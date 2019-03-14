@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Null_Subscripts.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:25:19 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/articles/GTM_Null_Subscripts.html]] -->
 <head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>
             GT.M Null Subscripts and Null Subscripts Collation</title><link rel="stylesheet" href="e-novative_article.css" type="text/css"></link><meta name="generator" content="DocBook XSL Stylesheets V1.68.1"></meta><meta name="description" content="
                                                         
@@ -27,28 +27,28 @@
                     
                     
 		  "></meta></head><body><div class="article" lang="en-US"><div class="titlepage"><div><div><h1 class="title"><a id="id877534"></a>
-            <a id="return_to_top"></a>GT.M Null Subscripts and Null Subscripts Collation</h1></div><div><h3 class="subtitle"><i>Technical Bulletin: GT.M Null Subscripts</i></h3></div><div><p class="copyright">Copyright © 2006 Fidelity National Information Services, Inc.</p></div><div><div xmlns="" align="center"><a href="legalnotice.html" target="_blank">Legal Notice</a></div></div><div><p class="pubdate">May 03, 2006</p></div><div><div xmlns="" class="revhistory"><table border="1" align="center" width="70%" summary="Revision history"><tr><th align="left" valign="top" colspan="2"><b>Revision History</b></th></tr><tr><td align="left">Revision 1.1</td><td align="left">03 May 2006</td></tr><tr><td align="left">Revision 1.0</td><td align="left">06 September 2005</td></tr></table></div></div><div><div class="abstract"><p class="title"><b></b></p><p>
+            <a id="return_to_top"></a>GT.M Null Subscripts and Null Subscripts Collation</h1></div><div><h3 class="subtitle"><i>Technical Bulletin: GT.M Null Subscripts</i></h3></div><div><p class="copyright">Copyright (C) 2006 Fidelity National Information Services, Inc.</p></div><div><div xmlns="" align="center"><a href="legalnotice.html" target="_blank">Legal Notice</a></div></div><div><p class="pubdate">May 03, 2006</p></div><div><div xmlns="" class="revhistory"><table border="1" align="center" width="70%" summary="Revision history"><tr><th align="left" valign="top" colspan="2"><b>Revision History</b></th></tr><tr><td align="left">Revision 1.1</td><td align="left">03 May 2006</td></tr><tr><td align="left">Revision 1.0</td><td align="left">06 September 2005</td></tr></table></div></div><div><div class="abstract"><p class="title"><b></b></p><p>
                     <div class="informaltable"><table border="0" width="100%"><colgroup><col></col><col></col></colgroup><tbody><tr><td align="left" valign="top">                                    
                     <p>
                     <div class="address"><p><br></br>
-                        <p></p><br></br>
-                        GT.M Group<br></br>
-                        Fidelity National Information Services, Inc.<br></br>
-                        <span class="street">2 West Liberty Boulevard, Suite 300</span><br></br>
-                        <span class="city">Malvern, </span><span class="state">PA </span><span class="postcode"> 19355, </span><br></br>
-                        <span class="country">United States of America</span><br></br>
-                     </p></div>
+                        <p></p><br></br>
+                        GT.M Group<br></br>
+                        Fidelity National Information Services, Inc.<br></br>
+                        <span class="street">2 West Liberty Boulevard, Suite 300</span><br></br>
+                        <span class="city">Malvern, </span><span class="state">PA </span><span class="postcode"> 19355, </span><br></br>
+                        <span class="country">United States of America</span><br></br>
+                     </p></div>
                      </p>                        
                      </td><td align="left" valign="top">
                      <p>                        
                      <div class="address"><p><br></br>
-                        <p></p><br></br>
-                        <span class="phone">GT.M Support: +1 (610) 578-4226</span> <br></br>
-                        <span class="phone">Switchboard: +1 (610) 296-8877 </span><br></br>
-                        <span class="fax">Fax: +1 (484) 595-5101 </span><br></br>
-                        <a href="http://www.fis-gtm.com/" target="_top">http://www.fis-gtm.com</a><br></br>
-                        <a href="mailto:gtmsupport@fnf.com" target="_top">gtmsupport@fnf.com</a><br></br>
-                    </p></div>
+                        <p></p><br></br>
+                        <span class="phone">GT.M Support: +1 (610) 578-4226</span> <br></br>
+                        <span class="phone">Switchboard: +1 (610) 296-8877 </span><br></br>
+                        <span class="fax">Fax: +1 (484) 595-5101 </span><br></br>
+                        <a href="http://www.fis-gtm.com/" target="_top">http://www.fis-gtm.com</a><br></br>
+                        <a href="mailto:gtmsupport@fnf.com" target="_top">gtmsupport@fnf.com</a><br></br>
+                    </p></div>
                     </p>
                     </td></tr></tbody></table></div>
 		  </p></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#id878195">Overview</a></span></dt><dt><span class="sect1"><a href="#id878773">Null Subscripts</a></span></dt><dt><span class="sect1"><a href="#id878491">Null Subscript Collation</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id878921">GDE Changes</a></span></dt><dt><span class="sect2"><a href="#id878736">DSE Changes</a></span></dt><dt><span class="sect2"><a href="#id878558">M-Commands/Functions</a></span></dt><dt><span class="sect2"><a href="#id879188">MUPIP Binary Extract and Load</a></span></dt><dt><span class="sect2"><a href="#id879373">Replication Changes</a></span></dt><dt><span class="sect2"><a href="#id878470">GTCM_GNP Changes</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id878275">Error Messages</a></span></dt><dt><span class="sect1"><a href="#id879641">Limitations</a></span></dt><dt><span class="sect1"><a href="#id879534">Typographical Conventions</a></span></dt></dl></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id877534">Return to top</a></p><div><h2 class="title"><a id="id878195"></a>Overview</h2></div></div></div><p>This technical bulletin discusses the following new features regarding null subscripts introduced effective V5.0-000:</p><p>
@@ -459,5 +459,5 @@ Date/Time       19-MAY-2005 18:51:43 [$H = 60039,67903]
   </p></div></div><div xmlns="" id="customfooter" align="center">
 For more information, see the <a href="http://www.sanchez-gtm.com/" target="_blank" style="color: #000; font-weight: bold;">GT.M</a> web site. 
 </div></body>
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Null_Subscripts.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:25:19 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/articles/GTM_Null_Subscripts.html]] -->
 </html>

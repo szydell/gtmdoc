@@ -1,14 +1,14 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/mup_intro.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:01 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/mup_intro.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Introduction</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
-<link rel="up" href="mupipchap.html" title="Chapter 5. General Database Management">
-<link rel="prev" href="mupipchap.html" title="Chapter 5. General Database Management">
+<link rel="up" href="mupipchap.html" title="Chapter 5. General Database Management">
+<link rel="prev" href="mupipchap.html" title="Chapter 5. General Database Management">
 <link rel="next" href="gdm.html" title="Commands and Qualifiers">
 <link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
 </head>
@@ -18,9 +18,9 @@
 <tr><th colspan="3" align="center">Introduction</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="mupipchap.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 5. General Database Management</th>
-<td width="20%" align="right"> <a accesskey="n" href="gdm.html">Next</a>
+<a accesskey="p" href="mupipchap.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 5. General Database Management</th>
+<td width="20%" align="right"> <a accesskey="n" href="gdm.html">Next</a>
 </td>
 </tr>
 </table>
@@ -34,11 +34,11 @@
 <a name="mup_intro"></a>Introduction</h2></div></div></div>
 <p>This chapter describes common database management operations such as creating database files, modifying database characteristics, database backup and restore, routine integrity checks, extracting or loading data, and optimizing performance. </p>
 <p>GT.M uses M Peripheral Interchange Program (MUPIP) for GT.M database management, database journaling, and logical multisite replication (LMS). This chapter summarizes the MUPIP commands pertaining to GT.M database management and serves as a foundation for more advanced GT.M functionality described for Journaling and LMS.</p>
-<p>For MUPIP commands pertaining to database journaling, refer to <a class="xref" href="journaling.html" title="Chapter 6. GT.M Journaling">Chapter 6: &#8220;<i><span>GT.M </span>Journaling</i>&#8221;</a>.</p>
-<p>For MUPIP commands pertaining to multisite database replication, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>. </p>
+<p>For MUPIP commands pertaining to database journaling, refer to <a class="xref" href="journaling.html" title="Chapter 6. GT.M Journaling">Chapter 6: &#8220;<i><span>GT.M </span>Journaling</i>&#8221;</a>.</p>
+<p>For MUPIP commands pertaining to multisite database replication, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Two MUPIP operations - INTRPT and STOP - perform process management functions. All other MUPIP operations relate to the operation of the database.</p></td></tr>
@@ -53,17 +53,17 @@ MUPIP&gt;</pre>
 <p>This starts MUPIP and stops the process with Process ID (PID) 1158. </p>
 <p>Some MUPIP commands require information contained in the global directory. Therefore, a process must have access to a valid global directory before using any MUPIP commands other than EXIT, INTRPT, JOURNAL, RESTORE, STOP and the -file option of any command that has that option.</p>
 <p>The environment variable gtmgbldir specifies the active global directory. </p>
-<p>A gtmgbldir value of mumps.gld tells MUPIP to look for a global directory file mumps.gld in the current directory. <span> For more information on the global directory, refer to <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">&#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p>
+<p>A gtmgbldir value of mumps.gld tells MUPIP to look for a global directory file mumps.gld in the current directory. <span> For more information on the global directory, refer to <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">&#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>FIS recommends against running GT.M components as root. When run as root, GT.M components use the owner and group of the database file as the owner and group of newly created journal files, backup files, snapshot files, shared memory, and semaphores. In addition, they set the permissions on the resulting files, shared memory, and semaphores, as if running as the owner of the database file and as a member of the database file group. </p></td></tr>
 </table></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top">
@@ -278,7 +278,7 @@ MUPIP&gt;</pre>
 </table></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>MUPIP commands that need standalone access issue a MUUSERLBK error on a crashed replication-enabled database and MUUSERECOV error in case of a non-replicated-but-journaled database.</p></td></tr>
@@ -302,20 +302,20 @@ MUPIP&gt;</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="mupipchap.html">Prev</a> </td>
+<a accesskey="p" href="mupipchap.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="mupipchap.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="gdm.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="gdm.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Chapter 5. General Database Management </td>
+<td width="40%" align="left" valign="top">Chapter 5. General Database Management </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> <span>Commands and Qualifiers</span>
+<td width="40%" align="right" valign="top"> <span>Commands and Qualifiers</span>
 </td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/mup_intro.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:01 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/mup_intro.html]] -->
 </html>

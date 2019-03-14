@@ -6,7 +6,7 @@
 
 
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Database_Encryption.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:25:16 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/articles/GTM_Database_Encryption.html]] -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -451,7 +451,7 @@ body {
   <a id=_GT_M_Database_Encryption_Tech_6455395985394716 name=_GT_M_Database_Encryption_Tech_6455395985394716></a>GT.M Database Encryption Technical Bulletin
 </h1>
 <div class=legalnotice>
-  <font size=2>Copyright © 2010 Fidelity Information Services, Inc.&nbsp; All Rights Reserved.&nbsp;</font>&nbsp;
+  <font size=2>Copyright A(C) 2010 Fidelity Information Services, Inc.&nbsp; All Rights Reserved.&nbsp;</font>&nbsp;
   <div>
     &nbsp;
   </div>
@@ -464,7 +464,7 @@ body {
     &nbsp;
   </div>
   <p>
-    <span class=trademark><font size=2>GT.M</font></span><font size=2>™ is a trademark of Fidelity Information Services, Inc.&nbsp; Other trademarks are the property of their respective owners.&nbsp;</font>&nbsp;
+    <span class=trademark><font size=2>GT.M</font></span><font size=2>a?c is a trademark of Fidelity Information Services, Inc.&nbsp; Other trademarks are the property of their respective owners.&nbsp;</font>&nbsp;
   </p>
   <div>
     &nbsp;
@@ -822,7 +822,7 @@ body {
         </li>
       </ol>
       <li>
-        <a href=#_Appendix_Reference_Implementa_4077480975538492 target=_self>Appendix – Reference Implementation Error messages</a>
+        <a href=#_Appendix_Reference_Implementa_4077480975538492 target=_self>Appendix a?? Reference Implementation Error messages</a>
       </li>
       <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
         <li>
@@ -894,7 +894,7 @@ body {
       </ol>
     </ol>
     <li>
-      <a href=#Appendix_Building_Encryption_L target=_self>Appendix – Building Encryption Libraries</a>
+      <a href=#Appendix_Building_Encryption_L target=_self>Appendix a?? Building Encryption Libraries</a>
     </li>
     <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
       <li>
@@ -1012,7 +1012,7 @@ body {
   &nbsp;
 </div>
 <p>
-  <font size=2>A plug-in architecture allows you to use your choice of encryption package. &nbsp;The characteristics of encryption are entirely determined by the package you choose – for example, GT.M implements no "back doors" or "key recovery", and if you want such functionality, you need to choose or construct an encryption package that provides the features you want. </font>
+  <font size=2>A plug-in architecture allows you to use your choice of encryption package. &nbsp;The characteristics of encryption are entirely determined by the package you choose a?? for example, GT.M implements no "back doors" or "key recovery", and if you want such functionality, you need to choose or construct an encryption package that provides the features you want. </font>
 </p>
 <p>
 </p>
@@ -1028,7 +1028,7 @@ body {
   &nbsp;
 </div>
 <p>
-  <font size=2>In the reference implementation, GT.M uses a symmetric cipher to encrypt data.&nbsp; The reference implementation encrypts the key for the symmetric cipher with an asymmetric cipher using public and private keys.&nbsp; The private keys are stored in a key ring on disk locked with a password (or passphrase – the terms are used interchangeably). </font>
+  <font size=2>In the reference implementation, GT.M uses a symmetric cipher to encrypt data.&nbsp; The reference implementation encrypts the key for the symmetric cipher with an asymmetric cipher using public and private keys.&nbsp; The private keys are stored in a key ring on disk locked with a password (or passphrase a?? the terms are used interchangeably). </font>
 </p>
 <h2 class=western>
   <a id=Disclaimer_29210755010304446_4_6025377316400409 name=Disclaimer_29210755010304446_4_6025377316400409></a>Disclaimer
@@ -1050,7 +1050,7 @@ body {
   &nbsp;
 </div>
 <p style=FONT-STYLE:normal>
-  <font size=2>Our expertise is in GT.M, not in encryption.&nbsp; Encryption needs vary.&nbsp; Furthermore, the use of encryption may be restricted – or required – by regulations applicable to your location and circumstances.&nbsp; Therefore, our approach is to create a plug-in architecture where you can choose your preferred encryption software. In the course of development, we tested it primarily with <a href=http://gnupg.org/ target=_blank title="Click here to visit the GNU Privacy Guard home page">GNU Privacy Guard</a>, the widely available implementation of Pretty Good Privacy (see "PGP: Pretty Good Privacy" by Simson Garfinkel).&nbsp; Ensure that you have confidence in (and confidence in the support for) whichever encryption software you choose, because failure of the encryption software is likely to leave your data unrecoverable.&nbsp; GT.M itself performs no encryption, and encryption is performed exclusively by software that you install and configure.&nbsp; <i><b>FIS neither endorses nor supports any specific encryption algorithm or library.</b></i></font>
+  <font size=2>Our expertise is in GT.M, not in encryption.&nbsp; Encryption needs vary.&nbsp; Furthermore, the use of encryption may be restricted a?? or required a?? by regulations applicable to your location and circumstances.&nbsp; Therefore, our approach is to create a plug-in architecture where you can choose your preferred encryption software. In the course of development, we tested it primarily with <a href=http://gnupg.org/ target=_blank title="Click here to visit the GNU Privacy Guard home page">GNU Privacy Guard</a>, the widely available implementation of Pretty Good Privacy (see "PGP: Pretty Good Privacy" by Simson Garfinkel).&nbsp; Ensure that you have confidence in (and confidence in the support for) whichever encryption software you choose, because failure of the encryption software is likely to leave your data unrecoverable.&nbsp; GT.M itself performs no encryption, and encryption is performed exclusively by software that you install and configure.&nbsp; <i><b>FIS neither endorses nor supports any specific encryption algorithm or library.</b></i></font>
 </p>
 <p style=FONT-STYLE:normal>
 </p>
@@ -1105,7 +1105,7 @@ body {
   <a id=Long_Lived_Keys_52102823867602 name=Long_Lived_Keys_52102823867602></a>Long Lived Keys
 </h3>
 <p>
-  <font size=2>A database file has an extended life.&nbsp; In typical operation, only a minuscule fraction of the data within a database changes each day. As changing an encryption key requires re-encrypting all the data, this means encryption keys for files have long lives.&nbsp; Since long-lived keys are security risks – for example, they cannot be changed when an employee leaves – key management must therefore be part of the overall security plan.&nbsp; At a minimum, long lived keys require two stage key management – a database key with a long life, not normally accessed or viewed by a human, stored in a form encrypted by another key that can be changed more easily. </font>
+  <font size=2>A database file has an extended life.&nbsp; In typical operation, only a minuscule fraction of the data within a database changes each day. As changing an encryption key requires re-encrypting all the data, this means encryption keys for files have long lives.&nbsp; Since long-lived keys are security risks a?? for example, they cannot be changed when an employee leaves a?? key management must therefore be part of the overall security plan.&nbsp; At a minimum, long lived keys require two stage key management a?? a database key with a long life, not normally accessed or viewed by a human, stored in a form encrypted by another key that can be changed more easily. </font>
 </p>
 <p>
 </p>
@@ -1393,7 +1393,7 @@ body {
     </td>
     <td width=72%>
       <p>
-        <font size=2>A pair of keys used so what one key encrypts the other can decrypt.&nbsp; The private key is sometimes referred to as the "secret" key (because it is not shared as opposed to the public key which is; the private key should never be on disk in the clear).&nbsp; In the reference implementation, asymmetric keys are used to encrypt the symmetric database key.&nbsp; This allows a master to encrypt a symmetric database key with a user’s public key (so only the user can decrypt it with their private key). </font>
+        <font size=2>A pair of keys used so what one key encrypts the other can decrypt.&nbsp; The private key is sometimes referred to as the "secret" key (because it is not shared as opposed to the public key which is; the private key should never be on disk in the clear).&nbsp; In the reference implementation, asymmetric keys are used to encrypt the symmetric database key.&nbsp; This allows a master to encrypt a symmetric database key with a usera??s public key (so only the user can decrypt it with their private key). </font>
       </p>
       <p>
         <font size=2>Encryption using a public key / private key pair is referred to as "public key encryption".&nbsp; The reference implementation uses GNU Privacy Guard with associated libraries libgpgme and libgpg-error for asymmetric key encryption. </font>
@@ -1473,7 +1473,7 @@ body {
   &nbsp;
 </div>
 <p>
-  <font size=2>Journal files contain data records, such as before image records, update records, and after image records, as well as structural information such as transaction markers, process records, etc.&nbsp; Again, only records that contain data – before image records, update records and after image records – are encrypted.&nbsp; Records that contain structural information remain in cleartext. </font>
+  <font size=2>Journal files contain data records, such as before image records, update records, and after image records, as well as structural information such as transaction markers, process records, etc.&nbsp; Again, only records that contain data a?? before image records, update records and after image records a?? are encrypted.&nbsp; Records that contain structural information remain in cleartext. </font>
 </p>
 <p>
 </p>
@@ -1647,7 +1647,7 @@ body {
   &nbsp;
 </p>
 <div>
-  <font size=2><font color=#000000>The following schematic illustrates acquisition of the password for the key ring on disk.&nbsp; Note that an error (for example from the entry of an incorrect password) may not be triggered immediately – for example, DSE does not need an encryption key until you attempt to access data (since the file header is not encrypted, access to it does not </font><font color=#000000>require</font><font color=#000000> a key).</font><br>
+  <font size=2><font color=#000000>The following schematic illustrates acquisition of the password for the key ring on disk.&nbsp; Note that an error (for example from the entry of an incorrect password) may not be triggered immediately a?? for example, DSE does not need an encryption key until you attempt to access data (since the file header is not encrypted, access to it does not </font><font color=#000000>require</font><font color=#000000> a key).</font><br>
   </font>
   <div id=gkgv style=TEXT-ALIGN:center>
     <img src="images/dpqq6h6_157hfmf6mgg_b.gif" style=HEIGHT:983px;WIDTH:665px>
@@ -1711,7 +1711,7 @@ body {
   &nbsp;
 </div>
 <p>
-  <font size=2>Database and journal file headers include a cryptographic hash of the encryption key and algorithm used for that file.&nbsp; When opening a file, GT.M uses the key in the memory key ring whose hash matches that in the header – the <font face="arial narrow">database_filename</font> in the key ring is ignored.&nbsp; Older keys need not be deleted until they are no longer required (for example, an older key may be required to access a restored backup copy of a database). Permitting the same </font><font size=2><font face="arial narrow">database_filename</font></font><font size=2> to occur multiple times in a master key file also enables one master key file to be used for multiple instances of an application.&nbsp; This ensures that the correct key for a file is always used, even if the file has been renamed, copied from another location, etc. – the correct key must of course be available in the memory key ring; if no such key exists, GT.M triggers a CRYPTKEYFETCHFAILED error. </font>
+  <font size=2>Database and journal file headers include a cryptographic hash of the encryption key and algorithm used for that file.&nbsp; When opening a file, GT.M uses the key in the memory key ring whose hash matches that in the header a?? the <font face="arial narrow">database_filename</font> in the key ring is ignored.&nbsp; Older keys need not be deleted until they are no longer required (for example, an older key may be required to access a restored backup copy of a database). Permitting the same </font><font size=2><font face="arial narrow">database_filename</font></font><font size=2> to occur multiple times in a master key file also enables one master key file to be used for multiple instances of an application.&nbsp; This ensures that the correct key for a file is always used, even if the file has been renamed, copied from another location, etc. a?? the correct key must of course be available in the memory key ring; if no such key exists, GT.M triggers a CRYPTKEYFETCHFAILED error. </font>
 </p>
 <p>
 </p>
@@ -1774,7 +1774,7 @@ body {
   <a id=Database_Operation_79561009562_09247611183673143 name=Database_Operation_79561009562_09247611183673143></a>Database Operation
 </h3>
 <p style=FONT-STYLE:normal>
-  <font size=2>On disk, database and journal files are always encrypted – GT.M never writes unencrypted data to an encrypted database or journal file.&nbsp; GT.M uses decryption when reading data records from disk, and encryption when it writes data records to disk. </font>
+  <font size=2>On disk, database and journal files are always encrypted a?? GT.M never writes unencrypted data to an encrypted database or journal file.&nbsp; GT.M uses decryption when reading data records from disk, and encryption when it writes data records to disk. </font>
 </p>
 <p style=FONT-STYLE:normal>
 </p>
@@ -2923,7 +2923,7 @@ body {
   &nbsp;
 </div>
 <p>
-  <font size=2>MUPIP and DSE use the same plug-in architecture as mumps processes – </font><font face="courier new" size=2>gtmcrypt_init()</font><font size=2> to acquire keys, </font><font face="courier new" size=2>gtmcrypt_encode()</font><font size=2> to encode, etc.</font>
+  <font size=2>MUPIP and DSE use the same plug-in architecture as mumps processes a?? </font><font face="courier new" size=2>gtmcrypt_init()</font><font size=2> to acquire keys, </font><font face="courier new" size=2>gtmcrypt_encode()</font><font size=2> to encode, etc.</font>
 </p>
 <h2 class=western>
   <a id=Changes_to_Utility_Programs_19 name=Changes_to_Utility_Programs_19></a>Changes to Utility Programs
@@ -2948,7 +2948,7 @@ body {
 <ul>
   <li>
     <p>
-      <font size=2>FIS strongly recommends you make a copy of any global directory before upgrading it. There is no way to downgrade a global directory – you need to recreate it. </font>
+      <font size=2>FIS strongly recommends you make a copy of any global directory before upgrading it. There is no way to downgrade a global directory a?? you need to recreate it. </font>
     </p>
   </li>
 </ul>
@@ -3289,12 +3289,12 @@ body {
 <ul>
   <li>
     <p>
-      <font size=2><font face="courier new">gtmcrypt_key_t</font> – a datatype that is a handle to a key.&nbsp; The GT.M database engine itself does not manipulate keys. The plug-in keeps the keys, and provides handles to keys that the GT.M database engine uses to refer to keys. </font>
+      <font size=2><font face="courier new">gtmcrypt_key_t</font> a?? a datatype that is a handle to a key.&nbsp; The GT.M database engine itself does not manipulate keys. The plug-in keeps the keys, and provides handles to keys that the GT.M database engine uses to refer to keys. </font>
     </p>
   </li>
   <li>
     <p>
-      <font size=2><font face="courier new">xc_fileid_ptr_t</font> – a pointer to a structure maintained by GT.M to uniquely identify a file.&nbsp; Note that a file may have multiple names – not only as a consequence of absolute and relative path names, but also because of symbolic links and also because a file system can be mounted at more than one place in the file name hierarchy.&nbsp; GT.M needs to be able to uniquely identify files. </font>
+      <font size=2><font face="courier new">xc_fileid_ptr_t</font> a?? a pointer to a structure maintained by GT.M to uniquely identify a file.&nbsp; Note that a file may have multiple names a?? not only as a consequence of absolute and relative path names, but also because of symbolic links and also because a file system can be mounted at more than one place in the file name hierarchy.&nbsp; GT.M needs to be able to uniquely identify files. </font>
     </p>
   </li>
 </ul>
@@ -3314,17 +3314,17 @@ body {
 <ul>
   <li>
     <p>
-      <font face="courier new" size=2>xc_status_t gtm_filename_to_id(xc_string_t *filename, xc_fileid_ptr_t *fileid)</font><font size=2> – function that takes a file name and provides the file id structure for that file. </font>
+      <font face="courier new" size=2>xc_status_t gtm_filename_to_id(xc_string_t *filename, xc_fileid_ptr_t *fileid)</font><font size=2> a?? function that takes a file name and provides the file id structure for that file. </font>
     </p>
   </li>
   <li>
     <p>
-      <font face="courier new" size=2>xc_status_t gtm_is_file_identical(xc_fileid_ptr_t fileid1, xc_fileid_ptr_t fileid2)</font><font size=2> – function that determines whether two file ids map to the same file. </font>
+      <font face="courier new" size=2>xc_status_t gtm_is_file_identical(xc_fileid_ptr_t fileid1, xc_fileid_ptr_t fileid2)</font><font size=2> a?? function that determines whether two file ids map to the same file. </font>
     </p>
   </li>
   <li>
     <p>
-      <font face="courier new" size=2>gtm_xcfileid_free(xc_fileid_ptr_t fileid)</font><font size=2> – function to release a file id structure.</font>
+      <font face="courier new" size=2>gtm_xcfileid_free(xc_fileid_ptr_t fileid)</font><font size=2> a?? function to release a file id structure.</font>
     </p>
     <div>
       &nbsp;
@@ -3419,7 +3419,7 @@ body {
   </li>
   <li>
     <p>
-      <font size=2>Whenever GT.M needs to decode a block of bytes, it calls </font><font face="courier new" size=2>gtmcrypt_decode()</font><font size=2> to decode the encrypted data.&nbsp; <font face=verdana>At the level at which GT.M database encryption operates, it does not matter what the data is – numeric data, string data whether in M or UTF-8 mode and whether or not modified by a collation algorithm. Encryption and decryption simply operate on a series of bytes.</font>&nbsp; </font>
+      <font size=2>Whenever GT.M needs to decode a block of bytes, it calls </font><font face="courier new" size=2>gtmcrypt_decode()</font><font size=2> to decode the encrypted data.&nbsp; <font face=verdana>At the level at which GT.M database encryption operates, it does not matter what the data is a?? numeric data, string data whether in M or UTF-8 mode and whether or not modified by a collation algorithm. Encryption and decryption simply operate on a series of bytes.</font>&nbsp; </font>
     </p>
   </li>
   <li>
@@ -3738,7 +3738,7 @@ body {
   &nbsp;
 </div>
 <h2 class=western>
-  <a id=_Appendix_Reference_Implementa_4077480975538492 name=_Appendix_Reference_Implementa_4077480975538492></a>Appendix – Reference Implementation Error messages
+  <a id=_Appendix_Reference_Implementa_4077480975538492 name=_Appendix_Reference_Implementa_4077480975538492></a>Appendix a?? Reference Implementation Error messages
 </h2>
 <font size=2>These error messages are generated by the reference plug-in.&nbsp; If you change the plug-in, the messages will be those generated by your plug-in.&nbsp; Note that the messages from the plug-in (incorrectly) use the term "DB keys file" for the master key file.</font>
 <div>
@@ -4038,7 +4038,7 @@ body {
   &nbsp;
 </p>
 <p style=FONT-FAMILY:Verdana>
-  <font size=2><font color=#000000>Action: Add an entry for this encryption key.&nbsp; If needed, use DSE DUMP –FILE –ALL on all of the database files to find the database file that matches the &lt;hash&gt;.&nbsp; With extracts and backups, multiple database files may have contributed encrypted records. </font></font>
+  <font size=2><font color=#000000>Action: Add an entry for this encryption key.&nbsp; If needed, use DSE DUMP a??FILE a??ALL on all of the database files to find the database file that matches the &lt;hash&gt;.&nbsp; With extracts and backups, multiple database files may have contributed encrypted records. </font></font>
 </p>
 <h3>
   <a id=_No_entries_found_in_DB_keys_f_5668686674907804 name=_No_entries_found_in_DB_keys_f_5668686674907804></a><font size=3><font color=#000000><font face=verdana>No entries found in DB keys file</font></font></font>
@@ -4086,7 +4086,7 @@ body {
   <a href=#toc id=c..c target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
 </p>
 <h1 class=western>
-  <a id=Appendix_Building_Encryption_L name=Appendix_Building_Encryption_L></a>Appendix – Building Encryption Libraries
+  <a id=Appendix_Building_Encryption_L name=Appendix_Building_Encryption_L></a>Appendix a?? Building Encryption Libraries
 </h1>
 <p>
   <font size=2>FIS neither encourages nor supports the use of any specific encryption library.&nbsp; In order to be helpful, here is how we created the libraries for testing GT.M in the development environment.&nbsp; </font>
@@ -4631,5 +4631,5 @@ body {
   <sup>7 </sup><a name=FOOTNOTE-7></a><font size=1><font face=verdana>Such a failure in the cipher will likely appear to GT.M as a damaged database.</font></font>
 </div></body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Database_Encryption.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:25:16 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/articles/GTM_Database_Encryption.html]] -->
 </html>

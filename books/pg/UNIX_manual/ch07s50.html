@@ -1,13 +1,13 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s50.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:10 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s50.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>$ZSUBstr()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s49.html" title="$ZSIGPROC()">
 <link rel="next" href="ch07s51.html" title="$ZTRanslate()">
 <link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
@@ -18,9 +18,9 @@
 <tr><th colspan="3" align="center">$ZSUBstr()</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch07s49.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 7. Functions</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch07s51.html">Next</a>
+<a accesskey="p" href="ch07s49.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s51.html">Next</a>
 </td>
 </tr>
 </table>
@@ -50,7 +50,7 @@
 <pre class="programlisting">GTM&gt;write $ZCHSET
 M
 GTM&gt;set char1="a" ; one byte character
-GTM&gt;set char2="<span class="symbol">ç</span>"; two-byte character
+GTM&gt;set char2="<span class="symbol">c</span>"; two-byte character
 GTM&gt;set char3="<span class="symbol">&#26032;</span>"; three-byte character
 GTM&gt;set y=char1_char2_char3
 GTM&gt;write $zsubstr(y,1,3)=$zsubstr(y,1,5)
@@ -60,7 +60,7 @@ GTM&gt;write $zsubstr(y,1,3)=$zsubstr(y,1,5)
 <pre class="programlisting">GTM&gt;write $zchset
 UTF-8
 GTM&gt;set char1="a" ; one byte character
-GTM&gt;set char2="<span class="symbol">ç</span>"; two-byte character
+GTM&gt;set char2="<span class="symbol">c</span>"; two-byte character
 GTM&gt;set char3="<span class="symbol">&#26032;</span>"; three-byte character
 GTM&gt;set y=char1_char2_char3
 GTM&gt;write $zsubstr(y,1,3)=$zsubstr(y,1,5)
@@ -72,7 +72,7 @@ GTM&gt;write $zsubstr(y,1,3)=$zsubstr(y,1,5)
 <li class="listitem" style="list-style-type: circle"><p>In both the modes, the third expression of $ZSUBSTR() is a byte, rather than character, position within the first expression.</p></li>
 <li class="listitem" style="list-style-type: circle"><p>$EXTRACT() operates on characters, irrespective of byte length.</p></li>
 <li class="listitem" style="list-style-type: circle"><p>$ZEXTRACT() operates on bytes, irrespective of multi-byte character boundaries.</p></li>
-<li class="listitem" style="list-style-type: circle"><p>$ZSUBSTR() is the only way to extract as valid UTF-8 encoded characters from a byte string containing mixed UTF-8 and non UTF-8 data. It operates on <span class="trademark">Unicode</span>® characters so that its result does not exceed the given byte length.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>$ZSUBSTR() is the only way to extract as valid UTF-8 encoded characters from a byte string containing mixed UTF-8 and non UTF-8 data. It operates on <span class="trademark">Unicode</span>(R) characters so that its result does not exceed the given byte length.</p></li>
 </ul></div>
 </div>
 </div>
@@ -81,19 +81,19 @@ GTM&gt;write $zsubstr(y,1,3)=$zsubstr(y,1,5)
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch07s49.html">Prev</a> </td>
+<a accesskey="p" href="ch07s49.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch07s51.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s51.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZSIGPROC() </td>
+<td width="40%" align="left" valign="top">$ZSIGPROC() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZTRanslate()</td>
+<td width="40%" align="right" valign="top"> $ZTRanslate()</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s50.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:10 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s50.html]] -->
 </html>

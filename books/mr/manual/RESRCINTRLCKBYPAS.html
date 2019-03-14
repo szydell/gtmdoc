@@ -1,37 +1,37 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/RESRCINTRLCKBYPAS.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:50:32 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/RESRCINTRLCKBYPAS.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>RESRCINTRLCKBYPAS </title>
+<title>RESRCINTRLCKBYPAS </title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
-<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
-<link rel="prev" href="RESOLVESEQSTRM.html" title="RESOLVESEQSTRM ">
-<link rel="next" href="RESRCWAIT.html" title="RESRCWAIT ">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="RESOLVESEQSTRM.html" title="RESOLVESEQSTRM ">
+<link rel="next" href="RESRCWAIT.html" title="RESRCWAIT ">
 <link rel="copyright" href="ln-idp153747552.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">RESRCINTRLCKBYPAS </th></tr>
+<tr><th colspan="3" align="center">RESRCINTRLCKBYPAS </th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="RESOLVESEQSTRM.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 1. Error Messages</th>
-<td width="20%" align="right"> <a accesskey="n" href="RESRCWAIT.html">Next</a>
+<a accesskey="p" href="RESOLVESEQSTRM.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="RESRCWAIT.html">Next</a>
 </td>
 </tr>
 </table>
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">RESRCINTRLCKBYPAS </span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">RESRCINTRLCKBYPAS </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="RESRCINTRLCKBYPAS"></a>RESRCINTRLCKBYPAS </h2></div></div></div>
+<a name="RESRCINTRLCKBYPAS"></a>RESRCINTRLCKBYPAS </h2></div></div></div>
 <p><span class="bold"><strong>RESRCINTRLCKBYPAS</strong></span>,  tttt with PID qqqq bypassing the ssss semaphore for region rrrr (ffff) currently held by PID pppp.</p>
 <p>All GT.M Components Information: GT.M issues the RESRCINTRLCKBYPAS message to the system log as an indication it may not detect when the last process detaches from the shared resource and therefore may not rundown the database shared resources as it normally would. GT.M protects the actions of setting up and tearing down the shared resources associated with a database with a pair of semaphores. Because DSE, and LKE are tools for diagnosing issues, when they start and find they cannot acquire the semaphores after a reasonable number of tries, they proceed to open the database anyway because it is highly probable the database is already set up. When DSE and LKE bypass the semaphore acquisition, they leave the count of attached processes incorrect. When many processes terminate at the same time, typically because of a system shutdown, there can be significant contention for the semaphores that can cause their terminations to take an unusually long time. When this happens, and the count of remaining attached processes is significant, a process may skip the semaphore acquisition, again leaving the count of attached process incorrect. If either of these events occurs, GT.M issues the RESRCINTRLCKBYPAS message where tttt identifies the process type: "LKE", "DSE" or "GT.M"; qqqq is the bypassing process's PID; ssss identifies the semaphore type: "FTOK" or "access control"; rrrr is the region bypassed; ffff is the file corresponding to region rrrr; pppp is the PID of the process holding the semaphore.</p>
 <p>Action: These messages when shutting down GT.M activity may indicate a need to complete the process by invoking a MUPIP JOURNAL -ROLLBACK -BACKWARD for replicated databases, a MUPIP JOURNAL -RECOVER -BACKWARD for unreplicated journaled databases and a MUPIP RUNDOWN for journal-free databases to get the database to a safe state; doing so as part of every shutdown is good practice.</p>
@@ -42,19 +42,19 @@
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="RESOLVESEQSTRM.html">Prev</a> </td>
+<a accesskey="p" href="RESOLVESEQSTRM.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="RESRCWAIT.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="RESRCWAIT.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">RESOLVESEQSTRM  </td>
+<td width="40%" align="left" valign="top">RESOLVESEQSTRM  </td>
 <td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
-<td width="40%" align="right" valign="top"> RESRCWAIT </td>
+<td width="40%" align="right" valign="top"> RESRCWAIT </td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/RESRCINTRLCKBYPAS.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:50:32 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/RESRCINTRLCKBYPAS.html]] -->
 </html>

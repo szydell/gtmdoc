@@ -1,14 +1,14 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/apbs01.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:04 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/apbs01.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Monitoring GT.M Messages</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
-<link rel="up" href="monitoring_gtm.html" title="Appendix B. Monitoring GT.M">
-<link rel="prev" href="monitoring_gtm.html" title="Appendix B. Monitoring GT.M">
+<link rel="up" href="monitoring_gtm.html" title="Appendix B. Monitoring GT.M">
+<link rel="prev" href="monitoring_gtm.html" title="Appendix B. Monitoring GT.M">
 <link rel="next" href="apbs02.html" title="Managing core dumps">
 <link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
 </head>
@@ -18,9 +18,9 @@
 <tr><th colspan="3" align="center">Monitoring GT.M Messages</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="monitoring_gtm.html">Prev</a> </td>
-<th width="60%" align="center">Appendix B. Monitoring GT.M </th>
-<td width="20%" align="right"> <a accesskey="n" href="apbs02.html">Next</a>
+<a accesskey="p" href="monitoring_gtm.html">Prev</a> </td>
+<th width="60%" align="center">Appendix B. Monitoring GT.M </th>
+<td width="20%" align="right"> <a accesskey="n" href="apbs02.html">Next</a>
 </td>
 </tr>
 </table>
@@ -124,13 +124,13 @@ Journal Pool</p></th>
 <p><code class="code">gtmsecshr</code> log file - <code class="code">gtm_secshr_log</code> in the directory <code class="code">$gtm_log</code> (send a SIGHUP to the <code class="code">gtmsecshr</code> process to create a new log file).</p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>Starting with V6.0-000, GT.M logs gtmsecshr messages in the system log and ignores the environment variable gtm_log. </p></td></tr>
 </table></div>
 </li>
-<li class="listitem"><p>Source Server, Receive Server, and Update Process log files. For more information, refer to <a class="xref" href="replication.html#chng_log_file" title="Changing the Log File">Section : &#8220;<span>Changing the Log File</span>&#8221;</a> in the Database Replication chapter.</p></li>
+<li class="listitem"><p>Source Server, Receive Server, and Update Process log files. For more information, refer to <a class="xref" href="replication.html#chng_log_file" title="Changing the Log File">Section : &#8220;<span>Changing the Log File</span>&#8221;</a> in the Database Replication chapter.</p></li>
 </ol></div>
 <p>Since database health is critical, database growth warrants special attention. Ensure every file system holding a database file has sufficient space to handle the anticipated growth of the files it holds. Remember that with the lazy allocation used by UNIX file systems, all files in a system complete for its space. GT.M issues an informational message each time it extends a database file. When extending a file, it also issues a warning if the remaining space is less than three times the extension size. You can use the $VIEW() function to find out the total number of blocks in a database as well as the number of free blocks.</p>
 <p>As journal files grow with every update they use up disk faster than database files do. GT.M issues messages when a journal file reaches within three, two and one extension size number of blocks from the automatic journal file switch limit. GT.M also issues messages when a journal file reaches its specified maximum size, at which time GT.M closes it, renames it and creates a new journal file. Journal files covering time periods prior to the last database backup (or prior to the backup of replicating secondary instances) are not needed for continuity of business, and can be deleted or archived, depending on your retention policy. Check the amount of free space in file systems at least hourly and perhaps more often, especially file systems used for journaling, and take action if it falls below a threshold.</p>
@@ -155,7 +155,7 @@ Journal Pool</p></th>
 <p>The shell script or command pointed to by gtm_procstuckexec can send an alert, take corrective actions, and log information.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Make sure user processes have sufficient space and permissions to run the shell command / script. For example for the script to invoke the debugger, the process must be of the same group or have a way to elevate privileges.</p></td></tr>
@@ -166,19 +166,19 @@ Journal Pool</p></th>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="monitoring_gtm.html">Prev</a> </td>
+<a accesskey="p" href="monitoring_gtm.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="monitoring_gtm.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="apbs02.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="apbs02.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Appendix B. Monitoring GT.M  </td>
+<td width="40%" align="left" valign="top">Appendix B. Monitoring GT.M  </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Managing core dumps </td>
+<td width="40%" align="right" valign="top"> Managing core dumps </td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/apbs01.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:04 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/apbs01.html]] -->
 </html>

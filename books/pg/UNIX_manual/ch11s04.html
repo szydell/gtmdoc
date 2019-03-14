@@ -1,13 +1,13 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch11s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:11 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch11s04.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Using External Calls</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch11.html" title="Chapter 11. Integrating External Routines">
+<link rel="up" href="ch11.html" title="Chapter 11. Integrating External Routines">
 <link rel="prev" href="ch11s03.html" title="Creating a Shareable Library">
 <link rel="next" href="ch11s05.html" title="Calls from External Routines: Call-Ins">
 <link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
@@ -19,10 +19,10 @@
 <span>Using </span>External Calls</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch11s03.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 11. <span>Integrating</span> External<span> Routines</span>
+<a accesskey="p" href="ch11s03.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 11. <span>Integrating</span> External<span> Routines</span>
 </th>
-<td width="20%" align="right"> <a accesskey="n" href="ch11s05.html">Next</a>
+<td width="20%" align="right"> <a accesskey="n" href="ch11s05.html">Next</a>
 </td>
 </tr>
 </table>
@@ -58,7 +58,7 @@
 <p>gtm_pointertofunc_t : For passing callback function pointers. <span>For details see <a class="xref" href="ch11s04.html#callback_mechanism" title="Callback Mechanism">&#8220;Callback Mechanism&#8221;</a>.</span></p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top">
@@ -90,7 +90,7 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 <p>gtm_hiber_start() always sleeps until the time expires; gtm_hiber_start_wait_any() sleeps until the time expires or an interrupt by any signal (including another timer). gtm_start_timer() starts a timer but returns immediately (no sleeping) and drives the given handler when time expires unless the timer is canceled.</p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>GT.M continues to support xc_* equivalent types of gtm_* for upward compatibility. gtmxc_types.h explicitly marks the xc_* equivalent types as deprecated. </p></td></tr>
@@ -172,7 +172,7 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </ul></div>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>Pre-allocation is optional for all output-only parameters except gtm_string_t * and gtm_char_t *. Pre-allocation yields better management of memory for the external call. When an external call exceeds its specified preallocation (gtm_string_t * or gtm_char_t * output), GT.M produces the EXCEEDSPREALLOC error.  In the case the user allocates space for the character pointer inside a gtm_string_t * type output parameter, a length field longer than the specified preallocate size for the output parameter does not cause an EXCEEDSPREALLOC error. </p></td></tr>
@@ -217,15 +217,15 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 <td>
 <p>hiber_start</p>
 </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>sleep for a specified time</p>
 </td>
 </tr>
 <tr>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>slp_time</p>
 </td>
@@ -243,15 +243,15 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 <td>
 <p>hiber_start_wait_any</p>
 </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>sleep for a specified time or until any interrupt, whichever comes first</p>
 </td>
 </tr>
 <tr>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>slp_time</p>
 </td>
@@ -269,15 +269,15 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 <td>
 <p>start_timer</p>
 </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>start a timer and invoke a handler function when the timer expires</p>
 </td>
 </tr>
 <tr>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>tid</p>
 </td>
@@ -289,8 +289,8 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </td>
 </tr>
 <tr>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>time_to_expire</p>
 </td>
@@ -302,8 +302,8 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </td>
 </tr>
 <tr>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>handler</p>
 </td>
@@ -315,8 +315,8 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </td>
 </tr>
 <tr>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>hlen</p>
 </td>
@@ -328,8 +328,8 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </td>
 </tr>
 <tr>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>hdata</p>
 </td>
@@ -347,15 +347,15 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 <td>
 <p>cancel_timer</p>
 </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>stop a timer previously started with start_timer(), if it has not yet expired</p>
 </td>
 </tr>
 <tr>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>tid</p>
 </td>
@@ -373,15 +373,15 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 <td>
 <p>gtm_malloc</p>
 </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>allocates process memory from the heap</p>
 </td>
 </tr>
 <tr>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>&lt;return-value&gt;</p>
 </td>
@@ -393,8 +393,8 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </td>
 </tr>
 <tr>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>space_needed</p>
 </td>
@@ -413,15 +413,15 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 <td>
 <p>gtm_free</p>
 </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>return memory previously allocated with gtm_malloc()</p>
 </td>
 </tr>
 <tr>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>free_address</p>
 </td>
@@ -443,7 +443,7 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>FIS strongly discourages the use of signals, especially SIGALARM, in user written C functions. GT.M assumes that it has complete control over any signals that occur and depends on that behavior for recovery if anything should go wrong. The use of exposed timer APIs should be considered for timer needs.</p></td></tr>
@@ -609,19 +609,19 @@ void init_callbacks(int count, void* (*m)(int), void (*f)(void*))
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch11s03.html">Prev</a> </td>
+<a accesskey="p" href="ch11s03.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch11.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch11s05.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch11s05.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Creat<span>ing a </span> Shareable Library </td>
+<td width="40%" align="left" valign="top">Creat<span>ing a </span> Shareable Library </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> <span>Calls from External Routines: </span>Call-Ins</td>
+<td width="40%" align="right" valign="top"> <span>Calls from External Routines: </span>Call-Ins</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch11s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:11 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch11s04.html]] -->
 </html>

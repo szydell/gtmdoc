@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Database_Migration.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:25:18 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/articles/GTM_Database_Migration.html]] -->
 <head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>GT.M Database Migration</title><link rel="stylesheet" href="e-novative_article.css" type="text/css"></link><meta name="generator" content="DocBook XSL Stylesheets V1.68.1"></meta><meta name="description" content="
 				
 									
@@ -25,25 +25,25 @@
 										
 									
 								
-			"></meta></head><body><div class="article" lang="en-US"><div class="titlepage"><div><div><h1 class="title"><a id="id3067708"></a><a id="return_to_top"></a>GT.M Database Migration</h1></div><div><h3 class="subtitle"><i>Technical Bulletin: GT.M Database Migration</i></h3></div><div><p class="copyright">Copyright © 2010 Fidelity National Information Services, Inc.</p></div><div><div xmlns="" align="center"><a href="legalnotice.html" target="_blank">Legal Notice</a></div></div><div><p class="pubdate">April 26, 2010</p></div><div><div xmlns="" class="revhistory"><table border="1" align="center" width="70%" summary="Revision history"><tr><th align="left" valign="top" colspan="2"><b>Revision History</b></th></tr><tr><td align="left">Revision 1.3</td><td align="left">26 April 2010</td></tr><tr><td align="left" colspan="2"><div xmlns="http://www.w3.org/1999/xhtml" class="itemizedlist"><ul><li>Improved the description of <a href="#obtaining_v5">Obtaining V5CBSU</a>, <a href="#using_v5">Using V5CBSU</a>, and <a href="#obtain_dbcert" title="Obtaining DBCERTIFY">Obtaining DBCERTIFY</a> sections.</li><li>Added <a href="#obtaining_v5">V5CBSU operational changes </a> introduced in V5.3-003.</li></ul></div></td></tr><tr><td align="left">Revision 1.2</td><td align="left">14 June 2006</td></tr><tr><td align="left">Revision 1.1</td><td align="left">03 May 2006</td></tr><tr><td align="left">Revision 1.0</td><td align="left">15 November 2005</td></tr></table></div></div><div><div class="abstract"><p class="title"><b></b></p><p>
+			"></meta></head><body><div class="article" lang="en-US"><div class="titlepage"><div><div><h1 class="title"><a id="id3067708"></a><a id="return_to_top"></a>GT.M Database Migration</h1></div><div><h3 class="subtitle"><i>Technical Bulletin: GT.M Database Migration</i></h3></div><div><p class="copyright">Copyright (C) 2010 Fidelity National Information Services, Inc.</p></div><div><div xmlns="" align="center"><a href="legalnotice.html" target="_blank">Legal Notice</a></div></div><div><p class="pubdate">April 26, 2010</p></div><div><div xmlns="" class="revhistory"><table border="1" align="center" width="70%" summary="Revision history"><tr><th align="left" valign="top" colspan="2"><b>Revision History</b></th></tr><tr><td align="left">Revision 1.3</td><td align="left">26 April 2010</td></tr><tr><td align="left" colspan="2"><div xmlns="http://www.w3.org/1999/xhtml" class="itemizedlist"><ul><li>Improved the description of <a href="#obtaining_v5">Obtaining V5CBSU</a>, <a href="#using_v5">Using V5CBSU</a>, and <a href="#obtain_dbcert" title="Obtaining DBCERTIFY">Obtaining DBCERTIFY</a> sections.</li><li>Added <a href="#obtaining_v5">V5CBSU operational changes </a> introduced in V5.3-003.</li></ul></div></td></tr><tr><td align="left">Revision 1.2</td><td align="left">14 June 2006</td></tr><tr><td align="left">Revision 1.1</td><td align="left">03 May 2006</td></tr><tr><td align="left">Revision 1.0</td><td align="left">15 November 2005</td></tr></table></div></div><div><div class="abstract"><p class="title"><b></b></p><p>
 				<div class="informaltable"><table border="0" width="100%"><colgroup><col></col><col></col></colgroup><tbody><tr><td align="left" valign="top">
 									<p>
 										<div class="address"><p><br></br>
-                        <p></p><br></br>
-                        GT.M Group<br></br>
-                        Fidelity National Information Services, Inc.<br></br>
-                        <span class="street">2 West Liberty Boulevard, Suite 300</span><br></br>
-                        <span class="city">Malvern, </span><span class="state">PA </span><span class="postcode"> 19355, </span><br></br>
-                        <span class="country">United States of America</span><br></br>
-                     </p></div>
+                        <p></p><br></br>
+                        GT.M Group<br></br>
+                        Fidelity National Information Services, Inc.<br></br>
+                        <span class="street">2 West Liberty Boulevard, Suite 300</span><br></br>
+                        <span class="city">Malvern, </span><span class="state">PA </span><span class="postcode"> 19355, </span><br></br>
+                        <span class="country">United States of America</span><br></br>
+                     </p></div>
 									</p>
 								</td><td align="left" valign="top">
 									<p>
 										<div class="address"><p><br></br>
 											<p></p><br></br>
-											<span class="phone">GT.M Support: +1 (610) 578-4226</span><br></br>
-											<span class="phone">Switchboard: +1 (610) 296-8877</span><br></br>
-											<span class="fax">Fax: +1 (484) 595-5101</span><br></br>
+											<span class="phone">GT.M Support: +1 (610) 578-4226</span><br></br>
+											<span class="phone">Switchboard: +1 (610) 296-8877</span><br></br>
+											<span class="fax">Fax: +1 (484) 595-5101</span><br></br>
 											<a href="http://www.fis-gtm.com/" target="_top">http://www.fis-gtm.com</a><br></br>
 											<a href="mailto:gtmsupport@fnis.com" target="_top">gtmsupport@fnis.com</a><br></br>
 										</p></div>
@@ -1185,5 +1185,5 @@
 		</p></div><div class="footnotes"><br></br><hr width="100" align="left"></hr><div class="footnote"><p><sup>[<a id="ftn.id3069033" href="#id3069033">1</a>] </sup>All GT.M releases prior to V5.0-000, including V5 field test releases such as V5.0-FT01, have V4 database formats.  V5 field test releases however, have a V5 global directory.</p></div><div class="footnote"><p><sup>[<a id="ftn.id3069632" href="#id3069632">2</a>] </sup>Since the largest permissible database block size is 65,024 bytes, the largest record that can be stored in a V4 database is 65,016 bytes, and the largest record that can be stored in a V5 database is 65,008 bytes, which leaves open the theoretical possibility of a database that cannot be upgraded to V5.  Since Fidelity is not aware of any customer who uses a block size of 65,024 bytes, this remains just a theoretical issue.</p></div><div class="footnote"><p><sup>[<a id="ftn.id3070424" href="#id3070424">3</a>] </sup>If you reduce the maximum record size in the database file with DSE, remember to make a change to the global directory with GDE so that any new database files have the new value.</p></div></div></div><div xmlns="" id="customfooter" align="center">
 For more information, see the <a href="http://www.sanchez-gtm.com/" target="_blank" style="color: #000; font-weight: bold;">GT.M</a> web site. 
 </div></body>
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Database_Migration.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:25:18 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/articles/GTM_Database_Migration.html]] -->
 </html>

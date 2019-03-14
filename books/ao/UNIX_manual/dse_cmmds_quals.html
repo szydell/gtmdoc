@@ -1,13 +1,13 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/dse_cmmds_quals.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:02 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/dse_cmmds_quals.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>DSE Commands and Qualifiers</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
-<link rel="up" href="ch10.html" title="Chapter 10. Database Structure Editor">
+<link rel="up" href="ch10.html" title="Chapter 10. Database Structure Editor">
 <link rel="prev" href="operate_dse.html" title="Operating in DSE">
 <link rel="next" href="dse_summary.html" title="DSE Command Summary">
 <link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
@@ -18,9 +18,9 @@
 <tr><th colspan="3" align="center"><span>DSE Commands and Qualifiers</span></th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="operate_dse.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 10. Database Structure Editor</th>
-<td width="20%" align="right"> <a accesskey="n" href="dse_summary.html">Next</a>
+<a accesskey="p" href="operate_dse.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 10. Database Structure Editor</th>
+<td width="20%" align="right"> <a accesskey="n" href="dse_summary.html">Next</a>
 </td>
 </tr>
 </table>
@@ -401,7 +401,7 @@ that is, on the first block-oriented command, DSE uses block one (1).</p>
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>The block size must always be less than or equal to the block size in the file header.</p></td></tr>
@@ -412,7 +412,7 @@ that is, on the first block-oriented command, DSE uses block one (1).</p>
 <p>Changes the level field for the specified block.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>DSE lets you change the level of a bitmap block to -1 (the value of the level for a bitmap block) when the bitmap level gets corrupted and takes on an arbitrary value. Note that you should specify -1 in hexadecimal form, that is, FF. </p></td></tr>
@@ -549,7 +549,7 @@ prior versions, this can still be specified as -B_COMPREHENSIVE.</p>
 <p><a class="indexterm" name="idp186575216"></a>
 <span class="emphasis"><em>-E[NCRYPTION_HASH]</em></span>
 </p>
-<p>Changes the hash of the password stored in the database file header if and when you change the hash library. <span>For more information on key management and reference implementation, refer to <a class="xref" href="ch12.html" title="Chapter 12. Database Encryption">Chapter 12: &#8220;<i>Database Encryption</i>&#8221;</a>.</span></p>
+<p>Changes the hash of the password stored in the database file header if and when you change the hash library. <span>For more information on key management and reference implementation, refer to <a class="xref" href="ch12.html" title="Chapter 12. Database Encryption">Chapter 12: &#8220;<i>Database Encryption</i>&#8221;</a>.</span></p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
 <tr>
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
@@ -609,7 +609,7 @@ prior versions, this can still be specified as -B_COMPREHENSIVE.</p>
 </p>
 <p>Changes the decimal value for the maximum allowable key size. Reducing KEY_MAX_SIZE can restrict access to existing data and cause GT.M to report errors. Do not create incompatible key and record sizes. </p>
 <p>Before permanently changing the key size using DSE, use GDE to check that the appropriate Global Directory contains the same key size for the region. This prepares for future MUPIP CREATEs and performs a consistency check on
-the key and record size values. <span>For more information on key and record sizes, refer to <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">Chapter 4: &#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p>
+the key and record size values. <span>For more information on key and record sizes, refer to <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">Chapter 4: &#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p>
 <p>Use only with: -FILEHEADER</p>
 <p>
 <span class="emphasis"><em><a class="indexterm" name="idp186610208"></a>
@@ -646,7 +646,7 @@ the key and record size values. <span>For more information on key and record siz
 <p>Changes the decimal value for the maximum allowable record size. Use the -RECORD_MAX_SIZE qualifier only in conjunction with the -FILEHEADER
 qualifier. Reducing RECORD_MAX_SIZE can restrict access to existing data and cause GT.M to report errors. Do not create incompatible key and record sizes.</p>
 <p>Before making a permanent change to the records size using DSE, use GDE to check that the appropriate Global Directory contains the same record size for the region. This prepares for future MUPIP CREATEs and
-performs a consistency check on the key and record size values. <span>For more information on key and record sizes, refer to <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">Chapter 4: &#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p>
+performs a consistency check on the key and record size values. <span>For more information on key and record sizes, refer to <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">Chapter 4: &#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p>
 <p>
 <a class="indexterm" name="idp186584144"></a>
 <span class="emphasis"><em><span>-</span>REF[ERENCE_COUNT]=reference_count</em></span>
@@ -655,17 +655,17 @@ performs a consistency check on the key and record size values. <span>For more i
 To accurately determine the proper reference count, restrict CHANGE <span>-</span>FILEHEADER <span>-</span>REFERENCE_COUNT to the case where the process running DSE has exclusive (standalone) access to the
 database file. When DSE has sole access to a database file the <span>-</span>REFERENCE_COUNT should be one (1). This is an informational field and does not have any effect on processing.</p>
 <a class="indexterm" name="idp186584560"></a><p><span class="emphasis"><em><span>-</span>REG[_SEQNO]=sequence-number</em></span></p>
-<p>In <span>an LMS</span> environment, this sets the "Region Seqno" field. <span>For more information, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</span> </p>
+<p>In <span>an LMS</span> environment, this sets the "Region Seqno" field. <span>For more information, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</span> </p>
 <p>
 <a class="indexterm" name="idp186619504"></a>
 <span class="emphasis"><em><span>-</span>RESYNC_S[EQNO]=sequence-number</em></span>
 </p>
-<p>In <span>an LMS</span> environment, this sets the hexidecimal value of the "Resync Seqno" field. <span>For more information, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</span></p>
+<p>In <span>an LMS</span> environment, this sets the hexidecimal value of the "Resync Seqno" field. <span>For more information, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</span></p>
 <p>
 <a class="indexterm" name="idp186607808"></a>
 <span class="emphasis"><em><span>-</span>RESYNC_T[N]=sequence-number</em></span>
 </p>
-<p>In <span>an LMS</span> environment, this sets the hexidecimal value ofthe "Resync transaction" field. <span>For more information, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</span></p>
+<p>In <span>an LMS</span> environment, this sets the hexidecimal value ofthe "Resync transaction" field. <span>For more information, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</span></p>
 <p>
 <a class="indexterm" name="idp186580400"></a>
 <span class="emphasis"><em>-SPIN_SLEEP_MASK]=hexadecimal-mask</em></span>
@@ -1159,7 +1159,7 @@ Date/Time       27-JAN-2019 03:13:40 [$H = 63214,11620]
 <p>This command displays the fileheader elements along with the following helper process parameters: </p>
 <pre class="programlisting">Upd reserved area [% global buffers]   50  Avg blks read per 100 records                200
 Pre read trigger factor [% upd rsrvd]    50  Upd writer trigger [%flshTrgr]                 33</pre>
-<p>For more information, refer to the fileheader elements section in <a class="xref" href="ch09.html" title="Chapter 9. GT.M Database Structure(GDS)">&#8220;<i>GT.M Database Structure(GDS)</i>&#8221;</a>.</p>
+<p>For more information, refer to the fileheader elements section in <a class="xref" href="ch09.html" title="Chapter 9. GT.M Database Structure(GDS)">&#8220;<i>GT.M Database Structure(GDS)</i>&#8221;</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1276,7 +1276,7 @@ Hex:  10   Dec:  16</pre>
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>A doubly allocated block may cause inappropriate mingling of data. As long as no KILLs occur, double allocation may not cause permanent loss of additional data. However, it may cause the application programs to generate errors and/or inappropriate results. When a block is doubly allocated, a KILL may remove data outside its proper scope. See "Maintaining Database Integrity Chapter" for more information on repairing doubly allocated blocks.</p></td></tr>
@@ -1391,7 +1391,7 @@ HELP command is:</p>
 <pre class="programlisting">I[NTEGRIT] -B[LOCK]=block-number</pre>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Unlike MUPIP INTEG, this command only detects errors internal to a block and cannot detect errors such as indices incorrectly pointing to another block. <span>For information on the utility that checks multiple blocks, refer to the <a class="xref" href="gdm.html#mup_integ" title="INTEG">&#8220;INTEG
@@ -2020,20 +2020,20 @@ block-oriented command, DSE uses block one (1).</p>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="operate_dse.html">Prev</a> </td>
+<a accesskey="p" href="operate_dse.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch10.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="dse_summary.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="dse_summary.html">Next</a>
 </td>
 </tr>
 <tr>
 <td width="40%" align="left" valign="top">
-<span>Operating in DSE</span> </td>
+<span>Operating in DSE</span> </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> <span>DSE Command </span>Summary</td>
+<td width="40%" align="right" valign="top"> <span>DSE Command </span>Summary</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/dse_cmmds_quals.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:02 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/dse_cmmds_quals.html]] -->
 </html>

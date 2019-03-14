@@ -1,37 +1,37 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/TPRESTART.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:50:33 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/TPRESTART.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>TPRESTART </title>
+<title>TPRESTART </title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
-<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
-<link rel="prev" href="TPQUIT.html" title="TPQUIT ">
-<link rel="next" href="TPRESTNESTERR.html" title="TPRESTNESTERR ">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="TPQUIT.html" title="TPQUIT ">
+<link rel="next" href="TPRESTNESTERR.html" title="TPRESTNESTERR ">
 <link rel="copyright" href="ln-idp153747552.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">TPRESTART </th></tr>
+<tr><th colspan="3" align="center">TPRESTART </th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="TPQUIT.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 1. Error Messages</th>
-<td width="20%" align="right"> <a accesskey="n" href="TPRESTNESTERR.html">Next</a>
+<a accesskey="p" href="TPQUIT.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="TPRESTNESTERR.html">Next</a>
 </td>
 </tr>
 </table>
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">TPRESTART </span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">TPRESTART </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="TPRESTART"></a>TPRESTART </h2></div></div></div>
+<a name="TPRESTART"></a>TPRESTART </h2></div></div></div>
 <p><span class="bold"><strong>TPRESTART</strong></span>, Database mmmm; code: xxxx; blk: yyyy in glbl: zzzz; pvtmods: aaaa, blkmods: bbbb, blklvl: cccc, type: dddd, readset: eeee, writeset: ffff, local_tn: gggg, zpos: hhhh</p>
 <p>Run Time Information: The UNIX environment variables GTM_TPRESTART_LOG_FIRST and GTM_TPRESTART_LOG_DELTA control the logging of TPRESTART messages. GTM_TPRESTART_LOG_FIRST indicates the number of TP restarts to log from a GT.M invocation. Once that many have been logged, every GTM_TPRESTART_LOG_DELTA TP restarts, GT.M logs a restart message. If GTM_TPRESTART_LOG_DELTA is undefined, GT.M performs no operator logging. The default value for GTM_TPRESTART_LOG_FIRST is 0 (zero), which leaves the control completely with GTM_TPRESTART_LOG_DELTA. The facility that produces this message can serve as a diagnostic tool in developmental environments for investigating contention due to global updates. A zzzz of "*BITMAP" indicates contention in block allocation which might involve multiple globals. hhhh is the $ZPOSITION of the line of M code that caused the restart of the transaction; utilities leave this field blank.</p>
 <p>Action: Disable, or adjust the frequency of, these messages with the mechanism described above. To reduce the number of restarts, consider changes to the global structure, or varying the time when work is scheduled. Consider whether the business and program logic permits the use of NOISOLATION.</p>
@@ -42,19 +42,19 @@
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="TPQUIT.html">Prev</a> </td>
+<a accesskey="p" href="TPQUIT.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="TPRESTNESTERR.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="TPRESTNESTERR.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">TPQUIT  </td>
+<td width="40%" align="left" valign="top">TPQUIT  </td>
 <td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
-<td width="40%" align="right" valign="top"> TPRESTNESTERR </td>
+<td width="40%" align="right" valign="top"> TPRESTNESTERR </td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/TPRESTART.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:50:33 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/TPRESTART.html]] -->
 </html>

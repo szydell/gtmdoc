@@ -1,13 +1,13 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:13 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s04.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Chained and Nested Triggers</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch14.html" title="Chapter 14. Triggers">
+<link rel="up" href="ch14.html" title="Chapter 14. Triggers">
 <link rel="prev" href="ch14s03.html" title="Trigger ISVs Summary">
 <link rel="next" href="ch14s05.html" title="A Simple Example">
 <link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
@@ -18,9 +18,9 @@
 <tr><th colspan="3" align="center">Chained and Nested Triggers</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch14s03.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 14. Triggers</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch14s05.html">Next</a>
+<a accesskey="p" href="ch14s03.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 14. Triggers</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch14s05.html">Next</a>
 </td>
 </tr>
 </table>
@@ -38,7 +38,7 @@
 <p>This example sets off a chained sequence of two triggers and one nested trigger. On <code class="code">Set ^Acct("ID")=10</code>, GT.M chains together an arbitrary sequence of triggers for <code class="code">^Acct("ID")</code> and <code class="code">^Acct(sub:)</code>. It is possible for either the <code class="code">^Acct(sub=:)</code> trigger or the <code class="code">^Acct("ID")</code> trigger to execute first and the other to follow because the trigger execution sequence is arbitrary. Whenever GT.M invokes the trigger for <code class="code">^Acct("ID")</code>, the <code class="code">Set ^Acct(1)=$ZTVALUE+1</code> code sets off the trigger for ^<code class="code">Acct(sub=:)</code> as a nested trigger.</p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td>
 <th align="left">Caution</th>
 </tr>
 <tr><td align="left" valign="top"><p>FIS recommends against using chained and nested triggers that potentially update the same piece of a global variable. You should always assess the significance of having chained triggers for a database update especially because of the arbitrary trigger execution order.The following table shows the stacking behavior of some Intrinsic Special Variables in chained and nested triggers.</p></td></tr>
@@ -183,20 +183,20 @@
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch14s03.html">Prev</a> </td>
+<a accesskey="p" href="ch14s03.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch14.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch14s05.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch14s05.html">Next</a>
 </td>
 </tr>
 <tr>
 <td width="40%" align="left" valign="top">
-<span>Trigger ISVs </span>Summary </td>
+<span>Trigger ISVs </span>Summary </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> A Simple Example</td>
+<td width="40%" align="right" valign="top"> A Simple Example</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:13 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s04.html]] -->
 </html>

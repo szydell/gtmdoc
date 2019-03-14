@@ -1,15 +1,15 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s09.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:11 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s09.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>I/O Commands</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
+<link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
 <link rel="prev" href="ch09s08.html" title="Using Socket Devices">
-<link rel="next" href="ch10.html" title="Chapter 10. Utility Routines">
+<link rel="next" href="ch10.html" title="Chapter 10. Utility Routines">
 <link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -18,9 +18,9 @@
 <tr><th colspan="3" align="center">I/O Commands</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch09s08.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 9. <span>Input/Output</span> Processing</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch10.html">Next</a>
+<a accesskey="p" href="ch09s08.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 9. <span>Input/Output</span> Processing</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch10.html">Next</a>
 </td>
 </tr>
 </table>
@@ -90,7 +90,7 @@
 <p>Positions the file pointer at the end-of-file. This deviceparameter only affects the device on the first OPEN command or OPEN command if the file is CLOSEd NODESTROY. Re-OPENing an already OPEN device with this deviceparameter has no effect. By default, OPEN sets the file pointer to the beginning-of-file.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>If an APPEND is combined with a SEEK deviceparameter the APPEND is done first - regardless of deviceparameter order.</p></td></tr>
@@ -157,7 +157,7 @@ use sd</pre>
 <p>For LOCAL sockets, CONNECT attempts to open the specified file. If it doesn't exist or there is no listener, CONNECT retries until it succeeds or a specified timeout expires. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>CONNECT is not compatible with LISTEN.</p></td></tr>
@@ -180,7 +180,7 @@ use sd</pre>
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>expr "ab:/:://:bc" is interpreted as four delimiters, which are "ab", ":", "/", and "bc". One socket can have 0-64 delimiters and each delimiter can contain 1-64 characters.</p></td></tr>
@@ -255,7 +255,7 @@ File &gt;</pre>
 <p>NOFIXED specifies a variable-length record format for sequential disk files. NOFIXED is a synonym for VARIABLE. FIXED is incompatible with STREAM and VARIABLE. By default, records have VARIABLE length record format.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>FIXED length records do not implicitly use embedded record terminators such as line feeds.</p></td></tr>
@@ -263,10 +263,10 @@ File &gt;</pre>
 <p>In UTF-8 mode, GT.M I/O enforces a more record-oriented view of the file, treating each record as RECORDSIZE bytes long. Note that a UTF-8 code-point never splits across records. If a multi-byte character (when CHSET is UTF-8) or a surrogate pair (when CHSET is UTF-16) does not fit into the record (either logical as given by WIDTH or physical as given by RECORDSIZE), the WRITE command uses the byte values as specified by the PAD deviceparameter to fill the physical record. A combining character may end up in the subsequent record if it does not fit in the current record.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>PAD is effective only for devices opened with a CHSET related to <span class="trademark">Unicode</span>® characters. In M mode PAD is always &lt;SP&gt;</p></td></tr>
+<tr><td align="left" valign="top"><p>PAD is effective only for devices opened with a CHSET related to <span class="trademark">Unicode</span>(R) characters. In M mode PAD is always &lt;SP&gt;</p></td></tr>
 </table></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;do ^fixedex
@@ -349,7 +349,7 @@ gtmcp ; Copy a binary file using GT.M
 <p>If expr is set to a value other than M, UTF-8, UTF-16, UTF-16LE or UTF-16BE, GT.M produces a run-time error. UTF-16, UTF-LE, and UTF-16BE are not supported for $Principal and Terminal devices. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>ICHSET is a deviceparameter of both the OPEN and USE commands. As ICHSET can change the character set of an already OPENed device, it can help deal with binary data intermixed with character data. </p></td></tr>
@@ -399,7 +399,7 @@ decryption.</p>
 <p>Enables exception handling in socket devices. expr specifies the I/O error trapping mode. A value equal to "TRAP" specifies that I/O errors on a device raise error conditions. A value equal to "NOTRAP", or when IOERROR is not specified, indicates that I/O error on a device does not raise error conditions.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>The IOERROR setting is associated with sockets while EXCEPTION is associated with the SOCKET device. In other words, IOERROR can be turned on or off for each of the sockets associated with a SOCKET device but there is only one EXCEPTION value which is used for all the sockets.</p></td></tr>
@@ -423,7 +423,7 @@ decryption.</p>
 <p>Separate IKEY and OKEY deviceparameters allow different keys for READ from and WRITE to a device; for example, when a GT.M process is an element of a UNIX pipe. Because encryption ciphers use state machines (which are initialized with the IV at the beginning of the file), GT.M permits READ and WRITE operations only either starting at the beginning of a file, or at the position at which the last READ or WRITE operation completed. In particular, non-empty files cannot be opened in APPEND mode; the SEEK deviceparameter is prohibited; and the TRUNCATE is only permitted at the beginning of a file or at the end, the former deleting the contents, and the latter effectively a no-op.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Encrypted files must be written and read sequentially from the beginning (including the Byte Order Marker for UTF files); GT.M supports READ and WRITE operations at arbitrary locations in a file only for unencrypted files.</p></td></tr>
@@ -540,7 +540,7 @@ GTM&gt;open tcpdev:(LISTEN="local.socket"_":LOCAL":delim=$c(13):attach="server":
 <p>If expr is set to a value other than M, UTF-8, UTF-16, UTF-16LE or UTF-16BE, GT.M produces a run-time error. UTF-16, UTF-LE, and UTF-16BE are not supported for $Principal and Terminal devices. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>OCHSET is a deviceparameter of both the OPEN and USE commands. As OCHSET can change the character set of an already OPENed device, it can help deal with binary data intermixed with character data. </p></td></tr>
@@ -611,7 +611,7 @@ decryption.</p>
 </ol></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>In all UTF-16 character sets, RECORDSIZE must be even and PAD bytes occupy two bytes with the high order byte zero. </p></td></tr>
@@ -703,7 +703,7 @@ GTM&gt;</pre>
 <p>For all UTF-16 CHSET values, RECORDSIZE must be even and PAD characters each occupy two bytes in the
 record.</p>
 <p>The maximum size of intexpr is 1,048,576 bytes. GT.M produces an error if you specify a value greater than 1,048,576. </p>
-<p>When a CHSET related to <span class="trademark">Unicode</span>® characters is in use, GT.M treats RECORDSIZE as a byte limit at which to wrap or truncate output depending on [Z][NO]WRAP. For any Unicode character set, GT.M ignores RECORDSIZE for a device which is already open if any I/O has been done. </p>
+<p>When a CHSET related to <span class="trademark">Unicode</span>(R) characters is in use, GT.M treats RECORDSIZE as a byte limit at which to wrap or truncate output depending on [Z][NO]WRAP. For any Unicode character set, GT.M ignores RECORDSIZE for a device which is already open if any I/O has been done. </p>
 <p>If the character set is not UTF-16, UTF-16LE, UTF-16BE, the default RECORDSIZE is 32K-1bytes. </p>
 <p>If the character set is UTF-16, UTF-16LE or UTF16-BE, the RECORDSIZE must always be in multiples of 2. For these character sets, the default RECORDIZE is 32K-4 bytes. </p>
 <p>For all UTF-16 CHSET values, RECORDSIZE must be even and PAD characters each occupy two bytes in the record.</p>
@@ -733,7 +733,7 @@ possible presence of a Byte Order Marker (BOM), SEEK for a FIXED format file wri
 character set must follow at least one prior READ since the device was created.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>If an APPEND is combined with a SEEK deviceparameter the APPEND is done first - regardless of deviceparameter order.</p></td></tr>
@@ -1107,24 +1107,24 @@ GTM&gt; </pre>
 <td>
 <p>APPEND</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>ATTACH=expr</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1140,22 +1140,22 @@ GTM&gt; </pre>
 </tr>
 <tr>
 <td><p>COMMAND=expr</p></td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>CONNECT=expr</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1164,11 +1164,11 @@ GTM&gt; </pre>
 <td>
 <p>[NO]DELIMITER</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1180,11 +1180,11 @@ GTM&gt; </pre>
 <td>
 <p>X</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -1213,20 +1213,20 @@ GTM&gt; </pre>
 <td>
 <p>FIFO</p>
 </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>[NO]FIXED</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1234,36 +1234,36 @@ GTM&gt; </pre>
 <p>X</p>
 </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>[NO]FOLLOW</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td class="auto-generated"> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td class="auto-generated"> </td>
 </tr>
 <tr>
 <td>
 <p>GROUP=expr</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
 <td>
 <p>X</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td><p>ICHSET=encoding</p></td>
@@ -1285,22 +1285,22 @@ GTM&gt; </pre>
 </tr>
 <tr>
 <td><p>INDEPENDENT</p></td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>IOERROR=expr</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1318,11 +1318,11 @@ GTM&gt; </pre>
 <td>
 <p>LISTEN=expr</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1331,16 +1331,16 @@ GTM&gt; </pre>
 <td>
 <p>[NO]NEWVERSION</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
 <td>
 <p>X</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td><p>OCHSET=encoding</p></td>
@@ -1364,31 +1364,31 @@ GTM&gt; </pre>
 <td>
 <p>OWNER=expr</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
 <td>
 <p>X</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td><p>PARSE</p></td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>[NO]READONLY</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1396,14 +1396,14 @@ GTM&gt; </pre>
 <p>X</p>
 </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>RECORDSIZE=intexpr</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1411,121 +1411,121 @@ GTM&gt; </pre>
 <p>X</p>
 </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td><p>SEEK=strexpr</p></td>
-<td> </td>
+<td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td><p>SHELL=expr</p></td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td><p>STDERR=expr</p></td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>[NO]STREAM</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
 <td><p>X</p></td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>SYSTEM=expr</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
 <td>
 <p>X</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>[NO]TRUNCATE</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
 <td>
 <p>X</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>UIC=expr</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
 <td>
 <p>X</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>VARIABLE</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
 <td><p>X</p></td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>WORLD=expr</p>
 </td>
-<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
 <td>
 <p>X</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -1552,22 +1552,22 @@ GTM&gt; </pre>
 <td>
 <p>[NO]WRITEONLY</p>
 </td>
-<td> </td>
+<td> </td>
 <td><p>X</p></td>
 <td><p>X</p></td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
 <p>ZBFSIZE</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1576,11 +1576,11 @@ GTM&gt; </pre>
 <td>
 <p>Z[NO]DELAY</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1589,11 +1589,11 @@ GTM&gt; </pre>
 <td>
 <p>Z[NO]FF</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1602,11 +1602,11 @@ GTM&gt; </pre>
 <td>
 <p>ZIBFSIZE</p>
 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
 <p>X</p>
 </td>
@@ -1648,7 +1648,7 @@ GTM&gt; </pre>
 <p>ATTACH is not compatible with any other device parameters in the USE command.A socket can move from one device to another using DETACH/ATTACH.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>A socket does not carry [I|O]CHSET with it while being moved. Such a socket uses the [I|O]CHSET of the device it is ATTACHed to. If there is input still buffered, this may cause unintentional consequences in the application if [I|O]CHSET changes. GT.M does not detect (or report) a change in [I|O]CHSET due to DETACH/ATTACH.</p></td></tr>
@@ -1694,7 +1694,7 @@ GTM&gt; </pre>
 <p>For more information, refer to <a class="xref" href="ch09s09.html#connect_9" title="CONNECT">&#8220;CONNECT&#8221;</a>.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>CONNECT is not compatible with LISTEN.</p></td></tr>
@@ -1731,7 +1731,7 @@ READ X</pre>
 <li class="listitem"><p>Otherwise, if $ZTRAP is not the empty string, the process executes $ZTRAP.</p></li>
 <li class="listitem"><p>Otherwise, GT.M terminates the process.</p></li>
 </ul></div>
-<p>For more information on error handling, refer to <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</p>
+<p>For more information on error handling, refer to <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</p>
 <p>When CTRAP includes &lt;CTRL-C&gt;, [NO]CENABLE has no effect. CTRAPping &lt;CTRL-C&gt; also takes precedence over CENABLE.</p>
 </div>
 <div class="sect4">
@@ -1747,7 +1747,7 @@ READ X</pre>
 </ol></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>expr "ab:/:://:bc" is interpreted as four delimiters, which are "ab", ":", "/", and "bc". One socket can have 0-64 delimiters and each delimiter can contain 1-64 characters.</p></td></tr>
@@ -1768,7 +1768,7 @@ READ X</pre>
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>A socket can move from one device to another using DETACH/ATTACH. A socket does not carry [I|O]CHSET with it while being moved. Such a socket uses the [I|O]CHSET of the device it is ATTACHed to. If there is input still buffered, this may cause unintentional consequences in the application if [I|O]CHSET changes. GT.M does not detect (or report) a change in [I|O]CHSET due to DETACH/ATTACH.</p></td></tr>
@@ -1854,7 +1854,7 @@ socketpool OPEN SOCKET TOTAL=0 CURRENT=-1</pre>
 <p>If any of the EDITING &lt;CTRL&gt; characters are in the CTRAP list, their editing functions are not available since CTRAP takes precedence. However the EDITING &lt;CTRL&gt; characters takes precedence over the TERMINATOR list. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>M READ EDITING depends on the values of $X and $Y being correct. If the application sends its own escape sequences or control characters, which change the cursor position, it must properly update $X and $Y before doing a M READ with EDITING enabled to ensure correct formatting during input. </p></td></tr>
@@ -1895,7 +1895,7 @@ socketpool OPEN SOCKET TOTAL=0 CURRENT=-1</pre>
 </h5></div></div></div>
 <p>EXCEPTION=expr Applies to: All devices</p>
 <p>Defines an error handler for an I/O device. The expression must contain a fragment of GT.M code (for example, GOTO ERRFILE) that GT.M XECUTEs when the driver for the device detects an error, or an entryref to which GT.M transfers control, as appropriate for the current gtm_ztrap_form.</p>
-<p>For more information on error handling, refer to <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</p>
+<p>For more information on error handling, refer to <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
@@ -1907,7 +1907,7 @@ socketpool OPEN SOCKET TOTAL=0 CURRENT=-1</pre>
 <p>The valid values for expr:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>[NO]CHARACTERS enables or disables maintenance of $X and $Y according to the M ANSI standard for the characters &lt;BS&gt;, &lt;LF&gt;, &lt;CR&gt; and &lt;FF&gt;. CHARACTERS causes the device driver to examine all output for the above characters, and to adjust $X and $Y accordingly. By default, GT.M performs special maintenance on $X and $Y only for M format control characters, WRAPped records, and certain action deviceparameters.</p></li>
-<li class="listitem">In UTF-8 mode, FILTER recognizes the line terminators specified by the <span class="trademark">Unicode</span>® standard.</li>
+<li class="listitem">In UTF-8 mode, FILTER recognizes the line terminators specified by the <span class="trademark">Unicode</span>(R) standard.</li>
 <li class="listitem"><p>[NO]ESCAPE alters the effect of ANSI escape sequences on $X and $Y. ESCAPE causes GT.M to filter the output, searching for ANSI escape sequences and preventing them from updating $X and $Y. By default, GT.M does not screen output for escape sequences.</p></li>
 </ul></div>
 <p>By default, GT.M does not perform output filtering. For GT.M to maintain $X for non-graphic characters as described by the standard, FILTER="CHARACTERS" must be enabled. Output filtering adds additional overhead to I/O processing. </p>
@@ -1966,7 +1966,7 @@ socketpool OPEN SOCKET TOTAL=0 CURRENT=-1</pre>
 <p>Enables exception handling in socket devices. expr specifies the I/O error trapping mode. A value equal to "TRAP" specifies that I/O errors on a device raise error conditions. A value equal to "NOTRAP", or when IOERROR is not specified, indicates that an I/O error on a device does not raise error conditions.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>GT.M currently handles exception handling at device level instead of socket level.</p></td></tr>
@@ -2086,12 +2086,12 @@ character set must follow at least one prior READ since the device was created.<
 <p>Makes the socket specified by the handle named in expr the current socket for the Socket device . If the named socket is a listening socket, it checks for an incoming connection request and if one is available, it accepts the request and creates a new connected socket in which case $KEY provides information on the new socket Specifying a socket handle not contained in the Socket device generates an error.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>SOCKET is compatible with DELIMITER only.</p></td></tr>
 </table></div>
-<p>For a usage example, refer to the socketexamplemulti2.m in the <a class="xref" href="ch09s08.html#socket_device_examples" title="Socket Device Examples">Section : &#8220;Socket Device Examples&#8221;</a>. </p>
+<p>For a usage example, refer to the socketexamplemulti2.m in the <a class="xref" href="ch09s08.html#socket_device_examples" title="Socket Device Examples">Section : &#8220;Socket Device Examples&#8221;</a>. </p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
@@ -2103,7 +2103,7 @@ character set must follow at least one prior READ since the device was created.<
 <p>When EDITING is enabled, the control characters used for editing are not treated as terminators even if they are in the TERMINATOR list. </p>
 <p>You can define any control character as a terminator, but they are all single character.</p>
 <p>When the terminal is in UTF-8 mode (chset=utf8,) GT.M limits the terminator characters to the first 127 which are common between ASCII and UTF-8 encodng. In M mode, any of the 256 characters may be specified a terminator.</p>
-<p>In UTF-8 mode, if CR is in the terminator list (either by default or explicitly,) GT.M ignore the following LF to keep with the standard <span class="trademark">Unicode</span>® line terminator definitions.</p>
+<p>In UTF-8 mode, if CR is in the terminator list (either by default or explicitly,) GT.M ignore the following LF to keep with the standard <span class="trademark">Unicode</span>(R) line terminator definitions.</p>
 <p>NOTERMINATOR eliminates all terminators. When a terminal has all terminators disabled, fixed length READ and READ * terminate on receipt of some number of characters, and a timed READ terminates on timeout, but any other READ only terminates when the input fills the terminal read buffer.</p>
 <p>By default, terminals recognize &lt;CR&gt;, &lt;LF&gt;, and &lt;ESC&gt; as terminators (that is, TERMINATOR=$C(10, 13,27)). TERMINATOR="" restores the default. In UTF-8 mode, the usual UTF-8 line terminators are also included in the default set of terminators. </p>
 <p>Example:</p>
@@ -2128,7 +2128,7 @@ character set must follow at least one prior READ since the device was created.<
 <p></p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>A terminal may have its own handling of XON/XOFF, controlled by a set-up mode or by switches. If an application requires program recognition of &lt;CTRL-S&gt; and &lt;CTRL-Q&gt;, the terminals may require reconfiguration.</p></td></tr>
@@ -2325,11 +2325,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>ATTACH</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2341,11 +2341,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2354,11 +2354,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2390,21 +2390,21 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p>CONNECT</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2416,11 +2416,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2429,21 +2429,21 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p>[NO]DELIMITER</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2452,11 +2452,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>DETACH=expr</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2468,11 +2468,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2481,11 +2481,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2494,11 +2494,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2507,11 +2507,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2520,11 +2520,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2556,9 +2556,9 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2573,10 +2573,10 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2585,14 +2585,14 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>[NO]FOLLOW</p>
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td class="auto-generated"> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td class="auto-generated"> </td>
 </tr>
 <tr>
 <td>
@@ -2601,32 +2601,32 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p>IKEY</p>
                 </td>
-<td> </td>
+<td> </td>
 <td><p>X</p></td>
 <td><p>X</p></td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p>INREWIND</p>
                 </td>
-<td> </td>
+<td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                 </td>
 </tr>
@@ -2634,11 +2634,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>INSEEK</p>
                 </td>
-<td> </td>
+<td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                 </td>
 </tr>
@@ -2646,11 +2646,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>IOERROR</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2659,12 +2659,12 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>KEY</p>
                 </td>
-<td> </td>
+<td> </td>
 <td><p>X</p></td>
 <td><p>X</p></td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2693,11 +2693,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>LISTEN</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2706,22 +2706,22 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>OKEY</p>
                 </td>
-<td> </td>
+<td> </td>
 <td><p>X</p></td>
 <td><p>X</p></td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p>OUTREWIND</p>
                 </td>
-<td> </td>
+<td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                 </td>
 </tr>
@@ -2729,11 +2729,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>OUTSEEK</p>
                 </td>
-<td> </td>
+<td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                 </td>
 </tr>
@@ -2744,45 +2744,45 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p>REWIND</p>
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p>SEEK=strexpr</p>
                 </td>
-<td> </td>
+<td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p>SOCKET</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2794,24 +2794,24 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p>[NO]TRUNCATE</p>
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2820,11 +2820,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2833,11 +2833,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2890,13 +2890,13 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -2905,23 +2905,23 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p>ZBFSIZE</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2930,11 +2930,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>Z[NO]DELAY</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2943,11 +2943,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>Z[NO]FF</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2956,11 +2956,11 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>ZIBFSIZE</p>
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -2990,13 +2990,13 @@ character set must follow at least one prior READ since the device was created.<
 <p>The maximum length of the input string is the smaller of the device buffer size limitation or the GT.M maximum string size (1,048,576 bytes). If a record is longer than the maximum record length, GT.M returns the record piece by piece during sequential reads, for devices that allow it.</p>
 <p>When a string literal appears as an argument to a READ, M writes the literal to the current device. String literals appear as READ arguments to serve as prompts for input. GT.M does not permit expression arguments on a READ to act as prompts. Variable prompts must appear as arguments to a WRITE. If a variable appears as an argument to a READ, GT.M always interprets it as input, never as output. This facility is used mostly with terminal I/O.</p>
 <p>The READ commands adjust $X and $Y, based on the length of the input read.</p>
-<p>In UTF-8 mode, the READ command uses the character set value specified on the device OPEN as the character encoding of the input device. If character set "M" or "UTF-8" is specified, the data is read with no transformation. If character set is "UTF-16", "UTF-16LE", or "UTF-16BE", the data is read with the specified encoding and transformed to UTF-8. If the READ command encounters an illegal character or a character outside the selected representation, it produces a run-time error. The READ command recognizes all <span class="trademark">Unicode</span>® line terminators for non-FIXED devices. See "Line Terminators" section for more details. In M mode, characters and bytes have a one-to-one relationship and therefore READ can be used to read bit-streams of non-character data. </p>
+<p>In UTF-8 mode, the READ command uses the character set value specified on the device OPEN as the character encoding of the input device. If character set "M" or "UTF-8" is specified, the data is read with no transformation. If character set is "UTF-16", "UTF-16LE", or "UTF-16BE", the data is read with the specified encoding and transformed to UTF-8. If the READ command encounters an illegal character or a character outside the selected representation, it produces a run-time error. The READ command recognizes all <span class="trademark">Unicode</span>(R) line terminators for non-FIXED devices. See "Line Terminators" section for more details. In M mode, characters and bytes have a one-to-one relationship and therefore READ can be used to read bit-streams of non-character data. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="read_cmmd_star"></a>READ * Command<a class="indexterm" name="idp191147632"></a>
 </h4></div></div></div>
 <p>The READ * command reads one character from the current device and returns the decimal ASCII representation of that character into the variable specified for the READ * command. READ * appears most frequently in communication protocols, or in interactive programs where single character answers are appropriate.</p>
-<p>In UTF-8 mode, the READ * command accepts one <span class="trademark">Unicode</span>® character input and puts the numeric code-point value for that character into the variable. The READ * command reads one to four bytes, depending on the encoding and returns the numeric code-point value of the character. If ICHSET specifies "UTF-16", "UTF-16LE" or "UTF-16BE", the READ * command reads a byte pair or two byte pairs (if it is a surrogate pair) and returns the numeric code-point value. If ICHSET is M, the READ * command reads a single byte and returns the numeric byte value just like in M mode. </p>
+<p>In UTF-8 mode, the READ * command accepts one <span class="trademark">Unicode</span>(R) character input and puts the numeric code-point value for that character into the variable. The READ * command reads one to four bytes, depending on the encoding and returns the numeric code-point value of the character. If ICHSET specifies "UTF-16", "UTF-16LE" or "UTF-16BE", the READ * command reads a byte pair or two byte pairs (if it is a surrogate pair) and returns the numeric code-point value. If ICHSET is M, the READ * command reads a single byte and returns the numeric byte value just like in M mode. </p>
 <p>The following example reads the value "A", and returns the decimal ASCII representation of "A" in the variable X.</p>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt; READ *X
@@ -3043,7 +3043,7 @@ GTM&gt;Write $char(x)
 </ul></div>
 <p>GT.M can write up to 1,048,576  bytes (the GT.M maximum string size) as a result of a single WRITE argument. GT.M buffers output into a "logical record" for all devices except sockets without DELIMITERs and sequential devices with STREAM enabled. The WRITE command appends a string to the current record of the current device. GT.M does not write to the output device until the buffer is full, a GT.M format control character forces a write, a USE command, a CLOSE command, or, for terminals, the buffer becomes stale. The GT.M compiler breaks a concatenated WRITE argument into a series of WRITE arguments to eliminate the overhead of the concatentation. If circumstances provide a reason for a single WRITE, perform the concatenation prior to the WRITE. </p>
 <p>Each device has a WIDTH and a LENGTH that define the virtual "page". The WIDTH determines the maximum size of a record for a device, while the LENGTH determines how many records fit on a page. When the current record size ($X) reaches the maximum WIDTH and the device has WRAP enabled, GT.M starts a new record. When the current line ($Y) reaches the maximum LENGTH, GT.M starts a new page.</p>
-<p>For devices OPENed with a CHSET supported in UTF-8 mode, WRITE * takes intexpr as a code-point and writes the associated <span class="trademark">Unicode</span>® character in the encoding specified by CHSET. For devices OPENed in M mode, WRITE * takes intexpr as an ASCII value and writes the associated ASCII character.</p>
+<p>For devices OPENed with a CHSET supported in UTF-8 mode, WRITE * takes intexpr as a code-point and writes the associated <span class="trademark">Unicode</span>(R) character in the encoding specified by CHSET. For devices OPENed in M mode, WRITE * takes intexpr as an ASCII value and writes the associated ASCII character.</p>
 <p>The WRITE command also has several format control characters that allow the manipulation of the virtual cursor. For all I/O devices, the GT.M format control characters do the following:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>WRITE !: Clears $X and increments $Y and terminates the logical record in progress. The definition of "logical record" varies from device to device, and is discussed in each device section.</p></li>
@@ -3052,7 +3052,7 @@ GTM&gt;Write $char(x)
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>If $X is less than WIDTH, WRITE ! writes WIDTH - $X spaces. </p></td></tr>
@@ -3120,7 +3120,7 @@ rather than the entire socket device.</p>
 <p>EXCEPTION=expr  Applies to: All devices</p>
 <p>Defines an error handler for an I/O device. The expression must contain a fragment of GT.M code (for example, GOTO ERRFILE) that GT.M XECUTEs when the driver for the device detects an error, or an entryref to which GT.M transfers control, as appropriate for the current gtm_ztrap_form.</p>
 <p>The expression must contain a fragment of GT.M code (for example, GOTO ERRFILE) that GT.M XECUTEs when the driver for the device detects an error, or an entryref to which GT.M transfers control, as appropriate for the current gtm_ztrap_form. </p>
-<p>For more information on error handling, refer to <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</p>
+<p>For more information on error handling, refer to <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
@@ -3236,7 +3236,7 @@ rather than the entire socket device.</p>
                   <p><a class="xref" href="ch09s09.html#delete_close" title="DELETE">&#8220;DELETE&#8221;</a></p>
                   
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -3252,7 +3252,7 @@ rather than the entire socket device.</p>
                   <p><a class="xref" href="ch09s09.html#destroy_close" title="DESTROY">&#8220;DESTROY&#8221;</a></p>
                   
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -3284,63 +3284,63 @@ rather than the entire socket device.</p>
                   <p><a class="xref" href="ch09s09.html#group_close" title="GROUP">&#8220;GROUP&#8221;</a></p>
                   
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p><a class="xref" href="ch09s09.html#owner_close" title="OWNER">&#8220;OWNER&#8221;</a></p>
                   
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p><a class="xref" href="ch09s09.html#rename_close" title="RENAME">&#8220;RENAME&#8221;</a></p>
                   
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p><a class="xref" href="ch09s09.html#rewind_9" title="REWIND">&#8220;REWIND&#8221;</a></p>
                   
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p><a class="xref" href="ch09s09.html#socket_close" title="SOCKET">&#8220;SOCKET&#8221;</a></p>
                   
                 </td>
-<td> </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
@@ -3350,42 +3350,42 @@ rather than the entire socket device.</p>
                   <p><a class="xref" href="ch09s09.html#system_close_unix" title="SYSTEM">&#8220;SYSTEM&#8221;</a></p>
                   
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p><a class="xref" href="ch09s09.html#uic_unix_close" title="UIC">&#8220;UIC&#8221;</a></p>
                   
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
                   <p><a class="xref" href="ch09s09.html#world_close" title="WORLD">&#8220;WORLD&#8221;</a></p>
                   
                 </td>
-<td> </td>
+<td> </td>
 <td>
                   <p>X</p>
                 </td>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
+<td> </td>
 </tr>
 </tbody>
 </table>
@@ -3393,7 +3393,7 @@ rather than the entire socket device.</p>
 <p></p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Since EXCEPTION is the only CLOSE deviceparameter that applies to NULL, the NULL device column is not shown in the table above.</p></td></tr>
@@ -3441,18 +3441,18 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>ATTACH</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3461,28 +3461,28 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>[NO]CENABLE</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>CLEARSCREEN</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3494,35 +3494,35 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>[NO]CONVERT</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>CTRAP</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   
 </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>DELETE</p>
   </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
@@ -3537,7 +3537,7 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3555,51 +3555,51 @@ rather than the entire socket device.</p>
 <td>
    <p>DETACH</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>DOWNSCROLL</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>[NO]ECHO</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>ERASELINE</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>[NO]ESCAPE</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3619,11 +3619,11 @@ rather than the entire socket device.</p>
 <td>
    <p>[NO]FILTER[=expr]</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3632,18 +3632,18 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>FLUSH</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3697,27 +3697,27 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>[NO]HOSTSYNC</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>[Z]LENGTH=intexpr</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3726,8 +3726,8 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3761,11 +3761,11 @@ rather than the entire socket device.</p>
 <td>
    <p>[NO]PASTHRU</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3777,7 +3777,7 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3786,8 +3786,8 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3796,15 +3796,15 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>RENAME=expr</p>
   </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
@@ -3819,7 +3819,7 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3839,17 +3839,17 @@ rather than the entire socket device.</p>
 <td>
    <p>SKIPFILE=intexpr</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>SOCKET</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
@@ -3861,7 +3861,7 @@ rather than the entire socket device.</p>
 <td>
    <p>SPACE=intexpr</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
@@ -3876,8 +3876,8 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3886,7 +3886,7 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
@@ -3895,17 +3895,17 @@ rather than the entire socket device.</p>
 <td>
    <p>TERMINATOR=expr</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>TIMEOUT=expr</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p></p>
   </td>
@@ -3921,27 +3921,27 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>[NO]TTSYNC</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>[NO]TYPEAHEAD</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3950,7 +3950,7 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
@@ -3959,11 +3959,11 @@ rather than the entire socket device.</p>
 <td>
    <p>UPSCROLL</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3972,18 +3972,18 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
-<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>[Z]WIDTH=intexpr</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -3992,7 +3992,7 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
@@ -4007,37 +4007,37 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>WRITELB=expr</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>X=intexpr</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
    <p>Y=intexpr</p>
   </td>
-<td> </td>
+<td> </td>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -4049,7 +4049,7 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -4061,7 +4061,7 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -4073,7 +4073,7 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -4085,7 +4085,7 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -4097,7 +4097,7 @@ rather than the entire socket device.</p>
 <td>
    <p>X</p>
   </td>
-<td> </td>
+<td> </td>
 </tr>
 </tbody>
 </table>
@@ -4109,19 +4109,19 @@ rather than the entire socket device.</p>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch09s08.html">Prev</a> </td>
+<a accesskey="p" href="ch09s08.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch09.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch10.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch10.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Using Socket Devices </td>
+<td width="40%" align="left" valign="top">Using Socket Devices </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Chapter 10. Utility Routines</td>
+<td width="40%" align="right" valign="top"> Chapter 10. Utility Routines</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s09.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:11 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s09.html]] -->
 </html>

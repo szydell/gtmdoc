@@ -1,15 +1,15 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/replication.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:48:58 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/replication.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Commands and Qualifiers</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
-<link rel="up" href="ch07.html" title="Chapter 7. Database Replication">
+<link rel="up" href="ch07.html" title="Chapter 7. Database Replication">
 <link rel="prev" href="ch07s03.html" title="Procedures">
-<link rel="next" href="lkechap.html" title="Chapter 8. M Lock Utility (LKE)">
+<link rel="next" href="lkechap.html" title="Chapter 8. M Lock Utility (LKE)">
 <link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -18,9 +18,9 @@
 <tr><th colspan="3" align="center">Commands and Qualifiers</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch07s03.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 7. Database Replication</th>
-<td width="20%" align="right"> <a accesskey="n" href="lkechap.html">Next</a>
+<a accesskey="p" href="ch07s03.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Database Replication</th>
+<td width="20%" align="right"> <a accesskey="n" href="lkechap.html">Next</a>
 </td>
 </tr>
 </table>
@@ -49,7 +49,7 @@ environment.</p>
 
 </em></span>
 </p>
-<p>Use these qualifiers in the same manner that you would use them for a MUPIP SET. <span>For more information refer to <a class="xref" href="mupipchap.html" title="Chapter 5. General Database Management">Chapter 5: &#8220;<i>General Database Management</i>&#8221;</a>.</span></p>
+<p>Use these qualifiers in the same manner that you would use them for a MUPIP SET. <span>For more information refer to <a class="xref" href="mupipchap.html" title="Chapter 5. General Database Management">Chapter 5: &#8220;<i>General Database Management</i>&#8221;</a>.</span></p>
 <p><a class="indexterm" name="idp184083808"></a>
 <span class="emphasis"><em>
 <span>-replication=<em class="replaceable"><code>replication-state</code></em></span>
@@ -64,7 +64,7 @@ environment.</p>
 <p>Disable replication of the database file(s) or region(s). Even if you turn off replication, journaling continues to operate as before.</p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>GT.M creates a new set of journal files and cuts the back link to the previous journal files if the replication-state is OFF and then turned ON again. The database cannot rollback to a state prior to ON. Therefore, ensure that replication-state remains ON throughout the span of database replication. Turn replication-state OFF only if database replication is no longer needed or the instance is about to be refreshed from the backup of the originating instance.</p></td></tr>
@@ -83,7 +83,7 @@ environment.</p>
 <p>Denotes an implicit replication state when GT.M attempts to keep replication working even if run-time conditions such as no available disk space or no authorization for a process attempting to auto-switch a journal file cause GT.M to turn journaling off. Even with journaling turned off, the Source Server attempts to continue replication using the records available in the replication journal pool. In this state, replication can only continue as long as all the information it needs is in the replication journal pool. Events such as an operationally significant change on the replicating instance(s) or communication problems are likely to cause the Source Server to need information older than that in the replication journal pool and because it cannot look for that information in journal files, at that point the Source Server shuts down.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>If the replication ON state is like a bicycle running smoothly on the road, replication WAS_ON is like a bicycle with a flat front tire being ridden like a unicycle - the system is operating outside its intended mode of use and is more subject to misfortune.</p></td></tr>
@@ -170,7 +170,7 @@ $ mupip replicate -instance_create</pre>
 <p>Goes through all 16 slots in the replication instance file, identifies the slots that are inactive, and clears them to make them available for reuse. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Initially, all the slots are unused. A Source Server replicating to a secondary instance for the first time utilizes an unused slot to store the information related to that secondary. Any Source Server process replicating to the same secondary instance updates information using the same slot until -CLEANSLOT clears the slot to make it reusable. Use -CLEANSLOT to clear inactive slots when the originating instance connects to more than 16 different secondary instances throughout its lifetime.</p></td></tr>
@@ -467,14 +467,14 @@ $ mupip replicate -source -start -buffsize=$jnlpool_size -secondary=localhost:12
 <p>This example starts the Source Server at port 1234 for the replicating instance Brazil. The Source Server creates a Journal Pool. A GT.M Process writes the updated journal records to the Journal Pool. Then, the Source Server process transports each record from the Journal Pool to Brazil via a TCP/IP connection.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Before starting replication, always remember to rundown every replicated database region then start the Source Server.</p></td></tr>
 </table></div>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>GT.M updates to replicated regions are permitted only on the originating instance and disabled on ALL other replicating instances.</p></td></tr>
@@ -499,7 +499,7 @@ $ mupip replicate -source -start -buffsize=$jnlpool_size -secondary=localhost:12
 <p>The Source and Receiver Servers log all compression related events and/or messages in their respective logs. The source server also logs the length of the compressed data (in addition to the uncompressed data length) in its logfile.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>If you plan to use the optional compression facility for replication, you must provide the compression library. The GT.M interface for compression libraries accepts the zlib compression libraries without any need for adaptation. These libraries are included in many UNIX distributions and are downloadable from the zlib home page. GT.M supports the use of the IBM provided zlib library for AIX. If you prefer to use other compression libraries, you need to configure or adapt them to provide the same API provided by zlib. Simple instructions for compiling zlib on a number of platforms follow. Although GT.M uses zlib, zlib is not FIS software and FIS does not support zlib. These instructions are merely provided as a convenience to you.</p></td></tr>
@@ -673,7 +673,7 @@ as the value of -instsecondary.</p>
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left"></th>
 </tr>
 <tr><td align="left" valign="top"><p>If a filter fails to respond within just over a minute to delivery of a mini-transaction or TP transaction, a Source or Receiver Server issues a FILTERTIMEDOUT error, stops the filter, and exits.</p></td></tr>
@@ -1229,19 +1229,19 @@ would not need this qualifier.</p>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch07s03.html">Prev</a> </td>
+<a accesskey="p" href="ch07s03.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="lkechap.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="lkechap.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Procedures </td>
+<td width="40%" align="left" valign="top">Procedures </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Chapter 8. M Lock Utility (LKE)</td>
+<td width="40%" align="right" valign="top"> Chapter 8. M Lock Utility (LKE)</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/replication.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:48:58 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/replication.html]] -->
 </html>

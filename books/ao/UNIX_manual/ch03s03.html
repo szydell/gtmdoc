@@ -1,13 +1,13 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/ch03s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:00 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/ch03s03.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Configuring and operating GT.M with Unicode® support (optional)</title>
+<title>Configuring and operating GT.M with Unicode(R) support (optional)</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
-<link rel="up" href="ch03.html" title="Chapter 3. Basic Operations">
+<link rel="up" href="ch03.html" title="Chapter 3. Basic Operations">
 <link rel="prev" href="ch03s02.html" title="Environment Variables">
 <link rel="next" href="ch03s04.html" title="Starting GT.M">
 <link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
@@ -15,31 +15,31 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">Configuring and operating GT.M with <span class="trademark">Unicode</span>® support (optional) </th></tr>
+<tr><th colspan="3" align="center">Configuring and operating GT.M with <span class="trademark">Unicode</span>(R) support (optional) </th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch03s02.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 3. Basic Operations</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a>
+<a accesskey="p" href="ch03s02.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 3. Basic Operations</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a>
 </td>
 </tr>
 </table>
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch03.html">Basic Operations</a></span> &gt; <span class="breadcrumb-node">Configuring and operating GT.M with <span class="trademark">Unicode</span>® support (optional) </span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch03.html">Basic Operations</a></span> &gt; <span class="breadcrumb-node">Configuring and operating GT.M with <span class="trademark">Unicode</span>(R) support (optional) </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="conf_opr_unic"></a>Configuring and operating GT.M with <span class="trademark">Unicode</span>® support (optional) <a class="indexterm" name="idp179558592"></a><a class="indexterm" name="idp179542528"></a>
+<a name="conf_opr_unic"></a>Configuring and operating GT.M with <span class="trademark">Unicode</span>(R) support (optional) <a class="indexterm" name="idp179558592"></a><a class="indexterm" name="idp179542528"></a>
 </h2></div></div></div>
-<p>The configure script provides the option to install GT.M with or without <span class="trademark">Unicode</span>® support for encoding international character sets. This section describes the system environment required to install and operate GT.M with Unicode support. Users who handle data in ASCII or other single-byte character sets such as one of the ISO-8859 representations and do not foresee any use of character sets beyond single byte character sets, may proceed to the next section.</p>
+<p>The configure script provides the option to install GT.M with or without <span class="trademark">Unicode</span>(R) support for encoding international character sets. This section describes the system environment required to install and operate GT.M with Unicode support. Users who handle data in ASCII or other single-byte character sets such as one of the ISO-8859 representations and do not foresee any use of character sets beyond single byte character sets, may proceed to the next section.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="m_utf8_modes"></a>M mode and UTF-8 mode </h3></div></div></div>
 <p>A GT.M process can operate in either M mode or UTF-8 mode. In certain circumstances, both M mode and UTF-8 mode may concurrently access the same database.</p>
 <p>$gtm_chset determines the mode in which a process operates. If it has a value of M, GT.M treats all 256 combinations of the 8 bits in a byte as a character, which is suitable for many single-language applications.</p>
-<p>If $gtm_chset has a value of UTF-8, GT.M (at process startup) interprets strings as being encoded in UTF-8. In this mode, all functionality related to <span class="trademark">Unicode</span>® support becomes available and standard string-oriented operations operate with UTF-8 encoding. In this mode, GT.M detects character boundaries (since the size of a character is variable length), calculates glyph display width, and performs string conversion between UTF-8 and UTF-16.</p>
+<p>If $gtm_chset has a value of UTF-8, GT.M (at process startup) interprets strings as being encoded in UTF-8. In this mode, all functionality related to <span class="trademark">Unicode</span>(R) support becomes available and standard string-oriented operations operate with UTF-8 encoding. In this mode, GT.M detects character boundaries (since the size of a character is variable length), calculates glyph display width, and performs string conversion between UTF-8 and UTF-16.</p>
 <p><a class="indexterm" name="idp179571632"></a><a class="indexterm" name="idp179575024"></a>If you install GT.M with Unicode support, all GT.M components related to M mode reside in your GT.M distribution directory and Unicode support related components reside in the utf8 subdirectory of your GT.M distribution. For processes in UTF-8 mode, in addition to gtm_chset, ensure that $gtm_dist points to the utf8 subdirectory, that $gtmroutines includes the utf8 subdirectory (or the libgtmutil.so therein) rather than its parent directory.</p>
 <p>In addition to $gtm_chset, GT.M V5.3-004 and up use $gtm_icu_version to choose an ICU library library version other than the default. For ICU libraries built with <code class="code">symbol renaming enabled</code>, $gtm_icu_version becomes a required setting.</p>
 <p><code class="code">$gtm_icu_version</code> specifies the ICU version that GT.M should use for UTF-8 operations. It is in the form of <code class="code">MajorVersion.MinorVersion</code> where MajorVersion and MinorVersion specify the desired Major verion and Minor version of ICU. For example, 3.6 refers to ICU version 3.6. If $gtm_icu_version is defined, GT.M works regardless of whether or not symbols are renamed in ICU. If $gtm_icu_version is not defined or does not evaluate to an installed ICU version, GT.M look for non-renamed symbols in the default ICU version. Note that display widths for a few characters are different starting in ICU 4.0. </p>
@@ -69,7 +69,7 @@
 <tr>
 <td rowspan="2" valign="middle"><p>AIX 6</p></td>
 <td><p>GT.M V5.3-004 until GT.M V6.2-002A</p></td>
-<td><p>GT.M cannot use the AIX provided ICU libraries. Please follow the instructions from the <a class="xref" href="compiling_icu.html" title="Appendix C. Compiling ICU on GT.M supported platforms">Appendix C: &#8220;<i>Compiling ICU on GT.M supported platforms</i>&#8221;</a> and define gtm_icu_version accordingly.</p></td>
+<td><p>GT.M cannot use the AIX provided ICU libraries. Please follow the instructions from the <a class="xref" href="compiling_icu.html" title="Appendix C. Compiling ICU on GT.M supported platforms">Appendix C: &#8220;<i>Compiling ICU on GT.M supported platforms</i>&#8221;</a> and define gtm_icu_version accordingly.</p></td>
 <td><p>Y</p></td>
 </tr>
 <tr>
@@ -93,7 +93,7 @@
 <p></p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>The <code class="code">gtmprofile</code> script defines <code class="code">$gtm_icu_version</code> as necessary.</p></td></tr>
@@ -102,7 +102,7 @@
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="compile_icu_gtm"></a>Compiling ICU </h3></div></div></div>
-<p>GT.M uses ICU 3.6 (or above) to perform operations related to <span class="trademark">Unicode</span>® support. GT.M generates the distribution for UTF-8 mode only if ICU 3.6 (or above) is installed on the system. Therefore, install an appropriate ICU version before installing GT.M to perform functionality related to Unicode support. </p>
+<p>GT.M uses ICU 3.6 (or above) to perform operations related to <span class="trademark">Unicode</span>(R) support. GT.M generates the distribution for UTF-8 mode only if ICU 3.6 (or above) is installed on the system. Therefore, install an appropriate ICU version before installing GT.M to perform functionality related to Unicode support. </p>
 <p>Note that the ICU installation instructions may not be the same for every platform. If <code class="code">libicu</code> has been compiled with <code class="code">symbol renaming enabled</code>, GT.M requires <code class="code">$gtm_icu_version</code> be explicitly set. Please see the above section for more information.</p>
 <p>After installing ICU 3.6 (or above), you also need to set the following environment variables to an appropriate value.</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
@@ -118,19 +118,19 @@
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch03s02.html">Prev</a> </td>
+<a accesskey="p" href="ch03s02.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Environment Variables </td>
+<td width="40%" align="left" valign="top">Environment Variables </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Starting GT.M </td>
+<td width="40%" align="right" valign="top"> Starting GT.M </td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/ch03s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:00 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/ch03s03.html]] -->
 </html>

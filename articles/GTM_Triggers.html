@@ -6,7 +6,7 @@
 
 
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Triggers.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:25:20 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/articles/GTM_Triggers.html]] -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -454,11 +454,11 @@ body {
   <a id=Triggers_7120101139357794_5481 name=Triggers_7120101139357794_5481></a>Triggers Technical Bulletin
 </h1>
 <br>
-Copyright © 2010 Fidelity Information Services, Inc. All Rights Reserved.<br>
+Copyright A(C) 2010 Fidelity Information Services, Inc. All Rights Reserved.<br>
 <br>
 Permission is granted to copy, distribute and/or modify this document under the terms of the <a href=http://www.gnu.org/licenses/fdl.txt>GNU Free Documentation License</a>, Version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.<br>
 <br>
-GT.M™ is a trademark of Fidelity Information Services, Inc. Other trademarks are the property of their respective owners.<br>
+GT.Ma?c is a trademark of Fidelity Information Services, Inc. Other trademarks are the property of their respective owners.<br>
 <br>
 This document contains a description of GT.M and the operating instructions pertaining to the various functions that comprise the system. This document does not contain any commitment of FIS. FIS believes the information in this publication is accurate as of its publication date; such information is subject to change without notice. FIS is not responsible for any errors or defects.
 <p>
@@ -922,7 +922,7 @@ A trigger definition file is a text file used for adding new triggers, modifying
               You can specify a selection list that includes a mix of points, ranges and patterns, but a pattern cannot serve as either end of a range. For example, :,"a":"d";?1U is a valid specification but :,"a":?1A is not.&nbsp;
             </li>
             <li>
-              You can specify a local variable name for each subscript. For example instead of <font face="Courier New">^X(1,:,:)</font>, you can specify <font face="Courier New">^X(1,lastname=:,firstname=:)</font>. This causes GT.M to define local variables<font face="courier new"> lastname</font> and <font face="courier new">firstname</font> to the actual second and third level subscripts respectively from the global node invoking this trigger. The trigger code can then use these variables just like any other M local variable. As described in the Trigger Execution Environment section, trigger code executes in a clean environment - as if all code is preceded by an implicit NEW – the implicit assignments apply only within the scope of the trigger code and don't conflict or affect any run-time code or other triggers.
+              You can specify a local variable name for each subscript. For example instead of <font face="Courier New">^X(1,:,:)</font>, you can specify <font face="Courier New">^X(1,lastname=:,firstname=:)</font>. This causes GT.M to define local variables<font face="courier new"> lastname</font> and <font face="courier new">firstname</font> to the actual second and third level subscripts respectively from the global node invoking this trigger. The trigger code can then use these variables just like any other M local variable. As described in the Trigger Execution Environment section, trigger code executes in a clean environment - as if all code is preceded by an implicit NEW a?? the implicit assignments apply only within the scope of the trigger code and don't conflict or affect any run-time code or other triggers.
             </li>
             <li>
               You cannot use the @ operator, unspecified subscripts (for example, <font face="Courier New">^A()</font> or <font face="Courier New">^A(:,))</font> or local or global variable names as subscripts.
@@ -1652,7 +1652,7 @@ GT.M stores trigger definitions as nodes of a global-like structure <font face="
 <p>
   Consider the following trivial example:
 </p>
-<font face="Courier New">^Acct(id=:,disc=:) –commands=Set –xecute="Set msg=<font face="Courier New">""Trigger Failed"",</font>$ETrap=""If $Increment(^count) Write msg,!"" Set $ZTVAlue=x/disc"</font>
+<font face="Courier New">^Acct(id=:,disc=:) a??commands=Set a??xecute="Set msg=<font face="Courier New">""Trigger Failed"",</font>$ETrap=""If $Increment(^count) Write msg,!"" Set $ZTVAlue=x/disc"</font>
 <p>
   <br>
 </p>
@@ -1749,7 +1749,7 @@ An application process can use a broad range of corrective actions to handle run
   </li>
   <li>
     <p>
-      Defining <font face="'courier new'">gtm_trigger_etrap</font> to hold M code of any complexity exposes mismatches between the quoting conventions for M code and shell scripts. FIS suggests an approach of enclosing the entire value in single-quotes and only escaping the single-quote (‘), exclamation-point (!) and back-slash (\) characters. For a comprehensive (but hopefully not very realistic) example:
+      Defining <font face="'courier new'">gtm_trigger_etrap</font> to hold M code of any complexity exposes mismatches between the quoting conventions for M code and shell scripts. FIS suggests an approach of enclosing the entire value in single-quotes and only escaping the single-quote (a??), exclamation-point (!) and back-slash (\) characters. For a comprehensive (but hopefully not very realistic) example:
     </p>
     <font face="Courier New">$ export gtm_trigger_etrap='write:1\'=2 $zstatus,\!,"5\\2=",5\\2,\! halt' </font>
     <div>
@@ -2407,10 +2407,10 @@ When journaling is ON, GT.M generates journal records for database updates perfo
     For information on the syntax and usage of a trigger definition file, see "<a href=#Trigger_Definition_File_695291 id=tpz- target=_self title="Trigger Definition File">Trigger Definition File</a>".
   </li>
   <li>
-    A MUPIP TRIGGER –TRIGGERFILE operation occurs within a transaction boundary, therefore, if even one trigger from the trigger definition file fails to parse correctly, MUPIP TRIGGER rolls back the entire trigger definition file load.
+    A MUPIP TRIGGER a??TRIGGERFILE operation occurs within a transaction boundary, therefore, if even one trigger from the trigger definition file fails to parse correctly, MUPIP TRIGGER rolls back the entire trigger definition file load.
   </li>
   <li>
-    MUPIP TRIGGER –TRIGGERFILE ignores blank lines and extra whitespace within lines. It treats lines with a semi-colon in the first position as comments and ignores their content.
+    MUPIP TRIGGER a??TRIGGERFILE ignores blank lines and extra whitespace within lines. It treats lines with a semi-colon in the first position as comments and ignores their content.
   </li>
   <li>
     MUPIP TRIGGER compiles the XECUTE action string and rejects the load if the compilation has errors.
@@ -2446,7 +2446,7 @@ When journaling is ON, GT.M generates journal records for database updates perfo
     Name-list can include global names, delimited with a leading up-arrow, (^) and/or trigger names with no leading up-arrow. You can specify a trailing asterisk(*) with either.
   </li>
   <li>
-    With no arguments specified, GT.M treats -SELECT as –SELECT="*" and extracts a list of all current triggers.
+    With no arguments specified, GT.M treats -SELECT as a??SELECT="*" and extracts a list of all current triggers.
   </li>
   <li>
     Optionally, you can specify a file name to redirect the output of the command. If you do not specify a file name, MUPIP TRIGGER prompts for a file name. If you respond with an empty string (RETURN), MUPIP TRIGGER directs the output to STDOUT.
@@ -2457,7 +2457,7 @@ When journaling is ON, GT.M generates journal records for database updates perfo
 </p>
 <div style="MARGIN:2pt 0pt">
   <p>
-    Note: The output from the MUPIP TRIGGER –SELECT command may not be identical to your trigger definition file. This is because GT.M converts some semantically identical syntax into a single internal representation; while -SELECT output may not be identical to the -TRIGGERFILE input, it has the same meaning.&nbsp; <font color=#0000ff>Additionally, MUPIP TRIGGER -SELECT displays a field called "Cycle" as part of a comment. Cycle is the number of trigger definition updates (addition, modification, or deletion) performed on a global.<br>
+    Note: The output from the MUPIP TRIGGER a??SELECT command may not be identical to your trigger definition file. This is because GT.M converts some semantically identical syntax into a single internal representation; while -SELECT output may not be identical to the -TRIGGERFILE input, it has the same meaning.&nbsp; <font color=#0000ff>Additionally, MUPIP TRIGGER -SELECT displays a field called "Cycle" as part of a comment. Cycle is the number of trigger definition updates (addition, modification, or deletion) performed on a global.<br>
     </font>
   </p>
 </div>
@@ -2488,7 +2488,7 @@ When journaling is ON, GT.M generates journal records for database updates perfo
     </li>
     <li>
       Execute a command like the following:<br>
-      <font face="Courier New">$ mupip trigger –triggerfile=triggers.trg</font><br>
+      <font face="Courier New">$ mupip trigger a??triggerfile=triggers.trg</font><br>
       This command adds a trigger for ^Acct("ID"). On successful trigger load, this command displays an output like the following:
       <div>
         <font face="Courier New">File triggers.trg, Line 1: ^Acct trigger added with index 1</font>
@@ -2519,7 +2519,7 @@ When journaling is ON, GT.M generates journal records for database updates perfo
     <li>
       <div>
         Execute a command like the following:<br>
-        <font face="Courier New">$ mupip trigger –select="^Acct*"</font><br>
+        <font face="Courier New">$ mupip trigger a??select="^Acct*"</font><br>
         This command displays the triggers. A sample output looks like the following:&nbsp;<br>
         <font face="Courier New">;trigger name: ValidateAccount#&nbsp; <font color=#0000ff><font color=#000000>cycle:</font> 1<br>
         </font>+^Acct("ID") -name=ValidateAccount -commands=S -xecute="Write ""Hello Earth!""" </font>
@@ -2742,7 +2742,7 @@ This example adds a trigger definition for the first level node of <font face="c
   <a id=ZTCode_17816755651572924_74733_014850263749313641 name=ZTCode_17816755651572924_74733_014850263749313641></a>$ZTCOde
 </h3>
 <p>
-  Within trigger context, $ZTCOde evaluates to a string containing the trigger code (that is, the string value for the –xecute in the trigger definition). Outside trigger context, $ZTCOde has the value of an empty string.
+  Within trigger context, $ZTCOde evaluates to a string containing the trigger code (that is, the string value for the a??xecute in the trigger definition). Outside trigger context, $ZTCOde has the value of an empty string.
 </p>
 <div>
   &nbsp;
@@ -2785,7 +2785,7 @@ This example adds a trigger definition for the first level node of <font face="c
   &nbsp;
 </div>
 <div>
-  $ZTLevel greater than one (&gt;1) indicates that there are nested triggers in progress. When a single update invokes multiple triggers solely because of multiple trigger matches of that initial (non-trigger) update, they aren’t nested (they are chained) and thus all have same $ZTLevel.
+  $ZTLevel greater than one (&gt;1) indicates that there are nested triggers in progress. When a single update invokes multiple triggers solely because of multiple trigger matches of that initial (non-trigger) update, they arena??t nested (they are chained) and thus all have same $ZTLevel.
 </div>
 <p>
   <br>
@@ -2811,7 +2811,7 @@ This example adds a trigger definition for the first level node of <font face="c
   &nbsp;
 </div>
 <div class=programlisting>
-  <font face="Courier New">+^Acct("ID") –commands=Set –xecute="Set ^Acct(1)=$ZTVALUE+1"</font>
+  <font face="Courier New">+^Acct("ID") a??commands=Set a??xecute="Set ^Acct(1)=$ZTVALUE+1"</font>
 </div>
 <font face="Courier New">+^Acct(sub=:) - command=Set -xecute="Set ^X($ZTVALUE)=sub"</font>
 <div>
@@ -2941,7 +2941,7 @@ This example adds a trigger definition for the first level node of <font face="c
 <div>
   Note that if trigger code does not reference $ZTMOrmhole, GT.M does not make it available to MUPIP (via the journal files or replication stream). Therefore, if a replicating secondary has different trigger code than the initiating primary (an unusual configuration) and the triggers on the replicating node require information from $ZTWORMHOLE, the triggers on the intiating node must reference $ZTWORMHOLE to ensure GT.M maintains the data it contains for use by the update process on the replicating node. While you can change $ZWORmhole within trigger code, because of the arbitrary ordering of triggers on the same node, such an approach requires careful design and implementation.<br>
   <br style=COLOR:#0000ff>
-  <font color=#0000ff>GTM allows $ZTWOrmhole to be NEW’d. NEWing $ZTWOrmhole is slightly different from NEWing other ISVs/variables in the sense that the former retains its original value whereas the latter does not. However, like other NEWs, GT.M restores $ZTWOrmhole's value when the stack level pops.</font><br>
+  <font color=#0000ff>GTM allows $ZTWOrmhole to be NEWa??d. NEWing $ZTWOrmhole is slightly different from NEWing other ISVs/variables in the sense that the former retains its original value whereas the latter does not. However, like other NEWs, GT.M restores $ZTWOrmhole's value when the stack level pops.</font><br>
 </div>
 <div>
   &nbsp;
@@ -3884,5 +3884,5 @@ This example adds a trigger definition for the first level node of <font face="c
   <sup>1 </sup><a name=FOOTNOTE-1></a>A trigger definition file is a text file. You can specify any extension of your choice. For consistency across GT.M documentation and&nbsp; GT.M automated testing systems, we have used .trg as the file extension for a trigger definition file.
 </div></body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Triggers.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:25:20 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/articles/GTM_Triggers.html]] -->
 </html>

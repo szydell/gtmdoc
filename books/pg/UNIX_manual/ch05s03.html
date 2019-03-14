@@ -1,13 +1,13 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:09 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s03.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Variables</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
+<link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
 <link rel="prev" href="ch05s02.html" title="M Names">
 <link rel="next" href="ch05s04.html" title="Literals">
 <link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
@@ -18,10 +18,10 @@
 <tr><th colspan="3" align="center">Variables</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch05s02.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 5. <span>General Language Features of M</span>
+<a accesskey="p" href="ch05s02.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 5. <span>General Language Features of M</span>
 </th>
-<td width="20%" align="right"> <a accesskey="n" href="ch05s04.html">Next</a>
+<td width="20%" align="right"> <a accesskey="n" href="ch05s04.html">Next</a>
 </td>
 </tr>
 </table>
@@ -55,14 +55,14 @@
 <a name="M_Collation_Seq"></a>M Collation Sequences<a class="indexterm" name="idp185492560"></a>
 </h3></div></div></div>
 <p>M collates all canonic numeric subscripts ahead of all string subscripts, including strings such as those with leading zeros that represent non-canonic numbers. Numeric subscripts collate from negative to positive in value order. String subscripts collate in ASCII sequence. In addition, GT.M allows the empty string subscript in most contexts, (the null, or empty, string collates ahead of all canonic numeric subscripts).</p>
-<p>GT.M allows definition of alternative collation sequences. For complete information on enabling this functionality, <span>See <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a></span>.</p>
+<p>GT.M allows definition of alternative collation sequences. For complete information on enabling this functionality, <span>See <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a></span>.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="Local_Variables"></a>Local Variables<a class="indexterm" name="idp185598848"></a>
 </h3></div></div></div>
 <p>A local variable in M refers to a variable used solely within the scope of a single process. Local variable names have no leading delimiter.</p>
-<p>M makes a local variable available and subject to modification by all routines executed within a process from the time that variable is first SET until it is KILLed, or until the process stops executing M. However, M "protects" a local variable after that variable appears as an argument to a NEW command, or after it appears as an element in a formalist used in parameter passing. When M protects a local variable, it saves a copy of the variable's value and makes that variable undefined. M restores the variable to its saved value during execution of the QUIT that terminates the process stack level associated with the "protecting" NEW or formalist. For more information on NEW and QUIT, <span>see <a class="xref" href="ch06.html" title="Chapter 6. Commands">Chapter 6: &#8220;<i>Commands</i>&#8221;</a></span>.</p>
+<p>M makes a local variable available and subject to modification by all routines executed within a process from the time that variable is first SET until it is KILLed, or until the process stops executing M. However, M "protects" a local variable after that variable appears as an argument to a NEW command, or after it appears as an element in a formalist used in parameter passing. When M protects a local variable, it saves a copy of the variable's value and makes that variable undefined. M restores the variable to its saved value during execution of the QUIT that terminates the process stack level associated with the "protecting" NEW or formalist. For more information on NEW and QUIT, <span>see <a class="xref" href="ch06.html" title="Chapter 6. Commands">Chapter 6: &#8220;<i>Commands</i>&#8221;</a></span>.</p>
 <p>M restricts the following uses of variables to local variables:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
 <li class="listitem" style="list-style-type: circle"><p>FOR command control variables.</p></li>
@@ -322,7 +322,7 @@ day1 week1 mumps
 day2 week1 a
 day3 week2 b
 day4 week2 c.gld</pre>
-<p>This example demonstrates the mechanism. A table is set up the first time for proper memory management, and for each reference, a table lookup is performed. Note that for the purpose of simplicity, no error checking is done, so table.dat is assumed to be in the correct format, and have exactly four entries. <span>This routine should be built as a shared</span><span>library</span>, see <span><a class="xref" href="ch11.html" title="Chapter 11. Integrating External Routines">Chapter 11: &#8220;<i><span>Integrating</span> External<span> Routines</span></i>&#8221;</a></span> for information on building as a shared <span>library</span>.<span>The function init_functable is necessary to set up the GT.M memory management functions.</span></p>
+<p>This example demonstrates the mechanism. A table is set up the first time for proper memory management, and for each reference, a table lookup is performed. Note that for the purpose of simplicity, no error checking is done, so table.dat is assumed to be in the correct format, and have exactly four entries. <span>This routine should be built as a shared</span><span>library</span>, see <span><a class="xref" href="ch11.html" title="Chapter 11. Integrating External Routines">Chapter 11: &#8220;<i><span>Integrating</span> External<span> Routines</span></i>&#8221;</a></span> for information on building as a shared <span>library</span>.<span>The function init_functable is necessary to set up the GT.M memory management functions.</span></p>
 </div>
 </div>
 </div>
@@ -332,19 +332,19 @@ day4 week2 c.gld</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch05s02.html">Prev</a> </td>
+<a accesskey="p" href="ch05s02.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch05s04.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch05s04.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">M Names </td>
+<td width="40%" align="left" valign="top">M Names </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Literals</td>
+<td width="40%" align="right" valign="top"> Literals</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:09 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s03.html]] -->
 </html>

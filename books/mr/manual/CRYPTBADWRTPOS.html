@@ -1,37 +1,37 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/CRYPTBADWRTPOS.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:50:26 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/CRYPTBADWRTPOS.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>CRYPTBADWRTPOS </title>
+<title>CRYPTBADWRTPOS </title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
-<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
-<link rel="prev" href="CRYPTBADCONFIG.html" title="CRYPTBADCONFIG ">
-<link rel="next" href="CRYPTDLNOOPEN.html" title="CRYPTDLNOOPEN ">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="CRYPTBADCONFIG.html" title="CRYPTBADCONFIG ">
+<link rel="next" href="CRYPTDLNOOPEN.html" title="CRYPTDLNOOPEN ">
 <link rel="copyright" href="ln-idp153747552.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">CRYPTBADWRTPOS </th></tr>
+<tr><th colspan="3" align="center">CRYPTBADWRTPOS </th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="CRYPTBADCONFIG.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 1. Error Messages</th>
-<td width="20%" align="right"> <a accesskey="n" href="CRYPTDLNOOPEN.html">Next</a>
+<a accesskey="p" href="CRYPTBADCONFIG.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="CRYPTDLNOOPEN.html">Next</a>
 </td>
 </tr>
 </table>
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">CRYPTBADWRTPOS </span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">CRYPTBADWRTPOS </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="CRYPTBADWRTPOS"></a>CRYPTBADWRTPOS </h2></div></div></div>
+<a name="CRYPTBADWRTPOS"></a>CRYPTBADWRTPOS </h2></div></div></div>
 <p><span class="bold"><strong>CRYPTBADWRTPOS</strong></span>, CRYPTBADWRTPOS, Encrypted WRITE disallowed from a position different than where the last WRITE completed</p>
 <p>Run Time Error: A WRITE attempt to an encrypted device violates the integrity of the produced ciphertext. This is the case, for example, when trying to WRITE to a previously encrypted and CLOSEd file. Because encryption ciphers rely on state machine algorithms, GT.M prohibits WRITEs performed in non-sequential fashion or when they threaten to overlay already encrypted data.</p>
 <p>Action: Revise your M code to avoid illegal I/O operations with encryption. Note, in particular, that when using encryption non-empty files cannot be opened in APPEND mode; the SEEK deviceparameter is prohibited; and the TRUNCATE is only permitted at the beginning or end of a file.</p>
@@ -42,19 +42,19 @@
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="CRYPTBADCONFIG.html">Prev</a> </td>
+<a accesskey="p" href="CRYPTBADCONFIG.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="CRYPTDLNOOPEN.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="CRYPTDLNOOPEN.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">CRYPTBADCONFIG  </td>
+<td width="40%" align="left" valign="top">CRYPTBADCONFIG  </td>
 <td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
-<td width="40%" align="right" valign="top"> CRYPTDLNOOPEN </td>
+<td width="40%" align="right" valign="top"> CRYPTDLNOOPEN </td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/CRYPTBADWRTPOS.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:50:26 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/CRYPTBADWRTPOS.html]] -->
 </html>

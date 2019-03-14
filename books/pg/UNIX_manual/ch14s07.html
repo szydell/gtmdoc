@@ -1,13 +1,13 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:13 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s07.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Trigger Invocation and Execution Semantics</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch14.html" title="Chapter 14. Triggers">
+<link rel="up" href="ch14.html" title="Chapter 14. Triggers">
 <link rel="prev" href="ch14s06.html" title="Trigger Definition Storage">
 <link rel="next" href="ch14s08.html" title="Triggers in Journaling and Database Replication">
 <link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
@@ -19,9 +19,9 @@
 <span>Trigger Invocation and Execution </span>Semantics</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch14s06.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 14. Triggers</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch14s08.html">Next</a>
+<a accesskey="p" href="ch14s06.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 14. Triggers</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch14s08.html">Next</a>
 </td>
 </tr>
 </table>
@@ -60,7 +60,7 @@ GTM&gt;write ^B
 <p>SET ^A=100 invokes trigger A#1. When the trigger execution begins, GT.M sets ^A to 100 in the process address space, but does not apply it to the database. Therefore, the trigger logic sees ^A as set to 100. Other process accessing the database, however, see the prior value of ^A. When the trigger execution completes, the trigger logic commits the value of a node from the process address space only if $ZTVALUE is not set. The trigger logic commits the value of a node from the $ZTVALUE only if $ZTVALUE is set during trigger execution. Because $ZTVALUE is not set in A#1, GT.M commits the value of ^A from the process address space to the database. Therefore, GT.M commits ^A=100 to the database.SET ^B=200 invokes trigger B#2. $ZTVALUE is set during trigger execution, therefore GT.M commits the value of $ZTVALUE to ^B at the end of trigger execution.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Within trigger code, any SET operation on ^B recursively invokes trigger B#1. Therefore, always set $ZTVALUE to change the value node during trigger execution.GT.M executes the triggering update and all associated triggers within the same transaction, whether or not the original command is inside a transaction. This means that although the trigger logic sees the updated value of the node, it is not visible to other processes until the outermost transaction commits to the database. If there is a conflicting update by another process, GT.M RESTARTs the explicit or implicit transaction to resolve the conflict.</p></td></tr>
@@ -109,7 +109,7 @@ GTM&gt;write ^B
 <p>The trigger facility includes an environment variable called gtm_trigger_etrap. It provides the initial value for $ETRAP in trigger context and can be used to set error traps for trigger operations in both mumps and MUPIP processes.  The code can, of course, also SET $ETRAP within the trigger context. During a run-time trigger operation if you do not specify the value of gtm_trigger_etrap and a trigger fails, GT.M uses the current trap handler. In a mumps process, if the trap handler was $ZTRAP at the time of the triggering update and gtm_trigger_etrap isn't defined, the error trap is implicitly replaced by $ETRAP="" which exits out of both the trigger logic and the triggering action before the $ZTRAP unstacks and takes effect. In a MUPIP process, if you do not specify the value of gtm_trigger_etrap and a trigger fails, GT.M implicitly performs a SET $ETRAP="If $ZJOBEXAM()" and terminates the MUPIP process. $ZOBEXAM() records diagnostic information (equivalent to ZSHOW "*") to a file that provides a basis for analysis of the failure.</p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top">
@@ -171,19 +171,19 @@ $</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch14s06.html">Prev</a> </td>
+<a accesskey="p" href="ch14s06.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch14.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch14s08.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch14s08.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Trigger Definition Storage </td>
+<td width="40%" align="left" valign="top">Trigger Definition Storage </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Triggers in Journaling and Database Replication</td>
+<td width="40%" align="right" valign="top"> Triggers in Journaling and Database Replication</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:13 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s07.html]] -->
 </html>

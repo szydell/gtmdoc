@@ -1,13 +1,13 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:10 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s07.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Using PIPE Devices</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
+<link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
 <link rel="prev" href="ch09s06.html" title="Using Null Devices">
 <link rel="next" href="ch09s08.html" title="Using Socket Devices">
 <link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
@@ -18,9 +18,9 @@
 <tr><th colspan="3" align="center">Using PIPE Devices</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch09s06.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 9. <span>Input/Output</span> Processing</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch09s08.html">Next</a>
+<a accesskey="p" href="ch09s06.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 9. <span>Input/Output</span> Processing</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch09s08.html">Next</a>
 </td>
 </tr>
 </table>
@@ -38,7 +38,7 @@
 <p>A PIPE device is specified with a "PIPE" value for mnemonicspace on an OPEN command. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>GT.M ignores the mnemonicspace specification on an OPEN of a previously OPEN device and leaves the existing device with its original characteristics.</p></td></tr>
@@ -57,7 +57,7 @@ open p:(command="ps -ef|grep $USER":readonly)::"PIPE"</pre>
 <p>This shows the use of a PIPE device to identify processes belonging to the current userid. The READONLY device parameter specifies that the GT.M process only read the output of the pipe, and not provide it with any input. This example illustrates the fact that the command can be any shell command, can include environment variables and pipes within the command. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Flags to the ps command vary for different UNIX platforms. </p></td></tr>
@@ -393,7 +393,7 @@ pipe3;
 <p>This demonstrates that the created sub process nestin keeps running as an INDEPENDENT process after the GT.M process CLOSEs the pipe. This GT.M process uses another PIPE device to return the process id of nestin and READ it into pid so that it may be killed by this or another process, should that be appropriate. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>"nestin.c" is a program which reads from standard input and writes to standard output until it see and EOF.  It then loops for 300 1sec sleeps doing nothing.  The purpose of using independent is as a server process which continues until it receives some other signal for termination.</p></td></tr>
@@ -777,19 +777,19 @@ Try 2   pipe OPEN PIPE SHELL="/bin/bash" COMMAND="$gtm_dist/mumps -run induceEPI
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch09s06.html">Prev</a> </td>
+<a accesskey="p" href="ch09s06.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch09.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch09s08.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch09s08.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Using Null Devices </td>
+<td width="40%" align="left" valign="top">Using Null Devices </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Using Socket Devices</td>
+<td width="40%" align="right" valign="top"> Using Socket Devices</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:10 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s07.html]] -->
 </html>

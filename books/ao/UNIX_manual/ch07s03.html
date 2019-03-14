@@ -1,13 +1,13 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/ch07s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:48:58 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/ch07s03.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Procedures</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
-<link rel="up" href="ch07.html" title="Chapter 7. Database Replication">
+<link rel="up" href="ch07.html" title="Chapter 7. Database Replication">
 <link rel="prev" href="ch07s02.html" title="Implementing Replication and Recovery">
 <link rel="next" href="replication.html" title="Commands and Qualifiers">
 <link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
@@ -18,9 +18,9 @@
 <tr><th colspan="3" align="center">Procedures</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch07s02.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 7. Database Replication</th>
-<td width="20%" align="right"> <a accesskey="n" href="replication.html">Next</a>
+<a accesskey="p" href="ch07s02.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Database Replication</th>
+<td width="20%" align="right"> <a accesskey="n" href="replication.html">Next</a>
 </td>
 </tr>
 </table>
@@ -35,7 +35,7 @@
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="downld_repl_ex"></a>Download Replication Examples</h3></div></div></div>
-<p><code class="code"><span class="bold"><strong>repl_procedures.tar.gz</strong></span></code> contains a set of replication example scripts. Each script contains a combination of GT.M commands that accomplish a specific task. All examples in the Procedures section use these replication scripts but each example uses different script sequence and script arguments. Always run all replication examples in a test system from a new directory as they create sub-directories and database files in the current directory. No claim of copyright is made with regard to these examples. These example scripts are for explanatory purposes and are not intended for production use. <span class="bold"><strong></strong></span>YOU MUST UNDERSTAND, AND APPROPRIATELY ADJUST THE COMMANDS GIVEN IN THESE SCRIPTS BEFORE USING IN A PRODUCTION ENVIRONMENT.<span class="bold"><strong></strong></span> Typically, you would set replication between instances on different systems/data centers and create your own set of scripts with appropriate debugging and error handling to manage replication between them. Click <a class="ulink" href="downloadables/repl_procedures.tar.gz" target="_top"><span class="inlinemediaobject"><img src="images/download.png" alt="Download repl_procedures.tar.gz"></span></a> to download <code class="code"><span class="bold"><strong>repl_procedures.tar.gz</strong></span></code> on a test system. </p>
+<p><code class="code"><span class="bold"><strong>repl_procedures.tar.gz</strong></span></code> contains a set of replication example scripts. Each script contains a combination of GT.M commands that accomplish a specific task. All examples in the Procedures section use these replication scripts but each example uses different script sequence and script arguments. Always run all replication examples in a test system from a new directory as they create sub-directories and database files in the current directory. No claim of copyright is made with regard to these examples. These example scripts are for explanatory purposes and are not intended for production use. <span class="bold"><strong></strong></span>YOU MUST UNDERSTAND, AND APPROPRIATELY ADJUST THE COMMANDS GIVEN IN THESE SCRIPTS BEFORE USING IN A PRODUCTION ENVIRONMENT.<span class="bold"><strong></strong></span> Typically, you would set replication between instances on different systems/data centers and create your own set of scripts with appropriate debugging and error handling to manage replication between them. Click <a class="ulink" href="downloadables/repl_procedures.tar.gz" target="_top"><span class="inlinemediaobject"><img src="images/download.html" alt="Download repl_procedures.tar.gz"></span></a> to download <code class="code"><span class="bold"><strong>repl_procedures.tar.gz</strong></span></code> on a test system. </p>
 <p><code class="code"><span class="bold"><strong>repl_procedures.tar.gz</strong></span></code> includes the following scripts:</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
@@ -361,7 +361,7 @@ source ./gtmenv A V6.3-000A_x86_64
 <p>Immediately, after starting the Source Server but before making any updates, take a backup of the replication instance file. The instance file has the journal sequence number that corresponds to the database state at the time of starting the instance. This backup instance helps when you need to start a new Supplementary Instance without taking a backup of the Originating Instance. Retain the backup copy of the Originating Instance as you may need it in future as a checkpoint from where its supplementary instance may resume to receive updates. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>While a backed up instance file helps start replication on the P side of A&#8594;P, it does not prevent the need for taking a backup of the database on A. You need to do a database backup/restore or an extract/load from A to P to ensure P has all of the data as on A at startup.</p></td></tr>
@@ -1364,7 +1364,7 @@ REG_SEQNO=&lt;Largest_Region_Seqno_from_step_4&gt; for the region having the lar
 </ol></div>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Note on Triggers">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
 <th align="left">Note on Triggers</th>
 </tr>
 <tr><td align="left" valign="top"><p>While adding triggers, bear in mind that triggers get replicated if you add them when replication is turned on. However, when you add triggers when replication is turned off, those triggers and the database updates resulting from the executing their trigger code do not get replicated.</p></td></tr>
@@ -1477,7 +1477,7 @@ source ./env A V6.2-001_x86_64
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left"></th>
 </tr>
 <tr><td align="left" valign="top"><p>When the instances have different endian-ness, create a new replication instance file as described in <a class="xref" href="replication.html#create_repl_inst" title="Creating the Replication Instance File">&#8220;<span>Creating the Replication Instance File</span>&#8221;</a></p></td></tr>
@@ -1489,7 +1489,7 @@ source ./env A V6.2-001_x86_64
 <p>The following example creates two instances (Alice and Bob) and a basic framework required for setting up a TLS replication connection between them. Alice and Bob are fictional characters from <a class="ulink" href="https://en.wikipedia.org/wiki/Alice_and_Bob" target="_top">https://en.wikipedia.org/wiki/Alice_and_Bob</a> and represent two instances who use the certificates signed by the same root CA. This example is solely for the purpose of explaining the general steps required to encrypt replication data in motion. You must understand, and appropriately adjust, the scripts before using them in a production environment. Note that all certificates created in this example are for the sake of explaining their roles in a TLS replication environment. For practical applications, use certificates signed by a CA whose authority matches your use of TLS.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>Use the openssl.conf provided with repl_procedures.tar.gz to create the self-signed root certification authority (ca.crt) and leaf-level certificates used in this example. In production, ensure that you configure openssl.cnf according to your environment and security requirements. For example, in production you would keep root-level certificates in directories with 0500 permissions and the individual files with 0400 permissions so that unauthorized users cannot access them.</p></td></tr>
@@ -1790,19 +1790,19 @@ a backup of the replication instance file and the database together with BACKUP 
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch07s02.html">Prev</a> </td>
+<a accesskey="p" href="ch07s02.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="replication.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="replication.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Implementing Replication and Recovery </td>
+<td width="40%" align="left" valign="top">Implementing Replication and Recovery </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Commands and Qualifiers</td>
+<td width="40%" align="right" valign="top"> Commands and Qualifiers</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/ch07s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:48:58 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/ch07s03.html]] -->
 </html>

@@ -1,38 +1,38 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch02s08.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:08 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch02s08.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Extensions for the support for the Unicode® standard</title>
+<title>Extensions for the support for the Unicode(R) standard</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch02.html" title="Chapter 2. GT.M Language Extensions">
+<link rel="up" href="ch02.html" title="Chapter 2. GT.M Language Extensions">
 <link rel="prev" href="ch02s07.html" title="Alias Variables Extensions">
-<link rel="next" href="ch03.html" title="Chapter 3. Development Cycle">
+<link rel="next" href="ch03.html" title="Chapter 3. Development Cycle">
 <link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">Extensions for the support for the <span class="trademark">Unicode</span>® standard </th></tr>
+<tr><th colspan="3" align="center">Extensions for the support for the <span class="trademark">Unicode</span>(R) standard </th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch02s07.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 2. <span>GT.M </span>Language Extensions</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch03.html">Next</a>
+<a accesskey="p" href="ch02s07.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 2. <span>GT.M </span>Language Extensions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch03.html">Next</a>
 </td>
 </tr>
 </table>
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch02.html"><span>GT.M </span>Language Extensions</a></span> &gt; <span class="breadcrumb-node">Extensions for the support for the <span class="trademark">Unicode</span>® standard </span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch02.html"><span>GT.M </span>Language Extensions</a></span> &gt; <span class="breadcrumb-node">Extensions for the support for the <span class="trademark">Unicode</span>(R) standard </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="unic"></a>Extensions for the support for the <span class="trademark">Unicode</span>® standard </h2></div></div></div>
-<p>To represent and process strings that use international characters, GT.M processes can use the UTF-8 encoding defined by the <span class="trademark">Unicode</span>® standard.</p>
+<a name="unic"></a>Extensions for the support for the <span class="trademark">Unicode</span>(R) standard </h2></div></div></div>
+<p>To represent and process strings that use international characters, GT.M processes can use the UTF-8 encoding defined by the <span class="trademark">Unicode</span>(R) standard.</p>
 <p>If the environment variable gtm_chset has a value of UTF-8 and either LC_ALL or LC_CTYPE is set to a locale with UTF-8 support (for example, zh_CN.utf8), a GT.M process interprets strings as containing characters encoded in the UTF-8 representation. In the UTF-8 mode, GT.M no longer assumes that one character is one byte, or that the glyph display width of a character is one.  Depending on how ICU is built on a computer system, in order to operate in UTF-8 mode, a GT.M process may well also need a third environment variable, gtm_icu_version set appropriately. </p>
 <p>If the environment variable gtm_chset has no value, the string "M", or any value other than "UTF-8", GT.M treats each 8-bit byte as a character, which suffices for English, and many single-language applications.</p>
 <p>All GT.M components related to the M mode reside in the top level directory in which a GT.M release is installed and the environment variable gtm_dist should point to that directory for M mode processes. All GT.M components related to the UTF-8 mode reside in the utf8 subdirectory and the environment variable gtm_dist should point to that subdirectory for UTF-8 mode processes. So, in addition to the values of the environment variables gtm_chset and LC_ALL/LC_CTYPE, gtm_dist for a UTF-8 process should also point to the utf8 subdirectory.</p>
@@ -40,7 +40,7 @@
 <p>In UTF-8 mode, string processing functions (such as $EXTRACT()) operate on strings of multi-byte characters, and can therefore produce different results in M and UTF-8 modes, depending on the actual data processed. Each function has a "Z" alter ego (for example, $ZEXTRACT()) that can be used to operate on sequences of bytes identically in M and UTF-8 modes (that is, in M mode, $EXTRACT() and $ZEXTRACT() behave identically).</p>
 <p>In M mode, the concept of an illegal character does not exist. In UTF-8 mode, a sequence of bytes may not represent a valid character, and generates an error when encountered by functions that expect and process UTF-8 strings. During a migration of an application to add the support for UTF-8 mode, illegal character errors may be frequent and indicative of application code that is yet to be modified. VIEW "NOBADCHAR" suppresses these errors at times when their presence impedes development.</p>
 <p>In UTF-8 mode, GT.M also supports IO encoded in UTF-16 variants as well as in the traditional one byte per character encoding from devices other than $PRINCIPAL. </p>
-<p>The following table summarizes GT.M's support for the <span class="trademark">Unicode</span>® standard.</p>
+<p>The following table summarizes GT.M's support for the <span class="trademark">Unicode</span>(R) standard.</p>
 <div class="informaltable">
 <a name="tblunic"></a><table border="1">
 <colgroup>
@@ -365,12 +365,12 @@
                <p>User-defined Collation</p>
             </td>
 <td>
-               <p>For some languages (such as Chinese), the ordering of character strings encoded with UTF-8 may not be the linguistically or culturally correct ordering. Supporting applications in such languages requires development of collation modules - GT.M natively supports M collation, but does not include pre-built collation modules for any specific natural language. Therefore, applications that use UTF-8 characters may need to implement their own collation functions. <span>For more information on developing a collation module for the <span class="trademark">Unicode</span>® standard, refer to <a class="xref" href="ch12s03.html" title="Implementing an Alternative Collation Sequence for Unicode® characters">&#8220;Implementing an Alternative Collation Sequence for <span class="trademark">Unicode</span>® characters&#8221;</a>.</span></p>
+               <p>For some languages (such as Chinese), the ordering of character strings encoded with UTF-8 may not be the linguistically or culturally correct ordering. Supporting applications in such languages requires development of collation modules - GT.M natively supports M collation, but does not include pre-built collation modules for any specific natural language. Therefore, applications that use UTF-8 characters may need to implement their own collation functions. <span>For more information on developing a collation module for the <span class="trademark">Unicode</span>(R) standard, refer to <a class="xref" href="ch12s03.html" title="Implementing an Alternative Collation Sequence for Unicode(R) characters">&#8220;Implementing an Alternative Collation Sequence for <span class="trademark">Unicode</span>(R) characters&#8221;</a>.</span></p>
             </td>
 </tr>
 <tr>
 <td>
-<p><span class="trademark">Unicode</span>® Byte Order Marker (BOM) </p>
+<p><span class="trademark">Unicode</span>(R) Byte Order Marker (BOM) </p>
 </td>
 <td>
 <p>When ICHSET is UTF-16, GT.M uses BOM (U+FEFF) to automatically determine the endianess. For this to happen, the BOM must appear at the beginning of the file or data stream. If BOM is not present, GT.M assumes big endianess. SEEK or APPEND operations require specifying the endianess (UTF-16LE or UTF-16BE) because they do not go to the beginning of the file or data stream to automatically determine the endianess. When endianess is not specified, SEEK or APPEND assume big endianess. </p>
@@ -422,8 +422,8 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="unicode_philosophy"></a>Philosophy of GT.M's support for the <span class="trademark">Unicode</span>® standard</h3></div></div></div>
-<p>With the support of the <span class="trademark">Unicode</span>® standard, there is no change to the GT.M database engine or to the way that data is stored and manipulated. GT.M has always allowed indexes and values of M global and local variables to be either canonical numbers or any arbitrary sequence of bytes. There is also no change to the character set used for M source programs. M source programs have always been in ASCII (standard ASCII - $C(0) through $C(127) - is a proper subset of the UTF-8 encoding specified by the Unicode standard). GT.M accepts some non-ASCII characters in comments and string literals.</p>
+<a name="unicode_philosophy"></a>Philosophy of GT.M's support for the <span class="trademark">Unicode</span>(R) standard</h3></div></div></div>
+<p>With the support of the <span class="trademark">Unicode</span>(R) standard, there is no change to the GT.M database engine or to the way that data is stored and manipulated. GT.M has always allowed indexes and values of M global and local variables to be either canonical numbers or any arbitrary sequence of bytes. There is also no change to the character set used for M source programs. M source programs have always been in ASCII (standard ASCII - $C(0) through $C(127) - is a proper subset of the UTF-8 encoding specified by the Unicode standard). GT.M accepts some non-ASCII characters in comments and string literals.</p>
 <p>The changes in GT.M to support the Unicode standard are principally enhancements to M language features. Although conceptually simple, these changes fundamentally alter certain previously ingrained assumptions. For example:</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><p>The length of a string in characters is not the same as the length of a string in bytes. The length of a UTF-8 string in characters is always less than or equal to its length in bytes.</p></li>
@@ -432,7 +432,7 @@
 </ol></div>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>GT.M treats canonical and non-canonical versions of the same string as different and unequal. FIS recommends that applications be written to use canonical forms. Where conformance to a canonical representation of input strings cannot be assured, application logic linguistically and culturally correct for each language should convert non-canonical strings to canonical strings.</p></td></tr>
@@ -447,8 +447,8 @@
 <p>For some languages (such as Chinese), the ordering of strings according to UTF-8 code-points (character values) may not be the linguistically or culturally correct ordering. Supporting applications in such languages requires development of collation modules - GT.M natively supports M collation, but does not include pre-built collation modules for any specific natural language.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="glyps_unic"></a>Glyphs and <span class="trademark">Unicode</span>® characters</h4></div></div></div>
-<p>Glyphs are the visual representation of text elements in writing systems and UTF-8 code-points are the underlying data. Internally, GT.M stores UTF-8 encoded strings as sequences of bytes. A <span class="trademark">Unicode</span>® compatible output device - terminal, printer or application - renders the characters as sequences of glyphs that depict the sequence of code-points, but there may not be a one-to-one correspondence between characters and glyphs.</p>
+<a name="glyps_unic"></a>Glyphs and <span class="trademark">Unicode</span>(R) characters</h4></div></div></div>
+<p>Glyphs are the visual representation of text elements in writing systems and UTF-8 code-points are the underlying data. Internally, GT.M stores UTF-8 encoded strings as sequences of bytes. A <span class="trademark">Unicode</span>(R) compatible output device - terminal, printer or application - renders the characters as sequences of glyphs that depict the sequence of code-points, but there may not be a one-to-one correspondence between characters and glyphs.</p>
 <p>For example, consider the following word from the Devanagari writing system.</p>
 <p><span class="symbol">&#2309;&#2330;&#2381;&#2331;&#2368;</span></p>
 <p>On a screen or a printer, it is displayed in 4 columns. Internally GT.M stores it as a sequence of 5 UTF-8 code-points:</p>
@@ -549,7 +549,7 @@
 </table>
 </div>
 <p>The Devanagari writing system (U+0900 to U+097F) is based on the representation of syllables as contrasted with the use of an alphabet in English. Therefore, it uses the half-form of a consonant to represent certain syllables. The above example uses the half-form of the consonant (U+091A).</p>
-<p>Although the half-form form consonant is a valid text element in the context of the Devanagari writing system, it does not map directly to a character in the <span class="trademark">Unicode</span>® standard. It is obtained by combining the DEVANAGARI LETTER CA, with DEVANAGARI SIGN VIRAMA, and DEVANAGARI LETTER CHA.</p>
+<p>Although the half-form form consonant is a valid text element in the context of the Devanagari writing system, it does not map directly to a character in the <span class="trademark">Unicode</span>(R) standard. It is obtained by combining the DEVANAGARI LETTER CA, with DEVANAGARI SIGN VIRAMA, and DEVANAGARI LETTER CHA.</p>
 <div class="informaltable">
 <a name="tblhalfform"></a><table border="0">
 <colgroup>
@@ -603,10 +603,10 @@ GTM&gt;</pre>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="icu1"></a>ICU</h3></div></div></div>
-<p>ICU is a widely used, defacto standard package (see <a class="ulink" href="http://icu-project.org/" target="_top">http://icu-project.org</a> for more information) that GT.M relies on for most operations that require knowledge of the <span class="trademark">Unicode</span>® character sets, such as text boundary detection, character string conversion between UTF-8 and UTF-16, and calculating glyph display widths.</p>
+<p>ICU is a widely used, defacto standard package (see <a class="ulink" href="http://icu-project.org/" target="_top">http://icu-project.org</a> for more information) that GT.M relies on for most operations that require knowledge of the <span class="trademark">Unicode</span>(R) character sets, such as text boundary detection, character string conversion between UTF-8 and UTF-16, and calculating glyph display widths.</p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>Unless the support for the Unicode standard is sought for a process (that is, unless the environment variable gtm_chset is UTF-8"), GT.M processes do not need ICU. In other words, existing applications that are not based on the Unicode standard continue to work on supported platforms without ICU.</p></td></tr>
@@ -629,7 +629,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="data_interchange1"></a>Data interchange</h4></div></div></div>
-<p>GT.M's support for the <span class="trademark">Unicode</span>® standard only affects the interpretation of data in databases, and not databases themselves. A simple way to convert from a ZWR format extract in one mode to an extract in the other is to load it in the database using a process in the mode in which it was generated, and to once more extract it from the database using a process in the other mode.</p>
+<p>GT.M's support for the <span class="trademark">Unicode</span>(R) standard only affects the interpretation of data in databases, and not databases themselves. A simple way to convert from a ZWR format extract in one mode to an extract in the other is to load it in the database using a process in the mode in which it was generated, and to once more extract it from the database using a process in the other mode.</p>
 <p>If a sequence of 8-bit octets contains bytes other than those in the ASCII range (0 through 127), an extract in ZWR format for the same sequence of bytes is different in M and UTF-8 modes. In M mode, the $[Z]CHAR() values in a ZWR format extract are always equal to or less than 255. In UTF-8 mode, they can have larger values - the code-points of UTF-8 characters can be far greater than 255.</p>
 <p>Note that the characters written to the output device are subject to the OCHSET transformation of the controlling output device. If OCHSET is "M", the multi-byte characters are written in raw bytes without any transformation.</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
@@ -637,7 +637,7 @@ GTM&gt;</pre>
 <li class="listitem"><p>Each multi-byte non-graphic character (as classified by $ZCHSET) is written in $CHAR(nnnn) notation, where nnnn is the decimal character code (that is, code-point up to 1114111 if $ZCHSET="UTF-8" or up to 255 if $ZCHSET="M").</p></li>
 <li class="listitem"><p>If $ZCHSET="UTF-8" and a subscript or data contains a malformed UTF-8 byte sequence, ZWRITE treats each byte in the sequence as a separate malformed character. Each such byte is written in $ZCHAR(nn[,...]) notation, where each nn is the corresponding byte in the illegal UTF-8 byte sequence.</p></li>
 </ol></div>
-<p>Note that attempts to use ZWRITE output from a system as input to another system using a different character set may result in errors or not yield the same state as existed on the source system. Application developers can deal with this by defining and using one or more pattern tables that declare all non-ASCII characters (or any useful subset thereof) to be non-graphic. <span>For more details on defining pattern tables, please refer to "Pattern Code Definition" section of <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a>.</span></p>
+<p>Note that attempts to use ZWRITE output from a system as input to another system using a different character set may result in errors or not yield the same state as existed on the source system. Application developers can deal with this by defining and using one or more pattern tables that declare all non-ASCII characters (or any useful subset thereof) to be non-graphic. <span>For more details on defining pattern tables, please refer to "Pattern Code Definition" section of <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a>.</span></p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
@@ -650,22 +650,22 @@ GTM&gt;</pre>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
 <a name="string_nrml"></a>String Normalization</h5></div></div></div>
-<p>In GT.M, strings are not implicitly normalized. <span class="trademark">Unicode</span>® normalization is a method of computing canonical representation of the character strings. Normalization is required if the strings contain combination characters (such as accented characters consisting of a base character followed by an accent character) as well as precomposed characters. The Unicode standard assigned code-points to such precomposed characters for backward compatibility with legacy code sets. For the applications containing both versions of the same character (or combining characters), the Unicode standard recommends one of the normal forms. Because GT.M does not normalize strings, the application developers must develop the functionality of normalizing the strings, as needed, in order for string matching and string collation to behave in a conventional and wholesome fashion. In such a case, edit checks can be used that only accept a single representation when multiple representations are possible. </p>
+<p>In GT.M, strings are not implicitly normalized. <span class="trademark">Unicode</span>(R) normalization is a method of computing canonical representation of the character strings. Normalization is required if the strings contain combination characters (such as accented characters consisting of a base character followed by an accent character) as well as precomposed characters. The Unicode standard assigned code-points to such precomposed characters for backward compatibility with legacy code sets. For the applications containing both versions of the same character (or combining characters), the Unicode standard recommends one of the normal forms. Because GT.M does not normalize strings, the application developers must develop the functionality of normalizing the strings, as needed, in order for string matching and string collation to behave in a conventional and wholesome fashion. In such a case, edit checks can be used that only accept a single representation when multiple representations are possible. </p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
 <a name="uf16-ns"></a>UTF-16 is not supported for $PRINCIPAL device</h5></div></div></div>
-<p>In GT.M does not support UTF-16, UTF-16LE and UTF-16BE encodings for $PRINCIPAL I/O devices (including Terminal, Sequential and Socket devices). In order to perform <span class="trademark">Unicode</span>®-related I/O with the $PRINCIPAL device, application developers must use "UTF-8" for the ICHSET or OCHSET deviceparameters.</p>
+<p>In GT.M does not support UTF-16, UTF-16LE and UTF-16BE encodings for $PRINCIPAL I/O devices (including Terminal, Sequential and Socket devices). In order to perform <span class="trademark">Unicode</span>(R)-related I/O with the $PRINCIPAL device, application developers must use "UTF-8" for the ICHSET or OCHSET deviceparameters.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
 <a name="utf16nstd"></a>UTF-16 is not supported for Terminal Devices</h5></div></div></div>
-<p>Due to the uncommon usage and lack of support for UTF-16 by UNIX terminals and terminal emulators, GT.M does not support UTF-16, UTF-16LE and UTF-16BE encodings for Terminal I/O devices. Note that UNIX platforms use UTF-8 as the defacto character encoding for the <span class="trademark">Unicode</span>® standard. The terminal connections from remote hosts (such as Windows) must communicate with GT.M in UTF-8 encoding.</p>
+<p>Due to the uncommon usage and lack of support for UTF-16 by UNIX terminals and terminal emulators, GT.M does not support UTF-16, UTF-16LE and UTF-16BE encodings for Terminal I/O devices. Note that UNIX platforms use UTF-8 as the defacto character encoding for the <span class="trademark">Unicode</span>(R) standard. The terminal connections from remote hosts (such as Windows) must communicate with GT.M in UTF-8 encoding.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
 <a name="errormae"></a>Error messages are in [American] English</h5></div></div></div>
-<p>GT.M has no facility for a translation of product error messages or on-line help into languages other than [American] English. All error message text (except the messages arguments that could include <span class="trademark">Unicode</span>® data) is in the [American] English language.</p>
+<p>GT.M has no facility for a translation of product error messages or on-line help into languages other than [American] English. All error message text (except the messages arguments that could include <span class="trademark">Unicode</span>(R) data) is in the [American] English language.</p>
 </div>
 </div>
 <div class="sect3">
@@ -681,7 +681,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="maximums"></a>Maximums</h4></div></div></div>
-<p>In older versions of GT.M which did not support the <span class="trademark">Unicode</span>® standard, the restrictions on certain objects were put in place with the assumption that a character is represented by a single byte. With support for the Unicode standard in GT.M, the following restrictions are in terms of bytes- not characters. </p>
+<p>In older versions of GT.M which did not support the <span class="trademark">Unicode</span>(R) standard, the restrictions on certain objects were put in place with the assumption that a character is represented by a single byte. With support for the Unicode standard in GT.M, the following restrictions are in terms of bytes- not characters. </p>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
 <a name="mnameleng"></a>M Name Length </h5></div></div></div>
@@ -706,7 +706,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="tengodlrule"></a>Ten Golden Rules </h4></div></div></div>
-<p>Adhere to the following rules of thumb to design and develop applications based on the <span class="trademark">Unicode</span>® standard for deployment on GT.M.</p>
+<p>Adhere to the following rules of thumb to design and develop applications based on the <span class="trademark">Unicode</span>(R) standard for deployment on GT.M.</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><p>GT.M functionality related to the Unicode standard and characters becomes available only in UTF-8 mode. </p></li>
 <li class="listitem"><p>[At least] in UTF-8 mode, byte manipulation must use Z* equivalent functions.</p></li>
@@ -726,19 +726,19 @@ GTM&gt;</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch02s07.html">Prev</a> </td>
+<a accesskey="p" href="ch02s07.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch02.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch03.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch03.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Alias Variables Extensions </td>
+<td width="40%" align="left" valign="top">Alias Variables Extensions </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Chapter 3. <span>Development</span> Cycle</td>
+<td width="40%" align="right" valign="top"> Chapter 3. <span>Development</span> Cycle</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch02s08.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:08 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch02s08.html]] -->
 </html>

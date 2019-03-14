@@ -1,13 +1,13 @@
 <html>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s34.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:10 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s34.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ZGoto</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s33.html" title="ZEDit">
 <link rel="next" href="ch06s35.html" title="ZHALT">
 <link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
@@ -18,9 +18,9 @@
 <tr><th colspan="3" align="center">ZGoto</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch06s33.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 6. Commands</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch06s35.html">Next</a>
+<a accesskey="p" href="ch06s33.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s35.html">Next</a>
 </td>
 </tr>
 </table>
@@ -48,7 +48,7 @@
 <li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more ZGOTO arguments form a legal argument for a ZGOTO.</p></li>
 <li class="listitem"><p>ZGOTO accepts a trigger entryref (with a trailing hash-sign (#)); if the trigger is not currently loaded (by some previous trigger action), GT.M generates a ZLINKFILE error. Note that ZGOTO should be reserved for error handling and testing, as it is a very unstructured operation.</p></li>
 </ul></div>
-<p>A ZGOTO command with an entryref performs a similar function to the GOTO command, with the additional capability of reducing the GT.M stack level. In a single operation, ZGOTO executes ($ZLEVEL - intexpr) implicit QUITs and a GOTO operation, transferring control to the named entryref. <span>For more information on entryrefs, refer to <a class="xref" href="ch05.html" title="Chapter 5. General Language Features of M">Chapter 5: &#8220;<i><span>General Language Features of M</span></i>&#8221;</a>.</span></p>
+<p>A ZGOTO command with an entryref performs a similar function to the GOTO command, with the additional capability of reducing the GT.M stack level. In a single operation, ZGOTO executes ($ZLEVEL - intexpr) implicit QUITs and a GOTO operation, transferring control to the named entryref. <span>For more information on entryrefs, refer to <a class="xref" href="ch05.html" title="Chapter 5. General Language Features of M">Chapter 5: &#8220;<i><span>General Language Features of M</span></i>&#8221;</a>.</span></p>
 <p>The ZGOTO command leaves the invocation stack at the level specified by the integer expression. GT.M implicitly terminates any intervening FOR loops and unstacks variables stacked with NEW commands as appropriate.</p>
 <p>A ZGOTO 0 from a call-in unwinds all the M stack frames and returns to the invoking C routine. For all other cases, ZGOTO 0 terminates the process.</p>
 <p>Using ZGOTO 0:entryref invokes the "unlink all" facility. It allows a process to disassociate itself from all routines it has linked, releases memory, and continue execution with entryref as the only current entry in the M virtual stack.  ZGOTO 0:entryref  preserves local variables and IO devices across this transition and performs the following:</p>
@@ -62,7 +62,7 @@
 <p>ZGOTO resembles HALT (and not QUIT) in that it causes an exit regardless of the number of active levels in the current invocation. ZGOTO resembles QUIT (and not HALT) in that it destroys the GT.M context and terminates the process only if the current GT.M invocation is at the base of the process. Understanding the difference between ZGOTO and HALT has an impact only in an environment where GT.M is invoked recursively  from other languages.</p>
 <p>ZGOTO $ZLEVEL:LABEL^ROUTINE produces identical results to GOTO LABEL^ROUTINE. ZGOTO $ZLEVEL-1 responds like a QUIT (followed by ZCONTINUE, if in Direct Mode). If the integer expression evaluates to a value greater than the current value of $ZLEVEL or less than zero (0), GT.M issues a run-time error.</p>
 <p>If ZGOTO has no entryref, it performs some number of implicit QUITs and transfers control to the next command at the specified level. If ZGOTO has no argument, it behaves like ZGOTO 1, which resumes operation of the lowest level GT.M routine as displayed by ZSHOW "S". In the image invoked by <span>$gtm_dist mumps -direct</span>, a ZGOTO without arguments returns the process to Direct Mode.</p>
-<p>ZGOTO provides a useful debugging tool in Direct Mode. However, because ZGOTO is not conducive to structured coding, it is best to restrict its use in production programs to error handling. <span>For more information on GT.M error handling, refer to <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</span></p>
+<p>ZGOTO provides a useful debugging tool in Direct Mode. However, because ZGOTO is not conducive to structured coding, it is best to restrict its use in production programs to error handling. <span>For more information on GT.M error handling, refer to <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</span></p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="examples_of_zgoto"></a>Examples<span> of ZGOTO</span><a class="indexterm" name="idp187178480"></a>
@@ -83,19 +83,19 @@ GTM&gt;</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch06s33.html">Prev</a> </td>
+<a accesskey="p" href="ch06s33.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch06s35.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s35.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">ZEDit </td>
+<td width="40%" align="left" valign="top">ZEDit </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> ZHALT</td>
+<td width="40%" align="right" valign="top"> ZHALT</td>
 </tr>
 </table>
 </div>
 </body>
 
-<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s34.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 11:49:10 GMT -->
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s34.html]] -->
 </html>
