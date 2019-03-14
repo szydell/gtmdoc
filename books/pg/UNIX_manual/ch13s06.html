@@ -265,7 +265,7 @@ GTM&gt;</pre>
 <p>At SUB1, this routine NEWs $ETRAP and assigns it a value, which implicitly NEWs $ZTRAP. When the routine encounters an error at the SUB1 level, GT.M transfers control to label ET1 without modifying the value of $ETRAP or $ZTRAP. When the routine encounters a QUIT command in routine ET1, GT.M transfers control to the command after the DO that invoked ET1 and restores $ETRAP or $ZTRAP to the values they held before the NEW and the SET. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>If the transfer to ET1 was accomplished with a ZGOTO that reduced the stack level, after the trap, $ETRAP would have the value of the empty string and $ZTRAP would be "B".</p></td></tr>
@@ -578,7 +578,7 @@ $ </pre>
 <p>If the action specified by $ZTRAP results in another run-time error before changing the value of $ZTRAP, it may result in a loop that iteratively invokes $ZTRAP until a stack overflow terminates the GT.M image. Keep $ZTRAP simple and take special care to debug exception handling. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>An error in $ETRAP code triggers an implicit TROLLBACK:$TLEVEL QUIT:$QUIT "" QUIT.</p></td></tr>

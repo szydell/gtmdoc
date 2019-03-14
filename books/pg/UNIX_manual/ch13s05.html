@@ -219,7 +219,7 @@
 <p>The most recent error in $ECODE appears first, the oldest last. If the error is defined by the M standard, the code starts with an "M", GT.M error codes including those provided by OS services start with "Z", and application defined codes must start with "U". Every code is separated by a coma (,) and there is always a coma at the beginning and at the end of a list. GT.M provided codes are those reported in $ZSTATUS, interpreted by $ZMESSAGE() and recognized as arguments to ZMESSAGE command. When GT.M supplies a standard error code in $ECODE, it also supplies a corresponding 'Z' code.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>See <a class="xref" href="ch08s02.html" title="$ECode">&#8220;$ECode&#8221;</a> for a detailed description of $ECODE.</p></td></tr>
@@ -235,7 +235,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 <p>SETting $ECODE to an invalid value is an error. SETting $ECODE to a valid error behaves like detection of error. SETting $ECODE="" does not cause a change in the flow, but effects $STACK(), subsequent $QUITs and errors.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top">
@@ -246,7 +246,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 <p></p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>The value of $ECODE provides information about errors that have occurred since the last time it was reset to an empty string. In addition to the information in this variable, more detailed information can be obtained from the intrinsic function $STACK. <span>For more information, see the section on <a class="xref" href="ch07s21.html" title="$STack()">&#8220;$STack()&#8221;</a></span>.</p></td></tr>
@@ -259,7 +259,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 <p>$ZSTATUS contains a string value specifying the error condition code and location of the last exception condition that occurred during routine execution.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>For further details, see <a class="xref" href="ch08s55.html" title="$ZStatus">&#8220;$ZStatus&#8221;</a>.</p></td></tr>
@@ -365,7 +365,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 <p>Although the "adaptive" and "popadaptive" behaviors permit mixing of two behaviors based on the current value of $ZTRAP, the $ZTRAP behavior type is selected at process startup from gtm_ztrap_form and cannot be modified during the life of the process.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left"></th>
 </tr>
 <tr><td align="left" valign="top"><p>Like $ZTRAP values, invocation of device EXCEPTION values, with the exception noted, follow the pattern specified by the current gtm_ztrap_form setting.</p></td></tr>
@@ -394,7 +394,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 <p>If an error handling procedure was invoked through the $ETRAP method, and the value of $ECODE is non-empty when QUITing from the level of which the error occurred, the behavior is to transfer control to the error handler associated with the newly unstacked level. However, if the QUIT command at the end of error level happens to unstack a saved value of $ZTRAP (and thus cause the value of $ETRAP to become empty), the error handling mechanism switches from $ETRAP-based to $ZTRAP-based.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>At the end of an error handling procedure invoked through $ZTRAP, the value of $ECODE is not examined, and this value (if any) does not cause any transfer to another error handling procedure. However, if not cleared it may later trigger a $ETRAP unstacked by a QUIT.</p></td></tr>
@@ -410,7 +410,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 <p>If the mechanisms are mixed, or there is a desire to refer to $ECODE in an environment using $ZTRAP, it is recommended to have $ZTRAP error code SET $ECODE="" at some appropriate time, so that $ECODE does not become cluttered with errors that have been successfully handled.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>A device EXCEPTION gets control after a non-fatal device error and $ETRAP/$ZTRAP get control after other non-fatal errors.</p></td></tr>
@@ -441,7 +441,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 <p>With $ETRAP: New $ETRAP Set $ETRAP=...</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>In both cases, QUITting to a lower level may effectively make the other mechanism active.</p></td></tr>
@@ -455,7 +455,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 <p>With $ETRAP: If $ECODE[...</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>The value of $ZSTATUS reflects only the most recent error, while the value of $ECODE is the cumulative list of all errors since its value was explicitly set to empty. Both values are always maintained and can be used with either mechanism.</p></td></tr>
@@ -474,7 +474,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>It is important to remain aware of any issues that may arise within an error trapping procedure, and also of the conditions that might cause the code in question to be invoked.</p></td></tr>

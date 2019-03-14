@@ -51,7 +51,7 @@
 <p>If a transaction is a lost transaction that has been rolled back and it is determined that for all the M globals set and killed in the transaction $ZQGBLMOD() is zero (0), it is probably safe to apply the updates automatically. However, this determination of safety can only be made by the application designer and not by GT.M. If the $ZQGBLMOD() is one (1) for any set or kill in the transaction, it is not safe to apply the update.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>The test of $ZQGBLMOD() and applying the updates must be encapsulated inside a GT.M transaction.</p></td></tr>
@@ -61,7 +61,7 @@
 <p>Another approach to handling lost transactions would be to store in the database the initial message sent by a client, as well as the outcome and the response, and to reprocess the message with normal business logic. If the outcome is the same, the transaction can be safely applied. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>If restartable batch operations are implemented, lost batch transactions can be ignored since a subsequent batch restart will process them correctly.</p></td></tr>
