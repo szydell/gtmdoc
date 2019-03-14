@@ -1,0 +1,178 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch01s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:44 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Programming Environment</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch01.html" title="Chapter 1. About GT.M">
+<link rel="prev" href="ch01.html" title="Chapter 1. About GT.M">
+<link rel="next" href="ch02.html" title="Chapter 2. GT.M Language Extensions">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Programming Environment</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch01.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. About GT.M</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">About GT.M</a></span> &gt; <span class="breadcrumb-node">Programming Environment</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="progr_environ"></a>Programming Environment<a class="indexterm" name="idp184187760"></a>
+</h2></div></div></div>
+<p>The GT.M Programming Environment is described in the following sections.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="manage_data"></a>Managing Data<a class="indexterm" name="idp184249936"></a>
+</h3></div></div></div>
+<p>The scope of M data is either process local or global.</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Local variables last only for the duration of the current session; GT.M deletes them when the M process terminates.</p></li>
+<li class="listitem"><p>Global variables contain data that persists beyond the process. GT.M stores global variables on disk. A Global Directory organizes global variables and describes the organization of a database. The GT.M administrator uses the Global Directory Editor (GDE) to create and manage Global Directories. A Global Directory maps global names to a database file. GT.M uses this mapping when it stores and retrieves globals from the database. Several Global Directories may refer to a single database file.</p></li>
+</ul></div>
+<p>For more information about the GT.M data management system, refer to the "Global Directory Editor", "MUPIP" and "GT.M Journaling" chapters in the <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="db_manage_utils"></a>Database Management<span> Utilities</span><a class="indexterm" name="idp184352304"></a>
+</h4></div></div></div>
+<p>The Global Directory Editor (GDE) creates, modifies, maintains, and displays the characteristics of Global Directories. GDE also maps LOCKs on resource names to the region of the database specified for the corresponding global variables.</p>
+<p>The M Peripheral Interchange Program (MUPIP) creates database files and provides tools for GT.M database management and database journaling.</p>
+<p>For more information regarding GT.M database utilities, refer to the "Global Directory Editor", "MUPIP" and "GT.M Journaling" chapters in the <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="manage_source_code"></a>Managing Source Code<a class="indexterm" name="idp184351168"></a>
+</h3></div></div></div>
+<p>In the GT.M programming environment, source routines are generated and stored as standard <span>UNIX files</span>. They are created and edited with standard <span>UNIX</span> text editors. GT.M accepts source lines of up to 8192 bytes. When GT.M encounters a line with a length greater than 8192 bytes in a source file, it emits an LSEXPECTED warning. This warning identifies cases where a line greater than 8192 bytes is split into multiple lines, which causes statements beyond the character prior to the limit to execute irrespective of any starting IF, ELSE or FOR commands. The 8192 byte limit applies to XECUTE command arguments and Direct Mode input as well.</p>
+<p>GT.M is designed to work with the operating system utilities and enhances them when beneficial. The following sections describe the process of programming and debugging with GT.M and from the operating system.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="src_file_mang"></a>Source File Management<a class="indexterm" name="idp184334704"></a>
+</h4></div></div></div>
+<p>In addition to standard M "percent" utilities, GT.M permits the use of the standard UNIX file manipulation tools, for example, the diff, grep, cp, and mv commands. The GT.M programmer can also use the powerful facilities provided by the UNIX directory structure, such as time and date information, tree-structured directories, and file protection codes.</p>
+<p>GT.M programs are compatible with most source management software, for example, RCS and SCCS.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="prog_and_debug_faci"></a>Program<span>ming and</span> Debug<span>ging Facilities</span><a class="indexterm" name="idp184322576"></a>
+</h4></div></div></div>
+<p>The GT.M programmer can use any UNIX text editor to create M source files. If you generate a program from within the Direct Mode, it also accesses the UNIX text editor specified by the environment variable EDITOR and provides additional capabilities to automate and enhance the process.</p>
+<p>The GT.M programmer also uses the Direct Mode facility to interactively debug, modify, and execute M routines. In Direct Mode, GT.M executes each M command immediately, as if it had been in-line at the point where GT.M initiated Direct Mode.</p>
+<p>The following is a list of additional enhancements available from the Direct Mode:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The capability to issue commands from Direct Mode to the <span>shell</span></p></li>
+<li class="listitem"><p>A command recall function to display and reuse previously entered commands</p></li>
+<li class="listitem"><p>Many language extensions that specifically optimize the debugging environment</p></li>
+</ul></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="gtm_compiler"></a><span>The </span>GT.M Compiler<a class="indexterm" name="idp184314528"></a>
+</h4></div></div></div>
+<p>The GT.M compiler operates on source files to produce object files consisting of position-independent,  native object code, which on some platforms can be linked into shared object libraries. GT.M provides syntax error checking at compile-time and allows you to enable or disable the compile-as-written mode. By default, GT.M produces an object file even if the compiler detects errors in the source code. This compile-as-written mode facilitates a flexible approach to debugging.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="run_time_sys"></a>The Run-Time System<a class="indexterm" name="idp184123072"></a>
+</h4></div></div></div>
+<p>A GT.M programmer can execute an M routine from  <span>the shell</span> or interactively, using the M commands from Direct Mode.</p>
+<p>The run-time system executes compile-as-written code as long as it does not encounter the compile-time errors. If it detects an error, the run-time system suspends execution of a routine immediately and transfers control to Direct Mode or to a user-written error routine.</p>
+<div class="sect4">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="automatic_and_incr_link"></a>Automatic and Incremental Linking</h5></div></div></div>
+<p>The run-time system utilizes a GT.M facility called ZLINK to link in an M routine. When a program or a Direct Mode command refers to an M routine that is not part of the current process, GT.M automatically uses the ZLINK facility and attempts to link the referenced routine (auto-ZLINK). The ZLINK facility also determines whether recompilation of the routine is necessary. When compiling as a result of a ZLINK, GT.M typically ignores errors in the source code.</p>
+<p>The run-time system also provides incremental linking. The ZLINK command adds an M routine to the current image. This feature facilitates the addition of code modifications during a debugging session. The GT.M programmer can also use the feature to add patches and generated code to a running M process.</p>
+</div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="err_proc"></a>Error Processing<a class="indexterm" name="idp184313888"></a>
+</h4></div></div></div>
+<p>The GT.M compiler detects and reports syntax errors at the following times:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>Compile-time - while producing the object module from a source file</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Run-time - while compiling code for M indirection and XECUTEs</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Run-time - when the user is working in Direct Mode.</p></li>
+</ul></div>
+<p>The compile-time error message format displays the line containing the error and the location of the error on the line. The error message also indicates what was incorrect about the M statement.</p>
+<p>GT.M can not detect certain types of errors associated with indirection, the functioning of I/O devices, and program logic until run-time.</p>
+<p>The compile-as-written feature allows compilation to continue and produces an object module despite errors in the code. This permits testing of other pathways through the code. The errors are reported at run-time, when GT.M encounters them in the execution path.</p>
+<p>The GT.M run-time system recognizes execution errors and reports them when they occur. It also reports errors flagged by the compiler when they occur in the execution path.</p>
+<p>For more information, see <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="input_output_proc"></a>Input-Output Processing<a class="indexterm" name="idp184324160"></a>
+</h4></div></div></div>
+<p>GT.M supports input and output processing with the following system components:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Terminals</p></li>
+<li class="listitem"><p>Sequential disk files</p></li>
+<li class="listitem"><p>Mailboxes</p></li>
+<li class="listitem"><p>FIFOs</p></li>
+<li class="listitem"><p>Null devices</p></li>
+<li class="listitem"><p>Socket devices</p></li>
+</ul></div>
+<p>GT.M input/output processing is device-independent. Copying information from one device to another is accomplished without reformatting.</p>
+<p>GT.M has special terminal-handling facilities. GT.M performs combined QIO operations to enhance terminal performance. The terminal control facilities that GT.M provides include escape sequences, control character traps, and echo suppression.</p>
+<p>GT.M supports RMS sequential disk files that are accessed using a variety of deviceparameters.</p>
+<p>GT.M supports block I/O with fixed and variable length records for file-structured (FILES-11) tapes and non-file-structured unlabeled (FOREIGN) tapes. GT.M supports the ASCII character set for unlabeled FOREIGN and FILES-11 tapes. GT.M supports the EBCDIC character set for FOREIGN tapes only. GT.M also supports FOREIGN DOS-11 and ANSI labelled tapes or stream format records. It also supports ASCII and EBCDIC character sets.</p>
+<p>GT.M uses permanent or temporary mailboxes fifos for interprocess communication. GT.M treats mailboxes as record-structured I/O devices.</p>
+<p>GT.M provides the ability to direct output to a null device. This is an efficient way to discard unwanted output.</p>
+<p>GT.M provides device-exception processing so that I/O exception handling need not be combined with process-related exception conditions. The OPEN, USE, and CLOSE EXCEPTION parameters define an XECUTE string as an error handler for an I/O device.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="integrate_with_other_lang"></a>Integrating GT.M with Other Languages<a class="indexterm" name="idp184329392"></a>
+</h3></div></div></div>
+<p>GT.M offers capabilities that allow you to optimize your programming environment. These include allowing you to call into M routines from programs written in other programming languages, access your M databases with interfaces that provide functionality equivalent to M intrinsic database functions, and to alter your programming environment when working with languages other than American English. These include allowing you to call programs written in other programming languages that support C-like interfaces and to alter your programming environment when working with languages other than American English. This capability is described in more detail in chapters throughout this manual.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="acc_to_non_m_routine"></a>Access to <span>Non-M</span> Routines<a class="indexterm" name="idp184366592"></a>
+</h3></div></div></div>
+<p>GT.M routines can call external (non-M) routines using the external call function. This permits access to functions implemented in other programming languages. For more information, see <span><a class="xref" href="ch11.html" title="Chapter 11. Integrating External Routines">Chapter 11: &#8220;<i><span>Integrating</span> External<span> Routines</span></i>&#8221;</a></span>.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="internationalization"></a>Internationalization<a class="indexterm" name="idp184302784"></a>
+</h3></div></div></div>
+<p>GT.M allows the definition of alternative collation sequences and pattern matching codes for use with languages other than English. <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a> describes the details and requirements of this functionality.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch01.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 1. About GT.M </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Chapter 2. <span>GT.M </span>Language Extensions</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch01s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:44 GMT -->
+</html>

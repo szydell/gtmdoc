@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_rsel_d.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:56 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of %RSEL</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="rsel_percent_d.html" title="%RSEL" />
+    <link rel="prev" href="output_var_rsel_d.html" title="Output Variables" />
+    <link rel="next" href="international_utils.html" title="Internationalization Utilities" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of %RSEL</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="output_var_rsel_d.html">Prev</a> </td>
+          <th width="60%" align="center">%RSEL</th>
+          <td width="20%" align="right"> <a accesskey="n" href="international_utils.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="examples_of_rsel_d"></a>Examples of %RSEL</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4226236" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO ^%RSEL
+	Routine: TES*
+	TEST2 TEST3
+	Current total of 2 routines 
+	Routine: &lt;RETURN&gt;
+	GTM&gt;DO OBJ^%RSEL
+	<span>Routine:Test%</span>
+	
+	Current total of 0 routines
+	Routine: &lt;RETURN&gt;
+	GTM&gt;ZWRITE
+	%ZR=0
+	</pre>
+      <p>This example selects two source routines starting with &quot;TES&quot; as the first three characters. Then, the example invokes %RSEL at the OBJ label to select object modules only. OBJ^%RSEL returns a %ZR=0 because object modules for the TEST routines do not exist. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO ^%RSEL
+	Routine: BES*
+	BEST BEST2 BEST3 BEST4
+	Current total of 4 routines
+	Routine: - BEST
+	BEST
+	Current total of 3 routines
+	Routine: ?D
+	BEST2 BEST3 BEST4 
+	Routine: 'BEST2
+	BEST2
+	Current total of 2 routines
+	Routine: ?D
+	BEST3 BEST4
+	Routine: &lt;RETURN&gt;
+	GTM&gt;ZWRITE
+	%ZR=2
+	<span>%ZR(&quot;BEST3&quot;)=&quot;USER:[SMITH.WORK]&quot;</span>
+	<span>%ZR(&quot;BEST4&quot;)=&quot;USER:[SMITH.TEST]&quot;</span>
+	
+	
+	GTM&gt;
+	</pre>
+      <p>This example selects the routines using the asterisk (*) wildcard and illustrates how to tailor your selection list. Note that %ZR contains two routines from different directories. </p>
+      <p>By default, %RSEL bases the contents of %ZR on source files that have a .M extension.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO ^%RSEL
+	Routine:BEST*
+	BEST2 BEST3
+	Current total of 2 routines 
+	Routine: &lt;RETURN&gt;
+	GTM&gt;ZWRITE
+	%ZR=2
+	<span>%ZR(&quot;BEST2&quot;)=&quot;USER:[SMITH.WORK]&quot;</span>
+	<span>%ZR(&quot;BEST3&quot;)=&quot;USER:[SMITH.WORK]&quot;</span>
+	
+	
+	</pre>
+      <p>This example creates a %ZR array with BEST2 and BEST3.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO ^%RSEL
+	Routine:LOCK
+	LOCK
+	Current total of 1 routine
+	Routine: &lt;RETURN&gt;
+	GTM&gt;ZWRITE 
+	%ZR=1
+	<span>%ZR(&quot;LOCK&quot;)=&quot;USER:[SMITH.WORK]&quot;</span>
+	
+	GTM&gt;DO CALL^%RSEL
+	Routine:BEST*
+	BEST2 BEST3
+	Current total of 2 routines
+	Routine: &lt;RETURN&gt;
+	GTM&gt;ZWRITE
+	%ZR=3
+	<span>
+	%ZR(&quot;BEST2&quot;)=&quot;USER:[SMITH.WORK]&quot;
+	%ZR(&quot;BEST3&quot;)=&quot;USER:[SMITH.WORK]&quot;
+	%ZR(&quot;LOCK&quot;)=&quot;USER:[SMITH.WORK]&quot;
+	</span>
+	
+	GTM&gt;
+	</pre>
+      <p>This example creates a %ZR array with LOCK and adds to it using CALL%RSEL. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="output_var_rsel_d.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rsel_percent_d.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="international_utils.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Output Variables </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Internationalization Utilities</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_rsel_d.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:56 GMT -->
+</html>

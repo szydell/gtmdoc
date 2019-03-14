@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/create_a_library.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:35 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Creating a Library</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter3.html" title="Chapter 3. Program Development Cycle" />
+    <link rel="prev" href="mumps_cmmd_qual_summ.html" title="MUMPS Command Qualifiers Summary" />
+    <link rel="next" href="qualifiers_for_lib_cmmd.html" title="Qualifiers for the LIBRARY Command" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Creating a Library</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="mumps_cmmd_qual_summ.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 3. Program Development Cycle</th>
+          <td width="20%" align="right"> <a accesskey="n" href="qualifiers_for_lib_cmmd.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="create_a_library"></a>Creating a Library</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="qualifiers_for_lib_cmmd.html">Qualifiers for the LIBRARY Command</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <p>Libraries provide a tool that makes VMS LINKs easier to manage. Like VMS LINK, GT.M ZLINK can also access object libraries. However, ZLINKing from object libraries has some restrictions that limit its utility. If you wish to focus on program development from the GT.M environment rather than from the VMS environment, you can skip over this section and continue with the section on &quot;Controlling Run-time Parameters&quot; which follows.</p>
+      <p>When an object module contains frequently used routines, you can store the object module in a library for future use. A library simplifies file management and the linking process because VMS LINKs do not have to explicitly refer to object modules filed in a library.</p>
+      <p>You might store the previously developed LOOKUP and SUM routines in an object module library, TOOLS.OLB. Create the library file of object modules using the VMS Librarian utility. Invoke the Librarian using the DCL command, LIBRARY.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        $ LIBRARY/CREATE TOOLS LOOKUP,SUM
+      </pre>
+      <p>The Librarian creates a library in the file TOOLS.OLB. The default library type .OLB indicates an object library.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        $ LIBRARY TOOLS TAXES/INSERT
+      </pre>
+      <p>This adds the newly developed TAXES module to the library, TOOLS.</p>
+      <p>The fact that the Librarian accepts VMS wildcards makes the Librarian a powerful tool for gathering and managing modules. The Librarian creates and maintains indexed libraries, which can assist in linking.</p>
+      <p>This documentation focuses on those aspects of the Librarian relevant to the GT.M user's needs for object code management. The Librarian also manages other types of files. For more information refer to the VMS Librarian Reference Manual.</p>
+      <p>The format for the <a id="id4160193" class="indexterm"></a> LIBRARY command is:</p>
+      <pre class="programlisting">
+        LIBRARY[/qualifier[...]] library-file-spec 
+        input-file-spec,[...]]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Qualifiers generally determine the kind of operation to perform.</p>
+          </li>
+          <li>
+            <p>The library file-specification identifies the library to utilize.</p>
+          </li>
+          <li>
+            <p>The input file-specifications identify the modules to include in or remove from the library.</p>
+          </li>
+          <li>
+            <p>VMS allows the * and % wildcards in an input file specification; the * wildcard accepts any legal number and combination of characters, including a null, in the position the wildcard holds; the % wildcard accepts exactly one legal character in its position.</p>
+          </li>
+          <li>
+            <p>By default, the Librarian produces object libraries with an extension of .OLB.</p>
+          </li>
+          <li>
+            <p>By default, the Librarian expects input object modules with an extension of .OBJ.</p>
+          </li>
+        </ul>
+      </div>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="mumps_cmmd_qual_summ.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter3.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="qualifiers_for_lib_cmmd.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">MUMPS Command Qualifiers Summary </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Qualifiers for the LIBRARY Command</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/create_a_library.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:35 GMT -->
+</html>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zgetlki.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:19 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZGETLKI()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter7.html" title="Chapter 7. Functions" />
+    <link rel="prev" href="examples_of_zgetjpi.html" title="Examples of $ZGETJPI()" />
+    <link rel="next" href="examples_of_zgetlki.html" title="Examples of $ZGETLKI()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZGETLKI()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zgetjpi.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 7. Functions</th>
+          <td width="20%" align="right"> <a accesskey="n" href="examples_of_zgetlki.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zgetlki"></a>$ZGETLKI()</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zgetlki.html">Examples of $ZGETLKI()</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4189593" class="indexterm"></a>
+      <p>The $ZGETLKI function returns an item of information about a VMS lock.</p>
+      <p>The format for the $ZGETLKI() function is:</p>
+      <pre class="programlisting">
+    $ZGETLKI(expr1,expr2)
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The first expression specifies a lock-id identifying the target VMS lock.</p>
+          </li>
+          <li>
+            <p>The second expression specifies the item keyword identifying the type of information returned; keywords may be in upper-, lower-, or mixed-case.</p>
+          </li>
+        </ul>
+      </div>
+      <p>$ZGETLKI() provides a tool for examining VMS lock characteristics from within M. Accessing information about locks belonging to other users requires WORLD or SYSLCK privileges. Note that VMS locks and M LOCKs are not at all the same, even though they serve corresponding purposes in their respective environments. For information about VMS locks, refer to the VMS Introduction to System Services.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="2">
+    <p>$ZGETLKI() Item Keywords  </p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ITEM KEYWORD</p>
+    </td>
+              <td>
+    <p>$ZGETLKI() DATA RETURNED</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>CSID</p>
+    <p></p>
+    <p>CVTCOUNT</p>
+    <p></p>
+    <p>GRANTCOUNT</p>
+    <p></p>
+    <p>LCKREFCNT</p>
+    <p></p>
+    </td>
+              <td>
+    <p>Cluster system ID of the system where the process owning the VMS lock resides</p>
+    <p>Number of VMS locks on the conversion queue for the lock resource</p>
+    <p>Number of VMS locks on the grant queue for the lock resource</p>
+    <p>Number of locks having this VMS lock as a parent</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>LKID</p>
+    <p></p>
+    <p>LOCKID</p>
+    <p>MSTCSID</p>
+    <p></p>
+    <p>MSTLKID</p>
+    </td>
+              <td>
+    <p>Lock ID of the lock on the node where the process owning the lock resides</p>
+    <p>Lock ID of the lock</p>
+    <p>Cluster system ID of the node currently mastering the lock resource</p>
+    <p>Lock ID of the master copy of the lock</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>NAMSPACE</p>
+    <p>PARENT</p>
+    <p>PID</p>
+    <p>RESNAME</p>
+    </td>
+              <td>
+    <p>Resource name space information</p>
+    <p>Lock ID of the parent lock for the lock</p>
+    <p>PID of the process owning the lock</p>
+    <p>Lock resource name as a string</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>RSBREFCNT</p>
+    <p>STATE</p>
+    <p>VALBLK</p>
+    <p></p>
+    <p>WAITCOUNT</p>
+    <p></p>
+    </td>
+              <td>
+    <p>Number of sub-resource of the lock resource</p>
+    <p>Current state of the lock</p>
+    <p>Lock value block of the resource; formatted as a string of 32 hexadecimal digits</p>
+    <p>Number of locks on the wait queue for the resource of the lock</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zgetjpi.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter7.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="examples_of_zgetlki.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of $ZGETJPI() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of $ZGETLKI()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zgetlki.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:19 GMT -->
+</html>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/linking_procedures.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:48 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Linking Procedures</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter11vms.html" title="Chapter 11. Integrating External Routines" />
+    <link rel="prev" href="compiling_errors.html" title="Compiling Errors" />
+    <link rel="next" href="important_considerations_for_extr_calls.html" title="Important Considerations for External Calls" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Linking Procedures</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="compiling_errors.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 11. Integrating External Routines</th>
+          <td width="20%" align="right"> <a accesskey="n" href="important_considerations_for_extr_calls.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="linking_procedures"></a>Linking Procedures</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4230646" class="indexterm"></a>
+      <p>For an external routine to be accessible to GT.M, the routine, and an external call table entry defining its usage, must be linked into an M image. Use the VMS linker to combine these elements; they cannot be ZLINKed. The VMS linker produces an executable image that can be run with the DCL RUN command.</p>
+      <p>For example, if the M routine CAL.M uses external calls to obtain values from the external FORTRAN routine SQRT.F, to link the resultant object modules use the command line: </p>
+      <pre class="programlisting">
+	$ LINK CAL,SQRT,GTMZCTAB
+	</pre>
+      <p>to produce an executable image called CAL.EXE.</p>
+      <p>If your M routine calls more than one external routine and uses several table source files, you may want to put the external routine and external call table source object modules in a VMS object library file (file type .OLB). The OpenVMS DCL Dictionary manual describes how to create object module libraries.</p>
+      <p>Using an object library simplifies the linking process because you do not have to explicitly reference the routines with the LINK command. For example, if the external routine, CAL.M requires values from SQRT1.F, SQRT2.F and SQRT3.F, you can put the object modules in the library, SQRT.OLB. To link the object modules, use the LINK qualifiers, /LIBRARY and /INCLUDE:</p>
+      <pre class="programlisting">
+	$ LINK CAL,SQRT/LIB/INCLUDE=GTMZCTAB
+	</pre>
+      <p>The /LIBRARY qualifier indicates that SQRT is a library file. The linker searches the symbol table of the library for undefined symbols in previously processed modules (GTMZCTAB.OBJ in this case). The linker includes the library modules containing the undefined symbols (SQRT1.OBJ, SQRT2.OBJ and SQRT3.OBJ) in the linking process.</p>
+      <p>Because your M routine does not explicitly reference the external call table object module, you need to reference the object module explicitly with the LINK command. The /INCLUDE qualifier directs the linker to include the named module or modules from the library in the linking process.</p>
+      <p>For more information on the /LIBRARY and /INCLUDE qualifiers, refer to the OpenVMS Linker Utility manual. </p>
+      <p>External call tables may be placed in a shareable image. This permits independent modifications of the base image and the external call tables. If you place your external call tables in a shareable image, all the tables must be in the same image. When linking your shareable external call table image, you must declare the following universal symbols in an options file:</p>
+      <pre class="programlisting">
+	gtm$startzc,gtm$endzc,gtm$startzcpack, gtm$endzcpack
+	</pre>
+      <p>Example:</p>
+      <pre class="programlisting">
+	$ link/share=zcshr zctab1,zctab2,sys$input/opt- symbol_vector=(gtm$startzc=DATA,gtm$endzc=DATA, -gtm$startzcpack=DATA,gtm$endzcpack=DATA)
+	$ library/share/create zclib zcshr
+	$ link mygtm,zclib/library/include=zcshr
+	$ define zcshr user:[holmes.dev]zcshr.exe
+	$ run mygtm
+	</pre>
+      <p>This links a shareable image named zcshr.exe, which includes external call tables from zctabl.obj and zctab2.obj. It uses sys$input for in-line input of the options file, although a separate file might be more appropriate if the link occurs frequently. Then it places the universal symbols for zcshr in a shareable image library named zclib.olb. It links an M program against that library, specifically including zcshr. Then it defines a logical name for the shareable image–a step that would be unnecessary if the image were placed in sys$library. Finally, it runs the image. </p>
+      <p>Another possibility is to use an options file to include zcshr/share, rather than creating a shareable image library, as shown below.</p>
+      <p>Example: </p>
+      <pre class="programlisting">
+	$ type xcall.opt
+	symbol_vector= ( -
+	gtm$startzc = DATA, -
+	gtm$endzc = DATA, -
+	gtm$startzcpack = DATA, -
+	gtm$endzcpack = DATA -
+	
+	$ link/share=zcshr zctab1,zctab2,xcall.opt/opt
+	$ link mygtm,zclib/library/include=zcshr/sys$input/opt-
+	zshr/share
+	$ define zcshr user:[holmes.dev]zcshr.exe
+	$ run mygtm	
+	</pre>
+      <p>For more information on linking and shareable images in VMS, refer to the OpenVMS Linker Utility manual.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="compiling_errors.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter11vms.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="important_considerations_for_extr_calls.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Compiling Errors </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Important Considerations for External Calls</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/linking_procedures.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:48 GMT -->
+</html>

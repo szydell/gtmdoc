@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_date.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:17 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of %DATE</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="percent_date.html" title="%DATE" />
+    <link rel="prev" href="date_input_formats_table.html" title="Date Input Formats Table" />
+    <link rel="next" href="percent_h.html" title="%H" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of %DATE</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="date_input_formats_table.html">Prev</a> </td>
+          <th width="60%" align="center">%DATE</th>
+          <td width="20%" align="right"> <a accesskey="n" href="percent_h.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="examples_of_date"></a>Examples of %DATE</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4220328" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO ^%DATE
+	Date:
+	GTM&gt;ZWRITE
+	%DN=59105
+	</pre>
+      <p>This example invokes %DATE at the GTM&gt; prompt. After pressing &lt;RETURN&gt; at the Date: prompt, %DATE converts today's date (for example, 10/28/2002) to the $HOROLOG format. ZWRITE displays the contents of the output variable.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO INT^%DATE
+	GTM&gt;ZWRITE
+	%DN=59105
+	</pre>
+      <p>This example invokes INT^%DATE, which converts the current date non-interactively into $HOROLOG format. ZWRITE displays the contents of the output variable.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;SET %DS=&quot;10/20/2002&quot;
+	GTM&gt;DO INT^%DATE
+	GTM&gt;ZWRITE
+	%DN=59097
+	%DS=&quot;10/20/2002&quot;
+	</pre>
+      <p>This example sets the input variable %DS prior to invoking INT^%DATE, which converts that date non-interactively to $HOROLOG format. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;WRITE $$FUNC^%DATE(&quot;10/20/2002&quot;)
+	59097	
+	</pre>
+      <p>This example invokes %DATE with the label FUNC as an extrinsic function to convert an input date to $HOROLOG. If the invocation does not supply a date for $$FUNC^%DATE, FUNC converts the current date. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;WRITE $ZDATEFORM
+	1975
+	GTM&gt;WRITE $$FUNC^%DATE(&quot;10/20/80&quot;)
+	51062
+	GTM&gt;WRITE $ZDATE(51062)
+	10/20/1980
+	GTM&gt;WRITE $$FUNC^%DATE(&quot;10/20/10&quot;)
+	62019
+	GTM&gt;WRITE $ZDATE(62019)
+	10/20/2010
+	</pre>
+      <p>This example shows the use of a year limit in $ZDATEFORM. Two digit years are interpreted to be in the interval (1975, 2074) since $ZDATEFORM is 1975; the input year &quot;80&quot; is interpreted as the year &quot;1980&quot; and &quot;10&quot; is interpreted as the year &quot;2010&quot;. The example invokes FUNC^%DATE to convert the input date to $HOROLOG format. $ZDATE() is used to convert the $HOROLOG format date to mm/dd/yyyy format.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="date_input_formats_table.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="percent_date.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="percent_h.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Date Input Formats Table </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> %H</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_date.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:17 GMT -->
+</html>

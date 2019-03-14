@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/close_cmmd_9.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:40 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Close</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="io_commands_9.html" title="I/O Commands" />
+    <link rel="prev" href="write_cmmd_9.html" title="Write" />
+    <link rel="next" href="close_device_params_9.html" title="CLOSE Deviceparameters" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Close</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="write_cmmd_9.html">Prev</a> </td>
+          <th width="60%" align="center">I/O Commands</th>
+          <td width="20%" align="right"> <a accesskey="n" href="close_device_params_9.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="close_cmmd_9"></a>Close</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4212676" class="indexterm"></a>
+      <p>The CLOSE command breaks the connection between a process and a device.</p>
+      <p>The format of the CLOSE command is:</p>
+      <pre class="programlisting">
+	C[LOSE][:tvexpr] expr[:(keyword[=expr][:...])][,...]
+	</pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>The required expression specifies the device to CLOSE.</p>
+          </li>
+          <li>
+            <p>The optional keywords specify deviceparameters that control device behavior; some deviceparameters take arguments delimited by an equal sign (=); if there is only one keyword, the surrounding parentheses are optional.</p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom evaluating to a list of one or more CLOSE arguments form a legal argument for a CLOSE.</p>
+          </li>
+        </ul>
+      </div>
+      <p>When a CLOSE is issued, GT.M flushes all pending output to the device, and processes any deviceparameters. CLOSEing a device not currently OPEN has no effect.</p>
+      <p>If the device is a temporary mailbox and the process is the only process accessing the mailbox, the device driver deletes the mailbox.</p>
+      <p>GT.M retains the characteristics of all device types, except a <span>Files-11 RMS</span>, for use in case of subsequent re-OPENs. If the device is a <span>Files-11 RMS</span>, characteristics controlled by deviceparameters are lost after the CLOSE. </p>
+      <p>CLOSE may send sequential files to the VMS queue manager for processing. The CLOSE command provides deviceparameters that SPOOL the file for printing on a printer or terminal, or SUBMIT the file to batch for execution. Many of the CLOSE deviceparameters for sequential files control queue behavior for either SPOOL or SUBMIT or both, and therefore must be used with SPOOL and/or SUBMIT to have any effect.</p>
+      <p>If the device being CLOSEd is $IO, GT.M implicitly USEs $PRINCIPAL. GT.M ignores CLOSE $PRINCIPAL.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	CLOSE sd:(SPOOL:QUEUE=que:DELETE)
+	</pre>
+      <p>This CLOSEs the device, and if it is an RMS file on disk or tape, it spools the file for printing on the QUEUE specified by the variable que. The CLOSE also marks the file for deletion after printing.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	CLOSE SD:RENAME=SD_&quot;.SAV&quot;
+	</pre>
+      <p>This closes the device and, if it is a disk file, renames it to have the type .SAV.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="write_cmmd_9.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="io_commands_9.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="close_device_params_9.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Write </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> CLOSE Deviceparameters</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/close_cmmd_9.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:40 GMT -->
+</html>

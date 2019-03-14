@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/using_mailbox.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:27 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Using Mailboxes</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter9.html" title="Chapter 9. Input/Output Processing" />
+    <link rel="prev" href="seq_file_examples.html" title="Sequential File Examples" />
+    <link rel="next" href="logical_rec_for_mailbox.html" title="Logical Records for Mailboxes" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Using Mailboxes</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="seq_file_examples.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 9. Input/Output Processing</th>
+          <td width="20%" align="right"> <a accesskey="n" href="logical_rec_for_mailbox.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="using_mailbox"></a>Using Mailboxes</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="logical_rec_for_mailbox.html">Logical Records for Mailboxes</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="mailbox_device_parameter_summ.html">Mailbox Deviceparameter Summary</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="mailbox_examples.html">Mailbox Examples</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4202618" class="indexterm"></a>
+      <p>A mailbox is a VMS facility that uses shared system memory to pass messages from one process to another. Because they use shared memory, mailboxes can only be used for communication between process on the same computer. They cannot be used to pass messages between machines in a VMSCluster. A GT.M image can use mailboxes to communicate with any process on the same system, including non-GT.M processes. Mailbox device names have the format MBA&lt;number&gt;:. VMS creates mailboxes with associated logical names, which translates to the device name. When GT.M creates a mailbox, it uses the device name argument of the OPEN command and creates a logical name that translates to the mailbox specification. Because of VMS conventions, logical names for mailboxes are not case sensitive and cannot have a leading undescore(_).</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>If the OPEN specifies a device name in the form MBA&lt;number&gt;:, and the mailbox does not exist, OPEN creates a new mailbox and uses the OPEN argument to create a logical name translating to the new mailbox.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>VMS provides permanent and temporary mailboxes, requiring respectively the PRMMBX and TMPMBX priviliges for creation. Because, by default, permanent mailbox names are translated in the SYSTEM logical name table, their creation also nornamlly requires the SYSNAM privilege. To allow the possibility of using temporary mailboxes for inter-job communication, GT.M uses the GROUP logical name table to translate temporary mailbox names, and so requires the GRPNAM privilege to create temporary mailboxes.</p>
+      <p>Accessing an existing mailbox does not require any VMS privileges. The system manager typically creates permanent mailboxes, usually at system startup. Therefore, permanent mailboxes serve to limit the number of accounts requiring VMS privileges. The last process to CLOSE a temporary mailbox deletes it. Using temporary mailboxes for short infrequent communications tends to conserve system memory. Because VMS uses temporary mailboxes primarily for communication between subprocesses of a single job, VMS uses the JOB table as the VMS default lofical name table for translating mailbox names.</p>
+      <p>GT.M ignores all deviceparameters on an OPEN command issued for an already open mailbox.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="seq_file_examples.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter9.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="logical_rec_for_mailbox.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Sequential File Examples </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Logical Records for Mailboxes</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/using_mailbox.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:27 GMT -->
+</html>

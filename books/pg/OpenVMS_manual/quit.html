@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/quit.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:42 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$Quit</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter8.html" title="Chapter 8. Intrinsic Special Variables" />
+    <link rel="prev" href="principal.html" title="$Principal" />
+    <link rel="next" href="reference.html" title="$Reference" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$Quit</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="principal.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 8. Intrinsic Special Variables</th>
+          <td width="20%" align="right"> <a accesskey="n" href="reference.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="quit"></a>$Quit</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4193614" class="indexterm"></a>
+      <p>$Q[UIT] indicates whether the current block of code was called as an extrinsic function or as a subroutine. </p>
+      <p>If $Q[UIT] contains 1 (when the current process-stack frame is invoked by an extrinsic function), the QUIT would therefore require an argument.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>When a process is initiated, but before any commands are processed, the value of $Q[UIT] is zero (0). </p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>This special variable is mainly used in error-trapping conditions. Its value tells whether the current DO level was reached by means of a subroutine call (DO xxx) or by a function call (SET variable=$$xxx).</p>
+      <p>A typical way of exiting from an error trap is:</p>
+      <pre class="programlisting">
+    QUIT:$QUIT &quot;&quot; QUIT
+    </pre>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>GT.M does not permit $QUIT to be SET or NEWed.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="principal.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter8.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="reference.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$Principal </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $Reference</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/quit.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:42 GMT -->
+</html>

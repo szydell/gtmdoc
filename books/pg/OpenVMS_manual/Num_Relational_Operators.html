@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Num_Relational_Operators.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:34 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Numeric Relational Operators</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Operators.html" title="Operators" />
+    <link rel="prev" href="String_Operators.html" title="String Operators" />
+    <link rel="next" href="Str_Relational_Operators.html" title="String Relational Operators" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Numeric Relational Operators</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="String_Operators.html">Prev</a> </td>
+          <th width="60%" align="center">Operators</th>
+          <td width="20%" align="right"> <a accesskey="n" href="Str_Relational_Operators.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Num_Relational_Operators"></a>Numeric Relational Operators</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4167251" class="indexterm"></a>
+      <p>M relational operators always generate a result of TRUE (1) or FALSE (0). All numeric relational operators force M to evaluate the expressions to which they apply as numeric. The numeric relational operators are:</p>
+      <p>&gt;binary arithmetic greater than</p>
+      <p>&lt;binary arithmetic less than</p>
+      <p>The equal sign (=) does not force numeric evaluation, and should be viewed as a string operator. However, the equal sign between two numeric values tests for numeric equality.</p>
+      <p>Other numeric relations are formed using the logical NOT operator apostrophe (') as follows:</p>
+      <p>'&gt; not greater than, that is, less than or equal to</p>
+      <p>'&lt; not less than, that is, greater than or equal to</p>
+      <p>'=    not equal, numeric or string operation</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+         GTM&gt;WRITE 1&gt;2
+         0
+         GTM&gt;WRITE 1&lt;2
+         1
+         GTM&gt;
+        </pre>
+      <p>The above example demonstrates the basic arithmetic relational operations.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+         GTM&gt;WRITE 1'&lt;2
+         0
+         GTM&gt;WRITE 2'&lt;1
+         1
+         GTM&gt;
+        </pre>
+      <p>The above example demonstrates combinations of arithmetic, relational operators with the logical NOT operator.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="String_Operators.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Operators.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="Str_Relational_Operators.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">String Operators </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> String Relational Operators</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Num_Relational_Operators.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:34 GMT -->
+</html>

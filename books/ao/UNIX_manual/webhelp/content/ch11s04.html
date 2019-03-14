@@ -1,0 +1,1457 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:exsl="http://exslt.org/common" xmlns:ng="http://docbook.org/docbook-ng" xmlns:db="http://docbook.org/ns/docbook">
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/webhelp/content/ch11s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:01:47 GMT -->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=7"/>
+<title>Finding and Fixing Database Errors</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"/><link rel="home" href="index.html" title="GT.M Administration and Operations Guide"/><link rel="up" href="ch11.html" title="Chapter 11. Maintaining Database Integrity"/><link rel="prev" href="ch11s03.html" title="Repairing the Database with DSE"/><link rel="next" href="ch12.html" title="Chapter 12. Database Encryption"/><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><script type="text/javascript">
+            //The id for tree cookie
+            var treeCookieId = "treeview-51337";
+            var language = "en";
+            var w = new Object();
+            //Localization
+            txt_filesfound = 'Results';
+            txt_enter_at_least_1_char = "You must enter at least one character.";
+            txt_browser_not_supported = "Your browser is not supported. Use of Mozilla Firefox is recommended.";
+            txt_please_wait = "Please wait. Search in progress...";
+            txt_results_for = "Results for: ";
+        </script><style type="text/css">
+            input {
+            margin-bottom: 5px;
+            margin-top: 2px;
+            }
+
+            .folder {
+            display: block;
+            height: 22px;
+            padding-left: 20px;
+            background: transparent url(../common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+            }
+            
+        </style><link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/><link rel="stylesheet" type="text/css" href="../common/css/positioning.css"/><link rel="stylesheet" type="text/css" href="../common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css"/><link rel="stylesheet" type="text/css" href="../common/jquery/treeview/jquery.treeview.css"/><script type="text/javascript" src="../common/jquery/jquery-1.4.2.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery-ui-1.8.2.custom.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery.cookie.js"><!----></script><script type="text/javascript" src="../common/jquery/treeview/jquery.treeview.min.js"><!----></script><script type="text/javascript" src="search/htmlFileList.js"><!----></script><script type="text/javascript" src="search/htmlFileInfoList.js"><!----></script><script type="text/javascript" src="search/nwSearchFnt.js"><!----></script><script type="text/javascript" src="search/stemmers/en_stemmer.js"><!--//make this scalable to other languages as well.--></script><script type="text/javascript" src="search/index-1.js"><!----></script><script type="text/javascript" src="search/index-2.js"><!----></script><script type="text/javascript" src="search/index-3.js"><!----></script></head><body><div id="header"><img style="margin-right: 2px; height: 59px; padding-right: 25px; padding-top: 8px" align="right" src="../common/images/logo.png" alt="Company Logo"/><h1 align="center">Finding and Fixing Database Errors<br/>Chapter 11. Maintaining Database Integrity</h1><div id="navheader" align="right"><!----><table><tr><td style="height: 28px; width: 16px;"><a id="showHideButton" onclick="showHideToc();" class="pointLeft" title="Hide TOC tree">.
+                            </a></td><td><img src="../common/images/highlight-blue.gif" alt="H" height="25px" onclick="toggleHighlight()" id="showHideHighlight" style="cursor:pointer" title="Toggle search result highlighting"/></td><td><a accesskey="p" href="ch11s03.html">Prev</a>
+                                        |
+                                        <a accesskey="u" href="ch11.html">Up</a>
+                                    |
+                                    <a accesskey="n" href="ch12.html">Next</a></td></tr></table></div></div><div id="content"><!----><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="finding_and_fixing_db_errors"/>Finding and Fixing Database Errors<a id="d0e43167" class="indexterm"/></h2></div></div></div><p>The rest of this chapter is arranged loosely in the form of a decision tree. The
+material covers a wide range of scenarios and possible actions. </p><p>As you begin the decision-making process, follow these general guidelines from
+this point:</p><p>
+<span class="italic">IF THE SYMPTOM IS A FAILURE TO PROCESS,</span> refer
+to section H1.</p><p>
+<span class="italic">IF THE SYMPTOM IS A MUPIP INTEG ERROR REPORT</span>,
+refer to section I1. If you are investigating a particular error message, refer to
+the "MUPIP INTEG errors" table. </p><p>
+<span class="italic">IF THE SYMPTOM IS A GT.M RUN-TIME ERROR REPORT</span>,
+refer to section R1. If you are investigating a particular error message, refer to
+the"MUPIP INTEG errors" table.</p><p>To facilitate use of the material as a troubleshooting guide, the text in these
+sections refers to other sections with alphanumeric designators. Each alphanumeric
+section describes suggested actions to employ in handling a particular
+situation.</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="c1_possible_cache_control_problems"/>C1–Possible Cache Control Problems</h3></div></div></div><p>When a process detects that a normal cache operating principal has been
+violated, or that a cache operation is taking an unexpectedly long time, that
+process triggers a cache verification and rebuild. Such events can be caused by
+abnormal process termination, or by inappropriately configured or managed
+database storage subsystems.</p><p>When such an event occurs, GT.M sends a series of messages to the operator
+facility describing the results of the cache verification. If the cache rebuild
+is successful, no further immediate action is required. If the cache rebuild
+fails, the database administrator must close off access to the database and use
+DSE (CRIT and WCINIT) and MUPIP (INTEG) to reset the cache manually and verify
+that the database is not damaged.</p><p>If such events are delivered to the operator facility, you should investigate
+whether it is appropriate to modify your procedures to prevent abnormal
+termination, to reconfigure your disk subsystem, or to change the nature or
+schedule of disk activities so that database access is not disrupted during key
+periods of operation.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="h1_process_hangs"/>H1–Process Hangs</h3></div></div></div><p>The term "hang" refers to a failure to process. Processes may hang for a
+variety of reasons that have nothing to do with GT.M. However, hanging GT.M
+processes may indicate that a database has become inaccessible. When you suspect
+a hang, first determine the extent of the problem.</p><p>Your tools include:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Knowledge of the application and how it is used</p></li><li class="listitem"><p>Communication with users</p></li><li class="listitem"><p>The ps command and other UNIX system utilities</p></li></ul></div><p>
+<span class="italic">WHEN MANY PROCESSES ON A SYSTEM ARE
+HANGING</span>, determine if the hangs are confined to a particular
+application. If all applications are affected or if processes not using GT.M
+databases are affected, the problem is not a database-specific problem, but
+something more general, such as 
+<span>a UNIX</span> problem. Refer to section H6.</p><p>
+<span class="italic">WHEN ONLY ONE PROCESS IS HANGING</span>, find out
+whether that process is the only one using a particular GT.M application. If it
+is the only process, start some appropriate second process and determine whether
+the second process is also affected.</p><p>
+<span class="italic">IF A PROCESS HANGS WHILE OTHER PROCESSES ACCESSING THE
+SAME DATABASE CONTINUE TO PROCESS,</span> the problem is not a database
+problem. Refer to section H2 and then to section H8.</p><p>
+<span class="italic">WHEN ONLY GT.M PROCESSES RUNNING A PARTICULAR
+APPLICATION HANG,</span>the problem may be a database problem. Refer to
+section H2.</p><p>Is the system "hung?" If so, consider the following additional
+questions:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Does LKE work? If not, then a database has problems (see
+below).</p><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>Are there locks owned by a nonexistent process? Can they be
+cleared? What were the circumstances of a process leaving locks?
+</p></li><li class="listitem"><p>Are there locks which are not changing? What is the state of
+the owning process(es)? If not all processes are hung, can the
+stalled process(es) be MUPIP STOPped? </p></li></ul></div></li><li class="listitem"><p>Does some region have a "persistent" owner of the critical section
+(crit)? Which one(s)? </p></li><li class="listitem"><p>If there is a crit owner, what is its state? If it is a nonexistent
+process can it be <span>-</span>REMOVED?</p></li><li class="listitem"><p>Does a CRIT <span>-</span>INIT <span>-</span>RESET free the section or just change who owns it? </p></li><li class="listitem"><p>If CRIT <span>-</span>INIT
+<span>-</span>RESET doesn't
+free the problem, the cache is damaged.</p></li></ul></div><p>The following is another way of testing the cache: If CRIT is cleared and DSE
+BUFFER hangs, the cache is not working. Use MUPIP STOP and/or CRIT <span>-</span>INIT <span>-</span>RESET to get everyone out of the
+segment, then use DSE WCINIT. After a WCINIT, make sure that you can
+successfully exit from DSE. Use MUPIP INTEG (<span>-</span>FAST) to check for damage which can be induced by
+WCINIT.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="h3_db_access_problems"/>H3–Database Access Problems</h3></div></div></div><p>Use the following diagnostic steps and references to determine an appropriate
+course of action for database access problems.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Determine if the disk volume is inaccessible.</p><p>Use 
+<span>the
+UNIX ls utility</span> to display information retrieved from the
+volume. If the volume is not accessible to 
+<span>UNIX</span>, the problem is not
+a database problem. Refer to section H7.</p></li><li class="listitem"><p>Determine whether 
+<span>UNIX</span> can write to the 
+<span>disk</span>.</p><p>Use a shell command such as mv or cp. If UNIX cannot write
+to the volume, the problem is not a database problem. Refer to section
+H7.</p></li><li class="listitem"><p>Determine whether any database file used by the application has "Cache
+Freeze" set.</p><p>Use DSE FIND <span>-</span>REGION=region and DUMP <span>-</span>FILEHEADER to verify that CACHE FREEZE is zero
+(00000000) for any hung region(s).</p><p>If CACHE FREEZE shows a PID, that process used MUPIP or DSE to FREEZE
+the database. In this case, investigate whether the process is currently
+producing the desired results. If the FREEZE is legitimate, do whatever
+is appropriate to speed up the process using FREEZE. For example,
+
+<span> use the NICE command</span>. If the
+process still exists, but should not be running at this time, stop it.
+If CACHE FREEZE is non-zero but not in use to protect the database, use
+DSE FIND <span>-</span>REGION=region and CHANGE <span>-</span>FILEHEAD <span>-</span>FREEZE=FALSE to clear the FREEZE state.</p><p>Use the DSE commands FIND <span>-</span>REGION and DUMP <span>-</span>FILEHEADER. If any region is frozen, determine
+who initiated the freeze, and whether the process should be terminated
+or allowed to complete. The following actions freeze databases:</p><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>DSE CHANGE <span>-</span>FILEHEADER <span>-</span>FREEZE=TRUE</p></li><li class="listitem"><p>DSE ALL <span>-</span>FREEZE</p></li><li class="listitem"><p>MUPIP BACKUP <span>-</span>NOONLINE</p></li><li class="listitem"><p>MUPIP FREEZE</p></li><li class="listitem"><p>MUPIP INTEG <span>-</span>REGION</p></li><li class="listitem"><p>MUPIP EXTRACT <span>-</span>FREEZE</p></li></ul></div><p>
+</p><p>DSE CHANGE <span>-</span>FILEHEADER <span>-</span>FREEZE=FALSE and MUPIP FREEZE <span>-</span>OFF clear a freeze. However,
+when used with <span>-</span>OVERRIDE, these commands may cause damage to the results of
+the process that initiated the freeze. After the freeze is cleared,
+re-examine the entire situation.</p></li><li class="listitem"><p>Determine whether the database files used by the application are
+accessible for reading.</p><p>Use an M function such as $DATA() or $ORDER().</p></li><li class="listitem"><p>Determine whether the database files used by the application are
+accessible for writing.</p><p>SET a node in each database equal to itself.</p></li></ul></div><p>
+<span class="italic">IF THE DATA CAN BE BOTH READ AND WRITTEN,</span>
+the problem is not a database problem. Refer to section H8.</p><p>
+<span class="italic">IF DATA CANNOT BE READ OR WRITTEN,</span> some
+process is unable to release full ownership of the database critical section.
+Determine the process identification number (PID) of the process using the DSE
+command CRITICAL. If the process exists, refer to section H4. If the process is
+non-existent, use DSE CRITICAL <span>-</span>REMOVE to emulate a release and re-examine the entire
+situation.</p><p>Example:</p><pre class="programlisting">S reg=$V("GVNEXT",""),com="dbcheck.com" o     m-*  com:newv u com
+W "$ DEFINE/USER SYS$OUTPUT dbcheck.lis",!,"$ DSE",!
+F  Q:reg=""  D
+. W "FIND /REGION=",reg,!,"DUMP /FILEHEADER",! 
+. S reg(reg)="",reg=$V("GVNEXT",reg)
+W "$ SEARCH dbcheck.lis ""Cache freeze""",!
+; CAUTION: in the above line, "Cache freeze" 
+; MUST be mixed-case as shown
+W "$ DELETE dbcheck.lis.",!,"$ EXIT",!
+C com ZSY "@dbcheck" 
+O com C com:delete
+W !,"Attempting first access"
+S g="^%" D:$D(^%)  F  S g=$O(@g) Q:g=""  D
+. S reg=$V("REGION",g) Q:$l(reg(reg))
+. I $D(@g)'[0 S reg(reg)=g
+. E  S reg(reg)=$Q(@g) 
+. W !,"Successful Read in region: ",reg," of ",g
+S reg="" F  S reg=$O(reg(reg)) Q:reg=""  D
+W !,"Write to region: ",reg 
+S @(reg(reg)_"="_reg(reg)) W "–OK"
+Q
+S reg=$V("GVFIRST"),com="dbcheck" o com:newv u com
+W "dse &lt;&lt;yz &gt; dbcheck.lis",!
+F  Q:reg=""  D
+. W "find -region=",reg,!,"dump -fileheader",! 
+. S reg(reg)="",reg=$V("GVNEXT",reg)
+W "yz",!,"cat dbcheck.lis | grep 'Cache freeze'"
+; CAUTION: in the above line, "Cache freeze" 
+; MUST be mixed-case as shown
+W "|awk '{print $1, $2, $3}'"
+C com ZSY "/bin/csh -c ""source dbcheck""" 
+O com,dbcheck.lis C com:delete,dbcheck.lis:delete
+W !,"Attempting first access"
+S g="^%" D:$D(^%)  F  S g=$O(@g) Q:g=""  D
+. S reg=$V("REGION",g) Q:$l(reg(reg))
+. I $D(@g)'[0 S reg(reg)=g
+. E  S reg(reg)=$Q(@g) 
+. W !,"Successful Read in region: ",reg," of ",g
+S reg="" F  S reg=$O(reg(reg)) Q:reg=""  D
+. W !,"Write to region: ",reg 
+. S @(reg(reg)_"="_reg(reg)) W "–OK"
+Q
+</pre><p>This routine provides a generalized approach to automating some of the tasks
+described in this section. It contains argumentless DO commands primarily for
+typesetting reasons. The routine issues a report if any region is frozen, but
+does not report which regions are in that state. It may hang reading or writing
+a database. However, unless the region(s) holding ^% and the next global after
+^% has a problem, it displays the name of the region that it is about to try. If
+this routine runs to completion, the databases in the current Global Directory
+are completely accessible. The limitations of this routine can be overcome by
+writing custom 
+<span>shell
+scripts</span> and/or M programs that include embedded information about
+one or more Global Directories.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="../common/images/note.jpg"/></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>If you have a Global Directory mapping globals to multiple files, you may
+create an alternative Global Directory using different mappings to those
+same files. Such mapping prevents the test program(s) from touching the
+"real" data.</p></td></tr></table></div><p>Example:</p><pre class="programlisting">Mapping      Production region   Test region
+-----------------------------------------------
+A   to   M   
+$DEFAULT            SCRATCH
+N   to   Z   SCRATCH            
+$DEFAULT
+</pre></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="h4_database_cache_problms"/>H4–Database Cache Problems</h3></div></div></div><p>To increase the access speed, GT.M buffers data exchanged between processes
+and database files in the shared memory cache. If information in the memory
+cache is damaged, it can block the transfer of data to the disk.</p><p>
+<span class="italic">IF A PROCESS HAS BEEN DETERMINED (FROM SECTION H3) TO
+NEVER RELEASE FULL OWNERSHIP OF THE DATABASE CRITICAL SECTION,</span>
+there may be a problem with the database cache. To determine where the problem
+is occurring terminate the process. If this clears the hang, the problem was not
+in the database but in the process, which was somehow damaged. Refer to section
+P1. Otherwise, another process showing the same symptoms takes the place of the
+terminated process. In this case, the cache is damaged.</p><p>
+<span class="italic">IF THE CACHE IS DAMAGED,</span> it must be
+reinitialized. It is crucial to stop all other database activity during cache
+initialization. Refer to section Q1 before continuing with this section.</p><p>To minimize database damage due to cache reinitialization, and to confirm that
+the problem is due to a damaged cache, use the DSE command CRITICAL SEIZE
+followed by BUFFER_FLUSH. The DSE command BUFFER_FLUSH attempts to flush the
+database cache which is a benign operation. Wait at least one minute for this
+operation to complete.</p><p>
+<span class="italic">IF THE BUFFER_FLUSH DOES NOT HANG,</span> the
+cache is not damaged, and you should review all previous steps starting with
+section H1. </p><p>
+<span class="italic">IF THE BUFFER_FLUSH DOES HANG,</span> use the DSE
+command WCINIT to reinitialize the cache. This command requires confirmation.
+Never use WCINIT on a properly operating database. After a WCINIT always perform
+at least a MUPIP INTEG FAST to detect any induced damage that has a danger of
+spreading. If the WCINIT command hangs, clear the critical section as described
+in section H5 and reissue the WCINIT.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="h5_critical_section_problems"/>H5–Critical Section Problems</h3></div></div></div><p>The concurrency control mechanism allows only one process at a time to execute
+code within a "critical section." To gain access to the database requires a
+process to first gain ownership of the critical section. The errors described in
+this section occur when a problem occurs in ownership control of the critical
+section.</p><p>
+<span class="italic">IF YOU HAVE DETERMINED WHICH PROCESS IS HOLDING THE
+CRITICAL SECTION</span> (from section H2 using system utilities), try
+terminating that process. If this corrects the problem, the damage was to the
+process, rather than the critical section. Refer to section P1. </p><p>
+<span class="italic">IF YOU CANNOT IDENTIFY THE PROCESS</span>, or if
+terminating such a process causes other processes to exhibit the same
+problem(s), the critical section is damaged and must be reinitialized. Restrict
+database activity during the reinitialization. Refer to section Q1 before
+continuing with this section.</p><p>
+<span class="italic">TO REINITIALIZE THE DATABASE CRITICAL SECTION:
+</span> Reinitializing a critical section on an active database file carries
+some risk of causing database damage. You can minimize this risk by restricting
+database activity during the reinitialization. Refer to section Q1 before
+continuing with this section.</p><p>The DSE command CRITICAL INITIALIZE RESET re-establishes the database-critical
+section and induces errors for all processes currently accessing the database in
+question. You can avoid the induced errors in other processes by dropping the
+RESET qualifier. However, this technique may result in other processes
+attempting to use partially created critical section structures, possibly
+corrupting them or the database contents.</p><p>After the CRITICAL INITIALIZE, use the DSE commands CRITICAL SEIZE and
+CRITICAL RELEASE to verify operation of the critical section. Actions such as
+those described in section H3 test more thoroughly for proper operation. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="h6_Unix_problems"/>H6–UNIX Problems</h3></div></div></div><p>
+<span class="italic">IF YOU HAVE DETERMINED THAT MANY PROCESSES IN THE UNIX
+ENVIRONMENT ARE PERFORMING BADLY,</span> some processes may be using
+priorities to "hijack" the system. If this is the case, review why priorities
+are being adjusted and take appropriate action. Otherwise, you may have a
+UNIX-related problem.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="h7_disk_hardware_problems"/>H7–Disk Hardware Problems</h3></div></div></div><p>
+<span class="italic">IF YOU HAVE DETERMINED THAT A DISK VOLUME IS
+INACCESSIBLE TO the OS FOR READ AND/OR WRITE,</span>use the DCL command
+SHOW DEVICE /FULL to check that the correct volume is properly mounted. If the
+volume cannot be written, examine the physical device to see whether write lock
+switches or plugs have been disturbed.</p><p>
+<span class="italic">IF YOU HAVE DETERMINED THAT A DISK VOLUME IS
+INACCESSIBLE TO UNIX FOR READ AND/OR WRITE,</span> use the df command to
+check that the correct volume is properly mounted. If the volume cannot be
+written, examine the physical device to see whether write lock switches or plugs
+have been disturbed.</p><p>
+<span class="italic">IF YOU CANNOT LOCATE THE PROBLEM,</span> run disk
+diagnostics. Be aware that many disk diagnostics are destructive (i.e., destroy
+your files). Avoid these diagnostics until you have exhausted all other avenues.
+If you have to run destructive disk diagnostics, or you determine that a disk
+spindle must be replaced, start planning for the recovery immediately.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="h8_application_problems"/>H8–Application Problems</h3></div></div></div><p>Application problems may be caused by conflicting M LOCKs or OPEN commands in
+more than one process, or by a process waiting for completion of M READ or JOB
+command, which is dependent on an asynchronous event.</p><p>First, determine if processes are waiting, without relief, for M LOCKs using
+the LKE command SHOW ALL WAITING. M routines use LOCK commands to create mutual
+exclusion semaphores. </p><p>
+<span class="italic">IF THE SHOW COMMAND HANGS,</span> you have a cache
+or critical section problem. Restart your evaluation in section H5.</p><p>
+<span class="italic">IF THE SHOW COMMAND DISPLAYS NO LOCKS
+WAITING,</span> the problem is not a LOCK problem. If repeated use of
+SHOW does not display the one or more LOCKs that persist every time, the problem
+is not a LOCK problem. However, even if the problem is not a lock problem,
+continue with this section because it discusses the M commands JOB, OPEN, and
+READ, which may also produce hangs.</p><p>A LOCK identified as belonging to a non-existent process results from an
+abnormal process termination. GT.M automatically clears such LOCKs when some
+other process requests a conflicting LOCK. </p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a id="persistent_locks"/>Persistent LOCKs</h4></div></div></div><p>Persistent LOCKs belonging to currently existing processes are best
+released by terminating those processes. Using the LKE command CLEAR with
+various qualifiers can clear LOCKs, but may cause the routines using the
+LOCKs to produce inappropriate results. For more information on LKE, refer
+to the "M LOCK Utility" chapter.</p><p>The two most common reasons for persistent LOCKs are deadlocks and LOCKS
+held during operations that take indeterminate amounts of time.</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a id="deadlocks"/>Deadlocks</h4></div></div></div><p>Deadlocks occur when two or more processes own resources and are trying to
+add ownership of an additional resource already owned by another of the
+deadlocked processes.</p><p>Example:</p><pre class="programlisting">Process 1       Process 2
+---------       --------- 
+LOCK ^A         LOCK ^B
+LOCK +^B        LOCK +^A</pre><p>This shows a sequence in which Process 1 owns ^A and Process 2 owns ^B.
+Each process is trying to get the resource owned by the other, while
+"refusing" to release the resource it owns.</p><p>Example:</p><pre class="programlisting">Process 1       Process 2        Process 3
+---------       ---------        --------- 
+LOCK ^A         LOCK ^B          LOCK ^C
+LOCK +^B        LOCK +^C         LOCK +^A</pre><p>This is similar to the previous example, except that it involves three
+processes. When an application uses LOCKs in a complex fashion, deadlocks
+may involve many processes.</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a id="prevention_of_a_deadlock"/>Preventing Deadlocks</h4></div></div></div><p>You can prevent deadlocks by using timeouts on the LOCK commands. Timeouts
+allow the program to recognize a deadlock. Once a routine detects a
+deadlock, it should release its LOCKs and restart execution from the
+beginning of the code that accumulates LOCKs. Without timeouts, there is no
+way in M to break a deadlock. You must use outside intervention to terminate
+at least one deadlocked process, or use LKE to strip a LOCK from such a
+process.</p><p>Example:</p><pre class="programlisting"> for  quit:$$NEW
+ quit
+NEW()  lock ^X(0)
+ set ^X(0)=^X(0)+1
+ quit $$STORE(^X(0))
+STORE(x)
+ lock +^X(x):10 if  set ^X(x)=name_"^"_bal
+ lock
+ quit $TEST</pre><p>This uses a timeout on the LOCK of ^X(x) to cause a retry of NEW.</p><p>In addition to the LOCK command, the M JOB, OPEN, and READ commands can
+contribute to deadlocks.</p><p>Example:</p><pre class="programlisting">Process 1         Process 2
+---------         --------- 
+LOCK ^A
+                  OPEN "MSA0:"
+                  OPEN "/dev/nrst0"
+OPEN "MSA0:"
+OPEN "/dev/nrst0"
+                  LOCK +^A
+</pre><p>This shows a sequence in which Process 1 owns ^A and Process 2
+owns device /dev/nrst0. Again, each is trying to get the resource held by
+the other. Notice that the LOCK commands could be replaced by OPEN commands
+specifying some non-shared device other than /dev/nrst0.</p><p>An application may combine the technique of timeouts on "long" commands to
+protect the current process, with the technique of minimizing LOCK and OPEN
+durations, to minimize conflicts with other processes.</p><p>Another type of application hanging occurs when a process acquires
+ownership of a resource and then starts an operation that does not complete
+for a long period of time. Other processes that need the unavailable
+resource(s) then hang.</p><p>Example:</p><pre class="programlisting">Process 1         Process 2
+---------         --------- 
+LOCK ^A
+READ x
+                  LOCK ^A</pre><p>If the READ by Process 1 is to an interactive terminal, and the operator
+has abandoned that device, the READ may take what seems, at least to Process
+2, forever. The M commands OPEN and JOB, as well as READ, can produce this
+problem. When this situation arises, take action to get long-running
+commands completed or to terminate the process performing those
+commands.</p><p>There are two programming solutions that help avoid these situations. You
+can either limit the duration of those commands with timeouts, or defer
+resource ownership until any long operations are complete.</p><p>Example:</p><pre class="programlisting">
+ for  quit:$$UPD
+ quit
+UPD()  set x=^ACCT(acct)
+ do EDITACCT
+ lock ^ACCT(acct) 
+ if x=^ACCT(acct) set ^ACCT(acct)=y
+ else  write !,"Update conflict–Please Reenter"
+ lock
+ QUIT $TEST</pre><p>This stores the contents of ^ACCT(acct) in local variable x, before the
+interactive editing performed by sub-routine EDITACCT (not shown). When the
+interaction is complete, it LOCKs the resource name and tests whether
+^ACCT(acct) has been changed by some other process. If not, it updates the
+global variable. Otherwise, it informs the user and restarts UPD. This
+technique eliminates the "open update" problem, but it introduces the
+possibility the user may have to re-enter work. An application that needs to
+minimize the possibility of re-entry may extend this technique by testing
+individual fields (pieces) for conflicting changes.</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="i1_mupip_integ_errors"/>I1–MUPIP INTEG Errors</h3></div></div></div><p>Database errors reported by MUPIP INTEG differ in impact and severity. Some
+require an immediate action to prevent extending the damage. Action on other
+less severe errors may be delayed.</p><p>The next section provides general guidelines for determining your next course
+of action and a table with information related to the error messages you may
+encounter.</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a id="evaluate_danger_level"/>Evaluating the Danger Level of a Database Problem</h4></div></div></div><p>If you encounter an anomaly in your database or its operations, the
+following list may offer some help in determining your next course of
+action. The heading of each section indicates the level of urgency FIS attributes to those items listed below it.</p><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="requires_immed_attention"/>Requires Immediate Attention</h5></div></div></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Block incorrectly marked free errors are very serious and lead
+to accelerating damage. They degenerate into block
+doubly-allocated errors, which are also very dangerous. A
+database with these errors should be closed immediately for
+repairs.</p></li><li class="listitem"><p>Any (structural) error in an index block is dangerous and
+should be repaired as soon as possible. </p></li></ul></div><p>Repairs for such errors should also be performed on a database that
+has been closed to normal activity. The need for both of these actions
+occurring quickly arises from the likelihood of the bad index being
+used. Only if your knowledge of the application allows you to predict
+that a damaged area is used exclusively by restricted functions which
+are not active (e.g., monthly processing or purges) should you defer
+repairs.</p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="can_be_deferred"/>Can Be Deferred</h5></div></div></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Any (structural) error in a data block (level 0) does not pose
+a threat of accelerating damage. However, level 0 errors may
+cause errors or unreliable behavior in the application.</p></li><li class="listitem"><p>Block "incorrectly marked busy" errors only result in database
+space becoming unavailable until the errors are corrected. An
+index block error generates incorrectly marked busy errors,
+because INTEG cannot process the descendants of the damaged
+index. Therefore, incorrectly marked busy errors should be
+corrected only after all other errors, except for bitmap errors,
+are corrected.</p></li><li class="listitem"><p>Any bitmap errors flag not only the incorrectly marked block,
+but also the associated bitmap, and sometimes the master map.
+Therefore, local and master map errors should be corrected only
+after all bitmap marked busy or free errors are
+corrected.</p></li><li class="listitem"><p>Transaction number errors usually impact only incremental and
+online backups.</p></li><li class="listitem"><p>File size errors can misdirect MUPIP but do not cause the GT.M
+run-time system to generate further errors. An exception is
+auto-extend, which may not work properly if there are file size
+errors.</p></li><li class="listitem"><p>Reference count errors and free block errors are informational
+only.</p></li></ul></div><p>The following list of INTEG messages classifies error severity using
+the following codes, and refers you to a section identifying appropriate
+follow-up action.</p><table border="0" summary="Simple list" class="simplelist"><tr><td>A Access: prevents database access</td></tr><tr><td>B Benign: presents no risk of additional damage and has little
+or no effect on database performance</td></tr><tr><td>D Dangerous: presents a high risk that continuing updates may
+cause significant additional damage</td></tr><tr><td>I Index: if the block is an index block, continuing updates will
+be quite dangerous: treat as a D; if the block is a data block,
+continuing updates can only cause limited additional damage </td></tr><tr><td>T Transient: usually cleared by an update to the
+database</td></tr></table><p>Repair Dangerous and Access errors immediately. You may assess the
+benefits of deferring correction of less severe errors until normally
+scheduled down-time.</p><div class="informaltable"><table width="100%" border="1"><colgroup><col class="c1"/><col class="c2"/><col class="c3"/></colgroup><thead><tr><th colspan="3">
+<p>MUPIP INTEG Error Messages</p>
+</th></tr><tr><th>
+<p>SEVERITY</p>
+</th><th>
+<p>ERROR MESSAGE</p>
+</th><th>
+<p>SECTION </p>
+</th></tr></thead><tbody><tr><td>
+<p>I</p>
+<p>I</p>
+<p>D</p>
+<p>D</p>
+<p>D</p>
+<p>D</p>
+<p>D</p>
+</td><td>
+<p>Bad key name.</p>
+<p>Bad numeric subscript.</p>
+<p>Bad pointer value in directory.</p>
+<p>Bitmap block number as pointer.</p>
+<p>Block at incorrect level.</p>
+<p>Block busy/free status unknown (local bitmap
+corrupted).</p>
+<p>Block doubly allocated.</p>
+</td><td>
+<p>K1</p>
+<p>K1</p>
+<p>K4</p>
+<p>K4</p>
+<p>01</p>
+<p>M1</p>
+<p>K3</p>
+</td></tr><tr><td>
+<p>B</p>
+<p>D</p>
+<p>I</p>
+<p>D</p>
+<p>D</p>
+</td><td>
+<p>Block incorrectly marked busy.</p>
+<p>Block incorrectly marked free.</p>
+<p>Block larger than file block size.</p>
+<p>Block pointer larger than file maximum.</p>
+<p>Block pointer negative.</p>
+</td><td>
+<p>M1</p>
+<p>M1</p>
+<p>O1</p>
+<p>K4</p>
+<p>K4</p>
+</td></tr><tr><td>
+<p>A</p>
+<p>A</p>
+<p>A</p>
+<p>I</p>
+<p>T</p>
+</td><td>
+<p>Block size equals zero.</p>
+<p>Block size is greater than 64K.</p>
+<p>Block size not a multiple of 512 bytes.</p>
+<p>Block too small.</p>
+<p>Block transaction number too large.</p>
+</td><td>
+<p>I3</p>
+<p>I3</p>
+<p>I3</p>
+<p>01</p>
+<p>I6</p>
+</td></tr><tr><td>
+<p>D</p>
+<p>D</p>
+<p>D</p>
+<p>B</p>
+<p>T</p>
+</td><td>
+<p>Blocks per local map is less than 512.</p>
+<p>Blocks per local map is greater than 2K.</p>
+<p>Blocks per local map is not a multiple of
+512.</p>
+<p>Cannot INTEG region across network.</p>
+<p>Cannot determine access method;trying with
+BG.</p>
+</td><td>
+<p>I3</p>
+<p>I3</p>
+<p>I3</p>
+<p>I5</p>
+<p>I6</p>
+</td></tr><tr><td>
+<p>I</p>
+<p>T</p>
+<p>A</p>
+<p>T</p>
+<p>B</p>
+</td><td>
+<p>Compression count not maximal.</p>
+<p>Current tn and early tn are not equal.</p>
+<p>Database for region rrr is already frozen, not
+INTEGing</p>
+<p>Database requires flushing.</p>
+<p>File size larger than block count would
+indicate.</p>
+</td><td>
+<p>K6</p>
+<p>I6</p>
+<p>I6</p>
+<p>I7</p>
+<p>I4</p>
+</td></tr><tr><td>
+<p>D</p>
+<p>A</p>
+<p>I</p>
+<p>B</p>
+<p>A</p>
+</td><td>
+<p>File size smaller than block count would
+indicate.</p>
+<p>File smaller than database header.</p>
+<p>First record of block has nonzero compression
+count.</p>
+<p>Free blocks counter in file header: nnn is
+incorrect, should be mmm.</p>
+<p>Header indicates file creation did not
+complete.</p>
+</td><td>
+<p>I4</p>
+<p>I3</p>
+<p>O1</p>
+<p>I3</p>
+<p>I3</p>
+</td></tr><tr><td>
+<p>A</p>
+<p>A</p>
+<p>D</p>
+<p>A</p>
+<p>D</p>
+</td><td>
+<p>Header indicates file is corrupt.</p>
+<p>Header size not valid for database.</p>
+<p>Block xxxx doubly allocated in index block.</p>
+<p>Incorrect version of GT.M database.</p>
+<p>Invalid mixing of global names.</p>
+</td><td>
+<p>I8</p>
+<p>I3</p>
+<p>K3</p>
+<p>I2</p>
+<p>K3</p>
+</td></tr><tr><td>
+<p>I</p>
+<p>I</p>
+<p>I</p>
+<p>I</p>
+<p>I</p>
+</td><td>
+<p>Key greater than index key.</p>
+<p>Key larger than database maximum.</p>
+<p>Key larger than maximum allowed length.</p>
+<p>Key too long.</p>
+<p>Key too short.</p>
+</td><td>
+<p>K2</p>
+<p>K7</p>
+<p>K1</p>
+<p>K1</p>
+<p>K1</p>
+</td></tr><tr><td>
+<p>I</p>
+<p>I</p>
+<p>I</p>
+<p>D</p>
+<p>B</p>
+</td><td>
+<p>Keys less than sibling's index key.</p>
+<p>Keys out of order.</p>
+<p>Last record of block has invalid size.</p>
+<p>Last record of block has nonzero compression
+count.</p>
+<p>Local bitmap incorrect.</p>
+</td><td>
+<p>K2</p>
+<p>K2</p>
+<p>K5</p>
+<p>K5</p>
+<p>M1</p>
+</td></tr><tr><td>
+<p>B</p>
+<p>B</p>
+<p>B</p>
+<p>T</p>
+<p>B</p>
+</td><td>
+<p>Local map block level incorrect.</p>
+<p>Map block too large.</p>
+<p>Map block too small.</p>
+<p>Map block transaction number too large.</p>
+<p>Master bitmap incorrectly asserts this local map
+has free space.</p>
+</td><td>
+<p>M2</p>
+<p>M2</p>
+<p>M2</p>
+<p>I6</p>
+<p>M1</p>
+</td></tr><tr><td>
+<p>B</p>
+<p>B</p>
+<p>B</p>
+<p>B</p>
+<p>B</p>
+</td><td>
+<p>Master bitmap incorrectly marks this local map
+full.</p>
+<p>Master bitmap shows this map full, agreeing with
+disk local map.</p>
+<p>Master bitmap shows this map full, agreeing with
+MUPIP INTEG.</p>
+<p>Master bitmap shows this map full, in disagreement
+with both disk and mu_int result.</p>
+<p>Master bitmap shows this map has space, agreeing
+with disk local map.</p>
+</td><td>
+<p>M1</p>
+<p>M1</p>
+<p>M1</p>
+<p>M1</p>
+<p>M1</p>
+</td></tr><tr><td>
+<p>B</p>
+<p>D</p>
+<p>I</p>
+<p>..</p>
+<p>I</p>
+</td><td>
+<p>Master bitmap shows this map has space, agreeing
+with MUPIP INTEG.</p>
+<p>Read error on bitmap.</p>
+<p>Record has too large compression count.</p>
+<p>Record too large.</p>
+<p>Record too small.</p>
+</td><td>
+<p>M1</p>
+<p>H7</p>
+<p>O2</p>
+<p>O2</p>
+<p>O2</p>
+</td></tr><tr><td>
+<p>D</p>
+<p>D</p>
+<p>D</p>
+<p>D</p>
+<p>D</p>
+</td><td>
+<p>Reference count should be zero, is nnn.</p>
+<p>Root block number greater than last block number
+in file.</p>
+<p>Root block number is a local bitmap number.</p>
+<p>Root block number negative.</p>
+<p>Root level higher than maximum.</p>
+</td><td>
+<p>I6</p>
+<p>K4</p>
+<p>K4</p>
+<p>K4</p>
+<p>O1</p>
+</td></tr><tr><td>
+<p>D</p>
+<p>A</p>
+<p>A</p>
+<p>A</p>
+</td><td>
+<p>Root level less than one.</p>
+<p>Start VBN smaller than possible.</p>
+<p>Total blocks equals zero.</p>
+<p>Unable to verify that this is a database
+file.</p>
+</td><td>
+<p>O1</p>
+<p>I3</p>
+<p>I4</p>
+<p>I3</p>
+</td></tr></tbody></table></div></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="gtm_version_mismatch_chi2"/>I2–GT.M Version Mismatch</h3></div></div></div><p>GT.M databases and Global Directories may change with new releases of the
+product.</p><p>
+<span class="italic">IF YOU GET AN ERROR INDICATING A VERSION
+MISMATCH,</span> first identify the GT.M version using the M command
+WRITE $ZVERSION from Direct Mode.</p><p>Then refer to the installation procedures for your new release. If you are
+running more than one release of GT.M 
+investigate the 
+<span>environment variables</span> that define the environments, and take
+appropriate action. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="i3_file_header_errors"/>I3–File Header Errors</h3></div></div></div><p>These errors indicate damage to the control or reference information in the
+file header.</p><p>"Start VBN smaller than possible" indicates that INTEG cannot locate the
+database structure. "Header indicates that file creation did not complete"
+indicates a MUPIP CREATE problem. In these cases, the database has effectively
+been lost. DSE cannot correct these problems. If you determine that the costs of
+recovering from a backup, hopefully with journal files, are prohibitive,
+consider consulting with FIS.</p><p>To correct the other errors of this type use the DSE CHANGE FILEHEADER command
+with the BLK_SIZE=, BLOCKS_FREE=, and TOTAL_BLKS qualifiers.</p><p>"Free blocks counter ..." indicates that the count of free blocks in the file
+header is not correct. This error only affects $VIEW("FREECNT",region) and DUMP
+FILEHEADER which return the information.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="i4_file_size_errors"/>I4–File Size Errors</h3></div></div></div><p>File size errors can misdirect MUPIP, but do not cause the GT.M run-time
+system to generate further errors. Auto-extend is the exception and may not
+function properly if there are file size errors. One possible symptom of an
+auto-extend problem would be incorrectly marked busy errors from a partial
+bitmap at the "old" end of the database which had previously been incorrectly
+initialized.</p><p>These errors indicate that the total blocks count does not agree with the file
+size. Get the starting VBN and the block size for the file by using DSE DUMP
+FILEHEADER. Then calculate the correct total blocks value with the following
+formula:</p><pre class="programlisting">((file size - starting VBN + 1) / (block size / 512))
+</pre><p>A decimal number results from this formula. Convert this decimal to a
+hexadecimal number, then change the total block count to this hexadecimal value
+using DSE CHANGE FILEHEADER TOTAL_BLKS= . You may also need to adjust the free
+blocks count with BLOCKS_FREE=. MUPIP INTEG informs you if this is necessary and
+gives the correct values. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="i5_more_db_access_problems"/>I5–More Database Access Problems</h3></div></div></div><p>These error messages reflect failures to find, open, or access a database
+file. Examine any secondary error messages to obtain additional information
+about the problem.</p><p>
+
+<span>Use printenv to check gtmgbldir</span> or use the M command
+WRITE $ZGBLDIR to verify that the "pointer" identifies the proper Global
+Directory. If the pointer is not appropriate, 
+<span>reset
+gtmgbldir</span> or use the M command SET $ZGBLDIR= to name the proper
+file.</p><p>Examine the Global Directory using GDE. If the Global Directory is not
+appropriate, correct or recreate it with GDE. For more information on the use of
+GDE, refer to the "Global Directory Editor" chapter.</p><p>IF THE GLOBAL DIRECTORY IS DAMAGED BUT ACCESSIBLE WITH GDE, investigate who
+may have used GDE to perform the modifications. If the Global Directory is
+damaged and not accessible with GDE, investigate what program, other than GT.M
+and its utilities, might have written to the file. Except for GDE, all GT.M
+components treat the Global Directory as static and read-only.</p><p>IF THE GLOBAL DIRECTORY APPEARS CORRECT, use the DCL command SHOW LOGICAL to
+verify that any logical names it uses are properly defined for the process
+experiencing the problem. If the process has an environment to which you do not
+have access, you may have to carefully read the command procedures used to
+establish that environment.</p><p>IF THE GLOBAL DIRECTORY APPEARS CORRECT, use printenv to verify that any
+environment variables that it uses are properly defined for the process
+experiencing the problem. If the process has an environment to which you do not
+have access, you may have to carefully read the shell scripts used to establish
+that environment.</p><p>IF THE ENVIRONMENT VARIABLES APPEAR CORRECT, use the 
+<span>ls -l </span> to
+examine the file protection. Remember to examine not only the file, but also all
+directories accessed in locating the file.</p><p>IF THE FILES APPEAR TO BE PROPERLY MAPPED by the Global Directory, correctly
+placed given all logical names, and correctly protected to permit appropriate
+access, use one of the DCL commands TYPE or DUMP to verify access to the files,
+independent of GT.M.</p><p>IF THE FILES APPEAR TO BE PROPERLY MAPPED by the Global Directory, properly
+placed given all environment variables, and properly protected to permit
+appropriate access, use the od or cat utility to verify access to the files,
+independent of GT.M.</p><p>IF YOU SUSPECT A VERSION MISMATCH PROBLEM, refer to section I2. </p><p>IF YOU SUSPECT A DISK HARDWARE PROBLEM, refer to section H7.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="i6_transient_errors"/>I6–Transient Errors</h3></div></div></div><p>GT.M corrects certain errors automatically. If you find that any of these
+errors persist, contact your GT.M support channel.</p><p>"Block transaction number too large" indicates that the file header has a smaller transaction number than the database block. </p><p>If you are not running TP or incremental backup this is a benign error (from the database's point of view; application data consistency should be verified). GT.M automatically self-corrects these errors as soon as it performs sufficient updates to get the current transaction number of the database higher than any block's transaction number. If this error persists, perform the following steps:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Run the MUPIP INTEG command on your database and look for the following output: </p><p><code class="code">"Largest transaction number found in database was HHHHHHH"</code></p></li><li class="listitem"><p>Run the following command:</p><p><code class="code">dse change -fileheader -current_tn=&lt;HHHHHHH+1&gt;</code></p><p>Where &lt;HHHHHHH+1&gt; is the largest transaction number + 1. This command sets the current transaction number to one more than the largest transaction number found in the database. Note that HHHHHHH is in hexadecimal form. </p></li></ul></div><p>"Current tn and early tn are not equal" indicates that the critical section has been damaged. "Reference
+count is not zero" indicates an improper file close. The first access that
+references a questionable database should correct these errors. Generally, these
+errors indicate that the file was not closed normally. This problem is typically
+caused by an unscheduled shutdown of the system. Review your institution's
+shutdown procedures to ensure a controlled shutdown.</p><p>"Cannot determine access method..." indicates that the fileheader has been
+damaged. When INTEG detects this error, it forces the access method to BG and
+continues. If there is no other damage to the file header, no other action may
+be required. </p><p>However, if the access method should be MM, use MUPIP SET ACCESS_METHOD= to
+correct the database.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="i7_db_rundown_prblm"/>I7–Database Rundown Problem</h3></div></div></div><p>A MUPIP INTEG may be performed without write access to the file. However, in
+the case where the file was improperly closed, it must be RUNDOWN prior to being
+INTEGed. To do this, MUPIP requires write access to the file, so either increase
+the privileges for the process, change the protection on the file, or use a more
+privileged process and repeat the MUPIP INTEG. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="i8_repair_induced_prblm"/>I8–Repair-Induced Problems</h3></div></div></div><p>These error messages are created by operator actions performed with
+DSE.</p><p>The DSE commands CRITICAL INITIALIZE RESET, ALL RESET, and ALL RENEW induce
+CRITRESET errors in all processes attempting to access the target
+database(s).</p><p>Any process attempting to access a database that has its "corrupt" flag set to
+TRUE receives a DBCRPT error.</p><div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="../common/images/caution.jpg"/></td><th align="left">Caution</th></tr><tr><td align="left" valign="top"><p>Using the DSE command CHANGE FILEHEADER CORRUPT=TRUE is very dangerous. If
+the DSE session EXITs before issuing a CHANGE FILEHEADER CORRUPT=FALSE, the
+database becomes entirely useless.</p></td></tr></table></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="k1_bad_key"/>K1–Bad Key</h3></div></div></div><p>This section describes appropriate actions when the error message indicates a
+damaged key. GDS transforms subscripted or unsubscripted global variable names
+into keys, which are part of the database record used to index the corresponding
+global variable data values. The keys are stored in a compressed form which
+omits that part of the prefix held in common with the previous key in the block.
+The compression count is the number of common characters. Except in the
+Directory Tree, all records after the first one have a non-zero count. The first
+record in a block always has a compression count of zero (0).</p><p>IF THE BLOCK IS A DATA BLOCK, that is, level zero (0), refer to section
+O3.</p><p>IF THE BLOCK HAS A LEVEL GREATER THAN ZERO (0), examine the record with the
+DSE command DUMP BLOCK= OFFSET where the block and offset values are provided by
+the INTEG error report. If the record appears to have a valid block pointer,
+note the pointer. Otherwise, refer to section O2.</p><p>After noting the pointer, SPAWN and use MUPIP INTEG BLOCK=pointer (if you have
+time constraints, you may use the FAST qualifier) to check the structure.</p><p>IF THE SUB-TREE IS INVALID, according to the MUPIP INTEG, DSE REMOVE the
+record containing the reported bad key, INTEG, and refer to section O4.</p><p>Otherwise use the DSE command DUMP BLOCK= RECORD=9999 to find the last record
+in the block and examine it using the DUMP RECORD= command. Continue using DSE
+to follow the pointer(s) down to level 0, always choosing the right-hand branch.
+Note the largest key at the data level. REMOVE the record containing the
+reported bad key. Determine the proper placement for the noted key using FIND
+KEY= and ADD KEY= POINTER where the key and the pointer are those noted in the
+preceding actions. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="k2_keys_misplaced"/>K2–Keys Misplaced</h3></div></div></div><p>When the error is a misplaced key, the keys are not in proper collating
+sequence.</p><p>IF THE BLOCK IS A DATA BLOCK, that is, level zero (0), DUMP it GLO, REMOVE the
+records that point to it, MAP it FREE, and MUPIP LOAD the output of the DUMP
+GLO.</p><p>IF THE BLOCK HAS A LEVEL GREATER THAN ZERO (0), you may choose to reposition
+the record in its proper place or use the salvage strategy discussed in section
+O4. In general, the salvage strategy is less demanding and less dangerous.
+However, it may be time consuming if the index block holding the record has a
+level much greater than one (1). If you decide against the salvage strategy,
+note the contents of the damaged record. In either case, REMOVE the record. If
+using salvage, refer to section O4. If not, determine the proper location for
+the record using FIND KEY= to display the closest existing path, then follow the
+procedure outlined in the last paragraph of K1.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="k3_block_doubly_allocated"/>K3–Block Doubly Allocated</h3></div></div></div><p>A doubly allocated block is dangerous because it causes data to be
+inappropriately mingled. As long as no KILLs occur, double allocation does not
+cause permanent loss of additional data. However, it may cause the application
+programs to generate errors and/or inappropriate results. When a block is doubly
+allocated, a KILL may remove data outside its proper scope.</p><p>A doubly allocated index block may also cause increasing numbers of blocks to
+become corrupted. Use the following process to correct the problem.</p><p>First, identify all pointers to the block, using FIND EXHAUSTIVE and/or
+information reported by MUPIP INTEG. If the error report identifies the block as
+containing inappropriate keys or a bad level, INTEG has identified all paths
+that include the block. In that case, INTEG reports all paths after the first
+with the doubly allocated error, and the first path with some other, for
+example, "Keys out of order" error. </p><p>IF THE INTEG REPORT DOES NOT MENTION THE BLOCK PRIOR TO THE DOUBLY ALLOCATED
+ERROR, use FIND EXHAUSTIVE to identify all pointers to that block.</p><p>IF THE BLOCK IS A DATA BLOCK, that is, level zero (0), DUMP it GLO, REMOVE the
+records that point to it, MAP it FREE, and MUPIP LOAD the output of the DUMP
+GLO.</p><p>IF THE BLOCK HAS A LEVEL GREATER THAN ZERO (0), you may sort through the block
+and its descendants to disentangle intermixed data. If the block has a level of
+more than one (1), this may be worth a try. The salvage strategy (discussed in
+section O4) may be time consuming and there may be only one misplaced node.
+However, in general, the salvage strategy is less demanding and less
+dangerous.</p><p>IF YOU CHOOSE THE SALVAGE STRATEGY, REMOVE the records that point to the
+block, MAP it FREE, and refer to section O4.</p><p>IF YOU DECIDE TO WORK WITH THE BLOCK, choose the path to retain, REMOVE the
+other pointer record, and relocate any misplaced descendants with DSE ADD and
+REMOVE. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="k4_pointer_prbl"/>K4–Pointer Problems</h3></div></div></div><p>Each index block is made up of records that contain keys and corresponding
+pointers. In the case where database damage is a symptom of an incorrect key
+paired with a valid pointer, the repair strategy, which may be implemented with
+a number of tactics, is to use the pointer to locate the data and reconstruct
+the key. </p><p>While they occur very infrequently, invalid pointers do not permit the same
+strategy. If there is an invalid pointer, always eliminate the record containing
+the bad pointer using the DSE REMOVE command. Since no data can be stored under
+an invalid pointer, either the pointer error was discovered on the first attempt
+to use it and no data has been lost, or the pointer was damaged during use. If
+the pointer was damaged during use, the lost data should be located by examining
+"Block incorrectly marked busy" errors and generally be recovered as described
+in section O4.</p><p>IF MUCH DATA IS LOST, it may be worthwhile attempting to reconstruct the bad
+record as follows. Before removing the record containing the bad pointer, use
+the DUMP command to note the key in the record. Using the error reports and/or
+the DSE RANGE command, locate the block to which the key should point. Then use
+DSE ADD to replace the previously deleted record with a new record that has the
+correct key and pointer in place.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="i5_star_key_prblms"/>K5–Star Key Problems</h3></div></div></div><p>The last record in every index block must be a star-key record that points to
+a block that continues the path to all data not covered by the preceding records
+in the block. Star-key records have a unique format with a size of seven (7), or
+eight (8), depending on the platform, and a compression count of zero (0). The
+errors discussed in this section indicate a missing or damaged star-key and may
+be attacked with two strategies.</p><p>In general, you should turn the last existing record into a star-key. This
+works well as long as the block holds at least one valid record. If you choose
+this strategy, locate the last record using DUMP RECORD=9999. Then DUMP the last
+record and note its pointer. Next, REMOVE the last record. Finally, ADD STAR
+POINTER= to the key you noted.</p><p>If the star-key is the only record in a root block, you should add a new empty
+level 0 descendent. If you choose this strategy, add a new star-key using FIND
+FREEBLOCK HINT=this-block to locate a nearby block. Next, MAP the new block BUSY
+and CHANGE LEVEL= 0 and BSIZ=7(or 8, if your platform dictates). If the new
+block has a level of zero (0), return to the damaged block and ADD STAR
+POINTER=the-first-new-block.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="k6_compression_count_error"/>K6–Compression Count Error</h3></div></div></div><p>"Compression count not maximal" indicates that the compression count that is
+used to save space in key storage is not correct.</p><p>IF THE BLOCK IS A DATA BLOCK, that is, level zero (0), DUMP it GLO, REMOVE the
+records that point to it, MAP it FREE, and MUPIP LOAD the output of the DUMP
+GLO.</p><p>IF THE BLOCK HAS A LEVEL GREATER THAN ZERO (0), REMOVE the record and ADD it
+back in the same location with the same KEY=, and POINTER= or STAR.</p><p>You may also adjust the compression count using CHANGE CMPC=. Because this
+changes the value of all subsequent keys in the block (except the star-key), you
+should try this alternative only if those keys also appear incorrect. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="k7_key_warning"/>K7–Key Warning</h3></div></div></div><p>"Key too large for database maximum" indicates that the database holds a key
+that is legal to GT.M but exceeds the KEY_MAX_SIZE for the database. </p><p>Use the DSE command CHANGE FILEHEADER KEY_MAX_SIZE= to adjust the file
+limitation. Alternatively, you may remove the record, using the M command KILL
+on an ancestor node. If any user attempts to modify or replace the record in the
+database while the key is over-length, GT.M will reject the SET with an error.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="m1_bitmap_errors"/>M1–Bitmap Errors</h3></div></div></div><p>Every block in the file has a corresponding bit in a bitmap. All blocks with
+valid data are marked busy in their maps; all blocks that are unused or no
+longer hold data are marked free. GDS uses bitmaps to locate free blocks
+efficiently. The errors discussed in this section indicate problems with
+bitmaps.</p><p>"Block incorrectly marked free" is the only potentially dangerous bitmap
+error. This error means that the block is within the B-tree structure, but that
+the bitmap shows it available for use (i.e., it is a "Block doubly allocated"
+waiting to happen). Immediately use DSE to MAP such blocks BUSY.</p><p>Bitmap information is redundant (i.e., bitmaps can be recreated by scanning
+the B-tree); however, the majority of bitmap errors reflect secondary errors
+emanating from flaws in the B-tree, which are often reported as key or data
+errors by MUPIP INTEG. </p><p>When INTEG encounters an error, it stops processing that leaf of the tree.
+When it subsequently compares its generated bitmaps to those in the database, it
+reports the blocks belonging in the tree that it could not find as "Block
+incorrectly marked busy." This error type can be viewed as a flag, marking the
+location of a block of lost data whose index is disrupted.</p><p>INTEG reports each block that it concludes is incorrectly marked, and also the
+local map that holds the "bad" bits. Furthermore, if the local map "errors"
+affect whether the local map should be marked full or not full in the master
+map, INTEG also reports the (potential) problem with the master map. Therefore,
+a single error in a level one (1) index block will generate, in addition to
+itself, one or more "Block incorrectly marked busy", one or more "Local bitmap
+incorrect", and possibly one or more "Master bitmap shows..." Errors in higher
+level index blocks can induce very large numbers of bitmap error reports.</p><p>Because bitmap errors are typically secondary to other errors, correcting the
+primary errors usually also cures the bitmap errors. For this reason and, more
+importantly, because bitmap errors tend to locate "lost" data, they should
+always be corrected at, or close to, the end of a repair session.</p><p>The DSE command MAP provides a way to switch bits in local maps with FREE and
+BUSY, propagate the status of a local map to the master map with MASTER, and
+completely rebuild all maps from the B-tree with RESTORE. Never use MAP MASTER
+until all non-bitmap errors have been resolved.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="m2_bitmap_header_problms"/>M2–Bitmap Header Problems</h3></div></div></div><p>Bitmaps are stored in blocks that have a unique header format with a level of
+minus one (-1) and a block size of 87 or 88 depending on the Euclidian ordering
+of the platform. The errors discussed in this section indicate a bitmap block
+header that violates that format.</p><p>Use the DSE command CHANGE with the BSIZ=87 or 88 (depending on platform) and
+LEVEL=-1FF qualifiers to correct the problem. If the block size is too small,
+the bitmap will have to be reconstructed using MAP RESTORE or manually from
+INTEG error reports using MAP FREE. If there are other errors, defer any MAP
+RESTORE until after they have been repaired. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="O1_bad_block"/>O1–Bad Block</h3></div></div></div><p>GDS organizes the B-tree into logical blocks, each of which GT.M handles
+discretely. A block consists of a block header and a lexically increasing
+sequence of records. Blocks starting with the root block up to the data blocks
+are index blocks. The last block in any complete path is a data block. The
+errors discussed in this section indicate a damaged block.</p><p>Determine if the block has other problems by using the DSE command INTEGRIT.
+Examine the contents of the block using the DSE command DUMP. You may also
+examine the block preceding this block in the path and/or blocks pointed to by
+records in this block. If you can determine an appropriate action, use CHANGE
+with the BSIZ= and/or LEVEL= qualifiers. If you cannot quickly repair the block,
+examine its level with DUMP HEADER. If the block is a data block, that is, level
+zero (0), refer to section O3. If the block has a level greater than zero (0),
+REMOVE the record that points to the block and refer to section O4.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="o2_record_errors"/>O2–Record Errors</h3></div></div></div><p>GDS organizes keys with pointers or data to form records. A record has a
+header, which holds the record size, and a compression count, which identifies
+how much of the preceding key is held in common by this record. Records in the
+block are ordered by the values of their keys. The errors discussed in this
+section indicate damage to a record. Record errors present an added challenge,
+in that they potentially prevent GT.M from correctly interpreting subsequent
+records in the same block.</p><p>IF THE BLOCK IS A DATA BLOCK, that is, level zero (0), refer to section
+O3.</p><p>IF THE BLOCK IS AN INDEX BLOCK, that is, has a level greater than zero (0),
+the best option is generally to use the salvage strategy discussed in section
+O4. REMOVE the damaged record and INTEG the block. If the block is still
+corrupt, repeat the last step, REMOVE the pointer to it, and MAP it FREE. In any
+case, refer to section O4. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="o3_data_block_errors"/>O3–Data Block Errors</h3></div></div></div><p>The errors described in this section include damage to the header, the
+records, or the keys.</p><p>IF THE BLOCK IS LEVEL ZERO (0), use DSE DUMP to examine the contents of the
+block. Note any information that might allow you to correct the problem or might
+help to identify and recreate the endangered data. If you are familiar with GDS
+and hexadecimal representations, you may be able to recognize data that DSE
+cannot recognize because of misalignment.</p><p>IF THE BEGINNING OF THE BLOCK IS VALID, DUMP GLO may be able to capture its
+contents up to the point where it is damaged. In the worst case, REMOVE the
+record that points to the block, MAP it FREE, and lose its entire contents. The
+extent and importance of the damage depends on the size of the block and what it
+should be holding. In a similar but not quite as drastic case, REMOVE the record
+with the problem and lose the contents of that record. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="o4_salvage"/>O4–Salvage of Data Blocks with Lost Indices</h3></div></div></div><p>This strategy uses bitmap errors to locate data blocks containing information
+that belongs in the B-tree, but are no longer indexed because of errors and/or
+repairs to defective indices.</p><p>The algorithm is based on the fact that most bitmap errors are secondary to
+index errors. Therefore, it is optimistic about bitmaps and pessimistic about
+indices, and tends to error on the side of restoring more rather than less data
+to the B-tree. After using this technique, you should always check to see if
+obsolete, deleted data was restored. If data was restored, and GDS integrity has
+been restored, you can safely KILL the "extra" data.</p><p>IF THE INDICES HAVE BEEN DAMAGED FOR SOME TIME AND THE DAMAGE CAUSED DUPLICATE
+KEYS TO BE CREATED, this strategy raises the issue of which value is the
+"correct" value. Because most applications either form new nodes or update
+existing nodes rather than simply overlaying them, this issue seldom arises.
+Usually the application will fail in an attempt to update any "misplaced" node.
+If the problem does arise, the issue may not be determining the "correct" value,
+but the best available value. </p><p>IF THE DUPLICATE NODE PROBLEM COULD BE AN APPLICATION ISSUE, you can load the
+sequential file produced in DSE with an M program that detects and reports
+duplicate nodes. You can also use the block transaction numbers as clues to the
+order in which blocks were updated. However, remember that you generally cannot
+know which record was modified on the last update, and that DSE repair actions
+modify the block transaction number. </p><p>If the duplicate node problem poses a significant problem, you should probably
+not use DSE to repair the database, but instead, use journals to recover or
+restore from backups.</p><p>This strategy works well when the missing indices are level one (1). However,
+the time required increases dramatically as the level of the missing index
+increases. If you have a problem with a level four (4) or level five (5) index,
+and you have developed skill with DSE, you may wish to try the more technically
+demanding approach of repairing the indices.</p><p>Once you have corrected all errors except bitmap errors, SPAWN and use MUPIP
+INTEG FAST REGION NOMAP to get a list of all remaining bitmap errors. If the
+report includes any "Blocks incorrectly marked free", MAP them BUSY. Then use
+DUMP HEADER BLOCK= to examine each "Block incorrectly marked busy." If the level
+is one (1), DUMP the block ZWR. In any case, MAP it FREE. Once all blocks have
+been collected in a sequential file in this fashion, use MUPIP LOAD to reclaim
+the data from the sequential file.</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a id="downloadsalvage"/>Download salvage.m</h4></div></div></div><p>salvage.m is a utility that removes all incorrectly marked busy blocks from the specified region. During execution it displays the DSE commands that it will execute and aborts execution when it encounters an error. It dumps the zwrite formatted content of blocks incorrectly marked busy to a file called &lt;region&gt;_db.zwr. Upon completion, it sets the abandoned_kills and kill_in_prog flags in the database fileheader to false. Click on <a class="ulink" href="downloadables/salvage.html" target="_top"><span class="inlinemediaobject"><img src="images/download.png" alt="Download salvage.m"/></span></a> to download salvage.m program. You can also download <span class="bold"><strong>salvage.m</strong></span> from http://tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/downloadables/salvage.m. </p><p>Steps to run the salvage utility are as follows:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Perform an argumentless MUPIP RUNDOWN before running this utility.</p></li><li class="listitem"><p>Ensure that there are no INTEG errors other than the incorrectly marked busy block errors.</p></li><li class="listitem"><p>Run <code class="code"> $gtm_dist/mumps -r ^salvage</code>.</p></li><li class="listitem"><p>Specify the region name. If no region is specified, the utility assumes DEFAULT.</p></li><li class="listitem"><p>If the utility reports a DSE error, fix that error and run the salvage utility again.</p></li></ol></div><p>After completing repairs with the salvage utility, open the &lt;REGION&gt;_db.zwr file and examine its contents. If there is a need to recover the data from the incorrectly marked    busy blocks, perform a MUPIP LOAD &lt;REGION&gt;_db.zwr to load that data back to the database.</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="sal_dam_spa"/>O5–Salvage of a damaged spanning node<a id="d0e44753" class="indexterm"/></h3></div></div></div><p>The following example shows how to salvage a damaged spanning node in ^mypoem. </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Run MUPIP INTEG to find the location of the damaged spanning node. A MUPIP INTEG report of a region that has damaged spanning nodes might look something like the following: </p><pre class="programlisting">Integ of region DEFAULT
+Block:Offset Level
+%GTM-E-DBSPANGLOINCMP, 
+       7:10     0  Spanning node is missing. Block no 3 of spanning node is missing
+                   Directory Path:  1:10, 2:10
+                   Path:  4:31, 7:10
+Spanning Node ^mypoem(#SPAN1) is suspect.
+%GTM-E-DBKEYGTIND, 
+       7:10     0  Key greater than index key
+                   Directory Path:  1:10, 2:10
+                   Path:  4:31, 7:10
+Keys from ^mypoem(#SPAN48) to ^mypoem(#SPAN3*) are suspect.
+%GTM-E-DBSPANCHUNKORD, 
+       3:10     0  Chunk of 1 blocks is out of order
+                   Directory Path:  1:10, 2:10
+                   Path:  4:3D, 3:10
+Spanning Node Chunk ^mypoem(#SPAN4) is suspect.
+Total error count from integ:        3
+Type           Blocks         Records          % Used      Adjacent
+Directory           2               2           5.468            NA
+Index               1               4          13.476             1
+Data                4               5          76.562             4
+Free               93              NA              NA            NA
+Total             100              11              NA             5
+[Spanning Nodes:2 ; Blocks:3]
+%GTM-E-INTEGERRS, Database integrity errors</pre><p>Notice the lines that contain: "Block no 3 of spanning node is missing", "Key greater than index key", and ^mypoem(#SPAN48)  and there is an extra chunk that is not connected to ^mypoem(#SPAN4). </p></li><li class="listitem"><p>Confirm whether you have determined the spanning range of the node: </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Is ^mypoem(#SPAN48) the last node (block number 3)? </p></li><li class="listitem"><p>Is ^mypoem(#SPAN4) the last node?</p></li></ul></div><p>Clearly, GT.M did not find block 3 and ^mypoem(#SPAN4) terminated the spanning node, so ^mypoem(#SPAN4) might be the last node. So, the parts of a spanning node that contain the value are ^mypoem(#SPAN2) through ^mypoem(#SPAN4). </p></li><li class="listitem"><p>Use DSE to find the spanned nodes:</p><pre class="programlisting">DSE&gt; find -key=^mypoem(#SPAN2)
+Key found in block  6.
+    Directory path
+    Path--blk:off
+    1:10,    2:10,
+    Global tree path
+    Path--blk:off
+    4:25,    6:10,
+DSE&gt; find -key=^mypoem(#SPAN3)
+Key not found, would be in block  7.
+    Directory path
+    Path--blk:off
+    1:10,    2:10,
+    Global tree path
+    Path--blk:off
+    4:31,    7:10,
+DSE&gt; find -key=^mypoem(#SPAN4) 
+Key found in block  3.
+    Directory path
+    Path--blk:off
+    1:10,    2:10,
+    Global tree path
+    Path--blk:off
+    4:3D,    3:10,
+DSE&gt; f -k=^mypoem(#SPAN5)
+Key not found, would be in block  3.
+    Directory path
+    Path--blk:off
+    1:10,    2:10,
+    Global tree path
+    Path--blk:off
+    4:3D,    3:10,</pre><p>Notice that there is #SPAN2 and #SPAN4 but no #SPAN5. Therefore, #SPAN4 is the last piece. #SPAN3 was not found and is most likely the damaged node.</p></li><li class="listitem"><p>Dump all the blocks in ZWRITE format to see what can be salvaged.</p><pre class="programlisting">DSE&gt; open -file=mypoem.txt
+DSE&gt; dump -block=6 -zwr
+1 ZWR records written.
+DSE&gt; dump -block=7 -zwr
+1 ZWR records written.
+DSE&gt; dump -block=3 -zwr
+1 ZWR records written.
+DSE&gt; close
+Closing output file:  mypoem.txt
+$ cat mypoem.txt
+; DSE EXTRACT
+; ZWR
+$ze(^mypoem,0,480)="Half a league, half a league,Half a league onward,All in the valley of Death Rode the six hundred.  Forward, the Light Brigade!  Charge for the guns he said: Into the valley of Death Rode the six hundred.  Forward, the Light Brigade! Was there a man dismayed?  Not tho the soldiers knew Some one had blundered: Theirs not to make reply, Theirs not to reason why, Theirs but to do and die: Into the valley of Death Rode the six hundred.  Cannon to right of them, Cannon to left of "
+$ze(^mypoem,22080,480)="them, Cannon in front of them Volleyed and thundered; Stormed at with shot and shell, Boldly they rode and well, Into the jaws of Death, Into the mouth of Hell Rode the six hundred.  Flashed all their sabres bare, Flashed as they turned in air Sabring the gunners there, Charging an army while All the world wondered: Plunged in the battery-smoke Right thro the line they broke; Cossack and Russian Reeled from the sabre-stroke Shattered and sundered.  Then they rode back, but no"
+$ze(^mypoem,960,468)="t Not the six hundred.  Cannon to right of them, Cannon to left of them, Cannon behind them Volleyed and thundered; Stormed at with shot and shell, While horse and hero fell, They that had fought so well Came thro the jaws of Death, Back from the mouth of Hell, All that was left of them, Left of six hundred.  When can their glory fade?  O the wild charge they made!  All the world wondered.  Honour the charge they made!  Honour the Light Brigade, Noble six hundred!"</pre><p>Notice that block 3 (which is the second block above (because you started with block 2)) has the correct value but its internal subscript must have been damaged. </p></li><li class="listitem"><p>Fix the starting position in the $ZEXTRACT statement:</p><pre class="programlisting">
+$ze(^mypoem,480,480)="them, Cannon in front of them Volleyed and thundered; Stormed at with shot and shell, Boldly they rode and well, Into the jaws of Death, Into the mouth of Hell Rode the six hundred.  Flashed all their sabres bare, Flashed as they turned in air Sabring the gunners there, Charging an army while All the world wondered: Plunged in the battery-smoke Right thro the line they broke; Cossack and Russian Reeled from the sabre-stroke Shattered and sundered.  Then they rode back, but no"</pre><p>Verify the value for correctness if you have the knowledge of the type of data in this global. This completes data recovery (whatever was possible). </p></li><li class="listitem"><p>Kill the existing global:</p><pre class="programlisting">GTM&gt;kill ^mypoem
+GTM&gt;write ^mypoem
+%GTM-E-GVUNDEF, Global variable undefined: ^mypoem</pre></li><li class="listitem"><p>Load the salvaged global:</p><pre class="programlisting">$ mupip load -format=zwr mypoem.txt
+; DSE EXTRACT
+; ZWR
+Beginning LOAD at record number: 3
+LOAD TOTAL        Key Cnt: 3  Max Subsc Len: 8  Max Data Len: 480
+Last LOAD record number: 5
+$ gtm
+GTM&gt;w ^mypoem
+Half a league, half a league,Half a league onward,All in the valley of Death Rode the six hundred.  Forward, the Light Brigade!  Charge for the guns he said: Into the valley of Death Rode the six hundred.  Forward, the Light Brigade! Was there a man dismayed?  Not tho the soldiers knew Some one had blundered: Theirs not to make reply, Theirs not to reason why, Theirs but to do and die: Into the valley of Death Rode the six hundred.  Cannon to right of them, Cannon to left of them, Cannon in front of them Volleyed and thundered; Stormed at with shot and shell, Boldly they rode and well, Into the jaws of Death, Into the mouth of Hell Rode the six hundred.  Flashed all their sabres bare, Flashed as they turned in air Sabring the gunners there, Charging an army while All the world wondered: Plunged in the battery-smoke Right thro the line they broke; Cossack and Russian Reeled from the sabre-stroke Shattered and sundered.  Then they rode back, but not Not the six hundred.  Cannon to right of them, Cannon to left of them, Cannon behind them Volleyed and thundered; Stormed at with shot and shell, While horse and hero fell, They that had fought so well Came thro the jaws of Death, Back from the mouth of Hell, All that was left of them, Left of six hundred.  When can their glory fade?  O the wild charge they made!  All the world wondered.  Honour the charge they made!  Honour the Light Brigade, Noble six hundred!</pre></li></ol></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="p1_process_damage"/>P1–Process Damage</h3></div></div></div><p>A damaged process is one that has become internally "confused" and is
+executing in a pathological way not caused by circumstances in the external
+environment.</p><p> If multiple processes exhibit the same symptoms, the problem is likely embedded in the database.</p><p>IF YOU HAVE DISCOVERED THAT A PROCESS WAS DAMAGED, carefully review all events
+related to that process leading to the discovery of the problem. It may be
+possible that the process had an elevated priority and was not hanging, but
+rather was "hogging" system resources. It is also possible that the problem is
+an application loop problem, missed by not performing the steps in section H3
+with enough rigor. </p><p>
+
+<span>Check
+</span>for evidence of any hardware problem that might damage a process.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="q1_restict_db_access"/>Q1–Restricting Database Access</h3></div></div></div><p>Prevent new users from attempting to access the database by taking
+steps such as bringing the system to the single-user state or removing execute
+access to GT.M components for an appropriate class or users. Also, terminate or
+suspend all processes accessing the database in question, using the UNIX ps -af
+utility to find such processes. Because the DSE command CRITICAL -INITIALIZE
+-RESET generates errors for all processes accessing a database file, it provides
+a quick way to stop such processes.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="r1_gtm_run_time_errors"/>R1–GT.M Run-Time Errors</h3></div></div></div><p>GT.M processes may detect errors at run-time. These errors trigger the GT.M
+error handling mechanism, which generally places the process in direct mode, or
+triggers the application programs to transcribe an error context to a sequential
+file or to a global. For more information on error handling, refer to the "Error
+Processing" chapter of the </p><p><a class="ulink" href="../../pg/UNIX_manual/index.html" target="_top">GT.M Programmer's Guide</a></p><p>.</p><p>Most run-time errors are related to the application and its environment.
+However, some errors reflect the inability of a process to properly deal with a
+database. Some errors of this type are also, or only, generated by the GT.M
+utility programs.</p><p>For descriptions of individual errors, refer to the GT.M Message and Recovery
+Procedure Reference Manual.</p><p>IF YOU CANNOT REPRODUCE SUCH ERRORS WITH ANOTHER PROCESS PERFORMING THE SAME
+TASK, or with an appropriately directed MUPIP INTEG, they were most likely
+reported by a damaged process. In this case, refer to section P1.</p><p>The following table lists run-time errors, alphabetically by mnemonic, each
+with a section reference for further information.</p><div class="informaltable"><table width="100%" border="1"><colgroup><col class="c1"/><col class="c2"/><col class="c3"/></colgroup><thead><tr><th colspan="3">
+<p>Run-Time Error Messages Identifying Potential System
+Problems</p>
+</th></tr><tr><th>
+<p>ERROR MNEMONIC</p>
+</th><th>
+<p>ERROR MESSAGE TEXT</p>
+</th><th>
+<p>SECTION</p>
+</th></tr></thead><tbody><tr><td>
+<p>BADDVER</p>
+<p>BITMAPSBAD</p>
+<p>BTFAIL</p>
+<p>CCPINTQUE</p>
+<p>CRITRESET</p>
+</td><td>
+<p>Incorrect database version vvv</p>
+<p>Database bitmaps are incorrect</p>
+<p>The database block table is corrupt</p>
+<p>Interlock failure accessing Cluster Control Program
+queue</p>
+<p>The critical section crash count for rrr region has been
+incremented</p>
+</td><td>
+<p>I2</p>
+<p>M1</p>
+<p>R3</p>
+<p>R7</p>
+<p>I8</p>
+</td></tr><tr><td>
+<p>DBCCERR</p>
+<p>DBCRPT</p>
+<p>DBFILERR</p>
+<p>DBNOFILEP</p>
+<p>DBNOTGDS</p>
+</td><td>
+<p>Interlock instruction failure in critical mechanism for
+region rrr</p>
+<p>Database is flagged corrupt </p>
+<p>Error with database file</p>
+<p>No database file has been successfully opened</p>
+<p>Unrecognized database file format</p>
+</td><td>
+<p>R7</p>
+<p>I8</p>
+<p>I5</p>
+<p>I5</p>
+<p>I5</p>
+</td></tr><tr><td>
+<p>DBOPNERR</p>
+<p>DBRDERR</p>
+<p>FORCEDHALT</p>
+<p>GBLDIRACC</p>
+<p>GBLOFLOW</p>
+</td><td>
+<p>Error opening database file</p>
+<p>Cannot read database file after opening</p>
+<p>Image HALTed by MUPIP STOP</p>
+<p>Global Directory access failed, cannot perform database
+functions</p>
+<p>Database segment is full</p>
+</td><td>
+<p>I5</p>
+<p>I5</p>
+<p>R4</p>
+<p>I5</p>
+<p>R5</p>
+</td></tr><tr><td>
+<p>GVKILLFAIL</p>
+<p>GVORDERFAIL</p>
+<p>GVPUTFAIL</p>
+<p>GVQUERYFAIL</p>
+<p>GVRUNDOWN</p>
+</td><td>
+<p>Global variable KILL failed. Failure code: cccc</p>
+<p>Global variable $ORDER or $NEXT function failed. Failure
+code: cccc </p>
+<p>Global variable put failed. Failure code: cccc</p>
+<p>Global variable $QUERY function failed. Failure code:
+cccc</p>
+<p>Error during global database rundown</p>
+</td><td>
+<p>R2</p>
+<p>R2</p>
+<p>R2</p>
+<p>R2</p>
+<p>I5</p>
+</td></tr><tr><td>
+<p>GDINVALID</p>
+<p>GTMCHECK</p>
+<p>GVDATAFAIL</p>
+<p>GVDIRECT</p>
+<p>GVGETFAIL</p>
+</td><td>
+<p>Unrecognized Global Directory format: fff</p>
+<p>Internal GT.M error–report to FIS</p>
+<p>Global variable $DATA function failed. Failure code:
+cccc</p>
+<p>Global variable name could not be found in global
+directory</p>
+<p>Global variable retrieval failed. Failure code:
+cccc</p>
+</td><td>
+<p>I5</p>
+<p>R6</p>
+<p>R2</p>
+<p>I5</p>
+<p>R2</p>
+</td></tr><tr><td>
+<p>GVZPREVFAIL</p>
+<p>MUFILRNDWNFL</p>
+<p>UNKNOWNFOREX</p>
+<p>TOTALBLKMAX</p>
+<p>WCFAIL</p>
+</td><td>
+<p>Global variable $ZPREVIOUS function failed. Failure code:
+cccc</p>
+<p>File rundown failed</p>
+<p>Process halted by a forced exit from a source other than
+MUPIP</p>
+<p>Extension exceeds maximum total blocks, not
+extending</p>
+<p>The database cache is corrupt</p>
+</td><td>
+<p>R2</p>
+<p>I5</p>
+<p>R4</p>
+<p>R5</p>
+<p>R3</p>
+</td></tr></tbody></table></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="r2_structure_db_integ"/>R2–Structural Database Integrity Errors<a id="d0e45191" class="indexterm"/></h3></div></div></div><p>These run-time errors indicate that the process detected an integrity error within the body of the database.</p><p>Verify the error using the MUPIP command INTEG SUBSCRIPT=, specifying an
+immediate ancestor node of the global variable displayed in the error message.
+Alternatively, you may try the access by running the same routine in another
+process or by using Direct Mode to perform the same actions as those performed
+by the M line that triggered the error. If you cannot reproduce the error, refer
+to section P1.</p><p>Most of these errors terminate with a four-character failure code. Each
+character in the code represents the failure type for an attempt to perform the
+database access. In cases where the letters are not all the same, the last code
+is the most critical, because it reflects what happened when the process made
+its last retry. Earlier tries show error codes that are important to
+establishing the context of the last error.</p><p>The following table lists the failure codes, whether or not they require a
+MUPIP INTEG, a brief description of the code's meaning, and a section reference
+for locating more information.</p><div class="informaltable"><table width="100%" border="1"><colgroup><col class="c1"/><col class="c2"/><col class="c3"/><col class="c4"/></colgroup><thead><tr><th colspan="4">
+<p>Run-Time Database Failure Codes</p>
+</th></tr><tr><th>
+<p>FAIL CODE</p>
+</th><th>
+<p>RUN INTEG</p>
+</th><th>
+<p>DESCRIPTION</p>
+</th><th>
+<p>SECTION</p>
+</th></tr></thead><tfoot><tr><th colspan="4">
+<p>* In the last retry may indicate a process problem</p>
+</th></tr></tfoot><tbody><tr><td>
+<p>A</p>
+<p>B</p>
+<p>C</p>
+<p>D</p>
+<p>E</p>
+</td><td>
+<p>x</p>
+<p>x</p>
+<p>x</p>
+<p>x</p>
+</td><td>
+<p>Special case of code C.</p>
+<p>Key too large to be correct.</p>
+<p>Record unaligned: properly formatted record header did not
+appear where expected.</p>
+<p>Record too small to be correct.</p>
+<p>History overrun prevents validation of a block.</p>
+</td><td>
+<p>O2</p>
+<p>K1</p>
+<p>O2</p>
+<p>O2</p>
+<p>R3</p>
+</td></tr><tr><td>
+<p>G</p>
+<p>H*</p>
+<p>J</p>
+<p>K</p>
+<p>L</p>
+</td><td>
+<p>-</p>
+<p>x</p>
+</td><td>
+<p>Cache record modified while in use by the
+transaction.</p>
+<p>Development of a new version of a block encountered a likely concurrency conflict.</p>
+<p>Level on a child does not show it to be a direct
+descendent of its parent.</p>
+<p>Cache control problem encountered or suspected.</p>
+<p>Conflicting update of a block took priority.</p>
+</td><td>
+<p>R3</p>
+<p>P1</p>
+<p>O1</p>
+<p>C1</p>
+<p>R3</p>
+</td></tr><tr><td>
+<p>M</p>
+<p>N</p>
+<p>O</p>
+<p>P</p>
+<p>Q</p>
+</td><td>
+<p>x</p>
+<p>x</p>
+</td><td>
+<p>Error during commit that the database logic does not
+handle.</p>
+<p>A primitive such as a file or queue operation
+failed.</p>
+<p>Before image was lost prior to its transfer to the journal
+buffer.</p>
+<p>Multi-block update aborted - database damage
+likely.</p>
+<p>Shared memory interlock failed.</p>
+</td><td>
+<p>P1</p>
+<p>R7</p>
+<p>R3</p>
+<p>I5</p>
+<p>R7</p>
+</td></tr><tr><td>
+<p>R</p>
+<p>S</p>
+<p>U</p>
+<p>V</p>
+<p>X</p>
+</td><td>
+<p>x</p>
+</td><td>
+<p>Critical section reset (probably by DSE).</p>
+<p>Attempt to increase the level beyond current
+maximum.</p>
+<p>Cache record unstable while in use by the
+transaction.</p>
+<p>Read-only process could not find room to work.</p>
+<p>Bitmap block header invalid.</p>
+</td><td>
+<p>R5</p>
+<p>R8</p>
+<p>R3</p>
+<p>R9</p>
+<p>M2</p>
+</td></tr><tr><td>
+<p>Y</p>
+<p>Z</p>
+<p>a</p>
+<p>b</p>
+<p>c</p>
+</td><td>
+<p>x</p>
+<p>x</p>
+</td><td>
+<p>Record offset outside of block bounds.</p>
+<p>Block did not contain record predicted by the
+index.</p>
+<p>Predicted bitmap preempted by another update.</p>
+<p>History overrun prevents validation of a bitmap.</p>
+<p>Bitmap cache record modified while in use by the
+transaction.</p>
+</td><td>
+<p>02</p>
+<p>02</p>
+<p>R3</p>
+<p>R3</p>
+<p>R3</p>
+</td></tr><tr><td>
+<p>d</p>
+<p>e</p>
+<p>f</p>
+<p>g</p>
+</td><td>
+<p>x</p>
+</td><td>
+<p>Not currently used.</p>
+<p>Attempt to read a block outside the bounds of the
+database.</p>
+<p>Conflicting update took priority on a non-isolated global
+and a block split requires a TP_RESTART.</p>
+<p>The number of conflicting updates on non-isolated global
+nodes exceed an acceptable level and requires a
+TP_RESTART.</p>
+</td><td>
+<p>-</p>
+<p>02</p>
+<p>R3</p>
+<p>R3</p>
+</td></tr></tbody></table></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="r2_run_time_db_cache"/>R3–Run-time Database Cache Problems</h3></div></div></div><p>These messages indicate probable process damage or database cache corruption.
+Retry the action with another process. If the second process also fails, refer
+to section H4; otherwise, refer to section P1.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="r4_stopped_processes"/>R4–Stopped Processes</h3></div></div></div><p>These errors indicate the process received a message from a 
+<span>kill </span>system service
+requesting that the image terminate.</p><p>The MUPIP STOP command uses 
+<span>kill</span> with a distinguished code. The code provided by
+MUPIP STOP allows the process to include the source of the stop directive in the
+error message. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="r5_no_more_room"/>R5–No More Room in the File</h3></div></div></div><p>IF THE DATABASE FILLS UP AND CANNOT EXPAND, processes that try to add new
+information to the database experience run-time errors. The following conditions
+prevent automatic database expansion.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Using the MM access method</p></li><li class="listitem"><p>Using a file extension of zero (0)</p></li><li class="listitem"><p>Inadequate free blocks available on the volume to handle the specified
+extension</p></li></ul></div><p>You can handle the first two cases by using the MUPIP EXTEND command. MUPIP
+EXTEND may also help in dealing with the third case by permitting an extension
+smaller than that specified in the file header. Note that the extension size in
+the file header, or /BLOCKS= qualifier to MUPIP EXTEND, is in GDS blocks and
+does not include overhead for bitmaps.</p><p>IF THERE IS NO MORE SPACE ON A VOLUME, you may use the M command KILL to
+delete data from the database. To KILL an entire global, the database file must
+contain one free GDS block. You may acquire these by KILLing a series of
+subscripted nodes or by doing a small extension.</p><p>You may also use UNIX utilities such as tar, cp, and lprm to remove
+files from the volume and place them on another volume.</p><p>Finally, you may create or add to a bound volume set with the MOUNT utility
+invoked by the DCL command MOUNT. If you change the RMS placement of the files,
+be sure to adjust the Global Directory and/or the logical names to match the new
+environment.</p><p>You can also add a new disk. If you change the placement of the files, be sure
+to also adjust the Global Directory and/or the environment variables to match
+the new environment.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="r6_gtmassert_and_gtmcheck_errors"/>R6–GTMASSERT and GTMCHECK Errors</h3></div></div></div><p>GTMASSERT and GTMCHECK errors indicate that a process has detected
+some sort of logical inconsistency. Consult with FIS
+after gathering all information about the circumstances surrounding the error. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="r7_interlock_q"/>R7–Interlocked Queue Hardware Problems</h3></div></div></div><p>These messages indicate possible problems with multiple processor
+synchronization. Initiate running of hardware diagnostics. If the diagnostics do
+not locate a problem, consider consulting with FIS 
+after gathering all information about the circumstances of the error.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="r8_db_tree"/>R8–Database Tree Maximum Level Exceeded</h3></div></div></div><p>An attempt has been made to create a tree in the database that contains seven
+or more levels. The legal levels for a tree are zero to seven. You can add new
+levels to the global either by killing some of the existing subscripts, or by
+extracting the global and reloading it into a database with a larger block size,
+so it does not require as large a tree.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="r9_read"/>R9–Read-only Process Blocked</h3></div></div></div><p>While it is unlikely in normal operation, there is a possibility that a
+process that has read-only access to a database file may fail because it cannot
+acquire enough cache space to do its work. Because it does not have authority to
+write to the database, such a process cannot flush modified cache records to
+disk: it must rely on updating processes to keep the number of modified records
+down to a point that permits read-only access to the database to proceed
+successfully. However, if updating processes exit in a fashion that does not
+permit them to flush out modified records, the read-only process (particularly
+one doing a large transaction) may fail because the cache cannot supply enough
+blocks. This condition can be cleared by a DSE BUFFER command in the affected
+region(s).</p></div></div><script type="text/javascript" src="../common/main.js"><!----></script><div class="navfooter"><hr/><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch11s03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch11.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch12.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></div><div><div id="leftnavigation" style="padding-top:3px; background-color:white;"><div id="tabs"><ul><li><a href="#treeDiv"><em>Contents</em></a></li><li><a href="#searchDiv"><em>Search</em></a></li></ul><div id="treeDiv"><img src="../common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;"/><div id="ulTreeDiv" style="display:none"><ul id="tree" class="filetree"><li><span class="file"><a href="preface.html">About This Manual </a></span><ul><li><span class="file"><a href="pr01s01.html">Intended Audience</a></span></li><li><span class="file"><a href="pr01s02.html">Purpose of the Manual</a></span></li><li><span class="file"><a href="pr01s03.html">How to Use This Manual</a></span></li><li><span class="file"><a href="pr01s04.html">Overview</a></span></li><li><span class="file"><a href="pr01s05.html">Conventions Used in This Manual</a></span></li></ul></li><li><span class="file"><a href="ch01.html">About GT.M</a></span><ul><li><span class="file"><a href="ch01s01.html">Hardware/Operating System Environment</a></span></li><li><span class="file"><a href="ch01s02.html">Installation</a></span></li><li><span class="file"><a href="ch01s03.html">Security</a></span></li><li><span class="file"><a href="ch01s04.html">Program Development Environment</a></span></li><li><span class="file"><a href="ch01s05.html">Database Subsystem</a></span></li><li><span class="file"><a href="ch01s06.html">GT.M Utility Programs</a></span><ul><li><span class="file"><a href="ch01s06.html#util_prog_gde">GDE</a></span></li><li><span class="file"><a href="ch01s06.html#util_mup">MUPIP</a></span></li><li><span class="file"><a href="ch01s06.html#lke_intr">LKE</a></span></li><li><span class="file"><a href="ch01s06.html#dse_intr">DSE </a></span></li><li><span class="file"><a href="ch01s06.html#comm_quals_utils">Command Qualifiers</a></span></li></ul></li><li><span class="file"><a href="ch01s07.html">Database Integrity</a></span></li><li><span class="file"><a href="ch01s08.html">Interprocess Communication</a></span></li></ul></li><li><span class="file"><a href="ch02.html">Installing GT.M</a></span><ul><li><span class="file"><a href="ch02s01.html">Obtaining GT.M Distribution Media</a></span></li><li><span class="file"><a href="ch02s02.html">Before you begin</a></span></li><li><span class="file"><a href="ch02s03.html">Installation Procedure</a></span><ul><li><span class="file"><a href="ch02s03.html#shr_lib_plu">Compiling the Reference Implementation Plugin </a></span><ul><li><span class="file"><a href="ch02s03.html#recompile_ref_impl">Instructions</a></span></li></ul></li></ul></li><li><span class="file"><a href="ch02s04.html">gtminstall script
+  </a></span></li></ul></li><li><span class="file"><a href="ch03.html">Basic Operations</a></span><ul><li><span class="file"><a href="ch03s01.html">GT.M Environment Setup </a></span><ul><li><span class="file"><a href="ch03s01.html#gtmprofile_script">gtmprofile </a></span></li><li><span class="file"><a href="ch03s01.html#gtmcshrc">gtmcshrc</a></span></li><li><span class="file"><a href="ch03s01.html#gtmbase">gtmbase </a></span></li><li><span class="file"><a href="ch03s01.html#gdedefaults">gdedefaults</a></span></li><li><span class="file"><a href="ch03s01.html#gtm_script">gtm </a></span></li></ul></li><li><span class="file"><a href="ch03s02.html">Environment Variables</a></span></li><li><span class="file"><a href="ch03s03.html">Configuring and operating GT.M with Unicode® support (optional) </a></span><ul><li><span class="file"><a href="ch03s03.html#m_utf8_modes">M mode and UTF-8 mode </a></span></li><li><span class="file"><a href="ch03s03.html#compile_icu_gtm">Compiling ICU </a></span></li></ul></li><li><span class="file"><a href="ch03s04.html">Starting GT.M </a></span></li><li><span class="file"><a href="ch03s05.html">Configuring huge pages for GT.M x86[-64] on Linux</a></span><ul><li><span class="file"><a href="ch03s05.html#huge_use">Using huge pages</a></span><ul><li><span class="file"><a href="ch03s05.html#using_huge_pages">Using huge pages for shared memory</a></span></li><li><span class="file"><a href="ch03s05.html#using_huge_pages_for_ppm">Using huge pages for GT.M process private memory</a></span></li></ul></li></ul></li><li><span class="file"><a href="ch03s06.html">Configuring the Restriction facility</a></span><ul><li><span class="file"><a href="ch03s06.html#zsysfilter">ZSYSTEM and PIPE OPEN command restriction facility</a></span></li><li><span class="file"><a href="ch03s06.html#audit_principal_device">Audit Principal Device restriction facility</a></span><ul><li><span class="file"><a href="ch03s06.html#apd_logging">Logging</a></span></li></ul></li></ul></li></ul></li><li><span class="file"><a href="gdechap.html">Global Directory Editor</a></span><ul><li><span class="file"><a href="glbl_dir_intro.html">Global Directory</a></span></li><li><span class="file"><a href="gde_overview.html">GDE Overview</a></span><ul><li><span class="file"><a href="gde_overview.html#identifygd">Identifying the Current Global Directory</a></span></li><li><span class="file"><a href="gde_overview.html#creategd">Creating a Default Global Directory</a></span></li><li><span class="file"><a href="gde_overview.html#map_glbl">Mapping Global Variables in a Global Directory</a></span></li><li><span class="file"><a href="gde_overview.html#examine_def">Examining the Default Global Directory</a></span></li><li><span class="file"><a href="gde_overview.html#abbrev_gd">Global Directory Abbreviations</a></span></li><li><span class="file"><a href="gde_overview.html#custom_glbldir">Customizing a Global Directory</a></span><ul><li><span class="file"><a href="gde_overview.html#add_jrnl">Adding a Journaling Information Section</a></span></li></ul></li></ul></li><li><span class="file"><a href="using_gde.html">Using GDE</a></span><ul><li><span class="file"><a href="using_gde.html#map_guides">Guidelines for Mapping</a></span><ul><li><span class="file"><a href="using_gde.html#basic_map">Example of a Basic Mapping</a></span></li></ul></li></ul></li><li><span class="file"><a href="gdecmds.html">Global Director Editor Commands</a></span><ul><li><span class="file"><a href="gdecmds.html#specify_file_names_in_cmmd_lines">Specifying File Names in Command Lines</a></span></li><li><span class="file"><a href="gdecmds.html#fonts_conv">Font/Capitalization Conventions Used in this Chapter</a></span></li><li><span class="file"><a href="gdecmds.html#at_sign">@</a></span></li><li><span class="file"><a href="gdecmds.html#gde_add">Add</a></span><ul><li><span class="file"><a href="gdecmds.html#add_name">-Name</a></span></li><li><span class="file"><a href="gdecmds.html#add_seg">-Segment</a></span></li><li><span class="file"><a href="gdecmds.html#add_reg">-Region</a></span></li><li><span class="file"><a href="gdecmds.html#add_gbl">-Gblname</a></span></li></ul></li><li><span class="file"><a href="gdecmds.html#gde_change">Change</a></span></li><li><span class="file"><a href="gdecmds.html#gde_delete">Delete</a></span></li><li><span class="file"><a href="gdecmds.html#gde_exit">Exit</a></span></li><li><span class="file"><a href="gdecmds.html#gde_help">Help</a></span></li><li><span class="file"><a href="gdecmds.html#gde_locks">LOCks</a></span></li><li><span class="file"><a href="gdecmds.html#gde_log">LOG</a></span></li><li><span class="file"><a href="gdecmds.html#gde_quit">Quit</a></span></li><li><span class="file"><a href="gdecmds.html#gde_rename">Rename</a></span></li><li><span class="file"><a href="gdecmds.html#setgd">SEtgd</a></span></li><li><span class="file"><a href="gdecmds.html#gde_show">SHow</a></span></li><li><span class="file"><a href="gdecmds.html#gde_template">Template </a></span></li><li><span class="file"><a href="gdecmds.html#gde_verify">Verify</a></span></li></ul></li><li><span class="file"><a href="nameregseg.html">Name, Region, and Segment Qualifiers</a></span><ul><li><span class="file"><a href="nameregseg.html#name_qualifiers">Name Qualifiers</a></span></li><li><span class="file"><a href="nameregseg.html#region_qual">Region Qualifiers</a></span></li><li><span class="file"><a href="nameregseg.html#segment_quals">Segment Qualifiers</a></span></li><li><span class="file"><a href="nameregseg.html#gblname_qual">Gblname Qualifiers</a></span></li><li><span class="file"><a href="nameregseg.html#instance_qual">Instance Qualifier</a></span></li></ul></li><li><span class="file"><a href="gde_cmmd_summ.html">GDE Command Summary</a></span><ul><li><span class="file"><a href="gde_cmmd_summ.html#qual_summ">GDE Command Qualifier Summary</a></span></li></ul></li></ul></li><li><span class="file"><a href="mupipchap.html">General Database Management</a></span><ul><li><span class="file"><a href="mup_intro.html">Introduction</a></span><ul><li><span class="file"><a href="mup_intro.html#mup_operations">Operations - Standalone and Concurrent Access</a></span></li><li><span class="file"><a href="mup_intro.html#mupip_main">MUPIP</a></span></li></ul></li><li><span class="file"><a href="gdm.html">Commands and Qualifiers</a></span><ul><li><span class="file"><a href="gdm.html#mup_back">BACKUP</a></span><ul><li><span class="file"><a href="gdm.html#backup_bkupdbjnl">-BKupdbjnl</a></span></li><li><span class="file"><a href="gdm.html#backup_bytestream">-Bytestream</a></span></li><li><span class="file"><a href="gdm.html#backup_database">-Database</a></span></li><li><span class="file"><a href="gdm.html#backup_nettimeout">-NETtimeout</a></span></li><li><span class="file"><a href="gdm.html#mup_newjnlfiles">-NEWJNLFILES</a></span></li><li><span class="file"><a href="gdm.html#backup_online">-Online</a></span></li><li><span class="file"><a href="gdm.html#backup_record">-Record</a></span></li><li><span class="file"><a href="gdm.html#backup_replace">-REPLace</a></span></li><li><span class="file"><a href="gdm.html#backup_replinstance">-REPLInstance </a></span></li><li><span class="file"><a href="gdm.html#backup_since">-Since</a></span></li><li><span class="file"><a href="gdm.html#backup_transaction">-Transaction</a></span></li><li><span class="file"><a href="gdm.html#examples_mup_backup">Examples for MUPIP BACKUP</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_create">CREATE</a></span><ul><li><span class="file"><a href="gdm.html#create_region">-Region</a></span></li><li><span class="file"><a href="gdm.html#examples_mup_create">Examples for MUPIP CREATE</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_downgrade">DOWNGRADE</a></span><ul><li><span class="file"><a href="gdm.html#down_ver">-VERSION={V4|V5|V63000A}</a></span></li><li><span class="file"><a href="gdm.html#examples_mup_downgrade">Examples for MUPIP DOWNGRADE</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_dumpfhead">DUMPFHEAD</a></span><ul><li><span class="file"><a href="gdm.html#mup_dumpfhead_file">-FILE=file</a></span></li><li><span class="file"><a href="gdm.html#mup_dumpfhead_region">-REGION=region</a></span></li><li><span class="file"><a href="gdm.html#examples_mup_dumpfhead">Examples for MUPIP DUMPFHEAD</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_endiancvt">ENDIANCVT </a></span><ul><li><span class="file"><a href="gdm.html#endiancvt_override">-OVerride</a></span></li><li><span class="file"><a href="gdm.html#examples_mup_endiancvt">Examples for MUPIP ENDIANCVT</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_exit">EXIT</a></span></li><li><span class="file"><a href="gdm.html#mup_extend">EXTEND</a></span><ul><li><span class="file"><a href="gdm.html#extend_blocks">-Blocks</a></span></li><li><span class="file"><a href="gdm.html#examples_mup_extend">Examples for MUPIP EXTEND</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_extract">EXTRACT</a></span><ul><li><span class="file"><a href="gdm.html#extract_format">-FOrmat</a></span></li><li><span class="file"><a href="gdm.html#extract_freeze">-FReeze</a></span></li><li><span class="file"><a href="gdm.html#extract_label">-LAbel</a></span></li><li><span class="file"><a href="gdm.html#extract_log">-LOg</a></span></li><li><span class="file"><a href="gdm.html#extract_null_iv">-Null_iv</a></span></li><li><span class="file"><a href="gdm.html#extract_region">-Region</a></span></li><li><span class="file"><a href="gdm.html#extract_select">-Select</a></span></li><li><span class="file"><a href="gdm.html#extract_stdout">-STdout</a></span></li><li><span class="file"><a href="gdm.html#examples_mup_extract">Examples for MUPIP EXTRACT</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_freeze">FREEZE
+</a></span><ul><li><span class="file"><a href="gdm.html#mup_freeze_off">-OFf</a></span></li><li><span class="file"><a href="gdm.html#mup_freeze_on">-ON</a></span></li><li><span class="file"><a href="gdm.html#mup_freeze_autorelease">-[NO]A[UTORELEASE</a></span></li><li><span class="file"><a href="gdm.html#mup_freeze_online">-ONLine</a></span></li><li><span class="file"><a href="gdm.html#mup_freeze_override">-OVerride</a></span></li><li><span class="file"><a href="gdm.html#mup_freeze_record">-Record</a></span></li><li><span class="file"><a href="gdm.html#examples_mup_freeze">Examples for MUPIP FREEZE</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_ftok">FTOK
+</a></span><ul><li><span class="file"><a href="gdm.html#ftok_db">-DB</a></span></li><li><span class="file"><a href="gdm.html#ftok_jnlpool">-JNLPOOL</a></span></li><li><span class="file"><a href="gdm.html#ftok_recvpool">-RECVPOOL</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_hash">HASH</a></span></li><li><span class="file"><a href="gdm.html#mup_integ">INTEG
+</a></span><ul><li><span class="file"><a href="gdm.html#integ_adjacency">-ADjacency</a></span></li><li><span class="file"><a href="gdm.html#integ_block">-BLock</a></span></li><li><span class="file"><a href="gdm.html#integ_brief">-BRief</a></span></li><li><span class="file"><a href="gdm.html#integ_fast">-FAst</a></span></li><li><span class="file"><a href="gdm.html#integ_file">-FIle</a></span></li><li><span class="file"><a href="gdm.html#integ_full">-FUll</a></span></li><li><span class="file"><a href="gdm.html#integ_keyranges">-Keyranges</a></span></li><li><span class="file"><a href="gdm.html#integ_map">-MAP</a></span></li><li><span class="file"><a href="gdm.html#integ_maxkeysize">-MAXkeysize</a></span></li><li><span class="file"><a href="gdm.html#integ_online">-Online </a></span></li><li><span class="file"><a href="gdm.html#integ_region">-Region</a></span></li><li><span class="file"><a href="gdm.html#integ_subscript">-Subscript</a></span></li><li><span class="file"><a href="gdm.html#integ_stats">-Stats</a></span></li><li><span class="file"><a href="gdm.html#tn_reset">-TN_reset</a></span></li><li><span class="file"><a href="gdm.html#integ_transaction">-TRansaction</a></span></li><li><span class="file"><a href="gdm.html#examples_mup_integ">Examples for MUPIP INTEG</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_intrpt">INTRPT
+</a></span></li><li><span class="file"><a href="gdm.html#mup_journal">JOURNAL</a></span></li><li><span class="file"><a href="gdm.html#mup_load">LOAD</a></span><ul><li><span class="file"><a href="gdm.html#load_format">-FOrmat</a></span></li><li><span class="file"><a href="gdm.html#load_begin">-BEgin</a></span></li><li><span class="file"><a href="gdm.html#load_end">-End</a></span></li><li><span class="file"><a href="gdm.html#load_fillfactor">-FIll_factor</a></span></li><li><span class="file"><a href="gdm.html#load_onerror">-Onerror</a></span></li><li><span class="file"><a href="gdm.html#load_stdin">-Stdin
+    </a></span></li><li><span class="file"><a href="gdm.html#examples_mup_load">Examples for MUPIP LOAD</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_rctldump">RCTLDUMP</a></span></li><li><span class="file"><a href="gdm.html#mup_reorg">REORG
+</a></span><ul><li><span class="file"><a href="gdm.html#reorg_encrypt">-Encrypt</a></span></li><li><span class="file"><a href="gdm.html#reorg_exclude">-Exclude</a></span></li><li><span class="file"><a href="gdm.html#reorg_fill_factor">-Fill_factor </a></span></li><li><span class="file"><a href="gdm.html#reorg_index_fill_factor">-Index_fill_factor</a></span></li><li><span class="file"><a href="gdm.html#reorg_resume">-Resume</a></span></li><li><span class="file"><a href="gdm.html#reorg_region">-Region</a></span></li><li><span class="file"><a href="gdm.html#reorg_select">-Select</a></span></li><li><span class="file"><a href="gdm.html#reorg_truncate">-Truncate</a></span></li><li><span class="file"><a href="gdm.html#examples_mup_reorg">Examples for MUPIP REORG</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_replicate_cm">REPLICATE</a></span></li><li><span class="file"><a href="gdm.html#mup_restore">RESTORE</a></span><ul><li><span class="file"><a href="gdm.html#mup_restore_extend">-Extend
+</a></span></li><li><span class="file"><a href="gdm.html#examples_mup_restore">Examples for MUPIP RESTORE</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_rundown">RUNDOWN</a></span><ul><li><span class="file"><a href="gdm.html#mup_rundown_file">-File</a></span></li><li><span class="file"><a href="gdm.html#mup_rundown_override">-Override</a></span></li><li><span class="file"><a href="gdm.html#mup_rundown_region">-Region</a></span></li><li><span class="file"><a href="gdm.html#mup_rundown_relinkctl">-Relinkctl</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_set">SET</a></span><ul><li><span class="file"><a href="gdm.html#set_file">-File</a></span></li><li><span class="file"><a href="gdm.html#set_jnlfile">-Jnlfile</a></span></li><li><span class="file"><a href="gdm.html#set_region">-Region</a></span></li><li><span class="file"><a href="gdm.html#set_replication">-REPlication</a></span></li><li><span class="file"><a href="gdm.html#set_access_method">-ACcess_method </a></span></li><li><span class="file"><a href="gdm.html#set_asyncio">-ASyncIO </a></span></li><li><span class="file"><a href="gdm.html#set_defer_time">-Defer_time </a></span></li><li><span class="file"><a href="gdm.html#set_deferallocate">-DEFER_Allocate </a></span></li><li><span class="file"><a href="gdm.html#set_epochtaper">-Epochtaper</a></span></li><li><span class="file"><a href="gdm.html#set_extension_count">-Extension_count</a></span></li><li><span class="file"><a href="gdm.html#set_flush_time">-Flush_time</a></span></li><li><span class="file"><a href="gdm.html#set_global_buffers">-Global_buffers</a></span></li><li><span class="file"><a href="gdm.html#hard_spin_count">-Hard_spin_count</a></span></li><li><span class="file"><a href="gdm.html#inst_freeze_on_error">-INST_freeze_on_error</a></span></li><li><span class="file"><a href="gdm.html#set_journal">-Journal</a></span></li><li><span class="file"><a href="gdm.html#set_key_size">-Key_size </a></span></li><li><span class="file"><a href="gdm.html#set_lock_space">-Lock_space</a></span></li><li><span class="file"><a href="gdm.html#mutex_slots">-Mutex_slots</a></span></li><li><span class="file"><a href="gdm.html#null_subscripts">-Null_subscripts</a></span></li><li><span class="file"><a href="gdm.html#lck_shares_db_crit">-Lck_shares_db_crit</a></span></li><li><span class="file"><a href="gdm.html#set_qdbrundown">-Qdbrundown</a></span></li><li><span class="file"><a href="gdm.html#set_bypass_recov">-PArtial_recov_bypass</a></span></li><li><span class="file"><a href="gdm.html#set_read_only">-Read_only</a></span></li><li><span class="file"><a href="gdm.html#set_record_size">-RECord_size </a></span></li><li><span class="file"><a href="gdm.html#set_reserved_bytes">-REServed_bytes</a></span></li><li><span class="file"><a href="gdm.html#sleep_spin_count">-SLeep_spin_count
+</a></span></li><li><span class="file"><a href="gdm.html#spin_sleep_mask">-Spin_sleep_mask</a></span></li><li><span class="file"><a href="gdm.html#set_stats">-STATs </a></span></li><li><span class="file"><a href="gdm.html#set_stdnullcoll">-STDnullcoll </a></span></li><li><span class="file"><a href="gdm.html#set_trigger_flush">-Trigger_flush </a></span></li><li><span class="file"><a href="gdm.html#set_version">-Version</a></span></li><li><span class="file"><a href="gdm.html#set_wait_disk">-WAit_disk </a></span></li><li><span class="file"><a href="gdm.html#set_writes_per_flush">-WRites_per_flush </a></span></li><li><span class="file"><a href="gdm.html#examples_mup_set">Examples for MUPIP SET</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_size">SIZE</a></span></li><li><span class="file"><a href="gdm.html#mup_stop">STOP
+</a></span></li><li><span class="file"><a href="gdm.html#mup_trigger">TRIGGER</a></span><ul><li><span class="file"><a href="gdm.html#examples_mup_trigger">Examples for MUPIP TRIGGER</a></span></li></ul></li><li><span class="file"><a href="gdm.html#mup_gupgrade">UPGRADE
+</a></span><ul><li><span class="file"><a href="gdm.html#examples_of_mup_upgrade">Example for MUPIP UPGRADE</a></span></li></ul></li></ul></li><li><span class="file"><a href="mup_summary.html">MUPIP Command Summary</a></span></li></ul></li><li><span class="file"><a href="journaling.html">GT.M Journaling</a></span><ul><li><span class="file"><a href="ch06s01.html">Introduction </a></span><ul><li><span class="file"><a href="ch06s01.html#jnl_files_intro">Journal Files </a></span></li><li><span class="file"><a href="ch06s01.html#jnl_recov_file">Recovery from a Journal File</a></span><ul><li><span class="file"><a href="ch06s01.html#for_recv">Forward Recovery</a></span></li><li><span class="file"><a href="ch06s01.html#backward_recovery_jnl">Backward Recovery </a></span></li></ul></li><li><span class="file"><a href="ch06s01.html#rolledback_files">rolled_bak* files</a></span></li><li><span class="file"><a href="ch06s01.html#jnl_fil_acc_auth">Journal Files Access Authorization</a></span></li><li><span class="file"><a href="ch06s01.html#trigg_jnl_fil">Triggers in Journal Files</a></span></li><li><span class="file"><a href="ch06s01.html#before_image_jnl">BEFORE_IMAGE Journaling  </a></span></li><li><span class="file"><a href="ch06s01.html#nobefore_image_jnl">NOBEFORE_IMAGE Journaling  </a></span></li><li><span class="file"><a href="ch06s01.html#choose_be_nobe">Choosing between BEFORE_IMAGE and NOBEFORE_IMAGE </a></span></li><li><span class="file"><a href="ch06s01.html#brk_trns_file">Broken Transaction File</a></span></li><li><span class="file"><a href="ch06s01.html#lost_transact_file">Lost Transaction File</a></span></li><li><span class="file"><a href="ch06s01.html#epoch_definition">Epoch</a></span></li><li><span class="file"><a href="ch06s01.html#jnl_benefits">Journaling Benefits </a></span></li><li><span class="file"><a href="ch06s01.html#backup_jnl_files">Backup Journal Files  </a></span></li><li><span class="file"><a href="ch06s01.html#sel_db_jnling">Select database files for Journaling  </a></span></li><li><span class="file"><a href="ch06s01.html#fencing_trans">Fencing Transactions </a></span></li><li><span class="file"><a href="ch06s01.html#to_jnl_or_no_jnl">Deciding Whether to Use Fencing </a></span><ul><li><span class="file"><a href="ch06s01.html#fencing_advantages">Fencing Advantages </a></span></li><li><span class="file"><a href="ch06s01.html#fencing_disadv">Fencing Disadvantages </a></span></li></ul></li><li><span class="file"><a href="ch06s01.html#jnl_view_keyword">VIEW Keywords</a></span></li><li><span class="file"><a href="ch06s01.html#view_funct_keywords_jnl">$VIEW() Keywords</a></span></li></ul></li><li><span class="file"><a href="mup_jnl_set.html">SET</a></span><ul><li><span class="file"><a href="mup_jnl_set.html#jnl_set_obj">SET Object Identifying Qualifiers </a></span></li><li><span class="file"><a href="mup_jnl_set.html#jnl_set_action">SET Action Qualifiers </a></span><ul><li><span class="file"><a href="mup_jnl_set.html#set_jnl_options">SET -JOURNAL Options </a></span></li></ul></li><li><span class="file"><a href="mup_jnl_set.html#jnl_examples_mup_set">Examples for MUPIP SET</a></span></li></ul></li><li><span class="file"><a href="mup_journal.html">JOURNAL
+</a></span><ul><li><span class="file"><a href="mup_journal.html#jnl_action">Journal Action Qualifiers</a></span><ul><li><span class="file"><a href="mup_journal.html#jnl_extractstd">-EXtract[=&lt;file-name&gt;|-stdout]</a></span></li><li><span class="file"><a href="mup_journal.html#jnl_parallel">-PARA[LLEL][=n]</a></span></li><li><span class="file"><a href="mup_journal.html#recover">-RECover
+</a></span></li><li><span class="file"><a href="mup_journal.html#rollback">-ROLLBACK [{-ON[LINE]|-NOO[NLINE]}]
+
+</a></span></li><li><span class="file"><a href="mup_journal.html#show">-SHow=show-option-list
+
+
+
+
+
+</a></span></li><li><span class="file"><a href="mup_journal.html#jnl_verify">-[NO]Verify</a></span></li></ul></li><li><span class="file"><a href="mup_journal.html#jnl_direction">Journal Direction Qualifiers</a></span></li><li><span class="file"><a href="mup_journal.html#jnl_time">Journal Time Qualifiers</a></span></li><li><span class="file"><a href="mup_journal.html#jnl_sequence">Journal Sequence Number Qualifiers</a></span></li><li><span class="file"><a href="mup_journal.html#jnl_ctrl_quals">Journal Control Qualifiers</a></span></li><li><span class="file"><a href="mup_journal.html#jnl_select">Journal Selection Qualifiers</a></span></li></ul></li><li><span class="file"><a href="jnl_ext.html">Journal Extract Formats</a></span></li></ul></li><li><span class="file"><a href="ch07.html">Database Replication</a></span><ul><li><span class="file"><a href="ch07s01.html">Introduction</a></span><ul><li><span class="file"><a href="ch07s01.html#db_trans_no">Database Transaction Number</a></span></li><li><span class="file"><a href="ch07s01.html#jnl_seq_no">Journal Sequence Number</a></span></li><li><span class="file"><a href="ch07s01.html#stm_seq_no">Stream Sequence Number</a></span></li><li><span class="file"><a href="ch07s01.html#repl_gesz">Using Multiple Instances in the same Process</a></span></li><li><span class="file"><a href="ch07s01.html#sppl_exampls">Examples</a></span><ul><li><span class="file"><a href="ch07s01.html#simp_examp">Simple Example</a></span></li><li><span class="file"><a href="ch07s01.html#d0e22279">Ensuring Consistency with Rollback</a></span></li><li><span class="file"><a href="ch07s01.html#rollback_design">Rollback Not Desired or Required by Application Design</a></span></li><li><span class="file"><a href="ch07s01.html#two_ori_pri_fail">Two Originating Primary Failures</a></span></li><li><span class="file"><a href="ch07s01.html#replication_on_rlbk">Replication and Online Rollback</a></span></li></ul></li><li><span class="file"><a href="ch07s01.html#si_repl_limits">Limitations - SI Replication</a></span></li><li><span class="file"><a href="ch07s01.html#Replication_Architecture">Replication Architecture
+
+</a></span><ul><li><span class="file"><a href="ch07s01.html#helper_processes">Helper Processes</a></span></li><li><span class="file"><a href="ch07s01.html#Filters">Filters</a></span></li><li><span class="file"><a href="ch07s01.html#repl_instance_file">Replication Instance File</a></span></li></ul></li></ul></li><li><span class="file"><a href="ch07s02.html">Implementing Replication and Recovery</a></span><ul><li><span class="file"><a href="ch07s02.html#app_arch">Application Architecture</a></span><ul><li><span class="file"><a href="ch07s02.html#mssg">Implement a Message Delivery System</a></span></li></ul></li><li><span class="file"><a href="ch07s02.html#sys_req">System Requirements</a></span><ul><li><span class="file"><a href="ch07s02.html#prim_sec_stat_id">Root Primary Status Identification</a></span></li></ul></li><li><span class="file"><a href="ch07s02.html#failover_repl">Switchover
+
+</a></span></li><li><span class="file"><a href="ch07s02.html#inst_freeze">Instance Freeze</a></span></li><li><span class="file"><a href="ch07s02.html#tls_repl">TLS/SSL Replication</a></span><ul><li><span class="file"><a href="ch07s02.html#create_root">Creating a root-level certification authority</a></span></li><li><span class="file"><a href="ch07s02.html#create_leaf">Creating leaf-level certificates</a></span></li><li><span class="file"><a href="ch07s02.html#create_config">Creating a configuration file</a></span></li></ul></li><li><span class="file"><a href="ch07s02.html#ntwrk_link">Network Link between Systems</a></span></li><li><span class="file"><a href="ch07s02.html#choosing_between">Choosing between BEFORE_IMAGE and NOBEFORE_IMAGE journaling</a></span><ul><li><span class="file"><a href="ch07s02.html#repl_recovr">Recovery</a></span></li><li><span class="file"><a href="ch07s02.html#comp_othr_recov">Comparison other than Recovery</a></span></li></ul></li><li><span class="file"><a href="ch07s02.html#repl_data_repair">Database Repair</a></span></li></ul></li><li><span class="file"><a href="ch07s03.html">Procedures</a></span><ul><li><span class="file"><a href="ch07s03.html#downld_repl_ex">Download Replication Examples</a></span><ul><li><span class="file"><a href="ch07s03.html#procenv">env</a></span></li><li><span class="file"><a href="ch07s03.html#dbcreateproc">db_create</a></span></li><li><span class="file"><a href="ch07s03.html#backupreplproc">backup_repl</a></span></li><li><span class="file"><a href="ch07s03.html#replsetupproc">repl_setup</a></span></li><li><span class="file"><a href="ch07s03.html#originstartproc">originating_start</a></span></li><li><span class="file"><a href="ch07s03.html#replstartproc">replicating_start</a></span></li><li><span class="file"><a href="ch07s03.html#supplsetupproc">suppl_setup</a></span></li><li><span class="file"><a href="ch07s03.html#replstatusproc1">repl_status</a></span></li><li><span class="file"><a href="ch07s03.html#rollbackproc11">rollback</a></span></li><li><span class="file"><a href="ch07s03.html#originstop">originating_stop</a></span></li><li><span class="file"><a href="ch07s03.html#replstopproc">replicating_stop</a></span></li><li><span class="file"><a href="ch07s03.html#replstartsuppproc">replicating_start_suppl_n</a></span></li><li><span class="file"><a href="ch07s03.html#gengcproc">gen_gc</a></span></li><li><span class="file"><a href="ch07s03.html#certsetupproc">cert_setup</a></span></li><li><span class="file"><a href="ch07s03.html#gencaproc">gen_ca</a></span></li><li><span class="file"><a href="ch07s03.html#genleafproc">gen_leaf</a></span></li></ul></li><li><span class="file"><a href="ch07s03.html#abrepl1">Setting up an A→B replication configuration with empty databases</a></span></li><li><span class="file"><a href="ch07s03.html#abcrepl1">Setting up an A→B→C replication configuration with empty databases</a></span></li><li><span class="file"><a href="ch07s03.html#aprepl">Setting up an A→P replication configuration with empty databases</a></span></li><li><span class="file"><a href="ch07s03.html#riborg">Replicating Instance Starts from Backup of Originating Instance (A→B and A→P )</a></span></li><li><span class="file"><a href="ch07s03.html#nrml_cutov">Switchover possibilities in an A→B replication configuration</a></span></li><li><span class="file"><a href="ch07s03.html#recov_bap">Switchover possibilities in a B←A→P replication configuration </a></span><ul><li><span class="file"><a href="ch07s03.html#a_req_rlbk">A requires rollback</a></span></li><li><span class="file"><a href="ch07s03.html#ap_req_rllbk">A and P require rollback</a></span></li><li><span class="file"><a href="ch07s03.html#rollbk_nt_req">Rollback not required by application design</a></span></li><li><span class="file"><a href="ch07s03.html#automatic_rollback1">Rollback automatically</a></span></li></ul></li><li><span class="file"><a href="ch07s03.html#recov_bapq">Switchover possibilities in a B←A→P→Q replication configuration </a></span></li><li><span class="file"><a href="ch07s03.html#gldreplupd">Changing the global directory in an A→B replication configuration</a></span></li><li><span class="file"><a href="ch07s03.html#roll_sft_upg">Rolling Software Upgrade</a></span><ul><li><span class="file"><a href="ch07s03.html#upg_repl_first">Upgrade the replicating instance first (A→B)</a></span></li><li><span class="file"><a href="ch07s03.html#upd_orig_first">Upgrade the originating instance first (A→B)</a></span></li></ul></li><li><span class="file"><a href="ch07s03.html#shut_inst">Shutting down an instance</a></span></li><li><span class="file"><a href="ch07s03.html#up_re_in_fi">Creating a new Replication Instance File</a></span></li><li><span class="file"><a href="ch07s03.html#tls_repl_proc">Setting up a secured TLS replication connection</a></span></li><li><span class="file"><a href="ch07s03.html#schema_chng_filters">Schema Change Filters
+</a></span></li><li><span class="file"><a href="ch07s03.html#recwason">Recovering from the replication WAS_ON state </a></span></li><li><span class="file"><a href="ch07s03.html#rollbidle">Rollback data from crashed (idle) regions</a></span></li><li><span class="file"><a href="ch07s03.html#updateresyncproc1">Setting up a new replicating instance of an originating instance (A→B,
+P→Q, or A→P)</a></span></li><li><span class="file"><a href="ch07s03.html#updateresyncproc2">Replacing the replication instance file of a replicating instance (A→B
+and P→Q)</a></span></li><li><span class="file"><a href="ch07s03.html#updateresyncproc3">Replacing the replication instance file of a replicating instance (A→P)</a></span></li><li><span class="file"><a href="ch07s03.html#updateresyncproc4">Setting up a new replicating instance from a backup of the originating instance
+(A→P)</a></span></li><li><span class="file"><a href="ch07s03.html#proc4">Setting up an A→P configuration for the first time if P is an existing instance (having
+its own set of updates) </a></span></li></ul></li><li><span class="file"><a href="replication.html">Commands and Qualifiers</a></span><ul><li><span class="file"><a href="replication.html#trng_repl_on_off">Turning Replication On/Off</a></span></li><li><span class="file"><a href="replication.html#create_repl_inst">Creating the Replication Instance File</a></span></li><li><span class="file"><a href="replication.html#disp_change_repl">Displaying/Changing the attributes of Replication Instance File and Journal Pool</a></span></li><li><span class="file"><a href="replication.html#start_src_srvr">Starting the Source Server</a></span></li><li><span class="file"><a href="replication.html#sour_srvr_shutdown">Shutting down the Source Server</a></span></li><li><span class="file"><a href="replication.html#activate_passive_src_srvr">Activating a Passive Source Server</a></span></li><li><span class="file"><a href="replication.html#deavtivate_act_src_srvr">Deactivating an Active Source Server</a></span></li><li><span class="file"><a href="replication.html#stop_src_filtr">Stopping the Source Filter</a></span></li><li><span class="file"><a href="replication.html#chck_srvr_hlth">Checking Server Health</a></span></li><li><span class="file"><a href="replication.html#chng_log_file">Changing the Log File</a></span></li><li><span class="file"><a href="replication.html#enable_disable_dtld_log">Enabling/Disabling Detailed Logging</a></span></li><li><span class="file"><a href="replication.html#stp_src_srv">Stopping a Source Server</a></span></li><li><span class="file"><a href="replication.html#rprt_current_backlog">Reporting the Current Backlog of Journal Records</a></span></li><li><span class="file"><a href="replication.html#process_lost">Processing Lost Transactions File</a></span><ul><li><span class="file"><a href="replication.html#lost_tn_fmt">Lost Transaction File format</a></span></li></ul></li><li><span class="file"><a href="replication.html#strt_rcvr_srvr">Starting the Receiver Server
+
+</a></span></li><li><span class="file"><a href="replication.html#strt_upd_proc">Starting the Update Process</a></span></li><li><span class="file"><a href="replication.html#stop_upd_proc">Stopping the Update Process and/or the Receiver Server</a></span></li><li><span class="file"><a href="replication.html#chk_srvr_hlth">Checking Server  Health</a></span></li><li><span class="file"><a href="replication.html#chng_log">Changing the Log File</a></span></li><li><span class="file"><a href="replication.html#enable_disable_login">Enabling/Disabling Detailed Logging</a></span></li><li><span class="file"><a href="replication.html#rep_curr_backlog">Reporting the Current Backlog of Journal Records</a></span></li><li><span class="file"><a href="replication.html#rollback_db_after_sys_fail">Rolling Back a Replicated Database </a></span></li></ul></li></ul></li><li><span class="file"><a href="lkechap.html">M Lock Utility (LKE)</a></span><ul><li><span class="file"><a href="introduction.html">Introduction</a></span><ul><li><span class="file"><a href="introduction.html#invoke_exit_LKE">To Invoke and Exit LKE</a></span></li><li><span class="file"><a href="introduction.html#establish_GD">To establish a Global Directory</a></span></li></ul></li><li><span class="file"><a href="lke_comm_quals.html">LKE Commands and Qualifiers
+</a></span><ul><li><span class="file"><a href="lke_comm_quals.html#lke_clear">Clear</a></span></li><li><span class="file"><a href="lke_comm_quals.html#lke_clnup">CLNup</a></span></li><li><span class="file"><a href="lke_comm_quals.html#LKE_Show">SHow
+</a></span></li><li><span class="file"><a href="lke_comm_quals.html#LKE_Exit">Exit</a></span></li><li><span class="file"><a href="lke_comm_quals.html#Help">Help</a></span></li><li><span class="file"><a href="lke_comm_quals.html#LKE_SPAWN">SPawn
+</a></span></li></ul></li><li><span class="file"><a href="lke_command_summ.html">Summary
+</a></span></li><li><span class="file"><a href="lke_exercises.html">LKE Exercises</a></span><ul><li><span class="file"><a href="lke_exercises.html#lke_exer1">Exercise 1: Preventing concurrent updates using M Locks</a></span></li><li><span class="file"><a href="lke_exercises.html#lke_exer2">Exercise 2: Rectifying a deadlock situation</a></span></li></ul></li></ul></li><li><span class="file"><a href="ch09.html">GT.M Database Structure(GDS)</a></span><ul><li><span class="file"><a href="ch09s01.html">Database File Organization with GDS  </a></span><ul><li><span class="file"><a href="ch09s01.html#DFH">Database File Header </a></span></li><li><span class="file"><a href="ch09s01.html#FHDE">File Header Data Elements </a></span></li></ul></li><li><span class="file"><a href="ch09s02.html">Local Bitmaps  </a></span></li><li><span class="file"><a href="ch09s03.html">Master Bitmap  </a></span></li><li><span class="file"><a href="ch09s04.html">Database Structure  </a></span><ul><li><span class="file"><a href="ch09s04.html#tree_org">Tree Organization</a></span></li><li><span class="file"><a href="ch09s04.html#gds_blks">GDS Blocks </a></span></li><li><span class="file"><a href="ch09s04.html#Gds_rec">GDS Records </a></span><ul><li><span class="file"><a href="ch09s04.html#spanning_nodes">Using GDS records to hold spanning nodes  </a></span></li></ul></li><li><span class="file"><a href="ch09s04.html#gds_keys_D">GDS Keys </a></span></li><li><span class="file"><a href="ch09s04.html#compression_count">Compression Count </a></span></li><li><span class="file"><a href="ch09s04.html#use_of_keys">Use of Keys  </a></span></li><li><span class="file"><a href="ch09s04.html#character_keys">Characteristics of Keys  </a></span></li><li><span class="file"><a href="ch09s04.html#gvnameD">Global Variable Names </a></span></li><li><span class="file"><a href="ch09s04.html#str_subscr">String Subscripts </a></span></li><li><span class="file"><a href="ch09s04.html#numeric_Subsr">Numeric Subscripts </a></span></li></ul></li></ul></li><li><span class="file"><a href="ch10.html">Database Structure Editor</a></span><ul><li><span class="file"><a href="operate_dse.html">Operating in DSE</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html">DSE Commands and Qualifiers</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#add_dse">ADD</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#add_qualifiers_dse">Qualifiers of ADD</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#dse_exam_add">Examples for ADD</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#all_dse_cmmd">ALL</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#all_qualifiers_dse">Qualifiers</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#dse_example_add2">Examples of ALL</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#buffer_flush_cmmd_dse">Buffer_flush</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#change_dse_cmmd">CHange
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#change_qualifiers_block">CHANGE -BLock Qualifiers</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#change_qualifiers_file">CHANGE -FIleheader Qualifiers</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#change_example_Dse">Examples for CHANGE</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#dse_cache">CAche
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#Dse_cache_quals">Qualifiers of CACHE</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#dse_cache_Exampl">Examples for CACHE</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#close_dse_cmmd">CLose</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#critical_dse_cmmd">CRitical
+
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#qaulifiers_change_dse">Qualifiers of CRITICAL</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#crit_examp">Examples for CRITICAL</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#dump_dse_cmmd">Dump
+
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#dump_dse_qualifiers">Qualifiers of DUMP</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#dump_ex1">Examples for DUMP </a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#evaluate_dse_cmmd">EValuate
+
+
+
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#evaluate_dse_qualifiers">Qualifiers of Evaluate</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#examp_eval">Examples for EVALUATE
+</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#exit_dse_cmmd">EXit
+</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#find_cmmd_dse">Find
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#find_qualifiers_dse">Qualifiers of FIND</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#find_Examp">Examples for FIND
+</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#help_dse_cmmd">Help</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#integrit_dse_cmmd">Integrit
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#integrit_dse_qualifiers">Qualifiers of Integrit</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#maps_dse_cmmd">Maps
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#map_qualifiers_dse">Qualifiers for MAP</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#exam_maps">Examples</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#open_cmmd_dse">OPen
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#Open_qaulifier_dse">Qualifiers for OPEN</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#Dse_open_example">Examples for OPEN</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#overwrite_dse_cmmd">OVerwrite
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#overwrite_dse_qualifier">Qualifiers for OVERWRITE</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#dse_Example_overwrite">Examples for Overwrite</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#page_cmmd_dse">Page
+</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#range_dse_cmmd">RAnge
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#range_dse_qualifiers">Qualifiers of RANGE</a></span></li><li><span class="file"><a href="dse_cmmds_quals.html#example_Range">Examples for RANGE</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#remove_dse_cmmd">REMove
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#remove_dse_qualifier">Qualifiers of REMOVE</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#restore_dse_cmmd">REStore
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#qualifiers_restore_dse">Qualifiers of RESTORE</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#save_dse_cmmd">SAve
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#save_dse_qualifiers">Qualifiers of SAVE</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#shift">SHift
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#shift_dse_qualifiers">Qualifiers of SHIFT</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#dse_spawnl">SPawn
+</a></span><ul><li><span class="file"><a href="dse_cmmds_quals.html#spawn_example_D">Examples of SPAWN</a></span></li></ul></li><li><span class="file"><a href="dse_cmmds_quals.html#wcinit_dse_cmmd">Wcinit
+</a></span></li></ul></li><li><span class="file"><a href="dse_summary.html">DSE Command Summary</a></span></li></ul></li><li><span class="file"><a href="ch11.html">Maintaining Database Integrity</a></span><ul><li><span class="file"><a href="ch11s01.html">Verifying Database Integrity</a></span><ul><li><span class="file"><a href="ch11s01.html#regular_scheduled_verfication">Regularly Scheduled Verification</a></span></li><li><span class="file"><a href="ch11s01.html#before_or_after_major_transfer">Before or After Major Transfers</a></span></li><li><span class="file"><a href="ch11s01.html#imm_after_catastrophic_events">Immediately after Catastrophic Events</a></span></li><li><span class="file"><a href="ch11s01.html#imm_after_run_time_errors">Immediately after Run-Time Database Errors </a></span></li><li><span class="file"><a href="ch11s01.html#imm_after_database_repair">Immediately After Database Repairs</a></span></li></ul></li><li><span class="file"><a href="ch11s02.html">Approaches to Database Recovery</a></span><ul><li><span class="file"><a href="ch11s02.html#recover_frm_jrnls">Recover from Journals</a></span></li><li><span class="file"><a href="ch11s02.html#restore_frm_backup">Restore from Backup</a></span></li><li><span class="file"><a href="ch11s02.html#repair_with_dse">Repair with DSE</a></span></li><li><span class="file"><a href="ch11s02.html#preventive_maintenance">Preventive Maintenance</a></span><ul><li><span class="file"><a href="ch11s02.html#determine_the_cause_of_the_problem">Determining the Cause of the Problem</a></span></li><li><span class="file"><a href="ch11s02.html#chp11_mupip_recovery">MUPIP Recovery</a></span></li><li><span class="file"><a href="ch11s02.html#follow_up_chapter11_mupip_recovery">Follow-up</a></span></li></ul></li></ul></li><li><span class="file"><a href="ch11s03.html">Repairing the Database with DSE</a></span><ul><li><span class="file"><a href="ch11s03.html#using_the_proper_db_file">Using the Proper Database File</a></span></li><li><span class="file"><a href="ch11s03.html#locating_struc_with_dse">Locating Structures with DSE</a></span></li><li><span class="file"><a href="ch11s03.html#safety_in_repairs">Safety in Repairs</a></span></li><li><span class="file"><a href="ch11s03.html#discarding_data">Discarding Data</a></span></li><li><span class="file"><a href="ch11s03.html#concurrent_repairs">Concurrent Repairs</a></span></li><li><span class="file"><a href="ch11s03.html#terminate_processes">Terminating Processes</a></span></li><li><span class="file"><a href="ch11s03.html#rec_dam_spa">Recovering data from damaged binary extracts</a></span><ul><li><span class="file"><a href="ch11s03.html#currupt_errors">CORRUPT Errors</a></span></li><li><span class="file"><a href="ch11s03.html#ldspan_errors">LDSPANGLOINCMP Errors</a></span></li><li><span class="file"><a href="ch11s03.html#rep_example">Example–Repairing an error in a binary extract </a></span></li></ul></li></ul></li><li id="webhelp-currentid"><span class="file"><a href="ch11s04.html">Finding and Fixing Database Errors</a></span><ul><li><span class="file"><a href="ch11s04.html#c1_possible_cache_control_problems">C1–Possible Cache Control Problems</a></span></li><li><span class="file"><a href="ch11s04.html#h1_process_hangs">H1–Process Hangs</a></span></li><li><span class="file"><a href="ch11s04.html#h3_db_access_problems">H3–Database Access Problems</a></span></li><li><span class="file"><a href="ch11s04.html#h4_database_cache_problms">H4–Database Cache Problems</a></span></li><li><span class="file"><a href="ch11s04.html#h5_critical_section_problems">H5–Critical Section Problems</a></span></li><li><span class="file"><a href="ch11s04.html#h6_Unix_problems">H6–UNIX Problems</a></span></li><li><span class="file"><a href="ch11s04.html#h7_disk_hardware_problems">H7–Disk Hardware Problems</a></span></li><li><span class="file"><a href="ch11s04.html#h8_application_problems">H8–Application Problems</a></span><ul><li><span class="file"><a href="ch11s04.html#persistent_locks">Persistent LOCKs</a></span></li><li><span class="file"><a href="ch11s04.html#deadlocks">Deadlocks</a></span></li><li><span class="file"><a href="ch11s04.html#prevention_of_a_deadlock">Preventing Deadlocks</a></span></li></ul></li><li><span class="file"><a href="ch11s04.html#i1_mupip_integ_errors">I1–MUPIP INTEG Errors</a></span><ul><li><span class="file"><a href="ch11s04.html#evaluate_danger_level">Evaluating the Danger Level of a Database Problem</a></span><ul><li><span class="file"><a href="ch11s04.html#requires_immed_attention">Requires Immediate Attention</a></span></li><li><span class="file"><a href="ch11s04.html#can_be_deferred">Can Be Deferred</a></span></li></ul></li></ul></li><li><span class="file"><a href="ch11s04.html#gtm_version_mismatch_chi2">I2–GT.M Version Mismatch</a></span></li><li><span class="file"><a href="ch11s04.html#i3_file_header_errors">I3–File Header Errors</a></span></li><li><span class="file"><a href="ch11s04.html#i4_file_size_errors">I4–File Size Errors</a></span></li><li><span class="file"><a href="ch11s04.html#i5_more_db_access_problems">I5–More Database Access Problems</a></span></li><li><span class="file"><a href="ch11s04.html#i6_transient_errors">I6–Transient Errors</a></span></li><li><span class="file"><a href="ch11s04.html#i7_db_rundown_prblm">I7–Database Rundown Problem</a></span></li><li><span class="file"><a href="ch11s04.html#i8_repair_induced_prblm">I8–Repair-Induced Problems</a></span></li><li><span class="file"><a href="ch11s04.html#k1_bad_key">K1–Bad Key</a></span></li><li><span class="file"><a href="ch11s04.html#k2_keys_misplaced">K2–Keys Misplaced</a></span></li><li><span class="file"><a href="ch11s04.html#k3_block_doubly_allocated">K3–Block Doubly Allocated</a></span></li><li><span class="file"><a href="ch11s04.html#k4_pointer_prbl">K4–Pointer Problems</a></span></li><li><span class="file"><a href="ch11s04.html#i5_star_key_prblms">K5–Star Key Problems</a></span></li><li><span class="file"><a href="ch11s04.html#k6_compression_count_error">K6–Compression Count Error</a></span></li><li><span class="file"><a href="ch11s04.html#k7_key_warning">K7–Key Warning</a></span></li><li><span class="file"><a href="ch11s04.html#m1_bitmap_errors">M1–Bitmap Errors</a></span></li><li><span class="file"><a href="ch11s04.html#m2_bitmap_header_problms">M2–Bitmap Header Problems</a></span></li><li><span class="file"><a href="ch11s04.html#O1_bad_block">O1–Bad Block</a></span></li><li><span class="file"><a href="ch11s04.html#o2_record_errors">O2–Record Errors</a></span></li><li><span class="file"><a href="ch11s04.html#o3_data_block_errors">O3–Data Block Errors</a></span></li><li><span class="file"><a href="ch11s04.html#o4_salvage">O4–Salvage of Data Blocks with Lost Indices</a></span><ul><li><span class="file"><a href="ch11s04.html#downloadsalvage">Download salvage.m</a></span></li></ul></li><li><span class="file"><a href="ch11s04.html#sal_dam_spa">O5–Salvage of a damaged spanning node</a></span></li><li><span class="file"><a href="ch11s04.html#p1_process_damage">P1–Process Damage</a></span></li><li><span class="file"><a href="ch11s04.html#q1_restict_db_access">Q1–Restricting Database Access</a></span></li><li><span class="file"><a href="ch11s04.html#r1_gtm_run_time_errors">R1–GT.M Run-Time Errors</a></span></li><li><span class="file"><a href="ch11s04.html#r2_structure_db_integ">R2–Structural Database Integrity Errors</a></span></li><li><span class="file"><a href="ch11s04.html#r2_run_time_db_cache">R3–Run-time Database Cache Problems</a></span></li><li><span class="file"><a href="ch11s04.html#r4_stopped_processes">R4–Stopped Processes</a></span></li><li><span class="file"><a href="ch11s04.html#r5_no_more_room">R5–No More Room in the File</a></span></li><li><span class="file"><a href="ch11s04.html#r6_gtmassert_and_gtmcheck_errors">R6–GTMASSERT and GTMCHECK Errors</a></span></li><li><span class="file"><a href="ch11s04.html#r7_interlock_q">R7–Interlocked Queue Hardware Problems</a></span></li><li><span class="file"><a href="ch11s04.html#r8_db_tree">R8–Database Tree Maximum Level Exceeded</a></span></li><li><span class="file"><a href="ch11s04.html#r9_read">R9–Read-only Process Blocked</a></span></li></ul></li></ul></li><li><span class="file"><a href="ch12.html">Database Encryption</a></span><ul><li><span class="file"><a href="ch12s01.html">Introduction </a></span><ul><li><span class="file"><a href="ch12s01.html#encrypt_overview_desc">Overview </a></span></li><li><span class="file"><a href="ch12s01.html#encrypt_disclaim">Disclaimer </a></span></li><li><span class="file"><a href="ch12s01.html#encryption_limit">Limitations of GT.M Database Encryption </a></span><ul><li><span class="file"><a href="ch12s01.html#dar_nt_prtc">Data Not At Rest Not Protected </a></span></li><li><span class="file"><a href="ch12s01.html#keys_in_prc_Add">Keys in the Process Address Space / Environment</a></span></li><li><span class="file"><a href="ch12s01.html#long_lived_keys">Long Lived Keys </a></span></li><li><span class="file"><a href="ch12s01.html#volumin_sampl_enc_data">Voluminous Samples of Encrypted Data </a></span></li><li><span class="file"><a href="ch12s01.html#Encry_algo_nt_Supprt">Encryption Algorithms Neither Endorsed Nor Supported by FIS </a></span></li><li><span class="file"><a href="ch12s01.html#no_key_recov">No Key Recovery </a></span></li><li><span class="file"><a href="ch12s01.html#human_intervention">Human Intervention Required </a></span></li><li><span class="file"><a href="ch12s01.html#mm_databases">MM Databases </a></span></li></ul></li><li><span class="file"><a href="ch12s01.html#Alternatives_to_Database_Encry">Alternatives to Database Encryption </a></span></li><li><span class="file"><a href="ch12s01.html#Device_IO">Device IO </a></span></li><li><span class="file"><a href="ch12s01.html#Replication_and_GT_CM">GT.CM </a></span></li><li><span class="file"><a href="ch12s01.html#fips">FIPS Mode</a></span></li></ul></li><li><span class="file"><a href="ch12s02.html">Theory of Operation </a></span><ul><li><span class="file"><a href="ch12s02.html#encr_Definitions">Definition of Terms </a></span></li><li><span class="file"><a href="ch12s02.html#encrypt_overview_1">Overview </a></span><ul><li><span class="file"><a href="ch12s02.html#encrwarn">Warning </a></span></li><li><span class="file"><a href="ch12s02.html#data_db_jnl">Data in Database and Journal Files </a></span></li><li><span class="file"><a href="ch12s02.html#Symmetric_and_Asymmetric_Ciphe_">Symmetric and Asymmetric Ciphers </a></span></li><li><span class="file"><a href="ch12s02.html#Key_Ring_on_Disk">Key Ring on Disk </a></span></li><li><span class="file"><a href="ch12s02.html#Master_Key_File_Key_Files">Master Key Configuration File and Encryption Keys </a></span></li><li><span class="file"><a href="ch12s02.html#Memory_Key_Ring">Memory Key Ring </a></span></li><li><span class="file"><a href="ch12s02.html#key_validation_hasing">Key Validation and Hashing </a></span></li><li><span class="file"><a href="ch12s02.html#Database_Operations">Database Operation </a></span></li></ul></li></ul></li><li><span class="file"><a href="ch12s03.html">Examples of use </a></span><ul><li><span class="file"><a href="ch12s03.html#Key_Management">Key Management </a></span></li></ul></li><li><span class="file"><a href="ch12s04.html">Tested Reference Implementations </a></span></li><li><span class="file"><a href="ch12s05.html">Special note - GNU Privacy Guard and Agents</a></span><ul><li><span class="file"><a href="ch12s05.html#use_pinentry_pgm">Using the reference implementation's custom pinentry program</a></span></li></ul></li><li><span class="file"><a href="ch12s06.html">Installation </a></span></li><li><span class="file"><a href="ch12s07.html">
+      Administration and Operation of Encrypted Databases </a></span><ul><li><span class="file"><a href="ch12s07.html#util_programs"> Utility Programs </a></span><ul><li><span class="file"><a href="ch12s07.html#encr_gde">GDE </a></span><ul><li><span class="file"><a href="ch12s07.html#format_enr">Format / Upgrade </a></span></li><li><span class="file"><a href="ch12s07.html#noencryption_qual">-[NO]ENcryption</a></span></li></ul></li><li><span class="file"><a href="ch12s07.html#encr_mupip_cm">MUPIP </a></span><ul><li><span class="file"><a href="ch12s07.html#encr_mupip_Cre">MUPIP CREATE </a></span></li><li><span class="file"><a href="ch12s07.html#encr_mup_jnl">MUPIP JOURNAL </a></span></li><li><span class="file"><a href="ch12s07.html#encr_mup_load">MUPIP LOAD </a></span></li></ul></li><li><span class="file"><a href="ch12s07.html#encr_dse">DSE </a></span><ul><li><span class="file"><a href="ch12s07.html#changing_hash">Changing the hash in the database file header </a></span></li></ul></li></ul></li><li><span class="file"><a href="ch12s07.html#changing_encr_keys">Changing the Encryption Keys </a></span></li><li><span class="file"><a href="ch12s07.html#Db_create_encr">Encrypted Database Creation </a></span></li></ul></li><li><span class="file"><a href="ch12s08.html">Plugin Architecture &amp; Interface </a></span><ul><li><span class="file"><a href="ch12s08.html#encr_packaging">Packaging </a></span></li><li><span class="file"><a href="ch12s08.html#extn_gtm_encr">Extensions to the GT.M External Interface </a></span></li><li><span class="file"><a href="ch12s08.html#encr_operation">Operation </a></span></li></ul></li><li><span class="file"><a href="ch12s09.html">Using the Reference Implementation with Older Releases  </a></span></li></ul></li><li><span class="file"><a href="ch13.html">GT.CM Client/Server</a></span><ul><li><span class="file"><a href="ch13s01.html">Introduction</a></span></li><li><span class="file"><a href="ch13s02.html">Overview</a></span><ul><li><span class="file"><a href="ch13s02.html#gtcm_server">GT.CM Server</a></span></li><li><span class="file"><a href="ch13s02.html#gtcm_client">GT.CM Client</a></span></li><li><span class="file"><a href="ch13s02.html#gtcm_stsh">GT.CM Server Startup and Shutdown</a></span><ul><li><span class="file"><a href="ch13s02.html#gtcm_srv_Start">GT.CM Server Startup</a></span></li><li><span class="file"><a href="ch13s02.html#gtcm_srv_Shut">GT.CM Server Shutdown</a></span></li></ul></li><li><span class="file"><a href="ch13s02.html#encry_types_oper">Types of Operations</a></span></li><li><span class="file"><a href="ch13s02.html#gtcp_err_msg">Error Messages</a></span></li><li><span class="file"><a href="ch13s02.html#gtcm_examples">Examples</a></span></li></ul></li></ul></li><li><span class="file"><a href="ipc_usage.html">GT.M's IPC Resource Usage</a></span><ul><li><span class="file"><a href="apas01.html">Examining GT.M's IPC Resources</a></span></li><li><span class="file"><a href="apas02.html">gmtsecshr</a></span></li></ul></li><li><span class="file"><a href="monitoring_gtm.html">Monitoring GT.M </a></span><ul><li><span class="file"><a href="apbs01.html">Monitoring GT.M Messages</a></span></li><li><span class="file"><a href="apbs02.html">Managing core dumps </a></span></li></ul></li><li><span class="file"><a href="compiling_icu.html">Compiling ICU on GT.M supported platforms</a></span><ul><li><span class="file"><a href="apcs01.html">Compiling ICU</a></span><ul><li><span class="file"><a href="apcs01.html#ICUAIX44">Compiling ICU 4.4 on AIX 6.1</a></span><ul><li><span class="file"><a href="apcs01.html#installicuaix">Installation Instructions</a></span></li></ul></li><li><span class="file"><a href="apcs01.html#ICU_4.2AIX">Compiling ICU 4.2 on AIX 6.1</a></span><ul><li><span class="file"><a href="apcs01.html#installicu42aix">Installation Instructions</a></span></li></ul></li><li><span class="file"><a href="apcs01.html#compile_icu42">Compiling ICU 4.2 on HP Integrity IA64 HP-UX 11.31</a></span><ul><li><span class="file"><a href="apcs01.html#inst_compile_icu42">Installation Instructions</a></span></li></ul></li><li><span class="file"><a href="apcs01.html#ICU_IA64">Compiling ICU 3.6 on HP Integrity IA64 HP-UX 11.31</a></span><ul><li><span class="file"><a href="apcs01.html#instr_ICU_IA64">Installation Instructions</a></span></li></ul></li><li><span class="file"><a href="apcs01.html#comp_rhel">Compiling ICU 4.2 on Red Hat Enterprise Linux 4 Update 2</a></span><ul><li><span class="file"><a href="apcs01.html#instruc_comp_rhel">Installation Instructions</a></span></li></ul></li><li><span class="file"><a href="apcs01.html#compiling_ICUV3.6">Compiling ICU 3.6 on Red Hat Enterprise Linux 4 Update 2</a></span><ul><li><span class="file"><a href="apcs01.html#instru_compiling_ICUV3.6">Installation Instructions</a></span></li></ul></li><li><span class="file"><a href="apcs01.html#compico42sol">Compiling ICU 4.2 on Solaris 9 (SunOS 5.9)</a></span><ul><li><span class="file"><a href="apcs01.html#instruct_compico42sol">Installation Instructions</a></span></li></ul></li><li><span class="file"><a href="apcs01.html#ICU_Solaris">Compiling ICU 3.6 on Solaris 9 (SunOS 5.9)</a></span><ul><li><span class="file"><a href="apcs01.html#instruc_ICU_Sol">Installation Instructions</a></span></li></ul></li></ul></li></ul></li><li><span class="file"><a href="build_encry_lib.html">Building Encryption Libraries</a></span><ul><li><span class="file"><a href="apds01.html">Building Encryption Libraries </a></span><ul><li><span class="file"><a href="apds01.html#Ubuntu_LTS_x86_64_4182407">Debian, Ubuntu, RedHat and Fedora </a></span></li><li><span class="file"><a href="apds01.html#IBM_AIX_5_3_pSeries_6214410681">IBM AIX 7.1 (pSeries) </a></span><ul><li><span class="file"><a href="apds01.html#gpg_error_instr">GPG-ERROR </a></span></li><li><span class="file"><a href="apds01.html#gcrypt_aix">GCRYPT </a></span></li><li><span class="file"><a href="apds01.html#crypto_aix">CRYPTO (From OpenSSL) </a></span></li><li><span class="file"><a href="apds01.html#gpgme_aix">GPGME </a></span></li><li><span class="file"><a href="apds01.html#aix_gnupg">GNUPG </a></span></li></ul></li></ul></li></ul></li><li><span class="file"><a href="app_security_phil.html">GT.M Security Philosophy</a></span><ul><li><span class="file"><a href="apes01.html">Philosophy</a></span><ul><li><span class="file"><a href="apes01.html#nrml_usrgir">Normal User and Group Id Rule</a></span><ul><li><span class="file"><a href="apes01.html#sec_excep">Exceptions</a></span><ul><li><span class="file"><a href="apes01.html#Sec_shrd_mem">Shared Memory Exception for BG</a></span></li><li><span class="file"><a href="apes01.html#gtmsecshr_excep">gtmsecshr Exception</a></span></li></ul></li><li><span class="file"><a href="apes01.html#Security_Triggers">Triggers</a></span></li></ul></li><li><span class="file"><a href="apes01.html#gtmc_excep">Recommendations</a></span></li></ul></li><li><span class="file"><a href="apes02.html">gtmsecshr commands</a></span></li><li><span class="file"><a href="apes03.html">Shared Resource Authorization Permissions</a></span></li></ul></li><li><span class="file"><a href="apf.html">GTMPCAT - GT.M Process/Core Analysis Tool </a></span><ul><li><span class="file"><a href="apfs01.html">Overview</a></span></li><li><span class="file"><a href="apfs02.html">Usage</a></span></li><li><span class="file"><a href="apfs03.html">Interactive Mode</a></span></li></ul></li><li><span class="file"><a href="Package_GTM_Apps.html">Packaging GT.M Applications</a></span><ul><li><span class="file"><a href="apgs01.html">Setting up a Captive User Application with GT.M</a></span><ul><li><span class="file"><a href="apgs01.html#sample_profile">Sample .profile</a></span></li></ul></li><li><span class="file"><a href="apgs02.html">Invoking GT.M through a C main() program</a></span></li><li><span class="file"><a href="apgs03.html">Defensive Practices</a></span></li><li><span class="file"><a href="apgs04.html">Other</a></span></li></ul></li><li><span class="file"><a href="TLS_Configuration_File.html">Creating a TLS Configuration File</a></span><ul><li><span class="file"><a href="aphs01.html">Creating a TLS Configuration File</a></span></li></ul></li><li><span class="file"><a href="go01.html">Glossary</a></span></li></ul></div></div><div id="searchDiv"><div id="search"><form onsubmit="Verifie(ditaSearch_Form);return false" name="ditaSearch_Form" class="searchForm"><fieldset class="searchFieldSet"><legend>Search</legend><center><input id="textToSearch" name="textToSearch" type="text" class="searchText"/> &nbsp; <input onclick="Verifie(ditaSearch_Form)" type="button" class="searchButton" value="Go" id="doSearch"/></center></fieldset></form></div><div id="searchResults"><center/></div></div></div></div></div></body>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/webhelp/content/ch11s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:01:47 GMT -->
+</html>

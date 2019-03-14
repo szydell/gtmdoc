@@ -1,0 +1,442 @@
+<html>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch07s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:43 GMT -->
+<head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Commands and Qualifiers</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch07.html" title="Chapter 7. Database Replication"><link rel="prev" href="ch07s02.html" title="Implementing Replication and Recovery"><link rel="next" href="chapter8.html" title="Chapter 8. M Lock Utility"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Commands and Qualifiers</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch07s02.html">Prev</a> </td><th width="60%" align="center">Chapter 7. Database Replication</th><td width="20%" align="right"> <a accesskey="n" href="chapter8.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Commands and Qualifiers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="commands_qualifiers"></a>Commands and Qualifiers</h2></div></div></div><div class="sect2" title="Controlling Replication"><div class="titlepage"><div><div><h3 class="title"><a name="cntrl_repl"></a>Controlling Replication</h3></div></div></div><p>The following M commands and qualifiers control database replication in a GT.M
+environment.</p><div class="sect3" title="Turning Replication On/Off"><div class="titlepage"><div><div><h4 class="title"><a name="trng_repl_on_off"></a>Turning Replication On/Off</h4></div></div></div><p>Command Syntax:</p><pre class="programlisting">mupip set {/file db-file | /region reg-list} /replication={ON | OFF}</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/FILE and /REGION</span>
+</em></span>
+</p><p>Use these qualifiers in the same manner that you would use them for a
+MUPIP SET command. Refer the "MUPIP" chapter for detailed
+information.</p><p>
+<span class="emphasis"><em>
+
+<span>/REPLICATION</span>
+</em></span>
+</p><p>Sets journal characteristics and changes the replication state
+simultaneously. Can also be used with the 
+<span> /JOURNAL</span> qualifier.</p><p>
+<span class="emphasis"><em>ON</em></span>
+</p><p>Use this qualifier to enable replication for the selected database file(s)
+or region(s). This action also turns before-image journaling on. The system
+creates a new journal file for each database file or region, and renames the
+existing journal file. </p><p>
+<span class="emphasis"><em>OFF</em></span>
+</p><p>Use this qualifier to disable replication of the database file(s) or
+region(s).</p></div><div class="sect3" title="Starting the Source Server"><div class="titlepage"><div><div><h4 class="title"><a name="start_src_srvr"></a>Starting the Source Server</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /source /start
+{/secondary=&lt;hostname:port&gt; | /passive}
+/log=&lt;log file name&gt;
+[/buffsize=&lt;Journal Pool size in bytes&gt;]
+[/filter=&lt;filter command&gt;]
+[/connectparams="&lt;hard tries&gt;, &lt;hard tries period&gt;, &lt;soft tries
+period&gt;, &lt;alert time&gt;, &lt;heartbeat period&gt;, &lt;max heartbeat wait&gt;"]</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/REPLICATE</span>
+</em></span>
+</p><p>Use this qualifier to access the replication subsystem.</p><p>
+<span class="emphasis"><em>
+
+<span>/SOURCE</span>
+</em></span>
+</p><p>Use this qualifier to identify the Source Server.</p><p>
+<span class="emphasis"><em>
+
+<span>/START</span>
+</em></span>
+</p><p>Use this qualifier to start the Source Server.</p><p>
+<span class="emphasis"><em>
+
+<span>/SECONDARY=&lt;hostname:port&gt;</span>
+</em></span>
+</p><p>Use this qualifier to identify the secondary system. The qualifier should
+include an IP address or hostname that resolves to an IP address and the
+port at which the Receiver Server is waiting for a connection.</p><p>
+<span class="emphasis"><em>
+
+<span>/PASSIVE</span>
+</em></span>
+</p><p>Use this qualifier to start the Source Server in passive mode.</p><p>
+<span class="emphasis"><em>
+
+<span>/LOG=&lt;log file name&gt;</span>
+</em></span>
+</p><p>Use this mandatory qualifier to specify the location of the log
+file.</p><p>
+<span class="emphasis"><em>
+
+<span>/BUFFSIZE=&lt;Journal Pool size in
+bytes&gt;</span>
+</em></span>
+</p><p>Use this optional qualifier to specify the size of the Journal Pool. The
+server rounds the size up or down to suit its needs. Any size less than 1 MB
+is rounded up to 1 MB. If you do not specify a qualifier, the size defaults
+to the GT.M default value of 64 MB. Remember that you cannot exceed the
+system-provided maximum shared memory. For systems with high update rates,
+specify a larger buffer size to avoid the overflows and file I/O that occur
+when the Source Server reads journal records from journal files.</p><p>
+<span class="emphasis"><em>
+
+<span>/FILTER=&lt;filter command&gt;</span>
+</em></span>
+</p><p>Use this optional qualifier to specify the complete path of the filter
+program and any associated arguments. If you specify arguments, you must
+enclose the command string in quotation marks. If a filter is active, the
+Source Server passes the entire output stream to the filter as input. Then,
+the output from the filter stream passes to the secondary system. If the
+filter program is an M program with entry-ref OLD2NEW^FILTER, specify the
+following path:</p><pre class="programlisting">filter="mumps /run OLD2NEW^FILTER"</pre><p>
+
+</p><p>The filter must be written to take its imput from SYS$INPUT and write its
+output to SYS$OUTPUT. The format of the input and output data is the MUPIP
+journal file extract format.The filter must maintain a strict 1:1
+relationship between transactions on the input stream and transactions on
+the output stream. If a transaction on the input results in no sets and
+kills in the output, the filter must still write an empty transaction to the
+output stream.</p><p>
+<span class="emphasis"><em>
+
+<span>/connectparams=&lt;hard tries&gt;,&lt;hard tries
+period&gt;, &lt;soft tries period&gt;,&lt;alert
+time&gt;,&lt;heartbeat period&gt;,&lt;max heartbeat
+wait&gt;</span>
+</em></span>
+</p><p>Use this optional qualifier to specify the connection retry parameters. If
+the connection between the Source and Receiver Servers is broken or the
+Source Server fails to connect to the Receiver Server at startup, the Source
+Server applies these parameters to the reconnection attempts.</p><p>First, the Source Server makes the number of reconnection attempts
+specified by the &lt;hard tries&gt; value every &lt;hard tries period&gt;
+milliseconds. Then, the Source Server attempts reconnection every &lt;soft
+tries period&gt; seconds and logs an alert message every &lt;alert time&gt;
+seconds. If the specified &lt;alert time&gt; value is less than &lt;hard
+tries&gt;*&lt;hard tries period&gt;/1000 + lt;soft tries period&gt;, it is
+set to the larger value. The Source Server sends a heartbeat message to the
+Receiver Server every &lt;heartbeat period&gt; seconds and expects a
+response back from the Receiver Server within &lt;max heartbeat wait&gt;
+seconds.</p></div><div class="sect3" title="Shutting Down the Source Server"><div class="titlepage"><div><div><h4 class="title"><a name="sour_srvr_shutdown"></a>Shutting Down the Source Server</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /source /shutdown [/timeout=&lt;timeout in seconds&gt;]</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>
+/SHUTDOWN</span>
+</em></span>
+</p><p>Use this qualifier to shutdown the Source Server.</p><p>
+<span class="emphasis"><em>
+
+<span>/TIMEOUT=&lt;timeout in
+seconds&gt;</span>
+</em></span>
+</p><p>Use this optional qualifier to specify the period of time the server
+should wait before shutting down. If you do not specify a qualifier, the
+default timeout period is 30 seconds. If you specify <span class="emphasis"><em>
+<span>/TIMEOUT=0</span>
+
+</em></span>, shutdown occurs immediately.</p></div><div class="sect3" title="Activating a Passive Source Server"><div class="titlepage"><div><div><h4 class="title"><a name="activate_passive_src_srvr"></a>Activating a Passive Source Server</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /source /activate
+/secondary=&lt;hostname:port&gt;
+[/log=&lt;log file name&gt;]
+[/connectparams="&lt;hard tries&gt;,&lt;hard tries period&gt;, &lt;soft tries period&gt;,
+&lt;alert time&gt;,&lt;heartbeat period&gt;,&lt;max heartbeat wait&gt;"]</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/ACTIVATE</span>
+</em></span>
+</p><p>Use this qualifier to activate a passive Source Server. Once activated,
+the Source Server reads journal records from the Journal Pool and transports
+them to the system specified by the <span class="emphasis"><em>
+<span>/SECONDARY</span>
+
+</em></span>qualifier.</p></div><div class="sect3" title="Deactivating an Active Source Server"><div class="titlepage"><div><div><h4 class="title"><a name="deavtivate_act_src_srvr"></a>Deactivating an Active Source Server</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /SOURCE /DEACTIVATE</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/DEACTIVATE</span>
+</em></span>
+</p><p>Use this qualifier to make an active Source Server passive. To change the
+secondary system with which the Source Server is communicating, deactivate
+the Source Server and then activate it with a different secondary
+system.</p></div><div class="sect3" title="Stopping the Source Filter"><div class="titlepage"><div><div><h4 class="title"><a name="stop_src_filtr"></a>Stopping the Source Filter</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /source /stopsourcefilter</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/STOPSOURCEFILTER</span>
+</em></span>
+</p><p>Use this qualifier to instruct the Source Server to stop any active
+filter.</p></div><div class="sect3" title="Checking Server Health"><div class="titlepage"><div><div><h4 class="title"><a name="chck_srvr_hlth"></a>Checking Server Health</h4></div></div></div><p>Use the following command and qualifier to determine whether the Source
+Server is running.</p><p>Command syntax:</p><pre class="programlisting">mupip replicate /source /checkhealth</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/CHECKHEALTH</span>
+</em></span>
+</p><p>Use this qualifier to determine whether the Source Server is running. If
+the Source Server is running, the exit code is 0 (zero). If the Source
+Server is not running or an error exists, the exit code is not 0.</p></div><div class="sect3" title="Changing the Log File"><div class="titlepage"><div><div><h4 class="title"><a name="chng_log_file"></a>Changing the Log File</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">&gt;mupip replicate /source /changelog /log=&lt;log file name&gt;</pre><p>Qualfiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/CHANGELOG</span>
+</em></span>
+</p><p>Use this qualifier to instruct the Source Server to change its log
+file.</p><p>
+<span class="emphasis"><em>
+
+<span>/LOG=&lt;log file name &gt;</span>
+</em></span>
+</p><p>Use this mandatory qualifier to specify the name of the new log file. If
+you specify the name of the current log file, no change occurs.</p></div><div class="sect3" title="Enabling/Disabling Detailed Logging"><div class="titlepage"><div><div><h4 class="title"><a name="enable_disable_dtld_log"></a>Enabling/Disabling Detailed Logging</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /source /statslog={ON | OFF} [/log=&lt;log file name&gt;]</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/STATSLOG={ON | OFF}</span>
+</em></span>
+</p><p>Use this qualifier to enable or disable detailed logging. When ON, the
+system logs current-state information of the Source Server and messages
+exchanged between the Source and Receiver Servers. If <span class="emphasis"><em>
+<span>/</span>
+</em></span> log is not specified the system logs information to the same
+file used for general logging. By default, detailed logging is OFF. Once you
+enable it (ON), changing <span class="emphasis"><em>
+
+<span>/STATSLOG</span>
+</em></span> to
+OFF can stop detailed logging.</p></div><div class="sect3" title="Reporting the Current Backlog of Journal Records"><div class="titlepage"><div><div><h4 class="title"><a name="rprt_current_backlog"></a>Reporting the Current Backlog of Journal Records</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /source /showbacklog</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/SHOWBACKLOG</span>
+</em></span>
+</p><p>Use this qualifier to report the current backlog of journal records (in
+terms of JNL_SEQNO) on the output device (normally the standard output
+device). This qualifier does not affect the statistics logged in the log
+file. The backlog is the difference between the last JNL_SEQNO written to
+the Journal Pool and the last JNL_SEQNO sent by the Source Server to the
+Receiver Server.</p></div><div class="sect3" title="Starting the Receiver Server"><div class="titlepage"><div><div><h4 class="title"><a name="strt_rcvr_srvr"></a>Starting the Receiver Server</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /receiver /start
+/listenport=&lt;port number&gt;
+/log=&lt;log file name&gt;
+[/buffsize=&lt;Receive Pool size in bytes&gt;]
+[/filter=&lt;filter command&gt;]
+[/stopsourcefilter] [/updateresync]</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/RECEIVER</span>
+</em></span>
+</p><p>Use this qualifier to identify the Receiver Server.</p><p>
+<span class="emphasis"><em>
+
+<span>/LISTENPORT=&lt;port
+number&gt;</span>
+</em></span>
+</p><p>Use this qualifier to specify the TCP port number the Receiver Server will
+listen to for incoming connections from a Source Server. Note that the
+current implementation of the Receiver Server does not support machines with
+multiple IP addresses.</p><p>
+<span class="emphasis"><em>
+
+<span>/STOPSOURCEFILTER</span>
+</em></span>
+</p><p>When a secondary restarts after an upgrade to a newer version, use this
+qualifier to stop any active filter at the primary Source Server.
+Alternatively, the filter at the primary system's Source Server can also be
+stopped by issuing the following command:</p><pre class="programlisting">mupip replicate /source /stopsourcefilter</pre><p>
+<span class="emphasis"><em>
+<span>/</span>updateresync</em></span>
+</p><p>Indicates to the Source Server on the primary to update the last known
+synchronization point on the primary to that of the secondary.</p></div><div class="sect3" title="Starting the Update Process"><div class="titlepage"><div><div><h4 class="title"><a name="strt_upd_proc"></a>Starting the Update Process</h4></div></div></div><p>The following command starts the Update Process only, if it has been
+shutdown independent of the Receiver Server.</p><p>Command syntax:</p><pre class="programlisting">mupip replicate /receiver /start /updateonly</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/UPDATEONLY</span>
+</em></span>
+</p><p>If the Update Process has been shutdown independent of the Receiver
+Server, use this qualifier to restart the Update Process.</p></div><div class="sect3" title="Stopping the Update Process"><div class="titlepage"><div><div><h4 class="title"><a name="stop_upd_proc"></a>Stopping the Update Process</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /receiver /shutdown [/updateonly]
+[/timeout=&lt;timeout in seconds&gt;]</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/UPDATEONLY</span>
+</em></span>
+</p><p>Use this qualifier to stop only the Update Process. If you do not specify
+this qualifier, both the Update Process and Receiver Server shut
+down.</p></div><div class="sect3" title="Checking Server Health"><div class="titlepage"><div><div><h4 class="title"><a name="chk_srvr_hlth"></a>Checking Server Health</h4></div></div></div><p>Use the following command to determine whether the Receiver Server is
+running.</p><p>Command syntax:</p><pre class="programlisting">mupip replicate /receiver /checkhealth</pre></div><div class="sect3" title="Changing the Log File"><div class="titlepage"><div><div><h4 class="title"><a name="chng_log"></a>Changing the Log File</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /receiver /changelog /log=&lt;log file name&gt;</pre></div><div class="sect3" title="Enabling/Disabling Detailed Logging"><div class="titlepage"><div><div><h4 class="title"><a name="enable_disable_login"></a>Enabling/Disabling Detailed Logging</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /receiver /statslog={ON | OFF}
+[/log=&lt;log file name&gt;]</pre></div><div class="sect3" title="Reporting the Current Backlog of Journal Records"><div class="titlepage"><div><div><h4 class="title"><a name="rep_curr_backlog"></a> Reporting the Current Backlog of Journal Records</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip replicate /receiver /showbacklog</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/SHOWBACKLOG</span>
+</em></span>
+</p><p>Use this qualifier to report the current backlog (i.e., the difference
+between the last JNL_SEQNO written to the Receive Pool and the last JNLSEQNO
+processed by the Update Process) of journal records on the Receiver
+Server.</p></div><div class="sect3" title="Rolling Back the Database After System Failures"><div class="titlepage"><div><div><h4 class="title"><a name="rollback_db_after_sys_fail"></a>Rolling Back the Database After System Failures</h4></div></div></div><p>Command syntax:</p><pre class="programlisting">mupip journal /rollback {[/fetchresync=&lt;port number&gt; | /resync=&lt;JNL_SEQNO&gt;]}
+/losttrans=&lt;extract file&gt; file-list</pre><p>Qualifiers:</p><p>
+<span class="emphasis"><em>
+
+<span>/ROLLBACK</span>
+</em></span>
+</p><p>Use this qualifier to rollback the database. If you do not use the
+<span class="emphasis"><em>
+
+<span>/FETCHRESYNC </span>
+</em></span> qualifier, the database rolls
+back to the last consistent state.</p><p>
+<span class="emphasis"><em>
+
+<span>/FETCHRESYNC=&lt;port
+number&gt;</span>
+</em></span>
+</p><p>Use this qualifier to roll back to the transaction that is identified by a
+reference point (a JNL_SEQNO) fetched from the primary system. This command
+rolls back a former primary to the journal sequence number at which the
+current primary took over.</p><p>The &lt;port number&gt; is the communication port number that the rollback
+command uses when fetching the reference point. Please provide, as &lt;port
+number&gt; for rollback, the same number used by the Receiver Server and
+with which the primary will attempt to establish communication.</p><p>The reference point sent by the primary system is the RESYNC_SEQNO
+(explained later) that the primary has maintained. The database/journal
+files are rolled back to the earlier RESYNC_SEQNO (i.e., the one received
+from primary or the one maintained locally). </p><p>
+<span class="emphasis"><em>
+
+<span>/RESYNC=&lt;JNL_SEQNO&gt;</span>
+</em></span>
+</p><p>Use this qualifier to roll back to the transaction identified by
+&lt;JNL_SEQNO&gt; only when the database/ journal files need to be rolled
+back to a specific point. If you specify a &lt;JNL_SEQNO&gt; that is greater
+than the last consistent state, the database/journal files will be rolled
+back to the last consistent state. Under normal operating conditions, you
+would not need this qualifier.</p><p>
+<span class="emphasis"><em>
+
+<span>/LOSTTRANS=&lt;extract
+file&gt;</span>
+</em></span>
+</p><p>If failover occurs (i.e., primary system fails and secondary system
+assumes the primary system role), some transactions committed to A's
+database may not be reflected in B's database. Before the former primary
+becomes the new secondary, these transactions must be rolled off before it
+can assume the role of secondary. These transactions are known as "lost
+transactions." </p><p>The system stores extracted lost transactions in the file &lt;extract
+file&gt; specified by this mandatory qualifier. The starting point for the
+search for lost transactions is the JNL_SEQNO obtained from the primary
+system in the <span class="emphasis"><em>
+<span>/FETCHRESYNC</span>
+
+</em></span> operation. If
+<span class="emphasis"><em>
+<span>/FETCHRESYNC</span>
+
+</em></span> is not specified, &lt;extract
+file&gt; lists the post-consistent-state transactions that were undone by
+the rollback procedure to reach a consistent state.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The extracted lost transactions list may contain broken transactions
+due to system failures that occurred during processing. Do not resolve
+these transactions&#8211;they are not considered to be committed.</p></td></tr></table></div><p>
+<span class="emphasis"><em>
+
+<span>FILE-LIST</span>
+</em></span>
+</p><p>Use this qualifier to indicate the list of journal files to be used in the
+rollback operation. When you specify * for file-list, GT.M uses the journal
+files of the database files listed in the Global Directory that 
+<span>GTM$GBLDIR</span> points
+to for rollback.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Currently, the only value accepted for file-list is *. This prevents
+incomplete input from being supplied to the rollback operation. 
+</p></td></tr></table></div><p>When a database file is rolled back, the corresponding journal file is
+also rolled back so that the two are synchronized. To roll back a journal
+file GT.M must truncate it at the JNL_SEQNO to which the database file is
+rolled back. Before the journal file is rolled back, GT.M makes a copy of it
+in the same directory. The name of the copy is the same as the name of the
+journal file; however, it includes the suffix _roll_bak. This "roll back"
+file is not created until the journal file is rolled back and truncated. A
+journal file whose entire contents are eliminated by a rollback is renamed
+with the suffix _rolled_bak. FIS recommends that you rename the roll
+back journal file immediately after a rollback if you want to save it, to
+prevent a subsequent rollback from overwriting it.</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="swtch_jrnl_file"></a></h4></div></div></div><p>The journal file header includes a field that stores the name of the
+previous generation of the journal file when switched, thereby creating a
+chain of generations (i.e., each journal file points to its previous
+generation). The resynchronization and rollback operations use this chain to
+locate all the required generations of a journal file.</p><p>The previous generation of a journal file is listed as part of the output
+of the following command that displays the header information of a journal
+file. To display the header information of a journal file &lt;jnl_file&gt;,
+invoke the following command:</p><pre class="programlisting">mupip journal /show=header &lt;jnl_file&gt;</pre><p>Invoke the following command to change the previous generation journal
+file name in the journal file header:</p><p>
+<span class="emphasis"><em>
+
+<span> mupip set /jnlfile &lt;jnl_file&gt;
+/[no]prevjnlfile=&lt;jnlfilename&gt; [-bypass]
+</span>
+</em></span>
+</p><p>Descriptions of the command qualifiers follow:</p><p>
+<span class="emphasis"><em>
+
+<span>/JNLFILE</span>
+</em></span>
+</p><p>Use this qualifier to indicate that the target for the SET function is a
+journal file.</p><p>
+<span class="emphasis"><em>&lt;journal file&gt;</em></span>
+</p><p>Use this qualifier to define the target journal file for the SET
+function.</p><p>
+<span class="emphasis"><em>
+
+<span>/PREVJNLFILE =
+&lt;jnlfilename&gt;</span>
+</em></span>
+</p><p>Use this qualifier to change the name of the previous generation of the
+journal file in the header of &lt;jnl_file&gt; to &lt;jnlfilename&gt; (e.g.,
+when moving the previous generation journal file to a different location).
+The file name can be a full path-name or a relative path name; however,
+before the file-name is stored in the header, it is expanded to its full
+path-name.</p><p>
+<span class="emphasis"><em>
+
+<span>/NOPREVJNLFILE</span>
+</em></span>
+</p><p>Use this qualifier to cut the generation link of the journal file
+&lt;jnl_file&gt;. The name of the previous generation journal file is
+nullified in the header of &lt;jnl_file&gt;. Such an operation is
+appropriate when it is assured that there will never be a reason for a
+rollback to the previous generation journal file.</p><p>
+<span class="emphasis"><em>
+
+<span>/BYPASS</span>
+</em></span>
+</p><p>Use this qualifier to override the requirement that database files (or
+their corresponding journal files) affected by the set command be available
+standalone.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Changing the previous generation file link when a rollback operation
+is in progress or when the Source Server is actively replicating, can
+damage the journal file and hamper recoverability.</p></td></tr></table></div><p>To eliminate the generation link of a journal file, specify noprevjnlfile
+option as part of the <span class="emphasis"><em>
+
+<span>/JOURNAL=&lt;journal-options&gt;</span>
+</em></span> qualifier for
+MUPIP SET. When switching the journal file for database file mumps.dat, use
+the following command to cut the journal file generation link of the newly
+created journal file newmumps.mjl:</p><pre class="programlisting">mupip set
+/journal=(before,noprevjnlfile,file=newmumps.mjl)
+/file mumps.dat</pre><p>When journal files are switched as part of the online backup command, the
+generation link of a journal file can be cut. mupip backup accepts the
+<span class="emphasis"><em>
+
+<span>/JOURNAL=&lt;journal-options&gt;</span>
+</em></span>
+qualifier along with <span class="emphasis"><em>
+
+<span>/NEWJNLFILEs</span>
+</em></span> qualifier
+of online backup. Specify the noprevjnlfile as a journal-option to cut the
+journal file generation link of the newly created journal file.</p></div><div class="sect3" title="Re-synchronizing Primary and Secondary Databases"><div class="titlepage"><div><div><h4 class="title"><a name="resync_prime_sec"></a>Re-synchronizing Primary and Secondary Databases</h4></div></div></div><p>The RESYNC_SEQNO of a system is the lesser of the following values:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The last JNL_SEQNO sent as primary or received as secondary</p></li><li class="listitem"><p>The largest JNL_SEQNO in the local database/journal files</p></li></ul></div><p>The Source Server on the primary system records the JNL_SEQNO of the last
+transaction successfully sent in RESYNC_SEQNO. The Update Process on the
+secondary system records the JNL_SEQNO of the last transaction successfully
+processed in RESYNC_SEQNO. The RESYNC_SEQNO is maintained as resync_seqno in
+the file-header of each region.</p><p>The RESYNC_SEQNO of a system is the maximum of the local region
+resync_seqnos. If a rollback operation rolls a database/journal file to a
+JNL_SEQNO that is less than the resync_seqno of that database file, the
+resync_seqno is set to the largest JNL_SEQNO in that database/journal
+file.</p><p>When invoking the rollback <span class="emphasis"><em>
+<span>/FETCHRESYNC
+</span>
+
+</em></span> command on the
+secondary, the RESYNC_SEQNO maintained on the secondary system is sent to
+the Source Server on the primary. This is part of the request message for
+the reference point of the resynchronization. The Source Server replies to
+this message with the primary system's RESYNC_SEQNO. For each replicated
+region, the Source Server also finds the per-region transaction number
+corresponding to the transaction that marks the synchronization point for
+that region. This transaction number is the largest JNL_SEQNO less than or
+equal to the minimum of the primary and secondary systems' RESYNC_SEQNO. The
+Source Server stores the transaction number found in resync_tn in the region
+file header. The set of all resync_tns represents the state of the database
+at the primary system when it synchronizes with the secondary system.</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch07s02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="chapter8.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Implementing Replication and Recovery </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 8. M Lock Utility</td></tr></table></div></body>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch07s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:43 GMT -->
+</html>

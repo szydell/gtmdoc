@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/If.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:10 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>If</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="Chapter 6. Commands" />
+    <link rel="prev" href="Examples_of_Hang.html" title="Examples of Hang" />
+    <link rel="next" href="Examples_of_If.html" title="Examples of If" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">If</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Examples_of_Hang.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 6. Commands</th>
+          <td width="20%" align="right"> <a accesskey="n" href="Examples_of_If.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="If"></a>If</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="Examples_of_If.html">Examples of If</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4171055" class="indexterm"></a>
+      <p>The IF command provides conditional execution of the remaining commands on the line. When IF has an argument, it updates $TEST with the truth value of its evaluated argument. GT.M executes the remainder of a line after an IF statement when $TEST is 1 (TRUE). When $TEST is 0 (FALSE), GT.M does not execute the rest of the line.</p>
+      <p>The format of the IF command is:</p>
+      <pre class="programlisting">
+        I[F] [tvexpr[,...]]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Because IF is a conditional command, it does not support a command postconditional.</p>
+          </li>
+          <li>
+            <p>The scope of the IF is the remainder of the line.</p>
+          </li>
+          <li>
+            <p>The action of IF is controlled by the value of the expression and by $TEST, if there is no expression.</p>
+          </li>
+          <li>
+            <p>IF with no argument acts on the existing value of $TEST (which it does not change); in this case, at least two (2) spaces must follow the IF to separate it from the next command on the line.</p>
+          </li>
+          <li>
+            <p>An indirection operator, and an expression atom evaluating to a list of one or more IF arguments form a legal argument to IF.</p>
+          </li>
+        </ul>
+      </div>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>Commands with timeouts also maintain $TEST. For information about $TEST, refer to the &quot;Intrinsic Special Variables&quot; chapter in this manual. Because GT.M stacks $TEST only at the execution of an extrinsic or an argumentless DO command, any XECUTE or DO with an argument has the potential side effect of altering $TEST. Therefore, use the argumentless IF with caution.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>Example:</p>
+      <pre class="programlisting">
+        IF A,B ...
+        is equivalent to
+        IF A IF B
+      </pre>
+      <p>An IF with more than one argument behaves as if those arguments were logically &quot;ANDed.&quot; However, execution of the line ceases with the evaluation of the first false argument. For IF argument expressions containing the &quot;AND&quot; operator (&amp;), execution still ceases with the evaluation of the first false argument. Any global references within the expression act in sequence to maintain the naked reference.</p>
+      <p>Postconditionals perform a function similar to IF; however, their scope is limited to a single command or argument, and they do not modify $TEST. For more information on postconditionals, refer to the &quot;General Language Features of M&quot; chapter <span>in this manual</span>.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Examples_of_Hang.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="Examples_of_If.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of Hang </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of If</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/If.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:10 GMT -->
+</html>

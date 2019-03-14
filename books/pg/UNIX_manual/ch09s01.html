@@ -1,0 +1,294 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>I/O Intrinsic Special Variables</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
+<link rel="prev" href="ch09.html" title="Chapter 9. Input/Output Processing">
+<link rel="next" href="ch09s02.html" title="I/O Devices">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">I/O Intrinsic Special Variables</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch09.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 9. <span>Input/Output</span> Processing</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch09s02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch09.html"><span>Input/Output</span> Processing</a></span> &gt; <span class="breadcrumb-node">I/O Intrinsic Special Variables</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="io_isv"></a>I/O Intrinsic Special Variables</h2></div></div></div>
+<p>GT.M intrinsic special variables provide a mean for application code to communicate and manage the state of a device. </p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="device_name_variable"></a>Device Name Variables<a class="indexterm" name="idp189573120"></a>
+</h3></div></div></div>
+<p>GT.M provides three intrinsic special variables that identify devices. </p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="io_h"></a>$Io<a class="indexterm" name="idp189545504"></a>
+</h4></div></div></div>
+<p>$I[O] contains the name of the current device specified by the last USE command. A SET command cannot modify $IO. USE produces the same $IO as USE $PRINCIPAL, but $P is the preferred construct.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="principal_g"></a>$Principal<a class="indexterm" name="idp189462528"></a>
+</h4></div></div></div>
+<p>A process inherits three open file descriptors from its parent - STDIN, STDOUT and STDERR - which can all map to different files or devices.  GT.M provides no way for M application to access STDERR.  Although STDIN and STDOUT may map to different devices, files, sockets, pipes, etc. in the operating system, M provides for only device $PRINCIPAL, to refers to both.  At process startup, and when $PRINCIPAL is selected with a USE command, READ commands apply to STDIN and WRITE commands apply to STDOUT.  The device type of the standard input determines which USE deviceparameters apply to $PRINCIPAL.</p>
+<p>For an interactive process, $PRINCIPAL is the user's terminal.  GT.M ignores a CLOSE of the principal device. GT.M does not permit a SET command to modify $PRINCIPAL.</p>
+<p>0 is an alternate for $PRINCIPAL (for example, USE 0).  FIS recommends that application code use $PRINCIPAL. The environment variable gtm_principal can be used to set a string reported by GT.M for $PRINCIPAL and which can be used in lieu of $PRINCIPAL for the USE command.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="zio_h"></a>$ZIO<a class="indexterm" name="idp189538672"></a>
+</h4></div></div></div>
+<p>$ZIO contains the translated name of the current device, in contrast to $IO, which contains the name as specified by the USE command.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="cursor_position_variable"></a>Cursor Position Variables<a class="indexterm" name="idp189536416"></a>
+</h3></div></div></div>
+<p>GT.M provides two intrinsic special variables for determining the virtual cursor position. $X refers to the current column, while $Y refers to the current row. </p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="x_cpv"></a>$X<a class="indexterm" name="idp189658992"></a>
+</h4></div></div></div>
+<p>$X contains an integer value ranging from 0 to 65,535, specifying the horizontal position of a virtual cursor in the current output record. $X=0 represents the initial position on a new record or row.</p>
+<p>Every OPENed device has a $X. However, GT.M only has access to $X of the current device.</p>
+<p>Generally, in M mode GT.M increments $X for every character written to and read from the current device; see below for behavior of a UTF-8 mode device. GT.M format control characters, FILTER, and the device WIDTH and WRAP also have an effect on $X. </p>
+<p>As $X is only a counter to help a program track output, SET $X does not reposition the cursor or perform any other IO. Conversely, if a sequence of characters sent to a terminal or other device with a WRITE causes it to be repositioned except as described below, $X will not reflect this change. </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="y_cpv"></a>$Y<a class="indexterm" name="idp189617984"></a>
+</h4></div></div></div>
+<p>$Y contains an integer value ranging from 0 to 65,535, specifying the vertical position of a virtual cursor in the current output record. $Y=0 represents the top row or line.</p>
+<p>Every OPEN device has a $Y. However, GT.M only accesses $Y of the current device.</p>
+<p>When GT.M finishes the logical record in progress, it generally increments $Y. GT.M recognizes the end of a logical record when it processes certain GT.M format control characters, or when the record reaches its maximum size, as determined by the device WIDTH, and the device is set to WRAP. The definition of "logical record" varies from device to device. For an exact definition, see the sections on each device type. FILTER and the device LENGTH also have an effect on $Y.</p>
+<p>As $Y is only a counter to help a program track output, SET $Y does not reposition the cursor or perform any other IO. Conversely, if a sequence of characters sent to a terminal or other device with a WRITE causes it to be repositioned except as described below, $Y will not reflect this change. </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="mainetance_of_z_and_y"></a>Maintenance of $X and $Y<a class="indexterm" name="idp189646384"></a>
+</h4></div></div></div>
+<p>The following factors affect the maintenance of the virtual cursor position ($X and $Y):</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>The bounds of the virtual "page"</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Format control characters</p></li>
+<li class="listitem" style="list-style-type: circle"><p>GT.M character filtering</p></li>
+</ul></div>
+<p>Each device has a WIDTH and a LENGTH that define the virtual "page." The WIDTH determines the maximum size of a record for a device, while the LENGTH determines how many records fit on a page. GT.M starts a new record when the current record size ($X) reaches the maximum WIDTH and the device has WRAP enabled. When the current line ($Y) reaches the maximum LENGTH, GT.M starts a new page.</p>
+<p>GT.M has several format control characters (used in the context of a WRITE command) that allow the manipulation of the virtual cursor. For all I/O devices, the GT.M format control characters do the following:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>! Sets $X to zero (0) and increments $Y, and terminates the logical record in progress. The definition of "logical record" varies from device to device, and is discussed in each device section.</p></li>
+<li class="listitem" style="list-style-type: circle"><p># Sets $X and $Y to zero (0), and terminates the logical record in progress.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>?n If n is greater than $X, writes n-$X spaces to the device, bringing $X to n. If n is less than or equal to $X, ?n has no effect. When WRAP is enabled and n exceeds the WIDTH of the line, WRITE ?n increments $Y and sets $X equal to n#WIDTH, where # is the GT.M modulo operator.</p></li>
+</ul></div>
+<p>In UTF-8 mode, GT.M maintains $X in the following measurement units:</p>
+<div class="informaltable">
+<a name="tblxmu"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                  <p>Devices</p>
+                </th>
+<th>
+                  <p>Input</p>
+                </th>
+<th>
+                  <p>Output</p>
+                </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                  <p>FIFO</p>
+                </td>
+<td>
+                  <p>code points</p>
+                </td>
+<td>
+                  <p>display columns</p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>PIPE</p>
+                </td>
+<td>
+                  <p>code points</p>
+                </td>
+<td>
+                  <p>display columns</p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>SD</p>
+                </td>
+<td>
+                  <p>code points</p>
+                </td>
+<td>
+                  <p>display columns</p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>SOC</p>
+                </td>
+<td>
+                  <p>code points</p>
+                </td>
+<td>
+                  <p>code points</p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>TRM</p>
+                </td>
+<td>
+                  <p>display columns</p>
+                </td>
+<td>
+                  <p>display columns</p>
+                </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>GT.M provides two modes of character filtering. When filtering is enabled, certain &lt;CTRL&gt; characters and/or escape sequences have special effects on the cursor position (for example, &lt;BS&gt; (ASCII 8) may decrement $X, if $X is non-zero). <span>For more information on write filtering, refer to <a class="xref" href="ch09s09.html#filter_use" title="FILTER">&#8220;FILTER&#8221;</a>.</span></p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="status_variables"></a>Status Variables<a class="indexterm" name="idp189677696"></a>
+</h3></div></div></div>
+<p>GT.M provides several I/O status variables that convey information about the commands operating on the device.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="za_de"></a>$Device <a class="indexterm" name="idp189656256"></a>
+</h4></div></div></div>
+<p>If the last commanded resulted in no error-condition, the value of $DEVICE, when interpreted as a truth-value is 0 (FALSE). If the status of the device reflect any error-condition, the value of $DEVICE, when interpreted as a truth-value is 1 (TRUE). When $DEVICE starts with 1, it's followed by a comma (,) and then by the text that would be in $ZSTATUS at the time of the error. </p>
+<p>Examples: </p>
+<p>0 indicates for READ with a zero (0) timeout that available data has been read. </p>
+<p>"1,Device detected EOF" indicates the device reached an end-of-file condition. </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="za_ke"></a>$Key <a class="indexterm" name="idp189695328"></a>
+</h4></div></div></div>
+<p>$K[EY] contains the string that terminated the most recent READ command from the current device (including any introducing and terminating characters). If no READ command is issued to the current device or if no terminator is used, the value of $KEY is an empty string. </p>
+<p>For PIPE: </p>
+<p>$KEY contains the UNIX process id of the created process shell which executes the command connected to the PIPE.</p>
+<p>For more information, refer to <a class="xref" href="ch08s08.html" title="$Key">&#8220;$Key&#8221;</a>.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="za_sv"></a>$ZA<a class="indexterm" name="idp189677280"></a>
+</h4></div></div></div>
+<p>$ZA contains the status of the last read on the device. The value is a decimal integer with a meaning as follows:</p>
+<p>For Terminal I/O: </p>
+<p>0: Indicates normal termination of a read operation</p>
+<p>1: Indicates a parity error</p>
+<p>2: Indicates the terminator sequence was  too long</p>
+<p>9: Indicates a default for all other errors</p>
+<p></p>
+<p>For Sequential Disk  : </p>
+<p>0: Indicates normal termination of a read operation</p>
+<p>9: Indicates a failure of a read operation</p>
+<p></p>
+<p></p>
+<p></p>
+<p>For FIFO:</p>
+<p>0: Indicates normal termination or time out</p>
+<p>9: Indicates a failure of a read operation</p>
+<p></p>
+<p>For SOCKET:</p>
+<p>0: Indicates normal termination or time out</p>
+<p>9: Indicates failure of a read operation</p>
+<p>For PIPE: </p>
+<p>0: Indicates normal termination or time out when using READ x:n, where n &gt;0 </p>
+<p>9: Indicates failure of a READ x or READ x:n, where n&gt;0 </p>
+<p>9: Indicates failure of a WRITE where the pipe is full and the WRITE would block</p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top"><p>$ZA refers to the status of the current device. Therefore, exercise care in sequencing USE commands and references to $ZA.</p></td></tr>
+</table></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="zb_sv"></a>$ZB<a class="indexterm" name="idp189569504"></a>
+</h4></div></div></div>
+<p>$ZB contains a string specifying the input terminator for the last terminal READ. $ZB is null, and it is not maintained for devices other than terminals. $ZB may contain any legal input terminator, such as &lt;CR&gt; (ASCII 13) or an escape sequence starting with &lt;ESC&gt; (ASCII 27), from zero (0) to 15 bytes in length. $ZB is null for any READ terminated by a timeout or any fixed-length READ terminated by input reaching the maximum length. </p>
+<p>$ZB contains the actual character string, not a sequence of numeric ASCII codes.</p>
+<p>If a device is opened with CHSET set to UTF-8 or UTF-16*, $ZB contains the bad character if one is encountered. This holds true for sockets, sequential files (and thus FIFOs and PIPEs) and terminals. </p>
+<p>Example:</p>
+<pre class="programlisting">set zb=$zb for i=1:1:$length(zb) write !,i,?5,$ascii(zb,i)</pre>
+<p>This example displays the series of ASCII codes for the characters in $ZB. </p>
+<p>$ZB refers to the last READ terminator of the current device. Therefore, be careful when sequencing USE commands and references to $ZB. </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="zeof_sv"></a>$ZEOF<a class="indexterm" name="idp189693376"></a>
+</h4></div></div></div>
+<p>$ZEOF contains a truth-valued expression indicating whether the last READ operation reached the end-of-file. $ZEOF is TRUE(1) at EOF and FALSE (0) at other positions. GT.M does not maintain $ZEOF for terminal devices.</p>
+<p>$ZEOF refers to the end-of-file status of the current device. Therefore, be careful when sequencing USE commands and references to $ZEOF.</p>
+<p>$ZEOF is set for terminals if the connection dropped on read. </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="zpin_sv"></a>ZPIN</h4></div></div></div>
+<p>When $PRINCIPAL has different input/output devices, the USE command recognizes intrinsic special variable $ZPIN to apply appropriate deviceparameters to the input side of $PRINCIPAL. A USE with $ZPIN sets $IO to $PRINCIPAL for READs and WRITEs from the input and output side of $PRINCIPAL. $ZSOCKET() also accepts $ZPIN as its first argument and, if the device is a split SOCKET device, supplies information on the input SOCKET device.  In any context other than USE or $ZSOCKET(), or if $PRINCIPAL is not a split device, $PRINCIPAL, $ZPIN and $ZPOUT are synonyms. In the case of a split $PRINCIPAL, $ZPIN returns the value of $PRINCIPAL followed by the string "&lt; /"  Any attempt to OPEN $ZPIN results in a DEVOPENFAIL error. </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="zpout_sv"></a>$ZPOUT</h4></div></div></div>
+<p>When $PRINCIPAL has different input/output devices, the USE command recognizes intrinsic special variables $ZPOUT to apply appropriate deviceparameters to the output side of $PRINCIPAL. A USE with $ZPOUT sets $IO to $PRINCIPAL for READs and WRITEs from the input and output side of $PRINCIPAL.  $ZSOCKET() also accepts $ZPOUT as its first argument and, ifthe device is a split SOCKET device, supplies information on the output SOCKET device.  In any context other than USE or $ZSOCKET(), or if $PRINCIPAL is not a split device, $PRINCIPAL, $ZPIN and $ZPOUT are synonyms. In the case of a split $PRINCIPAL, $ZPOUT returns the value of $PRINCIPAL followed by the string "&gt; /"  Any attempt to OPEN $ZPOUT results in a DEVOPENFAIL error.</p>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch09.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch09.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch09s02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 9. <span>Input/Output</span> Processing </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> I/O Devices</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

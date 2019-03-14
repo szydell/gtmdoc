@@ -1,0 +1,843 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Migrating_Off_Alpha_AXP_OpenVMS.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:00:54 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<base target="_top">
+<style type="text/css">
+  
+
+/* default css */
+
+table {
+  font-size: 1em;
+  line-height: inherit;
+  border-collapse: collapse;
+}
+
+
+tr {
+  
+  text-align: left;
+  
+}
+
+
+div, address, ol, ul, li, option, select {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p {
+  margin: 0px;
+}
+
+
+pre {
+  font-family: Courier New;
+  white-space: pre-wrap;
+  margin:0;
+}
+
+body {
+  margin: 6px;
+  padding: 0px;
+  font-family: Verdana, sans-serif;
+  font-size: 10pt;
+  background-color: #ffffff;
+}
+
+
+img {
+  -moz-force-broken-image-icon: 1;
+}
+
+@media screen {
+  html.pageview {
+    background-color: #f3f3f3 !important;
+  }
+
+  
+
+  body {
+    min-height: 1100px;
+    
+    counter-reset: __goog_page__;
+  }
+  * html body {
+    height: 1100px;
+  }
+  .pageview body {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 2px solid #bbb;
+    border-bottom: 2px solid #bbb;
+    width: 648px !important;
+    margin: 15px auto 25px;
+    padding: 40px 50px;
+  }
+  /* IE6 */
+  * html {
+    overflow-y: scroll;
+  }
+  * html.pageview body {
+    overflow-x: auto;
+  }
+  /* Prevent repaint errors when scrolling in Safari. This "Star-7" css hack
+     targets Safari 3.1, but not WebKit nightlies and presumably Safari 4.
+     That's OK because this bug is fixed in WebKit nightlies/Safari 4 :-). */
+  html*#wys_frame::before {
+    content: '\A0';
+    position: fixed;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+  }
+  
+  
+
+  
+    .writely-callout-data {
+      display: none;
+      *display: inline-block;
+      *width: 0;
+      *height: 0;
+      *overflow: hidden;
+    }
+    .writely-footnote-marker {
+      background-image: url('MISSING.html');
+      background-color: transparent;
+      background-repeat: no-repeat;
+      width: 7px;
+      overflow: hidden;
+      height: 16px;
+      vertical-align: top;
+
+      
+      -moz-user-select: none;
+    }
+    .editor .writely-footnote-marker {
+      cursor: move;
+    }
+    .writely-footnote-marker-highlight {
+      background-position: -15px 0;
+      -moz-user-select: text;
+    }
+    .writely-footnote-hide-selection ::-moz-selection, .writely-footnote-hide-selection::-moz-selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection ::selection, .writely-footnote-hide-selection::selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection {
+      cursor: move;
+    }
+
+    
+    .editor .writely-comment-yellow {
+      background-color: #FF9;
+      background-position: -240px 0;
+    }
+    .editor .writely-comment-yellow-hover {
+      background-color: #FF0;
+      background-position: -224px 0;
+    }
+    .editor .writely-comment-blue {
+      background-color: #C0D3FF;
+      background-position: -16px 0;
+    }
+    .editor .writely-comment-blue-hover {
+      background-color: #6292FE;
+      background-position: 0 0;
+    }
+    .editor .writely-comment-orange {
+      background-color: #FFDEAD;
+      background-position: -80px 0;
+    }
+    .editor .writely-comment-orange-hover {
+      background-color: #F90;
+      background-position: -64px 0;
+    }
+    .editor .writely-comment-green {
+      background-color: #99FBB3;
+      background-position: -48px 0;
+    }
+    .editor .writely-comment-green-hover {
+      background-color: #00F442;
+      background-position: -32px 0;
+    }
+    .editor .writely-comment-cyan {
+      background-color: #CFF;
+      background-position: -208px 0;
+    }
+    .editor .writely-comment-cyan-hover {
+      background-color: #0FF;
+      background-position: -192px 0;
+    }
+    .editor .writely-comment-purple {
+      background-color: #EBCCFF;
+      background-position: -144px 0;
+    }
+    .editor .writely-comment-purple-hover {
+      background-color: #90F;
+      background-position: -128px 0;
+    }
+    .editor .writely-comment-magenta {
+      background-color: #FCF;
+      background-position: -112px 0;
+    }
+    .editor .writely-comment-magenta-hover {
+      background-color: #F0F;
+      background-position: -96px 0;
+    }
+    .editor .writely-comment-red {
+      background-color: #FFCACA;
+      background-position: -176px 0;
+    }
+    .editor .writely-comment-red-hover {
+      background-color: #FF7A7A;
+      background-position: -160px 0;
+    }
+
+    .editor .writely-comment-marker {
+      background-image: url('MISSING.html');
+      background-color: transparent;
+      padding-right: 11px;
+      background-repeat: no-repeat;
+      width: 16px;
+      height: 16px;
+      -moz-user-select: none;
+    }
+
+    .editor .writely-comment-hidden {
+      padding: 0;
+      background: none;
+    }
+    .editor .writely-comment-marker-hidden {
+      background: none;
+      padding: 0;
+      width: 0;
+    }
+    .editor .writely-comment-none {
+      opacity: .2;
+      filter:progid:DXImageTransform.Microsoft.Alpha(opacity=20);
+      -moz-opacity: .2;
+    }
+    .editor .writely-comment-none-hover {
+      opacity: .2;
+      filter:progid:DXImageTransform.Microsoft.Alpha(opacity=20);
+      -moz-opacity: .2;
+    }
+  
+
+
+  
+  .br_fix span+br:not(:-moz-last-node) {
+    
+    position:relative;
+    
+    left: -1ex
+    
+  }
+
+  
+  #cb-p-tgt {
+    font-size: 8pt;
+    padding: .4em;
+    background-color: #ddd;
+    color: #333;
+  }
+  #cb-p-tgt-can {
+    text-decoration: underline;
+    color: #36c;
+    font-weight: bold;
+    margin-left: 2em;
+  }
+  #cb-p-tgt .spin {
+    width: 16px;
+    height: 16px;
+    background: url(http://ssl.gstatic.com/docs/clipboard/spin_16o.gif) no-repeat;
+  }
+}
+
+h6 { font-size: 8pt }
+h5 { font-size: 8pt }
+h4 { font-size: 10pt }
+h3 { font-size: 12pt }
+h2 { font-size: 14pt }
+h1 { font-size: 18pt }
+
+blockquote {padding: 10px; border: 1px #DDD dashed }
+
+.webkit-indent-blockquote { border: none; }
+
+a img {border: 0}
+
+.pb {
+  border-width: 0;
+  page-break-after: always;
+  /* We don't want this to be resizeable, so enforce a width and height
+     using !important */
+  height: 1px !important;
+  width: 100% !important;
+}
+
+.editor .pb {
+  border-top: 1px dashed #C0C0C0;
+  border-bottom: 1px dashed #C0C0C0;
+}
+
+div.google_header, div.google_footer {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+
+/* Table of contents */
+.editor div.writely-toc {
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+}
+.writely-toc > ol {
+  padding-left: 3em;
+  font-weight: bold;
+}
+ol.writely-toc-subheading {
+  padding-left: 1em;
+  font-weight: normal;
+}
+/* IE6 only */
+* html writely-toc ol {
+  list-style-position: inside;
+}
+.writely-toc-none {
+  list-style-type: none;
+}
+.writely-toc-decimal {
+  list-style-type: decimal;
+}
+.writely-toc-upper-alpha {
+  list-style-type: upper-alpha;
+}
+.writely-toc-lower-alpha {
+  list-style-type: lower-alpha;
+}
+.writely-toc-upper-roman {
+  list-style-type: upper-roman;
+}
+.writely-toc-lower-roman {
+  list-style-type: lower-roman;
+}
+.writely-toc-disc {
+  list-style-type: disc;
+}
+
+/* Ordered lists converted to numbered lists can preserve ordered types, and
+   vice versa. This is confusing, so disallow it */
+ul[type="i"], ul[type="I"], ul[type="1"], ul[type="a"], ul[type="A"] {
+  list-style-type: disc;
+}
+
+ol[type="disc"], ol[type="circle"], ol[type="square"] {
+  list-style-type: decimal;
+}
+
+/* end default css */
+
+
+  /* default print css */
+  
+  @media print {
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    div.google_header, div.google_footer {
+      display: block;
+      min-height: 0;
+      border: none;
+    }
+
+    div.google_header {
+      flow: static(header);
+    }
+
+    /* used to insert page numbers */
+    div.google_header::before, div.google_footer::before {
+      position: absolute;
+      top: 0;
+    }
+
+    div.google_footer {
+      flow: static(footer);
+    }
+
+    /* always consider this element at the start of the doc */
+    div#google_footer {
+      flow: static(footer, start);
+    }
+
+    span.google_pagenumber {
+      content: counter(page);
+    }
+
+    span.google_pagecount {
+      content: counter(pages);
+    }
+
+
+    callout.google_footnote {
+      
+      display: prince-footnote;
+      footnote-style-position: inside;
+      /* These styles keep the footnote from taking on the style of the text
+         surrounding the footnote marker. They can be overridden in the
+         document CSS. */
+      color: #000;
+      font-family: Verdana;
+      font-size: 10.0pt;
+      font-weight: normal;
+    }
+
+    /* Table of contents */
+    #WritelyTableOfContents a::after {
+      content: leader('.') target-counter(attr(href), page);
+    }
+
+    #WritelyTableOfContents a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+
+  @page {
+    @top {
+      content: flow(header);
+    }
+    @bottom {
+      content: flow(footer);
+    }
+    @footnotes {
+      border-top: solid black thin;
+      padding-top: 8pt;
+    }
+  }
+  /* end default print css */
+
+
+/* custom css */
+
+
+/* end custom css */
+
+/* ui edited css */
+
+body {
+  font-family: Verdana;
+  
+  font-size: 10.0pt;
+  line-height: normal;
+  background-color: #ffffff;
+}
+/* end ui edited css */
+
+
+/* editor CSS */
+.editor a:visited {color: #551A8B}
+.editor table.zeroBorder {border: 1px dotted gray}
+.editor table.zeroBorder td {border: 1px dotted gray}
+.editor table.zeroBorder th {border: 1px dotted gray}
+
+
+.editor div.google_header, .editor div.google_footer {
+  border: 2px #DDDDDD dashed;
+  position: static;
+  width: 100%;
+  min-height: 2em;
+}
+
+.editor .misspell {background-color: yellow}
+
+.editor .writely-comment {
+  font-size: 9pt;
+  line-height: 1.4;
+  padding: 1px;
+  border: 1px dashed #C0C0C0
+}
+
+
+/* end editor CSS */
+
+</style>
+
+  
+  <title>GT.M - Migrating Off Alpha/AXP OpenVMS</title>
+
+</head>
+
+<body 
+    
+    >
+    
+    
+    
+<h1>
+  <a id=GT_M_Migrating_Off_Alpha_AXP_O_09363830611178925 name=GT_M_Migrating_Off_Alpha_AXP_O_09363830611178925></a><span style=FONT-FAMILY:Verdana>GT.M - Migrating Off Alpha/AXP OpenVMS</span>
+</h1>
+<h2>
+  <a id=Table_of_Contents_46002889973624606 name=Table_of_Contents_46002889973624606></a>Table of Contents
+</h2>
+<div class=writely-toc id=WritelyTableOfContents toctype=none+none>
+  <ol class=writely-toc-none>
+    <li>
+      <a href=#GT_M_Migrating_Off_Alpha_AXP_O_09363830611178925 target=_self>GT.M - Migrating Off Alpha/AXP OpenVMS</a>
+      <ol class="writely-toc-subheading writely-toc-none" style=MARGIN-LEFT:0pt>
+        <li>
+          <a href=#Table_of_Contents_46002889973624606 target=_self>Table of Contents</a>
+        </li>
+        <li>
+          <a href=#Overview_14369417980417376 target=_self>Overview</a>
+        </li>
+        <li>
+          <a href=#Why_GT_M__9678105548471001 target=_self>Why GT.M?</a>
+        </li>
+        <li>
+          <a href=#Migrating_off_Alpha_AXP_OpenVM_48367090156144155 target=_self>Migrating off Alpha/AXP OpenVMS</a>
+          <ol class="writely-toc-subheading writely-toc-none" style=MARGIN-LEFT:0pt>
+            <li>
+              <a href=#Migrate_from_another_M_to_GT_M_6395261591693209 target=_self>Migrate from another M to GT.M on Alpha/AXP OpenVMS</a>
+              <ol class="writely-toc-subheading writely-toc-none" style=MARGIN-LEFT:0pt>
+                <li>
+                  <a href=#Migrate_routines_9704576251404 target=_self>Migrate routines</a>
+                </li>
+                <li>
+                  <a href=#Migrating_the_global_variables_4066406555466273 target=_self>Migrating the global variables</a>
+                </li>
+                <li>
+                  <a href=#Transitioning_production_envir_5345298140654787 target=_self>Transitioning production environments to GT.M</a>
+                  <ol class="writely-toc-subheading writely-toc-none" style=MARGIN-LEFT:0pt>
+                    <li>
+                    <a href=#Use_of_DDP_0794664383515733 target=_self>Use of DDP</a>
+                    </li>
+                  </ol>
+                </li>
+                <li>
+                  <a href=#Summary_of_Migrating_from_anot_9339246818238037 target=_self>Summary of Migrating from another M to GT.M on Alpha/AXP OpenVMS</a>
+                </li>
+              </ol>
+            </li>
+            <li>
+              <a href=#Migrate_from_GT_M_on_Alpha_AXP_7117663378158303 target=_self>Migrate from GT.M on Alpha/AXP OpenVMS to GT.M on x86 GNU/Linux</a>
+              <ol class="writely-toc-subheading writely-toc-none" style=MARGIN-LEFT:0pt>
+                <li>
+                  <a href=#Introduction_to_GT_M_Database__12674033595148237 target=_self>Introduction to GT.M Database Replication</a>
+                </li>
+                <li>
+                  <a href=#Migrate_routines_13001438939603638 target=_self>Migrate routines</a>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <a href=#Summary_7104049792960525 target=_self>Summary</a>
+        </li>
+        <li>
+          <a href=#Platforms_other_than_x86_GNU_L_637010508241218 target=_self>Platforms other than x86 GNU/Linux</a>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</div>
+<h2 class=western style=FONT-FAMILY:Verdana>
+  <a id=Overview_14369417980417376 name=Overview_14369417980417376></a>Overview
+</h2>
+<p style=FONT-FAMILY:Verdana>
+  For years, the Hewlett Packard Alpha/AXP OpenVMS platform has hosted major M (MUMPS) implementations, including <a href=http://fis-gtm.com/ id=h:kx target=_blank title="Click to visit the GT.M home page">GT.M</a> from Fidelity Information Services, as well as DSM, MSM and Caché from InterSystems.&nbsp; With the sunset of the Alpha/AXP OpenVMS platform looming and no longer over the horizon, GT.M on x86 GNU/Linux provides an economical replacement platform.&nbsp; A low-risk migration approach consisting of <i>reversible</i> small steps eliminates the risk of traditional “big bang” conversions.
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  This document shows you how.
+</p>
+<h2 class=western style=FONT-FAMILY:Verdana>
+  <a id=Why_GT_M__9678105548471001 name=Why_GT_M__9678105548471001></a>Why GT.M?
+</h2>
+<p style=FONT-FAMILY:Verdana>
+  GT.M is a mature – in production since 1986 – highly robust and scalable implementation of M.&nbsp; It currently runs large production systems on Alpha/AXP OpenVMS &amp; x86 GNU/Linux, as well as on other platforms, including what is, to the best of our knowledge, the largest real time core processing system that is in daily live production at any bank anywhere in the world today.&nbsp; Individual database files of hundreds of GB, with aggregate database sizes in the TB range are in use by multiple customers.
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  GT.M has unique functionality for deploying mission critical applications that require 24x365 continuity of business, applications that must remain available not only in the face of unplanned events but also in the face of planned events, and even planned events such as application software upgrades that require a change to the organization of the data in <font size=2><font size=3>the</font></font> database (i.e., the application schema).&nbsp; This functionality is mature and has been in production since 1999.&nbsp; <i> It is this functionality that facilitates the migration from Alpha/AXP OpenVMS to x86 Linux.</i>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style="TEXT-DECORATION:none; FONT-FAMILY:Verdana">
+  GT.M on several platforms, including <i>both Alpha/AXP OpenVMS and x86 GNU/Linux</i>, is released as free / open source software (<a href=http://en.wikipedia.org/wiki/Free_software id=ct4q target=_blank title="Click here to visit the WIkipedia page on Free Software">FOSS</a>).&nbsp; There are no artificial barriers restricting its use.&nbsp; At the same time, for production use, support with service levels is available on a commercial basis.
+</p>
+<p style="TEXT-DECORATION:none; FONT-FAMILY:Verdana">
+  <br>
+</p>
+<p style="TEXT-DECORATION:none; FONT-FAMILY:Verdana">
+  There exist many successful ports to GT.M from other M implementations – on multiple platforms, including Alpha/AXP OpenVMS. Many are private (references can be provided – e-mail <a href=mailto:ks.bhaskar@fnis.com>ks.bhaskar@fnis.com</a> to discuss your use of GT.M).&nbsp; One very visible and public port is that of the VistA healthcare information system, developed by the US Department of Veterans Affairs (VA) and used by the VA on other M implementations on the Alpha/AXP OpenVMS platform – ported to GT.M on x86 GNU/Linux by the community, VistA now runs on GT.M on x86 GNU/Linux at clinics and hospitals in the US and internationally.
+</p>
+<h2 class=western style=FONT-FAMILY:Verdana>
+  <a id=Migrating_off_Alpha_AXP_OpenVM_48367090156144155 name=Migrating_off_Alpha_AXP_OpenVM_48367090156144155></a>Migrating off Alpha/AXP OpenVMS
+</h2>
+<p style=FONT-FAMILY:Verdana>
+  At a conceptual level, migrating your M application from Alpha/AXP OpenVMS to x86 GNU/Linux involves two steps:
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<ul style=FONT-FAMILY:Verdana>
+  <li>
+    <p>
+      On the Alpha/AXP OpenVMS platform, migrate from your current M to GT.M.&nbsp; This step can of course be skipped for applications that are already on GT.M on this platform.
+    </p>
+  </li>
+  <li>
+    <p>
+      Migrate from GT.M on Alpha/AXP OpenVMS to GT.M on x86 GNU/Linux.
+    </p>
+  </li>
+</ul>
+<h3 class=western style=FONT-FAMILY:Verdana>
+  <a id=Migrate_from_another_M_to_GT_M_6395261591693209 name=Migrate_from_another_M_to_GT_M_6395261591693209></a>Migrate from another M to GT.M on Alpha/AXP OpenVMS
+</h3>
+<p style=FONT-FAMILY:Verdana>
+  Migrating to GT.M from another M implementation requires migrating the routines, migrating the global variables, and bringing up your application in production on GT.M.
+</p>
+<h4 class=western style=FONT-FAMILY:Verdana>
+  <a id=Migrate_routines_9704576251404 name=Migrate_routines_9704576251404></a>Migrate routines
+</h4>
+<p style=FONT-FAMILY:Verdana>
+  With the following exceptions, GT.M supports the M standard (ISO/IEC 11756:1999):
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<ul style=FONT-FAMILY:Verdana>
+  <li>
+    <p>
+      While GT.M does not implement Structured System Variable Names (SSVNs), it provides equivalent functionality.
+    </p>
+  </li>
+  <li>
+    <p>
+      GT.M short-circuits the evaluation of logical expressions.&nbsp; As a practical matter, unless your application uses functions with side effects, this makes no difference to your application.&nbsp; In the event your application does use functions with side effects, this difference can be handled by minor localized modifications (which are backwards compatible with your current M implementation).
+    </p>
+  </li>
+</ul>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  As provided for by the standard, GT.M implements extensions that begin with “Z” – some of these are compatible with other popular M implementations and some are different.&nbsp; To facilitate the migration, depending on the complexity of your application, <a href=http://georgejames.com/ id=bt-c target=_blank title="Click here to visit George James Software">George James Software</a> has well-regarded tools (<a href=http://georgejames.com/tools/REpIntro.shtml?m_tool_rep id=kz68 target=_blank title="Click here to visit the RE/parser page">RE/parser</a> and <a href=http://georgejames.com/tools/REdIntro.shtml?m_tool_red id=z0ty target=_blank title="Click here to visit the RE/data page">RE/data</a>).
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  Since you will be running your application on GT.M on both Alpha/AXP OpenVMS and on x86 GNU/Linux, you may need some minor refactoring of the application to reflect differences between the platforms.&nbsp; For example, GT.M on Alpha/AXP comes packaged with calls to OpenVMS services that are not necessarily meaningful on Linux; on Linux, you can use the external call mechanism to access standard libraries via POSIX APIs.&nbsp; As another example, your application may have logic that assumes an OpenVMS directory structure; this will have to be modified for a Linux directory structure
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  Migrating your application to GT.M and testing it can be performed while you continue running your application on your existing M.
+</p>
+<h4 class=western style=FONT-FAMILY:Verdana>
+  <a id=Migrating_the_global_variables_4066406555466273 name=Migrating_the_global_variables_4066406555466273></a>Migrating the global variables
+</h4>
+<p style=FONT-FAMILY:Verdana>
+  For development and testing purposes, it is a straightforward matter to extract a snapshot of the application's global variables from a backup and load them into GT.M databases.&nbsp; A program to extract all of them into a text file that GT.M will load directly is a few lines of standard M code, and a program for Caché is available for <a href=https://sourceforge.net/tracker/?func=detail&amp;aid=534145&amp;group_id=11026&amp;atid=311026 id=lme7 target=_blank title="Click here for a Cache program to export a database in GT.M ZWR format">download</a>.
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  Multiple extracts can be run in parallel, depending on available CPU and IO bandwidth, and multiple loads can likewise be performed in parallel.
+</p>
+<h4 class=western style=FONT-FAMILY:Verdana>
+  <a id=Transitioning_production_envir_5345298140654787 name=Transitioning_production_envir_5345298140654787></a>Transitioning production environments to GT.M
+</h4>
+<p style=FONT-FAMILY:Verdana>
+  There are several approaches to achieving this goal.&nbsp; The simplest conceptually, is to bring down the application on your prior M, extract the data, load it into GT.M and bring the application up on GT.M. Depending on the size of your database, and the capacity of your server, this may take from minutes to hours.
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  A more complex approach, but one that minimizes switching time is:
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<ul style=FONT-FAMILY:Verdana>
+  <li>
+    <p>
+      Take a back up of the database, and use the extract / load approach to move it to GT.M.&nbsp; Let the application continue to run on your prior M, with journaling turned on.
+    </p>
+  </li>
+  <li>
+    <p>
+      After the load completes, the GT.M database is some hours hours behind the other database.&nbsp; Now, create a new set of journal files and let the application continue to run on your existing M.&nbsp; Extract from the journal files all the updates that were performed, and load this into the GT.M database.
+    </p>
+  </li>
+  <li>
+    <p>
+      After the above is completed, the GT.M database should lag the other database by a shorter period of time.&nbsp; Repeat the process as needed so that each time the lag between the other M database and GT.M database gets smaller and smaller.
+    </p>
+  </li>
+  <li>
+    <p>
+      When the time difference between the databases is very small, bring down the application on the other M.&nbsp; Migrate the last set of updates to the GT.M database and bring up the application on GT.M.
+    </p>
+  </li>
+</ul>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  Both approaches are low risk in that you will have the routines and database from your prior M implementation.&nbsp; In the event you want to revert temporarily for whatever reason, you can run a mupip journal extract command on GT.M to extract the journal output in a text file that you can easily use to apply the updates on your prior M database with a small program of perhaps a half dozen lines of code.&nbsp; In fact, depending on your needs, you can do this process periodically, say every hour or every day.&nbsp; By managing the gap between your new GT.M application on Alpha/AXP OpenVMS and that on your prior M implementation, you can bound the maximum time that it will take you to switch back, in the event you ever need to.
+</p>
+<h5 class=western style=FONT-FAMILY:Verdana>
+  <a id=Use_of_DDP_0794664383515733 name=Use_of_DDP_0794664383515733></a>Use of DDP
+</h5>
+<p style=FONT-FAMILY:Verdana>
+  Many popular M implementations on Alpha/AXP OpenVMS support a protocol called DDP, a bare Ethernet protocol.&nbsp; You may also be able to run a hybrid application during the transition, where some processes run their application logic on your prior M, some run on GT.M, and they all use a common database.&nbsp; This allows the switchover of the database to be decoupled from the switchover of the routines at the cost of a little additional complexity during the transition.
+</p>
+<h4 class=western style=FONT-FAMILY:Verdana>
+  <a id=Summary_of_Migrating_from_anot_9339246818238037 name=Summary_of_Migrating_from_anot_9339246818238037></a>Summary of Migrating from another M to GT.M on Alpha/AXP OpenVMS
+</h4>
+<p style=FONT-FAMILY:Verdana>
+  The transition from running your application on your prior M, to running it on GT.M, on the Alpha/AXP OpenVMS platform is a manageable effort, low risk, and with the ability to mitigate even that low risk.&nbsp; Once your application is running to your satisfaction on GT.M on Alpha/AXP OpenVMS, you can migrate to GT.M on x86 GNU/Linux.
+</p>
+<h3 class=western style=FONT-FAMILY:Verdana>
+  <a id=Migrate_from_GT_M_on_Alpha_AXP_7117663378158303 name=Migrate_from_GT_M_on_Alpha_AXP_7117663378158303></a>Migrate from GT.M on Alpha/AXP OpenVMS to GT.M on x86 GNU/Linux
+</h3>
+<p style=FONT-FAMILY:Verdana>
+  Once you are on GT.M on Alpha/AXP OpenVMS, database replication facilitates a straightforward migration to GT.M on x86 GNU/Linux.&nbsp; Skip the Introduction to GT.M Database Replication if <font size=2><font size=3>you are familiar with GT.M database replication.</font></font>
+</p>
+<h4 class=western style=FONT-FAMILY:Verdana>
+  <a id=Introduction_to_GT_M_Database__12674033595148237 name=Introduction_to_GT_M_Database__12674033595148237></a><font size=3><font size=4>Introduction to GT.M Database Replication</font></font>
+</h4>
+<p style=FONT-FAMILY:Verdana>
+  In GT.M database replication, an “originating instance” executes business logic and commits updates to its database.&nbsp; As long as an instance exists that can operate in its primary role, the application is available (in this regard, an application on GT.M is no different from an application on any other platform).&nbsp; GT.M database replication adds the ability to stream database updates in real time to a “replicating instance” operating in a secondary role.&nbsp; This replication occurs over a TCP/IP connection.&nbsp; There is no distance restriction between instances – as of this date, we are aware of at least one customer with over one thousand miles between instances.&nbsp; Pictorially, it looks like this:
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <img src="images/drawing_sEEzwlCChgZAenMJHskeK6g_12.png"><br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  If either the replicating instance (Site B) or the network fail, the originating instance (Site A) operates unaffected; when the replicating instance and/or network recover, <font size=2><font size=3>the</font></font> replicating instance catches up with database updates performed by the originating primary.&nbsp; If Site A fails in an unplanned event, or must come down for a planned event, within seconds Site B can take over as the originating instance.&nbsp; When Site A is recovered, it becomes the new replicating instance:
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <img src="images/drawing_sQBY8hzphb9II-fQ5xPgUpg_8.png"><br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  GT.M provides hooks that an application can use to recover from more complicated failure scenarios.&nbsp; Furthermore, GT.M database replication also has functionality that an application can exploit to provide continuity of business through planned events such as application and system upgrades, <font size=2><font size=3>and</font></font> even many application and system upgrades that involve changes to the organization of data in the database.
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  In migrating from GT.M on Alpha/AXP OpenVMS to GT.M on x86 GNU/Linux, you will use GT.M's database replication across heterogeneous systems.<a class=sdfootnoteanc href=#sdfootnote1sym name=sdfootnote1anc><sup><a href=#FOOTNOTE-1>1</a></sup>&nbsp;</a>
+</p>
+<h4 class=western style=FONT-FAMILY:Verdana>
+  <a id=Migrate_routines_13001438939603638 name=Migrate_routines_13001438939603638></a>Migrate routines
+</h4>
+<p style=FONT-FAMILY:Verdana>
+  The first step is to migrate any routines.&nbsp; With the exception of a few calls to OpenVMS that are prepackaged functions on GT.M on OpenVMS, and which must be replaced with equivalent calls to library functions on GNU/Linux using GT.M's call-out mechanism, the M language functionality on GNU/Linux is a superset of that on OpenVMS.<sup><a href=#FOOTNOTE-2>2</a></sup>&nbsp; <a class=sdfootnoteanc href=#sdfootnote2sym name=sdfootnote2anc></a> IO device parameters can differ.&nbsp; Of course, if you have code that assumes OpenVMS device and file names, that will have to be migrated to GNU/Linux.&nbsp; One operational difference is that GT.M on GNU/Linux does not support DDP.
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  Before migrating the database, ensure that your OpenVMS instance is operating with a Source Server in passive mode.&nbsp; Migrating the database is a simple matter of using Mupip Extract to export the global variables from a backup on OpenVMS and using Mupip Load on GNU/Linux to populate freshly created database files.&nbsp; One additional step to facilitate replication is to find the Region Seqno from the database files on OpenVMS, and to set the database files on GNU/Linux to the maximum value found on OpenVMS.&nbsp; The Linux instance is now ready.&nbsp; The last part of the migration consists of the following steps:
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<ul style=FONT-FAMILY:Verdana>
+  <li>
+    <p>
+      Bring up the GNU/Linux instance in a secondary role, and switch the Source Server process on the OpenVMS instance from passive to active.&nbsp; The two instances will establish communication. &nbsp; Using the Region Seqno field, the GNU/Linux instance will catch up with updates made on the OpenVMS instance since the backup was taken, and then keep up with the OpenVMS instance as it streams database updates to it in real time.&nbsp; Run in this mode until you are comfortable that the GNU/Linux instance is stable, and that it is keeping up with the database update rates being generated by the OpenVMS instance.
+    </p>
+  </li>
+  <li>
+    <p>
+      Switchover so that the GNU/Linux instance is in a primary role and the OpenVMS instance is in a secondary role.&nbsp; The GT.M part of this instance can be scripted and accomplished in seconds.&nbsp; Now your application is live on GNU/Linux, but database updates are streamed to the OpenVMS instance to keep it up to date.&nbsp; If you find you have an issue with your application on GNU/Linux, you can again switchover so that the OpenVMS is again your production environment.&nbsp; You can take corrective action for your application on the GNU/Linux instance and try again.&nbsp; Once you are comfortable that your application is stable on GNU/Linux, you can bring down the OpenVMS instance.
+    </p>
+  </li>
+</ul>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  Having accomplished the migration, FIS recommends that you bring up a second instance on GNU/Linux so that your application can continue to be available when the production instance goes down in an unplanned or planned event.&nbsp; On GNU/Linux, GT.M permits an unlimited number of additional instances for whatever level of redundancy you need.
+</p>
+<h2 class=western style=FONT-FAMILY:Verdana>
+  <a id=Summary_7104049792960525 name=Summary_7104049792960525></a>Summary
+</h2>
+<p style=FONT-FAMILY:Verdana>
+  While platform migration is not always trivial, the process of migrating from any M implementation on Alpha/AXP OpenVMS to GT.M on x86 GNU/Linux virtually eliminates risk by breaking down the process into a series of straightforward, manageable steps, each of which can be rapidly reversed in the event unforeseen behavior occurs when that step is taken.
+</p>
+<p style=FONT-FAMILY:Verdana>
+  <br>
+</p>
+<p style=FONT-FAMILY:Verdana>
+  The fact that GT.M on x86 GNU/Linux is FOSS is simply an added bonus that makes it a cost effective target platform with 24x7 support available on commercial terms.
+</p>
+<h2 class=western style=FONT-FAMILY:Verdana>
+  <a id=Platforms_other_than_x86_GNU_L_637010508241218 name=Platforms_other_than_x86_GNU_L_637010508241218></a>Platforms other than x86 GNU/Linux
+</h2>
+<p style="TEXT-DECORATION:none; FONT-FAMILY:Verdana">
+  The techniques described here also apply to GT.M on Linux on Itanium based servers.&nbsp; While GT.M is not FOSS on that platform, it is competitively priced.
+</p>
+<p style="TEXT-DECORATION:none; FONT-FAMILY:Verdana">
+  <br>
+</p>
+<p style="TEXT-DECORATION:none; FONT-FAMILY:Verdana">
+  As of this date, GT.M is also available on AIX on IBM pSeries, z/OS on IBM zSeries, Solaris on Sun SPARC, and HP-UX on Itanium (as with GNU/Linux on Itanium, GT.M on these platforms, it is competitively priced even though it is not FOSS).&nbsp; Although an originating instance on OpenVMS on Alpha/AXP can replicate to a replicating instance on these platforms, an originating instance on these platforms cannot replicate to a replicating instance on OpenVMS on Alpha/AXP.&nbsp; To effect a migration from M on OpenVMS Alpha/AXP to GT.M on one of these platforms in a series of small, reversible steps, first migrate to GT.M on x86 GNU/Linux, <font size=2><font size=3>and</font></font> then to your preferred final destination platform.
+</p>
+<br style=FONT-FAMILY:Verdana>
+<hr>
+<ol>
+  <li>
+    <a name=FOOTNOTE-1></a><span style=FONT-FAMILY:Verdana>An originating instance on GT.M on Alpha/AXP OpenVMS can replicate to exactly one other instance which must be GT.M on one of OpenVMS or Tru64 UNIX on Alpha/AXP, or Linux on x86 or Itanium.&nbsp; An originating instance on GT.M on UNIX/Linux platforms can replicate to either one Alpha/AXP OpenVMS instance or to as many as sixteen instances of GT.M on other UNIX/Linux platforms.</span>
+  </li>
+  <li>
+    <a name=FOOTNOTE-2></a><span style=FONT-FAMILY:Verdana>Major GT.M functionality on GNU/Linux but not on OpenVMS is support for the Unicode (ISO/IEC-10646).</span>
+  </li>
+</ol></body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Migrating_Off_Alpha_AXP_OpenVMS.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:00:54 GMT -->
+</html>

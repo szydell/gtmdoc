@@ -1,0 +1,58 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s06.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:49 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Trigger Definition Storage</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch14.html" title="Chapter 14. Triggers">
+<link rel="prev" href="ch14s05.html" title="A Simple Example">
+<link rel="next" href="ch14s07.html" title="Trigger Invocation and Execution Semantics">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Trigger Definition Storage</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch14s05.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 14. Triggers</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch14s07.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch14.html">Triggers</a></span> &gt; <span class="breadcrumb-node">Trigger Definition Storage</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="trigger_definition_storage"></a>Trigger Definition Storage</h2></div></div></div>
+<p>GT.M stores trigger definitions and trigger lookup information as nodes of a global-like structure <code class="code">(^#t</code>). GT.M stores these structures in each region where triggers are mapped. You can manage the trigger definitions with MUPIP TRIGGER and $ZTRIGGER() but you cannot directly access <code class="code">^#t</code> (except with DSE, which FIS recommends against under normal circumstances).</p>
+<p>Database key and record size do not constrain the global like <code class="code">^#t</code> structure. GT.M automatically sets the key size of <code class="code">^#t</code> nodes to 1019 bytes which allows GT.M to store triggers more compactly in cases where regions have a small record size limit. GT.M can automatically span <code class="code">^#t</code> nodes as needed to accommodate records that exceed block size.</p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch14s05.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch14.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch14s07.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">A Simple Example </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> <span>Trigger Invocation and Execution </span>Semantics</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s06.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:49 GMT -->
+</html>

@@ -1,0 +1,88 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s17.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Quit</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s16.html" title="Open">
+<link rel="next" href="ch06s18.html" title="Read">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Quit</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s16.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s18.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">Quit</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="quit_cmmd"></a>Quit</h2></div></div></div>
+<a class="indexterm" name="idp186659728"></a><p>Except when a  QUIT appears on a line after a FOR, the QUIT command terminates execution of the current GT.M invocation stack level initiated by a DO, XECUTE, extrinsic function or special variable, and return control to the next "lower" level. In this case, QUIT restores any values stacked at the current level by NEWs or by parameter passing. A QUIT command terminates any closest FOR command on the same line. Note that M overloads the QUIT command to terminate DO, FOR, XECUTE and extrinsics ($$) of which FOR is the most different.</p>
+<p>The format of the QUIT command is:</p>
+<pre class="programlisting">Q[UIT][:tvexpr] [expr | *lname | *lvn]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>When a QUIT terminates an extrinsic function, it must have an argument that supplies the value returned by the function; in all other cases, QUIT must not have an argument and must be followed by at least two (2) spaces to separate it from the next command on the line.</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a QUIT argument form a legal argument for a QUIT.</p></li>
+<li class="listitem"><p>An unsubscripted lvn (lname) specifies the root of an array, while a subscripted lvn must specify an alias container.</p></li>
+<li class="listitem"><p>When QUIT * terminates an extrinsic function or an extrinsic special variable, it always returns an alias container. If lvn is an lname that is not an alias, QUIT * creates an alias container. For more information and examples of alias variables, refer to <a class="xref" href="ch02s07.html" title="Alias Variables Extensions">&#8220;Alias Variables Extensions&#8221;</a>. </p></li>
+<li class="listitem"><p>The QUIT performs two similar, but different, functions depending on its context. Because FORs do not add levels to the GT.M invocation stack, QUITs inside FOR loops simply terminate the loop. QUITs that terminate DOs, XECUTEs and extrinsics remove a GT.M invocation stack level and therefore may adjust the local variable environment resulting from previous NEWs or parameter passing. A QUIT from an extrinsic or a frame created by an argumentless DO restores $TEST to its stacked value.</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating QUIT arguments forms a legal argument for a QUIT other than from a FOR.</p></li>
+<li class="listitem"><p>Attempting to QUIT (implicitly or explicitly) from code invoked by a DO, XECUTE or extrinsic after that code issued a TSTART not yet matched by a TCOMMIT, produces an error.</p></li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_quit"></a>Examples<span> of QUIT</span><a class="indexterm" name="idp186709632"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">     Do A
+     Quit
+A    Write !,"This is label A"</pre>
+<p>The explicit QUIT at the line preceding the label A prevents line A from executing twice. The sub-routine at line A terminates with the implicit QUIT at the end of the routine.</p>
+<p>Example:</p>
+<pre class="programlisting">       Write $$ESV
+        Quit
+ESV()
+        QUIT "value of this Extrinsic Special Variable"</pre>
+<p>Because the label ESV has an argument list (which is empty), GT.M can only legally reach that label with an extrinsic invocation. The QUIT on the second line prevents execution from erroneously "falling through" to the line labeled ESV. Because ESV identifies a subroutine that implements an extrinsic special variable, the QUIT on the line after ESV has an argument to provide the value of the extrinsic.</p>
+<p>Example:</p>
+<pre class="programlisting">Set x="" For  Set x=$Order(^BAL(x)) Quit:x]]"AR5999"!'$Length(x)  DO STF</pre>
+<p>The postconditional QUIT terminates the FOR loop. Note the two spaces after the QUIT because it has no argument.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s16.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s18.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Open </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Read</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s17.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/length.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:58 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$Length()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter7.html" title="Chapter 7. Functions" />
+    <link rel="prev" href="examples_of_justify.html" title="Examples of $JUSTIFY()" />
+    <link rel="next" href="examples_of_length.html" title="Examples of $LENGTH()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$Length()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_justify.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 7. Functions</th>
+          <td width="20%" align="right"> <a accesskey="n" href="examples_of_length.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="length"></a>$Length()</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_length.html">Examples of $LENGTH()</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4182980" class="indexterm"></a>
+      <p>The $LENGTH function returns the length of a string measured in characters, or in &quot;pieces&quot; separated by a delimiter specified by one of its arguments.</p>
+      <p>The format for the $LENGTH function is:</p>
+      <pre class="programlisting">
+    $L[ENGTH](expr1[,expr2])
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The first expression specifies the string that $LENGTH() &quot;measures.&quot;</p>
+          </li>
+          <li>
+            <p>The optional second expression specifies the delimiter that defines the measure; if this argument is missing, $LENGTH() returns the number of characters in the string.</p>
+          </li>
+          <li>
+            <p>If the second argument is present and not a null string, $LENGTH returns one more than the count of the number of occurrences of the second string in the first string; if the second argument is a null string, the M standard specifies that $LENGTH() returns a zero (0).</p>
+          </li>
+        </ul>
+      </div>
+      <p>$LENGTH() provides a tool for determining the lengths of strings in two ways, characters and pieces. The two argument $LENGTH() returns the number of existing pieces, while the one argument returns the number of characters.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_justify.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter7.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="examples_of_length.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of $JUSTIFY() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of $LENGTH()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/length.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:58 GMT -->
+</html>

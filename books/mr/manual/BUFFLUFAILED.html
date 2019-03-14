@@ -1,0 +1,60 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/BUFFLUFAILED.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>BUFFLUFAILED </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="BTFAIL.html" title="BTFAIL ">
+<link rel="next" href="BUFOWNERSTUCK.html" title="BUFOWNERSTUCK ">
+<link rel="copyright" href="ln-idp153747552.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">BUFFLUFAILED </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="BTFAIL.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="BUFOWNERSTUCK.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">BUFFLUFAILED </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="BUFFLUFAILED"></a>BUFFLUFAILED </h2></div></div></div>
+<p><span class="bold"><strong>BUFFLUFAILED</strong></span>,  Errors flushing buffers from uuuu for database file dddd</p>
+<p>DSE/MUPIP Error: MUPIP or DSE (uuuu) could not flush the buffers for database file dddd completely. In the case of MUPIP, this typically means that some process is not releasing the critical section. In the case of DSE, this typically means there is some error in the global buffer cache which needs to be fixed.</p>
+<p>Action: In the case of MUPIP, wait approximately 20 seconds and retry. In the case of DSE, try DSE CACHE RECOVER to fix the cache. If the error persists, report it to the group responsible for database integrity at your operation as soon as possible.</p>
+<a class="indexterm" name="idp154615040"></a><a class="indexterm" name="idp154616000"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="BTFAIL.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="BUFOWNERSTUCK.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">BTFAIL  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> BUFOWNERSTUCK </td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/BUFFLUFAILED.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+</html>

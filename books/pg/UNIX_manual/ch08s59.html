@@ -1,0 +1,117 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch08s59.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZTExit</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
+<link rel="prev" href="ch08s58.html" title="$ZSYstem">
+<link rel="next" href="ch08s60.html" title="$ZTIMeout">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZTExit</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch08s58.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 8. <span>Intrinsic Special Variables</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch08s60.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZTExit</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="ztexit"></a>$ZTExit<a class="indexterm" name="idp189352672"></a>
+</h2></div></div></div>
+<p>$ZTE[XIT] contains an expression that controls the GT.M interrupt facility at the transaction commit or rollback. At each outermost TCOMMIT or TROLLBACK, If +$ZTEXIT evaluates to non-zero (TRUE), then $ZINTERRUPT is XECUTEd after completing the commit or rollback.</p>
+<p>$ZTEXIT is a read-write ISV, that is, it can appear on the left side of the equal sign (=) in the argument to the SET command. M routines cannot NEW $ZTEXIT. GT.M initializes $ZTEXIT to null at the process startup. Note that the changes to the value of $ZTEXIT during a GT.M invocation last for the entire duration of the process, so it is the application's responsibility to reset $ZTEXIT after $ZINTERRUPT is delivered in order to turn off redelivering the interrupt every subsequent transaction commit or rollback.</p>
+<p>Example:</p>
+<pre class="programlisting">$ export sigusrval=10
+$ /usr/lib/fis-gtm/V6.1-000_x86_64/gtm
+GTM&gt;zprint ^ztran
+foo;
+  set $ztexit=1
+  set $zinterrupt="d ^throwint"
+  tstart ()
+  for i=1:1:10 do
+  . set ^ACN(i,"bal")=i*100
+  tstart ()
+  do ^throwint
+  ;do ^proc
+  tcommit:$tlevel=2
+  for i=1:1:10 do
+  . set ^ACN(i,"int")=i*0.05
+  ;do ^srv
+  if $tlevel trollback
+  ;do ^exc
+  set $ztexit="",$zinterrupt=""
+  quit
+bar;
+  write "Begin Transaction",!
+  set $ztexit=1
+  tstart ()
+  i '$zsigproc($j,$ztrnlnm("sigusrval")) write "interrupt sent...",!!
+  for i=1:1:4 set ^B(i)=i*i
+  tcommit
+  write "End Transaction",!
+  ;do ^srv
+  quit
+GTM&gt;zprint ^throwint
+throwint
+  set $zinterrupt="write !,""interrupt occurred at : "",$stack($stack-1,""PLACE""),! set $ztexit=1"
+  if '$zsigproc($job,$ztrnlnm("sigusrval")) write "interrupt sent to process"
+  write "***************************************",!!
+  quit
+GTM&gt;do foo^ztran
+interrupt sent to process
+interrupt occurred at : throwint+3^throwint
+***************************************
+interrupt occurred at : foo+13^ztran
+GTM&gt;</pre>
+<p>In the above call to foo^ztran, the interrupt handler is a user-defined routine, throwint. The process is sent a signal (SIGUSR1), and $ZINTERRUPT is executed. At the outermost trollback, the interrupt is rethrown, causing $ZINTERRUPT to be executed again.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;w $zinterrupt
+"IF $ZJOBEXAM()"
+GTM&gt;zsystem "ls GTM*"
+ls: No match.
+GTM&gt;do bar^ztran
+Begin Transaction
+interrupt sent...
+End Transaction
+GTM&gt;zsystem "ls GTM*"
+GTM_JOBEXAM.ZSHOW_DMP_3951_1  GTM_JOBEXAM.ZSHOW_DMP_3951_2
+GTM&gt;</pre>
+<p>This uses the default value of $ZINTERRUPT to service interrupts issued to the process. The $ZJOBEXAM function executes a ZSHOW "*", and stores the output in each GTM_ZJOBEXAM_ZSHOW_DMP for the initial interrupt, and at tcommit when the interrupt is rethrown.</p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch08s58.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch08.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch08s60.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZSYstem </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZTIMeout</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch08s59.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

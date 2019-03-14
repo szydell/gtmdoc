@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/TP_Characteristics.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:35 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>TP Characteristics</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Transctn_Processing.html" title="Transaction Processing" />
+    <link rel="prev" href="TP_Defnts.html" title="TP Definitions" />
+    <link rel="next" href="TP_Performance.html" title="TP Performance" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">TP Characteristics</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="TP_Defnts.html">Prev</a> </td>
+          <th width="60%" align="center">Transaction Processing</th>
+          <td width="20%" align="right"> <a accesskey="n" href="TP_Performance.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="TP_Characteristics"></a>TP Characteristics</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4169425" class="indexterm"></a>
+      <p>Most transaction processing systems try to have transactions meet the &quot;ACID&quot; test–Atomic, Consistent, Isolated, and Durable. To conform with the M approach of providing maximum flexibility and, when possible, backwards compatibility with older versions of the standard, M transaction processing requires the use of programming conventions that meet the ACID test.</p>
+      <p>For example, some effects of the BREAK, CLOSE, JOB, OPEN, READ, USE WRITE, and ZSYSTEM commands may be observed by parties to the system. Because the effects of these commands might cause an observing process or person to conclude that a transaction executing them was in progress and perhapsfinished, they violate, in theory, the principle of Isolation.</p>
+      <p>The LOCK command is another example. A program may attempt to use a LOCK to determine if another process has a transaction in progress. The answer would depend on the management of LOCKs within transactions, which is implementation-specific. This would therefore clearly violate the principle of Isolation. The LOCK command is discussed later in this section.</p>
+      <p>The simplest way to construct a transaction that meets the ACID test is not to use any commands within a transaction whose affects may be immediately &quot;visible&quot; outside the transaction. Unfortunately, because M applications are highly interactive, this is not entirely straightforward. When a user interaction relies on database information, one solution is for the program to save the initial values of any global values that could affect the outcome, in local variables. Then, once the interaction is over and the transaction has been initiated, the program checks the saved values against the corresponding global variables. If they are the same, it proceeds. If they differ, some other update has changed the information, and the program must issue a TROLLBACK, and initiate another interaction as a replacement.</p>
+      <p>Even when the &quot;visible&quot; commands appear within a transaction, an M application may provide wholesome operation by relying on additional programming or operating conventions.</p>
+      <p>A program using LOCKs to achieve serializability relies on properly designed and universally followed LOCKing conventions to achieve Isolation with respect to database operations. LOCKs placed outside the transaction (usually a LOCK immediately before the TSTART and an unlock immediately after the TCOMMIT) achieve serializability by actually serializing any approximately concurrent transaction. LOCKs placed inside the transaction (frequently a LOCK immediately after the TSTART and an unlock immediately before the TCOMMIT) signal M to ensure that no operations using the same LOCK resource(s) overlap. Within a transaction, an M implementation may defer both LOCKing and unlocking to achieve its goal of serializability. A program using TSTARTs with the SERIAL keyword replaces the convention with a guarantee from M that all the database activity of the transaction meets the test of Isolation with respect to database activity.</p>
+      <p>In GT.M the Durability aspect of the ACID properties relies on the journaling feature. When journaling is on, every transaction is recorded in the journal file as well as in the database. The journal file constitutes a serial record of database actions and states. It is always written before the database updates and is designed to permit recovery of the database if the database should be damaged. By default when a process commits a transaction, it does not return control to the application code until the transaction has reached the journal file. The exception to this is that when the TSTART specifies TRANSACTIONID=&quot;BATCH&quot; the process resumes application execution without waiting for the file system to confirm the successful write of the journal record. The idea of the TRANSACTIONID=&quot;BATCH&quot; has nothing inherently to do with &quot;batch&quot; processing - it is to permit maximum throughput for transactions where the application has its own check-pointing mechanism, or method of recreating the transaction in case of a failure. The real durability of transactions is a function of the durability of the journal files. Putting journal files on reliable devices (RAID with UPS protection) and eliminating common points of failure with the path to the database (separate drives, controllers cabling) improve durability. The use of the replication feature can also improve durability by moving the data to a separate site in real time.</p>
+      <p>Attempting to QUIT (implicitly or explicitly) from code invoked by a DO, XECUTE, or extrinsic after that code issued a TSTART not yet matched by a TCOMMIT, produces an error. Although this is a consequence of the RESTART capability, it is true even when that capability is disabled. For example, this means that an XECUTE containing only a TSTART fails, while an XECUTE that performs a complete transaction succeeds.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="TP_Defnts.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Transctn_Processing.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="TP_Performance.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">TP Definitions </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> TP Performance</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/TP_Characteristics.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:35 GMT -->
+</html>

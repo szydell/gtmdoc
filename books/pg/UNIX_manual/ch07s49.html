@@ -1,0 +1,115 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s49.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZSIGPROC()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s48.html" title="$ZSEARCH()">
+<link rel="next" href="ch07s50.html" title="$ZSUBstr()">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZSIGPROC()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s48.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s50.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZSIGPROC()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zsigproc"></a>$ZSIGPROC()</h2></div></div></div>
+<p>Sends a signal to a process. The format for the $ZSIGPROC function is:</p>
+<pre class="programlisting">$ZSIGPROC(expr1,expr2)</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The first expression is the pid of the process to which the signal is to be sent. </p></li>
+<li class="listitem"><p>The second expression is the system signal number. Because a signal number of a signal name can be different for various platforms, FIS recommends using signal names to maintain code portability across different platforms. For example, the signal number for SIGUSR1 is 10 on Linux, 30 on AIX, and 16 for some other platforms. Use the $&amp;gtmposix.signalval(signame,.sigval) function available in the gtmposix plugin to determine the signal number of a signal name. </p></li>
+<li class="listitem"><p>If the second expression is 0, $ZSIGPROC() checks the validity of the pid specified in the first expression. </p></li>
+<li class="listitem">
+<p>There are four possible return values from $ZSIGPROC():</p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th><p>Return codes/POSIX Error Definitions</p></th>
+<th><p>Description</p></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p>0</p></td>
+<td><p>The specified signal number was successfully sent to the specified pid. Any return value other than 0 indicates an error. </p></td>
+</tr>
+<tr>
+<td><p>EPERM</p></td>
+<td><p>The process has insufficient permissions to send the signal to the specified pid.</p></td>
+</tr>
+<tr>
+<td><p>ESRCH</p></td>
+<td><p>The specified pid does not exist.</p></td>
+</tr>
+<tr>
+<td><p>EINVAL</p></td>
+<td><p>Invalid expression(s).</p></td>
+</tr>
+</tbody>
+</table></div>
+</li>
+</ul></div>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top"><p>Although $ZSIGPROC() may work today as a way to invoke the asynchronous interrupt mechanism of GT.M processes to XECUTE $ZINTERRUPT because the underlying mechanism uses the POSIX USR1 signal, FIS reserves the right to change the underlying mechanism to suit its convenience and sending a POSIX USR1 may cease to work as a way to invoke the asynchronous interrupt mechanism. Use MUPIP INTRPT as the supported and stable API to invoke the asynchronous interrupt mechanism.</p></td></tr>
+</table></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_zsigproc"></a>Examples<span> of $ZSIGPROC()</span>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;job ^Somejob
+GTM&gt;set ret=$&amp;gtmposix.signalval("SIGUSR1",.sigusr1) zwrite 
+ret=0
+sigusr1=10
+GTM&gt;write $zsigproc($zjob,sigusr1)
+0
+GTM&gt;</pre>
+<p>This example sends the SIGUSR1 signal to the pid specified by $zjob. </p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s48.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s50.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZSEARCH() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZSUBstr()</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s49.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

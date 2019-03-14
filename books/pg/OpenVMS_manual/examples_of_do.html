@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_do.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:19 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of %DO</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="percent_do.html" title="%DO" />
+    <link rel="prev" href="output_variables_do.html" title="Output Variables" />
+    <link rel="next" href="percent_hd.html" title="%HD" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of %DO</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="output_variables_do.html">Prev</a> </td>
+          <th width="60%" align="center">%DO</th>
+          <td width="20%" align="right"> <a accesskey="n" href="percent_hd.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="examples_of_do"></a>Examples of %DO</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4221823" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO INT^%DO 
+	Decimal: 12
+	Digits: 4
+	GTM&gt;ZWRITE
+	%DO=&quot;0014&quot;
+	</pre>
+      <p>This example invokes %DO interactively with INT^%DO. %DO prompts for a decimal number and an output length. If the output value of %DO has leading zeros, the value is a string. ZWRITE displays the contents of the variables.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;SET %DO=12 
+	GTM&gt;DO ^%DO
+	GTM&gt;ZWRITE
+	%DO=&quot;000000000014&quot;
+	</pre>
+      <p>This example sets the read-write variable %DO to 12 and invokes %DO to convert the number non-interactively. Because the number of digits was not specified, %DO used the default of 12 digits. Set %DL to specify the number of output digits. ZWRITE displays the contents of the variables.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;WRITE $$FUNC^%DO(12,7)
+	0000014	
+	</pre>
+      <p>This example invokes %DO as an extrinsic function with the label FUNC. The first argument specifies the number to be converted and the optional, second argument specifies the number of output digits. If the second argument is not specified, %DO uses the default of 12 digits. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="output_variables_do.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="percent_do.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="percent_hd.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Output Variables </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> %HD</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_do.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:19 GMT -->
+</html>

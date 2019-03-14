@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/close_device_params_9.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:16 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>CLOSE Deviceparameters</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="close_cmmd_9.html" title="Close" />
+    <link rel="prev" href="close_cmmd_9.html" title="Close" />
+    <link rel="next" href="close_device_param_table.html" title="CLOSE Deviceparameters Table" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">CLOSE Deviceparameters</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="close_cmmd_9.html">Prev</a> </td>
+          <th width="60%" align="center">Close</th>
+          <td width="20%" align="right"> <a accesskey="n" href="close_device_param_table.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="close_device_params_9"></a>CLOSE Deviceparameters</h4>
+          </div>
+        </div>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="after_close"></a>AFTER</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4212832" class="indexterm"></a>
+        <p>AFTER=expr			Applies to: SD</p>
+        <p>Specifies a time when a SPOOLed or SUBMITted job should start. The expression provides a value for the time in DCL absolute or delta time format.</p>
+        <p>By default, the VMS job controller starts processing a SUBMITted or SPOOLed file as soon as system resources permit.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="burst_close"></a>BURST</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4212873" class="indexterm"></a>
+        <p>[NO]BURST			Applies to: SPL</p>
+        <p>Enables or disables printing burst flags on a SPOOLed file.</p>
+        <p>By default, the queue controls whether to print burst flags.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="characterstic_close"></a>CHARACTERISTIC</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4212909" class="indexterm"></a>
+        <p>CHARACTERISTIC=intexpr		Applies to: S/S</p>
+        <p>Specifies a characteristic required of the queue for processing a SUBMITted or SPOOLed job. The expression supplies a single characteristic number. To specify multiple characteristics, use the CHARACTERISTIC deviceparameter more than once on the CLOSE.</p>
+        <p>The VMS system manager assigns queue CHARACTERISTICs. VMS gives CHARACTERISTICs both names and numbers. However, the CHARACTERISTIC deviceparameter only accepts numeric identifications.</p>
+        <p>By default, CLOSE does not limit the queue selection with characteristics.</p>
+        <p>Example:</p>
+        <pre class="programlisting">
+	CLOSE sd:(SUBMIT:CHARACTERISTIC=4:CHAR=5)
+	</pre>
+        <p>This CLOSEs the device, and if the device is an RMS file, SUBMITs the file to batch, restricting the VMS job controller to execute the job in a queue with CHARACTERISTICs numbers 4 and 5.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="cli_close"></a>CLI</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4212970" class="indexterm"></a>
+        <p>CLI=expr		Applies to: SUB</p>
+        <p>Specifies a command language for a SUBMITted job. The expression must name an available CLI.</p>
+        <p>By default, VMS uses the CLI identified by the account under which the job was SUBMITted, generally DCL.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="copies_close"></a>COPIES</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213007" class="indexterm"></a>
+        <p>COPIES=intexp		Applies to: SPL</p>
+        <p>Specifies the number of copies of a SPOOLed file to print. The integer expression supplies a number of <a id="id4213030" class="indexterm"></a>copies.</p>
+        <p>By default, the spooler prints one copy.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="cpulimit_close"></a>CPULIMIT</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213060" class="indexterm"></a>
+        <p>CPULIMIT=intexpr		Applies to: S/S</p>
+        <p>Specifies the maximum CPU time a SPOOLed or SUBMITted job can consume before VMS terminates it. The integer expression supplies a time as a number of 10 millisecond increments. CPULIMIT=0 requests unlimited CPU time. This is analogous to the /CPUTIME qualifier on the DCL SUBMIT command.</p>
+        <p>By default, the account and/or the queue control the maximum CPU time.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="delete_close"></a>DELETE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213100" class="indexterm"></a>
+        <p>DELETE		Applies to: MBX SD FIFO</p>
+        <p>Instructs GT.M to delete <span>the mailbox or</span> the current version of the disk file after GT.M closes it. <span>When the file is SPOOLed or SUBMITted, VMS deletes the file after processing it.</span></p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="doublespace_close"></a>DOUBLESPACE</h5>
+            </div>
+          </div>
+        </div>
+        <p>[NO]DOUBLESPACE		Applies to: SPL</p>
+        <p>Enables or disables <a id="id4213157" class="indexterm"></a>double spacing of a SPOOLed file.</p>
+        <p>By default, the spooler prints files single spaced.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="exception_close"></a>EXCEPTION</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213185" class="indexterm"></a>
+        <p>EXCEPTION=expr		Applies to: All devices</p>
+        <p>Defines an error handler for an I/O device. The expression must contain a fragment of GT.M code (for example, GOTO ERRFILE) that GT.M XECUTEs when the driver for the device detects an error, or an entryref to which GT.M transfers control, as appropriate for the current gtm_ztrap_form.</p>
+        <p>For more information on error handling, refer &quot;Error Processing&quot;.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="firstpage_close"></a>FIRSTPAGE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213227" class="indexterm"></a>
+        <p>FIRSTPAGE=intexpr			Applies to: SPL</p>
+        <p>Specifies the page number at which to start printing a SPOOLed file. This is analogous to the first argument to the /PAGE qualifier on the DCL PRINT command.</p>
+        <p>By default, the spooler starts printing at the beginning of a file.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="flag_close"></a>FLAG</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213267" class="indexterm"></a>
+        <p>[NO]FLAG			Applies to: SPL</p>
+        <p>Enables or disables printing a flag page before a SPOOLed file.</p>
+        <p>By default, the queue controls whether to print a flag page.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="form_close"></a>FORM</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213305" class="indexterm"></a>
+        <p>FORM=intexpr			Applies to: SPL</p>
+        <p>FORM=intexpr 			Applies to: Sequential Files when used with SPOOL</p>
+        <p>Specifies a predefined form number to use while printing a SPOOLed file.</p>
+        <p>The VMS system manager sets up queue FORMs. VMS gives FORMs both names and numbers. However, the FORM deviceparameter only accepts numeric identifications.</p>
+        <p>By default, the spooler prints files on the default form.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="group_close"></a>GROUP</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213348" class="indexterm"></a>
+        <p>GROUP=expr		Applies to: SD </p>
+        <p>Specifies UIC-based security on RMS files. The expression is a mask evaluating to null or to any combination of the letters REWD, indicating respectively READ, EXECUTE, WRITE, and DELETE access. When any one of these deviceparameters appears on a CLOSE, any user category (OWNER, SYSTEM, WORLD), that is not explicitly specified remains unchanged.</p>
+        <p>In order to modify file security, the user who issues the CLOSE must have <span>control access</span>.</p>
+        <p>By default, CLOSE does not modify the <span>UIC-based security</span> on an existing file. </p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="header_close"></a>HEADER</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213412" class="indexterm"></a>
+        <p>[NO]HEADER			Applies to: SPL</p>
+        <p>Enables or disables printing a VMS header on the top of each page of a SPOOLed file. This header includes the file specification and the time and date. When using this header, ensure that the form size is 2 lines larger than the page size of material in the file. Otherwise, printing intended for a single page may overflow onto 2 pages.</p>
+        <p>By default, the spooler does not print a VMS header.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="hold_close"></a>HOLD</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213455" class="indexterm"></a>
+        <p>[NO]HOLD			Applies to: S/S</p>
+        <p>Enables or disables holding the SPOOLed or SUBMITted job for release by an operator.</p>
+        <p>By default, The VMS job controller starts processing the SUBMITted or SPOOLed file as soon as system resources permit.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="lastpage_close"></a>LASTPAGE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213494" class="indexterm"></a>
+        <p>LASTPAGE=intexpr		Applies to: SPL</p>
+        <p>Specifies the page number at which to stop printing a SPOOLed file. This is analogous to the second argument to the /PAGE qualifier on the DCL PRINT command.</p>
+        <p>By default, the spooler stops printing at the end-of-file.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="logfile_close"></a>LOGFILE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213534" class="indexterm"></a>
+        <p>LOGFILE=expr			Applies to: SUB</p>
+        <p>Specifies the file into which a SUBMITted job should log its output. The expression supplies an RMS file specification. This is analogous to the /LOG_FILE qualifier on the DCL SUBMIT command.</p>
+        <p>By default, the VMS job controller logs a job into the login directory of the account under which the job runs, with a file name constructed from the job name and a file type of .LOG.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="logqueue_close"></a>LOGQUEUE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213578" class="indexterm"></a>
+        <p>LOGQUEUE=expr			Applies to: SUB</p>
+        <p>Specifies the queue used to print the log file of a SUBMITted job. The expression supplies a queue name.</p>
+        <p>By default, the VMS job controller uses the SYS$PRINT queue.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="lowercase"></a>LOWERCASE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213616" class="indexterm"></a>
+        <p>[NO]LOWERCASE				Applies to: SPL</p>
+        <p>Specifies whether a SPOOLed file prints on a queue supporting a device that can print lower-case characters.</p>
+        <p>By default, CLOSE does not restrict printing based on this capability.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="name_close"></a>NAME</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213656" class="indexterm"></a>
+        <p>NAME=expr		Applies to: S/S</p>
+        <p>Specifies the name of a SPOOLed or SUBMITted job. The expression supplies a name from one to 39 characters in length.</p>
+        <p>By default, a job takes the name of the SPOOLed or SUBMITted file.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="note_close"></a>NOTE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213692" class="indexterm"></a>
+        <p>NOTE=expr			Applies to: SPL</p>
+        <p>Specifies a note to print on the flag pages of a SPOOLed job. The expression specifies the text of a note. NOTE performs no function if neither the job nor the queue specify BURST and/or FLAG and/or TRAILER.</p>
+        <p>By default, the spooler does not print the note on flag pages.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="notify"></a>NOTIFY</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213733" class="indexterm"></a>
+        <p>[NO]NOTIFY			Applies to: S/S</p>
+        <p>Specifies whether the process receives notification when a SPOOLed or SUBMITted job completes, in the form of a broadcast mailbox message.</p>
+        <p>By default, when a job completes, the VMS job controller does not notify the other active processes belonging to the same user as the job.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="operator"></a>OPERATOR</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213774" class="indexterm"></a>
+        <p>OPERATOR=expr		Applies to: S/S</p>
+        <p>Pauses the queue and notifies the operator to take action when a SPOOLed or SUBMITted job is ready for execution. The expression contains a message, which the VMS job controller sends to the operator console(s).</p>
+        <p>By default, The VMS job controller does not require operator action before a SPOOLed job prints or a SUBMITted job runs.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="owner_close"></a>OWNER</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213813" class="indexterm"></a>
+        <p>OWNER=expr			Applies to: SD </p>
+        <p>Specifies UIC-based security on RMS files. The expression is a mask evaluating to null or to any combination of the letters REWD, indicating respectively READ, EXECUTE, WRITE, and DELETE access. When any one of these deviceparameters appears on a CLOSE, any user category (GROUP, SYSTEM, WORLD), that is not explicitly specified remains unchanged.</p>
+        <p>In order to modify file security, the user who issues the CLOSE must have <span>control access</span>.</p>
+        <p>By default, CLOSE does not modify the <span>UIC-based security</span> on an existing file. </p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="p1_to_p8"></a>P1_to_P8</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213877" class="indexterm"></a>
+        <p>P1=expr to P8=expr			Applies to: S/S</p>
+        <p>Specifies the parameters supplied to a SPOOLed or SUBMITted job. Each expression supplies a parameter value. The CLOSE must specify each parameter with a separate Pn deviceparameter. VMS assigns every parameter value to a DCL symbol of the same (Pn) name in the job. This is analogous to the /PARAMETER qualifier on the DCL PRINT and SUBMIT commands.</p>
+        <p>By default, P1 to P8 have null values.</p>
+        <p>Example:</p>
+        <pre class="programlisting">
+	CLOSE sd:(SUBMIT:P1=p1:P2=5:P3=&quot;INIT&quot;)
+	</pre>
+        <p>This CLOSEs the device, and if the device is an RMS file, SUBMITs it to batch with three parameters that are respectively: the value of the variable p1 , the integer 5 and the string &quot;INIT&quot;.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="paginate"></a>PAGINATE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213936" class="indexterm"></a>
+        <p>[NO]PAGINATE			Applies to: SPL</p>
+        <p>Instructs the spooler whether to insert appropriate carriage control characters whenever output exceeds the form length. This is analogous to the /[NO]FEED qualifier on the DCL PRINT command.</p>
+        <p>By default, the spooler adds its own pagination.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="passall"></a>PASSALL</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4213976" class="indexterm"></a>
+        <p>[NO]PASSALL			Applies to: SPL</p>
+        <p>Enables or disables spooler suppression of non-graphic character sequences in a SPOOLed file. Non-graphic characters should be PASSALLed when they control printer behavior.</p>
+        <p>By default, the spooler does not send non-graphic sequences to the printer.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="print_close"></a>PRINT</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214017" class="indexterm"></a>
+        <p>[NO]PRINT			Applies to: SUB</p>
+        <p>Specifies whether to print and delete, or not print and retain, the log file generated by a SUBMITted job. This is analogous to a combination of the /KEEP and /PRINT qualifiers on the DCL SUBMIT command.</p>
+        <p>By default, the VMS job controller prints and deletes the log file.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="priority_close"></a>PRIORITY</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214057" class="indexterm"></a>
+        <p>PRIORITY=intexpr			Applies to: S/S</p>
+        <p>Specifies the priority of a SPOOLed or SUBMITted job. Attempts to raise priority above a SYSGEN established maximum (MAXQUEPRI) only succeed if the user has appropriate VMS privileges (OPER or ALTPRI).</p>
+        <p>By default, a SYSGEN parameter (DEFQUEPRI) and the priority of the submitting process control the priority of a SPOOLed or SUBMITted job.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="queue_close"></a>QUEUE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214100" class="indexterm"></a>
+        <p>QUEUE=expr				Applies to: S/S</p>
+        <p>Specifies the queue for a SPOOLed or SUBMITted job. The expression supplies a queue name.</p>
+        <p>By default, SPOOLed jobs go to SYS$PRINT and SUBMITted jobs go to SYS$BATCH.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="remote_close"></a>REMOTE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214139" class="indexterm"></a>
+        <p>REMOTE=expr			Applies to: S/S</p>
+        <p>Specifies the node on the network where a SPOOLed or SUBMITted job executes. The expression supplies the node name of the target system. Within a VMSCluster, a shared queue management system may direct SPOOLed or SUBMITted jobs to other members of the cluster without use of the REMOTE parameter.</p>
+        <p>By default, the VMS job controller executes a job on the system from which it is SPOOLed or SUBMITted. However, by default, in a VMSCluster with a shared queue management system, the VMS job controller executes a job on the cluster member with the largest current supply of required resources.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="rename_close"></a>RENAME</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214183" class="indexterm"></a>
+        <p>RENAME=expr			Applies to: SD</p>
+        <p>Changes the file name to the name contained in the argument string. <span>When the expression omits part of the file specification, GT.M constructs the full file specification by applying the defaults discussed in the section on device specifications.</span></p>
+        <p>If the process has sufficient access permissions, it may use RENAME to specify a different directory as well as file name<span>, type and version</span>. RENAME cannot move a file to a different device.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="restart_close"></a>RESTART</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214239" class="indexterm"></a>
+        <p>[NO]RESTART			Applies to: S/S</p>
+        <p>Enables or disables automatic restart on reboot after a system failure for a SPOOLed or SUBMITted job.</p>
+        <p>By default, the VMS job controller requires operator intervention to restart jobs running at the time of a system failure.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="setup_close"></a>SETUP</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214279" class="indexterm"></a>
+        <p>SETUP=expr			Applies to: SPL</p>
+        <p>Specifies one or more setup modules to copy to the printing device before the contents of a SPOOLed file. The expression supplies a list of setup module names separated by commas (,). VMS stores setup modules in a device control library and the spooler uses them to initialize or download programmable printers.</p>
+        <p>By default, the spooler sends no setup modules to the printer ahead of a SPOOLed file.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="socket_close"></a>SOCKET</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214320" class="indexterm"></a>
+        <p>SOCKET=expr			Applies to: SOC</p>
+        <p>The socket specified in expr is closed. Specifying a socket that has not been previously OPENed generates an error. If no SOCKET deviceparameter is specified on a CLOSE for a socket device, the socket device and all sockets associated with it are closed.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="spool_close"></a>SPOOL</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214358" class="indexterm"></a>
+        <p>SPOOL			Applies to: SD</p>
+        <p>Sends the sequential file to the default print queue SYS$PRINT. The deviceparameter QUEUE provides a means to specify different print queues. </p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="submit_close"></a>SUBMIT</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214394" class="indexterm"></a>
+        <p>SUBMIT			Applies to: SD</p>
+        <p>Submits the named sequential file to the default batch queue SYS$BATCH. The deviceparameter QUEUE provides a means to specify different print queues. </p>
+        <p>Specifies UIC-based security on RMS files. The expression is a mask evaluating to null or to any combination of the letters REWD, indicating respectively READ, EXECUTE, WRITE, and DELETE access. When any one of these deviceparameters appears on a CLOSE, any user category that is not explicitly specified remains unchanged.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="system_close_vms"></a>SYSTEM</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214439" class="indexterm"></a>
+        <p>SYSTEM=expr			Applies to: SD</p>
+        <p>Specifies UIC-based security on RMS files. The expression is a mask evaluating to null or to any combination of the letters REWD, indicating respectively READ, EXECUTE, WRITE, and DELETE access. When any one of these deviceparameters appears on an OPEN of a new file, any user category that is not explicitly specified is given the default mask. When any one of these deviceparameters appears on an OPEN of an existing file, any user category (OWNER, GROUP, WORLD), that is not explicitly specified remains unchanged.</p>
+        <p>In order to modify file security, the user who issues the OPEN or CLOSE must have control access ownership.</p>
+        <p>By default, CLOSE does not modify the UIC-based security on an existing file. </p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="trailer"></a>TRAILER</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214490" class="indexterm"></a>
+        <p>[NO]TRAILER			Applies to: SPL</p>
+        <p>Enables and disables printing a flag page after a SPOOLed file.</p>
+        <p>By default, the queue controls printing of trailing flag pages.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="user_close"></a>USER</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214529" class="indexterm"></a>
+        <p>USER=expr			Applies to: S/S</p>
+        <p>Specifies the user name under which a SPOOLed or SUBMITted job runs. The expression supplies a currently valid one to 12 character user name. USER requires the VMS CMKRNL privilege.</p>
+        <p>By default, the VMS job controller runs the job under the account of the process by which it was SPOOLed or SUBMITted.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="world_close"></a>WORLD</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4214567" class="indexterm"></a>
+        <p>WORLD=expr				Applies to: SD </p>
+        <p>Specifies UIC-based security on RMS files. The expression is a mask evaluating to null or to any combination of the letters REWD, indicating respectively READ, EXECUTE, WRITE, and DELETE access. When any one of these deviceparameters appears on a CLOSE, any user category (OWNER, GROUP, SYSTEM), that is not explicitly specified remains unchanged.</p>
+        <p>In order to modify file security, the user who issues the CLOSE must have <span>control access</span>.</p>
+        <p>By default, CLOSE and CLOSE do not modify the <span>UIC-based security</span> on an existing file. Unless otherwise specified, when CLOSE creates a new file, it establishes security using standard defaulting rules.</p>
+        <p>In order to modify file security, the user who issues the CLOSE must have <span>control access</span>.</p>
+        <p>By default, CLOSE does not modify the <span>UIC-based security</span> on an existing file. </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="close_cmmd_9.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="close_cmmd_9.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="close_device_param_table.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Close </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> CLOSE Deviceparameters Table</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/close_device_params_9.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:16 GMT -->
+</html>

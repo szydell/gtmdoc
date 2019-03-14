@@ -1,0 +1,69 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Triggers</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch14.html" title="Chapter 14. Triggers">
+<link rel="prev" href="ch14.html" title="Chapter 14. Triggers">
+<link rel="next" href="ch14s02.html" title="Trigger Definition File">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Triggers</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch14.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 14. Triggers</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch14s02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch14.html">Triggers</a></span> &gt; <span class="breadcrumb-node">Triggers</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="trig_oview"></a>Triggers</h2></div></div></div>
+<p>GT.M allows you to set up a trigger mechanism that automatically executes a defined action in response to a database update operation on a matching global node.The trigger mechanism executes a fragment of M code (trigger code) "before" or "as part of" a database update. You can define the specifications of this mechanism in a Trigger Definition File. For a trigger on KILL (and ZKILL), GT.M executes trigger code "before" the KILL operation. For example, a trigger on KILL ^CIF(:,1) might clear old cross references. For a trigger on SET, GT.M executes trigger code "as part of" the SET operation. Within trigger logic, the ISV $ZTOLDVAL provides read access to the value of global node prior to the update and $ZTVALUE provides read/write access to the tentative SET value. This allows you to modify the tentative SET value before GT.M commits it to the database. The term "as part of" means that SET triggers execute intertwined with the SET operation. Although it is not yet committed the database, the tentative new value appears to the process as assigned but the process must SET $ZTVALUE to make any revision to the tentative value, because a SET of the global node would nest the trigger recursively - a pathological condition. GT.M executes SET triggers during a MERGE update where GT.M internally performs a series of SET operations and while performing a $INCREMENT() operation where GT.M internally performs a SET operation.For all triggers, GT.M handles the database update event and the triggered actions as an Atomic (all or nothing) transaction. Because triggers use application code and are always part of an implicit or explicit TP transaction, trigger code must conform to ACID conventions discussed in the TP documentation. </p>
+<p>Triggers meet many application needs including (but not limited to) the following:</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p><span class="bold"><strong>Enforce schema-level consistency</strong></span>: Since database schema created in a normal M application are implicit, M applications implement logic to maintain and enforce conformance with an application schema. Using triggers to enforce schema-level consistency ensures all processes invoke the code uniformly, and increases code modularity and maintainability.</p></li>
+<li class="listitem"><p><span class="bold"><strong>Allow an application to maintain one or more non-primary key indexes</strong></span>. For example, a trigger on updates to global nodes containing a customer id can maintain an index on the last name.</p></li>
+<li class="listitem"><p><span class="bold"><strong>Implement business logic</strong></span>: For example, an update to an account could automatically trigger updates to related accounts.</p></li>
+<li class="listitem"><p><span class="bold"><strong>Reducing replication traffic</strong></span>: Since the GT.M replication stream carries only the triggering updates, not the triggered updates, triggers reduce network traffic.</p></li>
+<li class="listitem"><p><span class="bold"><strong>Automate application defined logging or journaling of updates or maintaining historical records</strong></span>. Triggers can be used to control these.</p></li>
+<li class="listitem"><p><span class="bold"><strong>Implement referential integrity</strong></span>: For example, a trigger can prevent the posting of a bank transaction for an inactive account and display a rule violation message.</p></li>
+<li class="listitem"><p><span class="bold"><strong>Debugging</strong></span>: Debugging an application with multiple concurrent accesses is hard. You can use triggers to establish "watch points" on global variable updates to trap incorrect accesses. For example, if an application is failing because certain global variable nodes either have incorrect values or when previously set values disappear. A trigger can be used to trap all such accesses.</p></li>
+<li class="listitem"><p><span class="bold"><strong>Implement a dataflow based programming paradigm</strong></span>. Although not a primary goal of the implementation of triggers, you can use them to implement applications that use a dataflow programming paradigm.</p></li>
+</ol></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch14.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch14.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch14s02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 14. Triggers </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Trigger Definition<span> File</span>
+</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+</html>

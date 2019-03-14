@@ -1,0 +1,302 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch11s06.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Type Limits for Call-ins and Call-outs</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch11.html" title="Chapter 11. Integrating External Routines">
+<link rel="prev" href="ch11s05.html" title="Calls from External Routines: Call-Ins">
+<link rel="next" href="ch12.html" title="Chapter 12. Internationalization">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Type Limits for Call-ins and Call-outs</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch11s05.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 11. <span>Integrating</span> External<span> Routines</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch12.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch11.html"><span>Integrating</span> External<span> Routines</span></a></span> &gt; <span class="breadcrumb-node">Type Limits for Call-ins and Call-outs</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="cico_typelimit"></a>Type Limits for Call-ins and Call-outs</h2></div></div></div>
+<p>Depending on the direction (I, O, or IO) of a particular type, both call-ins and call-outs may transfer a value in two directions as follows:</p>
+<pre class="programlisting">Call-out: GT.M -&gt; C -&gt; GT.M       Call-in:     C -&gt; GT.M -&gt; C
+            |     |     |                      |     |     |
+            '-----'-----'                      '-----'-----'
+               1     2                            2     1</pre>
+<p>In the following table, the GT.M-&gt;C limit applies to 1 and the C-&gt;GT.M limit applies to 2. In other words, GT.M-&gt;C applies to I direction for call-outs and O direction for call-ins and C-&gt;GT.M applies to I direction for call-ins and O direction for call-outs.</p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th>
+<p></p>
+</th>
+<th colspan="2">
+<p>GTM-&gt;C</p>
+</th>
+<th colspan="2">
+<p>C-&gt;GT.M</p>
+</th>
+</tr>
+<tr>
+<th>
+<p>Type</p>
+</th>
+<th>
+<p>Precision</p>
+</th>
+<th>
+<p>Range </p>
+</th>
+<th>
+<p>Precision</p>
+</th>
+<th>
+<p>Range</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>gtm_int_t, gtm_int_t *</p>
+</td>
+<td>
+<p>Full</p>
+</td>
+<td>
+<p>[-2^31+1, 2^31-1]</p>
+</td>
+<td>
+<p>Full </p>
+</td>
+<td>
+<p>[-2^31, 2^31-1]</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>gtm_uint_t, gtm_uint_t * </p>
+</td>
+<td>
+<p>Full</p>
+</td>
+<td>
+<p>[0, 2^32-1]</p>
+</td>
+<td>
+<p>Full</p>
+</td>
+<td>
+<p>[0, 2^32-1]</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>gtm_long_t, gtm_long_t * (64-bit)</p>
+</td>
+<td>
+<p>18 digits </p>
+</td>
+<td>
+<p>[-2^63+1, 2^63-1]</p>
+</td>
+<td>
+<p>18 digits</p>
+</td>
+<td>
+<p>[-2^63, 2^63-1] </p>
+</td>
+</tr>
+<tr>
+<td>
+<p>gtm_long_t, gtm_long_t * (32-bit)</p>
+</td>
+<td>
+<p>Full</p>
+</td>
+<td>
+<p>[-2^31+1, 2^31-1]</p>
+</td>
+<td>
+<p>Full</p>
+</td>
+<td>
+<p>[-2^31, 2^31-1]</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>gtm_ulong_t, gtm_ulong_t * (64-bit) </p>
+</td>
+<td>
+<p>18 digits</p>
+</td>
+<td>
+<p>[0, 2^64-1]</p>
+</td>
+<td>
+<p>18 digits</p>
+</td>
+<td>
+<p>[0, 2^64-1]</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>gtm_ulong_t, gtm_ulong_t * (32-bit)</p>
+</td>
+<td>
+<p>Full</p>
+</td>
+<td>
+<p>[0, 2^32-1] </p>
+</td>
+<td>
+<p>Full</p>
+</td>
+<td>
+<p>[0, 2^32-1] </p>
+</td>
+</tr>
+<tr>
+<td>
+<p>gtm_float_t, gtm_float_t * </p>
+</td>
+<td>
+<p>6-9 digits</p>
+</td>
+<td>
+<p>[1E-43, 3.4028235E38]</p>
+</td>
+<td>
+<p>6 digits</p>
+</td>
+<td>
+<p>[1E-43, 3.4028235E38]</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>gtm_double_t, gtm_double_t * </p>
+</td>
+<td>
+<p>15-17 digits</p>
+</td>
+<td>
+<p>[1E-43, 1E47] </p>
+</td>
+<td>
+<p>15 digits </p>
+</td>
+<td>
+<p>[1E-43, 1E47]</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>gtm_char_t * </p>
+</td>
+<td>
+<p>N/A</p>
+</td>
+<td>
+<p>["", 1MiB] </p>
+</td>
+<td>
+<p>N/A</p>
+</td>
+<td>
+<p>["", 1MiB] </p>
+</td>
+</tr>
+<tr>
+<td>
+<p>gtm_char_t ** </p>
+</td>
+<td>
+<p>N/A</p>
+</td>
+<td>
+<p>["", 1MiB] </p>
+</td>
+<td>
+<p>N/A</p>
+</td>
+<td>
+<p>["", 1MiB]</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>gtm_string_t * </p>
+</td>
+<td>
+<p>N/A</p>
+</td>
+<td>
+<p>["", 1MiB] </p>
+</td>
+<td>
+<p>N/A </p>
+</td>
+<td>
+<p>["", 1MiB]</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Notes">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Notes</th>
+</tr>
+<tr><td align="left" valign="top"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>gtm_char_t ** is not supported for call-ins but they are included for IO and O direction usage with call-outs.</p></li>
+<li class="listitem"><p>For call-out use of gtm_char_t * and gtm_string_t *, the specification in the interface definition for preallocation sets the range for IO and O, with a maximum of 1MiB.</p></li>
+</ul></div></td></tr>
+</table></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch11s05.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch11.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch12.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">
+<span>Calls from External Routines: </span>Call-Ins </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Chapter 12. Internationalization</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch11s06.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+</html>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_zgetdvi.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of $ZGETDVI()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zgetdvi.html" title="$ZGETDVI()" />
+    <link rel="prev" href="zgetdvi.html" title="$ZGETDVI()" />
+    <link rel="next" href="zgetjpi.html" title="$ZGETJPI()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of $ZGETDVI()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zgetdvi.html">Prev</a> </td>
+          <th width="60%" align="center">$ZGETDVI()</th>
+          <td width="20%" align="right"> <a accesskey="n" href="zgetjpi.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_zgetdvi"></a>Examples of $ZGETDVI()</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4188507" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; W $ZGETDVI($ZPARSE(&quot;cus.dat&quot;,&quot;device&quot;),&quot;freeblocks&quot;)
+    296697
+    GTM&gt;
+    </pre>
+      <p>This uses $ZGETDVI() and $ZPARSE() to display the number of free RMS blocks on the disk drive that holds the CUS.DAT file.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    IF $ZGETDVI($IO,&quot;PRINTER&quot;) WRITE clrtop    
+    </pre>
+      <p>This uses $ZGETDVI() as the argument to an IF command, such that the WRITE command executes only if the current device has an attached printer port.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zgetdvi.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zgetdvi.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="zgetjpi.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZGETDVI() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $ZGETJPI()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_zgetdvi.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+</html>

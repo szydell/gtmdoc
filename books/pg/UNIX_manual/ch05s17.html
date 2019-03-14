@@ -1,0 +1,282 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s17.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Transaction Processing</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
+<link rel="prev" href="ch05s16.html" title="Extrinsic Special Variables">
+<link rel="next" href="ch06.html" title="Chapter 6. Commands">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Transaction Processing</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch05s16.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 5. <span>General Language Features of M</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch05.html"><span>General Language Features of M</span></a></span> &gt; <span class="breadcrumb-node">Transaction Processing</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Transctn_Processing"></a>Transaction Processing<a class="indexterm" name="idp185945056"></a>
+</h2></div></div></div>
+<p>Transaction Processing (TP) provides a way for M programs to organize database updates into logical groups that occur as a single event (i.e., either all the database updates in a transaction occur, or none of them occur). With a properly constructed transaction, no other actor or process behaves as if it observed any intermediate state. Transaction processing has been designed to improve throughput and minimize the possibility and impact of "live lock" conditions. </p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="TP_Defnts"></a>TP Definitions<a class="indexterm" name="idp185961840"></a>
+</h3></div></div></div>
+<p>In M, a transaction is a sequence of commands that begins with a TSTART command, ends with a TCOMMIT command, and is not within the scope of another transaction. Applications can nest TSTART/TCOMMIT commands to create sub-transactions, but sub-transactions only commit at the outer-most TCOMMIT. $TLEVEL greater than 1 indicates sub-transaction nesting.</p>
+<p>A successful transaction ends with a COMMIT that is triggered by the TCOMMIT command at the end of the transaction. A COMMIT causes all the database updates performed within the transaction to become available to other processes.</p>
+<p>An unsuccessful transaction ends with a ROLLBACK. ROLLBACK is invoked explicitly by the TROLLBACK command, or implicitly at a process termination that occurs during a transaction in progress. An error within a transaction does not cause an implicit ROLLBACK. A ROLLBACK removes any database updates performed within the transaction before they are made available to other processes. ROLLBACK also releases all resources LOCKed since the start of the transaction, and makes the naked reference undefined.</p>
+<p>A RESTART is a transfer of control to the TSTART at the beginning of the transaction. RESTART implicitly includes a ROLLBACK and may optionally restore local variables to the values they had when the initial TSTART was originally executed. A RESTART always restores $TEST and the naked reference to the values they had when the initial TSTART was executed. RESTART does not manage device state information. A RESTART is invoked by the TRESTART command or by M if it is determined that the transaction is in conflict with other database updates. RESTART can only successfully occur if the initial TSTART includes an argument that enables RESTART.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="TP_Characteristics"></a>Key Considerations - Writing TP Code<a class="indexterm" name="idp185908960"></a>
+</h3></div></div></div>
+<p>Some key considerations for writing application code between TSTART and TCOMMIT are as follows: </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Do not use BREAK, CLOSE, JOB, OPEN, READ, USE, WRITE, LOCK, HANG, and ZSYSTEM as they violate the ACID  principal of Isolation. Using these commands inside a transaction may lead to longer than usual response time, high CPU utilization, repeat execution due to transaction restart, and/or TPNOTACID messages in the operator log. If application logic requires their use, put them before TSTART or after TCOMMIT so that they do not interfere with the transaction processing mechanism. For example, placing a LOCK before TSTART and releasing it after TCOMMIT provides an additional application layer of serialization for the transaction code.</p></li>
+<li class="listitem"><p>Keep your transaction code "pure" . By "pure" we mean that you restrict code to only perform database updates (SET, MERGE, and so on). The primary purpose of a GT.M transaction is to perform database updates that commit in entirety or do not commit at all. Perform external interaction like invoking an external call before or after the transaction. </p></li>
+<li class="listitem"><p>Design transactions to minimize the number of regions they use, particularly update. Like keeping transactions small, this minimizes contention and improves performance.</p></li>
+<li class="listitem"><p>Keep transactions as short as possible.  </p></li>
+<li class="listitem"><p>Code for handling errors during transactions must include a TROLLBACK. A TROLLBACK should appear as early as possible in the error handling code. You can run commands like WRITE, OPEN, etc. after TROLLBACK because the TROLLBACK releases resources held by the transaction. </p></li>
+<li class="listitem"><p>Remember that trigger code executes within an implicit transaction. So, trigger code is always subject to transaction considerations.</p></li>
+</ul></div>
+<p>Most transaction processing systems try to have transactions that meet the "ACID" test &#8211; Atomic, Consistent, Isolated, and Durable. </p>
+<p>To provide ACID transactions, GT.M uses a technique called optimistic concurrency control. Each block has a transaction number that GT.M sets to the current database transaction number when updating a block. Application logic, brackets transactions with TSTART and TCOMMIT commands. Once inside a transaction, a GT.M process tracks each database block that it reads (any database block containing existing data that it intends to update has to be read first) and in process private memory keeps a list of updates that it intends to apply - application logic within the process views the database with the updates; application logic in other processes does not see states internal to the transaction. At TCOMMIT time, the process checks whether any blocks have changed since it read them, and if none have changed, it commits the transaction, making its changes visible to other processes Atomically with Isolation and Consistency (Durability comes from the journal records written at COMMIT time). Optimistic concurrency attempts to exploit the odds that two processes need access to the same resource at the same time. If the chances are small, it permits many processes to work concurrently, particularly in a system with multiple CPUs. If the changes are not small the penalty is repeated execution of the same transaction logic.</p>
+<p>If one or more blocks have changed, the process reverts its state to the TSTART and re-executes the application code for the transaction. If it fails to commit the second time, it tries yet again. If it fails to commit on the third attempt, it locks other processes out of the database and executes the transaction as the sole process (that is, on the fourth attempt, it switches to a from an optimistic approach to a pessimistic one).</p>
+<p>This technique normally works very well and is one of the factors that allow GT.M to excel at transaction processing throughput.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p> GT.M uses implicit transaction processing when it needs to ensure complex operations, including spanning block actions, spanning region actions and trigger actions preserve Atomicity. Of these, triggers involve application code and therefore are most subject to the following discussion.
+</p></td></tr>
+</table></div>
+<p>Pathological cases occur when processes routinely modify blocks that other processes have read (called "collisions"), resulting in frequent transaction restarts. Collisions can be legitimate or accidental. Importantly, the longer that a transaction is "open" (the "collision window," when the application logic is between TSTART and TCOMMIT), the greater the probability that a collision will require a transaction restart.</p>
+<p>Legitimate collisions can result from normal business activity, for example, if two joint account holders make simultaneous ATM withdrawals from a joint account. When the time an application takes to process each transaction is a minuscule fraction of a second, the probability of a collision is very low, and in the rare case where one occurs, the restart mechanism handles it well. An example with a higher probability of collision comes from commercial accounts, where a large enterprise may have tens to hundreds of accounts, individual transactions may hit multiple accounts, and during the business day many people may execute transactions against those accounts. Again, the small collision window means that collisions remain rare and the restart mechanism handles them well when they occur.</p>
+<p>Legitimate (from a GT.M point of view) collisions can also occur as a consequence of application design. For example, if an application has an application level transaction journal that every process appends to then that design will likely result in high rates of collisions, creating a pathological case where every transaction fails three times and then commits on the fourth attempt with all other processes locked out. The way to avoid these is to adjust the application design, either to use M LOCKs to gate such "hot spots" or, better, to give each process its own update space which, at some event, a single process then consolidates. </p>
+<p>Accidental collisions result when two processes access unrelated data that happens to reside on the same data block (for example, some global indexed by last name can result in an accidental collision if two account holders whose last names start with the same letter, the global data nodes may reside in the same block). Because the path to many data blocks typically pass though one index block, data additions cause changes in index blocks and can generate accidental collisions. While it is not possible to avoid accidental collisions (especially in blocks containing metadata such as index blocks), they are typically rare and the occasional collision is handled well by the restart mechanism. Because the application is rarely in a position to efficiently prevent accidental collisions, FIS strongly recommends using TCOMMIT forms that allow GT.M to use restarts and thus relieve the application logic of having to manage TRESTNOT errors. GT.M uses the database block as the granularity for concurrency control because it is generally an efficient and successful compromise between a more granular and expensive lock and a less granular but more likely to conflict lock. It also simplifies some things by aligning with the unit of transfer to non-volatile storage.</p>
+<p>Application design that keeps transactions open for long periods of time can cause pathological rates of accidental collision. When a process tries to run an entire report in a transaction, instead of the transaction taking a fraction of a second (remember that transactions are intended to be atomic), the report takes seconds or even minutes and effectively ensures collisions and restarts. Furthermore, since the probability of collisions is high, the probability of these long-running transactions executing the fourth retry (with other processes shut out) goes up, and when that happens, the system appears to respond erratically, or hang temporarily.</p>
+<p> Non-isolated actions are another consideration in the design of wholesome transactions. Because M permits all language features with a transaction, an application may use actions that interact with actors outside of the transaction; such actions violate the ACID principal of Isolation, which states to be wholesome a transaction must not interact with other agents or processes until it commits (see below for a more detailed discussion). While there may be reasons drawn from the larger application model that justify violations of Isolation, doing so carries risks. One problem is time, external interactions typically have a longer duration, and in the worst case may have an indefinite duration. The JOB, LOCK, OPEN, and READ commands have an optional timeout to place time limits on external interactions as do some WRITE format arguments. The HANG command induces a potentially arbitrary delay. In addition, BREAK, WRITE, ZSYSTEM and external calls also involve external interaction. Except for WRITE and external calls, in order to minimize potential the impact of non-ACID transactions, GT.M limits the duration of database locks for transactions that use these non-isolated commands, and records that limitation as a TPNOTACID message in the operator log. However, that time limit, managed with the gtm_tpnotacidtime environment variable, can be long enough, depending on its value, to permit noticeable processing disruptions. Further, processes denied a long lock may have trouble completing and consume system resources with repeated unsuccessful attempts. External calls are excluded from this protection because they are the domain of more sophisticated design and may actually remain isolated (see the tip below on Implementing Web Services). WRITE is currently excluded because most WRITE commands are non-blocking, but applications should avoid blocking WRITEs within a transaction. Beyond the issue of duration, because the application can repeat due to a restart or rollback because of an error or application logic, non-isolated actions require management to appropriately manage their external interactions; this is discussed in more detail below. In summary, put external interactions before or after transactions rather than within them. If the application requires a non-isolated action within a transaction, be aware of the risks, design, implement and test very carefully. </p>
+<p>GT.M provides a transaction timeout feature that interrupts long-running transactions in order to limit their impact on the system, and the consequent user perception of system erratic response times and temporary hangs. Calls to an external library, say to access a web service, can subvert the timeout mechanism when the external library uses an uninterruptable system call. If such a web service uses an adjacent server that responds immediately, the web service is wholesome. But if the web service accesses a remote server without a guaranteed short response time, then collisions may be frequent, and if a process in the fourth retry waits for a web service that never responds, it brings the entire application to a standstill.</p>
+<div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip: Implementing Web Services Safely">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Tip]" src="images/tip.jpg"></td>
+<th align="left">Implementing Web Services Safely</th>
+</tr>
+<tr><td align="left" valign="top">
+<p>To safely implement web services inside a transaction, an application must implement a guaranteed upper bound on the time taken by the service. The story or use case for each circumstance determines the appropriate timeout for the corresponding transaction. For example, if the web service is to authorize a transaction, there might be a 500 millisecond timeout with the authorization refused if the approval service does not respond within that time.</p>
+<p>There are two approaches to implementing web services with a timeout.</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>For applications that call out to C code, the C code guarantee a return within a time limit, using a wrapper if necessary. GT.M provides functions that external C code can use to implement timers. If the call is to an unknown library, or one without a way to guarantee a timeout, the external C code may need to create an intermediate proxy that can provide a timeout to GT.M.</p></li>
+<li class="listitem"><p>Because web services are usually implemented by a known protocol layered on TCP/IP and GT.M provides a SOCKET device for TCP/IP connections, implement the call out to the web service using a GT.M SOCKET device. GT.M can then enforce the TP timeout mechanism, which it cannot for an external call, especially one that calls via a library into an uninterruptible OS service.</p></li>
+</ol></div>
+</td></tr>
+</table></div>
+<p>To conform with the M approach of providing maximum flexibility and, when possible, backwards compatibility with older versions of the standard, M transaction processing requires the use of programming conventions that meet the ACID test.</p>
+<p>For example, some effects of the BREAK, CLOSE, JOB, OPEN, READ, USE WRITE, and ZSYSTEM commands may be observed by parties to the system. Because the effects of these commands might cause an observing process or person to conclude that a transaction executing them was in progress and perhaps finished, they violate, in theory, the principle of Isolation.</p>
+<p>The LOCK command is another example. A program may attempt to use a LOCK to determine if another process has a transaction in progress. The answer would depend on the management of LOCKs within transactions, which is implementation-specific. This would therefore clearly violate the principle of Isolation. The LOCK command is discussed later in this section.</p>
+<p>The simplest way to construct a transaction that meets the ACID test is not to use any commands within a transaction whose effects may be immediately "visible" outside the transaction. Unfortunately, because M applications are highly interactive, this is not entirely straightforward. When a user interaction relies on database information, one solution is for the program to save the initial values of any global values that could affect the outcome, in local variables. Then, once the interaction is over and the transaction has been initiated, the program checks the saved values against the corresponding global variables. If they are the same, it proceeds. If they differ, some other update has changed the information, and the program must issue a TROLLBACK, and initiate another interaction as a replacement.</p>
+<p>Even when the "visible" commands appear within a transaction, an M application may provide wholesome operation by relying on additional programming or operating conventions.</p>
+<p>A program using LOCKs to achieve serializability relies on properly designed and universally followed LOCKing conventions to achieve Isolation with respect to database operations. LOCKs placed outside the transaction (usually a LOCK immediately before the TSTART and an unlock immediately after the TCOMMIT) achieve serializability by actually serializing any approximately concurrent transaction. LOCKs placed inside the transaction (frequently a LOCK immediately after the TSTART and an unlock immediately before the TCOMMIT) signal M to ensure that no operations using the same LOCK resource(s) overlap. Within a transaction, an M implementation may defer both LOCKing and unlocking to achieve its goal of serializability. A program using TSTARTs with the SERIAL keyword replaces the convention with a guarantee from M that all the database activity of the transaction meets the test of Isolation with respect to database activity.</p>
+<p>In GT.M the Durability aspect of the ACID properties relies on the journaling feature. When journaling is on, every transaction is recorded in the journal file as well as in the database. The journal file constitutes a serial record of database actions and states. It is always written before the database updates and is designed to permit recovery of the database if the database should be damaged. By default, when a process commits a transaction, it does not return control to the application code until the transaction has reached the journal file. The exception to this is that when the TSTART specifies TRANSACTIONID="BATCH" the process resumes application execution without waiting for the file system to confirm the successful write of the journal record. The idea of the TRANSACTIONID="BATCH" has nothing inherently to do with "batch" processing - it is to permit maximum throughput for transactions where the application has its own check-pointing mechanism, or method of recreating the transaction in case of a failure. The real durability of transactions is a function of the durability of the journal files. Putting journal files on reliable devices (RAID with UPS protection) and eliminating common points of failure with the path to the database (separate drives, controllers cabling) improve durability. The use of the replication feature can also improve durability by moving the data to a separate site in real time.</p>
+<p>Attempting to QUIT (implicitly or explicitly) from code invoked by a DO, XECUTE, or extrinsic after that code issued a TSTART not yet matched by a TCOMMIT, produces an error. Although this is a consequence of the RESTART capability, it is true even when that capability is disabled. For example, this means that an XECUTE containing only a TSTART fails, while an XECUTE that performs a complete transaction succeeds.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="TP_Performance"></a>TP Performance<a class="indexterm" name="idp185973680"></a>
+</h3></div></div></div>
+<p>To achieve the best GT.M performance, transactions should:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>be as short as possible</p></li>
+<li class="listitem" style="list-style-type: circle"><p>consist, as much as possible, only of global updates</p></li>
+<li class="listitem" style="list-style-type: circle"><p>be SERIAL with no associated LOCKs</p></li>
+<li class="listitem" style="list-style-type: circle"><p>have RESTART enabled with a minimum of local variables protected by a restart portion of the TSTART argument.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Large concurrent transactions using TCOMMIT may result in repeated and inefficient attempts by competing processes to capture needed scarce resources, resulting in poor performance.</p></li>
+</ul></div>
+<p>Example:</p>
+<pre class="programlisting"> TSTART ():SERIAL
+ SET (ACCT,^M(0))=^M(0)+1
+ SET ^M(ACCT)=PREC,^PN(NAM)=ACCT
+ TCOMMIT</pre>
+<p>This transaction encapsulates these two SETs. The first increments the tally of patients registered, storing the number in local variable ACCT for faster access in the current program, and in global variable ^M(0). The second SET stores a patient record by account number and the third cross-references the account number with the patient name. Placing the SETs within a single transaction ensures that the database always receive either all of the SETs or none of them, thus protecting database integrity against process or system failure. Similarly, another concurrent process, whether using transactions or not, never finds one of the SETs in place without also finding the other one.</p>
+<p>Example:</p>
+<pre class="programlisting"> TSTART ():SERIAL
+ IF $TRESTART&gt;3 DO QUIT
+ .TROLLBACK
+ .WRITE !,"Too many RESTARTs"
+ .QUIT
+ SET (NEXT,^ID(0))=^ID(0)+1
+ SET ^ID(NEXT)=RECORD,^XID(ZIP,NEXT)=""
+ TCOMMIT</pre>
+<p>This transaction will automatically restart if it cannot serialize the SETs to the database, and will terminate with a TROLLBACK if more than 3 RESTARTs occur.</p>
+<p>GT.M provides a way to monitor transaction restarts by reporting them to the operator logging facility. If the environment variable gtm_tprestart_log_delta is defined, GT.M reports every Nth restart where N is the numeric evaluation of the value of gtm_tprestart_log_delta. If the environment variable gtm_tprestart_log_first is defined, the restart reporting begins after the number of restarts specified by the value of gtm_tprestart_log_first. For example, defining both the environment variable to the value 1, causes all TP restarts to be logged. When gtm_tprestart_log_delta is defined, leaving gtm_tprestart_log_first undefined is equivalent to giving it the value 1.</p>
+<p>Here is an example message:</p>
+<pre class="programlisting">%GTM-I-TPRESTART, Database /gbls/dtx/dtx.dat; code: L; blk: 0x00BA13DD in glbl: ^DTX; pvtmods: 0, blkmods: 1, blklvl: 1, type: 4, readset: 3, writeset: 1, local_tn: 0x00000000000002D0, zpos: LABEL+108^ROUTINENAME
+</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>pvtmods - Is always less than or equal to blkmods. This means it can be 1 only if "blkmods" is also 1. If it is 1, it means that process P1 was planning to UPDATE (not just READ) the block number (indicated as "blk: ..." in the TPRESTART message) as part of its TP transaction.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>blkmods - Is either 1 or 0. 1 implies the transaction restarted because this process (P1) is attempting to READ/UPDATE a block that has concurrently been updated by another process (P2) since P1 access the block as part of its TP transaction. This means the "code: ..." output in the TPRESTART message will have L as the last letter. 0 implies the restart occurred because of a different reason. The "code: ..." then has something other than "L" as the last letter. Note that each letter in "code: ..." corresponds to the failure code in each try/retry in the order of occurrence.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>blklvl - Is the level in the GDS structure of the block ("blk: ..." field in the TPRESTART message) that caused the TP restart.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>type - A value of 0,1,2,4 shows the restart occurred in the TP transaction BEFORE executing TCOMMIT; whether it is a 0 or 1 or 2 or 4 should not matter to the user. These values would typically be used for debugging by your GT.M support channel. A value of 3 shows the restart occurred at TCOMMIT time.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>readset - The number of GDS blocks that accessed as part of this TP transaction in the region containing the global ("glbl: ..." in the TPRESTART message).</p></li>
+<li class="listitem" style="list-style-type: circle"><p>writeset - Out of the readset number, the number of GDS blocks this process was attempted to UPDATE as part of this TP transaction in the region containing the global ("glbl: ..." in the TPRESTART message).</p></li>
+<li class="listitem" style="list-style-type: circle"><p>local_tn - This is a never-decreasing counter (starting at 1 at process startup) incremented for every new TP transaction, TP restart, and TP rollback. Two TPRESTART messages by the same process should never have the same value of local_tn. The difference between the local_tn values of two messages from the same process indicates the number of TP transactions done by that process in the time interval between the two messages.</p></li>
+</ul></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Use VIEW [NO]LOGT[PRESTART][=intexpr] to enable or disable the logging of TPRESTART messages. Note that you can use the gtm_tprestart_log_delta and gtm_tprestart_log_first environment variables to set the frequency of TPRESTART messages. </p></li>
+<li class="listitem"><p>Use VIEW [NO]LOGN[ONTP][=intexpr] to enable or disable the logging of NONTPRESTART messages. This facility is the analog of TPRESTART tracking, but for non-TP mini-transacstions. Note that you can use the gtm_nontprestart_log_delta and gtm_nontprestart_log_first environment variables to set the frequency of the NONTPRESTART messages.</p></li>
+<li class="listitem"><p>For more information, refer to <a class="xref" href="ch06s25.html#key_words_view" title="Key Words in VIEW Command">&#8220;Key Words<span> in VIEW Command</span>&#8221;</a> and the Environment Variables section of <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p></li>
+</ul></div></td></tr>
+</table></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="TP_Example"></a>TP Example<a class="indexterm" name="idp186017248"></a>
+</h3></div></div></div>
+<p>Here is a transaction processing example that lets you exercise the concept. If you use this example, be mindful that the functions "holdit" and "trestart" are included as tools to allow you access to information within a transaction which would normally be hidden from users. These types of functions would not normally appear in production code. Comments have been inserted into the code to explain the function of various segments.</p>
+<pre class="programlisting">trans
+ ;This sets up the program constants
+ ;for doit and trestart
+ new
+ set $piece(peekon,"V",51)=""
+ set $piece(peekon,"V",25)="Peeking inside Job "_$job
+ set $piece(peekoff,"^",51)=""
+ set $piece(peekoff,"^",25)="Leaving peeking Job "_$job
+ ;This establishes the main loop
+ set CNFLTMSG="Conflict, please reenter"
+ for read !,"Name: ",nam quit:'$length(nam) do
+ .if "?"=nam do quit
+ ..write !,"Current data in ^trans:",! do:$data(^trans) quit
+ ...zwrite ^trans
+ .for set ok=1 do quit:ok write !,$char(7),CNFLTMSG,$char(7),!
+ ..set old=$get(^trans(nam),"?")
+ ..if "?"=old write !,"Not on file" do quit
+ ...;This is the code to add a new name
+ ...for do quit:"?"'=data
+ ....read !,"Enter any info using '#' delimiter: ",!,data 
+ ...if ""=data write !,"No entry made for ",nam quit
+ ...TSTART ():SERIAL if $$trestart ;$$trestart for demo
+ ...if $data(^trans(nam)) set ok=^trans(nam)=data TROLLBACK quit
+ ...set ^trans(nam)=data
+ ...TCOMMIT:$$doit ;$$doit for demo
+ ..;This is the beginning of the change and delete loop
+ ..for do quit:+fld=fld!'$length(fld) write " must be numeric"
+ ...write !,"Current data: ",!,old
+ ...read !,"Piece no. (negative to delete record) : ",fld
+ ..if 'fld write !,"no change made" quit
+ ..;This is the code to delete a new name
+ ..if fld&lt;0 do quit ; delete record
+ ...for do quit:"YyNn"[x
+ ....write !,"Ok to delete ",nam," Y(es) or N(o) &lt;N&gt;? " 
+ ....read x set x=$extract(x)
+ ...if "Yy"'[x!'$length(x) write !,"No change made" quit
+ ...TSTART ():SERIAL if $$trestart ;$$trestart for demo
+ ...if $get(^trans(nam),"?")'=old TROLLBACK set ok=0 quit
+ ...kill ^trans(nam)
+ ...TCOMMIT:$$doit; $$doit for demo
+ ..;This is the code to change a field
+ ..for read !,"Data: ",data quit:("?"'=data)&amp;(data'["#") do
+ ...write " must not be a single '?' or contain any '#'"
+ ..TSTART ():SERIAL if $$trestart ;$$trestart for demo
+ ..if '$data(^trans(nam)) set ok=0 TROLLBACK q
+ ..if $piece(^trans(nam),"#",fld)=$piece(old,"#",fld) do quit
+ ...set ok=$piece(^trans(nam),"#",fld)=data TROLLBACK
+ ..set $piece(^trans(nam),"#",fld)=data
+ ..TCOMMIT:$$doit; $$doit for demo
+ quit
+doit()
+;This inserts delay and an optional 
+;rollback only to show how it works
+ write !!,peekon do disp
+ for do quit:"CR"[act
+ .read !,"C(ommit), R(ollback), or W(ait) &lt;C&gt;? ",act
+ .set act=$translate($extract(act),"cr","CR")
+ .if "?"=act do disp
+ if "R"=act TROLLBACK write !,"User requested DISCARD"
+ write !,peekoff,!
+ quit $TLEVEL
+trestart()
+;This is only to show what is happening
+ if $TRESTART do
+ .write !!,peekon,!,"&gt;&gt;&gt;RESTART&lt;&lt;&lt;",! do disp write !,peekoff,!
+ quit 1
+disp
+ write !,"Name: ",nam
+ write !,"Original data: ",!,old,!,"Current data: "
+ write !,$get(^trans(nam),"KILLED!")
+ quit</pre>
+<p>Generally, this type of program would be receiving data from multiple sessions into the same global.</p>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody><tr valign="top">
+<td align="left" valign="top"><p class="relatedtopics">See Also</p></td>
+<td align="left" valign="top">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc" compact>
+<li class="listitem"><p><a class="ulink" href="../../ao/UNIX_manual/ch03s02.html" target="_top">gtm_tpnotacidtime</a>
+</p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch08s42.html" title="$ZMAXTPTIme">&#8220;$ZMAXTPTIme&#8221;</a></p></li>
+<li class="listitem"><p><a class="xref" href="ch06s22.html" title="TROllback">&#8220;TROllback&#8221;</a></p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch06s23.html" title="TStart">&#8220;TStart&#8221;</a></p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch06s20.html" title="TCommit">&#8220;TCommit&#8221;</a></p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch08s16.html" title="$TLevel">&#8220;$TLevel&#8221;</a></p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch08s66.html#ztlevel" title="$ZTLevel">&#8220;$ZTLevel&#8221;</a></p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch08s59.html" title="$ZTExit">&#8220;$ZTExit&#8221;</a></p></li>
+</ul></div>
+            </td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch05s16.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Extrinsic Special Variables </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Chapter 6. Commands</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s17.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+</html>

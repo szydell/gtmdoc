@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_ged.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:23 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of %GED</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="ged_percent.html" title="%GED" />
+    <link rel="prev" href="prompts_ged.html" title="Prompts" />
+    <link rel="next" href="percent_gi.html" title="%GI" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of %GED</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="prompts_ged.html">Prev</a> </td>
+          <th width="60%" align="center">%GED</th>
+          <td width="20%" align="right"> <a accesskey="n" href="percent_gi.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="examples_of_ged"></a>Examples of %GED</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4224322" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO ^%GED 
+	<span>Edit ^b</span>
+	
+	Beginning screen:
+	^b(1)=&quot;melons&quot;
+	^b(2)=&quot;oranges&quot;
+	^b(3)=&quot;bananas&quot;
+	<span>&lt;End of File&gt;</span>
+	Screen with a change to ^b(1), elimination of ^b(3), and two new entries ^b(4) and ^b(5):
+	^b(1)=&quot;apples&quot;
+	^b(2)=&quot;oranges&quot;
+	^b(4)=pears
+	^b(5)=&quot;grapes&quot;
+	<span>&lt;End of File&gt;</span>
+	%GED responds:
+	Invalid syntax: b(4)=pears
+	return to continue:
+	After screen:
+	^b(1)=&quot;apples&quot;
+	^b(2)=&quot;oranges&quot;
+	^b(4)=&quot;pears&quot;
+	^b(5)=&quot;grapes&quot;
+	<span>&lt;End of File&gt;</span>
+	%GED responds:
+	node: ^b
+	selected: 3
+	changed: 1
+	added: 2
+	killed: 1
+	Edit ^ &lt;RETURN&gt;
+	GTM&gt;
+	</pre>
+      <p>This example shows the use of the full-screen editor to change, add, and delete (kill) nodes. When you exit from the editor, %GED checks the syntax and reports any problems. By pressing &lt;RETURN&gt;, return to the full-screen editor to fix the error. At the end of the session, %GED reports how many nodes were selected, changed, killed, and added. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="prompts_ged.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="ged_percent.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="percent_gi.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Prompts </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> %GI</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_ged.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:23 GMT -->
+</html>

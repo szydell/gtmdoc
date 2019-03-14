@@ -1,0 +1,177 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/ch12s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:40 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Tested Reference Implementations</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="ch12.html" title="Chapter 12. Database Encryption">
+<link rel="prev" href="ch12s03.html" title="Examples of use">
+<link rel="next" href="ch12s05.html" title="Special note - GNU Privacy Guard and Agents">
+<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Tested Reference Implementations </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch12s03.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 12. Database Encryption</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch12s05.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch12.html">Database Encryption</a></span> &gt; <span class="breadcrumb-node">Tested Reference Implementations </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Tested_Reference_Implementations"></a>Tested Reference Implementations<a class="indexterm" name="idp188576032"></a> </h2></div></div></div>
+<p>GT.M database encryption comes with a source reference implementation that should compile "out of the box" with selected encryption packages. You can use this for your initial development and testing with GT.M database encryption. There are many encryption packages. As discussed earlier, FIS neither endorses nor supports any specific cipher or package. For your production use, you take responsibility for choosing, implementing and procuring support for your preferred package. Please remember that a malfunction in your chosen encryption package may result in unrecoverable data and FIS will be unable to help you. </p>
+<p>The <a class="link" href="ch12s08.html" title="Plugin Architecture &amp; Interface">Plugin Architecture and Interface</a> section below details the reference implementation, which is provided with full source code that you can freely modify for your own use. </p>
+<p>For each platform on which GT.M supports encryption, the following table lists the encryption packages and versions against which FIS tested GT.M. Note that FIS tested GT.M for operation against these packages; FIS did not test the robustness of the encryption packages themselves. </p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+               <p>OS (HW) </p>
+            </th>
+<th>
+               <p>libgpgme </p>
+            </th>
+<th>
+               <p>libgpg-error </p>
+            </th>
+<th>
+               <p>libgcrypt / libcrypto </p>
+            </th>
+<th>
+               <p>GPG </p>
+            </th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p>Ubuntu 14.04 LTS (x86_64) </p></td>
+<td><p>1.4.3-0.1ubuntu5.1 </p></td>
+<td><p>1.12-0.2ubuntu1 </p></td>
+<td><p>libgcrypt 1.5.3-2ubuntu4.4 </p></td>
+<td><p>2.0.22 </p></td>
+</tr>
+<tr>
+<td><p>Ubuntu 16.04 LTS (x86_64) </p></td>
+<td><p>1.6.0-1 </p></td>
+<td><p>1.21-2ubuntu1 </p></td>
+<td><p>libgcrypt 1.6.5-2 </p></td>
+<td><p>2.1.11 </p></td>
+</tr>
+<tr>
+<td><p>RHEL 6 (x86_64) </p></td>
+<td><p>1.1.6 </p></td>
+<td><p>1.4-2 </p></td>
+<td><p>libgcrypt 1.4.4-5 </p></td>
+<td><p>2.0.14 </p></td>
+</tr>
+<tr>
+<td><p>RHEL 6 (x86) </p></td>
+<td><p>1.1.6 </p></td>
+<td><p>1.4-2 </p></td>
+<td><p>libgcrypt 1.4.4-5 </p></td>
+<td><p>2.0.14 </p></td>
+</tr>
+<tr>
+<td><p>RHEL 7 </p></td>
+<td><p>1.3.2 </p></td>
+<td><p>1.12 </p></td>
+<td><p>libgcrypt 1.5.3 </p></td>
+<td><p>2.0.22 </p></td>
+</tr>
+<tr>
+<td><p>AIX 6.1 and 7.1 </p></td>
+<td><p>1.1.8 + fix </p></td>
+<td><p>1.7 </p></td>
+<td>
+<p>libcrypto from OpenSSL - (version &gt;= 1.5) </p>
+<p>AES256CFB as implemented by OpenSSL - (version &gt;= 0.9.8)</p>
+</td>
+<td><p>1.4.10 </p></td>
+</tr>
+</tbody>
+</table></div>
+<p>Where the table lists a package version number followed by "+ fix" it means that in the process of testing, we identified issues with the package that we fixed. We have provided the source code for our fixes to the upstream package maintainers. If you have a support agreement with FIS, we will share that source code with you, upon request. </p>
+<p>The reference implementation uses: </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The key ring on disk implemented by GPG. </p></li>
+<li class="listitem"><p>For public key encryption including the generation of public/private key pairs: RSA as implemented by GPG. </p></li>
+<li class="listitem"><p>For the cryptographic hash: SHA-512. </p></li>
+<li class="listitem"><p>For a programmatic interface to GPG: libgpgme. </p></li>
+<li class="listitem"><p>To provide error messages for GPG: libgpg-error. </p></li>
+<li class="listitem"><p>For symmetric encryption: AES256CFB implemented by libgcrypt on all platforms.</p></li>
+</ul></div>
+<p>When a GT.M process first opens a shared library providing an encryption plugin, it ensures that the library resides in $gtm_dist/plugin or a subdirectory thereof. This ensures that any library implementing an encryption plugin requires the same permissions to install, and is protected by the same access controls, as the GT.M installation itself.</p>
+<p>On all platforms on which GT.M supports encryption, compiling the source reference implementation produces the shared library plugins, libgtmcrypt_gcrypt_AES256CFB.so and libgtmcrypt_openssl_AES256CFB.so. On installation, platforms other than AIX, libgtmcrypt.so is a symbolic link to libgtmcrypt_gcrypt_AES256CFB.so; on AIX symbolic link is to libgtmcrypt_openssl_AESCFB.so.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Encrypted database files are compatible between different endian platforms as long as they use the same key and the same cipher. </p></li>
+<li class="listitem"><p>The sample shell scripts in the reference implementation use the standard shell (/bin/sh). </p></li>
+</ul></div></td></tr>
+</table></div>
+<p></p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top"><p>During development, in a core dump, FIS noticed a decrypted symmetric database key in buffer released by libgpgme despite the fact that GT.M made an appropriate call to the library to destroy the key. We have communicated this to the upstream developers. This emphasizes again the desirability of strong random numbers as database keys as well as the disabling of core dumps except when required. These strong keys can be created using the gen_sym_key.sh script described in the <a class="xref" href="ch12s03.html#Key_Management" title="Key Management">&#8220;Key Management &#8221;</a> section.</p></td></tr>
+</table></div>
+<p> While GT.M dropped support for Blowfish in V6.3-001 and FIS no longer tests it, you may continue to use Blowfish CFB from V6.0-001 through V6.3-000A using the following information. When GT.M database encryption was first released with V5.3-004, the reference implementation for AIX was Blowfish CFB. At that time, there were certain limitations in libgcrypt as a consequence of the port of libgcrypt to the 64-bit environment being less mature than its port to the 32-bit environment (GT.M on AIX is a 64-bit application). Also, Blowfish was used because the implementation of AES on libcrypto from OpenSSL at that time required data to be in chunks that are multiples of 16 bytes. In order to use Blowfish CFB after V6.0-001 via the reference implementation of the plugin, you need to change a symbolic link post-installation, or define the environment variable gtm_crypt_plugin as follows:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>If the environment variable gtm_crypt_plugin is defined and provides the path to a shared library relative to $gtm_dist/plugin, GT.M uses $gtm_dist/plugin/$gtm_crypt_plugin as the shared library providing the plugin.  For scripts intended to be portable between V6.0-000 and V6.0-001, you can safely set a value for gtm_crypt_plugin, which V6.0-000 ignores.</p></li>
+<li class="listitem"><p>If $gtm_crypt_plugin is not defined, GT.M expects $gtm_dist/plugin/libgtmcrypt.so to be a symbolic link to a shared library providing the plugin. The expected name of the actual shared library is libgtmcrypt_cryptlib_CIPHER.so (depending on your platform, the actual extension may differ from .so), for example, libgtmcrypt_openssl_AESCFB. GT.M cannot and does not ensure that the cipher is actually AES CFB as implemented by OpenSSL - GT.M uses CIPHER as salt for the hashed key in the database file header, and cryptlib is for your convenience, for example, for troubleshooting. Installing the GT.M distribution creates a default symbolic link.</p></li>
+</ul></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top">
+<p>GT.M V6.3-001 dropped support for the Blowfish encryption plugin.</p>
+<p>To migrate databases from Blowfish CFB to AES CFB requires that the data be extracted and loaded into newly created database files. To minimize the time your application is unavailable, you can deploy your application in a Logical Multi-Site (LMS) configuration, and migrate using a rolling upgrade technique Refer to the <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a> for more complete documentation. </p>
+</td></tr>
+</table></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch12s03.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch12.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch12s05.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Examples of use  </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Special note - GNU Privacy Guard and Agents</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/ch12s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:40 GMT -->
+</html>

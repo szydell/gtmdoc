@@ -1,0 +1,162 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch02s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:44 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Operating System Interface Facilities</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch02.html" title="Chapter 2. GT.M Language Extensions">
+<link rel="prev" href="ch02.html" title="Chapter 2. GT.M Language Extensions">
+<link rel="next" href="ch02s02.html" title="Debugging Facilities">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">
+<span>Operating System</span> Interface Facilities</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch02.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 2. <span>GT.M </span>Language Extensions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch02s02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch02.html"><span>GT.M </span>Language Extensions</a></span> &gt; <span class="breadcrumb-node"><span>Operating System</span> Interface Facilities</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="oper_sys_interface"></a><span>Operating System</span> Interface Facilities</h2></div></div></div>
+<p>To improve efficiency and reduce duplication and inconsistency, GT.M is closely integrated with the host operating system environment. With GT.M you can gain access to the operating system facilities to examine:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>System information, such as quotas and SIDs</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Jobs and processes</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Directories and files</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Devices</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Messages</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Privileges</p></li>
+</ul></div>
+<p>The following table summarizes the GT.M operating system interface facilities.</p>
+<div class="informaltable">
+<a name="tbloper"></a><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="2">
+<p>Operating System Interface Facilities</p>
+</th></tr>
+<tr>
+<th>
+<p>EXTENSION</p>
+</th>
+<th>
+<p>EXPLANATION</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>ZSYstem</p>
+</td>
+<td>
+<p>Provides access to the shell.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>$ZMessage()</p>
+</td>
+<td>
+<p>Translates an error condition code into text form.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>$ZCMdline</p>
+</td>
+<td>
+<p>Contains a string value specifying the "excess" portion of the command line that invoked the GT.M process.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>$ZJob</p>
+</td>
+<td>
+<p>Holds the pid of the process created by the last JOB command performed by the current process.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>$ZPARSE()</p>
+</td>
+<td>
+<p>Parses a UNIX filename.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>$ZSEARCH()</p>
+</td>
+<td>
+<p>Searches for one or more UNIX files.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>$ZSYstem</p>
+</td>
+<td>
+<p>Contains the status code of the last ZSYSTEM.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>$ZTRNLNM()</p>
+</td>
+<td>
+<p>Translates an environment variable.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>$ZDIRectory</p>
+</td>
+<td>
+<p>Contains current working directory.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch02.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch02.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch02s02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 2. <span>GT.M </span>Language Extensions </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Debugging Facilities</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch02s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:44 GMT -->
+</html>

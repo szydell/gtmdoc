@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/run_time_sys.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:35 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>The Run-Time System</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="manage_source_code.html" title="Managing Source Code" />
+    <link rel="prev" href="vax_vms_library.html" title="The VMS Librarian" />
+    <link rel="next" href="err_proc.html" title="Error Processing" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">The Run-Time System</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="vax_vms_library.html">Prev</a> </td>
+          <th width="60%" align="center">Managing Source Code</th>
+          <td width="20%" align="right"> <a accesskey="n" href="err_proc.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="run_time_sys"></a>The Run-Time System</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4154997" class="indexterm"></a>
+      <p>A GT.M programmer can execute an M routine from <span>DCL using the VMS RUN utility</span>  or interactively, using the M commands from Direct Mode.</p>
+      <p>The run-time system executes compile-as-written code as long as it does not encounter the compile-time errors. If it detects an error, the run-time system suspends execution of a routine immediately and transfers control to Direct Mode or to a user-written error routine.</p>
+      <p>The VMS INSTALL utility can install an M image. Installing images as shareable allows multiple users to access the image as a single copy. This approach eliminates the use of a separate copy of the image for each user, allowing a more efficient use of physical memory and of the disk channel.</p>
+      <p>To run GT.M routines in batch mode, use the DCL SUBMIT command and an appropriate command file.</p>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="automatic_and_incr_link"></a>Automatic and Incremental Linking</h5>
+            </div>
+          </div>
+        </div>
+        <p>The run-time system utilizes a GT.M facility called ZLINK to link in an M routine. When a program or a Direct Mode command refers to an M routine that is not part of the current process, GT.M automatically uses the ZLINK facility and attempts to link the referenced routine (auto-ZLINK). The ZLINK facility also determines whether recompilation of the routine is necessary. When compiling as a result of a ZLINK, GT.M typically ignores errors in the source code.</p>
+        <p>The run-time system also provides incremental linking. The ZLINK command adds an M routine to the current image. This feature facilitates the addition of code modifications during a debugging session. The GT.M programmer can also use the feature to add patches and generated code to a running M process.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="vax_vms_library.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="manage_source_code.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="err_proc.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">The VMS Librarian </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Error Processing</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/run_time_sys.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:35 GMT -->
+</html>

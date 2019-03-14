@@ -1,0 +1,221 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s02.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Trigger Definition File</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch14.html" title="Chapter 14. Triggers">
+<link rel="prev" href="ch14s01.html" title="Triggers">
+<link rel="next" href="ch14s03.html" title="Trigger ISVs Summary">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Trigger Definition<span> File</span>
+</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch14s01.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 14. Triggers</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch14s03.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch14.html">Triggers</a></span> &gt; <span class="breadcrumb-node">Trigger Definition<span> File</span></span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="trigger_definition_file"></a>Trigger Definition<span> File</span>
+</h2></div></div></div>
+<p>A trigger definition file is a text file used for adding new triggers, modifying existing triggers, or removing obsolete triggers. A trigger definition file consists of one or more trigger definitions. A trigger definition includes the following information:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle">
+<p><span class="bold"><strong>Trigger signature</strong></span>: A trigger signature consists of global variable, subscripts, value, command, and trigger code. GT.M uses a combination of global variable, subscripts, value, and command to find the matching trigger to invoke for a database update.</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p><span class="emphasis"><em>Global Variable</em></span>: The name of a specific global to which this trigger applies.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>Subscripts</em></span>: Subscripts for global variable nodes of the named global, specified using the same patterns as the ZWRITE command.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>Value</em></span>: For commands that SET or update the value at a node, GT.M honors an optional pattern to screen for changes to delimited parts of the value.  A value pattern includes a piece separator and a list of pieces of interest.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>Command</em></span>: There are four commands: SET, KILL, ZTRIGGER, and ZKILL (ZWITHDRAW is identical to ZKILL) the shorter name for the command is used when specifying triggers.  MERGE is logically treated as equivalent to a series of SET operations performed in a loop. GT.M handles $INCREMENT() of a global matching a SET trigger definition as a triggering update.</p></li>
+<li class="listitem">
+<p><span class="emphasis"><em>Trigger code</em></span>:  A string containing M code that GT.M executes when application code updates,  including deletions by KILL and like commands, a global node with a matching trigger. The specified code can invoke additional routines and subroutines.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>While GT.M does not restrict trigger code from performing I/O operations, FIS recommends against using OPEN, USE, READ, WRITE and CLOSE within trigger application code. Such operations may be useful for development and diagnostic purposes. However, triggers implicitly run as TP transactions and I/O violates the ACID property of Isolation. In addition, MUPIP has somewhat different I/O handling characteristics than the main GT.M run-time, so I/O within triggers run by MUPIP may behave differently than within the originating application environment.</p></td></tr>
+</table></div>
+</li>
+</ol></div>
+</li>
+<li class="listitem" style="list-style-type: circle"><p><span class="bold"><strong>ACID property modifiers for triggered database updates</strong></span>: Currently, GT.M merely performs a syntax check on this part of a trigger definition. GT.M ensures the triggering database update, and any updates generated by trigger logic executed with transaction semantics. With the VIEW "NOISOLATION" command, GT.M transaction processing has long provided a mechanism for an application to inform the GT.M runtime system that it need not enforce Isolation. In such a case, the application and schema design provides Isolation by ensuring only one process ever updates nodes in a particular global at any given time, say by using $JOB as a subscript. This property anticipates a time when a trigger specification can provide NOISOLATION for particular nodes, in contrast to entire globals, and for every update to that node, in contrast to by process use of a VIEW command. Currently, the GT.M runtime system enforces Consistency for application logic inside a transaction and for triggered updates. This property anticipates a time when a trigger specification permits an application to inform the runtime system the application and schema design ensures appropriate Consistency for a trigger and its logic, thus relieving the GT.M runtime system from that task.</p></li>
+<li class="listitem" style="list-style-type: circle"><p><span class="bold"><strong>Trigger Name</strong></span>: You can optionally specify a trigger name that uniquely identifies each trigger. GT.M uses a trigger name for error reporting and configuration management of triggers - for example, a ZSHOW "S" reports the name of each trigger on the stack. If you do not specify a trigger name, GT.M automatically generates one using the global name as a base. User-specified trigger names and automatically generated trigger names occupy different name space; both last for the life of the definition.  A user-specified trigger name is an alphanumeric string of up to 28 characters. It must start with an alphabetic character or a percent sign (%). For a trigger name, GT.M uses the same naming convention as an M name. In other contexts, GT.M truncates M names at 31 characters. However, GT.M treats a trigger name of over 28 characters as an error. This is because a trigger name uniquely identifies a trigger and truncation may cause duplication.</p></li>
+</ul></div>
+<p>An automatically generated trigger name is a string comprised of two parts. Using the global name as a base, GT.M takes the first part as an alphanumeric string of up to 21 characters starting with an alphabetic character or a percent sign (%). The trailing part consists of an automatically incremented number in the form of #n# where n is a whole number that monotonically increases from 1 to 999999 that uniquely identifies a trigger for the same update. For example, if no trigger names are specified in the trigger definition file, GT.M automatically generates trigger names Account#1#, Account#2#, and Account#3# for the first three triggers defined for global variable ^Account. An attempt to use automatic assignment for more than a million triggers produces an error.  Once the numeric portion of the auto generated names reaches 999999, you must reload all triggers associated with the global variables that use the auto generated name space. At run-time GT.M generates a trailing suffix of a hash-sign (#) followed by up to two characters to ensure that every trigger has a unique designation, even when the environment is complex. The run-time suffix applies to both user-specified and automatically generated trigger names. It helps in differentiating triggers with the same name in different database files.</p>
+<p>Suppose you want to set up a trigger called <code class="code">TrigAcct</code> on every <code class="code">s ^Acct("ID")</code> to invoke the routine <code class="code">^OpenAccount</code>. Your trigger definition file may have an entry like <code class="code">+^Acct("ID") -command=S -xecute="do ^OpenAccount" -name=TrigAcct</code>. The following diagram identifies the different parts of this trigger definition:</p>
+<p>
+<img src="pg_figures/accttrig.gif">
+
+</p>
+<p>To apply this trigger definition file to GT.M, all you do is to load it using MUPIP TRIGGER -TRIGGERFILE or $ZTRIGGER(). GT.M would invoke trigger name <code class="code">TrigAcct</code> on every SET operation on <code class="code">^Acct("ID")</code>. Internally, GT.M stores trigger <code class="code">TrigAcct</code> in the same database file where <code class="code">^Acct</code> is stored. The syntax of an entry in a trigger definition file is:</p>
+<p><code class="code">{-triggername|-triggername-prefix*|-*|{+|-}trigvn -commands=<em class="replaceable"><code>cmd[,...]</code></em> -xecute=<em class="replaceable"><code>strlit1</code></em> [-[z]delim=<em class="replaceable"><code>expr</code></em>][-pieces=<em class="replaceable"><code>[lvn=]int1[:int2][;...]</code></em>] [-options={[no]i[solation]|[no]c[onsistencycheck]}...] [-name=<em class="replaceable"><code>strlit2</code></em>]}</code></p>
+<div class="informaltable">
+<a name="tbltrigdef"></a><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td>
+              <p><code class="code">-triggername|-trigger-name-prefix*|-*</code></p>
+            </td>
+<td>
+              <p><code class="code">-triggername </code>deletes a user-specified trigger name called <code class="code">triggername</code> from the database.<code class="code">-triggername*</code> deletes all those user-defined triggers whose starting name match <code class="code">triggername</code>.<code class="code">-*</code> deletes all triggers; if the MUPIP TRIGGER command does not specify -NOPROMPT , GT.M displays a warning and asks for user confirmation before deleting all triggers. If MUPIP TRIGGER command specifies -NOPROMPT and the definition file includes a <code class="code">-*</code> line, GT.M deletes all the triggers without user confirmation. $ZTRIGGER() performs deletions -NOPROMPT.<code class="code">+triggername</code> issues an error; to add a new user-specified trigger name, use <code class="code">-name=strlit2</code>.</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p><code class="code">{+|-}tri</code><code class="code">gvn </code></p>
+            </td>
+<td>
+              <p><code class="code">trigvn </code>is a global node on which you set up a trigger.<code class="code">-trigvn</code> deletes any triggers in the database that match the specified trigger.<code class="code"> +trigvn </code>adds or replaces the specified trigger. If the specified trigger exists (with a matching specification), MUPIP TRIGGER or $ZTRIGGER() treats the matching definition as a no-op, resulting in no database update. If you want to specify more than one global node for the same trigger code, the following rules apply:</p>
+              <div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>You can use patterns and ranges for subscripts.</p></li>
+<li class="listitem"><p>You can specify a semicolon (;) separated list for subscripts.</p></li>
+<li class="listitem"><p>You can specify a selection list that includes a mix of points, ranges and patterns, but a pattern cannot serve as either end of a range. For example, :<code class="code">,"a":"d";?1U</code> is a valid specification but <code class="code">:,"a":?1A</code> is not.</p></li>
+<li class="listitem"><p>You can specify a local variable name for each subscript. For example instead of <code class="code">^X(1,:,:)</code>, you can specify <code class="code">^X(1,lastname=:,firstname=:)</code>. This causes GT.M to define local variables lastname and firstname to the actual second and third level subscripts respectively from the global node invoking this trigger. The trigger code can then use these variables just like any other M local variable. As described in the Trigger Execution Environment section, trigger code executes in a clean environment - as if all code is preceded by an implicit NEW - the implicit assignments apply only within the scope of the trigger code and don't conflict or affect any run-time code or other triggers.</p></li>
+<li class="listitem"><p>You cannot use the <code class="code">@</code> operator, unspecified subscripts (for example, <code class="code">^A()</code> or <code class="code">^A(:,))</code> or local or global variable names as subscripts.</p></li>
+<li class="listitem"><p>You cannot use patterns and ranges for the global variable name. Therefore, you cannot set a single trigger for <code class="code">^Acct*</code>.</p></li>
+</ol></div>
+              <p>In order to account for any non-standard collation, GT.M evaluates string subscript ranges using the global specific collation when an application update first invokes a trigger - as a consequence, it detects and reports range issues at run-time rather than from MUPIP TRIGGER or $ZTRIGGER(), so test appropriately. For example, GT.M reports a run-time error for an inverted subscript range such as (ASCII) C:A.</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>-<code class="code">command</code>=<em class="replaceable"><code>cmd</code></em></p>
+            </td>
+<td>
+              <p><code class="code">
+                  <em class="replaceable"><code>cmd</code></em>
+                </code> is the trigger invocation command. Currently, you can specify one or more of S[ET], K[ILL], ZTR[IGGER], or ZK[ILL]. A subsequent GT.M release may support ZTK[ILL] for triggering on descendent nodes of a KILLed ancestor, but, while current versions accept ZTK, they convert it into K. If cmd specifies multiple command values, GT.M treats each M command as a separate trigger. Note that even if you specify both SET and KILL, only one M command matches at any given time. Trigger code is not executed in the following conditions:</p>
+              <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>A KILL of a node that does not exist.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>A KILL of a node that has a cmd=ZK trigger, but no cmd=K trigger.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>A ZKILL or ZWITHDRAW of a node that has descendents but no data and a trigger with <abbr class="abbrev">cmd</abbr>=<em class="replaceable"><code>ZK</code></em>.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>The trigger uses the "piece" syntax (described below) and no triggering piece changes in the update.</p></li>
+</ul></div>
+            </td>
+</tr>
+<tr>
+<td>
+              <p><code class="code">-xecute</code>="|&lt;&lt;<em class="replaceable"><code>strlit1</code></em>"|&gt;&gt;</p>
+            </td>
+<td>
+              <p>strlit1 specifies the trigger code that is executed when an update matches trigvn. If strlit1 is a single line, enclose it with quotes (") and make sure that the quotes inside strlit1 are doubled as in normal M syntax. </p>
+<p>If strlit1 is in multiple lines, mark the beginning with &lt;&lt; which must immediately follow the = after the -xecute. A newline must immediately follow the &lt;&lt;. &gt;&gt; should mark the end of multiple-line strlit1 and must be at the beginning of a line. The lines in strlit1 follow the standard conventions of a GT.M program, that is, optional label, line start, and M code.</p>
+<p>The maximum length of strlit1 (even if multi-line) is 1048576 (ASCII) characters or 4096 DB records, whichever is smaller.</p>
+<p>To validate strlit1, MUPIP TRIGGER or $ZTRIGGER() compiles it before applying the trigger definition to the database and issues a TRGCOMPFAIL error if it contains any invalid code.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Trigger compilation detects compilation errors, but not run-time errors. Therefore, you should always test your trigger code before applying trigger definitions to the database. </p></td></tr>
+</table></div>
+              <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Warning">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Warning</th>
+</tr>
+<tr><td align="left" valign="top"><p> As stated in the Trigger Definition File section, the text of trigger code is a part of the trigger signature. If you use two trigger signatures that have the same semantics (global variable, subscript, value, and command) but different text (for example: <code class="code">set foo=$ztoldval</code>, <code class="code">s foo=$ztoldval</code>, and <code class="code">set foo=$ztol</code>), their signatures become different and GT.M treats them as different triggers. FIS recommends you to use comprehensive and strong coding conventions for trigger code or rely on user-specified names in managing the deletion and replacement of triggers.</p></td></tr>
+</table></div>
+<p>Example:</p>
+<pre class="programlisting">+^multi -commands=set -name=example -xecute=&lt;&lt;
+ do ^test1
+ do stop^test2
+&gt;&gt;</pre>
+            </td>
+</tr>
+<tr>
+<td>
+              <p><code class="code">[</code><code class="code">-pieces</code>=<code class="code"><em class="replaceable"><code>int1[:int2][;...]</code></em>] </code></p>
+            </td>
+<td>
+              <p>If<code class="code">
+                  <code class="code"> cmd</code>
+                </code> is <em class="replaceable"><code>S[et]</code></em>, you can specify an optional piece list sequence where <code class="code">int2</code>&gt;<code class="code">int1</code> and <code class="code">int1:int2</code> denotes a integer range from <code class="code">int1</code> to <code class="code">int2</code>. The trigger gets executed only when any piece from the specified piece list changes. Suppose your trigvn has a list "<code class="code">Window|Chair|Table|Door</code>" and you want to execute the trigger only when the value of the 3rd or 4th piece changes so you might specify the following trigger definition:</p>
+ <pre class="programlisting">+^trigvn -commands=S -pieces=3;4 -delim="|" -options=NOI,NOC -xecute="W ""3rd or 4th element updated."""
+GTM&gt;W ^trigvnWindow|Chair|Table|Door|
+GTM&gt;s $Piece(^trigvn,"|",3)="Dining Table"
+3rd or 4th element updated.</pre>
+              <p>This trigger is not executed if you change the first element. For example:</p>
+              <p><code class="code">S $Piece(^trigvn,"|",1)="Chandelier"</code></p>
+              <p>does not invoke the trigger.</p>
+              <p>You can also specify a range for your piece sequence. For example, 3:5;7;9:11 specifies a trigger on pieces 3 through 5,7 and 9 through 11. GT.M merges any overlapping values or ranges - for example, 3:6;7 is the same as 3:7.</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <em class="replaceable"><code>[-[z]delim=expr]</code></em>
+            </td>
+<td>
+              <p>If<code class="code"> cmd</code> is <code class="code">
+                  <em class="replaceable"><code>S[ET]</code></em>
+                </code>, you can specify an optional piece delimiter using <code class="code">-[z]delim=expr</code> where expr is a string literal or an expression (with very limited syntax) evaluating to a string separating the pieces (e.g., "|") in the values of nodes, and is interpreted as an ASCII or UTF-8 string based on the environment variable gtm_chset. To allow for unprintable delimiters in the delimiter expression, MUPIP TRIGGER only accepts $CHAR() and $ZCHAR() and string concatenation (_) as embellishments to the string literals. If zdelim specifies a delimiter, GT.M uses the equivalent of $ZPIECE() to match pieces and to identify changes in $ZTUPDATE() (refer to the ISV description for additional information); otherwise, if delim specifies a delimiter, GT.M uses the equivalent of $PIECE() for the current mode (M or UTF-8). Specifying a delimiter for <code class="code">cmd</code> other than S[ET] or specifying both <code class="code">delim</code> and <code class="code">zdelim</code> for the same trigger each produce an error.</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p><code class="code">[</code><code class="code">-option</code>s=<em class="replaceable"><code>
+                  {no]i[solation]|[[no]c[onsistencycheck]}...
+                </code></em></p>
+            </td>
+<td>
+              <p>You can specify <code class="code">[NO] ISOLATION </code>or <code class="code">[NO]CONSISTENCYCHECK</code> as a property of the triggered database updates. <code class="code">NOISOLATION</code> is a facility for your application to instruct GT.M where the application logic and database schema take responsibility for ensuring the ACID property of <code class="code">ISOLATION</code>, and that any apparent collisions are purely coincidental from multiple global nodes resident in the same physical block which serves as the GT.M level of granularity in conflict checking. In the current release this trigger designation is notational only - you must still implement <code class="code">NOISOLATION</code> at the process level with the VIEW command, but you can use the trigger designation in planning to move to schema-based control of this facility. <code class="code">NOCONSISTENCYCHECK</code> is a facility for your application to instruct GT.M that application logic and schema take responsibility for ensuring the ACID property of <code class="code">CONSISTENCY</code>. The <code class="code">[NO]CONSISTENCYCHECK</code> feature is not yet implemented and will be made available in a future GT.M release. For now, you can plan to move <code class="code">CONSISTENCY </code>responsibility from your application to a trigger and implement it later when this feature becomes available.Note: <code class="code">-options</code> are not part of the trigger signature and so can be modified without deleting an existing trigger.</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p><code class="code"><code class="code">[-</code>name</code><code class="code">=<em class="replaceable"><code>strlit2</code></em>]</code></p>
+            </td>
+<td>
+              <p><code class="code">
+                  <em class="replaceable"><code>strlit2</code></em>
+                </code> is a user-specified trigger name. It is an alphanumeric string of up to 28 characters. It must start with an alphabetic character or a percent sign (%). Note: <code class="code">
+                  <code class="code">-name</code>
+                </code> is not part of the trigger signature and so can be modified without deleting an existing trigger. Note also that the name can be used to delete a trigger - this alternative avoids potential issues with text variations in the code associated with the <code class="code">-xecute </code>qualifier which is part of the trigger signature when the variations do not have semantic significance.</p>
+            </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch14s01.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch14.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch14s03.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Triggers </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> <span>Trigger ISVs </span>Summary</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch14s02.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+</html>

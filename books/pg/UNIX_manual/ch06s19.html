@@ -1,0 +1,156 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s19.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Set</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s18.html" title="Read">
+<link rel="next" href="ch06s20.html" title="TCommit">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Set</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s18.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s20.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">Set</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="set_cmmd"></a>Set</h2></div></div></div>
+<p>SET assigns values to variables or to a selected portion of a variable.</p>
+<a class="indexterm" name="idp186731344"></a><p>The format of the SET command is:</p>
+<pre class="programlisting">S[ET][:tvexpr] setleft=expr | (setleft[,...])=expr | *lvn=lname | aliascontainer[,...]</pre>
+<p>where </p>
+<pre class="programlisting">setleft == glvn | $EXTRACT(glvn,[,intexpr1[,intexpr2]]) | $PIECE(glvn,expr1[,intexpr1[,intexpr2]]) | isv</pre>
+<p>and</p>
+<pre class="programlisting">aliascontainer == lvn | exfunc | exvar</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>A subscripted or unsubscripted local or global variable name on the left of the equal-sign (=) specifies a variable in which to store the expression found on the right side of the equal-sign; the variable need not exist prior to the SET; if the variable exists prior to the SET, the SET replaces its old value.</p></li>
+<li class="listitem"><p>During a SET, GT.M evaluates the right side of the equal sign before the left; this is an exception to the left-to-right order of evaluation in GT.M and means that GT.M maintains the naked indicator using the expression on the right-hand side of the equal sign (=) before setting the variable.</p></li>
+<li class="listitem"><p>When the portion of the argument to the left of the equal sign is in the form of a $PIECE function, SET replaces the specified piece or pieces of the variable (specified as the first argument to the $PIECE() form) with the value of the expression on the right side of the equal-sign; if the variable did not exist prior to the SET or does not currently contain the pieces identified by the optional third and fourth arguments to the $PIECE() form, SET adds sufficient leading delimiters, as specified by the second argument to the $PIECE form, to make the assignment fit the $PIECE() form. Note that if the fourth argument exceeds the third argument, SET does not modify the target glvn or change the naked indicator.</p></li>
+<li class="listitem"><p>When the portion of the argument to the left of the equal sign is in the form of a $EXTRACT function, SET replaces the specified character or characters of the variable (specified as the first argument to the $EXTRACT() form) with the value of the expression on the right side of the equal-sign; if the variable did not exist prior to the SET or does not contain the characters identified by the optional second and third arguments to the $EXTRACT() form, SET adds sufficient leading spaces to make the assignment fit the $EXTRACT() form. Note that if the third argument exceeds the second argument, SET does not modify the target glvn or change the naked indicator .</p></li>
+<li class="listitem"><p><code class="code">isv</code> on the left-hand side of the equal-sign specifies an Intrinsic Special Variable. Not all ISVs permit SET updates by the application - see the description of the individual ISV.</p></li>
+<li class="listitem"><p>When the portion of the argument to the left of the equal-sign is in the form of a list of <code class="code">setlefts</code> enclosed in parentheses, SET assigns the value of the expression on the right of the equal sign to all the destinations.</p></li>
+<li class="listitem"><p>If a SET updates a global node matching a trigger definition, GT.M executes the trigger code after the node has been updated in the process address space, but before it is applied to the database. When the trigger execution completes, the trigger logic commits the value of a node from the process address space only if $ZTVALUE is not set. if $ZTVALUE is set during trigger execution, the trigger logic commits the value of a node from the value of $ZTVALUE. For more information on using SET in Triggers, refer to <a class="xref" href="ch14s07.html#trig_set" title="Set">&#8220;Set&#8221;</a> section in the Triggers chapter. </p></li>
+<li class="listitem"><p>A SET * command explicitly makes the lvn on the left-hand side of the equal-sign an alias if it is an unsubscripted lvn (the root of an array) or an alias container if it is a subscripted lvn. If the portion of the argument on the right-hand side of the equal-sign is other than an lname (the root of an array), it must evaluate to an alias or alias container. Extrinsic functions and extrinsic special variables return an alias container if they terminate with a QUIT *.  For more information on Alias Variables, refer to <a class="xref" href="ch02s07.html" title="Alias Variables Extensions">&#8220;Alias Variables Extensions&#8221;</a>. </p></li>
+<li class="listitem"><p>In a SET * command, any previous array associated with the lvn on the left-hand side of the equal-sign ceases to be associated with it, and if lvn was the only lvn associated with that (old) array in any scope, GT.M may reclaim the space it occupied. Alias assignment does not require that any data set exist for a name on the right-hand side of the equal-sign - the assignment simply creates an association.</p></li>
+<li class="listitem"><p>SET * left-hand side arguments cannot be parenthetically enclosed lists such as SET (a,*b)=c or SET (*a,*b)=c.</p></li>
+<li class="listitem"><p>SET and SET * assignments can be combined into one command in a comma separated list, for example, SET *a=b,^c(3)=d(4). </p></li>
+<li class="listitem"><p>SET * only accepts argument indirection, that is, while SET accepts x="*a=b",@x,  SET does not permit x="*a",@x=b or SET x="b",*a=@x. </p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more SET arguments form a legal argument for a SET.</p></li>
+<li class="listitem"><p>A SET with proper syntax always succeeds regardless of the prior state or value of the variable, as long as GT.M can evaluate the expression to the right of the equal sign (=).</p></li>
+</ul></div>
+<p>For the syntax of $PIECE() or $EXTRACT(), refer to <a class="xref" href="ch07.html" title="Chapter 7. Functions">Chapter 7: &#8220;<i>Functions</i>&#8221;</a>.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_set"></a>Examples<span> of SET</span><a class="indexterm" name="idp186743664"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Kill  Set a="x",(b,c)=1,@a="hello" ZWRite
+a=x
+b=1
+c=1
+x="hello"
+GTM&gt;</pre>
+<p>The KILL command deletes any previously defined local variables. The SET command has three arguments. The first shows a simple direct assignment. The second shows the form that assigns the same value to multiple variables. The third shows atomic indirection on the left of the equal sign. The ZWRITE command displays the results of the assignments.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Set ^(3,4)=^X(1,2)</pre>
+<p>As GT.M evaluates the right-hand side of the equal sign before the left-hand side within a SET argument, the right-hand expression determines the naked reference indicator prior to evaluation of the left-hand side. Therefore, this example assigns ^X(1,3,4) the value of ^X(1,2).</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Kill x Set $Piece(x,"^",2)="piece 3" ZWRite x
+x="^^piece 3"
+GTM&gt;</pre>
+<p>This SET demonstrates a "set piece" and shows how SET generates missing delimiters when required. <span>For more information on $PIECE(), refer to <a class="xref" href="ch07.html" title="Chapter 7. Functions">Chapter 7: &#8220;<i>Functions</i>&#8221;</a>.</span></p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Set x="I love hotdogs"
+                
+GTM&gt;Set $Extract(x,3,6)="want"
+GTM&gt;Write x
+I want hotdogs
+GTM&gt;Set $Extract(x,7)=" many "
+GTM&gt;Write x
+I want many hotdogs
+GTM&gt;</pre>
+<p>The SET $EXTRACT command replaces and extracts the specified characters with the value of the expression on the right hand side of the equal-sign (=). <span>For more information on $EXTRACT(), refer to <a class="xref" href="ch07.html" title="Chapter 7. Functions">Chapter 7: &#8220;<i>Functions</i>&#8221;</a>.</span></p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;kill A,B
+        
+GTM&gt;set A=1,A(1)=1,A(2)=2
+GTM&gt;set *B=A ; A &amp; B are aliases. 
+GTM&gt;zwrite B
+B=1 ;*
+B(1)=1
+B(2)=2
+GTM&gt;</pre>
+<p>This SET * command creates an alias associated between A and B. It associates the entire tree of nodes of A including its root and all descendants with B. </p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;kill A,B,C
+          
+GTM&gt;set A=1,*C(2)=A ; C(2) is a container
+GTM&gt;zwrite
+A=1 ;*
+*C(2)=A
+GTM&gt;set *B=C(2) ; B is now an alias
+GTM&gt;write B,":",$length(C(2)),":" ; An alias variable provides access but a container doesn't
+1:0:
+GTM&gt;</pre>
+<p>This SET * command creates an alias by dereferencing an alias container. </p>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody><tr valign="top">
+<td align="left" valign="top">
+<p></p>
+<p class="relatedtopics">See Also</p>
+</td>
+<td align="left" valign="top">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc" compact>
+<li class="listitem"><p>
+<a class="xref" href="ch14s07.html#trig_set" title="Set">&#8220;Set&#8221;</a></p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch07s04.html" title="$Extract()">&#8220;$Extract()&#8221;</a></p></li>
+</ul></div>
+            </td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s18.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s20.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Read </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> TCommit</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s19.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

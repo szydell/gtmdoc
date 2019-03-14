@@ -1,0 +1,417 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/apcs01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:36 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Compiling ICU</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="compiling_icu.html" title="Appendix C. Compiling ICU on GT.M supported platforms">
+<link rel="prev" href="compiling_icu.html" title="Appendix C. Compiling ICU on GT.M supported platforms">
+<link rel="next" href="build_encry_lib.html" title="Appendix D. Building Encryption Libraries">
+<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Compiling ICU</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="compiling_icu.html">Prev</a> </td>
+<th width="60%" align="center">Appendix C. Compiling ICU on GT.M supported platforms</th>
+<td width="20%" align="right"> <a accesskey="n" href="build_encry_lib.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="compiling_icu.html">Compiling ICU on GT.M supported platforms</a></span> &gt; <span class="breadcrumb-node">Compiling ICU</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="compiling_ICU"></a>Compiling ICU<a class="indexterm" name="idp188981952"></a>
+</h2></div></div></div>
+<p>FIS recommends using the ICU libraries provided by the OS vendor. This appendix includes sample instructions to download ICU, configure it not to use multi-threading, and compile it for various platforms. Note that download sites, versions of compilers, and milli and micro releases of ICU may have changed ICU since the embedded dates when these instructions were tested making them out-of-date. Therefore, these instructions must be considered examples, not a cookbook.</p>
+<p>Although GT.M uses ICU, ICU is not FIS software and FIS does not support ICU. The sample instructions for installing and configuring ICU are merely provided as a convenience to you. </p>
+<p>All GT.M versions prior to V5.3-004 require exactly ICU 3.6, however, V5.3-004 (or later) accept ICU 3.6 or later.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Please consult the <a class="xref" href="ch03s03.html" title="Configuring and operating GT.M with Unicode® support (optional)">Section : &#8220;Configuring and operating GT.M with <span class="trademark">Unicode</span>® support (optional) &#8221;</a> for more information regarding supported OS vendor provided ICU libraries.</p></td></tr>
+</table></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ICUAIX44"></a>Compiling ICU 4.4 on AIX 6.1</h3></div></div></div>
+<p>As of November 2011, ICU version 4.4 can be compiled on AIX with the following configuration:</p>
+<p>Operating System: <em class="replaceable"><code>AIX</code></em></p>
+<p>Version: <em class="replaceable"><code>AIX 6.1 64-bit</code></em></p>
+<p>Compilers: <em class="replaceable"><code>IBM XL C/C++ 10, GNU make 3.80</code></em></p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="installicuaix"></a>Installation Instructions</h4></div></div></div>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Ensure that system environment variable PATH includes the location of all the compilers mentioned above.</p></li>
+<li class="listitem"><p>Set the environment variable OBJECT_MODE to 64.</p></li>
+<li class="listitem"><p>Download the source code of ICU version 4.4 for C from http://site.icu-project.org/download</p></li>
+<li class="listitem">
+<p>At the shell prompt, execute the following commands:</p>
+<pre class="programlisting">gunzip -d &lt; icu4c-4_4-src.tgz | tar -xf -
+cd icu/source
+./runConfigureICU AIX --disable-threads --enable-renaming=no --with-library-bits=64 CC=xlc
+gmake
+gmake -k check
+gmake install</pre>
+</li>
+<li class="listitem"><p>Set the environment variable LIBPATH to point to the location of ICU. AIX uses the environment variable LIBPATH to search for dynamically linked libraries.</p></li>
+</ol></div>
+<p>This installs ICU in the /usr/local directory.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>By default, ICU is installed in the /usr/local directory. To install ICU in a different directory, use --prefix=&lt;install_path&gt; with the runConfigureICU command.</p></td></tr>
+</table></div>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ICU_4.2AIX"></a>Compiling ICU 4.2 on AIX 6.1</h3></div></div></div>
+<p>As of December 2009, ICU version 4.2 can be
+        compiled on AIX with the following configuration:</p>
+<p>Operating System: <em class="replaceable"><code> UNIX </code></em></p>
+<p>Version: <em class="replaceable"><code> AIX 6.1 64-bit</code></em></p>
+<p>Compilers: <em class="replaceable"><code>IBM XL C/C++ 10, GNU make 3.80</code></em></p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="installicu42aix"></a>Installation Instructions</h4></div></div></div>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Ensure that system environment variable PATH includes the
+              location of all the compilers mentioned above.</p></li>
+<li class="listitem"><p>Set the environment variable OBJECT_MODE to 64.</p></li>
+<li class="listitem"><p>Download the source code of ICU version 4.2 for C from
+              <a class="ulink" href="http://site.icu-project.org/download" target="_top">
+              http://site.icu-project.org/download</a></p></li>
+<li class="listitem">
+<p>At the shell prompt, execute the following
+              commands:</p>
+<pre class="programlisting">gunzip -d &lt; icu4c-4_2_1-AIX6_1-VA9.tgz | tar -xf - 
+cd icu/source
+./configure CC=/usr/vac/bin/cc CXX=/usr/vacpp/bin/xlc++ --disable-threads --disable-renaming 
+gmake
+gmake check 
+gmake install</pre>
+</li>
+<li class="listitem"><p>Set the environment variable LIBPATH to point to the
+              location of ICU. AIX uses the environment variable LIBPATH to
+              search for dynamically linked libraries.</p></li>
+</ol></div>
+<p>This installs ICU in the <code class="code">/usr/local</code>
+          directory.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>By default, ICU is installed on <code class="code">/usr/local</code>
+            directory. </p></td></tr>
+</table></div>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="compile_icu42"></a>Compiling ICU 4.2 on HP Integrity IA64 HP-UX 11.31</h3></div></div></div>
+<p>As of November 2009, ICU version 4.2 could be compiled on HP Integrity IA64 HP-UX with the following configuration:</p>
+<p>Operating System: <em class="replaceable"><code>UNIX</code></em></p>
+<p>Version: <em class="replaceable"><code>IA64 HP-UX 11.31</code></em></p>
+<p>Compilers: <em class="replaceable"><code>HP C/aC++ B3910B A.06.15, GNU make (3.81)</code></em></p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="inst_compile_icu42"></a>Installation Instructions</h4></div></div></div>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Ensure that system environment variable PATH includes the location of all the compilers mentioned above.</p></li>
+<li class="listitem"><p>Download the source code of ICU (in this example version 3.6 for C from http://icu.sourceforge.net/).</p></li>
+<li class="listitem">
+<p>At the shell prompt, run the following commands: </p>
+<pre class="programlisting">gunzip -d &lt; icu4c-4_2_1-src.tgz | tar -xf -
+cd icu/source/
+chmod +x runConfigureICU configure install-sh
+./runConfigureICU HP-UX/ACC --disable-renaming --disable-threads --with-library-bits=64
+gmake
+gmake check
+gmake install</pre>
+</li>
+<li class="listitem"><p>Set the environment variable LD_LIBRARY_PATH to point to the location of ICU. HP-UX uses the environment variable LD_LIBRARY_PATH to search for dynamically linked libraries. </p></li>
+</ol></div>
+<p>This installs ICU in the /usr/local directory.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>By default, ICU is installed in the /usr/local directory. To install ICU in a different directory, use --prefix=&lt;install_path&gt; with the runConfigureICU command.  </p></td></tr>
+</table></div>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ICU_IA64"></a>Compiling ICU 3.6 on HP Integrity IA64 HP-UX 11.31</h3></div></div></div>
+<p>As of November 2009, ICU version 3.6 could be compiled on HP Integrity IA64 HP-UX with the following configuration:</p>
+<p>Operating System: <em class="replaceable"><code>UNIX</code></em></p>
+<p>Version: <em class="replaceable"><code>IA64 HP-UX 11.31</code></em></p>
+<p>Compilers: <em class="replaceable"><code>HP C/aC++ B3910B A.06.15, GNU make (3.81)</code></em></p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="instr_ICU_IA64"></a>Installation Instructions</h4></div></div></div>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Ensure that system environment variable PATH includes the location of all the compilers mentioned above. </p></li>
+<li class="listitem"><p>Download the source code of ICU (in this example version 3.6 for C from <a class="ulink" href="http://icu.sourceforge.net/download/3.6.html#ICU4C" target="_top">http://icu.sourceforge.net/download/3.6.html#ICU4C</a>). </p></li>
+<li class="listitem">
+<p>At the shell prompt, run the following commands: </p>
+<pre class="programlisting">gunzip -d &lt;  icu4c-3_6-src.tgz | tar -xf -
+cd icu/source/
+chmod +x runConfigureICU configure install-sh
+runConfigureICU HP-UX/ACC --disable-threads
+gmake
+gmake check
+gmake install
+</pre>
+</li>
+<li class="listitem"><p>Set the environment variable LD_LIBRARY_PATH to point to the location of ICU. HP-UX uses the environment variable LD_LIBRARY_PATH to search for dynamically linked libraries. </p></li>
+</ol></div>
+<p>This installs ICU in the <code class="code">/usr/local</code> directory.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top">
+<p>By default, ICU is installed in the <code class="code">/usr/local</code> directory.  If you install ICU in a different directory, type: </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p><code class="code">runConfigureICU HP-UX/ACC --prefix=&lt;install_path&gt; --disable-threads</code></p></li>
+<li class="listitem"><p>Then run the gmake commands, and set the environment variable LD_LIBRARY_PATH to point to the appropriate location.</p></li>
+</ul></div>
+</td></tr>
+</table></div>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="comp_rhel"></a>Compiling ICU 4.2 on Red Hat Enterprise Linux 4 Update 2</h3></div></div></div>
+<p>As of December 2009, ICU version 4.2 could be compiled on x86_64 Linux with the following configuration:</p>
+<p>Operating System: x86_64 Linux</p>
+<p>Version: Red Hat Enterprise Linux 4 Update 2</p>
+<p>Compilers: gcc 3.4.4, GNU make (3.77+), ANSI C compiler</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="instruc_comp_rhel"></a>Installation Instructions</h4></div></div></div>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Ensure that system environment variable PATH includes the location of all the compilers mentioned above.</p></li>
+<li class="listitem"><p>Download the source code of ICU version 4.2 for C from http://site.icu-project.org/download.</p></li>
+<li class="listitem">
+<p>At the shell prompt, execute the following commands:</p>
+<pre class="programlisting">gunzip -d &lt; icu4c-3_6-src.tgz | tar -xf -
+cd icu/source/
+chmod +x runConfigureICU configure install-sh
+./runConfigureICU Linux --disable-renaming --disable-threads --with-library-bits=64
+gmake
+gmake check
+gmake install</pre>
+</li>
+<li class="listitem"><p>Set the environment variable LD_LIBRARY_PATH to point to the location of ICU. Linux uses the environment variable LD_LIBRARY_PATH to search for dynamically linked libraries to be loaded.</p></li>
+</ol></div>
+<p>This installs ICU in the /usr/local directory.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>By default, ICU is installed in the /usr/local directory. To install ICU in a different directory, use --prefix=&lt;install_path&gt; with the runConfigureICU command. </p></td></tr>
+</table></div>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="compiling_ICUV3.6"></a>Compiling ICU 3.6 on Red Hat Enterprise Linux 4 Update 2</h3></div></div></div>
+<p>As of January 2007, ICU version 3.6 could be
+        compiled on x86 Linux with the following configuration:</p>
+<p>Operating System: <em class="replaceable"><code>x86 Linux</code></em></p>
+<p>Version: <em class="replaceable"><code>Red Hat Enterprise Linux 4 Update
+        2</code></em></p>
+<p>Compilers: <em class="replaceable"><code>gcc 3.4.4, GNU make (3.77+), ANSI C
+        compiler</code></em></p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="instru_compiling_ICUV3.6"></a>Installation Instructions</h4></div></div></div>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Ensure that system environment variable PATH includes the
+              location of all the compilers mentioned above.</p></li>
+<li class="listitem"><p>Download the source code of ICU version 3.6 for C from
+              <a class="ulink" href="http://icu.sourceforge.net/download/3.6.html#ICU4C" target="_top">http://icu.sourceforge.net/download/3.6.html#ICU4C
+              </a></p></li>
+<li class="listitem">
+<p>At the shell prompt, execute the following
+              commands:</p>
+<pre class="programlisting">gunzip -d &lt; icu4c-3_6-src.tgz | tar -xf - 
+cd icu/source/ 
+chmod +x runConfigureICU configure install-sh
+runConfigureICU Linux --disable-64bit-libs --disable-threads
+gmake 
+gmake check 
+gmake install</pre>
+</li>
+<li class="listitem"><p>Set the environment variable LD_LIBRARY_PATH to point to
+              the location of ICU. Linux uses the environment variable
+              LD_LIBRARY_PATH to search for dynamically linked libraries to be
+              loaded.</p></li>
+</ol></div>
+<p>This installs ICU in the <code class="code">/usr/local</code>
+          directory.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top">
+<p>By default, ICU is installed on <code class="code">/usr/local</code>
+            directory. If you need to install ICU on a different directory
+            type:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p><code class="code">runConfigureICU Linux
+                --prefix=&lt;install_path&gt; --disable-64bit-libs
+                --disable-threads</code></p></li>
+<li class="listitem"><p>Then execute the <code class="code">gmake </code>commands, and set
+                the environment variable LD_LIBRARY_PATH to point to the
+                appropriate location.</p></li>
+</ul></div>
+</td></tr>
+</table></div>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="compico42sol"></a>Compiling ICU 4.2 on Solaris 9 (SunOS 5.9)</h3></div></div></div>
+<p>As of December 2009, ICU version 4.2 could be compiled on Solaris with the following configuration:</p>
+<p>Operating System: <em class="replaceable"><code>Solaris</code></em></p>
+<p>Version: <em class="replaceable"><code>Solaris 9 (SunOS 5.9)</code></em></p>
+<p>Compilers: <em class="replaceable"><code>Sun Studio 8 (Sun C++ 5.5), GNU make (3.77+), ANSI C compiler</code></em></p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="instruct_compico42sol"></a>Installation Instructions</h4></div></div></div>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Ensure that system environment variable PATH includes the location of all the compilers mentioned above.</p></li>
+<li class="listitem"><p>Download the source code of ICU version 4.2 for C from http://site.icu-project.org/download</p></li>
+<li class="listitem">
+<p>Add the following line in the configuration file source/config/mh-solaris to include the appropriate C++ runtime libraries:</p>
+<pre class="programlisting">DEFAULT_LIBS = -lCstd -lCrun -lm -lc</pre>
+</li>
+<li class="listitem">
+<p>At the shell prompt, execute the following commands:</p>
+<pre class="programlisting">gunzip -d &lt; icu4c-4_2_1-src.tgz | tar -xf -
+cd icu/source/
+chmod +x runConfigureICU configure install-sh
+./configure --disable-renaming --disable-threads --enable-64bit-libs
+gmake
+gmake check
+gmake install</pre>
+</li>
+<li class="listitem"><p>Set the environment variable LD_LIBRARY_PATH to point to the location of ICU. Solaris uses the environment variable LD_LIBRARY_PATH to search for dynamically linked libraries to be loaded.</p></li>
+</ol></div>
+<p>ICU is now installed in the /usr/local directory.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>By default, ICU is installed in the /usr/local directory. To to install ICU in a different directory, use --prefix=&lt;install_path&gt; with the runConfigure command. </p></td></tr>
+</table></div>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ICU_Solaris"></a>Compiling ICU 3.6 on Solaris 9 (SunOS 5.9)</h3></div></div></div>
+<p>As of January 2007, ICU version 3.6 could be
+        compiled on Solaris with the following configuration:</p>
+<p>Operating System: <em class="replaceable"><code> Solaris </code></em></p>
+<p>Version: <em class="replaceable"><code> Solaris 9 (SunOS
+        5.9)</code></em></p>
+<p>Compilers: <em class="replaceable"><code> Sun Studio 8 (Sun C++ 5.5), GNU make
+        (3.77+), ANSI C compiler </code></em></p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="instruc_ICU_Sol"></a>Installation Instructions</h4></div></div></div>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Ensure that system environment variable PATH includes the
+              location of all the compilers mentioned above.</p></li>
+<li class="listitem"><p>Download the source code of ICU version 3.6 for C from
+              <a class="ulink" href="http://icu.sourceforge.net/download/3.6.html#ICU4C" target="_top">http://icu.sourceforge.net/download/3.6.html#ICU4C&gt;
+              </a></p></li>
+<li class="listitem">
+<p>Add the following line in the configuration file
+              source/config/mh-solaris to include the appropriate C++ runtime
+              libraries:</p>
+<pre class="programlisting">DEFAULT_LIBS = -lCstd -lCrun -lm -lc</pre>
+</li>
+<li class="listitem">
+<p>At the shell prompt, execute the following
+              commands:</p>
+<pre class="programlisting">gunzip -d &lt; icu4c-3_6-src.tgz | tar -xf - 
+cd icu/source/ 
+chmod +x runConfigureICU configure install-sh
+runConfigureICU Solaris --disable-64bit-libs --disable-threads
+gmake 
+gmake check 
+gmake install</pre>
+</li>
+<li class="listitem"><p>Set the environment variable LD_LIBRARY_PATH to point to
+              the location of ICU. Solaris uses the environment variable
+              LD_LIBRARY_PATH to search for dynamically linked libraries to be
+              loaded.</p></li>
+</ol></div>
+<p>ICU is now installed in the <code class="code">/usr/local</code>
+          directory.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top">
+<p>By default, ICU is installed in the <code class="code">/usr/local</code>
+            directory. If you need to install ICU on a different directory
+            type:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p><code class="code">runConfigureICU Solaris --prefix=&lt;install_path&gt; --disable-64bit-libs --disable-threads </code></p></li>
+<li class="listitem"><p>Then execute the gmake commands, and set the environment
+                variable LD_LIBRARY_PATH to point to the appropriate
+                location.</p></li>
+</ul></div>
+</td></tr>
+</table></div>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="compiling_icu.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="compiling_icu.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="build_encry_lib.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Appendix C. Compiling ICU on GT.M supported platforms </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Appendix D. Building Encryption Libraries</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/apcs01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:36 GMT -->
+</html>

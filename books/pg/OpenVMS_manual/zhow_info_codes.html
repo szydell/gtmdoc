@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zhow_info_codes.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:36 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ZSHow Information Codes</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zshow_cmmd.html" title="ZSHow" />
+    <link rel="prev" href="zshow_cmmd.html" title="ZSHow" />
+    <link rel="next" href="examples_of_zshow.html" title="Examples of ZSHow" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ZSHow Information Codes</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zshow_cmmd.html">Prev</a> </td>
+          <th width="60%" align="center">ZSHow</th>
+          <td width="20%" align="right"> <a accesskey="n" href="examples_of_zshow.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="zhow_info_codes"></a>ZSHow Information Codes</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4180187" class="indexterm"></a>
+      <p>A ZSHOW argument is an expression containing codes selecting one or more types of information.</p>
+      <p>B:    displays active ZBREAK breakpoints</p>
+      <p>C:    displays available external call table entry names</p>
+      <p>D:    displays device information</p>
+      <p>I:    displays the current values of all intrinsic special variables</p>
+      <p>L:    displays GT.M LOCKs and ZALLOCATEs held by the process</p>
+      <p>S:    displays the GT.M invocation stack</p>
+      <p>V:    displays local variables</p>
+      <p>*:    displays all possible types of ZSHOW information</p>
+      <p>Codes may be upper- or lower-case. Invalid codes produce a run-time error. Multiple occurrences of the same code in one ZSHOW argument only produce one output instance of the corresponding information. The order of the first appearance of the codes in the argument determines the order of the corresponding output instances.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>If you are using a local variable destination and place another code ahead of &quot;V&quot;, the effect is to have the results of the earlier code also appear in the results of the &quot;V&quot; code.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>If the wildcard (*) occurs in the list, ZSHOW uses the default order:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>intrinsic special variables</p>
+          </li>
+          <li>
+            <p>$ZCALL table entry names</p>
+          </li>
+          <li>
+            <p>local variables</p>
+          </li>
+          <li>
+            <p>ZBREAK information</p>
+          </li>
+          <li>
+            <p>device information</p>
+          </li>
+          <li>
+            <p>LOCK and ZALLOCATE information</p>
+          </li>
+          <li>
+            <p>the GT.M stack</p>
+          </li>
+        </ul>
+      </div>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zshow_cmmd.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zshow_cmmd.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="examples_of_zshow.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ZSHow </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of ZSHow</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zhow_info_codes.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:36 GMT -->
+</html>

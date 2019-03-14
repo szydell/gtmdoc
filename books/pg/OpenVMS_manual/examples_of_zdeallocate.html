@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_zdeallocate.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:36 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of ZDeallocate</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zdeallocate_cmmd.html" title="ZDeallocate" />
+    <link rel="prev" href="zdeallocate_cmmd.html" title="ZDeallocate" />
+    <link rel="next" href="zedit_cmmd.html" title="ZEDit" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of ZDeallocate</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zdeallocate_cmmd.html">Prev</a> </td>
+          <th width="60%" align="center">ZDeallocate</th>
+          <td width="20%" align="right"> <a accesskey="n" href="zedit_cmmd.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_zdeallocate"></a>Examples of ZDeallocate</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4178170" class="indexterm"></a>
+      <p>Example:</p>
+      <p>Refer to the &quot;Examples of ZALLOCATE&quot; in this chapter.</p>
+      <pre class="programlisting">
+       L ^AR(PNT)
+       .
+       .
+       .
+       ZALLOCATE ^AR(PNT,SUB)
+       .
+       .
+       .
+       L ^TOT(TDT)
+       .
+       .
+       .
+       ZDEALLOCATE ^AR(PNT,SUB)
+        </pre>
+      <p>This LOCKs ^AR(PNT), then, after performing some unspecified commands, it ZALLOCATEs ^AR(PNT,SUB). Because ZALLOCATE does not imply any change to LOCKs or existing ZALLOCATEd resource names, the LOCK of ^AR(PNT) remains in effect. Assuming the routine does not modify the variable PNT, ^AR(PNT,SUB) is already protected by the LOCK. Next, because an unsigned LOCK releases all resource names currently LOCKed by the process, the routine releases ^AR(PNT) with the LOCK of ^TOT(TDT). This leaves the ZALLOCATE of ^AR(PNT,SUB). The name ^AR and all its subscripts except for those that begin with ^AR(PNT,SUB) are now available for LOCKing by other processes. Finally the routine releases ^AR(PNT,SUB) with a ZDEALLOCATE command. The ZDEALLOCATE does not affect the LOCK on ^TOT(TDT). Note that this example was constructed to illustrate the interaction between LOCK, ZALLOCATE and ZDEALLOCATE, and not to illustrate sound programming practice.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zdeallocate_cmmd.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zdeallocate_cmmd.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="zedit_cmmd.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ZDeallocate </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> ZEDit</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_zdeallocate.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:36 GMT -->
+</html>

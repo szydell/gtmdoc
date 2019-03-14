@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_zgetsyi.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of $ZGETSYI()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zgetsyi.html" title="$ZGETSYI()" />
+    <link rel="prev" href="zgetsyi.html" title="$ZGETSYI()" />
+    <link rel="next" href="zjobexam.html" title="$ZJOBEXAM()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of $ZGETSYI()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zgetsyi.html">Prev</a> </td>
+          <th width="60%" align="center">$ZGETSYI()</th>
+          <td width="20%" align="right"> <a accesskey="n" href="zjobexam.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_zgetsyi"></a>Examples of $ZGETSYI()</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4190718" class="indexterm"></a>
+      <p>Example 1:</p>
+      <pre class="programlisting">
+    GTM&gt; WRITE $ZGETSYI(&quot;CLUSTER_NODES&quot;)
+    3
+    GTM&gt;
+    </pre>
+      <p>This uses $ZGETSYI() to display the number of nodes in the VMS cluster, in this case 3.</p>
+      <p>Example 2:</p>
+      <pre class="programlisting">
+    FOR node=&quot;MIKE&quot;,&quot;IKE&quot; D
+    .F item=&quot;node_swtype&quot;,&quot;version&quot; W !,$ZGETSYI(item,node)
+    QUIT
+    </pre>
+      <p>This uses nested FOR loops with $ZGETSYI() to display the operating system type for the nodes &quot;MIKE&quot; and &quot;IKE&quot;. Note that because &quot;VERSION&quot; is only available for the local node, the attempt to also show the operating system version displays a blank line, except when the current node is MIKE or IKE. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zgetsyi.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zgetsyi.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="zjobexam.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZGETSYI() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $ZJOBEXAM()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_zgetsyi.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+</html>

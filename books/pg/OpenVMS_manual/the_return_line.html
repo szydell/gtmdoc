@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/the_return_line.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:56 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>The Return Line</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="external_call_tables.html" title="External Call Tables" />
+    <link rel="prev" href="the_routine_line.html" title="The Routine Line" />
+    <link rel="next" href="status_return_line.html" title="STATUS" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">The Return Line</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="the_routine_line.html">Prev</a> </td>
+          <th width="60%" align="center">External Call Tables</th>
+          <td width="20%" align="right"> <a accesskey="n" href="status_return_line.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="the_return_line"></a>The Return Line</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4228167" class="indexterm"></a>
+      <p>A zcentry may have no more than one return line. If a table entry contains no RETURN line, the table creation process defaults RETURN to STATUS. The table creation process does not currently detect multiple return lines. The return line must follow the routine line and precede the input and output lines. If the return line is not present, it defaults to CLASS=STATUS, TYPE=LONG.</p>
+      <p>The format for the return line is:</p>
+      <pre class="programlisting">
+	RETURN retkeyword=value [, ... ]
+	Valid retkeywords:
+	[CLASS =] STATUS | VALUE | IGNORED
+	TYPE = DOUBLE | FLOATING | G_FLOATING | LONG 
+	| QUAD | BYTE | BYTEU | WORD | WORDU | LONGU
+	</pre>
+      <p>Return line keywords and their values must appear on a single MACRO line. MACRO lines may be continued by terminating them with a dash.</p>
+      <p>The CLASS keyword specifies how the external call handles the value left in the return register(s) by the external routine. An input line may specify a class keyword alone, rather than as the argument to the CLASS keyword. The CLASS keyword specifies one of three classes of returned values:</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="the_routine_line.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="external_call_tables.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="status_return_line.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">The Routine Line </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> STATUS</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/the_return_line.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:56 GMT -->
+</html>

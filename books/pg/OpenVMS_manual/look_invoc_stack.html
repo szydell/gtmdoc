@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/look_invoc_stack.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:30 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Looking at the Invocation Stack</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Using_Invocation_Stack_in_Debug.html" title="Using the Invocation Stack in Debugging" />
+    <link rel="prev" href="Determine_Level_of_Nesting.html" title="Determining Levels of Nesting" />
+    <link rel="next" href="Using_ZSHOW_Examine_Context_Info.html" title="Using ZSHOW to Examine Context Information" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Looking at the Invocation Stack</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Determine_Level_of_Nesting.html">Prev</a> </td>
+          <th width="60%" align="center">Using the Invocation Stack in Debugging</th>
+          <td width="20%" align="right"> <a accesskey="n" href="Using_ZSHOW_Examine_Context_Info.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="look_invoc_stack"></a>Looking at the Invocation Stack</h4>
+          </div>
+        </div>
+      </div>
+      <p>The $STACK intrinsic special variable and the $STACK() function provide a mechanism to access M stack context information.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;WRITE $STACK
+        2
+        GTM&gt;WRITE $STACK(2,&quot;ecode&quot;)
+        ,M6,Z150373850,
+        GTM&gt;WRITE $STACK(2,&quot;place&quot;)
+        name+3^<span>DMEX</span>
+        GTM&gt;WRITE $STACK(2,&quot;mcode&quot;)
+        if ln&lt;30,bame?1.a.1&quot;-&quot;.a1&quot;,&quot;1&quot; &quot;1a.ap do print q
+        GTM&gt;
+          </pre>
+      <p>This example gets the value of $STACK and then uses that value to get various types of information about that stack level using the $STACK() function. The &quot;ecode&quot; value of the error information for level two, &quot;place&quot; is similar to $ZPOSITION, &quot;mcode&quot; is the code for the level.</p>
+      <p>In addition to the $STACK intrinsic special variable, which provides the current stack level, $STACK(-1) gives the highest level for which $STACK() can return valid information. Until there is an error $STACK and $STACK(-1) are the same, but once $ECODE shows that there is an &quot;current&quot; error, the information returned by $STACK() is frozen to capture the state at the time of the error; it unfreezes after a SET $ECODE=&quot;&quot;.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;WRITE $STACK
+        2
+        GTM&gt;WRITE $STACK(-1)
+        2
+        GTM&gt;
+          </pre>
+      <p>This example shows that under the conditions created (in the above example), $STACK and $STACK(-1) have the same value.</p>
+      <p>The $STACK() can return information about lower levels.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        +1^GTM$DMOD
+        GTM&gt;WRITE $STACK(1,&quot;ecode&quot;)
+        GTM&gt;WRITE $STACK(1,&quot;place&quot;)
+        beg^<span>DMEX</span>
+        GTM&gt;WRITE $STACK(1,&quot;mcode&quot;)
+        beg for read !,&quot;Name:&quot;,namde do name
+        GTM&gt;
+          </pre>
+      <p>This example shows that there was no error at $STACK level one, as well as the &quot;place&quot; and &quot;mcode&quot; information for that level.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Determine_Level_of_Nesting.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Using_Invocation_Stack_in_Debug.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="Using_ZSHOW_Examine_Context_Info.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Determining Levels of Nesting </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Using ZSHOW to Examine Context Information</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/look_invoc_stack.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:30 GMT -->
+</html>

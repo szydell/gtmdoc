@@ -1,0 +1,110 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch10s05.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:47 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>String Utilities</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch10.html" title="Chapter 10. Utility Routines">
+<link rel="prev" href="ch10s04.html" title="Mathematic Utilities">
+<link rel="next" href="ch10s06.html" title="Global Utilities">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">String Utilities</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch10s04.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 10. Utility Routines</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch10s06.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch10.html">Utility Routines</a></span> &gt; <span class="breadcrumb-node">String Utilities</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="string_utils"></a>String Utilities</h2></div></div></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="trim_s"></a>%TRIM</h3></div></div></div>
+<p>%TRIM removes leading and trailing characters from a string. The format of the %TRIM utility function is:</p>
+<pre class="programlisting">$$FUNC|$$L|$$R^%TRIM(expr1[,expr2])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The first expression specifies the string. The optional second expression specifies a list of trailing and leading characters to remove from expr1. When expr2 is not specified, ^%TRIM assumes expr2 as $char(9,32) which removes all trailing and leading whitespaces (spaces and tabs) from expr1. Note that ^%TRIM treats expr2 as a list of characters (not a substring).  </p></li>
+<li class="listitem"><p>The $$FUNC label trims leading and trailing characters.</p></li>
+<li class="listitem"><p>The $$L label trims leading characters.</p></li>
+<li class="listitem"><p>The $$R label trims trailing characters.</p></li>
+</ul></div>
+<p>You can also use %TRIM as a command line utility routine to read from STDIN and write to STDOUT in the following format:</p>
+<pre class="programlisting">echo "  string with leading and trailing spaces  " | $gtm_dist/mumps -r ^%TRIM</pre>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set strToTrim=$char(9,32)_"string with spaces and tabs"_$char(32,32,32) write $length(strToTrim) 
+32 
+GTM&gt;write "strToTrim=",?24,"""",strToTrim,"""",!,"$$L^%TRIM(strToTrim)=",?24,"""",$$L^%TRIM(strToTrim),"""",!,"$$R^%TRIM(strToTrim)=",?24,"""",$$R^%TRIM(strToTrim),"""",!,"$$FUNC^%TRIM(strToTrim)=",?24,"""",$$FUNC^%TRIM(strToTrim),""""
+strToTrim=              "        string with spaces and tabs   "
+$$L^%TRIM(strToTrim)=   "string with spaces and tabs   "
+$$R^%TRIM(strToTrim)=   "        string with spaces and tabs"
+$$FUNC^%TRIM(strToTrim)="string with spaces and tabs"</pre>
+<p>This example invokes %TRIM as an extrinsic function and demonstrates the use of its $$L,$$R, and $$FUNC labels.</p>
+<p>Example:</p>
+<pre class="programlisting">$ echo " GT.M Rocks! " | $gtm_dist/mumps -r ^%TRIM
+GT.M Rocks!
+$</pre>
+<p>This example invokes %TRIM as a command line utility which reads STDIN and writes the trimmed output to STDOUT. </p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mpiece_s"></a>%MPIECE</h3></div></div></div>
+<p>The %MPIECE utility replaces one or more consecutive occurrences of the second argument in the first argument with one occurrence of the third argument. This lets $PIECE operate on the resulting string like UNIX awk.</p>
+<p>You can use the %MPIECE utility in Direct Mode or include it in a source application program in the following format:</p>
+<pre class="programlisting">$$^%MPIECE(str,expr1,expr2)</pre>
+<p>If expr1 and expr2 are not specified, %MPIECE assumes expr1 to be one or more consecutive occurrences of whitespaces and expr2 to be one space. </p>
+<p>%MPIECE removes all leading occurrences of expr1 from the result. </p>
+<p><span class="emphasis"><em>Utility Labels</em></span></p>
+<p>$$SPLIT^%MPIECE(str,expr1): Invokes %MPIECE as an extrinsic function that returns an alias local array of string divided into pieces by expr1. If expr1 is not specified, MPIECE assumes expr1 to be one or more consecutive occurrences of whitespaces. </p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set strToSplit=" please split this string into six"
+GTM&gt;set piecestring=$$^%MPIECE(strToSplit," ","|") zwrite strToSplit,piecestring write $length(piecestring,"|")
+strToSplit=" please split this string into six"
+piecestring="please|split|this|string|into|six
+6
+GTM&gt;set *fields=$$SPLIT^%MPIECE(strToSplit) zwrite fields
+fields(1)="please"
+fields(2)="split"
+fields(3)="this"
+fields(4)="string"
+fields(5)="into"
+fields(6)="six"</pre>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch10s04.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch10.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch10s06.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">
+      Mathematic Utilities </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> 
+      Global Utilities</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch10s05.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:47 GMT -->
+</html>

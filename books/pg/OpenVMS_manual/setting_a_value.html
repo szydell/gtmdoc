@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/setting_a_value.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Setting a Value for $ZROutines</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zroutines.html" title="$ZROutines" />
+    <link rel="prev" href="establishing_the_value_from_gtm_routine.html" title="Establishing the Value from GTM$ROUTINES" />
+    <link rel="next" href="zro_examples.html" title="$ZROutines Examples" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Setting a Value for $ZROutines</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="establishing_the_value_from_gtm_routine.html">Prev</a> </td>
+          <th width="60%" align="center">$ZROutines</th>
+          <td width="20%" align="right"> <a accesskey="n" href="zro_examples.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="setting_a_value"></a>Setting a Value for $ZROutines</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4195607" class="indexterm"></a>
+      <p>By default, each directory entry in $ZROUTINES is assumed to contain both object and source files. However, each object directory may have an associated directory or list of directories in which to search for the corresponding source files. This is done with the /SRC=directory-list qualifier. If /SRC= specifies more than one directory, the directories must be separated by commas, and the entire list must be enclosed in parentheses (). </p>
+      <p>If a directory has a /SRC= qualifier, and it should be searched for source, the argument for the /SRC must include the name of that directory, usually as the first element in the list. Directory-specifications may also have a /NOSRC qualifier, directing GT.M to proceed as if no source files exist for objects located in the qualified directory.</p>
+      <p>File-specifications in $ZROUTINES indicate object libraries. If you specify file-specifications, indicating object-libraries, rather than specifying object directories, the command assumes the /NOSRC qualifier. You may not specify source directories for an object library. </p>
+      <p>Because /NOSRC directories and object libraries prevent automatic recompilation of the objects they contain, use them with caution in a development environment.</p>
+      <p>To set $ZROUTINES outside of M, use the DCL command DEFINE to assign a translation to GTM$ROUTINES. Because GTM$ROUTINES is not a VMS search list, but rather a piece of data, usually containing one or more commas (,), that is passed to a GT.M process, enclose the equivalent parameter to the DEFINE or ASSIGN command in quotes (&quot; &quot;). If the definition contains commas and is not enclosed in quotes, VMS treats it as a VMS search list and the GT.M process subsequently receives an improperly formatted $ZROUTINES.</p>
+      <p>Frequently a system manager provides a default definition of GTM$ROUTINES in the system logical name table or in the login command files. You can override such a definition by (re)defining GTM$ROUTINES in your process logical name table. Changes to the value of $ZROUTINES during a GT.M invocation only last for the current invocation and do not change the value of GTM$ROUTINES.</p>
+      <p>Either directory- or file-specifications may include a logical name. GT.M handles logical names that translate to other logical names by performing iterative translations according to VMS conventions. If a logical name translates to a VMS search list, GT.M uses only the first name in the list. If the directory or file exists on a different node or device, the list element must specify the node and/or device. When GT.M SETs $ZROUTINES, it translates all logical names and verifies the syntax and the existence of all specified directories and libraries. If $ZROUTINES is set to an invalid value, GT.M generates a run-time error and does not change the value of $ZROUTINES. Because the logical names are translated when $ZROUTINES is set, any changes to their definition have no effect until $ZROUTINES is next set.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="establishing_the_value_from_gtm_routine.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zroutines.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="zro_examples.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Establishing the Value from GTM$ROUTINES </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $ZROutines Examples</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/setting_a_value.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+</html>

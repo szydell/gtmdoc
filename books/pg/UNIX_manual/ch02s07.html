@@ -1,0 +1,662 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch02s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:44 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Alias Variables Extensions</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch02.html" title="Chapter 2. GT.M Language Extensions">
+<link rel="prev" href="ch02s06.html" title="GT.M Device Handling Extensions">
+<link rel="next" href="ch02s08.html" title="Extensions for the support for the Unicode® standard">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Alias Variables Extensions</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch02s06.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 2. <span>GT.M </span>Language Extensions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch02s08.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch02.html"><span>GT.M </span>Language Extensions</a></span> &gt; <span class="breadcrumb-node">Alias Variables Extensions</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="alias_v"></a>Alias Variables Extensions</h2></div></div></div>
+<p>Alias variables provide a layer of abstraction between the name of a local variable and an array analogous to that provided by M pass by reference in routines and function calls. Multiple local variables can be aliased to the same array, and a SET or KILL to one acts as a SET or KILL to all. Alias container variables provide a way using a subscripted local to store a reference to an entire local variable array, which protects the associated array even when it's not accessible through any current local variable name.</p>
+<p>GT.M aliases provide low level facilities on which an application can implement object-oriented techniques. An object can be mapped onto, and stored and manipulated in an array, then saved in an alias container variable whence it can be retrieved for processing. The use of appropriate subscripts in the array used for a container, provides a way to organize the stored objects and retrieve them by using the $ORDER() function to traverse the container array. The use of alias variables to implement objects provides significant efficiencies over traditional local variables because alias variables and alias container variables eliminate the need to execute MERGE commands to move objects.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;kill A,B
+        
+GTM&gt;set A=1,*B=A ; B &amp; A are aliases
+GTM&gt;write B
+1
+GTM&gt; </pre>
+<p>Within the context of Alias Variables extensions:</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>array is very similar to its definition in the M standard, and means an entire tree of nodes, including the root and all descendants, except that it only applies to local variables and not to global variables.</p></li>
+<li class="listitem"><p>"Associated alias variables" means all alias variables and all alias container variables associated with an array. </p></li>
+<li class="listitem"><p>lvn is very similar to its definition in the M standard except that in the context of alias variables lvn is used to refer to a local variable name with a subscript. </p></li>
+<li class="listitem"><p>lname is very similar to its definition in the M standard, except that in the context of alias variables, lname is just the name of an unsubscripted local variable (root of an array).</p></li>
+<li class="listitem"><p>"Data cell" and "node" are synonyms.</p></li>
+</ol></div>
+<p>The following table summarizes Alias Variables extensions. </p>
+<div class="informaltable">
+<a name="tblavsumm"></a><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="2">
+<p>GT.M Extensions for Alias Variables</p>
+</th></tr>
+<tr>
+<th>
+<p>EXTENSION</p>
+</th>
+<th>
+<p>EXPLANATION</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>Set *</p>
+</td>
+<td>
+<p>Explicitly creates an alias. <span>For more information, refer to the description of SET * in <a class="xref" href="ch06s19.html" title="Set">&#8220;Set&#8221;</a></span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Kill *</p>
+</td>
+<td>
+<p>Removes the association between its arguments, and any associated data cells. <span>For more information, refer to the description of KILL * in <a class="xref" href="ch06s11.html" title="Kill">&#8220;Kill&#8221;</a></span></p>
+</td>
+</tr>
+<tr>
+<td><p>Quit *</p></td>
+<td><p>When QUIT * terminates an extrinsic function or an extrinsic special variable, it always returns an alias container. For more information, refer to the description of QUIT * in <a class="xref" href="ch06s17.html" title="Quit">&#8220;Quit&#8221;</a>.</p></td>
+</tr>
+<tr>
+<td>
+        <p>ZWrite / ZSHow "V"</p>
+</td>
+<td>
+<p>Produces Alias Variables format output. <span>For more information, refer to <a class="xref" href="ch06s49.html#zwr_format" title="ZWRITE Format for Alias Variables">&#8220;ZWRITE Format for Alias Variables&#8221;</a></span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>New</p>
+</td>
+<td>
+<p>For the scope of the NEW, a NEW of a name suspends its alias association. <span>For more information, refer to <a class="xref" href="ch06s15.html" title="New">&#8220;New&#8221;</a>.</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Exclusive New</p>
+</td>
+<td>
+<p>Create a scope in which some associations between an lname or an lvn and an array may be invisible. <span>For more information, refer to <a class="xref" href="ch06s15.html" title="New">&#8220;New&#8221;</a>.</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>$ZAHandle()</p>
+</td>
+<td>
+<p>returns a unique identifier (handle) for the array associated with an lname or an alias container; for an subscripted lvn that is not an alias container, it returns an empty string. <span>For more information, refer to <a class="xref" href="ch07s25.html" title="$ZAHandle()">&#8220;$ZAHandle()&#8221;</a></span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>$ZDATA()</p>
+</td>
+<td>
+<p>Extends $DATA() to reflect the current alias state of the lvn or lname argument in order to identify alias and alias container variables. <span>For more information, refer to <a class="xref" href="ch07s32.html" title="$ZDATA()">&#8220;$ZDATA()&#8221;</a>.</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>View and $View()</p>
+</td>
+<td>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>VIEW provides LV_GCOL, LV_REHASH, and STP_GCOL to perform garbage collection and local variable lookup table reorganization operations which normally happen automatically at appropriate times. <span>For more information on the keywords of the VIEW command, refer to <a class="xref" href="ch06s25.html#key_words_view" title="Key Words in VIEW Command">&#8220;Key Words<span> in VIEW Command</span>&#8221;</a>. </span></p></li>
+<li class="listitem"><p>$VIEW() provides LV_CREF, LV_GCOL, and LV_REF. FIS uses the LC_CREF, LV_GCOL, LV_REF keywords in testing and is documenting them to ensure completeness in product documentation.  They may (or may not)  be useful during application development for debugging or performance testing implementation alternatives. <span>For more information the keywords of $VIEW(), refer to <a class="xref" href="ch07s24.html#argument__keys_of_view" title="Argument Keywords of $VIEW()">&#8220;Argument Keywords of $VIEW()&#8221;</a>.</span> </p></li>
+</ul></div>
+</td>
+</tr>
+<tr>
+<td>
+<p>TSTART, RESTART, and ROLLBACK</p>
+</td>
+<td>
+<p>TSTART command can optionally list names whose arrays are restored on a transaction RESTART. If any of these are alias variables or have nodes which are alias container variables, their associations are also restored on transaction RESTART.<span> For more information, refer to <a class="xref" href="ch06.html" title="Chapter 6. Commands">Chapter 6: &#8220;<i>Commands</i>&#8221;</a>. </span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="alias_def"></a>Definitions</h3></div></div></div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="aliasvar1"></a>Alias Variables</h4></div></div></div>
+<p>Alias Variables provide access to an array through multiple names. Conceptually an alias variable is the same as a pass-by-reference joining of multiple variable names, except that the joining of alias variables is explicit, whereas that of variables passed by reference is implicit. Indeed, the underlying implementation of alias variables and pass-by-reference within GT.M is the same. </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>All alias variables associated with the same array are equivalent in their access to its nodes - for example, a SET of a node in an array via one name is no different than a SET to that node using any other name of which it is an alias. Nothing about the order of their creation or association has any significance. </p></li>
+<li class="listitem"><p>Once an array becomes accessible via only a single unsubscripted name, GT.M treats that name as a traditional local variable. </p></li>
+<li class="listitem"><p>GT.M treats variables joined through pass-by-reference as a special variant of an alias variable. Pass-by-reference relates to the M stack model with aliasing implicit as a side effect of invocation with DO or $$ and unaliasing implicit as a side effect of QUIT. In the broader alias case, program commands directly alias and unalias names without any binding to the M stack. </p></li>
+<li class="listitem"><p>GT.M treats the state of a TP (Transaction Processing) RESTART variable as an internal alias, which it only exposes if the transaction creating it RESTARTs. </p></li>
+<li class="listitem"><p>GT.M treats variables hidden by exclusive NEW as a type of alias.</p></li>
+<li class="listitem"><p>Owing to their implicit behavior, under certain circumstances, pass-by-reference aliases, RESTART variable and exclusive NEW aliases are not entirely symmetrical with respect to explicitly created alias variables (that is, they may come and go at different times, whereas alias variables come and go under application program control).</p></li>
+</ul></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="aliasconvar1"></a>Alias Container Variables </h4></div></div></div>
+<p>Alias container variables are subscripted lvns that protect arrays for subsequent access by an alias variable. Since accessing an array requires a name, aliasing a name with the alias container regains access to an array stored in a container. For example:</p>
+<pre class="programlisting">GTM&gt;kill A,B,C
+          
+GTM&gt;set A=1,*C(2)=A ; C(2) is a container
+GTM&gt;zwrite
+A=1 ;*
+*C(2)=A
+GTM&gt;set *B=C(2) ; B is now an alias
+GTM&gt;write B,":",$length(C(2)),":" ; An alias variable provides access but a container doesn't
+1:0:
+GTM&gt;</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The value of an alias container is the empty string. </p></li>
+<li class="listitem"><p>Use the SET * command to associate an lname with the container to obtain an alias that provides access to the array in a container. </p></li>
+<li class="listitem"><p>SET with an alias container as left-hand side target replaces the value at that node of the container variable and destroys any prior alias association with an array. </p></li>
+<li class="listitem"><p>References to descendants of an alias container variable refer to nodes of the named parent array and have no relationship to any alias container held by a parent node. </p></li>
+<li class="listitem"><p>An alias container variable serves as a way to organize and manage entire arrays. </p></li>
+<li class="listitem"><p>While it takes two alias variables for an array to be considered aliased, it only takes one alias container variable to do so. </p></li>
+</ul></div>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="aliasperf"></a>Performance </h3></div></div></div>
+<p>With two exceptions, alias and alias container variables add no overhead to normal local variable performance:</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Complex patterns of aliases layered onto TSTART RESTART variables. </p></li>
+<li class="listitem"><p>Complex patterns of aliases intermixed with NEW scope management, particularly when using exclusive NEW. </p></li>
+</ol></div>
+<p>There is no reason to avoid aliases in any situation, but in those two contexts, GT.M rewards attention to tidy design. GT.M uses garbage collection to manage the storage used for local variables. Increasing the use of local variables, for example, to implement objects, will increase the need for garbage collection, even though the garbage collector and storage management are designed to be light weight and self-tuning. The use of alias variables to implement objects, however, is as efficient as any other method is likely to be, and except for the normal admonition to not keep arrays and local variables around when they are not needed, and to not create levels of contexts over and above those actually needed by application logic, use alias variables as liberally as your application needs dictate.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="aliaszwzs"></a>ZWRITE / ZSHOW "V" format </h3></div></div></div>
+<p>ZWRITE as applied to local variables and ZSHOW "V" are conceptually similar, with two differences:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>ZWRITE allows the use of patterns to specify variables and subscripts to display whereas ZSHOW "V" applies to all local variables. </p></li>
+<li class="listitem" style="list-style-type: circle"><p>ZSHOW "V" optionally allows the output to be directed to a global or local variable, whereas ZWRITE always directs its output to the current output device.</p></li>
+</ul></div>
+<p>For more information on the ZWRITE / ZSHOW "V" format for alias variables, refer to <a class="xref" href="ch06s49.html#zwr_format" title="ZWRITE Format for Alias Variables">&#8220;ZWRITE Format for Alias Variables&#8221;</a>.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="passbyrefalias1"></a>Pass-by-reference </h3></div></div></div>
+<p>GT.M's underlying implementation of pass-by-reference and alias variables is the same. As illustrated by the program killalias above, ZWRITE displays variables joined though pass-by-reference using alias conventions. Pass-by-reference is distinguished from alias variables by its implicit creation and elimination. Note the interaction between pass by reference and alias variables when the association of a formallist parameter in a subprogram is changed:</p>
+<pre class="programlisting">$ /usr/lib/fis-gtm/V5.4-002B/gtm -run ^switchalias
+switchalias ; Demonstrate Set * on formalist parameter
+  zprint ; Print this program
+  set A=1,B=2
+  write "------------",!
+  write "Initial Values:",!
+  zwrite
+  do S1(.A)
+  write "------------",!
+  write "On return:",!
+  zwrite
+  quit
+  ;
+S1(X) ;
+  set X=3
+  write "------------",!
+  write "Inside call - note alias association for formallist parameter:",!
+  zwrite
+  set *X=B,X=4 ; Change association of formallist parameter
+  write "------------",!
+  write "Note changed association",!
+  zwrite
+  quit
+------------
+Initial Values:
+A=1
+B=2
+------------
+Inside call - note alias association for formallist parameter:
+A=3 ;*
+B=2
+*X=A
+------------
+Note changed association
+A=3
+B=4 ;*
+*X=B
+------------
+On return:
+A=3
+B=4
+$</pre>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="setquitexample"></a>SET * and QUIT * Examples</h3></div></div></div>
+<p>The following table show the type of data movement of alias and alias container variables from QUIT * in a function to a SET * target: </p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+<p></p>
+</th>
+<th>
+<p>QUIT *</p>
+</th>
+<th>
+<p>SET *</p>
+</th>
+<th>
+<p>Result</p>
+</th>
+<th>
+<p>ZWRITE</p>
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<p><code class="code">set *a=$$makealias(.c)</code></p>
+</td>
+<td>
+<p>Creates an alias container </p>
+</td>
+<td>
+<p>Dereferences the alias container </p>
+</td>
+<td>
+<p>Same as <code class="code">set *a=c</code></p>
+</td>
+<td>
+<p><code class="code">*c=a</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code class="code">set *a(1)=$$makealias(.c)</code></p>
+</td>
+<td>
+<p>Creates an alias container</p>
+</td>
+<td>
+<p>Dereferences the alias container</p>
+</td>
+<td>
+<p>Same as <code class="code">set *a(1)=c</code></p>
+</td>
+<td>
+<p><code class="code">*a(1)=c</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code class="code">set *a=$$makecntnr(.c)</code></p>
+</td>
+<td>
+<p>Returns an alias container</p>
+</td>
+<td>
+<p>Copies the alias container</p>
+</td>
+<td>
+<p>Same as <code class="code">set *a=c(1)</code></p>
+</td>
+<td>
+<p><code class="code">*c=a</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code class="code">set *a(1)=$$makecntnr(.c)</code></p>
+</td>
+<td>
+<p>Returns an alias container</p>
+</td>
+<td>
+<p>Copies the alias container</p>
+</td>
+<td>
+<p>Same as <code class="code">set *a(1)=c(1)</code></p>
+</td>
+<td>
+<p><code class="code">*a(1)=c</code></p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The makealias function returns an alias of the argument:</p>
+<pre class="programlisting">makealias(var)
+ quit *var</pre>
+<p>The makecntr function returns an alias container of the argument:</p>
+<pre class="programlisting">makecntnr(var)
+ new cont
+ set *cont(1)=var
+ quit *cont(1)</pre>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="killstarexamples"></a><span>KILL * </span>Examples</h3></div></div></div>
+<p>Example</p>
+<pre class="programlisting">GTM&gt;Set A=1,*B=A ; Create an array and an association
+                
+GTM&gt;ZWRite ; Show that the array and association exist
+A=1 ;*
+*B=A
+GTM&gt;Kill *A ; Remove the association for A - it now has no association and no array
+GTM&gt;ZWRite ; B is a traditional local variable
+B=1
+Example:
+GTM&gt;Set A=2 ; add a value for A
+                
+GTM&gt;ZWRite ; A and B have different values and both are traditional local variables
+A=2
+B=1
+GTM&gt;</pre>
+<p>KILL on the other hand, removes data in the array (and possibly the array itself) without affecting any alias association.</p>
+<pre class="programlisting">GTM&gt;Set A=2,*B=A ; Create an array and an association
+                
+GTM&gt;ZWRite ; Both array and association exist
+A=2 ;*
+*B=A
+GTM&gt;Kill A ; Kill the array
+GTM&gt;ZWRite ; There's no data to show - only the association
+*B=A
+GTM&gt;Set B=3 ; Create a new value
+GTM&gt;ZWRite ; The association was unaffected by the Kill
+A=3 ;*
+*B=A
+GTM&gt;</pre>
+<p>Example:</p>
+<pre class="programlisting">$ /usr/lib/fis-gtm/V5.4-002B_x86/gtm -run ^killalias
+killalias ; Demonstrate Kill * of pass-by-reference
+       ZPrint ; Print this program
+       Set A=1,C=3
+       Write "------------",!
+       Write "Initial Values:",!
+       ZWRite
+       Do K1(.A,.C) ; Pass A &amp; C by reference
+       Write "------------",!
+       Write "Value of A is unchanged because of Kill *B, but C has changed: ",!
+       ZWRite
+       Quit
+;
+K1(B,D) ; A &amp; C are bound to B &amp; D respectively
+       Write "------------",!
+       Write "A &amp; B are aliases, as are C &amp; D:",!
+       ZWRite
+       Kill *B
+       Set B=2,D=4
+       Write "------------",!
+       Write "After Kill *B, A &amp; B are different but C &amp; D remain associated:",!
+       ZWrite
+       Quit
+------------
+Initial Values:
+A=1
+C=3
+------------
+A &amp; B are aliases, as are C &amp; D:
+A=1 ;*
+*B=A
+C=3 ;*
+*D=C
+------------
+After Kill *B, A &amp; B are different but C &amp; D remain associated:
+A=1
+B=2
+C=4 ;*
+*D=C
+------------
+Value of A is unchanged because of Kill *B, but C has changed: 
+A=1
+C=4
+Example:
+GTM&gt;Set A=1,*B=A ; Create an array and association
+GTM&gt;ZWRite ; Verify that it's there
+A=1 ;*
+*B=A
+GTM&gt;Kill (A) ; Kill everything except A
+GTM&gt;ZWRite ; Demonstrate that A also has no array
+GTM&gt;Set A=2 ; Create an array
+GTM&gt;ZWRite ; The association survived the Kill
+A=2 ;*
+*B=A
+GTM&gt;</pre>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="anoteexamplealias1"></a><span>Annotated Alias </span>Examples </h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">$ /usr/lib/fis-gtm/V5.4-002B/gtm -run ^tprestart
+tprestart ; Transaction restart variable association also restored on restart
+  zprint ; Print this program
+  set A="Malvern",C="Pennsylvania",E="USA"
+  set *B=C,*D(19355)=E
+  write "------------",!
+  write "Initial values &amp; association",!
+  zwrite
+  tstart (B,D) ; On restart: A not restored, B,D restored, C,E restored by association
+  if '$TRestart Do  ; Change C,E if first time through
+  .set C="Wales",E="UK"
+  .kill *D(19355)
+  .write "------------",!
+  .write "First time through transaction; B,C,D,E changed",!
+  .zwrite
+  .set A="Brynmawr"
+  .kill *B
+  .write "------------",!
+  .write "A changed; association between B &amp; C and D &amp; E killed; B,D have no value",!
+  .zwrite
+  .trestart
+  else  Do  ; Show restored values on restart
+  write "------------",!
+  write "Second time through transaction; B,C,D,E &amp; association restored",!
+  zwrite
+  tcommit ; No global updates in this transaction!
+  quit
+------------
+Initial values &amp; association
+A="Malvern"
+B="Pennsylvania" ;*
+*C=B
+*D(19355)=E
+E="USA" ;*
+------------
+First time through transaction; B,C,D,E changed
+A="Malvern"
+B="Wales" ;*
+*C=B
+E="UK" ;*
+------------
+A changed; association between B &amp; C and D &amp; E killed; B,D have no value
+A="Brynmawr"
+C="Wales" ;*
+E="UK" ;*
+------------
+Second time through transaction; B,C,D,E &amp; association restored
+A="Brynmawr"
+B="Pennsylvania" ;*
+*C=B
+*D(19355)=E
+E="USA" ;*</pre>
+<p>Note that TROLLBACK does not restore alias variables:</p>
+<pre class="programlisting">/usr/lib/fis-gtm/V5.4-002B_x86/gtm -run ^tprollback
+tprollback ;
+  zprint ; Print this program
+  set A(1)=1,A(2)=2,A(3)=3
+  set B(1)="1b",*B(2)=A,B(3)=3 ; B includes a container for A
+  set *C(1)=B   ; C includes a container for B
+  kill *A,*B   ; C is the only way to the data
+  write "------------",!
+  write "Only containers before transaction:",!
+  zwrite
+  tstart (C)
+  if '$trestart
+  .set *D=C(1) ; D is now an alias for what used to be B
+  .set D(3)=-D(3)
+  .set *D=D(2) ; D is now an alias for what used to be A
+  .set D(1)=-D(1)
+  .kill *D  ; Kill D after is used to manipulate the arrays
+  .write "------------",!
+  .write "Changed values before restart:",!
+  .zwrite
+  .trestart
+  write "------------",!
+  write "Restored values restart:",!
+  zwrite
+  kill C ; Kill only handle to arrays
+  write "------------",!
+  write "No local arrays left:",!
+  zwrite
+  trollback  ; Rollback transaction, don't commit it
+  write "------------",!
+  write "Rollback doesnt restore names and local arrays",!
+  zwrite
+  quit
+------------
+Only containers before transaction:
+$ZWRTAC=""
+*C(1)=$ZWRTAC1
+$ZWRTAC1(1)="1b"
+*$ZWRTAC1(2)=$ZWRTAC2
+$ZWRTAC2(1)=1
+$ZWRTAC2(2)=2
+$ZWRTAC2(3)=3
+$ZWRTAC1(3)=3
+$ZWRTAC=""
+------------
+Restored values restart:
+$ZWRTAC=""
+*C(1)=$ZWRTAC1
+$ZWRTAC1(1)="1b"
+*$ZWRTAC1(2)=$ZWRTAC2
+$ZWRTAC2(1)=1
+$ZWRTAC2(2)=2
+$ZWRTAC2(3)=3
+$ZWRTAC1(3)=3
+$ZWRTAC=""
+------------
+No local arrays left:
+------------
+Rollback doesnt restore names and local arrays</pre>
+<p>Example:</p>
+<pre class="programlisting">$ /usr/lib/fis-gtm/V5.4-002B_x86/gtm -run ^aliasexample; Extended annotated alias example
+    zprint
+    write "------------",!
+    set x="name level",x(1)=1,x(1,2)="1,2",x("foo")="bar"
+    write $ZDATA(x),! ; x is a conventional lvn - output 11
+    set *y=x ; x an y are now alias variables
+    write $ZDATA(x),! ; output appears as 111
+    set *a(1)=y ; a(1) is now an alias container variable
+    set b="bness",b("b")="bbness" ; b is a conventional lvn
+    set *b=a(1) ; b joins x and y as alias variables for the same data
+    ; prior b values are lost
+    ; set *&lt;name&gt; is equivalent to Kill *&lt;name&gt; Set *&lt;name&gt;
+    set y("hi")="sailor" ; Assignment applies to all of {b,x,y}
+    kill b("foo") ; Kill applies to all of {b,x,y}
+    kill *x ; x is undefined and no longer an alias variable
+    ; b and y still provide access to the data
+    write a(1),"&lt;",! ; output appears as &lt;
+    write a(1)*3,! ; output appears as 0
+    write $length(a(1)),! ; output appears as 0
+    set c=y,c("legs")="tars" ; c is conventional lvn with value "name level"
+    do sub1
+    write $Data(c),! ; output is 1
+    do sub2(.c)
+    set a(1)="" ; a(1) ceases to be an alias container variable
+    ; has the value ""
+    write $D(i),! ; output is 0
+    kill *c,*y ; c and y become undefined lvns
+    zwrite b ; output is b("got")="a match"
+    ; it's no longer an alias variable
+    ; as everything else has gone
+    quit
+sub1
+    new y ; in this scope y is no longer an alias for b
+    set *y=c ; in this scope c and y are alias variables
+    kill y("legs") ; Kill apples to all of {c,y}
+    kill *y ; in this scope y is no longer an alias for c
+    ; this is really redundant as
+    ; the Quit implicitly does the same thing
+    quit
+sub2(i) ; i and c are joined due to pass-by-reference
+    write $ZAHandle(c)=$ZAHandle(i),! ; output appears as 1
+    kill b ; data for {b,y} is gone
+    ; both are undefined, but remain alias variables
+    set *c=a(1) ; c joins {b,y} as alias variable; prior value of c lost
+    ; c is no longer alias of i
+    write $ZAHandle(c)=$ZAHandle(i),! ; output appears as 0
+    set i=a(1) ; Assignment applies to i - value is ""
+    wet c("got")="a match" ; Assignment applies to all of {b,c,y)
+    quit
+ 
+------------
+11
+111
+&lt;
+0
+0
+1
+1
+0
+0
+b("got")="a match"</pre>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch02s06.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch02.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch02s08.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">
+<span>GT.M </span>Device Handling Extensions </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Extensions for the support for the <span class="trademark">Unicode</span>® standard </td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch02s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:44 GMT -->
+</html>

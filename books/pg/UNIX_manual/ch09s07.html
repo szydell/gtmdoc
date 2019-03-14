@@ -1,0 +1,795 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Using PIPE Devices</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
+<link rel="prev" href="ch09s06.html" title="Using Null Devices">
+<link rel="next" href="ch09s08.html" title="Using Socket Devices">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Using PIPE Devices</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch09s06.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 9. <span>Input/Output</span> Processing</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch09s08.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch09.html"><span>Input/Output</span> Processing</a></span> &gt; <span class="breadcrumb-node">Using PIPE Devices</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="using_pipe_device"></a>Using PIPE Devices<a class="indexterm" name="idp190231616"></a>
+</h2></div></div></div>
+<p>A PIPE device is used to access and manipulate the input and/or output of a shell command as a GT.M I/O device. GT.M maintains I/O status variables for a PIPE device just as it does for other devices. An OPEN of the device starts a sub-process. Data written to the device by the M program is available to the process on its STDIN. The M program can read the STDOUT and STDERR of the sub-process. This facilitates output only applications, such as printing directly from a GT.M program to an lp command; input only applications, such as reading the output of a command such as ps; and co-processing applications, such as using iconv to convert data from one encoding to another. </p>
+<p>A PIPE is akin to a FIFO device. Both FIFO and PIPE map GT.M devices to UNIX pipes, the conceptual difference being that whereas a FIFO device specifies a named pipe, but does not specify the process on the other end of the pipe, a PIPE device specifies a process to communicate with, but the pipes are unnamed. Specifically, an OPEN of a PIPE creates a subprocess with which the GT.M process communicates. </p>
+<p>A PIPE device is specified with a "PIPE" value for mnemonicspace on an OPEN command. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>GT.M ignores the mnemonicspace specification on an OPEN of a previously OPEN device and leaves the existing device with its original characteristics.</p></td></tr>
+</table></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="idp190177280"></a>Modes of PIPE Operation </h3></div></div></div>
+<p>The OPEN command for a PIPE provides a number of variations in the use of UNIX pipes shown below as Examples 1-4. </p>
+<p>Example:</p>
+<pre class="programlisting">set p="Printer"
+open p:(command="lpr":writeonly)::"PIPE" </pre>
+<p>This shows the use of a PIPE device to spool data to the default printer by spooling to the lpr command, opened via the default shell (the shell specified by the SHELL environment variable, and the shell used to start GT.M if SHELL is unspecified). The WRITEONLY device parameter specifies that the GT.M process not read data back from the lpr command. Use WRITEONLY when no errors are expected from the application(s) in the pipe. WRITEONLY tends not to serve most applications well.</p>
+<p>Example: </p>
+<pre class="programlisting">set p="MyProcs"
+open p:(command="ps -ef|grep $USER":readonly)::"PIPE"</pre>
+<p>This shows the use of a PIPE device to identify processes belonging to the current userid. The READONLY device parameter specifies that the GT.M process only read the output of the pipe, and not provide it with any input. This example illustrates the fact that the command can be any shell command, can include environment variables and pipes within the command. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Flags to the ps command vary for different UNIX platforms. </p></td></tr>
+</table></div>
+<p>Example:</p>
+<pre class="programlisting">set p="Convert"
+open p:(shell="/bin/csh":command="iconv -f ISO_8859-1 -t WINDOWS-1252")::"PIPE"</pre>
+<p>This shows the use of a process to whose input the GT.M process writes to and whose output the GT.M process reads back in, in this example converting data from an ISO 8859-1 encoding to the Windows 1252 encoding. This example also shows the use of a different shell from the default. If the OPEN deviceparameters don't specify a SHELL, the PIPE device uses the shell specified by the environment variable SHELL; if it does not find a definition for SHELL, the device uses the system default /bin/sh. </p>
+<p>Example:</p>
+<pre class="programlisting">set p="Files"
+set e="Errors"
+open p:(command="find /var/log -type d -print":readonly:stderr=e)::"PIPE"  </pre>
+<p>GT.M uses the standard system utility find to obtain a list of subdirectories of /var/log, which are read back via the device with handle "Files" with any errors (for example, "Permission denied" messages for sub-directories that the find command cannot process) read back via the device with handle "Errors". </p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="pipe_char"></a>PIPE Characteristics</h3></div></div></div>
+<p>The following characteristics of PIPE may be helpful in using them effectively. </p>
+<p>With Read: </p>
+<p>A READ with no timeout reads whatever data is available to be read; if there is no data to be read, the process hangs until some data becomes available. </p>
+<p>A READ with a timeout reads whatever data is available to be read, and returns; if there is no data to be read, the process waits for a maximum of the timeout period, an integer number of seconds, for data to become available (if the timeout is zero, it returns immediately, whether or not any data was read). If the READ returns before the timeout expires, it sets $TEST to TRUE(1); if the timeout expires, it sets $TEST to FALSE (0). When the READ command does not specify a timeout, it does not change $TEST. 
+READ specifying a maximum length (for example, READ X#10 for ten characters) reads until either the PIPE has supplied the specified number of characters, or a terminating delimiter. </p>
+<p>The following table shows the result and values of I/O status variables for various READ operations on a PIPE device.</p>
+<div class="informaltable">
+<a name="tbliostat"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                <p>Operation</p>
+              </th>
+<th>
+                <p>Result</p>
+              </th>
+<th>
+                <p>$DEVICE</p>
+              </th>
+<th>
+                <p>$ZA</p>
+              </th>
+<th>
+                <p>$TEST</p>
+              </th>
+<th>
+                <p>X</p>
+              </th>
+<th>
+                <p>$ZEOF</p>
+              </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                <p>READ X:n</p>
+              </td>
+<td>
+                <p>Normal Termination</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>1</p>
+              </td>
+<td>
+                <p>Data Read</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>READ X:n</p>
+              </td>
+<td>
+                <p>Timeout with no data read</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>empty string</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>READ X:n</p>
+              </td>
+<td>
+                <p>Timeout with partial data read</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>Partial data</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>READ X:n</p>
+              </td>
+<td>
+                <p>End of File</p>
+              </td>
+<td>
+                <p>1,Device detected EOF</p>
+              </td>
+<td>
+                <p>9</p>
+              </td>
+<td>
+                <p>1</p>
+              </td>
+<td>
+                <p>empty string</p>
+              </td>
+<td>
+                <p>1</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>READ X:0</p>
+              </td>
+<td>
+                <p>Normal Termination</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>1</p>
+              </td>
+<td>
+                <p>Data Read</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>READ X:0</p>
+              </td>
+<td>
+                <p>No data available</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>empty string</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>READ X:0</p>
+              </td>
+<td>
+                <p>Timeout with partial data read</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+<td>
+                <p>Partial data</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>READ X:0</p>
+              </td>
+<td>
+                <p>End of File</p>
+              </td>
+<td>
+                <p>1,Device detected EOF</p>
+              </td>
+<td>
+                <p>9</p>
+              </td>
+<td>
+                <p>1</p>
+              </td>
+<td>
+                <p>empty string</p>
+              </td>
+<td>
+                <p>1</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>READ X</p>
+              </td>
+<td>
+                <p>Error</p>
+              </td>
+<td>
+                <p>1,&lt;error signature&gt;</p>
+              </td>
+<td>
+                <p>9</p>
+              </td>
+<td>
+                <p>n/c</p>
+              </td>
+<td>
+                <p>empty string</p>
+              </td>
+<td>
+                <p>0</p>
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>With WRITE: </p>
+<p>The PIPE device does non-blocking writes. If a process tries to WRITE to a full PIPE and the WRITE would block, the device implicitly tries to complete the operation up to a default of 10 times. If the gtm_non_blocked_write_retries environment variable is defined, this overrides the default number of retries.  If the retries do not succeed (remain blocked), the WRITE sets $DEVICE to "1,Resource temporarily unavailable", $ZA to 9, and produces an error. If the GT.M process has defined an EXCEPTION, $ETRAP or $ZTRAP, the error trap may choose to retry the WRITE after some action or delay that might remove data from the PIPE device.</p>
+<p>With WRITE /EOF: </p>
+<p>WRITE /EOF to a PIPE device flushes, sets $X to zero (0) and terminates output to the created process, but does not CLOSE the PIPE device. After a WRITE /EOF, any additional WRITE to the device discards the content, but READs continue to work as before. A WRITE /EOF signals the receiving process to expect no further input, which may cause it to flush any output it has buffered and terminate. You should explicitly CLOSE the PIPE device after finishing all READs. If you do not want WRITE /EOF to flush any pending output including padding in FIXED mode or a terminating EOL in NOFIXED mode, SET $X=0 prior to the WRITE /EOF.</p>
+<p>To avoid an indefinite hang doing a READ from a created process that buffers its output to the input of the PIPE device, READ with timeout (typically 0).</p>
+<p>With CLOSE: </p>
+<p>The CLOSE of a PIPE device prevents all subsequent access to the pipes associated with the device. Unless the OPEN that created the device specified INDEPENDENT, the process terminates. Note that any subsequent attempt by the created process to read from its stdin (which would be a closed pipe) returns an EOF and typical UNIX behavior would be to terminate on such an event. </p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="pipe_Dev_examples"></a>PIPE Device Examples </h3></div></div></div>
+<p>The following examples show the use of deviceparameters and status variables with PIPE devices.</p>
+<p>Example:</p>
+<pre class="programlisting">pipe1;
+  set p1="test1" 
+  open p1:(shell="/bin/sh":comm="cat")::"PIPE"
+  for i=1:1:10 do
+  . use p1 
+  . write i,":abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz ",! 
+  . read x
+  . use $P 
+  . write x,! 
+  close p1
+  quit    </pre>
+<p>This WRITEs 10 lines of output to the cat command and reads the cat output back into the local variable x. The GT.M process WRITEs each line READ from the PIPE to the principal device. This example works because "cat" is not a buffering command. The example above would not work for a command such as tr that buffers its input.</p>
+<p>Example :</p>
+<pre class="programlisting">
+pipe3;
+  set p1="test1"
+  open p1:(shell="/bin/sh":command="tr -d e")::"PIPE"
+  for i=1:1:1000 do
+  . use p1
+  . write i,":abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz ",!
+  . read x:0
+  . if '+$device use $principal write x,! 
+  use p1
+  write /EOF
+  for  read x quit:$zeof  use $principal write x,! use p1
+  close p1
+  quit           </pre>
+<p>This shows the use of tr (a buffering command) in the created process for the PIPE device. To see the buffering effect the GT.M process WRITEs 1000 lines to the PIPE device. Different operating systems may have different buffer sizes. Notice the use of the r x:0 and the check on $DEVICE in the loop. If $DEVICE is 0, WRITE x writes the data read to the principal device. No actual READs complete, however, until tr reaches its buffer size and writes to its stdout. The final few lines remain buffered by tr after the process finishes the first loop. The GT.M process then issues a WRITE /EOF to the PIPE causing tr to flush its buffered lines. In the final for loop the GT.M process uses the simple form of READ x from the PIPE followed by a WRITE of each line to the principal device until $zeof becomes TRUE. </p>
+<p>Example :  </p>
+<pre class="programlisting">pipe4;
+  set a="test"
+  open a:(command="nestin":independent)::"PIPE"
+  use a 
+  set key=$KEY
+  write "Show nestin still running after CLOSE of a",!
+  write "The parent process of 1 shows the parent shell has exited after CLOSE of a"
+  read line1,line2
+  use $principal
+  write !,line1,!,line2,!,!
+  set k="ps -ef | grep -v grep | grep -v sh | grep -w '"_key_"' | awk '{print $2}'"
+  set b="getpid"
+  open b:(command=k:readonly)::"PIPE"
+  use b
+  read pid
+  close a
+  close b
+  set k2="ps -ef | grep -v grep | grep -v sh | grep -w '"_pid_"'"
+  set c="psout"
+  open c:(command=k2:writeonly)::"PIPE"
+  close c
+  quit          </pre>
+<p>This demonstrates that the created sub process nestin keeps running as an INDEPENDENT process after the GT.M process CLOSEs the pipe. This GT.M process uses another PIPE device to return the process id of nestin and READ it into pid so that it may be killed by this or another process, should that be appropriate. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>"nestin.c" is a program which reads from standard input and writes to standard output until it see and EOF.  It then loops for 300 1sec sleeps doing nothing.  The purpose of using independent is as a server process which continues until it receives some other signal for termination.</p></td></tr>
+</table></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;kill ^a
+GTM&gt;zprint ^indepserver
+indepserver;
+  read x
+  write "received = ",x,!
+  set ^quit=0
+  for  do  quit:^quit
+  . if $data(^a) write "^a = ",^a,!
+  . Hang 5
+GTM&gt;set a="test"
+GTM&gt;open a:(command="mumps -run ^indepserver&gt;indout":independent)::"pipe"
+GTM&gt;use a
+GTM&gt;write "instructions",!
+GTM&gt;close a
+GTM&gt;zsystem "cat indout"
+received = instructions
+GTM&gt;set ^a=1
+GTM&gt;zsystem "cat indout"
+received = instructions
+^a = 1
+^a = 1
+^a = 1
+GTM&gt;s ^quit=1
+GTM&gt;zsystem "cat indout"
+received = instructions
+^a = 1
+^a = 1
+^a = 1
+^a = 1
+GTM&gt;</pre>
+<p>This is a simple example using a mumps process as a server.  </p>
+<p>Example:        </p>
+<pre class="programlisting">pipe5;
+  set p1="test1"
+  set a=0
+  open p1:(shell="/bin/sh":command="cat":exception="goto cont1")::"PIPE"
+  set c=":abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz"
+  for i=1:1:10000  do
+  . use p1
+  . write i_c,!
+  . use $principal write i,!
+  use p1
+  write /EOF
+  for  read x quit:$zeof  use $principal write x,! use p1
+  close p1
+  quit
+cont1
+  if $zeof quit
+  if a=0 set a=i/2
+  set z=$za
+  ; use $device to make sure ztrap is caused by blocked write to pipe 
+  set d=$device
+  if "1,Resource temporarily unavailable"=d DO 
+  . use $p
+  . write "pipe full, i= ",i," $ZA = ",z,!
+  . set i=i-1 
+  . use p1
+  . for j=1:1:a  read x use $principal write j,"-",x,! use p1
+  quit          </pre>
+<p>This demonstrates how to deal with write blocking of a PIPE device. The loop doing the WRITE does not READ from the PIPE. Eventually causing the output of cat to block on its output and stop reading input from the pipe. When the process takes the $ZTRAP to cont1 it tests $DEVICE to determine if the trap is caused by the full pipe. If so, it uses the for loop to read half the number of lines output by the main loop. It decrements i and returns to the original WRITE loop to retry the failed line and continue with the WRITEs to the pipe. Depending upon the configuration of the environment, it may trap several times before processing all lines. </p>
+<p>Example:</p>
+<pre class="programlisting">
+  ; Example program that starts another program in a pipe and traps the errors. The called
+; programs intentionally induce errors
+pipexample
+  set $etrap="do readfrompipe(.pipe,.piperr) use $p zwrite $zstatus zhalt 99"
+  set pipe="pipe"
+  set piperr="piperr"
+  set writesize=1024
+  set cmd=$piece($zcmdline," ") set:'$length(cmd) cmd="induceEPIPE"
+  open pipe:(shell="/bin/bash":command="$gtm_dist/mumps -run "_cmd_"^pipexample":stderr=piperr)::"pipe"
+  zshow "D":devicelist write "The active device is ",devicelist("D",2),!
+  use pipe
+  for i=1:1:1024 write $tr($justify(i,writesize)," ","X"),!
+  close pipe
+  quit
+; Same as above, but without defining the PIPE's standard error
+nostderr
+  set $etrap="do readfrompipe(.pipe) use $p zshow ""*"" zhalt 99"
+  set pipe="pipe"
+  set writesize=1024
+  set cmd=$piece($zcmdline," ",2) set:'$length(cmd) cmd="induceEAGAIN"
+  open pipe:(shell="/bin/bash":command="$gtm_dist/mumps -run "_cmd_"^pipexample")::"pipe"
+  zshow "D":devicelist write "The active device is ",devicelist("D",2),!
+  write !,!
+  use pipe
+  for i=1:1:1024 write $tr($justify(i,writesize)," ","X"),!
+  close pipe
+  quit
+; This routine intentionally delays reading from the pipe to induce an EAGAIN
+induceEAGAIN
+  set $etrap="use $p zwrite $zstatus zhalt 99"
+  set hangtime=+$zcmdline set:'hangtime hangtime=5 set add=1
+  for i=1:1:1024 read x(i) quit:$zeof  do
+  . set delay(i)=1/(add+$random(hangtime))
+  . hang delay(i)
+  . set:i=30 add=10
+  halt
+; This routine intentionally induces an EPIPE by immediately sending a SIGTERM to itself causing
+; a FORCEDHALT error which goes to STDERR. Subsequently, a random DIVZERO error occurs, but this
+; error goes to STDOUT since it is not a fatal error
+induceEPIPE
+  set $etrap="use $p zwrite $zstatus zhalt 99"
+  set divzero=150373210 ; DIVZERO goes to stdout
+  write "My PID is ",$job,!
+  zsystem:'$zcmdline "kill -15 "_$job  ; FORCEDHALT error goes to stderr
+  for i=1:1 read x(i) quit:$zeof  zmessage:'$random(1000) divzero
+  halt
+; Read the contents of the pipe on failure. Messages from the programs inside the pipe aid
+; in undestanding the underlying problem(s)
+readfrompipe(pipe,piperr)
+  new i
+  new $etrap
+  set $etrap="set x=$zjobexam() zhalt 88"
+  use pipe
+  for i=1:1  read pipe(i):0 quit:'$test!$zeof
+  zkill pipe(i)
+  do:$data(piperr)
+  . use piperr
+  . for i=1:1  read piperr(i):0 quit:'$test!$zeof
+  . zkill piperr(i)
+  close pipe
+  use $p
+  for i=1:1  quit:'$data(pipe(i))  write ?4,"stdout:",pipe(i),!
+  for i=1:1  quit:'$data(piperr(i))  write ?4,"stderr:",piperr(i),!
+  quit
+; Example of trapping an error and retrying the operation as necessary. Error conditions
+; used are EPIPE, aka "Broken pipe" or ENO32, and EAGAIN, aka ENO11.
+retry
+  set $etrap="use $p zshow ""*"" zhalt 99"
+  set pipe="pipe"
+  set piperr="piperr"
+  set writesize=1024
+  set cmd=$piece($zcmdline," ") set:'$length(cmd) cmd="induceEPIPE"
+  for try=0:1  do  quit:$get(readcomplete,0)
+  . new $etrap set $etrap="goto retryEPIPE"
+  . open pipe:(shell="/bin/bash":command="$gtm_dist/mumps -run "_cmd_"^pipexample "_try:stderr=piperr)::"pipe"
+  . zshow "D":devicelist write "Try ",try,$char(9),devicelist("D",2),!
+  . use pipe
+  . for i=1:1:1024 do
+  . . new $etrap set $etrap="goto retryEAGAIN^pipexample"
+  . . write $tr($justify(i,writesize)," ","X"),!
+  . set readcomplete=1
+  close pipe
+  use $p
+  write ?4,"Writes completed",!
+  quit
+retryEPIPE
+  quit:$zstatus'["ENO32"
+  use $p
+  write "...Caught on try ",try,", write ",i,"... ",$zstatus,!
+  set $ecode=""
+  do readfrompipe(.pipe,.piperr)
+  quit
+retryEAGAIN
+  quit:$zstatus'["ENO11"
+  use $p
+  write "...Failed to perform non-blocked writes... Retrying write # ",$increment(i,-1),!
+  set $ecode=""
+  hang 1+$random(5)
+  use pipe
+  quit
+</pre>
+<p>This example demonstrates how to handle PIPE device errors, whether with the device itself or from programs inside the PIPE device.</p>
+<p>Example:        </p>
+<pre class="programlisting">
+sh&gt; mumps -run pipexample induceEAGAIN
+The active device is pipe OPEN PIPE SHELL="/bin/bash" COMMAND="$gtm_dist/mumps -run induceEAGAIN^pipexample" STDERR="piperr" 
+$ZSTATUS="11,pipexample+9^pipexample,%SYSTEM-E-ENO11, Resource temporarily unavailable"
+        
+sh&gt; mumps -run retry^pipexample induceEAGAIN
+Try 0   pipe OPEN PIPE SHELL="/bin/bash" COMMAND="$gtm_dist/mumps -run induceEAGAIN^pipexample 0" STDERR="piperr"
+...Failed to perform non-blocked writes... Retrying write # 54
+...Failed to perform non-blocked writes... Retrying write # 63
+...Failed to perform non-blocked writes... Retrying write # 69
+...Failed to perform non-blocked writes... Retrying write # 78
+    Writes completed
+      </pre>
+<p>This example demonstrates handling WRITE errors, like ENO11 or EAGAIN, that do not terminate the PIPE device. The PIPE device does non-blocking writes. If a process tries to WRITE to a full PIPE and the WRITE would block, the device implicitly tries to complete the operation up to a default of 10 times. GT.M sleeps 100 micro seconds between each retry. When dealing with programs that can take a while to process input, it's a good idea to either schedule a delay between WRITEs or come up with a mechanism to back off the WRITEs when the buffer fills up.</p>
+<pre class="programlisting">
+sh&gt; mumps -run pipexample induceEPIPE
+The active device is pipe OPEN PIPE SHELL="/bin/bash" COMMAND="$gtm_dist/mumps -run induceEPIPE^pipexample" STDERR="piperr" 
+    stdout:My PID is 12808
+    stderr:%GTM-F-FORCEDHALT, Image HALTed by MUPIP STOP
+$ZSTATUS="32,pipexample+9^pipexample,%SYSTEM-E-ENO32, Broken pipe"
+        
+sh&gt; mumps -run retry^pipexample induceEPIPE
+Try 0   pipe OPEN PIPE SHELL="/bin/bash" COMMAND="$gtm_dist/mumps -run induceEPIPE^pipexample 0" STDERR="piperr" 
+...Caught on try 0, write 49... 32,retry+13^pipexample,%SYSTEM-E-ENO32, Broken pipe
+    stdout:My PID is 16252
+    stderr:%GTM-F-FORCEDHALT, Image HALTed by MUPIP STOP
+Try 1   pipe OPEN PIPE SHELL="/bin/bash" COMMAND="$gtm_dist/mumps -run induceEPIPE^pipexample 1" STDERR="piperr" 
+...Caught on try 1, write 697... 32,retry+13^pipexample,%SYSTEM-E-ENO32, Broken pipe
+    stdout:My PID is 16403
+    stdout:$ZSTATUS="150373210,induceEPIPE+5^pipexample,%GTM-E-DIVZERO, Attempt to divide by zero"
+Try 2   pipe OPEN PIPE SHELL="/bin/bash" COMMAND="$gtm_dist/mumps -run induceEPIPE^pipexample 2" STDERR="piperr" 
+    Writes completed
+      </pre>
+<p>This example demonstrates how to create a separate STDERR pipe device from which to read the STDERR output of the program(s) inside the pipe. Reading the STDERR is important when dealing with failures from Unix programs. It is possible to read the errors without creating a STDERR pipe device, however the error messages are commingled with the output of the programs inside the pipe which could make diagnosis of the underlying problem harder. Notice that GT.M writes fatal errors, GTM-F types, to STDERR, but all others go to STDOUT.</p>
+<p>Additionally, this example demonstrates handling errors that terminate the PIPE device. In this example, the PIPE device is terminated when a program inside the pipe terminates before reading all of the driving MUMPS program's output causing an EPIPE or ENO32, a broken pipe. In such a situation the MUMPS program must capture the error that caused the termination and respond accordingly. The program may need to call out to other programs to determine the status of a service it is using or to alert the operator of an error with an external program or service. To operate successfully, the program must recreate the pipe and retry the operation.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="example_pipe_Device_summ"></a>PIPE Deviceparameter Summary</h3></div></div></div>
+<p>The following table summarizes the PIPE format deviceparameters.</p>
+<div class="informaltable">
+<a name="tblpipesumm"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                <p>DEVICE PARAMETER</p>
+              </th>
+<th>
+                <p>CMD</p>
+              </th>
+<th>
+                <p>DESCRIPTION</p>
+              </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                <p>[NO]FIXED</p>
+              </td>
+<td>
+                <p>O</p>
+              </td>
+<td>
+                <p>Controls whether records have fixed length</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>RECORDSIZE=intexpr </p>
+              </td>
+<td>
+                <p>O</p>
+              </td>
+<td>
+                <p>Specifies the maximum record size. </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>VARIABLE</p>
+              </td>
+<td>
+                <p>O</p>
+              </td>
+<td>
+                <p>Controls whether records have variable length.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[Z]WIDTH=intexpr </p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Sets the device's logical record size and enables WRAP. </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[Z][NO]WRAP </p>
+              </td>
+<td>
+                <p>O/U</p>
+              </td>
+<td>
+                <p>Controls the handling of records longer than the device width. </p>
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following table summarizes PIPE access deviceparamters.</p>
+<div class="informaltable">
+<a name="tblpipeaccess"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td>
+                <p>COMMAND=string</p>
+              </td>
+<td>
+                <p>o</p>
+              </td>
+<td>
+                <p>Specifies the command string to execut in a created process for the PIPE device. GT.M uses the default searching mechanism of the UNIX shell for creating the process and initiating its command(s).</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>SHELL=string</p>
+              </td>
+<td>
+                <p>o</p>
+              </td>
+<td>
+                <p>Specifies the path to a shell to be used instead of the default shell</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>STDERR=string</p>
+              </td>
+<td>
+                <p>o</p>
+              </td>
+<td>
+                <p>Specifies a device handle for a return pipe to which the created process writes any standard error output. The GT.M process can USE, READ, and CLOSE it, but cannot WRITE to it. When the GT.M process CLOSEs the PIPE device, the PIPE device CLOSEs STDERR, if still OPEN.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>WRITEONLY</p>
+              </td>
+<td>
+                <p>o</p>
+              </td>
+<td>
+                <p>Specifies that the GT.M process may only WRITE to the created process via the PIPE device.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>READONLY</p>
+              </td>
+<td>
+                <p>o</p>
+              </td>
+<td>
+                <p>Specifies that the GT.M process may only READ from the created process via the PIPE device. Output from both the standard output and the standard error output of the created process is available unless STDERR is specified.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>PARSE</p>
+              </td>
+<td>
+                <p>o</p>
+              </td>
+<td>
+                <p>Specifies that GT.M parse the COMMAND and issue an OPEN exception for any invalid command.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>INDEPENDENT</p>
+              </td>
+<td>
+                <p>o</p>
+              </td>
+<td>
+                <p>Specifies that the created process continues to execute after the PIPE device is CLOSEd.</p>
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch09s06.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch09.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch09s08.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Using Null Devices </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Using Socket Devices</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

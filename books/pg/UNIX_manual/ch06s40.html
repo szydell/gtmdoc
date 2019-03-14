@@ -1,0 +1,102 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s40.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>ZPrint</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s39.html" title="ZMessage">
+<link rel="next" href="ch06s41.html" title="ZRUPDATE">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">ZPrint</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s39.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s41.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">ZPrint</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zprint_cmmd"></a>ZPrint<a class="indexterm" name="idp187235072"></a>
+</h2></div></div></div>
+<p>The ZPRINT command displays the source code lines selected by its argument.</p>
+<p>The format of the ZPRINT command is:</p>
+<pre class="programlisting">ZP[RINT][:tvexpr][entryref[:label[+intexpr]][,...]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>A ZPRINT with no argument prints the entire current routine or the current trigger. The current routine is the routine closest to the top of an invocation stack, as displayed by a ZSHOW "S"; in this case, at least two (2) spaces must follow the command to separate it from the next command on the line.</p></li>
+<li class="listitem"><p>The optional entryref specifies the location in a routine at which to start printing; the entryref can include either a routinename or a label plus a routinename in the format LABEL^ROUTINENAME or LABEL+OFFSET^ROUTINENAME; if the entryref does not contain a routinename, ZPRINT defaults to the current routine.</p></li>
+<li class="listitem"><p>The optional label following the entryref identifies a location at which to stop printing; the optional integer expression specifies an offset from the label; the label and offset together are referred to as a lineref and this lineref identifies the last line to print; if the offset is specified without the label, the offset in the optional lineref is always counted from the beginning of the routine, even when the entryref specifies a label.</p></li>
+<li class="listitem"><p>If the ZPRINT argument includes the colon (:) delimiter, then the argument must also include at least one component of the optional lineref.</p></li>
+<li class="listitem"><p>If the ZPRINT argument contains only the entryref, with no components of the optional lineref and the entryref contains a label or offset, ZPRINT displays only the one line that occurs at that entryref. </p></li>
+<li class="listitem"><p>If the entryref contains only a routinename, ZPRINT displays the entire routine.</p></li>
+<li class="listitem"><p>If the entryref contains a trigger name, ZPRINT displays its trigger code. </p></li>
+<li class="listitem"><p>If the entryref contains only a routinename and the argument includes the optional lineref, ZPRINT starts the display at the beginning of the routine.</p></li>
+<li class="listitem"><p>If the optional lineref specifies a line prior to the lineref specified within the entryref, ZPRINT does not display any lines.</p></li>
+<li class="listitem"><p>If the offset in the optional lineref specifies a line beyond the end of the routine, ZPRINT displays the remainder of the routine.</p></li>
+<li class="listitem"><p>If ZPRINT cannot locate the routine or if either of the labels does not appear in the routine, ZPRINT issues an error.</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more ZPRINT arguments form a legal argument for a ZPRINT.</p></li>
+</ul></div>
+<p>Note that the routinename may only appear before the colon (:) delimiter. The integer expression offsets may be positive or negative, but they must always be delimited by a plus sign (+). </p>
+<p>For more information on entryrefs, refer to <a class="xref" href="ch05.html" title="Chapter 5. General Language Features of M">Chapter 5: &#8220;<i><span>General Language Features of M</span></i>&#8221;</a>.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_zprint"></a>Examples<span> of ZPRINT</span><a class="indexterm" name="idp187333040"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZPRINT X^RTN</pre>
+<p>This example displays the line beginning with the label X in the routine RTN.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZPRINT X^RTN:X+5
+    
+GTM&gt;ZPRINT X+-5^RTN:X
+GTM&gt;ZPRINT X^RTN:X+-5^RTN</pre>
+<p>The first line displays the line beginning with the label X and the next 5 lines in routine RTN. The second line displays the 5 lines preceding label X in the same routine and the line beginning with label X. The third line generates a run-time error because the routine name must appear only before the colon in the argument. </p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zprint ^A#1#
+ do ^test1
+ do stop^test2
+GTM&gt;</pre>
+<p>This command displays the trigger code for trigger name A#1#. </p>
+<pre class="programlisting">ZPRINT ^x#/BREG : Print trigger routine user-named "x" in region BREG
+ZPRINT ^x#1#/BREG : Print trigger routine auto-named "x#1" in region BREG
+ZPRINT ^x#1#A/BREG : Print trigger routine auto-named "x#1", runtime disambiguated by "#A", AND in region BREG
+ZPRINT +1^x#1#A/BREG : Print line 1 of trigger routine auto-named "x#1", runtime disambiguated by "#A", AND in region BREG</pre>
+<p>These are some examples of disambiguator combinations.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s39.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s41.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">ZMessage </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> ZRUPDATE</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s40.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

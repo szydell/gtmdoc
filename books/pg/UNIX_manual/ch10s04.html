@@ -1,0 +1,186 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch10s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:47 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Mathematic Utilities</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch10.html" title="Chapter 10. Utility Routines">
+<link rel="prev" href="ch10s03.html" title="Conversion Utilities">
+<link rel="next" href="ch10s05.html" title="String Utilities">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">
+      Mathematic Utilities</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch10s03.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 10. Utility Routines</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch10s05.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch10.html">Utility Routines</a></span> &gt; <span class="breadcrumb-node">
+      Mathematic Utilities</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="math_utils"></a>
+      Mathematic Utilities<a class="indexterm" name="idp192072960"></a>
+</h2></div></div></div>
+<p>The mathematic utilities are:</p>
+<p>%EXP: Raises one number to the power of another number.</p>
+<p>%SQROOT: Calculates the square root of a number.</p>
+<p>The mathematic utilities can be invoked as extrinsic functions.</p>
+<p>The "%" sign has been removed from the topic headings below, intentionally.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="exp_percent"></a>
+      %EXP<a class="indexterm" name="idp192052480"></a>
+</h3></div></div></div>
+<p>The %EXP utility raises one number provided to the power of another number provided. While this utility provides an interactive interface for exponential calculations, most production code would perform inline calculation with the "**" operator. The routine has entry points for interactive or non-interactive use.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="util_labels_exp"></a>
+      Utility Labels<a class="indexterm" name="idp192103008"></a>
+</h4></div></div></div>
+<p>INT: Calculates a number to the power of another number interactively.</p>
+<p>FUNC(i,j): Invokes %EXP as an extrinsic function returning the first argument raised to the power of the second argument.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="prompts_exp"></a>
+      Prompts<a class="indexterm" name="idp191849008"></a>
+</h4></div></div></div>
+<p>Power: Requests an exponent or power.</p>
+<p>Number: Requests a base number to raise by the power.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="input_var_exp"></a>
+      Input Variables<a class="indexterm" name="idp191956560"></a>
+</h4></div></div></div>
+<p>%I: As input, contains number to be raised to a power.</p>
+<p>%J: Contains exponential power by which to raise %I.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="outp_var_exp"></a>
+      Output Variables<a class="indexterm" name="idp192103904"></a>
+</h4></div></div></div>
+<p>%I: As output, contains the result of the exponential calculation.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="examples_of_exp"></a>
+      Examples of %EXP<a class="indexterm" name="idp192111664"></a>
+</h4></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO INT^%EXP
+Power: 3
+Number: 12
+12 raised to 3 is 1728</pre>
+<p>This example invokes %EXP in interactive mode using INT^%EXP. %EXP prompts for an exponent (power) and a base number.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;SET %I=2,%J=9
+GTM&gt;DO ^%EXP
+GTM&gt;ZWRITE
+%I=512
+%J=9</pre>
+<p>This example sets the read-write variable %I to 2, variable %J to 9, and invokes %EXP to calculate the result. ZWRITE displays the contents of the variables. %I contains the result.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $$FUNC^%EXP(2,9)
+512</pre>
+<p>This example invokes %EXP as an extrinsic function with the label FUNC.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="sqr_root_percent"></a>
+      %SQROOT<a class="indexterm" name="idp191986000"></a>
+</h3></div></div></div>
+<p>The %SQROOT utility calculates the square root of a number provided. While this utility provides an interactive interface for taking square roots, most production code would perform inline calculation by raising a number to the .5 power (n**.5). The routine has entry points for interactive or non-interactive use.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="util_labels_sqr_root"></a>
+      Utility Labels<a class="indexterm" name="idp192075120"></a>
+</h4></div></div></div>
+<p>INT: Calculates the square root of a number interactively.</p>
+<p>FUNC(s): Invokes %SQROOT as an extrinsic function returning the square root of the argument.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="prompts_sqr_root"></a>
+      Prompts<a class="indexterm" name="idp192111920"></a>
+</h4></div></div></div>
+<p>The square root of: Requests a number.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="input_var_sqr_root"></a>
+      Input Variables<a class="indexterm" name="idp192074288"></a>
+</h4></div></div></div>
+<p>%X: Contains the number for which to calculate the square root.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="output_var_sqr_root"></a>
+      Output Variables<a class="indexterm" name="idp192124976"></a>
+</h4></div></div></div>
+<p>%Y: Contains the square root of %X.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="examples_of_sqr_root"></a>
+      Examples of %SQROOT<a class="indexterm" name="idp192129664"></a>
+</h4></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;SET %X=81
+GTM&gt;DO ^%SQROOT
+GTM&gt;ZWRITE
+%X=81
+%Y=9 </pre>
+<p>This example sets the variable %X to 81 and invokes %SQROOT to calculate the square root non-interactively. ZWRITE displays the contents of the variables.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO INT^%SQROOT
+The square root of: 81 is: 9
+The square root of: &lt;RETURN&gt;
+GTM&gt; </pre>
+<p>This example invokes INT^%SQROOT interactively that prompts for a number. The square root of the number appears on the same line. %SQROOT then prompts for another number. Press &lt;RETURN&gt; to exit.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $$FUNC^%SQROOT(81)
+9</pre>
+<p>This example invokes %SQROOT as an extrinsic function with the label FUNC.</p>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch10s03.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch10.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch10s05.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">
+      Conversion Utilities </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> String Utilities</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch10s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:47 GMT -->
+</html>

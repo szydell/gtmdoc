@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/creating_the.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:01 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Creating the Executable Image</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="collation_seq.html" title="Collation Sequence Definitions" />
+    <link rel="prev" href="defining_the_logical_name.html" title="Defining the Logical Name" />
+    <link rel="next" href="considerations_in_establish_alt_collations.html" title="Considerations in Establishing Alternative Collations" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center"><span>Creating the Executable Image</span></th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="defining_the_logical_name.html">Prev</a> </td>
+          <th width="60%" align="center">Collation Sequence Definitions</th>
+          <td width="20%" align="right"> <a accesskey="n" href="considerations_in_establish_alt_collations.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="creating_the"></a><span>Creating the Executable Image</span></h3>
+          </div>
+        </div>
+      </div>
+      <p>A valid executable image for an alternative collation sequence must contain the following four user defined routines.</p>
+      <p>gtm_ac_xform:		Transforms subscripts to the alternative collation sequence.</p>
+      <p>gtm_ac_xback:		Transforms the alternative collation keys back to the original subscript representation.</p>
+      <p>gtm_ac_version:	Returns a numeric version identifier for the &quot;currently active&quot; set of collation routines.</p>
+      <p>gtm_ac_verify:	Returns the success (odd) or failure (even) in matching a collation sequence with a given version number.</p>
+      <p>Specifications for creating each of these routines are described, with examples, in the &quot;Creating the User-defined Collation Routines&quot; section later in this chapter.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="defining_the_logical_name.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="collation_seq.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="considerations_in_establish_alt_collations.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Defining the Logical Name </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Considerations in Establishing Alternative Collations</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/creating_the.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:01 GMT -->
+</html>

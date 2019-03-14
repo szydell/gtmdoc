@@ -1,0 +1,60 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/TRESTMAX.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:10 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>TRESTMAX </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="TRESTLOC.html" title="TRESTLOC ">
+<link rel="next" href="TRESTNOT.html" title="TRESTNOT ">
+<link rel="copyright" href="ln-idp153747552.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">TRESTMAX </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="TRESTLOC.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="TRESTNOT.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">TRESTMAX </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="TRESTMAX"></a>TRESTMAX </h2></div></div></div>
+<p><span class="bold"><strong>TRESTMAX</strong></span>,  TRESTART not allowed in a final TP retry more than once</p>
+<p>Run Time Error: The code contained one or more explicit TRESTART command(s) which called for a RESTART after more than once after $TRESTART reached 3. Once $TRESTART reaches 3, GT.M switches from an optimistic to a conventional locking strategy so such restarts are expensive and potentially disruptive. Therefore GT.M limits the ability of the application code to repeatedly demand such RESTARTs.</p>
+<p>Action: Investigate the cause and reason(s) for the explicit restart. When combined with a subsequent TROLLBACK, explicit TRESTARTs may provide a way to manipulate the variable context and flow of control in useful ways, but other uses are unusual. If explicit TRESTARTs are appropriate, consider whether they should be conditional on the value of $TRESTART.</p>
+<a class="indexterm" name="idp159824864"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="TRESTLOC.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="TRESTNOT.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">TRESTLOC  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> TRESTNOT </td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/TRESTMAX.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:10 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/TP_Defnts.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:35 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>TP Definitions</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Transctn_Processing.html" title="Transaction Processing" />
+    <link rel="prev" href="Transctn_Processing.html" title="Transaction Processing" />
+    <link rel="next" href="TP_Characteristics.html" title="TP Characteristics" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">TP Definitions</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Transctn_Processing.html">Prev</a> </td>
+          <th width="60%" align="center">Transaction Processing</th>
+          <td width="20%" align="right"> <a accesskey="n" href="TP_Characteristics.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="TP_Defnts"></a>TP Definitions</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4169365" class="indexterm"></a>
+      <p>In M, a transaction is a sequence of commands that begins with a TSTART command, ends with a TCOMMIT command, and is not within the scope of another transaction.</p>
+      <p>A successful transaction ends with a COMMIT that is triggered by the TCOMMIT command at the end of the transaction. A COMMIT causes all the database updates performed within the transaction to become available to other processes.</p>
+      <p>An unsuccessful transaction ends with a ROLLBACK. ROLLBACK is invoked explicitly by the TROLLBACK command, or implicitly at a process termination that occurs during a transaction in progress. An error within a transaction does not cause an implicit ROLLBACK. A ROLLBACK removes any database updates performed within the transaction before they are made available to other processes. ROLLBACK also releases all resources LOCKed since the start of the transaction, and makes the naked reference undefined.</p>
+      <p>A RESTART is a transfer of control to the TSTART at the beginning of the transaction. RESTART implicitly includes a ROLLBACK and may optionally restore local variables to the values they had when the initial TSTART was originally executed. A RESTART always restores $TEST and the naked reference to the values they had when the initial TSTART was executed. RESTART does not manage device state information. A RESTART is invoked by the TRESTART command or by M if it is determined that the transaction is in conflict with other database updates. RESTART can only successfully occur if the initial TSTART includes an argument that enables RESTART.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Transctn_Processing.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Transctn_Processing.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="TP_Characteristics.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Transaction Processing </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> TP Characteristics</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/TP_Defnts.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:35 GMT -->
+</html>

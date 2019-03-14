@@ -1,0 +1,85 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/ch02s02.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:36 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Before you begin</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="ch02.html" title="Chapter 2. Installing GT.M">
+<link rel="prev" href="ch02s01.html" title="Obtaining GT.M Distribution Media">
+<link rel="next" href="ch02s03.html" title="Installation Procedure">
+<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Before you begin</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch02s01.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 2. Installing GT.M</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch02s03.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch02.html">Installing GT.M</a></span> &gt; <span class="breadcrumb-node">Before you begin</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="beforeyoubegin"></a>Before you begin<a class="indexterm" name="idp178963360"></a>
+</h2></div></div></div>
+<p>Before you begin installing GT.M, perform the following tasks:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Read the GT.M Release Notes documentation. The release documents contain the latest information that may be critical for installing and configuring GT.M. They are located at the User Documentation tab on the GT.M website
+(<a class="ulink" href="http://fis-gtm.com/" target="_top">www.fis-gtm.com</a>).</p></li>
+<li class="listitem"><p>Determine whether or not, GT.M access is restricted to a group. Keep the group name handy as you will have to enter it during the installation process.</p></li>
+<li class="listitem">
+<p>Set the environment variable gtm_log to a directory where GT.M should create log files. In conformance with the Filesystem Hierarchy Standard, FIS recommends <code class="code">/var/log/fis-gtm/$gtmver</code> as the value for $gtm_log unless you are installing the same version of GT.M in multiple directories. Note that <code class="code">$gtmver</code> can be in the form of <code class="code">V6.1-000_x86</code> which represents the current GT.M release and platform information.</p>
+<p>If you do not set gtm_log, GT.M creates log files in a directory in <code class="code">/tmp (AIX, GNU/Linux)</code>. However, this is not recommended because it makes GT.M log files vulnerable to the retention policy of a temporary directory. </p>
+<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<th align="left">Important</th>
+</tr>
+<tr><td align="left" valign="top"><p>Starting with V6.0-000, gtmsecshr logs its messages in the system log and the environment variable gtm_log is ignored.</p></td></tr>
+</table></div>
+</li>
+<li class="listitem"><p>If you need to perform UTF-8 mode operations in GT.M, you must have at least ICU version 3.6 installed. GT.M uses ICU 3.6 (or above) to provide the support for UTF-8 mode. GT.M generates the distribution for UTF-8 mode only if ICU 3.6 (or above) is installed on your system. By default, GT.M uses the most current version of ICU. GT.M expects ICU to have been built with symbol renaming disabled and issues an error at startup if the currently installed version of ICU has been built with symbol renaming enabled. If you intend to use a version of ICU built with symbol renaming enabled or any version other than the default, keep the MAJOR VERSION and MINOR VERSION numbers ready as you will have to enter it as MajorVersion.MinorVersion (for example "3.6" to denote ICU-3.6) during the installation process.</p></li>
+</ul></div>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top">
+<p>Installing GT.M on an NFS mounted directory is not recommended. Several NFS characteristics violate GT.M database design assumptions which may manifest themselves as hard to diagnose problems. If you still choose to install and operate GT.M from an NFS mounted directory, there are chances that at some point you will face significant problems with performance and response time.</p>
+<p>While you should never operate GT.M database and journal files from an NFS mounted directory you can safely, except on Linux, use an NFS mounted directory for keeping source and object code modules and performing sequential file IO. While NFS mounted files may work for you, historically they have not provided sufficient support for file locking over NFS to prevent intermittent errors when you have a significant concurrent file activity.</p>
+</td></tr>
+</table></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch02s01.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch02.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch02s03.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Obtaining GT.M Distribution Media </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Installation Procedure</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/ch02s02.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:36 GMT -->
+</html>

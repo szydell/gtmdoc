@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_zsearch.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of $ZSEARCH()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zsearch.html" title="$ZSEARCH()" />
+    <link rel="prev" href="zsearch.html" title="$ZSEARCH()" />
+    <link rel="next" href="zsetprv.html" title="$ZSETPRV()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of $ZSEARCH()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zsearch.html">Prev</a> </td>
+          <th width="60%" align="center">$ZSEARCH()</th>
+          <td width="20%" align="right"> <a accesskey="n" href="zsetprv.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_zsearch"></a>Examples of $ZSEARCH()</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4192093" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+    <span>
+    GTM&gt; WRITE $ZSEARCH(&quot;DATA.DAT&quot;)
+    PROJK:[TEST]DATA.DAT;6
+    GTM&gt;
+    </span>
+    
+    </pre>
+      <p>This uses $ZSEARCH() to display the full <span>RMS file-specification of the current version of &quot;DATA.DAT&quot;</span> in the process current default directory.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt;SET x=$ZSEARCH(&quot;*.M&quot;)
+    GTM&gt;FOR S x=$ZSEARCH(&quot;*.M&quot;) Q:x=&quot;&quot; W !,$ZPARSE(x,&quot;NAME&quot;)
+    </pre>
+      <p>This FOR loop uses $ZSEARCH() and $ZPARSE() to display M source file names in the process current <span>default</span> directory. To ensure that the search starts at the beginning, the example resets the context by first searching with a different argument.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zsearch.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zsearch.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="zsetprv.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZSEARCH() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $ZSETPRV()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_zsearch.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+</html>

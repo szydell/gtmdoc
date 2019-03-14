@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/logical_names_dev.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:30 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Logical Names</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter3.html" title="Chapter 3. Program Development Cycle" />
+    <link rel="prev" href="chapter3.html" title="Chapter 3. Program Development Cycle" />
+    <link rel="next" href="commands_and_symbols.html" title="Commands and Symbols" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Logical Names</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="chapter3.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 3. Program Development Cycle</th>
+          <td width="20%" align="right"> <a accesskey="n" href="commands_and_symbols.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="logical_names_dev"></a>Logical Names</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4157172" class="indexterm"></a>
+      <p>GT.M uses VMS logical names for two different purposes.</p>
+      <p>Logical names perform the classic function of locating the files that Fidelity provides as part of GT.M.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3">
+                <p>Logical Names that Locate GT.M Components  </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>LOGICAL NAME</p>
+              </td>
+              <td>
+                <p>COMPONENT</p>
+              </td>
+              <td>
+                <p>DESCRIPTION</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>GTM$DIST</p>
+              </td>
+              <td>
+                <p>many files</p>
+              </td>
+              <td>
+                <p>The location of the distribution.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>GTM$HELP</p>
+              </td>
+              <td>
+                <p>help files</p>
+              </td>
+              <td>
+                <p>The location of the help libraries.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>GTM$CNFDB</p>
+              </td>
+              <td>
+                <p>config db</p>
+              </td>
+              <td>
+                <p>The configuration database.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>GTMSECSHR</p>
+              </td>
+              <td>
+                <p>GTMSECSHR.EXE</p>
+              </td>
+              <td>
+                <p>The protected portion of the run-time library.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>GTMSHR</p>
+              </td>
+              <td>
+                <p>GTMSHR.EXE</p>
+              </td>
+              <td>
+                <p>The bulk of the run-time library.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>MCOMPILE</p>
+              </td>
+              <td>
+                <p>MCOMPILE.EXE</p>
+              </td>
+              <td>
+                <p>The base module through which the MUMPS command accesses the compiler in GTMSHR.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>GTM$DMOD</p>
+              </td>
+              <td>
+                <p>GTM$DMOD.EXE</p>
+              </td>
+              <td>
+                <p>A simple Direct Mode base program.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p>If the distribution is placed in SYS$LIBRARY and the help libraries in SYS$HELP, GTM$DIST and GTM$CNFDB become the only required logical names in this table.</p>
+      <p>The following hold information that determines some details of GT.M run-time operation, over which the user has control.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3" align="center">
+                <p>Logical Names Controlling the Run-time Environment  </p>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <p>LOGICAL NAME</p>
+              </td>
+              <td align="center">
+                <p>DEFAULT</p>
+              </td>
+              <td>
+                <p>DESCRIPTION</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>GTM$GBLDIR</p>
+              </td>
+              <td>
+                <p>MUMPS.GLD</p>
+              </td>
+              <td>
+                <p>Provides the file-specification file name for the initial Global Directory; used by all the GT.M utility programs that access database files.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>GTM$ROUTINES</p>
+              </td>
+              <td>
+                <p>&quot;[],GTM$DIST&quot;</p>
+              </td>
+              <td>
+                <p>Provides a list of directories and object libraries that GT.M may search for source and object code.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>GTM$COMPILE</p>
+              </td>
+              <td>
+                <p>not defined</p>
+              </td>
+              <td>
+                <p>Provides the compile control qualifiers for auto-ZLINK and any ZLINK command that does not specify qualifiers in its argument.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>GTM$PRINCIPAL</p>
+              </td>
+              <td>
+                <p>not defined</p>
+              </td>
+              <td>
+                <p>Provides the value for $PRINCIPAL, which designates the principal device; if it is not defined GT.M uses the VMS device designation.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>GTM$COMPILER_ ESCAPE</p>
+              </td>
+              <td>
+                <p>not defined</p>
+              </td>
+              <td>
+                <p>Provides the file specification containing the user defined routines required by the compiler escape program.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>TPU$SECTION</p>
+              </td>
+              <td>
+                <p>EVE$SECTION</p>
+              </td>
+              <td>
+                <p>Selects the TPU editor invoked by the ZEDIT command.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>TPU$COMMAND</p>
+              </td>
+              <td>
+                <p>not defined</p>
+              </td>
+              <td>
+                <p>Selects a file modifying the TPU editor.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>EVE$INIT</p>
+              </td>
+              <td>
+                <p>not defined</p>
+              </td>
+              <td>
+                <p>Selects a file initializing EVE characteristics when TPU$SECTION selects EVE.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Only GTM$GBLDIR, and in some cases GTM$ROUTINES, are required by users who don't perform programming activities. The TPU logical names are related to that VMS component that GT.M uses to provide an integrated full screen editor.</p>
+      <p>The system manager may define these logical names in the system table or place the definitions in a command file that defines the names in the process logical name table when users login to VMS.</p>
+      <p>As a programmer, you can modify your environment by defining the controlling names in your job or process logical name table.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="chapter3.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter3.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="commands_and_symbols.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Chapter 3. Program Development Cycle </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Commands and Symbols</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/logical_names_dev.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:30 GMT -->
+</html>

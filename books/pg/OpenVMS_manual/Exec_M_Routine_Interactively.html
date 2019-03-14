@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Exec_M_Routine_Interactively.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:33 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Executing M Routines Interactively</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Debug_Routine_Direct_Mode.html" title="Debugging a Routine in Direct Mode" />
+    <link rel="prev" href="Creat_Display_M_Rtn.html" title="Creating and Displaying M Routines" />
+    <link rel="next" href="Proc_with_Runtime_Syntax_Err.html" title="Processing with Run-time and Syntax Errors" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Executing M Routines Interactively</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Creat_Display_M_Rtn.html">Prev</a> </td>
+          <th width="60%" align="center">Debugging a Routine in Direct Mode</th>
+          <td width="20%" align="right"> <a accesskey="n" href="Proc_with_Runtime_Syntax_Err.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Exec_M_Routine_Interactively"></a>Executing M Routines Interactively</h3>
+          </div>
+        </div>
+      </div>
+      <p>To execute an M routine interactively, it is not necessary to explicitly compile and link your program. When you refer to an M routine that is not part of the current image, GT.M automatically attempts to compile and ZLINK the program.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;DO ^dmex
+        Name: Revere, Paul
+        %GTM-E-UNDEF, Undefined local variable: bame
+        At M source location <span>name+3^DMEX</span>
+        GTM&gt;
+        </pre>
+      <p>In this example GT.M places you in Direct Mode, but also cites an error found in the program with a run-time error message. In this example, it was a reference to bame, which is undefined.</p>
+      <p>To see additional information about the error message, examine the $ECODE or $ZSTATUS special variables.</p>
+      <p>$ECODE is read-write intrinsic special variable that maintains a list of comma delimited codes that describe a history of past errors - the most recent ones appear at the end of the list. In $ECODE, standard errors are prefixed with an &quot;M&quot;, user defined errors with a &quot;U&quot;, and GT.M errors with a &quot;Z&quot;. A GT.M code always follows a standard code.</p>
+      <p>$ZSTATUS is a read-write intrinsic special variable that maintains a string containing the error condition code and location of the last exception condition occurring during routine execution. <span>$ZSTATUS information always contains all components of the VMS error message format (message number, facility, error severity, identification and text).</span> GT.M updates $ZSTATUS only for errors found in routines and not for errors entered at the Direct Mode prompt.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>For more information on $ECODE and $STATUS refer to the &quot;Intrinsic Special Variables&quot; chapter in this manual.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;WRITE $ECODE
+        ,M6,Z150373850
+        </pre>
+      <p>This example uses a WRITE command to display $ECODE.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;WRITE $ZS
+          <span>
+        150373850,name+3^DMEX,%GTM-E-UNDEF,Undefined
+        local variable: bame
+          </span>
+          
+        </pre>
+      <p>This example uses a WRITE command to display $ZSTATUS. Note that the $ZSTATUS code is the same as the &quot;Z&quot; code in $ECODE.</p>
+      <p>You can record the error message number, and use the $ZMESSAGE function later to re-display the error message text.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;WRITE $ZM(150373850)
+        %GTM-E-UNDEF, Undefined local variable: !AD
+        </pre>
+      <p>This example uses a WRITE command and the $ZMESSAGE function to display the error message generated in the previous example. $ZMESSAGE() is useful when you have a routine that produces several error messages that you may want to examine later. The error message reprinted using $ZMESSAGE() is generic; therefore, the code !AD appears instead of the specific undefined local variable displayed with the original message.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Creat_Display_M_Rtn.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Debug_Routine_Direct_Mode.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="Proc_with_Runtime_Syntax_Err.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Creating and Displaying M Routines </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Processing with Run-time and Syntax Errors</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Exec_M_Routine_Interactively.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:33 GMT -->
+</html>

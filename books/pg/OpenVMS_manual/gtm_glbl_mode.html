@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/gtm_glbl_mode.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:34 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>GTMI$_GLOBAL Mode</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="mode_arg.html" title="Mode Argument" />
+    <link rel="prev" href="mode_arg_desc.html" title="Mode Argument Description:" />
+    <link rel="next" href="gtm_i_naked_mode.html" title="GTMI$_NAKED Mode" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">GTMI$_GLOBAL Mode</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="mode_arg_desc.html">Prev</a> </td>
+          <th width="60%" align="center">Mode Argument</th>
+          <td width="20%" align="right"> <a accesskey="n" href="gtm_i_naked_mode.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="gtm_glbl_mode"></a>GTMI$_GLOBAL Mode</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4234061" class="indexterm"></a>
+      <p>The GTMI$_GLOBAL mode indicates a full global reference. Key1 refers to a global name without the &quot;^&quot; character, the optional key2 indicates the first subscript level and so on. GTMI$_GLOBAL is valid for both global reference and LOCK resource name operations. After GTM$INIT, a function with a GTMI$_GLOBAL mode and a key count greater than one must precede a function with a GTMI$_NAKED mode.</p>
+      <p>The GTMI_GLOBAL mode indicates a full global reference. Key1 refers to a global name without the &quot;^&quot; character, the optional key2 indicates the first subscript level and so on. After gtm_init, a function with a GTMI_GLOBAL mode and a non-zero key count must precede any function with a GTMI_NAKED mode.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	gtm$kill(GTMI$_GLOBAL, &amp;gname)
+	mode=(short)GTMI_GLOBAL;DESC_MODE(k0[0],mode);DESC_CHAR(k0[1],&quot;A&quot;);DESC_ZERO(k0[2]);
+	</pre>
+      <p>This specifies the global name gname as key1. The reference does not have a subscript because the example does not specify key2. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="mode_arg_desc.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="mode_arg.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="gtm_i_naked_mode.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Mode Argument Description: </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> GTMI$_NAKED Mode</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/gtm_glbl_mode.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:34 GMT -->
+</html>

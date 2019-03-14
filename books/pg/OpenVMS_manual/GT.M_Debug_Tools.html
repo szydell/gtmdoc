@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/GT.M_Debug_Tools.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:43 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Summary of GT.M Debugging Tools</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter4.html" title="Chapter 4. Operating and Debugging in Direct Mode" />
+    <link rel="prev" href="Using_Processes.html" title="Using Spawned Processes" />
+    <link rel="next" href="chapter5.html" title="Chapter 5. General Language Features of M" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Summary of GT.M Debugging Tools</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Using_Processes.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 4. Operating and Debugging in Direct Mode</th>
+          <td width="20%" align="right"> <a accesskey="n" href="chapter5.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="GT.M_Debug_Tools"></a>Summary of GT.M Debugging Tools</h2>
+          </div>
+        </div>
+      </div>
+      <p>The following table summarizes GT.M commands, functions, and intrinsic special variables available for debugging. For more information on these commands, functions, and special variables, refer to the &quot;Commands&quot;, &quot;Functions&quot;, and &quot;Intrinsic Special Variables&quot; chapters in this manual.</p>
+      <p>For more information on syntax and run-time errors during Direct Mode, refer to the &quot;Error Processing&quot; chapter in this manual.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="2" align="center">
+                <p>GT.M Debugging Tools</p>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <p>EXTENSION</p>
+              </td>
+              <td align="center">
+                <p>EXPLANATION</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ECode</p>
+              </td>
+              <td>
+                <p>Contains a list of errors since it was last cleared</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$STack</p>
+              </td>
+              <td>
+                <p>Contains the current level of DO/XECUTE nesting from a base of zero (0).</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$STack()</p>
+              </td>
+              <td>
+                <p>Returns information about the M virtual stack context, most of which freezes when an error changes $ECODE from the empty string to a list value.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZBreak</p>
+              </td>
+              <td>
+                <p>Establishes a temporary breakpoint, with optional count and M action.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZCOMpile</p>
+              </td>
+              <td>
+                <p>Invokes the GT.M compiler without a corresponding ZLINK.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZContinue</p>
+              </td>
+              <td>
+                <p>Continues routine execution from a break.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZEDit</p>
+              </td>
+              <td>
+                <p><span>Invokes a VMS editor.</span></p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZGoto</p>
+              </td>
+              <td>
+                <p>Removes zero or more levels from the M invocation stack and transfers control.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZLink</p>
+              </td>
+              <td>
+                <p>Includes a new or modified M routine in the current M image; automatically recompiles if necessary.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZMessage</p>
+              </td>
+              <td>
+                <p>Signals a specified condition.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZPrint</p>
+              </td>
+              <td>
+                <p>Displays lines of source code.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZSHow</p>
+              </td>
+              <td>
+                <p>Displays information about the M environment.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZSTep</p>
+              </td>
+              <td>
+                <p>Incrementally executes a routine to the beginning of the next line of the specified type.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZSYstem</p>
+              </td>
+              <td>
+                <p><span>Accesses the VMS Command Language Interpreter (CLI), generally DCL.</span></p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZWRite</p>
+              </td>
+              <td>
+                <p>Displays all or some local or global <span>symbols</span>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZCSTATUS</p>
+              </td>
+              <td>
+                <p>Contains the value of the status code for the last compile performed by a ZCOMPILE command.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZEDit</p>
+              </td>
+              <td>
+                <p>Contains the status code for the last ZEDit.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZLEVel</p>
+              </td>
+              <td>
+                <p>Contains the current level of DO/EXECUTE nesting.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZMessage()</p>
+              </td>
+              <td>
+                <p>Returns the text associated with an error condition code.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZPOSition</p>
+              </td>
+              <td>
+                <p>Contains a string indicating the current execution location.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZPROmpt</p>
+              </td>
+              <td>
+                <p>Controls the symbol displayed as the direct mode prompt.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZROutines</p>
+              </td>
+              <td>
+                <p>Contains a string specifying a directory list containing the object, and optionally the source, files.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZSOurce</p>
+              </td>
+              <td>
+                <p>Contains name of the M source program most recently ZLINKed or ZEDITed; default name for next ZEDIT or ZLINK.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZStatus</p>
+              </td>
+              <td>
+                <p>Contains error condition code and location of the last exception condition occurring during routine execution.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZSTep</p>
+              </td>
+              <td>
+                <p>Controls the default ZSTep action.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZSYstem</p>
+              </td>
+              <td>
+                <p>Contains the status code of the last ZSYSTEM.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Using_Processes.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter4.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="chapter5.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Using <span>Spawned</span> Processes </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Chapter 5. General Language Features of M</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/GT.M_Debug_Tools.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:43 GMT -->
+</html>

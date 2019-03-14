@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/query.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:05 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$Query()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter7.html" title="Chapter 7. Functions" />
+    <link rel="prev" href="examples_of_qsubscript.html" title="Examples of $QSUBSCRIPT()" />
+    <link rel="next" href="examples_of_query.html" title="Examples of $QUERY()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$Query()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_qsubscript.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 7. Functions</th>
+          <td width="20%" align="right"> <a accesskey="n" href="examples_of_query.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="query"></a>$Query()</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_query.html">Examples of $QUERY()</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4183815" class="indexterm"></a>
+      <p>The $QUERY function returns the next subscripted local or global variable node name, independent of level, which follows the node specified by its argument in M collating sequence and has a data value.</p>
+      <p>The format for the $QUERY function is:</p>
+      <pre class="programlisting">
+    $Q[UERY](glvn)        
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The subscripted or unsubscripted global or local variable name specifies the starting node from which $QUERY() searches for a node with a data value.</p>
+          </li>
+          <li>
+            <p>If $QUERY() finds no node after the specified global or local variable, it returns a null string. </p>
+          </li>
+        </ul>
+      </div>
+      <p>$QUERY() provides a tool for scanning an entire array for nodes that have data values. Because $QUERY() can return a result specifying a different level than its argument, the result provides a full variable name. This contrasts with $ORDER(), which returns a subscript value. To access the data value at a node, a $ORDER() return can be used as a subscript; however, a $QUERY() return must be used with indirection. Because arrays tend to have homogeneous values within a level but not between levels, $QUERY() is more useful as a tool in utility programs than in application programs. The $QUERY() is useful in avoiding nested $ORDER loops.</p>
+      <p>Note that the standard does not unambiguously define the state of the naked reference indicator after a $QUERY(). While in GT.M after $QUERY(), the naked reference indicator reflects the $QUERY() argument, NOT its result.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_qsubscript.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter7.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="examples_of_query.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of $QSUBSCRIPT() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of $QUERY()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/query.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:05 GMT -->
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/trestart.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:22 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>TREstart</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="Chapter 6. Commands" />
+    <link rel="prev" href="tcommit.html" title="TCOMMIT" />
+    <link rel="next" href="trollback.html" title="TROllback" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">TREstart</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="tcommit.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 6. Commands</th>
+          <td width="20%" align="right"> <a accesskey="n" href="trollback.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="trestart"></a>TREstart</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4175133" class="indexterm"></a>
+      <p>The TRESTART command attempts to RESTART the current transaction. A RESTART transfers control back to the initial TSTART and restores much of the process state to what it was when that TSTART was executed. Errors are produced if a TRESTART is used when no transaction is in progress ($TLEVEL=0) and when the transaction does not have RESTART enabled.</p>
+      <p>The format for the TRESTART command is:</p>
+      <pre class="programlisting">
+        TRE[START][:tvexpr]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>Because TRESTART has no argument, at least two (2) spaces must follow the command to separate it from the next command on the line.</p>
+            <p>TRESTARTs (and implicit RESTARTs) do not restore any device states; they do restore the following to the state they had when GT.M executed the initial TSTART:</p>
+          </li>
+          <li>
+            <p>$TEST</p>
+          </li>
+          <li>
+            <p>The naked indicator</p>
+          </li>
+          <li>
+            <p>LOCKs held by the process</p>
+          </li>
+        </ul>
+      </div>
+      <p>They also restore any local variables named by one or more active TSTARTs to the values they had when they were first named.</p>
+      <p>For an example of the use of the TRESTART command, refer to the chapter on &quot;General Language Features of M&quot; in this manual.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="tcommit.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="trollback.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">TCOMMIT </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> TROllback</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/trestart.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:22 GMT -->
+</html>

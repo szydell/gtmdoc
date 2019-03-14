@@ -1,0 +1,88 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s16.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Open</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s15.html" title="New">
+<link rel="next" href="ch06s17.html" title="Quit">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Open</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s15.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s17.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">Open</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="open_cmmd"></a>Open</h2></div></div></div>
+<a class="indexterm" name="idp186681264"></a><p>The OPEN command creates a connection between a GT.M process and a device.</p>
+<p>The format of the OPEN command is:</p>
+<pre class="programlisting">O[PEN][:tvexpr] expr[:[(keyword[=expr][:...])] [:numexpr]][,...]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The required expression specifies the device to OPEN.</p></li>
+<li class="listitem"><p>The optional keywords specify deviceparameters that control device behavior; some deviceparameters take arguments delimited by an equal sign (=); if the argument only contains one deviceparameter, the surrounding parentheses are optional.</p></li>
+<li class="listitem"><p>The optional numeric expression specifies a time in seconds after which the command should timeout if unsuccessful; choosing 0 results in a single attempt to open the device.</p></li>
+<li class="listitem"><p>When an OPEN command specifying a timeout contains no deviceparameters, double colons (::) separate the timeout numeric expression from the device expression.</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more OPEN arguments form a legal argument for an OPEN.</p></li>
+<li class="listitem"><p>In UTF-8 mode, the OPEN command recognizes the ICHSET, OCHSET, and CHSET deviceparameters to determine the encoding of the the input / output devices. </p></li>
+<li class="listitem"><p>OPEN on a directory produces a GTMEISDIR error in both READONLY and NOREADONLY modes along with the directory name which failed to open. UNIX directories contain metadata that is only available to the file system. Note that you can use the ZSEARCH() function to identify files in a directory, and you can call the POSIX stat() function to access metadata. The optional GT.M POSIX plug-in packages the stat() function for easy access from M application code.</p></li>
+</ul></div>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody><tr valign="top">
+<td align="left" valign="top">
+<p></p>
+<p class="relatedtopics">See Also</p>
+</td>
+<td align="left" valign="top">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc" compact>
+<li class="listitem"><p>
+<a class="xref" href="ch09s09.html#open_cmmd_9" title="Open">&#8220;Open&#8221;</a></p></li>
+<li class="listitem"><p><a class="xref" href="ch09s09.html#device_param_summ_table" title="Deviceparameter Summary Table">&#8220;Deviceparameter Summary<span> Table</span>&#8221;</a></p></li>
+</ul></div>
+            </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s15.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s17.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">New </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Quit</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s16.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

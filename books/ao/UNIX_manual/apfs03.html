@@ -1,0 +1,77 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/apfs03.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:40 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Interactive Mode</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="apf.html" title="Appendix F. GTMPCAT - GT.M Process/Core Analysis Tool">
+<link rel="prev" href="apfs02.html" title="Usage">
+<link rel="next" href="Package_GTM_Apps.html" title="Appendix G. Packaging GT.M Applications">
+<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Interactive Mode</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="apfs02.html">Prev</a> </td>
+<th width="60%" align="center">Appendix F. GTMPCAT - GT.M Process/Core Analysis Tool </th>
+<td width="20%" align="right"> <a accesskey="n" href="Package_GTM_Apps.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="apf.html">GTMPCAT - GT.M Process/Core Analysis Tool </a></span> &gt; <span class="breadcrumb-node">Interactive Mode</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="tmpcatinteractive"></a>Interactive Mode</h2></div></div></div>
+<p>gtmpcat has an interactive mode. Instead of producing a report, the interactive mode acts as a front-end that enhances the use of the debugger from the underlying OS.</p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top"><p>As interactive mode is still under development, it is likely to have rough edges. For example, M terminal IO is limited to that provided by GT.M . you can edit input using the left and right arrow keys but command retrieval is limited to the last command entered (with the up arrow key, and the down arrow key has no effect).</p></td></tr>
+</table></div>
+<p>The <span class="emphasis"><em>help gtmpcat</em></span> command describes currently supported commands . Any command that is not recognized in this mode, or any command prefixed with a "\" char, is sent to the native debugger and its output displayed on the console.</p>
+<p>All of the information from the reports is available in this mode. Each "section" of the report can be printed, either the entire report or one or more at a time with the report command.</p>
+<p>There are commands that give additional information not available in the standard report. For example:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p><span class="emphasis"><em>cache</em></span>: The <span class="emphasis"><em>cache</em></span> command gives information similar to the DSE CACHE command.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>dmp</em></span>: The <span class="emphasis"><em>dmp</em></span> command dumps a data structure, given just its address as long as the structure is defined in the initialization file.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>dmparray</em></span>: The <span class="emphasis"><em>dmparray</em></span> command can dump an array of control blocks in a formatted fashion. The array of control blocks are typdef structures defined in the GT.M header files and whose layouts are defined in GTMDefinedTypesInit.m<sup>[<a name="idp189028864" href="#ftn.idp189028864" class="footnote">14</a>]</sup>.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>dmplist</em></span>: The <span class="emphasis"><em>dmplist</em></span> command can dump a linked list of blocks terminating when a maximum number of such blocks is processed or if the list cycles around to the beginning or if it hits a NULL forward link.</p></li>
+</ul></div>
+<div class="footnotes">
+<br><hr width="100" align="left">
+<div class="footnote"><p><sup>[<a name="ftn.idp189028864" href="#idp189028864" class="para">14</a>] </sup>The initialization file for interactive mode is GTMDefinedTypesInit.m which is platform and release specific. It is available as a separate tarball in GT.M release directories (older versions have GTMDefinedTypesInit.m packaged with the GT.M tarball itself). </p></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="apfs02.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="apf.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="Package_GTM_Apps.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Usage </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Appendix G. Packaging GT.M Applications</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/apfs03.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:40 GMT -->
+</html>

@@ -1,0 +1,101 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s08.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$Increment()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s07.html" title="$Get()">
+<link rel="next" href="ch07s09.html" title="$Justify()">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$Increment()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s07.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s09.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$Increment()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="increment"></a>$Increment()<a class="indexterm" name="idp187808320"></a>
+</h2></div></div></div>
+<p>Atomically adds (increments) a global variable by a numeric value. Note that increment is atomic, but the evaluation of the expression is not, unless inside a transaction (TStart/TCommit). The function also works on local variables, but has less benefit for locals as it does not (need to) provide ACID behavior.</p>
+<p>The format of the $INCREMENT function is:</p>
+<pre class="programlisting">$INCREMENT(glvn[,numexpr])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>$I, $INCR, $INCREMENT, $ZINCR, and $ZINCREMENT are considered as valid synonyms of the full function name.</p></li>
+<li class="listitem"><p>$INCREMENT() returns the value of the glvn after the increment.</p></li>
+<li class="listitem"><p>If not specified, numexpr defaults to 1. Otherwise, $INCREMENT() evaluates the "numexpr" argument before the "glvn" argument.</p></li>
+<li class="listitem"><p>numexpr  can be a negative value.</p></li>
+<li class="listitem"><p>Since it performs an arithmetic operation, $INCREMENT() treats glvn as numeric value. $INCREMENT treats glvn as if it were the first argument of an implicit $GET() before the increment. If the value of glvn is undefined $INCREMENT treats it as having empty string , which means it treats it as a numeric zero (0) (even if glvn is a global variable that resides on a remote node and is accessed through a GT.CM GNP server).</p></li>
+<li class="listitem"><p>If $INCREMENT() occurs inside a transaction ($TLevel is non-zero), or if glvn refers to a local variable, it is equivalent to SET glvn=$GET(glvn)+numexpr.</p></li>
+<li class="listitem"><p>If $INCREMENT() occurs outside a transaction ($TLevel is zero) and glvn refers to a global variable, the function acts as a SET glvn=$GET(glvn)+numexpr performed as an Atomic, Consistent and Isolated operation. Note that $INCREMENT() performs the evaluation of numexpr before it starts the Atomic, Consistent, Isolated incrementing of the glvn. If the region containing the glvn is journaled, then the $INCREMENT() is also Durable. Only BG, MM (OpenVMS only) and GT.CM GNP access methods are supported for the region containing the global variable (glvn). GT.CM OMI and GT.CM DDP access methods do not support this operation and there are no current plans to add such support. </p></li>
+<li class="listitem"><p>$INCREMENT() does not support global variables that have NOISOLATION turned ON (through the VIEW "NOISOLATION" command), and a $INCREMENT() on such a variable, triggers a GVINCRISOLATION run-time error.</p></li>
+<li class="listitem">
+<p>The naked reference is affected by the usage of global variables (with or without indirection) in the glvn and/or numexpr components. The evaluation of  "numexpr" ahead of "glvn" determines the value of the naked reference after the $INCREMENT. If neither glvn or numexpr contain indirection, then $INCREMENT sets the naked reference as follows:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem"><p>glvn, if glvn is a global, or</p></li>
+<li class="listitem"><p>the last global reference in "numexpr" if glvn is a local, or</p></li>
+<li class="listitem"><p>unaffected if neither glvn nor numexpr has any global reference.</p></li>
+</ul></div>
+</li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_increment"></a>Examples<span> of $INCREMENT()</span><a class="indexterm" name="idp187777616"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set i=1
+GTM&gt;write $increment(i)
+2
+GTM&gt;write $increment(i)
+3
+GTM&gt;write $increment(i)
+4
+GTM&gt;write $increment(i)
+5
+GTM&gt;write i
+5
+GTM&gt;write $increment(i,-2)
+3
+GTM&gt;write I
+3
+GTM&gt;</pre>
+<p>This example increments the value of i by 1 and at the end decrements it by 2. Note that the default value for incrementing a variable is 1.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s07.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s09.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$Get() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $Justify()</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s08.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

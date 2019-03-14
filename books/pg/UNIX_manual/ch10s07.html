@@ -1,0 +1,628 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch10s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:47 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Routine Utilities</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch10.html" title="Chapter 10. Utility Routines">
+<link rel="prev" href="ch10s06.html" title="Global Utilities">
+<link rel="next" href="ch10s08.html" title="Internationalization Utilities">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">
+      Routine Utilities</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch10s06.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 10. Utility Routines</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch10s08.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch10.html">Utility Routines</a></span> &gt; <span class="breadcrumb-node">
+      Routine Utilities</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="routine_utils"></a>
+      Routine Utilities<a class="indexterm" name="idp192255552"></a>
+</h2></div></div></div>
+<p>The routine utilities are:</p>
+<p>%FL: Lists the comment lines at the beginning of source programs.</p>
+<p>%RANDSTR: Generates a random string.</p>
+<p>%RCE: Replaces every occurrence of a text string with another text string in a routine or a list of routines.</p>
+<p>%RD: Lists routine names available through $ZROUTINES.</p>
+<p>%RI: Loads routines from RO file to <span>*.m</span> files in GT.M format.</p>
+<p>%RO: Writes M source code for one or more routines to a sequential device such as a terminal, or a disk file.</p>
+<p>%RSE: Searches for every occurrence of a text string in a routine or a list of routines.</p>
+<p>%RSEL: Selects M routines and places their directories and names in a local array.</p>
+<p>The "%" sign has been removed from the topic headings below, intentionally.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="fl_percent"></a>
+      %FL<a class="indexterm" name="idp192117200"></a>
+</h3></div></div></div>
+<p>The %FL utility lists the comment lines at the beginning of source programs. %FL writes the routines in alphabetical order to the specified device. If the output device is not the principal device, %FL displays the name of each routine on the principal device as it writes the routine to the output device.</p>
+<p>%FL uses %RSEL to select routines. For more information, see <a class="xref" href="ch10s07.html#rsel_percent_d" title="%RSEL">&#8220;
+      %RSEL&#8221;</a>.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="prompts_fl"></a>
+      Prompts<a class="indexterm" name="idp192291440"></a>
+</h4></div></div></div>
+<p>Routine: Requests the name(s) of the routines (using %RSEL); &lt;RETURN&gt; ends the selection.</p>
+<p>Output Device: &lt;terminal&gt;:</p>
+<p>Requests a destination device; defaults to the principal device.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="examples_of_fl"></a>
+      Examples of %FL<a class="indexterm" name="idp192079424"></a>
+</h4></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%FL
+First Line Lister 
+Routine: %D
+%D
+Current total of 1 routine.
+Routine: %GS* 
+%GSE %GSEL
+Current total of 3 routines.
+Routine: - %D
+%D
+Current total of 2 routines.
+Routine: ?D
+%GSE %GSEL
+Routine: &lt;RETURN&gt;
+Output Device: &lt;RETURN&gt;
+Routine First Line Lister Utility
+GT.M 21-MAR-2002 16:44:09 
+%GSE
+%GSE;GT.M %GSE utility - global search
+;
+%GSEL;
+%GSEL;GT.M %GSEL utility - global select into a local array
+;
+;invoke ^%GSEL to create %ZG - a local array of existing globals, interactively
+;
+Total 5 lines in of 2 routines.
+GTM&gt;</pre>
+<p>This example selects %D, then selects %GSE and %GSEL and deselects %D. Because the example enters &lt;RETURN&gt; at the Output Device: &lt;terminal&gt;: prompt, the output goes to the principal device.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="randstr"></a>%RANDSTR
+  <a class="indexterm" name="idp192117008"></a>
+</h3></div></div></div>
+<p>%RANDSTR generates a random string. The format %RANDSTR is:</p>
+<pre class="programlisting">%RANDSTR (strlen,charranges,patcodes,charset)</pre>
+<p>The random string is of length strlen from an alphabet defined by charset or by charranges and patcodes.</p>
+<p>strlen: the length of the random string.</p>
+<p>charranges: Range of alphabets defined by charset. By default charranges is 1:1:127.  charranges uses the same syntax used for FOR loop ranges, for example, 48:2:57 to select the even decimal digits or 48:1:57,65:1:70 to select hexadecimal digits.</p>
+<p>patcodes:  specifies pattern codes used to restrict the characters to those that match the selected codes. By default, patcodes is "AN".</p>
+<p>charset: Specifies a string of non-zero length. If specified, %RANDSTR generates the random string using the characters in charset, otherwise it takes its alphabet as specified by charranges and patcodes.  If charset is of zero length, and is passed by reference, %RANDSTR() initializes it to the alphabet of characters defined by charranges and patcodes. If not specified, strlen defaults to 8, charranges defaults to 1:1:127 and patcodes to "AN".</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="rce_percent"></a>
+      %RCE<a class="indexterm" name="idp192309424"></a>
+</h3></div></div></div>
+<p>The %RCE utility replaces every occurrence of a text string with another text string in a routine or a list of routines.</p>
+<p>%RCE uses %RSEL to select routines. For more information, see <a class="xref" href="ch10s07.html#rsel_percent_d" title="%RSEL">&#8220;
+      %RSEL&#8221;</a>.</p>
+<p>%RCE prompts for a text string to replace and its replacement. %RCE searches for text strings in a case-sensitive manner. %RCE issues a warning message if you specify a control character such as a &lt;TAB&gt; in the text string or its replacement. %RCE confirms your selection by displaying the text string and its replacement between a left and right arrow. The arrows highlight any blank spaces that you might have included in the text string or its replacement.</p>
+<p> Regardless of whether you select a display of every change, %RCE displays the name of each routine as it is processed. You can suppress the output of the names of routines in which no changes are made by using the QUIET and QCALL utility labels.  %RCE completes processing with a count of replacements and routines changed.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="prompts_rce"></a>
+      Prompts<a class="indexterm" name="idp192216304"></a>
+</h4></div></div></div>
+<p>Routine: Requests (using %RSEL) the name(s) of the routines to change; &lt;RETURN&gt; ends the selection.</p>
+<p>Old string: Requests string to be replaced.</p>
+<p>New string: Requests replacement string.</p>
+<p>Show changed lines &lt;Yes&gt;?:</p>
+<p>Asks whether to display the before and after versions of the modified lines on an output device.</p>
+<p>Output Device: &lt;terminal&gt;:</p>
+<p>Requests a destination device; defaults to the principal device.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="util_labels_rce"></a>
+      Utility Labels<a class="indexterm" name="idp192244160"></a>
+</h4></div></div></div>
+<p>QUIET: Only displays the names of routines in which changes are made.</p>
+<p>CALL: Works without user interaction unless %ZR is not defined.</p>
+<p>QCALL: Works without user interaction unless %ZR is not defined. Only displays the names of routines in which changes are made.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="input_vari_rce"></a>
+      Input Variables<a class="indexterm" name="idp192322368"></a>
+</h4></div></div></div>
+<p>The following input variables are only applicable when invoking CALL^%RCE.</p>
+<p>%ZR: Contains an array of routines provided or generated with %RSEL.</p>
+<p>%ZF: Contains string to find.</p>
+<p>%ZN: Contains a replacement string.</p>
+<p>%ZD: Identifies the device to display the change trail, defaults to principal device. Make sure you open the device if the device is not the principal device.</p>
+<p>%ZC: Truth-value indicating whether to display the change trail, defaults to 0 (no).</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="examples_of_rce"></a>
+      Examples of %RCE<a class="indexterm" name="idp192326240"></a>
+</h4></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RCE 
+Routine Change Every occurrence 
+Routine: BES*
+BEST BEST2 BEST3 BEST4
+Current total of 4 routines
+Routine: &lt;RETURN&gt;
+Old string:^NAME 
+New string:^STUDENT
+Replace all occurrences of:
+&gt;^NAME&lt;
+With
+&gt;^STUDENT&lt;
+Show changed lines &lt;Yes&gt;?: &lt;RETURN&gt;
+Output Device: &lt;RETURN&gt;
+/usr/smith/work/BEST.m
+Was: S ^NAME=SMITH 
+Now: S ^STUDENT=SMITH
+Was: S ^NAME(1)=JOHN
+Now: S ^STUDENT(1)=JOHN
+/usr/smith/work/BEST2.m
+/usr/smith/work/BEST3.m
+Was: S ^NAME=X
+Now: S ^STUDENT=X
+Was: W ^NAME
+Now: W ^STUDENT
+/usr/smith/work/BEST4.m
+Total of 4 routines parsed.
+4 occurrences changed in 2 routines.
+GTM&gt;</pre>
+<p>This example selects a list of routines that change the string "^NAME" to the string "^STUDENT," and displays a trail of the changes.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RCE
+Routine Change Every occurrence
+Routine: BES*
+BEST BEST2 BEST3 BEST4
+Current total of 4 routines
+Routine: &lt;RETURN&gt;
+Old String:&lt;TAB&gt; 
+The find string contains control characters
+New string: &lt;RETURN&gt;
+Replace all occurrences of:
+&gt;&lt;TAB&gt;&lt;
+With:
+&gt;&lt;
+Show changed lines &lt;Yes&gt;?: N
+BEST BEST2 BEST3 BEST4
+Total 4 routines parsed.
+4 occurrences changed in 2 routines.
+GTM&gt; </pre>
+<p>This example removes all occurrences of the &lt;TAB&gt; key from specified routines and suppresses the display trail of changes.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="percent_rd_d"></a>
+      %RD<a class="indexterm" name="idp192125936"></a>
+</h3></div></div></div>
+<p>The %RD utility lists routine names accessible through the current $ZROUTINES. %RD calls %RSEL and displays any routines accessible through %RSEL. Use %RD to locate routines.</p>
+<p>%RD accepts the wildcard characters asterisk (*) and question mark (?). The wildcards carry their usual meanings, an asterisk (*) denotes a field or a portion of a field, and a question mark (?) denotes a single character in positions other than the first.</p>
+<p>A colon (:) between two routine names specifies a range of routines. %RD displays only those routine names accessible through the current $ZROUTINES.</p>
+<p>After each selection %RD displays the total number of routines listed.</p>
+<p>Pressing &lt;RETURN&gt; exits %RD.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="prompts_rd_d"></a>
+      Prompts<a class="indexterm" name="idp192346592"></a>
+</h4></div></div></div>
+<p>Routine: Requests (using %RSEL) the name(s) of the routines to list; &lt;RETURN&gt; ends the selection.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="util_labels_rd_d"></a>
+      Utility Labels<a class="indexterm" name="idp192342640"></a>
+</h4></div></div></div>
+<p>OBJ: Lists object modules accessible through the current $ZROUTINES.</p>
+<p>LIB: Lists percent (%) routines accessible through the current $ZROUTINES.</p>
+<p>SRC: Lists the source modules accessible through the current $ZROUTINES (same as %RD).</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="examples_of_rd_d"></a>
+      Examples of %RD<a class="indexterm" name="idp192289104"></a>
+</h4></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RD 
+Routine directory
+Routine: TAXES
+TAXES
+Total of 1 routine
+Routine:*
+EMP FICA PAYROLL TAXES YTD
+Total of 5 Routines
+Routine: &lt;RETURN&gt;
+GTM&gt;</pre>
+<p>This example invokes %RD that prompts for routine TAXES and the wildcard (*). %RD lists five routines accessible through the current $ZROUTINES.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO OBJ^%RD 
+Routine directory
+Routine:*
+EMP FICA
+Total of 2 routines
+Routine: &lt;RETURN&gt;
+GTM&gt; </pre>
+<p>This example invokes %RD with the label OBJ that lists only object modules accessible through the current $ZROUTINES.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO LIB^%RD 
+Routine directory
+%D %DATE %DH %G %GD %GSEL 
+GTM&gt; </pre>
+<p>This example invokes %RD with the LIB label that lists all the % routines accessible through the current $ZROUTINES.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO SRC^%RD 
+Routine directory
+Routine:*
+DATACHG
+Total of 1 routines
+Routine: &lt;RETURN&gt;
+GTM&gt; </pre>
+<p>This example invokes %RD with the label SRC that lists only source modules accessible through the current $ZROUTINES.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="percent_ri_d"></a>
+      %RI<a class="indexterm" name="idp192347488"></a>
+</h3></div></div></div>
+<p>%RI transforms M routines in the sequential format described in the ANSI standard into individual <span>.m</span> files in GT.M format. Use %RI to make M RO format accessible as GT.M routines.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="prompts_ri_d"></a>
+      Prompts<a class="indexterm" name="idp192364016"></a>
+</h4></div></div></div>
+<p>Formfeed delimited &lt;No&gt;?</p>
+<p>Requests whether lines should be delimited by formfeed characters rather than carriage returns.</p>
+<p>Input Device: &lt;terminal&gt;:</p>
+<p>Requests name of RO file containing M routines.</p>
+<p>Output Directory:</p>
+<p>Requests name of directory to output M routines.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="examples_of_ri_d"></a>
+      Examples of %RI<a class="indexterm" name="idp192299984"></a>
+</h4></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RI
+Routine Input utility - Converts RO file to *.m files
+Formfeed delimited &lt;No&gt;? &lt;RETURN&gt;
+Input device: &lt;terminal&gt;: file.ro
+Files saved from FILEMAN directory
+GT.M 07-MAY-2002 15:17:54
+Output directory: /usr/smith/work/
+DI DIA DIAO DIAI DIB DIBI
+Restored 753 lines in 6 routines.
+GTM&gt;</pre>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="percent_ro_d"></a>
+      %RO<a class="indexterm" name="idp192341696"></a>
+</h3></div></div></div>
+<p>The %RO utility writes M source code for one or more routines to a sequential device such as, a disk file or a printer. .</p>
+<p>%RO uses %RSEL to select routines. For more information, see <a class="xref" href="ch10s07.html#rsel_percent_d" title="%RSEL">&#8220;
+      %RSEL&#8221;</a>.</p>
+<p>%RO writes the routines in alphabetical order to the specified device. %RO displays the name of each routine as it writes the routine to the device.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="prompts_ro_d"></a>
+      Prompts<a class="indexterm" name="idp192375344"></a>
+</h4></div></div></div>
+<p>Routine: Requests (using %RSEL) the name(s) of the routines to output; &lt;RETURN&gt; ends selection.</p>
+<p>Output device: &lt;terminal&gt;:</p>
+<p>Requests a destination device; defaults to the principal device.</p>
+<p>Header label: Requests text to place in the first of the two header records.</p>
+<p>Strip comments &lt;No&gt;?:</p>
+<p>Asks whether to remove all comment lines except those with two adjacent semicolons.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="util_labels_ro_d"></a>
+      Utility Labels<a class="indexterm" name="idp192372864"></a>
+</h4></div></div></div>
+<p>CALL: Works without user interaction unless %ZR is not defined.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="input_var_ro_d"></a>
+      Input Variables<a class="indexterm" name="idp192252832"></a>
+</h4></div></div></div>
+<p>The following input variables are only applicable when invoking CALL^%RO.</p>
+<p>%ZR: Contains an array of routines provided or generated with %RSEL.</p>
+<p>%ZD: Identifies the device to display output, defaults to principal device.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="examples_of_ro"></a>
+      Examples of %RO<a class="indexterm" name="idp192375824"></a>
+</h4></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RO
+Routine Output - Save selected routines into RO file.
+Routine: %D
+%D
+Current total of 1 routines.
+Routine: -%D
+%D
+Current total of 0 routines.
+Routine: BEST* 
+BEST BEST1 BEST2 
+Current total of 3 routines.
+Routine: ?D
+BEST BEST1 BEST2
+Routine: &lt;RETURN&gt;
+Output Device: &lt;terminal&gt;: output.txt
+Header Label: Source code for the BEST modules.
+Strip comments &lt;No&gt;?:&lt;RETURN&gt;
+BEST BEST1 BEST2 
+Total of 53 lines in 3 routines
+GTM&gt;</pre>
+<p>This example adds and subtracts %D from the selection, then adds all routines starting with "BEST" and confirms the current selection. The example sends output to <span> the designated output file output.txt</span>. %RO displays the label at the beginning of the output file. The first record of the header label is the text entered at the prompt. The second record of the header label consists of the word "GT.M" and the current date and time.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="rse_percent_d"></a>
+      %RSE<a class="indexterm" name="idp192367728"></a>
+</h3></div></div></div>
+<p>The %RSE utility searches for every occurrence of a text string in a routine or a list of routines.</p>
+<p>%RSE uses %RSEL to select routines. For more information, see <a class="xref" href="ch10s07.html#rsel_percent_d" title="%RSEL">&#8220;
+      %RSEL&#8221;</a>.</p>
+<p>%RSE searches for text strings that are case-sensitive. %RSE issues a warning message if you specify a control character such as a &lt;TAB&gt; in the text string. %RSE confirms your selection by displaying the text string between a left and right arrow. The arrows display any blank spaces included in the text string.</p>
+<p>%RSE displays the name of each routine as it is processed. You can suppress the output of the names of routines in which the search string is not found by using the QUIET and QCALL utility labels.</p>
+<p> %RSE completes processing with a count of occurrences found.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="prompts_rse_d"></a>
+      Prompts<a class="indexterm" name="idp192291264"></a>
+</h4></div></div></div>
+<p>Routine: Requests (using %RSEL) the name(s) of the routines to search; &lt;RETURN&gt; ends selection.</p>
+<p>Find string: Requests string for which to search.</p>
+<p>Output device: &lt;terminal&gt;:</p>
+<p>Requests a destination device; defaults to the principal device.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="util_labels_rse_d"></a>
+      Utility Labels<a class="indexterm" name="idp192388784"></a>
+</h4></div></div></div>
+<p>QUIET: Only displays the names of routines in which the search string is found.</p>
+<p>CALL: Works without user interaction unless %ZR is not defined.</p>
+<p>QCALL: Works without user interaction unless %ZR is not defined. Only displays the names of routines in which the search string is found.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="input_var_rse_d"></a>
+      Input Variables<a class="indexterm" name="idp192366064"></a>
+</h4></div></div></div>
+<p>The following input variables are only applicable when invoking CALL^%RSE.</p>
+<p>%ZR: Contains an array of routines provided or generated with %RSEL.</p>
+<p>%ZF: Contains the string to find.</p>
+<p>%ZD: Identifies the device to display the results, defaults to principal device. Make sure you open the device if the device is not the principal device.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="examples_of_rse"></a>
+      Examples of %RSE<a class="indexterm" name="idp192394336"></a>
+</h4></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RSE
+Routine Search for Every occurrence 
+Routine: BES*
+BEST BEST2 BEST3 BEST4
+Current total of 4 routines
+Routine: &lt;RETURN&gt;
+Find string:^NAME
+Find all occurrences of: 
+&gt;^NAME&lt;
+Output device: &lt;terminal&gt;:
+/usr/smith/work/BEST.m
+S ^NAME=SMITH
+S ^NAME(1)=JOHN
+/usr/smith/work/BEST2.m
+/usr/smith/work/BEST3.m
+S ^NAME=X
+W ^NAME
+/usr/smith/work/BEST4.m
+Total of 4 routines parsed.
+4 occurrences found in 2 routines.
+GTM&gt;</pre>
+<p>This example invokes %RSE that searches and finds a given string. The output device specifies a terminal display of all lines where the text string occurs.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RSE
+Routine Search for Every occurrence
+Routine: BEST
+BEST
+Current total of 1 routine
+Routine: &lt;RETURN&gt;
+Find string:^NAME 
+Find all occurrences of: 
+&gt;^NAME&lt;
+Output Device: out.lis
+BEST
+GTM&gt; </pre>
+<p>This example instructs ^%RSE to write all lines where the text string occurs to an output file, <span> out.lis</span>.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="rsel_percent_d"></a>
+      %RSEL<a class="indexterm" name="idp192349056"></a>
+</h3></div></div></div>
+<p>The %RSEL utility selects M routines. %RSEL selects routines using directories specified by the GT.M special variable $ZROUTINES. $ZROUTINES contains an ordered list of directories that certain GT.M functions use to locate source and object files. If $ZROUTINES is not defined, %RSEL searches only the current default directory. Other GT.M utilities call %RSEL.</p>
+<p>%RSEL prompts for the name of a routine(s).</p>
+<p>%RSEL accepts the wildcard characters asterisk (*) and question mark (?). The wildcards carry their usual meanings: an asterisk (*) denotes a field or a portion of a field, and a question mark (?) denotes a single character in positions other than the first.</p>
+<p>A colon (:) between two routines specifies a range.</p>
+<p>%RSEL creates a read-write variable %ZR, which is a local array of selected routines. After each selection, %RSEL reports the number of routines in %ZR. A minus sign (-) or an apostrophe (') character preceding a routine name removes that routine from the %ZR array. A question mark (?) provides online help, and "?D" displays M routines currently in the array.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>If a local variable %ZRSET is defined, %RSEL places the output information into a global variable (^%RSET) instead of the local variable %ZR.</p></td></tr>
+</table></div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="prompts_rsel_d"></a>
+      Prompts<a class="indexterm" name="idp192415600"></a>
+</h4></div></div></div>
+<p>Routine: Requests the name(s) of the routines; &lt;RETURN&gt; ends selection.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="util_labels_rsel_d"></a>
+      Utility Labels<a class="indexterm" name="idp192407824"></a>
+</h4></div></div></div>
+<p>CALL: Performs %RSEL without reinitializing %ZR.</p>
+<p>OBJ: Searches only object files.</p>
+<p>SRC: Searches only source files (same as %RSEL).</p>
+<p>SILENT: Provides non-interactive (batch) access to the functionality of %RSEL. The syntax is  <code class="code">SILENT^%RSEL(pattern,label) </code>where <code class="code">pattern </code>is a string that specifies the routine names to be searched. label can be "OBJ", "SRC" or "CALL". The default is "SRC" value corresponds to ^%RSEL if invoked interactively.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="input_var_rsel_d"></a>
+      Input Variables<a class="indexterm" name="idp192345360"></a>
+</h4></div></div></div>
+<p>The following input variables are only valid when invoking CALL^%RSEL:</p>
+<p>%ZE: Contains the file extension, usually either <span>.m</span> for source files or <span>.o</span> for object files.</p>
+<p>%ZR: As input, contains an existing list of routines to be modified.</p>
+<p>%ZRSET: On being set, requests %RSEL to place the output in the global variable ^%RSET.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="output_var_rsel_d"></a>
+      Output Variables<a class="indexterm" name="idp192418896"></a>
+</h4></div></div></div>
+<p>%ZR: As output, contains list of directories indexed by selected routine names.</p>
+<p>^%RSET($JOB): The output global variable ^%RSET is used instead of the local variable %RD if the input variable %ZRSET is set. It is indexed by job number $JOB and the selected routine names.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="examples_of_rsel_d"></a>
+      Examples of %RSEL<a class="indexterm" name="idp192408272"></a>
+</h4></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RSEL
+Routine: TES*
+TEST2 TEST3
+Current total of 2 routines 
+Routine: &lt;RETURN&gt;
+GTM&gt;DO OBJ^%RSEL
+Routine:TEST?
+Current total of 0 routines
+Routine: &lt;RETURN&gt;
+GTM&gt;ZWRITE
+%ZR=0</pre>
+<p>This example selects two source routines starting with "TES" as the first three characters. Then, the example invokes %RSEL at the OBJ label to select object modules only. OBJ^%RSEL returns a %ZR=0 because object modules for the TEST routines do not exist.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RSEL
+Routine: BES*
+BEST BEST2 BEST3 BEST4
+Current total of 4 routines
+Routine: - BEST
+BEST
+Current total of 3 routines
+Routine: ?D
+BEST2 BEST3 BEST4 
+Routine: 'BEST2
+BEST2
+Current total of 2 routines
+Routine: ?D
+BEST3 BEST4
+Routine: &lt;RETURN&gt;
+GTM&gt;ZWRITE
+%ZR=2
+%ZR("BEST3")="/usr/smith/work/"
+%ZR("BEST4")="/usr/smith/test/"
+GTM&gt;</pre>
+<p>This example selects the routines using the asterisk (*) wildcard and illustrates how to tailor your selection list. Note that %ZR contains two routines from different directories.</p>
+<p>By default, %RSEL bases the contents of %ZR on source files that have a .m extension.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RSEL
+Routine:BEST*
+BEST2 BEST3
+Current total of 2 routines 
+Routine: &lt;RETURN&gt;
+GTM&gt;ZWRITE
+%ZR=2
+%ZR("BEST2")="/usr/smith/test/"
+%ZR("BEST3")="/usr/smith/test/"</pre>
+<p>This example creates a %ZR array with BEST2 and BEST3.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RSEL
+Routine:LOCK
+LOCK
+Current total of 1 routine
+Routine: &lt;RETURN&gt;
+GTM&gt;ZWRITE 
+%ZR=1
+%ZR("LOCK")="/usr/smith/work/"
+GTM&gt;DO CALL^%RSEL
+Routine:BEST*
+BEST2 BEST3
+Current total of 2 routines
+Routine: &lt;RETURN&gt;
+GTM&gt;ZWRITE
+%ZR=3
+%ZR("BEST2")="/usr/smith/work/"
+%ZR("BEST3")="/usr/smith/work/"
+%ZR("LOCK")="/usr/smith/work/"
+GTM&gt;</pre>
+<p>This example creates a %ZR array with LOCK and adds to it using CALL%RSEL.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;do SILENT^%RSEL("myroutine","OBJ")</pre>
+<pre class="programlisting">GTM&gt;ZWRITE
+%ZR=1
+%ZR("myroutine")="/usr/smith/work"</pre>
+<p>This example invokes %RSEL non-interactively and creates a %ZR array for myroutine using OBJ%RSEL.</p>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch10s06.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch10.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch10s08.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">
+      Global Utilities </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> 
+      Internationalization Utilities</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch10s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:47 GMT -->
+</html>

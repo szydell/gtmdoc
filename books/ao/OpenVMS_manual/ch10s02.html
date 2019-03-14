@@ -1,0 +1,885 @@
+<html>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch10s02.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:44 GMT -->
+<head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>DSE Commands and Qualifiers</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch10.html" title="Chapter 10. Database Structure Editor"><link rel="prev" href="ch10s01.html" title="Operating in DSE"><link rel="next" href="ch10s03.html" title="DSE Command Summary"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">DSE Commands and Qualifiers</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch10s01.html">Prev</a> </td><th width="60%" align="center">Chapter 10. Database Structure Editor</th><td width="20%" align="right"> <a accesskey="n" href="ch10s03.html">Next</a></td></tr></table><hr></div><div class="sect1" title="DSE Commands and Qualifiers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dse_cmmds_qualifiers"></a>DSE Commands and Qualifiers</h2></div></div></div><p>The following sections describe DSE commands and their qualifiers. DSE allows
+abbreviations of commands. The section explaining each command provides the minimal
+abbreviation for that command.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The abbreviations designated for each command and qualifier represent the
+minimum distinguishable subset of letters. </p></td></tr></table></div><p>The DSE commands work on the last region specified. If no other region has been
+selected during this DSE session, DSE works on the default region, which is the
+region mapping to the name-space *. Use the FIND <span>/</span>REGION=region command to initially specify or change the
+region.</p><p>Using DSE to modify your database is a very delicate operation. DSE should only be
+used by or under the supervision of someone who understands the GDS
+structure.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>To specify a null data value to DSE, use a backslash (\).</p></td></tr></table></div><p>Example:</p><pre class="programlisting">DSE&gt; ADD /block=3 /record=1 /key="x(1)" /data="</pre><p>To help the new DSE user, the following lists categorize the DSE commands by their
+potential level of impact on the database.</p><p>
+<span class="bold"><strong>General Purpose Commands</strong></span>
+</p><p>The following commands do not affect the database:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>CLOSE</p></li><li class="listitem"><p>EVALUATE</p></li><li class="listitem"><p>EXIT</p></li><li class="listitem"><p>OPEN <span>/</span>FILE="file-name"</p></li><li class="listitem"><p>PAGE</p></li><li class="listitem"><p>SPAWN</p></li><li class="listitem"><p>HELP</p></li><li class="listitem"><p>OPEN /FILE=file-spec</p></li></ul></div><p>
+<span class="bold"><strong>Non-invasive Commands</strong></span>
+</p><p>The following commands use, but do not change, the database:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>FIND</p></li><li class="listitem"><p>DUMP</p></li><li class="listitem"><p>SAVE</p></li><li class="listitem"><p>RANGE</p></li><li class="listitem"><p>INTEG</p></li></ul></div><p>
+<span class="bold"><strong>Invasive Commands</strong></span>
+</p><p>The following commands modify the database . </p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p> Use these commands only if you are completely sure that you know what you are
+doing, or under the direction of FIS technical support. Inappropriate use
+of these commands can result in improper operation of the application including
+hangs, crashes, and unrecoverable damage to the database. Under normal
+operation, there should be no need to use these commands:</p></td></tr></table></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>ADD</p></li><li class="listitem"><p>ALL</p></li><li class="listitem"><p>BUFFER_FLUSH</p></li><li class="listitem"><p>CHANGE</p></li><li class="listitem"><p>CRITICAL</p></li><li class="listitem"><p>MAPS</p></li><li class="listitem"><p>OVERWRITE</p></li><li class="listitem"><p>SHIFT</p></li><li class="listitem"><p>REMOVE </p></li><li class="listitem"><p>RESTORE</p></li></ul></div><div class="sect2" title="DSE Command Syntax"><div class="titlepage"><div><div><h3 class="title"><a name="dse_cmmd_syn"></a>DSE Command Syntax</h3></div></div></div><p>The format for DSE commands is:</p><pre class="programlisting">DSE&gt; command [<span>/</span>qualifier[...]] [object[,...]]
+</pre><p>DSE interprets all numeric input as hexadecimal, except for time values, the
+<span>/</span>BLK_SIZE=, <span>/</span>KEY_MAX_SIZE=, <span>/</span>RECORD_MAX_SIZE, <span>/</span>REFERENCE_COUNT=, <span>/</span>TIMERS PENDING, and <span>/</span>WRITES_PER_FLUSH on CHANGE
+<span>/</span>FILEHEADER, and
+<span>/</span>VERSION=, on the
+REMOVE and RESTORE commands. This convention corresponds to the displays
+provided by DSE and by MUPIP INTEG.</p></div><div class="sect2" title="ADD"><div class="titlepage"><div><div><h3 class="title"><a name="add_dse"></a>ADD</h3></div></div></div><p>The ADD command adds a record to a block.</p><p>
+<span>The format of the ADD command for</span>
+ blocks with a level greater than zero (0) is:</p><pre class="programlisting">ADD [ /B[LOCK]=[block] /STAR /POINTER=block
+or
+ADD /[/B[LOCK]=[block]/OFFSET=offset|/RECORD=record /KEY=key /POINTER=pointer</pre><p>For level 0 blocks, it is:</p><pre class="programlisting">ADD/[/B[LOCK]=[block]/OFFSET=offset|/RECORD=record/KEY=key/D ATA=string </pre><p>The ADD command requires either the <span>/</span>OFFSET or <span>/</span>RECORD qualifier to position the record in the block, and either
+the <span>/</span>KEY or the <span>/</span>STAR qualifier to define the
+key for the block.</p><p>The <span>/</span>STAR qualifier is
+invalid at level 0 (a data block). The ADD command requires the <span>/</span>DATA qualifier at level 0 or the
+<span>/</span>POINTER qualifier at
+any other level to provide record content.</p><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="add_qualifiers_dse"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>B[LOCK]=block-number</em></span>
+</p><p>Specifies the block to receive the new record.</p><p>On commands with no <span>/</span>BLOCK= qualifier, DSE uses the last block handled by a DSE
+operation. When no block has been accessed, that is, on the first
+block-oriented command, DSE uses block one (1).</p><p>
+<span class="emphasis"><em>
+<span>/</span>D[ATA]=string</em></span>
+</p><p>Specifies the data field for records added to a data block. Use quotation
+marks around the string and escape codes of the form or b, where "a" and "b"
+are hexadecimal digits representing non-printing characters. translates to a
+single backslash. The <span>/</span>DATA qualifier only applies at level 0 and is incompatible
+with the <span>/</span>STAR and
+<span>/</span>POINTER
+qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>K[EY]=key</em></span>
+</p><p>Specifies the key of the new record. Enclose M-style global references,
+including the leading caret symbol (^), in quotation marks (" "). The
+<span>/</span>KEY qualifier is
+incompatible with the <span>/</span>STAR qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>O[FFSET]=offset</em></span>
+</p><p>Adds the new record at the next record boundary after the specified
+offset. The <span>/</span>OFFSET
+qualifier is incompatible with the <span>/</span>RECORD and <span>/</span>STAR qualifiers. </p><p>
+<span class="emphasis"><em>
+<span>/</span>P[OINTER]=pointer</em></span>
+</p><p>Specifies the block pointer field for records added to an index block. The
+<span>/</span>POINTER qualifier
+is incompatible with the <span>/</span>DATA qualifier and cannot be used at level 0.</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[ECORD]=record-number</em></span>
+</p><p>Specifies a record number of the new record. The <span>/</span>RECORD qualifier is incompatible
+with the <span>/</span>OFFSET and
+<span>/</span>STAR
+qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>S[TAR]</em></span>
+</p><p>Adds a star record (i.e., a record that identifies the last record in an
+indexed block) at the end of the specified block. The <span>/</span>STAR qualifier is incompatible
+with all qualifiers except <span>/</span>BLOCK and <span>/</span>POINTER and cannot be used at level 0.</p></div></div><div class="sect2" title="ALL"><div class="titlepage"><div><div><h3 class="title"><a name="all_dse_cmmd"></a>ALL</h3></div></div></div><p>The ALL command applies action(s) specified by a qualifier to all GDS regions
+defined by the current Global Directory. This is a very powerful command; use it
+with caution. Be especially careful if you have an overlapping database
+structure (e.g., overlapping regions accessed from separate application Global
+Directories). If you use this type of database structure, you may need to
+construct special Global Directories to use with DSE that exclude overlapped
+regions. <span>Do not use this command unless you understand how GT.M
+uses global directories.</span>
+</p><p>The format of the ALL command is:</p><pre class="programlisting">AL[L]  <span>/</span>B[UFFER_FLUSH]
+<span>/</span>C[RITINIT]
+<span>/</span>[NO]F[REEZE]
+<span>/</span>O[VERRIDE]]
+<span>/</span>REF[ERENCE]
+<span>/</span>REL[EASE]
+<span>/</span>REN[EW]
+<span>/</span>S[EIZE]
+<span>/</span>W[CINIT]           
+</pre><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="all_qualifiers_dse"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>BUFFER_FLUSH</em></span>
+</p><p>Flushes to disk the file header and all cache buffers for all regions
+specified by the current Global Directory. The <span>/</span>BUFFER_FLUSH qualifier is
+incompatible with the <span>/</span>RENEW qualifier.</p><p>Just before breaking database on shadowed disks, it is important
+to freeze updates and then flush all regions. Failure to do so will result
+in a database with integrity errors on the shadowed copy. If you are doing
+this to backup your database without bringing down your application,
+FIS recommends MUPIP BACKUP/ONLINE as the preferred alternative.</p><p>
+<span class="emphasis"><em>
+<span>/</span>C[RITINIT]</em></span>
+</p><p>Initializes critical sections for all regions specified by the current
+Global Directory. The <span>/</span>CRITINIT qualifier is incompatible with the <span>/</span>RENEW, <span>/</span>RELEASE, and <span>/</span>SEIZE qualifiers.</p><p>This causes all processes currently accessing the databases
+specified by the current Global Directory to terminate with an error.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Such action may cause database damages when used while concurrent
+updates are in progress.</p></td></tr></table></div><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]F[REEZE]</em></span>
+</p><p>Allows a user to freeze, or prevent updates to, GDS regions specified by
+the current Global Directory. The <span>/</span>FREEZE qualifier freezes all such GDS regions except
+those previously frozen by another user. Regions frozen by a particular user
+are associated with that user. A frozen region may be updated in one of two
+ways: The user who froze the region may unfreeze it with the <span>/</span>NOFREEZE qualifier; or
+another user may override the freeze in conjunction with the <span>/</span>OVERRIDE
+qualifier.</p><p>For information about a preferred method of manipulating FREEZE, refer to
+the MUPIP FREEZE section of the "MUPIP" chapter.</p><p>By default, the <span>/</span>NOFREEZE qualifier unfreezes only those GDS regions that were
+previously frozen by the user the process. Once a region is unfrozen, it may
+be updated by any user. To unfreeze all GDS regions of the Global Directory,
+use the <span>/</span>OVERRIDE
+qualifier.</p><p>The <span>/</span>FREEZE
+qualifier is incompatible with the <span>/</span>RENEW qualifier.</p><p>DSE releases <span>/</span>FREEZE
+when it EXITs. To hold all databases, enter ALL FREEZE and then SPAWN to
+perform  operations <span>such as
+breaking a shadow.</span>
+</p><p>
+<span class="emphasis"><em>
+<span>/</span>O[VERRIDE]</em></span>
+</p><p>The <span>/</span>OVERRIDE
+qualifier is meaningful only with the <span>/</span>FREEZE or <span>/</span>NOFREEZE qualifiers. When used with <span>/</span>NOFREEZE it unfreezes all GDS
+regions, including those frozen by other users. When used with <span>/</span>FREEZE, the <span>/</span>OVERRIDE qualifier
+freezes all GDS regions, including those frozen by other users, associating
+all such freezes with the current user. The current user must then use the
+/NOFREEZE qualifier to unfreeze the database; any other user attempting a
+<span>/</span>NOFREEZE would
+also have to include the <span>/</span>OVERRIDE qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>REF[ERENCE]</em></span>
+</p><p>Resets reference counts to 1 for all regions specified by the current
+Global Directory. The <span>/</span>REFERENCE qualifier is incompatible with the <span>/</span>RENEW qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>REL[EASE]</em></span>
+</p><p>Releases critical sections for all regions specified by the current Global
+Directory. The <span>/</span>RELEASE qualifier is incompatible with the <span>/</span>CRITINIT, <span>/</span>RENEW, and <span>/</span>SEIZE qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>REN[EW]</em></span>
+</p><p>Reinitializes critical sections (<span>/</span>CRITICAL) and buffers (<span>/</span>WCINIT), resets reference counts
+(<span>/</span>REFERENCE_COUNT)
+to 1, and clears freeze flags for all regions specified by the current
+Global Directory (<span>/</span>NOFREEZE). <span>/</span>RENEW requires confirmation. The <span>/</span>RENEW qualifier is incompatible
+with all other qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>S[EIZE]</em></span>
+</p><p>Seizes the critical section for all regions specified by the current
+Global Directory. The <span>/</span>SEIZE qualifier is incompatible with the <span>/</span>CRITINIT, <span>/</span>RELEASE, and <span>/</span>RENEW qualifiers.</p><p>The <span>/</span>SEIZE qualifier
+can be useful when you encounter a DSEBLKRDFAIL error, generated when DSE is
+unable to read a block from the database.</p><p>
+<span class="emphasis"><em>
+<span>/</span>W[CINIT]</em></span>
+</p><p>Reinitializes buffers for all regions specified by the current Global
+Directory. <span>/</span>WCINIT
+requires confirmation. The <span>/</span>WCINIT qualifier is incompatible with the <span>/</span>RENEW qualifier.</p></div></div><div class="sect2" title="Buffer_flush"><div class="titlepage"><div><div><h3 class="title"><a name="buffer_flush_cmmd_dse"></a>Buffer_flush</h3></div></div></div><p>The BUFFER_FLUSH command flushes the file header and the current region's
+buffers to disk. <span>This command is required immediately prior to
+breaking a disk mirror shadow set where the database
+resides.</span>
+</p><p>The format of the BUFFER_FLUSH command is:</p><pre class="programlisting">B[UFFER_FLUSH]
+</pre><p>The BUFFER_FLUSH command has no qualifiers.</p></div><div class="sect2" title="CHange"><div class="titlepage"><div><div><h3 class="title"><a name="change_dse_cmmd"></a>CHange</h3></div></div></div><p>The CHANGE command changes fields of a block, file, or record header.</p><p>The format of the CHANGE command is:</p><pre class="programlisting">CH[ANGE]
+</pre><p>The CHANGE command either has a <span>/</span>FILEHEADER qualifier or an implicit or explicit <span>/</span>BLOCK qualifier, plus one or more of
+their associated qualifiers, to define the target of the change.</p><p>
+<span>/</span>BL[OCK]=block-number
+and one or more of the following qualifiers:</p><table border="0" summary="Simple list" class="simplelist"><tr><td>
+<span>/</span>BS[IZ]=block-size</td></tr><tr><td>
+<span>/</span>L[EVEL]=level</td></tr><tr><td>
+<span>/</span>TN[=transaction-number]</td></tr><tr><td>
+<span>/</span>OF[FSET]=offset</td></tr><tr><td>
+<span>/</span>RE[CORD]=record-number</td></tr><tr><td>
+<span>/</span>CM[PC]=compression-count</td></tr><tr><td>
+<span>/</span>RS[IZ]=record-size</td></tr><tr><td>or</td></tr><tr><td>
+<span>/</span>F[ILEHEADER] and
+one or more of the following qualifiers:</td></tr><tr><td>
+<span>/</span>BLK[_SIZE
+]=block-size</td></tr><tr><td>
+<span>/</span>BLO[CKS_FREE]=free-blocks</td></tr><tr><td>
+<span>/</span>B_B[YTESTREAM]=transaction-number</td></tr><tr><td>
+<span>/</span>B_C[OMPREHENSIVE]=transaction-number</td></tr><tr><td>
+<span>/</span>B_D[ATABASE]=transaction-number</td></tr><tr><td>
+<span>/</span>B_I[NCREMENTAL]=transaction-number</td></tr><tr><td>
+<span>/</span>B_R[ECORD]=transaction-number</td></tr><tr><td>
+<span>/</span>CU[RRENT_TN]=transaction-number</td></tr><tr><td>
+<span>/</span>DEF[_COLLATION]=value</td></tr><tr><td>
+<span>/</span>FL[USH_TIME][=delta-time]</td></tr><tr><td>
+<span>/</span>FR[EEZE]=value</td></tr><tr><td>
+<span>/</span>K[EY_MAX_SIZE]=key-max-size</td></tr><tr><td>
+<span>/</span>M[ACHINE_NAM]=value</td></tr><tr><td>
+<span>/</span>NO[CRIT]</td></tr><tr><td>
+<span>/</span>N[ULL_SUBSCRIPTS]=value</td></tr><tr><td>
+<span>/</span>OV[ERRIDE]</td></tr><tr><td>
+<span>/</span>REC[ORD_MAX_SIZE]=record-max-size</td></tr><tr><td>
+<span>/</span>REF[ERENCE_COUNT]=reference-count</td></tr><tr><td>
+<span>/</span>REG[_SEQNO]=sequence-number</td></tr><tr><td>
+<span>/</span>RESYNC_S[EQNO]=sequence-number</td></tr><tr><td>
+<span>/</span>RESYNC-T[N]=sequence-number</td></tr><tr><td>
+<span>/</span>TIM[ERS_PENDING]=integer</td></tr><tr><td>
+<span>/</span>TO[TAL_BLKS]=total-blocks</td></tr><tr><td>
+<span>/</span>TR[IGGER_FLUSH]=trigger-flus</td></tr><tr><td>
+<span>/</span>W[RITES_PER_FLUSH]=writes-per-flush</td></tr></table><div class="sect3" title="Change / BLOCK Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="change_qualifiers_block"></a>
+<span>Change /</span>
+BLOCK Qualifiers</h4></div></div></div><p>This section describes <span>/</span>BLOCK and all of its qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>BL[OCK]=block_number</em></span>
+</p><p>Specifies the block to modify. The <span>/</span>BLOCK qualifier is incompatible with the <span>/</span>FILEHEADER qualifier and
+all qualifiers related to <span>/</span>FILEHEADER.</p><p>
+<span>/</span>BLOCK is the
+default qualifier. On commands with neither a <span>/</span>BLOCK nor a <span>/</span>FILEHEADER qualifier, DSE uses
+the last block handled by a DSE operation. When no block has been accessed,
+that is, on the first block-oriented command, DSE uses block one (1).</p><p>The following qualifiers operate on a block header.</p><p>
+<span class="emphasis"><em>
+<span>/</span>BS[IZ]=block_size</em></span>
+</p><p>Changes the block size field of the specified block. Decreasing the block
+size can result in loss of existing data. The <span>/</span>BSIZ qualifier is incompatible
+with all qualifiers except <span>/</span>BLOCK, <span>/</span>LEVEL and <span>/</span>TN.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>DSE does not allow you to change the block size to an arbitrary
+number. It always rounds the block size to the next higher multiple of
+512, because database block sizes must always be a multiple of 512.
+Also, the block size must always be less than or equal to the block size
+in the file header.</p></td></tr></table></div><p>
+<span class="emphasis"><em>
+<span>/</span>L[EVEL]=level</em></span>
+</p><p>Changes the level field for the specified block. The <span>/</span>LEVEL qualifier is incompatible
+with all qualifiers except <span>/</span>BLOCK, <span>/</span>BSIZ, and <span>/</span>TN.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>DSE lets you change the level of a bitmap block to -1 (the value of
+the level for a bitmap block) when the bitmap level gets corrupted and
+takes on an arbitrary value. Note that -1 must be specified in
+hexadecimal, FF.</p></td></tr></table></div><p>Example:</p><pre class="programlisting">DSE &gt;CHANGE /LEVEL=FF</pre><p>
+<span class="emphasis"><em>
+<span>/</span>TN[=transaction_number]</em></span>
+</p><p>Changes the transaction number for the current block. When a CHANGE
+command does not include a <span>/</span>TN=, DSE sets the transaction number to the current
+transaction number. Manipulation of the block transaction number affects
+MUPIP BACKUP <span>/</span>BYTESTREAM, and <span>/</span>ONLINE. The <span>/</span>TN qualifier is incompatible with all qualifiers except
+<span>/</span>BLOCK, <span>/</span>BSIZ, and <span>/</span>LEVEL.</p><p>The following <span>/</span>BLOCK
+qualifiers operate on a record header.</p><p>
+<span class="emphasis"><em>
+<span>/</span>OF[FSET]=offset</em></span>
+</p><p>Specifies the offset, in bytes, of the target record within the block. If
+the offset does not point to the beginning of a record, DSE rounds down to
+the last valid record start (for example, CHANGE <span>/</span>OFFSET=10 starts at <span>/</span>OFFSET=A, if that was the
+last record). The <span>/</span>OFFSET qualifier is incompatible with all qualifiers except
+<span>/</span>BLOCK, <span>/</span>CMPC, and <span>/</span>RSIZ.</p><p>
+<span class="emphasis"><em>
+<span>/</span>RE[CORD]=record_number</em></span>
+</p><p>Specifies the record number of the target record. The <span>/</span>RECORD qualifier is incompatible
+with all qualifiers except <span>/</span>BLOCK, <span>/</span>CMPC, and <span>/</span>RSIZ.</p><p>
+<span class="emphasis"><em>
+<span>/</span>CM[PC]=compression_count</em></span>
+</p><p>Changes the compression count field of the specified record. Because
+compression counts propagate from the "front" of the block, this can
+potentially change the keys of all records following it in the block. If the
+goal is to change only a single record, it may be preferable to add a new
+record and remove the old one. The <span>/</span>CMPC qualifier is incompatible with all qualifiers
+except <span>/</span>BLOCK, <span>/</span>OFFSET, <span>/</span>RECORD, and <span>/</span>RSIZ.</p><p>
+<span class="emphasis"><em>
+<span>/</span>RS[IZ]=record_size</em></span>
+</p><p>Changes the record size field of the specified record. The <span>/</span>RSIZ qualifier is
+incompatible with all qualifiers except <span>/</span>CMPC, <span>/</span>OFFSET, and <span>/</span>RECORD.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Changing this number impacts all records following it in the
+block.</p></td></tr></table></div></div><div class="sect3" title="Change / FILEHEADER Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="change_qualifiers_file"></a>
+<span>Change /</span>
+FILEHEADER Qualifiers</h4></div></div></div><p>This section describes the <span>/</span>FILEHEADER qualifier and the other qualifiers that operate on
+a file header.</p><p>
+<span class="emphasis"><em>
+<span>/</span>FI[LEHEADER]</em></span>
+</p><p>Enables modification of specific fields in the file header. The <span>/</span>FILEHEADER qualifier is
+incompatible with the <span>/</span>BLOCK and all qualifiers related to <span>/</span>BLOCK (that is <span>/</span>BSIZ, <span>/</span>CMPC, <span>/</span>LEVEL, <span>/</span>OFFSET, <span>/</span>RECORD, <span>/</span>RSIZ, and <span>/</span>TN qualifiers).</p><p>
+<span class="emphasis"><em>
+<span>/</span>BLK[_SIZE]=block_size</em></span>
+</p><p>Changes the decimal block size field of the current file.</p><p>The block size cannot be changed to an arbitrary value. It always rounds
+the block size to the next higher multiple of 512, because database block
+sizes must always be a multiple of 512.</p><p>It is not possible to change the block size of a database file
+once it is created. The intent of the command is only to correct the value
+in the file header in case it is damaged.</p><p>
+<span class="emphasis"><em>
+<span>/</span>BLO[CKS_FREE]=free blocks</em></span>
+</p><p>Changes the free blocks field of the current file. Use the <span>/</span>BLOCK_FREE qualifier only
+in conjunction with the <span>/</span>FILEHEADER qualifier.</p><p>
+<span class="emphasis"><em>/B_C[OMPREHENSIVE]=transaction-number</em></span>
+</p><p>This deprecated command has been replaced by /B_D[ATABASE] and is
+temporarily supported for backward compatibility.</p><p>
+<span class="emphasis"><em>
+<span>/</span>B[YTESTREAM]=transaction_number</em></span>
+</p><p>Changes the transaction number in the file header field that
+maintains this information about the last /BYTESTREAM backup.</p><p>
+<span class="emphasis"><em>/B_D[ATABASE]=transaction_number</em></span>
+</p><p>Changes the transaction number in the file header field that
+maintains this information about the last /DATABASE backup.</p><p>
+<span class="emphasis"><em>/B_I[NCREMENTAL]=transaction_number</em></span>
+</p><p>This deprecated command has been replaced by the /B_BYTESTREAM
+command, and is temporaily supported for backward compatibility.</p><p>
+<span class="emphasis"><em>
+<span>/</span>B_R[ECORD]=transaction_number</em></span>
+</p><p>Changes the transaction number in the file header field that maintains
+this information about the last <span>/</span>RECORD backup.</p><p>
+<span class="emphasis"><em>
+<span>/</span>CU[RRENT_TN]=transaction_number</em></span>
+</p><p>Changes the current transaction number for the current region. It also
+places a transaction number in a block header. This qualifier has
+implications only for MUPIP BACKUP <span>/</span>INCREMENTAL. Raising the <span>/</span>CURRENT_TN can correct "block
+transaction number too large" errors <span>resulting from system
+crashes</span>.</p><p>
+<span class="emphasis"><em>
+<span>/</span>FL[USH_TIME][=delta_time]</em></span>
+</p><p>Changes the flush_time default interval (in delta_time). The time entered
+must be between zero and one hour. Input is interpreted as decimal. A
+<span>/</span>FLUSH_TIME with
+no value resets the <span>/</span>FLUSH_TIME to the default value (one second for BG and 30 seconds
+for MM).</p><p>The units of delta_time is centi-seconds (hundredths of a second). For
+example, to change the flush time interval to a second, delta_time would be
+100. To change it to 30 minutes, delta_time would be 180,000 (30*60*100).
+Valid values for the qualifier are one to 360,000 (an hour).</p><p>
+<span class="emphasis"><em>
+<span>/</span>FR[EEZE]=value</em></span>
+</p><p>Sets availability of the region for update. Possible values are: T[RUE] or
+F[ALSE]. Use to "freeze" (disable database writes) or "unfreeze" the
+database. <span>FREEZE normally bypasses freezes by other
+processes. Use /OVERRIDE with /FREEZE to override a freeze by another
+process.</span>
+
+</p><p>For information about a preferred method of manipulating FREEZE, refer to
+the MUPIP FREEZE section of the "MUPIP" chapter.</p><p>DSE releases <span>/</span>FREEZE
+when it EXITs. To hold the database(s), CHANGE <span>/</span>FILEHEADER <span>/</span>FREEZE=TRUE and then SPAWN to
+perform other operations.</p><p>
+<span class="emphasis"><em>
+<span>/</span>K[EY_MAX_SIZE]=key_max_size</em></span>
+</p><p>Changes the decimal value for the maximum allowable key size.  Reducing KEY_MAX_SIZE can restrict
+access to existing data and cause GT.M to report errors. Do not create
+incompatible key and record sizes. </p><p>Before permanently changing the key size using DSE, use GDE to check that
+the appropriate Global Directory contains the same key size for the region.
+This prepares for future MUPIP CREATEs and performs a consistency check on
+the key and record size values. For more information on key and record
+sizes, refer to the "Global Directory Editor" chapter.</p><p>
+<span class="emphasis"><em>M[ACHINE_NAM]=value</em></span>
+</p><p>Sets the name of the machine of the open database to that of the
+current machine, or it cleans it. Values are CURRENT and CLEAR. You do not
+have to set the machine name.</p><p>MUPIP RUNDOWN is a better way to clean the machine after a crash
+or other abnormal event.</p><p>
+<span class="emphasis"><em>NO[CRIT]</em></span>
+</p><p>Allows DSE DUMP to work even if another process is holding a
+critical section. Since results in this mode may be inconsistent, it should
+only be used if the critical section mechanism is not operating
+normally.</p><p>
+<span class="emphasis"><em>
+<span>/</span>N[ULL_SUBSCRIPTS]=value</em></span>
+</p><p>Sets the acceptability of null subscripts in database keys. Possible
+values are: T[RUE] or F[ALSE]. Prohibiting null subscripts can restrict
+access to existing data and cause GT.M to report errors.</p><p>DSE rejects null subscripts for the <span>/</span>KEY qualifier for various commands if they are
+disabled by the NULLSUBSCRIPTS flag in the file header.</p><p>
+<span class="emphasis"><em>/OVERRIDE</em></span>
+</p><p>The /OVERRIDE qualifier is meaningful only with the /FREEZE or
+/NOFREEZE qualifiers. When used with /NOFREEZE it unfreezes all GDS regions,
+including those frozen by other users. When used with /FREEZE, the /OVERRIDE
+qualifier freezes all GDS regions, including those frozen by other users,
+associating all such freezes with the current user. The current user must
+then use the /NOFREEZE qualifier to unfreeze the database; any other user
+attempting a /NOFREEZE would also have to include the /OVERRIDE
+qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>REF[ERENCE_COUNT]=reference_count</em></span>
+</p><p>Sets a field that tracks how many processes are accessing the database
+with read/write permissions. MUPIP INTEG and DSE use decimal numbers for
+<span>/</span>REFERENCE_COUNT.
+To accurately determine the proper reference count, restrict CHANGE <span>/</span>FILEHEADER <span>/</span>REFERENCE_COUNT to the
+case where the process running DSE has exclusive (standalone) access to the
+database file. When DSE has sole access to a database file the <span>/</span>REFERENCE_COUNT should be
+one (1). This is an informational field and does not have any effect on
+processing.</p><p>
+<span class="emphasis"><em>/REG[_SEQNO]=sequence-number</em></span>
+</p><p>In a replicated environment, this sets the "Region Seqno" field.
+Refer to the "Database Replication" chapter for more details.</p><p>
+<span class="emphasis"><em>/RESYNC_S[EQNO]=sequence-number</em></span>
+</p><p>In a replicated environment, this sets the "Resync Seqno" field.
+Refer to the "Database Replication" chapter for more details.</p><p>
+<span class="emphasis"><em>/RESYNC_T[N]=sequence-number</em></span>
+</p><p>In a replicated environment, this sets the "Resync transaction"
+field. Refer to the "Database Replication" chapter for more details.</p><p>
+<span class="emphasis"><em>
+<span>/</span>TI[MERS_PENDING]=timers_pending</em></span>
+</p><p>Sets a field that tracks the number of processes considering a timed
+flush. Proper values are 0, 1, and 2.</p><p>
+<span class="emphasis"><em>
+<span>/</span>TO[TAL_BLKS]=total_blocks</em></span>
+</p><p>Changes the total blocks field of the current file. 
+</p><p>This command only changes the value saved in the file header. It
+does not affect the size of the database file. Do not change it to a value
+that does not match the actual size of the file.</p><p>
+<span class="emphasis"><em>
+<span>/</span>TR[IGGER_FLUSH]=trigger_flush</em></span>
+</p><p>Sets the decimal value for the triggering threshold, in buffers, for
+flushing the cache-modified queue.</p><p>GT.M will dynamically adjust this value for optimal
+performance.</p><p>
+<span class="emphasis"><em>
+<span>/</span>WR[ITES_PER_FLUSH]=writes_per_flush</em></span>
+</p><p>Sets the decimal number of blocks to write in each flush. </p></div></div><div class="sect2" title="CLose"><div class="titlepage"><div><div><h3 class="title"><a name="close_dse_cmmd"></a>CLose</h3></div></div></div><p>The CLOSE command closes the currently open output file.</p><p>The format of the CLOSE command is:</p><pre class="programlisting">CL[OSE]
+</pre><p>The CLOSE command has no qualifiers.</p></div><div class="sect2" title="CRitical"><div class="titlepage"><div><div><h3 class="title"><a name="critical_dse_cmmd"></a>CRitical</h3></div></div></div><p>The CRITICAL command, along with its qualifiers, displays and/or modifies the
+status and contents of the critical section for the current region. The critical
+section provides a control mechanism. This field identifies, by its process
+identification number (PID), the process presently managing updates to
+database.</p><p>The format of the CRITICAL command is:</p><pre class="programlisting">CR[ITICAL] <span>/</span>I[NIT]
+<span>/</span>O[WNER]
+<span>/</span>REL[EASE]
+<span>/</span>REM[OVE]
+<span>/</span>S[EIZE]
+</pre><p>By default, the CRITICAL command assumes the <span>/</span>OWNER qualifier, which displays the
+status of the critical section.</p><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="qaulifiers_change_dse"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>I[NIT]</em></span>
+</p><p>Reinitializes the critical section. The <span>/</span>INIT RESET qualifiers together cause all GT.M
+processes actively accessing that database file to signal an error. Do not
+use <span>/</span>INIT without the
+<span>/</span>RESET parameter
+when other processes are accessing the region.</p><p>
+<span class="emphasis"><em>
+<span>/</span>O[WNER]</em></span>
+</p><p>Displays the ID of the process at the head of the critical section. When
+the current process owns the critical section, DSE displays a warning
+message. The <span>/</span>OWNER
+qualifier is incompatible with other qualifiers.</p><p>Example:</p><pre class="programlisting">DSE&gt; critical <span>/</span>OWNER
+Write critical section is currently unowned
+</pre><p>
+<span class="emphasis"><em>
+<span>/</span>REL[EASE]</em></span>
+</p><p>Releases the critical section if the process running DSE owns the section.
+The <span>/</span>RELEASE qualifier
+is incompatible with other qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>REM[OVE]</em></span>
+</p><p>Terminates any write ownership of the critical section. Use this when the
+critical section is owned by a process that is nonexistent or is known to no
+longer be running a GT.M image. The <span>/</span>REMOVE qualifier is incompatible with other
+qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>RES[ET]</em></span>
+</p><p>When used without /INIT, this qualifier displays the number of
+times that the critical section /RESET /INIT has been executed.</p><p>Using <span>/</span>RESET with
+<span>/</span>INIT causes an
+error for processes that are attempting to get the critical section of the
+region. Under the guidance of FIS, use <span>/</span>RESET <span>/</span>INIT as a way to clear certain
+types of hangs. The <span>/</span>RESET qualifier is only compatible with the <span>/</span>INIT qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>S[EIZE]</em></span>
+</p><p>Seizes the critical section if the section is available. The <span>/</span>SEIZE qualifier is
+incompatible with other qualifiers.</p></div></div><div class="sect2" title="Dump"><div class="titlepage"><div><div><h3 class="title"><a name="dump_dse_cmmd"></a>Dump</h3></div></div></div><p>The DUMP command displays blocks, records, or file headers. DUMP is one of the
+primary DSE examination commands. Use the error messages reported by MUPIP INTEG
+to determine what to DUMP and examine from the database. DUMP also transfers
+records to a sequential file for future study and/or for input to MUPIP
+LOAD.</p><p>The format of the DUMP command is:</p><pre class="programlisting">D[UMP]  <span>/</span>A[LL]
+<span>/</span>B[LOCK]=block_number
+<span>/</span>C[OUNT]=count
+<span>/</span>F[ILEHEADER]
+<span>/</span>G[LO]
+<span>/</span>[NO]C[RIT]
+<span>/</span>[NO]H[EADER]
+<span>/</span>O[FFSET]=offset
+<span>/</span>R[ECORD]=record-number
+</pre><p>The DUMP command requires specification of an object using either <span>/</span>BLOCK, <span>/</span>HEADER, <span>/</span>RECORD, or <span>/</span>FILEHEADER.</p><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="dump_dse_qualifiers"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>A[LL]</em></span>
+</p><p>When used with <span>/</span>FILEHEADER, the <span>/</span>A[LL] qualifier displays additional information valuable to
+FIS technical support when troubleshooting GT.M problems.</p><p>
+<span class="emphasis"><em>
+<span>/</span>B[LOCK]=block-number</em></span>
+</p><p>Specifies the starting block of the dump. The <span>/</span>BLOCK qualifier is incompatible
+with the <span>/</span>FILEHEADER
+qualifier.</p><p>For commands without an object qualifier, DSE uses the last block handled
+by a DSE operation. When no block has been accessed, (i.e., on the first
+block-oriented command), DSE uses block one (1).</p><p>Example:</p><pre class="programlisting">DSE&gt; DUMP /BLOCK=2
+        
+Block 2 Size 1B Level 0 TN 2
+Rec:1 Blk 2 Off 7 Size A Cmpc 0 Ptr 8 Key ^a
+7 : | A 0 0 61 0 0 8 0 0 0 
+| . . . a . . . . . .
+Rec:2 Blk 2 Off 11 Size A Cmpc 0 Ptr B Key ^b
+11 : | A 0 0 62 0 0 B 0 0 0
+| . . . b . . . . . .</pre><p>
+<span class="emphasis"><em>
+<span>/</span>C[OUNT]=count</em></span>
+</p><p>Specifies the number of blocks, block headers, or records to DUMP. The
+<span>/</span>COUNT qualifier
+is incompatible with the <span>/</span>FILEHEADER qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>F[ILEHEADER]</em></span>
+</p><p>Dumps file header information. The <span>/</span>FILEHEADER qualifier is incompatible with all other
+qualifiers except <span>/</span>ALL. A DSE dump of a database file header prints a 0x prefix for
+all fields printed in hexadecimal format.</p><p>Example:</p><pre class="programlisting">DSE&gt; DUMP /FILEHEADER
+
+Access method                 BG     Global Buffers           1024
+Reserved Bytes                 0     Block size (in bytes)    8192
+Maximum record size          510     Starting VBN               49
+Maximum key size             128     Total blocks       0x00000386
+Null subscripts            FALSE     Free blocks        0x00000032
+Last Record Backup    0x00000001     Extension Count           100
+Last Database Bckup   0x00000001     Number of local maps        2
+Last Bytestream Bckup 0x00000001     Lock space         0x00000028
+In critical section   0x00000000     Timers pending              0
+Cache freeze id       0x00000000     Flush timer       00:00:01.00
+Freeze match          0x00000000     Flush trigger             960
+Current transaction   0x000A9689     No. of writes/flush         7
+Create in progress         FALSE     Modified cache blocks       0
+Reference count                1     Journaling         DISALLOWED
+KILLs in progress              0
+Replication State         CLOSED     Region Seqno              0x1
+Resync Seqno                 0x1     Resync transaction 0x00000001</pre><p>Refer to the "Greystone Database Structure" chapter for a description of
+the file header fields.</p><p>
+<span class="emphasis"><em>
+<span>/</span>G[LO]</em></span>
+</p><p>Dumps the specified record or blocks into the current output file in
+Global Output (GO) format. The <span>/</span>GLO qualifier is incompatible with the <span>/</span>HEADER and <span>/</span>FILEHEADER qualifiers. <span>Once you choose the /GLO format, you must exit DSE and reenter
+to choose the /ZWR format.</span>
+</p><p>
+<span class="emphasis"><em>
+<span>/</span>NO[CRIT]</em></span>
+</p><p>Allows DSE DUMP to work even if another process is holding a critical
+section. Since results in this mode may be inconsistent, it should only be
+used if the critical section mechanism is not operating normally.</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]H[EADER]</em></span>
+</p><p>Specifies whether the dump of the specified blocks or records is
+restricted to, or excludes, headers. <span>/</span>HEADER displays only the header, <span>/</span>NOHEADER displays the block or
+record with the header suppressed. DUMP without the <span>/</span>[NO]HEADER qualifier dumps both
+the block/record and the header. The <span>/</span>HEADER qualifier is incompatible with the <span>/ZWR,</span>
+<span>/</span>GLO, and <span>/</span>FILEHEADER
+qualifiers.</p><p>By default, DUMP displays all information in a block or record.</p><p>
+<span class="emphasis"><em>
+<span>/</span>O[FFSET]=offset</em></span>
+</p><p>Specifies the offset, in bytes, of the starting record for the dump. If
+the offset does not point to the beginning of a record, DSE rounds down to
+the last valid record start (e.g., DUMP <span>/</span>OFF=10 starts at <span>/</span>OFF=A if that was the last record). The <span>/</span>OFFSET qualifier is
+incompatible with the <span>/</span>RECORD and <span>/</span>FILEHEADER qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[ECORD]=record_number</em></span>
+</p><p>Specifies the record number of the starting record of the dump. The
+<span>/</span>RECORD qualifier
+is incompatible with the <span>/</span>OFFSET and <span>/</span>FILEHEADER qualifiers.</p><p>If you try to dump a record number that is larger than the last actual
+record in the block, a DSE error message provides the number of the last
+record in the block.</p><p>
+<span class="emphasis"><em>/ZWR</em></span>
+</p><p>Dumps the specified record or blocks into the current output file
+in ZWRITE (ZWR) format. The /ZWR qualifier is incompatible with the /HEADER
+and /FILEHEADER qualifiers. Once you choose the /ZWR format, you must exit
+DSE and reenter to choose the /GLO format.</p></div></div><div class="sect2" title="EValuate"><div class="titlepage"><div><div><h3 class="title"><a name="evaluate_dse_cmmd"></a>EValuate</h3></div></div></div><p>The EVALUATE command displays a number in both hexadecimal and decimal. Use it
+to translate a hexadecimal number to decimal, and vice versa. The <span>/</span>DECIMAL and <span>/</span>HEXADECIMAL qualifiers specify the
+input base for the number.</p><p>The format of the EVALUATE command is:</p><pre class="programlisting">EV[ALUATE]  <span>/</span>D[ECIMAL]
+<span>/</span>H[EXADECIMAL]
+<span>/</span>N[UMBER]=number
+</pre><p>The <span>/</span>NUMBER qualifier is
+required.</p><p>By default, EVALUATE treats the number as having a hexadecimal base.</p><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="evaluate_dse_qualifiers"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>D[ECIMAL]</em></span>
+</p><p>Specifies that the input number has a decimal base. The <span>/</span>DECIMAL qualifier is incompatible
+with the <span>/</span>HEXADECIMAL
+qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>H[EXADECIMAL]</em></span>
+</p><p>Specifies that the input number has a hexadecimal base. The <span>/</span>HEXADECIMAL qualifier is
+incompatible with <span>/</span>DECIMAL.</p><p>
+<span class="emphasis"><em>
+<span>/</span>N[UMBER]=number</em></span>
+</p><p>Specifies the number to evaluate. This qualifier is required.</p><p>Example:</p><pre class="programlisting">DSE&gt; EVALUATE /NUMBER=61
+Hex: 61 Dec: 97</pre></div></div><div class="sect2" title="EXit"><div class="titlepage"><div><div><h3 class="title"><a name="exit_dse_cmmd"></a>EXit</h3></div></div></div><p>The EXIT command ends a DSE session.</p><p>The format of the EXIT command is:</p><pre class="programlisting">EX[IT]
+</pre><p>The EXIT command has no qualifiers.</p></div><div class="sect2" title="Find"><div class="titlepage"><div><div><h3 class="title"><a name="find_cmmd_dse"></a>Find</h3></div></div></div><p>The FIND command directs DSE to a given block or region. At the beginning of a
+DSE session, use the FIND <span>/</span>REGION command to select the target region.</p><p>The format of the FIND command is:</p><pre class="programlisting">        
+F[IND]  <span>/</span>B[LOCK]=block-number 
+<span>/</span>E[XHAUSTIVE] 
+<span>/</span>F[REEBLOCK] /H[INT]
+<span>/</span>K[EY]=key 
+<span>/</span>[NO]C[RIT]
+<span>/</span>R[EGION][=region] 
+<span>/</span>S[IBLINGS]
+</pre><p>The FIND command, except when used with the <span>/</span>FREEBLOCK and <span>/</span>REGION qualifiers, uses the index tree to locate blocks.
+FIND can locate blocks only within the index tree structure. If you need to
+locate keys independent of their attachment to the tree, use the RANGE
+command.</p><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="find_qualifiers_dse"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>B[LOCK]=block_number</em></span>
+</p><p>Specifies the block to find. This qualifier is incompatible with the
+<span>/</span>KEY and <span>/</span>REGION qualifiers.</p><p>On commands without the <span>/</span>BLOCK= qualifier, DSE uses the last block handled by a DSE
+operation. When no block has been accessed, that is, on the first
+block-oriented command, DSE uses block one (1).</p><p>
+<span class="emphasis"><em>
+<span>/</span>E[XHAUSTIVE]</em></span>
+</p><p>Instructs DSE to search the entire index structure for the desired path or
+siblings. FIND <span>/</span>EXHAUSTIVE is useful in locating blocks that are in the tree but
+not indexed correctly. The <span>/</span>EXHAUSTIVE qualifier is incompatible with the <span>/</span>FREEBLOCK, <span>/</span>KEY, and <span>/</span>REGION qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>F[REEBLOCK]</em></span>
+</p><p>Finds the nearest free block to the block specified by <span>/</span>HINT. The <span>/</span>FREEBLOCK qualifier is
+incompatible with all other qualifiers except <span>/</span>BLOCK and <span>/</span>HINT. The <span>/</span>HINT qualifier is required with
+the <span>/</span>FREEBLOCK
+qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>H[INT]=block_number</em></span>
+</p><p>Designates the starting point of a <span>/</span>FREEBLOCK search. The <span>/</span>HINT qualifier must be used only
+in conjunction with the <span>/</span>FREEBLOCK qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>K[EY]=key</em></span>
+</p><p>Searches the database for the block containing the specified key or if the
+key does not exist, the block that would contain it, if it existed. Enclose
+an M-style key in quotation marks (" "). FIND <span>/</span>KEY is useful in locating
+properly indexed keys. The <span>/</span>KEY qualifier is incompatible with all other
+qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]C[RIT]</em></span>
+</p><p>Allows DSE FIND to work even if another process is holding a critical
+section. Since results in this mode may be inconsistent, it should only be
+used if the critical section mechanism is not operating normally.</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[EGION][=region]</em></span>
+</p><p>Switches to the named Global Directory region. The <span>/</span>REGION qualifier is incompatible
+with all other qualifiers.</p><p>
+<span>/</span>REGION without a
+specified region, or <span>/</span>REGION="*", displays all existing regions in the database.</p><p>
+<span class="emphasis"><em>
+<span>/</span>S[IBLINGS]</em></span>
+</p><p>Displays the block numbers of the logical siblings of the specified block.
+The logical siblings are the blocks that logically exist to the right and
+left of the given block in the database tree structure. The <span>/</span>SIBLINGS qualifier is
+incompatible with the <span>/</span>FREEBLOCK, <span>/</span>HINT, <span>/</span>KEY, and <span>/</span>REGION qualifiers.</p></div></div><div class="sect2" title="Help"><div class="titlepage"><div><div><h3 class="title"><a name="help_dse_cmmd"></a>Help</h3></div></div></div><p>The HELP command explains DSE commands. <span>The HELP command uses
+similar conventions to the OpenVMS help facility.</span> The format of the
+HELP command is:</p><pre class="programlisting"><span>/</span>H[ELP] [help topic]
+</pre><p>Enter the DSE command (item) after the HELP command or at the Topic
+prompt. The command (item) tells HELP which information to display. Press
+&lt;RETURN&gt; or &lt;CTRL Z&gt; to return to the DSE prompt.</p></div><div class="sect2" title="Integrit"><div class="titlepage"><div><div><h3 class="title"><a name="integrit_dse_cmmd"></a>Integrit</h3></div></div></div><p>The INTEGRIT command checks the internal consistency of a single non-bitmap
+block. INTEGRIT reports errors in hexadecimal notation.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Unlike MUPIP INTEG, this command only detects errors internal to a block
+and cannot detect errors such as indices incorrectly pointing to another
+block.</p></td></tr></table></div><p>The format of the INTEGRIT command is:</p><pre class="programlisting">I[NTEGRIT] <span>/</span>B[LOCK]=block-number
+</pre><p>For information on the utility that checks multiple blocks, refer to the MUPIP
+INTEG section of the "MUPIP" chapter.</p><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="integrit_dse_qualifiers"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>B[LOCK]=block_number</em></span>
+</p><p>Specifies the block for DSE to check. On commands with no <span>/</span>BLOCK qualifier, DSE uses the
+last block handled by a DSE operation. When no block has been accessed, that
+is, on the first block-oriented command, DSE uses block one (1).</p><p>
+<span class="emphasis"><em>
+<span>/</span>NO[CRIT]</em></span>
+</p><p>Allows DSE INTEG to work even if another process is holding a critical
+section. Since results in this mode may be inconsistent, it should only be
+used if the critical section mechanism is not operating normally.</p></div></div><div class="sect2" title="Maps"><div class="titlepage"><div><div><h3 class="title"><a name="maps_dse_cmmd"></a>Maps</h3></div></div></div><p>The MAPS command examines or updates bitmaps. The format of the MAPS command
+is:</p><pre class="programlisting">M[APS] <span>/</span>BL[OCK]=block-number
+<span>/</span>BU[SY]
+<span>/</span>F[REE]
+<span>/</span>M[ASTER]
+<span>/</span>R[ESTORE_ALL]
+</pre><p>MAPS can flag blocks as being either <span>/</span>BUSY or <span>/</span>FREE. The <span>/</span>MASTER qualifier reflects the current status of a local bitmap back
+into the master map. The <span>/</span>RESTORE_ALL qualifier rebuilds all maps and should be used with
+caution since it can destroy important information.</p><p>By default, MAPS shows the status of the bitmap for the specified
+block.</p><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="map_qualifiers_dse"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>BL[OCK]=block_number</em></span>
+</p><p>Specifies the target block for MAPS. The <span>/</span>BLOCK qualifier is incompatible
+with the <span>/</span>RESTORE_ALL
+qualifier.</p><p>On commands with no <span>/</span>BLOCK= or <span>/</span>RESTORE_ALL qualifier, DSE uses the last block handled by a
+DSE operation. When no block has been accessed, that is, on the first
+block-oriented command, DSE uses block one (1).</p><p>
+<span class="emphasis"><em>
+<span>/</span>BU[SY]</em></span>
+</p><p>Marks the current block busy in the block's local map and appropriately
+updates the master bitmap. The <span>/</span>BUSY qualifier is incompatible with all qualifiers except
+<span>/</span>BLOCK.</p><p>
+<span class="emphasis"><em>
+<span>/</span>F[REE]</em></span>
+</p><p>Marks the current block free in the block's local map and appropriately
+updates the master bitmap. The <span>/</span>FREE qualifier is incompatible with all qualifiers except
+<span>/</span>BLOCK.</p><p>
+<span class="emphasis"><em>
+<span>/</span>M[ASTER]</em></span>
+</p><p>Sets the bit in the master bitmap associated with the current block's
+local map according to whether or not that local map is full. The <span>/</span>MASTER qualifier is
+incompatible with all qualifiers except <span>/</span>BLOCK.</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[ESTORE_ALL]</em></span>
+</p><p>Sets all local bitmaps and the master bitmap to reflect the blocks used in
+the database file. Use <span>/</span>RESTORE_ALL only if the database contents are known to be
+correct, but a large number of the bitmaps require correction. The <span>/</span>RESTORE_ALL qualifier is
+incompatible with all other qualifiers.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The <span>/</span>RESTORE_ALL
+qualifier rebuilds all maps and should be used with a great deal of
+caution as it can destroy important information.</p></td></tr></table></div></div></div><div class="sect2" title="OPen"><div class="titlepage"><div><div><h3 class="title"><a name="open_cmmd_dse"></a>OPen</h3></div></div></div><p>The OPEN command opens a file for sequential output of global variable data.
+OPEN a file to which you want to "dump" information.</p><p>The format of the OPEN command is:</p><pre class="programlisting">OP[EN] F[ILE]=file
+</pre><p>If an OPEN command does not have a <span>/</span>FILE qualifier, DSE reports the name of the current
+output file.</p><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="Open_qaulifier_dse"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>F[ILE]=
+<span>file-specification</span>
+</em></span>
+</p><p>Specifies the file to open.</p></div></div><div class="sect2" title="OVerwrite"><div class="titlepage"><div><div><h3 class="title"><a name="overwrite_dse_cmmd"></a>OVerwrite</h3></div></div></div><p>The OVERWRITE command overwrites the specified string onto the given offset in
+the current block. Use extreme caution when using this command.</p><p>The format of the OVERWRITE command is:</p><pre class="programlisting">OV[ERWRITE] <span>/</span>D[ATA]=string
+<span>/</span>O[FFSET]=offset
+</pre><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="overwrite_dse_qualifier"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>B[LOCK]=block number</em></span>
+</p><p>Directs DSE to OVERWRITE a specific block. If no block number is
+specified, the default is the current block.</p><p>
+<span class="emphasis"><em>
+<span>/</span>D[ATA]=string</em></span>
+</p><p>Specifies the data to be written. Use quotation marks around string and
+escape codes of the form or b, where a and b are hexadecimal digits, for
+non-printing characters. translates to a single backslash.</p><p>
+<span class="emphasis"><em>
+<span>/</span>O[FFSET]=offset</em></span>
+</p><p>Specifies the offset in the current block where the overwrite should
+begin.</p></div></div><div class="sect2" title="Page"><div class="titlepage"><div><div><h3 class="title"><a name="page_cmmd_dse"></a>Page</h3></div></div></div><p>The PAGE command sends one form feed to the output device. Use PAGE to add
+form feeds to a dump file, making the hard copy file easier to read. If you plan
+to use the dump file with MUPIP LOAD, do not use PAGE.</p><p>The format of the PAGE command is:</p><pre class="programlisting">P[AGE]
+</pre><p>The PAGE command has no qualifiers.</p></div><div class="sect2" title="RAnge"><div class="titlepage"><div><div><h3 class="title"><a name="range_dse_cmmd"></a>RAnge</h3></div></div></div><p>The RANGE command finds all blocks in the database whose first key falls in
+the specified range of keys. The RANGE command may take a very long time unless
+the range specified by <span>/</span>FROM and <span>/</span>TO is
+small. Use FIND <span>/</span>KEY
+and/or FIND <span>/</span>KEY <span>/</span>EXHAUSTIVE first to quickly
+determine whether the key appears in the index tree.</p><p>The format of the RANGE command is:</p><pre class="programlisting">RA[NGE] <span>/</span>F[ROM]=block-number
+<span>/</span>T[O]=block-number
+<span>/</span>I[NDEX]
+<span>/</span>LOS[T]
+<span>/</span>[NO]C[RIT]
+<span>/</span>[NO]BU[SY]
+<span>/</span>S[TAR]
+<span>/</span>LOW[ER]=key
+<span>/</span>U[PPER]=key                
+</pre><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="range_dse_qualifiers"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>F[ROM]=block_number</em></span>
+</p><p>Specifies a starting block number for the range search. </p><p>By default, RANGE starts processing at the beginning of the file.</p><p>
+<span class="emphasis"><em>
+<span>/</span>T[O]=block-number</em></span>
+</p><p>Specifies an ending block number for the range search. By default, RANGE
+stops processing at the end of the file.</p><p>
+<span class="emphasis"><em>
+<span>/I[NDEX]=block-number</span>
+
+</em></span>
+</p><p>Restricts a search to index blocks.</p><p>
+<span class="emphasis"><em>
+<span>/</span>LOS[T]=block_number</em></span>
+</p><p>Restricts a search to blocks not found by a FIND <span>/</span>BLOCK.</p><p>
+<span class="emphasis"><em>
+<span>/</span>LOW[ER]=key</em></span>
+</p><p>Specifies the lower bound for the key range.</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]BU[SY]=busy/free</em></span>
+</p><p>Restricts a search to either BUSY or FREE blocks.</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]C[RIT]</em></span>
+</p><p>Allows DSE RANGE to work even if another process is holding a critical
+section. Since results in this mode may be inconsistent, it should only be
+used if the critical section mechanism is not operating normally.</p><p>
+<span class="emphasis"><em>
+<span>/S[TAR]=block-number</span>
+
+</em></span>
+</p><p>Includes index blocks that contain a single star key.</p><p>
+<span class="emphasis"><em>
+<span>/</span>U[PPER]=key</em></span>
+</p><p>Specifies the upper bound for the key range.</p></div></div><div class="sect2" title="REMove"><div class="titlepage"><div><div><h3 class="title"><a name="remove_dse_cmmd"></a>REMove</h3></div></div></div><p>The REMOVE command removes one or more records or a save buffer.</p><p>The format of the REMOVE command is:</p><pre class="programlisting">REM[OVE]    <span>/</span>B[LOCK]=block-number
+<span>/</span>C[OUNT]=count
+<span>/</span>O[FFSET]=offset
+<span>/</span>R[ECORD]=record-number
+<span>/</span>V[ERSION]=version-number
+</pre><p>The version number is specified in decimal.</p><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="remove_dse_qualifier"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>B[LOCK]=block_number</em></span>
+</p><p>Specifies the block associated with the record or buffer being
+deleted.</p><p>On commands with no <span>/</span>BLOCK= qualifier, DSE uses the last block handled by a DSE
+operation. When no block has been accessed, that is, on the first
+block-oriented command, DSE uses block one (1).</p><p>
+<span class="emphasis"><em>
+<span>/</span>C[OUNT]=count</em></span>
+</p><p>Specifies the number of records to remove. The <span>/</span>COUNT qualifier is incompatible
+with the <span>/</span>VERSION
+qualifier.</p><p>By default, REMOVE deletes a single record.</p><p>
+<span class="emphasis"><em>
+<span>/</span>O[FFSET]=offset</em></span>
+</p><p>Specifies the offset (in bytes) of the record to be removed. If the offset
+does not point to the beginning of a record, DSE rounds down to the last
+valid record start (for example, REMOVE <span>/</span>OFF=10 starts at OFF=A if that was the last record).
+The <span>/</span>OFFSET qualifier
+is incompatible with the <span>/</span>RECORD and <span>/</span>VERSION qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[ECORD]=record_number</em></span>
+</p><p>Specifies the number that identifies the record to remove. The <span>/</span>RECORD qualifier is
+incompatible with the <span>/</span>OFFSET and <span>/</span>VERSION qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>V[ERSION]=version_number</em></span>
+</p><p>Specifies the version number, in decimal, of the save buffer to remove.
+<span>/</span>VERSION is
+required to REMOVE a SAVE buffer. <span>/</span>VERSION is incompatible with all qualifiers except
+<span>/</span>BLOCK.</p></div></div><div class="sect2" title="REStore"><div class="titlepage"><div><div><h3 class="title"><a name="restore_dse_cmmd"></a>REStore</h3></div></div></div><p>The RESTORE command restores saved versions of blocks.</p><pre class="programlisting">RES[TORE]   B[LOCK]=block-number
+F[ROM]=from
+R[EGION]=region
+V[ERSION]=version-number                    
+</pre><p>The version number is specified in decimal.</p><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="qualifiers_restore_dse"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>B[LOCK]=block_number</em></span>
+</p><p>Specifies the block to restore.</p><p>For commands with no <span>/</span>BLOCK= qualifier, DSE uses the last block handled by a DSE
+operation. When no block has been accessed, (i.e., on the first
+block-oriented command), DSE uses block one (1).</p><p>
+<span class="emphasis"><em>
+<span>/</span>F[ROM]=block_number</em></span>
+</p><p>Specifies the block number of the save buffer to restore.</p><p>DSE restores the block specified with <span>/</span>BLOCK qualifier with the block specified by the
+<span>/</span>FROM
+qualifier.</p><p>By default, RESTORE uses the target block number as the <span>/</span>FROM block number.</p><p>The default block number is 1. </p><p>
+<span class="emphasis"><em>
+<span>/R[EGION]=region</span>
+
+</em></span>
+</p><p>Specifies the region of the saved buffer to restore.</p><p>By default, RESTORE uses SAVE buffers from the current region.</p><p>
+<span class="emphasis"><em>
+<span>/</span>V[ERSION]=version_number</em></span>
+</p><p>Specifies the decimal version number of the block to restore. The version
+number is required.</p></div></div><div class="sect2" title="SAve"><div class="titlepage"><div><div><h3 class="title"><a name="save_dse_cmmd"></a>SAve</h3></div></div></div><p>The SAVE command preserves versions of blocks, or displays a listing of saved
+versions for the current DSE session. Saved information is lost when DSE
+EXITs.</p><p>Use with the RESTORE command to move SAVEd blocks to a permanent location, and
+as a safety feature use SAVE to retain copies of database blocks before changing
+them.</p><p>The format of the SAVE command is:</p><pre class="programlisting">SA[VE] <span>/</span>B[LOCK]=block-number
+<span>/</span>C[OMMENT]=string
+<span>/</span>L[IST]
+<span>/</span>[NO]C[RIT]
+</pre><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="save_dse_qualifiers"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>B[LOCK]=block_number</em></span>
+</p><p>Specifies the block to restore.</p><p>On commands with no <span>/</span>BLOCK= qualifier, DSE uses the last block handled by a DSE
+operation. When no block has been accessed, that is, on the first
+block-oriented command, DSE uses block one (1).</p><p>
+<span class="emphasis"><em>
+<span>/</span>C[OMMENT]=string</em></span>
+</p><p>Specifies a comment to save with the block. Enclose the comment in
+quotation marks (" "). The <span>/</span>COMMENT qualifier is incompatible with the <span>/</span>LIST qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>L[IST]</em></span>
+</p><p>Lists saved versions of specified blocks. The <span>/</span>LIST qualifier is incompatible
+with the <span>/</span>COMMENT
+qualifier.</p><p>By default, SAVE <span>/</span>LIST provides a directory of all SAVEd blocks.</p><p>
+<span class="emphasis"><em>
+<span>/NO[CRIT]</span>
+
+</em></span>
+</p><p>Allows DSE SAVE to work even if another process is holding a critical
+section. Since results in this mode may be inconsistent, it should only be
+used if the critical section mechanism is not operating normally. </p></div></div><div class="sect2" title="SHift"><div class="titlepage"><div><div><h3 class="title"><a name="shift"></a>SHift</h3></div></div></div><p>The SHIFT command shifts data in a block, filling the block with zeros, or
+shortening the block.</p><p>DSE SHIFT in the backward direction is restricted to the maximum of OFFSET
+number of bytes.</p><p>In the following command, m must be less than or equal to n:</p><pre class="programlisting">DSE &gt;SHIFT /BACKWARD=m /OFFSET=n</pre><p>This ensures that the shift will not cross block boundaries, either
+intentionally or unintentionally.</p><p>Use extreme caution with this command. The format of the SHIFT command
+is:</p><pre class="programlisting">SH[IFT]  B[ACKWARD]=shift
+F[ORWARD]=shift
+O[FFSET]=offset                
+</pre><div class="sect3" title="Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="shift_dse_qualifiers"></a>Qualifiers</h4></div></div></div><p>
+<span class="emphasis"><em>
+<span>/</span>B[ACKWARD]=shift</em></span>
+</p><p>Specifies the number of bytes to shift data in the direction of the block
+header. The <span>/</span>BACKWARD
+qualifier is incompatible with the <span>/</span>FORWARD qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>F[ORWARD]=shift</em></span>
+</p><p>Specifies the number of bytes to shift data toward the end of the block.
+The <span>/</span>FORWARD qualifier
+is incompatible with the <span>/</span>BACKWARD qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>O[FFSET]=offset</em></span>
+</p><p>Specifies the starting offset, in bytes, of the portion of the block to
+shift.</p><p>
+<span class="emphasis"><em>
+<span>/</span>SPawn</em></span>
+</p><p>The SPAWN command creates a subprocess for access to the OpenVMS
+Command Language Interpreter (CLI), usually DCL, without terminating the
+current DSE environment. Use the SPAWN command to suspend a session and
+issue DCL commands such as MUPIP INTEG /REGION or GDE. The SPAWN command
+accepts an optional command string for execution by the spawned sub-process.
+If the SPAWN has no command string parameter, the created subprocess issues
+a DCL prompt and accepts any legal CLI command. To terminate the subprocess,
+use the LOGOUT DCL command. </p><p>The format of the SPAWN command is:</p><pre class="programlisting">SP[AWN] [command]</pre><p>The SPAWN command has no qualifiers.</p></div></div><div class="sect2" title="Wcinit"><div class="titlepage"><div><div><h3 class="title"><a name="wcinit_dse_cmmd"></a>Wcinit</h3></div></div></div><p>The WCINIT command reinitializes the global buffers of the current region.
+Because it cleans out the cache, the WCINIT command should not be used except
+under the guidance of FIS.</p><div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Warning"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Warning]" src="images/warning.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>A WCINIT command issued while normal database operations are in progress
+can cause catastrophic damage to the database.</p></td></tr></table></div><p>The format of the WCINIT command is:</p><pre class="programlisting">W[CINIT]
+</pre><p>The WCINIT command has no qualifiers.</p><p>When you issue the WCINIT command, DSE issues the CONFIRMATION: prompt. You
+must verify the WCINIT command by responding with "YES."</p><p>If you do not confirm the WCINIT, DSE issues the message: </p><p>No action taken, enter yes at the CONFIRMATION prompt to initialize global
+buffers. </p><p>WCINIT operations are more safely performed by MUPIP RUNDOWN. Use this command
+only under instructions from FIS.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch10s01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch10.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch10s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Operating in DSE </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> DSE Command Summary</td></tr></table></div></body>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch10s02.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:44 GMT -->
+</html>

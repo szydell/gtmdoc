@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/options_for_argument2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:01 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Options for Argument2</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="call_arguments_t.html" title="Call Arguments" />
+    <link rel="prev" href="timeout_arg_desc.html" title="Timeout Argument Description" />
+    <link rel="next" href="data_types_and_descriptors.html" title="Data Types and Descriptors" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Options for Argument2</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="timeout_arg_desc.html">Prev</a> </td>
+          <th width="60%" align="center">Call Arguments</th>
+          <td width="20%" align="right"> <a accesskey="n" href="data_types_and_descriptors.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="options_for_argument2"></a>Options for Argument2</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4234579" class="indexterm"></a>
+      <p>Five DAL functions allow a second argument, which provides a place for a return argument. The argument is specified as the destination argument. The database functions that return a value and require specification of a destination are: </p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>gtm_data </p>
+          </li>
+          <li>
+            <p>gtm_get </p>
+          </li>
+          <li>
+            <p>gtm_order </p>
+          </li>
+          <li>
+            <p>gtm_previous</p>
+          </li>
+          <li>
+            <p>gtm_query </p>
+          </li>
+        </ul>
+      </div>
+      <p>Example:</p>
+      <pre class="programlisting">
+	mode = (short)GTMI_EXTGBL;DESC_MODE (k0[0],mode);DESC_CHAR (k0[1],&quot;./mumps.gld&quot;);DESC_CHAR (k0[2],&quot;CAT&quot;);DESC_CHAR (k0[3],&quot;Garfield&quot;);DESC_ZERO (k0[4]);
+	memset (k1, 0, sizeof(k1));k1[0].type = GTM_ARRAY_OF_CHARS;
+	status = gtm_get (k0,k1);	
+	</pre>
+      <p>This example corresponds to the M statement:</p>
+      <pre class="programlisting">
+	K1=$GET(^|&quot;,/mumps.gld&quot;|CAT(&quot;Garfield&quot;)
+	</pre>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="timeout_arg_desc.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="call_arguments_t.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="data_types_and_descriptors.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Timeout Argument Description </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Data Types and Descriptors</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/options_for_argument2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:01 GMT -->
+</html>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/util_labels_sys_mang.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:56 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Utility Labels</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="st_percent_vms.html" title="%ST" />
+    <link rel="prev" href="st_percent_vms.html" title="%ST" />
+    <link rel="next" href="gtm_utils_summ_table.html" title="GT.M Utilities Summary Table" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Utility Labels</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="st_percent_vms.html">Prev</a> </td>
+          <th width="60%" align="center">%ST</th>
+          <td width="20%" align="right"> <a accesskey="n" href="gtm_utils_summ_table.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="util_labels_sys_mang"></a>Utility Labels</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4226680" class="indexterm"></a>
+      <p>IMAGE:	Displays all users accessing GT.M and lists their program images </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO ^%ST
+
+	GT.M Mumps users on 15-Mar-2002 13:44:22
+	Terminal Username UIC Proc.id Access CPU time Login time
+	-------- -------- --- ------- ------ -------- ---------------
+	WTA1: JONES 100,200 2067000FD Local 04:05.34 15-Mar-2002 09:34:45
+	WTA2: SMITH 101,200 2088000E0 Local 00:13.22 15-Mar-2002 13:04:00
+	Total 4 users.
+	Insufficient privileges to see 2 processes.
+	</pre>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>The display times above are shortened due to typesetting limitations.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>This invokes %ST, which displays the number of users accessing GT.M and information about those processes that you have privileges to see. If you do not have sufficient privileges to view all processes accessing GT.M, you receive a message stating how many processes exist but are not displayed. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO IMAGE^%ST
+	
+	GT.M Mumps users on 22-Dec-2002 13:44:22
+	Terminal Username UIC Proc.id Access CPU time Login time
+	-----------------------------------------------------------------
+	Image: DIEHARD:[DEV.V25][PRO]PROD1.EXE;50
+	WTA1: JONES 100,200 2067000FD Local 04:05.34 22-Dec-2002 09:34:45
+	Image: DIEHARD:[DEV.V25][PRO]TEST1.EXE;52
+	WTA2: SMITH 101,200 2088000E0 Local 00:13.22 22-Dec-2002 13:04:00
+	Total 2 users.
+	</pre>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>The display times above are shortened due to typesetting limitations.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>This invokes IMAGE^%ST, which displays all users accessing GT.M and the images they are running.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="st_percent_vms.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="st_percent_vms.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="gtm_utils_summ_table.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">%ST </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> GT.M Utilities Summary Table</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/util_labels_sys_mang.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:56 GMT -->
+</html>

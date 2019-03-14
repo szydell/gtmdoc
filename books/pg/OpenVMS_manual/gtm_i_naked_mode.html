@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/gtm_i_naked_mode.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:37 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>GTMI$_NAKED Mode</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="mode_arg.html" title="Mode Argument" />
+    <link rel="prev" href="gtm_glbl_mode.html" title="GTMI$_GLOBAL Mode" />
+    <link rel="next" href="gtm_extgbl_mode.html" title="GTMI$_EXTGBL Mode" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">GTMI$_NAKED Mode</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="gtm_glbl_mode.html">Prev</a> </td>
+          <th width="60%" align="center">Mode Argument</th>
+          <td width="20%" align="right"> <a accesskey="n" href="gtm_extgbl_mode.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="gtm_i_naked_mode"></a>GTMI$_NAKED Mode</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4234109" class="indexterm"></a>
+      <p>The GTMI$_NAKED mode indicates an M naked reference. This means that the first key parameter replaces the last key of the last global reference and GT.M interprets any additional key parameters as additional subscripts. For this reason, a function with a GTMI$_GLOBAL mode must precede a function with a GTMI$_NAKED mode to establish the prior reference. With GTMI$_NAKED, key1 specifies the first subscript and key2 to keyn specify optional subscripts. The naked mode is not valid for GTM$LOCK, GTM$INCLOCK, GTM$DECLOCK, GTM$ZALLOC and GTM$ZDEALLOC operations. The naked mode is also not valid for those operations pertaining to local variables.</p>
+      <p>The GTMI_NAKED mode indicates an M naked reference. This means that the first key parameter replaces the last key of the last global reference and GT.M interprets any additional key parameters as additional subscripts. For this reason, a function with a GTMI_GLOBAL mode with at least one subscript must precede a function with a GTMI_NAKED mode to establish the prior reference. With GTMI_NAKED key1 specifies the first subscript to apply to the naked reference and key2 to keyn specify optional subscripts. The naked mode is not valid for gtm_lock, gtm_inclock, gtm_declock, gtm_zalloc, and gtm_zdealloc operations.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	$DESCRIPTOR(subscript1,&quot;1&quot;)
+	$DESCRIPTOR(subscript2,&quot;3.1415&quot;)
+	$DESCRIPTOR(data,&quot;12.566&quot;)
+	gtm$put(GTMI$_NAKED, &amp;data, &amp;subscript1, &amp;subscript2)
+	DESC_CHAR(k0[0],&quot;12.566&quot;mode = (short)GTMI_NAKED;DESC_MODE (k0[1],mode);DESC_CHAR (k0[2],&quot;1&quot;);DESC_CHAR (k0[3],&quot;3.1415&quot;);DESC_ZERO (k0[4]);
+	status = gtm_put(k0);
+	</pre>
+      <p>This call format specifies GTMI$_NAKED as the mode, data as the source and two subscripts as key1 and key2. </p>
+      <p>This example corresponds to the M statement:</p>
+      <pre class="programlisting">
+	S ^(1,3.1415)=12.566
+	</pre>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="gtm_glbl_mode.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="mode_arg.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="gtm_extgbl_mode.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">GTMI$_GLOBAL Mode </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> GTMI$_EXTGBL Mode</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/gtm_i_naked_mode.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:37 GMT -->
+</html>

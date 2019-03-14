@@ -1,0 +1,69 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch08s12.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$STack</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
+<link rel="prev" href="ch08s11.html" title="$Reference">
+<link rel="next" href="ch08s13.html" title="$Storage">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$STack</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch08s11.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 8. <span>Intrinsic Special Variables</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch08s13.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$STack</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="stack_g"></a>$STack<a class="indexterm" name="idp188921968"></a>
+</h2></div></div></div>
+<p>$ST[ACK] contains an integer value of zero (0) or greater indicating the current level of M execution stack depth.</p>
+<p>When a process is initiated but before any command is executed, the value of $STACK is zero (0).</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>The difference between $STACK and $ESTACK is that $ESTACK may appear as an argument of the NEW command. NEWing $ESTACK resets its value to zero (0), and can be useful to set up a layered error trapping mechanism.</p></td></tr>
+</table></div>
+<p>The value of $STACK is "absolute" since the start of a GT.M. process, whereas the value of $ESTACK is "relative" to the most recent "anchoring point".</p>
+<p>For examples on the use of special variable $STACK, see <a class="xref" href="ch07s21.html" title="$STack()">&#8220;$STack()&#8221;</a>. </p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch08s11.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch08.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch08s13.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$Reference </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $Storage</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch08s12.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

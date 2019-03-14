@@ -1,0 +1,147 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch12s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Collation Sequence Definitions</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch12.html" title="Chapter 12. Internationalization">
+<link rel="prev" href="ch12.html" title="Chapter 12. Internationalization">
+<link rel="next" href="ch12s02.html" title="Creating the Alternate Collation Routines">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Collation Sequence Definitions</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch12.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 12. Internationalization</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch12s02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch12.html">Internationalization</a></span> &gt; <span class="breadcrumb-node">Collation Sequence Definitions</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="collation_seq"></a>Collation Sequence Definitions<a class="indexterm" name="idp193075392"></a>
+</h2></div></div></div>
+<p>Normally, GT.M orders data with numeric values first, followed by strings sequenced by ASCII values. To use an alternative collating sequence the following items must be provided at GT.M process intialization. </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>A shared library containing the routines for each alternative collation sequence</p></li>
+<li class="listitem" style="list-style-type: circle"><p>An environment variable of the form gtm_collate_n, specifying the shared library containing the routines for alternative collation sequence n.</p></li>
+</ul></div>
+<p></p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="shared_library_holding"></a><span>Creating the </span>Shared Library<span> holding the alternative sequencing routines</span>
+</h3></div></div></div>
+<p>A shared library for an alternative collation sequence must contain the following four routines:</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+<p>gtm_ac_xform_1: Transforms subscripts up to the maximum supported string length to the alternative collation sequence, or</p>
+<p>gtm_ac_xform: Transforms subscripts up to 32,767 bytes to the alternative collation sequence.</p>
+</li>
+<li class="listitem">
+<p>gtm_ac_xback_1: Use with gtm_ac_xform_1 to transform the alternative collation keys back to the original subscript representation, or</p>
+<p>gtm_ac_xback: Use with gtm_ac_xform to transforms the alternative collation keys back to the original subscript representation.</p>
+</li>
+<li class="listitem"><p>gtm_ac_version: Returns a numeric version identifier for the "currently active" set of collation routines.</p></li>
+<li class="listitem"><p>gtm_ac_verify: Returns the success (odd) or failure (even) in matching a collation sequence with a given version number.</p></li>
+</ol></div>
+<p>GT.M searches the shared library for the gtm_ac_xform_1 and gtm_ac_xback_1 before searching for the gtm_ac_xform and gtm_ac_xback routines. If the shared library contains gtm_ac_xform_1, GT.M ignores gtm_ac_xform even if it is present.  If GT.M finds gtm_ac_xform_1 but does not find gtm_ac_xback_1, it reports a COLLATIONUNDEF error with an additional mismatch COLLFNMISSING warning.</p>
+<p>If the application does not use strings longer than 32,767 bytes, the alternative collation library need not contain the gtm_ac_xform_1 and gtm_ac_xback_1 routines.  On the other hand, if the application passes strings greater than 32,767 bytes (but less than the maximum support string length) and does not provide gtm_xc_xform_1 and gtm_xc_xback_1, GT.M issues the COLLARGLONG run-time error.</p>
+<p>Note that database key sizes are much more restricted by GT.M than local key sizes, and may be restricted further by user configuration.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="defining_env_variables"></a><span>Defining the </span>Environment Variable<a class="indexterm" name="idp193043136"></a>
+</h3></div></div></div>
+<p>GT.M locates the alternative collation sequences through the environment variable gtm_collate_n where n is an integer from 1 to 255 that identifies the collation sequence, and pathname identifies the shared library containing the routines for that collation sequence, for example:</p>
+<pre class="programlisting">$ gtm_collate_1=/opt/fis-gtm/collation
+$ export gtm_collate_1</pre>
+<p>Multiple alternative collation sequence definitions can co-exist.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="considerations_in_establish_alt_collations"></a><span>Considerations in </span>Establish<span>ing</span> Alternative Collations<a class="indexterm" name="idp193191632"></a>
+</h4></div></div></div>
+<p>Alternative collation sequences for a global must be set when the global contains no data. When the global is defined the collation sequence is stored in the global. This ensures the future integrity of the global's collation. If it becomes necessary to change the collation sequence of a global containing data, you must copy the data to a temporary repository, delete the global, modify the variable's collation sequence by reinitializing the global either in a region that has the desired collation or with %GBLDEF, and restore the data from the temporary repository.</p>
+<p>Be careful when creating the transformation and inverse transformation routines. The transformation routine must unambiguously and reliably encode every possible input value. The inverse routine must faithfully return the original value in every case. Errors in these routines can produce delayed symptoms that could be hard to debug. These routines may not be written in M.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="defin_a_default_database_collation_method"></a><span>Defining a Default Database </span>Collation Method<a class="indexterm" name="idp193031744"></a>
+</h3></div></div></div>
+<p>GT.M lets you define an alternative collation sequence as the default when creating a new database. Subsequently, this default is applied when each new global is created. </p>
+<p>This default collation sequence is set as a GDE qualifier for the ADD, CHANGE, and TEMPLATE commands using the following example with CHANGE:</p>
+<pre class="programlisting">GDE&gt;CHANGE -REGION DEFAULT -COLLATION_DEFAULT=&lt;0-255&gt;</pre>
+<p>This qualifier always applies to regions, and takes effect when a database is created with MUPIP CREATE. The output of GDE SHOW displays this value, and DSE DUMP -FILEHEADER also includes this information. In the absence of an alternative default collations sequence, the default used is 0, or ASCII.</p>
+<p>The value cannot be changed once a database file is created, and will be in effect for the life of the database file. The same restriction applies to the version of the collation sequence. The version of a collation sequence implementation is also stored in the database fileheader and cannot be modified except by recreating the file.</p>
+<p>If the code of the collation sequence changes, making it incompatible with the collation sequence in use when the database was created, use the following procedure to ensure the continued validity of the database. MUPIP EXTRACT the database using the older compatible collation routines, then recreate and MUPIP LOAD using the newer collation routines.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="establish_a_local_coll_seq"></a>Establishing A Local Collation Sequence<a class="indexterm" name="idp193179136"></a>
+</h3></div></div></div>
+<p>All subscripted local variables for a process must use the same collation sequence. The collation sequence used by local variables can be established as a default or in the current process. The local collation sequence can only be changed when a process has no subscripted local variables defined.</p>
+<p>To establish a default local collation sequence provide a numeric value to the environment variable gtm_local_collate to select one of the collation tables, for example:</p>
+<pre class="programlisting">$ gtm_local_collate=n
+$ export gtm_local_collate</pre>
+<p>where n is the number of a collation sequence that matches a valid collation number defined by an environment variable in the form gtm_collate_n.</p>
+<p>An active process can use the %LCLCOL utility to define the collation sequence for subscripts of local variables. %LCLCOL has these extrinsic entry points:</p>
+<p>set^%LCLCOL(n)changes the local collation to the type specified by n.</p>
+<p>If the collation sequence is not available, the routine returns a false (0) and does not modify the local collation sequence.</p>
+<p>Example:</p>
+<pre class="programlisting">IF '$$set^%LCLCOL(3) D
+. Write "local collation sequence not changed",! Break</pre>
+<p>This piece of code illustrates $$set^LCLCOL used as an extrinsic. It would write an error message and BREAK if the local collation sequence was not set to 3.</p>
+<p>set^%LCLCOL(n,ncol) determines the null collation type to be used with the collation type n. </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>If the truth value of ncol is FALSE(0), local variables use the GT.M standard null collation.</p></li>
+<li class="listitem"><p>If the truth value of ncol is TRUE(1), local variables use the M standard null collation.</p></li>
+</ul></div>
+<p>With set^%LCLCOL(,ncol), the null collation order can be changed while keeping the alternate collation order unchanged. If subscripted local variables exist, null collation order cannot be changed. In this case, GT.M issues the COLLDATAEXISTS error.</p>
+<p>get^%LCLCOL returns the current local type.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Write $$get^%LCLCOL
+0</pre>
+<p>This example uses $$get^%LCLCOL as an extrinsic that returns 0, indicating that the effective local collation sequence is the standard M collation sequence.</p>
+<p>If set^%LCLCOL is not specified and gtm_local_collate is not defined, or is invalid, the process uses M standard collation. The following would be considered invalid values:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>A value less than 0</p></li>
+<li class="listitem" style="list-style-type: circle"><p>A value greater than 255</p></li>
+<li class="listitem" style="list-style-type: circle"><p>A legal collation sequence that is inaccessible to the process</p></li>
+</ul></div>
+<p>Inaccessibility could be caused by a missing <span>environment variable</span>, a missing image, or security denial of access.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch12.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch12.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch12s02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 12. Internationalization </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> <span>Creating the </span>Alternate Collation<span> Routines</span>
+</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch12s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+</html>

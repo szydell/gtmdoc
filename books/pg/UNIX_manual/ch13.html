@@ -1,0 +1,154 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch13.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Chapter 13. Error Processing</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="index.html" title="GT.M Programmer's Guide">
+<link rel="prev" href="ch12s04.html" title="Matching Alternative Patterns">
+<link rel="next" href="ch13s01.html" title="Compile Time Error Message Format">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Chapter 13. Err<span>or</span> Processing</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch12s04.html">Prev</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="ch13s01.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-node">Err<span>or</span> Processing</span>
+</div>
+<div class="chapter">
+<div class="titlepage"><div>
+<div><h2 class="title">
+<a name="ch_error_processing"></a>Chapter 13. Err<span>or</span> Processing</h2></div>
+<div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
+<tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V6.3-007</td>
+<td align="left">01 February 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch13s06.html#prgrm_to_rec_info" title="Program to Record Information on an Error using $ZTRAP">&#8220;Program to Record Information on an Error using $ZTRAP&#8221;</a>, add $ZTIMEOUT and $ZAUDIT to $zjobexam() output </p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-005</td>
+<td align="left">29 June 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch13s06.html#prgrm_to_rec_info" title="Program to Record Information on an Error using $ZTRAP">&#8220;Program to Record Information on an Error using $ZTRAP&#8221;</a>, update ^EP13 and ^ERR examples for V6.3-005.</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-003</td>
+<td align="left">12 December 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch13s04.html" title="Processing Run-time Errors">&#8220;Processing Run-time<span> Errors</span>&#8221;</a>, add paragraph on the precompilation of traps</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-001</td>
+<td align="left">20 March 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch12s04.html#patt_code_selection" title="Pattern Code Selection">&#8220;<span>Pattern </span>Code Selection&#8221;</a>, added a compiler warning.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch13s06.html#prgrm_to_rec_info" title="Program to Record Information on an Error using $ZTRAP">&#8220;Program to Record Information on an Error using $ZTRAP&#8221;</a>, Update output</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-003</td>
+<td align="left">24 February 2014</td>
+<td align="left"><p>In <a class="xref" href="ch13s04.html#run_time_err_out_of_drct_mode" title="Run-time Errors Outside of Direct Mode">&#8220;Run-time Errors Outside of Direct Mode&#8221;</a>, added a note about the gtm_etrap environment variable.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-001</td>
+<td align="left">21 March 2013</td>
+<td align="left"><p>In <a class="xref" href="ch13s05.html#choosing_etrap_and_ztrap" title="Choosing $ETRAP or $ZTRAP">&#8220;<span>Choosing </span>$ETRAP or $ZTRAP&#8221;</a>, added a note about handling non-fatal errors.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.4-002B</td>
+<td align="left">26 December 2011</td>
+<td align="left">Conversion to documentation revision history reflecting GT.M releases with revision history for each chapter.</td>
+</tr>
+</table></div></div>
+</div></div>
+<div class="toc">
+<p><b>Table of Contents</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch13s01.html">Compile Time<span> Error Message Format</span></a></span></dt>
+<dt><span class="sect1"><a href="ch13s02.html"><span>Processing Compile Time </span>Errors</a></span></dt>
+<dt><span class="sect1"><a href="ch13s03.html">Run-time Error<span> Message Format</span></a></span></dt>
+<dt><span class="sect1"><a href="ch13s04.html">Processing Run-time<span> Errors</span></a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch13s04.html#run_time_err_in_drct_mode"><span>Run-time Errors in </span>Direct Mode</a></span></dt>
+<dt><span class="sect2"><a href="ch13s04.html#run_time_err_out_of_drct_mode">Run-time Errors Outside of Direct Mode</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch13s05.html">Program Handling of Errors</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch13s05.html#ecode_ch14">$ECODE</a></span></dt>
+<dt><span class="sect2"><a href="ch13s05.html#zstatus_content">$ZSTATUS Content</a></span></dt>
+<dt><span class="sect2"><a href="ch13s05.html#zerror_and_zyerror">$ZERROR and $ZYERROR</a></span></dt>
+<dt><span class="sect2"><a href="ch13s05.html#etrap_behavior">$ETRAP Behavior</a></span></dt>
+<dt><span class="sect2"><a href="ch13s05.html#nesting_etrap_and_using_estack">Nesting $ETRAP and using $ESTACK</a></span></dt>
+<dt><span class="sect2"><a href="ch13s05.html#ztrap_behavior"><span>$ZTRAP </span>Behavior</a></span></dt>
+<dt><span class="sect2"><a href="ch13s05.html#diff_btw_etrap_and_ztrap"><span>Differences between </span>$ETRAP and $ZTRAP</a></span></dt>
+<dt><span class="sect2"><a href="ch13s05.html#ztrap_idnt_with_etrap">$ZTRAP <span>Interaction </span>With $ETRAP</a></span></dt>
+<dt><span class="sect2"><a href="ch13s05.html#choosing_etrap_and_ztrap"><span>Choosing </span>$ETRAP or $ZTRAP</a></span></dt>
+<dt><span class="sect2"><a href="ch13s05.html#err_proc_caution">Error Processing Cautions</a></span></dt>
+<dt><span class="sect2"><a href="ch13s05.html#input_output_errors"><span>Input/Output </span>Errors</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch13s06.html">Error Actions</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch13s06.html#break_on_an_err">Break<span> on an Error</span></a></span></dt>
+<dt><span class="sect2"><a href="ch13s06.html#uncondition_trnsfr_on_an_err">Unconditional Transfer<span> on an Error</span></a></span></dt>
+<dt><span class="sect2"><a href="ch13s06.html#setting_ztrap_for_each_lvl">Setting $ZTRAP<span> for Each Level</span></a></span></dt>
+<dt><span class="sect2"><a href="ch13s06.html#nested_err_handling">Nested Error Handling</a></span></dt>
+<dt><span class="sect2"><a href="ch13s06.html#terminate_exec_on_an_err">Terminating Execution<span> on an Error</span></a></span></dt>
+<dt><span class="sect2"><a href="ch13s06.html#setting_ztrap_and_other_actions"><span>Setting $ZTRAP to </span>Other Actions </a></span></dt>
+<dt><span class="sect2"><a href="ch13s06.html#summ_of_ztrap_etrap">Summary<span> of $ETRAP &amp; $ZTRAP Error-Handling Options</span></a></span></dt>
+<dt><span class="sect2"><a href="ch13s06.html#errors_in_ztrap">Errors<span> in</span> $ZTRAP</a></span></dt>
+<dt><span class="sect2"><a href="ch13s06.html#record_info_abt_err">Recording Information about Errors</a></span></dt>
+</dl></dd>
+</dl>
+</div>
+<p>This chapter describes GT.M features and techniques for handling errors. Errors in programs may be classified as "predictable" meaning foreseen, or "unpredictable" meaning unforeseen.</p>
+<p>M programs may attempt to recover from predictable errors. Device errors that can be remedied by an operator are the most common class of errors for which recovery provides a large benefit. Predictable errors from which the program does not attempt to recover are generally treated the same as unpredictable errors.</p>
+<p>A typical application handles unpredictable errors by logging as much information about the error as the designer considers useful, then terminating or restarting the application from a known point.</p>
+<p>Because GT.M invokes error handling when things are not normal, careful design and implementation of error handling are required to minimize the impact of errors and the cost of subsequent prevention.</p>
+<p>The GT.M compiler detects and reports syntax errors at:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>Compile time while producing the object module from a source file.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Run time while compiling code for M indirection and XECUTEs.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Run time when the user is working in Direct Mode.</p></li>
+</ul></div>
+<p>The GT.M run-time system:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>Recognizes and reports execution errors when they occur. </p></li>
+<li class="listitem" style="list-style-type: circle"><p>Reports errors flagged by the compiler when they fall in the execution path.</p></li>
+</ul></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch12s04.html">Prev</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="ch13s01.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Matching Alternative Patterns </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Compile Time<span> Error Message Format</span>
+</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch13.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+</html>

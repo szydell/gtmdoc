@@ -1,0 +1,449 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/pr01s08.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>MUPIP INTEG Errors</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="preface.html" title="About This Manual">
+<link rel="prev" href="pr01s07.html" title="Plug-in Errors">
+<link rel="next" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="copyright" href="ln-idp153747552.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">MUPIP INTEG Errors</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="pr01s07.html">Prev</a> </td>
+<th width="60%" align="center">About This Manual</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch01.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="preface.html">About This Manual</a></span> &gt; <span class="breadcrumb-node">MUPIP INTEG Errors</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="mupip_integ_errors_preface"></a>MUPIP INTEG Errors</h2></div></div></div>
+<p>Database errors reported by MUPIP INTEG differ in impact and severity. Some require an immediate action to prevent extending the damage, action on other less severe errors may be delayed.</p>
+<p>The following table outlines the MUPIP INTEG error messages with their severity using the  codes as listed below:</p>
+<div class="informaltable"><table border="0" width="50%">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p>A</p></td>
+<td><p>Access: Prevents database access</p></td>
+</tr>
+<tr>
+<td><p>B</p></td>
+<td><p>Benign: Presents no risk of additional damage and has little or no effect on database performance</p></td>
+</tr>
+<tr>
+<td><p>D</p></td>
+<td><p>Dangerous: Presents a high risk that continuing updates may cause significant additional damage</p></td>
+</tr>
+<tr>
+<td><p>I</p></td>
+<td><p>Index: If the block is an index block, continuing updates will be quite dangerous: treat as a D; if the block is a datablock, continuing updates can only cause limited additional damage</p></td>
+</tr>
+<tr>
+<td><p>T</p></td>
+<td><p>Transient: Usually cleared by an update to the database</p></td>
+</tr>
+</tbody>
+</table></div>
+<p></p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="4"><p>MUPIP INTEG Error Messages</p></th></tr>
+<tr>
+<th><p><span class="bold"><strong>Error Name</strong></span></p></th>
+<th><p><span class="bold"><strong>Message</strong></span></p></th>
+<th><p><span class="bold"><strong>Severity</strong></span></p></th>
+<th><p><span class="bold"><strong>Section*</strong></span></p></th>
+</tr>
+</thead>
+<tfoot><tr><th colspan="4"><p>Section*: Refers to the specified section in <span class="emphasis"><em>Managing Database Integrity</em></span> chapter of Administration and Operations Guide. The section details a description along with the action item to be taken on encountering the error message.</p></th></tr></tfoot>
+<tbody>
+<tr>
+<td><p>DBBADKYNM</p></td>
+<td><p>Bad Key Name</p></td>
+<td><p>I</p></td>
+<td><p>K1</p></td>
+</tr>
+<tr>
+<td><p>DBBADNSUB</p></td>
+<td><p>Bad numeric subscript</p></td>
+<td><p>I</p></td>
+<td><p>K1</p></td>
+</tr>
+<tr>
+<td><p>DBBADPNTR</p></td>
+<td><p>Bad pointer value in directory</p></td>
+<td><p>D</p></td>
+<td><p>K4</p></td>
+</tr>
+<tr>
+<td><p>DBBDBALLOC</p></td>
+<td><p>Block doubly allocated</p></td>
+<td><p>D</p></td>
+<td><p>K3</p></td>
+</tr>
+<tr>
+<td><p>DBBFSTAT</p></td>
+<td><p>Block busy/free status unknown (local bitmap corrupted)</p></td>
+<td><p>D</p></td>
+<td><p>M1</p></td>
+</tr>
+<tr>
+<td><p>DBBNPNTR</p></td>
+<td><p>Bit map block number as pointer</p></td>
+<td><p>D</p></td>
+<td><p>K4</p></td>
+</tr>
+<tr>
+<td><p>DBBPLMGT2K</p></td>
+<td><p>Blocks per local map is greater than 2K</p></td>
+<td><p>D</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBBPLMLT512</p></td>
+<td><p>Blocks per local map is less than 512</p></td>
+<td><p>D</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBBPLNOT512</p></td>
+<td><p>Blocks per local map is not 512</p></td>
+<td><p>D</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBBSIZZRO</p></td>
+<td><p>Block size equals zero</p></td>
+<td><p>A</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBCOMPTOOLRG</p></td>
+<td><p>Record has too large compression count</p></td>
+<td><p>I</p></td>
+<td><p>O2</p></td>
+</tr>
+<tr>
+<td><p>DBDATAMX</p></td>
+<td><p>Record too large</p></td>
+<td><p>B</p></td>
+<td><p>O5</p></td>
+</tr>
+<tr>
+<td><p>DBFGTBC</p></td>
+<td><p>File size larger than block count would indicate</p></td>
+<td><p>B</p></td>
+<td><p>I4</p></td>
+</tr>
+<tr>
+<td><p>DBFSTBC</p></td>
+<td><p>File size smaller than block count would indicate</p></td>
+<td><p>D</p></td>
+<td><p>I4</p></td>
+</tr>
+<tr>
+<td><p>DBFSTHEAD</p></td>
+<td><p>File smaller than database header</p></td>
+<td><p>A</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBGTDBMAX</p></td>
+<td><p>Key larger than database maximum</p></td>
+<td><p>I</p></td>
+<td><p>K7</p></td>
+</tr>
+<tr>
+<td><p>DBHEADINV</p></td>
+<td><p>Header size not valid for database</p></td>
+<td><p>A</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBINCLVL</p></td>
+<td><p>Block at incorrect level</p></td>
+<td><p>D</p></td>
+<td><p>O1</p></td>
+</tr>
+<tr>
+<td><p>DBINCRVER</p></td>
+<td><p>Incorrect version of GT.M database</p></td>
+<td><p>A</p></td>
+<td><p>I2</p></td>
+</tr>
+<tr>
+<td><p>DBINVGBL</p></td>
+<td><p>Invalid mixing of global names</p></td>
+<td><p>D</p></td>
+<td><p>K3</p></td>
+</tr>
+<tr>
+<td><p>DBKEYGTIND</p></td>
+<td><p>Key greater than index key</p></td>
+<td><p>I or B</p></td>
+<td><p>K2 or O5</p></td>
+</tr>
+<tr>
+<td><p>DBKGTALLW</p></td>
+<td><p>Key larger than maximum allowed length</p></td>
+<td><p>I</p></td>
+<td><p>K1</p></td>
+</tr>
+<tr>
+<td><p>DBLOCMBINC</p></td>
+<td><p>Local bit map incorrect</p></td>
+<td><p>B</p></td>
+<td><p>M1</p></td>
+</tr>
+<tr>
+<td><p>DBLRCINVSZ</p></td>
+<td><p>Last record of block has invalid size</p></td>
+<td><p>I</p></td>
+<td><p>K5</p></td>
+</tr>
+<tr>
+<td><p>DBLTSIBL</p></td>
+<td><p>Key less than sibling&#8217;s index key</p></td>
+<td><p>I</p></td>
+<td><p>K2</p></td>
+</tr>
+<tr>
+<td><p>DBLVLINC</p></td>
+<td><p>Local map block level incorrect</p></td>
+<td><p>B</p></td>
+<td><p>M2</p></td>
+</tr>
+<tr>
+<td><p>DBMAXKEYEXC</p></td>
+<td><p>Maximum key size for database exceeds design maximum</p></td>
+<td><p>D</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBMAXRSEXBL</p></td>
+<td><p>Maximum record size for database exceeds what the block size can support</p></td>
+<td><p>D</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBMBMINCFREZ</p></td>
+<td><p>Master bit map incorrectly asserts this local map has free space</p></td>
+<td><p>B</p></td>
+<td><p>M1</p></td>
+</tr>
+<tr>
+<td><p>DBMBPFLDIS</p></td>
+<td><p>Master bit map shows this map full, in disagreement with both disk and INTEG results</p></td>
+<td><p>B</p></td>
+<td><p>M1</p></td>
+</tr>
+<tr>
+<td><p>DBMBPFLDLBM</p></td>
+<td><p>Master bit map shows this map full, agreeing with disk local map</p></td>
+<td><p>B</p></td>
+<td><p>M1</p></td>
+</tr>
+<tr>
+<td><p>DBMBPFLINT</p></td>
+<td><p>Master bit map shows this map full, agreeing with MUPIP INTEG</p></td>
+<td><p>B</p></td>
+<td><p>M1</p></td>
+</tr>
+<tr>
+<td><p>DBMBPFRDLBM</p></td>
+<td><p>Master bit map shows this map has space, agreeing with disk local map</p></td>
+<td><p>B</p></td>
+<td><p>M1</p></td>
+</tr>
+<tr>
+<td><p>DBMBPFRINT</p></td>
+<td><p>Master bit map shows this map has space, agreeing with MUPIP INTEG</p></td>
+<td><p>B</p></td>
+<td><p>M1</p></td>
+</tr>
+<tr>
+<td><p>DBMBPINCFL</p></td>
+<td><p>Master bit map incorrectly marks this local map full</p></td>
+<td><p>B</p></td>
+<td><p>M1</p></td>
+</tr>
+<tr>
+<td><p>DBMBSIZMN</p></td>
+<td><p>Map block too small</p></td>
+<td><p>B</p></td>
+<td><p>M2</p></td>
+</tr>
+<tr>
+<td><p>DBMBSIZMX</p></td>
+<td><p>Map block too large</p></td>
+<td><p>B</p></td>
+<td><p>M2</p></td>
+</tr>
+<tr>
+<td><p>DBMBTNSIZMX</p></td>
+<td><p>Map block transaction number too large</p></td>
+<td><p>T</p></td>
+<td><p>I6</p></td>
+</tr>
+<tr>
+<td><p>DBMRKBUSY</p></td>
+<td><p>Block incorrectly marked busy</p></td>
+<td><p>B</p></td>
+<td><p>M1</p></td>
+</tr>
+<tr>
+<td><p>DBMRKFREE</p></td>
+<td><p>Block incorrectly marked free</p></td>
+<td><p>D</p></td>
+<td><p>M1</p></td>
+</tr>
+<tr>
+<td><p>DBMXRSEXCMIN</p></td>
+<td><p>Maximum record size for database is less than the design minimum</p></td>
+<td><p>D</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBNOTDB</p></td>
+<td><p>File does not have a valid GDS file header</p></td>
+<td><p>A</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBNOTMLTP</p></td>
+<td><p>Block size not a multiple of 512 bytes</p></td>
+<td><p>A</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBRBNLBMN</p></td>
+<td><p>Root block number is a local bit map number</p></td>
+<td><p>D</p></td>
+<td><p>K4</p></td>
+</tr>
+<tr>
+<td><p>DBRBNNEG</p></td>
+<td><p>Root block number negative</p></td>
+<td><p>D</p></td>
+<td><p>K4</p></td>
+</tr>
+<tr>
+<td><p>DBRBNTOOLRG</p></td>
+<td><p>Root block number greater than last block number in file</p></td>
+<td><p>D</p></td>
+<td><p>K4</p></td>
+</tr>
+<tr>
+<td><p>DBREADBM</p></td>
+<td><p>Read error on bitmap</p></td>
+<td><p>D</p></td>
+<td><p>H7</p></td>
+</tr>
+<tr>
+<td><p>DBRLEVLTONE</p></td>
+<td><p>Root level less than one</p></td>
+<td><p>D</p></td>
+<td><p>O1</p></td>
+</tr>
+<tr>
+<td><p>DBRLEVTOOHI</p></td>
+<td><p>Root level higher than maximum</p></td>
+<td><p>D</p></td>
+<td><p>O1</p></td>
+</tr>
+<tr>
+<td><p>DBSPANCHUNKORD</p></td>
+<td><p>Chunk of blocks is out of order</p></td>
+<td><p>B</p></td>
+<td><p>O5</p></td>
+</tr>
+<tr>
+<td><p>DBSPANGLOINCMP</p></td>
+<td><p>Spanning node is missing</p></td>
+<td><p>B</p></td>
+<td><p>O5</p></td>
+</tr>
+<tr>
+<td><p>DBSVBNMIN</p></td>
+<td><p>Start VBN smaller than possible</p></td>
+<td><p>A</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBSZGT64K</p></td>
+<td><p>Block size is greater than 64K</p></td>
+<td><p>A</p></td>
+<td><p>I3</p></td>
+</tr>
+<tr>
+<td><p>DBTNNEQ</p></td>
+<td><p>Current tn and early tn are not equal</p></td>
+<td><p>T</p></td>
+<td><p>I6</p></td>
+</tr>
+<tr>
+<td><p>DBTNTOOLG</p></td>
+<td><p>Block transaction number too large</p></td>
+<td><p>T</p></td>
+<td><p>I6</p></td>
+</tr>
+<tr>
+<td><p>DBTTLBLK0</p></td>
+<td><p>Total blocks equal zero</p></td>
+<td><p>A</p></td>
+<td><p>I4</p></td>
+</tr>
+<tr>
+<td><p>DBUNDACCMT</p></td>
+<td><p>Cannot determine access method; trying with BG</p></td>
+<td><p>T</p></td>
+<td><p>I6</p></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="pr01s07.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="preface.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch01.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Plug-in Errors </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Chapter 1. Error Messages</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/pr01s08.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+</html>

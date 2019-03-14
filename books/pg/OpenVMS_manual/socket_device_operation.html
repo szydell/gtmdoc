@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/socket_device_operation.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Socket Device Operation</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="using_socket_device.html" title="Using Socket Devices" />
+    <link rel="prev" href="write_cmmd_g.html" title="WRITE Command" />
+    <link rel="next" href="socket_device_param_summ.html" title="Socket Deviceparameter Summary" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Socket Device Operation</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="write_cmmd_g.html">Prev</a> </td>
+          <th width="60%" align="center">Using Socket Devices</th>
+          <td width="20%" align="right"> <a accesskey="n" href="socket_device_param_summ.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="socket_device_operation"></a>Socket Device Operation</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4203956" class="indexterm"></a>
+      <p>Each socket may be in one of the following states:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Created – indicates that the socket exists.</p>
+          </li>
+          <li>
+            <p>Bound – indicates that the socket exists and is bound to a port; a &quot;Bound socket&quot; needs a listen queue which currently requires a WRITE /LISTEN [after a USE].</p>
+          </li>
+          <li>
+            <p>Connected – indicates that the socket exists and has a connection.</p>
+          </li>
+        </ul>
+      </div>
+      <p>A server socket used for accepting new connections goes through the first two states in one step with a single OPEN or in two steps with an OPEN and a USE. When a server does a WRITE /WAIT on a Bound socket, a client can establish a connection which Creates another server socket that is Connected. In server operation, $KEY supplies the port value when a socket is bound (important when port 0 is specified to get the system to choose the port), and a socket id when a Connected socket is created. A client socket goes through the first and third states with a single OPEN or in two steps with an OPEN and a USE. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="write_cmmd_g.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="using_socket_device.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="socket_device_param_summ.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">WRITE Command </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Socket Deviceparameter Summary</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/socket_device_operation.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/null_device_examples.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Null Device Examples</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="using_null_devices.html" title="Using Null Devices" />
+    <link rel="prev" href="null_device_param_summ.html" title="Null Deviceparameter Summary" />
+    <link rel="next" href="using_socket_device.html" title="Using Socket Devices" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Null Device Examples</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="null_device_param_summ.html">Prev</a> </td>
+          <th width="60%" align="center">Using Null Devices</th>
+          <td width="20%" align="right"> <a accesskey="n" href="using_socket_device.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="null_device_examples"></a>Null Device Examples</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4203403" class="indexterm"></a>
+      <p>This section contains examples of null device usage.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    SET dev=&quot;<span>nl:</span>&quot;
+    OPEN dev USE dev
+    SET x=&quot;&quot; WRITE hdr,!,$ZDATE($h),?30,$J,!
+    FOR SET x=$O(^tmp($J,x)) q:x=&quot;&quot; DO REPORT
+    CLOSE dev
+    </pre>
+      <p>This program produces a report derived from the information in the global variable ^tmp. The unspecified routine REPORT may potentially contain a large amount of code. To see that the basic program functions without error, the programmer may wish to simply discard the output involved in favor of watching the function. To run the program normally, the programmer simply has to change the variable dev to name another device.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    JOB ^X:(INPUT=&quot;NL:&quot;:OUTPUT=&quot;NL:&quot;ERROR=&quot;ERROR.LOG&quot;
+    </pre>
+      <p>This issues an M JOB command to execute the routine ^X in another process. This routine simply processes a large number of global variables and produces no output. In the example, the JOBbed process takes its INPUT from a null device (it shouldn't ask for any), and sends its OUTPUT to a null device (it shouldn't produce any). If the JOBbed process encounters an error, it directs the error message to ERROR.LOG.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="null_device_param_summ.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="using_null_devices.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="using_socket_device.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Null Deviceparameter Summary </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Using Socket Devices</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/null_device_examples.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+</html>

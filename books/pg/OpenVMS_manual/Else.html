@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Else.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:05 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Else</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="Chapter 6. Commands" />
+    <link rel="prev" href="Example_of_Do.html" title="Examples of Do" />
+    <link rel="next" href="Examples_of_Else.html" title="Examples of Else" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Else</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Example_of_Do.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 6. Commands</th>
+          <td width="20%" align="right"> <a accesskey="n" href="Examples_of_Else.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="Else"></a>Else</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="Examples_of_Else.html">Examples of Else</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4170316" class="indexterm"></a>
+      <p>GT.M executes the remainder of the line after the ELSE if $TEST is FALSE (0). GT.M does not execute the rest of the line if $TEST is TRUE (1).</p>
+      <p>The format of the ELSE command is:</p>
+      <pre class="programlisting">
+        E[LSE]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Because ELSE is a conditional command, it does not support a command postconditional.</p>
+          </li>
+          <li>
+            <p>The scope of the ELSE is the remainder of the line.</p>
+          </li>
+          <li>
+            <p>Because the ELSE has no argument, at least two (2) spaces must follow the command to separate it from the next command on the line.</p>
+          </li>
+        </ul>
+      </div>
+      <p>Because the scopes of both the IF and the ELSE commands extend to the rest of the GT.M line, placing an ELSE on the same line as the corresponding IF cannot achieve the desired result. If an ELSE were placed on the same line as its corresponding IF, then the expression tested by the IF would be either TRUE or FALSE. If the condition is TRUE, the code following the ELSE would not be executed. If the condition is FALSE, the ELSE and everything following it would not be executed.</p>
+      <p>ELSE is analogous to IF '$TEST, except the latter statement switches $TEST to its complement and ELSE never alters $TEST.</p>
+      <p>The scope of an ELSE can be extended with DO or XECUTE commands.</p>
+      <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Caution">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Caution]" src="images/caution.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>Use ELSE with caution. Because GT.M stacks $TEST only at the execution of an extrinsic or an argumentless DO command, any XECUTE or DO with an argument has the potential side effect of altering $TEST. For information about $TEST, refer to the &quot;Intrinsic Special Variables&quot; chapter in this manual.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Example_of_Do.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="Examples_of_Else.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of Do </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of Else</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Else.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:05 GMT -->
+</html>

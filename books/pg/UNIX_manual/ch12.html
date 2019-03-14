@@ -1,0 +1,116 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch12.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Chapter 12. Internationalization</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="index.html" title="GT.M Programmer's Guide">
+<link rel="prev" href="ch11s06.html" title="Type Limits for Call-ins and Call-outs">
+<link rel="next" href="ch12s01.html" title="Collation Sequence Definitions">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Chapter 12. Internationalization</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch11s06.html">Prev</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="ch12s01.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-node">Internationalization</span>
+</div>
+<div class="chapter">
+<div class="titlepage"><div>
+<div><h2 class="title">
+<a name="ch_internationalization"></a>Chapter 12. Internationalization</h2></div>
+<div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
+<tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V6.3-006</td>
+<td align="left">26 October 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch12s03.html" title="Implementing an Alternative Collation Sequence for Unicode® characters">&#8220;Implementing an Alternative Collation Sequence for <span class="trademark">Unicode</span>® characters&#8221;</a>, minor corrections.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch12s04.html#pattern_code_def" title="Pattern Code Definition">&#8220;Pattern Code Definition&#8221;</a>, UTF-8 tweaks</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-001</td>
+<td align="left">20 March 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch12s04.html#patt_code_selection" title="Pattern Code Selection">&#8220;<span>Pattern </span>Code Selection&#8221;</a>, added a compiler warning.</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.1-000</td>
+<td align="left">28 August 2014</td>
+<td align="left"><p>In <a class="xref" href="ch12s02.html#using_the_percent_gbldef_util" title="Using the %GBLDEF Utility">&#8220;<span>Using the </span>%GBLDEF<span> Utility</span>&#8221;</a>, added changes for global spaning regions.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.4-002B</td>
+<td align="left">26 December 2011</td>
+<td align="left">Conversion to documentation revision history reflecting GT.M releases with revision history for each chapter.</td>
+</tr>
+</table></div></div>
+</div></div>
+<div class="toc">
+<p><b>Table of Contents</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch12s01.html">Collation Sequence Definitions</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch12s01.html#shared_library_holding"><span>Creating the </span>Shared Library<span> holding the alternative sequencing routines</span></a></span></dt>
+<dt><span class="sect2"><a href="ch12s01.html#defining_env_variables"><span>Defining the </span>Environment Variable</a></span></dt>
+<dt><span class="sect2"><a href="ch12s01.html#defin_a_default_database_collation_method"><span>Defining a Default Database </span>Collation Method</a></span></dt>
+<dt><span class="sect2"><a href="ch12s01.html#establish_a_local_coll_seq">Establishing A Local Collation Sequence</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch12s02.html"><span>Creating the </span>Alternate Collation<span> Routines</span></a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch12s02.html#transfrm_routine">Transformation<span> Routine (gtm_ac_xform_1 or gtm_ac_xform)</span></a></span></dt>
+<dt><span class="sect2"><a href="ch12s02.html#inverse_trnsfrm_routine">Inverse Transformation<span> Routine (gtm_ac_xback or gtm_ac_xback_1)</span></a></span></dt>
+<dt><span class="sect2"><a href="ch12s02.html#version_cntrl_routines">Version Control<span> Routines (gtm_ac_version and gtm_ac_verify)</span></a></span></dt>
+<dt><span class="sect2"><a href="ch12s02.html#using_the_percent_gbldef_util"><span>Using the </span>%GBLDEF<span> Utility</span></a></span></dt>
+<dt><span class="sect2"><a href="ch12s02.html#exampl_up_low_alpha">Example of Upper and Lower Case Alphabetic Collation Sequence</a></span></dt>
+<dt><span class="sect2"><a href="ch12s02.html#example_reverse">Example of Collating Alphabets in Reverse Order using gtm_ac_xform_1 and gtm_ac_xback_1</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch12s03.html">Implementing an Alternative Collation Sequence for <span class="trademark">Unicode</span>® characters</a></span></dt>
+<dt><span class="sect1"><a href="ch12s04.html">Matching Alternative Patterns</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch12s04.html#pattern_code_def">Pattern Code Definition</a></span></dt>
+<dt><span class="sect2"><a href="ch12s04.html#patt_code_selection"><span>Pattern </span>Code Selection</a></span></dt>
+</dl></dd>
+</dl>
+</div>
+<p>This chapter describes GT.M facilities for applications using characters encoded in other than eight-bit bytes (octets). Before continuing with use
+   of UTF-8 features, you will need to ensure that your system has installed and configured the needed infrastructure for languages you wish to support, including International Components for Unicode (ICU / libicu), UTF-8 locale(s), and terminal emulators with appropriate fonts. This chapter addresses the specific issues of defining alternative collation sequences, and defining unique patterns for use with the pattern match operator.</p>
+<p>Alternative collation sequences (or an alternative ordering of strings) can be defined for global and local variable subscripts. They can be established for specified globals or for an entire database. The alternative sequences are defined by a series of routines in an executable file pointed to by <span>an environment variable</span>. As the collation sequence is implemented by a user-supplied program, virtually any collation policy may be implemented. Detailed information on establishing alternative collation sequences and defining the <span>environment variable</span> is provided in <span><a class="xref" href="ch12s01.html" title="Collation Sequence Definitions">&#8220;Collation Sequence Definitions&#8221;</a></span>. </p>
+<p>M has defined pattern classes that serve as arguments to the pattern match operator. GT.M supports user definition of additional pattern classes as well as redefinition of the standard pattern classes. Specific patterns are defined in a text file that is pointed to by <span>an environment variable</span>. Pattern classes may be re-defined dynamically. The details of defining these pattern classes and the <span>environment variable</span> are described in the section called <span><a class="xref" href="ch12s04.html" title="Matching Alternative Patterns">&#8220;Matching Alternative Patterns&#8221;</a></span>.</p>
+<p>For some languages (such as Chinese), the ordering of strings according to <span class="trademark">Unicode</span>® code-points (character values) may or may not be the linguistically or culturally correct ordering. Supporting applications in such languages requires development of collation modules - GT.M natively supports M collation, but does not include pre-built collation modules for any specific natural language. Therefore, applications that use characters in Unicode may need to implement their own collation functions. <span>For more information on developing a collation module for Unicode, refer to <a class="xref" href="ch12s03.html" title="Implementing an Alternative Collation Sequence for Unicode® characters">&#8220;Implementing an Alternative Collation Sequence for <span class="trademark">Unicode</span>® characters&#8221;</a>.  </span></p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch11s06.html">Prev</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="ch12s01.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Type Limits for Call-ins and Call-outs </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Collation Sequence Definitions</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch12.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:48 GMT -->
+</html>

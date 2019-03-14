@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Cmmd_Recall.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:14 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Command Recall</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Funct_in_Direct_Mode.html" title="Functionality Available in Direct Mode" />
+    <link rel="prev" href="Funct_in_Direct_Mode.html" title="Functionality Available in Direct Mode" />
+    <link rel="next" href="Line_Editing.html" title="Line Editing" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Command Recall</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Funct_in_Direct_Mode.html">Prev</a> </td>
+          <th width="60%" align="center">Functionality Available in Direct Mode</th>
+          <td width="20%" align="right"> <a accesskey="n" href="Line_Editing.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="Cmmd_Recall"></a>Command Recall</h4>
+          </div>
+        </div>
+      </div>
+      <p>Direct Mode includes a line command recall function <span>similar to the DCL recall function, which displays</span> previously entered command lines. Use &lt;CTRL-B&gt; or the Up Arrow key at the GTM&gt; prompt to scroll back through command lines. Use the Down Arrow key to scroll forward through the command lines. GT.M displays one command line at a time.<span>Once you have recalled a command, you can edit it if you wish and then reissue it.</span></p>
+      <p>The RECALL command is another way to access previously entered Direct Mode command lines. RECALL is only valid in Direct Mode and causes an error if it appears in other M code.</p>
+      <p>The format of the RECALL command is:</p>
+      <pre class="programlisting">
+            REC[ALL] [intlit|strlit]
+          </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional integer literal specifies a previously entered command by the counting back from the present.</p>
+          </li>
+          <li>
+            <p>The optional string literal specifies the most recently entered command line that starts with characters matching the (case-sensitive) literal.</p>
+          </li>
+          <li>
+            <p>When the RECALL command has no argument, it displays up to a maximum of 99 available past Direct Mode entries.</p>
+          </li>
+        </ul>
+      </div>
+      <p>If the Direct Mode session has just started, you may not have entered 99 lines for GT.M to save and therefore you will not have 99 lines to look at. The most recently entered GT.M command line has the number one (1), older lines have higher numbers. GT.M does not include the RECALL command in the listing. If the RECALL command is issued from a location other than the Direct Mode prompt, GT.M issues a run-time error.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;WRITE $ZGBLDIR
+        M.GLD
+        GTM&gt;SET $ZGBLDIR TEST.GLD
+        GTM&gt;SET A=10
+        GTM&gt;SET B=A
+        GTM&gt;REC
+        1 SET B=A
+        2 SET A=10
+        3 SET $ZGBLDIR TEST.GLD
+        4 WRITE $ZGBLDIR
+          </pre>
+      <p>This REC[ALL] command displays the previously entered commands.</p>
+      <p>You can also display a selected command by entering RECALL and the line number of the command you want to retrieve.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;REC 2
+        GTM&gt;SET A=10
+          </pre>
+      <p>This RECALLs the line number two (2).</p>
+      <p>If the RE[CALL] command includes a text parameter, GT.M displays the most recent command matching the text after the RE[CALL] command.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;REC WRITE
+        GTM&gt;WRITE $ZGBLDIR
+        MUMPS.GLD
+          </pre>
+      <p>This RECALLs &quot;WRITE&quot;, the command most recently beginning with this text. Note that the RECALL command text is case sensitive. The RECALL command with a text argument treats WRITE and write differently, that is, it treats them case sensitively. If you first type the WRITE command in lower-case and then type WRITE in upper-case to recall it, the RECALL command does not find a match.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Funct_in_Direct_Mode.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Funct_in_Direct_Mode.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="Line_Editing.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Functionality Available in Direct Mode </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Line Editing</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Cmmd_Recall.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:14 GMT -->
+</html>

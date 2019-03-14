@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Lines.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:34 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Lines</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Routines.html" title="Routines" />
+    <link rel="prev" href="Routines.html" title="Routines" />
+    <link rel="next" href="Labels.html" title="Labels" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Lines</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Routines.html">Prev</a> </td>
+          <th width="60%" align="center">Routines</th>
+          <td width="20%" align="right"> <a accesskey="n" href="Labels.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Lines"></a>Lines</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4167957" class="indexterm"></a>
+      <p>A line of M code consists of the following elements in the following order:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>An optional label.</p>
+          </li>
+          <li>
+            <p>A line-start delimiter. The standard defines the line-start delimiter as a space (&lt;SP&gt;) character. In order to enhance routine readability, GT.M extends M by accepting one or more tab (&lt;HT&gt;) characters as line-start delimiters.</p>
+          </li>
+          <li>
+            <p>Zero or more level indicators, which are periods (.). The level indicators show the level of nesting for argumentless DO commands: the more periods, the deeper the nesting. M ignores lines that contain level indicators unless they directly follow an argumentless DO command with a matching level of nesting.</p>
+            <p>For more information on the DO command, refer to the &quot;Commands&quot; chapter in this manual.</p>
+          </li>
+          <li>
+            <p>Zero or more commands and their arguments. M accepts multiple commands on a line. The argument(s) of one command are separated from the next command by a command-start delimiter, consisting of one or more spaces (&lt;SP&gt;).</p>
+          </li>
+          <li>
+            <p>A terminating end-of-line, which is a carriage return, line feed (&lt;CR&gt;&lt;LF&gt;) sequence.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Routines.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Routines.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="Labels.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Routines </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Labels</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Lines.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:34 GMT -->
+</html>

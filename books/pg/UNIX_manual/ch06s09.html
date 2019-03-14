@@ -1,0 +1,125 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s09.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>If</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s08.html" title="Hang">
+<link rel="next" href="ch06s10.html" title="Job">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">If</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s08.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s10.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">If</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="If"></a>If<a class="indexterm" name="idp186306624"></a>
+</h2></div></div></div>
+<p>The IF command provides conditional execution of the remaining commands on the line. When IF has an argument, it updates $TEST with the truth value of its evaluated argument. GT.M executes the remainder of a line after an IF statement when $TEST is 1 (TRUE). When $TEST is 0 (FALSE), GT.M does not execute the rest of the line. When the IF argument evaluates to a literal FALSE (0), GT.M discards the command and its arguments at compile time, which means it does not perform any validity checking on the remainder of the line.</p>
+<p>The format of the IF command is:</p>
+<pre class="programlisting">I[F] [tvexpr[,...]]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Because IF is a conditional command, it does not support a command postconditional.</p></li>
+<li class="listitem"><p>The scope of the IF is the remainder of the line. The scope of an IF can be extended with DO (or XECUTE) commands.</p></li>
+<li class="listitem"><p>The action of IF is controlled by the value of the expression and by $TEST, if there is no expression.</p></li>
+<li class="listitem"><p>IF with no argument acts on the existing value of $TEST (which it does not change); in this case, at least two (2) spaces must follow the IF to separate it from the next command on the line.</p></li>
+<li class="listitem"><p>An indirection operator, and an expression atom evaluating to a list of one or more IF arguments form a legal argument to IF.</p></li>
+</ul></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top">
+<p>Commands with timeouts also maintain $TEST. For information about $TEST, refer to <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>. Because GT.M stacks $TEST only at the execution of an extrinsic or an argumentless DO command, any XECUTE or DO with an argument has the potential side effect of altering $TEST. </p>
+<p>Use the argumentless IF with caution.</p>
+</td></tr>
+</table></div>
+<p>Example:</p>
+<pre class="programlisting">IF A,B ...
+is equivalent to
+IF A IF B</pre>
+<p>An IF with more than one argument behaves as if those arguments were logically "ANDed." However, execution of the line ceases with the evaluation of the first false argument. For IF argument expressions containing the "AND" operator (&amp;), by default, execution still ceases with the evaluation of the first false argument, however any global references within the expression act in sequence to maintain the naked reference. The "FULL_BOOLEAN" and "SIDE_EFFECTS" compiler settings modify this behavior if you desire GT.M to provide side effects it would otherwise bypass due to short-circiuting of Boolean expressions.</p>
+<p>Postconditionals perform a function similar to IF; however, their scope is limited to a single command or argument, and they do not modify $TEST. For more information on postconditionals, <span>see <a class="xref" href="ch05.html" title="Chapter 5. General Language Features of M">Chapter 5: &#8220;<i><span>General Language Features of M</span></i>&#8221;</a></span>.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Examples_of_If"></a>Examples<span> of If</span><a class="indexterm" name="idp186306864"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">IF x=+x!(x="") Do BAL</pre>
+<p>In this example, the DO executes if x contains a number or a null string.</p>
+<p>Example:</p>
+<pre class="programlisting">Write !,?50,BAL If 'BAL Write "****"
+IF  Set EMPTY(acct)=""</pre>
+<p>The IF in the first line changes the value of $TEST, determining the execution of the code following the argumentless IF in the second line. Such argumentless IFs may serve as a form of line continuation.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Set X=1,Y=1,Z=2 Kill UNDEF
+GTM&gt;If X=1,Y=1,Z=3,UNDEF=0 Write "HI"
+GTM&gt;</pre>
+<p>The IF command causes GT.M to cease executing the line after it determines Z is not equal to three (3). Therefore, GT.M never evaluates the reference to the undefined variable and never generates an error.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Set X=1 Kill UNDEF
+GTM&gt;If X=1!(UNDEF=3) Write "HI"
+HI
+GTM&gt;</pre>
+<p>Because GT.M recognizes that the X=1 fulfills the IF, it skips evaluation of the UNDEF variable and executes this IF command without generating an error. Because GT.M does not require such optimizations and in fact discourages them by requiring that all global references maintain the naked indicator, other implementations may generate an error.</p>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody><tr valign="top">
+<td align="left" valign="top">
+<p></p>
+<p class="relatedtopics">See Also</p>
+</td>
+<td align="left" valign="top">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc" compact>
+<li class="listitem"><p>
+<a class="xref" href="ch05s07.html#Postconditionals" title="Postconditionals">&#8220;Postconditionals&#8221;</a></p></li>
+<li class="listitem"><p><a class="xref" href="ch08s15.html" title="$Test">&#8220;$Test&#8221;</a></p></li>
+</ul></div>
+            </td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s08.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s10.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Hang </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Job</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s09.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+</html>

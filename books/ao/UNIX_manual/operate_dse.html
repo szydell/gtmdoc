@@ -1,0 +1,112 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/operate_dse.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:38 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Operating in DSE</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="ch10.html" title="Chapter 10. Database Structure Editor">
+<link rel="prev" href="ch10.html" title="Chapter 10. Database Structure Editor">
+<link rel="next" href="dse_cmmds_quals.html" title="DSE Commands and Qualifiers">
+<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center"><span>Operating in DSE</span></th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch10.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 10. Database Structure Editor</th>
+<td width="20%" align="right"> <a accesskey="n" href="dse_cmmds_quals.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch10.html">Database Structure Editor</a></span> &gt; <span class="breadcrumb-node"><span>Operating in DSE</span></span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="operate_in_dse"></a><span>Operating in DSE</span><a class="indexterm" name="idp186074080"></a>
+</h2></div></div></div>
+<p>The GT.M Database Structure Editor, DSE, is primarily a tool for authorized GT.M consultants to examine and, under unusual circumstances, repair GT.M Database Structure (GDS) databases. With DSE, it is possible to see and change most of the attributes of a GT.M database.</p>
+<p>DSE gives all possible control over a database and therefore, it may cause irreparable damage when used without knowing the consequences. Therefore, you unless you have extensive experience, you should always get guidance from FIS or an equivalently knowledgeable support  resource before running any DSE command that changes any attribute of any production database or other database you value. However, you can use those DSE commands that let you see the attributes of your database for collecting database metrics and monitoring status.</p>
+<p>GT.M installation procedure places the DSE utility program in a directory specified by the <span>environment variable gtm_dist</span>.</p>
+<p>Invoke DSE using the <span>"dse" command at the shell prompt</span>. If this does not work, consult your system manager to investigate setup and file access issues.</p>
+<p>Example:</p>
+<pre class="programlisting">$gtm_dist/dse
+File/usr/name/mumps.dat
+Region  DEFAULT
+DSE&gt;</pre>
+<p>DSE displays the  DSE&gt; prompt.</p>
+<p>You may also specify a command when entering DSE.</p>
+<p>By default, DSE starts with the region that stands first in the list of regions arranged in alphabetical order. In the above example, the first region is DEFAULT. </p>
+<p>You may also specify a command when entering DSE.</p>
+<p>Example:</p>
+<pre class="programlisting">$gtm_dist/dse dump <span>-</span>fileheader     </pre>
+<p>This command displays the fileheader of the region that stands first in the list of regions arranged in alphabetical order and then returns to the shell prompt. To look at other regions, at the DSE prompt you must first issue a FIND <span>-</span>REGION=&lt;desired-region&gt; command.</p>
+<p>As previously mentioned, DSE provides control over most of the attributes of your database. With DSE, it is possible to examine them and,with a few exceptions, change them.</p>
+<p>All DSE commands are divided into two categories-Change commands and Inquiry commands. Change commands allow you to modify the attribute of your database, in most cases without any warning or error. As the low level tool of last resort, Change commands allow you to take certain actions that can cause extensive damage when undertaken without an extensive understanding of the underlying data structures on disk and in memory and with an imperfect understanding of the commands issued.  Do not use the Change commands unless you know exactly what you are doing and have taken steps to protect yourself against mistakes, both inadvertent and resulting from an incomplete understanding of the commands you issue. Change commands are not required for normal operation, and are usually only used under the direction of FIS support to recover from the unanticipated consequences of failures not adequately planned for (for example, you should configure GT.M applications such that you never need a Change command to recover from a system crash).</p>
+<p>Inquiry commands let you see the attributes of your database. You may frequently use the inquiry commands for collecting your database metrics and status reporting.</p>
+<p>The list of Change commands is as follows:</p>
+<pre class="programlisting">AD[D]
+AL[L]
+B[UFFER _FLUSH]
+CH[ANGE]
+CR[ITICAL]
+REM[OVE]
+RES[TORE]
+SH[IFT]
+W[CINIT]
+OV[ERWRITE]
+M[APS] <span>-</span>BU[SY] <span>-</span>F[REE] <span>-</span>M[ASTER] <span>-</span>R[ESTORE_ALL]</pre>
+<p>The list of Inquiry commands is as follows:</p>
+<pre class="programlisting">CL[OSE]
+D[UMP]
+EV[ALUATE]
+EX[IT]
+F[IND]
+H[ELP]
+I[NTEGRIT]
+M[APS] <span>-</span>BL[OCK]
+OP[EN]
+P[AGE]
+RA[NGE]
+SA[VE]
+SP[AWN]  </pre>
+<p>Although DSE can operate concurrently with other processes that access the same database file, FIS strongly recommends using DSE in standalone mode when using Change commands. Some DSE operations can adversely impact the database when they occur during active use of the database. Other DSE operations may be difficult to perform in a logically sound fashion because a DSE operator works on a block at a time, while normal database operations update all related blocks almost simultaneously.</p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top"><p>When DSE attaches to a database with a version that does not match the DSE version, DSE issues an informational message and continues. At this point, you should exit DSE and find the version of DSE that matches the database. You should continue after this warning if and only if you are certain that the DSE is indeed from the GT.M version that has the database open (and hence the error results from a damaged database file header or shared memory that you intend to repair, following instructions from FIS).</p></td></tr>
+</table></div>
+<p>Use the DSE EXIT, or QUIT command to leave DSE. </p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch10.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch10.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="dse_cmmds_quals.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 10. Database Structure Editor </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> <span>DSE Commands and Qualifiers</span>
+</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/operate_dse.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:38 GMT -->
+</html>

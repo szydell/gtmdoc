@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_sqr_root.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:48 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of %SQROOT</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="sqr_root_percent.html" title="%SQROOT" />
+    <link rel="prev" href="output_var_sqr_root.html" title="Output Variables" />
+    <link rel="next" href="global_utils.html" title="Global Utilities" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of %SQROOT</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="output_var_sqr_root.html">Prev</a> </td>
+          <th width="60%" align="center">%SQROOT</th>
+          <td width="20%" align="right"> <a accesskey="n" href="global_utils.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="examples_of_sqr_root"></a>Examples of %SQROOT</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4223379" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;SET %X=81
+	GTM&gt;DO ^%SQROOT
+	GTM&gt;ZWRITE
+	%X=81
+	%Y=9	
+	</pre>
+      <p>This example sets the variable %X to 81 and invokes %SQROOT to calculate the square root non-interactively. ZWRITE displays the contents of the variables.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO INT^%SQROOT
+	The square root of: 81 is: 9
+	The square root of: &lt;RETURN&gt;
+	GTM&gt;	
+	</pre>
+      <p>This example invokes INT^%SQROOT interactively that prompts for a number. The square root of the number appears on the same line. %SQROOT then prompts for another number. Press &lt;RETURN&gt; to exit.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;WRITE $$FUNC^%SQROOT(81)
+	9
+	</pre>
+      <p>This example invokes %SQROOT as an extrinsic function with the label FUNC.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="output_var_sqr_root.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="sqr_root_percent.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="global_utils.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Output Variables </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Global Utilities</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_sqr_root.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:48 GMT -->
+</html>

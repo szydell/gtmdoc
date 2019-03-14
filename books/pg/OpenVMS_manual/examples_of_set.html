@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_set.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:36 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of Set</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="set_cmmd.html" title="Set" />
+    <link rel="prev" href="set_cmmd.html" title="Set" />
+    <link rel="next" href="tcommit.html" title="TCOMMIT" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of Set</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="set_cmmd.html">Prev</a> </td>
+          <th width="60%" align="center">Set</th>
+          <td width="20%" align="right"> <a accesskey="n" href="tcommit.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_set"></a>Examples of Set</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4174982" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;KILL SET a=&quot;x&quot;,(b,c)=1,@a=&quot;hello&quot; ZWRITE
+        a=x
+        b=1
+        c=1
+        x=&quot;hello&quot;
+        GTM&gt;
+        </pre>
+      <p>The KILL command deletes any previously defined local variables. The SET command has three arguments. The first shows a simple direct assignment. The second shows the form that assigns the same value to multiple variables. The third shows atomic indirection on the left of the equal sign. The ZWRITE command displays the results of the assignments.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+          GTM&gt;SET ^(3,4)=^X(1,2)
+        </pre>
+      <p>Because GT.M evaluates the right-hand side of the equal sign before the left-hand side within a SET argument, the right-hand expression determines the naked reference indicator prior to evaluation of the left-hand side. Therefore, this example assigns ^X(1,3,4) the value of ^X(1,2).</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;KILL x SET $P(x,&quot;^&quot;,3)=&quot;piece 2&quot; ZWRITE x
+        x=&quot;^^piece 2&quot;
+        GTM&gt;
+        </pre>
+      <p>This SET demonstrates a &quot;setpiece&quot; and shows how SET generates missing delimiters when required. <span>For more information on syntax for $PIECE(), refer to the &quot;Functions&quot; chapter in this manual.</span></p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;SET x=&quot;I love hotdogs&quot;
+        GTM&gt;SET $EXTRACT(x,3,6)=&quot;want&quot;
+        GTM&gt;WRITE x
+        I want hotdogs
+        GTM&gt;SET $EXTRACT(x,7)=&quot; many &quot;
+        GTM&gt;WRITE x
+        I want many hotdogs
+        GTM&gt;
+        </pre>
+      <p>The SET $EXTRACT command replaces and extracts the specified characters with the value of the expression on the right hand side of the equal-sign (=).</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="set_cmmd.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="set_cmmd.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="tcommit.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Set </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> TCOMMIT</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_set.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:36 GMT -->
+</html>

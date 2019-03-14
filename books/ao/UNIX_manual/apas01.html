@@ -1,0 +1,225 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/apas01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:40 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Examining GT.M's IPC Resources</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="ipc_usage.html" title="Appendix A. GT.M's IPC Resource Usage">
+<link rel="prev" href="ipc_usage.html" title="Appendix A. GT.M's IPC Resource Usage">
+<link rel="next" href="apas02.html" title="gmtsecshr">
+<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Examining GT.M's IPC Resources</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ipc_usage.html">Prev</a> </td>
+<th width="60%" align="center">Appendix A. GT.M's IPC Resource Usage</th>
+<td width="20%" align="right"> <a accesskey="n" href="apas02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ipc_usage.html">GT.M's IPC Resource Usage</a></span> &gt; <span class="breadcrumb-node">Examining GT.M's IPC Resources</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="examine_IPC"></a>Examining GT.M's IPC Resources<a class="indexterm" name="idp188740688"></a><a class="indexterm" name="idp188800064"></a>
+</h2></div></div></div>
+<p>GT.M uses UNIX IPC resources as follows:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>For each database region, GT.M uses a shared memory segment (allocated with shmat()) for control structures and to implement M Locks. For journaled databases, the journal buffers reside in that shared memory segment. With the BG database access method, global buffers for the database also reside there. Note that use of the online help system by a process opens a database file with the BG access method. The first process to open a database file creates and initializes the shared memory segment, and the last process to exit normally cleans up and deletes the shared memory segment. However, under certain abnormal terminations of the last process (for example, if it is terminated with a <code class="code">kill -KILL</code>), that last process may not be able to clean up the shared memory segment, resulting in "orphan" shared memory segments (those with no attached processes).</p></li>
+<li class="listitem"><p>For database regions which use the MM access method, the file system manages an additional shared memory segment (allocated with <code class="code">mmap()</code>) to memory map the database file. GT.M does not explicitly allocate this shared memory. Because UNIX allocates shared memory segment when GT.M opens a database file, and releases it when the process terminates, such shared memory segments allocated by <code class="code"> mmap()</code> are never orphaned.</p></li>
+<li class="listitem"><p>When replicating, GT.M implements the journal pool on the primary in a shared memory segment. On the secondary, GT.M uses a shared memory segment for the receive pool.</p></li>
+<li class="listitem"><p>GT.M operations such as creating a shared memory segment for a given database file should be performed only by one process even if more than one process opens the database file at the same time. GT.M uses sets of public UNIX semaphores to insure these operations are single-threaded. GT.M uses other sets of public semaphores to setup and tear down shared memory segments allocated with <code class="code">shmat()</code>.</p></li>
+<li class="listitem"><p>Public semaphore ids may be non-unique. Private semaphore ids are always unique for each database.</p></li>
+<li class="listitem"><p>The semaphore with keys starting <code class="code">0x2b</code> and <code class="code">0x2c</code> are startup and rundown semaphores. A GT.M process uses them only while attaching to or detaching from a database.</p></li>
+<li class="listitem"><p>The number of processes and the number of semaphore attached to an IPC resource may vary according to the state of your database. Some shared memory regions have <code class="code">0</code> processes attached to them (the <code class="code"> nattch </code>column). If these correspond to GT.M database regions or to global directories, they are most likely from improper process termination of GT.M (GT.M processes show up as "<code class="code"> mumps </code>" in a <code class="code"> ps </code>command) and GT.M utility processes; source server, receiver server, or update processes (which appear as "<code class="code"> mupip </code>"); or other GT.M utilities ("<code class="code"> mupip </code>", "<code class="code"> dse </code>", or "<code class="code"> lke </code>").</p></li>
+<li class="listitem"><p>An instance has one journal pool, and, if a replicating instance, one receiver pool too. Note that you might run multiple instances on the same computer system.</p></li>
+<li class="listitem"><p>For simple GT.M operation (that is, no multisite replication), there is no journal pool or receive pool.</p></li>
+</ul></div>
+<p>The following exercise demonstrates how GT.M utilizes IPC resources in a multisite database replication configuration. The task is to set up a replicated GT.M database configuration on two servers at 2 different locations.</p>
+<p>The steps of this task are as follows:</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Create 2 databases-<code class="code">America </code>and <code class="code">Brazil</code>-on 2 different servers (<code class="code"> Server_A </code>and<code class="code"> Server_B</code>) and deploy them in a multisite database replication configuration so that <code class="code"> America </code>is the primary site and <code class="code"> Brazil </code>is the secondary site. Ensure that no GT.M processes exist on either server.</p></li>
+<li class="listitem">
+<p>In <code class="code">Server_A</code> and in the directory holding database files for <code class="code"> America </code>give the following commands (note
+   that because the default journal pool size is 64MB, a value of 1048576 bytes - GT.M's minimum size of 1MB for this exercise):</p>
+<pre class="programlisting">$ export gtm_repl_instance=multisite.repl 
+$ mupip replicate -instance_create -name=America 
+$ mupip set -replication=on -region "*" 
+$ mupip replicate -source -start -buf=1048576 -secondary=Server_B:1234 -log=A2B.log -instsecondary=Brazil</pre>
+</li>
+<li class="listitem">
+<p>Now execute the following command:</p>
+<pre class="programlisting">$ gtm_dist/ftok mumps.dat multisite.repl</pre>
+</li>
+<li class="listitem">
+<p>This command produces the "public" (system generated) IPC Keys (essentially hash values) for mumps.dat and its replication
+   instance<code class="code"> multisite.repl</code>. It produces a sample output like the following:</p>
+<pre class="programlisting">  mumps.dat :: 721434869 [ 0x2b0038f5 ] 
+multisite.repl :: 721434871 [ 0x2b0038f7 ]</pre>
+</li>
+<li class="listitem">
+<p>The keys starting with <code class="code">0x2b</code> (Hexadecimal form) are the keys for the semaphores used by replication instance <code class="code">
+   America </code>with the high order hexadecimal <code class="code">0x2b</code> replaced by <code class="code">0x2c</code> for the replication instance file (GT.M's standard prefix for semaphores for journal pools is <code class="code">0x2c</code> and that for database files is<code class="code">0x2b</code>). You can observe this with the <code class="code"> ipcs </code>command:</p>
+<pre class="programlisting">------ Semaphore Arrays --------
+key  semid owner perms nsems
+0xd74e4524 196608 welsley 660 1
+0x2c0038f7 983041 welsley 777 3
+0x00000000 1015810 welsley 777 5
+0x2b0038f5 1048579 welsley 777 3
+0x00000000 1081348 welsley 777 3
+</pre>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>You can expect files in separate file systems to share the same public<code class="code"> ftok</code>. This is a normal behavior for large systems with multiple installations and does not affect GT.M operations in any way. This is because GT.M does not assume the semaphore has a one-to-one relationship with the resource and startup/shutdown operations are relatively rare, so the interference among resources have a minimal or no impact. However, the private semaphore (with the <code class="code">0 </code>key) is unique for a database and is used while a process is actively using the resource.</p></td></tr>
+</table></div>
+</li>
+<li class="listitem">
+<p>Execute the following command and note down the <code class="code"> shared memory id </code>and <code class="code"> private semaphore id </code>on instance America.</p>
+<pre class="programlisting">$ mupip ftok mumps.dat</pre>
+<p>This command identifies the "private" (GT.M generated) semaphores that a process uses for all "normal" access. The sample
+   output of this command looks like the following:</p>
+<pre class="programlisting">File  ::   Semaphore Id   ::   Shared Memory Id  :: FileId
+---------------------------------------------------------------------------------------------------------------
+mumps.dat ::  1081348 [0x00108004] :: 2490370 [0x00260002] :: 0xf53803000000000000fe000000000000ffffffd2 
+</pre>
+</li>
+<li class="listitem">
+<p>Now, execute the following command and note down the <code class="code"> shared memory </code>and <code class="code"> private semaphore id </code>for
+   journal pool.</p>
+<pre class="programlisting">$ mupip ftok -jnl multisite.repl</pre>
+<p>The sample output of this command looks like the
+   following:</p>
+<pre class="programlisting">File   :: Semaphore Id     ::   Shared Memory Id  :: FileId
+---------------------------------------------------------------------------------------------------------------
+multisite.repl :: 1015810 [0x000f8002]  ::  2457601 [0x00258001] :: 0xf73803000000000000fe000000000000ffffffd2</pre>
+<p>Note that the <code class="code"> Semaphore id 1015810 </code>and <code class="code"> Shared Memory ID 2457601 </code>are in the sample output of the <code class="code"> ipcs -a </code>command below.</p>
+</li>
+<li class="listitem">
+<p>Now execute the command <code class="code"> ipcs -a </code>to view the current IPC resources. This command produces an output like the following:</p>
+<pre class="programlisting">------ Shared Memory Segments --------
+key  shmid owner perms bytes nattch status
+0x00000000 0  root  777 122880 1
+0x00000000 2457601 welsley 777 1048576 1
+0x00000000 2490370 welsley 777 2633728 1
+0x00000000 2523139 welsley 600 393216 2  dest
+0x00000000 2555908 welsley 600 393216 2  dest
+0x00000000 1048583 welsley 600 393216 2  dest
+0x00000000 1081352 welsley 600 393216 2  dest
+0x00000000 1114121 welsley 666 376320 2
+0xd74e4524 1146890 welsley 660 64528 0
+0x00000000 1933323 welsley 666 62500 2
+0x00000000 1966092 welsley 666 1960000 2
+------ Semaphore Arrays --------
+key  semid owner perms nsems
+0xd74e4524 196608 welsley 660 1
+0x2c0038f7 983041 welsley 777 3
+0x00000000 1015810 welsley 777 5
+0x2b0038f5 1048579 welsley 777 3
+0x00000000 1081348 welsley 777 3
+ 
+------ Message Queues --------
+key  msqid owner perms used-bytes messages</pre>
+<p>Using the following formula, where n is the number of regions, to calculate GT.M's IPC resources in a multisite replication configuration:</p>
+<pre class="programlisting">IPCs = (n regions * (1 shm/region + 1 ftok sem/region + 1 private sem/region)) 
++ 1 sem/journal-pool + 1 sem/receiver-pool </pre>
+<p>In this case, America has one region and no receiver-pool so:</p>
+<pre class="programlisting">1 region * 3 IPCs/region + 1 IPC/journal-pool = 4 IPCs</pre>
+<p>Therefore, assuming that instance <code class="code"> America </code>has 1 region, the total IPC utilized by GT.M is: 4 [1 * 3 + 1 +0]. Note that there is no receiver pool for instance<code class="code"> America</code>.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>For <code class="code"> MUPIP RECOVER </code>operations the total number of IPC resources are <code class="code">3<em class="replaceable"><code>n</code></em> </code>(As there is no Journal Pool or Receiver Pool) where <em class="replaceable"><code> n </code></em>is the number of regions.</p></td></tr>
+</table></div>
+</li>
+<li class="listitem">
+<p>Now connect to <code class="code"> Server_B </code>and give the following commands in the directory holding database files for<code class="code"> Brazil</code>:</p>
+<pre class="programlisting">$ export gtm_repl_instance=multisite1.repl 
+$ mupip replicate -instance_create -name=Brazil $ mupip rundown -region "*"
+$ mupip set -journal="enable,before,on" -replication=on -region "*"
+$ mupip replicate -source -start -passive -buf=1048576 -log=B2dummy.log -inst=dummy 
+$ mupip replicate -receive -start -listenport=1234 -buf=1048576 -log=BFrA.log</pre>
+<p>Now execute the command:</p>
+<pre class="programlisting">$gtm_dist/ftok mumps.dat multisite1.repl</pre>
+<p>This command produces the "public" (system generated) IPC Key of <code class="code"> mumps.dat </code>and its replication instance<code class="code">    multisite1.repl</code>. It produces a sample output like the following:</p>
+<pre class="programlisting">  mumps.dat :: 722134735 [ 0x2b0ae6cf ]
+multisite1.repl :: 722134737 [ 0x2b0ae6d1 ]</pre>
+<p>Note that keys starting with 0x2b in the output of the ipcs -a command are the public IPC keys for the semaphores of the database file on replication instance<code class="code"> Brazil</code>.</p>
+</li>
+<li class="listitem">
+<p>Then, execute the following command and note down the <code class="code"> shared memory id </code>and <code class="code"> private semaphore id </code>on
+   instance<code class="code"> Brazil</code>.</p>
+<pre class="programlisting">$ mupip ftok mumps.dat</pre>
+<p>This command identifies the "private" (GT.M generated) semaphores that a process uses for all "normal" access. The sample output of this command looks like the following:</p>
+<pre class="programlisting">File :: Semaphore Id  :: Shared Memory Id :: FileId
+--------------------------------------------------------------------------------------------------------------
+mumps.dat :: 327683 [0x00050003] :: 11665410 [0x00b20002]:: 0xcfe63400000000000a0000000000000000000000</pre>
+</li>
+<li class="listitem">
+<p>Now, execute the following command and note down the <code class="code"> shared memory </code>and <code class="code"> private semaphore id </code>for journal pool.</p>
+<pre class="programlisting">$ mupip ftok -jnl multisite1.repl</pre>
+<p>The sample output of this command looks like the
+   following:</p>
+<pre class="programlisting">File  :: Semaphore Id  :: Shared Memory Id :: FileId
+---------------------------------------------------------------------------------------------------------------
+multisite1.repl :: 262145 [0x00040001] :: 11632641[0x00b18001]:: 0xd1e63400000000000a0000000000000000000</pre>
+<p>Note that the <code class="code"> Semaphore id 262145</code> and <code class="code">
+   Shared Memory ID 11632641 </code>are in the sample output of the
+   <code class="code"> ipcs -a </code>command below.</p>
+</li>
+<li class="listitem">
+<p>Now, execute the command <code class="code"> ipcs -a </code>to view the IPC resources of Brazil.</p>
+<p>This command produces a sample output like the following:</p>
+<pre class="programlisting">------ Shared Memory Segments --------
+key  shmid owner perms bytes nattch status
+0x00000000 11632641 gtmuser 777 1048576 3
+0x00000000 11665410 gtmuser 777 2629632 2
+0x00000000 11698179 gtmuser 777 1048576 2
+------ Semaphore Arrays --------
+key  semid owner perms nsems
+0x2c0ae6d1 229376 gtmuser 777 3
+0x00000000 262145 gtmuser 777 5
+0x2b0ae6cf 294914 gtmuser 777 3
+0x00000000 327683 gtmuser 777 3
+0x00000000 360452 gtmuser 777 5
+------ Message Queues --------
+key  msqid owner perms used-bytes messages </pre>
+</li>
+</ol></div>
+<p><code class="code"> Brazil </code>has 1 region and its receiver server is listening to <code class="code">America</code>, therefore as per the formula for calculating GT.M IPC resources, the total IPCs utilized by GT.M is: 5 <code class="code">[1 * 3 + 1 + 1]</code>. </p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ipc_usage.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ipc_usage.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="apas02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Appendix A. GT.M's IPC Resource Usage </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> gmtsecshr</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/apas01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:40 GMT -->
+</html>

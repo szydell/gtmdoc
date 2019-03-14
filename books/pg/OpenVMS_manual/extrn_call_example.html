@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/extrn_call_example.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:50 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>External Call Example</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter11vms.html" title="Chapter 11. Integrating External Routines" />
+    <link rel="prev" href="important_considerations_for_extr_calls.html" title="Important Considerations for External Calls" />
+    <link rel="next" href="calls_from_external_routines.html" title="Calls from External Routines" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">External Call Example</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="important_considerations_for_extr_calls.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 11. Integrating External Routines</th>
+          <td width="20%" align="right"> <a accesskey="n" href="calls_from_external_routines.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="extrn_call_example"></a>External Call Example</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4230840" class="indexterm"></a>
+      <p>The example in this section illustrates how to use external calls to invoke the external routine, TRANSLOGNAM, written in the C programming language. The TRANSLOGNAM routine translates a logical name. The M source file, DM.M, invokes Direct Mode. Calling TRANSLOGNAM from GT.M returns a translated logical name in a fashion similar to the $ZTRNLNM function. For information about $ZTRNLNM(), refer to the &quot;Functions&quot; chapter in this manual.</p>
+      <p>Procedures:</p>
+      <div class="orderedlist">
+        <ol type="1">
+          <li>
+            <p>Create the source files:</p>
+            <p>TRANSLOGNAM.C</p>
+            <p>ZCTAB.MAR (external call table source file)</p>
+            <p>DM.M</p>
+          </li>
+          <li>
+            <p>Compile the source files using the respective language compilers.</p>
+          </li>
+          <li>
+            <p>Link the TRANSLOGNAM.OBJ and ZCTAB.OBJ files to the DM.OBJ file.</p>
+          </li>
+          <li>
+            <p>Run the DM.EXE image to invoke Direct Mode</p>
+          </li>
+          <li>
+            <p>Use an external call to translate a logical name from M.</p>
+          </li>
+        </ol>
+      </div>
+      <p>Using any VMS editor, create the TRANSLOGNAM.C source file and insert the code illustrated in the following program.</p>
+      <p>Program TRANSLOGNAM.C:</p>
+      <pre class="programlisting">
+	#include &lt;descrip.h&gt;
+	#include &lt;lnmdef.h&gt;
+	#include &lt;lib$routines.h&gt;
+	#include &lt;starlet.h&gt;
+	long translognam (struct dsc$descriptor *src, struct dsc$descriptor *dst, struct dsc$descriptor *msg)
+	{
+	long status;
+	long attr;
+	unsigned char buffer[255];
+	unsigned char buffer1[255];
+	short return_length;
+	short return_length1;
+	$DESCRIPTOR(tabnam, &quot;LNM$FILE_DEV&quot;);
+	struct
+	{
+	 short buffer_length;
+	 short item_code;
+	 unsigned char *buffer_address;
+	 short *return_length_address;
+	 long terminator;
+	} item_list;
+	attr = LNM$M_CASE_BLIND;
+	item_list.buffer_length = sizeof buffer;
+	item_list.item_code = LNM$_STRING;
+	item_list.buffer_address = buffer;
+	item_list.return_length_address = &amp;return_length;
+	item_list.terminator = 0;
+	status = sys$trnlnm(&amp;attr, &amp;tabnam, src, 0, &amp;item_list);
+	if (status &amp; 1)
+	{
+	 dst-&gt;dsc$w_length = 0;
+	 dst-&gt;dsc$b_dtype = DSC$K_DTYPE_T;
+	 dst-&gt;dsc$b_class = DSC$K_CLASS_D;
+	 dst-&gt;dsc$a_pointer = 0;
+	 status = lib$scopy_r_dx (&amp;return_length, buffer, dst);
+	}
+	return_length1 = sizeof(&quot;CURRENT GLOBAL DIRECTORY&quot;) - 1;
+	strcpy(buffer1,&quot;CURRENT GLOBAL DIRECTORY&quot;);
+	msg-&gt;dsc$w_length = 0;
+	msg-&gt;dsc$b_dtype = DSC$K_DTYPE_T;
+	msg-&gt;dsc$b_class = DSC$K_CLASS_D;
+	msg-&gt;dsc$a_pointer = 0;
+	status = lib$scopy_r_dx(&amp;return_length1, buffer1, msg);
+	return status;
+	}
+	</pre>
+      <p>Create the external call table source file and insert:</p>
+      <pre class="programlisting">
+	.title zctablexample
+	.library &quot;gtm$dist:gtmzcall.mlb&quot;
+	zcinit
+	routinecallname=trnlnm, linkname=translognam, inputs=1, -outputs=2
+	returnclass=status
+	inputposition=1, mechanism=descrip tor, type=string
+	outputposition=2, mechanism=descrip tor, type=string
+	outputposition=3, mechanism=descriptor, type=string
+	zcallfin
+	.end	
+	</pre>
+      <p>Create the DM.M source file and insert:</p>
+      <pre class="programlisting">
+	DM FOR BREAK
+	</pre>
+      <p>Compile the source files.</p>
+      <pre class="programlisting">
+	$ MUMPS DM
+	$ CC TRANSLOGNAM
+	$ MACRO ZCTAB	
+	</pre>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>Alternatively, you may omit the &quot;.library&quot; line from the external call table source file, and add</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <pre class="programlisting">
+	+GTM$DIST:GTMZCALL.MLB/LIBRARY
+	</pre>
+      <p>to the MACRO command, above.</p>
+      <p>Link the resultant object modules.</p>
+      <pre class="programlisting">
+	$ LINK DM,ZCTAB,TRANSLOGNAM
+	</pre>
+      <p>Run the DM.EXE image to invoke Direct Mode.</p>
+      <pre class="programlisting">
+	$ RUN DM
+	GTM&gt;
+	</pre>
+      <p>To translate a logical name from M, use an externref:</p>
+      <pre class="programlisting">
+	GTM&gt;WRITE $&amp;trnlnm(&quot;GTM$GBLDIR&quot;)
+	MUMPS.GLD,CURRENT GLOBAL DIRECTORY
+	GTM&gt;
+	</pre>
+      <p>or use the $ZCALL():</p>
+      <pre class="programlisting">
+	GTM&gt;WRITE $ZC(&quot;trnlnm&quot;,&quot;GTM$GBLDIR&quot;)
+	MUMPS.GLD,CURRENT GLOBAL DIRECTORY
+	GTM&gt;
+	</pre>
+      <p>This $ZCALL() invokes the C program TRANSLOGNAM and passes it GTM$GBLDIR. The C program returns MUMPS.GLD, which becomes the result of the $ZCALL().</p>
+      <p>Note that returned value from external routine are comma delimited string and their position depend on the relative position of the &quot;output&quot; specification in the external call table. If we swap the &quot;output&quot; specification in ZCTAB.MAR, the returned value would be:</p>
+      <pre class="programlisting">
+	CURRENT GLOBAL DIRECTORY,MUMPS.GLD
+	</pre>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="important_considerations_for_extr_calls.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter11vms.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="calls_from_external_routines.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Important Considerations for External Calls </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Calls from External Routines</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/extrn_call_example.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:50 GMT -->
+</html>

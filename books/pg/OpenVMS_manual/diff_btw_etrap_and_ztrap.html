@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/diff_btw_etrap_and_ztrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Differences between $ETRAP and $ZTRAP</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="prgrm_handling_of_error.html" title="Program Handling of Errors" />
+    <link rel="prev" href="ztrap_behavior.html" title="$ZTRAP Behavior" />
+    <link rel="next" href="ztrap_idnt_with_etrap.html" title="$ZTRAP Interaction With $ETRAP" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Differences between $ETRAP and $ZTRAP</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ztrap_behavior.html">Prev</a> </td>
+          <th width="60%" align="center">Program Handling of Errors</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ztrap_idnt_with_etrap.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="diff_btw_etrap_and_ztrap"></a>Differences between $ETRAP and $ZTRAP</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4238321" class="indexterm"></a>
+      <p>The activation of $ETRAP and $ZTRAP are the same, however there are a number of differences in their subsequent behavior.</p>
+      <p>For subsequent errors the then current $ZTRAP is invoked, while with $ETRAP, behavior is controlled by the state of $ECODE. This means that when using $ZTRAP, it is important to change $ZTRAP, possibly to the empty string, at the beginning of the action in order to protect against recursion caused by any errors in $ZTRAP itself or in the code it invokes.</p>
+      <p>If there is no explicit or implicit GOTO or ZGOTO in the action, once a $ZTRAP action completes, execution resumes at the beginning of the line where the error occurred, while once a $ETRAP action completes, there is an implicit QUIT. This means that $ZTRAP actions that are not intended to permit a successful retry of the failing code should contain a GOTO, or more typically a ZGOTO. In contrast, $ETRAP actions that are intended to cause a retry must explicitly reinvoke the code where the error occurred.</p>
+      <p>For QUITs from the level at which an error occurred, $ZTRAP has no effect, where $ETRAP behavior is controlled by the state of $ECODE. This means that to invoke an error handler nested at the lower level, $ZTRAP actions need to use an explicit ZMESSAGE command, while $ETRAP does such invocations implicitly unless $ECODE is SET to the empty string.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ztrap_behavior.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="prgrm_handling_of_error.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ztrap_idnt_with_etrap.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZTRAP Behavior </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $ZTRAP Interaction With $ETRAP</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/diff_btw_etrap_and_ztrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+</html>

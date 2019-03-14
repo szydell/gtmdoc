@@ -1,0 +1,387 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/ch07.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:01:07 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Chapter 7. Database Replication</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="prev" href="jnl_ext.html" title="Journal Extract Formats">
+<link rel="next" href="ch07s01.html" title="Introduction">
+<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Chapter 7. Database Replication</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="jnl_ext.html">Prev</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s01.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-node">Database Replication</span>
+</div>
+<div class="chapter">
+<div class="titlepage"><div>
+<div><h2 class="title">
+<a name="ch_db_replication"></a>Chapter 7. Database Replication</h2></div>
+<div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
+<tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V6.3-007</td>
+<td align="left">01 February 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#riborg" title="Replicating Instance Starts from Backup of Originating Instance (A&#8594;B and A&#8594;P )">&#8220;Replicating Instance Starts from Backup of Originating Instance (A&#8594;B and A&#8594;P )&#8221;</a>, Use PREVLINK when taking a backup to be used exclusively for replication.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#rollback_db_after_sys_fail" title="Rolling Back a Replicated Database">&#8220;<span>Rolling Back a Replicated Database </span>&#8221;</a>, correct the description of -FETCHRESYNC. </p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#strt_rcvr_srvr" title="Starting the Receiver Server">&#8220;Start<span>ing the</span> Receiver Server
+
+&#8221;</a>, improve the description of -AUTOROLLBACK.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-006</td>
+<td align="left">26 October 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="replication.html#disp_change_repl" title="Displaying/Changing the attributes of Replication Instance File and Journal Pool">&#8220;<span>Displaying/Changing the attributes of Replication Instance File and Journal Pool</span>&#8221;</a>, add information about the -cleanslot qualifier. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html" title="Introduction">&#8220;Introduction&#8221;</a>, correct the alignment of bc_repl.svg.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#tls_repl_proc" title="Setting up a secured TLS replication connection">&#8220;Setting up a secured TLS replication connection&#8221;</a>, make corrections and add clarification about openssl.conf</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-005</td>
+<td align="left">03 July 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s02.html#create_config" title="Creating a configuration file">&#8220;Creating a configuration file&#8221;</a>, Disable SSLv3</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#downld_repl_ex" title="Download Replication Examples">&#8220;Download Replication Examples&#8221;</a>, adjust formatting to fix a PDF rendering issue</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html#repl_gesz" title="Using Multiple Instances in the same Process">&#8220;Using Multiple Instances in the same Process&#8221;</a>, fix a typo.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-004</td>
+<td align="left">23 March 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#rollbidle" title="Rollback data from crashed (idle) regions">&#8220;Rollback data from crashed (idle) regions&#8221;</a>, add procedure to rollback data from crashed (idle) regions</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, specify that the Source Server directs errors to the log file, add fixes for the filter example</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-003</td>
+<td align="left">12 December 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s02.html#comp_othr_recov" title="Comparison other than Recovery">&#8220;Comparison other than Recovery&#8221;</a>, correct incomplete statement</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#downld_repl_ex" title="Download Replication Examples">&#8220;Download Replication Examples&#8221;</a>, changing script title to env and spell change</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html#repl_gesz" title="Using Multiple Instances in the same Process">&#8220;Using Multiple Instances in the same Process&#8221;</a>, add new section</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html#repl_instance_file" title="Replication Instance File">&#8220;Replication Instance File&#8221;</a>, instance reconnect on the basis of most recent shared journal seq number</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s02.html#repl_recovr" title="Recovery">&#8220;Recovery&#8221;</a>, corrections and improvements</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, correct the quoting of the -filter qualifier and remove -replicate </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html" title="Introduction">&#8220;Introduction&#8221;</a>, add information about using extended global references or SET $ZGBLDIR to update another source instance.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#up_re_in_fi" title="Creating a new Replication Instance File">&#8220;Creating a new Replication Instance File&#8221;</a>, Updated GTM version</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-002</td>
+<td align="left">22 August 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch07s02.html#inst_freeze" title="Instance Freeze">&#8220;Instance Freeze&#8221;</a>, add that MUPIP REPLICATE -SOURCE -JNLPOOL -SHOW displays the load status of the custom errors file. </p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-001</td>
+<td align="left">20 March 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#ap_req_rllbk" title="A and P require rollback">&#8220;A and P require rollback&#8221;</a>, used capitals for keywords</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s02.html#create_config" title="Creating a configuration file">&#8220;Creating a configuration file&#8221;</a>, fixed a minor typo</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#create_repl_inst" title="Creating the Replication Instance File">&#8220;<span>Creating the Replication Instance File</span>&#8221;</a>, added the description of the -noqdbrundown qualifier. </p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#disp_change_repl" title="Displaying/Changing the attributes of Replication Instance File and Journal Pool">&#8220;<span>Displaying/Changing the attributes of Replication Instance File and Journal Pool</span>&#8221;</a>, added the description of the -noqdbrundown qualifier.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#gldreplupd" title="Changing the global directory in an A&#8594;B replication configuration">&#8220;Changing the global directory in an A&#8594;B replication configuration&#8221;</a>, added a new procedures for changing global directory settings in an A-&gt;B replication configuration; minor tweak to wording</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html#helper_processes" title="Helper Processes">&#8220;Helper Processes&#8221;</a>, specified that Helper Processes increase replication throughput, decrease backlog, and improve manageability.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s02.html#inst_freeze" title="Instance Freeze">&#8220;Instance Freeze&#8221;</a>, removed the reference to the Instance Freeze as field test grade implementation. The Instance Freeze facility became production grade in V6.0-001.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html" title="Procedures">&#8220;Procedures&#8221;</a>, rewrote most sections and added downloadable replication example scripts. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#recov_bapq" title="Switchover possibilities in a B&#8592;A&#8594;P&#8594;Q replication configuration">&#8220;Switchover possibilities in a B&#8592;A&#8594;P&#8594;Q replication configuration &#8221;</a>, updated for V6.3-000A</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html#repl_instance_file" title="Replication Instance File">&#8220;Replication Instance File&#8221;</a>, used caps for keywords</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s02.html#repl_recovr" title="Recovery">&#8220;Recovery&#8221;</a>, used capitals for keywords and leading delimiters for qualifiers</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#riborg" title="Replicating Instance Starts from Backup of Originating Instance (A&#8594;B and A&#8594;P )">&#8220;Replicating Instance Starts from Backup of Originating Instance (A&#8594;B and A&#8594;P )&#8221;</a>, followed convention of capitalizing key words when they are outside of examples</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html#si_repl_limits" title="Limitations - SI Replication">&#8220;Limitations - SI Replication&#8221;</a>, removed reference to OpenVMS</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#sour_srvr_shutdown" title="Shutting down the Source Server">&#8220;<span>Shutting down the</span> Source Server&#8221;</a>, added the description of the -zerobacklog qualifier.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html#sppl_exampls" title="Examples">&#8220;Examples&#8221;</a>, used capitals for keywords outside of examples</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, removed references to Solaris, HP-UX, and OpenVMS; specified that pool limit is  4GiB - 8; specified that GT.M supports the use of IBM provided zlib library for AIX.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#stop_upd_proc" title="Stopping the Update Process and/or the Receiver Server">&#8220;Stop<span>ping the</span> Update Process and/or the Receiver Server&#8221;</a>, added information about the -shutdown qualifier; alphabetized the qualifiers after -shutdown.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html" title="Introduction">&#8220;Introduction&#8221;</a>, language cleanup - intermediate save</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#tls_repl_proc" title="Setting up a secured TLS replication connection">&#8220;Setting up a secured TLS replication connection&#8221;</a>, Changed Helen and Phil to Alice and Bob.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#up_re_in_fi" title="Creating a new Replication Instance File">&#8220;Creating a new Replication Instance File&#8221;</a>, changed 4.5-000 to 5.4-000</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#updateresyncproc1" title="Setting up a new replicating instance of an originating instance (A&#8594;B, P&#8594;Q, or A&#8594;P)">&#8220;Setting up a new replicating instance of an originating instance (A&#8594;B,
+P&#8594;Q, or A&#8594;P)&#8221;</a>, changed on -&gt; one\n</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.2-002</td>
+<td align="left"></td>
+<td align="left"><p>Added examples and improved the instructions in <a class="xref" href="ch07s03.html" title="Procedures">&#8220;Procedures&#8221;</a>.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V6.2-001</td>
+<td align="left">27 February 2015</td>
+<td align="left"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added the NOJNLFILEONLY qualifier. </p></td>
+</tr>
+<tr>
+<td align="left">Revision V6.1-000/1</td>
+<td align="left">04 September 2014</td>
+<td align="left"><p>In <a class="xref" href="ch07s03.html" title="Procedures">&#8220;Procedures&#8221;</a>, corrected the downloadable scripts example (msr_proc2.tar.gz) for setting up an A&#8594;P replication configuration.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V6.1-000</td>
+<td align="left">01 August 2014</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added the description of -TLSID, -[NO]PLAINTEXTFALLBACK, and -RENEGOTIATE_INTERVAL qualifiers.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#strt_rcvr_srvr" title="Starting the Receiver Server">&#8220;Start<span>ing the</span> Receiver Server
+
+&#8221;</a>, added the descriptions of -TLSID, -START, and -LOG qualifiers..</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html" title="Procedures">&#8220;Procedures&#8221;</a>, added a new topic called <a class="xref" href="ch07s03.html#tls_repl_proc" title="Setting up a secured TLS replication connection">&#8220;Setting up a secured TLS replication connection&#8221;</a>. This topic includes a downloadable example that creates two databases and sets up TLS replication between them.</p></li>
+<li class="listitem"><p>Added a new section called <a class="xref" href="ch07s02.html#tls_repl" title="TLS/SSL Replication">&#8220;TLS/SSL Replication&#8221;</a>.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-003/1</td>
+<td align="left">19 February 2014</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added information about the use of the gtm_ipv4_only environment variable.</p></li>
+<li class="listitem"><p>In <a class="xref" href="gdm.html#mup_reorg" title="REORG">&#8220;REORG
+&#8221;</a>, added a caution note about running successive reorgs.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-003</td>
+<td align="left">27 January 2014</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html" title="Procedures">&#8220;Procedures&#8221;</a>, added downloadable script examples for A&#8594;B and A&#8594;P replication scenarios.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#activate_passive_src_srvr" title="Activating a Passive Source Server">&#8220;<span>Activating a</span> Passive Source Server&#8221;</a>, added information about the ACTIVE_REQUESTED mode.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#deavtivate_act_src_srvr" title="Deactivating an Active Source Server">&#8220;<span>Deactivating an</span> Active Source Server&#8221;</a>, added information about the PASSIVE_REQUESTED mode.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added information about the IPv6 support.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-001/1</td>
+<td align="left">22 March 1013</td>
+<td align="left"><p>Improved the formatting of all command syntaxes and corrected the description of the -helper qualifier.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-001</td>
+<td align="left">27 February 2013</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s02.html#inst_freeze" title="Instance Freeze">&#8220;Instance Freeze&#8221;</a>, added a note about the behavior when a process configured for instance freeze encounters an error with journaling.</p></li>
+<li class="listitem"><p>Improved the description of -UPDATERESYNC.</p></li>
+<li class="listitem">
+<p>In <a class="xref" href="ch07s03.html" title="Procedures">&#8220;Procedures&#8221;</a>, added the following topics:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem"><p><a class="xref" href="ch07s03.html#updateresyncproc1" title="Setting up a new replicating instance of an originating instance (A&#8594;B, P&#8594;Q, or A&#8594;P)">&#8220;Setting up a new replicating instance of an originating instance (A&#8594;B,
+P&#8594;Q, or A&#8594;P)&#8221;</a></p></li>
+<li class="listitem"><p><a class="xref" href="ch07s03.html#updateresyncproc2" title="Replacing the replication instance file of a replicating instance (A&#8594;B and P&#8594;Q)">&#8220;Replacing the replication instance file of a replicating instance (A&#8594;B
+and P&#8594;Q)&#8221;</a></p></li>
+<li class="listitem"><p><a class="xref" href="ch07s03.html#updateresyncproc3" title="Replacing the replication instance file of a replicating instance (A&#8594;P)">&#8220;Replacing the replication instance file of a replicating instance (A&#8594;P)&#8221;</a></p></li>
+<li class="listitem"><p><a class="xref" href="ch07s03.html#updateresyncproc4" title="Setting up a new replicating instance from a backup of the originating instance (A&#8594;P)">&#8220;Setting up a new replicating instance from a backup of the originating instance
+(A&#8594;P)&#8221;</a></p></li>
+</ul></div>
+</li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#disp_change_repl" title="Displaying/Changing the attributes of Replication Instance File and Journal Pool">&#8220;<span>Displaying/Changing the attributes of Replication Instance File and Journal Pool</span>&#8221;</a>, corrected the description of the -offset and -size qualifiers of -EDITINSTANCE.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-000/1</td>
+<td align="left">21 November 2012</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="replication.html" title="Commands and Qualifiers">&#8220;Commands and Qualifiers&#8221;</a>, added the description of the -log_interval qualifier.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#strt_rcvr_srvr" title="Starting the Receiver Server">&#8220;Start<span>ing the</span> Receiver Server
+
+&#8221;</a>, added the description of the -initialize qualifier and updated the description of -updateresync for V6.0-000.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-000</td>
+<td align="left">19 October 2012 </td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added the description of the -freeze qualifier. </p></li>
+<li class="listitem"><p>Added a new section called <a class="xref" href="ch07s02.html#inst_freeze" title="Instance Freeze">&#8220;Instance Freeze&#8221;</a>.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/10</td>
+<td align="left">28 September 2012</td>
+<td align="left"><p>In <a class="xref" href="replication.html#strt_rcvr_srvr" title="Starting the Receiver Server">&#8220;Start<span>ing the</span> Receiver Server
+
+&#8221;</a>, improved the description of -UPDATERESYNC.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/9</td>
+<td align="left">14 August 2012</td>
+<td align="left"><p>Improved the description of the replication WAS_ON state and added the <a class="xref" href="ch07s03.html#recwason" title="Recovering from the replication WAS_ON state">&#8220;Recovering from the replication WAS_ON state &#8221;</a> section.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/6</td>
+<td align="left">19 July 2012</td>
+<td align="left"><p>Removed excessive spacing around SVG diagrams in screen and print pdfs. </p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/5</td>
+<td align="left">17 July 2012</td>
+<td align="left"><p>Updated for V5.5-000.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/4</td>
+<td align="left">6 June 2012</td>
+<td align="left"><p>Removed -LOG as an option for -STATSLOG.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/3</td>
+<td align="left">2 May 2012</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="replication.html#rollback_db_after_sys_fail" title="Rolling Back a Replicated Database">&#8220;<span>Rolling Back a Replicated Database </span>&#8221;</a>, corrected the command syntax and the example.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, corrected the quoting of -filter examples. </p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/1</td>
+<td align="left">5 March 2012</td>
+<td align="left"><p>Improved the description of the -instsecondary qualifier. Added the <a class="xref" href="replication.html#stp_src_srv" title="Stopping a Source Server">&#8220;Stop<span>ping a</span> Source Server&#8221;</a> section and the <a class="xref" href="ch07s03.html#shut_inst" title="Shutting down an instance">&#8220;Shutting down an instance&#8221;</a> procedure. </p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000</td>
+<td align="left">27 February 2012</td>
+<td align="left"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added information about using external filters for pre-V5.5-000 versions. </p></td>
+</tr>
+<tr>
+<td align="left">Revision 4</td>
+<td align="left">13 January 2012</td>
+<td align="left"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added an example of a replication filter.</p></td>
+</tr>
+<tr>
+<td align="left">Revision 2</td>
+<td align="left">2 December 2011</td>
+<td align="left">Corrected the usage of the term propagating instance, improved the description of -stopsourcefilter, and changed -nopropagatingprimary to -propagatingprimary. </td>
+</tr>
+<tr>
+<td align="left">Revision 1</td>
+<td align="left">10 November 2011</td>
+<td align="left"><p>In the <a class="xref" href="ch07s03.html" title="Procedures">&#8220;Procedures&#8221;</a> section, changed "Restore the replication instance file" to "Recreate the replication instance file". </p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.4-002B</td>
+<td align="left">24 October 2011</td>
+<td align="left">Conversion to documentation revision history reflecting GT.M releases with revision history for each chapter.</td>
+</tr>
+</table></div></div>
+</div></div>
+<div class="toc">
+<p><b>Table of Contents</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch07s01.html">Introduction</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch07s01.html#db_trans_no">Database Transaction Number</a></span></dt>
+<dt><span class="sect2"><a href="ch07s01.html#jnl_seq_no">Journal Sequence Number</a></span></dt>
+<dt><span class="sect2"><a href="ch07s01.html#stm_seq_no">Stream Sequence Number</a></span></dt>
+<dt><span class="sect2"><a href="ch07s01.html#repl_gesz">Using Multiple Instances in the same Process</a></span></dt>
+<dt><span class="sect2"><a href="ch07s01.html#sppl_exampls">Examples</a></span></dt>
+<dt><span class="sect2"><a href="ch07s01.html#si_repl_limits">Limitations - SI Replication</a></span></dt>
+<dt><span class="sect2"><a href="ch07s01.html#Replication_Architecture">Replication Architecture
+
+</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch07s02.html">Implementing Replication and Recovery</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch07s02.html#app_arch">Application Architecture</a></span></dt>
+<dt><span class="sect2"><a href="ch07s02.html#sys_req">System Requirements</a></span></dt>
+<dt><span class="sect2"><a href="ch07s02.html#failover_repl">Switchover
+
+</a></span></dt>
+<dt><span class="sect2"><a href="ch07s02.html#inst_freeze">Instance Freeze</a></span></dt>
+<dt><span class="sect2"><a href="ch07s02.html#tls_repl">TLS/SSL Replication</a></span></dt>
+<dt><span class="sect2"><a href="ch07s02.html#ntwrk_link">Network Link between Systems</a></span></dt>
+<dt><span class="sect2"><a href="ch07s02.html#choosing_between">Choosing between BEFORE_IMAGE and NOBEFORE_IMAGE journaling</a></span></dt>
+<dt><span class="sect2"><a href="ch07s02.html#repl_data_repair">Database Repair</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch07s03.html">Procedures</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch07s03.html#downld_repl_ex">Download Replication Examples</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#abrepl1">Setting up an A&#8594;B replication configuration with empty databases</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#abcrepl1">Setting up an A&#8594;B&#8594;C replication configuration with empty databases</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#aprepl">Setting up an A&#8594;P replication configuration with empty databases</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#riborg">Replicating Instance Starts from Backup of Originating Instance (A&#8594;B and A&#8594;P )</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#nrml_cutov">Switchover possibilities in an A&#8594;B replication configuration</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#recov_bap">Switchover possibilities in a B&#8592;A&#8594;P replication configuration </a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#recov_bapq">Switchover possibilities in a B&#8592;A&#8594;P&#8594;Q replication configuration </a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#gldreplupd">Changing the global directory in an A&#8594;B replication configuration</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#roll_sft_upg">Rolling Software Upgrade</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#shut_inst">Shutting down an instance</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#up_re_in_fi">Creating a new Replication Instance File</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#tls_repl_proc">Setting up a secured TLS replication connection</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#schema_chng_filters">Schema Change Filters
+</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#recwason">Recovering from the replication WAS_ON state </a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#rollbidle">Rollback data from crashed (idle) regions</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#updateresyncproc1">Setting up a new replicating instance of an originating instance (A&#8594;B,
+P&#8594;Q, or A&#8594;P)</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#updateresyncproc2">Replacing the replication instance file of a replicating instance (A&#8594;B
+and P&#8594;Q)</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#updateresyncproc3">Replacing the replication instance file of a replicating instance (A&#8594;P)</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#updateresyncproc4">Setting up a new replicating instance from a backup of the originating instance
+(A&#8594;P)</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#proc4">Setting up an A&#8594;P configuration for the first time if P is an existing instance (having
+its own set of updates) </a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="replication.html">Commands and Qualifiers</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="replication.html#trng_repl_on_off"><span>Turning Replication On/Off</span></a></span></dt>
+<dt><span class="sect2"><a href="replication.html#create_repl_inst"><span>Creating the Replication Instance File</span></a></span></dt>
+<dt><span class="sect2"><a href="replication.html#disp_change_repl"><span>Displaying/Changing the attributes of Replication Instance File and Journal Pool</span></a></span></dt>
+<dt><span class="sect2"><a href="replication.html#start_src_srvr"><span>Starting the</span> Source Server</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#sour_srvr_shutdown"><span>Shutting down the</span> Source Server</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#activate_passive_src_srvr"><span>Activating a</span> Passive Source Server</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#deavtivate_act_src_srvr"><span>Deactivating an</span> Active Source Server</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#stop_src_filtr"><span>Stopping the</span> Source Filter</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#chck_srvr_hlth">Check<span>ing</span> Server Health</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#chng_log_file"><span>Changing the Log File</span></a></span></dt>
+<dt><span class="sect2"><a href="replication.html#enable_disable_dtld_log"><span>Enabling/Disabling Detailed</span> Logging</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#stp_src_srv">Stop<span>ping a</span> Source Server</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#rprt_current_backlog"><span>Reporting the Current Backlog of Journal Records</span></a></span></dt>
+<dt><span class="sect2"><a href="replication.html#process_lost">Process<span>ing</span> Lost Transactions<span> File</span></a></span></dt>
+<dt><span class="sect2"><a href="replication.html#strt_rcvr_srvr">Start<span>ing the</span> Receiver Server
+
+</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#strt_upd_proc">Start<span>ing the</span> Update Process</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#stop_upd_proc">Stop<span>ping the</span> Update Process and/or the Receiver Server</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#chk_srvr_hlth">Check<span>ing Server</span>  Health</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#chng_log"><span>Changing the Log File</span></a></span></dt>
+<dt><span class="sect2"><a href="replication.html#enable_disable_login"><span>Enabling/Disabling Detailed Logging</span></a></span></dt>
+<dt><span class="sect2"><a href="replication.html#rep_curr_backlog"><span>Reporting the Current Backlog of Journal Records</span></a></span></dt>
+<dt><span class="sect2"><a href="replication.html#rollback_db_after_sys_fail"><span>Rolling Back a Replicated Database </span></a></span></dt>
+</dl></dd>
+</dl>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="jnl_ext.html">Prev</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s01.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">
+<span>Journal </span>Extract Formats </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Introduction</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/ch07.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:01:07 GMT -->
+</html>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/ztrnlmn.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:31 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZTRNLNM()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter7.html" title="Chapter 7. Functions" />
+    <link rel="prev" href="examples_of_zsetprv.html" title="Examples of $ZSETPRV()" />
+    <link rel="next" href="examples_of_ztrnlnm.html" title="Examples of $ZTRNLNM()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZTRNLNM()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zsetprv.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 7. Functions</th>
+          <td width="20%" align="right"> <a accesskey="n" href="examples_of_ztrnlnm.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="ztrnlmn"></a>$ZTRNLNM()</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_ztrnlnm.html">Examples of $ZTRNLNM()</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4192733" class="indexterm"></a>
+      <p>The $ZTRNLNM function returns information about an equivalence stored in the VMS logical name tables. The $ZTRNLNM function is analogous to the DCL Lexical function F$TRNLNM. $ZTRNLNM() optionally does iterative translation, while the DCL lexical does not. This difference only manifests itself when a logical name translates to another logical name. </p>
+      <p>The format for the $ZTRNLNM function is:</p>
+      <pre class="programlisting">
+    <span>
+    $ZTRNLNM(expr1[,expr2[,expr3[,expr4[,expr5[,expr6]]]]])
+    </span>
+    
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The first expression specifies the target logical name. </p>
+          </li>
+          <li>
+            <p>The second optional expression specifies the logical name table(s) for $ZTRNLNM() to use; if the argument is missing or null, $ZTRNLNM() uses the tables identified by LNM$DCL_LOGICAL, which usually uses LNM$FILE_DEV to specify searching the process, job, group and system tables in that order.</p>
+          </li>
+          <li>
+            <p>The third optional expression specifies the index (numbered from 0) that $ZTRNLNM uses if the look-up encounters a search list; if the argument is missing or null, $ZTRNLNM() uses the first element of the search list.</p>
+          </li>
+          <li>
+            <p>The fourth optional expression specifies the initial mode of the look-up; if this argument is missing or null, $ZTRNLNM() starts the look-up in USER mode (alternatives are SUPERVISOR and EXECUTIVE).</p>
+          </li>
+          <li>
+            <p>The optional fifth expression specifies a keyword indicating whether the look-up is CASE_SENSITIVE (the alternative and default is CASE_BLIND).</p>
+          </li>
+          <li>
+            <p>The optional sixth argument specifies the item keyword indicating the item of information that $ZTRNLNM() returns; if the argument is missing or null, $ZTRNLNM() returns the &quot;VALUE&quot; of the translated equivalence name.</p>
+          </li>
+        </ul>
+      </div>
+      <p>$ZTRNLNM() provides a tool for examining VMS logical names environment variables from within GT.M.</p>
+      <p>If the (third) index argument is specified in conjunction with the (sixth) item argument of &quot;FULL&quot;, the $ZTRNLNM() uses the index value throughout the iterative translation, and terminates with a null result when it encounters no equivalence name at the specified index within each iteration.</p>
+      <p>Only the first argument is required, but missing arguments before the last argument specified, must be filled with null strings (&quot;&quot;).</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="2">
+    <p>$ZTRNLNM() Item Keywords  </p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ITEM KEYWORD</p>
+    </td>
+              <td>
+    <p>$ZTRNLNM() DATA RETURNED</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ACCESS_MODE</p>
+    <p>CONCEALED</p>
+    <p>CONFINE</p>
+    <p>FULL</p>
+    <p></p>
+    <p></p>
+    <p></p>
+    </td>
+              <td>
+    <p>Mode: 0=USER, 1=SUPER, 2=EXEC, 3=KERNEL</p>
+    <p>1 if concealed, else 0</p>
+    <p>1 if confined, else 0</p>
+    <p>Specifies that translation iterates until the result is not a logical name, or was created with the TERMINAL attribute; FULL is not available in DCL</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>LENGTH</p>
+    <p>MAX_INDEX</p>
+    <p>NO_ALIAS</p>
+    <p>TABLE</p>
+    <p></p>
+    </td>
+              <td>
+    <p>Length of the equivalence string</p>
+    <p>Largest index defined; 1st index is a 0</p>
+    <p>1 if no alias, else 0</p>
+    <p>1 if the equivalence is the name of a logical name table, else 0</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>TABLE_NAME</p>
+    <p>TERMINAL</p>
+    <p>VALUE</p>
+    </td>
+              <td>
+    <p>Name of table holding equivalence</p>
+    <p>1 if terminal, else 0</p>
+    <p>Equivalence name</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zsetprv.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter7.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="examples_of_ztrnlnm.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of $ZSETPRV() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of $ZTRNLNM()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/ztrnlmn.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:31 GMT -->
+</html>

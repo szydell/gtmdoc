@@ -1,0 +1,87 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$Get()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s06.html" title="$FNumber()">
+<link rel="next" href="ch07s08.html" title="$Increment()">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$Get()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s06.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s08.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$Get()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="get"></a>$Get()<a class="indexterm" name="idp187793136"></a>
+</h2></div></div></div>
+<p>Returns the value of a local or global variable if the variable has a value. If the variable has no value, the function returns a value specified by an optional second argument, and otherwise returns an empty string.</p>
+<p>The format for the $GET function is:</p>
+<pre class="programlisting">$G[ET](glvn[,expr])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The subscripted or unsubscripted global or local variable name specifies the node for which $GET() returns a value.</p></li>
+<li class="listitem"><p>If the global or local variable has a data value, $GET() returns the value of the variable.</p></li>
+<li class="listitem"><p>If the global or local variable has no data value, $GET() returns the value of the optional expression (second argument), or an empty string if the expression is not specified.</p></li>
+</ul></div>
+<p>M defines $GET(x,y) as equivalent to:</p>
+<pre class="programlisting">$Select($Data(x)[0:y,1:x)</pre>
+<p>and $GET(x) as equivalent to:</p>
+<pre class="programlisting">$GET(x,"")</pre>
+<p>$GET() provides a tool to eliminate separate initialization of variables. This technique may provide performance benefits when used to increase the density of a sparse global array by eliminating nodes that would otherwise hold absent optional information. On the other hand, some uses of one argument $GET() can mask logic problems.</p>
+<p>GT.M has a "NOUNDEF" mode of operation, which treats all variable references as if they were arguments to a one argument $GET(). The VIEW command  controls "NOUNDEF" mode. </p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_get"></a>Examples<span> of $GET()</span><a class="indexterm" name="idp187796704"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">setstatus;
+         if '$data(^PNT(NAME,TSTR)) set STATUS="NEW TEST"
+         else  if ^PNT(NAME,TSTR)="" set STATUS="WAITING FOR RESULT"
+         else  set STATUS=^PNT(NAME,TSTR)</pre>
+<p>This example can be reduced to two lines of code by using $GET(), shown in the following example. However, by using $GET() in its one-argument form, the distinction between an undefined variable and one with a null value is lost:</p>
+<pre class="programlisting">set STATUS=$get(^PNT(NAME,TSTR))
+if STATUS="" set STATUS="WAITING FOR RESULT"</pre>
+<p>This is solved by using the two-argument form of $GET():</p>
+<pre class="programlisting">set STATUS=$get(^PNT(NAME,TSTR),"NEW TEST")
+if STATUS="" set STATUS="WAITING FOR RESULT"</pre>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s06.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s08.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$FNumber() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $Increment()</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s07.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

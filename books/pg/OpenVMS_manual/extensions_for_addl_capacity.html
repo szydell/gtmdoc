@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/extensions_for_addl_capacity.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:27 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Extensions For Additional Capability</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter2.html" title="Chapter 2. GT.M Language Extensions" />
+    <link rel="prev" href="jrnl_ext.html" title="Journaling Extensions" />
+    <link rel="next" href="gtm_device_handling_extensions.html" title="GT.M Device Handling Extensions" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Extensions For Additional Capability</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="jrnl_ext.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 2. GT.M Language Extensions</th>
+          <td width="20%" align="right"> <a accesskey="n" href="gtm_device_handling_extensions.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="extensions_for_addl_capacity"></a>Extensions For Additional Capability</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4156523" class="indexterm"></a>
+      <p>For ways to adjust some process operating characteristics, refer to the VIEW section of the &quot;Commands&quot; chapter in this manual. For ways to get information about certain process operating characteristics, refer to the $VIEW() section of the &quot;Functions&quot; chapter in this manual.</p>
+      <p>In GT.M, support of environment specification for global names and resource names is possible. It is possible to excercise user code to customize interpretation of the environment specification. Refer to &quot;General Language Features&quot; chapter in this manual for details.</p>
+      <p>The following table summarizes GT.M extensions that increase general capability.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="2" align="center">
+                <p>GT.M Extensions for Additional Capability</p>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <p>EXTENSION</p>
+              </td>
+              <td align="center">
+                <p>EXPLANATION</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>View</p>
+              </td>
+              <td>
+                <p>Modifies the environment.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZAllocate*</p>
+              </td>
+              <td>
+                <p>Facilitates incremental locking by locking a name without unlocking previously locked names.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZDeallocate*</p>
+              </td>
+              <td>
+                <p>Unlocks one or more names without necessarily unlocking other names.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZHelp</p>
+              </td>
+              <td>
+                <p>Provides access to on-line help.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZWIthdraw</p>
+              </td>
+              <td>
+                <p>&quot;Kills&quot; data in a node without affecting the node's descendants.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$Order()</p>
+              </td>
+              <td>
+                <p>Enhanced to return the next unsubscripted variable in collating sequence from the current environment.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$View()</p>
+              </td>
+              <td>
+                <p>Examines the GT.M environment.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZCall()**</p>
+              </td>
+              <td>
+                <p>Returns a value from an external routine or user-defined function written in another programming language.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZCStatus</p>
+              </td>
+              <td>
+                <p>Returns the status from the last compile.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZDate()</p>
+              </td>
+              <td>
+                <p>Converts a date and/or time in $HOROLOG format into formatted text, using a user-specified format string.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZPrevious()***</p>
+              </td>
+              <td>
+                <p>Returns the previous element in a collating sequence, at the current level of a local or global array.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZA,$ZB, $ZEOF</p>
+              </td>
+              <td>
+                <p>Return device dependent I/O status information.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZCOmpile</p>
+              </td>
+              <td>
+                <p>Maintains the compiler qualifiers to be used on automatic compilation.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZBIT functions</p>
+              </td>
+              <td>
+                <p>A series of functions beginning with the characters $ZBIT that allow manipulation of bits.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZGBLdir</p>
+              </td>
+              <td>
+                <p>Maintains the name of the current global directory; may be set to switch this process to a new database.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZIO</p>
+              </td>
+              <td>
+                <p>Contains translated name of current I/O device.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZINTerrupt</p>
+              </td>
+              <td>
+                <p>Specifies the code to be XECUTE'd when an interrupt is processed.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZMAXTPTIme</p>
+              </td>
+              <td>
+                <p>Contains an integer value indicating the time duration GT.M should wait for the completion of all activities fenced by the current transaction's outermost TSTART/TCOMMIT pair.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZROutines</p>
+              </td>
+              <td>
+                <p>Maintains the list of directories to search during look-ups of object and source files.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZSYstem</p>
+              </td>
+              <td>
+                <p>Returns the status from the last VMS shell invocation.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZVERsion</p>
+              </td>
+              <td>
+                <p>Contains a designation of the current version name, level, and operating system.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>*The ZALLOCATE and ZDEALLOCATE commands are provided for compatibility with other M systems. However, Sanchez recommends use of the standard LOCK command, which provides an incremental locking facility. The incremental lock provides both flexibility and greater compatibility with the M language standard.</p>
+      <p>**The $ZCALL function is provided for compatibility with previous versions of GT.M and other M systems. However, Sanchez recommends use of the standard external reference for routines and functions. The external reference provides both flexibility and compatibility with the M language standard.</p>
+      <p>**<span>*</span>The $ZPREVIOUS function is provided for compatibility with previous versions of GT.M and other M systems. However, Sanchez recommends use of the standard two-argument form for the $ORDER function.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="jrnl_ext.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter2.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="gtm_device_handling_extensions.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Journaling Extensions </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> GT.M Device Handling Extensions</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/extensions_for_addl_capacity.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:27 GMT -->
+</html>

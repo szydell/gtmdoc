@@ -1,0 +1,321 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/mup_intro.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:36 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Introduction</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="mupipchap.html" title="Chapter 5. General Database Management">
+<link rel="prev" href="mupipchap.html" title="Chapter 5. General Database Management">
+<link rel="next" href="gdm.html" title="Commands and Qualifiers">
+<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Introduction</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="mupipchap.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 5. General Database Management</th>
+<td width="20%" align="right"> <a accesskey="n" href="gdm.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="mupipchap.html">General Database Management</a></span> &gt; <span class="breadcrumb-node">Introduction</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="mup_intro"></a>Introduction</h2></div></div></div>
+<p>This chapter describes common database management operations such as creating database files, modifying database characteristics, database backup and restore, routine integrity checks, extracting or loading data, and optimizing performance. </p>
+<p>GT.M uses M Peripheral Interchange Program (MUPIP) for GT.M database management, database journaling, and logical multisite replication (LMS). This chapter summarizes the MUPIP commands pertaining to GT.M database management and serves as a foundation for more advanced GT.M functionality described for Journaling and LMS.</p>
+<p>For MUPIP commands pertaining to database journaling, refer to <a class="xref" href="journaling.html" title="Chapter 6. GT.M Journaling">Chapter 6: &#8220;<i><span>GT.M </span>Journaling</i>&#8221;</a>.</p>
+<p>For MUPIP commands pertaining to multisite database replication, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Two MUPIP operations - INTRPT and STOP - perform process management functions. All other MUPIP operations relate to the operation of the database.</p></td></tr>
+</table></div>
+<p>The GT.M installation procedure places the MUPIP utility program in a directory specified by $gtm_dist. </p>
+<p>Invoke MUPIP by executing the mupip program at the shell prompt. If this does not work, consult your system manager (MUPIP requires that the $gtm_dist point to the directory containing the MUPIP executable image).</p>
+<pre class="programlisting">$gtm_dist/mupip
+MUPIP&gt;</pre>
+<p>MUPIP asks for commands, with the MUPIP&gt; prompt. Enter the EXIT command at the MUPIP&gt; prompt to stop the utility. MUPIP performs one operation at a time, and automatically terminates after most operations.</p>
+<p>When additional information appears on the command line after the mupip program name, MUPIP processes the additional information as its command, for example:</p>
+<pre class="programlisting">$gtm_dist/mupip stop 1158 </pre>
+<p>This starts MUPIP and stops the process with Process ID (PID) 1158. </p>
+<p>Some MUPIP commands require information contained in the global directory. Therefore, a process must have access to a valid global directory before using any MUPIP commands other than EXIT, INTRPT, JOURNAL, RESTORE, STOP and the -file option of any command that has that option.</p>
+<p>The environment variable gtmgbldir specifies the active global directory. </p>
+<p>A gtmgbldir value of mumps.gld tells MUPIP to look for a global directory file mumps.gld in the current directory. <span> For more information on the global directory, refer to <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">&#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p>
+<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<th align="left">Important</th>
+</tr>
+<tr><td align="left" valign="top"><p>FIS recommends against running GT.M components as root. When run as root, GT.M components use the owner and group of the database file as the owner and group of newly created journal files, backup files, snapshot files, shared memory, and semaphores. In addition, they set the permissions on the resulting files, shared memory, and semaphores, as if running as the owner of the database file and as a member of the database file group. </p></td></tr>
+</table></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top">
+<p>You can perform read operations on a GT.M database residing on a read-only mounted filesystem. However, please note:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The filesystem must remain read-only for the duration of any process that opens a database file resident on it. If a read-only file system is switched to read-write while GT.M processes have database files open on it, and other processes update those databases, the read-only processes are likely to read incorrect or corrupt data.</p></li>
+<li class="listitem"><p>When the filesystem is read-only the shared memory resources which are typically shared among multiple processes instead become private to each process, so memory resource use increases with each additional concurrent process.</p></li>
+<li class="listitem"><p>M locks mapped to regions that map to database files on read-only filesystems are visible only to the process that owns the locks, and are invisible to other processes.</p></li>
+</ul></div>
+</td></tr>
+</table></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mup_operations"></a>Operations <span>- Standalone and Concurrent Access</span><a class="indexterm" name="idp180784000"></a>
+</h3></div></div></div>
+<p>While most MUPIP operations can be performed when GT.M processes are actively accessing database files, some operations require stand-alone access. When using standalone access, no other process can access the database file(s). When using concurrent access, other processes can read or update the database file(s) while MUPIP accesses them. A few operations permit concurrent access to read database files, but not to update them. All MUPIP operations can be performed with stand-alone access - there is never a requirement for another process to be accessing database files when MUPIP operates on them.</p>
+<p>Most MUPIP operations require write access to the database files with which they interact. The exceptions are INTRPT and STOP, which do not require database access, but may require other privileges; EXTRACT, which requires read access; and INTEG, which may require write access, depending on the circumstances it encounters and the qualifiers with which it is invoked. <span>The following table displays some of the MUPIP operations and their database access requirements.</span></p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+<p>Operations</p>
+</th>
+<th>
+<p>MUPIP command</p>
+</th>
+<th>
+<p>Database Access Requirements</p>
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<p>Backup database files</p>
+</td>
+<td>
+<p>MUPIP BACKUP</p>
+</td>
+<td>
+<p>Backup never requires standalone access and concurrent write access is controlled by -[NO]ONLINE.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Create and initialize database files</p>
+</td>
+<td>
+<p>MUPIP CREATE</p>
+</td>
+<td>
+<p>Standalone access</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Converts a database file from one endian format to the other (BIG to LITTLE or LITTLE to BIG) </p>
+</td>
+<td>
+<p>MUPIP ENDIANCVT</p>
+</td>
+<td>
+<p>Standalone access</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Recover database files (for example, after a system crash) and extract journal records</p>
+</td>
+<td>
+<p>MUPIP JOURNAL</p>
+</td>
+<td>
+<p>Standalone access</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Restore databases from bytestream backup files</p>
+</td>
+<td>
+<p>MUPIP RESTORE</p>
+</td>
+<td>
+<p>Standalone access</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Properly close database files when processes terminate abnormally. </p>
+</td>
+<td>
+<p>MUPIP RUNDOWN</p>
+</td>
+<td>
+<p>Standalone access</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Modify database and/or journal file characteristics</p>
+<p></p>
+</td>
+<td>
+<p>MUPIP SET</p>
+</td>
+<td>
+<p>Standalone access is required if the MUPIP SET command specifies -ACCESS_METHOD, -GLOBAL_BUFFERS, -MUTEX_SLOTS, -LOCK_SPACE or -NOJOURNAL, or if any of the -JOURNAL options ENABLE, DISABLE, or BUFFER_SIZE are specified. </p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Grow the size of BG database files</p>
+</td>
+<td>
+<p>MUPIP EXTEND</p>
+</td>
+<td>
+<p>Concurrent access.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Export data from database files into sequential (flat) or binary files</p>
+</td>
+<td>
+<p>MUPIP EXTRACT</p>
+</td>
+<td>
+<p>Although MUPIP EXTRACT command works with concurrent access, it implicitly freezes the database to prevent updates. Therefore, from an application standpoint, you might plan for a standalone access during a MUPIP EXTRACT operation. </p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Prevent updates to database files</p>
+</td>
+<td>
+<p>MUPIP FREEZE</p>
+</td>
+<td>
+<p>Standalone access.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Check the integrity of GDS databases</p>
+</td>
+<td>
+<p>MUPIP INTEG</p>
+</td>
+<td>
+<p>Concurrent access. However, standalone access is required if MUPIP INTEG specifies -FILE. </p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Import data into databases</p>
+</td>
+<td>
+<p>MUPIP LOAD</p>
+</td>
+<td>
+<p>Although MUPIP LOAD works with concurrent access, you should always assess the significance of performing a MUPIP LOAD operation when an application is running because it may result in an inconsistent application state for the database. </p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Defragment database files to improve performance</p>
+</td>
+<td>
+<p>MUPIP REORG</p>
+</td>
+<td>
+<p>Concurrent access.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Send an asynchronous signal to a GT.M process</p>
+</td>
+<td>
+<p>MUPIP INTRPT</p>
+</td>
+<td>
+<p>Non-database access.</p>
+</td>
+</tr>
+<tr>
+<td><p>Reports information related to relinkctl files and their associated shared memory segments.</p></td>
+<td>
+<p>MUPIP RCTLDUMP</p>
+</td>
+<td>
+<p>Non-database access.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Stop GT.M processes</p>
+</td>
+<td>
+<p>MUPIP STOP</p>
+</td>
+<td>
+<p>Non-database access.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>MUPIP commands that need standalone access issue a MUUSERLBK error on a crashed replication-enabled database and MUUSERECOV error in case of a non-replicated-but-journaled database.</p></td></tr>
+</table></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mupip_main"></a><span>MUPIP</span>
+</h3></div></div></div>
+<p>The general format of MUPIP commands is:</p>
+<pre class="programlisting">mupip command [-qualifier[...]] [object[,...]] [destination] </pre>
+<p>MUPIP allows the abbreviation of commands and qualifiers. In each section describing a command or qualifier, the abbreviation is also shown (for example, B[ACKUP]). The abbreviated version of the command you can use on the command line is B. To avoid future compatibility problems and improve the readability, specify at least four characters when using MUPIP commands in scripts.</p>
+<p>Although you can enter commands in both upper and lower case (the mupip program name itself must be in lower case on UNIX/Linux), the typographical convention used in this chapter is all small letters for commands. Another convention is in the presentation of command syntax. If the full format of the command is too long for a single line of print, the presentation wraps around into additional lines. </p>
+<pre class="programlisting">$ mupip backup -bytestream -transaction=1 accounts,history,tables,miscellaneous /var/production/backup/</pre>
+<p>When you enter a MUPIP command, one of its variable arguments is the region-list. region-list identify the target of the command and may include the UNIX wildcards "?" and "*". Region-lists containing UNIX wildcard characters must always be quoted, for example, "*" to prevent inappropriate expansion by the UNIX shell. Similarly, for file and directory names you might want to avoid non-graphic characters and most punctuations except underbars (_), not because of GT.M conventions but because of inappropriate expansion by UNIX shells.</p>
+<p>MUPIP qualifier values are restricted only by the maximum size of the command input line, which is 4KB on some systems and upto 64KB on others.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="mupipchap.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="mupipchap.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="gdm.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 5. General Database Management </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> <span>Commands and Qualifiers</span>
+</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/mup_intro.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:36 GMT -->
+</html>

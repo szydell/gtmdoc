@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/read_cmmd.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:19 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Read</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="Chapter 6. Commands" />
+    <link rel="prev" href="examples_of_quit.html" title="Examples of Quit" />
+    <link rel="next" href="set_cmmd.html" title="Set" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Read</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_quit.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 6. Commands</th>
+          <td width="20%" align="right"> <a accesskey="n" href="set_cmmd.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="read_cmmd"></a>Read</h2>
+          </div>
+        </div>
+      </div>
+      <p>The <a id="id4174706" class="indexterm"></a> READ command transfers input from the current device to a global or local variable specified as a READ argument. For convenience, READ also accepts arguments that perform limited output to the current device.</p>
+      <p>The format of the READ command is:</p>
+      <pre class="programlisting">
+        R[EAD][:tvexpr] (glvn|*glvn|glvn#intexpr)[:numexpr]|strlit|fcc[,...]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>A subscripted or unsubscripted global or local variable name specifies a variable into which to store the input; the variable does not have to exist prior to the READ; if the variable does exist prior to the READ, the READ replaces its old value.</p>
+          </li>
+          <li>
+            <p>When an asterisk (*) immediately precedes the variable name, READ accepts one character of input and places the ASCII code for that character into the variable.</p>
+          </li>
+          <li>
+            <p>When a number-sign (#) and a non-zero integer expression immediately follow the variable name, the integer expression determines the maximum number of characters accepted as input to the read; such reads terminate when GT.M reads the number of characters specified by the integer expression or a terminator character in the input stream, whichever occurs first.</p>
+          </li>
+          <li>
+            <p>The optional numeric expression specifies a time in seconds at most, for which the command waits for input to be terminated. When a timeout is specified, if the input has been terminated before the timeout expires, $TEST is set to 1 (true), otherwise, $TEST is set to 0 (false).</p>
+          </li>
+          <li>
+            <p>To provide a concise means of issuing prompts, GT.M sends string literal and format control character (!,?intexpr,#) arguments of a READ to the current device as if they were arguments of a WRITE.</p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom evaluating to a list of one or more READ arguments form a legal argument for a READ.</p>
+          </li>
+        </ul>
+      </div>
+      <p>For more information on READ, devices, input, output and format control characters, refer to the &quot;Input/Output Processing&quot; chapter in this manual.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_quit.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="set_cmmd.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of Quit </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Set</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/read_cmmd.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:19 GMT -->
+</html>

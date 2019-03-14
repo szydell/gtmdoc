@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zroutine_search_examples.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZROutines Search Examples</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zroutines.html" title="$ZROutines" />
+    <link rel="prev" href="zroutines_search_types.html" title="$ZROutines Search Types" />
+    <link rel="next" href="zsource.html" title="$ZSOurce" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZROutines Search Examples</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zroutines_search_types.html">Prev</a> </td>
+          <th width="60%" align="center">$ZROutines</th>
+          <td width="20%" align="right"> <a accesskey="n" href="zsource.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="zroutine_search_examples"></a>$ZROutines Search Examples</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4196335" class="indexterm"></a>
+      <p>This section describes a model for understanding $ZROUTINES operations and the illustrating examples, which may assist you if you wish to examine the topic closely.</p>
+      <p>You may think of $ZROUTINES as supplying a two dimensional matrix of places to look for files. The matrix has one or more rows. The first row in the matrix contains places to look for object and the second and following rows contain places to look for source. Each column represents the set of places that contain information related to the object modules in the first row of the column.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; s $zro=&quot;[],[smi.utl]/nosrc,[jon.utl]
+    /src=([jon.utl.so],[smi.utl)&quot;
+    </pre>
+      <p>The following table illustrates the matrix view of this $ZROUTINES.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="4">
+    <p>$ZROUTINES Search Matrix</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>SEARCH FOR</p>
+    </td>
+              <td>
+    <p>Column 1</p>
+    </td>
+              <td>
+    <p>Column 2</p>
+    </td>
+              <td>
+    <p>Column 3</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>OBJECTS</p>
+    </td>
+              <td>
+    <p>[]</p>
+    </td>
+              <td>
+    <p>[SMI.UTL]</p>
+    </td>
+              <td>
+    <p>[JON.UTL]</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>SOURCE</p>
+    </td>
+              <td>
+    <p>[]</p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p>[JON.UTL.SO]</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p>[SMI.UTL]</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>To perform object-only searches, GT.M searches only the directories or object libraries in the top 'objects' row for each column starting at column one. If GT.M does not locate the object file in a directory or object library in the 'objects' row of a column, GT.M begins searching again in the next column. If GT.M cannot locate the file in any of the columns, it issues a run-time error.</p>
+      <p>As illustrated in the preceding table, GT.M searches for object files in the directories <span>[], [SMI.UTL] and [JON.UTL]</span> .</p>
+      <p>To perform source-only searches, GT.M looks down to the 'source' row at the bottom of each column, excluding columns headed by <span>/NOSRC</span> or object libraries. If GT.M cannot locate the source file in the 'source' row of a column, it searches the next eligible column. <span>The /SRC= qualifier specifies the directories in a column where GT.M should search for the source files related to the object files in the column. If GT.M cannot locate the file in any of the columns, it issues a run-time error.</span></p>
+      <p>To perform object-source match searches, GT.M looks at each column starting at column one. GT.M does an object-only search in the 'objects' row of a column and a source-only search in the 'source' row(s) of a column. If GT.M locates either the object file or the source file, the search is done. Otherwise GT.M starts searching the next column. If GT.M cannot locate either the object file or the source file in any of the columns, it issues a run-time error. </p>
+      <p>As illustrated in the preceding table, GT.M looks for object file in the directory [] and source file in the directory [] first (column one). If neither of them are found, GT.M then looks for object file in [SMI.UTL] (column two). Note that, GT.M does not search for source file since this is a /NOSRC directory. If the object file is not found, GT.M then looks for the object file in [JON.UTL] and source file in [JON.UTL.SO] and [SMI.UTL] as specified by the /SRC=qualifier (column three).</p>
+      <p>Once the object-source match search is done, GT.M now has either the object-file or source-file or both available. GT.M then recompiles the source-file based on certain conditions, before linking the object-file into the current image. Refer to ZLINK section in the &quot;Commands&quot; chapter of this manual for more information on those conditions.</p>
+      <p>If auto-ZLINK or ZLINK determines that the source file requires [re]compilation, GT.M places the object file in the above object directory in the same column as the source file. For example, if GT.M locates the source file in <span>[SMI.UTL]</span> in column three, GT.M places the resultant object file in <span>[JON.UTL]</span>.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zroutines_search_types.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zroutines.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="zsource.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZROutines Search Types </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $ZSOurce</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zroutine_search_examples.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+</html>

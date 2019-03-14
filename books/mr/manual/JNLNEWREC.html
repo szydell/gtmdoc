@@ -1,0 +1,60 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/JNLNEWREC.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:07 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>JNLNEWREC </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="JNLNAMLEN.html" title="JNLNAMLEN ">
+<link rel="next" href="JNLNMBKNOTPRCD.html" title="JNLNMBKNOTPRCD ">
+<link rel="copyright" href="ln-idp153747552.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">JNLNEWREC </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="JNLNAMLEN.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="JNLNMBKNOTPRCD.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">JNLNEWREC </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="JNLNEWREC"></a>JNLNEWREC </h2></div></div></div>
+<p><span class="bold"><strong>JNLNEWREC</strong></span>,    Target system cannot recognize journal record of type xxxx. Last recognized type is yyyy.</p>
+<p>MUPIP Error: This error is logged to the replication server log file. This indicates that the GT.M application on the replication primary generated a newly introduced journal record (of type xxxx) that is not recognized by the secondary system. The highest numbered journal record type on the secondary is yyyy. A new type that can be transformed to an older type internally by the source server on the primary side will be automatically done. This error occurs when the primary source server cannot transform the new type to an older type due to impact on the application logic.</p>
+<p>Action: The application either should not generate a journal record that is not recognized by the secondary, or, write a filter that transforms the unknown type to a known type on the target system. The replication source server on the primary should be restarted with the filter.</p>
+<a class="indexterm" name="idp156898112"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="JNLNAMLEN.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="JNLNMBKNOTPRCD.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">JNLNAMLEN  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> JNLNMBKNOTPRCD </td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/JNLNEWREC.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:07 GMT -->
+</html>

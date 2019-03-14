@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/routine_examples.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:57 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Routines Example</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter12vms.html" title="Chapter 12. Database Access Library" />
+    <link rel="prev" href="data_conversion_t.html" title="Data Conversion" />
+    <link rel="next" href="chapter13.html" title="Chapter 13. Internationalization" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Routines Example</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="data_conversion_t.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 12. Database Access Library</th>
+          <td width="20%" align="right"> <a accesskey="n" href="chapter13.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="routine_examples"></a>Routines Example</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4235085" class="indexterm"></a>
+      <p>This section provides an example routine written in the C programming language that comprehensively illustrates the DAL calls and their types of arguments. The example indicates how a calling routine specifies a GT.M database function using the syntax of the source language. For every C statement that does a DAL call, the corresponding M command is indicated as a C comment in the same line.</p>
+      <p>The routine passes arguments by descriptors. To pass arguments by descriptor from a C program, the routine must have a structure declaration that models the descriptor and assigns appropriate values to structure members. The routines must include the header file &lt;descrip.h&gt;, which defines the descriptor structures for all forms of descriptors. </p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>The example routine presented below does not check the return status of each DAL call for illustrative purposes. However, in production C code, every DAL call’s return status must be checked immediately after the call. </p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>The C code below also uses a VAX-C construct &quot;globalvalue&quot;, which is similar to the ANSI-C &quot;extern&quot; construct. The routine assumes the existence of two global directories MUMPS.GLD and OTHER.GLD with their corresponding databases and that at the start of execution the logical corresponding to the current global directory &quot;gtm$gbldir&quot; points to MUMPS.GLD.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>As the keywords used in the following C program, GTMI$_GLOBAL, GTMI$_LOCAL, and so on, are defined in the module GTMI$_DEF in GTM$DIST:GTMLIB.OLB, the LINK command must include the GTM$DIST:GTMLIB.OLB object library in order to be able to successfully link and run DAL.C.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>Example:</p>
+      <pre class="programlisting">
+	#include &lt;stdio.h&gt;
+	#include &lt;descrip.h&gt;
+	
+	globalvalue GTMI$_GLOBAL, GTMI$_LOCAL, GTMI$_NAKED, GTMI$_EXTGBL, GTMI$_EXTLCL;
+	int			dal()
+	{
+	long mg = GTMI$_GLOBAL, ml = GTMI$_LOCAL, mn = GTMI$_NAKED;
+	long meg = GTMI$_EXTGBL, mel = GTMI$_EXTLCL;
+	long sts;
+	$DESCRIPTOR (dmumps, &quot;MUMPS&quot;);
+	$DESCRIPTOR (dother, &quot;OTHER&quot;);
+	$DESCRIPTOR (dsub1, &quot;1&quot;);
+	$DESCRIPTOR (dsub2, &quot;2&quot;);
+	$DESCRIPTOR (dsuba, &quot;a&quot;);
+	$DESCRIPTOR (dsubb, &quot;b&quot;);
+	$DESCRIPTOR (ddata, &quot;data&quot;);
+	$DESCRIPTOR (dextgbl, &quot;OTHER.GLD&quot;);
+	$DESCRIPTOR (dxecstr, &quot;set ^OTHER(1)=1&quot;);
+	struct dsc$descriptor_s ddest = {0, DSC$K_DTYPE_T, DSC$K_CLASS_D, 0};
+	sts = gtm$init(); 
+	/* ;Call GTM$INIT before any DAL call */
+	sts = gtm$interrupt(3);
+	/* ;Ctrl-C is interrupt character*/
+	sts = gtm$ztstart();
+	/* ztstart */
+	sts = gtm$put(mg, &amp;ddata, &amp;dmumps, &amp;dsub1);
+	/* set ^MUMPS(1)=&quot;data&quot;*/
+	sts = gtm$ztcommit(0);
+	/* ztcommit 0*/
+	sts = gtm$put(mg, &amp;ddata, &amp;dmumps, &amp;dsub2, &amp;dsuba); 
+	/* set ^MUMPS(2,&quot;a&quot;)=&quot;data&quot;*/
+	sts = gtm$put(mn, &amp;ddata, &amp;dsubb);
+	/* set ^(&quot;b&quot;)=&quot;data&quot;*/
+	sts = gtm$put(meg, &amp;ddata, &amp;dextgbl, &amp;dother, &amp;dsub1); 
+	/* set ^|&quot;OTHER.GLD&quot;|OTHER(1)=&quot;data&quot;*/
+	sts = gtm$data(mg, &amp;ddest, &amp;dmumps, &amp;dsub2);
+	/* set retval=$DATA(^MUMPS(2)) */
+	sts = gtm$get(mg, &amp;ddest, &amp;dmumps, &amp;dsub2, &amp;dsubb);
+	/* set retval=$GET(^MUMPS(2,&quot;b&quot;)) */
+	sts = gtm$order(mg, &amp;ddest, -1, &amp;dmumps, &amp;dsub2); 
+	/* set retval=$ORDER(^MUMPS(2),-1) */
+	sts = gtm$previous(mg, &amp;ddest, &amp;dmumps, &amp;dsub2); 
+	/* set retval=$ZPREVIOUS(^MUMPS(2)) */
+	sts = gtm$query(mg, &amp;ddest, &amp;dmumps, &amp;dsub1); 
+	/* set retval=$QUERY(^MUMPS(1)) */
+	sts = gtm$withdraw(mg, &amp;dmumps, &amp;dsub2);
+	/* zwithdraw ^MUMPS(2) */
+	sts = gtm$setgbldir(&amp;dextgbl); 
+	/* set $zgbldir=&quot;OTHER.GLD&quot; */
+	sts = gtm$kill(mg, &amp;dother);
+	/* kill ^OTHER */
+	sts = gtm$xecute(&amp;dxecstr); 
+	/* xecute &quot;set ^OTHER(1)=&quot;&quot;data&quot;&quot;&quot; */
+	sts = gtm$put(ml, &amp;ddata, &amp;dmumps, &amp;dsub1); 
+	/* set MUMPS(1)=&quot;data&quot; */
+	sts = gtm$put(ml, &amp;ddata, &amp;dmumps, &amp;dsub2, &amp;dsuba);
+	/* set MUMPS(2,&quot;a&quot;)=&quot;data&quot; */
+	sts = gtm$data(ml, &amp;ddest, &amp;dmumps, &amp;dsub2);
+	/* set retval=$DATA(MUMPS(2)) */
+	sts = gtm$inclock(0, mel, &amp;dextgbl, &amp;dother);
+	/* lock +|&quot;OTHER.GLD&quot;|other:0 */
+	sts = gtm$lock(-1, mg, &amp;dmumps, 0, ml, &amp;dother); 
+	/* lock (^MUMPS,OTHER) */
+	sts = gtm$declock(mg, &amp;dmumps);
+	/* lock -^MUMPS */
+	sts = gtm$lock(); 
+	/* lock */
+	sts = gtm$zalloc(-1, ml, &amp;dmumps); 
+	/* zalloc MUMPS */
+	sts = gtm$zdealloc(ml, &amp;dmumps);
+	/* zdealloc MUMPS */
+	sts = gtm$rundown();
+	/* ;Runs down all open GT.M databases */
+	sts = gtm$zstatus(&amp;ddest);
+	/* ;return value of $ZSTATUS in ddest */
+	return sts;
+	}	
+	</pre>
+      <p>The routines pass arguments by descriptor. To pass arguments by descriptor from a C program, the routine must have a structure declaration that models the descriptor and assigns appropriate values to structure members. The routines must use the &quot;include file&quot; gtm_descript.h, which defines descriptor structures for all forms of descriptors.</p>
+      <p>The routines invoke the gtm_init() function to initialize the GT.M run-time library. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	#include &quot;mdef.h&quot;#include &quot;gtmidef.h&quot;#include &quot;gtm_descript.h&quot;main (){ long status,i ; short mode ;gtm_descriptor k0[10], k1[10] ; /* k0 and k1 will hold the arguments to the DAL calls. The size of the array is not significant, except that each array must have enough elements to hold all of its values. */
+	status = gtm_init() ;printf(&quot;Init status : %d &quot;,status);
+	DESC_CHAR (k0[0],&quot;Comic strip character&quot;) ;  /* The value for the node */DESC_CHAR (k1[0],&quot;Disney character&quot;) ; /* The value for the node */
+	mode = (short)GTMI_GLOBAL ;DESC_MODE (k0[1],mode);DESC_MODE (k1[1],mode);
+	DESC_CHAR (k1[2],&quot;MOUSE&quot;) ;/* The name of the global */DESC_CHAR (k0[2],&quot;CAT&quot;) ; /* The name of the global */
+	DESC_CHAR (k0[3],&quot;Garfield&quot;) ; /* The first subscript */DESC_CHAR (k1[3],&quot;Mickey&quot;) ; /* The first subscript */
+	DESC_ZERO (k0[4]); /* Create null descriptor */DESC_ZERO (k1[4]); /* to signify no more keys*/
+	status = gtm_put (k1);printf(&quot;Put ^MOUSE(Mickey)=Disney character : %d &quot;,status);
+	status = gtm_put (k0);printf(&quot;Put ^CAT(Garfield)=Comic strip character : %d &quot;,status);
+	DESC_CHAR (k0[0],&quot;Tom &amp; Jerry Cartoon&quot;) ; /* The value for the node */mode = (short)GTMI_NAKED ; /* The mode is GTMI_NAKED */
+	DESC_MODE (k0[1],mode);
+	DESC_CHAR (k0[2],&quot;Tom&quot;) ; /* The first subscript */DESC_ZERO (k0[3]); /* Create null descriptor */ /* to signify no more keys*/
+	status = gtm_put (k0);printf(&quot;Put ^(Tom)=Tom &amp; Jerry Cartoon : %d &quot;,status);
+	mode = (short)GTMI_GLOBAL;/* The mode is GTMI_GLOBAL*/DESC_MODE (k0[1],mode);DESC_CHAR (k0[2],&quot;COUNT&quot;);DESC_ZERO (k0[4]);
+	for (i=0; i&lt;10; i++){ DESC_LONG (k0[0],i); DESC_LONG (k0[3],i); status = gtm_put (k0); printf(&quot;Put ^COUNT(%d)=%d : %d &quot;,i,i,status);}
+	memset(k1, 0, sizeof(k1));k1[0].type = GTM_ARRAY_OF_CHARS;mode = GTMI_GLOBAL;DESC_MODE (k0[0],mode);DESC_CHAR (k0[1],&quot;COUNT&quot;);DESC_ZERO (k0[2]);
+	status = gtm_data (k0, k1);printf(&quot;$DATA(^COUNT) = %.*s : %d &quot;,k1[0].len,k1[0].val,status);
+	status = gtm_halt();printf(&quot;Halt status : %d &quot;,status);return 1;}
+	</pre>
+      <p>This C routine sets three globals ^MOUSE(&quot;Mickey&quot;), ^CAT(&quot;Tom&quot;), ^CAT(&quot;Garfield&quot;). The routine then sets up a loop that builds ^COUNT(1) through ^COUNT(10). Finally, a $DATA is performed on ^COUNT. The following M routine corresponds to the previous C program:</p>
+      <pre class="programlisting">
+	data; S ^MOUSE(&quot;Mickey&quot;)=&quot;Disney character&quot;S ^CAT(&quot;Garfield&quot;)=&quot;Comic strip character&quot;S ^(&quot;Tom&quot;)=&quot;Tom &amp; Jerry Cartoon&quot;F i=0:1:9 S ^COUNT(i)=iW !,&quot;Put CAT(0) through CAT(9)&quot;,!W $data(^COUNT)Q
+	</pre>
+      <p>Example:</p>
+      <pre class="programlisting">
+	#include &quot;mdef.h&quot;#include &quot;gtmidef.h&quot;#include &quot;gtm_descript.h&quot;#define DESC_MODE(x,y) {x.type=GTM_MODE; x.len=sizeof(y); x.val=(void*)&amp;y;}#define DESC_CHAR(x,y) {x.type=GTM_ARRAY_OF_CHARS; x.len=sizeof(y)-1; x.val=y;}#define DESC_ZERO(x) {x.type=0; x.len=0;}#define DESC_LONG(x,y) {x.type=GTM_LONG; x.len=sizeof(y); x.val=&amp;y;}#define DESC_DELIM(x,y) {x.type=GTM_DELIMITER;x.len=sizeof(y);x.val=(void *)&amp;y;}main (){longstatus,timeout ;shortmode,delim ;gtm_descriptork0[15], k1[10] ; /* k0 and k1 will hold the arguments to the DAL calls. The size of the array is not significant. */ status = gtm_init() ;printf(&quot;Init status : %d &quot;,status);memset(k0, 0, sizeof(k0));status = gtm_lock (k0); /* L */timeout = 0 ;DESC_LONG (k0[0],timeout) ; /* Time out of zero */mode = (short)GTMI_GLOBAL ; /* The mode is GTMI_GLOBAL */DESC_MODE (k0[1],mode);DESC_CHAR (k0[2],&quot;A&quot;) ; /* The name of the global */DESC_ZERO (k0[3]) ;status = gtm_lock (k0); /* L ^A:0 */DESC_CHAR (k0[0],&quot;zshow L w **********,!&quot;);status = gtm_xecute(k0);timeout = 1;DESC_LONG (k0[0],timeout) ;mode = (short)GTMI_GLOBAL;DESC_MODE (k0[1],mode);DESC_CHAR (k0[2],&quot;B&quot;) ;DESC_ZERO (k0[3]) ;status = gtm_inclock (k0); /* L +^B:1 */DESC_CHAR (k0[0],&quot;zshow L w **********,!&quot;);status = gtm_xecute(k0);timeout=-1;DESC_LONG (k0[0],timeout) ; /* No timeout */mode = (short)GTMI_GLOBAL;DESC_MODE (k0[1],mode) ;DESC_CHAR (k0[2],&quot;D&quot;);DESC_CHAR (k0[3],&quot;a&quot;);DESC_CHAR (k0[4],&quot;b&quot;);DESC_CHAR (k0[5],&quot;c&quot;);DESC_CHAR (k0[6],&quot;d&quot;);DESC_ZERO (k0[7]);status = gtm_inclock (k0);/* L +^D(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;) */DESC_CHAR (k0[0],&quot;zshow L w **********,!&quot;);status = gtm_xecute(k0);timeout = -1;DESC_LONG (k0[0],timeout) ;mode = (short)GTMI_GLOBAL;DESC_MODE (k0[1],mode);DESC_CHAR (k0[2],&quot;C&quot;);DESC_ZERO (k0[3]);status = gtm_inclock (k0) ; /* L +^C */DESC_CHAR (k0[0],&quot;zshow L w **********,!&quot;);status = gtm_xecute(k0);mode = (short)GTMI_GLOBAL;DESC_MODE (k0[0],mode);DESC_CHAR (k0[1],&quot;C&quot;);DESC_ZERO (k0[2]);status = gtm_declock (k0); /* L -^C */DESC_CHAR (k0[0],&quot;zshow L w **********,!&quot;);status = gtm_xecute(k0);DESC_CHAR (k0[1],&quot;D&quot;);status = gtm_declock (k0); /* L -^D */DESC_CHAR (k0[0],&quot;zshow L w **********,!&quot;);status = gtm_xecute(k0);timeout = -1;DESC_LONG (k0[0],timeout);mode = (short)GTMI_EXTGBL;DESC_MODE (k0[1],mode);DESC_CHAR (k0[2],&quot;./M.gld&quot;); DESC_CHAR (k0[3],&quot;a&quot;);DESC_ZERO (k0[4]);status = gtm_zalloc (k0); /* za ^|&quot;./M.gld&quot;|a */DESC_CHAR (k0[0],&quot;zshow L w **********,!&quot;);status = gtm_xecute(k0);DESC_ZERO (k0[0]);status = gtm_lock (k0); /* L */DESC_CHAR (k0[0],&quot;zshow L w **********,!&quot;);status = gtm_xecute(k0);timeout = -1;DESC_LONG (k0[0],timeout);mode = (short)GTMI_GLOBAL;DESC_MODE (k0[1],mode);DESC_CHAR (k0[2],&quot;A&quot;);delim = 0; /* Separator for arguments*/DESC_DELIM (k0[3],delim); /* Create null descriptor*/mode = (short)GTMI_LOCAL;DESC_MODE (k0[4],mode);DESC_CHAR (k0[5],&quot;B&quot;);DESC_DELIM (k0[6],delim);mode = (short)GTMI_LOCAL;DESC_MODE (k0[7],mode);DESC_CHAR (k0[8],&quot;C&quot;);DESC_ZERO (k0[9]);status = gtm_lock(k0); /* L (^A,B,C) */DESC_CHAR (k0[0],&quot;zshow L w **********,!&quot;);status = gtm_xecute(k0);timeout = -1;DESC_LONG (k0[0],timeout);mode = GTMI_LOCAL;DESC_MODE (k0[1],mode);DESC_CHAR (k0[2],&quot;A&quot;);DESC_CHAR (k0[3],&quot;a&quot;);DESC_CHAR (k0[4],&quot;b&quot;);DESC_CHAR (k0[5],&quot;c&quot;);DESC_CHAR (k0[6],&quot;d&quot;);DESC_DELIM (k0[7],delim);DESC_MODE (k0[8],mode);DESC_CHAR (k0[9],&quot;D&quot;);DESC_ZERO (k0[10]);status = gtm_inclock(k0); /* L +(A(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;),D) */DESC_CHAR (k0[0],&quot;zshow L w **********,!&quot;);status = gtm_xecute(k0);mode = GTMI_EXTGBL;DESC_MODE (k0[0],mode);DESC_CHAR (k0[1],&quot;./mumps.gld&quot;);DESC_CHAR (k0[2],&quot;a&quot;);DESC_ZERO (k0[3]);status = gtm_zdealloc (k0); /* zd ^|&quot;./M.gld&quot;|a */DESC_CHAR (k0[0],&quot;zshow L w **********,!&quot;);status = gtm_xecute(k0);status = gtm_halt();printf(&quot;Halt status : %d &quot;,status);return 1;}
+	</pre>
+      <p>Example:</p>
+      <pre class="programlisting">
+	#include &quot;mdef.h&quot;#include &quot;gtmidef.h&quot;#include &quot;gtm_descript.h&quot;#define DESC_MODE(x,y) {x.type=GTM_MODE; x.len=sizeof(y); x.val=(void*)&amp;y;}#define DESC_CHAR(x,y) {x.type=GTM_ARRAY_OF_CHARS; x.len=sizeof(y)-1; x.val=y;}#define DESC_ZERO(x) {x.type=0; x.len=0;}#define DESC_LONG(x,y) {x.type=GTM_LONG; x.len=sizeof(y); x.val=&amp;y;}main (){longstatus,i ;shortmode ;gtm_descriptork0[10], dummy[10] ; /* k0 and dummy will hold the arguments to the DAL calls. The size is not significant.*/ status = gtm_init() ;printf(&quot;Init status : %d &quot;,status);status = gtm_ztstart ();mode = (short)GTMI_GLOBAL;DESC_MODE (k0[0],mode);DESC_CHAR (k0[1],&quot;CAT&quot;);status = gtm_kill (k0);status = gtm_ztstart ();DESC_CHAR (k0[0],&quot;data&quot;);mode = (short)GTMI_GLOBAL;DESC_MODE (k0[1],mode);DESC_CHAR (k0[2],&quot;CAT&quot;);DESC_CHAR (k0[3],&quot;1&quot;);DESC_ZERO (k0[4]);status = gtm_put (k0);status = gtm_ztstart ();memset(dummy, 0, sizeof(dummy));dummy[0].type = GTM_ARRAY_OF_CHARS;mode = (short)GTMI_GLOBAL;DESC_MODE (k0[0],mode);DESC_CHAR (k0[1],&quot;CAT&quot;);DESC_ZERO (k0[2]);status = gtm_data (k0, dummy);DESC_CHAR (k0[0],&quot;2&quot;);DESC_ZERO (k0[1]);status = gtm_ztcommit (k0);DESC_MODE (k0[0],mode);DESC_CHAR (k0[1],&quot;CAT&quot;);DESC_CHAR (k0[2],&quot;1&quot;);DESC_ZERO (k0[3]);status = gtm_data (k0, dummy);DESC_CHAR (k0[0],&quot;0&quot;);DESC_ZERO (k0[1]);status = gtm_ztcommit (k0);status = gtm_halt();printf(&quot;Halt status : %d &quot;,status);return 1;}
+	</pre>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="data_conversion_t.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter12vms.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="chapter13.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Data Conversion </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Chapter 13. Internationalization</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/routine_examples.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:57 GMT -->
+</html>

@@ -1,0 +1,98 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch08s34.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZGbldir</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
+<link rel="prev" href="ch08s33.html" title="$ZError">
+<link rel="next" href="ch08s35.html" title="$ZHorolog">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZGbldir</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch08s33.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 8. <span>Intrinsic Special Variables</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch08s35.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZGbldir</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zgbldir"></a>$ZGbldir<a class="indexterm" name="idp189017808"></a>
+</h2></div></div></div>
+<p>$ZG[BLDIR] contains the value of the current Global Directory filename. When $ZGBLDIR specifies an invalid or inaccessible file, GT.M cannot successfully perform database operations.</p>
+<p>GT.M initializes $ZGBLDIR to the translation of the environment variable gtmgbldir. The value of the gtmgbldir environment variable may include a reference to another environment variable. If gtmgbldir is not defined, GT.M initializes $ZGBLDIR to null. When $ZGBLDIR is null, GT.M constructs a file name for the Global Directory using the name $gtmgbldir and the extension .gld in the current working directory. </p>
+<p>$ZGBLDIR is a read-write Intrinsic Special Variable, (i.e., it can appear on the left side of the equal sign (=) in the argument to the SET command). SET $ZGBLDIR="" causes GT.M to assign $ZGBLDIR to the translation of gtmgbldir if that environment variable is defined. If it is not defined, then SET $ZGBLDIR="" causes GT.M to construct a file name using the name $gtmgbldir.gld in the current directory. GT.M permits $ZGBLDIR to be NEW'd. A $ZGBLDIR value may include an environment variable.</p>
+<p>SETting $ZGBLDIR also causes GT.M to attempt to open the specified file. If the file name is invalid or the file is inaccessible, GT.M triggers an error without changing the value of $ZGBLDIR.</p>
+<p>To establish a value for $ZGBLDIR outside of M, use the appropriate shell command to assign a translation to gtmgbldir. Defining gtmgbldir provides a convenient way to use the same Global Directory during a session where you repeatedly invoke and leave GT.M. </p>
+<p>Changes to the value of $ZGBLDIR during a GT.M invocation only last for the current invocation and do not change the value of gtmgbldir.</p>
+<p>Example:</p>
+<pre class="programlisting">$ gtmgbldir=test.gld
+$ export gtmgbldir
+$ gtm
+GTM&gt;WRITE $zgbldir
+/usr/dev/test.gld
+GTM&gt;SET $zgbldir="mumps.gld"
+GTM&gt;WRITE $zgbldir
+mumps.gld
+GTM&gt;HALT
+$ echo $gtmgbldir
+test.gld</pre>
+<p>This example defines the environment variable gtmgbldir. Upon entering GT.M Direct Mode, $ZGBLDIR has the value supplied by gtmgbldir. The SET command changes the value. After the GT.M image terminates, the echo command demonstrates that gtmgbldir was not modified by the M SET command.</p>
+<pre class="programlisting">$ ls test.gld
+test.gld not found
+$ gtm
+GTM&gt;WRITE $zgbldir
+/usr/dev/mumps.gld
+GTM&gt;set $zgbldir="test.gld"
+%GTM-E-ZGBLDIRACC, Cannot access global directory
+"/usr/dev/test.gld". Retaining /usr/dev/mumps.gld"
+%SYSTEM-E-ENO2, No such file or directory
+GTM&gt;WRITE $zgbldir
+/usr/dev/mumps.gld
+GTM&gt;halt
+$</pre>
+<p>The SET command attempts to change the value of $ZGBLDIR to test.gld. Because the file does not exist, GT.M reports an error and does not change the value of $ZGBLDIR.</p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top"><p>Attempting to restore an inaccessible initial Global Directory that has been NEW'd, can cause an error.</p></td></tr>
+</table></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch08s33.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch08.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch08s35.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZError </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZHorolog</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch08s34.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

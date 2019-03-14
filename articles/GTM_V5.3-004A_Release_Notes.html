@@ -1,0 +1,2558 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_V5.3-004A_Release_Notes.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:00:39 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<base target="_top">
+<style type="text/css">
+  
+
+/* default css */
+
+table {
+  font-size: 1em;
+  line-height: inherit;
+  border-collapse: collapse;
+}
+
+
+tr {
+  
+  text-align: left;
+  
+}
+
+
+div, address, ol, ul, li, option, select {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p {
+  margin: 0px;
+}
+
+
+pre {
+  font-family: Courier New;
+  white-space: pre-wrap;
+  margin:0;
+}
+
+body {
+  margin: 6px;
+  padding: 0px;
+  font-family: Verdana, sans-serif;
+  font-size: 10pt;
+  background-color: #ffffff;
+  color: #000;
+}
+
+
+img {
+  -moz-force-broken-image-icon: 1;
+}
+
+@media screen {
+  html.pageview {
+    background-color: #f3f3f3 !important;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  
+
+  body {
+    min-height: 1100px;
+    
+    counter-reset: __goog_page__;
+  }
+  
+  * html body {
+    height: 1100px;
+  }
+  /* Prevent repaint errors when scrolling in Safari. This "Star-7" css hack
+     targets Safari 3.1, but not WebKit nightlies and presumably Safari 4.
+     That's OK because this bug is fixed in WebKit nightlies/Safari 4 :-). */
+  html*#wys_frame::before {
+    content: '\A0';
+    position: fixed;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+  }
+  
+  .pageview body {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 2px solid #bbb;
+    border-bottom: 2px solid #bbb;
+    width: 648px !important;
+    margin: 15px auto 25px;
+    padding: 40px 50px;
+  }
+  /* IE6 */
+  * html {
+    overflow-y: scroll;
+  }
+  * html.pageview body {
+    overflow-x: auto;
+  }
+  
+
+  
+    
+    .writely-callout-data {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    
+
+    .writely-footnote-marker {
+      background-image: url('MISSING.html');
+      background-color: transparent;
+      background-repeat: no-repeat;
+      width: 7px;
+      overflow: hidden;
+      height: 16px;
+      vertical-align: top;
+
+      
+      -moz-user-select: none;
+    }
+    .editor .writely-footnote-marker {
+      cursor: move;
+    }
+    .writely-footnote-marker-highlight {
+      background-position: -15px 0;
+      -moz-user-select: text;
+    }
+    .writely-footnote-hide-selection ::-moz-selection, .writely-footnote-hide-selection::-moz-selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection ::selection, .writely-footnote-hide-selection::selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection {
+      cursor: move;
+    }
+
+    /* Comments */
+    .writely-comment-yellow {
+      background-color: #ffffd7;
+    }
+    .writely-comment-orange {
+      background-color: #ffe3c0;
+    }
+    .writely-comment-pink {
+      background-color: #ffd7ff;
+    }
+    .writely-comment-green {
+      background-color: #d7ffd7;
+    }
+    .writely-comment-blue {
+      background-color: #d7ffff;
+    }
+    .writely-comment-purple {
+      background-color: #eed7ff;
+    }
+
+  
+
+
+  
+  .br_fix span+br:not(:-moz-last-node) {
+    
+    position:relative;
+    
+    left: -1ex
+    
+  }
+
+  
+  #cb-p-tgt {
+    font-size: 8pt;
+    padding: .4em;
+    background-color: #ddd;
+    color: #333;
+  }
+  #cb-p-tgt-can {
+    text-decoration: underline;
+    color: #36c;
+    font-weight: bold;
+    margin-left: 2em;
+  }
+  #cb-p-tgt .spin {
+    width: 16px;
+    height: 16px;
+    background: url(http://ssl.gstatic.com/docs/clipboard/spin_16o.gif) no-repeat;
+  }
+}
+
+h6 { font-size: 8pt }
+h5 { font-size: 8pt }
+h4 { font-size: 10pt }
+h3 { font-size: 12pt }
+h2 { font-size: 14pt }
+h1 { font-size: 18pt }
+
+blockquote {padding: 10px; border: 1px #DDD dashed }
+
+.webkit-indent-blockquote { border: none; }
+
+a img {border: 0}
+
+.pb {
+  border-width: 0;
+  page-break-after: always;
+  /* We don't want this to be resizeable, so enforce a width and height
+     using !important */
+  height: 1px !important;
+  width: 100% !important;
+}
+
+.editor .pb {
+  border-top: 1px dashed #C0C0C0;
+  border-bottom: 1px dashed #C0C0C0;
+}
+
+div.google_header, div.google_footer {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+
+/* Table of contents */
+.editor div.writely-toc {
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+}
+.writely-toc > ol {
+  padding-left: 3em;
+  font-weight: bold;
+}
+ol.writely-toc-subheading {
+  padding-left: 1em;
+  font-weight: normal;
+}
+/* IE6 only */
+* html writely-toc ol {
+  list-style-position: inside;
+}
+.writely-toc-none {
+  list-style-type: none;
+}
+.writely-toc-decimal {
+  list-style-type: decimal;
+}
+.writely-toc-upper-alpha {
+  list-style-type: upper-alpha;
+}
+.writely-toc-lower-alpha {
+  list-style-type: lower-alpha;
+}
+.writely-toc-upper-roman {
+  list-style-type: upper-roman;
+}
+.writely-toc-lower-roman {
+  list-style-type: lower-roman;
+}
+.writely-toc-disc {
+  list-style-type: disc;
+}
+
+/* Ordered lists converted to numbered lists can preserve ordered types, and
+   vice versa. This is confusing, so disallow it */
+ul[type="i"], ul[type="I"], ul[type="1"], ul[type="a"], ul[type="A"] {
+  list-style-type: disc;
+}
+
+ol[type="disc"], ol[type="circle"], ol[type="square"] {
+  list-style-type: decimal;
+}
+
+/* end default css */
+
+
+  /* default print css */
+  @media print {
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    div.google_header, div.google_footer {
+      display: block;
+      min-height: 0;
+      border: none;
+    }
+
+    div.google_header {
+      flow: static(header);
+    }
+
+    /* used to insert page numbers */
+    div.google_header::before, div.google_footer::before {
+      position: absolute;
+      top: 0;
+    }
+
+    div.google_footer {
+      flow: static(footer);
+    }
+
+    /* always consider this element at the start of the doc */
+    div#google_footer {
+      flow: static(footer, start);
+    }
+
+    span.google_pagenumber {
+      content: counter(page);
+    }
+
+    span.google_pagecount {
+      content: counter(pages);
+    }
+
+    .endnotes {
+      page: endnote;
+    }
+
+    /* MLA specifies that endnotes title should be 1" margin from the top of the page. */
+    @page endnote {
+      margin-top: 1in;
+    }
+
+    callout.google_footnote {
+      
+      display: prince-footnote;
+      footnote-style-position: inside;
+      /* These styles keep the footnote from taking on the style of the text
+         surrounding the footnote marker. They can be overridden in the
+         document CSS. */
+      color: #000;
+      font-family: Verdana;
+      font-size: 10.0pt;
+      font-weight: normal;
+    }
+
+    /* Table of contents */
+    #WritelyTableOfContents a::after {
+      content: leader('.') target-counter(attr(href), page);
+    }
+
+    #WritelyTableOfContents a {
+      text-decoration: none;
+      color: black;
+    }
+
+    /* Comments */
+    .writely-comment-yellow {
+      background-color: #ffffd7;
+    }
+    .writely-comment-orange {
+      background-color: #ffe3c0;
+    }
+    .writely-comment-pink {
+      background-color: #ffd7ff;
+    }
+    .writely-comment-green {
+      background-color: #d7ffd7;
+    }
+    .writely-comment-blue {
+      background-color: #d7ffff;
+    }
+    .writely-comment-purple {
+      background-color: #eed7ff;
+    }
+  }
+
+  @page {
+    @top {
+      content: flow(header);
+    }
+    @bottom {
+      content: flow(footer);
+    }
+    @footnotes {
+      border-top: solid black thin;
+      padding-top: 8pt;
+    }
+  }
+  /* end default print css */
+
+
+/* custom css */
+
+
+/* end custom css */
+
+/* ui edited css */
+
+body {
+  font-family: Verdana;
+  
+  font-size: 10.0pt;
+  line-height: normal;
+  background-color: #ffffff;
+}
+/* end ui edited css */
+
+
+/* editor CSS */
+.editor a:visited {color: #551A8B}
+.editor table.zeroBorder {border: 1px dotted gray}
+.editor table.zeroBorder td {border: 1px dotted gray}
+.editor table.zeroBorder th {border: 1px dotted gray}
+
+
+.editor div.google_header, .editor div.google_footer {
+  border: 2px #DDDDDD dashed;
+  position: static;
+  width: 100%;
+  min-height: 2em;
+}
+
+.editor .misspell {background-color: yellow}
+
+.editor .writely-comment {
+  font-size: 9pt;
+  line-height: 1.4;
+  padding: 1px;
+  border: 1px dashed #C0C0C0
+}
+
+
+/* end editor CSS */
+
+</style>
+
+  
+  <title>GT.M V5.3-004A Release Notes</title>
+
+</head>
+
+<body 
+    
+    >
+    
+    
+    
+<div class=titlepage>
+  <h1>
+    <a id=_Technical_Bulletin_GT_M_V5_3__9934166934177112 name=_Technical_Bulletin_GT_M_V5_3__9934166934177112></a>Technical Bulletin - GT.M V5.3-004A Release Notes
+  </h1>
+  <div class=legalnotice>
+    Copyright © 2010 Fidelity Information Services, Inc.&nbsp; All Rights Reserved.&nbsp;
+    <div>
+      &nbsp;
+    </div>
+    <p>
+      Permission is granted to copy, distribute and/or modify this document under the terms of the <a href=http://www.gnu.org/licenses/fdl.txt id=lpr- target=_blank title="Click here to read the GNU Free Documentation License">GNU Free Documentation License</a>, Version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.
+    </p>
+    <div>
+      &nbsp;
+    </div>
+    <p>
+      <span class=trademark>GT.M</span>™ is a trademark of Fidelity Information Services, Inc.&nbsp; Other trademarks are the property of their respective owners.<br>
+    </p>
+    <div>
+      &nbsp;
+    </div>
+    <p>
+      This document contains a description of GT.M and the operating instructions pertaining to the various functions that comprise the system.&nbsp; This document does not contain any commitment of FIS.&nbsp; FIS believes the information in this publication is accurate as of its publication date; such information is subject to change without notice.&nbsp; FIS is not responsible for any errors or defects.
+    </p>
+  </div>
+  <div>
+    <a id=Revision_History_5023846650535 name=Revision_History_5023846650535></a>&nbsp;
+  </div>
+  <h2 class=pubdate>
+    <a id=Revision_History_5170783765732_025957298366665604 name=Revision_History_5170783765732_025957298366665604></a>Revision History
+  </h2>
+  <p class=pubdate>
+  </p>
+  <table border=1 bordercolor=#000000 cellpadding=3 cellspacing=0 id=vt_h>
+    <tbody>
+    <tr>
+      <td align=middle valign=top>
+        Revision
+        <div>
+          &nbsp;
+        </div>
+      </td>
+      <td align=left valign=top>
+        Date
+        <div>
+          &nbsp;
+        </div>
+      </td>
+      <td align=left valign=top>
+        Summary
+        <div>
+          &nbsp;
+        </div>
+      </td>
+    </tr>
+<tr>
+<td>1.13<br></td>
+<td>26 January 2012</td>
+<td>In the Platforms section, removed a line that erroneously stated AIX 5.2 as a supported operating system version. </td>
+
+</tr>
+    <tr>
+      <td>
+        1.12<br>
+      </td>
+      <td>
+        27 November 2009<br>
+      </td>
+      <td>
+        Reworked section "Database Compatibility for GT.M V5.3-004A" for clarity and renamed it to "Upgrading to GT.M V5.3-004A"; Added the guidelines for using MUPIP REORG -UPGRADE;<br>
+        <font size=2>Moved the instructions for compiling ICU on HP PA-RISC HP-UX to a separate section; Added the instructions for compiling ICU on HP Integrity IA64 HP-UX.&nbsp;</font><br>
+      </td>
+    </tr>
+    <tr>
+      <td align=middle valign=top>
+        1.11
+      </td>
+      <td align=left valign=top>
+        13 August 2009
+      </td>
+      <td align=left valign=top>
+        Corrected AIX information to reflect AIX 5.3 as lowest supported operating system level
+      </td>
+    </tr>
+    <tr>
+      <td align=middle valign=top>
+        1.1
+        <div>
+          &nbsp;
+        </div>
+      </td>
+      <td align=left valign=top>
+        10 August 2009
+        <div>
+          &nbsp;
+        </div>
+      </td>
+      <td align=left valign=top>
+        Updated to reflect V5.3-004A; corrected description of S9A11-001722; added entry for S9F04-002544, previously fixed in V5.3-003
+        <div>
+          &nbsp;
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td align=middle valign=top>
+        1.0
+        <div>
+          &nbsp;
+        </div>
+      </td>
+      <td align=left valign=top>
+        16 July 2009
+        <div>
+          &nbsp;
+        </div>
+      </td>
+      <td align=left valign=top>
+        First published version
+        <div>
+          &nbsp;
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <p class=pubdate>
+  </p>
+  <div>
+    &nbsp;
+  </div>
+  <div class=abstract>
+    <p class=title>
+    </p>
+    <p>
+    </p>
+    <div class=informaltable>
+      <table border=0 cellpadding=1 cellspacing=2 class=zeroBorder width=100%>
+        <tbody>
+        <tr>
+          <td align=left valign=top width=50%>
+            <p>
+            </p>
+            <div class=address>
+              <p>
+              </p>
+              <p>
+                GT.M Group
+              </p>
+              <p>
+                Fidelity National Information Services, Inc.
+              </p>
+              <p>
+                2 West Liberty Boulevard, Suite 300
+              </p>
+              <p>
+                Malvern, Pennsylvania 19355
+              </p>
+              <p>
+                United States of America
+              </p>
+              <p>
+                &nbsp;
+              </p>
+            </div>
+          </td>
+          <td align=left valign=top width=50%>
+            <p>
+            </p>
+            <div class=address>
+              <p>
+              </p>
+              <p>
+                GT.M Support for customers: +1 (610) 578-4226 / <a href=mailto:gtmsupport@fisglobal.com title="If you have GT.M support, click here to send e-mail and request support">gtmsupport@fisglobal.com</a>
+              </p>
+              <p>
+              </p>
+              <div>
+                &nbsp;
+              </div>
+              <p>
+                Switchboard: +1 (610) 296-8877
+              </p>
+              Website: <a href=http://fis-gtm.com/ id=j47- target=_blank title="Click here to visit the GT.M home page">http://fis-gtm.com</a>
+              <p>
+                &nbsp;
+              </p>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <a id=q:81></a>
+  </div>
+</div>
+<div class=toc>
+  <p>
+  </p>
+  <h2>
+    <a id=Table_of_Contents_510593612128_13869039958437157 name=Table_of_Contents_510593612128_13869039958437157></a><b>T<a id=z_bk name=toc></a>able of Contents</b>
+  </h2>
+  <a href=#_V5_3_003_42444616858911943_97_3536704425533077 id=bgsv target=_self title="Click here to go directly to the Changes section">Click here to go directly to the Changes section</a>.
+  <div>
+    &nbsp;
+  </div>
+  <div>
+    &nbsp;
+  </div>
+  <div class=writely-toc id=WritelyTableOfContents toctype=none+none>
+    <ol class=writely-toc-none>
+      <li>
+        <a href=#_Technical_Bulletin_GT_M_V5_3__9934166934177112 target=_self>Technical Bulletin - GT.M V5.3-004A Release Notes</a>
+      </li>
+      <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+        <li>
+          <a href=#Revision_History_5170783765732_025957298366665604 target=_self>Revision History</a>
+        </li>
+        <li>
+          <a href=#Table_of_Contents_510593612128_13869039958437157 target=_self>Table of Contents</a>
+        </li>
+        <li>
+          <a href=#Typographical_Conventions_8537_9902628992395978 target=_self>Conventions</a>
+        </li>
+        <li>
+          <a href=#_Bulletin_Overview_62528978250_45288321693780753 target=_self>Bulletin Overview</a>
+        </li>
+        <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+          <li>
+            <a href=#_Platforms_2151380940233626_61_01808439213901436 target=_self>Platforms</a>
+          </li>
+          <li>
+            <a href=#_Migrating_to_64_bit_platforms_19330040325327758 target=_self>Migrating to 64-bit platforms</a>
+          </li>
+          <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+            <li>
+              <a href=#_Call_ins_and_External_Calls_0_30713664816856157 target=_self>Call-ins and External Calls</a>
+            </li>
+            <li>
+              <a href=#_Internationalization_Collatio_8566597183614201 target=_self>Internationalization (Collation)</a>
+            </li>
+            <li>
+              <a href=#_Environment_Translation_61573_5294978940794685 target=_self>Environment Translation</a>
+            </li>
+          </ol>
+          <li>
+            <a href=#_Recompile_7524501020454256_50_9445586193184429 target=_self>Recompile</a>
+          </li>
+          <li>
+            <a href=#_Rebuild_Shared_Libraries_or_I_19240578052230095 target=_self>Rebuild Shared Libraries or Images</a>
+          </li>
+          <li>
+            <a href=#_Additional_Installation_Instr_08592308826582762 target=_self>Additional Installation Instructions</a>
+          </li>
+          <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+            <li>
+              <a href=#_UNIX_2470193629452917_4777089_5291197346820357 target=_self>UNIX</a>
+            </li>
+            <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+              <li>
+                <a href=#_Additional_Information_for_AI_23161448517528094 target=_self>Additional Information for AIX</a>
+              </li>
+            </ol>
+            <li>
+              <a href=#_OpenVMS_6976338280179322_1641_20320654576097152 target=_self>OpenVMS</a>
+            </li>
+          </ol>
+          <li>
+            <a href=#_Database_Compatibility_for_GT_18713769342396214 target=_self>Upgrading to GT.M V5.3-004</a>
+          </li>
+          <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+            <li>
+              <a href=#_Database_Compatibility_for_GT_22087636579938674 target=_self>Stage 1: Upgrading your Global Directory</a>
+            </li>
+            <li>
+              <a href=#Stage_2_5293352739190076_47865 target=_self>Stage 2: Upgrading your Database Files</a>
+            </li>
+            <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+              <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+                <li>
+                  <a href=#Upgrade_notes_Database_Files_0 target=_self>Database Compatibility Notes</a>
+                </li>
+              </ol>
+            </ol>
+            <li>
+              <a href=#Stage_3_20156017953353456_4337 target=_self>Stage 3: Upgrading your Replication Instance File</a>
+            </li>
+            <li>
+              <a href=#Stage_4_5038444195635015_20776 target=_self>Stage 4: Upgrading your Journal Files</a>
+            </li>
+          </ol>
+          <li>
+            <a href=#_Managing_M_mode_and_UTF_8_mod_854486128979032 target=_self>Managing M mode and UTF-8 mode</a>
+          </li>
+          <li>
+            <a href=#_Setting_the_environment_varia_9385861341688055 target=_self>Setting the environment variable TERM</a>
+          </li>
+          <li>
+            <a href=#_Installing_Compression_Librar_7106566065855489 target=_self>Installing Compression Libraries</a>
+          </li>
+        </ol>
+        <li>
+          <a href=#_Change_History_05166510740653_23570112910236618 target=_self>Changes</a>
+        </li>
+        <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+          <li>
+            <a href=#_M_Database_Access_00981506229_3102327739944464 target=_self>M-Database Access</a>
+          </li>
+          <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+            <li>
+              <a href=#S9I11_002714_Better_protection target=_self>S9I11-002714 Better protection against damaged journal file descriptors</a>
+            </li>
+            <li>
+              <a href=#S9A11_001722_More_conservative target=_self>S9A11-001722 More conservative access permissions</a>
+            </li>
+            <li>
+              <a href=#C9905_001119_Caching_optimizat target=_self>C9905-001119 Caching optimization for transaction processing</a>
+            </li>
+            <li>
+              <a href=#C9A05_001476_Database_encrypti target=_self>C9A05-001476 Database encryption</a>
+            </li>
+            <li>
+              <a href=#C9E02_002510_Rare_case_of_inco target=_self>C9E02-002510 Rare case of incorrect KILL in progress indicator fixed</a>
+            </li>
+            <li>
+              <a href=#C9E10_002648_Correct_ORDER_1_r target=_self>C9E10-002648 Correct $ORDER(gvn,-1) if last gvn subscript is "" &amp; last global node starts with $ZCHAR(255)</a>
+            </li>
+            <li>
+              <a href=#C9I09_003042_TP_performance_op_4457495345928115 target=_self>C9I09-003042 TP performance optimization</a>
+            </li>
+            <li>
+              <a href=#C9J01_003076_Redundant_databas_8929374233566515 target=_self>C9J01-003076 Redundant database disk writes eliminated</a>
+            </li>
+            <li>
+              <a href=#C9J01_003078_Better_protection_3687383447952526 target=_self>C9J01-003078 Better protection against spurious signals during database startup and shutdown</a>
+            </li>
+            <li>
+              <a href=#C9J03_00396_Improved_error_mes target=_self>C9J03-00396 Improved error message for OpenVMS journaling issue (V5.3-004A)</a>
+            </li>
+            <li>
+              <a href=#C9J04_003120_More_graceful_han_2662584388000795 target=_self>C9J04-003120 More graceful handling of high contention during database open and close</a>
+            </li>
+            <li>
+              <a href=#C9J05_003121_More_robust_handl_5289305834207609 target=_self>C9J05-003121 More robust handling of MM database file headers when generating core files</a>
+            </li>
+            <li>
+              <a href=#C9I09_003031_Database_file_siz_0731509911815299 target=_self>C9J05-003122 Database file size limit raised to 224 million blocks</a>
+            </li>
+            <li>
+              <a href=#C9J05_003123_More_robust_handl_3945318518329256 target=_self>C9J05-003123 More robust handling of insufficient timer queue entries (TQELM) on OpenVMS</a>
+            </li>
+            <li>
+              <a href=#C9J05_003132_Better_handling_o_8048157414759345 target=_self>C9J05-003132 Better handling of version mismatch errors during database initialization</a>
+            </li>
+            <li>
+              <a href=#C9J06_003139_Eliminate_a_cause_4698101434089522 target=_self>C9J06-003139 Eliminate a cause of redundant records in journal file</a>
+            </li>
+            <li>
+              <a href=#C9J07_003162_Prevent_two_unusu target=_self>C9J07-003162 Prevent two unusual causes of DBKEYORD (V5.3-004A)</a>
+            </li>
+          </ol>
+          <li>
+            <a href=#_M_Other_Than_Database_Access__6095275976579253 target=_self>M-Other Than Database Access</a>
+          </li>
+          <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+            <li>
+              <a href=#S9902_001105_4907991220276604_ target=_self>S9902-001105 New gtm_nocenable environment variable</a>
+            </li>
+            <li>
+              <a href=#S9F04_002544_FIFO_timed_READ_c target=_self>S9F04-002544 FIFO timed READ correction (V5.3-003)</a>
+            </li>
+            <li>
+              <a href=#S9G06_002616_Correct_report_of target=_self>S9G06-002616 Correct report of MAXFORARGS</a>
+            </li>
+            <li>
+              <a href=#S9H01_002639_More_appropriate_ target=_self>S9H01-002639 More appropriate error message on inability to access a file to be compiled</a>
+            </li>
+            <li>
+              <a href=#S9I10_002704_GT_CM_Server_out_ target=_self>S9I10-002704 GT.CM Server out-of-memory prevented (V5.3-004A)</a>
+            </li>
+            <li>
+              <a href=#S9J01_002718_ZSYSTEM_returns_e target=_self>S9J01-002718 $ZSYSTEM returns exit status modulo 256 of shell invoked by last ZSYSTEM</a>
+            </li>
+            <li>
+              <a href=#S9J05_002724_SET_correctly_han target=_self>S9J05-002724 SET correctly handles special case of local variables used as subscripts for target</a>
+            </li>
+            <li>
+              <a href=#S9J06_002725_NAME_returns_empt target=_self>S9J06-002725 $NAME() returns empty string for undefined variables</a>
+            </li>
+            <li>
+              <a href=#S9J07_002728_ZCOMPILE_with_an_ target=_self>S9J07-002728 ZCOMPILE with an error closes the object file (V5.3-004A)</a>
+            </li>
+            <li>
+              <a href=#S9J07_002729_MUMPS_LIST_with_a target=_self>S9J07-002729 MUMPS -LIST with an error more robust (V5.3-004A)</a>
+            </li>
+            <li>
+              <a href=#C9B09_001754_KILL_of_a_variabl target=_self>C9B09-001754 KILL of a variable joined by pass-by-reference to a formallist variable</a>
+            </li>
+            <li>
+              <a href=#C9E02_002527_Correct_ZEOF_hand target=_self>C9E02-002527 Correct $ZEOF handling when $PRINCIPAL is NULL device</a>
+            </li>
+            <li>
+              <a href=#C9I02_002957_New_functionality_1967045588610158 target=_self>C9I02-002957 New functionality - alias variables</a>
+            </li>
+            <li>
+              <a href=#C9I04_002984_Correct_ZEOF_hand_6111337588389723 target=_self>C9I04-002984 Correct $ZEOF handling on read from or append to zero length files</a>
+            </li>
+            <li>
+              <a href=#C9I08_003017_No_more_inappropr_17367512558278597 target=_self>C9I08-003017 No inappropriate process terminations on access to routine source after ZLINK</a>
+            </li>
+            <li>
+              <a href=#C9I09_003031_GT_M_now_runs_on__796429995489178 target=_self>C9I09-003031 GT.M now runs on z/OS on IBM eServer zSeries</a>
+            </li>
+            <li>
+              <a href=#C9I09_003033_ICU_version_3_6_n_6499712963858812 target=_self>C9I09-003033 ICU versions 3.6 and greater now supported</a>
+            </li>
+            <li>
+              <a href=#C9I12_003064_Improvements_to_P target=_self>C9I12-003064 Improvements to PIPE and FIFO devices</a>
+            </li>
+            <li>
+              <a href=#C9I12_003068_Reduced_memory_fr_47560474904664596 target=_self>C9I12-003068 Reduced memory fragmentation for processes linking large numbers of routines</a>
+            </li>
+            <li>
+              <a href=#C9J01_003080_Memory_leak_plugg_3287293607032048 target=_self>C9J01-003080 Memory leak plugged in pattern matching with alternation</a>
+            </li>
+            <li>
+              <a href=#C9J01_003081_Better_handling_o_6638911788129515 target=_self>C9J01-003081 Better handling of deeply nested indirection on 64-bit platforms</a>
+            </li>
+            <li>
+              <a href=#C9J03_003097_Error_during_crea target=_self>C9J03-003097 Error during creation of a file or FIFO device</a>
+            </li>
+            <li>
+              <a href=#C9J03_003102_Non_ASCII_charact target=_self>C9J03-003102 Non ASCII characters accepted in M mode pattern match string literals</a>
+            </li>
+            <li>
+              <a href=#C9J03_003104_Trailing_white_sp target=_self>C9J03-003104 Trailing white space ignored in string used for indirection or Xecute</a>
+            </li>
+            <li>
+              <a href=#C9J04_003106_Inappropriate_fai target=_self>C9J04-003106 Inappropriate failure of EXCEPTION handler on OPEN fixed</a>
+            </li>
+            <li>
+              <a href=#C9J04_003109_ZPROMPT_initializ target=_self>C9J04-003109 $ZPROMPT initialized from environment variable / logical name $gtm_prompt</a>
+            </li>
+            <li>
+              <a href=#C9J04_003115_Appropriate_error target=_self>C9J04-003115 Appropriate error when compiling M programs containing binary data</a>
+            </li>
+            <li>
+              <a href=#C9J04_003119_Correct_code_gene target=_self>C9J04-003119 Correct code generation for branches to previous labels in large routines on Solaris</a>
+            </li>
+            <li>
+              <a href=#C9J05_003129_Correct_location__7151425947841475 target=_self>C9J05-003129 Correct location reported in large routines</a>
+            </li>
+            <li>
+              <a href=#C9J06_003135_Cause_of_segmenta_16000877975581151 target=_self>C9J06-003135 Cause of segmentation violation in complex external calls with AIX removed</a>
+            </li>
+            <li>
+              <a href=#C9J06_003136_Faster_compilatio_7991497680892888 target=_self>C9J06-003136 Faster compilation, using less memory</a>
+            </li>
+            <li>
+              <a href=#C9J06_003141_gtmprofile_and_gt target=_self>C9J06-003141 gtmprofile and gtmcshrc recognize lower-case utf-8 for gtm_chset</a>
+            </li>
+            <li>
+              <a href=#C9J06_003144_Timed_LOCK_releas target=_self>C9J06-003144 "Timed" LOCK release maintains $TEST (V5.3-004A)</a>
+            </li>
+            <li>
+              <a href=#C9J07_003146_zOS_cursor_moveme target=_self>C9J07-003146 zOS cursor movement correction (V5.3-004A)</a>
+            </li>
+            <li>
+              <a href=#C9J07_003147_prevention_of_a_r_9273903570191192 target=_self>C9J07-003147 prevention of a rare stuck process in OpenVMS</a>
+            </li>
+            <li>
+              <a href=#C9J07_003152_Improved_error_me target=_self>C9J07-003152 Improved error messages for UTF-8/ICU issues (V5.3-004A)</a>
+            </li>
+            <li>
+              <a href=#C9J07_003161_Compile_of_many_l target=_self>C9J07-003161 Compile of many literals no longer fails (V5.3-004A)</a>
+            </li>
+          </ol>
+          <li>
+            <a href=#_Utilities_MUPIP_8524079436773_19873758576529343 target=_self>Utilities- MUPIP</a>
+          </li>
+          <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+            <li>
+              <a href=#S9J05_002723_Source_Server_gen target=_self>S9J05-002723 Source Server generates a core dump for JNLBADRECFMT error</a>
+            </li>
+            <li>
+              <a href=#C9G09_002804_Fixed_Update_Serv target=_self>C9G09-002804 Update Server handling of key &amp; record sizes too large for replicating instance</a>
+            </li>
+            <li>
+              <a href=#C9J01_003086_Commands_to_freez_9894628098522389 target=_self>C9J01-003086 MUPIP commands to freeze updates print informational messages</a>
+            </li>
+            <li>
+              <a href=#C9J04_003117_MUPIP_LOAD_speede target=_self>C9J04-003117 MUPIP LOAD speeded up in UTF-8 mode</a>
+            </li>
+            <li>
+              <a href=#C9J07_003159_Improved_MUPIP_BA target=_self>C9J07-003159 Improved MUPIP BACKUP error message (V5.3-004A)</a>
+            </li>
+          </ol>
+          <li>
+            <a href=#_Utilities_Other_Than_MUPIP_69_06731016891770025 target=_self>Utilities-Other Than MUPIP</a>
+          </li>
+          <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+            <li>
+              <a href=#C9B11_001789_Improved_recovera target=_self>C9B11-001789 Improved recoverability after low-level DSE operations</a>
+            </li>
+            <li>
+              <a href=#C9J01_003071_Installation_scri_5049240411857813 target=_self>C9J01-003071 Installation script on Solaris now works with /bin/sh and tests for 64-bit ICU libraries</a>
+            </li>
+            <li>
+              <a href=#C9J01_003079_Distribution_may__7122046343837781 target=_self>C9J01-003079 Distribution may now be unpacked by any user</a>
+            </li>
+            <li>
+              <a href=#C9J02_003095_Installation_scri target=_self>C9J02-003095 Installation script creates any needed parent directories</a>
+            </li>
+            <li>
+              <a href=#C9J05_003128_Better_printing_o_7833877543626123 target=_self>C9J05-003128 Better printing of UTF-8 characters with DSE DUMP -BLOCK</a>
+            </li>
+            <li>
+              <a href=#C9J06_003134_GDE_now_issues_be_8050523403889164 target=_self>C9J06-003134 GDE issues better errors when opening command files</a>
+            </li>
+            <li>
+              <a href=#C9J06_003138_DSE_CACHE_VERIFY__049126745626555834 target=_self>C9J06-003138 DSE CACHE-VERIFY no longer reports spurious error</a>
+            </li>
+          </ol>
+        </ol>
+        <li>
+          <a href=#_Error_Messages_07420816201306_8444816760438915 target=_self>Error Messages</a>
+        </li>
+        <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+          <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+            <li>
+              <a href=#ALIASEXPECTED_Alias_or_alias_c target=_self>ALIASEXPECTED, Alias or alias container variable expected in this context</a>
+            </li>
+            <li>
+              <a href=#BADTAG_Unable_to_use_file_ffff target=_self>BADTAG, Unable to use file ffff (CCSID tttt) with CCSID uuuu</a>
+            </li>
+            <li>
+              <a href=#BUFFLUFAILED_Errors_flushing_b target=_self>BUFFLUFAILED, Errors flushing buffers from uuuu for database file dddd</a>
+            </li>
+            <li>
+              <a href=#CLOSEFAIL_Error_while_closing_ target=_self>CLOSEFAIL, Error while closing file descriptor dddd</a>
+            </li>
+            <li>
+              <a href=#CRYPTDLNOOPEN_Error_loading_en target=_self>CRYPTDLNOOPEN, Error loading encryption library. xxxx</a>
+            </li>
+            <li>
+              <a href=#CRYPTHASHGENFAILED_Error_gener target=_self>CRYPTHASHGENFAILED, Error generating encryption hash. xxxx</a>
+            </li>
+            <li>
+              <a href=#CRYPTINIT_Error_initializing_e target=_self>CRYPTINIT, Error initializing encryption library. xxxx</a>
+            </li>
+            <li>
+              <a href=#CRYPTJNLWRONGHASH_Encryption_k target=_self>CRYPTJNLWRONGHASH, Encryption key hash mismatch between journal file jjjj and corresponding database file dddd</a>
+            </li>
+            <li>
+              <a href=#CRYPTKEYFETCHFAILED_Cannot_obt target=_self>CRYPTKEYFETCHFAILED, Cannot obtain encryption key for ffff. xxxx</a>
+            </li>
+            <li>
+              <a href=#CRYPTKEYFETCHFAILEDNF_Cannot_o target=_self>CRYPTKEYFETCHFAILEDNF, Cannot obtain encryption key. xxxx</a>
+            </li>
+            <li>
+              <a href=#CRYPTNOMM_is_an_encrypted_data target=_self>CRYPTNOMM, is an encrypted database. Cannot support MM access method.</a>
+            </li>
+            <li>
+              <a href=#CRYPTNOPSWDINTP_Cannot_prompt_ target=_self>CRYPTNOPSWDINTP, Cannot prompt for password inside a TP transaction.</a>
+            </li>
+            <li>
+              <a href=#CRYPTNOV4_ffff_is_an_encrypted target=_self>CRYPTNOV4, ffff is an encrypted database. Cannot downgrade(to V4) with Encryption option enabled.&gt;/error/fao=2!/ansi=0</a>
+            </li>
+            <li>
+              <a href=#CRYPTOPFAILED_Encrypt_Decrypt_ target=_self>CRYPTOPFAILED, Encrypt/Decrypt operation failed. xxxx</a>
+            </li>
+            <li>
+              <a href=#DZWRNOALIAS_ZWRTAC_cannot_be_a target=_self>DZWRNOALIAS, $ZWRTAC cannot be aliased</a>
+            </li>
+            <li>
+              <a href=#DZWRNOPAREN_ZWRTACxxx_is_not_a target=_self>DZWRNOPAREN, $ZWRTACxxx is not allowed inside a parenthesized SET target</a>
+            </li>
+            <li>
+              <a href=#FREEZEERR_Error_while_trying_t target=_self>FREEZEERR, Error while trying to ffff region rrrr</a>
+            </li>
+            <li>
+              <a href=#NOALIASLIST_Parenthetical_list target=_self>NOALIASLIST, Parenthetical lists of multiple arguments cannot have a preceding alias introducer or include alias (*) forms</a>
+            </li>
+            <li>
+              <a href=#NONUTF8LOCALE_Locale_has_chara target=_self>NONUTF8LOCALE, Locale has character encoding (cccc) which is not compatible with UTF-8 character set</a>
+            </li>
+            <li>
+              <a href=#TRANS2BIG_Transaction_exceeded target=_self>TRANS2BIG, Transaction exceeded available buffer space for region rrrr</a>
+            </li>
+            <li>
+              <a href=#VIEWLVN_Invalid_local_variable target=_self>VIEWLVN, Invalid local variable name used with VIEW/$VIEW(): vvvv</a>
+            </li>
+          </ol>
+        </ol>
+      </ol>
+    </ol>
+  </div>
+  <p>
+  </p>
+  <a href=#id1030206 target=_self></a>
+</div>
+<div class=sect1>
+  <div class=titlepage>
+    <h2 class=title>
+      <a id=Typographical_Conventions_8537_9902628992395978 name=Typographical_Conventions_8537_9902628992395978></a>Conventions
+    </h2>
+  </div>
+  <p>
+    <span class=italic><u>UNIX</u>: The term UNIX is used here in the general sense of all platforms for which GT.M uses a POSIX API.&nbsp; As of this date, this includes: AIX; HP-UX on IA64 and PA-RISC; GNU/Linux on IA64, x86 and x86_64; Solaris on SPARC; z/OS.</span>
+  </p>
+  <div>
+    &nbsp;
+  </div>
+  <p>
+    <span class=italic><u>Command Syntax</u>: </span>UNIX syntax (that is, lowercase text and "-" for flags/qualifiers) is used throughout this document.&nbsp; OpenVMS accepts both lowercase and uppercase text; flags/qualifiers on OpenVMS should be preceded with "/".
+  </p>
+  <div>
+    &nbsp;
+  </div>
+  <p>
+  </p>
+  <div>
+    &nbsp;
+  </div>
+  <span class=italic><u>Program Names</u>: When referring to a GT.M program or function, the reference is in upper case, e.g, MUPIP BACKUP.&nbsp; When a specific example is provided, the lower case UNIX command names are used, e.g., <font face="courier new">mupip backup -database ACN,HIST /backup</font> </span>&nbsp;
+</div>
+<p>
+</p>
+<div>
+  &nbsp;
+</div>
+<p>
+  <span class=italic><u>Reference Number</u>:</span> Reference numbers used to track software enhancements and customer support requests appear in parentheses ().
+</p>
+<div>
+  &nbsp;
+</div>
+<p>
+</p>
+<div>
+  &nbsp;
+</div>
+<p>
+  <span class=italic><u>Platform Identifier</u>:</span> If a new feature or software enhancement does not apply to all platforms, the relevant platform or platforms appear in brackets [].
+</p>
+<p>
+  &nbsp;
+</p>
+<div class=titlepage>
+  <p class=returntotop>
+    <a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a>
+  </p>
+  <h2 class=title>
+    <a id=_Bulletin_Overview_62528978250_45288321693780753 name=_Bulletin_Overview_62528978250_45288321693780753></a><a id=id1031015></a>Bulletin Overview
+  </h2>
+</div>
+<p class=sect1>
+  <a id=ch.hi.id.0Z></a>
+</p>
+<p class=sect1>
+  GT.M V5.3-004A addresses a few issues with V5.3-004 (highlighted as <font style=BACKGROUND-COLOR:#ffff00>V5.3-004A</font>).
+</p>
+<div>
+  &nbsp;
+</div>
+<p class=sect1>
+</p>
+<div>
+  &nbsp;
+</div>
+<p class=sect1>
+  GT.M V5.3-004 adds significant new functionality to GT.M:
+</p>
+<p class=sect1>
+</p>
+<div>
+  &nbsp;
+</div>
+<div class=sect1>
+  <ul>
+    <li>
+      <u>Support for z/OS on the IBM eServer zSeries computing platform</u>.&nbsp; GT.M programs now run on mainframes using the zFS file system with a high degree of portability from and to other POSIX environments.&nbsp; Barring enhancements to IO device parameters, the fact that z/OS is not natively an ASCII platform is transparent to the M programmer.&nbsp; Refer to the <a href=GTM_on_z_OS.html/index.html id=mbg7 title="Click here to read the GT.M on z/OS technical bulletin">GT.M on IBM eServer zSeries z/OS Technical Bulletin</a> for details.
+      <div>
+        &nbsp;
+      </div>
+    </li>
+    <li>
+      <u>Database encryption</u>.&nbsp; GT.M on selected platforms can encrypt data in database and journal files.&nbsp; Encryption protects against unauthorized access to data by an unauthorized process which is able to access disk files, that is, encryption protects data at rest (DAR).&nbsp; Rather than build encryption into GT.M, a plug-in architecture facilitates use of your preferred encryption software.&nbsp; Refer to the <a href=GTM_Database_Encryption.html id=dvt1 title="Click here to read the GT.M database encryption technical bulletin">GT.M Database Encryption Technical Bulletin</a> for details.
+      <div>
+        &nbsp;
+      </div>
+    </li>
+    <li>
+      <p>
+        <u>Alias variables</u>.&nbsp; Intended to provide an underlying technology for implementing an object layer, alias variables provide a layer of abstraction between the name of a local variable and an array analogous to that provided by M pass by reference in subroutine invocations.&nbsp; Multiple local variables can be aliases, and a SET or KILL to one acts as a SET or KILL to all.&nbsp; Alias container variables provide a way of storing a reference to a data-space in an M sparse array, which protects the associated <font face="arial narrow">array</font> even when it’s not accessible through any current name.&nbsp; Refer to the <a href=GTM_Alias_Variables.html id=g8t3 title="Click here to read the GT.M alias variables technical bulletin">GT.M Alias Variables technical bulletin</a> for details.
+      </p>
+    </li>
+  </ul>
+</div>
+<div class=article>
+  <div>
+    &nbsp;
+  </div>
+</div>
+<p class=article>
+  There are of course numerous bug fixes, remedied mis-features and smaller enhancements.&nbsp; For a comprehensive list, see Changes.
+</p>
+<div>
+  &nbsp;
+</div>
+<p class=article>
+</p>
+<div>
+  &nbsp;
+</div>
+<div class=sect2>
+  <div class=titlepage>
+    <p class=returntotop>
+      <a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a>
+    </p>
+    <h3 class=title>
+      <a id=_Platforms_2151380940233626_61_01808439213901436 name=_Platforms_2151380940233626_61_01808439213901436></a><a id=id1030186></a>Platforms
+    </h3>
+  </div>
+  <p>
+    As of the publication date, FIS supports this release on the following hardware and operating system versions.&nbsp; Contact FIS for a current list of supported platforms.
+  </p>
+  <div>
+    &nbsp;
+  </div>
+  <p>
+  </p>
+  <div>
+    &nbsp;
+  </div>
+  <p>
+  </p>
+  <div class=informaltable>
+    <table border=1 width=95%>
+      <tbody>
+      <tr>
+        <td align=middle valign=top>
+          <p>
+            <span class=bold><b>Platform</b></span>
+          </p>
+        </td>
+        <td align=middle valign=top>
+          <p>
+            <span class=bold><b>Supported Versions</b></span>
+          </p>
+        </td>
+        <td align=middle valign=top>
+          <p>
+            <span class=bold><b>Notes</b></span>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td align=middle valign=top>
+          <p>
+            Hewlett-Packard Integrity IA64 HP-UX
+          </p>
+        </td>
+        <td align=middle valign=top>
+          <p>
+            11V3 (11.31)
+          </p>
+        </td>
+        <td align=middle valign=center>
+          <p>
+            -
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td align=middle valign=top>
+          <p>
+            IA64 GNU/Linux - Red Hat Enterprise Linux
+          </p>
+        </td>
+        <td align=middle valign=top>
+          <p>
+            Red Hat Enterprise Linux 5.3
+          </p>
+        </td>
+        <td align=left valign=top>
+          <p>
+            GT.M should also run on recent releases of other major Linux distributions with a contemporary 2.6 Linux kernel, glibc (version 2.5-24 or later) and ncurses (version 5.5-24 or later).&nbsp; We have verified that GT.M passes comprehensive testing on RHEL 5.x on machines that have single cells (no more than 8 CPUs).&nbsp; Multi-cell machines are not considered suitable for production use until they are certified.
+          </p>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td align=middle valign=top>
+          <p>
+            Hewlett-Packard PA-RISC HP-UX
+          </p>
+        </td>
+        <td align=middle valign=top>
+          <p>
+            11.11
+          </p>
+        </td>
+        <td align=left valign=top>
+          <p>
+            GT.M supports UTF-8 mode and M mode on this platform subject to the following:
+          </p>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+          <ul>
+            <li>
+              Problems with HP-UX 11.11 prevent FIS from testing 4 byte UTF-8 characters.&nbsp; FIS understands that the issue is resolved in HP-UX 11.31.&nbsp; At this time, HP-UX 11.31 is still untested and not formally supported for GT.M; however, we are aware of nothing that would prevent GT.M V5.3-004 from working correctly on that newer version.
+            </li>
+          </ul>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+          <p>
+            Running GT.M on HP-UX 11i requires that patch PHKL_28475 be applied to the system.&nbsp; This patch fixes a problem with the <font face="courier new">lseek64()</font> C library call that GT.M uses.&nbsp; A system without this patch gives fairly consistent database errors of varying types, structural damage, and in general does not work correctly for any but the most simplistic usage.&nbsp; The <span class=emphasis><font face="courier new">swlist -p</font></span> command (executed as root) can be used to determine if this patch has been applied.&nbsp; Since recent "BATCH" and "GOLDEN" patches may contain this patch, your system may already have this patch applied but may not list it separately. Contact your HP support channel for more information.
+          </p>
+          <div>
+            &nbsp;
+          </div>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+          <p>
+            GT.M does not support database encryption on this platform.
+          </p>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td align=middle valign=top>
+          <p>
+            Hewlett-Packard Alpha/AXP Tru64 UNIX
+          </p>
+        </td>
+        <td align=middle valign=top>
+          <p>
+            5.1B
+          </p>
+        </td>
+        <td align=left valign=top>
+          <p>
+            GT.M supports M mode but not UTF-8 mode on this platform.&nbsp; GT.M does not support database encryption on this platform.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td align=middle valign=top>
+          <p>
+            Hewlett-Packard Alpha/AXP OpenVMS
+          </p>
+        </td>
+        <td align=middle valign=top>
+          <p>
+            7.3-1/7.3-2/8.2/8.3
+          </p>
+        </td>
+        <td align=left valign=top>
+          <p>
+            GT.M supports M mode but not UTF-8 mode on this platform.&nbsp; GT.M does not support database encryption on this platform.
+          </p>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+          <p>
+            If you need to work with external calls written in C with Version 6.x of the Compaq C compiler on Alpha OpenVMS, then you must carefully review all the provided kits for that product and apply them appropriately.
+          </p>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td align=middle valign=top>
+          <p>
+            IBM eServer pSeries AIX
+          </p>
+        </td>
+        <td align=middle valign=top>
+          <p>
+            5.3
+          </p>
+        </td>
+        <td align=left valign=top><p>Since GT.M processes are 64-bit, FIS expects 64-bit AIX configurations to be preferable.</p>
+	<br>
+          <ul>
+            <li>
+              While GT.M supports both UTF-8 mode and M mode on this platform, there are problems with the AIX ICU utilities that prevent FIS from testing 4-byte UTF-8 characters as comprehensively on this platform as we do on others.
+            </li>
+          </ul>
+          <div>
+            &nbsp;
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td align=middle valign=top>
+          <p>
+            Sun SPARC Solaris
+          </p>
+        </td>
+        <td align=middle valign=top>
+          <p>
+            9 (Update 3 and above) and 10
+          </p>
+        </td>
+        <td align=left valign=top>
+          <p>
+            GT.M supports the deprecated DAL calls in M mode but not in UTF-8 mode.&nbsp; Please refer to the Integrating External Routines chapter in the Programmer’s Guide for appropriate alternative solutions.
+          </p>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td align=middle valign=top>
+          <p>
+            x86_64 GNU/Linux
+          </p>
+        </td>
+        <td align=middle valign=top>
+          <p>
+            Red Hat Enterprise Linux 5.3; Ubuntu 8.04 LTS (Hardy Heron), 8.10 (Intrepid Ibex) &amp; 9.04 (Jaunty Jackalope)
+          </p>
+        </td>
+        <td align=left valign=top>
+          <p>
+            To run 64-bit GT.M processes requires both a 64-bit kernel as well as 64-bit hardware.
+          </p>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+          <p>
+            GT.M should also run on recent releases of other major Linux distributions with a contemporary 2.6 Linux kernel, glibc (version 2.5-24 or later) and ncurses (version 5.5 or later).
+          </p>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+          <p>
+            To install GT.M with Unicode (UTF-8) support on RHEL 5.3, in response to the installation question <font face="courier new">Should an ICU version other than the default be used? (y or n)</font> please respond <font face="courier new">y</font> and then specify the ICU version (e.g., respond <font face="courier new">3.6</font>) to the subsequent prompt <font face="courier new">Enter ICU version (at least ICU version 3.6 is required. Enter as &lt;minor-ver&gt;.&lt;major-ver&gt;):</font>
+          </p>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td align=middle valign=top>
+          <p>
+            x86 GNU/Linux
+          </p>
+        </td>
+        <td align=middle valign=top>
+          <p>
+            Red Hat Enterprise Linux 4
+          </p>
+        </td>
+        <td align=left valign=top>
+          <p>
+            This 32-bit version of GT.M runs on either 32- or 64-bit x86 platforms; we expect the X86_64 GNU/Linux version of GT.M to be preferable on 64-bit hardware.
+          </p>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+          <p>
+            GT.M should also run on recent releases of other major Linux distributions with a contemporary 2.6 Linux kernel, glibc (version 2.3.4-2 or later) and ncurses (version 5.4-1 or later).&nbsp; The minimum CPU must have the instruction set of a 686 (Pentium Pro) or equivalent. Contact FIS for support of older CPUs.
+          </p>
+          <div>
+            &nbsp;
+          </div>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+          <p>
+            Although RHEL 5.x is officially not supported for the 32-bit x86 GNU/Linux GT.M, we are aware of no reason why GT.M will not run on it.
+          </p>
+          <p>
+          </p>
+          <div>
+            &nbsp;
+          </div>
+          <p>
+            This is the last GT.M release for RHEL 4.x.&nbsp; Future GT.M releases will require RHEL V5.x.
+          </p>
+          <div>
+            &nbsp;
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class=sect2>
+  <div class=titlepage>
+    <p class=returntotop>
+    </p>
+    <div>
+      &nbsp;
+    </div>
+    <p class=returntotop>
+      <a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a>
+    </p>
+    <h3 class=title>
+      <a id=_Migrating_to_64_bit_platforms_19330040325327758 name=_Migrating_to_64_bit_platforms_19330040325327758></a><a id=manage64></a>Migrating to 64-bit platforms
+    </h3>
+  </div>
+  <p>
+    The same application code runs on both 32-bit and 64-bit platforms. Please note that:
+  </p>
+  <div>
+    &nbsp;
+  </div>
+  <p>
+  </p>
+  <div>
+    &nbsp;
+  </div>
+  <div class=itemizedlist>
+    <ul>
+      <li>
+        <p>
+          You must compile the application code separately for each platform.&nbsp; Even though the M source code is exactly the same, the generated object modules are different even on the same hardware architecture - the object code for x86 and x86_64 is different.
+        </p>
+      </li>
+      <li>
+        <p>
+          Parameter-types that interface GT.M with non-M code using C calling conventions must match the data-types on their target platforms.&nbsp; Mostly, these parameters are for call-ins, external calls, internationalization (collation), and environment translation and are listed in the tables below.&nbsp; Note that most addresses on 64-bit platforms are 8 bytes long and require 8 byte alignment in structures whereas all addresses on 32-bit platforms are 4 bytes long and require 4-byte alignment in structures.
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div class=sect3>
+    <div class=titlepage>
+      <h4 class=title>
+        <a id=_Call_ins_and_External_Calls_0_30713664816856157 name=_Call_ins_and_External_Calls_0_30713664816856157></a>Call-ins and External Calls
+      </h4>
+      <div>
+        &nbsp;
+      </div>
+    </div>
+    <div class=informaltable>
+      <table border=1>
+        <tbody>
+        <tr>
+          <td>
+            <p>
+              <span class=bold><b>Parameter type</b></span>
+            </p>
+          </td>
+          <td>
+            <p>
+              <span class=bold><b>32-Bit</b></span>
+            </p>
+          </td>
+          <td>
+            <p>
+              <span class=bold><b>64-bit</b></span>
+            </p>
+          </td>
+          <td>
+            <p>
+              <span class=bold><b>Remarks</b></span>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>
+              gtm_long_t
+            </p>
+          </td>
+          <td>
+            <p>
+              4-byte (32-bit)
+            </p>
+          </td>
+          <td>
+            <p>
+              8-byte (64-bit)
+            </p>
+          </td>
+          <td>
+            <p>
+              gtm_long_t is much the same as the C language long type, except on Tru64 UNIX, where GT.M remains a 32-bit application.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>
+              gtm_ulong_t
+            </p>
+          </td>
+          <td>
+            <p>
+              4-byte
+            </p>
+          </td>
+          <td>
+            <p>
+              8-byte
+            </p>
+          </td>
+          <td>
+            <p>
+              gtm_ulong_t is much the same as the C language unsigned long type.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>
+              gtm_int_t
+            </p>
+          </td>
+          <td>
+            <p>
+              4-byte
+            </p>
+          </td>
+          <td>
+            <p>
+              4-byte
+            </p>
+          </td>
+          <td>
+            <p>
+              gtm_int_t has 32-bit length on all platforms.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>
+              gtm_uint_t
+            </p>
+          </td>
+          <td>
+            <p>
+              4-byte
+            </p>
+          </td>
+          <td>
+            <p>
+              4-byte
+            </p>
+          </td>
+          <td>
+            <p>
+              gtm_uint_t has 32-bit length on all platforms
+            </p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class=sect3>
+    <div class=titlepage>
+      <p class=title>
+      </p>
+      <div>
+        &nbsp;
+      </div>
+      <ul>
+        <li>
+          If your interface uses gtm_long_t or gtm_ulong_t types but your interface code uses int or signed int types, failure to revise the types so they match on a 64-bit platform will cause the code to fail in unpleasant, potentially dangerous and hard to diagnose ways.
+        </li>
+      </ul>
+      <h4 class=title>
+        <a id=_Internationalization_Collatio_8566597183614201 name=_Internationalization_Collatio_8566597183614201></a>Internationalization (Collation)
+      </h4>
+    </div>
+    <p>
+      &nbsp;
+    </p>
+    <div class=informaltable>
+      <table border=1>
+        <tbody>
+        <tr>
+          <td>
+            <p>
+              <span class=bold><b>Parameter type</b></span>
+            </p>
+          </td>
+          <td>
+            <p>
+              <span class=bold><b>32-Bit </b></span>
+            </p>
+          </td>
+          <td>
+            <p>
+              <span class=bold><b>64-bit</b></span>
+            </p>
+          </td>
+          <td>
+            <p>
+              <span class=bold><b>Remarks</b></span>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>
+              gtm_descriptor in gtm_descript.h
+            </p>
+          </td>
+          <td>
+            <p>
+              4-byte
+            </p>
+          </td>
+          <td>
+            <p>
+              8-byte
+            </p>
+          </td>
+          <td>
+            <p>
+              Although it is only the address within these types that changes, the structures may grow by up to 8 bytes as a result of compiler padding to meet platform alignment requirements.
+            </p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class=sect3>
+    <div class=titlepage>
+      <p class=title>
+      </p>
+      <div>
+        &nbsp;
+      </div>
+      <ul>
+        <li>
+          Assuming other aspects of their code are 64-bit capable, collation routines should require only recompilation.
+          <div>
+            &nbsp;
+          </div>
+        </li>
+      </ul>
+      <h4 class=title>
+        <a id=_Environment_Translation_61573_5294978940794685 name=_Environment_Translation_61573_5294978940794685></a>Environment Translation&nbsp;
+      </h4>
+    </div>
+    <div class=informaltable>
+      <table border=1>
+        <tbody>
+        <tr>
+          <td>
+            <p>
+              <span class=bold><b>Parameter type</b></span>
+            </p>
+          </td>
+          <td>
+            <p>
+              <span class=bold><b>32-Bit</b></span>
+            </p>
+          </td>
+          <td>
+            <p>
+              <span class=bold><b>64-bit</b></span>
+            </p>
+          </td>
+          <td>
+            <p>
+              <span class=bold><b>Remarks</b></span>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>
+              gtm_string_t type in gtmxc_types.h
+            </p>
+          </td>
+          <td>
+            <p>
+              4-byte
+            </p>
+          </td>
+          <td>
+            <p>
+              8-byte
+            </p>
+          </td>
+          <td>
+            <p>
+              Although it is only the address within these types that changes, the structures may grow by up to 8 bytes as a result of compiler padding to meet platform alignment requirements.
+            </p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class=sect2>
+  <div class=titlepage>
+    <p class=returntotop>
+    </p>
+    <div>
+      &nbsp;
+    </div>
+    <ul>
+      <li>
+        Any environment translation routines require only a recompile, assuming other aspects of their code are 64-bit capable.
+      </li>
+    </ul>
+    <p class=returntotop>
+    </p>
+    <div>
+      &nbsp;
+    </div>
+    <p class=returntotop>
+      <a href=#Table_of_Contents_510593612128_7471010945331905 target=_self title="Click here to move to the Table of Contents"></a><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a>
+    </p>
+    <h3 class=title>
+      <a id=_Recompile_7524501020454256_50_9445586193184429 name=_Recompile_7524501020454256_50_9445586193184429></a><a id=id1030600></a>Recompile
+    </h3>
+  </div>
+  <div class=itemizedlist>
+    <ul>
+      <li>
+        <p>
+          Recompile all M and C source files.
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class=sect2>
+  <div class=titlepage>
+    <p class=returntotop>
+      <a href=#id1030164 target=_self></a>
+    </p>
+    <a href=#id1030164 target=_self></a><br>
+    <div>
+      &nbsp;
+    </div>
+    <p class=returntotop>
+      <a href=#Table_of_Contents_510593612128_7471010945331905 target=_self title="Click here to move to the Table of Contents"></a><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a>
+    </p>
+    <h3 class=title>
+      <a id=_Rebuild_Shared_Libraries_or_I_19240578052230095 name=_Rebuild_Shared_Libraries_or_I_19240578052230095></a><a id=id1031496></a>Rebuild Shared Libraries or Images
+    </h3>
+  </div>
+  <div class=itemizedlist>
+    <ul>
+      <li>
+        <p>
+          Rebuild all Shared Libraries (UNIX) or Shareable Executable Images (OpenVMS) after recompiling all M and C source files.
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class=sect2>
+  <div class=titlepage>
+    <p class=returntotop>
+      <a href=#id1030164 target=_self></a>
+    </p>
+    <a href=#id1030164 target=_self></a><br>
+    <div>
+      &nbsp;
+    </div>
+    <p class=returntotop>
+      <a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a>
+    </p>
+    <h3 class=title>
+      <a id=_Additional_Installation_Instr_08592308826582762 name=_Additional_Installation_Instr_08592308826582762></a>Additional Installation Instructions&nbsp;
+    </h3>
+  </div>
+  <p>
+    To install GT.M, see the "Installing GT.M" section in the GT.M Administration and Operations Guide.
+  </p>
+  <div class=sect3>
+    <div class=titlepage>
+      <h4 class=title>
+        <a id=_UNIX_2470193629452917_4777089_5291197346820357 name=_UNIX_2470193629452917_4777089_5291197346820357></a><a id=id1033081></a>UNIX
+      </h4>
+    </div>
+    <div class=orderedlist>
+      <ol type=1>
+        <li>
+          Fidelity strongly recommends installing each version of GT.M in a separate (new) directory, rather than overwriting a previously installed version.&nbsp; If you must overwrite an existing GT.M installation with a new version you <i>must</i> first shut down all processes using the old version.&nbsp; Since the the <a href=http://www.lanana.org/ id=qorh target=_blank title="Click herer to visit the Linux Assigned Names and Numbers Authority">Linux Assigned Names and Numbers Authority</a> has assigned GT.M the package name lsb-gtm, FIS recommends installing GT.M V5.3-004 in <font face="courier new">/opt/lsb-gtm/V5.3-004_</font><font face="arial narrow">arch</font> (e.g., <font face="courier new">/opt/lsb-gtm/V5.3-004_i686</font>) on Linux systems.&nbsp; On other POSIX platforms, a location such as <font face="courier new">/opt/gtm/V5.3-004</font> would be appropriate.
+        </li>
+        <li>
+          <p>
+            Use the MUPIP RUNDOWN command of the old GT.M version to ensure all database files are cleanly closed.
+          </p>
+        </li>
+        <li>
+          <p>
+            In UNIX editions, make sure gtmsecshr is not running. If gtmsecshr is running, first stop all GT.M processes including the DSE, LKE and MUPIP utilities and then perform <font face="courier new">kill </font><font face="arial narrow">pid_of_gtmsecshr</font>.
+          </p>
+        </li>
+      </ol>
+      <div>
+        &nbsp;
+      </div>
+      <ul style=MARGIN-LEFT:40px>
+        <li>
+          <u><i>Never</i></u> replace the binary image on disk of any executable file while it is in use by an active process.&nbsp; It may lead to unpredictable results. Depending on the operating system, these results include but are not limited to the denial of service (that is, system lockup) and damage to files that these processes open (that is, database structural damage).
+        </li>
+      </ul>
+      <ol type=1>
+      </ol>
+    </div>
+    <div class=sect4>
+      <div class=titlepage>
+        <h5 class=title>
+          <a id=_Additional_Information_for_AI_23161448517528094 name=_Additional_Information_for_AI_23161448517528094></a><a id=id1033125></a>Additional Information for AIX
+        </h5>
+      </div>
+      <p>
+        GT.M for IBM pSeries AIX requires the Asynchronous IO facility to be available and configured. Before installing GT.M on IBM pSeries AIX, run the following command to check the filesets of this facility: <span class=emphasis><font face="courier new">lslpp -l bos.rte.aio</font></span>
+      </p>
+      <p>
+      </p>
+      <div>
+        &nbsp;
+      </div>
+      <p>
+        If there are no filesets, then install them from AIX installation media.&nbsp; Then, use SMIT to configure the Asynchronous IO facility.&nbsp; Use SMIT as follows:
+      </p>
+      <div class=itemizedlist>
+        <ul>
+          <li>
+            <p>
+              <span class=emphasis><font face="courier new">smit aio</font> (for gui mode) or</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              <span class=emphasis><font face="courier new">smitty aio</font> (for text mode)</span>
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+      </p>
+      <div>
+        &nbsp;
+      </div>
+      <p>
+        For system that has the <span class=emphasis>"posixaio"</span> option instead of <span class=emphasis>"aio"</span> (also called "legacy aio"), use SMIT as follows:
+      </p>
+      <div class=itemizedlist>
+        <ul>
+          <li>
+            <p>
+              <span class=emphasis><font face="courier new">smit posixaio</font> (for gui mode) or</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              <span class=emphasis><font face="courier new">smitty posixaio</font> (for text mode)</span>
+            </p>
+          </li>
+        </ul>
+        <div>
+          Select <span class=emphasis>"Configure AIO now"</span><i><span class=emphasis>.</span>&nbsp; </i>If you see a message such as <span class=emphasis>"aio0 has been created"</span>, it means that there is no further need of setup at this time.
+        </div>
+        <div>
+          &nbsp;
+        </div>
+        <div>
+          &nbsp;
+        </div>
+      </div>
+      <p>
+        In addition to configuring the aio0 device, select <span class=emphasis>"Change/Show characteristics of Asynchronous I/O"</span> change the value of <span class=emphasis>"State to be configured at system restart" </span>from <span class=emphasis>"defined" </span>to <span class=emphasis>"available"</span>.&nbsp; This ensures that the aio0 device will be available when you next reboot the system.
+      </p>
+      <p>
+      </p>
+      <div>
+        &nbsp;
+      </div>
+      <p>
+        If you expect a database file to exceed 2GB, then you <i>must</i> configure its file system to permit files larger than 2GB.&nbsp; Furthermore, should you choose to place journal files on file systems with a 2GB limit, since GT.M journal files can grow to a maximum size of 4GB, you <i>must</i> then set the journal auto switch limit to less than 2 GB.
+      </p>
+    </div>
+  </div>
+  <div class=sect3>
+    <div class=titlepage>
+      <h4 class=title>
+        <a id=_OpenVMS_6976338280179322_1641_20320654576097152 name=_OpenVMS_6976338280179322_1641_20320654576097152></a><a id=id1032899></a>OpenVMS
+      </h4>
+    </div>
+    <p>
+      To upgrade from a GT.M version prior to V4.3-001, you must update any customized copy of <span class=emphasis><i><font face="courier new">GTM$DEFAULTS</font> </i></span>to include a definition for <span class=emphasis><font face="courier new">GTM$ZDATE_FORM</font></span><font face="courier new">.</font><br>
+    </p>
+    <p>
+    </p>
+    <div>
+      &nbsp;
+    </div>
+    <p>
+      You can ignore the following section if you choose the standard GT.M configuration or answer <span class=emphasis><i>yes </i></span>to the following question:
+    </p>
+    <p style="FONT-FAMILY:Courier New">
+      <span class=emphasis>Do you want to define GT.M commands to the system</span>
+    </p>
+    <p>
+    </p>
+    <div>
+      &nbsp;
+    </div>
+    <p>
+      If you define GT.M commands locally with <span class=emphasis><font face="courier new">SET COMMAND GTM$DIST:GTMCOMMANDS.CLD</font></span> in <font face="courier new">GTMLOGIN.COM</font> or other command file for each process which uses GT.M, you must execute the same command after installing the new version of GT.M before using it.&nbsp; If you define the GT.M commands to the system other than during the installation of GT.M, you must update the system <font face="courier new">DCLTABLES</font> with the new <span class=emphasis><font face="courier new">GTMCOMMANDS.CLD</font> </span>provided with this version of GT.M.&nbsp; See the OpenVMS "Command Definition, Librarian, and Message Utilities Manual" section on "Adding a system command."&nbsp; In both cases, it is important for each process to match the proper <font face="courier new">GTMCOMMANDS.CLD</font> with the version of GT.M it runs.
+    </p>
+    <p>
+      &nbsp;
+    </p>
+  </div>
+</div>
+<p class=returntotop>
+  <a href=#Table_of_Contents_510593612128_7471010945331905 target=_self title="Click here to move to the Table of Contents"></a><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a>
+</p>
+<a id=xj_5 name=_Database_Compatibility_for_GT></a>
+<h3 class=title>
+  <a id=_Database_Compatibility_for_GT_18713769342396214 name=_Database_Compatibility_for_GT_18713769342396214></a>Upgrading to GT.M V5.3-004
+</h3>
+<p class=title>
+  <a id=x4_7 name=_Database_Compatibility_for_GT></a>The GT.M database consists of four types of components— database files, journal files, global directories, and replication instance files. The format of each database component may differ for each GT.M version and even for 32-bit/64-bit GT.M platforms on the same hardware architecture.
+</p>
+<p class=titlepage>
+  <a id=rcue name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<div class=titlepage>
+  <a id=g2ze name=_Database_Compatibility_for_GT></a>GT.M upgrade procedure for V5.3-004A consists of 4 stages:&nbsp;&nbsp;
+</div>
+<div class=titlepage>
+  <a id=ltuh name=_Database_Compatibility_for_GT></a>&nbsp;
+</div>
+<ul>
+  <li>
+    <a href=#Stage1 id=fk6p target=_self title="Stage 1: Upgrading your Global Directory"><font size=2>Stage 1: Upgrading your Global Directory</font></a><a id=qaw: name=_Database_Compatibility_for_GT></a>&nbsp;
+  </li>
+  <li>
+    <a href=#Stage2 id=ibiw target=_self title="Stage 2: Upgrading your Database Files"><font size=2>Stage 2: Upgrading your Database Files</font></a><a id=a:rf name=_Database_Compatibility_for_GT></a>
+  </li>
+  <li>
+    <a id=k7fs name=_Database_Compatibility_for_GT></a><a href=#Stage3 id=bsji target=_self title="Stage 3: Upgrading your Replication Instance File"><font size=2>Stage 3: Upgrading your Replication Instance File</font></a><a id=l_es name=_Database_Compatibility_for_GT></a>&nbsp;
+  </li>
+  <li>
+    <a href=#Stage4 id=didv target=_self title="Stage 4: Upgrading your Journal Files"><font size=2>Stage 4: Upgrading your Journal Files</font></a><a id=mf9. name=_Database_Compatibility_for_GT></a>
+  </li>
+</ul>
+<a id=e1:3 name=_Database_Compatibility_for_GT></a><a id=q5vm name=_Database_Compatibility_for_GT></a><a id=orqa name=_Database_Compatibility_for_GT></a>
+<p class=titlepage>
+  <a id=o0ue name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<p class=titlepage>
+  <a id=f.7. name=_Database_Compatibility_for_GT></a>Read the upgrade instructions of each stage carefully. Your upgrade procedure for GT.M V5.3-004A depends on your GT.M upgrade history and your current version.&nbsp;
+</p>
+<h4 class=titlepage>
+  <a id=_Database_Compatibility_for_GT_22087636579938674 name=_Database_Compatibility_for_GT_22087636579938674></a>S<a id=Stage1 name=Stage1></a>tage 1: Upgrading your Global Directory
+</h4>
+<a id=oul1 name=_Database_Compatibility_for_GT></a>
+<div class=titlepage>
+  <a id=c.bd name=_Database_Compatibility_for_GT></a>FIS strongly recommends you make a copy of your Global Directory before upgrading it. There is no way to downgrade a Global Directory to an earlier format.<br>
+  <br>
+</div>
+<p class=titlepage>
+  <a id=_Database_Compatibility_for_GT_7473127083642803 name=_Database_Compatibility_for_GT_7473127083642803></a><b>To upgrade from any prior GT.M version:<br>
+  </b>
+</p>
+<p class=titlepage>
+  <b><br>
+  </b>
+</p>
+<div class=titlepage>
+  <ol>
+    <li>
+      <a id=jtnp name=_Database_Compatibility_for_GT></a>Open your Global Directory with the GDE utility program from GT.M V5.3-004A.
+    </li>
+    <li>
+      <a id=n_ix name=_Database_Compatibility_for_GT></a>Run the <font face="Courier New">EXIT</font> command. This command automatically, even with no other intervening commands, upgrades the global directory.
+    </li>
+  </ol>
+</div>
+<p class=sect2>
+  <a id=kuba name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<p class=sect2>
+  <a id=dykd name=_Database_Compatibility_for_GT></a>If you inadvertently open a global directory in an earlier format, with no intention of upgrading it, execute the <font face="Courier New">QUIT</font> command rather than the <font face="Courier New">EXIT</font> command.
+</p>
+<p class=sect2>
+  <a id=wf6i name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<div class=sect2>
+  <a id=lbvj name=_Database_Compatibility_for_GT></a>If you inadvertently upgrade a global directory, perform the following steps:
+</div>
+<div class=sect2>
+  <a id=a89l name=_Database_Compatibility_for_GT></a>&nbsp;
+</div>
+<div class=sect2>
+  <ol>
+    <li>
+      <a id=x94- name=_Database_Compatibility_for_GT></a>Open the global directory with GDE from V5.3-004A.
+    </li>
+    <li>
+      <a id=n:x6 name=_Database_Compatibility_for_GT></a>Execute the <font face="Courier New">SHOW ALL</font> command.
+    </li>
+  </ol>
+</div>
+<div class=article>
+  <a id=rk72 name=_Database_Compatibility_for_GT></a>&nbsp;
+</div>
+<div class=article>
+  <a id=nf0v name=_Database_Compatibility_for_GT></a>Note: Create a GDE command script, or manually enter the GDE commands corresponding to the output, into GDE from the prior GT.M version.
+</div>
+<p class=article>
+  <a id=cvys name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<div class=article>
+  <a id=wxfo name=_Database_Compatibility_for_GT></a>Note: Because global directories are binary files, analogous to object files, FIS recommends that you use a GDE command script to create your global directories.
+</div>
+<h4 class=article>
+  <a id=Stage_2_5293352739190076_47865 name=Stage_2_5293352739190076_47865></a>S<a id=Stage2 name=Stage2></a>tage 2: Upgrading your Database Files&nbsp;&nbsp;
+</h4>
+<a id=hd68 name=_Database_Compatibility_for_GT></a>
+<p class=article>
+  <a id=mhjo name=_Database_Compatibility_for_GT></a>You need to upgrade your database files only when there is a block format upgrade (V4-&gt;V5). However, some versions, for example, the ones which have been initially been created with V4 (and subsequently upgraded to a V5 format) may additionally need a <font face="Courier New">MUPIP REORG –UPGRADE</font> operation to upgrade previously used but free blocks that may have been missed by earlier upgrade tools.&nbsp;<br>
+</p>
+<p class=article>
+  <a id=dabk name=_Database_Compatibility_for_GT></a><br>
+</p>
+<p class=article>
+  <a id=_Database_Compatibility_for_GT_5392545428059027 name=_Database_Compatibility_for_GT_5392545428059027></a><b>To upgrade from a GT.M version prior to V5.000: </b><br>
+</p>
+<p class=article>
+  <br>
+</p>
+<p class=article>
+</p>
+<ol>
+  <li>
+    <div>
+      <a id=bqud name=_Database_Compatibility_for_GT></a>Upgrade your database files using in-place or traditional database upgrade procedure depending on your situation. For more information on in-place/traditional database upgrade, see <a href="GTM_Database_Migration.html" id=h8db title="Database Migration Technical Bulletin"><font color=#810081>Database Migration Technical Bulletin</font></a>.
+    </div>
+  </li>
+</ol>
+<ol start=2>
+  <li>
+    <div>
+      <a id=l5do name=_Database_Compatibility_for_GT></a>Run the <font face="Courier New">MUPIP REORG –UPGRADE</font> command. This command upgrades all V4 block to V5 format.
+    </div>
+    <a id=qlfj name=_Database_Compatibility_for_GT></a>
+  </li>
+</ol>
+<p>
+</p>
+<a id=wd5y name=_Database_Compatibility_for_GT></a><a id=y5au name=_Database_Compatibility_for_GT></a>
+<p>
+  <a id=cpk4 name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<div>
+  <a id=or:q name=_Database_Compatibility_for_GT></a>Note: Databases created with GT.M releases prior to V5.0-000 and upgraded to a V5 format retain a maximum size limit of 64M (67,108,864) blocks.<br>
+  <br>
+</div>
+<p>
+  <a id=_Database_Compatibility_for_GT_9275914313641255 name=_Database_Compatibility_for_GT_9275914313641255></a><b>To upgrade from GT.M V5.0*/V5.1*/V5.2*/V5.3*:<br>
+  </b>
+</p>
+<p>
+  <b><br>
+  </b>
+</p>
+<div>
+  <a id=sg7o name=_Database_Compatibility_for_GT></a>No database file upgrade procedure is necessary if you upgrade from GT.M V5.0-000 or later to V5.3 series releases.&nbsp; However, you may need to run the <font face="Courier New">MUPIP REORG –UPGRADE</font> command to upgrade any previously used but free block that may have been missed during earlier upgrade cycles.&nbsp; You do not need to run <font face="Courier New">MUPIP REORG –UPGRADE</font> in the following situation:
+</div>
+<div>
+  <a id=bmnc name=_Database_Compatibility_for_GT></a>&nbsp;
+</div>
+<ol>
+  <li>
+    <div>
+      <a id=mg7- name=_Database_Compatibility_for_GT></a>A database was instantiated by a V5 <font face="Courier New">MUPIP CREATE</font>, or
+    </div>
+  </li>
+  <li>
+    <div>
+      <a id=u5eo name=_Database_Compatibility_for_GT></a>A database has previously been completely processed by a <font face="Courier New">MUPIP REORG –UPGRADE</font> from V5.3-003 or later.
+    </div>
+  </li>
+</ol>
+<div>
+  <a id=g:lu name=_Database_Compatibility_for_GT></a>&nbsp;
+</div>
+<div>
+  <a id=a0p: name=_Database_Compatibility_for_GT></a>If you have already run the <font face="Courier New">MUPIP REORG –UPGRADE</font> command in V5.3-003[A], subsequent versions cannot determine whether or not it was done correctly and record warnings in the operator log for running <font face="Courier New">MUPIP REORG -UPGRADE</font>. Therefore, you must run either:
+</div>
+<div>
+  <a id=u577 name=_Database_Compatibility_for_GT></a>&nbsp;
+</div>
+<ul>
+  <li>
+    <div>
+      <a id=f7vm name=_Database_Compatibility_for_GT></a>Run the <font face="Courier New">MUPIP REORG –UPGRADE</font> command again, or
+    </div>
+  </li>
+  <li>
+    <div>
+      <a id=svqm name=_Database_Compatibility_for_GT></a>Run the <font face="Courier New">DSE CHANGE –FULLY_UPGRADED=1 </font>command to stop the warnings.
+      <div>
+        <a id=f-6t name=_Database_Compatibility_for_GT></a>&nbsp;
+      </div>
+      <div>
+        <a id=tghn name=_Database_Compatibility_for_GT></a>Caution: Do not run the <font face="Courier New">DSE CHANGE -FILEHEADER –FULLY_UPGRADED=1</font> command unless you are absolutely certain you have previously run <a id=xe0t name=_Database_Compatibility_for_GT></a><font face="Courier New">MUPIP REORG –UPGRADE</font> from V5.3-003 or later. Using this command when inappropriately may lead to database integrity issues.
+      </div>
+    </div>
+  </li>
+</ul>
+<p>
+  <a id=nr_v name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<div>
+  <a id=yps5 name=_Database_Compatibility_for_GT></a>For additional upgrade considerations, see "<a href=#Data_Comp_Note id=lwl9 target=_self title="Upgrade Notes">Database Compatibility Notes</a><a id=pz90 name=_Database_Compatibility_for_GT></a>".&nbsp;&nbsp;<a id=lewt name=_Database_Compatibility_for_GT></a><br>
+</div>
+<h6>
+  <a id=Upgrade_notes_Database_Files_0 name=Upgrade_notes_Database_Files_0></a>D<a id=Data_Comp_Note name=Data_Comp_Note></a>atabase Compatibility Notes
+</h6>
+<a id=f-ib name=_Database_Compatibility_for_GT></a>
+<ul>
+  <li>
+    <div>
+      <a id=g5qa name=_Database_Compatibility_for_GT></a>Changes to the database file header may occur in any release.&nbsp; GT.M automatically upgrades database file headers as needed.&nbsp; Any changes to database file headers are upward and downward compatible within a major database release number, that is, although processes from only one GT.M release can access a database file at any given time, processes running different GT.M releases with the same major release number can access a database file at different times.
+    </div>
+  </li>
+  <li>
+    <div>
+      <a id=qdzk name=_Database_Compatibility_for_GT></a>Databases created with V5.3-004 can grow to a maximum size of 224M (234,881,024) blocks.&nbsp; This means, for example, that with an 8KB block size, the maximum database file size is 1,792GB (this is the size of a single global variable; a database consists of any number of global variables).&nbsp; A database created with GT.M versions V5.0-000 through V5.3-003 can be upgraded with MUPIP UPGRADE to increase the limit on database file size from 128M to 224M blocks.
+    </div>
+  </li>
+  <li>
+    <div>
+      <a id=lx_3 name=_Database_Compatibility_for_GT></a>Databases created with V5.0-000 through V5.3-003A have a maximum size of 128M (134,217,728) blocks.&nbsp; Until &amp; unless a database created with V5.3-004, or created in V5.0-000 through V5.3-003, exceeds the 128M block limit of earlier V5 GT.M releases, it can be accessed by releases V5.0-000 through V5.3-003.&nbsp;
+    </div>
+  </li>
+</ul>
+<h4>
+  <a id=Stage_3_20156017953353456_4337 name=Stage_3_20156017953353456_4337></a>S<a id=Stage3 name=Stage3></a>tage 3: Upgrading your Replication Instance File
+</h4>
+<a id=zu5i name=_Database_Compatibility_for_GT></a>
+<div>
+  <a id=j9nh name=_Database_Compatibility_for_GT></a>If you are running a logical multi-site (LMS) application configuration on a UNIX platform, then you need to recreate the replication instance file using the <font face="Courier New">MUPIP REPLICATE -INSTANCE_CREATE</font> command whenever your upgrade changes GT.M from a 32-bit implementation to a 64-bit implementation (or potentially vice versa on the x86 platform).&nbsp; If your upgrade does not include a change between a 32- and 64-bit implementation then you do not need to recreate the replication instance file.&nbsp; For example, on Linux systems, you do not have to recreate the replication instance file if you upgrade from 32-bit pre V5.3-001 to 32-bit V5.3-001/V5.3-001A/V5.3-002/V5.3-003. You have to recreate the replication instance file only for the upgrade scenarios below.
+</div>
+<p>
+  <a id=hkt4 name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<p>
+  <a id=fqvj name=_Database_Compatibility_for_GT></a>Note: When upgrading from a 32-bit GT.M version to a 64-bit GT.M version you always need to recreate the replication instance files.&nbsp; This includes upgrades from V5.3-000 or prior versions to GT.M V5.3-001 or later on AIX or 64-bit Linux and upgrades from V5.3-001 or prior versions to GT.M V5.3-002 or later on Solaris.&nbsp; GT.M version upgrades on 32-bit Linux do not need to recreate instance files.&nbsp; After recreating replication instance files for a replication secondary (or tertiary in a multi-site replication environment) always start it with the <font face="Courier New">-UPDATERESYNC</font> qualifier.&nbsp; Using pre-existing instance files (as opposed to creating new instance files) could cause any process that reads the instance file (which includes the source server, receiver server, update process and GT.M processes on primary) to abnormally terminate with errors ranging from REPLINSTSECMTCH to a SIG-11 (which would create a corefile).
+</p>
+<p>
+  <a id=lcdk name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<ol>
+  <li>
+    <a id=fqte name=_Database_Compatibility_for_GT></a>On AIX systems, if you upgrade from 32-bit pre-V5.3-001 to 64-bit V5.3-001 or later.
+  </li>
+  <li>
+    <a id=dzeu name=_Database_Compatibility_for_GT></a>On Linux systems, if you upgrade from a 32-bit pre-V5.3-001 to 64-bit V5.3-001 or later or from a 64-bit release to a newer 32-bit release.
+  </li>
+  <li>
+    <a id=ttmi name=_Database_Compatibility_for_GT></a>On Sun SPARC Solaris, if you upgrade from 32-bit pre-V5.3-003 to 64-bit V5.3-003.
+  </li>
+</ol>
+<p>
+  <a id=pihi name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<p>
+  <a id=p8uq name=_Database_Compatibility_for_GT></a>In these three scenarios, your source server process terminates abnormally if you do not recreate the replication instance file. Shut down all receiver servers on other instances looking for updates from this instance, shut down this instance, recreate the instance file and then restart the receiver server on this instance with the <font face="Courier New">-UPDATERESYNC</font> qualifier.&nbsp;
+</p>
+<p>
+  <a id=q4n- name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<p>
+  <a id=aoes name=_Database_Compatibility_for_GT></a>Note: The <font face="Courier New">UPDATERESYNC</font> qualifier unconditionally synchronizes this secondary instance with the primary.
+</p>
+<p>
+  <a id=d7nk name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<div>
+  <a id=f3_e name=_Database_Compatibility_for_GT></a>You must always follow the steps in the Multi-Site Replication technical bulletin when migrating from a logical dual site (LDS) configuration to an LMS configuration, even if you are not changing GT.M releases.
+</div>
+<h4>
+  <a id=Stage_4_5038444195635015_20776 name=Stage_4_5038444195635015_20776></a>S<a id=Stage4 name=Stage4></a>tage 4: Upgrading your Journal Files
+</h4>
+<a id=i:95 name=_Database_Compatibility_for_GT></a>
+<p>
+  <a id=_Database_Compatibility_for_GT_6645986153670779 name=_Database_Compatibility_for_GT_6645986153670779></a><b>To upgrade from any prior GT.M version: </b><br>
+</p>
+<p>
+  <br>
+</p>
+<ul>
+  <li>
+    <a id=uvha name=_Database_Compatibility_for_GT></a>Create a fresh backup of your database.
+  </li>
+  <li>
+    <a id=hkyb name=_Database_Compatibility_for_GT></a>Generate new journal files (without back-links).
+  </li>
+</ul>
+<p>
+  <a id=b-_i name=_Database_Compatibility_for_GT></a>&nbsp;
+</p>
+<div>
+  <a id=lb.l name=_Database_Compatibility_for_GT></a>Important: This is necessary because MUPIP can't use journal files from a release other than its own for RECOVER or ROLLBACK.&nbsp;
+</div>
+<div>
+  &nbsp;
+</div>
+<div class=sect2>
+  <div class=titlepage>
+    <p class=returntotop>
+      <a href=#Table_of_Contents_510593612128_7471010945331905 target=_self title="Click here to move to the Table of Contents"></a><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a>
+    </p>
+    <h3 class=title>
+      <a id=_Managing_M_mode_and_UTF_8_mod_854486128979032 name=_Managing_M_mode_and_UTF_8_mod_854486128979032></a><a id=id1033517></a>Managing M mode and UTF-8 mode
+    </h3>
+  </div>
+  <p>
+    With <a href=http://icu-project.org/ id=cg4w target=_blank title="Click here to visit the International Components for Unicode home page">International Components for Unicode</a> (ICU) version 3.6 or later installed, GT.M's UTF-8 mode provides support for <a href=http://unicode.org/ id=oqah target=_blank title="Click here to visit the home page of the Unicode Consortium">Unicode</a> (ISO/IEC-10646) character strings.&nbsp; On a system that does not have ICU 3.6 or later installed, GT.M only supports M mode.
+  </p>
+  <p>
+  </p>
+  <div>
+    &nbsp;
+  </div>
+  <p>
+    On a system that has ICU installed, GT.M installs support for both M mode and UTF-8 mode, including a <font face="courier new">utf8</font> subdirectory of the directory where GT.M is installed.&nbsp; From the same source file, depending upon the value of the environment variable <font face="courier new">$gtm_chset</font>, the GT.M compiler generates an object file either for M mode or UTF-8 mode.&nbsp; GT.M generates a new object file when an object file is older than the source file and was generated with the same setting of <font face="courier new">$gtm_chset</font>/<font face="courier new">$ZCHset</font>.&nbsp; A GT.M process triggers an error if it encounters an object file generated with a different setting of <font face="courier new">$gtm_chset</font>/<font face="courier new">$ZCHset</font> than that processes' current value.&nbsp;&nbsp;
+  </p>
+  <p>
+  </p>
+  <div>
+    &nbsp;
+  </div>
+  <p>
+    Always generate an M object module with a value of <font face="courier new">$gtm_chset</font>/<font face="courier new">$ZCHset</font> matching the value processes executing that module will have.&nbsp; As the GT.M installation itself contains utility programs written in M, their object files also conform to this rule.&nbsp; In order to use utility programs in both M mode and UTF-8 mode, the GT.M installation ensures that both M and UTF-8 versions of object modules exist, the latter in the <font face="courier new">utf8</font> subdirectory.&nbsp; This technique of segregating the object modules by their compilation mode prevents both frequent recompiles and errors in installations where both modes are in use.&nbsp; If your installation uses both modes, consider a similar pattern for structuring application object code repositories.
+  </p>
+  <p>
+    &nbsp;
+  </p>
+  <p>
+    GT.M is installed in a parent directory and a <font face="courier new">utf8</font> subdirectory as follows:
+  </p>
+  <div>
+    &nbsp;<br>
+  </div>
+  <div class=itemizedlist>
+    <ul>
+      <li>
+        <p>
+          Actual files for GT.M executable programs (<font face="courier new">mumps</font>, <font face="courier new">mupip</font>, <font face="courier new">dse</font>, <font face="courier new">lke</font>, and so on) are in the parent directory, that is, the location specified for installation.
+        </p>
+      </li>
+      <li>
+        <p>
+          Object files for programs written in M (GDE, utilities) have two versions - one compiled with support for <span class=trademark>Unicode</span> in the <font face="courier new">utf8</font> subdirectory, and one compiled without support for <span class=trademark>Unicode</span> in the parent directory.&nbsp; Installing GT.M generates both the versions of object files, as long as ICU 3.6 or greater is installed and visible to GT.M when GT.M is installed.
+        </p>
+      </li>
+      <li>
+        <p>
+          The <font face="courier new">utf8</font> subdirectory has files called <font face="courier new">mumps</font>, <font face="courier new">mupip</font>, <font face="courier new">dse</font>, <font face="courier new">lke</font>, and so on, which are relative symbolic links to the executables in the parent directory (for example, <font face="courier new">mumps</font> is the symbolic link <font face="courier new">../mumps</font>).
+        </p>
+      </li>
+      <li>
+        <p>
+          When a shell process sources the shell scripts <span class=emphasis><i>gtmprofile</i></span> or <span class=emphasis><i>gtmcshrc</i></span>, the behavior is as follows:
+        </p>
+      </li>
+      <div class=itemizedlist>
+        <ul>
+          <li>
+            <p>
+              If <font face="courier new">$gtm_chset</font> is <font face="courier new">"m"</font>, <font face="courier new">"M"</font> or undefined, there is no change from the previous GT.M versions to the value of the environment variable <font face="courier new">$gtmroutines</font>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <font face="courier new">$gtm_chset</font> is <font face="courier new">"UTF-8"</font> (the check is case-insensitive),
+            </p>
+            <div>
+              &nbsp;
+            </div>
+          </li>
+          <div class=itemizedlist>
+            <ul>
+              <li>
+                <p>
+                  <font face="courier new">$gtm_dist</font> is set to the <font face="courier new">utf8</font> subdirectory (that is, if GT.M is installed in <font face="courier new">/opt/lsb-gtm/gtm_V5.3-004_i686</font>, then <font face="courier new">gtmprofile</font> and <font face="courier new">gtmcshrc</font> set <font face="courier new">$gtm_dist</font> to <font face="courier new">/opt/lsb-gtm/gtm_V5.3-004_i686/utf8</font>).
+                </p>
+              </li>
+              <li>
+                <p>
+                  The last element of <font face="courier new">$gtmroutines</font> is <font face="courier new">$gtm_dist($gtm_dist/..)</font> so that the source files in the parent directory for utility programs are matched with object files in the <font face="courier new">utf8</font> subdirectory.&nbsp;<br>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </ul>
+      </div>
+    </ul>
+  </div>
+  <h4>
+    Compiling ICU on HP PA-RISC HP-UX
+  </h4>
+  Note: All GT.M versions prior to V5.3-004 require exactly ICU 3.6, however, V5.3-004 (or later) accept ICU 3.6 or later.<br>
+  <br>
+  As of this writing (November, 2009), ICU version 3.6 can be compiled on HP PA-RISC HP-UX with the following configuration:<br>
+  <p>
+  </p>
+  <p>
+  </p>
+  <p>
+    <br>
+  </p>
+  <p>
+    <i>Version:</i> 11.31 (11iv3)
+  </p>
+  <p>
+    <i>Compiler:</i> cc HP C/aC++ B3910B A.06.12, aCC HP C/aC++ B3910B A.06.15, GNU Make 3.81<br>
+  </p>
+  <p>
+  </p>
+  <p>
+    <i>Instructions: </i><br>
+  </p>
+  <div class=orderedlist>
+    <ol type=1>
+      <li>
+        <p>
+          Ensure that system environment variable <font face="courier new">$PATH</font> includes the location of all the compilers mentioned above.
+        </p>
+      </li>
+      <li>
+        <p>
+          Download the source code of ICU (in this example, version 3.6 for C from <a href=http://icu.sourceforge.net/download/3.6.html#ICU4C target=_top>http://icu.sourceforge.net/download/3.6.html#ICU4C</a>)
+        </p>
+      </li>
+      <li>
+        <p>
+          At the shell prompt, execute the following commands:<br>
+          <br>
+        </p>
+        <div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+          gunzip -d &lt; icu4c-3_6-src.tgz | tar -xf -<br>
+        </div>
+        <div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+          cd icu/source/<br>
+        </div>
+        <div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+          chmod +x runConfigureICU configure install-sh<br>
+        </div>
+        <div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+          runConfigureICU --enable-debug HP-UX/ACC --enable-64bit-libs? --enable-rpath –disable-threads<br>
+        </div>
+        <div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+          gmake<br>
+        </div>
+        <div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+          gmake check<br>
+        </div>
+        <div style=MARGIN-LEFT:40px>
+          <font face="courier new">gmake install</font><br>
+        </div>
+      </li>
+      <li>
+        <p>
+          Set the environment variable <font face="courier new">$LD_LIBRARY_PATH</font> to point to the location of ICU.&nbsp; HP-UX uses the environment variable <font face="courier new">$LD_LIBRARY_PATH</font> to search for dynamically linked libraries to be loaded.
+        </p>
+      </li>
+      <li>
+        <p>
+          ICU is now installed in <font face="courier new">/usr/local</font>.
+        </p>
+      </li>
+    </ol>
+    <br>
+    <div style=MARGIN-LEFT:40px>
+      <ul>
+        <li>
+          <p>
+            By default, ICU is installed in <font face="courier new">/usr/local</font>.&nbsp; If you install ICU in a different directory, type:
+          </p>
+        </li>
+        <div class=itemizedlist>
+          <ul>
+            <li>
+              <font face="Courier New">runConfigureICU HP-UX/ACC --prefix=&lt;install_path&gt; --enable-64bit-libs? --enable-rpath –disable-threads </font>
+            </li>
+            <li>
+              <p>
+                Then execute the gmake commands, and set the environment variable <font face="courier new">$LD_LIBRARY_PATH</font> to point to the appropriate location.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <p class=returntotop>
+    <br>
+  </p>
+  Note: Although GT.M uses ICU, ICU is not FIS software and FIS does not support ICU.&nbsp; Instructions for installing and configuring ICU are merely provided as a convenience to you.
+  <h4>
+    Compiling ICU on HP Integrity IA64 HP-UX
+  </h4>
+  <p>
+    Note: All GT.M versions prior to V5.3-004 require exactly ICU 3.6, however, V5.3-004 (or above) accept ICU 3.6 or later.
+  </p>
+  <p>
+    <br>
+  </p>
+  <p>
+    As of this writing (November, 2009), ICU version 3.6 can be compiled on HP Integrity IA64 HP-UX with the following configuration:<br>
+    <br>
+    <i>Version</i>: HP-UX 11.31<br>
+    <i>Compilers</i>: HP C/aC++ B3910B A.06.15, GNU make (3.81)<br>
+    <i>Instructions</i>:<br>
+  </p>
+  <ol>
+    <li>
+      Ensure that system environment variable PATH includes the location of all the compilers mentioned above.
+    </li>
+    <li>
+      Download the source code of ICU (in this example version 3.6 for C from <a href=http://icu.sourceforge.net/download/3.6.html#ICU4C id=u9qj title=http://icu.sourceforge.net/download/3.6.html#ICU4C>http://icu.sourceforge.net/download/3.6.html#ICU4C</a>).
+    </li>
+    <li>
+      At the shell prompt, run the following commands:
+    </li>
+  </ol>
+  <p>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="courier new">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gunzip -d&lt;&nbsp; icu4c-3_6-src.tgz | tar -xf -</font><br style="FONT-FAMILY:Courier New">
+    <font face="courier new">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;cd icu/source/</font><br style="FONT-FAMILY:Courier New">
+    <font face="courier new">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;chmod +x runConfigureICU configure install-sh</font><br style="FONT-FAMILY:Courier New">
+    <font face="courier new">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;runConfigureICU HP-UX/ACC --disable-threads</font><br style="FONT-FAMILY:Courier New">
+    <font face="courier new">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;gmake</font><br style="FONT-FAMILY:Courier New">
+    <font face="courier new">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;gmake check</font><br style="FONT-FAMILY:Courier New">
+    <font face="courier new">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;gmake install</font><br style="FONT-FAMILY:Courier New">
+  </p>
+  <ol start=4>
+    <li>
+      Set the environment variable LD_LIBRARY_PATH to point to the location of ICU. HP-UX uses the environment variable LD_LIBRARY_PATH to search for dynamically linked libraries to be loaded.
+    </li>
+  </ol>
+  <p>
+    <br>
+    ICU is now installed in the /usr/local directory.
+  </p>
+  <p>
+    <br>
+  </p>
+  <div class=orderedlist>
+    <p>
+      By default, ICU is installed in <font face="courier new">/usr/local</font>.&nbsp; If you install ICU in a different directory, type:
+    </p>
+    <ul>
+      <li>
+        <pre class=programlisting><p class=MsoPlainText style="MARGIN:0pt 0pt 0pt">runConfigureICU HP-UX/ACC --prefix=&lt;install_path&gt; --disable-threads</p></pre>
+      </li>
+      <li>
+        <pre class=programlisting></pre>Then run the gmake commands, and set the environment variable <font face="courier new">$LD_LIBRARY_PATH</font> to point to the appropriate location.</li></ul></div></div><div class=sect2><div class=titlepage><div>&nbsp;&nbsp;</div><p>Note: Although GT.M uses ICU, ICU is not FIS software and FIS does not support ICU.&nbsp; The instructions for installing and configuring ICU are merely provided as a convenience to you.</p><p class=returntotop></p><div>&nbsp;</div><p class=returntotop><a href=#Table_of_Contents_510593612128_7471010945331905 target=_self title="Click here to move to the Table of Contents"></a><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a></p><h3 class=title><a id=_Setting_the_environment_varia_9385861341688055 name=_Setting_the_environment_varia_9385861341688055></a><a id=id1032999></a>Setting the environment variable TERM </h3></div><p>The environment variable <font face="courier new">$TERM</font> must specify a terminfo entry that accurately matches the terminal (or terminal emulator) settings. Refer to the terminfo man pages for more information on the terminal settings of the platform where GT.M needs to run. </p><div>&nbsp;</div><p></p><div>&nbsp;</div><ul><li>Some terminfo entries may seem to work properly but fail to recognize function key sequences or position the cursor properly in response to escape sequences from GT.M.&nbsp; GT.M itself does not have any knowledge of specific terminal control characteristics.&nbsp; Therefore, it is important to specify the right terminfo entry to let GT.M communicate correctly with the terminal.&nbsp; You may need to add new terminfo entries depending on their specific platform and implementation.&nbsp; The terminal (emulator) vendor may also be able to help. </li><li>GT.M uses the following terminfo capabilities.&nbsp; The full variable name is followed by the capname in parenthesis: <div><span class=emphasis><i>auto_right_margin(am), clr_eos(ed), clr_eol(el), columns(cols), cursor_address(cup), cursor_down(cud1), cursor_left(cub1), cursor_right(cuf1), cursor_up(cuu1), eat_newline_glitch(xenl), key_backspace(kbs), key_dc(kdch1), key_down(kcud1), key_left(kcub1), key_right(kcuf1), key_up(kcuu1), key_insert(kich1), keypad_local(rmkx), keypad_xmit(smkx), lines(lines).</i></span></div></li></ul><p></p><div>&nbsp;</div><p>GT.M sends <span class=emphasis><i>keypad_xmit </i></span>before terminal reads for direct mode and READs (other than READ *) if EDITING is enabled. GT.M sends <span class=emphasis><i>keypad_local </i></span>after these terminal reads. </p></div><div class=sect2><div class=titlepage><p class=returntotop></p><div>&nbsp;</div><p class=returntotop><a href=#Table_of_Contents_510593612128_7471010945331905 target=_self title="Click here to move to the Table of Contents"></a><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a></p><h3 class=title><a id=_Installing_Compression_Librar_7106566065855489 name=_Installing_Compression_Librar_7106566065855489></a><a id=id1033781></a>Installing Compression Libraries </h3></div><p>If you plan to use the optional compression facility for replication, you must provide the compression library.&nbsp; The GT.M interface for compression libraries accepts the <a href=http://zlib.net/ target=_blank title="Click here to visit the zlib home page">zlib</a> compression libraries without any need for adaptation.&nbsp; These libraries are included in many UNIX distributions and are downloadable from the <a href=http://zlib.net/ target=_blank title="Click here to visit the zlib home page">zlib home page</a>.&nbsp; If you prefer to use other compression libraries, you need to configure or adapt them to provide the same API provided by zlib.&nbsp; Simple instructions for compiling zlib on a number of platforms follow.&nbsp; Although GT.M uses zlib, zlib is not FIS software and FIS does not support zlib.&nbsp; These instructions are merely provided as a convenience to you. </p><div>&nbsp;</div><p></p><div>&nbsp;</div><p><span class=emphasis><i>Solaris/cc compiler from Sun Studio:</i></span></p><div style=MARGIN-LEFT:40px><font face="courier new">./configure --shared </font><div style="FONT-FAMILY:Courier New"><font face="courier new">make CFLAGS="-KPIC -m64"</font></div><div>&nbsp;</div></div><pre class=programlisting>            </pre><p><span class=emphasis><i>HP-UX(IA64)/HP C compiler:</i></span></p><div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">./configure --shared <div>make CFLAGS="+DD64"</div><div>&nbsp;</div></div><pre class=programlisting>            </pre><p><span class=emphasis><i>AIX/XL compiler: </i></span></p><div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">./configure --shared <div>Add -q64 to the LDFLAGS line of the Makefile</div><div>make CFLAGS="-q64"</div><div>&nbsp;</div></div><pre class=programlisting>            </pre><p><span class=emphasis><i>Linux/gcc: </i></span></p><div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">./configure --shared <div>make CFLAGS="-m64"</div><div>&nbsp;</div></div><pre class=programlisting><div><span class=emphasis><font face=verdana><i>z/OS</i></font></span><font face=verdana>:</font></div><div>&nbsp;</div></pre><div style=MARGIN-LEFT:40px>Refer to the <a href=GTM_on_z_OS.html id=nn2b title="Read the section on steps we used to install zlib on z/OS">steps we used to install zlib on z/OS in the GT.M for z/OS technical bulletin</a>. <div>&nbsp;</div></div><pre class=programlisting></pre><p></p><div>&nbsp;</div><p>If a package for zlib is available with your operating system, FIS suggests that you use it rather than building your own.</p><p></p><div>&nbsp;</div><p>By default, GT.M searches for the <font face="courier new">libz.so</font> shared library (<font face="courier new">libz.sl</font> on HPUX PA-RISC) in the standard system library directories (for example, <font face="courier new">/usr/lib</font>, <font face="courier new">/usr/local/lib</font>, <font face="courier new">/usr/local/lib64</font>).&nbsp; If the shared library is installed in a non-standard location, before starting replication, you must ensure that the environment variable <font face="courier new">$LIBPATH</font> (AIX and z/OS) and <font face="courier new">$LD_LIBRARY_PATH</font> (other UNIX platforms) includes the directory containung the library.&nbsp; The source and receiver server link the shared library at runtime.&nbsp; If this fails for any reason (such as file not found, or insufficient authorization), the replication logic logs a DLLNOOPEN error and continues with no compression. </p><div>&nbsp;</div><p></p><div>&nbsp;</div></div><div class=sect1><div class=titlepage><p class=returntotop><a href=#Table_of_Contents_510593612128_7471010945331905 target=_self title="Click here to move to the Table of Contents"></a><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a></p><h2 class=title><a id=_Change_History_05166510740653_23570112910236618 name=_Change_History_05166510740653_23570112910236618></a>Changes</h2></div><div class=sect2><div class=titlepage><div><a id=_V5_3_003_42444616858911943_97_3536704425533077 name=_V5_3_003_42444616858911943_97_3536704425533077></a></div></div></div></div><div class=sect1><div class=titlepage><div><h3 class=title><a id=_M_Database_Access_00981506229_3102327739944464 name=_M_Database_Access_00981506229_3102327739944464></a>M-Database Access </h3><h4><a id=S9I11_002714_Better_protection name=S9I11_002714_Better_protection></a>S9I11-002714 Better protection against damaged journal file descriptors </h4>GT.M now checks the validity of the journal file descriptor if it encounters an ENO9 (EBADF) or ENO29 (ESPIPE) error while writing to the journal file. If GT.M finds the descriptor invalid, GT.M now creates a core file, closes that journal file and resumes operation. Furthermore, when a GT.M process opens a database file or journal file, it now checks whether the new file descriptor matches that of any open database or journal file. If so, GT.M creates a core file in the current working directory of the process. Then, if the invalid file descriptor corresponds to a journal file the process closes that journal file, and continues operation; if the invalid file descriptor corresponds to a database file, the process terminates abnormally in order to avoid potential database damage. This change was in response to a handful of reports of unexplained journal file closings and one report of writes to a journal file incorrectly redirected to a database file resulting in database and journal file damage all on AIX pSeries. We were not able to determine the root cause - whether in GT.M, in AIX, or in calls to application code written in C - but this change protects against that error whatever the cause. [UNIX] (S9I11-002714)&nbsp; <h4><a id=S9A11_001722_More_conservative name=S9A11_001722_More_conservative></a>S9A11-001722 More conservative access permissions </h4>When you restrict access to a database file, GT.M now propagates those restrictions to shared resources associated with the database file, such as semaphores, shared memory, journals and temporary files used in the course of MUPIP BACKUP. Prior versions granted world read/write access to these resources, since permissions of the database file control effective access, and since journal files can reside in directories whose ownership, group and access permissions can be limited. In the unusual case where the owner of the database file is not a member of the group of the database file, but the owner of the database file is a member of the group of libgtmshr.so, GT.M uses that group id; otherwise granting world read/write access to the database associated resources. Note that an owner who is not a member of the group owning the distribution cannot run GT.M if the distribution is limited to group access. These more conservative access permissions should be transparent to existing applications. [UNIX] (also C9C12-002191, C9I10-003048) <div>&nbsp;</div><h4><a id=C9905_001119_Caching_optimizat name=C9905_001119_Caching_optimizat></a>C9905-001119 Caching optimization for transaction processing </h4><div>&nbsp;</div><p>Transaction Processing (TP) logic now enables a caching optimization for global references that previously only worked for non-TP (so called mini-transactions).&nbsp; This can provide a performance increase for applications using TP.&nbsp; (C9905-001119)</p><h4><a id=C9A05_001476_Database_encrypti name=C9A05_001476_Database_encrypti></a>C9A05-001476 Database encryption </h4><div>&nbsp;</div><p>GT.M now supports database file encryption using a plug-in architecture.&nbsp; This enhances GT.M’s ability to protect data stored in the database and assists with compliance, such as HIPAA and PCI DSS.&nbsp; The <a href=GTM_Database_Encryption.html id=z383 title="Click here to read the GT.M database encryption technical bulletin">GT.M Database Encryption Technical Bulletin</a> provides details.&nbsp; [AIX, HP-UX on IA64, Linux, Solaris, z/OS] (C9A05-001476)</p><h4><a id=C9E02_002510_Rare_case_of_inco name=C9E02_002510_Rare_case_of_inco></a>C9E02-002510 Rare case of incorrect KILL in progress indicator fixed </h4><div>&nbsp;</div><p>The KILL in progress (KIP) handling now deals correctly with the very rare case where a process terminates (perhaps because of a MUPIP STOP) in the middle of a non-TP (mini-transaction) multi-block Kill, and termination processing encounters a secondary error.&nbsp; In previous versions there was a very small chance the process could inappropriately clear the KIP indicator for the wrong region and/or leave behind an incorrect KIP indicator.&nbsp; DSE DUMP -FILE displays the current value of KIP as "KILLs in Progress".&nbsp; (C9E02-002510)</p><h4><a id=C9E10_002648_Correct_ORDER_1_r name=C9E10_002648_Correct_ORDER_1_r></a>C9E10-002648 Correct $ORDER(<font face="arial narrow">gvn</font>,-1) if last gvn subscript is "" &amp; last global node starts with $ZCHAR(255)</h4>Using "" as the last subscript in a global argument to $ORDER(gvn,-1) or $ZPREVIOUS() now produces correct results when the global level contains subscripts beginning with $ZCHAR(255). In previous versions, these functions incorrectly ignored such nodes. This was not an issue with local variables. Note: When using GT.CM GNP in a client server environment, you must upgrade both the client and server environments to implement a complete correction - upgrading only one of the two retains the incorrect behavior for subscripts beginning with $ZCHAR(255). (C9E10-002648) <h4><a id=C9I09_003042_TP_performance_op_4457495345928115 name=C9I09_003042_TP_performance_op_4457495345928115></a>C9I09-003042 TP performance optimization</h4><p>Transaction processing performance has been improved in the case where a only a small subset of the global variables accessed by a process in its lifetime are accessed within any given transaction.&nbsp; (C9I09-003042)</p><h4><a id=C9J01_003076_Redundant_databas_8929374233566515 name=C9J01_003076_Redundant_databas_8929374233566515></a>C9J01-003076 Redundant database disk writes eliminated </h4><div>&nbsp;</div><p>Fewer disk write operations are used to keep the database file, and journal file if any, on disk up-to-date with shared memory when the database has had no updates for a while.&nbsp; In previous versions, it was possible for more than one process to (redundantly) write file headers and EPOCH records.&nbsp; [UNIX] (C9J01-003076)</p><h4><a id=C9J01_003078_Better_protection_3687383447952526 name=C9J01_003078_Better_protection_3687383447952526></a>C9J01-003078 Better protection against spurious signals during database startup and shutdown </h4><div>&nbsp;</div><p>GT.M now manages any signals arriving during database startup and rundown and (BG) buffer allocation more robustly.&nbsp; In previous versions, there were very narrow windows where a signal such as a MUPIP STOP could disrupt lock management and cause a deadlock.&nbsp; [UNIX] (C9J01-003078)</p><h4><a id=C9J03_00396_Improved_error_mes name=C9J03_00396_Improved_error_mes></a>C9J03-00396 Improved error message for OpenVMS journaling issue (V5.3-004A) </h4><p>GT.M now sends a JNLFLUSH error message to the operator facility if a process has trouble completing its journal writes. &nbsp;Prior versions issued a GTMASSERT in this case. [OpenVMS] (C9J03-003096)</p><h4><a id=C9J04_003120_More_graceful_han_2662584388000795 name=C9J04_003120_More_graceful_han_2662584388000795></a>C9J04-003120 More graceful handling of high contention during database open and close </h4><p>GT.M now handles high contention at database startup and shutdown more gracefully.&nbsp; In prior versions, a large number of processes opening and closing a database file at the same time could cause one of them to get an inappropriate CRITSEMFAIL error.&nbsp; Such an error had no associated database damage.&nbsp; [UNIX] (C9J04-003120)</p><h4><a id=C9J05_003121_More_robust_handl_5289305834207609 name=C9J05_003121_More_robust_handl_5289305834207609></a>C9J05-003121 More robust handling of MM database file headers when generating core files </h4><p>When possible, in a core file, GT.M now appropriately includes the file header for a database region using the MM access method.&nbsp; In prior versions if a memory related problem triggered the core it could cause an indefinite recursion.&nbsp; [UNIX] (C9J05-003121)</p><h4><a id=C9I09_003031_Database_file_siz_0731509911815299 name=C9I09_003031_Database_file_siz_0731509911815299></a>C9J05-003122 Database file size limit raised to 224 million blocks</h4><p>Databases created with V5.3-004 can grow to a maximum size of 224M (234,881,024) blocks.&nbsp; This means, for example, that with an 8KB block size, the maximum single database file size is 1,792GB (8KB*224M).&nbsp; In prior V5 versions, the maximum was 128M (134,217,728) blocks.&nbsp; Note that this is the size of a single database file - a logical database (an M global variable name space) can consist of an arbitrary number of database files.&nbsp; (C9I09-003122)</p><h4><a id=C9J05_003123_More_robust_handl_3945318518329256 name=C9J05_003123_More_robust_handl_3945318518329256></a>C9J05-003123 More robust handling of insufficient timer queue entries (TQELM) on OpenVMS </h4><div>&nbsp;</div><p>GT.M now handles the situation where a process has insufficient timer queue entries (TQELM) by skipping a free (idle) journal epoch, potentially repeatedly.&nbsp; In previous versions, the epoch logic could live-lock and produce indefinite looping when the process timer queue entries were exhausted.&nbsp; The workaround and recommended practice is to ensure that processes running GT.M have sufficient TQE limits (three per database file added to any other needs).&nbsp; You can adjust this limit for all users with the SYSGEN PQL_MTQELM parameter.&nbsp; Note that deferred epochs can lengthen journal recovery times.&nbsp; [OpenVMS] (C9J05-003123)</p><h4><a id=C9J05_003132_Better_handling_o_8048157414759345 name=C9J05_003132_Better_handling_o_8048157414759345></a>C9J05-003132 Better handling of version mismatch errors during database initialization </h4><p>GT.M now generates %GTM-E-VERMISMATCH errors correctly during database initialization.&nbsp; Previous versions could inappropriately return an %GTM-E-REQRUNDOWN error.&nbsp; (C9J05-003132)</p><h4><a id=C9J06_003139_Eliminate_a_cause_4698101434089522 name=C9J06_003139_Eliminate_a_cause_4698101434089522></a>C9J06-003139 Eliminate a cause of redundant records in journal file </h4><div>&nbsp;</div><p>GT.M now limits the number of EPOCH and PBLK records it writes in journal files that have before image journaling turned on.&nbsp; In previous versions of GT.M, depending on database update patterns, more records than needed could be written resulting in journal file size bloat.&nbsp; [UNIX] (C9J06-003139)</p><h4><a id=C9J07_003162_Prevent_two_unusu name=C9J07_003162_Prevent_two_unusu></a>C9J07-003162 Prevent two unusual causes of DBKEYORD (<font style=BACKGROUND-COLOR:#ffff00>V5.3-004A</font>) </h4><p>GT.M now maintains the integrity of the database even in rare cases of TP updates to globals that have NOISOLATION optimization turned on and non-TP updates to globals using the $INCREMENT() function. &nbsp;In GT.M V5.3-004, the NOISOLATION case could under very rare circumstances result in a damaged database. &nbsp;In all previous GT.M versions since V5.0-000 which implemented $INCREMENT(), its use could in very rare circumstances result in a damaged database. &nbsp;The symptoms of the damage could be either a DBKEYORD integrity error report from MUPIP INTEG or a false GVUNDEF reported by GT.M. (C9J07-003162)</p><p></p><div>&nbsp;</div><a href=#Table_of_Contents_510593612128_7471010945331905 target=_self title="Click here to move to the Table of Contents"></a><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a></div></div></div><div class=sect1><div class=titlepage><p class=returntotop></p><h3 class=title><a id=_M_Other_Than_Database_Access__6095275976579253 name=_M_Other_Than_Database_Access__6095275976579253></a>M-Other Than Database Access</h3><h4><a id=S9902_001105_4907991220276604_ name=S9902_001105_4907991220276604_></a>S9902-001105 New gtm_nocenable environment variable</h4><p>The new environment variable $gtm_nocenable controls whether &lt;CTRL-C&gt; is enabled at process startup. If $gtm_nocenable has a value of 1, "TRUE" or "YES" (case-insensitive), and the process principal device is a terminal, $PRINCIPAL is initialized to a NOCENABLE state where the process does not recognize &lt;CTRL-C&gt; as a signal to enter direct mode. No value, or other values of $gtm_nocenable initialize $PRINCIPAL with the CENABLE state. The [NO]CENABLE deviceparameter on a USE command can still control this characteristic from within the process. In prior versions, there was theoretically a minuscule window where GT.M might recognize a &lt;CTRL-C&gt; and enter direct mode even if a USE $PRINCIPAL:NOCENABLE was the very first command executed. In Open VMS, GTM$DEFAULTS provides a way to address this same issue. [UNIX] (S9902-001105) </p><h4><a id=S9F04_002544_FIFO_timed_READ_c name=S9F04_002544_FIFO_timed_READ_c></a>S9F04-002544 FIFO timed READ correction (<font style=BACKGROUND-COLOR:#ffff00>V5.3-003</font>)</h4>A FIFO timed READ to an existing, but empty device no longer results in a SYSTEM-E-ENO11 error. &nbsp;In versions prior to V5.3-003, this error not only inappropriately appeared, but also recurred on all subsequent READ operations until the device CLOSE. &nbsp;While this was fixed in V5.3-003, we missed documenting it in release notes for V5.3-003.&nbsp; [UNIX] (S9F04-002544)&nbsp; <h4><a id=S9G06_002616_Correct_report_of name=S9G06_002616_Correct_report_of></a>S9G06-002616 Correct report of MAXFORARGS</h4>GT.M correctly reports the MAXFORARGS when the compiler encounters more FOR command arguments than it can handle (currently 127). In previous releases, the compile might SEG-V (signal-11) or hang; some platforms worked correctly in V5.3-003, but all now appropriately handle this extreme case. (S9G06-002616) <h4><a id=S9H01_002639_More_appropriate_ name=S9H01_002639_More_appropriate_></a>S9H01-002639 More appropriate error message on inability to access a file to be compiled</h4>GT.M now returns a more appropriate error message when compiling a file that exists, but which, for some reason, GT.M cannot open (for example, %SYSTEM-E-ENO13, Permission denied).&nbsp; Previous versions issued the less helpful %GTM-E-IONOTOPEN.&nbsp; [UNIX] (S9H01-002639) <div><a id=S9J01_002718_ZSYSTEM_returns_e_6600798831486514 name=S9J01_002718_ZSYSTEM_returns_e_6600798831486514></a>&nbsp;</div><h4><a id=S9I10_002704_GT_CM_Server_out_ name=S9I10_002704_GT_CM_Server_out_></a>S9I10-002704 GT.CM Server out-of-memory prevented (<font style=BACKGROUND-COLOR:#ffff00>V5.3-004A</font>) </h4><div>&nbsp;</div><p>The GT.CM GNP or OMI server process no longer suffers from inappropriate memory consumption (due to unnecessary string pool growth). &nbsp;This addresses a problem introduced in V5.0-000, which could cause the server to exhaust available memory and fail, particularly when the server had been running for a long time and the data rates were high. &nbsp;In theory, DSE, MUPIP or compilation could also trigger this issue, but in practice none of them are likely to generate enough temporary storage to expose the problem. &nbsp;Increasing the OS managed memory limits on processes and restarting the server frequently could ameliorate or workaround the issue. (S9I10-002704)</p><a id=k0:3 name=C9B09_001754_KILL_of_a_variabl_10309564260433635></a><h4><a id=S9J01_002718_ZSYSTEM_returns_e name=S9J01_002718_ZSYSTEM_returns_e></a>S9J01-002718 $ZSYSTEM returns exit status modulo 256 of shell invoked by last ZSYSTEM </h4><p>The $ZSYSTEM Intrinsic Special Variable (ISV) now returns the exit status modulo 256 of the shell invoked by the last ZSYSTEM command.&nbsp; The 256 limitation is external to GT.M.&nbsp; Previously $ZSYSTEM was not always reliable - it reported the actual exit status, but potentially OR'd with extraneous data multiplied by 256 modulo 65536.&nbsp; [UNIX] (S9J01-002718)</p><h4><a id=S9J05_002724_SET_correctly_han name=S9J05_002724_SET_correctly_han></a>S9J05-002724 SET correctly handles special case of local variables used as subscripts for target </h4><p>The SET command correctly handles the case where local variables used as subscripts of <font face=verdana>glvns</font> outside of parentheses on the left hand side of the SET are also modified as part of a $$ or $&amp; or $INCREMENT invocation on the right hand side of the SET; for example: SET X(I)=$$FUNC() where $$FUNC() modifies the value of I.&nbsp; As a consequence of a regression introduced in V5.2-000A, SET evaluated the right hand side first and used the modified value of the variable as the subscript for the SET.&nbsp; A workaround for such prior versions is to use a parenthesized set instead; for example: SET (X(I))=$$FUNC().&nbsp; (S9J05-002724)</p><h4><a id=S9J06_002725_NAME_returns_empt name=S9J06_002725_NAME_returns_empt></a>S9J06-002725 $NAME() returns empty string for undefined variables</h4><p>When using NOUNDEF, $NAME() now returns an empty string where appropriate for undefined variables.&nbsp; Starting with V5.3-001, $NAME() would return nothing at all for such undefined variables.&nbsp; (S9J06-002725)</p><h4><a id=S9J07_002728_ZCOMPILE_with_an_ name=S9J07_002728_ZCOMPILE_with_an_></a>S9J07-002728 ZCOMPILE with an error closes the object file (<b><font style=BACKGROUND-COLOR:#ffff00>V5.3-004A</font>)</b></h4><p>GT.M now appropriately handles the situation when ZCOMPILE finds an error in the routine being compiled.&nbsp; Versions after V5.3-001 and through V5.3-004 create the object file, but do not close it - resulting in the possibility that other users trying to access the same object file, for example, through ZPRINT or $TEXT(), wait indefinitely for the object file to be closed. [Unix] (S9J07-002728)</p><h4><a id=S9J07_002729_MUMPS_LIST_with_a name=S9J07_002729_MUMPS_LIST_with_a></a>S9J07-002729 MUMPS -LIST with an error more robust (<font style=BACKGROUND-COLOR:#ffff00>V5.3-004A</font>) </h4><div>&nbsp;</div><p>GT.M now correctly handles the situation when a command line qualifier requests a source program listing file and the file being compiled has syntax errors.&nbsp; In previous versions certain types of syntax errors (for example LABELMISSING or FMLLSTPRESENT) could cause abnormal termination (SIG-11). [Unix] (S9J07-002729)</p><a id=vknx name=C9B09_001754_KILL_of_a_variabl_10309564260433635></a><h4><a id=C9B09_001754_KILL_of_a_variabl name=C9B09_001754_KILL_of_a_variabl></a>C9B09-001754 KILL of a variable joined by pass-by-reference to a formallist variable</h4><p>KILL of a variable joined by pass-by-reference to a formallist variable now always KILLs the formalist variable when the actuallist variable is KILL'd even if the formallist variable is specified as protected by an exclusive KILL.&nbsp; In prior releases, both variables were protected by the exclusive KILL.&nbsp; The new behavior conforms to the M standard.&nbsp; (C9B09-001754)</p><h4><a id=C9E02_002527_Correct_ZEOF_hand name=C9E02_002527_Correct_ZEOF_hand></a>C9E02-002527 Correct $ZEOF handling when $PRINCIPAL is NULL device</h4><p>GT.M now correctly reports 0 for $ZEOF prior to a READ from a NULL device $PRINCIPAL.&nbsp; Previously $ZEOF would inappropriately be set to 1 prior to attempting a READ from a NULL device $PRINCIPAL.&nbsp; [UNIX] (C9E02-002527)</p><h4><a id=C9I02_002957_New_functionality_1967045588610158 name=C9I02_002957_New_functionality_1967045588610158></a>C9I02-002957 New functionality - alias variables </h4><p>Alias variables provide a layer of abstraction between the name of a local variable and its value analogous to that provided by M pass by reference in routine calls.&nbsp; Multiple local variables can be aliases, and a SET or KILL to one acts as a SET or KILL to all.&nbsp; Alias container variables provide a way of storing a reference to a data-space in an M sparse array, which protects the associated data-space even when it is not accessible through any current name.&nbsp; The Alias Variables Technic</p><p>al Bulletin covers the details. (C9I02-002957)</p><h4><a id=C9I04_002984_Correct_ZEOF_hand_6111337588389723 name=C9I04_002984_Correct_ZEOF_hand_6111337588389723></a>C9I04-002984 Correct $ZEOF handling on read from or append to zero length files </h4><p>GT.M now handles $ZEOF for disk files correctly by setting it to 1 only after a read to the end of file.&nbsp; Previously $ZEOF would inappropriately be set to 1 when opening a zero length file READONLY or when opening a file for APPEND - in both cases prior to any read operation.&nbsp; Note: $ETRAP and $ZTRAP occur on the READ after $ZEOF is set by a prior READ, while EXCEPTION is triggered on the same read that sets $ZEOF.&nbsp; [UNIX] (C9I04-002984)</p><h4><a id=C9I08_003017_No_more_inappropr_17367512558278597 name=C9I08_003017_No_more_inappropr_17367512558278597></a>C9I08-003017 No inappropriate process terminations on access to routine source after ZLINK </h4><div>&nbsp;</div><p>Certain inappropriate terminations during ZLINK or ZPRINT commands, $TEXT() functions or $ETRAP/$ZTRAP invocations no longer occur.&nbsp; Previously, GT.M could get a signal 11 (UNIX) or ACCVIO (VMS) in these situations if a routine had been replaced by one or more ZLINK commands and the process referenced its source text with ZPRINT, $TEXT, $ETRAP, or $ZTRAP.&nbsp; (C9I08-003017)</p><h4><a id=C9I09_003031_GT_M_now_runs_on__796429995489178 name=C9I09_003031_GT_M_now_runs_on__796429995489178></a>C9I09-003031 GT.M now runs on z/OS on IBM eServer zSeries </h4><p>z/OS on zSeries is now a supported platform using a 64-bit POSIX API.&nbsp; The GT.M on IBM eServer zSeries z/OS Technical Bulletin provides details.&nbsp; [z/OS] (C9I09-003031)</p><h4><a id=C9I09_003033_ICU_version_3_6_n_6499712963858812 name=C9I09_003033_ICU_version_3_6_n_6499712963858812></a>C9I09-003033 ICU versions 3.6 and greater now supported </h4><p>In UTF-8 mode, GT.M now also uses ICU versions later than 3.6 (previous versions of GT.M required ICU 3.6).&nbsp; By default, GT.M now uses the most current installed version of ICU.&nbsp; GT.M expects ICU to have been built with symbol renaming disabled and will issue an error at startup if the currently installed version of ICU has been built with symbol renaming enabled.&nbsp; To use a different version of ICU (not the currently installed) or a version of ICU built with symbol renaming enabled, use the new <font face="courier new">$gtm_icu_version</font> environment variable to indicate the MAJOR VERSION and MINOR VERSION numbers of the desired ICU formatted as <font face=verdana>MajorVersion.MinorVersion</font> (for example <font face="courier new">"3.6"</font> to denote ICU-3.6).&nbsp; When <font face="courier new">$gtm_icu_version</font> is so defined, GT.M attempts to open the specific version of ICU.&nbsp; In this case, GT.M works regardless of whether or not symbols in this ICU have been renamed.&nbsp; A missing or ill-formed value for this environment variable causes GT.M to only look for non-renamed ICU symbols. Note that display widths for a few characters are different starting in ICU 4.0. [UNIX] (C9I09-003033)</p><a id=C9I12_003068_Reduced_memory_fr name=C9I12_003068_Reduced_memory_fr></a><h4><a id=C9I12_003064_Improvements_to_P name=C9I12_003064_Improvements_to_P></a>C9I12-003064 Improvements to PIPE and FIFO devices </h4>The PIPE device and FIFO device now maintain consistent status variables for all types of READ operations, including a READ that encounters an end of file (EOF). The FIFO device now utilizes non-blocking WRITE like the PIPE device. In prior versions FIFO WRITE operations could block if the buffer was full. In prior versions $DEVICE was not maintained at EOF on any READ nor was $ZA on a timed READ. $DEVICE now returns a 0 for for a timed READ that yields a partial result (unterminated or less than full fixed length), where it used to return inappropriate value of "1,Resource temporarily unavailable" . $ZA returns a 0 for a timed READ that returns a partial or empty result but does not encounter an EOF or error, where it used to return a 9. $TEST now returns a 0 (FALSE) for a partial result and a 1 (TRUE) for an EOF, where it used to do the opposite. Note: a FIFO READ does not recognize an EOF if the device is opened for both READ and WRITE. The table below shows the current behavior with the items that changed in bold where n is any (positive) non-zero time and the error case applies to timed or untimed READ. [UNIX] (C9I12-003064) <div>&nbsp;</div><p></p><div>&nbsp;</div><p align=center><font face="Verdana, sans-serif" size=2>PIPE and FIFO ISV after a READ</font></p><table border=1 bordercolor=#000000 cellpadding=5 cellspacing=0 width=100%><tbody><tr valign=top><td style=FONT-FAMILY:Verdana width=17%><p align=center><font size=2>Operation</font></p></td><td style=FONT-FAMILY:Verdana width=21%><p align=center><font size=2>Result</font></p></td><td style=FONT-FAMILY:Verdana width=19%><p align=center><font size=2>$DEVICE</font></p></td><td style=FONT-FAMILY:Verdana width=8%><p align=center><font size=2>$ZA</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>$TEST</font></p></td><td style=FONT-FAMILY:Verdana width=11%><p align=center><font size=2>X</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>$ZEOF</font></p></td></tr><tr valign=top><td style=FONT-FAMILY:Verdana width=17%><p><font size=2>READ X:n</font></p></td><td style=FONT-FAMILY:Verdana width=21%><p align=center><font size=2>Normal Termination</font></p></td><td style=FONT-FAMILY:Verdana width=19%><p align=center><font size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=8%><p align=center><font size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>1</font></p></td><td style=FONT-FAMILY:Verdana width=11%><p align=center><font size=2>Data Read </font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>0</font></p></td></tr><tr valign=top><td style=FONT-FAMILY:Verdana width=17%><p><font size=2>READ X:n</font></p></td><td style=FONT-FAMILY:Verdana width=21%><p align=center><font size=2>Timeout with no data read</font></p></td><td style=FONT-FAMILY:Verdana width=19%><p align=center><font color=#000000 size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=8%><p align=center><font size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=11%><p align=center><font size=2>empty string</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>0</font></p></td></tr><tr valign=top><td style=FONT-FAMILY:Verdana width=17%><p><font size=2>READ X:n</font></p></td><td style=FONT-FAMILY:Verdana width=21%><p align=center><font size=2>Timeout with partial data read</font></p></td><td style=FONT-FAMILY:Verdana width=19%><p align=center><font size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=8%><p align=center><font size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=11%><p align=center><font size=2>Partial data </font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>0</font></p></td></tr><tr valign=top><td style=FONT-FAMILY:Verdana width=17%><p><font size=2>READ X:n</font></p></td><td style=FONT-FAMILY:Verdana width=21%><p align=center><font size=2>End of File</font></p></td><td style=FONT-FAMILY:Verdana width=19%><p align=center><font color=#000000 size=2><b>1,Device detected EOF</b></font></p></td><td style=FONT-FAMILY:Verdana width=8%><p align=center><font size=2><b>9</b></font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font color=#000000 size=2>1</font></p></td><td style=FONT-FAMILY:Verdana width=11%><p align=center><font size=2>empty string</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>1</font></p></td></tr><tr valign=top><td style=FONT-FAMILY:Verdana width=17%><p><font size=2>READ X:0</font></p></td><td style=FONT-FAMILY:Verdana width=21%><p align=center><font size=2>Normal Termination</font></p></td><td style=FONT-FAMILY:Verdana width=19%><p align=center><font size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=8%><p align=center><font size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>1</font></p></td><td style=FONT-FAMILY:Verdana width=11%><p align=center><font size=2>Data Read</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>0</font></p></td></tr><tr valign=top><td style=FONT-FAMILY:Verdana width=17%><p><font size=2>READ X:0</font></p></td><td style=FONT-FAMILY:Verdana width=21%><p align=center><font size=2>No data available</font></p></td><td style=FONT-FAMILY:Verdana width=19%><p align=center><font color=#000000 size=2><b>0</b></font></p></td><td style=FONT-FAMILY:Verdana width=8%><p align=center><font color=#000000 size=2><b>0</b></font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=11%><p align=center><font size=2>empty string</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>0</font></p></td></tr><tr valign=top><td style=FONT-FAMILY:Verdana width=17%><p><font size=2>READ X:0</font></p></td><td style=FONT-FAMILY:Verdana width=21%><p align=center><font size=2>Timeout with partial data read</font></p></td><td style=FONT-FAMILY:Verdana width=19%><p align=center><font size=2>0</font></p></td><td style=FONT-FAMILY:Verdana width=8%><p align=center><font color=#000000 size=2><b>0</b></font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font color=#000000 size=2><b>0</b></font></p></td><td style=FONT-FAMILY:Verdana width=11%><p align=center><font size=2>Partial data</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>0</font></p></td></tr><tr valign=top><td style=FONT-FAMILY:Verdana width=17%><p><font size=2>READ X:0</font></p></td><td style=FONT-FAMILY:Verdana width=21%><p align=center><font size=2>End of File</font></p></td><td style=FONT-FAMILY:Verdana width=19%><p align=center><font color=#000000 size=2><b>1,Device detected EOF</b></font></p></td><td style=FONT-FAMILY:Verdana width=8%><p align=center><font size=2>9</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font color=#000000 size=2><b>1</b></font></p></td><td style=FONT-FAMILY:Verdana width=11%><p align=center><font size=2>empty string</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>1</font></p></td></tr><tr valign=top><td style=FONT-FAMILY:Verdana width=17%><p><font size=2>READ X</font></p></td><td style=FONT-FAMILY:Verdana width=21%><p align=center><font size=2>Error</font></p></td><td style=FONT-FAMILY:Verdana width=19%><p align=center><font size=2>1,&lt;error signature&gt;</font></p></td><td style=FONT-FAMILY:Verdana width=8%><p align=center><font size=2>9</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>n/c</font></p></td><td style=FONT-FAMILY:Verdana width=11%><p align=center><font size=2>empty string</font></p></td><td style=FONT-FAMILY:Verdana width=12%><p align=center><font size=2>0</font></p></td></tr></tbody></table><h4><a id=C9I12_003068_Reduced_memory_fr_47560474904664596 name=C9I12_003068_Reduced_memory_fr_47560474904664596></a>C9I12-003068 Reduced memory fragmentation for processes linking large numbers of routines </h4><div>&nbsp;</div><p>GT.M now more efficiently handles large numbers of M routines within a single process, reducing memory usage for processes that link a large number of routines.&nbsp; (C9I12-003068)</p><h4><a id=C9J01_003080_Memory_leak_plugg_3287293607032048 name=C9J01_003080_Memory_leak_plugg_3287293607032048></a>C9J01-003080 Memory leak plugged in pattern matching with alternation </h4><div>&nbsp;</div><p>GT.M now frees memory created when processing a pattern match operator containing alternations.&nbsp; In previous versions of GT.M, this same usage caused a small memory leak.&nbsp; (C9J01-003080)</p><h4><a id=C9J01_003081_Better_handling_o_6638911788129515 name=C9J01_003081_Better_handling_o_6638911788129515></a>C9J01-003081 Better handling of deeply nested indirection on 64-bit platforms </h4><div>&nbsp;</div><p>64-bit implementations now handle deeply nested indirection in a more wholesome way.&nbsp; In previous releases, indirection nesting of more than 16 levels could trigger a buffer overflow, causing the process to terminate abnormally.&nbsp; [AIX, HP-UX IA64, Linux IA64 &amp; x86_64, Solaris] (C9J01-003081)</p><h4><a id=C9J03_003097_Error_during_crea name=C9J03_003097_Error_during_crea></a>C9J03-003097 Error during creation of a file or FIFO device</h4><p>GT.M now handles the case where an error occurs during the creation of a file or FIFO device, for example resulting from incorrect parameters, by ensuring neither the external device or file, nor the GT.M internal information on it persist.&nbsp; In previous versions an empty file would exist after the unsuccessful OPEN and a ZSHOW “D” included a CLOSED device.&nbsp;&nbsp; Additionally, the descriptors associated with the empty file would accumulate leading to a possible depletion of available descriptors.&nbsp; [UNIX] (C9J03-003097)</p><p></p><div>&nbsp;</div><ul><li>Note: Deleting devices (or files) created by an OPEN which has an error has deeper implications when that device, especially a FIFO, serves as a means of communications between a two processes.&nbsp; If one process OPENs a FIFO device for WRITE, there is an interval during which another process can OPEN the same device for READ.&nbsp; During that interval the writer process can encounter an error (for example, an invalid parameter) causing GT.M to delete the device, but the reader process can complete its OPEN successfully.&nbsp; This sequence results in a process with an orphaned device open for READ.&nbsp; Any other process that OPENs the same device for WRITE creates a new instance of it, so the reader can never find data to READ from the orphaned device.&nbsp; Since GT.M has insufficient context to enforce process synchronization between reader and writer, the application must use appropriate communication protocols and error handling techniques to provide synchronization between processes using files and FIFOs for communication.</li></ul><h4><a id=C9J03_003102_Non_ASCII_charact name=C9J03_003102_Non_ASCII_charact></a>C9J03-003102 Non ASCII characters accepted in M mode pattern match string literals </h4><div>&nbsp;</div><p>If $ZCHSET is "M", GT.M now accepts string literals containing characters in the range $CHAR(128) to $CHAR(255) on the right side of the pattern match operator.&nbsp; Previously GT.M issued a PATLIT error in such cases.&nbsp; Note that this is an unhealthy programming practice because string literals containing such characters are different between "M" and "UTF-8" modes and may cause subtle application bugs that are not immediately obvious.&nbsp; [UNIX] (C9J03-003102)</p><h4><a id=C9J03_003104_Trailing_white_sp name=C9J03_003104_Trailing_white_sp></a>C9J03-003104 Trailing white space ignored in string used for indirection or Xecute </h4><div>&nbsp;</div><p>GTM now ignores trailing white space and/or comments in a string compiled for use in indirection or the Xecute command.&nbsp; Previously GTM would generate an INDEXTRACHARS error in this situation.&nbsp; (C9J03-003104)</p><h4><a id=C9J04_003106_Inappropriate_fai name=C9J04_003106_Inappropriate_fai></a>C9J04-003106 Inappropriate failure of EXCEPTION handler on OPEN fixed </h4><div>&nbsp;</div><p>GT.M now protects an EXCEPTION handler for an OPEN on a Sequential Disk, FIFO, or PIPE device when the OPEN fails.&nbsp; Previously there was a small chance the EXCEPTION could be corrupted during such an error resulting in inappropriate failure of the exception handler. (C9J04-003106)</p><h4><a id=C9J04_003109_ZPROMPT_initializ name=C9J04_003109_ZPROMPT_initializ></a>C9J04-003109 $ZPROMPT initialized from environment variable / logical name <font face="courier new">$gtm_prompt</font></h4><div>&nbsp;</div><p>If the UNIX environment variable or VMS logical name <font face="courier new">$gtm_prompt</font> is defined, it is used to initialize the <font face="courier new">$ZPROMPT <font face=verdana>Intrinsic Special Variable (ISV)</font></font>, which specifies the direct mode prompt.&nbsp; If <font face="courier new">$gtm_prompt</font> is not defined, the default remains <font face="courier new">"GTM&gt;</font>". (C9J04-003109)</p><h4><a id=C9J04_003115_Appropriate_error name=C9J04_003115_Appropriate_error></a>C9J04-003115 Appropriate error when compiling M programs containing binary data </h4><div>&nbsp;</div><p>GT.M now issues an appropriate error if an attempt is made to compile an M program that contains binary data.&nbsp; Previous versions of GT.M could terminate abnormally.&nbsp; (C9J04-003115)</p><h4><a id=C9J04_003119_Correct_code_gene name=C9J04_003119_Correct_code_gene></a>C9J04-003119 Correct code generation for branches to previous labels in large routines on Solaris </h4><div>&nbsp;</div><p>GT.M now manages branches (DO, Extrinsic, GOTO, ZGOTO) to previous labels in the same routine properly.&nbsp; Previous 64-bit versions (V5.3-002 or later) could branch incorrectly, when the offset to the branch exceeded 1MB, typically causing a SEGV (Signal-11) error.&nbsp; Note that a 1MB offset is extremely large for an object module, requiring a substantially larger source module to generate it.&nbsp; [Solaris] (C9J04-003119)</p><h4><a id=C9J05_003129_Correct_location__7151425947841475 name=C9J05_003129_Correct_location__7151425947841475></a>C9J05-003129 Correct location reported in large routines </h4><div>&nbsp;</div><p>GTM now reports the correct location (entryref) in errors, $STACK, $ZPOSITION and other places where it displays location.&nbsp; In prior versions large routines could trigger an internal overflow and cause GT.M to report incorrect locations.&nbsp; (C9J05-003129)</p><h4><a id=C9J06_003135_Cause_of_segmenta_16000877975581151 name=C9J06_003135_Cause_of_segmenta_16000877975581151></a>C9J06-003135 Cause of segmentation violation in complex external calls with AIX removed </h4><div>&nbsp;</div><p>The call-out ($&amp;) interface now correctly manages the registers on return from the call.&nbsp; In previous AIX releases stating with V5.3-001 external call logic that used many registers – typically programs with instances of significant logic complexity - could fail with a SEG-V (signal 11).&nbsp; The workaround was to rework called routines to lower their register usage high-water mark.&nbsp; [AIX] (C9J06-003135)</p><h4><a id=C9J06_003136_Faster_compilatio_7991497680892888 name=C9J06_003136_Faster_compilatio_7991497680892888></a>C9J06-003136 Faster compilation, using less memory </h4><div>&nbsp;</div><p>GT.M now compiles programs with many literals faster and manages compiler memory requirements to a low rather than high-water mark.&nbsp; This change also increases how many names (labels, routines and variables) the 32-bit x86 Linux edition can handle in a compilation.&nbsp; Previous versions took longer to compile some routines and could acquire a large memory footprint when compiling large routines.&nbsp; The memory size was typically an issue only when doing dynamic compilation from a running process.&nbsp; [UNIX] (C9J06-003136)</p><h4><a id=C9J06_003141_gtmprofile_and_gt name=C9J06_003141_gtmprofile_and_gt></a>C9J06-003141 gtmprofile and gtmcshrc recognize lower-case utf-8 for gtm_chset </h4><div>&nbsp;</div><p>The gtmprofile and gtmcshrc scripts now recognize utf-8 as a valid setting of the gtm_chset environment variable. Previously, only UTF-8 was recognized by these scripts.&nbsp; [UNIX] (C9J06-003141)</p><h4><a id=C9J06_003144_Timed_LOCK_releas name=C9J06_003144_Timed_LOCK_releas></a>C9J06-003144 "Timed" LOCK release maintains $TEST (<font style=BACKGROUND-COLOR:#ffff00>V5.3-004A</font>) </h4><div>&nbsp;</div><p>GT.M now sets $TEST to 1 in case of a timed lock release operation (e.g. LOCK -^GBLREF:TIMEOUT). &nbsp;Previous versions of GT.M left $TEST untouched in this case which was not in compliance with the M-standard. (C9J06-003144)</p><h4><a id=C9J07_003146_zOS_cursor_moveme name=C9J07_003146_zOS_cursor_moveme></a>C9J07-003146 zOS cursor movement correction (<font style=BACKGROUND-COLOR:#ffff00>V5.3-004A</font>) </h4><div>&nbsp;</div><p>Cursor addressing for terminal devices now works correctly using the X, Y, UP, or DOWN parameters of the USE statement. [z/OS] (C9J07-003146)</p><h4><a id=C9J07_003147_prevention_of_a_r_9273903570191192 name=C9J07_003147_prevention_of_a_r_9273903570191192></a>C9J07-003147 prevention of a rare stuck process in OpenVMS </h4><div>&nbsp;</div><p>GT.M now avoids a case where multiple processes attempting to exit at the same time might cause one process to deadlock trying to get information about one of the other processes which is not available. [OpenVMS](C9J07-003147)</p><h4><a id=C9J07_003152_Improved_error_me name=C9J07_003152_Improved_error_me></a>C9J07-003152 Improved error messages for UTF-8/ICU issues (<font style=BACKGROUND-COLOR:#ffff00>V5.3-004A</font>) </h4><div>&nbsp;</div><p>GT.M now reports more descriptive error messages for two cases dealing with ICU (for UTF-8)&nbsp; - ICUVERLT36, when it finds an ICU library with version less than 3.6 or when the <font face="'Courier New'">$gtm_icu_version</font> environment variable defines a value less than 3.6; and ICUSYMNOTFOUND when <font face="'Courier New'">$gtm_icu_version</font> is not defined and it encounters an ICU library built with symbol renaming. &nbsp;Previously, GT.M did not immediately report the error when <font face="'Courier New'">$gtm_icu_version</font> specified a version less than 3.6 and the error message did not include the library path and the ICU version in question. [Unix] (C9J07-003152) </p><div>&nbsp;</div><h4><a id=C9J07_003161_Compile_of_many_l name=C9J07_003161_Compile_of_many_l></a>C9J07-003161 Compile of many literals no longer fails (<font style=BACKGROUND-COLOR:#ffff00>V5.3-004A</font>) </h4><div>&nbsp;</div><p>GTM now compiles routines with many thousands of literals correctly and without error. &nbsp;Previously a routine with a large number or literals could occasionally cause a memory access violation (SEG-V, Sig-11 or ACCVIO) or, at least in theory, some corruption of a literal string. (C9J07-003161)</p><div><a href=#Table_of_Contents_510593612128_7471010945331905 target=_self title="Click here to move to the Table of Contents"></a><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a></div></div></div><div class=sect1><div class=titlepage><p class=returntotop></p><h3 class=title><a id=_Utilities_MUPIP_8524079436773_19873758576529343 name=_Utilities_MUPIP_8524079436773_19873758576529343></a>U<a id=Utilities_MUPIP_H name=Utilities_MUPIP_H></a>tilities- MUPIP </h3><h4><a id=S9J05_002723_Source_Server_gen name=S9J05_002723_Source_Server_gen></a>S9J05-002723 Source Server generates a core dump for JNLBADRECFMT error</h4><p>For enhanced troubleshooting, the source server now creates a core dump as part of issuing a JNLBADRECFMT error, in case one is encountered.&nbsp; The core file will help with determining the cause of the error.&nbsp; [UNIX] (S9J05-002723)</p><h4><a id=C9G09_002804_Fixed_Update_Serv name=C9G09_002804_Fixed_Update_Serv></a>C9G09-002804 Update Server handling of key &amp; record sizes too large for replicating instance </h4><div>&nbsp;</div><p>After one retry (to rule out the unlikley case of a TCP error in transmission), the Update Server on a replicating instance now appropriately issues GVSUBOFLOW or REC2BIG errors and then shuts down.&nbsp; GVSUBOFLOW indicates the incoming key length is greater than the maximum key size for a region.&nbsp; REC2BIG indicates the incoming global variable record length exceeds the maximum for a region.&nbsp; Previous versions ignored the GVSUBOFLOW error, causing database structural damage, and indefinitely retried a REC2BIG error, logging a stream of “Bad trans” messages.&nbsp; If the database key and record sizes on replicating instance are properly matched with those on the initiating instance, replication never encounters this issue. (C9G09-002804)</p><h4><a id=C9J01_003086_Commands_to_freez_9894628098522389 name=C9J01_003086_Commands_to_freez_9894628098522389></a>C<a id=C9J01-003086_H name=C9J01-003086_H></a>9J01-003086 MUPIP commands to freeze updates print informational messages </h4><div>&nbsp;</div><p>MUPIP FREEZE, DSE ALL -FREEZE/-NOFREEZE and DSE CHANGE -FILEHEADER -FREEZE=TRUE/FALSE now print informational messages to indicate the action on each region and the overall outcome.&nbsp; These commands used to be silent unless they encountered an error.&nbsp; (C9J01-003086)</p><h4><a id=C9J04_003117_MUPIP_LOAD_speede name=C9J04_003117_MUPIP_LOAD_speede></a>C9J04-003117 MUPIP LOAD speeded up in UTF-8 mode </h4><div>&nbsp;</div><p>MUPIP LOAD in UTF-8 mode runs faster and should now more closely approximate MUPIP Load in M mode.&nbsp; [UNIX] (C9J04-003117)</p><p></p><div>&nbsp;</div><p><a href=#C9J053128 id=g89n target=_self title="Click here to move to the description of C9J05-003128">C9J05-003128 is described below</a>, under <a href=#Utilities_Other_Than_MUPIP_H id=xx7b target=_self title="Click here to go to the section Utilities, other than MUPIP">Utilities other than MUPIP</a>.</p><h4><a id=C9J07_003159_Improved_MUPIP_BA name=C9J07_003159_Improved_MUPIP_BA></a>C9J07-003159 Improved MUPIP BACKUP error message (<font style=BACKGROUND-COLOR:#ffff00>V5.3-004A</font>) </h4><div>&nbsp;</div><p>MUPIP BACKUP -DATABASE now issues an appropriate error message in case it encounters a failure while creating the backup database. &nbsp;Previous versions would issue a misleading error message in this case. (C9J07-003159)</p><div>&nbsp;</div></div></div><div class=sect1><div class=titlepage><p class=returntotop><a href=#Table_of_Contents_510593612128_7471010945331905 target=_self title="Click here to move to the Table of Contents"></a><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a></p><h3 class=title><a id=_Utilities_Other_Than_MUPIP_69_06731016891770025 name=_Utilities_Other_Than_MUPIP_69_06731016891770025></a>U<a id=Utilities_Other_Than_MUPIP_H name=Utilities_Other_Than_MUPIP_H></a>tilities-Other Than MUPIP </h3><div>&nbsp;</div></div><h4><a id=C9B11_001789_Improved_recovera name=C9B11_001789_Improved_recovera></a>C9B11-001789 Improved recoverability after low-level DSE operations </h4><div>&nbsp;</div><p>DSE CHANGE -BLOCK -TN and DSE MAPS -RESTORE now write before-image journal records (which show up as PBLK records in a mupip journal -extract -detail output) as appropriate.&nbsp; DSE CHANGE -BLOCK -TN also writes after-image journal records (which show up as a AIMG records in the detailed journal extract) in case of local bitmap blocks.&nbsp; Previous versions did not write these records which could prevent a backward recovery/rollback from restoring the database to a valid past state.&nbsp; Please note that these are low-level DSE operations intended only to be performed under the guidance of FIS support.&nbsp; (C9B11-001789)</p><h4><a id=C9J01_003071_Installation_scri_5049240411857813 name=C9J01_003071_Installation_scri_5049240411857813></a>C9J01-003071 Installation script on Solaris now works with <font face="courier new">/bin/sh</font> and tests for 64-bit ICU libraries </h4><div>&nbsp;</div><p>The installation script for GT.M on Solaris now works with <font face="courier new">/bin/sh</font>.&nbsp; Previously, it required <font face="courier new">/usr/xpg4/bin/sh</font> or Korn shell (<font face="courier new">ksh</font>).&nbsp; Also, the script now correctly checks for 64-bit ICU libraries.&nbsp; Previously it checked for 32-bit ICU libraries, despite the fact that GT.M is a 64-bit application, and would fail to build GT.M's <font face="courier new">utf8</font> subdirectory if the 32-bit ICU libraries were not found.&nbsp; [Solaris] (C9J01-003071)</p><h4><a id=C9J01_003079_Distribution_may__7122046343837781 name=C9J01_003079_Distribution_may__7122046343837781></a>C9J01-003079 Distribution may now be unpacked by any user </h4><div>&nbsp;</div><p>The release tar file may now be unpacked by any user.&nbsp; The install script must still be run as root to set permissions properly.&nbsp; Previous releases required root permissions to unpack the archive.&nbsp; [UNIX] (C9J01-003079)</p><p></p><div>&nbsp;</div><p><a href=#C9J01-003086_H id=fyre target=_self title="Click to move to description of C9J01-003086">C9J01-003086 is described above</a> under <a href=#Utilities_MUPIP_H id=tfzl target=_self title="Click to move to Utilites, MUPIP">Utilities, MUPIP</a>.</p><h4><a id=C9J02_003095_Installation_scri name=C9J02_003095_Installation_scri></a>C9J02-003095 Installation script creates any needed parent directories </h4><div>&nbsp;</div><p>The installation script for GT.M now creates any required parent directories for either an absolute or relative path installation.&nbsp; In addition, the installation creates a soft link from the <font face="courier new">utf8</font> installation directory to <font face="courier new">gtmsecshr</font> and copies all include files in the distribution to the installation directory.&nbsp; Previously, the installation failed if any parent directories did not exist or if the installation directory was a relative path; also it did not provide the soft link and omitted some include files.&nbsp; [UNIX] (C9J02-003095)</p><h4><a id=C9J05_003128_Better_printing_o_7833877543626123 name=C9J05_003128_Better_printing_o_7833877543626123></a>C<a id=C9J053128 name=C9J053128></a>9J05-003128 Better printing of UTF-8 characters with DSE DUMP -BLOCK </h4><div>&nbsp;</div><p>DSE DUMP BLOCK now outputs certain printable UTF-8 character representations that it incorrectly suppressed in previous versions.&nbsp; Also, MUPIP LOAD now produces proper terminal output while loading binary format extract files created by GT.M versions before V5.2-000.&nbsp; Previous versions incorrectly displayed a &lt;CTRL-D&gt; character at the end of the first line of the header report, even though the actual database load worked correctly.&nbsp; [UNIX] (C9J05-003128)</p><h4><a id=C9J06_003134_GDE_now_issues_be_8050523403889164 name=C9J06_003134_GDE_now_issues_be_8050523403889164></a>C9J06-003134 GDE issues better errors when opening command files </h4><div>&nbsp;</div><p>GDE now issues an error if it encounters any problem opening a command file.&nbsp; In previous versions, it reported only file not found, but suppressed other errors, for example insufficient authorization.&nbsp; (C9J06-003134)</p><h4><a id=C9J06_003138_DSE_CACHE_VERIFY__049126745626555834 name=C9J06_003138_DSE_CACHE_VERIFY__049126745626555834></a>C9J06-003138 DSE CACHE-VERIFY no longer reports spurious error </h4><div>&nbsp;</div><p>DSE CACHE -VERIFY now works correctly. In previous versions, it could fail with a DBBMMSTR error (reported in the operator log) even though the database was clean.&nbsp; [OpenVMS] (C9J06-003138)</p></div><div class=sect1><div class=titlepage><p class=returntotop></p><div>&nbsp;</div><p class=returntotop><a href=#Table_of_Contents_510593612128_7471010945331905 target=_self title="Click here to move to the Table of Contents"></a><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a></p><h2 class=title><a id=_Error_Messages_07420816201306_8444816760438915 name=_Error_Messages_07420816201306_8444816760438915></a><a id=id1035403></a>Error Messages </h2></div><div class=sect2><div class=titlepage><div><a id=_BACKUPKILLIP__21732323495926653 name=_BACKUPKILLIP__21732323495926653></a></div></div></div><h4><a id=ALIASEXPECTED_Alias_or_alias_c name=ALIASEXPECTED_Alias_or_alias_c></a>ALIASEXPECTED, Alias or alias container variable expected in this context</h4><p>Compile time or Run Time Error: This indicates the argument for a SET * or KILL * command used a non-alias local variable where the syntax requires an alias or alias container variable. </p><p>Action: Correct the code in or investigate the logic to determine why the local variable in question is not in the expected state. </p><h4><a id=BADTAG_Unable_to_use_file_ffff name=BADTAG_Unable_to_use_file_ffff></a>BADTAG, Unable to use file ffff (CCSID tttt) with CCSID uuuu</h4>Run Time Error: This z/OS specific error indicates the device or file ffff had a tag tttt incompatible with the tag uuuu implied by chset associated with OPEN command. <div>&nbsp;</div><p>Action: Change the [i/o]chset to match the device or file or use iconv to convert the file to an appropriate character set, or possibly use chtag to [re]tag the file. </p><div>&nbsp;</div><h4><a id=BUFFLUFAILED_Errors_flushing_b name=BUFFLUFAILED_Errors_flushing_b></a>BUFFLUFAILED, Errors flushing buffers from uuuu for database file dddd </h4><div>&nbsp;</div><p>MUPIP Error: MUPIP or DSE (uuuu) could not flush the buffers for database file dddd completely. In the case of MUPIP, this typically means that some process is not releasing the critical section. In the case of DSE, this typically means there is some error in the global buffer cache which needs to be fixed.</p><p>Action: In the case of MUPIP, wait approximately 20 seconds and retry. In the case of DSE, try DSE CACHE RECOVER to fix the cache. If the error persists, report it to the group responsible for database integrity at your operation as soon as possible</p><h4><a id=CLOSEFAIL_Error_while_closing_ name=CLOSEFAIL_Error_while_closing_></a>CLOSEFAIL, Error while closing file descriptor dddd</h4>Run Time Error: GT.M records this error in the syslog whenever it attempts to close an open file descriptor dddd and the close returns with an error. After recording this error, the GT.M process resumes normal operation. <div>Action:&nbsp; Report the above error message along with the accompanying GTM-I-CALLERID message to GT.M Support, as it may be a symptom of out-of-design operation.</div><div>&nbsp;</div><h4><a id=CRYPTDLNOOPEN_Error_loading_en name=CRYPTDLNOOPEN_Error_loading_en></a>CRYPTDLNOOPEN, Error loading encryption library. xxxx</h4><p>Run Time Error: GT.M failed to load the gtmcrypt plug-in or one of its related libraries.</p><p>Action: Refer to the accompanying detail (xxxx) and verify that the gtmcrypt plug-in and related libraries are properly installed and that <font face="courier new" size=2>$LD_LIBRARY_PATH</font><font face="courier new" size=2> / </font><font face="courier new" size=2>$LIBPATH</font> are properly set. </p><h4><a id=CRYPTHASHGENFAILED_Error_gener name=CRYPTHASHGENFAILED_Error_gener></a>CRYPTHASHGENFAILED, Error generating encryption hash. xxxx</h4><p>Run Time Error: gtmcrypt plug-in reports there is problem with the hash function.</p><p>Action: Examine the message (xxxx) from the plug-in and take the needed action. </p><h4><a id=CRYPTINIT_Error_initializing_e name=CRYPTINIT_Error_initializing_e></a>CRYPTINIT, Error initializing encryption library. xxxx</h4><p>Run Time Error: The gtmcrypt plug-in reports it is unable to initialize one or more of its related libraries.</p><p>Action: Examine the detailed message (xxxx) from the plug-in and take appropriate action. </p><h4><a id=CRYPTJNLWRONGHASH_Encryption_k name=CRYPTJNLWRONGHASH_Encryption_k></a>CRYPTJNLWRONGHASH, Encryption key hash mismatch between journal file jjjj and corresponding database file dddd</h4><p>Run Time Error: gtmcrypt plug-in reports the hash of the key in the header of database file dddd does not match the hash stored in the header of journal file jjjj.&nbsp; This is most likely caused by inappropriate operator action such as replacing the current journal file with an older journal file.</p><p>Action: Correct the error that caused the incorrect journal file to be pointed to by the database file. If the correct journal file has been inadvertently deleted, create new journal files with the -noprevjnl switch.&nbsp; Take a backup as soon as possible thereafter. Depending on your situation, you may need to refresh secondary instances.</p><h4><a id=CRYPTKEYFETCHFAILED_Cannot_obt name=CRYPTKEYFETCHFAILED_Cannot_obt></a>CRYPTKEYFETCHFAILED, Cannot obtain encryption key for ffff. xxxx</h4><p>Run Time Error: gtmcrypt plug-in reports it was unable to obtain an encryption key for file ffff.</p><p>Action: Examine the message (xxxx) from the plug-in and take the needed action: for example, verify encryption key for this file is pointed to by the database key file, verify proper permissions on the directory path and the file, etc.</p><h4><a id=CRYPTKEYFETCHFAILEDNF_Cannot_o name=CRYPTKEYFETCHFAILEDNF_Cannot_o></a>CRYPTKEYFETCHFAILEDNF, Cannot obtain encryption key. xxxx</h4><p>Run Time Error: gtmcrypt plug-in reports it was unable to obtain an encryption key based upon matching the hash of an encryption key.</p><p>Action: Examine the message (xxxx) from the plug-in and take the needed action: for example, verify encryption keys for all database files are pointed to by the database key file.&nbsp; For extracts and backups, verify all the keys from the databases that provided records are in the database key file.</p><h4><a id=CRYPTNOMM_is_an_encrypted_data name=CRYPTNOMM_is_an_encrypted_data></a>CRYPTNOMM, is an encrypted database. Cannot support MM access method.</h4><p>MUPIP or GDE error: This error is triggered by an attempt to mark an MM database as encrypted with GDE or to switch an encrypted database from BG to MM with MUPIP SET.&nbsp; The MM access method is not supported for encrypted databases.</p><p>Action: Use the BG access method for encrypted files. </p><h4><a id=CRYPTNOPSWDINTP_Cannot_prompt_ name=CRYPTNOPSWDINTP_Cannot_prompt_></a>CRYPTNOPSWDINTP, Cannot prompt for password inside a TP transaction.</h4><p>Run-time error: This error occurs if an external call was used to set the gtm_passwd environment variable to the null string after GT.M has been started and the first time an encrypted database file is accessed is within a TP transaction.</p>Action: If possible, set the gtm_passwd environment variable to the obfuscated password. Otherwise, ensure that any TP transactions have been closed before setting the gtm_passwd environment variable to the null string. Once that is done, immediately touch a global from an encrypted database, e.g., $DATA(myglobal), to ensure the prompting happens before entering another TP transaction. <div>&nbsp;</div><h4><a id=CRYPTNOV4_ffff_is_an_encrypted name=CRYPTNOV4_ffff_is_an_encrypted></a>CRYPTNOV4, ffff is an encrypted database. Cannot downgrade(to V4) with Encryption option enabled.&gt;/error/fao=2!/ansi=0</h4><p>MUPIP error: An attempt to downgrade ffff which is an encrypted database to the V4 (GT.M version 4) format failed because the V4 format does not support encrypted database files. </p><p>Action: Use the database in the current format.&nbsp; If a V4 format is required, extract the data in unencrypted ZWRite format with MUPIP EXTRACT and load it into a newly created V4 database.</p><h4><a id=CRYPTOPFAILED_Encrypt_Decrypt_ name=CRYPTOPFAILED_Encrypt_Decrypt_></a>CRYPTOPFAILED, Encrypt/Decrypt operation failed. xxxx</h4><p>Run Time Error: gtmcrypt plug-in reports there is problem with encryption or decryption. </p><p>Action: Examine the message (xxxx) from the plug-in and take appropriate action. </p><h4><a id=DZWRNOALIAS_ZWRTAC_cannot_be_a name=DZWRNOALIAS_ZWRTAC_cannot_be_a></a>DZWRNOALIAS, $ZWRTAC cannot be aliased</h4>Compile Time Error: This indicates the argument for a SET * command attempted to assign a $ZWRTAC* psuedo-variable as a alias. <p>Action: Correct the code in question - the $ZWRTAC* is only useful in restoring context from ZSHOW or ZWRITE output and has very narrow capabilities.</p><h4><a id=DZWRNOPAREN_ZWRTACxxx_is_not_a name=DZWRNOPAREN_ZWRTACxxx_is_not_a></a>DZWRNOPAREN, $ZWRTACxxx is not allowed inside a parenthesized SET target</h4>Compile Time Error: This indicates the argument for a SET command attempted to assign a $ZWRTAC* psuedo-variable within a parenthesized list of left-hand arguments. <p>Action: Correct the code in question - the $ZWRTAC* is only useful in restoring context from ZSHOW or ZWRITE output and has very narrow capabilities.</p><h4><a id=FREEZEERR_Error_while_trying_t name=FREEZEERR_Error_while_trying_t></a>FREEZEERR, Error while trying to ffff region rrrr</h4>MUPIP Error: This indicates an unsuccessful database freeze or unfreeze ffff operation on region rrrr. <p>Action: Look for accompanying text that explains the cause of the error and take appropriate action. </p><div>&nbsp;</div><h4><a id=NOALIASLIST_Parenthetical_list name=NOALIASLIST_Parenthetical_list></a>NOALIASLIST, Parenthetical lists of multiple arguments cannot have a preceding alias introducer or include alias (*) forms</h4>Run Time Error: This indicates the argument for a SET command attempted to assign an alias using a parenthesized list as a left-hand argument, which is unsupported syntax. <p>Action: Correct the code in question to avoid the parenthesized list.</p><h4><a id=NONUTF8LOCALE_Locale_has_chara name=NONUTF8LOCALE_Locale_has_chara></a>NONUTF8LOCALE, Locale has character encoding (cccc) which is not compatible with UTF-8 character set</h4><p>Run Time Error: This error is reported by GT.M when it recognizes that the LC_CTYPE locale category cccc (as shown by the UNIX locale command) does not use UTF-8 character encoding when gtm_chset is "UTF-8". </p><p>Action: Set the environment variable LC_CTYPE to a Unicode locale name with UTF-8 character encoding. Note that LC_ALL, if defined, overrides LC_CTYPE. The name of the locale varies between different UNIX platforms, but mostly in the form of &lt;lang&gt;_&lt;country&gt;.&lt;charset&gt;, where each element (without the angular brackets) has the form shown below:</p><div class=orderedlist><ol type=1><li><p>&lt;lang&gt; is the language code in lower case (such as en, or de).</p></li><li><p>&lt;country&gt; is the country name in upper case (such as US, GB)</p></li><li><p>&lt;charset&gt; is the character set encoding (such as UTF-8, ISO8859-1)</p></li></ol></div><p>Refer to the operating system manuals for the specific details of available locale names on the system.</p><h4><a id=TRANS2BIG_Transaction_exceeded name=TRANS2BIG_Transaction_exceeded></a>TRANS2BIG, Transaction exceeded available buffer space for region rrrr </h4><p>Run Time Error: This indicates that a transaction updated more blocks than the global buffer could hold for a particular region rrrr or accessed more than the single transaction limit of 64K blocks.</p><p></p><p>Action: Look for missing TCOMMIT commands; modify the code to reduce the total content or change content of the transaction. If the transaction is as intended and the issue is the number of updates, increase the GLOBAL_BUFFERS for the region using MUPIP SET, or modify the Global Directory to redistribute the relevant globals to more regions.</p><h4><a id=VIEWLVN_Invalid_local_variable name=VIEWLVN_Invalid_local_variable></a>VIEWLVN, Invalid local variable name used with VIEW/$VIEW(): vvvv</h4>Run Time Error: This indicates the argument for a VIEW command or $VIEW() function required a local variable name, but it (vvvv) was either missing or invalid.<br><p>Action: Correct the code in or investigate the logic to determine why the local variable in question is not in the expected state.</p><p></p><div>&nbsp;</div><p><a href=#toc target=_self title="Click here to move to the Table of Contents">Return to Table of Contents</a></p><div>&nbsp;</div></div><div align=center id=customfooter>For more information, see the <a href=http://fis-gtm.com/ id=afu8 target=_blank title="Click here to visit the GT.M web site">GT.M web site</a>. </div><div>&nbsp;</div><br></body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_V5.3-004A_Release_Notes.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:00:39 GMT -->
+</html>

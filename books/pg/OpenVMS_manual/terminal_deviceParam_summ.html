@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/terminal_deviceParam_summ.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Terminal Device parameter Summary</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="using_terminals.html" title="Using Terminals" />
+    <link rel="prev" href="read_maxlen.html" title="READ X#maxlen Command for Terminals" />
+    <link rel="next" href="terminal_examples.html" title="Terminal Examples" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Terminal Device parameter Summary</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="read_maxlen.html">Prev</a> </td>
+          <th width="60%" align="center">Using Terminals</th>
+          <td width="20%" align="right"> <a accesskey="n" href="terminal_examples.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="terminal_deviceParam_summ"></a>Terminal Device parameter Summary</h3>
+          </div>
+        </div>
+      </div>
+      <p>The following tables provide a brief summary of deviceparameters for terminals, grouped into related areas. For more detailed information, refer to the sections following the OPEN, USE, and CLOSE commands.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3" align="center">
+    <p>Error Processing Device parameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICE PARAMETER</p>
+    </td>
+              <td>
+    <p>COMMAND</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>EXCEPTION=expr</p>
+    </td>
+              <td>
+    <p>O/U/C</p>
+    </td>
+              <td>
+    <p>Controls device-specific error handling.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p></p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3" align="center">
+    <p>Interaction Management Device parameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICE PARAMETER</p>
+    </td>
+              <td>
+    <p>COMMAND</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]CENABLE</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls whether &lt;CTRL-C&gt; on $PRINCIPAL causes GT.M to go to direct mode.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>CTRAP=expr</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls vectoring on trapped &lt;CTRL&gt; characters.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]EDITING</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls VMS line editing.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]ESCAPE</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls escape sequence processing.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>FIELD=intexpr</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls input buffer size.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]INSERT</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls insert or overstrike on input.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>OVERSTRIKE</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Synonym for NOINSERT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]PASTHRU</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls VMS interpretation of special control characters (for example &lt;CTRL-B&gt;).</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]TERMINATOR[=expr]</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls characters that end a READ</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3" align="center">
+    <p>Flow Control Deviceparameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICEPARAMETER</p>
+    </td>
+              <td>
+    <p>COMMAND</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]CONVERT</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls forcing input to uppercase.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]FILTER[=expr]</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls some $X, $Y maintenance.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>FLUSH</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Clears the typeahead buffer.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]HOSTSYNC</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls host's use of XON/XOFF.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]READSYNC</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls wrapping READs in XON/XOFF.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]TTSYNC</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls input response to XON/XOFF.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]TYPEAHEAD</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls unsolicited input handling.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3" align="center">
+    <p>Screen Management Deviceparameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICEPARAMETER</p>
+    </td>
+              <td>
+    <p>COMMAND</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>CLEARSCREEN</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Clears from cursor to end-of-screen.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DOWNSCROLL</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Moves display down one line.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]ECHO</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls the host echo of input.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ERASELINE</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Clears from cursor to end-of-line.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>LENGTH=intexpr</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls maximum number of lines on a page ($Y).</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>UPSCROLL</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Moves display up one line.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>WIDTH=intexpr</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls the maximum width of an output line ($X).</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]WRAP</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls handling of output lines longer than the maximum width.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>X=intexpr</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Positions the cursor to column intexpr.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>Y=intexpr</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Positions the cursor to row intexpr.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>O:    Applies to the OPEN command</p>
+      <p>U:    Applies to the USE command</p>
+      <p>C:    Applies to the CLOSE command</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="read_maxlen.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="using_terminals.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="terminal_examples.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">READ X#maxlen Command for Terminals </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Terminal Examples</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/terminal_deviceParam_summ.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+</html>

@@ -1,0 +1,232 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s15.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>New</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s14.html" title="Merge">
+<link rel="next" href="ch06s16.html" title="Open">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">New</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s14.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s16.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">New</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="new_cmmd"></a>New</h2></div></div></div>
+<a class="indexterm" name="idp186642576"></a><p>The  NEW command "stacks" copies of local variables and reinitializes those variables. An explicit or implicit QUIT from a DO, XECUTE or extrinsic function "unstacks" the NEWed variables, that is, restores the variable to the stacked value. A NEW lasts only while the current scope of execution is active.</p>
+<p>The format of the NEW command is:</p>
+<pre class="programlisting">N[EW][:tvexpr] [[(]lvn[,...][)][,...]]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>NEW arguments are unsubscripted local variable names; NEW affects not only the variable specified in the argument, but also all variables descended from that variable.</p></li>
+<li class="listitem"><p>When an undefined variable is NEWed, the fact that it is undefined is "stacked", and when leaving the current scope, it returns to being undefined, that is, the variable is implicitly KILLed during transfer of control.</p></li>
+<li class="listitem"><p>Without an argument GT.M NEWs all currently existing local variables; in this case, at least two (2) spaces must follow the NEW to separate it from the next command on the line.</p></li>
+<li class="listitem">
+<p>For the scope of the NEW, a NEW of a name suspends its alias association.  The association is restored when the scope of the New ends.  The array remains in existence - it can be modified through other alias variables with which it is associated and which remain in scope.  If none of its alias variables is in scope, the array remains intact and again becomes visible when the scope is restored. </p>
+<p>When a NEW argument is enclosed in parentheses, that NEW is considered "exclusive". An exclusive NEW creates a fresh data environment and effectively aliases the excluded variables with their original copies. This technique tends to improve performance and meets the M standard.  However, it has two implications: The alias operation KILL *, with no arguments, or naming an exclusively NEW'd variable, acts as a KILL in the current scope (has the same effect as a non-alias KILL), and ZWRITE, ZSHOW "V", $ZDATA() report any exclusively NEW'd variable as an alias. Refer to the section on the KILL command for a description of alternative behaviors for the interaction of KILL and exclusive NEW. <span>For a comprehensive discussion on alias variables, refer to <a class="xref" href="ch02s07.html" title="Alias Variables Extensions">&#8220;Alias Variables Extensions&#8221;</a>. </span></p>
+</li>
+<li class="listitem"><p>When the flow of execution terminates the scope of an argumentless or an exclusive NEW, GT.M restores all stacked variables to their previous values, and deletes all other local variables.</p></li>
+<li class="listitem"><p>The intrinsic special variables $ESTACK, $ETRAP, $ZGBLDIR, and $ZYERROR can be an explicit argument of a NEW.<span>For more information, refer to <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span></p></li>
+<li class="listitem"><p>The intrinsic special variable $ZTRAP can also be an explicit argument of a NEW; this stacks the current value of $ZTRAP and assigns $ZTRAP a null value ($ZTRAP="").</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more NEW arguments form a legal argument for a NEW.</p></li>
+</ul></div>
+<p>The NEW command provides a means of confining the scope of local variables. NEW operates only on unsubscripted local names and acts on the entire named array.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_new"></a>Examples<span> of NEW</span><a class="indexterm" name="idp186648992"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">NEW1;
+  Set A(1)=1,B=4,C=5
+  Write !,"VARIABLES BEFORE NEW:",!
+  ZWRite
+  Do LABEL
+  Write !,"VARIABLES AFTER RETURN:",!
+  ZWRite
+  Quit
+LABEL    
+  New A Set C=7
+  Write !,"VARIABLES AFTER NEW:",!
+  ZWRite
+  Quit</pre>
+<p>Produces the results:</p>
+<pre class="programlisting">VARIABLES BEFORE NEW:
+A(1)=1
+B=4
+C=5
+VARIABLES AFTER NEW:
+B=4
+C=7
+VARIABLES AFTER RETURN:
+A(1)=1
+B=4
+C=7</pre>
+<p>Example:</p>
+<pre class="programlisting">NEW2;
+  Set (A,B,C,D)="TEST"
+  Do LABEL
+  Write !,"VARIABLES AFTER RETURN:",!
+  ZWRite
+  Quit
+LABEL
+  New (B,C) SET (A,B,Z)="NEW"
+  Write !,"VARIABLES AFTER EXCLUSIVE NEW:",!
+  ZWRite
+  Quit</pre>
+<p>Produces the results:</p>
+<pre class="programlisting">VARIABLES AFTER EXCLUSIVE NEW:
+A="NEW"
+B="NEW"
+C="TEST"
+Z="NEW"
+VARIABLES AFTER RETURN:
+A="TEST"
+B="NEW"
+C="TEST"
+D="TEST"</pre>
+<p>Example:</p>
+<pre class="programlisting">/usr/lib/fis-gtm/V5.4-002B_x86/gtm -run ^stackalias   
+stackalias ; Demonstrate New with alias
+  ZPrint ; Print this program
+  Set A=1,*B=A,*C(2)=A ; Create some aliases
+  Write "------------",!
+  Write "ZWRite in the caller before subprogram",!
+  ZWRite
+  Do S1 ; Call a subprogram
+  Write "------------",!
+  Write "ZWRite in the caller after subprogram - A association is restored",!
+  ZWRite
+  Quit
+ ;
+S1  ; Subprogram
+  New A
+  Set A="I am not an alias",B="I am an alias"
+  Write "------------",!
+  Write "ZWRite in the subprogram with new A and modified B",!
+  ZWRite
+  Quit
+------------
+ZWRite in the caller before subprogram
+A=1 ;*
+*B=A
+C=3
+*C(2)=A
+D=4
+------------
+ZWRite in the subprogram with new A and modified B
+A="I am not an alias"
+B="I am an alias" ;*
+C=3
+*C(2)=B
+D=4
+------------
+ZWRite in the caller after subprogram - A association is restored
+A="I am an alias" ;*
+*B=A
+C=3
+*C(2)=A
+D=4</pre>
+<p> The following is essentially the same as the prior example but using an exclusive NEW:</p>
+<pre class="programlisting">$ /usr/lib/fis-gtm/V5.4-002B_x86/gtm -run ^stackalias1
+stackalias1 ; Demonstrate New with alias
+  ZPrint ; Print this program
+  Set A=1,*B=A,*C(2)=A ; Create some aliases
+  Write "------------",!
+  Write "ZWRite in the caller before subprogram",!
+  ZWRite
+  Do S1 ; Call a subprogram
+  Write "------------",!
+  Write "ZWRite in the caller after subprogram - A association is restored",!
+  ZWRite
+  Quit
+ ;
+S1  ; Subprogram
+  New (B)
+  Set A="I am not an alias",B="I am an alias"
+  Write "------------",!
+  Write "ZWRite in the subprogram - Notice B is flagged as an alias",!
+  ZWRite
+  Quit
+------------
+ZWRite in the caller before subprogram
+A=1 ;*
+*B=A
+C=3
+*C(2)=A
+D=4
+------------
+ZWRite in the subprogram - Notice B is flagged as an alias
+A="I am not an alias"
+B="I am an alias" ;*
+------------
+ZWRite in the caller after subprogram - A association is restored
+A="I am an alias" ;*
+*B=A
+C=3
+*C(2)=A
+D=4</pre>
+<p>An exclusive New can create a scope in which only one association between a name or an lvn and an array may be visible. In this case, ZWRITE nevertheless shows the existence of an alias, even when that array is accessible from only one name or lvn.</p>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody><tr valign="top">
+<td align="left" valign="top">
+<p></p>
+<p class="relatedtopics">See Also</p>
+</td>
+<td align="left" valign="top">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc" compact>
+<li class="listitem"><p>
+<a class="xref" href="ch02s07.html" title="Alias Variables Extensions">&#8220;Alias Variables Extensions&#8221;</a></p></li>
+<li class="listitem"><p><a class="xref" href="ch08s03.html" title="$EStack">&#8220;$EStack&#8221;</a></p></li>
+<li class="listitem"><p><a class="xref" href="ch08s04.html" title="$ETrap">&#8220;$ETrap&#8221;</a></p></li>
+<li class="listitem"><p><a class="xref" href="ch08s34.html" title="$ZGbldir">&#8220;$ZGbldir&#8221;</a></p></li>
+<li class="listitem"><p><a class="xref" href="ch08s65.html" title="$ZYERror">&#8220;$ZYERror&#8221;</a></p></li>
+</ul></div>
+            </td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s14.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s16.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Merge </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Open</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s15.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

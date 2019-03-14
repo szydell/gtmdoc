@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/terminate_exec_on_an_err.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Terminating Execution on an Error</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="err_actions.html" title="Error Actions" />
+    <link rel="prev" href="nested_err_handling.html" title="Nested Error Handling" />
+    <link rel="next" href="setting_ztrap_and_other_actions.html" title="Setting $ZTRAP to Other Actions " />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Terminating Execution on an Error</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="nested_err_handling.html">Prev</a> </td>
+          <th width="60%" align="center">Error Actions</th>
+          <td width="20%" align="right"> <a accesskey="n" href="setting_ztrap_and_other_actions.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="terminate_exec_on_an_err"></a>Terminating Execution on an Error</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4239236" class="indexterm"></a>
+      <p>If both $ETRAP and $ZTRAP are set to the empty string upon encountering an error, the current level is discarded and the error is reissued at the invoking level. When already at the lowest M stack level, GT.M terminates routine execution and returns control to the <span>DCL</span> level. If $ZTRAP is used exclusively, $ZTRAP=&quot;&quot; suppresses the unstacking of NEWed values of $ZTRAP associated with lower levels. $ETRAP values are always unstacked, however if the lowest level $ETRAP is the empty string (which it is by default when GT.M starts), GT.M performs the same termination as it does with $ZTRAP. These terminations with both ISVs empty provides a mechanism for returning to <span>DCL</span> with a status message when GT.M encounters an error.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;ZPRINT ^EP7
+	EP7WRITE !,&quot;THIS IS &quot;,$TEXT(+0)
+	SET $ECODE=&quot;&quot;;this only affects $ETRAP
+	SET $ETRAP=&quot;&quot;,$ZTRAP=&quot;&quot;
+	KILL A
+	BADWRITE A
+	WRITE !,&quot;THIS IS NOT DISPLAYED&quot;
+	QUIT
+	
+	GTM&gt;DO ^EP7
+	
+	THIS IS EP7
+	%GTM-E-UNDEF, Undefined local variable: A
+	%GTM_I-RTSLOC,At M source location BAD^EP7
+	<span>
+	$ WRITE SYS$OUTPUT $STATUS
+	%X08F685DA
+	</span>
+	
+	</pre>
+      <p>GT.M issues a message describing the M error and releases control to the invoking DCL. If your application packages M invocations in DCL, the DCL can determine the nature of the exit by examining the VMS symbol $STATUS.</p>
+      <p>When the action specified by $ZTRAP results in another run-time error before changing the value of $ZTRAP, the routine may iteratively invoke $ZTRAP until a stack overflow terminates the GT.M image. SETting $ZTRAP=&quot;&quot; at the beginning of error processing ensures that this type of infinite loop does not occur. Because $ETRAP is implicitly followed by a QUIT it does not have the tendency to recurse. While $ETRAP is resistant to recursion, it is not completely immune, because a GOTO or a ZGOTO within the same level can evade the implicit QUIT. $ETRAP error handling involving errors on more than one stack level can also be induced to recurse if $ECODE is inappropriately cleared before the errors at all levels have been properly dealt with.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+		GTM&gt;ZPRINT ^EP8
+		EP8WRITE !,&quot;THIS IS &quot;,$TEXT(+0)
+		NEW $ZTRAP SET $ZTRAP=&quot;DO ET&quot;
+		KILL A
+		BADWRITE A
+		WRITE !,&quot;THIS IS NOT DISPLAYED&quot;
+		QUIT
+		ETWRITE 2/0
+		QUIT
+		
+		GTM&gt;DO ^EP8
+		
+		THIS IS EP8
+		%GTM-E-STACKCRIT, Stack space critical
+		%GTM-E-ERRWZTRAP, Error while processing $ZTRAP
+		
+		$
+	</pre>
+      <p>When the routine encounters an error at label BAD, GT.M transfers control to label ET. When the routine encounters an error at label ET, it recursively does ET until a stack overflow condition terminates the GT.M image.</p>
+      <p>A set $ZTRAP=&quot;&quot; command as soon as the program enters an error-handling routine prevents this type of &quot;infinite&quot; recursion.</p>
+      <pre class="programlisting">
+	GTM&gt;ZPRINT ^EP8A
+	EP8AWRITE !,&quot;THIS IS &quot;,$TEXT(+0)
+	SET $ECODE=&quot;&quot;
+	SET $ZTRAP=&quot;&quot;,$ETRAP=&quot;DO ET&quot;
+	KILL A
+	BADWRITE A
+	WRITE !,&quot;THIS IS NOT DISPLAYED&quot;
+	QUIT
+	ETWRITE !,&quot;CONTINUING WITH ERROR TRAP AFTER AN ERROR&quot;
+	ZSHOW &quot;S&quot;
+	WRITE !,&quot;HERE COMES AN ERROR IN THE TRAP CODE&quot;
+	WRITE 2/0
+	QUIT
+	
+	GTM&gt;DO ^EP8A
+	
+	THIS IS EP8A
+	CONTINUING WITH ERROR TRAP AFTER AN ERROR ET+1^EP8A
+	Indirection ($ZTRAP)
+	<span>+1</span>^GTM$DMOD (Direct mode)
+	
+	HERE COMES AN ERROR IN THE TRAP CODE
+	GTM&gt;
+	</pre>
+      <p>This demonstrates how $ETRAP behavior in this circumstance is more appropriate. Note that the $ZTRAP=&quot;&quot; at the lowest level, prevents exection from returning to Direct Mode when the initial value of $ZTRAP (&quot;B&quot;) is unstacked; this step takes $ZTRAP out of the equation and should be part of initialization when the intention is to use $ETRAP exclusively.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;ZPRINT ^EP9
+	EP9WRITE !,&quot;THIS IS &quot;,$TEXT(+0)
+	SET $ZTRAP=&quot;DO ET&quot;
+	KILL A
+	BADWRITE A
+	WRITE !,&quot;THIS IS NOT DISPLAYED&quot;
+	QUIT
+	ETSET $ZT=&quot;&quot;
+	WRITE !,&quot;THIS IS THE ERROR TRAP&quot;
+	ERRORWRITE !,&quot;HERE COMES AN ERROR IN THE ERROR TRAP&quot;
+	WRITE 2/0
+	QUIT
+	
+	GTM&gt;DO ^EP9
+	
+	THIS IS EP9
+	THIS IS THE ERROR TRAP
+	HERE COMES AN ERROR IN THE ERROR TRAP
+	%GTM-E-LABELMISSING, Label referenced but not defined: ET
+	%GTM_E-ERRWETRAP, Error while processing $ETRAP
+	<span>
+	%GTM-E-DIVZERO, Attempt to divide by zero
+	$
+	</span>
+	
+	</pre>
+      <p>This routine sets the value of $ZTRAP to null as soon as the program enters the error handler. This insures program termination when an error occurs in the error handler. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="nested_err_handling.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="err_actions.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="setting_ztrap_and_other_actions.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Nested Error Handling </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Setting $ZTRAP to Other Actions </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/terminate_exec_on_an_err.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+</html>

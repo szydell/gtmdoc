@@ -1,0 +1,231 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/gdechap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:36 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Chapter 4. Global Directory Editor</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="prev" href="ch03s06.html" title="Configuring the Restriction facility">
+<link rel="next" href="glbl_dir_intro.html" title="Global Directory">
+<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Chapter 4. Global Directory Editor</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch03s06.html">Prev</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="glbl_dir_intro.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-node">Global Directory Editor</span>
+</div>
+<div class="chapter">
+<div class="titlepage"><div>
+<div><h2 class="title">
+<a name="ch_global_dir_editor"></a>Chapter 4. Global Directory Editor</h2></div>
+<div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
+<tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V6.3-007</td>
+<td align="left">01 February 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch03s06.html#apd_logging" title="Logging">&#8220;Logging&#8221;</a>, Downlodable dm_audit_listener.zip</p></li>
+<li class="listitem"><p>In <a class="xref" href="nameregseg.html#region_qual" title="Region Qualifiers">&#8220;Region Qualifiers&#8221;</a>, make a correction</p></li>
+<li class="listitem"><p>In <a class="xref" href="nameregseg.html#segment_quals" title="Segment Qualifiers">&#8220;Segment Qualifiers&#8221;</a>, correct max GLOBAL_BUFFER_COUNT; general fixes for the segment qualifiers summary table</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-006</td>
+<td align="left">26 October 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="nameregseg.html#region_qual" title="Region Qualifiers">&#8220;Region Qualifiers&#8221;</a>, add more information about epoch tapering and -NOSTATS.</p></li>
+<li class="listitem"><p>In <a class="xref" href="nameregseg.html#segment_quals" title="Segment Qualifiers">&#8220;Segment Qualifiers&#8221;</a>, content improvements and corrections for ASYNCIO and DEFER_ALLOCATE.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-005</td>
+<td align="left">03 July 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="gdecmds.html#gde_change" title="Change">&#8220;Change&#8221;</a>, correct the syntax of CHANGE -INSTANCE -FILE_NAME.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch03s06.html#zsysfilter" title="ZSYSTEM and PIPE OPEN command restriction facility">&#8220;ZSYSTEM and PIPE OPEN command restriction facility&#8221;</a>, add new section for the ZSYSTEM and PIPE OPEN command restriction facility</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-004</td>
+<td align="left">23 March 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="nameregseg.html#region_qual" title="Region Qualifiers">&#8220;Region Qualifiers&#8221;</a>, Add to stats qualifier description</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-003</td>
+<td align="left">12 December 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch03s06.html" title="Configuring the Restriction facility">&#8220;Configuring the Restriction facility&#8221;</a>, update TRIGGER_MOD; add HALT and ZHALT</p></li>
+<li class="listitem"><p>In <a class="xref" href="gdecmds.html#gde_add" title="Add">&#8220;Add&#8221;</a>, fix section ordering</p></li>
+<li class="listitem"><p>In <a class="xref" href="gdecmds.html#gde_change" title="Change">&#8220;Change&#8221;</a>, add CHANGE -INSTANCE -FILENAME</p></li>
+<li class="listitem"><p>In <a class="xref" href="gde_cmmd_summ.html" title="GDE Command Summary">&#8220;<span>GDE Command </span>Summary&#8221;</a>, add entry for the CHANGE and SHOW -INSTANCE qualifier; properly order ALL and GBLNAME</p></li>
+<li class="listitem"><p>In <a class="xref" href="gdecmds.html#gde_delete" title="Delete">&#8220;Delete&#8221;</a>, fix ordering of the format of the DELETE command</p></li>
+<li class="listitem"><p>In <a class="xref" href="gdecmds.html#gde_rename" title="Rename">&#8220;Rename&#8221;</a>, fix the ordering of the format of the RENAME command</p></li>
+<li class="listitem"><p>In <a class="xref" href="gdecmds.html#gde_show" title="SHow">&#8220;SHow&#8221;</a>, add the -INSTANCE qualifier and improve the documentation of SHOW -COMMAND</p></li>
+<li class="listitem"><p>In <a class="xref" href="gdecmds.html#gde_verify" title="Verify">&#8220;Verify&#8221;</a>, fix the ordering of the format of the VERIFY command</p></li>
+<li class="listitem"><p>In <a class="xref" href="nameregseg.html#instance_qual" title="Instance Qualifier">&#8220;Instance Qualifier&#8221;</a>, add new section</p></li>
+<li class="listitem"><p>In <a class="xref" href="nameregseg.html#segment_quals" title="Segment Qualifiers">&#8220;Segment Qualifiers&#8221;</a>, correct the description of -extension_count and specify 262144 as the maximum LOCK_SPACE; remove redundant and misplaced Encryption text.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-002</td>
+<td align="left">22 August 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch03s06.html" title="Configuring the Restriction facility">&#8220;Configuring the Restriction facility&#8221;</a>, add information about the Restriction facility</p></li>
+<li class="listitem"><p>In <a class="xref" href="gde_overview.html" title="GDE Overview">&#8220;<span>GDE </span>Overview&#8221;</a>, add statement on the return code </p></li>
+<li class="listitem"><p>In <a class="xref" href="gdecmds.html#gde_show" title="SHow">&#8220;SHow&#8221;</a>, clarify that SHOW -COMMAND does not display the current template settings.</p></li>
+<li class="listitem"><p>In <a class="xref" href="nameregseg.html#region_qual" title="Region Qualifiers">&#8220;Region Qualifiers&#8221;</a>, change -JOURNAL qualifier example to match the new default value for BUFFER_SIZE.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-001</td>
+<td align="left">20 March 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="gde_overview.html#abbrev_gd" title="Global Directory Abbreviations">&#8220;Global Directory Abbreviations&#8221;</a>, added AIO, AutoDB, Dall, Epoch Taper, LOCK Crit, and Stats abbreviations.</p></li>
+<li class="listitem"><p>In <a class="xref" href="gde_overview.html#examine_def" title="Examining the Default Global Directory">&#8220;Examining the Default Global Directory&#8221;</a>, added updates for V6.3-001.</p></li>
+<li class="listitem"><p>In <a class="xref" href="gdecmds.html#gde_show" title="SHow">&#8220;SHow&#8221;</a>, updated output for V6.3-001.</p></li>
+<li class="listitem"><p>In <a class="xref" href="gde_cmmd_summ.html#qual_summ" title="GDE Command Qualifier Summary">&#8220;<span>GDE Command </span>Qualifier Summary&#8221;</a>, updated the table for V6.3-001.</p></li>
+<li class="listitem"><p>In <a class="xref" href="nameregseg.html#region_qual" title="Region Qualifiers">&#8220;Region Qualifiers&#8221;</a>, added a note about a condition when the number of attached processes exceed 32Ki on a QDBRUNDOWN enabled database; tweaked wording; alphabetize lists; added AUTODB, LOCK_CRIT, and STATS</p></li>
+<li class="listitem"><p>In <a class="xref" href="nameregseg.html#segment_quals" title="Segment Qualifiers">&#8220;Segment Qualifiers&#8221;</a>, removed references to HP-UX and Solaris and various corrections and improvements; use delimiter before qualifiers; add -recover -forward for MM ; updated the summary table for V6.3-001 added ASYNCIO</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.2-002</td>
+<td align="left">17 June 2015</td>
+<td align="left">In <a class="xref" href="nameregseg.html#segment_quals" title="Segment Qualifiers">&#8220;Segment Qualifiers&#8221;</a>, added the [NO]EPOCHTAPER and -[NO]DEFER_ALLOCATE qualifiers. </td>
+</tr>
+<tr>
+<td align="left">Revision V6.1-000</td>
+<td align="left">01 August 2014</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="glbl_dir_intro.html" title="Global Directory">&#8220;Global Directory&#8221;</a>, explained the concepts of mapping different subscripts of the same global to different regions.</p></li>
+<li class="listitem"><p>In <a class="xref" href="gdecmds.html" title="Global Director Editor Commands">&#8220;<span>Global Director Editor </span>Commands&#8221;</a>, added example of globals spanning regions, the description of the new -GBLNAME, -COLLATION, MUTEX_LOCK qualifiers. </p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-003</td>
+<td align="left">27 January 2014</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="nameregseg.html#region_qual" title="Region Qualifiers">&#8220;Region Qualifiers&#8221;</a>, corrected the syntax of [NO]STDNULLCOLL and -COLLATION_DEFAULT .</p></li>
+<li class="listitem"><p>In <a class="xref" href="nameregseg.html#segment_quals" title="Segment Qualifiers">&#8220;Segment Qualifiers&#8221;</a>, added a paragraph about what happens when database file with automatic extension disabled (EXTENSION_COUNT=0) starts to get full.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-001</td>
+<td align="left">27 February 2013</td>
+<td align="left"><p>In <a class="xref" href="nameregseg.html#segment_quals" title="Segment Qualifiers">&#8220;Segment Qualifiers&#8221;</a> and under the -ALLOCATION section, specified that GT.M always reserves 32 global buffers for BG access method out of the requested allocation. </p></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-000/1</td>
+<td align="left">21 November 2012</td>
+<td align="left"><p>Updated for V6.0-000.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-000</td>
+<td align="left">19 October 2012</td>
+<td align="left"><p>In <a class="xref" href="nameregseg.html#region_qual" title="Region Qualifiers">&#8220;Region Qualifiers&#8221;</a>, added the description of -[NO]INST[_FREEZE_ON_ERROR]. </p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/10</td>
+<td align="left">28 September 2012</td>
+<td align="left"><p>Added the description of -[NO]STDNULLCOLL, corrected the description of -NULL_SUBSCRIPTS, and corrected the maximum value for -LOCK_SPACE.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/8</td>
+<td align="left">03 August 2012</td>
+<td align="left"><p>Improved the description of the LOCK_SPACE qualifier and GDE Overview. </p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/4</td>
+<td align="left">6 June 2012</td>
+<td align="left"><p>Added AUTOSWITCHLIMIT as an option for -JOURNAL region qualifier.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.4-002B</td>
+<td align="left">24 October 2011</td>
+<td align="left">Conversion to documentation revision history reflecting GT.M releases with revision history for each chapter.</td>
+</tr>
+</table></div></div>
+</div></div>
+<div class="toc">
+<p><b>Table of Contents</b></p>
+<dl>
+<dt><span class="sect1"><a href="glbl_dir_intro.html">Global Directory</a></span></dt>
+<dt><span class="sect1"><a href="gde_overview.html"><span>GDE </span>Overview</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="gde_overview.html#identifygd">Identifying the Current Global Directory</a></span></dt>
+<dt><span class="sect2"><a href="gde_overview.html#creategd">Creating a Default Global Directory</a></span></dt>
+<dt><span class="sect2"><a href="gde_overview.html#map_glbl">Mapping Global Variables in a Global Directory</a></span></dt>
+<dt><span class="sect2"><a href="gde_overview.html#examine_def">Examining the Default Global Directory</a></span></dt>
+<dt><span class="sect2"><a href="gde_overview.html#abbrev_gd">Global Directory Abbreviations</a></span></dt>
+<dt><span class="sect2"><a href="gde_overview.html#custom_glbldir">Customizing a Global Directory</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="using_gde.html">Using GDE</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="using_gde.html#map_guides">Guidelines for Mapping</a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="gdecmds.html"><span>Global Director Editor </span>Commands</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="gdecmds.html#specify_file_names_in_cmmd_lines">Specifying File Names in Command Lines</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#fonts_conv">Font/Capitalization Conventions Used in this Chapter</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#at_sign"><span>@</span></a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_add">Add</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_change">Change</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_delete">Delete</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_exit">Exit</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_help">Help</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_locks">LOCks</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_log">LOG</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_quit">Quit</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_rename">Rename</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#setgd">SEtgd</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_show">SHow</a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_template">Template </a></span></dt>
+<dt><span class="sect2"><a href="gdecmds.html#gde_verify">Verify</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="nameregseg.html"><span>Name, Region, and Segment </span>Qualifiers</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="nameregseg.html#name_qualifiers">Name Qualifiers</a></span></dt>
+<dt><span class="sect2"><a href="nameregseg.html#region_qual">Region Qualifiers</a></span></dt>
+<dt><span class="sect2"><a href="nameregseg.html#segment_quals">Segment Qualifiers</a></span></dt>
+<dt><span class="sect2"><a href="nameregseg.html#gblname_qual">Gblname Qualifiers</a></span></dt>
+<dt><span class="sect2"><a href="nameregseg.html#instance_qual">Instance Qualifier</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="gde_cmmd_summ.html"><span>GDE Command </span>Summary</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="gde_cmmd_summ.html#qual_summ"><span>GDE Command </span>Qualifier Summary</a></span></dt></dl></dd>
+</dl>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch03s06.html">Prev</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="glbl_dir_intro.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Configuring the Restriction facility </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Global Directory</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/gdechap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:36 GMT -->
+</html>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Executing_from_DCL.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:39 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Executing from DCL</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter3.html" title="Chapter 3. Program Development Cycle" />
+    <link rel="prev" href="Link_Argument_Qualifiers_Summ.html" title="Link Argument Qualifiers Summary" />
+    <link rel="next" href="chapter4.html" title="Chapter 4. Operating and Debugging in Direct Mode" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Executing from DCL</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Link_Argument_Qualifiers_Summ.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 3. Program Development Cycle</th>
+          <td width="20%" align="right"> <a accesskey="n" href="chapter4.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="Executing_from_DCL"></a>Executing from DCL</h2>
+          </div>
+        </div>
+      </div>
+      <p>An M application packaged as an executable image can execute in three modes: Interactive, Batch and Detached. The DCL RUN command starts all three modes of execution.</p>
+      <p>At the DCL prompt you can issue a RUN command with a parameter specifying an executable image linked with the VMS LINK utility.</p>
+      <pre class="programlisting">
+        $ RUN PAYROLL
+      </pre>
+      <p>When the command is part of a DCL command procedure invoked by an interactive process, the procedure usually must precede the RUN with a command to redirect I/O back to the terminal during GT.M execution.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        $ DEFINE SYS$INPUT 'F$TRNLNM(&quot;SYS$COMMAND&quot;)'
+        $ RUN PAYROLL
+      </pre>
+      <p>The DEFINE command redirects input from the command procedure file to the terminal for the duration of PAYROLL's execution.</p>
+      <p>The DCL SUBMIT command delivers procedures to the VMS batch processing system. These command procedures may contain RUN commands invoking GT.M executable images. When using batch, the command procedure may include imbedded input for GT.M.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        $ CREATE BAT.COM
+        $ MUMPS/DIRECT
+        READ X
+        This becomes X and then output.
+        WRITE X,!
+        HALT
+        $ EXIT
+        &lt;CTRL Z&gt;
+        $ SUBMIT/NOTIFY/NOPRINT BAT
+        $
+      </pre>
+      <p>This CREATEs a simple command file to demonstrate input and output in batch. The system directs the output to a file-specification constructed from the name of the input file in SYS$LOGIN for the process with an extension of .LOG. Normally the image would be invoked by RUNning an application image rather than invoking Direct Mode with the MUMPS/DIRECT command.</p>
+      <p>Alternatively a batch application may manage its own I/O with M OPEN, USE and CLOSE commands. For more information, refer to the &quot;Input/Output Processing&quot; chapter in this manual.</p>
+      <p>The /DETACHED qualifier on the RUN command causes VMS to create a new job that is neither interactive nor batch. When a detached job performs input or output, the RUN /DETACHED command may include the /INPUT= and /OUTPUT= qualifiers. Alternatively a detached application may manage its own I/O with M OPEN, USE and CLOSE commands.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        $ RUN/DETACHED PAYROLL/INPUT=SYS$LOGIN:DRIVER.DAT/OUTPUT=RESULTS.DAT
+      </pre>
+      <p>This creates a detached job to perform the PAYROLL application and specifies files for both input and output.</p>
+      <p>GT.M handles errors in the same fashion, regardless of how the image is invoked. For more information, refer to the &quot;Error Processing&quot; chapter in this manual. If an image makes no provision providing explicit error handling, GT.M places the process in Direct Mode. If the process is interactive, this permits immediate access to the GT.M debugging environment. For more information, refer to the &quot;Operating and Debugging in Direct Mode&quot; chapter in this manual.</p>
+      <p>If the process is batch or detached, generally GT.M does not find appropriate Direct Mode input and (eventually) terminates the image. When either SYS$ERROR or SYS$OUTPUT are files that are retained or printed, you can examine the error reports and initiate an appropriate action such as rerunning in interactive mode or entering an edit, compile, link and run cycle.</p>
+      <p>When an executable image terminates, it releases control back to the DCL that invoked it and execution continues in the original mode unless the end of the input indicates that VMS should terminate the process.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Link_Argument_Qualifiers_Summ.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter3.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="chapter4.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Link Argument Qualifiers Summary </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Chapter 4. Operating and Debugging in Direct Mode</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Executing_from_DCL.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:39 GMT -->
+</html>

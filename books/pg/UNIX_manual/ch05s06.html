@@ -1,0 +1,310 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s06.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Operators</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
+<link rel="prev" href="ch05s05.html" title="Expressions">
+<link rel="next" href="ch05s07.html" title="Commands">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Operators</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch05s05.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 5. <span>General Language Features of M</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch05s07.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch05.html"><span>General Language Features of M</span></a></span> &gt; <span class="breadcrumb-node">Operators</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Operators"></a>Operators<a class="indexterm" name="idp185638816"></a>
+</h2></div></div></div>
+<p>M has both unary and binary operators.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Precedence"></a>Precedence<a class="indexterm" name="idp185736400"></a>
+</h3></div></div></div>
+<p>All unary operations have right to left precedence.</p>
+<p>All M binary operations have strict left to right precedence. This includes all arithmetic, string, and logical operations. Hierarchies of operations require explicit establishment of precedence using parentheses (). Although this rule is counterintuitive, it is easy to remember and has no exceptions.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Arithmetic_Operators"></a>Arithmetic Operators</h3></div></div></div>
+<a class="indexterm" name="idp185687184"></a><p>All arithmetic operators force M to evaluate the expressions to which they apply as numeric. The arithmetic operators are:</p>
+<p>+     as a unary operator simply forces M to evaluate the expression following as numeric; as a binary operator it causes M to perform addition.</p>
+<p>-     as a unary operator causes M to negate the expression following; as a binary operator it causes M to perform subtraction.</p>
+<p>*     binary operator for multiplication.</p>
+<p>**    binary operator for exponentiation.</p>
+<p>/     binary operator for fractional division.</p>
+<p>\     binary operator for integer division.</p>
+<p>#     binary operator for modulo, that is, causes M to produce the remainder from integer division of the first argument by the second.</p>
+<p>Because of the practice of using it to intentionally induce an error, GT.M does not produce a DIVZERO error at compile time, only at run time, for divide or integer divide by a literal expression that evaluates to zero (0).</p>
+<p>Remember that precedence is left to right for all arithmetic operators.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE 1+1
+2
+GTM&gt;WRITE 2-1
+1
+GTM&gt;WRITE 2*2
+4
+GTM&gt;WRITE 3**2
+9
+GTM&gt;WRITE 4/2
+2
+GTM&gt;WRITE 7
+2
+GTM&gt;WRITE 7#3
+1
+GTM&gt;</pre>
+<p>This simple example demonstrates how each arithmetic binary operation uses numeric literals.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE +"12ABC"
+12
+GTM&gt;WRITE --"-3-4"
+-3
+GTM&gt;</pre>
+<p>The first WRITE shows the unary plus sign (+) operation forcing the numeric evaluation of a string literal. The second WRITE demonstrates the unary minus sign (-). Note the second minus sign within the string literal does not cause subtraction, but rather, terminates the numeric evaluation with the result of negative three (-3). Each of the leading minus signs causes one negation and therefore, the result is negative three (-3).</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Logical_Operators"></a>Logical Operators<a class="indexterm" name="idp185684576"></a>
+</h3></div></div></div>
+<p>M logical operators always produce a result that is TRUE (1) or FALSE (0). All logical operators force M to evaluate the expressions to which they apply as truth-valued. The logical operators are:</p>
+<p>'     unary NOT operator negates current truth-value; M accepts placement of the NOT operator next to a relational operator, for example, A'=B as meaning '(A=B).</p>
+<p>&amp;binary AND operator produces a true result only if both of the expressions are true.</p>
+<p>!     binary OR operator produces a true result if either of the expressions is true.</p>
+<p>Remember that precedence is always left to right, and that logical operators have the same precedence as all other operators.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE '0
+1
+GTM&gt;WRITE '1
+0
+GTM&gt;WRITE '5689
+0
+GTM&gt;WRITE '-1
+0
+GTM&gt;WRITE '"ABC"
+1
+GTM&gt;</pre>
+<p>The above example demonstrates the unary NOT operation. Note that any non-zero numeric value is true and has a false negation.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE 0&amp;0
+0
+GTM&gt;WRITE 1&amp;0
+0
+GTM&gt;WRITE 0&amp;1
+0
+GTM&gt;WRITE 1&amp;1
+1
+GTM&gt;WRITE 2&amp;1
+1
+GTM&gt;WRITE 0!0
+0
+GTM&gt;WRITE 1!0
+1
+GTM&gt;WRITE 0!1
+1
+GTM&gt;WRITE 1!1
+1
+GTM&gt;WRITE 2!1
+1
+GTM&gt;</pre>
+<p>The above example demonstrates all cases covered by the binary logical operators.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="String_Operators"></a>String Operators<a class="indexterm" name="idp185733712"></a>
+</h3></div></div></div>
+<p>All string operators force M to evaluate the expressions to which they apply as strings. The string operator is:</p>
+<p>_binary operator causes M to concatenate the second expression with the first expresion</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE "B"_"A"
+BA
+GTM&gt;WRITE "A"_1
+A1
+GTM&gt;</pre>
+<p>The above example demonstrates M concatenation.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Num_Relational_Operators"></a>Numeric Relational Operators<a class="indexterm" name="idp185738304"></a>
+</h3></div></div></div>
+<p>M relational operators always generate a result of TRUE (1) or FALSE (0). All numeric relational operators force M to evaluate the expressions to which they apply as numeric. The numeric relational operators are:</p>
+<p>&gt;binary arithmetic greater than</p>
+<p>&lt;binary arithmetic less than</p>
+<p>The equal sign (=) does not force numeric evaluation, and should be viewed as a string operator. However, the equal sign between two numeric values tests for numeric equality.</p>
+<p>Other numeric relations are formed using the logical NOT operator apostrophe (') as follows:</p>
+<p>'&gt; not greater than, that is, less than or equal to</p>
+<p>'&lt; not less than, that is, greater than or equal to</p>
+<p>&gt;= greater than or equal to, that is, not less than</p>
+<p>&lt;= less than or equal to, that is, not greater than</p>
+<p>'=    not equal, numeric or string operation</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE 1&gt;2
+0
+GTM&gt;WRITE 1&lt;2
+1
+GTM&gt;</pre>
+<p>The above example demonstrates the basic arithmetic relational operations.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE 1'&lt;2
+0
+GTM&gt;WRITE 2'&lt;1
+1
+GTM&gt;</pre>
+<p>The above example demonstrates combinations of arithmetic, relational operators with the logical NOT operator.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Str_Relational_Operators"></a>String Relational Operators<a class="indexterm" name="idp185699200"></a>
+</h3></div></div></div>
+<p>M relational operators always generate a result of TRUE (1) or FALSE (0). All string relational operators force M to evaluate the expressions to which they apply as strings. The string relational operators are:</p>
+<p>=     binary operator causes M to produce a TRUE if the expressions are equal.</p>
+<p>[     binary operator causes M to produce a TRUE if the first expression contains the ordered sequence of characters in the second expression.</p>
+<p>]     binary operator causes M to produce a TRUE if the first expression lexically follows the second expression in the character encoding sequence, which by default is ASCII.</p>
+<p>]]    binary operator causes M to produce a TRUE if the first expression lexically sorts after the second expression in the subscript collation sequence.</p>
+<p>Note that all non-empty strings lexically follow the empty string, and every string contains the empty string.</p>
+<p>Other string relations are formed using the logical NOT operator apostrophe (') as follows:</p>
+<p>'[    does not contain.</p>
+<p>']    does not follow, that is, lexically less than or equal to.</p>
+<p>']]   does not sort after, that is, lexically less than or equal to in the subscript collation sequence.</p>
+<p>'=    not equal, numeric or string operation.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE "A"="B"
+0
+GTM&gt;WRITE "C"="C"
+1
+GTM&gt;WRITE "A"["B"
+0
+GTM&gt;WRITE "ABC"["C"
+1
+GTM&gt;WRITE "A"]"B"
+0
+GTM&gt;WRITE "B"]"A"
+1
+GTM&gt;WRITE "A"]]"B"
+0
+GTM&gt;WRITE "B"]]"A"
+1</pre>
+<p>These examples demonstrate the string relational operators using string literals.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE 2]10
+1
+GTM&gt;WRITE 2]]10
+0
+GTM&gt;WRITE 0]"$"
+1
+GTM&gt;WRITE 0]]"$"
+0</pre>
+<p>These examples illustrate that when using the primary ASCII character set, the main difference in the "follows" (]) operator and the "sorts-after" (]]) operator is the way they treat numbers.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE 1=1
+1
+GTM&gt;WRITE 1=2
+0
+GTM&gt;WRITE 1="1"
+1
+GTM&gt;WRITE 1=01
+1
+GTM&gt;WRITE 1="01"
+0
+GTM&gt;WRITE 1=+"01"
+1
+GTM&gt;</pre>
+<p>These examples illustrate the dual nature of the equal sign operator. If both expressions are string or numeric, the results are straight forward. However, when the expressions are mixed, the native string data type prevails.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE "a"'="A"
+1
+GTM&gt;WRITE "FRED"'["RED"
+0
+GTM&gt;WRITE "ABC"']""
+0</pre>
+<p>These examples demonstrate combinations of the string relational operators with the NOT operator.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Patrn_Match_Operator"></a>Pattern Match Operator<a class="indexterm" name="idp185750800"></a>
+</h3></div></div></div>
+<p>The pattern match operator (?) causes M to return a TRUE if the expression ahead of the operator matches the characteristics described by the pattern following the operator. The pattern is not an expression.</p>
+<p>Patterns are made up of two elements:</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>A repetition count</p></li>
+<li class="listitem"><p>A pattern code, a string literal or an alternation list</p></li>
+</ol></div>
+<p>The element following the pattern match operator may consist of an indirection operator, followed by an element that evaluates to a legitimate pattern.</p>
+<p>The repetition count consists of either a single integer literal or a period (.) delimiter with optional leading and trailing integer literals. A single integer literal specifies an exact repetition count. The period syntax specifies a range of repetitions where the leading number is a minimum and the trailing number is a maximum. When the repetition count is missing the leading number, M assumes there is no minimum, (i.e., a minimum of zero). When the repetition count is missing the trailing number, M does not place a maximum on the number of repetitions.</p>
+<p>The pattern codes are:</p>
+<p>A     alphabetic characters upper or lower case</p>
+<p>C     control characters ASCII 0-31 and 127</p>
+<p>E     any character; used to pass all characters in portions of the string where the pattern is not restricted</p>
+<p>L     lower-case alphabetic characters, ASCII 97-122</p>
+<p>N     digits 0-9, ASCII 48-57</p>
+<p>P     punctuation, ASCII 32-47, 58-64, 91-96, 123-126</p>
+<p>U     upper-case alphabetic characters, ASCII 65-90</p>
+<p>Pattern codes may be upper or lower case and may be replaced with a string literal. GT.M allows the M pattern match definition of patcodes A, C, N, U, L, and P to be extended or changed, (A can only be modified implicitly by modifying L or U) and new patcodes added. For detailed information on enabling this functionality, <span>see <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a></span>.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>The GT.M compiler accepts pattern codes other than those explicitly defined above. If, at run-time, the pattern codes come into use and no pattern definitions are available, GT.M issues a run-time error (PATNOTFOUND). GT.M does not currently implement a mechanism for Y and Z patterns and continues to treat those as compile-time syntax errors. GT.M defers literal optimizations involving patterns within an XECUTE as well as evaluations that encounter issues with the pattern table.</p></td></tr>
+</table></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE "ABC"?3U
+1
+GTM&gt;WRITE "123-45-6789"?3N1"-"2N1"-"4N
+1</pre>
+<p>The first WRITE has a simple one-element pattern while the second has multiple elements including both codes and string literals. All the repetition counts are fixed.</p>
+<p>Example:</p>
+<pre class="programlisting">I x?.E1C.E W !,"Must not contain a control character" Q</pre>
+<p>This example uses a pattern match to test for control characters.</p>
+<p>Example:</p>
+<pre class="programlisting">I acn?1U.20A1","1U.10A D
+.S acn=$G((^ACX($P(acn,","),$P(acn,",",2)))</pre>
+<p>This example uses a pattern match with implicit minimums to determine that an "account number" is actually a name, and to trigger a look-up of the corresponding account number in the ^ACX cross index.</p>
+<p>The pattern match operator accepts the alteration syntax. Alteration consists of a repeat count followed by a comma-delimited list of patatoms enclosed in parentheses "()". The semantic is that the pattern matches if any of the listed patterns matches the operand string. For example, ?1(2N1"-"7N,3N1"-"2N1"-"4N).1U might be a way to match either a social security number or a taxpayer ID. Since alternation is defined as one of the ways of constructing a patatom, alternation can nest (be used recursively).</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Complex pattern matches may not be efficient to evaluate, so every effort should be made to simplify any commonly used pattern and to determine if more efficient alternative logic would be more appropriate.</p></td></tr>
+</table></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch05s05.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch05s07.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Expressions </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Commands</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s06.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+</html>

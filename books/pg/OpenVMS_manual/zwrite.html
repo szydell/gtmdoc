@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zwrite.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:48 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ZWRite</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="Chapter 6. Commands" />
+    <link rel="prev" href="examples_of_zwithdraw.html" title="Examples of ZWITHDRAW" />
+    <link rel="next" href="examples_of_zwrite.html" title="Examples of ZWRITE" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ZWRite</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zwithdraw.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 6. Commands</th>
+          <td width="20%" align="right"> <a accesskey="n" href="examples_of_zwrite.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zwrite"></a>ZWRite</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zwrite.html">Examples of ZWRITE</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4181484" class="indexterm"></a>
+      <p>The ZWRITE command displays the current value of one or more local or global variables. ZWRITE formats its output so that each item in the display forms a valid argument to a SET @ command. This means ZWRITE encloses string values in quotes and represents non-graphic (control) characters in $CHAR() syntax.</p>
+      <p>The format of the ZWRITE command is:</p>
+      <pre class="programlisting">
+    ZWR[ITE][:tvexpr] [zwrglvn[,...]]        
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>The optional global or local variable name specifies the variable for ZWRITE to display. </p>
+          </li>
+          <li>
+            <p>ZWRITE accepts several alternative syntaxes in place of subscripts; ZWRITE also accepts arguments specifying naked references to globals. Because ZWRITE is primarily a debugging tool, ZWRITE does not affect the naked indicator.</p>
+          </li>
+          <li>
+            <p>ZWRITE accepts null subscripts in its arguments, when these are allowed, and reports array nodes that have null subscripts.</p>
+          </li>
+          <li>
+            <p>A ZWRITE with no arguments displays all the currently available local variables; in this case, at least two (2) spaces must follow the command to separate it from the next command on the line. </p>
+          </li>
+          <li>
+            <p>If the global or local variable name is unsubscripted, ZWRITE displays the unsubscripted variable and all subscripted descendants.</p>
+          </li>
+          <li>
+            <p>If an asterisk (*) appears in the space normally occupied by the last subscript in a subscripted variable name, ZWRITE displays all variable nodes descended from the previously specified subscripts.</p>
+          </li>
+          <li>
+            <p>ZWRITE accepts GT.M pattern-match syntax in place of both variable names and subscripts.</p>
+          </li>
+          <li>
+            <p>ZWRITE &lt;name&gt;(), where &lt;name&gt; is a local or a global is treated as a synonym for ZWRITE &lt;name&gt;.</p>
+          </li>
+          <li>
+            <p>A colon acts as a range operator for subscript values; ZWRITE displays all subscripts of the variable starting with the value on the left side of the colon and ending with the value on the right side of the colon; if the range delimiter has no left-hand value, or has the empty string as the left-hand value, the display begins at the first subscript; if the range delimiter has no right-hand value or has the empty string as the right-hand value, the display ends at the last subscript at that level; if the range delimiter has no values or empty strings on either side, ZWRITE displays all subscripts at that level; an empty subscript level also displays all subscripts at that level.</p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom evaluating to a list of one or more ZWRITE arguments form a legal argument for a ZWRITE.</p>
+          </li>
+          <li>
+            <p>Long ZWRITE format records can be loaded.</p>
+          </li>
+        </ul>
+      </div>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zwithdraw.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="examples_of_zwrite.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of ZWITHDRAW </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of ZWRITE</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zwrite.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:48 GMT -->
+</html>

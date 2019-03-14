@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/ecode_ch14.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ECODE</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="prgrm_handling_of_error.html" title="Program Handling of Errors" />
+    <link rel="prev" href="prgrm_handling_of_error.html" title="Program Handling of Errors" />
+    <link rel="next" href="zstatus_content.html" title="$ZSTATUS Content" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ECODE</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="prgrm_handling_of_error.html">Prev</a> </td>
+          <th width="60%" align="center">Program Handling of Errors</th>
+          <td width="20%" align="right"> <a accesskey="n" href="zstatus_content.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="ecode_ch14"></a>$ECODE</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4237806" class="indexterm"></a>
+      <p>The value of $ECODE is a string that may reflect multiple error conditions. As long as no error has occured, the value of $ECODE is equal to the empty string. </p>
+      <p>$ECODE contains a list of errors codes for &quot;active&quot; errors - the error conditions which are not yet resolved. If there are no active errors, $ECODE contains the empty string. The value of $ECODE can be SET. </p>
+      <p>The most recent error in $ECODE appears first, the oldest last. If the error is defined by the M standard, the code starts with an &quot;M&quot;, GT.M error codes including those provided by OS services start with &quot;Z&quot;, and application defined codes must start with &quot;U&quot;. Every code is seperated by a coma (,) and there is always a coma at the begining and at the end of a list. GT.M provided codes are those reported in $ZSTATUS, interpretted by $ZMESSAGE() and recognized as arguments to ZMESSAGE command. When GT.M supplies a standard error code in $ECODE, it also supplies a corresponding 'Z' code.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>Refer to $Ecode section in Intrinsic Special Variable chapter in this manual, for a detailed description on $ECODE.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>Example (setting $ECODE):</p>
+      <pre class="programlisting">
+	SET $ECODE=&quot;&quot; ;sets $ECODE to the empty string
+	SET $ECODE=&quot;,M20,&quot; ;an ANSI M standardized error code
+	SET $ECODE=&quot;,U14,&quot; ;user defined error code
+	SET $PIECE($ECODE,&quot;,&quot;,2)=&quot;Z3,&quot; ;insert a non-ANSI error code
+	SET $PIECE($ECODE,&quot;,&quot;,$LENGTH($ECODE,&quot;,&quot;)+1)=&quot;An..,&quot; ;append	
+	</pre>
+      <p>Standard Error processing affects the flow of control in the following manner. Detection of an error causes GOTO implicit sub-routine. When $ECODE=&quot;&quot;, the implicit subroutine is $ETRAP and QUIT:$QUIT &quot;&quot; QUIT. Otherwise the implicit subroutine is $ETRAP followed by TROLLBACK:$TLEVEL and then QUIT:$QUIT &quot;&quot; QUIT.</p>
+      <p>The QUIT command behaves in a special fashion while the value of $ECODE is non-empty. If a QUIT command is executed that returns control to a less nested level than the one where the error occurred, and the value of $ECODE is still non-empty, first all normal activity related to the QUIT command occurs (especially the unstacking of NEWed variables) and then the current value of $ETRAP is executed. Note that, if $ETRAP had been NEWed at the current or intervening level, the unstacked value of $ETRAP is executed.</p>
+      <p>SETting $ECODE to an invalid value is an error. SETting $ECODE to a valid error behaves like detection of error. SETting $ECODE=&quot;&quot; does not cause a change in the flow, but effects $STACK(), subsequent $QUITs and errors.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>To force execution of an error trap or to flag a user-defined error (“U” errors), make the value of $ECODE non-empty:</p>
+              <pre class="programlisting">
+	SET $ECODE=&quot;,U13-User defined error trap,&quot;
+	</pre>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>The value of $ECODE provides information about errors that have occurred since the last time it was reset to an empty string. In addition to the information in this variable, more detailed information can be obtained from the intrinsic function $STACK. Refer to the $STACK() topic in the &quot;Functions&quot; chapter in this manual.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="prgrm_handling_of_error.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="prgrm_handling_of_error.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="zstatus_content.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Program Handling of Errors </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $ZSTATUS Content</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/ecode_ch14.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+</html>

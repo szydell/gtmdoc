@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Extrinsic_Functions.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:58 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Extrinsic Functions</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter5.html" title="Chapter 5. General Language Features of M" />
+    <link rel="prev" href="Extrnl_Calls.html" title="External Calls" />
+    <link rel="next" href="Extrinsic_Specl_Vars.html" title="Extrinsic Special Variables" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Extrinsic Functions</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Extrnl_Calls.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 5. General Language Features of M</th>
+          <td width="20%" align="right"> <a accesskey="n" href="Extrinsic_Specl_Vars.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="Extrinsic_Functions"></a>Extrinsic Functions</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4169173" class="indexterm"></a>
+      <p>An extrinsic function is an M subroutine that another M routine can invoke to return a value.</p>
+      <p>The format for extrinsic functions is:</p>
+      <pre class="programlisting">
+        $$[label][^routinename]([expr|.lname[,...]])
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional label and optional routinename make up the formallabel that specifies the name of the subroutine performing the extrinsic function. The formallabel must contain at least one of its optional components.</p>
+          </li>
+          <li>
+            <p>The optional expressions and actualnames make up the actuallist that specifies the list of actual parameters M passes to the invoked routine.</p>
+          </li>
+        </ul>
+      </div>
+      <p>M stacks $TEST for extrinsic functions. This is one of the two major differences between the DO command with parameters and extrinsics. On return from an extrinsic function, M restores the value of $TEST to what it was before the extrinsic function, regardless of the actions executed by the invoked routine.</p>
+      <p>M requires a routine that implements an extrinsic function to terminate with an explicit QUIT command which has an argument. M returns the value of the QUIT command argument as the value of the extrinsic function. This is the other major difference between the DO command with parameters and extrinsics. It is now possible to invoke a C function in a package via the external call mechanism.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+       POWER(V,X,S,T);extrinsic to raise to a power
+       ;ignores fractional powers
+       SET T=1,S=0
+       IF X&lt;0 SET X=-X,S=1
+       FOR X=1:1:X S T=T*V
+       QUIT $S(S:1/T,1:T)
+       GTM&gt; WRITE $$^POWER(3,4)
+       81
+       GTM&gt;
+      </pre>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>The POWER routine uses a formallist that is longer than the &quot;expected&quot; actuallist to protect local working variables. Such practice may be encouraged or discouraged by your institution's standards.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Extrnl_Calls.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter5.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="Extrinsic_Specl_Vars.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">External Calls </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Extrinsic Special Variables</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Extrinsic_Functions.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:58 GMT -->
+</html>

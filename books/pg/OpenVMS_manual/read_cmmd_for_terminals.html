@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/read_cmmd_for_terminals.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>READ * Command for Terminals</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="using_terminals.html" title="Using Terminals" />
+    <link rel="prev" href="terminal_read.html" title="Terminating a Terminal READ" />
+    <link rel="next" href="read_maxlen.html" title="READ X#maxlen Command for Terminals" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">READ * Command for Terminals</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="terminal_read.html">Prev</a> </td>
+          <th width="60%" align="center">Using Terminals</th>
+          <td width="20%" align="right"> <a accesskey="n" href="read_maxlen.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="read_cmmd_for_terminals"></a>READ * Command for Terminals</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4198748" class="indexterm"></a>
+      <p>If the terminal has ESCAPE sequencing enabled, and the input contains a valid escape sequence or a terminator character, the terminal device driver stores the entire sequence in $ZB and returns the ASCII representation of the first character.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; KILL
+    GTM&gt; USE $P:ESCAPE
+    GTM&gt; READ *X SET ZB=$ZB ZWRITE
+    (Press the F11 key on the VT220 terminal keyboard)
+    x=27
+    zb=$C(27)_&quot;[23~&quot;
+    </pre>
+      <p>This enters an escape sequence in response to a READ *. The READ * assigns the code for &lt;ESC&gt; to the variable X. The terminal handler places the entire escape sequence in $ZB. Because some of the characters are not graphic, that is, visible on a terminal, the example transfers the contents of $ZB to the local variable ZB and uses a ZWRITE so that the non-graphic characters appear in $CHAR() format.</p>
+      <p>The READ * command for terminals does not affect $ZB when escape sequencing is not enabled. If the input contains a valid escape sequence and escape sequencing is not enabled, the variable for the READ * command returns the first character of the escape sequence, for example, ASCII 27. The terminal device driver stores the remaining characters of the escape sequence in the read buffer. A READ command following a READ * command returns the remaining characters of the escape sequence. An application that operates with NOESCAPE must provide successive READ * commands to remove the remaining escape characters from the buffer.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; KILL
+    GTM&gt; USE $P:(NOESCAPE:TERM=$C(13))
+    GTM&gt; READ *X SET ZB=$ZB READ Y:0 ZWRITE
+    (Press the F11 key on the terminal keyboard)
+    [23~i=5
+    x=27
+    y=&quot;[23~&quot;
+    zb=&quot;&quot;
+    GTM&gt; USE $P:NOECHO READ *X S ZB=$ZB READ Y:0 USE $P:ECHO ZW
+    i=5
+    x=27
+    y=&quot;[23~&quot;
+    zb=&quot;&quot;
+    GTM&gt; READ *X SET ZB=$ZB USE $P:FLUSH READ Y:0 ZWRITE
+    i=5
+    x=27
+    y=&quot;&quot;
+    zb=&quot;&quot;    
+    </pre>
+      <p>While the first READ Y:0 picks up the sequence after the first character, notice how the graphic portion of the sequence appears on the terminal – this is because the READ *X separated the escape character from the rest of the sequence thus preventing the terminal driver logic from recognizing it as a sequence, and suppressing its echo. The explicit suppression of echo removes this visual artifact. In the case of the final READ *X, the FLUSH clears the input buffer so that it is empty by the time of the READ Y:0.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="terminal_read.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="using_terminals.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="read_maxlen.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Terminating a Terminal READ </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> READ X#maxlen Command for Terminals</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/read_cmmd_for_terminals.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+</html>

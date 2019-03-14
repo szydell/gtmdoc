@@ -1,0 +1,78 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s08.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Hang</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s07.html" title="Halt">
+<link rel="next" href="ch06s09.html" title="If">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Hang</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s07.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s09.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">Hang</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Hang"></a>Hang<a class="indexterm" name="idp186305008"></a>
+</h2></div></div></div>
+<p>The HANG command suspends GT.M program execution for a period of time specified by the command argument.</p>
+<p>The format of the HANG command is:</p>
+<pre class="programlisting">H[ANG][:tvexpr] numexpr[,...]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The numeric expression specifies the time in seconds to elapse before resuming execution; actual elapsed time may vary slightly from the specified time. If the numeric expression is negative, HANG has no effect. Portability requirements for GT.M only guarantee accuracy to the nearest second. <span>However, more accuracy can be found on different UNIX systems.</span></p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more HANG arguments form a legal argument to a HANG.</p></li>
+</ul></div>
+<p>A process that repeatedly tests for some event, such as a device becoming available or another process modifying a global variable, may use a HANG to limit its consumption of computing resources.</p>
+<p>Because HALT and HANG share the same abbreviation (H), GT.M differentiates them based on whether an argument follows the command.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Examples_of_Hang"></a>Examples<span> of HANG</span><a class="indexterm" name="idp186309760"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">For  Quit:$Data(^CTRL(1))  Hang 30</pre>
+<p>This FOR loop repeatedly tests for the existence of ^CTRL(1), and terminates when that global variable exists. Otherwise the routine HANGs for 30 seconds and tests again.</p>
+<p>Example:</p>
+<pre class="programlisting">SET t=1 For  Quit:$Data(^CTRL(1))  Hang t If t&lt;30 Set t=t+1</pre>
+<p>This is similar to the previous example, except that it uses an adaptive time that lengthens from 1 second to a limit of 30 seconds if the routine stays in the loop.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s07.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s09.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Halt </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> If</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s08.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+</html>

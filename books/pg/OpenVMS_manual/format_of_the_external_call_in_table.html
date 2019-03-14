@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/format_of_the_external_call_in_table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:56 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Format of the External Call Table</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="external_call_tables.html" title="External Call Tables" />
+    <link rel="prev" href="creating_an_external_call_table_file.html" title="Creating an External Call Table File" />
+    <link rel="next" href="the_zcentry_elements.html" title="The Zcentry Elements" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Format of the External Call Table</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="creating_an_external_call_table_file.html">Prev</a> </td>
+          <th width="60%" align="center">External Call Tables</th>
+          <td width="20%" align="right"> <a accesskey="n" href="the_zcentry_elements.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="format_of_the_external_call_in_table"></a>Format of the External Call Table</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4227819" class="indexterm"></a>
+      <p>The format for an external call table is:</p>
+      <pre class="programlisting">
+	ZCINIT | ZCALLINI
+	[zcentries] 
+	.
+	.
+	.
+	ZCALLFIN
+	.END
+	</pre>
+      <p>Where:</p>
+      <p>
+	ZCINIT or ZCALLINI</p>
+      <p>Appears at the beginning of every file, before the first zcentry. ZCALLINI and ZCINIT are synonyms.</p>
+      <p>zcentry:	A set of related lines specifying the characteristics of one external routine. An external call table source file may contain multiple table entries. zcentries are described in a separate section of this chapter.</p>
+      <p>ZCALLFIN:	Appears as the last line before .END in the external call table. A ZCALLFIN marks the end of the table and triggers proper processing of the last entry. If the table does not include a ZCALLFIN, the VMS assembler terminates without invoking the proper edit checks, silently producing a defective external call table that fails at run-time. </p>
+      <p>.END:		Appears as the final line of any VMS MACRO source file.</p>
+      <p>The MACRO may not include any programmed code between the ZCINIT or ZCALLINI and the ZCALLFIN. Programmed code should appear before the ZCINIT or ZCALLINI.</p>
+      <p>You must also point to the object library that contains the macros needed to assemble the external call tables. This may be done by adding</p>
+      <pre class="programlisting">
+	.library &quot;gtm$dist:gtmzcall.mlb&quot;
+	</pre>
+      <p>to the external call table before the line containing ZCINIT or ZCALLINI. Alternatively, you must add </p>
+      <pre class="programlisting">
+	+gtm$dist:gtmzcall.mlb/LIBRARY	
+	</pre>
+      <p>the MACRO command, as shown in the &quot;External Call Example&quot; section.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="creating_an_external_call_table_file.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="external_call_tables.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="the_zcentry_elements.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Creating an External Call Table File </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> The Zcentry Elements</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/format_of_the_external_call_in_table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:56 GMT -->
+</html>

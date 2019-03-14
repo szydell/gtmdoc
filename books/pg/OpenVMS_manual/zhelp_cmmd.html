@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zhelp_cmmd.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:37 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ZHelp</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="Chapter 6. Commands" />
+    <link rel="prev" href="examples_of_zgoto.html" title="Examples of ZGOTO" />
+    <link rel="next" href="ex_of_zhelp.html" title="Examples of ZHELP" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ZHelp</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zgoto.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 6. Commands</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ex_of_zhelp.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zhelp_cmmd"></a>ZHelp</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="ex_of_zhelp.html">Examples of ZHELP</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4178747" class="indexterm"></a>
+      <p>The ZHELP command provides access to help information from the GTM help library or from any help library specified in the command argument.</p>
+      <p>The format of the ZHELP command is:</p>
+      <pre class="programlisting">
+        ZH[ELP][:tvexpr] [expr1[:expr2],...]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>The optional first expression specifies the help topic.</p>
+          </li>
+          <li>
+            <p>If ZHELP has no argument or expr1=&quot;&quot;, ZHELP invokes base level help; at least two (2) spaces must follow a ZHELP command with no argument to separate it from the next command on the line.</p>
+          </li>
+          <li>
+            <p>The optional second expression specifies the help file name of a Global Directory containing ^HELP.</p>
+          </li>
+          <li>
+            <p>If ZHELP does not specify the second expression, the help file-specification defaults to GTM$HELP:M.HLB name of the Global Directory defaults to $gtm_dist/gtmhelp.gld.</p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom evaluating to a list of one or more ZHELP arguments form a legal argument for a ZHELP</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zgoto.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ex_of_zhelp.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of ZGOTO </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of ZHELP</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zhelp_cmmd.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:37 GMT -->
+</html>

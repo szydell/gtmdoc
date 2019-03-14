@@ -1,0 +1,1564 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Alias_Variables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:00:49 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<base target="_top">
+<style type="text/css">
+  
+
+/* default css */
+
+table {
+  font-size: 1em;
+  line-height: inherit;
+  border-collapse: collapse;
+}
+
+
+tr {
+  
+  text-align: left;
+  
+}
+
+
+div, address, ol, ul, li, option, select {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p {
+  margin: 0px;
+}
+
+
+pre {
+  font-family: Courier New;
+  white-space: pre-wrap;
+  margin:0;
+}
+
+body {
+  margin: 6px;
+  padding: 0px;
+  font-family: Verdana, sans-serif;
+  font-size: 10pt;
+  background-color: #ffffff;
+  color: #000;
+}
+
+
+img {
+  -moz-force-broken-image-icon: 1;
+}
+
+@media screen {
+  html.pageview {
+    background-color: #f3f3f3 !important;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  
+
+  body {
+    min-height: 1100px;
+    
+    counter-reset: __goog_page__;
+  }
+  
+  * html body {
+    height: 1100px;
+  }
+  /* Prevent repaint errors when scrolling in Safari. This "Star-7" css hack
+     targets Safari 3.1, but not WebKit nightlies and presumably Safari 4.
+     That's OK because this bug is fixed in WebKit nightlies/Safari 4 :-). */
+  html*#wys_frame::before {
+    content: '\A0';
+    position: fixed;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+  }
+  
+  .pageview body {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 2px solid #bbb;
+    border-bottom: 2px solid #bbb;
+    width: 648px !important;
+    margin: 15px auto 25px;
+    padding: 40px 50px;
+  }
+  /* IE6 */
+  * html {
+    overflow-y: scroll;
+  }
+  * html.pageview body {
+    overflow-x: auto;
+  }
+  
+
+  
+    
+    .writely-callout-data {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    
+
+    .writely-footnote-marker {
+      background-image: url('MISSING.html');
+      background-color: transparent;
+      background-repeat: no-repeat;
+      width: 7px;
+      overflow: hidden;
+      height: 16px;
+      vertical-align: top;
+
+      
+      -moz-user-select: none;
+    }
+    .editor .writely-footnote-marker {
+      cursor: move;
+    }
+    .writely-footnote-marker-highlight {
+      background-position: -15px 0;
+      -moz-user-select: text;
+    }
+    .writely-footnote-hide-selection ::-moz-selection, .writely-footnote-hide-selection::-moz-selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection ::selection, .writely-footnote-hide-selection::selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection {
+      cursor: move;
+    }
+
+    /* Comments */
+    .writely-comment-yellow {
+      background-color: #ffffd7;
+    }
+    .writely-comment-orange {
+      background-color: #ffe3c0;
+    }
+    .writely-comment-pink {
+      background-color: #ffd7ff;
+    }
+    .writely-comment-green {
+      background-color: #d7ffd7;
+    }
+    .writely-comment-blue {
+      background-color: #d7ffff;
+    }
+    .writely-comment-purple {
+      background-color: #eed7ff;
+    }
+
+  
+
+
+  
+  .br_fix span+br:not(:-moz-last-node) {
+    
+    position:relative;
+    
+    left: -1ex
+    
+  }
+
+  
+  #cb-p-tgt {
+    font-size: 8pt;
+    padding: .4em;
+    background-color: #ddd;
+    color: #333;
+  }
+  #cb-p-tgt-can {
+    text-decoration: underline;
+    color: #36c;
+    font-weight: bold;
+    margin-left: 2em;
+  }
+  #cb-p-tgt .spin {
+    width: 16px;
+    height: 16px;
+    background: url(http://ssl.gstatic.com/docs/clipboard/spin_16o.gif) no-repeat;
+  }
+}
+
+h6 { font-size: 8pt }
+h5 { font-size: 8pt }
+h4 { font-size: 10pt }
+h3 { font-size: 12pt }
+h2 { font-size: 14pt }
+h1 { font-size: 18pt }
+
+blockquote {padding: 10px; border: 1px #DDD dashed }
+
+.webkit-indent-blockquote { border: none; }
+
+a img {border: 0}
+
+.pb {
+  border-width: 0;
+  page-break-after: always;
+  /* We don't want this to be resizeable, so enforce a width and height
+     using !important */
+  height: 1px !important;
+  width: 100% !important;
+}
+
+.editor .pb {
+  border-top: 1px dashed #C0C0C0;
+  border-bottom: 1px dashed #C0C0C0;
+}
+
+div.google_header, div.google_footer {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+
+/* Table of contents */
+.editor div.writely-toc {
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+}
+.writely-toc > ol {
+  padding-left: 3em;
+  font-weight: bold;
+}
+ol.writely-toc-subheading {
+  padding-left: 1em;
+  font-weight: normal;
+}
+/* IE6 only */
+* html writely-toc ol {
+  list-style-position: inside;
+}
+.writely-toc-none {
+  list-style-type: none;
+}
+.writely-toc-decimal {
+  list-style-type: decimal;
+}
+.writely-toc-upper-alpha {
+  list-style-type: upper-alpha;
+}
+.writely-toc-lower-alpha {
+  list-style-type: lower-alpha;
+}
+.writely-toc-upper-roman {
+  list-style-type: upper-roman;
+}
+.writely-toc-lower-roman {
+  list-style-type: lower-roman;
+}
+.writely-toc-disc {
+  list-style-type: disc;
+}
+
+/* Ordered lists converted to numbered lists can preserve ordered types, and
+   vice versa. This is confusing, so disallow it */
+ul[type="i"], ul[type="I"], ul[type="1"], ul[type="a"], ul[type="A"] {
+  list-style-type: disc;
+}
+
+ol[type="disc"], ol[type="circle"], ol[type="square"] {
+  list-style-type: decimal;
+}
+
+/* end default css */
+
+
+  /* default print css */
+  @media print {
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    div.google_header, div.google_footer {
+      display: block;
+      min-height: 0;
+      border: none;
+    }
+
+    div.google_header {
+      flow: static(header);
+    }
+
+    /* used to insert page numbers */
+    div.google_header::before, div.google_footer::before {
+      position: absolute;
+      top: 0;
+    }
+
+    div.google_footer {
+      flow: static(footer);
+    }
+
+    /* always consider this element at the start of the doc */
+    div#google_footer {
+      flow: static(footer, start);
+    }
+
+    span.google_pagenumber {
+      content: counter(page);
+    }
+
+    span.google_pagecount {
+      content: counter(pages);
+    }
+
+    .endnotes {
+      page: endnote;
+    }
+
+    /* MLA specifies that endnotes title should be 1" margin from the top of the page. */
+    @page endnote {
+      margin-top: 1in;
+    }
+
+    callout.google_footnote {
+      
+      display: prince-footnote;
+      footnote-style-position: inside;
+      /* These styles keep the footnote from taking on the style of the text
+         surrounding the footnote marker. They can be overridden in the
+         document CSS. */
+      color: #000;
+      font-family: Verdana;
+      font-size: 10.0pt;
+      font-weight: normal;
+    }
+
+    /* Table of contents */
+    #WritelyTableOfContents a::after {
+      content: leader('.') target-counter(attr(href), page);
+    }
+
+    #WritelyTableOfContents a {
+      text-decoration: none;
+      color: black;
+    }
+
+    /* Comments */
+    .writely-comment-yellow {
+      background-color: #ffffd7;
+    }
+    .writely-comment-orange {
+      background-color: #ffe3c0;
+    }
+    .writely-comment-pink {
+      background-color: #ffd7ff;
+    }
+    .writely-comment-green {
+      background-color: #d7ffd7;
+    }
+    .writely-comment-blue {
+      background-color: #d7ffff;
+    }
+    .writely-comment-purple {
+      background-color: #eed7ff;
+    }
+  }
+
+  @page {
+    @top {
+      content: flow(header);
+    }
+    @bottom {
+      content: flow(footer);
+    }
+    @footnotes {
+      border-top: solid black thin;
+      padding-top: 8pt;
+    }
+  }
+  /* end default print css */
+
+
+/* custom css */
+
+
+/* end custom css */
+
+/* ui edited css */
+
+body {
+  font-family: Verdana;
+  
+  font-size: 10.0pt;
+  line-height: normal;
+  background-color: #ffffff;
+}
+/* end ui edited css */
+
+
+/* editor CSS */
+.editor a:visited {color: #551A8B}
+.editor table.zeroBorder {border: 1px dotted gray}
+.editor table.zeroBorder td {border: 1px dotted gray}
+.editor table.zeroBorder th {border: 1px dotted gray}
+
+
+.editor div.google_header, .editor div.google_footer {
+  border: 2px #DDDDDD dashed;
+  position: static;
+  width: 100%;
+  min-height: 2em;
+}
+
+.editor .misspell {background-color: yellow}
+
+.editor .writely-comment {
+  font-size: 9pt;
+  line-height: 1.4;
+  padding: 1px;
+  border: 1px dashed #C0C0C0
+}
+
+
+/* end editor CSS */
+
+</style>
+
+  
+  <title>GT.M Alias Variables Technical Bulletin</title>
+
+</head>
+
+<body 
+    
+    >
+    
+    
+    
+<h1>
+  <a id=Technical_Bulletin_GT_M_on_IBM name=Technical_Bulletin_GT_M_on_IBM></a>Technical Bulletin - GT.M Alias Variables
+</h1>
+<div class=legalnotice>
+  Copyright © 2010 Fidelity Information Services, Inc.<br>
+  <br>
+  Permission is granted to copy, distribute and/or modify this document under the terms of the <a href=http://www.gnu.org/licenses/fdl.txt id=lpr- target=_blank title="Click here to read the GNU Free Documentation License">GNU Free Documentation License</a>, Version 1.3 or any later version published by the <a href=http://www.fsf.org/ id=pl7z target=_blank title="Click here to visit the Free Software Foundation web site">Free Software Foundation</a>; with no Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.<br>
+  <br>
+  <p>
+    <a href=http://fis-gtm.com/ id=u58d target=_blank title="Click here to visit the GT.M web site">GT.M™</a> is a trademark of <a href=http://fisglobal.com/ id=q.in target=_blank title="Click here to visit the Fidelity Information Services web site">Fidelity Information Services, Inc.</a>&nbsp; Other trademarks are the property of their respective owners.<br>
+  </p>
+  <br>
+  <p>
+    This document contains a description of GT.M and the operating instructions pertaining to the various functions that comprise the system.&nbsp; This document does not contain any commitment made by FIS.&nbsp; FIS believes the information in this publication is accurate as of its publication date; such information is subject to change without notice.&nbsp; FIS is not responsible for any errors or defects.
+  </p>
+</div>
+<br>
+<h2>
+  <a id=Revision_History_5023846650535 name=Revision_History_5023846650535></a>Revision History
+</h2>
+<table border=1 bordercolor=#000000 cellpadding=3 cellspacing=0 id=ei_.>
+  <tbody>
+  <tr>
+    <td align=middle valign=top>
+      <b>Version<br>
+      </b>
+    </td>
+    <td>
+      <b>Date<br>
+      </b>
+    </td>
+    <td>
+      <b>Summary<br>
+      </b>
+    </td>
+  </tr>
+  <tr>
+    <td align=middle valign=top>
+      1.0<br>
+    </td>
+    <td>
+      July 15, 2009<br>
+    </td>
+    <td>
+      First published version<br>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<br>
+<table border=1 bordercolor=#000000 cellpadding=3 cellspacing=0 id=hp46 width=100%>
+  <tbody>
+  <tr align=left valign=top>
+    <td width=50%>
+      <p>
+        GT.M Group
+      </p>
+      <p>
+        Fidelity National Information Services, Inc.
+      </p>
+      <p>
+        2 West Liberty Boulevard, Suite 300
+      </p>
+      <p>
+        Malvern, Pennsylvania 19355
+      </p>
+      <p>
+        United States of America
+      </p>
+    </td>
+    <td width=50%>
+      <p>
+        GT.M Support for customers: +1 (610) 578-4226 / <a href=mailto:gtmsupport@fisglobal.com title="If you have GT.M support, click here to send e-mail and request support">gtmsupport@fisglobal.com</a>
+      </p>
+      <p>
+        <br>
+      </p>
+      <p>
+        Switchboard: +1 (610) 296-8877
+      </p>
+      <p>
+        Website: <a href=http://fis-gtm.com/ id=j47- target=_blank title="Click here to visit the GT.M home page">http://fis-gtm.com</a><a href=http://fis-gtm.com/></a>
+      </p>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<p>
+  <br>
+</p>
+<p>
+</p>
+<hr class=pb>
+<p>
+</p>
+<h2>
+  Table of Contents
+</h2>
+<div>
+  &nbsp;
+</div>
+<div class=writely-toc id=WritelyTableOfContents toctype=none+none>
+  <ol class=writely-toc-none>
+    <li>
+      <div>
+        <a href=#Technical_Bulletin_GT_M_on_IBM target=_self>Technical Bulletin - GT.M Alias Variables</a>
+      </div>
+    </li>
+    <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+      <li>
+        <a href=#Revision_History_5023846650535 target=_self>Revision History</a>
+      </li>
+      <li>
+        <a href=#Table_of_Contents_039223560028 target=_self>Table of Contents</a>
+      </li>
+      <li>
+        <a href=#Overview_526893555955292_96370_09962329835726358 target=_self>Overview</a>
+      </li>
+      <li>
+        <a href=#Alias_Variables_95025963354077_8983357989661621 target=_self>Alias Variables</a>
+      </li>
+      <li>
+        <a href=#Alias_Container_Variables_5220_5803030655621366 target=_self>Alias Container Variables</a>
+      </li>
+      <li>
+        <a href=#SET_7457917997183523_682347886 target=_self>SET *</a>
+      </li>
+      <li>
+        <a href=#KILL_7009436540647335_91484100 target=_self>KILL *</a>
+      </li>
+      <li>
+        <a href=#Performance_24763483410507248_ target=_self>Performance</a>
+      </li>
+      <li>
+        <a href=#ZWRITE_ZSHOW_V_049421233381659_7571617271297899 target=_self>ZWRITE / ZSHOW "V"</a>
+      </li>
+      <li>
+        <a href=#NEW_9667415325171272_165009719 target=_self>NEW</a>
+      </li>
+      <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+        <li>
+          <a href=#Exclusive_NEW_6921190682072934_10170714009480963 target=_self>Exclusive NEW</a>
+        </li>
+      </ol>
+      <li>
+        <a href=#Pass_by_reference_862903517278 target=_self>Pass-by-reference</a>
+      </li>
+      <li>
+        <a href=#Transaction_Processing_8419822 target=_self>Transaction Processing</a>
+      </li>
+      <li>
+        <a href=#_ZAHandle_3014645014468562 target=_self>$ZAHandle()</a>
+      </li>
+      <li>
+        <a href=#_ZDATA_6500294525548655 target=_self>$ZDATA()</a>
+      </li>
+      <li>
+        <a href=#View_5720488537691276_9912662631991471 target=_self>View</a>
+      </li>
+      <li>
+        <a href=#_View_8201873041977097 target=_self>$View()</a>
+      </li>
+      <li>
+        <a href=#Annotated_Extended_Alias_Examp target=_self>Annotated Extended Alias Example</a>
+      </li>
+    </ol>
+  </ol>
+</div>
+<br>
+<hr class=pb>
+<h2>
+  Overview
+</h2>
+<div>
+  Effective V5.3-004, GT.M adds support for alias variables and alias container variables.
+</div>
+<p>
+  <br>
+</p>
+<p>
+  Alias variables provide a layer of abstraction between the name of a local variable and an array analogous to that provided by M pass by reference in subprogram invocations (with a DO command or a function call).&nbsp; Multiple local variables can be aliases to the same array, and a SET or KILL to one acts as a SET or KILL to all.&nbsp; Alias container variables provide a way of associating a reference to an entire local variable array with a data-cell, which protects the associated array even when it’s not accessible through any current local variable name.
+</p>
+<p>
+  <br>
+</p>
+<p>
+  GT.M aliases are intended to provide low level facilities on which an application can implement object-oriented techniques.&nbsp; An object can be mapped onto, and stored and manipulated in an <font face="arial narrow">array</font>, then saved in an alias container variable whence it can be retrieved for processing.&nbsp; The use of appropriate subscripts in the array used for a container, provides a way to organize the stored objects and retrieve them by using the $Order() function to traverse the container <font face="arial narrow">array</font>.&nbsp; The use of alias variables to implement objects provides significant efficiencies over traditional local variables because alias variables and alias container variables eliminate the need to execute MERGE commands to move objects.<br>
+</p>
+<p>
+  <br>
+</p>
+<p>
+  New SET * and KILL * commands manipulate alias variables and alias container variables.
+</p>
+<p>
+  <br>
+</p>
+<p>
+  Within this document:<br>
+</p>
+<p>
+  <br>
+</p>
+<ul>
+  <li>
+    <p>
+      <font face="arial narrow">array</font> is very similar to its definition in the M standard, and means an entire tree of nodes, including the root and all descendants, except that in this document it only applies to local variables and not to global variables.<br>
+    </p>
+  </li>
+  <li>
+    <p>
+      "Associated alias variables" means all alias variables and all alias container variables associated with an array.
+    </p>
+  </li>
+  <li>
+    <p>
+      <font face="arial narrow">lvn</font> is very similar to its definition in the M standard,, except that in this document, <font face="arial narrow">lvn</font> is used to refer to a local variable name with a subscript.
+    </p>
+  </li>
+  <li>
+    <font face="arial narrow">name</font> is very similar to its definition in the M standard, except that in this document, <font face="arial narrow">name</font> is just the name of a local variable (i.e., without a subscript).<br>
+  </li>
+  <li>
+    "Data cell" and "node" are synonyms.
+  </li>
+</ul>
+<br>
+<h2>
+  <a id=Alias_Variables_95025963354077_8983357989661621 name=Alias_Variables_95025963354077_8983357989661621></a>Alias Variables
+</h2>
+Alias Variables provide access to an array through multiple <font face="arial narrow">name</font>s.&nbsp; Conceptually an alias variable is the same as a pass-by-reference joining of multiple variable names, except that the joining of alias variables is explicit, whereas that of variables passed by reference is implicit.&nbsp; Indeed, the underlying implementation of alias variables and pass-by-reference within GT.M is the same.&nbsp; For example:<br>
+<br>
+<div style=MARGIN-LEFT:40px>
+  <font face="courier new">GTM&gt;Kill A,B</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Set A=1,*B=A ; B &amp; A are aliases</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Write B</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">1</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;</font>
+</div>
+<br>
+<ul>
+  <li>
+    All alias variables associated with the same array are equivalent in their access to its nodes - e.g., a SET of a node in an <font face="arial narrow">array</font> via one <font face="arial narrow">name</font> is no different than a SET to that node via any other <font face="arial narrow">name</font> of which it is an alias.&nbsp; Nothing about the order of their creation or association has any significance.
+  </li>
+  <li>
+    Once an array becomes accessible via only a single unsubscripted <font face="arial narrow">name</font>, GT.M treats that <font face="arial narrow">name</font> as a traditional local variable.
+  </li>
+  <li>
+    GT.M treats variables joined through pass-by-reference as a special variant of an alias variable.&nbsp; Pass-by-reference relates to the M stack model with aliasing implicitly occurring as a side effect of invocation with DO or $$ and unaliasing implicitly as a side effect of QUIT.&nbsp; In the broader alias case, program commands directly alias and unalias <font face="arial narrow">name</font>s without any binding to the M stack.
+  </li>
+  <li>
+    GT.M treats the state of a TP (Transaction Processing) RESTART variable as an internal alias, which it only exposes if the transaction creating it RESTARTs.
+  </li>
+  <li>
+    GT.M treats variables hidden by exclusive NEW as a type of alias.<br>
+  </li>
+  <li>
+    Owing to their implicit behavior, under certain circumstances, pass-by-reference aliases, RESTART variable&nbsp; and exclusive NEW aliases are not entirely symmetrical with respect to explicitly created alias variables (i.e., they may come and go at different times, whereas alias variables come and go under application program control).<br>
+  </li>
+</ul>
+<h2>
+  <a id=Alias_Container_Variables_5220_5803030655621366 name=Alias_Container_Variables_5220_5803030655621366></a>Alias Container Variables
+</h2>
+Alias container variables are (subscripted) <font face="arial narrow">lvn</font>s protecting arrays for subsequent access by an alias variable.&nbsp; Since accessing an array requires an <font face="arial narrow">name</font>, you can alias a <font face="arial narrow">name</font> with the alias container to regain access to an array stored in a container.&nbsp; For example:<br>
+<br>
+<div style=MARGIN-LEFT:40px>
+  <font face="courier new">GTM&gt;Kill A,B,C</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Set A=1,*C(2)=A ; C(2) is a container</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;ZWRite</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">A=1 ;*</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">*C(2)=A</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Set *B=C(2) ; B is now an alias</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Write B,":",$Length(C(2)),":" ; An alias variable provides access but a container doe</font><font face="courier new">sn't</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">1:0:</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;</font><br>
+</div>
+<br>
+<ul>
+  <li>
+    The value of an alias container is the empty string.
+  </li>
+  <li>
+    Use the SET * command to associate an <font face="courier new">name</font> with the container to obtain access to the <font face="courier new">array</font> in a container.
+  </li>
+  <li>
+    SET with an alias container as left-hand side target replaces the value at that node of the container variable and destroys any prior alias association with an array.
+  </li>
+  <li>
+    References to descendants of a alias container variable refer to nodes of the named parent array and have no&nbsp; relationship to any array contained by a parent node.
+  </li>
+  <li>
+    An alias container variable serves as a way to organize and manage entire <font face="arial narrow">array</font>s.
+  </li>
+  <li>
+    While it takes two alias variables for an array to be considered aliased, it only takes one alias container variable to do so.
+  </li>
+</ul>
+<h2>
+  <a id=SET_7457917997183523_682347886 name=SET_7457917997183523_682347886></a>SET *
+</h2>
+<div style=MARGIN-LEFT:40px>
+  <p>
+    <font face="Courier New">S<font face=verdana>[</font>ET<font face=verdana>][</font>:<font face="arial narrow">tvexpr</font><font face=verdana>]</font> *<font face="arial narrow">lvn</font><font face=verdana>|</font><font face="arial narrow">name1</font>=<font face="arial narrow">name2<font face=verdana>[</font><font face="courier new">,</font>...<font face=verdana>]</font></font><br>
+    </font>
+  </p>
+</div>
+<br>
+<p>
+  A SET * command explicitly creates an alias.&nbsp; Any previous <font face="arial narrow">array</font> associated with <font face="arial narrow">lvn</font> or <font face="arial narrow">name1</font> ceases to be associated with it, and if <font face="arial narrow">lvn</font> was the only <font face="arial narrow">lvn</font> or <font face="arial narrow">name</font>&nbsp;associated with that (old) array in any scope, GT.M may reclaim the space it occupied.&nbsp; Alias assignment does not require that any data set exist for <font face="arial narrow">name2</font>; the assignment simply creates an association.<br>
+</p>
+<br>
+<ul>
+  <li>
+    SET * left-hand side arguments cannot be parenthetically enclosed lists such as <font face="courier new">SET (a,*b)=c</font>
+  </li>
+  <li>
+    <font face=Verdana>SET and SET * assignments can be combined into one command in a comma separated list, e.g., <font face="courier new">SET *a=b,^c(3)=d(4)</font></font>
+  </li>
+  <li>
+    SET * only accepts argument indirection, i.e., while <font face="courier new">SET x="*a=b",@x</font> is permitted, neither <font face="courier new">SET x="*a",@x=b</font> nor <font face="courier new">SET x="b",*a=@x</font> is permitted.
+  </li>
+  <li>
+    SET * right-hand side arguments must be <font face="arial narrow">name</font>s, rather than any form of general expression (<font face="arial narrow">expr</font>).<br>
+  </li>
+</ul>
+<br>
+GT.M maintains a count of the number of aliases associated with an <font face="arial narrow">array</font> (the array associated with a traditional local variable, sans any aliases, is one).&nbsp; When the count drops to zero, space used by that <font face="arial narrow">array</font> can be reclaimed by the GT.M garbage collector.<br>
+<br>
+It is possible to create an association between two names, neither of which has any value.&nbsp; Assigning a value to one makes the values visible, e.g.:<br>
+<br>
+<div style=MARGIN-LEFT:40px>
+  <font face="courier new">GTM&gt;ZWRite ; Nothing there</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Set *A=B ; Create an association</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;ZWRite ; Still no data to look at</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Set A("Malvern")="Pennsylvania" ; Create a node</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;ZWRite ; Now both have values</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">A("Malvern")="Pennsylvania"</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">*B=A</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;</font><br>
+</div>
+<br>
+Creating an alias container variable not only creates the association but also assigns data (the empty string) to the alias container node:<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  GTM&gt;ZWRite ; Nothing there<br>
+  <br>
+  GTM&gt;Set *C("I am a container")=D<br>
+  <br>
+  GTM&gt;ZWRite ; Both array for C and association for C("I am a container") are visible<br>
+  *C("I am a container")=D<br>
+  <br>
+  GTM&gt;Set D=4,D("Jacksonville")="Florida" ; The array for D comes into existence<br>
+  <br>
+  GTM&gt;ZWRite ; All is revealed<br>
+  *C("I am a container")=D<br>
+  D=4 ;*<br>
+  D("Jacksonville")="Florida"<br>
+  <br>
+  GTM&gt;
+</div>
+<br>
+Attempting to create an alias from subscripted lvn that is not an alias container variable triggers an error.&nbsp; Continuing the last example:<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  GTM&gt;Set *E=C("I am a container") ; This works because C("I am a container") is a container<br>
+  GTM&gt;Set *F=C(4) ; But this fails because C(4) is not a container<br>
+  %GTM-E-UNDEF, Undefined local variable: C(4)<br>
+</div>
+<br style="FONT-FAMILY:Courier New">
+<div style=MARGIN-LEFT:40px>
+  <font face="courier new">GTM&gt;ZWRite E,F ; Note that E has the value originally assigned to D but F remains undefined</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">E=4 ;*</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">E("Jacksonville")="Florida"</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">%GTM-E-UNDEF, Undefined local variable: F</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;</font><br>
+</div>
+<h2>
+  <a id=KILL_7009436540647335_91484100 name=KILL_7009436540647335_91484100></a>KILL *
+</h2>
+<div style=MARGIN-LEFT:40px>
+  <font face="Courier New">K<font face=verdana>[</font>ILL<font face=verdana>][</font>:<font face="arial narrow">tvexpr</font><font face=verdana>]</font> *<font face="arial narrow">lvn</font><font face=verdana>|</font><font face="arial narrow">name</font></font><font face="arial narrow"><font face=verdana>[</font><font face="courier new">,</font>...<font face=verdana>]</font></font>
+</div>
+<br>
+KILL * removes the association between its arguments, and any associated <font face="arial narrow">array</font>s.&nbsp; The arguments are left undefined, just as with a standard KILL.&nbsp; If the array has no remaining associations after the KILL *, GT.M can reuse the memory it occupied.&nbsp; For example:<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  GTM&gt;Set A=1,*B=A ; Create an array and an association<br>
+  <br>
+  GTM&gt;ZWRite ; Show that the array and association exist<br>
+  A=1 ;*<br>
+  *B=A<br>
+  <br>
+  GTM&gt;Kill *A ; Remove the association for A - it now has no association and no array<br>
+  <br>
+  GTM&gt;ZWRite ; B is a traditional local variable<br>
+  B=1<br>
+  <br>
+  GTM&gt;Set A=2 ; Create an array for A<br>
+  <br>
+  GTM&gt;ZWRite ; A and B have different values and both are traditional local variables<br>
+  A=2<br>
+  B=1<br>
+  <br>
+  GTM&gt;
+</div>
+<br>
+KILL on the other hand, removes data in the array (and possibly the array itself) without affecting any alias association.<br>
+<br>
+<div style=MARGIN-LEFT:40px>
+  <font face="courier new">GTM&gt;Set A=2,*B=A ; Create an array and an association</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;ZWRite ; Both array and association exist</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">A=2 ;*</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">*B=A</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Kill A ; Kill the array</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;ZWRite ; There's no data to show</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Set B=3 ; Create a new array by setting a value</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;ZWRite ; The association was unaffected by the Kill</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">A=3 ;*</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">*B=A</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;</font><br>
+</div>
+<br>
+KILL * of a container variable is just like a KILL of an alias variable, and deletes the association between <font face="arial narrow">lvn</font> and <font face="arial narrow">array</font>.<br>
+<br>
+KILL * treats an alias formed though pass-by-reference the same as any alias variable by removing the alias association:<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  $ mumps -run killalias<br>
+  killalias&nbsp;&nbsp; &nbsp;; Demonstrate Kill * of pass by reference<br>
+  &nbsp;&nbsp; &nbsp;ZPrint ; Print this program<br>
+  &nbsp;&nbsp; &nbsp;Set A=1,C=3<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "Initial Values:",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Do K1(.A,.C)&nbsp;&nbsp; &nbsp;; Pass A &amp; C by reference<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "Value of A is unchanged because of Kill *B, but C has changed: ",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Quit<br>
+  &nbsp;&nbsp; &nbsp;;<br>
+  K1(B,D)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;; A &amp; C are bound to B &amp; D respectively<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "A &amp; B are aliases, as are C &amp; D:",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Kill *B<br>
+  &nbsp;&nbsp; &nbsp;Set B=2,D=4<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "After Kill *B, A &amp; B are different but C &amp; D remain associated:",!<br>
+  &nbsp;&nbsp; &nbsp;ZWrite<br>
+  &nbsp;&nbsp; &nbsp;Quit<br>
+  ------------<br>
+  Initial Values:<br>
+  A=1<br>
+  C=3<br>
+  ------------<br>
+  A &amp; B are aliases, as are C &amp; D:<br>
+  A=1 ;*<br>
+  *B=A<br>
+  C=3 ;*<br>
+  *D=C<br>
+  ------------<br>
+  After Kill *B, A &amp; B are different but C &amp; D remain associated:<br>
+  A=1<br>
+  B=2<br>
+  C=4 ;*<br>
+  *D=C<br>
+  ------------<br>
+  Value of A is unchanged because of Kill *B, but C has changed:<br>
+  A=1<br>
+  C=4<br>
+  $
+</div>
+<br>
+<ul>
+  <li>
+    KILL * with no arguments removes all aliases and alias containers connections.
+  </li>
+</ul>
+<ul>
+  <li>
+    You can intermix KILL and KILL * in an argument list, e.g.: <font face="courier new">Kill *A,B</font>
+  </li>
+  <li>
+    Kill * is not permitted inside a parenthesized list of exclusions, e.g.: <font face="courier new">KILL (*A)</font> is an error.<br>
+  </li>
+  <li>
+    An exclusive Kill where one associated <font face="arial narrow">name</font> is inside the parenthetic list of exclusions and another associated <font face="arial narrow">name</font> is not with that list kills the array through the name that is not inside the list.&nbsp; The association, however, is preserved:<br>
+    <br>
+    <font face="courier new">GTM&gt;Set A=1,*B=A ; Create an array and association</font><br style="FONT-FAMILY:Courier New">
+    <br style="FONT-FAMILY:Courier New">
+    <font face="courier new">GTM&gt;ZWRite ; Verify that it's there</font><br style="FONT-FAMILY:Courier New">
+    <font face="courier new">A=1 ;*</font><br style="FONT-FAMILY:Courier New">
+    <font face="courier new">*B=A</font><br style="FONT-FAMILY:Courier New">
+    <br style="FONT-FAMILY:Courier New">
+    <font face="courier new">GTM&gt;Kill (A) ; Kill everything except A</font><br style="FONT-FAMILY:Courier New">
+    <br style="FONT-FAMILY:Courier New">
+    <font face="courier new">GTM&gt;ZWRite ; Demonstrate that A also has no array</font><br style="FONT-FAMILY:Courier New">
+    <br style="FONT-FAMILY:Courier New">
+    <font face="courier new">GTM&gt;Set A=2 ; Create an array</font><br style="FONT-FAMILY:Courier New">
+    <br style="FONT-FAMILY:Courier New">
+    <font face="courier new">GTM&gt;ZWRite ; The association survived the Kill</font><br style="FONT-FAMILY:Courier New">
+    <font face="courier new">A=2 ;*</font><br style="FONT-FAMILY:Courier New">
+    <font face="courier new">*B=A</font><br style="FONT-FAMILY:Courier New">
+    <br style="FONT-FAMILY:Courier New">
+    <font face="courier new">GTM&gt;</font><br>
+  </li>
+</ul>
+<h2>
+  <a id=Performance_24763483410507248_ name=Performance_24763483410507248_></a>Performance
+</h2>
+With two exceptions, alias and alias container variables add no overhead to normal local variable performance:<br>
+<br>
+<ul>
+  <li>
+    Complex patterns of aliases layered onto TSTART RESTART variables.
+  </li>
+  <li>
+    Complex patterns of aliases intermixed with NEW scope management, particularly that using exclusive NEW.
+  </li>
+</ul>
+<br>
+There is no reason to avoid aliases in any situation, but in those two contexts, attention to tidy design will be rewarded.<br>
+<br>
+GT.M uses garbage collection to manage the storage used for local variables.&nbsp; Increasing the use of local variables, for example, to implement objects, will increase the need for gargage collection, even though the garbage collector and storage management are designed to be light weight and self-tuning.&nbsp; The use of alias variables to implement objects, however, is as efficient as any other method is likely to be, and except for the normal admonition to not keep arrays and local variables around when they are not needed, and to not create levels of contexts over and above those actually needed by appliation logic, you can use alias variables as liberally as your application needs demand.<br>
+<h2>
+  <a id=ZWRITE_ZSHOW_V_049421233381659_7571617271297899 name=ZWRITE_ZSHOW_V_049421233381659_7571617271297899></a>ZWRITE / ZSHOW "V"
+</h2>
+ZWRITE as applied to local variables and ZSHOW "V" are conceptually similar, with two differences:<br>
+<br>
+<ul>
+  <li>
+    ZWRITE allows the use of patterns to specify variables and subscripts to display whereas ZSHOW "V" applies to all local variables.
+  </li>
+  <li>
+    ZSHOW "V" optionally allows the output to be directed to a global or local variable, whereas ZWRITE always directs its output to the current output device.<br>
+  </li>
+</ul>
+<br>
+As tool for debugging, and to capture process state, ZWRITE and ZSHOW "V" graphically document alias variables, alias container variables, and the associated data as described below, in what is called the "ZWRITE format."<br>
+<br>
+In the ZWRITE format, the contents of an <font face="arial narrow">array</font> are displayed with the <font face="arial narrow">name</font> associated with that <font face="arial narrow">array</font> that appears first in the lexical ordering of <font face="arial narrow">name</font>s.&nbsp; GT.M displays both the unsubscripted and subscripted nodes and values, appending a notational space-semicolon-asterisk (<font face="courier new">";*"</font>) sequence to the unsubscripted value, if any.&nbsp; The ZWRITE format output is designed to be read into a GT.M process with the commands <font face="courier new">Read x</font> and <font face="courier new">Set @x</font> (where <font face="courier new">x</font> is any <font face="arial narrow">name</font>) executed in a loop.&nbsp; <font face="courier new">";*"</font> acts as a comment ignored by the SET command.&nbsp; In the following example, since A and C are aliases associated with the same <font face="arial narrow">array</font>, the nodes of that <font face="arial narrow">array</font> are output with A, which occurs lexically before C, even though the values were assigned to C:<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  GTM&gt;Set C=1,C("Malvern")="Wales",*A=C,*B(-3.14)=C<br>
+  <br>
+  GTM&gt;ZSHow "V" ; ZWRite would produce the same output<br>
+  A=1 ;*<br>
+  A("Malvern")="Wales"<br>
+  *B(-3.14)=A<br>
+  *C=A<br>
+  <br>
+  GTM&gt;ZWRite C ; Only one is name associated with the array on this ZWRite command<br>
+  C=1 ;*<br>
+  C("Malvern")="Wales"<br>
+  <br>
+  GTM&gt;
+</div>
+<br>
+Continuing the example, if the variables selected for the ZWRITE command do not include any of the the associated alias variables, the output shows only the reference, not the data:<br>
+<br>
+<div style=MARGIN-LEFT:40px>
+  <font face="courier new">GTM&gt;ZWRITE B ; B only has a container</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">*B(-3.14)=A</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;</font><br>
+</div>
+<br>
+When ZWRITE / ZSHOW "V" encounters an alias container for an array with no current alias variable, it uses a name $ZWRTAC<font face="arial narrow">n</font> as the made-up name of an alias variable for that array, where <font face="arial narrow">n</font> is an arbitrary but unique integer.&nbsp; The SET command recognizes this special name, thus enabling the output of a ZWRITE / ZSHOW "V" to be used to recreate alias containers without associated alias variables.&nbsp; Continuing the example above:<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  GTM&gt;Kill *A,*C ; Delete alias variables and associations, leaving only the container<br>
+  <br>
+  GTM&gt;ZWRite<br>
+  $ZWRTAC=""<br>
+  *B(-3.14)=$ZWRTAC1<br>
+  $ZWRTAC1=3 ;*<br>
+  $ZWRTAC1("Malvern")="Wales"<br>
+  $ZWRTAC=""<br>
+  <br>
+  GTM&gt;
+</div>
+<br>
+ZWRITE produces $ZWRTAC<font face="arial narrow">n</font> names to serve as data cell anchors which SET @ accepts as valid set left targets.&nbsp; $ZWRTAC<font face="arial narrow">n</font> names are created and destroyed when using ZWRITE output to drive restoration of a previously captured variable state.&nbsp; Except for their appearance in ZWRITE output and as left-hand side SET @ targets, they have no function.&nbsp; Other than SET, no other commands can use $ZWRTAC* in their syntax.&nbsp; Although $ZWRTAC<font face="arial narrow">n</font> superficially looks like an intrinsic special variable (ISV), they are not ISVs.&nbsp; $ZWRTAC<font face="arial narrow">n</font> with no subscripts can serve as the target (left side of the equals-sign) of a SET * command.&nbsp; SET $ZWRTAC (no trailing integer) deletes all data cell associations with the $ZWRTAC prefixed aliases. GT.M only recognizes the upper-case unabbreviated name and prefix $ZWRTAC.<br>
+<br>
+<ul>
+  <li>
+    <i>FIS strongly recommends that you not create or manipulate your own $ZWRTAC<font face="arial narrow">n</font> "variables".&nbsp; They are not part of the supported functionality for implementing alias variables and containers, but are rather a part of the underlying implementation that is visible to you, the GT.M user.&nbsp; FIS can arbitrarily , for its own convenience change the use of $ZWRTAC in GT.M at any time.&nbsp; They are only documented here since you may see them in the output of ZWRITE and ZSHOW "V".</i><br>
+  </li>
+</ul>
+<br>
+<h2>
+  <a id=NEW_9667415325171272_165009719 name=NEW_9667415325171272_165009719></a>NEW
+</h2>
+For the scope of the NEW, a NEW of a <font face="arial narrow">name</font> suspends its alias association.&nbsp; The association is restored when the scope of the New ends.&nbsp; The <font face="arial narrow">array</font> remains in existence - it can be modified through other alias variables with which it is associated and which remain in scope.&nbsp; If none of its alias variables is in scope, the <font face="arial narrow">array</font> remains intact and again becomes visible when the scope is restored.&nbsp; For example:<br>
+<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  $ mumps -run stackalias<br>
+  stackalias&nbsp;&nbsp; &nbsp;; Demonstrate New with alias<br>
+  &nbsp;&nbsp; &nbsp;ZPrint ; Print this program<br>
+  &nbsp;&nbsp; &nbsp;Set A=1,*B=A,*C(2)=A ; Create some aliases<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "ZWRite in the caller before subprogram",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Do S1&nbsp;&nbsp; &nbsp;; Call a subprogram<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "ZWRite in the caller after subprogram - A association is restored",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Quit<br>
+  &nbsp;&nbsp; &nbsp;;<br>
+  S1&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;; Subprogram<br>
+  &nbsp;&nbsp; &nbsp;New A<br>
+  &nbsp;&nbsp; &nbsp;Set A="I am not an alias",B="I am an alias"<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "ZWRite in the subprogram with new A and modified B",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Quit&nbsp;&nbsp;&nbsp;<br>
+  ------------<br>
+  ZWRite in the caller before subprogram<br>
+  A=1 ;*<br>
+  *B=A<br>
+  *C(2)=A<br>
+  ------------<br>
+  ZWRite in the subprogram with new A and modified B<br>
+  A="I am not an alias"<br>
+  B="I am an alias" ;*<br>
+  *C(2)=B<br>
+  ------------<br>
+  ZWRite in the caller after subprogram - A association is restored<br>
+  A="I am an alias" ;*<br>
+  *B=A<br>
+  *C(2)=A<br>
+  $
+</div>
+<h3>
+  <a id=Exclusive_NEW_6921190682072934_10170714009480963 name=Exclusive_NEW_6921190682072934_10170714009480963></a>Exclusive NEW
+</h3>
+An exclusive New can create a scope in which only one association between a name or an lvn and an array may be visible.&nbsp; In this case, ZWRITE nevertheless shows the existence of an alias, even when that array is accessible from only one name or lvn.&nbsp; The following is essentially the same as the prior example but using an exclusive NEW:<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  $ mumps -run stackalias1<br>
+  stackalias1&nbsp;&nbsp; &nbsp;; Demonstrate New with alias<br>
+  &nbsp;&nbsp; &nbsp;ZPrint ; Print this program<br>
+  &nbsp;&nbsp; &nbsp;Set A=1,*B=A,*C(2)=A ; Create some aliases<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "ZWRite in the caller before subprogram",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Do S1&nbsp;&nbsp; &nbsp;; Call a subprogram<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "ZWRite in the caller after subprogram - A association is restored",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Quit<br>
+  &nbsp;&nbsp; &nbsp;;<br>
+  S1&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;; Subprogram<br>
+  &nbsp;&nbsp; &nbsp;New (B)<br>
+  &nbsp;&nbsp; &nbsp;Set A="I am not an alias",B="I am an alias"<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "ZWRite in the subprogram - Notice B is flagged as an alias",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Quit<br>
+  ------------<br>
+  ZWRite in the caller before subprogram<br>
+  A=1 ;*<br>
+  *B=A<br>
+  *C(2)=A<br>
+  ------------<br>
+  ZWRite in the subprogram - Notice B is flagged as an alias<br>
+  A="I am not an alias"<br>
+  B="I am an alias" ;*<br>
+  ------------<br>
+  ZWRite in the caller after subprogram - A association is restored<br>
+  A="I am an alias" ;*<br>
+  *B=A<br>
+  *C(2)=A<br>
+  $
+</div>
+<br>
+The GT.M implementation of aliases and of exclusive NEW interact in a way making exclusive NEW slightly asymmetric to non-exclusive NEW.&nbsp; As a consequence of the expectation exclusive NEW tends to restrict the scope of more variables than it's preserving, when GT.M encounters an exclusive NEW it creates a fresh data environment and effectively aliases the excluded variables with their original copies.&nbsp; This technique tends to improve performance and meets the M standard.&nbsp; However, it has two implications: if there are no other alias associations beyond that created by the exclusive NEW, a KILL * with no arguments has the same effect as a KILL with no arguments, and ZWRITE and $ZDATA() treat an exclusively NEW variable as an alias - note the ZWRITE output in the immediately preceding example.<br>
+<h2>
+  <a id=Pass_by_reference_862903517278 name=Pass_by_reference_862903517278></a>Pass-by-reference
+</h2>
+GT.M's underlying implementation of pass-by-reference and alias variables is the same. As illustrated by the program killalias above, ZWRITE displays variables joined though pass-by-reference using alias conventions.&nbsp; Pass-by-reference is distinguished from aliase variables by its implicit creation and elimination.<br>
+<br>
+Note the interaction between pass by reference and alias variables if you attempt to change the association of a formallist parameter in a subprogram:<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  $ mumps -run switchalias<br>
+  switchalias&nbsp;&nbsp; &nbsp;; Demonstrate Set * on formalist parameter<br>
+  &nbsp;&nbsp; &nbsp;ZPrint&nbsp;&nbsp; &nbsp;; Print this program<br>
+  &nbsp;&nbsp; &nbsp;Set A=1,B=2<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "Initial Values:",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Do S1(.A)<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "On return:",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Quit<br>
+  &nbsp;&nbsp; &nbsp;;<br>
+  S1(X)&nbsp;&nbsp; &nbsp;;<br>
+  &nbsp;&nbsp; &nbsp;Set X=3<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "Inside call - note alias association for formallist parameter:",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Set *X=B,X=4&nbsp;&nbsp; &nbsp;; Change association of formallist parameter<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "Note changed association",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;Quit<br>
+  ------------<br>
+  Initial Values:<br>
+  A=1<br>
+  B=2<br>
+  ------------<br>
+  Inside call - note alias association for formallist parameter:<br>
+  A=3 ;*<br>
+  B=2<br>
+  *X=A<br>
+  ------------<br>
+  Note changed association<br>
+  A=3<br>
+  B=4 ;*<br>
+  *X=B<br>
+  ------------<br>
+  On return:<br>
+  A=3<br>
+  B=4<br>
+  $
+</div>
+<h2>
+  <a id=Transaction_Processing_8419822 name=Transaction_Processing_8419822></a>Transaction Processing
+</h2>
+The TSTART command can optionally list <font face="arial narrow">name</font>s whose <font face="arial narrow">array</font>s are restored on a transaction RESTART.&nbsp; If any of these are alias variables or have nodes which are alias container variables, their associations are also restored on transaction RESTART:<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  $ mumps -run tprestart<br>
+  tprestart&nbsp;&nbsp; &nbsp;; Transaction restart variable association also restored on restart<br>
+  &nbsp;&nbsp; &nbsp;ZPrint&nbsp;&nbsp; &nbsp;; Print this program<br>
+  &nbsp;&nbsp; &nbsp;Set A="Malvern",C="Pennsylvania",E="USA"<br>
+  &nbsp;&nbsp; &nbsp;Set *B=C,*D(19355)=E<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "Initial values &amp; association",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;TStart (B,D) ; On restart: A not restored, B,D restored, C,E restored by association<br>
+  &nbsp;&nbsp; &nbsp;If '$TRestart Do ; Change C,E if first time through<br>
+  &nbsp;&nbsp; &nbsp;.Set C="Wales",E="UK"<br>
+  &nbsp;&nbsp; &nbsp;.Kill *D(19355)<br>
+  &nbsp;&nbsp; &nbsp;.Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;.Write "First time through transaction; B,C,D,E changed",!<br>
+  &nbsp;&nbsp; &nbsp;.ZWRite<br>
+  &nbsp;&nbsp; &nbsp;.Set A="Brynmawr"<br>
+  &nbsp;&nbsp; &nbsp;.Kill *B<br>
+  &nbsp;&nbsp; &nbsp;.Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;.Write "A changed; association between B &amp; C and D &amp; E killed; B,D have no value",!<br>
+  &nbsp;&nbsp; &nbsp;.ZWRite<br>
+  &nbsp;&nbsp; &nbsp;.TRestart<br>
+  &nbsp;&nbsp; &nbsp;Else&nbsp; Do ; Show restored values on restart<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Write "Second time through transaction; B,C,D,E &amp; association restored",!<br>
+  &nbsp;&nbsp; &nbsp;ZWRite<br>
+  &nbsp;&nbsp; &nbsp;TCommit ; No global updates in this transaction!<br>
+  &nbsp;&nbsp; &nbsp;Quit<br>
+  ------------<br>
+  Initial values &amp; association<br>
+  A="Malvern"<br>
+  B="Pennsylvania" ;*<br>
+  *C=B<br>
+  *D(19355)=E<br>
+  E="USA" ;*<br>
+  ------------<br>
+  First time through transaction; B,C,D,E changed<br>
+  A="Malvern"<br>
+  B="Wales" ;*<br>
+  *C=B<br>
+  E="UK" ;*<br>
+  ------------<br>
+  A changed; association between B &amp; C and D &amp; E killed; B,D have no value<br>
+  A="Brynmawr"<br>
+  C="Wales" ;*<br>
+  E="UK" ;*<br>
+  ------------<br>
+  Second time through transaction; B,C,D,E &amp; association restored<br>
+  A="Brynmawr"<br>
+  B="Pennsylvania" ;*<br>
+  *C=B<br>
+  *D(19355)=E<br>
+  E="USA" ;*<br>
+  $
+</div>
+<br>
+Note that TROLLBACK does not restore alias variables:<br>
+<br>
+<div style=MARGIN-LEFT:40px>
+  <font face="courier new">$ mumps -run tprollback</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">tprollback&nbsp;&nbsp; &nbsp;;</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;ZPrint&nbsp;&nbsp; &nbsp;; Print this program</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Set A(1)=1,A(2)=2,A(3)=3</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Set B(1)="1b",*B(2)=A,B(3)=3 ; B includes a container for A</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Set *C(1)=B&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; C includes a container for B</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Kill *A,*B&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; C is the only way to the data</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Write "------------",!</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Write "Only containers before transaction:",!</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;ZWRite</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;TStart (C)</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;If '$TRestart</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;.Set *D=C(1)&nbsp;&nbsp; &nbsp;; D is now an alias for what used to be B</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;.Set D(3)=-D(3)</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;.Set *D=D(2)&nbsp;&nbsp; &nbsp;; D is now an alias for what used to be A</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;.Set D(1)=-D(1)</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;.Kill *D&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;; Kill D after is used to manipulate the arrays</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;.Write "------------",!</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;.Write "Changed values before restart:",!</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;.ZWRite</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;.TRestart</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Write "------------",!</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Write "Restored values restart:",!</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;ZWRite</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Kill C ; Kill only handle to arrays</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Write "------------",!</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Write "No local arrays left:",!</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;ZWRite</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;TROllback ; Rollback transaction, don't commit it</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Write "------------",!</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Write "Rollback doesn't restore names and local arrays",!</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;ZWRite</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">&nbsp;&nbsp; &nbsp;Quit</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">------------</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">Only containers before transaction:</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC=""</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">*C(1)=$ZWRTAC1</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC1(1)="1b"</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">*$ZWRTAC1(2)=$ZWRTAC2</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC2(1)=1</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC2(2)=2</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC2(3)=3</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC1(3)=3</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC=""</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">------------</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">Restored values restart:</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC=""</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">*C(1)=$ZWRTAC1</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC1(1)="1b"</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">*$ZWRTAC1(2)=$ZWRTAC2</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC2(1)=1</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC2(2)=2</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC2(3)=3</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC1(3)=3</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ZWRTAC=""</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">------------</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">No local arrays left:</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">------------</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">Rollback doesn't restore names and local arrays</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$</font><br>
+</div>
+<h2>
+  <a id=_ZAHandle_3014645014468562 name=_ZAHandle_3014645014468562></a>$ZAHandle()
+</h2>
+$ZAHANDLE() returns a unique identifier (handle) for the <font face="arial narrow">array</font> associated with a <font face="arial narrow">name</font> or an <font face="arial narrow">alias container</font>; for an subscripted lvn, it returns an empty string.&nbsp; To facilitate debugging, the handle is a printable string representation of a hexadecimal number. &nbsp; The only meaningful operation on the value returned by a call to $ZAHANDLE() is to compare it for equality with the value returned by another call.&nbsp; Changing nodes within the array doesn't change its handle.&nbsp; $ZAHANDLE() returns different results for copies of an array.<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  GTM&gt;Set A=1,*B(1)=A<br>
+  <br>
+  GTM&gt;Write "$ZAHandle(A)=""",$ZAHandle(A),""" $ZAHandle(B(1))=""",$ZAHandle(B(1)),""""<br>
+  $ZAHandle(A)="17B8810" $ZAHandle(B(1))="17B8810"<br>
+  GTM&gt;Set A("Subscript")="Value" ; Change array - but $ZAHandle() doesn't change<br>
+  <br>
+  GTM&gt;Write "$ZAHandle(A)=""",$ZAHandle(A),""" $ZAHandle(B(1))=""",$ZAHandle(B(1)),""""<br>
+  $ZAHandle(A)="17B8810" $ZAHandle(B(1))="17B8810"<br>
+  GTM&gt;Merge D=A ; A copy of the data has a different $ZAHandle()<br>
+  <br>
+  GTM&gt;Write "$ZAHandle(A)=""",$ZAHandle(A),""" $ZAHandle(D)=""",$ZAHandle(D),""""&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
+  $ZAHandle(A)="17B8810" $ZAHandle(D)="17B8C10"<br>
+  GTM&gt;<br>
+</div>
+<div style="FONT-FAMILY:Courier New">
+  <font face=Verdana><br>
+  Since GT.M does not provide a way for a function to return an <font face="arial narrow">array</font> or alias variable as its result, the uniqueness of $ZAHandle() can be exploited to effect this capability, by placing the result in a local variable with an agreed prefix (e.g., "%") and its $ZAHANDLE() as a suffix.&nbsp; The handle can be returned as the value.<br>
+  <br>
+  </font>
+  <div style=MARGIN-LEFT:40px>
+    $ mumps -run retval<br>
+    retval&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;; Return an array / object from a function<br>
+    &nbsp;&nbsp; &nbsp;;;Data for the object array<br>
+    &nbsp;&nbsp; &nbsp;;;Albert Einstein,14-March-1879<br>
+    &nbsp;&nbsp; &nbsp;;;Arthur Eddington,28-December-1882<br>
+    &nbsp;&nbsp; &nbsp;;;<br>
+    &nbsp;&nbsp; &nbsp;ZPRint&nbsp;&nbsp; &nbsp;; Print this program<br>
+    &nbsp;&nbsp; &nbsp;New tmp1,tmp2,tmp3<br>
+    &nbsp;&nbsp; &nbsp;For i=3:1 Set tmp1=$Text(+i),tmp2=$Piece(tmp1,";;",2) Quit:'$Length(tmp2)&nbsp; Do<br>
+    &nbsp;&nbsp; &nbsp;.Set tmp3="%"_$$NewPerson($Piece(tmp2,",",1),$Piece(tmp2,",",2))<br>
+    &nbsp;&nbsp; &nbsp;.Set @("*Relativists("_(i-2)_")="_tmp3)<br>
+    &nbsp;&nbsp; &nbsp;.Kill @("*"_tmp3)<br>
+    &nbsp;&nbsp; &nbsp;Kill tmp1,tmp2,tmp3<br>
+    &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+    &nbsp;&nbsp; &nbsp;Write "Array of objects of relativists:",!<br>
+    &nbsp;&nbsp; &nbsp;ZWRite<br>
+    &nbsp;&nbsp; &nbsp;Quit<br>
+    &nbsp;&nbsp; &nbsp;;&nbsp;&nbsp; &nbsp;<br>
+    NewPerson(name,birthdate)&nbsp;&nbsp; &nbsp;; Create new person object<br>
+    &nbsp;&nbsp; &nbsp;New lname,fname,dob,tmp1,tmp2 ; New variables used by this function<br>
+    &nbsp;&nbsp; &nbsp;Set lname=$Piece(name," ",2),fname=$Piece(name," ",1)<br>
+    &nbsp;&nbsp; &nbsp;Set dob=$$FUNC^%DATE(birthdate)<br>
+    &nbsp;&nbsp; &nbsp;Set tmp1("fname")=fname,tmp1("lname")=lname,tmp1("dob")=dob<br>
+    &nbsp;&nbsp; &nbsp;Set tmp2=$ZAHandle(tmp1)<br>
+    &nbsp;&nbsp; &nbsp;Set @("*%"_tmp2_"=tmp1")<br>
+    &nbsp;&nbsp; &nbsp;Quit tmp2<br>
+    ------------<br>
+    Array of objects of relativists:<br>
+    $ZWRTAC=""<br>
+    *Relativists(1)=$ZWRTAC1<br>
+    $ZWRTAC1("dob")=13952<br>
+    $ZWRTAC1("fname")="Albert"<br>
+    $ZWRTAC1("lname")="Einstein"<br>
+    *Relativists(2)=$ZWRTAC2<br>
+    $ZWRTAC2("dob")=15337<br>
+    $ZWRTAC2("fname")="Arthur"<br>
+    $ZWRTAC2("lname")="Eddington"<br>
+    i=5<br>
+    $ZWRTAC=""<br>
+    $
+  </div>
+</div>
+<h2>
+  <a id=_ZDATA_6500294525548655 name=_ZDATA_6500294525548655></a>$ZDATA()
+</h2>
+$ZDATA() extends $DATA() to reflects the current alias state of the <font face="arial narrow">lvn</font> or <font face="arial narrow">name</font> argument to identify alias and alias container variables.&nbsp; It treats variables joined through pass-by-reference as well as TP RESTART variables within a transaction as alias variables.&nbsp; However, it does not distinguish nodes having alias containers among their descendants.<br>
+<br>
+In addition to the four standard M results from $DATA(), $ZDATA() returns:<br>
+<br>
+101 for an alias or alias container with no descendants<br>
+111 for an alias or alias container with descendants<br>
+<br>
+Existing $DATA() tests for data and descendants report on alias and alias container variables, as well as other variables in the standard fashion. When an application uses alias and alias container variables $ZDATA() supplies additional information when needed.<br>
+<br style="FONT-FAMILY:Courier New">
+<div style=MARGIN-LEFT:40px>
+  <font face="courier new">GTM&gt;Set a=1,*b(1)=a,*c=d</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Write $Data(a)," ",$ZDATA(a)</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">1 101</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Write $Data(b)," ",$ZDATA(b)</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">10 10</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Write $Data(c)," ",$ZDATA(c)</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">0 100</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Write $Data(d)," ",$ZDATA(d)</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">0 100</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Write $Data(b(1))," ",$ZDATA(b(1))</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">1 101</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Set b(1,2)=2</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Write $Data(b(1))," ",$ZDATA(b(1))</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">11 111</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Write $Data(b(1,2))," ",$ZDATA(b(1,2))</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">1 1</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;</font><br>
+</div>
+<h2>
+  <a id=View_5720488537691276_9912662631991471 name=View_5720488537691276_9912662631991471></a>View
+</h2>
+VIEW now provides the following (additional) keywords, recognized as valid case-insensitive evaluations of its expression argument:<br>
+<br>
+<ul>
+  <li>
+    LV_GCOL - triggers a data-space garbage collection, which normally happens automatically at appropriate times
+  </li>
+  <li>
+    LV_REHASH - triggers a reorganization of the local variable look-up table, which normally happens automatically at appropriate times
+  </li>
+  <li>
+    STP_GCOL - triggers a string-pool garbage collection, which normally happens automatically at appropriate times
+  </li>
+</ul>
+<br>
+There are no visible effects from invoking these operations, except for the passage of time.<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  GTM&gt;View "stp_GCOL","lv_gcol","lv_rehash"<br>
+  <br>
+  GTM&gt;
+</div>
+<br>
+Depending on the state of your process, this example can require GT.M do a lot of work behind the scenes.<br>
+<br>
+FIS uses these VIEW facilities in testing.&nbsp; They are documented here primarily to ensure completeness in product documentation.&nbsp; You may (or may not) find them useful during application development for debugging or performance testing implementation alternatives.
+<h2>
+  <a id=_View_8201873041977097 name=_View_8201873041977097></a>$View()
+</h2>
+$VIEW() now provides the following (additional) keywords, recognized as valid case-insensitive evaluations of its first expression:<br>
+<br>
+<ul>
+  <li>
+    LV_CREF - returns the number of references by alias containers to the <font face="arial narrow">array</font> associated with an unsubscripted local variable name specified as a second expr (for example a quoted string); it returns a zero for a variable without any associated alias container
+  </li>
+  <li>
+    LV_GCOL - returns the number of data-spaces recovered during a local variable data-space garbage collection it triggers; such collections normally happen automatically at appropriate times
+  </li>
+  <li>
+    LV_REF - returns the total number of references to the data-space associated with an unsubscripted local variable name specified as a second expr (for example a quoted string)
+  </li>
+</ul>
+<br>
+FIS uses these $VIEW() facilities in testing and documents them to ensure completeness in product documentation.&nbsp; You may (or may not) find them useful during application development for debugging or performance testing implementation alternatives.&nbsp; The following example creates an alias variable and an alias container variable and checks the number of both container references and total references to the cells associated with both a and b:<br>
+<br>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  GTM&gt;Set a=1,*b(1)=a<br>
+  <br>
+  GTM&gt;Write $View("LV_CREF","a")," ",$View("LV_CREF","b")<br>
+  1 0<br>
+  GTM&gt;Write $View("LV_REF","a")," ",$View("LV_REF","b") &nbsp;<br>
+  2 1<br>
+  GTM&gt;<br>
+</div>
+<br>
+This example creates two cross associated alias containers, destroys their ancestor nodes with KILL * and uses $VIEW("LV_GCOL") to force a clean-up of the abandoned data-spaces. In the absence of the $VIEW("LV_GCOL"), GT.M would do this automatically at some subsequent convenient time:<br>
+<br style="FONT-FAMILY:Courier New">
+<div style=MARGIN-LEFT:40px>
+  <font face="courier new">GTM&gt;Set *a(1)=b,*b(1)=a</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Kill *a,*b</font><br style="FONT-FAMILY:Courier New">
+  <br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;Write $View("LV_GCOL")</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">2</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">GTM&gt;</font><br>
+</div>
+<h2>
+  <a id=Annotated_Extended_Alias_Examp name=Annotated_Extended_Alias_Examp></a>Annotated Extended Alias Example
+</h2>
+<div style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  $ mumps -run aliasexample<br>
+  aliasexample&nbsp;&nbsp; &nbsp;; Extended annotated alias example<br>
+  &nbsp;&nbsp; &nbsp;ZPrint<br>
+  &nbsp;&nbsp; &nbsp;Write "------------",!<br>
+  &nbsp;&nbsp; &nbsp;Set x="name level",x(1)=1,x(1,2)="1,2",x("foo")="bar"<br>
+  &nbsp;&nbsp; &nbsp;Write $ZDATA(x),! ; x is a conventional lvn - output 11<br>
+  &nbsp;&nbsp; &nbsp;Set *y=x ; x an y are now alias variables<br>
+  &nbsp;&nbsp; &nbsp;Write $ZDATA(x),! ; output appears as 111<br>
+  &nbsp;&nbsp; &nbsp;Set *a(1)=y ; a(1) is now an alias container variable<br>
+  &nbsp;&nbsp; &nbsp;Set b="bness",b("b")="bbness" ; b is a conventional lvn<br>
+  &nbsp;&nbsp; &nbsp;Set *b=a(1) ; b joins x and y as alias variables for the same data<br>
+  &nbsp;&nbsp; &nbsp;; prior b values are lost<br>
+  &nbsp;&nbsp; &nbsp;; Set *&lt;name&gt; is equivalent to Kill *&lt;name&gt; Set *&lt;name&gt;<br>
+  &nbsp;&nbsp; &nbsp;Set y("hi")="sailor" ; Assignment applies to all of {b,x,y}<br>
+  &nbsp;&nbsp; &nbsp;Kill b("foo") ; Kill applies to all of {b,x,y}<br>
+  &nbsp;&nbsp; &nbsp;Kill *x ; x is undefined and no longer an alias variable<br>
+  &nbsp;&nbsp; &nbsp;; b and y still provide access to the data<br>
+  &nbsp;&nbsp; &nbsp;Write a(1),"&lt;",! ; output appears as &lt;<br>
+  &nbsp;&nbsp; &nbsp;Write a(1)*3,! ; output appears as 0<br>
+  &nbsp;&nbsp; &nbsp;Write $Length(a(1)),! ; output appears as 0<br>
+  &nbsp;&nbsp; &nbsp;Set c=y,c("legs")="tars" ; c is conventional lvn with value "name level"<br>
+  &nbsp;&nbsp; &nbsp;Do sub1<br>
+  &nbsp;&nbsp; &nbsp;Write $Data(c),! ; output is 1<br>
+  &nbsp;&nbsp; &nbsp;Do sub2(.c)<br>
+  &nbsp;&nbsp; &nbsp;Set a(1)="" ; a(1) ceases to be an alias container variable<br>
+  &nbsp;&nbsp; &nbsp;; has the value ""<br>
+  &nbsp;&nbsp; &nbsp;Write $D(i),! ; output is 0<br>
+  &nbsp;&nbsp; &nbsp;Kill *c,*y ; c and y become undefined lvns<br>
+  &nbsp;&nbsp; &nbsp;ZWRite b ; output is b("got")="a match"<br>
+  &nbsp;&nbsp; &nbsp;; it's no longer an alias variable<br>
+  &nbsp;&nbsp; &nbsp;; as everything else has gone<br>
+  &nbsp;&nbsp; &nbsp;Quit<br>
+  sub1<br>
+  &nbsp;&nbsp; &nbsp;New y ; in this scope y is no longer an alias for b<br>
+  &nbsp;&nbsp; &nbsp;Set *y=c ; in this scope c and y are alias variables<br>
+  &nbsp;&nbsp; &nbsp;Kill y("legs") ; Kill apples to all of {c,y}<br>
+  &nbsp;&nbsp; &nbsp;Kill *y ; in this scope y is no longer an alias for c<br>
+  &nbsp;&nbsp; &nbsp;; this is really redundant as<br>
+  &nbsp;&nbsp; &nbsp;; the Quit implicitly does the same thing<br>
+  &nbsp;&nbsp; &nbsp;Quit<br>
+  sub2(i) ; i and c are joined due to pass-by-reference<br>
+  &nbsp;&nbsp; &nbsp;Write $ZAHandle(c)=$ZAHandle(i),! ; output appears as 1<br>
+  &nbsp;&nbsp; &nbsp;Kill b ; data for {b,y} is gone<br>
+  &nbsp;&nbsp; &nbsp;; both are undefined, but remain alias variables<br>
+  &nbsp;&nbsp; &nbsp;Set *c=a(1) ; c joins {b,y} as alias variable; prior value of c lost<br>
+  &nbsp;&nbsp; &nbsp;; c is no longer alias of i<br>
+  &nbsp;&nbsp; &nbsp;Write $ZAHandle(c)=$ZAHandle(i),! ; output appears as 0<br>
+  &nbsp;&nbsp; &nbsp;Set i=a(1) ; Assignment applies to i - value is ""<br>
+  &nbsp;&nbsp; &nbsp;Set c("got")="a match" ; Assignment applies to all of {b,c,y)<br>
+  &nbsp;&nbsp; &nbsp;Quit<br>
+  ------------<br>
+  11<br>
+  111<br>
+  &lt;<br>
+  0<br>
+  0<br>
+  1<br>
+  1<br>
+  0<br>
+  0<br>
+  b("got")="a match"<br>
+  $
+</div>
+<br></body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/GTM_Alias_Variables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:00:49 GMT -->
+</html>

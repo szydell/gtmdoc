@@ -1,0 +1,71 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s16.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Extrinsic Special Variables</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
+<link rel="prev" href="ch05s15.html" title="Extrinsic Functions">
+<link rel="next" href="ch05s17.html" title="Transaction Processing">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Extrinsic Special Variables</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch05s15.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 5. <span>General Language Features of M</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch05s17.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch05.html"><span>General Language Features of M</span></a></span> &gt; <span class="breadcrumb-node">Extrinsic Special Variables</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Extrinsic_Specl_Vars"></a>Extrinsic Special Variables<a class="indexterm" name="idp185787536"></a>
+</h2></div></div></div>
+<p>An extrinsic special variable is a user-written M subroutine that another M routine can invoke to return a value.</p>
+<p>The format for extrinsic special variables is:</p>
+<pre class="programlisting">$$[label][^routinename]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The optional label and optional routinename make up the formallabel, which specifies the name of the subroutine performing the extrinsic function. The formallabel must contain at least one of its optional component.</p></li></ul></div>
+<p>An extrinsic special variable can be thought of as an extrinsic function without input parameters. $$x is equivalent in operation to $$x(). Extrinsic special variables are the only case where invocation of a formallabel does not require an actuallist. M stacks $TEST for extrinsic special variables.</p>
+<p>M requires that a routine that implements an extrinsic special variable terminate with an explicit QUIT command which has an argument. M returns the value of the QUIT command argument as the value of the extrinsic special variable.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZPRINT ^DAYOWEEK
+DAYOWEEK();extrinsic special variable to
+;provide the day of the week
+QUIT $ZD($H,"DAY")
+GTM&gt;WRITE $$DAYOWEEK^DAYOWEEK
+MON</pre>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch05s15.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch05s17.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Extrinsic Functions </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Transaction Processing</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s16.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+</html>

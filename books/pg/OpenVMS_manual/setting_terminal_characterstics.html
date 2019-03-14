@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/setting_terminal_characterstics.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Setting Terminal Characteristics</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="using_terminals.html" title="Using Terminals" />
+    <link rel="prev" href="using_terminals.html" title="Using Terminals" />
+    <link rel="next" href="logical_record_for_terminals.html" title="Logical Records for Terminals" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Setting Terminal Characteristics</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="using_terminals.html">Prev</a> </td>
+          <th width="60%" align="center">Using Terminals</th>
+          <td width="20%" align="right"> <a accesskey="n" href="logical_record_for_terminals.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="setting_terminal_characterstics"></a>Setting Terminal Characteristics</h3>
+          </div>
+        </div>
+      </div>
+      <p>GT.M does not isolate its handling of terminal characteristics from the VMS environment at large. GT.M inherits the VMS terminal characteristics in effect at the time the GT.M image is invoked. Therefore, DCL SET TERMINAL commands that precede invocation of a GT.M image affect the way the terminal behaves initially. For more information on setting terminal characteristics, refer to the SET TERMINAL command in the OpenVMS DCL Dictionary.</p>
+      <p>However, if the process temporarily leaves the GT.M environment with a ZSYSTEM command <span>or a $ZCALL() function</span>, GT.M does not recognize any changes to the terminal characteristics left by the external environment. This may cause disparities between the physical behavior of the terminal, and the perceived behavior by GT.M.</p>
+      <p><span>VMS</span> enforces standard device security for explicit OPENs of terminals other than the sign-in terminal (<span>SYS$COMMAND</span>). If you are unable to OPEN a terminal, contact your system manager.</p>
+      <p>Most terminal characteristics respond to deviceparameters on the USE command. Many $PRINCIPAL terminal characteristics modified by deviceparameters in GT.M persist after the GT.M image terminates.</p>
+      <p>USE of a terminal causes the device driver to flush the output buffer. This feature of the USE command provides routine control over the timing of output, which is occasionally required. However, it also means that redundant USE commands may induce an unnecessary performance penalty. Therefore, Sanchez Computer Associates recommends restricting USE commands to redirecting I/O, modifying deviceparameters, and initiating specifically required flushes. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="using_terminals.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="using_terminals.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="logical_record_for_terminals.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Using Terminals </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Logical Records for Terminals</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/setting_terminal_characterstics.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+</html>

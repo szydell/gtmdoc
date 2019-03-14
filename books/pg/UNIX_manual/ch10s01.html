@@ -1,0 +1,80 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch10s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:47 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Using the Utilities</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch10.html" title="Chapter 10. Utility Routines">
+<link rel="prev" href="ch10.html" title="Chapter 10. Utility Routines">
+<link rel="next" href="ch10s02.html" title="Date and Time Utilities">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Using the Utilities</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch10.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 10. Utility Routines</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch10s02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch10.html">Utility Routines</a></span> &gt; <span class="breadcrumb-node">Using the Utilities</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="using_the_utils"></a>Using the Utilities</h2></div></div></div>
+<p>You can either use a utility in Direct Mode or include it in a source application program with one or more of the following formats. </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>DO ^%UTILITYNAME</p></li>
+<li class="listitem" style="list-style-type: circle"><p>DO LABEL^%UTILITYNAME</p></li>
+<li class="listitem" style="list-style-type: circle"><p>$$FUNC^%UTILITYNAME[(para1,...)]</p></li>
+</ul></div>
+<p>Many utilities contain labels that invoke variations of the basic utility functionality. Some also provide the label FUNC to invoke an extrinsic function with optional or required parameters.</p>
+<p>GT.M passes input to non-extrinsic forms of the utilities interactively or by using "input" variables. GT.M passes output from non-extrinsic forms of the utilities using "output" variables. For extrinsic entry points, the utilities receive input as parameters and pass output as the returned result. For other entry points, GT.M uses predefined "input" and "output" variables to pass information. Some utilities interactively request user inputs and display their results. Each utility is described individually in this chapter where appropriate labels, input, and output variables are identified.</p>
+<p>By convention, the utilities use upper-case variables for external input and output. Since M is case-sensitive, when an invocation uses a lower-case or misspelled variable name, the routine does not output the expected information. Instead it supplies a default value, if one exists, or produces an error message.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;SET %ds="11/22/2010"
+GTM&gt;DO INT^%DATE
+GTM&gt;ZWRITE
+%DN=62047
+%ds="11/22/2010"</pre>
+<p>This example sets the lowercase variable %ds to the date 11/22/2010. Since the %DATE routine expects the input to be provided in the uppercase %DS variable, it returns a default value in the output variable $DN. The default is the $HOROLOG format of the current date, which is 11/17/2010 in the example.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Utility programs written in M (such as %GO) run within mumps processes and behave like any other code written in M. Encryption keys are required if the mumps process accesses encrypted databases. A process running a utility program written in M that does not access encrypted databases (such as %RSEL) does not need encryption keys just to run the utility program.</p></td></tr>
+</table></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch10.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch10.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch10s02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 10. Utility Routines </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> 
+      Date and Time Utilities</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch10s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:47 GMT -->
+</html>

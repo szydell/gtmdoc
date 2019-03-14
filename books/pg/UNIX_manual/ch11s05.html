@@ -1,0 +1,426 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch11s05.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:47 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Calls from External Routines: Call-Ins</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch11.html" title="Chapter 11. Integrating External Routines">
+<link rel="prev" href="ch11s04.html" title="Using External Calls">
+<link rel="next" href="ch11s06.html" title="Type Limits for Call-ins and Call-outs">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">
+<span>Calls from External Routines: </span>Call-Ins</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch11s04.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 11. <span>Integrating</span> External<span> Routines</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch11s06.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch11.html"><span>Integrating</span> External<span> Routines</span></a></span> &gt; <span class="breadcrumb-node"><span>Calls from External Routines: </span>Call-Ins</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="calls_from_ext_rutns_call_ins"></a><span>Calls from External Routines: </span>Call-Ins<a class="indexterm" name="idp192486464"></a>
+</h2></div></div></div>
+<p>Call-In is a framework supported by GT.M that allows a C/C++ program to invoke an M routine within the same process context. GT.M provides a well-defined Call-In interface packaged as a run-time shared library that can be linked into an external C/C++ program.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="relevant_files_for_call_ins"></a>Relevant files<span> for Call-Ins</span><a class="indexterm" name="idp192869056"></a>
+</h3></div></div></div>
+<p>To facilitate Call-Ins to M routines, the GT.M distribution directory ($gtm_dist) contains the following files:</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+<p>libgtmshr.so - A shared library that implements the GT.M run-time system, including the Call-In API. If Call-Ins are used from a standalone C/C++ program, this library needs to be explicitly linked into the program. <span>See <a class="xref" href="ch11s05.html#building_stand_alone_programs" title="Building Standalone Programs">&#8220;<span>Building </span>Standalone Programs&#8221;</a>, which describes the necessary linker options on each supported platforms.</span></p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>.so is the recognized shared library file extension on most UNIX platforms.</p></td></tr>
+</table></div>
+</li>
+<li class="listitem"><p>mumps - The GT.M startup program that dynamically links with libgtmshr.so.</p></li>
+<li class="listitem"><p>gtmxc_types.h - A C-header file containing the declarations of Call-In API.</p></li>
+</ol></div>
+<p>The following sections describe the files relevant to using Call-Ins.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="gtmxc_types_h"></a>gtmxc_types.h<a class="indexterm" name="idp192680496"></a>
+</h4></div></div></div>
+<p>The header file provides signatures of all Call-In interface functions and definitions of those valid data types that can be passed from C to M. FIS strongly recommends that these types be used instead of native types (int, char, float, and so on), to avoid possible mismatch problems during parameter passing.</p>
+<p>gtmxc_types.h defines the following types that can be used in Call-Ins.</p>
+<div class="informaltable">
+<a name="tbltypusage"></a><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+<p>Type</p>
+</th>
+<th>
+<p>Usage</p>
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p>void</p></td>
+<td><p>Used to express that there is no function return value</p></td>
+</tr>
+<tr>
+<td><p>gtm_int_t</p></td>
+<td><p>gtm_int_t has 32-bit length on all platforms. </p></td>
+</tr>
+<tr>
+<td><p>gtm_uint_t</p></td>
+<td><p>gtm_uint_t has 32-bit length on all platforms </p></td>
+</tr>
+<tr>
+<td><p>gtm_long_t</p></td>
+<td><p>gtm_long_t has 32-bit length on 32-bit platforms and 64-bit length on 64-bit platforms. It is much the same as the C language long type.</p></td>
+</tr>
+<tr>
+<td><p>gtm_ulong_t</p></td>
+<td><p>gtm_ulong_t is much the same as the C language unsigned long type. </p></td>
+</tr>
+<tr>
+<td><p>gtm_float_t</p></td>
+<td><p>floating point number</p></td>
+</tr>
+<tr>
+<td><p>gtm_double_t</p></td>
+<td><p>Same as above but double precision. </p></td>
+</tr>
+<tr>
+<td><p>gtm_status_t</p></td>
+<td><p>type int. If it returns zero then the call was successful. If it is non-zero, when control returns to GT.M, it issues a trappable error.</p></td>
+</tr>
+<tr>
+<td><p>gtm_long_t*</p></td>
+<td><p>Pointer to gtm_long_t. Good for returning integers.</p></td>
+</tr>
+<tr>
+<td><p>gtm_ulong_t*</p></td>
+<td><p>Pointer to gtm_ulong_t. Good for returning unsigned integers. </p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="programlisting">typedef struct {
+    gtm_long_t length;
+    gtm_char_t* address;
+} gtm_string_t;</pre>
+<p>The pointer types defined above are 32-bit addresses on all 32-bit platforms. For 64-bit platforms, gtm_string_t* is a 64-bit address. </p>
+<p>gtmxc_types.h also provides an input-only parameter type gtm_pointertofunc_t that can be used to obtain call-back function pointers via parameters in the external routine. If a parameter is specified as I:gtm_pointertofunc_t and if a numeric value (between 0-5) is passed for this parameter in M, GT.M interprets this value as the index into the callback table and passes the appropriate callback function pointer to the external routine.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>GT.M represents values that fit in 18 digits as numeric values, and values that require more than 18 digits as strings.</p></td></tr>
+</table></div>
+<p>gtmxc_types.h also includes definitions for the following entry points exported from libgtmshr: </p>
+<pre class="programlisting">void gtm_hiber_start(gtm_uint_t mssleep);
+void gtm_hiber_start_wait_any(gtm_uint_t mssleep)
+void gtm_start_timer(gtm_tid_t tid, gtm_int_t time_to_expir, void (*handler)(), gtm_int_t hdata_len, void \
+*hdata);
+void gtm_cancel_timer(gtm_tid_t tid);</pre>
+<p>where:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>mssleep - milliseconds to sleep</p></li>
+<li class="listitem" style="list-style-type: circle"><p>tid - unique timer id value</p></li>
+<li class="listitem" style="list-style-type: circle"><p>time_to_expir - milliseconds until timer drives given handler</p></li>
+<li class="listitem" style="list-style-type: circle"><p>handler - function pointer to handler to be driven</p></li>
+<li class="listitem" style="list-style-type: circle"><p>hdata_len - 0 or length of data to pass to handler as a parameter</p></li>
+<li class="listitem" style="list-style-type: circle"><p>hdata - NULL or address of data to pass to handler as a parameter</p></li>
+</ul></div>
+<p>gtm_hiber_start() always sleeps until the time expires; gtm_hiber_start_wait_any() sleeps until the time expires or an interrupt by any signal (including another timer). gtm_start_timer() starts a timer but returns immediately (no sleeping) and drives the given handler when time expires unless the timer is canceled.</p>
+<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<th align="left">Important</th>
+</tr>
+<tr><td align="left" valign="top"><p>GT.M continues to support xc_* equivalent types of gtm_* for upward compatibility. gtmxc_types.h explicitly marks the xc_* equivalent types as deprecated. </p></td></tr>
+</table></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="call_in_table"></a>Call-In Table<a class="indexterm" name="idp192936656"></a>
+</h4></div></div></div>
+<p>The Call-In table file is a text file that contains the signatures of all M label references that get called from C. In order to pass the typed C arguments to the type-less M formallist, the enviroment variable GTMCI must be defined to point to the Call-In table file path. Each signature must be specified separately in a single line. GT.M reads this file and interprets each line according to the following convention (specifications withint box brackets "[]", are optional):</p>
+<pre class="programlisting">&lt;c-call-name&gt; : &lt;ret-type&gt; &lt;label-ref&gt; ([&lt;direction&gt;:&lt;param-type&gt;,...])</pre>
+<p>where,</p>
+<p>&lt;label-ref&gt;: is the entry point (that is a valid label reference) at which GT.M starts executing the M routine being called-in</p>
+<p>&lt;c-call-name&gt;: is a unique C identifier that is actually used within C to refer to &lt;label-ref&gt;</p>
+<p>&lt;direction&gt;: is either I (input-only), O (output-only), or IO (input-output)</p>
+<p>&lt;ret-type&gt;: is the return type of &lt;label-ref&gt;</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Since the return type is considered as an output-only (O) parameter, the only types allowed are pointer types and void. Void cannot be specified as parameter.</p></td></tr>
+</table></div>
+<p>&lt;param-type&gt;: is a valid parameter type. Empty parentheses must be specified if no argument is passed to &lt;label-ref&gt; </p>
+<p>The &lt;direction&gt; indicates the type of operation that GT.M performs on the parameter read-only (I), write-only (O), or read-write (IO). All O and IO parameters must be passed by reference, that is as pointers since GT.M writes to these locations. All pointers that are being passed to GT.M must be pre-allocated. The following table details valid type specifications for each direction.</p>
+<div class="informaltable">
+<a name="tblallparam"></a><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+<p>Directions</p>
+</th>
+<th>
+<p>Allowed Parameter types</p>
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<p>I</p>
+</td>
+<td>
+<p>gtm_long_t, gtm_ulong_t, gtm_float_t, gtm_double_t,_gtm_long_t*, gtm_ulong_t*, gtm_float_t*, gtm_double_t*,_gtm_char_t*, gtm_string_t*</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>O/IO</p>
+</td>
+<td>
+<p>gtm_long_t*, gtm_ulong_t*, gtm_float_t*, gtm_double_t*,_gtm_char_t*, gtm_string_t*</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here is an example of Call-In table (calltab.ci) for piece.m<span> (see <a class="xref" href="ch11s05.html#callin_example" title="Example: Calling GT.M from a C Program">&#8220;Example: Calling GT.M from a C Program&#8221;</a>)</span>:</p>
+<pre class="programlisting">print     :void            display^piece()
+getpiece  :gtm_char_t*     get^piece(I:gtm_char_t*, I:gtm_char_t*, I:gtm_long_t)
+setpiece  :void            set^piece(IO:gtm_char_t*, I:gtm_char_t*, I:gtm_long_t, I:gtm_char_t*)
+pow       :gtm_double_t*   pow^piece(I:gtm_double_t, I:gtm_long_t)
+powequal  :void            powequal^piece(IO:gtm_double_t*, I:gtm_long_t)
+piece     :gtm_double_t*   pow^piece(I:gtm_double_t, I:gtm_long_t)</pre>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>The same entryref can be called by different C call names (for example, pow, and piece). However, if there are multiple lines with the same call name, only the first entry will be used by GT.M. GT.M ignores all subsequent entries using a call name. Also, note that the second and third entries, although shown here as wrapped across lines, must be specified as a single line in the file.</p></td></tr>
+</table></div>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="call_in_interface"></a><span>Call-In </span>Interface<a class="indexterm" name="idp192862400"></a>
+</h3></div></div></div>
+<p>This section is further broken down into 6 subsections for an easy understanding of the Call-In interface. The section is concluded with an elaborate example.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="initialize_gtm"></a>Initialize GT.M<a class="indexterm" name="idp192864416"></a>
+</h4></div></div></div>
+<pre class="programlisting">gtm_status_t gtm_init(void);</pre>
+<p>If the base program is not an M routine but a standalone C program, gtm_init() must be called (before calling any GT.M functions), to initialize the GT.M run-time system.</p>
+<p>gtm_init() returns zero (0) on success. On failure, it returns the GT.M error status code whose message can be read into a buffer by immediately calling gtm_zstatus()<span> (see <a class="xref" href="ch11s05.html#print_error_messages" title="Print Error Messages">&#8220;<span>Print </span>Error Messages&#8221;</a>)</span>. Duplicate invocations of gtm_init() are ignored by GT.M.</p>
+<p>If Call-Ins are used from an external call function (that is, a C function that has itself been called from M code), gtm_init() is not needed, because GT.M is initialized before the External Call. All gtm_init() calls from External Calls functions are ignored by GT.M.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="call_in_m_routines_from_c"></a>Call <span>an M Routine </span>from C<a class="indexterm" name="idp192941936"></a>
+</h4></div></div></div>
+<p>GT.M provides 2 interfaces for calling a M routine from C. These are:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>gtm_cip</p></li>
+<li class="listitem" style="list-style-type: circle"><p>gtm_ci</p></li>
+</ul></div>
+<p>gtm_cip offers better performance on calls after the first one. </p>
+<div class="sect4">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="idp192943312"></a>gtm_cip</h5></div></div></div>
+<pre class="programlisting">gtm_status_t gtm_cip(ci_name_descriptor *ci_info, ...);</pre>
+<p>The variable argument function gtm_cip() is the interface that invokes the specified M routine and returns the results via parameters. </p>
+<p>ci_name_descriptor has the following structure:</p>
+<pre class="programlisting">typedef struct
+{
+  gtm_string_t rtn_name;
+  void* handle;
+} ci_name_descriptor;</pre>
+<p>rtn_name is a C character string indicating the corresponding &lt;lab-ref&gt; entry in the Call-In table.</p>
+<p>The handle is GT.M private information initialized by GT.M on the first call-in and to be provided unmodified to GT.M on subsequent calls. If application code modifies it, it will corrupt the address space of the process, and potentially cause just about any bad behavior that it is possible for the process to cause, including but not limited to process death, database damage and security violations.</p>
+<p>The gtm_cip() call must follow the following format:</p>
+<pre class="programlisting">status = gtm_cip(&lt;ci_name_descriptor&gt; [, ret_val] [, arg1] ...);</pre>
+<p>First argument: ci_name_descriptor, a null-terminated C character string indicating the alias name for the corresponding &lt;lab-ref&gt; entry in the Call-In table.</p>
+<p>Optional second argument: ret_val, a pre-allocated pointer through which GT.M returns the value of QUIT argument from the (extrinsic) M routine. ret_val must be the same type as specified for &lt;ret-type&gt; in the Call-In table entry. The ret_val argument is needed if and only if &lt;ret-type&gt; is not void.</p>
+<p>Optional list of arguments to be passed to the M routine's formallist: the number of arguments and the type of each argument must match the number of parameters, and parameter types specified in the corresponding Call-In table entry. All pointer arguments must be pre-allocated. GT.M assumes that any pointer, which is passed for O/IO-parameter points to valid write-able memory.</p>
+<p>The status value returned by gtm_cip() indicates the GT.M status code; zero (0), if successful, or a non-zero; $ZSTATUS error code on failure. The $ZSTATUS message of the failure can be read into a buffer by immediately calling gtm_zstatus()<span> (for details, see  <a class="xref" href="ch11s05.html#print_error_messages" title="Print Error Messages">&#8220;<span>Print </span>Error Messages&#8221;</a>)</span>.</p>
+</div>
+<div class="sect4">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="idp192942352"></a>gtm_ci</h5></div></div></div>
+<pre class="programlisting">gtm_status_t gtm_ci(const gtm_char_t* c_call_name, ...);</pre>
+<p>The variable argument function gtm_ci() is the interface that actually invokes the specified M routine and returns the results via parameters. The gtm_ci() call must be in the following format:</p>
+<pre class="programlisting">status = gtm_ci(&lt;c_call_name&gt; [, ret_val] [, arg1] ...);</pre>
+<p>First argument:        c_call_name, a null-terminated C character string indicating the alias name for the corresponding &lt;lab-ref&gt; entry in the Call-In table.</p>
+<p>Optional second argument:        ret_val, a pre-allocated pointer through which GT.M returns the value of QUIT argument from the (extrinsic) M routine. ret_val must be the same type as specified for &lt;ret-type&gt; in the Call-In table entry. The ret_val argument is needed if and only if &lt;ret-type&gt; is not void.</p>
+<p>Optional list of arguments to be passed to the M routine's formallist:        the number of arguments and the type of each argument must match the number of parameters, and parameter types specified in the corresponding Call-In table entry. All pointer arguments must be pre-allocated. GT.M assumes that any pointer, which is passed for O/IO-parameter points to valid write-able memory.</p>
+<p>The status value returned by gtm_ci() indicates the GT.M status code; zero (0), if successful, or a non-zero; $ZSTATUS error code on failure. The $ZSTATUS message of the failure can be read into a buffer by immediately calling gtm_zstatus(). <span>For more details, see <a class="xref" href="ch11s05.html#print_error_messages" title="Print Error Messages">&#8220;<span>Print </span>Error Messages&#8221;</a>.</span></p>
+</div>
+<div class="sect4">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="callin_example"></a>Example: Calling GT.M from a C Program</h5></div></div></div>
+<p>Here are some working examples of C programs that use call-ins to invoke GT.M. Each example is packaged in a zip file which contains a C program, a call-in table, and a GT.M API. To run an example, click <span class="inlinemediaobject"><img src="images/download.png" alt="Download icon"></span> and follow the compiling and linking instructions in the comments of the C program. </p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th><p>Example</p></th>
+<th><p>Download information</p></th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+            <p>gtmaccess.c (gtm_ci interface)</p>
+          </td>
+<td>
+ <p>Click <a class="ulink" href="gtmci_gtmaccess.zip" target="_top"><span class="inlinemediaobject"><img src="images/download.png" alt="Download gtmci_gtmaccess.zip"></span></a> to download or open directly from http://tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/gtmci_gtmaccess.zip</p>
+</td>
+</tr>
+<tr>
+<td>
+            <p>gtmaccess.c (gtm_cip interface)</p>
+          </td>
+<td>
+<p>Click <a class="ulink" href="gtmcip_gtmaccess.zip" target="_top"><span class="inlinemediaobject"><img src="images/download.png" alt="Download gtmcip_gtmaccess.zip"></span></a> to download or open directly from http://tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/gtmcip_gtmaccess.zip</p>
+</td>
+</tr>
+<tr>
+<td>
+            <p>cpiece.c (gtm_ci interface)</p>
+          </td>
+<td>
+<p>Click <a class="ulink" href="gtmci_cpiece.zip" target="_top"><span class="inlinemediaobject"><img src="images/download.png" alt="Download gtmci_cpiece.zip"></span></a> to download or open directly from http://tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/gtmci_cpiece.zip</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="print_error_messages"></a><span>Print </span>Error Messages<a class="indexterm" name="idp193078016"></a>
+</h4></div></div></div>
+<pre class="programlisting">void gtm_zstatus (gtm_char_t* msg_buffer, gtm_long_t buf_len);</pre>
+<p>This function returns the null-terminated $ZSTATUS message of the last failure via the buffer pointed by msg_buffer of size buf_len. The message is truncated to size buf_len if it does not fit into the buffer. gtm_zstatus() is useful if the external application needs the text message corresponding to the last GT.M failure. A buffer of 2048 is sufficient to fit in any GT.M message.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="exit_frm_gtm"></a>Exit<span> from GT.M</span><a class="indexterm" name="idp193104480"></a>
+</h4></div></div></div>
+<pre class="programlisting">gtm_status_t  gtm_exit (void);</pre>
+<p>gtm_exit() can be used to shut down all databases and exit from the GT.M environment that was created by a previous gtm_init(). </p>
+<p>Note that gtm_init() creates various GT.M resources and keeps them open across multiple invocations of gtm_ci() until gtm_exit() is called to close all such resources. On successful exit, gtm_exit() returns zero (0), else it returns the $ZSTATUS error code.</p>
+<p>gtm_exit() cannot be called from an external call function. GT.M reports the INVGTMEXIT error if an external call function invokes gtm_exit(). Since the GT.M run-time system must be operational even after the external call function returns, gtm_exit() is meant to be called only once during a process lifetime, and only from the base C/C++ program when GT.M functions are no longer required by the program.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="building_stand_alone_programs"></a><span>Building </span>Standalone Programs<a class="indexterm" name="idp192900336"></a>
+</h3></div></div></div>
+<p>All external C functions that use call-ins should include the header file gtmxc_types.h that defines various types and provides signatures of call-in functions. To avoid potential size mismatches with the parameter types, FIS strongly recommends that gtm *t types defined in gtmxc_types.h be used instead of the native types (int, float, char, etc).</p>
+<p>To use call-ins from a standalone C program, it is necessary that the GT.M runtime library (libgtmshr.so) is explicitly linked into the program. If call-ins are used from an External Call function (which in turn was called from GT.M through the existing external call mechanism), the External Call library does not need to be linked explicitly with libgtmshr.so since GT.M would have already loaded it. </p>
+<p>The following sections describe compiler and linker options that must be used on each platform for call-ins to work from a standalone C/C++ program. </p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ibm_p_series_"></a>IBM pSeries (RS/6000) AIX<a class="indexterm" name="idp192978080"></a>
+</h4></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>Compiler: -I$gtm_dist</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Linker: -L$gtm_dist -lgtmshr</p></li>
+</ul></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="x86_gnu_linux"></a>X86 GNU/Linux<a class="indexterm" name="idp193065808"></a>
+</h4></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>Compiler: -I$gtm_dist </p></li>
+<li class="listitem" style="list-style-type: circle"><p>Linker: -L$gtm_dist -lgtmshr -rpath $gtm_dist </p></li>
+<li class="listitem" style="list-style-type: circle"><p>FIS advises that the C/C++ compiler front-end be used as the Linker to avoid specifying the system startup routines on the ld command. The compile can pass linker options to ld using -W option (for example, cc -W1, -R, $gtm_dist). For more details on these options, refer to the appropriate system's manual on the respective platforms.</p></li>
+</ul></div>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="nested_call_ins"></a>Nested Call-Ins<a class="indexterm" name="idp193018432"></a>
+</h3></div></div></div>
+<p>Call-ins can be nested by making an external call function in-turn call back into GT.M. Each gtm_ci() called from an External Call library creates a call-in base frame at $ZLEVEL 1 and executes the M routine at $ZLEVEL 2. The nested call-in stack unwinds automatically when the External Call function returns to GT.M.</p>
+<p>GT.M currently allows up to 10 levels of nesting, if TP is not used, and less than 10 if GT.M supports call-ins from a transaction<span> (see <a class="xref" href="ch11s05.html#rules_to_follow_in_call_ins" title="Rules to Follow in Call-Ins">&#8220;Rules to Follow in Call-Ins&#8221;</a>)</span>. GT.M reports the CIMAXLEVELS error when the nesting reaches its limit.</p>
+<p>Following are the GT.M commands, Intrinsic Special Variables, and functions whose behavior changes in the context of every new nested call-in environment.</p>
+<p>ZGOTO 0 (zero) returns to the processing of the invoking non-M routine as does ZGOTO 1 (one) with no entryref, while ZGOTO 1:entryref replaces the originally invoked M routine and continues M execution.</p>
+<p>$ZTRAP/$ETRAP NEW'd at level 1 (in GTM$CI frame).</p>
+<p>$ZLEVEL initializes to one (1) in GTM$CI frame, and increments for every new stack level.</p>
+<p>$STACK initializes to zero (0) in GTM$CI frame, and increments for every new stack level.</p>
+<p>$ESTACK NEW'd at level one (1) in GTM$CI frame.</p>
+<p>$ECODE/$STACK() initialized to null at level one (1) in GTM$CI frame.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>After a nested call-in environment exits and the external call C function returns to M, the above ISVs and Functions restore their old values.</p></td></tr>
+</table></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="rules_to_follow_in_call_ins"></a>Rules to Follow in Call-Ins<a class="indexterm" name="idp193010000"></a>
+</h3></div></div></div>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>External calls must not be fenced with TSTART/TCOMMIT if the external routine calls back into mumps using call-in mechanism. GT.M reports the CITPNESTED error if nested call-ins are invoked within a TP fence since GT.M currently does not handle TP support across multiple call-in invocations.</p></li>
+<li class="listitem"><p>The external application should never call exit() unless it has called gtm_exit() previously. GT.M internally installs an exit handler that should never be bypassed.</p></li>
+<li class="listitem"><p>The external application should never use any signals when GT.M is active since GT.M reserves them for its internal use. GT.M provides the ability to handle SIGUSR1 within M<span> (see <a class="xref" href="ch08s36.html" title="$ZINTerrupt">&#8220;$ZINTerrupt&#8221;</a> for more information)</span>. An interface is provided by GT.M for timers.</p></li>
+<li class="listitem"><p>FIS recommends the use of gtm_malloc() and gtm_free() for memory management by C code that executes in a GT.M process space for enhanced performance and improved debugging. Always use gtm_malloc to allocate returns for pointer types to prevent memory leaks. </p></li>
+<li class="listitem"><p>GT.M performs device input using the read() system service. UNIX documentation recommends against mixing this type of input with buffered input services in the fgets() family and ignoring this recommendation is likely to cause loss of input that is difficult to diagnose and understand.</p></li>
+</ol></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch11s04.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch11.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch11s06.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">
+<span>Using </span>External Calls </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Type Limits for Call-ins and Call-outs</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch11s05.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:47 GMT -->
+</html>

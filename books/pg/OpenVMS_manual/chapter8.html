@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/chapter8.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:32 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Chapter 8. Intrinsic Special Variables</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="prev" href="examples_of_ztrnlnm.html" title="Examples of $ZTRNLNM()" />
+    <link rel="next" href="device.html" title="$Device" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Chapter 8. Intrinsic Special Variables</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_ztrnlnm.html">Prev</a> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> <a accesskey="n" href="device.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="id4193095"></a>Chapter 8. Intrinsic Special Variables</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <p>
+          <b>Table of Contents</b>
+        </p>
+        <dl>
+          <dt>
+            <span class="sect1">
+              <a href="device.html">$Device</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="ecode.html">$ECode</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="estack.html">$EStack</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="etrap.html">$ETrap</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="horolog.html">$Horolog</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="io.html">$IO</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="job.html">$Job</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="key.html">$Key</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="principal.html">$Principal</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="quit.html">$Quit</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="reference.html">$Reference</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="stack_g.html">$STack</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="storage.html">$Storage</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="system.html">$SYstem</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="test.html">$Test</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="tlevel.html">$TLevel</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="trestart_g.html">$TRestart</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="x.html">$X</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="y.html">$Y</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="za.html">$ZA</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zb.html">$ZB</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zcmdline.html">$ZCMdline</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zcompile_g.html">$ZCOmpile</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zcstatus.html">$ZCstatus</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zdateform.html">$ZDAteform</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zdirectory.html">$ZDirectory</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zedit.html">$ZEDit</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zeof.html">$ZEOf</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zerror.html">$ZError</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zgbldir.html">$ZGbldir</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zinterrupt.html">$ZINTerrupt</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zininterrupt.html">$ZINInterrupt</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zio.html">$ZIO</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zjob.html">$ZJob</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zlevel.html">$ZLevel</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zmaxtptime.html">$ZMAXTPTIme</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zmode.html">$ZMOde</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zposition.html">$ZPOSition</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zprocess.html">$ZPROCess</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zprompt.html">$ZPROMpt</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zroutines.html">$ZROutines</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zsource.html">$ZSOurce</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zstatus.html">$ZStatus</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zstep.html">$ZSTep</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zsystem_h.html">$ZSYstem</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zexit.html">$ZTExit</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="ztrap.html">$ZTrap</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zversion.html">$ZVersion</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="zyerror.html">$ZYERror</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <p>This chapter describes the M Intrinsic Special Variables implemented in GT.M. All entries starting with the letter Z are GT.M additions to the ANSI standard Intrinsic Special Variables. None of the Intrinsic Special Variables are case sensitive. </p>
+      <p>M Intrinsic Special Variables start with a single dollar sign ($). GT.M provides such variables for program examination. In some cases, the Intrinsic Special Variables may be set to modify the corresponding part of the environment.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>None of the Intrinsic Special Variables can be KILLed. SETting or NEWing is generally not allowed, but is specifically noted in the descriptions of those that do.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_ztrnlnm.html">Prev</a> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> <a accesskey="n" href="device.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of $ZTRNLNM() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $Device</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/chapter8.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:32 GMT -->
+</html>

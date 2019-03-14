@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/PIPE_IO_Technical_bulletin.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:00:52 GMT -->
+<head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>PIPE IO Technical Bulletin</title><link rel="stylesheet" href="e-novative_article.css" type="text/css"></link><meta name="generator" content="DocBook XSL Stylesheets V1.68.1"></meta><meta name="description" content="
+                
+                                    
+                                        
+                                            GT.M Group
+                                            Fidelity National Information Services, Inc.
+                                            2 West Liberty Boulevard, Suite 300
+                                            Malvern, PA 19355
+                                            United States of America
+                                        
+                                    
+                                
+                                    
+                                        
+                                            GT.M Support: +1 (610) 578-4226
+                                            Switchboard: +1 (610) 296-8877
+                                            Fax: +1 (484) 595-5101
+                                            Website: http://fis-gtm.com
+                                            Email: gtmsupport@fnis.com
+                                        
+                                    
+                                
+                
+            "></meta></head><body><div class="article" lang="en-US"><div class="titlepage"><div><div><h1 class="title"><a id="id854397"></a><a id="return_to_top"></a>PIPE IO Technical Bulletin</h1></div><div><h3 class="subtitle"><i>GT.M V5.3-002 Release</i></h3></div><div><p class="copyright">Copyright © 2008 Fidelity National Information Services, Inc.</p></div><div><div xmlns="" align="center"><a href="legalnotice.html" target="_blank">Legal Notice</a></div></div><div><p class="pubdate">December 15, 2008</p></div><div><div xmlns="" class="revhistory"><table border="1" align="center" width="70%" summary="Revision history"><tr><th align="left" valign="top" colspan="2"><b>Revision History</b></th></tr><tr><td align="left">Revision 1.0</td><td align="left">December 15, 2008</td></tr></table></div></div><div><div class="abstract"><p class="title"><b></b></p><p>
+                <div class="informaltable"><table border="0" width="100%"><colgroup><col></col><col></col></colgroup><tbody><tr><td align="left" valign="top">
+                                    <p>
+                                        <div class="address"><p><br></br>
+                                            GT.M Group<br></br>
+                                            Fidelity National Information Services, Inc.<br></br>
+                                            <span class="street">2 West Liberty Boulevard, Suite 300</span><br></br>
+                                            <span class="city">Malvern, </span><span class="state">PA </span><span class="postcode">19355</span><br></br>
+                                            <span class="country">United States of America</span><br></br>
+                                        </p></div>
+                                    </p>
+                                </td><td align="left" valign="top">
+                                    <p>
+                                        <div class="address"><p><br></br>
+                                            <span class="phone">GT.M Support: +1 (610) 578-4226</span><br></br>
+                                            <span class="phone">Switchboard: +1 (610) 296-8877</span><br></br>
+                                            <span class="fax">Fax: +1 (484) 595-5101</span><br></br>
+                                            Website: <a href="http://www.fis-gtm.com/" target="_top">http://fis-gtm.com</a><br></br>
+                                            Email: <a href="mailto:gtmsupport@fnis.com" target="_top">gtmsupport@fnis.com</a><br></br>
+                                        </p></div>
+                                    </p>
+                                </td></tr></tbody></table></div>
+                <a id="toc"></a>
+            </p></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#id854652">Document Conventions</a></span></dt><dt><span class="sect1"><a href="#id855453">Bulletin Overview</a></span></dt><dt><span class="sect1"><a href="#id854825">Status Variables</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id854816">$ZA</a></span></dt><dt><span class="sect2"><a href="#id854735">$DEVICE</a></span></dt><dt><span class="sect2"><a href="#id855645">$KEY</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id854687">Using PIPE devices</a></span></dt><dt><span class="sect1"><a href="#id854975">Modes of PIPE device operation</a></span></dt><dt><span class="sect1"><a href="#id855162">READ Command</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id855058">READ with no timeout</a></span></dt><dt><span class="sect2"><a href="#id854961">READ with a timeout</a></span></dt><dt><span class="sect2"><a href="#id855352">READ fixed-length</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id854965">WRITE Command</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id855061">WRITE /EOF</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id855522">CLOSE Command</a></span></dt><dt><span class="sect1"><a href="#id855135">PIPE Device Examples</a></span></dt><dt><span class="sect1"><a href="#id855510">PIPE Deviceparameter Summary</a></span></dt><dt><span class="sect1"><a href="#id855773">OPEN Deviceparameters</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id855265">COMMAND Applies to: PIPE</a></span></dt><dt><span class="sect2"><a href="#id856148">[NO]FIXED Applies to: SD FIFO PIPE</a></span></dt><dt><span class="sect2"><a href="#id855026">INDEPENDENT Applies to: PIPE</a></span></dt><dt><span class="sect2"><a href="#id856143">PARSE Applies to: PIPE</a></span></dt><dt><span class="sect2"><a href="#id856324">[NO]READONLY Applies to: FIFO PIPE SD</a></span></dt><dt><span class="sect2"><a href="#id855343">RECORDSIZE=intexpr Applies to: SD FIFO PIPE</a></span></dt><dt><span class="sect2"><a href="#id856244">SHELL Applies to: PIPE</a></span></dt><dt><span class="sect2"><a href="#id856239">STDERR Applies to: PIPE</a></span></dt><dt><span class="sect2"><a href="#id855808">VARIABLE Applies to: SD FIFO PIPE</a></span></dt><dt><span class="sect2"><a href="#id854968">[Z]WIDTH=intexpr Applies to: TRM SOC NULL SD FIFO PIPE</a></span></dt><dt><span class="sect2"><a href="#id855762">[Z][NO]WRAP Applies to: SD FIFO SOC PIPE</a></span></dt><dt><span class="sect2"><a href="#id856211">[NO]WRITEONLY Applies to: PIPE</a></span></dt></dl></dd></dl></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h2 class="title"><a id="id854652"></a>Document Conventions</h2></div></div></div><p>In this document the lower case &#8220;pipe&#8221; refers to a UNIX pipe and the upper case &#8220;PIPE&#8221; to the GT.M device.</p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h2 class="title"><a id="id855453"></a>Bulletin Overview</h2></div></div></div><p>The V5.3-003 release extends the capabilities of the I/O status variables with support for a new PIPE device on the UNIX platforms as a mnemonic space device. An OPEN of the device starts a sub-process. Data written to the device by the M program is available to the process on its STDIN.  The M program can read the STDOUT and STDERR of the sub-process. This facilitates output only applications, such as printing directly from a GT.M program to an lp command; input only applications, such as reading the output of a command such as ps; and co-processing applications, such as using iconv to convert data from one encoding to another. (C9H05-002859)</p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h2 class="title"><a id="id854825"></a>Status Variables</h2></div></div></div><p>GT.M provides several I/O status variables that convey information about the status of individual operations.</p><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id854816"></a>$ZA</h3></div></div></div><p>For PIPE:</p><p>0 Indicates normal termination or time out when using READ x:n, where n &gt;0</p><p>9 Indicates failure of a READ x or READ x:n, where n&gt;0</p><p>9 Indicates failure of a WRITE where the pipe is full and the WRITE would block</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id854735"></a>$DEVICE</h3></div></div></div><p>For PIPE:</p><p>0 indicates for READ with a zero (0) timeout that available data has been read.</p><p>"1,Resource temporarily unavailable" indicates no input available for a READ with a zero (0) timeout.</p><p>&#8220;1,&lt;error signature&gt;&#8221; indicates a read error</p><p>0 indicates for a WRITE that it was successful</p><p>"1,Resource temporarily unavailable" indicates a failure of a WRITE where the pipe is full and the   WRITE would block.  This condition also causes an exception.</p><p>&#8220;1,&lt;error signature&gt;&#8221; indicates a write error</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id855645"></a>$KEY</h3></div></div></div><p>For PIPE:</p><p>Contains the UNIX process id of the created process shell which executes the command connected to the PIPE device.</p></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h2 class="title"><a id="id854687"></a>Using PIPE devices</h2></div></div></div><p>A PIPE is akin to a FIFO device.  Both FIFO and PIPE map GT.M devices to UNIX pipes, the conceptual difference being that whereas a FIFO device specifies a named pipe, but does not specify the process on the other end of the pipe, a PIPE device specifies a process to communicate with, but the pipes are unnamed.  Specifically, an OPEN of a PIPE creates a subprocess with which the GT.M process communicates.</p><p>A PIPE device is specified with a "PIPE" value for mnemonicspace on an OPEN command.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></img></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>GT.M ignores the mnemonicspace specification on an OPEN of a previously OPEN device and leaves the existing device with its original characteristics.</p></td></tr></table></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h2 class="title"><a id="id854975"></a>Modes of PIPE device operation</h2></div></div></div><p>The OPEN command for a PIPE provides a number of variations in the use of UNIX pipes shown below as Examples 1-4.</p><p> <span class="emphasis"><em>Example 1</em></span></p><pre class="programlisting">       
+            SET p="Printer"
+            OPEN p:(COMMAND="lp":WRITEONLY)::"PIPE" 
+        </pre><p>
+            <span class="inlinemediaobject"><a id="PIPE_IO_1"></a><img src="images/PIPE_IO_1.png" alt="Example 1"></img></span>       
+        </p><p>Example 1 shows the use of a PIPE device to spool data to the default printer by spooling to the lp command, opened via the default shell (the shell specified by the SHELL environment variable, and the shell used to start GT.M if SHELL is unspecified).  The WRITEONLY device parameter specifies that the GT.M process will not read data back from the lpr command. </p><p><span class="emphasis"><em>Example 2</em></span></p><pre class="programlisting">
+            Set p="MyProcs"
+            OPEN p:(COMMAND="ps -ef|grep $USER":READONLY)::"PIPE" 
+        </pre><p>
+            <span class="inlinemediaobject"><a id="PIPE_IO_2"></a><img src="images/PIPE_IO_2.png" alt="Example 2"></img></span>
+        </p><p>Example 2 shows the use of a PIPE device to identify processes belonging to the current userid. The READONLY device parameter specifies that the GT.M process will only read the output of the pipe, and will not provide it with any input.  This example illustrates the fact that the command can be any shell command, can include environment variables and pipes within the command.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></img></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>On your UNIX, flags to the ps command may differ from this example.</p></td></tr></table></div><p><span class="emphasis"><em>Example 3:</em></span></p><pre class="programlisting">
+            Set p="Convert"
+            OPEN p:(SHELL="/bin/csh":COMMAND="iconv -f ISO_8859-1 -t WINDOWS-1252")::"PIPE"  
+        </pre><p>
+            <span class="inlinemediaobject"><a id="PIPE_IO_3"></a><img src="images/PIPE_IO_3.png" alt="Example 3"></img></span>
+        </p><p>Example 3 shows the use of a process to whose input the GT.M process writes to and whose output the GT.M process reads back in, in this example convering data from an ISO 8859-1 encoding to the Windows 1252 encoding.  This example also shows the use of a different shell from the default.  If the OPEN deviceparameters don't specify a SHELL, the PIPE device uses the shell specified by the environment variable SHELL; if it does not find a definition for SHELL, the device uses the system default /bin/sh.</p><p><span class="emphasis"><em>Example 4:</em></span></p><pre class="programlisting">
+            SET p="Files"
+            SET e="Errors"
+            OPEN p:(COMMAND="find /var/log -type d -print":READONLY:STDERR=e)::"PIPE"  
+        </pre><p>
+            <span class="inlinemediaobject"><a id="PIPE_IO_4"></a><img src="images/PIPE_IO_4.png" alt="Example 4"></img></span>
+        </p><p>Example 4, GT.M uses the standard system utility find to obtain a list of subdirectories of /var/log, which are read back via the device with handle "Files" with any errors (e.g, &#8220;Permission denied&#8221; messages for sub-directories that the find command cannot process) read back via the device with handle "Errors".</p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h2 class="title"><a id="id855162"></a>READ Command</h2></div></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id855058"></a>READ with no timeout</h3></div></div></div><p>A READ with no timeout reads whatever data is available to be read; if there is no data to be read, the process hangs until some data becomes available. </p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id854961"></a>READ with a timeout</h3></div></div></div><p>A READ with a timeout reads whatever data is available to be read, and returns; if there is no data to be read, the process waits for a maximum of the timeout period, an integer number of seconds, for data to become available (if the timeout is zero, it returns immediately, whether or not any data was read). If the READ returns before the timeout expires $Test, it set $TEST to TRUE(1); if the timeout expires, it sets $TEST to FALSE (0). When the READ command does not specify a timeout, it does not change $TEST. </p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id855352"></a>READ fixed-length</h3></div></div></div><p>READ specifying a maximum length reads (for example, READ X#10 for ten characters) until either the PIPE has supplied the specified number of characters, or a terminating delimiter. A fixed-length READ may include a timeout.</p></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h2 class="title"><a id="id854965"></a>WRITE Command</h2></div></div></div><p>The PIPE device does non-blocking writes. If a process tries to WRITE to a full PIPE and the WRITE would block the device implicitly tries to complete the operation up to10 times.  If the implicit retries don't succeed (remain blocked), the WRITE sets $DEVICE to "1,Resource temporarily unavailable", $ZA to 9, and triggers an error. If the GT.M process has defined an EXCEPTION, $ETRAP or $ZTRAP, it may choose to retry the WRITE after some action or delay might remove data from the pipe.</p><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id855061"></a>WRITE /EOF</h3></div></div></div><p>WRITE /EOF to a PIPE closes the underlying UNIX pipe to force the created process to flush data but does not CLOSE the PIPE device. When the GT.M process finishes READs from the PIPE device, it still should explicitly CLOSE the PIPE device. When the PIPE device's created process (&#8220;tr&#8221;, for example) buffers output written to a UNIX pipe, the GT.M process must do WRITE/EOF after its final WRITE to the PIPE device. To avoid an indefinite hang, the GT.M process must READ with timeout (typically 0) for any READs on the device prior to the WRITE /EOF. After the GT.M process does a WRITE /EOF on the PIPE device closing stdin and presenting EOF to the created process, forcing the created process to flush any buffered data to the UNIX pipe acting as input to the PIPE device, it no longer has to use timed READ, although it may.</p></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h2 class="title"><a id="id855522"></a>CLOSE Command</h2></div></div></div><p>The CLOSE of a PIPE device prevents all subsequent access to the pipes associated with the device. Unless the OPEN that created the device specified INDEPENDENT, the process terminates. Note that any subsequent attempt by the created process to read from its stdin (which would be a closed pipe) returns an EOF and typical UNIX behavior would be to terminate on such an event.</p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h2 class="title"><a id="id855135"></a>PIPE Device Examples</h2></div></div></div><p>The following examples show the use of deviceparameters and status variables with PIPE devices.</p><p>Example : </p><pre class="programlisting">
+            SET p1="test1" 
+            OPEN p1:(shell="/bin/sh":comm="cat")::"PIPE"
+            FOR i=1:1:10 DO
+            . USE p1 
+            . WRITE i,":abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz ",! 
+            . READ x
+            . USE $P 
+            . WRITE x,! 
+            CLOSE p1
+            QUIT         
+        </pre><p>This WRITEs 10 lines of output to the cat command and reads the cat output back into the local variable x. The GT.M process WRITEs each line READ from the PIPE to the principal device. This example works since &#8220;cat&#8221; is not a buffering command. The example above would not work for a command such as tr that buffers its input.</p><p>Example :</p><pre class="programlisting">
+            SET p1="test1"
+            OPEN  p1:(SHELL="/bin/sh":COMMAND="tr -d e")::"PIPE"
+            FOR i=1:1:1000 DO
+            . USE p1
+            . WRITE i,":abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz ",!
+            . READ x:0
+            . IF '+$DEVICE USE $P WRITE x,! 
+            USE p1
+            WRITE /EOF
+            FOR  READ x QUIT:$ZEOF  USE $P WRITE x,! USE p1
+            CLOSE p1
+            QUIT   
+        </pre><p>This shows the use of &#8220;tr&#8221; (a buffering command) in the created process for the PIPE device. To see the buffering effect the GT.M process WRITEs 1000 lines to the PIPE device. Different operating systems may have different buffer sizes. Notice the use of the r x:0 and the check on $DEVICE in the loop. If $DEVICE is 0, WRITE x writes the data read to the principal device. No actual READs complete, however, until &#8220;tr&#8221; reaches its buffer size and writes to its stdout. The final few lines remain buffered by &#8220;tr&#8221; after the process finishes the first loop. The GT.M process then issues a WRITE /EOF to the PIPE causing &#8220;tr&#8221; to flush its buffered lines. In the final for loop the GT.M process uses the simple form of READ x from the PIPE followed by a WRITE of each line to the principal device until $zeof becomes TRUE.</p><p>Example : </p><pre class="programlisting"> 
+            SET a="test"
+            OPEN a:(COMMMAND="ntestin":INDEPENDENT)::"PIPE"
+            USE a
+            SET key=$KEY
+            WRITE "Show ntestin still running after CLOSE of a",!
+            WRITE "The parent process of 1 shows the parent shell has exited after CLOSE of a"
+            READ line1,line2
+            USE $p
+            WRITE !,line1,!,line2,!,!
+            SET k="ps -ef | grep -v grep | grep -v sh | grep -w '"_key_"' | awk '{print $2}'"
+            SET b="getpid"
+            OPEN b:(COMMMAND=k:READONLY)::"PIPE"
+            USE b
+            READ pid
+            CLOSE a
+            CLOSE b
+            SET k2="ps -ef | grep -v grep | grep -v sh | grep -w '"_pid_"'"
+            SET c="psout"
+            OPEN c:(COMMMAND=k2:WRITEONLY)::"PIPE"
+            CLOSE c
+            QUIT  
+        </pre><p>This demonstrates that the created process &#8220;ntestin&#8221; keeps running as an INDEPENDENT process after the GT.M process CLOSEs the pipe. This GT.M process uses another PIPE device to return the process id of &#8220;ntestin&#8221; and READ it into &#8220;pid&#8221; so that it may be killed by this or another process, should that be appropriate.</p><p>Example :</p><pre class="programlisting">
+            SET p1="test1"
+            SET a=0
+            OPEN p1:(SHELL="/bin/sh":COMMAND="cat":EXCEPTION="GOTO cont1")::"PIPE"
+            SET c=":abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz"
+            FOR i=1:1:10000  DO
+            . USE p1
+            . WRITE i_c,!
+            . USE $p WRITE i,!
+            USE p1
+            WRITE /EOF
+            FOR  READ x QUIT:$ZEOF  USE $p WRITE x,! USE p1
+            CLOSE p1
+            QUIT
+            cont1
+            IF $ZEOF QUIT
+            IF a=0 SET a=i/2
+            SET z=$ZA
+            ; use $device to make sure ztrap is caused by blocked write to pipe 
+            SET d=$DEVICE 
+            IF "1,Resource temporarily unavailable"=d DO 
+            . USE $p
+            . WRITE "pipe full, i= ",i," $ZA = ",z,!
+            . SET i=i-1 
+            . USE p1
+            . FOR j=1:1:a  READ x USE $p WRITE j,"-",x,! USE p1
+            QUIT  
+        </pre><p>This demonstrates WRITEs to a PIPE device with blocking. The WRITE loop has no READ to force the input pipe to fill up which blocks the cat output, causing cat to stop reading its input, letting the  pipe acting as input on the PIPE device to fill up and creating the blocked condition. When the process takes the $ZTRAP to cont1 it tests $DEVICE to determine if the trap is caused by the full pipe. If so, it uses the for loop to read half the number of lines output by the main loop. It decrements &#8220;i&#8221; and returns to the original WRITE loop to retry the failed line and continue with the WRITEs to the pipe. Depending upon the configuration of the environment, it may trap several times before processing all lines.</p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h2 class="title"><a id="id855510"></a>PIPE Deviceparameter Summary</h2></div></div></div><div class="table"><a id="id855445"></a><table summary="Pipe Format Deviceparameters" border="1"><colgroup><col></col><col></col><col></col></colgroup><tbody><tr><td>
+                            <p class="bold">DEVICE PARAMETER</p>
+                        </td><td>
+                            <p class="bold">CMD</p>
+                        </td><td>
+                            <p class="bold">DESCRIPTION</p>
+                        </td></tr><tr><td>
+                            <p>[NO]FIXED</p>
+                        </td><td>
+                            <p>O</p>
+                        </td><td>
+                            <p>Controls whether records have fixed length</p>
+                        </td></tr><tr><td>
+                            <p>RECORDSIZE=intexpr </p>
+                        </td><td>
+                            <p>O</p>
+                        </td><td>
+                            <p>Specifies the maximum record size. </p>
+                        </td></tr><tr><td>
+                            <p>VARIABLE</p>
+                        </td><td>
+                            <p>O</p>
+                        </td><td>
+                            <p>Controls whether records have variable length.</p>
+                        </td></tr><tr><td>
+                            <p>WIDTH=intexpr </p>
+                        </td><td>
+                            <p>O</p>
+                        </td><td>
+                            <p>Sets the device's logical record size and enables WRAP. </p>
+                        </td></tr><tr><td>
+                            <p>[NO]WRAP </p>
+                        </td><td>
+                            <p>O/U</p>
+                        </td><td>
+                            <p>Controls the handling of records longer than the device width. </p>
+                        </td></tr></tbody></table><p class="title"><b>Table 1. Pipe Format Deviceparameters</b></p></div><p></p><div class="table"><a id="id855417"></a><table summary="Pipe Access Deviceparameters" border="1"><colgroup><col></col><col></col><col></col></colgroup><tbody><tr><td>
+                            <p>COMMAND=string</p>
+                        </td><td>
+                            <p>o</p>
+                        </td><td>
+                            <p>Specifies the command string to execut in a created process for the PIPE device. GT.M uses the default searching mechanism of the UNIX shell for creating the process and initiating its command(s).</p>
+                        </td></tr><tr><td>
+                            <p>SHELL=string</p>
+                        </td><td>
+                            <p>o</p>
+                        </td><td>
+                            <p>Specifies the path to a shell to be used instead of the default shell</p>
+                        </td></tr><tr><td>
+                            <p>STDERR=string</p>
+                        </td><td>
+                            <p>o</p>
+                        </td><td>
+                            <p>Specifies a device handle for a return pipe to which the created process writes any standard error. The GT.M process can &#8220;USE&#8221; ,&#8220;READ&#8221;, and &#8220;CLOSE&#8221; it, but cannot WRITE to it. When the GT.M process CLOSEs the PIPE device the PIPE device CLOSEs STDERR, if still OPEN.</p>
+                        </td></tr><tr><td>
+                            <p>WRITEONLY</p>
+                        </td><td>
+                            <p>o</p>
+                        </td><td>
+                            <p>Specifies that the GT.M process may only WRITE to the created process via the PIPE device.</p>
+                        </td></tr><tr><td>
+                            <p>READONLY</p>
+                        </td><td>
+                            <p>o</p>
+                        </td><td>
+                            <p>Specifies that the GT.M process may only READ from the created process via the PIPE device. It returns both stdout and stderr except when STDERR specifies a separate stderr.</p>
+                        </td></tr><tr><td>
+                            <p>PARSE</p>
+                        </td><td>
+                            <p>o</p>
+                        </td><td>
+                            <p>Specifies that GT.M parse the COMMAND and issue an OPEN exception for any invalid command.</p>
+                        </td></tr><tr><td>
+                            <p>INDEPENDENT</p>
+                        </td><td>
+                            <p>o</p>
+                        </td><td>
+                            <p>Specifies that the created process continues to execute after the PIPE device is CLOSEd.</p>
+                        </td></tr></tbody></table><p class="title"><b>Table 2. Pipe Access Deviceparameters</b></p></div><p></p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h2 class="title"><a id="id855773"></a>OPEN Deviceparameters</h2></div></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id855265"></a>COMMAND Applies to: PIPE</h3></div></div></div><p>The COMMAND deviceparameter value specifies the invocation the newly created shell process performs. An invalid command value triggers an error in the new process, not the process issuing the OPEN. This can make diagnosis difficult &#8211; see the PARSE deviceparameter for potential assistance.</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id856148"></a>[NO]FIXED Applies to: SD FIFO PIPE</h3></div></div></div><p>Selects a fixed record length format for the device. FIXED does not specify the actual length of a record. Use RECORDSIZE to specify the record length.</p><p>NOFIXED specifies a variable length record format for device. NOFIXED is a synonym for VARIABLE. FIXED is incompatible with STREAM and VARIABLE.</p><p>By default, records have VARIABLE length.</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id855026"></a>INDEPENDENT Applies to: PIPE</h3></div></div></div><p>The INDEPENDENT deviceparameter specifies the newly created process won't be terminated by the CLOSE of the device. By default, CLOSE terminates the process associated with the PIPE device.</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id856143"></a>PARSE Applies to: PIPE</h3></div></div></div><p>The PARSE deviceparameter invokes preliminary validation of the COMMAND value. When debugging, PARSE provides more accessible diagnosis for COMMAND values. By default, OPEN does not validate command values before passing them to the newly created process. PARSE has certain limitations, which may, or may not map to, those of the shell.</p><div class="itemizedlist"><ul><li><p>PARSE searches for the command in $PATH and in $gtm_dist and triggers an error if it isn't found.</p></li><li><p>PARSE does not resolve aliases, so they trigger an error.</p></li><li><p>PARSE does not resolve environment variables, except $gtm_dist (as mentioned above), so they trigger an error.</p></li><li><p>PARSE does not recognize built-in commands other than nohup and cd unless $PATH or $gtm_dist contain a version with the same name (as the built-in). In the case of nohup, PARSE looks for the next token in $PATH and $gtm_dist.  "When PARSE encounters cd it ignores what follows until the next "|" token (if one appears later in the COMMAND value). </p></li><li><p>PARSE rejects parentheses around commands. </p><div class="itemizedlist"><ul><li><p>The following example fails: </p><pre class="programlisting">
+                             OPEN p:(COMM="(cd; pwd)":WRITEONLY)::"PIPE"   
+                            </pre></li><li><p>Which could be specified without a PARSE error as: </p><pre class="programlisting">
+                             OPEN p:(COMM="cd; pwd":WRITEONLY)::"pipe"   
+                            </pre></li><li><p>This restriction does not include parentheses embedded in character strings as in: </p><pre class="programlisting">
+                              OPEN p:(COMM="echo ""(test)""":WRITEONLY)::"pipe"  
+                            </pre></li><li><p>Or parameters to a command as in:  </p><pre class="programlisting">
+                             OPEN p:(COMM="tr -d '()'":WRITEONLY)::"PIPE"  
+                            </pre></li><li><p>The following are examples of valid OPEN commands using PARSE:</p><pre class="programlisting">
+                            OPEN a:(COMM="tr e j | echoback":STDERR=e:exception="g BADOPEN":PARSE)::"PIPE"
+                            OPEN a:(SHELL="/usr/local/bin/tcsh":COMM="/bin/cat |&amp; nl":PARSE)::"PIPE"
+                            OPEN a:(COMM="mupip integ -file mumps.dat":PARSE)::"PIPE"
+                            OPEN a:(COMM="$gtm_dist/mupip integ -file mumps.dat":PARSE)::"PIPE"
+                            OPEN a:(COMM="nohup cat":PARSE)::"PIPE"   
+                            </pre></li></ul></div></li></ul></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id856324"></a>[NO]READONLY Applies to: FIFO PIPE SD</h3></div></div></div><p>OPENs a device for reading only (READONLY) or reading and writing (NOREADONLY).</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></img></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>To open a sequential file using the READONLY parameter, the file must exist on the disk. If it does not, GT.M issues a run-time error.</p></td></tr></table></div><p>When GT.M encounters a WRITE directed to a device OPENed READONLY, GT.M issues a run-time error.</p><p>By default, OPEN accesses the device NOREADONLY (read-write).</p><p>For PIPE devices, also see the WRITEONLY deviceparameter.</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id855343"></a>RECORDSIZE=intexpr Applies to: SD FIFO PIPE</h3></div></div></div><p>Overrides the default record size for a device and specifies the new maximum record size in bytes.</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id856244"></a>SHELL Applies to: PIPE</h3></div></div></div><p>The SHELL deviceparameter specifies the shell for the new process. By default the newly created process uses the shell specified by the $SHELL environment variable, otherwise, if $SHELL is undefined the process uses /bin/sh.</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id856239"></a>STDERR Applies to: PIPE</h3></div></div></div><p>The STDERR deviceparameter specifies that the stderr output from the created process goes to a pipe with the name of the STDERR value. This pipe acts as a restricted device that can appears as the argument to USE, READ and CLOSE commands. It is implicitly READONLY and an attempt to WRITE to it triggers an error. If it has not previously acted as the argument to an explicit CLOSE command, the CLOSE of the PIPE device implicitly closes the the STDERR &#8220;device.&#8221;</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id855808"></a>VARIABLE Applies to: SD FIFO PIPE</h3></div></div></div><p>Specifies the VARIABLE record length format for the device.</p><p>By default, records have VARIABLE length.</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id854968"></a>[Z]WIDTH=intexpr Applies to: TRM SOC NULL SD FIFO PIPE</h3></div></div></div><p>Sets the device's logical record size and enables WRAP.</p><p>NOWRAP and WIDTH supersede each other. When WIDTH and NOWRAP appear together on the same USE command, the final one controls the device behavior. For a terminal, WIDTH=0 is equivalent to WIDTH=n:NOWRAP, where n is the default length of a logical record on that terminal.</p><p>Terminals inherit their default WIDTH in GT.M from the invoking shell environment. The default WIDTH for null and socket device is 255. For other devices WIDTH defaults to RECORDSIZE.</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id855762"></a>[Z][NO]WRAP Applies to: SD FIFO SOC PIPE</h3></div></div></div><p>Enables or disables automatic record termination. When the current record size ($X) reaches the maximum WIDTH and the device has WRAP enabled, GT.M starts a new record, as if the routine had issued a WRITE ! command.</p><p>NOWRAP causes GT.M to require a WRITE ! to terminate the record. NOWRAP allows $X to become greater than the device WIDTH for terminals and null devices.</p><p>The combination of STREAM and NOWRAP options on disk files allows you to write a record of arbitrary length. Without the STREAM option, the WRAP option determines the action taken when the record length exceeds the device WIDTH. NOWRAP causes GT.M to truncate the record, while WRAP causes GT.M to insert a format control character.</p><p>By default, records WRAP.</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="#id854397">Return to top</a></p><div><h3 class="title"><a id="id856211"></a>[NO]WRITEONLY Applies to: PIPE</h3></div></div></div><p>The WRITEONLY deviceparameter specifies that the PIPE acts only to send its output to the created process. Any attempt to READ from such a PIPE triggers an error. Note that when you open a PIPE with both STDERR and WRITEONLY you can still READ from the STDERR &#8220;device.&#8221;</p></div></div></div><div xmlns="" id="customfooter" align="center">
+For more information, see the <a href="http://www.sanchez-gtm.com/" target="_blank" style="color: #000; font-weight: bold;">GT.M</a> web site. 
+</div></body>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/articles/PIPE_IO_Technical_bulletin.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:00:52 GMT -->
+</html>

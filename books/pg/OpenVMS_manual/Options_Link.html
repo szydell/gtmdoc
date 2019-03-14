@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Options_Link.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:30 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>/OPT[IONS]</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Qualifiers_for_LINK.html" title="Qualifiers for the LINK Command" />
+    <link rel="prev" href="Library_Link.html" title="/LIB[RARY]" />
+    <link rel="next" href="Shareable_Link.html" title="/SH[AREABLE]" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">/OPT[IONS]</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Library_Link.html">Prev</a> </td>
+          <th width="60%" align="center">Qualifiers for the LINK Command</th>
+          <td width="20%" align="right"> <a accesskey="n" href="Shareable_Link.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="Options_Link"></a>/OPT[IONS]</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4162806" class="indexterm"></a>
+      <p>Instructs the Linker to search for an options file with the specified file name. Linker options files are useful for sophisticated Linker operations requiring long argument lists or for options only available from an options file. You can specify more than one options file with the LINK command.</p>
+      <p>By default, the Linker assumes option files have an extension of .OPT.</p>
+      <p>The CLUSTER link option is important because its third parameter allows you to define the page-fault-cluster (pfc) for parts of your image. The pfc parameter sets the number of pages to transfer into central memory on a page fault. If the image doesn't contain page-fault-cluster information, the SYSGEN parameter PFCDEFAULT determines the page-fault-cluster size. PFCDEFAULT defaults to a value appropriate for the utilities supplied with VMS. Because of the density of generated code, a typical GT.M application exhibits smaller regions of locality than most VMS utilities. Therefore, investigate whether adjusting the page-fault-cluster for one or more of your production images provides a performance benefit.</p>
+      <p>If your application is fairly straightforward, use GTMCOLLECT.OPT as your options file. If you need to include your own options file, use GTMCOLLECT.OPT as a guide to the technique for controlling the page fault cluster size. If you create an options file other than GTMCOLLECT.OPT, include it in the Linker argument list with the /OPTION qualifier.</p>
+      <p>At the first appropriate place in the file, include the cluster options:</p>
+      <pre class="programlisting">
+        cluster=code,,12,
+        cluster=lits,,20,
+          </pre>
+      <p>The numbers 12 and 20 are examples, and should be replaced by numbers that your system manager determines provide you with the maximum performance benefit for your application(s).</p>
+      <p>Near the end of the file include the collect options:</p>
+      <pre class="programlisting">
+        collect=code,gtm$code
+        collect=lits,gtm$literals
+          </pre>
+      <p>For a detailed description of option files, refer to the &quot;Options File&quot; chapter in the VMS Linker Reference Manual.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Library_Link.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Qualifiers_for_LINK.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="Shareable_Link.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">/LIB[RARY] </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> /SH[AREABLE]</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Options_Link.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:30 GMT -->
+</html>

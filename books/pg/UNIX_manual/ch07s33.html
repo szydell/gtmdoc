@@ -1,0 +1,209 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s33.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZDate()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s32.html" title="$ZDATA()">
+<link rel="next" href="ch07s34.html" title="$ZExtract()">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZDate()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s32.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s34.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZDate()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zdate_g"></a>$ZDate()<a class="indexterm" name="idp188338480"></a>
+</h2></div></div></div>
+<p>Returns a date and/or time formatted as text based on an argument formatted in the manner of $HOROLOG. <span>For information on the format of $HOROLOG, refer to <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span></p>
+<p>The format for the $ZDATE function is:</p>
+<pre class="programlisting">$ZD[ATE](expr1[,expr2[,expr3[,expr4]]]])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The first expression specifies in $HOROLOG format the date and/or time that $ZDATE() returns in text format. If the output requires only the date or the time, the other piece of the argument that is delimited by a comma (,) may be null.</p></li>
+<li class="listitem"><p>The optional second expression specifies a string providing $ZDATE() with a "picture" of the desired output format. If this argument is missing or null, $ZDATE() uses the default format string "MM/DD/YY". If the optional second expression exceeds 64 characters, $ZDATE() generates a run-time error.</p></li>
+<li class="listitem"><p>The optional third expression specifies a list of 12 month codes, separated by commas (,), that $ZDATE() uses in formatting text months called for by the "MON" picture, (that is, $ZDATE() outputs $PIECE(expr3,",",month-number) when "MON" appears in the second expression). If this argument is missing or null, $ZDATE() uses three-character English abbreviations for months.</p></li>
+<li class="listitem"><p>The optional fourth expression specifies a list of seven day codes, separated by commas (,), which $ZDATE() uses in formatting text days of the week called for by the "DAY" picture, $ZDATE() outputs $PIECE (expr4,",",day-of-week-number) when "DAY" appears in the second expression; if this argument is missing or null, $ZDATE() uses three-character English abbreviations for days of the week.</p></li>
+<li class="listitem"><p>$ZDATE() returns 31-Dec-1840 as a date representation of day 0. </p></li>
+</ul></div>
+<p>$ZDATE() provides an easy and flexible tool for putting M internal date/time ($HOROLOG) formats into more user-friendly formats. </p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Warning">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Warning</th>
+</tr>
+<tr><td align="left" valign="top"><p>$ZDATE() generates an error for input date values greater than 31-Dec-999999 (364570088) or less than 01-JAN-1840 (-365) and for time values greater than a second before midnight (86399) or less than 0 (zero).</p></td></tr>
+</table></div>
+<p>The Intrinsic Special Variable $ZDATEFORM determines the output format for years. The default value is zero (0), in which case $ZDATE() with one argument (no format specification) uses a "YY" (two digit) format for all years. If $ZDATEFORM is one (1), a "YYYY" (four digit) format is used for years later than 1999. For all other values of $ZDATEFORM, "YYYY" (four digit) format is used for all years. $ZDATEFORM does not affect $ZDATE() when the format argument is specified. </p>
+<p>The following table summarizes the usage of $ZDATE() when only first argument is specified.</p>
+<div class="informaltable">
+<a name="tblzdate"></a><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+<p>Value of $ZDATEFORM</p>
+</th>
+<th>
+<p>$ZDATE() Output Format</p>
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<p>0</p>
+</td>
+<td>
+<p>2 digits</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>4 digits for years 2000 and after</p>
+<p>2 digits otherwise (for years ranging between 1840, 1999)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>other</p>
+</td>
+<td>
+<p>4 digits</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="zdate_format_spec"></a>$ZDATE Format Specification Elements<a class="indexterm" name="idp188361360"></a>
+</h3></div></div></div>
+<p>This section lists the $ZDATE format specification elements. $ZDATE() format specifications must appear in upper case. When any alphabetic characters in format specifications are in lower case, $ZDATE() generates a run-time error.</p>
+<p>YY:   Outputs the rightmost two digits of the year.</p>
+<p>YEAR: Outputs the year as a four-digit number.</p>
+<p>YYYYYY: Outputs the year as a six-digit number. </p>
+<p>MM:   Outputs the month as a two-digit zero-filled number between 01 and 12.</p>
+<p>MON:  Outputs the month as a three-letter abbreviation. (You can modify the output further using expr3).</p>
+<p>DD:   Outputs the day of the month as a two-digit zero-filled number between 01 and 31.</p>
+<p>DAY:  Outputs the day of the week as a three-letter abbreviation. (You can modify the output further using expr4).</p>
+<p>24:   Outputs the hour of the day as a zero-filled number between 00 and 23.</p>
+<p>12:   Outputs the hour of the day as a zero-filled number between 01 and 12.</p>
+<p>60:   Outputs the minute of the hour as a zero-filled number between 00 and 59.</p>
+<p>SS:   Outputs the second of the minute as a zero-filled number between 00 and 59.</p>
+<p>AM:   Outputs the letters AM and PM depending on the time.</p>
+<p>+:    Inserts a plus sign (+) in the output string</p>
+<p>-:    Inserts a minus sign (-) in the output string.</p>
+<p>.:    Inserts a period (.) in the output string.</p>
+<p>,:    Inserts a comma (,)in the output string.</p>
+<p>/:    Inserts a slash (/) in the output string.</p>
+<p>::    Inserts a colon (:) in the output string.</p>
+<p>;:    Inserts a semi-colon (;) in the output string.</p>
+<p>*:    Inserts an asterisk (*) in the output string.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>A blank space inserts a blank space in the output string.</p></td></tr>
+</table></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_zdate"></a>Examples<span> of $ZDATE()</span><a class="indexterm" name="idp188353840"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $horolog,!,$zdate($H)
+62109,60946
+01/18/11
+GTM&gt;</pre>
+<p>This displays $HOROLOG and then uses $ZDATE() to display today's date. The output shown would appear if today were the eighteenth day of January, 2011.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zdate($H,"DD-MON-YEAR")
+18-JAN-2011
+GTM&gt;</pre>
+<p>This uses the second argument to specify a text format different from the default.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set m="Januar,Februar,Marz,April,Mai,Juni,Juli,August,"
+GTM&gt;set m=m_"September,October,November,Dezember"
+GTM&gt;write $zdate($horolog,"DD-MON-YEAR",m)
+18-Januar-2011
+GTM&gt;</pre>
+<p>This is similar to the prior example, however it uses the third argument to specify the months in German.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set d="Dimanche,Lundi,Mardi,Mercredi,Jeudi,Vendredi,Samedi"
+GTM&gt;write $zdate($H,"DAY, DD/MM/YY","",d)
+Mardi, 18/01/2011
+GTM&gt;</pre>
+<p>This example displays the eighteenth of January, however it uses the fourth argument to specify the days of the week in French.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write !,$zdate($H,"12:60:SS AM")
+10:35:51 PM
+GTM&gt;</pre>
+<p>This example shows hours, minutes, and seconds in a 12 hour clock with an AM/PM indicator.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write !,$zdate(",36524","24-60")
+10-08
+GTM&gt;</pre>
+<p>This example shows hours and minutes on a 24 hour clock. Notice that the first argument must provide the time in the second comma delimiter piece to match $HOROLOG format.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zdateform
+0
+GTM&gt;write $zdate($H)
+01/18/11
+GTM&gt;set $zdateform=1
+GTM&gt;write $zdate($horolog)
+01/18/2011
+GTM&gt;write $zdate($horolog,"MM/DD/YY")
+01/18/11</pre>
+<p>This example converts the output format for years from the default ("YY") format to the four digit format ("YYYY") using the Intrinsic Special Variable $ZDATEFORM.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zdate(123456789,"DAY MON DD, YYYYYY")
+FRI MAR 17, 339854
+GTM&gt;</pre>
+<p>This example displays year as a six-digit number.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s32.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s34.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZDATA() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZExtract()</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s33.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

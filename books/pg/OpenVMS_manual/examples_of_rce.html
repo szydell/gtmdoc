@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_rce.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:24 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of %RCE</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="rce_percent.html" title="%RCE" />
+    <link rel="prev" href="input_vari_rce.html" title="Input Variables" />
+    <link rel="next" href="percent_rd_d.html" title="%RD" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of %RCE</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="input_vari_rce.html">Prev</a> </td>
+          <th width="60%" align="center">%RCE</th>
+          <td width="20%" align="right"> <a accesskey="n" href="percent_rd_d.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="examples_of_rce"></a>Examples of %RCE</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4225208" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO ^%RCE 
+	Routine Change Every occurrence 
+	Routine: BES*
+	BEST BEST2 BEST3 BEST4
+	Current total of 4 routines
+	Routine: &lt;RETURN&gt;
+	Old string:^NAME 
+	New string:^STUDENT
+	Replace all occurrences of:
+	&gt;^NAME&lt;
+	With
+	&gt;^STUDENT&lt;
+	Show changed lines &lt;Yes&gt;?: &lt;RETURN&gt;
+	Output Device: &lt;RETURN&gt;
+	<span>USER:[SMITH.WORK]BEST.M</span>
+	
+	Was: S ^NAME=SMITH 
+	Now: S ^STUDENT=SMITH
+	Was: S ^NAME(1)=JOHN
+	Now: S ^STUDENT(1)=JOHN
+	<span>USER:[SMITH.WORK] BEST2.M</span>
+	
+	<span>USER:[SMITH.WORK]BEST3.M</span>
+	
+	Was: S ^NAME=X
+	Now: S ^STUDENT=X
+	Was: W ^NAME
+	Now: W ^STUDENT
+	<span>USER:[SMITH.WORK]BEST4.M</span>
+	
+	Total of 4 routines parsed.
+	4 occurrences changed in 2 routines.
+	GTM&gt;
+	</pre>
+      <p>This example selects a list of routines that change the string &quot;^NAME&quot; to the string &quot;^STUDENT,&quot; and displays a trail of the changes.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO ^%RCE
+	Routine Change Every occurrence
+	Routine: BES*
+	BEST BEST2 BEST3 BEST4
+	Current total of 4 routines
+	Routine: &lt;RETURN&gt;
+	Old String:&lt;TAB&gt; 
+	The find string contains control characters
+	New string: &lt;RETURN&gt;
+	Replace all occurrences of:
+	&gt;&lt;TAB&gt;&lt;
+	With:
+	&gt;&lt;
+	Show changed lines &lt;Yes&gt;?: N
+	BEST BEST2 BEST3 BEST4
+	Total 4 routines parsed.
+	4 occurrences changed in 2 routines.
+	GTM&gt;	
+	</pre>
+      <p>This example removes all occurrences of the &lt;TAB&gt; key from specified routines and suppresses the display trail of changes. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="input_vari_rce.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rce_percent.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="percent_rd_d.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Input Variables </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> %RD</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_rce.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:24 GMT -->
+</html>

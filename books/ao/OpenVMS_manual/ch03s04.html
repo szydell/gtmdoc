@@ -1,0 +1,71 @@
+<html>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch03s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:41 GMT -->
+<head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Setting Privileges</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="chapter3.html" title="Chapter 3. Planning for GT.M"><link rel="prev" href="ch03s03.html" title="Setting Up User Accounts"><link rel="next" href="ch03s05.html" title="Ensuring Adequate Disk Storage"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Setting Privileges</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s03.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Planning for GT.M</th><td width="20%" align="right"> <a accesskey="n" href="ch03s05.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Setting Privileges"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setting_priveleges"></a>Setting Privileges</h2></div></div></div><a class="indexterm" name="id3220586"></a><p>OpenVMS restricts various resources and functions to those users with the associated privileges. The system manager can assign the appropriate privileges to each user. Some of the privileges can affect the access a user receives regardless of the access assigned by UICs and ACLs. When creating a user account, grant only those privileges consistent with both responsibility and need. By carefully constructing operational procedures, you can often minimize, or even eliminate, apparent requirements for privileges.</p><p>A user has default privileges and privileges available with SET PROC/PRIV. When granting a user a privilege with the power to disrupt the system, recommend that they turn on the privilege just long enough to accomplish a task for which it is required. This minimizes the chances of a serious system error.</p><p>The following table summarizes OpenVMS privileges a GT.M user may need.</p><div class="informaltable"><table border="1"><colgroup><col><col><col></colgroup><tbody><tr><td>
+<p>VMS Privileges Affecting GT.M Users</p>
+</td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td>
+<p>VMS</p>
+<p>PRIV</p>
+</td><td>
+<p>CONTROLS GT.M</p>
+<p>FACILITY</p>
+</td><td>
+<p>NOTES</p>
+</td></tr><tr><td>
+<p>ACNT</p>
+</td><td>
+<p>JOB command; NOACCOUNTING parameter</p>
+</td><td>
+<p>Disables accounting</p>
+</td></tr><tr><td>
+<p>ALTPRI</p>
+</td><td>
+<p>JOB command; PRIORITY= parameter</p>
+</td><td>
+<p>Permits raising the priority of the detached process </p>
+</td></tr><tr><td>
+<p>DETACH</p>
+</td><td>
+<p>JOB command; DETACH parameter</p>
+</td><td>
+<p>Permits creation of detached processes with other UICs</p>
+</td></tr><tr><td>
+<p>GROUP</p>
+</td><td>
+<p>$ZGETJPI() and $ZPID() of other processes</p>
+</td><td>
+<p>Within the group</p>
+</td></tr><tr><td>
+<p>GRPNAM &amp;</p>
+<p>TMPMBX</p>
+</td><td>
+<p>Temporary mailbox creation</p>
+</td><td>
+<p>Needs both privileges</p>
+</td></tr><tr><td>
+<p>PRMMBX &amp;</p>
+<p>SYSNAM</p>
+</td><td>
+<p>Permanent mailbox creation</p>
+</td><td>
+<p>Needs both privileges</p>
+</td></tr><tr><td>
+<p>PSWAPM</p>
+</td><td>
+<p>JOB command; NOSWAPPING parameter</p>
+</td><td>
+<p>Permits swapping of a detached process to be disabled </p>
+</td></tr><tr><td>
+<p>WORLD</p>
+</td><td>
+<p>$ZGETJPI() and $ZPID() of other processes</p>
+</td><td>
+<p>Allows access to all processes</p>
+</td></tr><tr><td>
+<p>all</p>
+</td><td>
+<p>$ZSETPRIV() - change specified privilege</p>
+</td><td>
+<p>GT.M cannot grant privileges unless they are available to the account.</p>
+</td></tr></tbody></table></div><p></p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>You do not need to grant privileges to GT.M users who access mailboxes created by another user.</p></td></tr></table></div><p>The $Z functions affected by privileges are analogues to VMS lexical functions, and would likely be used to perform operational tasks. Refer to the previous table for the $Z functions affected.</p><p>In assigning groups and privileges, remember that MUPIP STOP requires GROUP or WORLD privilege to stop processes outside the user's UIC.</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="chapter3.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Setting Up User Accounts </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> Ensuring Adequate Disk Storage</td></tr></table></div></body>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch03s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:41 GMT -->
+</html>

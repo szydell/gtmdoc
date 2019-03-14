@@ -1,0 +1,78 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s30.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZCOllate()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s29.html" title="$ZCHar()">
+<link rel="next" href="ch07s31.html" title="$ZCOnvert()">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZCOllate()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s29.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s31.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZCOllate()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zcollate"></a>$ZCOllate()<a class="indexterm" name="idp188291376"></a>
+</h2></div></div></div>
+<p>Returns the transformed representation of the first argument glvn in a normalized form using the alternative transform specified by the second argument intexpr; the return can be used as an operand to the follows (]) or sorts-after (]]) operator such that, if both operands are in the normalized form, the result is independent of alternative collation. </p>
+<p>The format for the $ZCOLLATE() function is:</p>
+<pre class="programlisting">$ZCO[llate](glvn,intexpr[,{0|1}])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The subscripted or unsubscripted global or local variable name specifies the key to transform.</p></li>
+<li class="listitem"><p>The integer expression specifies the ID of the alternative transform to use.</p></li>
+<li class="listitem"><p>The optional third argument specifies whether the transform is to normalized form, by default or if zero (0), or, if one (1), the reverse transform from the normalized to the native form.</p></li>
+</ul></div>
+<p>Note that because the forward transform is to the GDS global storage format, the reverse transform always shows a global form. This is not material when the result is used for most comparisons, but for some uses the applcation might need to remove the leading up-arrow (^).</p>
+<p>Please see the section on $ZATRANSFORM() for a similar alternative.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_zcollate"></a>Example of $ZCOllate()</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zwrite($zcollate("A(""foo"")",0))
+"A"_$C(0,255)_"foo"_$C(0,0)
+GTM&gt;write $zcollate($zcollate("A(""foo"")",0),0,1)
+^A("foo")
+GTM&gt;</pre>
+<p>The first WRITE in this example shows the readable form or the value produced by the $ZCOLLATE() revealing the details of how GT.M internally represents this key using default (M) collation. The second WRITE shows how the combination of the transform and reverse transform restores the value to the original representation.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s29.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s31.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZCHar() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZCOnvert()</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s30.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

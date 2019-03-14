@@ -1,0 +1,60 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/TNTOOLARGE.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:10 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>TNTOOLARGE </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="TMPSTOREMAX.html" title="TMPSTOREMAX ">
+<link rel="next" href="TNWARN.html" title="TNWARN ">
+<link rel="copyright" href="ln-idp153747552.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">TNTOOLARGE </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="TMPSTOREMAX.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="TNWARN.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">TNTOOLARGE </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="TNTOOLARGE"></a>TNTOOLARGE </h2></div></div></div>
+<p><span class="bold"><strong>TNTOOLARGE</strong></span>,    Database file xxx has reached the transaction number limit (0xaaa). Renew database with MUPIP INTEG TN_RESET</p>
+<p>Run Time Information: This indicates that GT.M detected that the transaction numbers in the named database have reached the maximum number. There are 0xFFFFFFFF ([2**32 - 1] or 4,294,967,295 decimal) possible transaction numbers for V4 or 0xFFFFFFFFFFFFFFFF ([2**64 - 1] or 18,446,744,073,709,551,615 decimal) possible transaction numbers for V5 version databases. Note that the actual maximum TN is less than this theoretical limit. DSE DUMP FILEHEADER shows what the limit is. The actual limit reflects some overhead used, for example, during a TN_RESET operation.</p>
+<p>Action: Use MUPIP INTEG with the qualifier TN_RESET to reset the transaction numbers in the database. If the database is in the V4 format, consider converting it to the V5 format. The database cannot otherwise be used until the condition is removed by either a TN_RESET or, if a V4 database, changing the output mode to V5 with MUPIP SET VERSION.</p>
+<a class="indexterm" name="idp159698272"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="TMPSTOREMAX.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="TNWARN.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">TMPSTOREMAX  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> TNWARN </td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/TNTOOLARGE.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:10 GMT -->
+</html>

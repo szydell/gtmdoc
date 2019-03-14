@@ -1,0 +1,166 @@
+<html>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch02s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:41 GMT -->
+<head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Installation Procedures</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch02.html" title="Chapter 2. Installing GT.M"><link rel="prev" href="ch02.html" title="Chapter 2. Installing GT.M"><link rel="next" href="chapter3.html" title="Chapter 3. Planning for GT.M"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Installation Procedures</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><th width="60%" align="center">Chapter 2. Installing GT.M</th><td width="20%" align="right"> <a accesskey="n" href="chapter3.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Installation Procedures"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="install_proc"></a>Installation Procedures</h2></div></div></div><p>To install releases of GT.M, the system's OpenVMS version must be a supported OpenVMS version for the GT.M distribution, and must have adequate disk space to perform the installation.</p><p>Installing the GT.M software to a system requires the following:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Loading the distribution files on a drive</p></li><li class="listitem"><p>Running VMSINSTAL to install GT.M</p></li></ul></div><div class="sect2" title="Running the VMSINSTAL Utility"><div class="titlepage"><div><div><h3 class="title"><a name="running_vmsinstall"></a>Running the VMSINSTAL Utility</h3></div></div></div><p>GT.M provides semi-automatic installation procedures using VMSINSTAL. VMSINSTAL displays a series of prompts. If a prompt has a default, VMSINSTAL displays the default answer in brackets [ ] after the prompt. Pressing &lt;RETURN&gt; enters the default.</p><p>To access help on a question, respond to the question with a question mark (?).</p><p>Issue the following DCL command to invoke VMSINSTAL:</p><pre class="programlisting">
+$ @SYS$UPDATE:VMSINSTAL GTMnnn device:
+</pre><p>Replace device with the name of the device used to mount your GT.M software. Replace nnn with the version number of the current release (refer to the GT.M Release Notes). If you do not enter this complete command, the system will prompt you for this information later in this procedure.</p><p>The following messages display:</p><pre class="programlisting">
+OpenVMS Software Product Installation Procedure Vx.x-x
+It is dd-mmm-yyyy at hh:mm.
+Enter a question mark (?) at any time for help.
+</pre><p>If there are other users on the system, VMSINSTAL issues the following warning message and lists the users:</p><pre class="programlisting">
+%VMSINSTAL-W-ACTIVE, The following processes are still active:
+</pre><p class="remark"><i><span class="remark">
+If the warning was issued, VMSINSTAL requests confirmation before continuing.
+</span></i></p><pre class="programlisting">
+* Do you want to continue anyway [NO] ?
+</pre><p>Fidelity strongly recommends that, prior to upgrading a GT.M version, all processes of the version being upgraded be exited and the database be rundown. Otherwise, unpredictable results may occur. An alternative method is to install the new release in a separate directory.</p><p>GT.M software can be installed with DECnet when there are active users on the system. Changing the distribution while users are actively using an earlier version of GT.M may work with some releases. However, if the database files are modified by the new release, or if recompilation of M code is required, all GT.M users should exit and the database(s) rundown before installing the new software. Refer to the Release Notes for the distribution to determine if this is necessary. An alternative is to install a new release in a different directory.</p><pre class="programlisting">
+* Are you satisfied with the backup of your system disk [YES]?
+</pre><p>Enter Y(es) to proceed, or &lt;RETURN&gt;. Press N(o) to terminate the installation.</p><p class="remark"><i><span class="remark">
+If there are no other users or you elect to continue, VMSINSTAL requests verification for whether you have a good backup of your system disk.
+</span></i></p><pre class="programlisting">
+* Are you satisfied with the backup of your system disk [YES]?
+</pre><p>The installation of a GT.M distribution kit which does not update the database file format does not, by itself, put any part of a system except for older copies of GT.M in the target directory at risk (except with older copies of GT.M).</p><pre class="programlisting">
+* Are you satisfied with the backup of your system disk [YES]?
+</pre><p>Enter &lt;RETURN&gt; or Y(es) to proceed. Enter N(o) to terminate the installation.</p><p class="remark"><i><span class="remark">
+If you did not enter a complete VMSINSTAL command, with all parameters, the installation presents the following prompts.
+</span></i></p><pre class="programlisting">
+* Where will the distribution volumes be mounted:
+</pre><p>Enter the device, controller type and unit for the media where the distribution is to be mounted,
+(e.g., MSA0, MUA0, DUA0, MTA0).</p><pre class="programlisting">
+* Products:
+</pre><p>Enter the GTMnnn, replacing "nnn" with the current version number, or enter an asterisk (*) to process all products on the distribution media.</p><pre class="programlisting">
+* Options:
+</pre><p>Press &lt;RETURN&gt; unless you wish to use VMSINSTAL options.</p><p class="remark"><i><span class="remark">
+VMSINSTAL displays a message asking you to physically mount the first distribution volume set on the selected device.
+</span></i></p><p>If the volume set is not already mounted, physically mount it.</p><pre class="programlisting">
+* Are you ready?
+</pre><p>Enter Y(es) to proceed or N(o) to terminate the installation.</p><pre class="programlisting">
+Beginning installation of GTM Vnn.n at hh:mm
+</pre><p>This message confirms that VMSINSTAL has started the installation of GT.M.</p><pre class="programlisting">
+%VMSINSTAL-I-RESTORE, Restoring product saveset A ...
+</pre><p>This message confirms that VMSINSTAL has located GT.M on the distribution media.</p><p>If the system's OpenVMS version does not match the GT.M distribution or if the largest disk has inadequate disk storage space to complete the installation, VMSINSTAL displays a message and terminates the installation at this point.</p><pre class="programlisting">
+* Do you want to purge files replaced by this installation [YES]?
+</pre><p>Some organizations have a policy of testing new software before purging old files. Answer according to the guidelines of your organization.</p><p>Press &lt;RETURN&gt; or Y(es) if you want VMSINSTAL to remove old versions of files provided by the installation. Press N(o) to retain any old files.</p><p class="remark"><i><span class="remark">
+If you enter N(o), VMSINSTAL does not purge as part of the installation. Make a note to purge after testing.
+</span></i></p><pre class="programlisting">
+* Do you want the standard GT.M configuration (performs INSTALL) [YES]?
+</pre><p>For new or standard installations, Fidelity provides a quick and easy route to install your new software version. If you do not store or name your files in the standard way noted, press N(o). If you press Y(es), the following will happen automatically: </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Files are put in SYS$COMMON:[GTM_DIST] and owned by SYSTEM.</p></li><li class="listitem"><p>GTMSTART.COM is included in the system startup database and the GT.M command procedures are copied to SYS$MANAGER.</p></li><li class="listitem"><p>GT.M help files are left in GTM$DIST and not copied to SYS$HELP.</p></li><li class="listitem"><p>DCL commands for GT.M are defined in the system command tables.</p></li><li class="listitem"><p>Logical names, including LNK$LIBRARY*, are defined in the system table.</p></li><li class="listitem"><p>All the necessary images are INSTALLed during this installation.</p></li><li class="listitem"><p>The default global directory is defined as MUMPS.GLD.</p></li><li class="listitem"><p>The default routine search specification (GTM$ROUTINES) is defined as "[],GTM$DIST:"</p></li><li class="listitem"><p>The M percent routines are compiled.</p></li><li class="listitem"><p>The Installation Verification Procedure tests the newly installed software.</p></li></ul></div><p class="remark"><i><span class="remark">
+If you answer N(o) to the standard configuration, the questions continue as follows:
+</span></i></p><pre class="programlisting">
+* What UIC should own the GT.M distribution [SYSTEM]:
+</pre><p>Assigning a SYSTEM UIC to a language processor such as GT.M simplifies system security. The UIC can be a name, a group name and a user name separated by a comma or a pair of octal codes separated by a comma, specifying the group and user.</p><p>If the identifier SYSTEM is not defined in your rights database, the installation uses [1,4] for the default owner.</p><p>Press &lt;RETURN&gt; to assign the SYSTEM UIC or another UIC.</p><pre class="programlisting">
+* Do you want the GT.M distribution to go into a System Directory [YES]?
+</pre><p>Storing a language processor such as GT.M on the system disk simplifies system security and operations. If you have severe space constraints, you may need to use a different volume.</p><p>Press &lt;RETURN&gt; or Y(es) to place GT.M in a sub-directory of SYS$COMMON. Press N(o) to choose a different directory.</p><p class="remark"><i><span class="remark">
+If you choose to store GT.M in the system directory, the installation prompts:
+</span></i></p><pre class="programlisting">
+* In what System Directory do you want to place GT.M [GTM_DIST]:
+</pre><p>By default, VMSINSTAL installs the GT.M software in a directory used specifically to hold GT.M modules. Institutions not concerned with mixing software from different sources may elect to use SYSLIB (sys$library) instead of GTM_DIST.</p><p>Press &lt;RETURN&gt; to place the GT.M files in a sub-directory of SYS$COMMON called GTM_DIST or enter another sub-directory of SYS$COMMON.</p><p>If the sub-directory does not exist, VMSINSTAL creates it later in the installation. The sub-directory has Read and Execute protection for all user classes.</p><p class="remark"><i><span class="remark">
+If you chose not to store GT.M in the system directory, the installation displays the next two prompts:
+</span></i></p><pre class="programlisting">
+* On which device do you want to place GT.M []:
+</pre><p>The disk must have enough space to store GT.M and must be mounted at all times when GT.M is in use. The disk name can be physical or logical.</p><p>Enter an appropriate disk name to store the GT.M software.</p><pre class="programlisting">
+* In what directory on that device do you want to place GT.M [GTM_DIST]:
+</pre><p>Press &lt;RETURN&gt; to place the GT.M software in the default directory [GTM_DIST] or enter
+another directory. </p><p>If the sub-directory does not exist, VMSINSTAL creates it later in the installation. The directory has Read and Execute protection for all user classes. </p><p class="remark"><i><span class="remark">
+Independent of the placement of the software, the installation continues.
+</span></i></p><pre class="programlisting">
+* What do you want to call the configuration database [GTC.CNF]:
+</pre><p>The configuration database holds information which permits normal operation of products licensed from Fidelity. The installation generates command procedures which define a logical name directing configuration activity to this file. Using a single configuration database file for all Fidelity products simplifies system management.</p><p>Press &lt;RETURN&gt; to name the configuration database file GTC.CNF, or enter another file specification.</p><pre class="programlisting">
+* Do you want GTMSTART.COM in the startup database [YES]?
+</pre><p>Placing GTMSTART.COM in the startup database simplifies operations, particularly when using GT.CM. OpenVMS automatically activates programs and procedures in the startup database during every normal system startup. The principal alternatives are editing SYSTARTUP_VMS.COM or having special procedures for starting GT.M.</p><p>Press &lt;RETURN&gt; or Y(es) to place GTMSTART.COM in the startup database. Press N(o) to allow GT.M startup to be handled by other means.</p><p class="remark"><i><span class="remark">
+If you do not place GTMSTART.COM in the startup database, the installation asks the following question:
+</span></i></p><pre class="programlisting">
+* Do you want the GT.M .COM files in SYS$MANAGER [YES]?
+</pre><p>Copying the command procedures to SYS$MANAGER allows system startup to access them through the OpenVMS startup database and generally simplifies operations. However, if you have multiple GT.M versions on your system at the same time, you do not want to have multiple copies of the command procedures in SYS$MANAGER.</p><pre class="programlisting">
+* Do you want the GT.M help files in SYS$HELP [NO]?
+</pre><p>Storing the help files with the rest of the distribution keeps the entire GT.M distribution together. Some organizations prefer to keep all help files in SYS$HELP.</p><p>Press &lt;RETURN&gt; or N(o) to leave the GT.M help files with the rest of the GT.M distribution. Press Y(es) to place the help files in SYS$HELP.</p><pre class="programlisting">
+* Do you want to define GT.M commands to the System [YES]?
+</pre><p>Making GT.M accessible to many users is simplified by defining the GT.M commands in the system DCLTABLES. The principal alternatives are having each process define the commands during process startup or GT.M initialization, or using additional command tables. A method which modifies the command tables more frequently reduces process performance.</p><p>Press &lt;RETURN&gt; or Y(es) to define GT.M commands in the SYSTEM DCLTABLES. Press N(o) to make the definition process specific.</p><pre class="programlisting">
+* Do you want to define GT.M logical names in the System Table [YES]?
+</pre><p>Making GT.M accessible to many users is simplified by defining the GT.M logical names in the system logical name table. The principal alternative is defining them at the group or process level. A method which modifies logical name tables more frequently reduces process performance.</p><p>Press &lt;RETURN&gt; or Y(es) to define the GT.M logical names in the system table. Press N(o) to direct the definitions to be process specific.</p><pre class="programlisting">
+* Do you want to define the LNK$LIBRARY logical names [YES]?
+</pre><p>LNK$LIBRARY_n logical names point to libraries that are included by default when performing an image LINK under OpenVMS. GT.M has libraries that must be available when linking GT.M images.</p><p>Press &lt;RETURN&gt; or Y(es) if you want the installation procedures to find the next two available LNK$LIBRARY_n logical names and define them to point to the appropriate GT.M libraries. Press N(o), if you do not want this to happen automatically.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>If users have a different logical name environment than that of the installing process, the installation may choose inappropriate LNK$LIBRARY logicals. In this case, edit the GTMLOGICAL.COM procedure produced by the installation.</p></td></tr></table></div><pre class="programlisting">
+* Do you want to run the IVP (performs INSTALL) [YES]?
+</pre><p>This installation kit contains an Installation Verification Procedure (IVP) which can run as part of the installation process. The IVP performs basic tests to verify that the software has been installed successfully.</p><p>To complete the tests, the GT.M Program Authorization Key (PAK) must be properly configured in the
+configuration database and some of the components of GT.M must be INSTALLed (i.e., made known to OpenVMS).</p><p>Enter &lt;RETURN&gt; or Y(es) to run the Installation Verification Procedure at the end of the installation, or N(o) to complete the installation without the test.</p><p class="remark"><i><span class="remark">
+If you entered NO to running the Installation Verification Procedure, the installation displays the following prompt:
+</span></i></p><pre class="programlisting">
+* Do you want to compile the GT.M percent routines (performs INSTALL) [YES]?
+</pre><p>GT.M includes a set of programmer tools, called percent (%) routines (e.g., date conversion programs, global lister).</p><p>Press &lt;RETURN&gt; or Y(es), if you want these routines extracted from the text library and compiled. Press
+N(o), if you do not want these routines extracted.</p><p class="remark"><i><span class="remark">
+If you answered N(o) to running the Installation Verification Procedure, and N(o) to compiling the M percent utilities, the installation asks the following question:
+</span></i></p><pre class="programlisting">
+* Do you want to INSTALL the GT.M shareable images now [YES]?
+</pre><p>If the shareable images are not installed as part of the installation procedure, GTMSECSHR must still be installed before any process can run GT.M. </p><p>Press &lt;RETURN&gt; or Y(es) to install the images at the end of the installation. Press N(o) to defer installing the images.</p><pre class="programlisting">
+* Do you want to have a default definition for GTM$ROUTINES [YES]?
+</pre><p>The logical name, GTM$ROUTINES, specifies a list of the possible locations for your GT.M programs. This enables M to find the routine (program) you want to run even if it is not in your current default directory. </p><p>Press &lt;RETURN&gt; or Y(es), if you want a default search definition added to the command file executed during an M user login (GTMLOGIN.COM). Press N(o) if you do not want this logical set up.</p><p class="remark"><i><span class="remark">
+If you answered Y(es) to having a default GTM$ROUTINES, the installation presents the following prompt:
+</span></i></p><pre class="programlisting">
+* What is the search specification for the default GTM$ROUTINES 
+[[],GTM$DIST:]: ?
+</pre><p>When a user or application requests a routine which is not in the image, GTM$ROUTINES specifies the RMS directory list in which the routine may be located. The default causes the system to search for the routine first in the user's current default directory and then in the distribution directory GTM$DIST. The installation stores the utilities supplied by Fidelity Information Services in GTM$DIST. The routine search specification can be easily changed later.</p><p>Press &lt;RETURN&gt;, if you want to use the default definition for your GTM$ROUTINES logical names, or enter your own definition.</p><p>Because GTM$ROUTINES provides a string to GT.M and does not act as an OpenVMS search list, enclose the items in the list with quotation marks (" ") when the list has more than one item.</p><pre class="programlisting">
+* Do you want to have a default definition for GTM$GBLDIR [YES]?
+</pre><p>Defining a default logical name for GTM$GBLDIR simplifies the use of GT.M, particularly for new users. To use a GT.M database, a GT.M user needs a Global Directory (GD). The logical name, GTM$GBLDIR, provides the most convenient way to establish a current GD. The GD to which GTM$GBLDIR points may vary from process to process.</p><p>Press &lt;RETURN&gt; or Y(es) to add a definition of GTM$GBLDIR to GTMLOGIN.COM. Press N(o) to leave the definition of GD's to be handled by some other means.</p><p class="remark"><i><span class="remark">
+If you answered Y(es) to having a default definition for GTM$GBLDIR, the installation presents the following prompt.
+</span></i></p><pre class="programlisting">
+* What is the file specification for the default GTM$GBLDIR [MUMPS.GLD]
+</pre><p>The specified Global Directory file does not need to exist at this time. The file specification can be partial or complete. A partial file specification usually serves for development and a complete specification for production. The file specification can be easily changed later.</p><p>Press &lt;RETURN&gt; to accept MUMPS.GLD as the file specification for GTM$GBLDIR or enter a different one.</p><p class="remark"><i><span class="remark">
+When you have answered all the questions, the installation continues with the following messages:
+</span></i></p><pre class="programlisting">
+The following command files are created [and copied to SYS$MANAGER]:
+GTMINSTALL.COM
+GTMLOGICALS.COM
+GTMLOGIN.COM
+GTMSTART.COM
+GTMSTOP.COM
+
+Each file contains its own user documentation.
+All the questions have been asked.
+Installation now proceeds without your manual intervention for about 10-15 minutes.
+</pre><p class="remark"><i><span class="remark">
+If you answered Y(es) to using the standard configuration or YES to running the Installation Verification Procedure, the installation displays the following message:
+</span></i></p><pre class="programlisting">
+Finally the Installation Verification Procedure tests the installation.
+</pre><p class="remark"><i><span class="remark">
+The installation provides updates on its progress by displaying the following messages:
+</span></i></p><pre class="programlisting">
+%VMSINSTAL-I-RESTORE, Restoring product saveset B ...
+%VMSINSTAL-I-RESTORE, Restoring product saveset C ...
+%GTM-I-CRECOM, Creating command files
+%GTM-I-PREFIL, Preparing distribution files for installation
+%GTM-I-FININS, Finalizing the installation.
+%VMSINSTAL-I-MOVEFILES, Files will now be moved to their target directories...
+</pre><p class="remark"><i><span class="remark">
+VMSINSTAL may also display PURGE warning messages.
+</span></i></p><p>The purge messages indicate failure to purge files in use. This is probably caused by not terminating all GT.M processes from the previously installed versions.</p><p class="remark"><i><span class="remark">
+Once you reach this point, VMSINSTAL has placed the GT.M files on your system. If a failure occurs after this point and you understand how to correct the problem, you do not have to repeat the VMSINSTAL.
+</span></i></p><p class="remark"><i><span class="remark">
+If you answered Y(es) to the standard configuration or Y(es) to the Installation Verification Procedure, the following messages appear interspersed with actions:
+</span></i></p><pre class="programlisting">
+* GT.M Installation Verification Procedure
+Verifying GDE.
+Verifying MUPIP.
+Verifying DSE.
+Verifying direct mode MUMPS.
+Verifying LKE.
+Verifying GT.M MUMPS compiler.
+The GT.M validation has been completed on dd-mmm-yyyy at hh:mm:ss.
+</pre><p class="remark"><i><span class="remark">
+In any successful case, VMSINSTAL completes the installation with the confirmation message:
+</span></i></p><pre class="programlisting">
+Installation of GTM vnn.n completed at hh.mm
+</pre><p class="remark"><i><span class="remark">
+If you did not start the installation process with a complete VMSINSTAL command with all the parameters, the system prompts for the next product to be installed.
+</span></i></p><pre class="programlisting">
+Enter the products to be processed from the next distribution volume set.
+
+* Products:
+</pre><p>Press &lt;CTRL-Z&gt; to exit VMSINSTAL. </p><p class="remark"><i><span class="remark">
+VMSINSTAL exits with the message:
+</span></i></p><pre class="programlisting">
+VMSINSTAL procedure done at hh.mm
+$
+</pre><p>Review the .COM files. You may want to revise the .COM files, particularly after you have some experience with GT.M.</p><p>Refer to the OpenVMS System Manager's Manual: Essentials and the OpenVMS System Management Utilities Reference Manual for more information on installing images.</p></div><div class="sect2" title="Unload the Distribution Media"><div class="titlepage"><div><div><h3 class="title"><a name="unload_dist_media"></a>Unload the Distribution Media</h3></div></div></div><p>Physically unload the GT.M distribution media and store it in a safe place.</p></div><div class="sect2" title="Adding GTMSTOP to SHUTDOWN"><div class="titlepage"><div><div><h3 class="title"><a name="add_gtmstop_to_shutdwn"></a>Adding GTMSTOP to SHUTDOWN</h3></div></div></div><p>To ensure that all GT.M databases are properly closed before OpenVMS terminates, place a copy or invocation of GTMSTOP.COM in the site-specific shutdown
+procedure SYS$MANAGER:SYSHUTDWN.COM.</p></div><div class="sect2" title="Installing GT.M From Electronic Distribution"><div class="titlepage"><div><div><h3 class="title"><a name="install_gtm_electronically"></a>Installing GT.M From Electronic Distribution</h3></div></div></div><p>Fidelity distributes its GT.M language system and related products over the Internet. To get the products using this medium follow these steps:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Contact GT.M Support to get the FTP site address, and access information corresponding to the
+components you need.</p></li><li class="listitem"><p>Use an FTP client to download the files you need into appropriate disk storage accessible by the system on which they are to be installed. Ensure that all files are transferred in image or binary mode - some FTP clients may default or attempt to auto-sense the file type and the resulting downloads may be defective. If any files have .zip extensions, unzip them.</p></li><li class="listitem"><p>If the files have a .sav extension or single letter extensions (.A, .B, etc.), they are in BACKUP saveset form - check such files for proper characteristics using DIRECTORY /FULL. They should show the following:</p><p>Record format: Fixed length 9216 byte records</p><p>If they do not, correct them using SET FILE / ATTRIBUTE=(RFM=FIX,LRL=9216)</p><p>Refer to the installation instructions for the product in the corresponding manual.</p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch02.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="chapter3.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 2. Installing GT.M </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 3. Planning for GT.M</td></tr></table></div></body>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch02s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:41 GMT -->
+</html>

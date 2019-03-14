@@ -1,0 +1,543 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Using Terminals</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
+<link rel="prev" href="ch09s02.html" title="I/O Devices">
+<link rel="next" href="ch09s04.html" title="Using Sequential Files">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Using Terminals</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch09s02.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 9. <span>Input/Output</span> Processing</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch09s04.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch09.html"><span>Input/Output</span> Processing</a></span> &gt; <span class="breadcrumb-node">Using Terminals</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="using_terminals"></a>Using Terminals</h2></div></div></div>
+<p>A GT.M process assigns $PRINCIPAL to the UNIX standard input of the process (for READ) and standard output (for WRITE).  For a local interactive process, $PRINCIPAL identifies the "terminal" from which the user is signed on.</p>
+<p>While all terminals support the CTRAP deviceparameter, only $PRINCIPAL supports CENABLE. While CTRAP allows terminal input to redirect program flow, CENABLE allows the terminal user to invoke the Direct Mode. </p>
+<p>Directly connected printers often appear to GT.M as a terminal (although printers generally do not provide input) regardless of whether the printer is connected to the computer with a high speed parallel interface, or an asynchronous terminal controller. </p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="setting_terminal_characterstics"></a>Set<span>ting</span> <span>Terminal</span> Characteristics</h3></div></div></div>
+<p>GT.M does not isolate its handling of terminal characteristics from the operating system environment at large. GT.M inherits the operating system terminal characteristics in effect at the time the GT.M image is invoked. When GT.M exits, the terminal characteristics known by the operating system are restored.</p>
+<p>However, if the process temporarily leaves the GT.M environment with a ZSYSTEM command , GT.M does not recognize any changes to the terminal characteristics left by the external environment. This may cause disparities between the physical behavior of the terminal, and the perceived behavior by GT.M.</p>
+<p><span>UNIX</span> enforces standard device security for explicit OPENs of terminals other than the sign-in terminal (<span>$PRINCIPAL</span>). If you are unable to OPEN a terminal, contact your system manager.</p>
+<p>USE of a terminal causes the device driver to flush the output buffer. This feature of the USE command provides routine control over the timing of output, which is occasionally required. However, it also means that redundant USE commands may induce an unnecessary performance penalty. Therefore, FIS recommends restricting USE commands to redirecting I/O, modifying deviceparameters, and initiating specifically required flushes. </p>
+<p>The terminal input buffer size is fixed at 1024 on UNIX and a variable read terminates after 1023 characters. </p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="set_termchar"></a>Set<span>ting the environment variable</span> TERM</h4></div></div></div>
+<p>The environment variable $TERM must specify a terminfo entry that accurately matches the terminal (or terminal emulator) settings. Refer to the terminfo man pages for more information on the terminal settings of the platform where GT.M needs to run.</p>
+<p>Some terminfo entries may seem to work properly but fail to recognize function key sequences or position the cursor properly in response to escape sequences from GT.M. GT.M itself does not have any knowledge of specific terminal control characteristics. Therefore, it is important to specify the right terminfo entry to let GT.M communicate correctly with the terminal. You may need to add new terminfo entries depending on their specific platform and implementation. The terminal (emulator) vendor may also be able to help.</p>
+<p>GT.M uses the following terminfo capabilities. The full variable name is followed by the capname in parenthesis:</p>
+<pre class="programlisting">auto_right_margin(am), clr_eos(ed), clr_eol(el), columns(cols), cursor_address(cup), cursor_down(cud1),cursor_left(cub1), cursor_right(cuf1), cursor_up(cuu1), eat_newline_glitch(xenl), key_backspace(kbs), key_dc(kdch1),key_down(kcud1), key_left(kcub1), key_right(kcuf1), key_up(kcuu1), key_insert(kich1), keypad_local(rmkx),keypad_xmit(smkx), lines(lines). </pre>
+<p>GT.M sends keypad_xmit before terminal reads for direct mode and READs (other than READ *) if EDITING is enabled. GT.M sends keypad_local after these terminal reads.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="logical_record_for_terminals"></a>Logical Records for Terminals</h3></div></div></div>
+<p>A logical record for a terminal equates to a line on the physical screen. The WIDTH device characteristic specifies the width of the screen, while the LENGTH device characteristic specifies the number of lines on the screen. </p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="read_cmmd_for_terminals"></a>READ * Command for Terminals<a class="indexterm" name="idp189674336"></a>
+</h3></div></div></div>
+<p>If the terminal has ESCAPE sequencing enabled, and the input contains a valid escape sequence or a terminator character, GT.M stores the entire sequence in $ZB and returns the ASCII representation of the first character.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;kill
+GTM&gt;use $principal:escape
+GTM&gt;read *x set zb=$zb zwrite
+(Press the F11 key on the VT220 terminal keyboard)
+x=27
+zb=$C(27)_"[23~"</pre>
+<p>This enters an escape sequence in response to a READ *. The READ * assigns the code for &lt;ESC&gt; to the variable X. GT.M places the entire escape sequence in $ZB. As some of the characters are not graphic, that is, visible on a terminal, the example transfers the contents of $ZB to the local variable ZB and uses a ZWRITE so that the non-graphic characters appear in $CHAR() format.</p>
+<p>When escape processing is disabled, READ *x returns 27 in x for an &lt;ESC&gt;. If the escape introducer is also a TERMINATOR, $ZB has a string of length one (1), and a value of the $ASCII() representation of the escape introducer; otherwise, $ZB holds the empty string. GT.M stores the remaining characters of the escape sequence in the input stream. A READ command following a READ * command returns the remaining characters of the escape sequence.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;kill
+GTM&gt;use $principal:(noescape:term=$char(13))
+GTM&gt;read *x set zb=$zb read y:0 zwrite
+(Press the F11 key on the terminal keyboard)
+[23~x=27
+y="[23~"
+zb=""
+GTM&gt;use $principal:noecho read *x set zb=$zb read y:0 use $principal:echo zwrite
+x=27
+y="[23~"
+zb=""
+GTM&gt;read *x set zb=$zb use $principal:flush read y:0 zwrite
+x=27
+y=""
+zb=""</pre>
+<p>While the first READ Y:0 picks up the sequence after the first character, notice how the graphic portion of the sequence appears on the terminal &#8211; this is because the READ *X separated the escape character from the rest of the sequence thus preventing the terminal driver logic from recognizing it as a sequence, and suppressing its echo. The explicit suppression of echo removes this visual artifact. In the case of the final READ *X, the FLUSH clears the input buffer so that it is empty by the time of the READ Y:0.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="read_maxlen"></a>READ X#maxlen<span> Command for Terminals</span><a class="indexterm" name="idp189683984"></a>
+</h3></div></div></div>
+<p>Generally, GT.M performs the same maintenance on $ZB for a READ X#maxlen as for a READ. However, if the READ X#maxlen terminates because the input has reached the maximum length, GT.M sets $ZB to null. When the terminal has ESCAPE sequencing enabled, and the input contains an escape sequence, GT.M sets $ZB to contain the escape sequence. </p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="terminal_deviceParam_summ"></a><span>Terminal Deviceparameter </span>Summary</h3></div></div></div>
+<p>The following tables provide a brief summary of deviceparameters for terminals, grouped into related areas. <span>For detailed information, refer to <a class="xref" href="ch06s16.html" title="Open">&#8220;Open&#8221;</a>, <a class="xref" href="ch06s24.html" title="Use">&#8220;Use&#8221;</a>, and <a class="xref" href="ch09s09.html#close_cmmd_9" title="Close">&#8220;Close&#8221;</a>.</span></p>
+<div class="informaltable">
+<a name="tbltermsumm"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="3">
+                <p>Error Processing Deviceparameters</p>
+              </th></tr>
+<tr>
+<th>
+                <p>DEVICEPARAMETER</p>
+              </th>
+<th>
+                <p>COMMAND</p>
+              </th>
+<th>
+                <p>COMMENT</p>
+              </th>
+</tr>
+</thead>
+<tbody><tr>
+<td>
+                <p>EXCEPTION=expr</p>
+              </td>
+<td>
+                <p>O/U/C</p>
+              </td>
+<td>
+                <p>Controls device-specific error handling.</p>
+              </td>
+</tr></tbody>
+</table>
+</div>
+<p></p>
+<p></p>
+<div class="informaltable">
+<a name="tblintrmgt"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="3">
+                <p>Interaction Management Deviceparameters</p>
+              </th></tr>
+<tr>
+<th>
+                <p>DEVICEPARAMETER</p>
+              </th>
+<th>
+                <p>COMMAND</p>
+              </th>
+<th>
+                <p>COMMENT</p>
+              </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+                <p>[NO]CENABLE</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls whether &lt;CTRL-C&gt; on $PRINCIPAL causes GT.M to go to direct mode.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>CTRAP=expr</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls vectoring on trapped &lt;CTRL&gt; characters.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]EDITING</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls the editing mode for $PRINCIPAL.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]EMPTERM</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Control whether an "Erase" character on an empty input line should terminate a READ or READ # command.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]ESCAPE</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls escape sequence processing.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]INSERT</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls insert or overstrike on input.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]PASTHRU</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls interpretation by the operating system of special control characters (for example &lt;CTRL-B&gt;).</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]TERMINATOR[=expr]</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls characters that end a READ</p>
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></p>
+<p></p>
+<div class="informaltable">
+<a name="tblflowcntrl"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="3">
+                <p>Flow Control Deviceparameters</p>
+              </th></tr>
+<tr>
+<th>
+                <p>DEVICEPARAMETER</p>
+              </th>
+<th>
+                <p>COMMAND</p>
+              </th>
+<th>
+                <p>COMMENT</p>
+              </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+                <p>[NO]CONVERT</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls forcing input to uppercase.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]FILTER</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls some $X, $Y maintenance.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>FLUSH</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Clears the typeahead buffer.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]HOSTSYNC</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls host's use of XON/XOFF.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]READSYNC</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls wrapping READs in XON/XOFF.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]TTSYNC</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls input response to XON/XOFF.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]TYPEAHEAD</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls unsolicited input handling.</p>
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></p>
+<div class="informaltable">
+<a name="tblscrmgt"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="3">
+                <p>Screen Management Deviceparameters</p>
+              </th></tr>
+<tr>
+<th>
+                <p>DEVICEPARAMETER</p>
+              </th>
+<th>
+                <p>COMMAND</p>
+              </th>
+<th>
+                <p>COMMENT</p>
+              </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+                <p>CLEARSCREEN</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Clears from cursor to end-of-screen.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>DOWNSCROLL</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Moves display down one line.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]ECHO</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls the host echo of input.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>ERASELINE</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Clears from cursor to end-of-line.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[Z]LENGTH=intexpr</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls maximum number of lines on a page ($Y).</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>UPSCROLL</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Moves display up one line.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[Z]WIDTH=intexpr</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls the maximum width of an output line ($X).</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[Z][NO]WRAP</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls handling of output lines longer than the maximum width.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>X=intexpr</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Positions the cursor to column intexpr.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>Y=intexpr</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Positions the cursor to row intexpr.</p>
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>O:    Applies to the OPEN command</p>
+<p>U:    Applies to the USE command</p>
+<p>C:    Applies to the CLOSE command</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="terminal_examples"></a>Terminal Examples</h3></div></div></div>
+<p>This section contains examples of GT.M terminal handling.</p>
+<p>Example:</p>
+<pre class="programlisting">use $principal:(exception="zg "_$zl_":C^MENU")</pre>
+<p>This example USEs the principal device, and sets up an EXCEPTION handler.  When an error occurs, it transfers control to label C in the routine ^MENU at the process stack level where the EXCEPTION was established.</p>
+<p>Example:</p>
+<pre class="programlisting">use $principal:(x=0:y=0:clearscreen)</pre>
+<p>This example positions the cursor to the upper left-hand corner and clears the entire screen.</p>
+<p>Example:</p>
+<pre class="programlisting">use $principal:(noecho:width=132:wrap)</pre>
+<p>This example disables ECHOing, enables automatic WRAPping, and sets the line width to 132 characters.</p>
+<p> Note that GT.M enables WRAP automatically when you specify the WIDTH deviceparameter. </p>
+<p>Example:</p>
+<pre class="programlisting">use $principal:nocenable</pre>
+<p>This example disables &lt;CTRL-C&gt;.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch09s02.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch09.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch09s04.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">I/O Devices </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> <span>Using </span>Sequential  Files</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

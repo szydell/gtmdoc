@@ -1,0 +1,80 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s45.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>ZTCommit</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s44.html" title="ZSYstem">
+<link rel="next" href="ch06s46.html" title="ZTRigger">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">ZTCommit</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s44.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s46.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">ZTCommit</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="ztcommit"></a>ZTCommit<a class="indexterm" name="idp187407360"></a>
+</h2></div></div></div>
+<p>The ZTCOMMIT command marks the end of a logical transaction within a GT.M program. ZTCOMMIT used with ZTSTART "fences" transactions (that is, marks the end and beginning). Fencing transactions allows the MUPIP JOURNAL facility to prevent incomplete application transactions consisting of multiple global updates from affecting the database during a database recovery. FIS strongly recommends the use of the M transaction processing commands such as TSTART and TCOMMIT rather than ZTSTART and ZTCOMMIT. FIS no longer tests the deprecated ZTSTART / ZTCOMMIT functionally.</p>
+<p>The format of the ZTCOMMIT command is:</p>
+<pre class="programlisting">ZTC[OMMIT][:tvexpr] [intexpr]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The optional integer expression specifies the number of currently open ZTSTARTs for the ZTCOMMIT to close.</p></li>
+<li class="listitem"><p>A ZTCOMMIT with no argument closes one ZTSTART; in this case, at least two (2) spaces must follow the command to separate it from the next command on the line; with an argument of 0, ZTCOMMIT closes all open ZTSTARTs. </p></li>
+<li class="listitem"><p>When an application requires sub-transactions, it may nest ZTSTARTs and ZTCOMMITs to a maximum depth of 255. However, a ZTCOMMIT must "close" the outer-most ZTSTART before journaling accepts any part of the "transaction" as complete.</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more ZTCOMMIT arguments form a legal argument for a ZTCOMMIT.</p></li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_ztcommit"></a>Examples<span> of ZTCOMMIT</span><a class="indexterm" name="idp187542208"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZTCOMMIT 0</pre>
+<p>This ZTCOMMIT issued from Direct Mode would close any open ZTSTARTs.</p>
+<p>Example:</p>
+<p>
+<img src="pg_figures/ch6_001.gif">
+</p>
+<p>This shows a transaction with two independent nested sub-transactions. For additional examples, refer to the ZTSTART examples.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s44.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s46.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">ZSYstem </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> ZTRigger</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s45.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

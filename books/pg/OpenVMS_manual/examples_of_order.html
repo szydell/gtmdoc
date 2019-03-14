@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_order.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of $ORDER()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="order_cmmd.html" title="$Order()" />
+    <link rel="prev" href="order_cmmd.html" title="$Order()" />
+    <link rel="next" href="piece.html" title="$Piece()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of $ORDER()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="order_cmmd.html">Prev</a> </td>
+          <th width="60%" align="center">$Order()</th>
+          <td width="20%" align="right"> <a accesskey="n" href="piece.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_order"></a>Examples of $ORDER()</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4183363" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt;K S (a(1),a(2000),a(&quot;CAT&quot;),a(&quot;cat&quot;),a(&quot;ALF&quot;), a(12))=1
+    GTM&gt;S x=&quot;&quot; F S x=$0(a(x)) U:x=&quot;&quot; W !,x
+    1
+    12
+    2000
+    ALF
+    CAT
+    cat
+    GTMK&gt; a(&quot;CAT&quot;) SET a(5,10)=&quot;woolworths&quot;,a(&quot;cat&quot;)=&quot;last&quot;
+    GTM&gt; S x=&quot;&quot; F S x=$O(a(x),-1) Q:x=&quot;&quot; W !,x
+    cat
+    ALF
+    2000
+    12
+    5
+    1
+    GTM&gt;    
+    </pre>
+      <p>This example uses a $ORDER() loop to display all the subscripts at the first level of local variable a, make some changes in a, and then display all the subscripts in reverse order. Notice that $ORDER() returns only the existing subscripts in the sparse array and returns them in M collation sequence, regardless of the order in which they were entered. Also, $ORDER() does not differentiate between node A(5), which has only descendants (no data value), and the other nodes, which have data values.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt;k s (%(1),tiva(2),A(3),tiv(4),Q(5),%a(6))=&quot;&quot;
+    GTM&gt;s x=&quot;%&quot;
+    GTM&gt;w:$d(@x) !,x f s x=$order(@x) q:x=&quot;&quot; w !,x
+    %
+    %a
+    A
+    Q
+    tiv
+    tiva
+    x
+    GTM&gt;s x=&quot;zzzzzzzz&quot;
+    GTM&gt;w:$d(@x) !,x f s x=$order(@x,-1) q:x=&quot;&quot; w !,x
+    x
+    tiva
+    tiv
+    Q
+    A
+    %a
+    %
+    GTM&gt;    
+    </pre>
+      <p>This loop uses $ORDER() to display the current local variable names in both forward and reverse order. Notice that the first ([^]%) and last ([^]zzzzzzzz) names require handling as special cases and require a $DATA() function.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    SET acct=&quot;&quot;,cntt=&quot;&quot;
+    FOR SET acct=$OREDER(^acct(acct)) QUIT:acct=&quot;&quot; DO
+    . F SET cntt=$ORDER(^acct(acct,cntt)) DO WORK
+    QUIT
+    </pre>
+      <p>This uses two nested $ORDER() loops to cycle through the ^acct global array and perform some action for each second level node.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="order_cmmd.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="order_cmmd.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="piece.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$Order() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $Piece()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_order.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+</html>

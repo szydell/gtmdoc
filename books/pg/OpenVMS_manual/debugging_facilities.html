@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/debugging_facilities.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:24 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Debugging Facilities</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter2.html" title="Chapter 2. GT.M Language Extensions" />
+    <link rel="prev" href="oper_sys_interface.html" title="Operating System Interface Facilities" />
+    <link rel="next" href="exception_handling.html" title="Exception Handling Facilities" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Debugging Facilities</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="oper_sys_interface.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 2. GT.M Language Extensions</th>
+          <td width="20%" align="right"> <a accesskey="n" href="exception_handling.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="debugging_facilities"></a>Debugging Facilities</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4155719" class="indexterm"></a>
+      <p>GT.M provides a number of debugging features, many of them through language extensions.</p>
+      <p>These features include the ability to:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Interactively execute routines using M commands.</p>
+          </li>
+          <li>
+            <p>Display lines that may contain errors using the ZPRINT command and the $ZPOSITION special variable.</p>
+          </li>
+          <li>
+            <p>Redisplay error messages using the $ZSTATUS special variable and the ZMESSAGE command.</p>
+          </li>
+          <li>
+            <p>Set breakpoints and actions to bypass an error using the ZBREAK command.</p>
+          </li>
+          <li>
+            <p>Execute a line at a time using the ZSTEP command.</p>
+          </li>
+          <li>
+            <p>Display information about the M environment using the ZSHOW command.</p>
+          </li>
+          <li>
+            <p>Modify the invocation stack with QUIT and ZGOTO.</p>
+          </li>
+          <li>
+            <p>Incrementally add or modify code using the ZLINK and ZEDIT commands.</p>
+          </li>
+          <li>
+            <p>Continue execution using the ZCONTINUE command.</p>
+          </li>
+        </ul>
+      </div>
+      <p>The following table summarizes the GT.M language extensions that facilitate debugging.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="2" align="center">
+                <p>GT.M Debugging Tools</p>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <p>EXTENSION</p>
+              </td>
+              <td align="center">
+                <p>EXPLANATION</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZBreak</p>
+              </td>
+              <td>
+                <p>Establishes a temporary breakpoint, with optional M action and/or activation count.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZCOMpile</p>
+              </td>
+              <td>
+                <p>Invokes the GT.M compiler without a corresponding ZLINK.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZContinue</p>
+              </td>
+              <td>
+                <p>Continues routine execution from a BREAK.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZEDit</p>
+              </td>
+              <td>
+                <p>Invokes a VMS editor.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZGoto</p>
+              </td>
+              <td>
+                <p>Removes zero or more levels from the M invocation stack and, optionally, transfers control.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZLink</p>
+              </td>
+              <td>
+                <p>Includes a new or modified M routine in the current M process, automatically recompiling it if necessary.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZMessage</p>
+              </td>
+              <td>
+                <p>Signals the specified condition.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZPrint</p>
+              </td>
+              <td>
+                <p>Displays lines of source code.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZSHow</p>
+              </td>
+              <td>
+                <p>Displays information about the M environment.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZSTep</p>
+              </td>
+              <td>
+                <p>Executes a routine incrementally to the beginning of the next line of the specified type.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>ZWRite</p>
+              </td>
+              <td>
+                <p>Displays all or some of the local or global symbols.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZCSTATUS</p>
+              </td>
+              <td>
+                <p>Holds the status code value for the last compilation performed by a ZCOMPILE command.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZEDit</p>
+              </td>
+              <td>
+                <p>Contains the status code for the last ZEDit.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZJOBEXAM()</p>
+              </td>
+              <td>
+                <p>Performs a ZSHOW &quot;*&quot; to a default file location and name, or the one optionally specified by the argument.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZLEVel</p>
+              </td>
+              <td>
+                <p>Contains the current level of DO/XECUTE nesting.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZMessage()</p>
+              </td>
+              <td>
+                <p>Translates an error condition code into text form.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZPOSition</p>
+              </td>
+              <td>
+                <p>Contains a string indicating the current execution location.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZPROmpt</p>
+              </td>
+              <td>
+                <p>Controls the direct mode prompt.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZSOurce</p>
+              </td>
+              <td>
+                <p>Contains the name of the most recently ZLINKed or ZEDITed M source program; provides the default name for next ZEDIT or ZLINK.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZStatus</p>
+              </td>
+              <td>
+                <p>Contains error condition code and location of the last exception condition occurring during routine execution.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>$ZSTep</p>
+              </td>
+              <td>
+                <p>Controls the default ZSTep action.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="oper_sys_interface.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter2.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="exception_handling.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Operating System Interface Facilities </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Exception Handling Facilities</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/debugging_facilities.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:03:24 GMT -->
+</html>

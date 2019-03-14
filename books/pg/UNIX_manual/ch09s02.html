@@ -1,0 +1,156 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s02.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>I/O Devices</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
+<link rel="prev" href="ch09s01.html" title="I/O Intrinsic Special Variables">
+<link rel="next" href="ch09s03.html" title="Using Terminals">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">I/O Devices</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch09s01.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 9. <span>Input/Output</span> Processing</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch09s03.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch09.html"><span>Input/Output</span> Processing</a></span> &gt; <span class="breadcrumb-node">I/O Devices</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="io_devices_9"></a>I/O Devices<a class="indexterm" name="idp189710800"></a>
+</h2></div></div></div>
+<p>Each device type supported by GT.M responds to a particular subset of deviceparameters, while ignoring others. Devices may be programmed in a device-specific manner, or in a device-independent manner. Device-specific I/O routines are intended for use with only one type of device. Device-independent I/O routines contain appropriate deviceparameters for all devices to be supported by the function, so the user can redirect to a different device output while using the same program.</p>
+<p>GT.M supports the following I/O device types:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>Terminals and Printers</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Sequential Disk  Files</p></li>
+<li class="listitem" style="list-style-type: circle"><p>FIFOs</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Null Devices</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Socket Devices</p></li>
+<li class="listitem" style="list-style-type: circle"><p>PIPE Devices</p></li>
+</ul></div>
+<p></p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="io_device_recognition"></a>I/O Device Recognition</h3></div></div></div>
+<p>GT.M OPEN, USE, and CLOSE commands have an argument expression specifying a device name.  </p>
+<p>During an OPEN, GT.M attempts to resolve the specified device names to physical names. When GT.M successfully resolves a device name to a physical device, that device becomes the target of the OPEN. If the device name contains a dollar sign ($), GT.M attempts an environment variable translation; the result becomes the name of the device. If it does not find such an environment variable, it assumes that the dollar sign is a part of the filename, and opens a file by that name. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Note: GT.M resolves the device name argument for menemonicspace devices (SOCKET or PIPE) to a arbitrary handle instead of a physical name.</p></td></tr>
+</table></div>
+<p>Once a device is OPEN, GT.M establishes an internal correspondence between a name and the device or file. Therefore, while the device is OPEN, changing the translation of <span>an environment variable</span> in the device specification does not change the device.</p>
+<p>The following names identify the original $IO for the process:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>$PRINCIPAL</p></li>
+<li class="listitem" style="list-style-type: circle"><p>0</p></li>
+</ul></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="device_spec_defaults"></a>Device Specification Defaults</h3></div></div></div>
+<p>GT.M uses standard <span>filenames</span> for device specifiers.</p>
+<p>The complete format for a <span>filename</span> is:</p>
+<pre class="programlisting">/directory/file</pre>
+<p>If the expression specifying a device does not contain a complete <span>filename</span>, the expression may start with <span>an environment variable</span> that translates to one or more leading components of the  <span>filename</span>. GT.M applies default values for the missing components. </p>
+<p>If the specified file is not found, it is created unless READONLY is specified. </p>
+<p>The GT.M <span>filename</span> defaults are the following:</p>
+<p></p>
+<p>Directory: Current working directory</p>
+<p>File: No default (user-defined filename)</p>
+<p>Filetype: No default (user-defined filetype)</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="how_io_device_params_work"></a>How I/O Device parameters Work</h3></div></div></div>
+<p>I/O deviceparameters either perform actions that cause the device to do something (for example, CLEARSCREEN), or specify characteristics that modify the way the device subsequently behaves (for example, <span>WIDTH</span>). When an I/O command has multiple action deviceparameters, GT.M performs the actions in the order of the deviceparameters within the command argument. When a command has characteristic deviceparameters, the last occurrence of a repeated or conflicting deviceparameter determines the characteristic. </p>
+<p>Deviceparameters often relate to a specific device type. GT.M ignores any deviceparameters that do not apply to the type of the device specified by the command argument. Specified device characteristics are in force for the duration of the GT.M image, or until modified by an OPEN, USE, or CLOSE command. </p>
+<p>When reopening a device that it previously closed, a GT.M process restores all characteristics not specified on the OPEN to the values the device had when it was last CLOSEd. GT.M treats FIFO, PIPE, and SD differently and uses defaults for unspecified device characteristics on every OPEN (that is, GT.M does not retain devices characteristics on a CLOSE of SD, FIFO, and PIPE).</p>
+<p>The ZSHOW command with an argument of "D" displays the current characteristics for all devices OPENed by the process. ZSHOW can direct its output into a GT.M variable. <span>For more information on ZSHOW, refer to <a class="xref" href="ch06s42.html" title="ZSHow">&#8220;ZSHow&#8221;</a>.</span></p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="abbv_deviparam"></a>Abbreviating Deviceparameters</h3></div></div></div>
+<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<th align="left">Important</th>
+</tr>
+<tr><td align="left" valign="top"><p>Most Z* deviceparameters have the same functionality as their counterparts and are supported for compatibility reasons.</p></td></tr>
+</table></div>
+<p>GT.M deviceparameters do not have predefined abbreviations. GT.M recognizes deviceparameters using a minimum recognizable prefix technique. Most deviceparameters may be represented by four leading characters, except ERASELINE, all deviceparameters starting with WRITE, and Z* deviceparameters in a mnemonicspace (such as SOCKET). The four leading characters recognized do not include a leading NO for negation. </p>
+<p>For compatibility with previous versions, GT.M may recognize certain deviceparameters by abbreviations shorter than the minimum. While it is convenient in Direct Mode to use shorter abbreviations, FIS  may add additional deviceparameters, and therefore, recommends all programs use at least four characters. Because GT.M compiles the code, spelling out deviceparameters completely has no performance penalty, except when used with indirection or XECUTEd arguments.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="doc_conventions"></a>Document Conventions</h3></div></div></div>
+<p>This chapter uses the following mnemonics to describe when a deviceparameter applies:</p>
+<p>TRM: Valid for terminals</p>
+<p>SD: Valid for sequential disk files </p>
+<p>FIFO: Valid for FIFOs</p>
+<p>NULL: Valid for null devices</p>
+<p>SOC: Valid for both socket devices (TCP and LOCAL)</p>
+<p>SOC(LOCAL): Valid for LOCAL sockets devices </p>
+<p>SOC(TCP): Valid for TCP sockets devices </p>
+<p>PIPE: Valid for PIPE devices</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Lower case "pipe" refers to a UNIX pipe and the upper case "PIPE" to the GT.M device.</p></td></tr>
+</table></div>
+<p>Some of the deviceparameter defaults shown are the basic operating system defaults, and may be subject to modification before the invocation of GT.M.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="device_indpnt_programming"></a>Device-Independent Programming</h3></div></div></div>
+<p>When a user may choose a device for I/O, GT.M routines can take one of two basic programming approaches.</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>The user selection directs the program into different code branches, each of which handles a different device type.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>The user selection identifies the device. There is a single code path written with a full complement of deviceparameters to handle all selectable device types.</p></li>
+</ul></div>
+<p>The latter approach is called device-independent programming. To permit device independent programming, GT.M uses the same deviceparameter for all devices that have an equivalent facility, and ignores deviceparameters applied to a device that does not support that facility.</p>
+<p>Example:</p>
+<pre class="programlisting">OPEN dev:(EXCE=exc:REWIND:VARIABLE:WRITEONLY)</pre>
+<p>This example OPENs a device with deviceparameters that affect different devices. The EXCEPTION has an effect for all device types. When dev is a terminal or a null device, GT.M ignores the other deviceparameters. When dev is a sequential file on disk, GT.M uses REWIND and VARIABLE. This command performs a valid OPEN for all the different device types. </p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch09s01.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch09.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch09s03.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">I/O Intrinsic Special Variables </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Using Terminals</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch09s02.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

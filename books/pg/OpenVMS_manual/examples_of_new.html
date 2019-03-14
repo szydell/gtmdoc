@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_new.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:36 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of New</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="new_cmmd.html" title="New" />
+    <link rel="prev" href="new_cmmd.html" title="New" />
+    <link rel="next" href="open_cmmd.html" title="Open" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of New</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="new_cmmd.html">Prev</a> </td>
+          <th width="60%" align="center">New</th>
+          <td width="20%" align="right"> <a accesskey="n" href="open_cmmd.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_new"></a>Examples of New</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4174400" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+        SET A(1)=1,B=4,C=5
+        WRITE !,&quot;VARIABLES BEFORE NEW:&quot;,!
+        ZWRITE
+        DO LABEL
+        WRITE !,&quot;VARIABLES AFTER RETURN:&quot;,!
+        ZWRITE
+        QUIT
+        LABELNEW A SET C=7
+        WRITE !,&quot;VARIABLES AFTER NEW:&quot;,!
+        ZWRITE
+        QUIT
+        </pre>
+      <p>Produces the results:</p>
+      <pre class="programlisting">
+        VARIABLES BEFORE NEW:
+        A(1)=1
+        B=4
+        C=5
+        VARIABLES AFTER NEW:
+        B=4
+        C=7
+        VARIABLES AFTER RETURN:
+        A(1)=1
+        B=4
+        C=7
+        </pre>
+      <p>Example:</p>
+      <pre class="programlisting">
+        SET (A,B,C,D)=&quot;TEST&quot;
+        DO LABEL
+        WRITE !,&quot;VARIABLES AFTER RETURN:&quot;,!
+        ZWRITE
+        QUIT
+        LABELNEW (B,C) SET (A,B,Z)=&quot;NEW&quot;
+        WRITE !,&quot;VARIABLES AFTER EXCLUSIVE NEW:&quot;,!
+        ZWRITE
+        QUIT
+        </pre>
+      <p>Produces the results:</p>
+      <pre class="programlisting">
+        VARIABLES AFTER EXCLUSIVE NEW:
+        A=&quot;NEW&quot;
+        B=&quot;NEW&quot;
+        C=&quot;TEST&quot;
+        Z=&quot;NEW&quot;
+        VARIABLES AFTER RETURN:
+        A=&quot;TEST&quot;
+        B=&quot;NEW&quot;
+        C=&quot;TEST&quot;
+        D=&quot;TEST&quot;
+        </pre>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="new_cmmd.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="new_cmmd.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="open_cmmd.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">New </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Open</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_new.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:36 GMT -->
+</html>

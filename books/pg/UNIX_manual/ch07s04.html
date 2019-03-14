@@ -1,0 +1,103 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$Extract()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s03.html" title="$Data()">
+<link rel="next" href="ch07s05.html" title="$Find()">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$Extract()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s03.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s05.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$Extract()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="extract"></a>$Extract()<a class="indexterm" name="idp187732288"></a>
+</h2></div></div></div>
+<p>Returns a substring of a given string.</p>
+<p>The format for the $EXTRACT function is:</p>
+<pre class="programlisting">$E[XTRACT](expr[,intexpr1[,intexpr2]])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The expression specifies a string from which $EXTRACT() derives a substring.</p></li>
+<li class="listitem"><p>The first optional integer expression (second argument) specifies the starting character position in the string. If the starting position is beyond the end of the expression, $EXTRACT() returns an empty string. If the starting position is zero (0) or negative, $EXTRACT() starts at the first character; if this argument is omitted, $EXTRACT() returns the first character of the expression. $EXTRACT() numbers character positions starting at one (1) (that is, the first character of a string is at position one (1)).</p></li>
+<li class="listitem"><p>The second optional integer expression (third argument) specifies the ending character position for the result. If the ending position is beyond the end of the expression, $EXTRACT() stops with the last character of the expression. If the ending position precedes the starting position, $EXTRACT() returns an empty string. If this argument is omitted, $EXTRACT() returns one character at most.</p></li>
+</ul></div>
+<p>$EXTRACT() provides a tool for manipulating strings based on character positions.</p>
+<p>For a mumps process started in UTF-mode, $EXTRACT interprets the string arguments as UTF-8 encoded. With VIEW "BADCHAR" enabled, $EXTRACT() produces a run-time error when it encounters a character in the reserved range of the <span class="trademark">Unicode</span>® standard, but it does not process the characters that fall after the span specified by the arguments. The parallel function of $EXTRACT() is $ZEXTRACT(). Use $ZEXTRACT() for byte-oriented operations. <span>For more information, refer to <a class="xref" href="ch07s34.html" title="$ZExtract()">&#8220;$ZExtract()&#8221;</a>.</span></p>
+<p>$EXTRACT() can be used on the left-hand side of the equal sign (=) of a SET command to set a substring of a string. This construct permits easy maintenance of individual pieces within a string. It can also be used to right justify a value padded with blank characters. <span>For more information on SET $EXTRACT(), refer to <a class="xref" href="ch06s19.html" title="Set">&#8220;Set&#8221;</a> in the Commands chapter.</span></p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_extract"></a>Examples<span> of $EXTRACT()</span><a class="indexterm" name="idp187750144"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;for i=0:1:3 write !,$extract("HI",i),"&lt;"
+&lt;
+H&lt;
+I&lt;
+&lt;
+GTM&gt;</pre>
+<p>This loop displays the result of $EXTRACT(), specifying no ending character position and a beginning character position "before" first and second positions, and "after" the string.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;For i=0:1:3 write !,$extract("HI",1,i),"&lt;"
+&lt;
+H&lt;
+HI&lt;
+HI&lt;
+GTM&gt;</pre>
+<p>This loop displays the result of $EXTRACT() specifying a beginning character position of 1 and an ending character position "before, " first and second positions, and "after" the string.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zprint ^trim
+trim(x)
+    new i,j
+    for i=1:1:$length(x) quit:" "'=$extract(x,i)
+    for j=$length(x):-1:1 quit:" "'=$extract(x,j)
+    quit $extract(x,i,j)
+GTM&gt;set str=" MUMPS "
+GTM&gt;write $length(str)
+7
+GTM&gt;write $length($$^trim(str))
+5
+GTM&gt;</pre>
+<p>This extrinsic function uses $EXTRACT() to remove extra leading and trailing spaces from its argument.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s03.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s05.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$Data() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $Find()</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s04.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/nested_err_handling.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Nested Error Handling</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="err_actions.html" title="Error Actions" />
+    <link rel="prev" href="setting_ztrap_for_each_lvl.html" title="Setting $ZTRAP for Each Level" />
+    <link rel="next" href="terminate_exec_on_an_err.html" title="Terminating Execution on an Error" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Nested Error Handling</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="setting_ztrap_for_each_lvl.html">Prev</a> </td>
+          <th width="60%" align="center">Error Actions</th>
+          <td width="20%" align="right"> <a accesskey="n" href="terminate_exec_on_an_err.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="nested_err_handling"></a>Nested Error Handling</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4239154" class="indexterm"></a>
+      <p>$ETRAP or $ZTRAP set to a DO command instructs GT.M to transfer execution temporarily to another line within this or another routine when it encounters an error. A QUIT command within the scope of the DO transfers control back to the code specified by the $ETRAP or $ZTRAP. When the code in the ISV terminates due to an explicit or implicit QUIT, the behavior of $ETRAP and $ZTRAP is different. When $ETRAP is in control, the level at which the error occurred is removed, and control returns to the invoking level. When $ZTRAP contains code, execution picks up at the beginning of the line with the error. A DO command within $ZTRAP is normally used for I/O errors that an operator may resolve, because a DO command permits re-execution of the line containing the error.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;ZPRINT ^EP6
+	EP6WRITE !,&quot;THIS IS &quot;_$TEXT(+0)
+	NEW
+	NEW $ZTRAP SET $ZTRAP=&quot;DO ET&quot;
+	SET (CB,CE)=0
+	BADSET CB=CB+1 WRITE A SET CE=CE+1
+	WRITE !,&quot;AFTER SUCCESSFUL EXECUTION OF BAD:&quot;,!
+	ZWRITE
+	SET 1=&quot;A IS NOT DEFINED&quot;
+	QUIT
+	
+	GTM&gt;DO ^EP6
+	
+	THIS IS EP6
+	CONTINUING WITH ERROR TRAP AFTER AN ERROR
+	CB=1
+	CE-0
+	A IS NOT DEFINED
+	AFTER SUCCESSFUL EXECUTION OF BAD:
+	A=&quot;A IS NOW DEFINED&quot;
+	CB=2
+	CE=1
+	</pre>
+      <p>This example sets $ZTRAP to a DO command. When the routine encounters an error in the middle of the line at label BAD, GT.M transfers control to label ET. After QUITting from routine ET, GT.M returns control to the beginning of the ine at label BAD. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+		GTM&gt;ZPRINT ^EP6A
+		EP6AWRITE !,&quot;THIS IS &quot;_$TEXT(+0)
+		NEW
+		NEW $ETRAP SET $ETRAP=&quot;GOTO ET&quot;
+		SET (CB,CE)=0
+		BADSET CB=CB+1 WRITE A SET CE=CE+1
+		WRITE !,&quot;AFTER SUCCESSFUL EXECUTION OF BAD:&quot;,!
+		ZWRITE
+		QUIT
+		ETW !,&quot;CONTINUING WITH ERROR TRAP AFTER AN ERROR&quot;,!
+		ZWRITE
+		SET A=&quot;A IS NOW DEFINED&quot;
+		SET RETRY=$STACK($STACK,&quot;PLACE&quot;)
+		SET $ECODE=&quot;&quot;
+		GOTO @RETRY
+		
+		GTM&gt;DO EP6A
+		
+		THIS IS EP6A
+		CONTINUING WITH ERROR TRAP AFTER AN ERROR
+		CB=1
+		CE=0
+		A IS NOW DEFINED
+		AFTER SUCCESSFUL EXECUTION OF BAD:
+		A=&quot;A IS NOW DEFINED&quot;
+		CB=2
+		CE=1
+		RETRY=&quot;BAD^EP6A&quot;
+		
+		GTM&gt;	
+	</pre>
+      <p>This routine is an example of how $ETRAP handling can be coded to perform the same kind of resumtion of the original execution stream that occurs by default with $ZTRAP when there is no unconditional transfer of control.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="setting_ztrap_for_each_lvl.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="err_actions.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="terminate_exec_on_an_err.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Setting $ZTRAP for Each Level </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Terminating Execution on an Error</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/nested_err_handling.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+</html>

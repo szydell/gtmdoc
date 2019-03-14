@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/device_indpnt_programming.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Device-Independent Programming</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="io_devices_9.html" title="I/O Devices" />
+    <link rel="prev" href="doc_conventions.html" title="Document Conventions" />
+    <link rel="next" href="using_terminals.html" title="Using Terminals" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Device-Independent Programming</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="doc_conventions.html">Prev</a> </td>
+          <th width="60%" align="center">I/O Devices</th>
+          <td width="20%" align="right"> <a accesskey="n" href="using_terminals.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="device_indpnt_programming"></a>Device-Independent Programming</h3>
+          </div>
+        </div>
+      </div>
+      <p>When a user may choose a device for I/O, GT.M routines can take one of two basic programming approaches.</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The user selection directs the program into different code branches, each of which handles a different device type.</p>
+          </li>
+          <li>
+            <p>The user selection identifies the device. There is a single code path written with a full complement of deviceparameters to handle all selectable device types.</p>
+          </li>
+        </ul>
+      </div>
+      <p>The latter approach is called device-independent programming. To permit device independent programming, GT.M uses the same deviceparameter for all devices that have an equivalent facility, and ignores deviceparameters applied to a device that does not support that facility.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    OPEN dev:(EXCE=exc:REWIND:VARIABLE<span>:NEWVERSION</span>:WRITEONLY)
+    </pre>
+      <p>This OPENs a device with deviceparameters that affect different devices. Only the EXCEPTION has an effect for all device types. When dev is a terminal or a null device, GT.M ignores the other deviceparameters. When dev is an RMS file on disk, GT.M uses REWIND, VARIABLE, and NEWVERSION. When dev is a mailbox, GT.M only uses WRITEONLY. This command performs a valid OPEN for all the different device types. </p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>A file that has been previously created and contains data that should be retained can also be opened with the device parameter APPEND.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="doc_conventions.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="io_devices_9.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="using_terminals.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Document Conventions </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Using Terminals</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/device_indpnt_programming.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:38 GMT -->
+</html>

@@ -1,0 +1,350 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Variables</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
+<link rel="prev" href="ch05s02.html" title="M Names">
+<link rel="next" href="ch05s04.html" title="Literals">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Variables</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch05s02.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 5. <span>General Language Features of M</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch05s04.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch05.html"><span>General Language Features of M</span></a></span> &gt; <span class="breadcrumb-node">Variables</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Variables"></a>Variables<a class="indexterm" name="idp185258432"></a>
+</h2></div></div></div>
+<p>M does not require predefinition of variable type or size. M variables are either local or global. Any variable may be unsubscripted or subscripted.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Arrays_and_Subscripts"></a>Arrays and Subscripts<a class="indexterm" name="idp185522448"></a>
+</h3></div></div></div>
+<p>In M, subscripted variables identify elements in sparse arrays. Sparse arrays comprise existing subscripts and data nodes -; no space is reserved for potential data nodes. These arrays generally serve logical, rather than mathematical, purposes.</p>
+<p>M array subscripts are expressions, and are not restricted to numeric values.</p>
+<p>The format for an M global or local variable is:</p>
+<pre class="programlisting">[^]name[(expr1[,...])]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional leading caret symbol (^) designates a global variable.</p></li>
+<li class="listitem"><p>The name specifies a particular array.</p></li>
+<li class="listitem"><p>The optional expressions specify the subscripts and must be enclosed in parentheses and separated by commas (,).</p></li>
+</ul></div>
+<p>The body of the M standard places no restrictions on variable names. However, the portability section of the standard does suggest limits on the length of an individual subscript expression, and on the total length of a variable name. The measurement for the length of names includes the length of the global variable name itself, the sum of the lengths of all the evaluated subscripts, and an allowance for an overhead of two (2) times the number of subscripts. The total must not exceed 237. For globals, GT.M permits this total to be modified with GDE up to 255. For locals, GT.M limits the length of individual subscripts to the maximum string length of 32,767. GT.M restricts the number of subscripts for local or global variables to 31.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="M_Collation_Seq"></a>M Collation Sequences<a class="indexterm" name="idp185492560"></a>
+</h3></div></div></div>
+<p>M collates all canonic numeric subscripts ahead of all string subscripts, including strings such as those with leading zeros that represent non-canonic numbers. Numeric subscripts collate from negative to positive in value order. String subscripts collate in ASCII sequence. In addition, GT.M allows the empty string subscript in most contexts, (the null, or empty, string collates ahead of all canonic numeric subscripts).</p>
+<p>GT.M allows definition of alternative collation sequences. For complete information on enabling this functionality, <span>See <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a></span>.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Local_Variables"></a>Local Variables<a class="indexterm" name="idp185598848"></a>
+</h3></div></div></div>
+<p>A local variable in M refers to a variable used solely within the scope of a single process. Local variable names have no leading delimiter.</p>
+<p>M makes a local variable available and subject to modification by all routines executed within a process from the time that variable is first SET until it is KILLed, or until the process stops executing M. However, M "protects" a local variable after that variable appears as an argument to a NEW command, or after it appears as an element in a formalist used in parameter passing. When M protects a local variable, it saves a copy of the variable's value and makes that variable undefined. M restores the variable to its saved value during execution of the QUIT that terminates the process stack level associated with the "protecting" NEW or formalist. For more information on NEW and QUIT, <span>see <a class="xref" href="ch06.html" title="Chapter 6. Commands">Chapter 6: &#8220;<i>Commands</i>&#8221;</a></span>.</p>
+<p>M restricts the following uses of variables to local variables:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>FOR command control variables.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Elements within the parentheses of an "exclusive" KILL.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>TSTART [with local variables list].</p></li>
+<li class="listitem" style="list-style-type: circle"><p>A KILL with no arguments removes all current local variables.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>NEW command arguments.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Actualnames used by pass-by-reference parameter passing.</p></li>
+</ul></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Global_Var_Resource_Name_Env"></a><span>Global Variables</span> and Resource Name Env<span>ironments</span><a class="indexterm" name="idp185651968"></a>
+</h3></div></div></div>
+<p>M recognizes an optional environment specification in global names or in the LOCK resource names (nrefs), which have analogous syntax. Global variable names have a leading caret symbol (^) as a delimiter.</p>
+<p>M makes a global variable available, and subject to modification by all routines executed within all processes in an environment, from the time that variable is first SET until it is KILLed.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Naked_Ref"></a>Naked References<a class="indexterm" name="idp185616048"></a>
+</h3></div></div></div>
+<p>M accepts an abbreviation of the global name under some circumstances. When the leading caret symbol (^) immediately precedes the left parenthesis delimiting subscripts, the global variable reference is called a naked reference. M evaluates a naked reference by prefixing the last used global variable name, except for its last subscript, to the list of subscripts specified by the naked reference. The prefixed portion is known as the naked indicator. An attempt to use a naked reference when the prior global reference does not exist, or did not contain a subscript, generates an error.</p>
+<p>Because M has only one process-wide naked indicator which it maintains as a side affect of every evaluation of a global variable, using the naked reference requires an understanding of M execution sequence. M execution generally proceeds from left to right within a line, subject to commands that change the flow of control. However, M evaluates the portion of a SET command argument to the right side of the equal sign before the left side. Also, M does not evaluate any further $SELECT() arguments within the function after it encounters a true selection argument.</p>
+<p>In general, using naked references only in very limited circumstances prevents problems associated with the naked indicator.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Global_Var_Name_Environments"></a>Global Variable Name Environments<a class="indexterm" name="idp185651680"></a>
+</h3></div></div></div>
+<p>M recognizes an optional environment specification in global names. The environment specification designates one of some set of alternative database files.</p>
+<p>The syntax for global variable names that include an environment specification is:</p>
+<pre class="programlisting">^|expr|name[(subscript[,...])]</pre>
+<p>In GT.M, the expression identifies the Global Directory for mapping the global variable.</p>
+<p>Environment specifications permit easy access to global variables in alternative databases, including other "copies" of active variables in the current database. Environment specifications are sometimes referred to as extended global syntax or extended value syntax.</p>
+<p>GT.M also allows:</p>
+<pre class="programlisting">^|expr1,expr2|name[(subscript[,...])]</pre>
+<p>Where the first expression identifies the Global Directory and the second expression is accepted but ignored by GT.M.</p>
+<p>To improve compatibility with some other M implementations, GT.M also accepts another non-standard syntax. In this syntax, the leading and trailing up-bar (|) are respectively replaced by a left square-bracket ([) and a right square-bracket (]). This syntax also requires expratoms, rather than expressions. <span>For additional information on expratoms, see <a class="xref" href="ch05s05.html" title="Expressions">&#8220;Expressions&#8221;</a>.</span></p>
+<p>The formats for this non-standard syntax are:</p>
+<pre class="programlisting">^[expratom1]name[(subscript...)]</pre>
+<p>or</p>
+<pre class="programlisting">^[expratom1,expratom2]name[(subscript...)]</pre>
+<p>Where expratom1 identifies the Global Directory and expratom2 is a dummy variable. Note that the first set of brackets in each format is part of the syntax. The second set of square brackets is part of the meta-language identifying an optional element.</p>
+<p>Example:</p>
+<pre class="programlisting">$ gtmgbldir=Test.GLD
+$ export gtmgbldir
+$ GTM
+  
+GTM&gt;WRITE $ZGBLDIR
+TEST.GLD
+GTM&gt;WRITE ^A
+THIS IS ^A IN DATABASE RED
+GTM&gt;WRITE ^|"M1.GLD"|A
+THIS IS ^A IN DATABASE WHITE
+GTM&gt;WRITE $ZGBLDIR
+TEST.GLD
+GTM&gt;HALT
+  
+$ echo gtmgbldir
+TEST.GLD</pre>
+<p>The statement WRITE ^|"M1.GLD"|A writes variable ^A using the Global Directory, M1.GLD, but does not change the current Global Directory.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $ZGBLDIR
+M1.GLD
+GTM&gt;WRITE ^A
+THIS IS ^A IN DATABASE WHITE
+GTM&gt;WRITE ^|"M1.GLD"|A
+THIS IS ^A IN DATABASE WHITE</pre>
+<p>The statement WRITE ^|"M1.GLD"|A is equivalent to WRITE ^A.</p>
+<p>Specifying separate Global Directories does not always translate to using separate databases.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE ^|"M1.GLD"|A,!,^|"M2.GLD"|A,!,^|"M3.GLD"
+|A,!
+THIS IS ^A IN DATABASE WHITE
+THIS IS ^A IN DATABASE BLUE
+THIS IS ^A IN DATABASE WHITE</pre>
+<p>In this example, the WRITE does not display ^A from three GT.M database files. Mapping specified by the Global Directory Editor (GDE) determines the database file to which a Global Directory points.</p>
+<p>This result could have occurred under the following mapping:</p>
+<pre class="programlisting">^|"M1.GLD"|A --&gt; REGIONA --&gt; SEGMENTA --&gt; FILE1.DAT
+^|"M2.GLD"|A --&gt; REGIONA --&gt; SEGMENT1 --&gt; FILE2.DAT
+^|"M3.GLD"|A --&gt; REGION3 --&gt; SEGMENT3 --&gt; FILE1.DAT</pre>
+<p>For more information on Global Directories, refer to the "Global Directory Editor" chapter of the <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="Optnl_GT.M_Envr_Transltn_Facility"></a>Optional GT.M Environment Translation Facility<a class="indexterm" name="idp185685040"></a>
+</h4></div></div></div>
+<p>For users who wish to dynamically (at run-time) determine a global directory from non-global directory information (typically UCI and VOL) in the environment specification, GT.M provides an interface to add an appropriate translation.</p>
+<p>Using this facility impacts the performance of every global access that uses environment specification. Make sure you use it only when static determination of the global directory is not feasible. When used, make every effort to keep the translation routines very efficient.</p>
+<p>The use of this facility is enabled by the definition of the <span>environment variable gtm_env_translate</span>, which contains the path of a <span>shared library</span> with the following entry point:</p>
+<div class="sect4">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="gtm_env_xlate"></a>gtm_env_xlate<a class="indexterm" name="idp185697344"></a>
+</h5></div></div></div>
+<p>If the shared object is not accessible or the entry point is not accessible, GT.M reports an error.</p>
+<p>The gtm_env_xlate() routine has the following C prototype:</p>
+<pre class="programlisting">int gtm_env_xlate(gtm_string_t *in1, gtm_st
+   ring_t *in2, gtm_string *in3, gtm_string_t *out)</pre>
+<p>where gtm_string_t is a structure defined in gtmxc_types.h as follows:</p>
+<pre class="programlisting">typedef struct
+{
+  int length;
+  char *address;
+}gtm_string_t;</pre>
+<p>The purpose of the function is to use its three input arguments to derive and return an output argument that can be used as an environment specification by GT.M. Note that the input values passed (in1, in2 and in3) are the result of M evaluation and must not be modified. The first two arguments are the expressions passed within the up-bars "| |" or the square-brackets "[ ]", and the third argument is the current working directory as described by $ZDIRECTORY.</p>
+<p>A return value other than zero (0) indicates an error in translation, and is reported by a GT.M error</p>
+<p>If the length of the output argument is non-zero, GT.M appends a secondary TEXT message, containing the text found at the address of the output structure.</p>
+<p>GT.M does not do any memory management related to the output argument - space for the output should be allocated by the external routine. The routine must place the returned environment specification at the address it has allocated and adjust the length accordingly. On a successful return, the return value should be zero. If the translation routine must communicate an error to GT.M, it must return a non-zero value, and if it is to communicate additional error information, place the error text at the address where the environment would normally go and adjust the length to match the length of the error text.</p>
+<p>Length of the return value may range from 0-32767, otherwise GT.M reports an error.</p>
+<p>A zero-length (empty) string specifies the current value of $ZGBLDIR. Non-zero lengths must represent the actual length of the file specification pointed to by address, excluding any &lt;NUL&gt; terminator. If the address field of the output argument is NULL, GT.M issues an error.</p>
+<p>The file specification may be absolute or relative and may contain <span>an environment variable</span>. If the file specified is not accessible, or is not a valid global directory, GT.M reports errors in the same way it does for any invalid global directory.</p>
+<p>It is possible to write this routine in M (as a call-in), however, global variables in such a routine would change the naked indicator, which environment references normally do not. Depending on the conventions of the application, there might be difficult name-space management issues such as protecting the local variables used by the M routine.</p>
+<p>While it is possible for this routine to take any form that the application designer finds appropriate within the given interface definition, the following paragraphs make some recommendations based on the expectation that a routine invoked for any more than a handful of global references should be efficient.</p>
+<p>It is expected that the routine loads one or more tables, either at compilation or the first time it is invoked. The logic of the routine performs a look up on the entry in the set of tables. The lookup might be based on the length of the strings and some unique set of characters in the names, or a hash, with collision provisions as appropriate.</p>
+<p>The routine may have to deal with a case where one or both of the inputs have zero length. A subset of these cases may have the first string holding a comma limited string that needs to be re-interpreted as being equivalent to two input strings (note that the input strings must never be modified). The routine may also have to handle cases where a value (most likely the first) is accidentally or intentionally, already a global directory specification.</p>
+<p>Example:</p>
+<pre class="programlisting">$ cat gtm_env_translate.c
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include "gtmxc_types.h"
+static int init = 0;
+typedef struct
+{
+  gtm_string_t field1, field2, ret;
+} line_entry ;
+static line_entry table[5], *line, linetmp;
+/* Since these errors may occur before setup is complete, they are statics */
+static char *errorstring1 ="Error in function initialization, environment variable GTM_CALLIN_START not defined. Environment translation failed.";
+static char *errorstring2 ="Error in function initialization, function pointers could not be determined. Envrironment translation failed.";
+#define ENV_VAR"GTM_CALLIN_START"
+typedef int(*int_fptr)();
+int_fptr GTM_MALLOC;
+int init_functable(gtm_string_t *ptr)
+{
+/* This function demonstrates the initialization of other function pointers as well (if the user-code needs them for any reason, they should be defined as globals) */
+char *pcAddress;
+long lAddress;
+void **functable;
+void (*setup_timer) ();
+void (*cancel_timer) ();
+pcAddress = getenv(ENV_VAR);
+if (pcAddress == NULL)
+{
+ptr-&gt;length = strlen(errorstring1);
+ptr-&gt;address = errorstring1;
+return 1;
+}
+lAddress = -1;
+lAddress = atol(pcAddress);
+if (lAddress == -1)
+{
+ptr-&gt;length = strlen(errorstring2);
+ptr-&gt;address = errorstring2;
+return 1;
+}
+functable = (void *)lAddress;
+setup_timer = (void(*)()) functable[2];
+cancel_timer = (void(*)()) functable[3];
+GTM_MALLOC = (int_fptr) functable[4];
+return 0;
+}
+void copy_string(char **loc1, char *loc2, int length)
+{
+char *ptr;
+ptr = (char *) gtm_malloc(length);
+strncpy( ptr, loc2, length);
+*loc1 = ptr;
+}
+int init_table(gtm_string_t *ptr)
+{
+int i = 0;
+char buf[100];
+char *buf1, *buf2;
+FILE *tablefile;
+char *space = " ";
+char *errorstr1 = "Error opening table file table.dat";
+char *errorstr2 = "UNDETERMINED ERROR FROM GTM_ENV_XLATE";
+if ((tablefile = fopen("table.dat","r")) == (FILE *)NULL)
+{
+ptr-&gt;length = strlen(errorstr1);
+copy_string(&amp;(ptr-&gt;address), errorstr1, strlen(errorstr1));
+return 1;
+}
+while (fgets(buf, (int)sizeof(buf), tablefile) != (char *)NULL) 
+{
+line= &amp;table[i++];
+buf1 = buf;
+buf2 =strstr(buf1, space);
+line-&gt;field1.length = buf2 - buf1;
+copy_string( &amp;(line-&gt;field1.address), buf1, line-&gt;field1.length);
+buf1 = buf2+1;
+buf2 = strstr(buf1, space);
+line-&gt;field2.length = buf2-buf1;
+copy_string( &amp;(line-&gt;field2.address), buf1, line-&gt;field2.length);
+buf1 = buf2+1;
+line-&gt;ret.length = strlen(buf1) - 1;
+copy_string( &amp;(line-&gt;ret.address), buf1, line-&gt;ret.length);
+}
+fclose(tablefile);
+/* In this example, the last entry in the table is the error string */
+line = &amp;table[4];
+copy_string( &amp;(line-&gt;ret.address), errorstr2, strlen(errorstr2));
+line-&gt;ret.length = strlen(errorstr2);
+return 0;
+}
+int cmp_string(gtm_string_t str1, gtm_string_t str2)
+{
+if (str1.length == str2.length)
+return strncmp(str1.address, str2.address, (int) str1.length);
+else
+return str1.length - str2.length;
+}
+int cmp_line(line_entry *line1, line_entry *line2)
+{
+return (((cmp_string(line1-&gt;field1, line2-&gt;field1))||(cmp_string(line1-&gt;field2, line2-&gt;field2))));
+}
+int look_up_table(line_entry *aline, gtm_string_t *ret_ptr)
+{
+int i;
+int ret_v;
+for(i=0;i&lt;4;i++)
+{
+line = &amp;table[i];
+ret_v = cmp_line( aline, line);
+if (!ret_v)
+{
+ret_ptr-&gt;length = line-&gt;ret.length;
+ret_ptr-&gt;address = line-&gt;ret.address;
+return 0;
+}
+}
+/*ERROR OUT*/
+line = &amp;table[4];   
+ret_ptr-&gt;length= line-&gt;ret.length;
+ret_ptr-&gt;address = line-&gt;ret.address;
+return 1;
+}
+int gtm_env_xlate(gtm_string_t *ptr1, gtm_string_t *ptr2, gtm_string_t *ptr_zdir, gtm_string_t *ret_ptr)
+{
+int return_val, return_val_init;
+if (!init)
+{
+return_val_init = init_functable(ret_ptr);
+if (return_val_init) return return_val_init;
+return_val_init = init_table(ret_ptr); 
+if (return_val_init) return return_val_init;
+init = 1;
+}
+linetmp.field1.length= ptr1-&gt;length;
+linetmp.field1.address= ptr1-&gt;address;
+linetmp.field2.length= ptr2-&gt;length;
+linetmp.field2.address= ptr2-&gt;address;
+return_val = look_up_table(&amp;linetmp, ret_ptr);
+return return_val;
+}
+&gt; cat table.dat
+day1 week1 mumps
+day2 week1 a
+day3 week2 b
+day4 week2 c.gld</pre>
+<p>This example demonstrates the mechanism. A table is set up the first time for proper memory management, and for each reference, a table lookup is performed. Note that for the purpose of simplicity, no error checking is done, so table.dat is assumed to be in the correct format, and have exactly four entries. <span>This routine should be built as a shared</span><span>library</span>, see <span><a class="xref" href="ch11.html" title="Chapter 11. Integrating External Routines">Chapter 11: &#8220;<i><span>Integrating</span> External<span> Routines</span></i>&#8221;</a></span> for information on building as a shared <span>library</span>.<span>The function init_functable is necessary to set up the GT.M memory management functions.</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch05s02.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch05s04.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">M Names </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Literals</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s03.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+</html>

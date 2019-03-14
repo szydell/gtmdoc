@@ -1,0 +1,125 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s36.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZGetjpi()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s35.html" title="$ZFind()">
+<link rel="next" href="ch07s37.html" title="$ZJOBEXAM()">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZGetjpi()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s35.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s37.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZGetjpi()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zgetjpi_unix"></a>$ZGetjpi()</h2></div></div></div>
+<p>Returns job or process information of the specified process. The format for the $ZGETJPI function is:</p>
+<pre class="programlisting">$ZGETJPI(expr1,expr2)</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>expr1 identifies the PID of the target job. If expr1 is an empty string (""), $ZGETJPI() returns information about the current process.</p></li>
+<li class="listitem">
+<p>expr2 specifies the item keyword identifying the type of information returned; keywords may be upper, lower, or mixed-case. The keywords are as follows:</p>
+<div class="informaltable"><table width="100%" border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="2">
+<p>ZGETJPI()</p>
+</th></tr>
+<tr>
+<th>
+<p>Keywords</p>
+</th>
+<th>
+<p>Data Returned</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><p>ISPROCALIVE</p></td>
+<td><p>Determines whether the specified process is alive.</p></td>
+</tr>
+<tr>
+<td><p>CPUTIM </p></td>
+<td><p>Total process and child CPU time used in hundredths of a second.</p></td>
+</tr>
+<tr>
+<td><p>CSTIME</p></td>
+<td><p>System time of child processes</p></td>
+</tr>
+<tr>
+<td><p>CUTIME</p></td>
+<td><p>User time of child processes</p></td>
+</tr>
+<tr>
+<td><p>STIME</p></td>
+<td><p>Process system time</p></td>
+</tr>
+<tr>
+<td><p>UTIME</p></td>
+<td><p>Process user time</p></td>
+</tr>
+</tbody>
+</table></div>
+</li>
+<li class="listitem"><p>Note that the $ZGETJPI() retrieves process time measurements (CPUTIM, CSTIME, CUTIME, STIME, and UTIME) only of the current process ($JOB). The "child" process time includes ZSYSTEM and PIPE device sub-processes (only after the PIPE CLOSEs), but excludes processes created by JOB commands.</p></li>
+<li class="listitem"><p>$ZGETJPI() provides a tool for examining the characteristics of a UNIX process. Accessing information about processes belonging to other users requires certain UNIX privileges. Consult your system manager if you require additional privileges.</p></li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zgetjpi(1975,"isprocalive")
+1
+GTM&gt;</pre>
+<p>This uses $ZGETJPI() to determine whether process 1975 is alive. </p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set t=$zgetjpi("","cputim")
+GTM&gt;do ^bench write $zgetjpi("","cputim")-t
+1738
+GTM&gt;</pre>
+<p>This uses $ZGETJPI() to measure the actual CPU time, measured in hundredths of a second, consumed by performing the BENCH routine.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s35.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s37.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZFind() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZJOBEXAM()</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch07s36.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

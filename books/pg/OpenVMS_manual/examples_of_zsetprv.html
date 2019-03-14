@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_zsetprv.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of $ZSETPRV()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zsetprv.html" title="$ZSETPRV()" />
+    <link rel="prev" href="zsetprv.html" title="$ZSETPRV()" />
+    <link rel="next" href="ztrnlmn.html" title="$ZTRNLNM()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of $ZSETPRV()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zsetprv.html">Prev</a> </td>
+          <th width="60%" align="center">$ZSETPRV()</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ztrnlmn.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_zsetprv"></a>Examples of $ZSETPRV()</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4192227" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; WRITE $ZSETPRV(&quot;TMPMBX&quot;)
+    TMPMBX
+    GTM&gt;
+    </pre>
+      <p>This uses $ZSETPRV() to (attempt to) enable the TMPMBX privilege. The display from the WRITE command shows that the privilege was already enabled when the function executed.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    SET savprv=$ZSETPRV(&quot;SYSLCK&quot;)
+    IF '$ZPRIVILEGE(&quot;SYSLCK&quot;) WRITE !,&quot;Inadequate Privileges&quot;
+    ELSE DO ^%ST
+    SET savprv=$ZSETPRV(savprv)    
+    </pre>
+      <p>This uses $ZSETPRV() to attempt to enable the SYSLCK privilege. Then $ZPRIVILEGE() checks to determine if the privilege was granted. This controls whether to issue a message or run the %ST utility program. Finally, the routine restores the original state of the SYSLCK privilege that was stored in savprv by again using $ZSETPRV().</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="2">
+    <p>VMS Privileges  </p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>VMS PRIVILEGE</p>
+    </td>
+              <td>
+    <p>DESCRIPTION</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ALLSPOOL</p>
+    <p>ALTPRI</p>
+    <p>ACNT</p>
+    <p>BUGCHK</p>
+    <p>BYPASS</p>
+    </td>
+              <td>
+    <p>Allocate a spooled device</p>
+    <p>Set/alter process priority</p>
+    <p>Create processes with no accounting</p>
+    <p>Make bugcheck error log entries</p>
+    <p>Bypass UIC-based protection</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>CMEXEC</p>
+    <p>CMKRNL</p>
+    <p>DETACH</p>
+    <p>DIAGNOSE</p>
+    <p>DOWNGRADE</p>
+    </td>
+              <td>
+    <p>Change mode to executive</p>
+    <p>Change mode to Kernel</p>
+    <p>Create detached processes</p>
+    <p>Diagnose devices</p>
+    <p>Downgrade classification</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>EXQUOTA</p>
+    <p>GROUP</p>
+    <p>GRPNAM</p>
+    <p>GRPPRV</p>
+    <p>LOG_IO</p>
+    </td>
+              <td>
+    <p>Exceed quotas</p>
+    <p>Group process control</p>
+    <p>Place name in group logical name table</p>
+    <p>Group access via system protection field</p>
+    <p>Perform logical I/O operations</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>MOUNT</p>
+    <p>NETMBX</p>
+    <p>OPER</p>
+    <p>PFNMAP</p>
+    <p></p>
+    <p>PHY_IO</p>
+    </td>
+              <td>
+    <p>Issue mount volume QIO</p>
+    <p>Create a network device</p>
+    <p>All operator functions</p>
+    <p>Map to section by physical page frame number</p>
+    <p>Perform physical I/O operations</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>PRMCEB</p>
+    <p>PRMGBL</p>
+    <p>PRMJNL</p>
+    <p>PRMMBX</p>
+    <p>PSWAPM</p>
+    </td>
+              <td>
+    <p>Create permanent common event flag clusters</p>
+    <p>Create permanent global sections</p>
+    <p>Create permanent journals</p>
+    <p>Create permanent mailboxes</p>
+    <p>Change process swap mode</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>READALL</p>
+    <p>SECURITY</p>
+    <p>SETPRV</p>
+    <p>SETALL</p>
+    <p>SHARE</p>
+    </td>
+              <td>
+    <p>Have read access to all files</p>
+    <p>Perform security functions</p>
+    <p>Set process privileges</p>
+    <p>Set all privileges</p>
+    <p>Assign channel to a non-shared device</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>SHMEM</p>
+    <p></p>
+    <p>SYSGBL</p>
+    <p>SYSLCK</p>
+    <p>SYSNAM</p>
+    <p>SYSPRV</p>
+    </td>
+              <td>
+    <p>Allocate memory structures shared by multiple processors</p>
+    <p>Create system global sections</p>
+    <p>Queue system-wide locks</p>
+    <p>Place name in system logical table</p>
+    <p>Access using the system protection mask</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>TMPMBX</p>
+    <p>UPGRADE</p>
+    <p>VOLPRO</p>
+    <p>WORLD</p>
+    </td>
+              <td>
+    <p>Create temporary mailboxes</p>
+    <p>Upgrade classification</p>
+    <p>Override volume protection</p>
+    <p>World process control</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zsetprv.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zsetprv.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ztrnlmn.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZSETPRV() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $ZTRNLNM()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/examples_of_zsetprv.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+</html>

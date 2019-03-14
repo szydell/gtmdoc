@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/date_and_time_utils.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:33 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Date and Time Utilities</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter10.html" title="Chapter 10. Utility Routines" />
+    <link rel="prev" href="using_the_utils.html" title="Using the Utilities" />
+    <link rel="next" href="percent_d.html" title="%D" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Date and Time Utilities</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="using_the_utils.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 10. Utility Routines</th>
+          <td width="20%" align="right"> <a accesskey="n" href="percent_d.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="date_and_time_utils"></a>Date and Time Utilities</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="percent_d.html">%D</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="percent_date.html">%DATE</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="percent_h.html">%H</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="percent_t.html">%T</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="percent_ti.html">%TI</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="percent_to.html">%TO</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4219476" class="indexterm"></a>
+      <p>The date and time utilities are:</p>
+      <p>%D:	 	Displays the current date using the [d]d-mmm-[yy]yy format. </p>
+      <p>%DATE:	Converts input date to the $HOROLOG format.</p>
+      <p>%H:		Converts date and time to and from $HOROLOG format.</p>
+      <p>%T:		Displays the current time in [h]h:mm AM/PM format. </p>
+      <p>%TI:		Converts time to $HOROLOG format.</p>
+      <p>%TO:		Converts the current time from $HOROLOG format to [h]h:mm AM/PM format. </p>
+      <p>The &quot;%&quot; sign has been removed from the topic headings below, intentionally.</p>
+      <p>The Intrinsic Special Variable $ZDATEFORM interprets year inputs with two digits as described in the following table:</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td>
+	<p>$ZDATEFORM</p>
+	</td>
+              <td>
+	<p>INTERPRETATION OF 2 DIGIT YEAR</p>
+	</td>
+              <td>
+	<p>OUTPUT OF %D</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>0:</p>
+	</td>
+              <td>
+	<p>20th century (1900 - 1999)</p>
+	</td>
+              <td>
+	<p>2 digits</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>1:</p>
+	</td>
+              <td>
+	<p>current century (2000 - 2099)</p>
+	</td>
+              <td>
+	<p>4 digits</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>(1841-9999):</p>
+	</td>
+              <td>
+	<p>the next 99 years starting from $ZDATEFORM (x - x+99)</p>
+	</td>
+              <td>
+	<p>4 digits</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>other:</p>
+	</td>
+              <td>
+	<p>current century (2000 - 2099)</p>
+	</td>
+              <td>
+	<p>4 digits</p>
+	</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Example:</p>
+      <p>If $ZDATEFORM is 1965, an input year of 70 would be interpreted as 1970, whereas an input year of 10 would be taken as 2010.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="using_the_utils.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter10.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="percent_d.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Using the Utilities </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> %D</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/date_and_time_utils.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:33 GMT -->
+</html>

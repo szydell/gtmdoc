@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/TP_Performance.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:35 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>TP Performance</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Transctn_Processing.html" title="Transaction Processing" />
+    <link rel="prev" href="TP_Characteristics.html" title="TP Characteristics" />
+    <link rel="next" href="TP_Example.html" title="TP Example" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">TP Performance</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="TP_Characteristics.html">Prev</a> </td>
+          <th width="60%" align="center">Transaction Processing</th>
+          <td width="20%" align="right"> <a accesskey="n" href="TP_Example.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="TP_Performance"></a>TP Performance</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4169559" class="indexterm"></a>
+      <p>To achieve the best GT.M performance, transactions should:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>be as short as possible</p>
+          </li>
+          <li>
+            <p>consist, as much as possible, only of global updates</p>
+          </li>
+          <li>
+            <p>be SERIAL with no associated LOCKs</p>
+          </li>
+          <li>
+            <p>have RESTART enabled with a minimum of local variables protected by a restart portion of the TSTART argument.</p>
+          </li>
+          <li>
+            <p>Large concurrent transactions using TCOMMIT may result in repeated and inefficient attempts by competing processes to capture needed scarce resources, resulting in poor performance.</p>
+          </li>
+        </ul>
+      </div>
+      <p>Example:</p>
+      <pre class="programlisting">
+       TSTART ():SERIAL
+       SET (ACCT,^M(0))=^M(0)+1
+       SET ^M(ACCT)=PREC,^PN(NAM)=ACCT
+       TCOMMIT
+        </pre>
+      <p>This transaction encapsulates these two SETs. The first increments the tally of patients registered, storing the number in local variable ACCT for faster access in the current program, and in global variable ^M(0). The second SET stores a patient record by account number and the third cross-references the account number with the patient name. Placing the SETs within a single transaction ensures that the database always receive either all of the SETs or none of them, thus protecting database integrity against process or system failure. Similarly, another concurrent process, whether using transactions or not, never finds one of the SETs in place without also finding the other one.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+       TSTART ():SERIAL
+       IF $TRESTART&gt;3 DO QUIT
+       .TROLLBACK
+       .WRITE !,&quot;Too many RESTARTs&quot;
+       .QUIT
+       SET (NEXT,^ID(0))=^ID(0)+1
+       SET ^ID(NEXT)=RECORD,^XID(ZIP,NEXT)=&quot;&quot;
+       TCOMMIT
+        </pre>
+      <p>This transaction will automatically restart if it cannot serialize the SETs to the database, and will terminate with a TROLLBACK if more than 3 RESTARTs occur.</p>
+      <p>GT.M provides a way to monitor transaction restarts by reporting them to the operator logging facility. If the <span>logical name</span> TPRESTART_SYSLOG_DELTA is defined, GT.M reports every Nth restart where N is the numeric evaluation of the value of TPRESTART_SYSLOG_DELTA. If the <span>logical name</span> TPRESTART_SYSLOG_LIMIT is defined, the restart reporting begins after the number of restarts specified by the value of TPRESTART_SYSLOG_LIMIT. For example, defining both the <span>logical name</span> to the value 1, causes all TP restarts to be logged. When TPRESTART_SYSLOG_DELTA is defined, leaving TPRESTART_SYSLOG_LIMIT undefined is equivalent to giving it the value 1.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>For more information on enhancements related to TP performance refer to the &quot;NOISOLATION&quot; section under VIEW command topic in the &quot;Commands&quot; chapter of <span>this manual</span>.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="TP_Characteristics.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Transctn_Processing.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="TP_Example.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">TP Characteristics </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> TP Example</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/TP_Performance.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:35 GMT -->
+</html>

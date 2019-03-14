@@ -1,0 +1,25 @@
+<html>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch05s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:41 GMT -->
+<head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Operating In MUPIP</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch05.html" title="Chapter 5. MUPIP"><link rel="prev" href="ch05.html" title="Chapter 5. MUPIP"><link rel="next" href="ch05s02.html" title="MUPIP Commands and Qualifiers"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Operating In MUPIP</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05.html">Prev</a> </td><th width="60%" align="center">Chapter 5. MUPIP</th><td width="20%" align="right"> <a accesskey="n" href="ch05s02.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Operating In MUPIP"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="Operating_in_mupip"></a>Operating In MUPIP<a class="indexterm" name="id3229588"></a></h2></div></div></div><p>The default installation procedure places the MUPIP utility program in a directory
+specified by the <span>logical name GTM$DIST</span>
+
+</p><p>The installation also creates command files that define GTM$DIST and
+assigns the symbol MUPIP to be the foreign command, $GTM$DIST:MUPI*P. The asterisk
+(*) permits abbreviation of the symbol to four (4) characters.</p><p>Invoke MUPIP using the GT.M symbol MUPIP following command at the <span>DCL</span>
+ prompt. If this does not work, consult your system
+manager to investigate setup and file access issues.</p><pre class="programlisting">$ MUPIP
+MUPIP&gt;</pre><p>When MUPIP is ready to accept commands, the system displays the MUPIP&gt; prompt.
+Enter the EXIT command at the MUPIP&gt; prompt to stop the utility. MUPIP is
+designed to perform one operation at a time, and automatically terminates after most
+operations.</p><p>When additional information appears on the <span>DCL</span> command
+line after the MUPIP command, MUPIP processes the additional information as its
+command. <span>Since MUPIP performs one operation at a time, FIS
+recommends using this form of invocation for MUPIP operations.</span>
+</p><pre class="programlisting">$ MUPIP HELP</pre><div class="sect2" title="Use of Global Directories"><div class="titlepage"><div><div><h3 class="title"><a name="use_glbl_dir"></a>Use of Global Directories<a class="indexterm" name="id3229732"></a></h3></div></div></div><p>The logical name GTM$GBLDIR specifies the Global Directory. Define
+GTM$GBLDIR using the DCL command DEFINE. The system manager may define
+GTM$GBLDIR in a GROUP or SYSTEM table. Individual users define GTM$GBLDIR in
+their LOGIN.COM file or other command files.</p><pre class="programlisting">$ DEFINE GTM$GBLDIR PROD.GLD</pre><p>For more information on the Global Directory, refer to the "Global Directory
+Editor" chapter.</p><p>For more information on defining logical names, refer to the OpenVMS
+User's Manual.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05s02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 5. MUPIP </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> MUPIP Commands and Qualifiers</td></tr></table></div></body>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch05s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:41 GMT -->
+</html>

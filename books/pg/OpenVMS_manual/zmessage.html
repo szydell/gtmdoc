@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zmessage.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:40 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ZMessage</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="Chapter 6. Commands" />
+    <link rel="prev" href="zkill_cmmd.html" title="ZKill" />
+    <link rel="next" href="examples_of_zmessage.html" title="Examples of ZMESSAGE" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ZMessage</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zkill_cmmd.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 6. Commands</th>
+          <td width="20%" align="right"> <a accesskey="n" href="examples_of_zmessage.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zmessage"></a>ZMessage</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zmessage.html">Examples of ZMESSAGE</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4179747" class="indexterm"></a>
+      <p>The ZMESSAGE command signals a specified condition.</p>
+      <p>The format of the ZMESSAGE command is:</p>
+      <pre class="programlisting">
+       ZM[ESSAGE][:tvexpr] intexpr
+       [:expr...][,...]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>The required integer expression specifies the exception condition to signal.</p>
+          </li>
+          <li>
+            <p>The additional expressions specify one or more strings passed as ASCII text to the VMS message formatter by means of descriptors; for example, if the message associated with the condition contains a corresponding FAO !AD directive, the message facility inserts each text string in the message. $ZMESSAGE() function returns the message text with the substitution directives for a given message number.</p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom evaluating to a list of one or more ZMESSAGE arguments form a legal argument for a ZMESSAGE.</p>
+          </li>
+        </ul>
+      </div>
+      <p>For more information on Format ASCII Output (FAO), refer to the description of the F$FAO lexical function in the VMS DCL Dictionary.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zkill_cmmd.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="examples_of_zmessage.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ZKill </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of ZMESSAGE</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zmessage.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:04:40 GMT -->
+</html>

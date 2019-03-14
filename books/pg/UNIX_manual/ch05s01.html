@@ -1,0 +1,87 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Data Types</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
+<link rel="prev" href="ch05.html" title="Chapter 5. General Language Features of M">
+<link rel="next" href="ch05s02.html" title="M Names">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Data Types</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch05.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 5. <span>General Language Features of M</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch05s02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch05.html"><span>General Language Features of M</span></a></span> &gt; <span class="breadcrumb-node">Data Types</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Data_Types"></a>Data Types</h2></div></div></div>
+<p>M operates with a single basic data type, string. However, M evaluates data using methods that vary according to context.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Numeric_Expressions"></a>Numeric Expressions<a class="indexterm" name="idp185471392"></a>
+</h3></div></div></div>
+<p>When M syntax specifies a numexpr, M evaluates the data as a sequence of ASCII characters that specify a number. M stops the evaluation and provides the result generated from successfully evaluated characters when it encounters any character that is not the following:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>A digit 0-9</p></li>
+<li class="listitem" style="list-style-type: circle"><p>A plus sign (+) or minus sign (-) and also the first character in the string</p></li>
+<li class="listitem" style="list-style-type: circle"><p>The first decimal point (.) in the string</p></li>
+</ul></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Numeric_Accuracy"></a>Numeric Accuracy<a class="indexterm" name="idp185594784"></a>
+</h3></div></div></div>
+<p>GT.M provides 18 digits of accuracy, independent of the decimal point (.) placement, and a numeric range from 10**(-43) to (10**47). Numbers with three digits or fewer to the right of the decimal point are precise.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Integer_Expressions"></a>Integer Expressions<a class="indexterm" name="idp185353552"></a>
+</h3></div></div></div>
+<p>When M syntax specifies an intexpr, M evaluates the data as it would a numexpr except that it stops the evaluation at any decimal point including the first.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Truth_Valued_Expressions"></a>Truth-valued Expressions<a class="indexterm" name="idp185632896"></a>
+</h3></div></div></div>
+<p>When M syntax specifies a tvexpr, M evaluates the data as a numeric. However, it stops the evaluation and returns a true value (1) as soon as it encounters a non-zero digit, otherwise it returns a false value (0). In other words, M treats expressions that have a non-zero numeric value as true, and expressions that have a zero numeric value as false. The sign and/or decimal have no affect on the evaluation of a truth-valued expression.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch05.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch05s02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 5. <span>General Language Features of M</span> </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> M Names</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch05s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:45 GMT -->
+</html>

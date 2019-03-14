@@ -1,0 +1,767 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s25.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>View</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s24.html" title="Use">
+<link rel="next" href="ch06s26.html" title="Write">
+<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">View</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s24.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s26.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">View</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="commands_view"></a>View<a class="indexterm" name="idp186824640"></a>
+</h2></div></div></div>
+<p>The VIEW command adjusts an environmental factor selected by a keyword argument. For example, VIEW controls journal buffer flushing, determines whether GT.M reports undefined variables as errors or treats them as null, and determines which BREAK commands should display messages.</p>
+<p>The format of the VIEW command is:</p>
+<pre class="programlisting">V[IEW][:tvexpr] keyword[:expr2[:...]][,...]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The keyword specifies the environmental factor to change.</p></li>
+<li class="listitem"><p>The optional expression following the keyword specifies the nature of the change to the environmental factor. When this expression is a region list (a comma delimited list of regions), GT.M sorts the regions in an internal order eliminating any duplicates from the list for deadlock prevention. When region list is not specified, VIEW operates on all regions under the current global directory. </p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more VIEW arguments form a legal argument for a VIEW</p></li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="key_words_view"></a>Key Words<span> in VIEW Command</span><a class="indexterm" name="idp186796960"></a>
+</h3></div></div></div>
+<p>The following sections describe the keywords available for the VIEW command in GT.M.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="breakmsg"></a><span>"BREAKMSG":value</span><a class="indexterm" name="idp186787440"></a>
+</h4></div></div></div>
+<p>Sets the value of the BREAK message mask. When GT.M processes a BREAK command, the BREAK message mask controls whether to display a message describing the source of the BREAK.</p>
+<p>The mask uses the following four values that are added together to provide the BREAKMSG value.</p>
+<p>1 - BREAKs within the body of a program</p>
+<p>2 - BREAKs within a ZBREAK action</p>
+<p>4 - BREAKs within a device EXCEPTION</p>
+<p>8 - BREAKs within a ZSTEP action</p>
+<p>16 - ZBREAKs within a trigger removed due to updated trigger (TRIGZBREAKREM)</p>
+<p>The default BREAKMSG mask is 31 (1+2+4+8+16) which means that GT.M displays all BREAK messages. </p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;VIEW "BREAKMSG":5</pre>
+<p>In this example the BREAKMSG value is 5, representing the sum of 1 and 4. This enables BREAKS within the body of a program (value 1) and for a device EXCEPTION (value 4).</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="no_badchar"></a><span>[NO]</span>BADCHAR<a class="indexterm" name="idp186823360"></a>
+</h4></div></div></div>
+<p>Enables or disable the gneration of an error when character-oriented functions encounter malformed byte sequences (illegal characters).</p>
+<p>At process startup, GT.M initializes BADCHAR from the environment variable gtm_badchar. Set the environment variable $gtm_badchar to a non-zero number or "YES" (or "Y") to enable VIEW "BADCHAR". Set the environment variable $gtm_badchar to 0 or "NO" or "FALSE" (or "N" or "F") to enable VIEW "NOBADCHAR". By default, GT.M enables VIEW "BADCHAR".</p>
+<p>With VIEW "BADCHAR", GT.M functions generate the BADCHAR error when they encounter malformed byte sequences. With this setting, GT.M detects and clearly reports potential application program logic errors as soon as they appear. As an illegal UTF-8 character in the argument of a character-oriented function likely indicates a logic issue, FIS recommends using VIEW "BADCHAR" in production environments.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>When all strings consist of well-formed characters, the value of VIEW [NO]BADCHAR has no effect whatsoever. With VIEW "NOBADCHAR", the same functions treat malformed byte sequences as valid characters. During the migration of an application to add support for the UTF-8 mode, illegal character errors are likely to be frequent and indicative of application code that is yet to be modified. VIEW "NOBADCHAR" suppresses these errors at times when their presence impedes development.</p></td></tr>
+</table></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="dbflush"></a><span>"DBFLUSH"[:&lt;region_list&gt;[:N]]</span>
+</h4></div></div></div>
+<p>When using the BG access method, writes modified blocks in the global buffers to the database file. By default, this command option operates on all regions under the current global directory. N specifies the number of blocks to write; by default, DBFLUSH writes all modified blocks. Normally GT.M schedules block flushing at appropriate times, but this option exists for an application to explore the impact of flushing on their work load. See also the DBSYNC and EPOCH VIEW Options.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="dbsync"></a><span>"DBSYNC"[:&lt;region_list&gt;]</span>
+</h4></div></div></div>
+<p>Performs a file system hardening sync - fsync() - operation on the database file. By default, this command option operates on all regions under the current global directory. Normally GT.M schedules block flushing at appropriate times, but this option exists for an application to explore the impact of file hardening on their work load. See also the DBFLUSH and EPOCH VIEW Options.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="dmterm"></a><span>[NO]</span>DMTERM</h4></div></div></div>
+<p>Provides a mechanism to retain default line terminators for direct mode user interaction (including the BREAK command) independent of any TERMINATOR deviceparameter changes for $PRINCIPAL. With VIEW "NODMTERM", TERMINATOR deviceparameter apply to both READs from $PRINCIPAL and direct mode interactions. A case-insensitive value of the environment variable gtm_dmterm is "1", "yes", or "true" establishes a DMTERM state at process initiation; all other values, including no value, result in the default VIEW "NODMTERM" behavior. $VIEW("DMTERM") returns 1 for DMTERM mode or 0 for NODMTERM mode. </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="epocho"></a><span>"EPOCH"[:&lt;region_list&gt;]</span>
+</h4></div></div></div>
+<p>Flushes the database buffers and, if journaling is enabled, writes an EPOCH record. By default, this command option operates on all regions under the current global directory. Normally GT.M schedules epochs as a user controlled journaling characteristic, but this option exists for an application to explore the impact of epochs on their work load. See also the DBFLUSH and DBSYNC VIEW Options. Epochs include DBFLUSH and DBSYNC actions, but performing them before the epoch may reduce the duration of these actions within the epoch.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="viewflush1"></a><span>"FLUSH"[:&lt;region_list&gt;]</span>
+</h4></div></div></div>
+<p>Flushes dirty global buffers from the global buffer pool. If  journaling is turned on, "FLUSH" writes an EPOCH record and flushes dirty journal buffers prior to flushing dirty global buffers. If no region is specified, VIEW "FLUSH" flushes all regions in the current global directory that the GT.M process has opened.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="nofulbwarn"></a><span>[NO]FULL_BOOL[EAN|WARN]</span>
+</h4></div></div></div>
+<p>Controls the evaluation of Boolean expressions (expressions evaluated as a logical TRUE or FALSE).</p>
+<p>By default, GT.M enables VIEW "NOFULL_BOOLEAN" which means that GT.M stops evaluating a Boolean expression as soon as it establishes a definitive result. For example, neither 0&amp;$$abc^def() nor 1!$$abc^def() executes $$abc^def(). However, in the case of global references, such as 0&amp;^a or 1!^a, GT.M sets $reference and the naked indicator without actually accessing the global variable.</p>
+<p>With VIEW "FULL_BOOLEAN", GT.M ensures that all side effect expression atoms, extrinsic functions ($$), external functions ($&amp;), and $INCREMENT() execute in left-to-right order.</p>
+<p>With VIEW "FULL_BOOLWARN", GT.M not only evaluates Boolean expressions like "FULL_BOOLEAN" but produces a BOOLSIDEFFECT warning when it encounters Boolean expressions that may induce side-effects; that is: expressions with side effects after the first Boolean operator - extrinsic functions, external calls and $INCREMENT().</p>
+<p>GT.M picks up the value of [NO]FULL_BOOL[EAN|WARN] from the environment variable gtm_boolean. If gtm_boolean is undefined or evaluates to an integer zero (0), the initial setting the default "NOFULL_BOOLEAN", if it evaluates to an integer one (1), the initial setting is "FULL_BOOLEAN" and if it evaluates to integer two (2) the initial setting is "FULL_BOOLWARN".</p>
+<p>VIEW "[NO]FULL_BOOL[EAN][WARN]" takes effect immediately for indirection and XECUTE.</p>
+<p>VIEW "NOFULLBOOLEAN" produces an error when gtm_side_effects is on. For more information on the gtm_side_effects environment variable, refer to the Environment Variables section in the Basic Operations chapter of the Administration and Operations Guide.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="gdscert"></a><span>"GDSCERT":value</span><a class="indexterm" name="idp186826336"></a>
+</h4></div></div></div>
+<p>Enables (value=1) or disables (value=0) database block certification.</p>
+<p>Database block certification causes GT.M to check the internal integrity of every block as it writes the block. Block certification degrades performance and exists primarily as a tool for use by FIS. The default is GDSCERT:0.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="gvsreset"></a><span>"GVSRESET":"&lt;region&gt;"</span><a class="indexterm" name="idp186694176"></a>
+</h4></div></div></div>
+<p>Resets the process-specific fields that are part of the ZSHOW "G" result and database file header fields holding records reported by: GVSTAT, BG trace, buffer pool accounting and the TP block modification details. Note a VIEW "GVSRESET" performed by a process with read-only database access changes only the process-specific information and has no effect on the database file header. DSE CHANGE -FILEHEADER -GVSTATSRESET clears the same database file header fields as VIEW "GVRESET"; 
+</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="gvdupsetnoop"></a><span>"GVDUPSETNOOP":value</span><a class="indexterm" name="idp186812640"></a>
+</h4></div></div></div>
+<p>Enables (VIEW "GVDUPSETNOOP":1) or disables (VIEW "GVDUPSETNOOP":0) duplication set optimization.</p>
+<p>Duplicate set optimization prevents a SET that does not change the value of an existing node from performing the update or executing any trigger code specified for the node. By default, duplicate set optimization is enabled.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="jnlflush"></a><span>"JNLFLUSH"[:&lt;region_list&gt;]</span><a class="indexterm" name="idp186820736"></a>
+</h4></div></div></div>
+<p>Writes or flushes journaling buffers associated with the given region to permanent storage, for example, to disk. If the VIEW "JNLFLUSH" does not specify the optional region, GT.M flushes all journaled regions of the current Global Directory.</p>
+<p>Normally GT.M writes journal buffers when it completes a transaction (unless TRANSACTIONID="BATCH"), fills the journal buffer or when some period of time passes with no journal activity.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="jnlwait"></a>JNLWAIT<a class="indexterm" name="idp186823136"></a>
+</h4></div></div></div>
+<p>Causes a process to pause until its journaling buffers have been written. JNLWAIT ensures that GT.M successfully transfers all database updates issued by the process to the journal file before the process continues. Normally, GT.M performs journal buffer writes synchronously for TP updates, and asynchronously, while the process continues execution, for non-TP updates or TP updates with TRANSACTIONID=BATCH.</p>
+<p>JNLWAIT operates only on those regions for which the current process has opened journal files. As all the journal activity for a TP transaction occurs at commit time, GT.M ignores JNLWAIT when inside a TP TRANSACTION ($TLEVEL &gt; 0). For more information on journaling, refer to the "GT.M Journaling" chapter in the <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="jobpid"></a><span>"JOBPID":"value"</span><a class="indexterm" name="idp186807856"></a>
+</h4></div></div></div>
+<p>Enables (value=1) or disables (value=0) the addition of the child process ID to the output and error file names used (either implicitly generated or explicitly defined) by the JOB command. The default is 0.</p>
+<p>Using the value=1 option prevents the JOB command from overwriting output files each time the same JOB command executes.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="labels_ch6"></a><span>"LABELS":"value"</span><a class="indexterm" name="idp186739312"></a>
+</h4></div></div></div>
+<p>Enables (value="LOWER") or disables (value="UPPER") case sensitivity for labels within routines.</p>
+<p>It is important to have the same case handling at compile-time and run-time.</p>
+<p>Because GT.M stores routines as regular files and file names are case sensitive on UNIX, GT.M always treates routine names as case sensitive.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="link"></a><span>"LINK":"[NO]RECURSIVE"</span>
+</h4></div></div></div>
+<p>Enables ("LINK":"RECURSIVE") or disables ("LINK":"RECURSIVE") the ZLINK command to accept and relink routines on the GT.M invocation stack. With VIEW "LINK":"RECURSIVE" specified, the ZLINK command adds an executable routine even when a routine with the same name is active and available in the current stack. When a process links a routine with the same name as an existing routine, future calls use the new routine. Prior versions of that routine referenced by the stack remain tied to the stack until they QUIT, at which point they become inaccessible. This provides a mechanism to patch long-running processes. </p>
+<p>The default is VIEW "LINK":"NORECURSIVE".</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="view_nolognontp"></a><span>[NO]LOGN[ONTP][=intexpr]</span>
+</h4></div></div></div>
+<p>Allows a process to dynamically change the logging of NONTPRESTART messages to the operator log established at process startup by the environment variables gtm_nontprestart_log_delta and gtm_nontprestart_log_first.</p>
+<p>VIEW "NOLOGNONTP" turns off the logging of NONTPRESTART messages to the operator log.</p>
+<p>VIEW "LOGNONTP"[=intexpr] turns on logging of NONTPRESTART messages to the operator log. If no intexpr is specified, GT.M uses the value of environment variable gtm_nontprestart_log_delta, if it is defined, and one otherwise (that is, every transaction restart will be logged). A negative value of intexpr turns off the logging of NONTPRESTART messages.</p>
+<p>Note that it is not possible to perform the operations of gtm_nontprestart_log_first with VIEW "LOGNONTP"[=intexpr].</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="idp186878928"></a><span>[NO]LOGT[PRESTART][=intexpr]</span>
+</h4></div></div></div>
+<p>Allows a process to dynamically change the logging of TPRESTART messages to the operator log established at process startup by the environment variables gtm_tprestart_log_delta and gtm_tprestart_log_first.</p>
+<p>VIEW "NOLOGTPRESTART" turns off the logging of TPRESTART messages to the operator log.</p>
+<p>VIEW "LOGTPRESTART"[=intexpr] turns on logging of TPRESTART messages to the operator log. If no intexpr is specified, GT.M uses the value of environment variable gtm_tprestart_log_delta, if it is defined, and one otherwise (that is, every transaction restart will be logged). A negative value of intexpr turns off the logging of TPRESTART messages.</p>
+<p>Note that it is not possible to perform the operations of gtm_tprestart_log_first with VIEW "LOGTPRESTART"[=intexpr].</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="idp186881008"></a>LV_GCOL<a class="indexterm" name="idp186890656"></a>
+</h4></div></div></div>
+<p>Starts a data-space garbage collection, which normally happens automatically at appropriate times.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>There are no visible effects from LV_GCOL, LV_REHASH, and STP_GCOL except for the passage of time depending on the state of your process. FIS uses these VIEW "LV_GCOL","LV_REHASH","STP_GCOL" facilities in testing. They are documented to ensure completeness in product documentation. You may (or may not) find them useful during application development for debugging or performance testing implementation alternatives.</p></td></tr>
+</table></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="idp186815792"></a>LV_REHASH<a class="indexterm" name="idp186882672"></a>
+</h4></div></div></div>
+<p>Starts a reorganization of the local variable look-up table, which normally happens automatically at appropriate times.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>There are no visible effects from LV_REHASH, LV_GCOL, and STP_GCOL except for the passage of time depending on the state of your process. FIS uses these VIEW "LV_GCOL","LV_REHASH","STP_GCOL" facilities in testing. They are documented to ensure completeness in product documentation. You may (or may not) find them useful during application development for debugging or performance testing implementation alternatives.</p></td></tr>
+</table></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ch6_lvnullsubs"></a><span>[NEVER]|[NO]LVNULLSUBS</span><a class="indexterm" name="idp186755984"></a>
+</h4></div></div></div>
+<p>Disallows, partially disallows, or allows local arrays to have empty string subscripts. The default is LVNULLSUBS. </p>
+<p>NOLVNULLSUBS disallows any variant of SET to operate on a local array having an empty string subscript.</p>
+<p>NEVERLVNULLSUBS disallows any variant of SET or KILL ($DATA(),$GET(),$ORDER(), and $QUERY()) to operate on a local array having an empty string subscript. An empty string as the last subscript in $ORDER() and $QUERY() has the semantic significance of requesting the next lexical item and is not subject to NULLSUBS errors.</p>
+<p>LVNULLSUBS allows local arrays to have empty string subscripts. </p>
+<p>At process startup, GT.M initializes [NEVER][NO]LVNULLSUBS from $gtm_lvnullsubs. Set the environment variable $gtm_lvnullsubsv to:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>0 - equivalent to VIEW "NOLVNULLSUBS"</p></li>
+<li class="listitem"><p>1 (the default) - equivalent to VIEW "LVNULLSUBS" or</p></li>
+<li class="listitem"><p>2 - equivalent to VIEW "NEVERLVNULLSUBS".</p></li>
+</ul></div>
+<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<th align="left">Important</th>
+</tr>
+<tr><td align="left" valign="top"><p>Remember that for global variables, empty string subscript checking is controlled by a database region characteristic. FIS recommends using LVNULLSUBS, NOLVNULLSUBS, or NEVERLVNULLSUBS for local variables and NULLSUBS options ALWAYS or NEVER for global variables.</p></td></tr>
+</table></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="noisolation"></a><span>"NOISOLATION":&lt;expr&gt;</span><a class="indexterm" name="idp186880240"></a>
+</h4></div></div></div>
+<p>where expr must evaluate to one of the following forms:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>"", that is, the empty string : turn off the feature for all globals for which it has previously been turned on</p></li>
+<li class="listitem"><p>"^gvn1,^gvn2,..." : turn on the feature for the globals in the list, turning it off for globals for which it has previously been turned on</p></li>
+<li class="listitem"><p>"+^gvn1,^gvn2,..." : add these globals to the list of globals that have this feature turned on</p></li>
+<li class="listitem"><p>"-^gvn1,^gvn2,..." : turn off the feature for these globals leaving the status for other globals unchanged</p></li>
+</ul></div>
+<p>GT.M transaction processing permits the application to specify a set of globals that do not require GT.M to preserve Isolation, one of 
+the "ACID" properties of TP. This shifts the responsibility for Isolation from GT.M to the application logic, and permits GT.M to relax its TP Isolation rules. This avoids TP restarts in certain cases thus improving the performance of the application. For example, if a global variable includes $JOB as a subscript, the application may be written and scheduled in such a way that no more than one process uses a node of that global at any given time. Specifying such a global as "NOISOLATED" avoids transaction restarts that occur when different processes concurrently update and access nodes that share the same GDS block.</p>
+<p>The rules for enforcement by GT.M of Isolation, and therefore potentially Consistency, are relaxed for application-specified global variables in order to allow the application to manage these properties. GT.M is responsible for Atomicity and Durability, as well as for database integrity for all variables, and for Isolation and Consistency for any global variables for which the application does not accept responsibility.</p>
+<p>Note that if an application incorrectly specifies a global to be NOISOLATED, severe, and possibly intermittent and difficult to diagnose damage to application-level integrity is likely to result. A thorough understanding of the application is necessary before declaring a global to be noisolated. GT.M preserves database integrity (accessibility) for NOISOLATED, as well as ISOLATED global variables.</p>
+<p>GT.M ignores attempts to turn on (or off) the feature for globals that already have the feature turned on (or off). It is an error to modify the isolation-status of a global variable within a transaction across different references (either reads or writes) of that global variable. The VIEW command by itself is not considered to be a reference of the global variable. While not recommended programming practice, this means that a process can change a global's isolation-status within a transaction as long as it hasn't referenced it yet.</p>
+<p>Any reads on a NOISOLATION global are validated at the time of the read and not re-validated at TCOMMIT time. This means that if the value that was read changed after the read but before the TCOMMIT, the transaction would still be committed. Therefore it is important that any reads on a NOISOLATED global (if any) should be of data insensitive to change with time (unchanging or where consistency with other data accessed by the transaction doesn't matter). </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="patcode"></a><span>"PATCODE":"tablename"</span><a class="indexterm" name="idp186882928"></a>
+</h4></div></div></div>
+<p>Identifies the alternative table of unique patterns for use with the "?" operator to be loaded from the pattern definition file. For additional information, <span>refer to <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a></span>.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="patload"></a><span>"PATLOAD":"file-specification"</span><a class="indexterm" name="idp186906608"></a>
+</h4></div></div></div>
+<p>Identifies the file containing definitions of unique patterns for use with the "?" operator. These pattern definitions can be used in place of, or in addition to, the standard C, N, U, L, and P. <span>For more information on creating the file-specification, refer to <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a>.</span></p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="poollimit"></a><span>"POOLLIMIT":&lt;region&gt;:expr</span><a class="indexterm" name="idp186894304"></a>
+</h4></div></div></div>
+<p>VIEW "POOLLIMIT":&lt;region&gt;:expr, where expr is of the form n[%] provides a mechanism for a process that has the potential to "churn" global buffers to limit the potential impact on other processes by restricting the number of global buffers it uses. If the expression ends with a per-cent sign (%), the number is taken as an as a percentage of the configured global buffers and otherwise as an ordinal number of preferred buffers; standard M parsing and integer conversions apply. Preferred buffer values are limited to between 32 and one less than half the buffer pool inclusive; with the exception of zero (0) or 100 per cent, which turn off the limitation; specifications exceeding those limits provide the value of the nearer limit. If the argument specifies "*" for the region, the command applies to all regions. $VIEW("POOLLIMIT",&lt;region&gt;) returns the current value for the region as an ordinal number - zero (0) when there is no limit in place. Note that this facility is designed for use by a relatively small subset of processes. In addition, MUPIP REORG uses this facility to limit its buffers to a value established by the UNIX environment variable (or OpenVMS logical name) gtm_poollimit using the syntax described for VIEW "POOLLIMIT" with a default of 64 if gtm_poollimit is not specified. Note that this may slightly slow a standalone REORG but can be overridden by defining gtm_poollimit as 0 or "100%". </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="rctldump"></a>RCTLDUMP</h4></div></div></div>
+<p>Displays the created relinkctl files and the routines looked for in their related directories. An entry in these files does not mean that a given routine was found there. It merely means it was looked for there and shows a cycle number (which ZRUPDATE bumps) whose change indicates a new published version of the given object file. As it is a diagnostic tool for the new feature, FIS may remove or modify this VIEW option in subsequent releases.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>GT.M no longer supports VIEW "RCTLDUMP" as it has been supplanted by ZSHOW "A" and MUPIP RCTLDUMP.</p></td></tr>
+</table></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="resetgvstats_v"></a>RESETGVSTATS</h4></div></div></div>
+<p>Resets all the process-private global access statistics to 0. This is particularly useful for long running processes which would periodically like to restart the counting without requiring a shut down and restart.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="statsshare_v"></a><span>[NO]STATSHARE"[:&lt;region-list&gt;]</span>
+</h4></div></div></div>
+<p>VIEW "[NO]STATSHARE"[:&lt;region-list&gt;] enables or disables database statistics sharing for listed regions which permit such sharing. Without the region-list, the command acts on all regions enabled for sharing. When a targeted region has sharing disabled, STATSHARE has no effect. </p>
+<p>This provides a fast and efficient mechanism for processes to share their database access statistics for other processes to monitor. Processes opt in or out with the VIEW "[NO]STATSHARE"[:&lt;region-list&gt;] command, defaulting to VIEW "NOSTATSHARE". At process startup, a value of 1, or any case-independent string or leading substrings of "TRUE" or "YES" in the environment variable gtm_statshare provides an initial setting of VIEW "STATSHARE". When a process changes whether it is opting in or out, there is no change to the output of a ZSHOW "G" within that process. GT.M does not permit this form of the VIEW command within a TP transaction. Monitoring the statistics of other processes does not require opting-in. </p>
+<p>The processes which opt-in for STATSHARE place their statistics as binary data in database files located in the directory specified by the gtm_statsdir environment variable. All processes that share statistics MUST use the same value for $gtm_statsdir. The ^%YGBLSTAT utility program gathers and reports statistics. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>A VIEW "[NO]STATSHARE" with no region sub-argument opens any unopened mapped regions and any enabled associated statsDB regions; the $gtm_statshare environment variable applies to databases as the application first uses them. When the last VIEW "[NO]STATSHARE" had no region sub-argument, regions implicitly share when the process first references them, but after a VIEW specifies selective sharing, regions don't implicitly share as they open. </p></td></tr>
+</table></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="stdp_Gcol"></a>STP_GCOL</h4></div></div></div>
+<p>Starts a string-pool garbage collection, which normally happens automatically at appropriate times. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>There are no visible effects from STP_GCOL, LV_GCOL and LV_REHASH except for the passage of time depending on the state of your process. FIS uses these VIEW "LV_GCOL","LV_REHASH","STP_GCOL" facilities in testing. They are documented to ensure completeness in product documentation. You may (or may not) find them useful during application development for debugging or performance testing implementation alternatives.</p></td></tr>
+</table></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="undef"></a><span>[NO]</span>UNDEF<a class="indexterm" name="idp186938144"></a>
+</h4></div></div></div>
+<p>Enables or disables handling of undefined variables as errors. With UNDEF, GT.M handles all references to undefined local or global variables as errors. With NOUNDEF, GT.M handles all references to undefined local or global variables as if the variable had a value of the empty string. In other words, GT.M treats all variables appearing in expressions as if they were the argument of an implicit $GET(). UNDEF is the default.</p>
+<p>The environment variable $gtm_noundef specifies the initial value value of [NO]UNDEF at process startup. If it is defined, and evaluates to a non-zero integer or any case-independent string or leading substring of "TRUE" or "YES", then GT.M treats undefined variables as having an implicit value of an empty string. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>NOUNDEF does not apply to an undefined FOR control variable. This prevents an increment (or decrement) of an undefined FOR control variable from getting into an unintended infinite loop. For example, FOR A=1:1:10 KILL A gives an UNDEF error on the increment from 1 to 2 even with VIEW "NOUNDEF". </p></td></tr>
+</table></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="trace"></a><span>"TRACE":value:&lt;expr&gt;</span><a class="indexterm" name="idp186918112"></a>
+</h4></div></div></div>
+<p>Traces GT.M program execution and generates profiling information about the lines and functions executed; with low impact on the run-time performance.</p>
+<p>The feature turns on (value=1) or turns off (value=0) M-profiling. This expression must evaluate to a string containing the name of a GT.M global variable. The global may also have subscripts; however the subscripts must be literals or the special variable $JOB. <span>For the $JOB process identifier description, refer to <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span></p>
+<p>The expression is optional when turning M-profiling off, if it exists, it overrides the global variable set when M-profiling was turned on.</p>
+<p>gtm_trace_gbl_name enables GT.M tracing at process startup. Setting gtm_trace_gbl_name to a valid global variable name instructs GT.M to report the data in the specified global when a VIEW command disables the tracing, or implicitly at process termination. This setting behaves as if the process issued a VIEW "TRACE" command at process startup. However, gtm_trace_gbl_name has a capability not available with the VIEW command, such that if the environment variable is defined but evaluates to zero (0) or, only on UNIX, to the empty string, GT.M collects the M-profiling data in memory and discards it when the process terminates (this feature is mainly used for in-house testing). Note that having this feature activated for process that otherwise do not open a database file (such as GDE) can cause them to encounter an error.</p>
+<p>In addition, if a process issues a malformed VIEW command that attempts to turn tracing off, GT.M issues an error but retains all accumulated profiling data and continues tracing. If the tracing is still enabled at the process shutdown and the trace start specified a reporting location, GT.M attempts to place the trace data there. Note that if there is a problem updating the specified trace-reporting global variable, GT.M issues an error at process termination.</p>
+<p>M-profiling uses a technique called Basic Block Counting where calls are made to special profiling functions at key points in a GT.M program. A trace consists of the following run-time data as output for each GT.M function, as well as for each GT.M statement:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The number of times it is executed.</p></li>
+<li class="listitem"><p>The total CPU time, subject to the granularity of the operating system provided time functions, spent across all invocations for each function and each GT.M statement as <span>five values: count, user time, system time, total time, and elapsed time</span>.</p></li>
+</ul></div>
+<p>VIEW "TRACE" also reports details of child processes using two aggregate entries  -- "*RUN" for the current process and "*CHILDREN" for all of child processes spawned by the current process, each containing user, system, and combined CPU times. The "CHILD" category data excludes processes that result from the JOB command, PIPE devices OPENed with the INDEPENDENT device parameter and processes from PIPE devices that are still active. </p>
+<p>Instead of modifying the generated code as done by common profiling tools, such as gprof, M-profiling operates entirely within the GT.M run-time system; therefore, this feature does not require a special compilation, has no effect on code size and minimizes run-time overhead.</p>
+<p>When M-profiling is activated, it gathers profiling information for each line and GT.M function invocation. The reported time for a GT.M line is the time spent in generated code for that line, and does not include time spent in entreyrefs called from that line. When M-profiling is deactivated, the accumulated statistics are loaded into a GT.M global. GT.M profiling accumulates and provides the data; the user chooses tools and techniques to analyze the data.</p>
+<p>The M-profiling information is stored in the variable in the following format:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>If the expression is a global variable without subscripts such as "^foo", the M-profiling information is stored in the nodes ^foo(&lt;routine&gt;,&lt;label&gt;) and ^foo(&lt;routine&gt;,&lt;label&gt;,&lt;offset&gt;), each holding a value in the form <span>"&lt;count&gt;:&lt;usertime&gt;,:&lt;systemtime&gt;,:&lt;total_time&gt;"</span>.</p></li>
+<li class="listitem"><p>If the expression has a value such as "^foo("MYTRACE",$J)", the trace information is stored in the nodes ^foo("MYTRACE",&lt;pid&gt;,&lt;routine&gt;,&lt;label&gt;) and ^foo("MYTRACE",&lt;pid&gt;,&lt;routine&gt;,&lt;label&gt;,&lt;offset&gt;), each of which has a value in the form <span>"&lt;count&gt;,&lt;usertime&gt;,&lt;systemtime&gt;,&lt;total_time&gt;" </span> as described above.</p></li>
+<li class="listitem"><p>For FOR loops, information for each level of the loop is stored in the nodes as described above, with the extra subscipts "FOR LOOP". &lt;for_level&gt; is the value of the number of iterations at that level of the FOR loop.</p></li>
+</ul></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zprint ^profiling
+; In this example, query^profiling, order^profiling, and merge^profling perform the same operation -- store even-numbered subscripts of a global to a subscripted loc
+al variable. M-profiling results show which yields the fastest execution between the three.
+profiling
+  kill ^TMP,^trc
+  view "trace":1:"^trc"
+  set ulimit=1500
+  for i=1:1:ulimit set ^TMP(i)=i
+  do qom("^TMP")
+  view "trace":0:"^trc"
+  zwrite ^trc
+  quit
+qom(y)
+  do query(y)
+  do order(y)
+  do merge(y)
+  quit
+query(y)
+  new i,qryval
+  set i=0,y=$query(@y)
+  for  quit:y=""   do
+  .      set:i#2 qryval(i)=@y
+  .      set y=$query(@y)
+  .      set i=i+1
+  quit
+order(y)
+  new i,ordval
+  set x="",i=0,y=y_"(x)",x=$order(@y)
+  for  quit:x=""  do
+  .      set:i#2 ordval(i)=x
+  .      set x=$order(@y)
+  .      set i=i+1
+  quit
+merge(y)
+  new i,merval
+  set i=0,merval=0
+  merge merval=@y
+  for i=1:1:$order(merval(""),-1)  do
+  .      kill:i#2 merval(i)
+  quit</pre>
+<p>On a Ubuntu system running GTM V6.1-000_x86_64, this example produces an output like the following:</p>
+<pre class="programlisting">GTM&gt;do ^profiling
+^trc("*CHILDREN")="0:0:0"
+^trc("*RUN")="144009:76004:220013"
+^trc("profiling","merge")="1:8001:12000:20001:16231"
+^trc("profiling","merge",0)="1:0:0:0:5"
+^trc("profiling","merge",1)="1:0:0:0:4"
+^trc("profiling","merge",2)="1:0:0:0:4"
+^trc("profiling","merge",3)="1:8001:0:8001:8044"
+^trc("profiling","merge",4)="1:0:12000:12000:7992"
+^trc("profiling","merge",4,"FOR_LOOP",1)=1500
+^trc("profiling","merge",5)="1500:0:0:0:4"
+^trc("profiling","merge",6)="1:0:0:0:174"
+^trc("profiling","order")="1:12001:8001:20002:25720"
+^trc("profiling","order",0)="1:0:0:0:8"
+^trc("profiling","order",1)="1:0:0:0:6"
+^trc("profiling","order",2)="1:0:0:0:90"
+^trc("profiling","order",3)="1:0:8001:8001:7160"
+^trc("profiling","order",3,"FOR_LOOP",1)=1501
+^trc("profiling","order",4)="1500:0:0:0:6319"
+^trc("profiling","order",5)="1500:12001:0:12001:12069"
+^trc("profiling","order",6)="1500:0:0:0:0"
+^trc("profiling","order",7)="1:0:0:0:63"
+^trc("profiling","profiling",3)="1:0:0:0:9"
+^trc("profiling","profiling",4)="1:52003:20001:72004:74499"
+^trc("profiling","profiling",4,"FOR_LOOP",1)=1500
+^trc("profiling","profiling",5)="1:0:0:0:14"
+^trc("profiling","profiling",6)="1:0:0:0:10"
+^trc("profiling","qom")="1:0:0:0:78"
+^trc("profiling","qom",0)="1:0:0:0:18"
+^trc("profiling","qom",1)="1:0:0:0:11"
+^trc("profiling","qom",2)="1:0:0:0:9"
+^trc("profiling","qom",3)="1:0:0:0:11"
+^trc("profiling","qom",4)="1:0:0:0:5"
+^trc("profiling","query")="1:72004:20001:92005:88031"
+^trc("profiling","query",0)="1:0:0:0:5"
+^trc("profiling","query",1)="1:0:0:0:14"
+^trc("profiling","query",2)="1:0:0:0:108"
+^trc("profiling","query",3)="1:12000:0:12000:7625"
+^trc("profiling","query",3,"FOR_LOOP",1)=1501
+^trc("profiling","query",4)="1500:8000:0:8000:28256"
+^trc("profiling","query",5)="1500:52004:20001:72005:51919"
+^trc("profiling","query",6)="1500:0:0:0:0"
+^trc("profiling","query",7)="1:0:0:0:85"</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>CPU times are reported in microseconds. 1 second = 1,000,000 microseconds. </p></li>
+<li class="listitem"><p>^trc("*CHILDREN")="0:0:0" indicates that the main process did not spawn any child process. </p></li>
+<li class="listitem"><p>^trc("*RUN")="144009:76004:220013" : the three pieces specify the aggregate User Time, System Time and Total Time values for the main process.  </p></li>
+<li class="listitem"><p>^trc("profiling","query",3,"FOR_LOOP",1)=1501 specifies the number of times the FOR loop was executed on line #3 of query^profiling.</p></li>
+<li class="listitem"><p>^trc("profiling","merge")="1:8001:12000:20001:16231", ^trc("profiling","order")="1:12001:8001:20002:25720", ^trc("profiling","query")="1:72004:20001:92005:88031": the five pieces specify the aggregate Execution Count, User Time, System,Time, Total Time and the Elapsed Time of the code execution for merge^profiling, order^profling, and query^profiling. merge^profiling has the fastest execution time followed by order^profiling. query^profiling is the slowest amongst the three.  </p></li>
+<li class="listitem"><p>^trc("profiling","merge",3)="1:8001:0:8001:8044" and others like it specifies the cumulative Execution Count, User Time, System Time, Total Time and the Elapsed Time of the code execution of line 3 of merge^profiling. </p></li>
+<li class="listitem"><p>The M-profiling results are subject to the granularity of the operating system provided time functions. CPU time entries having 0:0:0 values indicate lightweight M mode having 0 to less than 1 microsecond. </p></li>
+</ul></div>
+<p>Consider the following program that presents the output of this M-profiling result in a tabular report. </p>
+<pre class="programlisting">GTM&gt;zprint ^tracereport
+tracereport(gbl,label,rtn)
+  set gap=15
+  set $piece(x,".",gap*6)="" write x,!
+  write "Line #",?gap,"Count",?gap*2,"User Time",?gap*3,"System Time",?gap*4,"Total Time",?gap*5,"Elapsed Time",!
+  set $piece(x,".",gap*6)="" write x,!
+  for  set gbl=$query(@gbl) quit:gbl=""  do
+  .      if ($length(@gbl,":")=5)&amp;($qsubscript(gbl,1)=rtn)&amp;($qsubscript(gbl,2)=label) do
+        ..      set gap=15 set lineno=$qsubscript(gbl,3)
+        ..      if lineno="" write label," total",?gap set zp=""
+        ..      else  write lineno,?gap set zp=label_"+"_lineno_"^"_rtn
+        ..      for i=1:1:5 set gap=gap+15 write $piece(@gbl,":",i),?gap
+        ..      write !
+        ..      set maxlines=$qsubscript(gbl,3)
+  for i=0:1:maxlines do
+  .      set zp=label_"+"_i_"^"_rtn
+  .      write "Line #",i,": ",?9
+  .      zprint @zp
+ 
+GTM&gt;do ^tracereport("^trc","order","profiling")
+.........................................................................................
+Line #         Count          User Time      System Time    Total Time     Elapsed Time
+.........................................................................................
+order total    1              12001          8001           20002          25720
+0              1              0              0              0              8
+1              1              0              0              0              6
+2              1              0              0              0              90
+3              1              0              8001           8001           7160
+4              1500           0              0              0              6319
+5              1500           12001          0              12001          12069
+6              1500           0              0              0              0
+7              1              0              0              0              63
+Line #0: order(y)
+Line #1:   new i,ordval
+Line #2:   set x="",i=0,y=y_"(x)",x=$order(@y)
+Line #3:   for  quit:x=""  do
+Line #4:   .      set:i#2 ordval(i)=x
+Line #5:   .      set x=$order(@y)
+Line #6:   .      set i=i+1
+Line #7:   quit</pre>
+<p>This shows that order^profiling has an elapsed time of 25720 and the maximum elapsed time was on line #5, which was executed 1500 times. </p>
+<pre class="programlisting">GTM&gt;do ^tracereport("^trc","merge","profiling")
+.........................................................................................
+Line #         Count          User Time      System Time    Total Time     Elapsed Time
+.........................................................................................
+merge total    1              8001           12000          20001          16231
+0              1              0              0              0              5
+1              1              0              0              0              4
+2              1              0              0              0              4
+3              1              8001           0              8001           8044
+4              1              0              12000          12000          7992
+5              1500           0              0              0              4
+6              1              0              0              0              174
+Line #0: merge(y)
+Line #1:   new i,merval
+Line #2:   set i=0,merval=0
+Line #3:   merge merval=@y
+Line #4:   for i=1:1:$order(merval(""),-1)  do
+Line #5:   . kill:i#2 merval(i)
+Line #6:   quit
+GTM&gt;</pre>
+<p>This shows that merge^profiling has an elapsed time of 16231 and the maximum elapsed time was on line #3, which was executed once. </p>
+<p>Note that M-profiling results are reported for each line. While reporting time for a line containing an invocation of a label, M-profiling excludes the execution time of that label. </p>
+<p>Here is an example:</p>
+<pre class="programlisting">GTM&gt;do ^tracereport("^trc","qom","profiling")
+.........................................................................................
+Line #         Count          User Time      System Time    Total Time     Elapsed Time
+.........................................................................................
+qom total      1              0              0              0              78
+0              1              0              0              0              18
+1              1              0              0              0              11
+2              1              0              0              0              9
+3              1              0              0              0              11
+4              1              0              0              0              5
+Line #0: qom(y)
+Line #1:   do query(y)
+Line #2:   do order(y)
+Line #3:   do merge(y)
+Line #4:   quit</pre>
+<p>Notice that the execution of do merge(y) reports an Elapsed Time of 9 whereas  merge^profiling reported an Elapsed Time of 1149. </p>
+<p>You can write programs like tracereport.m to interpret the results of the M-profiling data and also use them to analyze your code execution path based on your unique requirements. </p>
+<p><code class="code">view "trace":1: "&lt;gbl&gt;"</code> and <code class="code">view "trace":0: "&lt;gbl&gt;"</code> commands enable and disable M-profiling. </p>
+<p>To perform entryref-specific M-profiling without modifying the source program, use ZBREAK. For example, to perform M-profiling of the entryref merge^profiling, remove VIEW "TRACE" commands from profiling.m and then execute the following commands:</p>
+<pre class="programlisting">GTM&gt;ZBREAK merge^profiling:"view ""TRACE"":1:""^mtrc"" write ""Trace"""
+GTM&gt;do ^profiling
+Trace
+GTM&gt;view "TRACE":0:"^mtrc"
+ 
+GTM&gt;zwrite ^mtrc
+^mtrc("*CHILDREN")="0:0:0"
+^mtrc("*RUN")="132008:52003:184011"
+^mtrc("GTM$DMOD","^")="1:0:0:0:4"
+^mtrc("profiling","merge")="1:8001:0:8001:13450"
+^mtrc("profiling","merge",1)="1:0:0:0:6"
+^mtrc("profiling","merge",2)="1:0:0:0:5"
+^mtrc("profiling","merge",3)="1:8001:0:8001:6188"
+^mtrc("profiling","merge",4)="1:0:0:0:7149"
+^mtrc("profiling","merge",4,"FOR_LOOP",1)=1500
+^mtrc("profiling","merge",5)="1500:0:0:0:4"
+^mtrc("profiling","merge",6)="1:0:0:0:63"
+^mtrc("profiling","profiling")="1:0:0:0:9"
+^mtrc("profiling","profiling",8)="1:0:0:0:4"
+^mtrc("profiling","qom")="1:0:0:0:9"
+^mtrc("profiling","qom",4)="1:0:0:0:4" </pre>
+<p>Example:</p>
+<p>If prof.m is:</p>
+<pre class="programlisting">prof;
+    set start=1
+    set finish=1000
+    view "TRACE":1:"^trc"
+    kill cycle S max=$$docycle(start,finish,"cycle")
+    view "TRACE":0:"^trc"
+    zwrite ^trc
+    quit
+    ;
+docycle(first,last,var)
+    new i,currpath,current,maxcycle,n
+    set maxcycle=1
+    for current=first:1:last do cyclehelper
+    quit maxcycle
+    ;
+cyclehelper
+    set n=current
+    kill currpath
+    for i=0:1 quit:$data(@var@(n))!(1=n)  D
+    .    set currpath(i)=n
+    .    do iterate
+    if 0&lt;i do
+    .    if 1=n set i=i+1
+    .    else  set i=i+@var@(n)
+    .    do updatemax
+    .    set n="" for  set n=$O(currpath(n)) Q:""=n  S @var@(currpath(n))=i-n
+    Q
+    ;
+iterate
+    if 0=(n#2) set n=n/2
+    else  set n=3*n+1
+    quit
+    ;
+updatemax
+    set:i&gt;maxcycle maxcycle=i
+    quit
+    ;</pre>
+<p>On executing prof, the output looks like the following (times in the example were chosen for clarity of illustration and are not typical).</p>
+<pre class="programlisting">^trc("*CHILDREN")="0:0:0"
+^trc("*RUN")="224014:12000:236014"
+^trc("prof","cyclehelper")="1000:200013:0:200013:206318"
+^trc("prof","cyclehelper",1)="1000:12001:0:12001:3202"
+^trc("prof","cyclehelper",2)="1000:0:0:0:3766"
+^trc("prof","cyclehelper",3)="1000:64004:0:64004:94215"
+^trc("prof","cyclehelper",3,"FOR_LOOP",1)=3227
+^trc("prof","cyclehelper",4)="2227:0:0:0:9864"
+^trc("prof","cyclehelper",5)="2227:0:0:0:7672"
+^trc("prof","cyclehelper",6)="1000:12000:0:12000:3758"
+^trc("prof","cyclehelper",7)="432:0:0:0:1520"
+^trc("prof","cyclehelper",8)="432:8000:0:8000:11003"
+^trc("prof","cyclehelper",9)="432:0:0:0:3298"
+^trc("prof","cyclehelper",10)="432:104008:0:104008:61564"
+^trc("prof","cyclehelper",10,"FOR_LOOP",1)=2659
+^trc("prof","cyclehelper",11)="1000:0:0:0:3424"
+^trc("prof","docycle")="1:12001:0:12001:4886"
+^trc("prof","docycle",0)="1:0:0:0:83"
+^trc("prof","docycle",1)="1:0:0:0:36"
+^trc("prof","docycle",2)="1:0:0:0:4"
+^trc("prof","docycle",3)="1:12001:0:12001:4706"
+^trc("prof","docycle",3,"FOR_LOOP",1)=1000
+^trc("prof","docycle",4)="1:0:0:0:1718579845"
+^trc("prof","iterate")="2227:12000:12000:24000:30240"
+^trc("prof","iterate",1)="2227:0:0:0:8271"
+^trc("prof","iterate",2)="2227:12000:0:12000:7727"
+^trc("prof","iterate",3)="2227:0:0:0:7658"
+^trc("prof","prof",4)="1:0:0:0:22"
+^trc("prof","prof",5)="1:0:0:0:8"
+^trc("prof","updatemax")="432:0:0:0:4276"
+^trc("prof","updatemax",1)="432:0:0:0:1465"
+^trc("prof","updatemax",2)="432:0:0:0:1496"</pre>
+<p>Example:</p>
+<p>If fortypes.m is:</p>
+<pre class="programlisting">fortypes;
+    new i,j,k,v
+    set k=1
+    view "TRACE":1:"^trc"
+    for i=1:1:3  set v=i
+    for i=1:1  set v=0  quit:i=3
+    for i=1,2:1:4,6  set v=0
+    for i=1:1,2  set v=0  quit:i=3
+    for i=1:1:2  for j=1:1:3  set v=0
+    for i=1:1:2  
+    .    for j=1:1:1  do
+    ..        set v=0
+    set j=5  for i=1:1:j  do
+    .    set j=(j-1)
+    for i=1:1:2  for j=1:1:3  do
+    .    set v=0
+    for i=1:1:2  do
+    .    for j=1:1:3  set v=0
+    for i=1:1:2  do
+    .    for j=1:1:3  do
+    ..        set v=0
+    for i="foo","bar",1:1  set v=0  quit:i=3
+    for  set k=k+1  quit:k=3
+    for i=1:1:3  for j=1:1:(3-i)  set v=0
+    for i=1:1:3  for j=1:1:(3-i)  for k=1:1:(j+1)  set v=0
+    set k=3  view "TRACE":0:"^trc"
+    zwrite ^trc
+    quit</pre>
+<p>On executing fortypes, the output looks something like the following:</p>
+<pre class="programlisting">^trc("*CHILDREN")="4000:0:4000"
+^trc("*RUN")="468029:48003:516032"
+^trc("fortypes","fortypes",5)="1:0:0:0:9"
+^trc("fortypes","fortypes",5,"FOR_LOOP",1)=3
+^trc("fortypes","fortypes",7)="1:0:0:0:6"
+^trc("fortypes","fortypes",7,"FOR_LOOP",1)=3
+^trc("fortypes","fortypes",9)="1:0:0:0:6"
+^trc("fortypes","fortypes",9,"FOR_LOOP",1)=5
+^trc("fortypes","fortypes",11)="1:0:0:0:6"
+^trc("fortypes","fortypes",11,"FOR_LOOP",1)=3
+^trc("fortypes","fortypes",13)="1:0:0:0:8"
+^trc("fortypes","fortypes",13,"FOR_LOOP",1)=2
+^trc("fortypes","fortypes",13,"FOR_LOOP",2)=6
+^trc("fortypes","fortypes",15)="1:0:0:0:4"
+^trc("fortypes","fortypes",15,"FOR_LOOP",1)=2
+^trc("fortypes","fortypes",19)="1:0:0:0:26"
+^trc("fortypes","fortypes",19,"FOR_LOOP",1)=5
+^trc("fortypes","fortypes",20)="5:0:0:0:4"
+^trc("fortypes","fortypes",22)="1:0:0:0:27"
+^trc("fortypes","fortypes",22,"FOR_LOOP",1)=2
+^trc("fortypes","fortypes",22,"FOR_LOOP",2)=6
+^trc("fortypes","fortypes",23)="6:0:0:0:3"
+^trc("fortypes","fortypes",25)="1:0:0:0:11"
+^trc("fortypes","fortypes",25,"FOR_LOOP",1)=2
+^trc("fortypes","fortypes",26)="2:0:0:0:6"
+^trc("fortypes","fortypes",26,"FOR_LOOP",1)=6
+^trc("fortypes","fortypes",28)="1:0:0:0:8"
+^trc("fortypes","fortypes",28,"FOR_LOOP",1)=2
+^trc("fortypes","fortypes",29)="2:0:0:0:26"
+^trc("fortypes","fortypes",29,"FOR_LOOP",1)=6
+^trc("fortypes","fortypes",30)="6:0:0:0:4"
+^trc("fortypes","fortypes",32)="1:0:0:0:8"
+^trc("fortypes","fortypes",32,"FOR_LOOP",1)=5
+^trc("fortypes","fortypes",34)="1:0:0:0:5"
+^trc("fortypes","fortypes",34,"FOR_LOOP",1)=2
+^trc("fortypes","fortypes",36)="1:0:0:0:8"
+^trc("fortypes","fortypes",36,"FOR_LOOP",1)=3
+^trc("fortypes","fortypes",36,"FOR_LOOP",2)=3
+^trc("fortypes","fortypes",38)="1:0:0:0:14"
+^trc("fortypes","fortypes",38,"FOR_LOOP",1)=3
+^trc("fortypes","fortypes",38,"FOR_LOOP",2)=3
+^trc("fortypes","fortypes",38,"FOR_LOOP",3)=7</pre>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="zdate"></a><span>"ZDATE_FORM":"value"</span><a class="indexterm" name="idp186940960"></a>
+</h4></div></div></div>
+<p>Determines whether four digit year code is active for $ZDATE() function. GT.M defaults to zero (0), that is, two digit output. <span>For more usage information, refer to <a class="xref" href="ch07s33.html" title="$ZDate()">&#8220;$ZDate()&#8221;</a>.</span> </p>
+<p>If no value is given with the VIEW command, it turns four digit code on. It is equivalent to the intrinsic special variable $ZDATEFORM. Use $ZDATEFORM to set this VIEW keyword. Also, logical name environment variable gtm_zdate_form may be used to set the initial value to this factor.</p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_view"></a>Examples<span> of VIEW</span><a class="indexterm" name="idp186961408"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Kill A
+                
+GTM&gt;View "NOUNDEF"
+GTM&gt;Write A,?10,$L(A)
+         0
+GTM&gt;</pre>
+<p>This demonstrates how a VIEW that specifies NOUNDEF prevents UNDEFined errors.</p>
+<p>Example 2:</p>
+<pre class="programlisting">GTM&gt;ZLink "NOSENSE"
+%GTM-E-LABELMISSING Label referenced but
+not defined:lab
+%GTM-I-SRCNAM in source module /home/gtmuser1/.fis-gtm/V5.4-002B_x86/r/
+NOSENSE.m
+GTM&gt;ZPrint ^NOSENSE
+NOSENSE;
+        Do lab
+        Quit
+LAB  Write !,"THIS IS NOSENSE"
+        Quit
+GTM&gt;View "LABELS":"UPPER"
+GTM&gt;ZLink "NOSENSE.m"
+GTM&gt;Do ^NOSENSE
+THIS IS NOSENSE
+GTM&gt;</pre>
+<p>This demonstrates use of VIEW "LABELS" to make label handling case insensitive. Notice that the routine was ZLINKed with <span>an extension of .m</span> to force a recompile and ensure that the object code and the run-time handling of labels is the same.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s24.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s26.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Use </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Write</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s25.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:46 GMT -->
+</html>

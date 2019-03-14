@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/assing_the_coll_seq.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:27 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Assigning the Collation Sequence</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="using_the_percent_gbldef_util.html" title="Using the %GBLDEF Utility" />
+    <link rel="prev" href="using_the_percent_gbldef_util.html" title="Using the %GBLDEF Utility" />
+    <link rel="next" href="examine_glbl_coll_char.html" title="Examining Global Collation Characteristics" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Assigning the Collation Sequence</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="using_the_percent_gbldef_util.html">Prev</a> </td>
+          <th width="60%" align="center">Using the %GBLDEF Utility</th>
+          <td width="20%" align="right"> <a accesskey="n" href="examine_glbl_coll_char.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="assing_the_coll_seq"></a>Assigning the Collation Sequence</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4235740" class="indexterm"></a>
+      <p>To assign a collation sequence to an individual global use the following extrinsic entry point:</p>
+      <pre class="programlisting">
+	set^%GBLDEF(gname,nct,act)
+	</pre>
+      <p>where</p>
+      <p>The first argument, gname, is the name of the global. If the global name appears as a literal, it must be enclosed in quotation marks (&quot; &quot;). The leading caret symbol (^) must be included, and the name must be a legal M variable name.</p>
+      <p>The second argument, nct, is an integer that determines how numeric subscripts are to be handled. The value is FALSE (0) if numeric subscripts are to collate before strings, as in standard M, and TRUE (1) if numeric subscripts are to be handled like strings.</p>
+      <p>The third argument, act, is an integer specifying the active collation sequence–from 0, standard M collation, to 255. </p>
+      <p>If the global contains data, this function returns a FALSE (0) and does not modify the global. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt; KILL ^G
+	GTM&gt; W $SELECT($$set^%GBLDEF(&quot;^G&quot;,0,3):&quot;OK&quot;,1:&quot;FAILED&quot;
+	OK
+	</pre>
+      <p>This deletes the global variable ^G, then uses the $$set%GBLDEF as an extrinsic to set ^G to the collation sequence number 3 with numeric subscripts collating before strings. Using $$set%GBLDEF as an argument to $SELECT results in a return message notifying whether or not the SET was successful. $SELECT will return a &quot;FAILED&quot; message if the collation sequence requested is undefined.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="using_the_percent_gbldef_util.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="using_the_percent_gbldef_util.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="examine_glbl_coll_char.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Using the %GBLDEF Utility </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examining Global Collation Characteristics</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/assing_the_coll_seq.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:27 GMT -->
+</html>

@@ -1,0 +1,247 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/journaling.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:36 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Chapter 6. GT.M Journaling</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="prev" href="mup_summary.html" title="MUPIP Command Summary">
+<link rel="next" href="ch06s01.html" title="Introduction">
+<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Chapter 6. <span>GT.M </span>Journaling</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="mup_summary.html">Prev</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s01.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-node"><span>GT.M </span>Journaling</span>
+</div>
+<div class="chapter">
+<div class="titlepage"><div>
+<div><h2 class="title">
+<a name="ch_gtm_journaling"></a>Chapter 6. <span>GT.M </span>Journaling<a class="indexterm" name="idp182465104"></a>
+</h2></div>
+<div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
+<tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V6.3-007</td>
+<td align="left">01 February 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch06s01.html#backup_jnl_files" title="Backup Journal Files">&#8220;Backup Journal Files  &#8221;</a>, Add caution on using NOPREVLINK</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#jnl_ctrl_quals" title="Journal Control Qualifiers">&#8220;<span>Journal </span>Control Qualifiers&#8221;</a>, add NO for BROKENTRANS and LOSTTRANS</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html" title="JOURNAL">&#8220;JOURNAL
+&#8221;</a>, add NO for LOSTTRANS and BROKENTRANS</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#jnl_sequence" title="Journal Sequence Number Qualifiers">&#8220;<span>Journal Sequence Number</span> Qualifiers&#8221;</a>, add links to the relevant sections. </p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_summary.html" title="MUPIP Command Summary">&#8220;<span>MUPIP Command </span>Summary&#8221;</a>, add [NO] for LOSTTRANS and BROKENTRANS qualifiers</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#recover" title="-RECover">&#8220;-RECover
+&#8221;</a>, add statement on specifying non-overlapping file names</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_jnl_set.html#set_jnl_options" title="SET -JOURNAL Options">&#8220;<span>SET -</span>JOURNAL Options &#8221;</a>, add information about JNLSPACELOW and made general improvements</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-006</td>
+<td align="left">26 October 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch06s01.html#backward_recovery_jnl" title="Backward Recovery">&#8220;Backward Recovery &#8221;</a>, remove an incorrect reference to -AFTER. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch06s01.html#brk_trns_file" title="Broken Transaction File">&#8220;Broken Transaction File&#8221;</a>, content improvements. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch06s01.html#epoch_definition" title="Epoch">&#8220;Epoch&#8221;</a>, add new section.</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_jnl_set.html#jnl_examples_mup_set" title="Examples for MUPIP SET">&#8220;Examples <span>for MUPIP SET</span>&#8221;</a>, remove the NOPREVJNLFILE example as it is not supported as a JOURNAL option. </p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_jnl_set.html#jnl_set_obj" title="SET Object Identifying Qualifiers">&#8220;<span>SET </span>Object Identifying Qualifiers &#8221;</a>, UTF-8 tweaks</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#jnl_time" title="Journal Time Qualifiers">&#8220;<span>Journal </span>Time Qualifiers&#8221;</a>, add more clarity to the description of the -AFTER qualifier. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch06s01.html#lost_transact_file" title="Lost Transaction File">&#8220;Lost Transaction File&#8221;</a>, content improvements</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#recover" title="-RECover">&#8220;-RECover
+&#8221;</a>, add a note stating that -RECOVER on replicated databases initiates database recovery but turns replication OFF. </p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_jnl_set.html#set_jnl_options" title="SET -JOURNAL Options">&#8220;<span>SET -</span>JOURNAL Options &#8221;</a>, remove the PREVJNLFILE option and UTF-8 tweaks.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-004</td>
+<td align="left">23 March 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#jnl_sequence" title="Journal Sequence Number Qualifiers">&#8220;<span>Journal Sequence Number</span> Qualifiers&#8221;</a>, add information about the -seqno qualifer of journal -extract.</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_summary.html" title="MUPIP Command Summary">&#8220;<span>MUPIP Command </span>Summary&#8221;</a>, remove the entry for -updhelper </p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-003</td>
+<td align="left">12 December 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="mup_summary.html" title="MUPIP Command Summary">&#8220;<span>MUPIP Command </span>Summary&#8221;</a>, add a new GT.M Version column - maintainable since GT.M V5.4-002.</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#rollback" title="-ROLLBACK [{-ON[LINE]|-NOO[NLINE]}]">&#8220;-ROLLBACK <span>[{-ON[LINE]|-NOO[NLINE]}]</span>
+
+&#8221;</a>, remove obsolete caution</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-002</td>
+<td align="left">22 August 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="mup_jnl_set.html#set_jnl_options" title="SET -JOURNAL Options">&#8220;<span>SET -</span>JOURNAL Options &#8221;</a>, change default BUFFER_SIZE value to 2312; improve some wording</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#show" title="-SHow=show-option-list">&#8220;-SHow<span>=show-option-list</span>
+
+
+
+
+
+&#8221;</a>, adjust sample MUPIP JOURNAL -SHOW output to match current format</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-001</td>
+<td align="left">20 March 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#jnl_action" title="Journal Action Qualifiers">&#8220;<span>Journal </span>Action Qualifiers&#8221;</a>, added information about the new PARALLEL qualifier.</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#jnl_ctrl_quals" title="Journal Control Qualifiers">&#8220;<span>Journal </span>Control Qualifiers&#8221;</a>, added for the -CHECKTN and FENCE qualifiers; clarified FENCES</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html" title="JOURNAL">&#8220;JOURNAL
+&#8221;</a>, made adjustments to the qualifier compatibility matrix for MUPIP JOURNAL. Expanded the qualifier entries to their full keywords. </p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#jnl_parallel" title="-PARA[LLEL][=n]">&#8220;-<span>PARA[LLEL][=n]</span>&#8221;</a>, fixed typo; removed text associated with older versions and with other options</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#jnl_sequence" title="Journal Sequence Number Qualifiers">&#8220;<span>Journal Sequence Number</span> Qualifiers&#8221;</a>, used caps for non example keywords</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#jnl_time" title="Journal Time Qualifiers">&#8220;<span>Journal </span>Time Qualifiers&#8221;</a>, added changes for BEFORE and SINCE</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#jnl_verify" title="-[NO]Verify">&#8220;-<span>[NO]</span>Verify&#8221;</a>, added improvements and revised recommendations. </p></li>
+<li class="listitem"><p>In <a class="xref" href="jnl_ext.html" title="Journal Extract Formats">&#8220;<span>Journal </span>Extract Formats&#8221;</a>, removed HP-UX and OpenVMS</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_summary.html" title="MUPIP Command Summary">&#8220;<span>MUPIP Command </span>Summary&#8221;</a>, added FREEZE, DOWNGRADE, DUMPFHEAD commands and MUPIP INTEG and SET qualifiers for V6.3-001 </p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#rollback" title="-ROLLBACK [{-ON[LINE]|-NOO[NLINE]}]">&#8220;-ROLLBACK <span>[{-ON[LINE]|-NOO[NLINE]}]</span>
+
+&#8221;</a>, specified that -ONLINE is not supported for -ROLLBACK -FORWARD and made content improvements; reordered for better flow and removed some passive voice</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_jnl_set.html#set_jnl_options" title="SET -JOURNAL Options">&#8220;<span>SET -</span>JOURNAL Options &#8221;</a>, used delimiters for qualifiers</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.2-001</td>
+<td align="left">27 February 2015</td>
+<td align="left"><p>In <a class="xref" href="jnl_ext.html" title="Journal Extract Formats">&#8220;<span>Journal </span>Extract Formats&#8221;</a>, added information about the LGTRIG field. </p></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-001/1</td>
+<td align="left">22 March 1013</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Improved the formatting of all command syntaxes.</p></li>
+<li class="listitem"><p>In <a class="xref" href="mup_jnl_set.html#jnl_set_obj" title="SET Object Identifying Qualifiers">&#8220;<span>SET </span>Object Identifying Qualifiers &#8221;</a>, added information about the -repl_state and -dbfilename qualifiers.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-001</td>
+<td align="left">27 February 2013</td>
+<td align="left"><p>In <a class="xref" href="mup_journal.html#jnl_extractstd" title="-EXtract[=&lt;file-name&gt;|-stdout]">&#8220;-EXtract<span>[=&lt;file-name&gt;|-stdout]</span>&#8221;</a>, added information about the gtm_extract_nocol environment variable. </p></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-000/1</td>
+<td align="left">21 November 2012</td>
+<td align="left"><p>Updated <a class="xref" href="mup_jnl_set.html#set_jnl_options" title="SET -JOURNAL Options">&#8220;<span>SET -</span>JOURNAL Options &#8221;</a> and the journaling limits for V6.0-000.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/4</td>
+<td align="left">6 June 2012</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="mup_journal.html#rollback" title="-ROLLBACK [{-ON[LINE]|-NOO[NLINE]}]">&#8220;-ROLLBACK <span>[{-ON[LINE]|-NOO[NLINE]}]</span>
+
+&#8221;</a>, added the description of the new -ONLINE qualifier for -ROLLBACK. </p></li>
+<li class="listitem"><p>In <a class="xref" href="jnl_ext.html" title="Journal Extract Formats">&#8220;<span>Journal </span>Extract Formats&#8221;</a>, added the definitions of unam, clntnam, and ALIGN records.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/3</td>
+<td align="left">2 May 2012</td>
+<td align="left"><p>Added the definition of tid.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V5.5-000/2</td>
+<td align="left">19 March 2012</td>
+<td align="left"><p>Updated the Journal Extract Formats section for V5.5-000.</p></td>
+</tr>
+<tr>
+<td align="left">Revision 3</td>
+<td align="left">26 December 2011</td>
+<td align="left"><p>Added the Journal Extract format for ZTRIG. </p></td>
+</tr>
+<tr>
+<td align="left">Revision 2</td>
+<td align="left">2 December 2011</td>
+<td align="left">Improved the description of -EXTRACT and corrected the heading levels of some sections under MUPIP JOURNAL.</td>
+</tr>
+<tr>
+<td align="left">Revision V5.4-002B</td>
+<td align="left">24 October 2011</td>
+<td align="left">Conversion to documentation revision history reflecting GT.M releases with revision history for each chapter.</td>
+</tr>
+</table></div></div>
+</div></div>
+<div class="toc">
+<p><b>Table of Contents</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch06s01.html">Introduction </a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch06s01.html#jnl_files_intro">Journal Files </a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#jnl_recov_file">Recovery from a Journal File</a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#rolledback_files">rolled_bak* files</a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#jnl_fil_acc_auth">Journal Files Access Authorization</a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#trigg_jnl_fil">Triggers in Journal Files</a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#before_image_jnl">BEFORE_IMAGE Journaling  </a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#nobefore_image_jnl">NOBEFORE_IMAGE Journaling  </a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#choose_be_nobe">Choosing between BEFORE_IMAGE and NOBEFORE_IMAGE </a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#brk_trns_file">Broken Transaction File</a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#lost_transact_file">Lost Transaction File</a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#epoch_definition">Epoch</a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#jnl_benefits">Journaling Benefits </a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#backup_jnl_files">Backup Journal Files  </a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#sel_db_jnling">Select database files for Journaling  </a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#fencing_trans">Fencing Transactions </a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#to_jnl_or_no_jnl">Deciding Whether to Use Fencing </a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#jnl_view_keyword">VIEW Keywords</a></span></dt>
+<dt><span class="sect2"><a href="ch06s01.html#view_funct_keywords_jnl">$VIEW() Keywords</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="mup_jnl_set.html">SET</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="mup_jnl_set.html#jnl_set_obj"><span>SET </span>Object Identifying Qualifiers </a></span></dt>
+<dt><span class="sect2"><a href="mup_jnl_set.html#jnl_set_action"><span>SET </span>Action Qualifiers </a></span></dt>
+<dt><span class="sect2"><a href="mup_jnl_set.html#jnl_examples_mup_set">Examples <span>for MUPIP SET</span></a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="mup_journal.html">JOURNAL
+</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="mup_journal.html#jnl_action"><span>Journal </span>Action Qualifiers</a></span></dt>
+<dt><span class="sect2"><a href="mup_journal.html#jnl_direction"><span>Journal </span>Direction Qualifiers</a></span></dt>
+<dt><span class="sect2"><a href="mup_journal.html#jnl_time"><span>Journal </span>Time Qualifiers</a></span></dt>
+<dt><span class="sect2"><a href="mup_journal.html#jnl_sequence"><span>Journal Sequence Number</span> Qualifiers</a></span></dt>
+<dt><span class="sect2"><a href="mup_journal.html#jnl_ctrl_quals"><span>Journal </span>Control Qualifiers</a></span></dt>
+<dt><span class="sect2"><a href="mup_journal.html#jnl_select"><span>Journal </span>Selection Qualifiers</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="jnl_ext.html"><span>Journal </span>Extract Formats</a></span></dt>
+</dl>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="mup_summary.html">Prev</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s01.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">
+<span>MUPIP Command </span>Summary </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Introduction </td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/journaling.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:36 GMT -->
+</html>

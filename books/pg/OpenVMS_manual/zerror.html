@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zerror.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:01 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZError</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter8.html" title="Chapter 8. Intrinsic Special Variables" />
+    <link rel="prev" href="zeof.html" title="$ZEOf" />
+    <link rel="next" href="zgbldir.html" title="$ZGbldir" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZError</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zeof.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 8. Intrinsic Special Variables</th>
+          <td width="20%" align="right"> <a accesskey="n" href="zgbldir.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zerror"></a>$ZError</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4194689" class="indexterm"></a>
+      <p>$ZE[RROR] is supposed to hold the application-specific error-code corresponding to the GT.M error-code stored in $ECODE/$ZSTATUS (refer to their description in this chapter). </p>
+      <p>$ZERROR contains a default value of &quot;Unprocessed $ZERROR, see $ZSTATUS&quot; at process startup. </p>
+      <p>$ZERROR can be SET but not NEWed. </p>
+      <p>The mapping of a GT.M error-code to the application-specific error-code is achieved as follows. Whenever GT.M encounters an error, $ECODE/$ZSTATUS gets set first. It then invokes the code that $ZYERROR (see description later in this chapter) points to if it is not null. It is intended that the code invoked by $ZYERROR use the value of $ZSTATUS to select or construct a value to which it SETs $ZERROR. If an error is encountered by the attempt to execute the code specified in $ZYERROR, GT.M sets $ZERROR to the error status encountered. If $ZYERROR is null, GT.M does not change the value of $ZERROR. In all cases, GT.M proceeds to return control to the code specified by $ZTRAP/$ETRAP or device EXCEPTION whichever is applicable.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zeof.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter8.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="zgbldir.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZEOf </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $ZGbldir</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zerror.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:01 GMT -->
+</html>

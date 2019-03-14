@@ -1,0 +1,60 @@
+<html>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/DBCOMMITCLNUP.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>DBCOMMITCLNUP </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="DBCOLLREQ.html" title="DBCOLLREQ ">
+<link rel="next" href="DBCOMPTOOLRG.html" title="DBCOMPTOOLRG ">
+<link rel="copyright" href="ln-idp153747552.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">DBCOMMITCLNUP </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="DBCOLLREQ.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="DBCOMPTOOLRG.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">DBCOMMITCLNUP </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="DBCOMMITCLNUP"></a>DBCOMMITCLNUP </h2></div></div></div>
+<p><span class="bold"><strong>DBCOMMITCLNUP</strong></span>,   Pid dddd [hhhh] handled error (code = eeee) during commit of xxxx transaction in database file yyyy</p>
+<p>Success Information: This message is output to the operator log and indicates that there was an error in the midst of committing a xxxx (TP or non-TP) transaction that involved the database file yyyy, but the process (pid = dddd in decimal and hhhh in hexadecimal) handled the error and completed the commit. If non-zero, the error code eeee is what triggered the error in the first place. If zero, accompanying syslog messages will contain information on the cause.</p>
+<p>Action: In most cases the commit will be successfully completed. But in very rare cases, there might be errors that prevent the transaction from being successfully completed. To determine if there was any error, examine the following operator log messages. If there are more then 3 (three) DBCLNUPINFO messages for the same database file from the same process-id, then that particular database is suspect and an integrity check of that database needs to be done at the earliest. In addition, contact your GT.M support channel with the operator log messages.</p>
+<a class="indexterm" name="idp155136912"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="DBCOLLREQ.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="DBCOMPTOOLRG.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">DBCOLLREQ  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> DBCOMPTOOLRG </td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/mr/manual/DBCOMMITCLNUP.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+</html>

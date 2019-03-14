@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zerror_and_zyerror.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZERROR and $ZYERROR</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="prgrm_handling_of_error.html" title="Program Handling of Errors" />
+    <link rel="prev" href="zstatus_content.html" title="$ZSTATUS Content" />
+    <link rel="next" href="etrap_behavior.html" title="$ETRAP Behavior" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZERROR and $ZYERROR</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zstatus_content.html">Prev</a> </td>
+          <th width="60%" align="center">Program Handling of Errors</th>
+          <td width="20%" align="right"> <a accesskey="n" href="etrap_behavior.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="zerror_and_zyerror"></a>$ZERROR and $ZYERROR</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4237950" class="indexterm"></a>
+      <p>After an error occurs, if $ZYERROR is set to a valid entryref that exists in the current environment, GT.M invokes the routine at that entryref with an implicit DO before returning control to M code specified by $ZTRAP or device EXCEPTION. It is intended that the code invoked by $ZYERROR use the value of $ZSTATUS to select or construct a value to which it SETs $ZERROR.</p>
+      <p>If $ZYERROR is empty, $ZYERROR=&quot;unprocessed $ZERROR, see $ZSTATUS&quot;.</p>
+      <p>If there is a problem with the content of $ZYERROR or if the execution of the code it invokes, GT.M sets $ZERROR=$ZSTATUS for the secondary error and terminates the attempt to use $ZYERROR. During code evoked by $ZYERROR, the value of $ZERROR is the empty string.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zstatus_content.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="prgrm_handling_of_error.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="etrap_behavior.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZSTATUS Content </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $ETRAP Behavior</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zerror_and_zyerror.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:03 GMT -->
+</html>

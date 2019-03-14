@@ -1,0 +1,106 @@
+<html>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch03s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:41 GMT -->
+<head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Adjusting System Parameters</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="chapter3.html" title="Chapter 3. Planning for GT.M"><link rel="prev" href="chapter3.html" title="Chapter 3. Planning for GT.M"><link rel="next" href="ch03s02.html" title="GT.M and OpenVMS Security"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Adjusting System Parameters</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="chapter3.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Planning for GT.M</th><td width="20%" align="right"> <a accesskey="n" href="ch03s02.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Adjusting System Parameters"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="adjust_sys_par"></a>Adjusting System Parameters</h2></div></div></div><a class="indexterm" name="id3219793"></a><p>The OpenVMS System Generation (SYSGEN) utility maintains system parameters and system files. The
+following table summarizes SYSGEN parameters which control resources directly used by GT.M.</p><div class="informaltable"><table border="1" width="70%"><colgroup><col><col></colgroup><tbody><tr><td align="left" valign="top">
+                                <p><span class="bold"><strong>SYSGEN PARAMETER</strong></span></p>
+                            </td><td align="left" valign="top">
+                                <p><span class="bold"><strong>GT.M CONSIDERATIONS</strong></span></p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>GBLPAGES</p>
+                            </td><td align="left" valign="top">
+                                <p>For the run-time libraries: 1500 pages VAX</p>
+                                <p>4000 pages AXP</p>
+                                <p>For each simultaneously installed GT.M application image: 1 page per block</p>
+                                <p>For each BG segment: ((blocksize/512) * .7) *  #global_buffers + 2150 + lock_space</p>
+                                <p>For each MM segment: (File_size + journal_buffer_size + lock_space + 2) pages</p>
+                           </td></tr><tr><td align="left" valign="top">
+                                <p>GBLPAGFIL*</p>
+                            </td><td align="left" valign="top">
+                                <p>For each BG segment:</p>
+                                <p>((global_buffer_count * block_size/512) + global_buffer_count/10 + journal_buffer_size + lock_space + 29) pages + 2150 + lock_space</p>
+                                <p>For each MM segment: (journal_buffer_size + lock_space + 2) pages</p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>GBLSECTIONS</p>
+                            </td><td align="left" valign="top">
+                                <p>For the run-time libraries: 7 sections</p>
+                                <p>For each simultaneously installed GT.M application image: 2 sections</p>
+                                <p>For each simultaneously active BG database segment: 1 section</p>
+                                <p>For each simultaneously active MM database segment: 2 sections</p>
+                                <p>NOTE: The number of concurrent users of any given file does not effect these requirements</p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>LOCKIDTBL</p>
+                            </td><td align="left" valign="top">
+                                <p>For each simultaneously active</p>
+                                <p>GT.M process: 3</p>
+                                <p>database segment: 1</p>
+                                <p>database journal: 1</p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>RESHASHTBL</p>
+                            </td><td align="left" valign="top">
+                                <p>LOCKIDTBL/4 rounded up to the nearest power of 2</p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>VIRTUALPAGECNT</p>
+                                <p>(VAX only)</p>
+                            </td><td align="left" valign="top">
+                                <p>For the run-time libraries: 1500 pages</p>
+                                <p>For the largest GT.M image (including ZLINKed routines) : 1 page/block</p>
+                                <p>For the process that uses the largest amount of memory: sufficient data space</p>
+                                <p>For the sum of all BG segments accessed by the process that uses the largest amount of memory:</p>
+                                <p>((global_buffer_count * block_size /512) + global_buffer_count/10 + lock_space + 29) pages</p>
+                                <p>For the sum of all MM segments accessed by the process that uses the largest amount of memory: </p>
+                                <p>(File_size + lock_space + 2) pages</p>
+                            </td></tr></tbody></table></div><p>To calculate an exact impact of GT.M databases on the SYSGEN parameter GBLPAGFIL, add the total number of pages of all active GT.M database sections (those names starting with GTM$S_) on the INSTALL LIST/GLOBAL output.</p><p>For example:</p><pre class="programlisting">
+GT$S_$1$DIA0$7F2076A00000
+(00000000) WRT DZRO PRM SYS Pagcnt/Refcnt=9441/37764
+GT$S_$1$DIA1$C9E7E2000000
+(00000000) WRT DZRO PRM SYS Pagcnt/Refcnt=512/3072
+GT$S_$1$DIA1$348932000000
+(00000000) WRT DZRO PRM SYS Pagcnt/Refcnt=224/2240
+GT$S_$1$DIA0$7F2046A00000
+(00000000) WRT DZRO PRM SYS Pagcnt/Refcnt=9441/0
+</pre><p>The total page count for these sections is 19618 (9441+512+224+9441).</p><p>In addition to the SYSGEN parameters in the table above, the following parameters may have a
+critical effect on proper operation of OpenVMS and GT.M:</p><div class="informaltable"><table border="1" width="70%"><colgroup><col><col></colgroup><tbody><tr><td align="left" valign="top">
+                                <p>NPAGEDYN</p>
+                            </td><td align="left" valign="top">
+                                <p>This parameter controls the amount of non-paged dynamic memory available to the system. If NPAGEDYN is too small, OpenVMS performance becomes very poor. A necessarily large NPAGEDYN deprives users of working space. NPAGEDYN can be set empirically by starting with a generous value, then monitoring the use of the memory it provides, and adjusting it as needed.</p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>SYSMWCNT</p>
+                            </td><td align="left" valign="top">
+                                <p>This parameter controls the target size for the system working set. Because GBLPAGES are in the system working set, coordinate SYSMWCNT revisions with changes in GBLPAGES. If you use AUTOGEN, it changes the SYSMWCNT by one (1) for each 128 pages of change in GBLPAGES. Values
+                                of SYSMWCNT that are not matched to the configuration can cause such severe OpenVMS thrashing that response times for simple tasks may be measured in hours.</p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>WSMAX</p>
+                            </td><td align="left" valign="top">
+                                <p>This parameter controls the largest working set permitted for the system. M string facilities and GT.M local variables, which are essentially limited only by OpenVMS address space, usually lead
+                                to images which require large working sets. Such working sets are categorized in the OpenVMS documentation as typical of AI applications. Working sets can also be set empirically by starting with a large value, monitoring actual usage by a range of users and adjusting as needed.</p>
+                            </td></tr></tbody></table></div><p>For more information on system parameters, refer to the OpenVMS System Management Utilities Reference Manual. For more information on OpenVMS tuning, refer to the OpenVMS Performance Management Manual.</p><div class="sect2" title="Setting Page File Size"><div class="titlepage"><div><div><h3 class="title"><a name="setting_page_file_size"></a>Setting Page File Size</h3></div></div></div><a class="indexterm" name="id3218665"></a><p>Ensuring continuous operation of any OpenVMS system depends on having a page file of adequate size. A conservative approach to this issue is to establish a very large page file of 300,000 to 400,000 pages, monitor its use, and reduce it based on empirical evidence. Generally, the page file requires around 100,000 pages or less. Consider the use of secondary page files to balance your disk channel usage. For information on monitoring and managing page faulting, refer to the OpenVMS Performance Management Manual.</p><p>For Alpha, the page file should be the physical memory size ((in megabytes) + 8192). Refer to the
+OpenVMS System Manager manual for more information.</p><p>For VAX, the page file should be the size of the average process multiplied by the maximum number
+of processes. If the VIRTUALPAGECNT system parameter is larger, use that value.</p></div><div class="sect2" title="Invoking AUTOGEN"><div class="titlepage"><div><div><h3 class="title"><a name="invoking_autogen"></a>Invoking AUTOGEN</h3></div></div></div><a class="indexterm" name="id3220560"></a><p>AUTOGEN is a command procedure supplied by Compaq/HP that attempts to ensure that SYSGEN parameters
+fall within HP's(formerly Compaq) recommended limits. AUTOGEN performs the valuable task of propagating changes to interrelated parameters. When you change a parameter related to some other parameter AUTOGEN analyzes your modifications and adjusts related parameters.</p><p>Set the system parameters by specifying them in your SYS$SYSTEM:MODPARAMS.DAT file and invoke
+AUTOGEN in SYS$UPDATE. Some parameters take effect immediately, while others take effect only after you
+reboot the system.</p><p>Example:</p><pre class="programlisting">
+$ SET DEFAULT SYS$SYSTEM
+$ CREATE MODPARAMS.DAT
+MIN_GBLPAGES = 50000
+MIN_GBLPAGFIL = 40000
+MIN_GBLSECTIONS = 100
+MIN_VIRTUALPAGECNT = 600000
+MIN_WSMAX = 4096
+&lt;CTRL-Z&gt;
+$ SET DEFAULT SYS$UPDATE
+$ @AUTOGEN GETDATA REBOOT NOFEEDBACK
+</pre><p>In this example, the DCL command SET DEFAULT sets the default to the directory specified by the
+logical name SYS$SYSTEM. SYS$SYSTEM contains files processed by AUTOGEN.</p><p>The DCL command CREATE creates the MODPARAMS.DAT file and inserts each separate line following the
+command as a record of the new file. Pressing &lt;CTRL-Z&gt; signals the end of the input.</p><p>The DCL command SET DEFAULT sets the default to the directory specified by the logical name
+SYS$UPDATE. Invoking AUTOGEN from the system manager's account ensures that you have the required privileges. GETDATA is an AUTOGEN start-phase which collects all data required by the AUTOGEN system generation phases. REBOOT is the AUTOGEN end-phase that reboots the system to allow some parameters to take effect. NOFEEDBACK is an execution type which tells AUTOGEN not to use feedback information gathered from the system.</p><p>For more information on AUTOGEN, refer to the OpenVMS System Management Utilities Reference
+Manual.</p></div><div class="sect2" title="Enabling Virtual Terminal Operation"><div class="titlepage"><div><div><h3 class="title"><a name="enable_virtual_terminal_ops"></a>Enabling Virtual Terminal Operation</h3></div></div></div><a class="indexterm" name="id3220527"></a><p>To prevent application problems, dial-up lines that may be accidentally disconnected are often
+configured so that they can be physically disconnected without terminating the process. This presents a security risk, as a user can connect to the process simply by connecting to the line without having to login. Virtual terminals can be used to improve security on such lines because they only allow access to a disconnected process after going through the standard login procedure with the owner's name.</p><p>Virtual terminals also allow spawned processes to be controlled from a single terminal. Multiple
+independent processes can be controlled from a single terminal as well. Virtual terminals require some additional overhead. Refer to the OpenVMS documentation for more information.</p><p>Perform the following actions to enable virtual terminal operation, usually in
+SYS$MANAGER:SYSTARTUP_VMS.COM. See SYS$MANAGER:SYSTARTUP_VMS.TEMPLATE.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>For VAX, invoke SYSGEN and issue the command connect/noadapter vta0/driver=ttdriver.</p></li><li class="listitem"><p>For Alpha, invoke SYSMAN 10 and issue the command connect VTA0
+/noadapter/driver=sysloadable_images=ttdriver</p></li><li class="listitem"><p>In SYSGEN, set bit 17 of TTY_DEFCHAR2 ON to enable virtual terminals for all lines or OFF to
+disable them.</p></li><li class="listitem"><p>Issue the command: set term/perm/ [no]disconnect to adjust individual terminals with respect to the
+default.</p></li></ul></div><p>Refer to your TCP/IP package's documentation for instructions on how to enable virtual terminals
+for the TELNET
+connection.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="chapter3.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="chapter3.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 3. Planning for GT.M </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> GT.M and OpenVMS Security</td></tr></table></div></body>
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch03s01.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:24:41 GMT -->
+</html>

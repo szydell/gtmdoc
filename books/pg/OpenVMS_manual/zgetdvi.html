@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zgetdvi.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:17 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZGETDVI()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter7.html" title="Chapter 7. Functions" />
+    <link rel="prev" href="examples_of_zfile.html" title="Examples of $ZFILEATTRIBUTES()" />
+    <link rel="next" href="examples_of_zgetdvi.html" title="Examples of $ZGETDVI()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZGETDVI()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zfile.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 7. Functions</th>
+          <td width="20%" align="right"> <a accesskey="n" href="examples_of_zgetdvi.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zgetdvi"></a>$ZGETDVI()</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zgetdvi.html">Examples of $ZGETDVI()</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4187060" class="indexterm"></a>
+      <p>The $ZGETDVI function returns an item of information about a specified device. The $ZGETDVI function is analogous to the DCL Lexical function F$GETDVI.</p>
+      <p>The format for the $ZGETDVI function is:</p>
+      <pre class="programlisting">
+    $ZGETDVI(expr1,expr2)
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The first expression specifies the target device </p>
+          </li>
+          <li>
+            <p>The second expression specifies the item keyword identifying the type of information returned; keywords may be upper-, lower-, or mixed-case</p>
+          </li>
+        </ul>
+      </div>
+      <p>$ZGETDVI() provides a tool for examining the characteristics of devices in the VMS environment from within GT.M. There are three instances when the values returned by F$GETDVI and $ZGETDVI are not identical. They are noted in the following table.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="2" align="center">
+    <p>ZGETDVI() Item Keywords - all devices</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ITEM KEYWORD</p>
+    </td>
+              <td>
+    <p>$ZGETDVI() DATA RETURNED</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ACPPID</p>
+    <p>ACPTYPE</p>
+    <p>ALL</p>
+    <p>ALLDEVNAM</p>
+    <p>AVL</p>
+    </td>
+              <td>
+    <p>ACP process identification</p>
+    <p>ACP type code</p>
+    <p>Device is allocated: 1 if true, 0 if false</p>
+    <p>Allocation class device name</p>
+    <p>Device is available: 1 if true, 0 if false</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>CCL</p>
+    <p></p>
+    <p>CLUSTER</p>
+    <p>CONCEALED</p>
+    <p>CYLINDERS</p>
+    <p>DEVBUFSIZ</p>
+    </td>
+              <td>
+    <p>Device has carriage control: 1 if true, 0 if false</p>
+    <p>Volume cluster size</p>
+    <p>Device is concealed: 1 if true, 0 if false</p>
+    <p>Number of cylinders on the volume</p>
+    <p>Device buffer size</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVCHAR</p>
+    <p>DEVCHAR2</p>
+    <p>DEVCLASS</p>
+    <p>DEVDEPEND</p>
+    <p>DEVDEPEND2</p>
+    </td>
+              <td>
+    <p>Device characteristics</p>
+    <p>More device characteristics</p>
+    <p>Device class</p>
+    <p>Device-dependant information</p>
+    <p>More device-dependant information</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVLOCKNAM*</p>
+    <p>DEVNAM</p>
+    <p>DEVSTS</p>
+    <p>DEVTYPE</p>
+    <p>DIR</p>
+    </td>
+              <td>
+    <p>Device lock name (character string)</p>
+    <p>Device name</p>
+    <p>Device-dependant status information</p>
+    <p>An integer represnting the device type</p>
+    <p>Device is directory-structured: 1 if true, 0 if false</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DMA</p>
+    <p>DMT</p>
+    <p></p>
+    <p>DUA</p>
+    <p></p>
+    <p>ELG</p>
+    <p></p>
+    <p>ERRCNT</p>
+    </td>
+              <td>
+    <p>Device has DMA: 1 if true, 0 if false</p>
+    <p>Device is marked for dismount: 1 if true, 0 if false</p>
+    <p>Device is a generic device: 1 if true, 0 if false</p>
+    <p>Error logging is enabled: 1 if true, 0 if false</p>
+    <p>Error count</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>FOD</p>
+    <p></p>
+    <p>FOR</p>
+    <p></p>
+    <p>FREEBLOCKS</p>
+    <p>FULLDEVNAM</p>
+    <p>GEN</p>
+    </td>
+              <td>
+    <p>Device is file-oriented: 1 if true, 0 if false</p>
+    <p>Device is mounted foreign: 1 if true, 0 if false</p>
+    <p>Free blocks left on the volume</p>
+    <p>Fully qualified device name</p>
+    <p>Device is generic: 1 if true, 0 if false</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>IDV</p>
+    <p></p>
+    <p>LOCKID</p>
+    <p>LOGVOLNAM</p>
+    <p>MAXBLOCK</p>
+    <p>MAXFILES</p>
+    </td>
+              <td>
+    <p>Device is capable of input: 1 if true, 0 if false</p>
+    <p>Lock identification of lock on a disk</p>
+    <p>Logical volume name</p>
+    <p>Number of logical blocks on the volume</p>
+    <p>Maximum files on volume</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>MBX</p>
+    <p>MNT</p>
+    <p>MOUNTCNT</p>
+    <p>NET</p>
+    <p></p>
+    <p>NEXTDEVNAM</p>
+    </td>
+              <td>
+    <p>Device is a mailbox: 1 if true, 0 if false</p>
+    <p>Device is mounted: 1 if true, 0 if false</p>
+    <p>Mount cound</p>
+    <p>Device is a network device: 1 if true, 0 if false</p>
+    <p>Device name of next volume in volume set</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ODV</p>
+    <p></p>
+    <p>OPCNT</p>
+    <p>OPR</p>
+    <p>OWNUIC*</p>
+    <p>PID</p>
+    </td>
+              <td>
+    <p>Device is capable of output: 1 if true, 0 if false</p>
+    <p>Operation count</p>
+    <p>Device is an operator: 1 if true, 0 if false</p>
+    <p>UIC of device owner is hexadecimal</p>
+    <p>Process identification of device owner</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>RCK</p>
+    <p></p>
+    <p>REC</p>
+    <p></p>
+    <p>RECSIZ</p>
+    <p>REFCNT</p>
+    <p>RND</p>
+    <p></p>
+    </td>
+              <td>
+    <p>Device has read checking enabled: 1 if true, 0 if false</p>
+    <p>Device is record oriented: 1 if true, 0 if false</p>
+    <p>Blocked record size</p>
+    <p>Reference count</p>
+    <p>Device allows random access: 1 if true, 0 if false</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ROOTDEVNAM</p>
+    <p></p>
+    <p>RTM</p>
+    <p>SDI</p>
+    <p></p>
+    <p>SECTORS</p>
+    <p>SERIALNUM</p>
+    </td>
+              <td>
+    <p>Device name of root volume in volume set terminal name, null if not virtual</p>
+    <p>Device is real-time: 1 if true, 0 if false</p>
+    <p>Device is single directory structured: 1 if true, 0 if false</p>
+    <p>Number of sectors per track</p>
+    <p>Volume serial number</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>SERVED_DEVICE</p>
+    <p>SHR</p>
+    <p>SPL</p>
+    <p>SPLDEVNAM</p>
+    <p>SQD</p>
+    <p></p>
+    </td>
+              <td>
+    <p>Device is served: 1 if true, 0 if false</p>
+    <p></p>
+    <p>Device is shareable: 1 if true, 0 if false</p>
+    <p>Device is spooled: 1 if true, 0 if false</p>
+    <p>Spool device name</p>
+    <p>Device is sequential block oriented: 1 if true, 0 if false</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>STS</p>
+    <p>SWL</p>
+    <p></p>
+    <p>TRACKS</p>
+    <p>TRANSCNT</p>
+    <p>TRM</p>
+    </td>
+              <td>
+    <p>Status information</p>
+    <p>Device is software write locked: 1 if true, 0 if false</p>
+    <p>Number of tracks per cylinder</p>
+    <p>Volume transaction count</p>
+    <p>Device is a terminal: 1 if true, 0 if false</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>TT_ACCPORNAM</p>
+    <p>TT_PHYDEVNAM</p>
+    <p>UNIT</p>
+    <p>VOLCOUNT</p>
+    <p>VOLNAM</p>
+    <p>VOLNUMBER</p>
+    </td>
+              <td>
+    <p>Ternimal server name and port</p>
+    <p>Physical device name for terminal</p>
+    <p>Unit number</p>
+    <p>Volumes in a volume set</p>
+    <p>Volume name</p>
+    <p>Current volume in volume set</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>VOLSETMEM</p>
+    <p></p>
+    <p>VPROT*</p>
+    <p></p>
+    <p>WCK</p>
+    <p></p>
+    </td>
+              <td>
+    <p>Disk is in a volume set: 1 if true, 0 if false</p>
+    <p>Decimal representation of the four byte volume protection mask</p>
+    <p>Write checking is enabled: 1 if true, 0 if false</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p>*different form of return value than F$GETDVI</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="2">
+    <p>ZGETDVI() Item Keywords - Terminals   </p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ITEM KEYWORD</p>
+    </td>
+              <td>
+    <p>$ZGETDVI() DATA RETURNED TRUE(1)/FALSE(0)</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ALTYPEHEAD</p>
+    <p>ANSICRT</p>
+    <p>APP_KEYPAD</p>
+    <p>AUTOBAUD</p>
+    <p>AVO</p>
+    </td>
+              <td>
+    <p>Terminal has an alternative typehead buffer</p>
+    <p>Terminal is an ANSI CRT</p>
+    <p>Terminal keypad is in applications mode</p>
+    <p>Terminal has automatic baud rate detection</p>
+    <p>Terminal has a VT100-family display</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>BLOCK</p>
+    <p>BRDCSTMBX</p>
+    <p>CRFILL</p>
+    <p>DECCRT</p>
+    <p>DIALUP</p>
+    </td>
+              <td>
+    <p>Terminal has block mode capability</p>
+    <p>Terminal uses mailbox broadcast messages</p>
+    <p>Terminal requires fill after RET</p>
+    <p>Terminal is a DIGITAL CRT terminal</p>
+    <p>Terminal is connected to dialup</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DISCONNECT</p>
+    <p>DRCS</p>
+    <p>EDIT</p>
+    <p>EDITING</p>
+    <p>EIGHTBIT</p>
+    </td>
+              <td>
+    <p>Terminal can be disconnected</p>
+    <p>Terminal supports loadable character set</p>
+    <p>Terminal edit characteristic is set</p>
+    <p>Terminal advanced editing is enabled</p>
+    <p>Terminal uses 8-bit ASCII character set</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ESCAPE</p>
+    <p>FALLBACK</p>
+    <p></p>
+    <p>HALFDUP</p>
+    <p>HANGUP</p>
+    <p>HOSTSYNC</p>
+    </td>
+              <td>
+    <p>Terminal generates escape sequences</p>
+    <p>Terminal uses multi-national fallback option</p>
+    <p>Terminal is in half-duplex mode</p>
+    <p>Terminal has hangup characteristic set</p>
+    <p>Terminal has host/terminal communication</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>INSERT</p>
+    <p>LFFILL</p>
+    <p>LOCALECHO</p>
+    <p>LOWER</p>
+    <p>MBXDSABL</p>
+    <p></p>
+    </td>
+              <td>
+    <p>Terminal defaults to line-editing mode</p>
+    <p>Terminal requires fill after &lt;LF&gt;</p>
+    <p>Terminal has local echo characteristic set</p>
+    <p>Terminal has lower-case character set</p>
+    <p>Terminal receives unsolicited input and writing mail notification</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>MECHFORM</p>
+    <p>MECHTAB</p>
+    <p></p>
+    <p>MODEM</p>
+    <p>MODHANGUP</p>
+    <p></p>
+    <p>NOBRDCST</p>
+    </td>
+              <td>
+    <p>Terminal has mechanical form feed</p>
+    <p>Terminal has mechanical tabs and is capable of tab expansion</p>
+    <p>Terminal is connected to a modem</p>
+    <p>Terminal has modify hang-up characteristic set</p>
+    <p>Terminal receives broadcast messages</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>NOECHO</p>
+    <p>NOTYPEAHD</p>
+    <p></p>
+    <p>OPER</p>
+    <p>PASTHRU</p>
+    <p>PRINTER</p>
+    </td>
+              <td>
+    <p>Terminal does not echo input characters</p>
+    <p>Terminal must solicit data by a read operation</p>
+    <p>Terminal is an operator terminal</p>
+    <p>Terminal has passall with flow control</p>
+    <p>Terminal has available printer port</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>READSYNC</p>
+    <p>REGIS</p>
+    <p>SCOPE</p>
+    <p>SECURE</p>
+    <p>SETSPEED</p>
+    </td>
+              <td>
+    <p>Terminal has read synchronization</p>
+    <p>Terminal has REGIS graphics</p>
+    <p>Terminal has a video screen display</p>
+    <p>Terminal can recognize the secure server</p>
+    <p>Terminal has programmable line speed</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>SIXEL</p>
+    <p>SYSPSW</p>
+    <p>TTSYNC</p>
+    <p>WRAP</p>
+    <p></p>
+    </td>
+              <td>
+    <p>Terminal supports the sixel</p>
+    <p>Terminal has the system password enabled</p>
+    <p>Terminal/host synchronization exists</p>
+    <p>Terminal inserts a new line when the cursor moves beyond the right margin</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zfile.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter7.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="examples_of_zgetdvi.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of $ZFILEATTRIBUTES() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of $ZGETDVI()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/zgetdvi.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:05:17 GMT -->
+</html>

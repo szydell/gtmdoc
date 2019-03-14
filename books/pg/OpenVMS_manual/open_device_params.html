@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/open_device_params.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:31 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>OPEN Deviceparameters</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="open_cmmd_9.html" title="Open" />
+    <link rel="prev" href="examples_of_open_9.html" title="Examples of OPEN" />
+    <link rel="next" href="open_device_param_table.html" title="OPEN Deviceparameter Table" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">OPEN Deviceparameters</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_open_9.html">Prev</a> </td>
+          <th width="60%" align="center">Open</th>
+          <td width="20%" align="right"> <a accesskey="n" href="open_device_param_table.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="open_device_params"></a>OPEN Deviceparameters</h4>
+          </div>
+        </div>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="allocation_9"></a>ALLOCATION</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4204978" class="indexterm"></a>
+        <p>ALLOCATION=intexpr 	Applies to: Sequential Files</p>
+        <p>Specifies the initial size of the file in RMS 512 byte blocks. ALLOCATION accepts an integer argument in the range of 0 to 4,294,967,295. An argument of zero (0) does not allocate any space for the file at file creation. When a WRITE requires space in a file that is full, RMS extends the file by the amount specified in the EXTENSION deviceparameter.</p>
+        <p>By default, new files have an ALLOCATION of zero (0).</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="append_9"></a>APPEND</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205017" class="indexterm"></a>
+        <p>APPEND	Applies to: SD</p>
+        <p>Positions the file pointer at the end-of-file. This deviceparameter only affects the device on the first OPEN command. Re-OPENing an already OPEN device with this deviceparameter has no effect.</p>
+        <p>By default, OPEN sets the file pointer to the beginning-of-file.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="attach_9"></a>ATTACH</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205052" class="indexterm"></a>
+        <p>ATTACH=expr		Applies to: SOC</p>
+        <p>When ATTACH is used and one of ZLISTEN and CONNECT is specified at the same time, the value of expr becomes the identifier of the newly created socket. If neither ZLISTEN nor CONNECT is specified, ATTACH is ignored. </p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="blocksize_9"></a>BLOCKSIZE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205084" class="indexterm"></a>
+        <p>BLOCKSIZE=intexpr		Applies to: TRM MBX</p>
+        <p>BLOCKSIZE=intexpr 	Applies to: Terminals and Printers <span>and VMS Mailboxes</span></p>
+        <p>Specifies the size in bytes of the maximum single read or write for the specified device.</p>
+        <p>For mailboxes, BLOCKSIZE controls both block-size and record-size, and RECORDSIZE is ignored.</p>
+        <div class="informaltable">
+          <table border="1">
+            <colgroup>
+              <col />
+              <col />
+              <col />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td colspan="4">
+	<p>Blocksize in Bytes</p>
+	</td>
+              </tr>
+              <tr>
+                <td>
+	<p>DEVICE</p>
+	</td>
+                <td>
+	<p>DEFAULT</p>
+	</td>
+                <td>
+	<p>MINIMUM</p>
+	</td>
+                <td>
+	<p>MAXIMUM</p>
+	</td>
+              </tr>
+              <tr>
+                <td>
+	<p>MAILBOX</p>
+	</td>
+                <td>
+	<p>1024</p>
+	</td>
+                <td>
+	<p>1</p>
+	</td>
+                <td>
+	<p>65535</p>
+	</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="connect_9"></a>CONNECT</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205240" class="indexterm"></a>
+        <p>CONNECT=expr		Applies to: SOC</p>
+        <p>Enables a client connection with a server, which is located by the information provided by expr. A new socket is allocated for the client connection and is made the current socket for the device, if the operation is successful.</p>
+        <p>expr specifies the protocol and protocol specific information. Currently, TCP/IP is the only protocol GT.M supports. expr should be of the format &quot;&lt;host&gt;:&lt;port&gt;:TCP&quot;, where host is either an IP address or a hostname like server.sanchez.com.</p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.html" />
+              </td>
+              <th align="left"></th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>CONNECT is not compatible with ZLISTEN.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="contiguous_9"></a>CONTIGUOUS</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205287" class="indexterm"></a>
+        <p>CONTIGUOUS		Applies to: SD</p>
+        <p>Specifies that RMS must allocate physically contiguous (adjacent) disk space for a new file. If the disk cannot supply the required amount of contiguous space, the OPEN fails.</p>
+        <p>By default, RMS the operating system uses a contiguous-best-try algorithm. The algorithm uses contiguous space if available; otherwise, it pieces the file together out of the largest available extents.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="delimiter_9"></a>DELIMITER</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205325" class="indexterm"></a>
+        <p>[NO]DELIMITER=expr		Applies to: SOC</p>
+        <p>DELIMITER establishes or replaces the list of delimiters used by the sockets associated with the device. The default for on a command that first OPENs a device is NODELIMITER. The delimiter list on a preexisting device remains the same until it is explicitly replaced or deleted.</p>
+        <p>expr must be a string of the following format: </p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <p>':' is used to separate delimiters (it is the delimiter for delimiters).</p>
+            </li>
+            <li>
+              <p>'/' serves as an escape character.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.html" />
+              </td>
+              <th align="left"></th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>expr &quot;ab:/:://:bc&quot; is interpreted as four delimiters, which are &quot;ab&quot;, &quot;:&quot;, &quot;/&quot;, and &quot;bc&quot;. One socket can have 0-64 delimiters and each delimiter can contain 1-64 characters.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="exception_9"></a>EXCEPTION</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205380" class="indexterm"></a>
+        <p>EXCEPTION=expr		Applies to: All devices</p>
+        <p>Defines an error handler for an I/O device. The expression must contain a fragment of GT.M code (for example, GOTO ERRFILE) that GT.M XECUTEs when the driver for the device detects an error, or an entryref to which GT.M transfers control, as appropriate for the current gtm_ztrap_form.</p>
+        <p>For more information on error handling, refer to the &quot;Error Processing&quot; chapter in this manual GT.M Programmer's Guide.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="extension_9"></a>EXTENSION</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205422" class="indexterm"></a>
+        <p>EXTENSION=intexpr		Applies to: SD</p>
+        <p>Specifies the number of 512 byte blocks for RMS to extend the file when the original ALLOCATION is exhausted. If integer expression equals zero (0), the default for the disk volume, which is generally small, determines the extension size.</p>
+        <p>By default, RMS uses an EXTENSION of zero (0).</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="fixed_9"></a>FIXED</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205458" class="indexterm"></a>
+        <p>[NO]FIXED		Applies to: MTFMT SD FIFO </p>
+        <p>Selects a fixed record length format for sequential disk files. FIXED does not specify the actual length of a record. Use RECORDSIZE to specify the record length.</p>
+        <p>NOFIXED specifies a variable length record format for sequential disk files. NOFIXED is a synonym for VARIABLE. FIXED is incompatible with  VARIABLE.</p>
+        <p>By default, records have VARIABLE length.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="group_9"></a>GROUP</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205500" class="indexterm"></a>
+        <p>GROUP=expr		Applies to: SD</p>
+        <p>Specifies UIC-based security on RMS files. The expression is a mask evaluating to null or to any combination of the letters REWD, indicating respectively READ, EXECUTE, WRITE, and DELETE access. When any one of these deviceparameters appears on an OPEN of a new file, any user category (OWNER, SYSTEM, WORLD) that is not explicitly specified is given the default mask. When any one of these deviceparameters appears on an OPEN of an existing device, any user category that is not explicitly specified remains unchanged.</p>
+        <p>In order to modify file security, the user who issues the OPEN must have control access.</p>
+        <p>By default, OPEN does not modify the UIC-based security on an existing file. Unless otherwise specified, when OPEN creates a new file, it establishes security using standard defaulting rules.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="io_error_9"></a>IOERROR</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205548" class="indexterm"></a>
+        <p>IOERROR=expr		Applies to: SOC</p>
+        <p>Enables exception handling in socket devices. expr specifies the I/O error trapping mode. A value equal to &quot;TRAP&quot; specifies that I/O errors on a device raise error conditions. A value equal to &quot;NOTRAP&quot;, or when IOERROR is not specified, indicates that I/O error on a device does not raise error conditions.</p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.html" />
+              </td>
+              <th align="left"></th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>GT.M currently handles exception handling at device level instead of socket level.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="newversion_9"></a>NEWVERSION</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205590" class="indexterm"></a>
+        <p>NEWVERSION		Applies to: SD</p>
+        <p>The NEWVERSION deviceparameter creates a new version of the file. </p>
+        <p>On a Files-11 magnetic tape, RMS places the file at the end-of-tape. The NEWVERSION deviceparameter does not apply to foreign tapes.</p>
+        <p>By default, if any version of the file exists, OPEN accesses the current version. Otherwise, if no version of the file exists, OPEN without READONLY creates a new file.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="owner_9"></a>OWNER</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205633" class="indexterm"></a>
+        <p>OWNER=expr		Applies to: SD</p>
+        <p>Specifies UIC-based security on RMS files. The expression is a mask evaluating to null or to any combination of the letters REWD, indicating respectively READ, EXECUTE, WRITE, and DELETE access. When any one of these deviceparameters appears on an OPEN of a new file, any user category that is not explicitly specified is given the default mask. When any one of these deviceparameters appears on an OPEN of an existing file, any user category (GROUP, SYSTEM, WORLD) that is not explicitly specified remains unchanged.</p>
+        <p>To modify file security, the user who issues the OPEN must have control access.</p>
+        <p>By default, OPEN does not modify the UIC-based security on an existing file. Unless otherwise specified, OPEN establishes security using standard defaulting rules when it creates a new file.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="prmmbx_9"></a>PRMMBX</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205684" class="indexterm"></a>
+        <p>PRMMBX		Applies to: MBX</p>
+        <p>Specifies that the argument of the OPEN is a permanent mailbox name. If the mailbox does not exist and the process has adequate privileges, GT.M creates the mailbox. If the mailbox does not exist and the process does not have adequate privileges, the process generates a run-time error. A process does not require any privileges to OPEN an existing mailbox. See the Using Mailboxes section for a discussion of the required privileges.</p>
+        <p>By default, OPEN translates its device argument as a logical name and uses the result as the actual device/file-specification. This means that if the result is not an existing device or file, OPEN attempts to create an RMS sequential disk file with that name.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="read_only_9"></a>READONLY</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205727" class="indexterm"></a>
+        <p>[NO]READONLY		Applies to: SD MBX</p>
+        <p>OPENs a device for reading only (READONLY) or reading and writing (NOREADONLY).</p>
+        <p>To open a sequential file using the READONLY parameter, the file must exist on the disk. If it does not, GT.M issues a run-time error.</p>
+        <p>When GT.M encounters a WRITE directed to a file, <span>mailbox</span> OPENed READONLY, GT.M issues a run-time error.</p>
+        <p>By default, OPEN accesses the device or file NOREADONLY (read-write).</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="recordsize_9"></a>RECORDSIZE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4205780" class="indexterm"></a>
+        <p>RECORDSIZE=intexpr		Applies to: SD </p>
+        <p>Overrides the default record size for a disk or magnetic tape file and specifies the new maximum record size in bytes.</p>
+        <p>For mailboxes, BLOCKSIZE controls both block-size and record-size, and RECORDSIZE is ignored.</p>
+        <div class="informaltable">
+          <table border="1">
+            <colgroup>
+              <col />
+              <col />
+              <col />
+              <col />
+              <col />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td colspan="6" align="center">
+	<p>Recordsize in Bytes</p>
+	</td>
+              </tr>
+              <tr>
+                <td>
+	<p>DEVICE</p>
+	</td>
+                <td>
+	<p>DEFAULT</p>
+	</td>
+                <td colspan="2">
+	<p>FIXED RECORDS</p>
+	</td>
+                <td colspan="2">
+	<p>VARIABLE RECORDS</p>
+	</td>
+              </tr>
+              <tr>
+                <td>
+	<p></p>
+	</td>
+                <td>
+	<p></p>
+	</td>
+                <td>
+	<p>MINIMUM</p>
+	</td>
+                <td>
+	<p>MAXIMUM</p>
+	</td>
+                <td>
+	<p>MINIMUM</p>
+	</td>
+                <td>
+	<p>MAXIMUM</p>
+	</td>
+              </tr>
+              <tr>
+                <td>
+	<p>SEQUENTIAL DISK FILE</p>
+	</td>
+                <td>
+	<p>1024</p>
+	</td>
+                <td>
+	<p>1</p>
+	</td>
+                <td>
+	<p>32767</p>
+	</td>
+                <td>
+	<p>15</p>
+	</td>
+                <td>
+	<p>32767</p>
+	</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="rewind_9"></a>REWIND</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206008" class="indexterm"></a>
+        <p>REWIND		Applies to: SD MTF MT</p>
+        <p>REWIND positions the file pointer of a sequential disk or magnetic tape file to the first record.</p>
+        <p>By default, OPEN does not REWIND.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="shared_9"></a>SHARED</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206044" class="indexterm"></a>
+        <p>SHARED		Applies to: SD</p>
+        <p>Allows more than one user to access the same disk file. A file OPENed SHARED can accommodate a theoretically unlimited number of readers and a single writer. Any attempt to OPEN a file that is already OPEN by another process causes a run-time error unless all processes OPEN the file SHARED or READONLY. OPENing a file SHARED prevents RMS from using most of its algorithms for optimizing access and therefore significantly reduces the performance of I/O to that file.</p>
+        <p>By default, OPEN accesses the file or device exclusively (not SHARED).</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="system_9"></a>SYSTEM</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206087" class="indexterm"></a>
+        <p>SYSTEM=expr		Applies to: SD</p>
+        <p>Specifies UIC-based security on RMS files. The expression is a mask evaluating to null or to any combination of the letters REWD, indicating respectively READ, EXECUTE, WRITE, and DELETE access. When any one of these deviceparameters appears on an OPEN of a new file, any user category that is not explicitly specified is given the default mask. When any one of these deviceparameters appears on an OPEN of an existing file, any user category (OWNER, GROUP, WORLD), that is not explicitly specified remains unchanged.</p>
+        <p>In order to modify file security, the user who issues the OPEN or CLOSE must have control access ownership.</p>
+        <p>By default, OPEN does not modify the UIC-based security permissions on an existing file. Unless otherwise specified, when OPEN creates a new file, it establishes security using standard defaulting rules.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="tmpmbx"></a>TMPMBX</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206139" class="indexterm"></a>
+        <p>TMPMBX		Applies to: MBX</p>
+        <p>Specifies that the argument of the OPEN is a temporary mailbox name. If the mailbox does not exist, and the process has adequate privileges, GT.M creates the mailbox. If the mailbox does not exist and the process does not have adequate privileges, the process generates a run-time error. A process does not require any privileges to OPEN an existing mailbox. See the Using Mailboxes section for a discussion of the required privileges.</p>
+        <p>By default, OPEN translates its device argument as a logical name and uses the result as the actual device/file-specification. This means that if the result is not an existing device or file, OPEN attempts to create an RMS sequential disk file with that name.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="truncate_v"></a>TRUNCATE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206185" class="indexterm"></a>
+        <p>[NO]TRUNCATE		Applies to: SD</p>
+        <p>Enables or disables overwriting of existing data in Files-11 RMS files. Because the position of each record depends on the prior record, a WRITE destroys the ability to position reliably to subsequent records in a file. Therefore, by default (NOTRUNCATE), GT.M permits WRITEs only when the file pointer is positioned at the end-of-file. When a device has TRUNCATE enabled, a WRITE issued when the file pointer is not at end-of-file truncates the file by destroying all data from the file pointer to the end-of-file.</p>
+        <p>By default, OPEN accesses the file NOTRUNCATE, which does not allow overwriting of Files-11 RMS files.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="variable_9"></a>VARIABLE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206227" class="indexterm"></a>
+        <p>VARIABLE		Applies to: SD </p>
+        <p>VARIABLE 		Applies to: Sequential Files </p>
+        <p>Specifies the VARIABLE record length format for sequential disk.</p>
+        <p>VARIABLE is a synonym for NOFIXED. VARIABLE length records on disk start with two bytes of overhead for the device driver that hold the actual record-length represented as a two's complement binary number. VARIABLE length tape records start with four bytes of overhead, and represent the length as ASCII digits. A BLOCKSIZE for VARIABLE length tape records must specify at least four bytes more than the maximum record length. VARIABLE is incompatible with FIXED.</p>
+        <p>By default, records have VARIABLE length.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="world_9"></a>WORLD</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206274" class="indexterm"></a>
+        <p>WORLD=expr		Applies to: SD FIFO</p>
+        <p>Specifies UIC-based security on RMS files. The expression is a mask evaluating to null or to any combination of the letters REWD, indicating respectively READ, EXECUTE, WRITE, and DELETE access. When any one of these deviceparameters appears on an OPEN of a new file, any user category that is not explicitly specified is given the default mask. When any one of these deviceparameters appears on an OPEN of an existing file, any user category (OWNER, GROUP, SYSTEM), that is not explicitly specified remains unchanged.</p>
+        <p>To modify file security, the user who issues the OPEN must have <span>control access</span>.</p>
+        <p>By default, OPEN and CLOSE do not modify the <span>UIC-based security</span> on an existing file. Unless otherwise specified, when OPEN creates a new file, it establishes security using standard defaulting rules.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="wrap_9"></a>WRAP</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206338" class="indexterm"></a>
+        <p>[Z][NO]WRAPApplies to: <span>NULL</span> SD  SOC</p>
+        <p>Enables or disables automatic record termination. When the current record size ($X) reaches the maximum WIDTH and the device has WRAP enabled, GT.M starts a new record, as if the routine had issued a WRITE ! command.</p>
+        <p>NOWRAP causes GT.M to require a WRITE ! to terminate the record. NOWRAP allows $X to become greater than the device WIDTH for terminals and null devices. <span>Sequential files discard any portion of the current output record over the device width.</span></p>
+        <p>By default, records WRAP.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="write_9"></a>WRITE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206395" class="indexterm"></a>
+        <p>[NO]WRITEONLY		Applies to: MBX</p>
+        <p>OPENs a mailbox for writing only (WRITEONLY) or reading and writing (NOWRITEONLY).</p>
+        <p>By default, OPEN creates new mailboxes NOWRITEONLY (read-write).</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="zbf_size"></a>ZBFSIZE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206428" class="indexterm"></a>
+        <p>ZBFSIZE		Applies to: SOC</p>
+        <p>Allocates a buffer used by GT.M when reading from a socket. The ZBFSIZE deviceparameter should be at least as big as the largest message expected.</p>
+        <p>By default, the size of ZBFSIZE is 1024 and the maximum it can be is 1048576.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="zdelay"></a>ZDELAY</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206463" class="indexterm"></a>
+        <p>Z[NO]DELAY		Applies to: SOC</p>
+        <p>Controls buffering of data packets by the system TCP stack using the TCP_NODELAY option to the SETSOCKOPT system call. This behavior is sometimes known as the Nagle algorithm. The default is ZDELAY. This delays sending additional packets until either an acknowledgement of previous packets is received or an interval passes. If several packets are sent from one end of a connection before the other end responds, setting ZNODELAY may be desirable though at the cost of additional packets being transmitted over the network. ZNODELAY must be fully spelled out.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="zff"></a>ZFF</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206502" class="indexterm"></a>
+        <p>Z[NO]FF=expr		Applied to: SOC</p>
+        <p>expr specifies a string of characters, typically in $CHAR() format to send to socket device, whenever a routine issues a WRITE #. When no string is specified or when ZFF=&quot;&quot;, then no characters are sent. The default in GT.M is ZNOFF.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="zibfsize"></a>ZIBFSIZE</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206534" class="indexterm"></a>
+        <p>ZIBFSIZE			Applies to: SOC</p>
+        <p>Sets the buffer size used by the network software (setsockopt SO_RCVBUF).</p>
+        <p>The default and the maximum values depend on the platform and/or system parameters.</p>
+      </div>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="zlisten"></a>ZLISTEN</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4206567" class="indexterm"></a>
+        <p>ZLISTEN=expr			Applies to: SOC</p>
+        <p>A new socket is allocated to listen for a connection. It is made the current socket for the device, if the operation is successful. Upon successful completion, $KEY is set to the format of &quot;BOUND|&lt;socket handle&gt;|&lt;port number&gt;&quot;otherwise, $KEY is assigned the empty string.</p>
+        <p>expr specifies the protocol and protocol specific information. Currently, TCP/IP is the only protocol GT.M supports. expr must be of the format &quot;&lt;port&gt;:TCP&quot;, where port specifies the port number at which the socket is waiting for a connection.</p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.html" />
+              </td>
+              <th align="left"></th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>ZLISTEN is not compatible with ATTACH in the USE command and CONNECT in both USE and OPEN commands.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_open_9.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="open_cmmd_9.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="open_device_param_table.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of OPEN </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> OPEN Deviceparameter Table</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/open_device_params.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:31 GMT -->
+</html>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/ztrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:19 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZTrap</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter8.html" title="Chapter 8. Intrinsic Special Variables" />
+    <link rel="prev" href="zexit.html" title="$ZTExit" />
+    <link rel="next" href="zversion.html" title="$ZVersion" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZTrap</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zexit.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 8. Intrinsic Special Variables</th>
+          <td width="20%" align="right"> <a accesskey="n" href="zversion.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="ztrap"></a>$ZTrap</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4197135" class="indexterm"></a>
+      <p>$ZT[RAP] contains a string value that GT.M XECUTEs when an error occurs during routine execution. </p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>The following discussion assumes that $ETRAP error handling is simultaneously not in effect (that is, $ETRAP=&quot;&quot;). <span>Refer to &quot;Error Processing&quot; chapter in this manual for more information on the interaction between $ETRAP and $ZTRAP.</span></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>When the $ZTRAP variable is not null, GT.M executes $ZTRAP at the current level. The $ZTRAP variable has the initial value of &quot;B,&quot; and puts the process in Direct Mode when an error condition occurs. If the value of $ZTRAP is null (&quot;&quot;), an exception causes the image to run-down with the condition code associated with the exception. If $ZTRAP contains invalid source code, GT.M displays an error message and puts the process into Direct Mode.</p>
+      <p>$ZTRAP is a read-write Intrinsic Special Variable, (i.e., it can appear on the left side of the equal sign (=) in the argument to the SET command).</p>
+      <p>$ZTRAP may also appear as an argument to an inclusive NEW command. NEW $ZTRAP causes GT.M to set $ZTRAP to null ($ZTRAP=&quot;&quot;) and to stack the old value of $ZTRAP. When the program QUITs from the invocation level where the NEW occurred, GT.M restores the value previously stacked by the NEW. NEW $ZTRAP provides nesting of $ZTRAP. Because $ZTRAP=&quot;&quot; terminates the image when an error occurs, SET $ZTRAP= generally follows immediately after NEW $ZTRAP. You may use this technique to construct error handling strategies corresponding to the nesting of your programs. If the <span>logical name</span> gtm_ztrap_new evaluates to boolean TRUE (case insensitive string &quot;TRUE&quot;, or case insensitive string &quot;YES&quot;, or a non-zero number), $ZTRAP is NEWed when $ZTRAP is SET; otherwise $ZTRAP is not stacked when it is SET.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.html" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>QUIT from a $ZTRAP terminates the level at which the $ZTRAP was activated.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>Keep $ZTRAP simple and put complicated logic in another routine. If the action specified by $ZTRAP results in another run-time error before changing the value of $ZTRAP, GT.M invokes $ZTRAP until it exhausts the process stack space, terminating the image. Carefully debug exception handling. For more information on error handling, refer &quot;Error Processing&quot;.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; S $ZTRAP=&quot;ZP @$ZPOS B&quot;
+    </pre>
+      <p>This example modifies $ZTRAP to display source code for the line where GT.M encounters an error before entering Direct Mode.</p>
+      <p>There are four accepted behavioural forms of $ZTRAP controlled by the <span>VMS logical name</span> gtm_ztrap_form. If gtm_ztrap_form is defined to &quot;code&quot; (or not defined to one of the subsequently described values), then GT.M treats $ZTRAP as code and handles it as previously described in the documentation. </p>
+      <p>The four different behavioural forms of gtm_ztrap_form are:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>entryref - If gtm_ztrap_form evaluates to &quot;entryref&quot; then GT.M treats it as an entryref argument to an implicit GOTO command. </p>
+          </li>
+          <li>
+            <p>adaptive - If gtm_ztrap_form evaluates to &quot;adaptive&quot; then if $ZTRAP does not compile to valid M code, then $ZTRAP is treated as just described for &quot;entryref.&quot; Since there is little ambiguity, code and entryref forms of $ZTRAP can be intermixed in the same application. </p>
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+              <table border="0" summary="Note">
+                <tr>
+                  <td rowspan="2" align="center" valign="top" width="25">
+                    <img alt="[Note]" src="images/note.html" />
+                  </td>
+                  <th align="left"></th>
+                </tr>
+                <tr>
+                  <td align="left" valign="top">
+                    <p>Note that GT.M attempts to compile $ZTRAP before evaluating $ZTRAP as an entryref. Since GT.M allows commands without arguments such as QUIT, ZGOTO, or HANG as valid labels, be careful not to use such keywords as labels for error handling code in &quot;adaptive&quot; mode.</p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </li>
+          <li>
+            <p>pope[ntryref] / popa[daptive] - If gtm_ztrap_form evaluates to &quot;POPE[NTRYREF]&quot; or &quot;POPA[DAPTIVE]&quot; (case insensitive) and $ZTRAP value is in the form of entryref, GT.M unwinds the M stack from the level at which an error occurred to (but not including) the level at which $ZTRAP was last SET. Then, GT.M transfers control to the entryref in $ZTRAP at the level where the $ZTRAP value was SET. If the <span>VMS logical name</span> gtm_zyerror is defined to a valid entryref, GT.M transfers control to the entryref specified by GTM_ZYERROR (with an implicit DO) after unwinding the stack and before transferring control to the entyref specified in $ZTRAP.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zexit.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter8.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="zversion.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZTExit </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $ZVersion</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/ztrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:06:19 GMT -->
+</html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Transfer_Routine_Control.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:33 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Transferring Routine Control</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Debug_Routine_Direct_Mode.html" title="Debugging a Routine in Direct Mode" />
+    <link rel="prev" href="Using_ZSHOW_Examine_Context_Info.html" title="Using ZSHOW to Examine Context Information" />
+    <link rel="next" href="Disp_Source_Code.html" title="Displaying Source Code" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Transferring Routine Control</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Using_ZSHOW_Examine_Context_Info.html">Prev</a> </td>
+          <th width="60%" align="center">Debugging a Routine in Direct Mode</th>
+          <td width="20%" align="right"> <a accesskey="n" href="Disp_Source_Code.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Transfer_Routine_Control"></a>Transferring Routine Control</h3>
+          </div>
+        </div>
+      </div>
+      <p>The ZGOTO command transfers control from one part of the routine to another, or from one routine to another, using the specified entry reference. The ZGOTO command takes an optional integer expression that indicates the M stack level reached by performing the ZGOTO, and an optional entry reference specifying the location to where ZGOTO transfers control. A ZGOTO command, with an entry reference, performs a function similar to the GOTO command with the additional capability of reducing the M stack level. In a single operation, the process executes $ZLEVEL-intexpr, implicit QUITs from DO or extrinsic operations, and a GOTO operation transferring control to the named entry reference.</p>
+      <p>The ZGOTO command leaves the invocation stack at the level of the value of the integer expression. GT.M implicitly terminates any intervening FOR loops and unstacks variables stacked with NEW commands, as appropriate.</p>
+      <p>ZGOTO $ZLEVEL:LABEL^ROUTINE takes the same action as GO LABEL^ROUTINE.</p>
+      <p>ZGOTO $ZLEVEL-1 produces the same result as QUIT (followed by ZCONTINUE, if in Direct Mode).</p>
+      <p>If the integer expression evaluates to a value greater than the current value of $ZLEVEL, or less than zero (0), GT.M issues a run-time error.</p>
+      <p>If ZGOTO has no entry reference, it performs some number of implicit QUITs and transfers control to the next command at the specified level. When no argument is specified, ZGOTO 1 is the result, and operation resumes at the lowest level M routine as displayed by ZSHOW &quot;S&quot;. In the image invokedby <span>MUMPS/DIRECT</span>, or a similar image, a ZGOTO without arguments returns the process to Direct Mode.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Using_ZSHOW_Examine_Context_Info.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Debug_Routine_Direct_Mode.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="Disp_Source_Code.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Using ZSHOW to Examine Context Information </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Displaying Source Code</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/Transfer_Routine_Control.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:33 GMT -->
+</html>

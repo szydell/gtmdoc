@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/establish_a_local_coll_seq.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:01 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Establishing A Local Collation Sequence</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="collation_seq.html" title="Collation Sequence Definitions" />
+    <link rel="prev" href="deleting_glbl_coll_char.html" title="Deleting Global Collation Characteristics" />
+    <link rel="next" href="creating_the_user_defined_coll_routines.html" title="Creating the User-defined Collation Routines" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Establishing A Local Collation Sequence</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="deleting_glbl_coll_char.html">Prev</a> </td>
+          <th width="60%" align="center">Collation Sequence Definitions</th>
+          <td width="20%" align="right"> <a accesskey="n" href="creating_the_user_defined_coll_routines.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="establish_a_local_coll_seq"></a>Establishing A Local Collation Sequence</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4235921" class="indexterm"></a>
+      <p>All subscripted local variables for a process must use the same collation sequence. The collation sequence used by local variables can be established as a default or in the current process. The local collation sequence can only be changed when a process has no subscripted local variables defined.</p>
+      <p>To establish a default local collation sequence define the logical name:</p>
+      <pre class="programlisting">
+	$ DEFINE GTM_LOCAL_COLLATE n
+	</pre>
+      <p>where n is the number of a collation sequence, which matches a valid collation number defined by a logical name in the form GTM_COLLATE_n.</p>
+      <p>An active process can use the %LCLCOL utility to define the collation sequence for subscripts of local variables. %LCLCOL has these extrinsic entry points:</p>
+      <p>set^%LCLCOL(n)changes the local collation to the type specified by n.</p>
+      <p>If the collation sequence is not available, the routine returns a false (0) and does not modify the local collation sequence.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	IF '$$set^%LCLCOL(3) D
+	. W &quot;local collation sequence not changed&quot;,! B
+	</pre>
+      <p>This piece of code illustrates $$set^LCLCOL used as an extrinsic. It would write an error message and BREAK if the local collation sequence was not set to 3.</p>
+      <p>get^%LCLCOLreturns the current local type.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	 GTM&gt; WRITE $$get^%LCLCOL
+	 0
+	</pre>
+      <p>This example uses $$get^%LCLCOL as an extrinsic that returns 0, indicating that the effective local collation sequence is the standard M collation sequence.</p>
+      <p>If set^%LCLCOL is not specified and GTM_LOCAL_COLLATE is not defined, or is invalid, the process uses M standard collation. The following would be considered invalid values:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>A value less than 0</p>
+          </li>
+          <li>
+            <p>A value greater than 255</p>
+          </li>
+          <li>
+            <p>a legal collation sequence that is inaccessible to the image</p>
+          </li>
+        </ul>
+      </div>
+      <p>Inaccessibility could be caused by a missing <span>logical name</span>, a missing image, or by security denial of access.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="deleting_glbl_coll_char.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="collation_seq.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="creating_the_user_defined_coll_routines.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Deleting Global Collation Characteristics </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Creating the User-defined Collation Routines</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/establish_a_local_coll_seq.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:26:01 GMT -->
+</html>

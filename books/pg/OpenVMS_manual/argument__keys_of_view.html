@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/argument__keys_of_view.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Argument Keywords of $VIEW()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="view_g.html" title="$View()" />
+    <link rel="prev" href="view_g.html" title="$View()" />
+    <link rel="next" href="examples_of_view_g.html" title="Examples of $VIEW()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Argument Keywords of $VIEW()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="view_g.html">Prev</a> </td>
+          <th width="60%" align="center">$View()</th>
+          <td width="20%" align="right"> <a accesskey="n" href="examples_of_view_g.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="argument__keys_of_view"></a>Argument Keywords of $VIEW()</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4184782" class="indexterm"></a>
+      <p>$VIEW() provides a means of accessing GT.M environmental information. $VIEW() is similar in purpose to Intrinsic Special Variables. When GT.M permits modification of the factors accessible with $VIEW(), the VIEW command generally provides the tool for performing the change. </p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3">
+    <p>$VIEW() Argument Keywords</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ARG 1</p>
+    </td>
+              <td>
+    <p>ARG 2</p>
+    </td>
+              <td>
+    <p>RETURN VALUE</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;BREAKMSG&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Value of the break message mask; GT.M defaults to 15.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;FREEBLOCKS&quot;</p>
+    </td>
+              <td>
+    <p>region</p>
+    </td>
+              <td>
+    <p>Number of free database blocks in a given region.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;FREEZE&quot;</p>
+    </td>
+              <td>
+    <p>region</p>
+    </td>
+              <td>
+    <p>Process-id of the process that has frozen the database associated with the region specified.</p>
+    <p>If the region is currently not frozen, a value of 0 is returned.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;GDSCERT&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Truth Value indicating whether Database block certification is currently enabled or disabled. </p>
+    <p>To enable or disable Database block certification, use the VIEW &quot;GDSCERT&quot; command.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;GVACCESS_METHOD&quot;</p>
+    </td>
+              <td>
+    <p>region</p>
+    </td>
+              <td>
+    <p>Access method of the region.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;GVFILE&quot;</p>
+    </td>
+              <td>
+    <p>region</p>
+    </td>
+              <td>
+    <p>Name of the database associated with the region.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;GVFIRST&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Name of the first database region in the current global directory. Is functionally equivalent to $VIEW(&quot;GVNEXT&quot;,&quot;&quot;)</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;GVNEXT&quot;</p>
+    </td>
+              <td>
+    <p>region</p>
+    </td>
+              <td>
+    <p>Name of the next database region after the given one; &quot;&quot; for region starts with the first region.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;GVSTAT&quot;</p>
+    </td>
+              <td>
+    <p>region</p>
+    </td>
+              <td>
+    <p>Encoded information about database behaviour since segment creation.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;ICHITS&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Number of indirection cache hits since GT.M image activation.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;ICMISS&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Number of indirection cache misses since GT.M image activation.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;JNLACTIVE&quot;</p>
+    </td>
+              <td>
+    <p>region</p>
+    </td>
+              <td>
+    <p>can return the following values:</p>
+    <p>-1 (internal error)</p>
+    <p>0 journaling is disabled</p>
+    <p>1 journaling is enabled but closed (OFF)</p>
+    <p>2 journaling is enabled and open (ON)</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;JNLFILE&quot;</p>
+    </td>
+              <td>
+    <p>region</p>
+    </td>
+              <td>
+    <p>Journal file name associated with the region.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;JNLTRANSACTION&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Truth value showing how many ZTSTART transaction fences have been opened (and not closed).</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;LABELS&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Truth value showing whether label case sensitivity is ON (1 for &quot;LOWER&quot;) or OFF (0 for &quot;UPPER&quot;); GT.M defaults to 1.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;LVNULLSUBS&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Truth value showing whether null subscripts are permitted in local arrays (1 for &quot;LVNULLSUBS&quot;) or not (o for &quot;NOLVNULLSUBS&quot;); GT.M defaults to 1.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;NOISOLATION&quot;</p>
+    </td>
+              <td>
+    <p>global</p>
+    </td>
+              <td>
+    <p>The current isolation-status of the specified global variable which should have a leading &quot;^&quot; in its specification.</p>
+    <p>This function will return 1 if the global has isolation turned off (i.e. noisolation turned on) and 0 otherwise. </p>
+    <p>By default, all globals will have isolation turned on i.e. a $VIEW command will return 0. The isolation-status of a global</p>
+    <p>variable can be turned on and off by the VIEW &quot;NOISOLATION&quot; command.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;REGION&quot;</p>
+    </td>
+              <td>
+    <p>gvn</p>
+    </td>
+              <td>
+    <p>Name of the region holding the given global name.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;PATCODE&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Name of the active patcode table; GT.M defaults to &quot;M&quot;.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;RTNNEXT&quot;</p>
+    </td>
+              <td>
+    <p>routine name</p>
+    </td>
+              <td>
+    <p>Name of the next routine in the image after the given one; &quot;&quot; for routinename starts with the first routine in ASCII collating sequence.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;SPSIZE&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Number of bytes in the process stack; the default is 16k.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;STKSIZ&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Returns the GT.M stack size in bytes. In VMS, the GT.M stack size is user settable at image startup time by means of the USER_STACK_SIZE parameter in GTM$DEFAULTS.M64.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;TOTALBLOCKS&quot;</p>
+    </td>
+              <td>
+    <p>region</p>
+    </td>
+              <td>
+    <p>Total number of database blocks in a given region.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;TRANSACTIONID&quot;</p>
+    </td>
+              <td>
+    <p>NULL </p>
+    <p>or</p>
+    <p>transaction level</p>
+    </td>
+              <td>
+    <p>Transaction ID specified in the particular level (when the transaction level is specified). The first level TSTART is returned if the level is not specified as second argument.</p>
+    <p>NOTE: A NULL string is returned if the specified level (explicitly or implicitly) is greater than the current value of $TLEVEL.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;UNDEF&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Truth value showing whether undefined variables should be treated as having a null value (1 for &quot;UNDEF&quot;; 0 for &quot;NOUNDEF&quot;); GT.M defaults to 0.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;ZDATE_FORM&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Integer value showing whether four digit year code is active for $ZDATE(); GT.M defaults to 0 (for &quot;YY&quot; format). Logical name Environment variable gtm_zdate_form can be used to set the initial value of this factor. (Refer to $ZDATE() section in this chapter for its usage.)</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>&quot;ZDIR_FORM&quot;</p>
+    </td>
+              <td>
+    <p>none</p>
+    </td>
+              <td>
+    <p>Truth value showing whether ISV $ZDIR stores the whole path (including device specification) or just the directory path (0 for $ZDIR storing device specification and directory path; 1 for $ZDIR storing only the directory path); GT.M defaults to 0.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="view_g.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="view_g.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="examples_of_view_g.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$View() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples of $VIEW()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/argument__keys_of_view.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:37 GMT -->
+</html>

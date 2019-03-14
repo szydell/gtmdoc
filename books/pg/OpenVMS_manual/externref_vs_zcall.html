@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/externref_vs_zcall.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:56 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Externref vs. $ZCALL()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="calls_to_external_routines.html" title="Calls to External Routines" />
+    <link rel="prev" href="the_zcall_function.html" title="The $ZCALL() Function" />
+    <link rel="next" href="external_call_tables.html" title="External Call Tables" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Externref vs. $ZCALL()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="the_zcall_function.html">Prev</a> </td>
+          <th width="60%" align="center">Calls to External Routines</th>
+          <td width="20%" align="right"> <a accesskey="n" href="external_call_tables.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="externref_vs_zcall"></a>Externref vs. $ZCALL()</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4227607" class="indexterm"></a>
+      <p>Programmers are advised to use externrefs, though GT.M will continue to support the $ZCALL function. Externrefs have the following advantages: </p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Externrefs are part of the MDC Type A standard, while the $ZCALL function is not standard.</p>
+          </li>
+          <li>
+            <p>Externrefs may serve as a subroutine or a function, while $ZCALL may serve only as a function. </p>
+          </li>
+          <li>
+            <p>Externrefs allow you to pass variables by reference, while the $ZCALL function does not. </p>
+          </li>
+          <li>
+            <p>Externrefs are easier to read because the arguments correspond exactly to the input lines in the external call table. In the $ZCALL function, on the other hand, the first argument specifies the callname; the second argument thus corresponds to the first input line, the third argument to the second input line, and so on. This is explained further in the section on &quot;External Call Tables&quot;, below.</p>
+          </li>
+          <li>
+            <p>Externrefs may be faster because their addresses can be resolved by the linker rather than at run-time.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="the_zcall_function.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="calls_to_external_routines.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="external_call_tables.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">The $ZCALL() Function </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> External Call Tables</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+<!-- Mirrored from tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/externref_vs_zcall.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Mar 2019 23:25:56 GMT -->
+</html>
