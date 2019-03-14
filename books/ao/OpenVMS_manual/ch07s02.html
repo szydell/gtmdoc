@@ -34,7 +34,7 @@ process.</p></li><li class="listitem"><p>Additional requirements for application
 the "Messaging" section which follows. As previously noted, all
 processes accessing a replicated database must use the same Global
 Directory. Do not use M extended references since they can have
-unpredictable results. </p></li></ul></div><div class="figure"><a name="id3245197"></a><p class="title"><b>Figure 7.2. Logical Dual-Site Application Architecture</b></p><div class="figure-contents"><div class="mediaobject"><img src="ao_figures/log_dual_site_arch.html" alt="Represents logical dual-site application architecture."></div></div></div><br class="figure-break"><div class="sect3" title="Messaging"><div class="titlepage"><div><div><h4 class="title"><a name="mssg"></a>Messaging</h4></div></div></div><p>For online operations, application servers on the primary respond to
+unpredictable results. </p></li></ul></div><div class="figure"><a name="id3245197"></a><p class="title"><b>Figure 7.2. Logical Dual-Site Application Architecture</b></p><div class="figure-contents"><div class="mediaobject"><img src="ao_figures/log_dual_site_arch.png" alt="Represents logical dual-site application architecture."></div></div></div><br class="figure-break"><div class="sect3" title="Messaging"><div class="titlepage"><div><div><h4 class="title"><a name="mssg"></a>Messaging</h4></div></div></div><p>For online operations, application servers on the primary respond to
 messages from clients delivered over a network. Each message is assumed to
 result in zero (inquiry) or one (updated) transaction on the server. The
 network that delivers messages must be robust. This means that each message
@@ -79,7 +79,7 @@ that each application instance comes up in the correct state. In particular,
 there must be exactly one primary and either no secondary system or one
 secondary system. All database update operations on replicated databases
 must take place only on the primary, and there must be no logical database
-updates on the secondary.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>
+updates on the secondary.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>
 <span>/</span>mupip backup
 <span>/</span>online and mupip reorg <span>/</span>online update control
 information in the file header, not the database contents, and can
@@ -107,7 +107,7 @@ consistent state as of the end of the last transaction committed to the database
 by the application. Certain benign errors may also occur (refer to the
 "Maintaining Database Integrity" chapter). These can be repaired on the
 secondary system at an appropriate time, and are not considered "damaged" for
-the purpose of this discussion.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>If the magnetic media of the database and/or the journal file is damaged
+the purpose of this discussion.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>If the magnetic media of the database and/or the journal file is damaged
 (e.g., a head crash on a disk that is not mirrored), automatic repair is
 problematic. For this reason, it is strongly recommended that organizations
 use hardware mirroring for magnetic media.</p></td></tr></table></div><p>Considering the high level at which replication operates, the logical
@@ -119,7 +119,7 @@ a failover so that the damaged database begins operating as the secondary. Then
 shut down replication, repair the database, and resume replication. The
 secondary system will automatically "catch up," assuming that the replication
 fields in the database file headers are correct.</p><p>To maintain application consistency, do not change the logical content of a
-replicated region when using DSE to repair a damaged database.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Before attempting manual database repair, FIS strongly recommends
+replicated region when using DSE to repair a damaged database.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Before attempting manual database repair, FIS strongly recommends
 backing up the entire database (all regions).</p></td></tr></table></div><p>After repairing the database, bring the secondary back up and backup the
 database with new journal files. MUPIP backup online will allow the secondary to
 come back online and resume operation while the backup takes place. The old
@@ -184,7 +184,7 @@ if they are logically identical but configured differently, ensure that
 at least one region on the secondary has reg_seqno and resync_seqno the
 same as the largest reg_seqno on the primary.) No rollback/recovery
 should be required on either site. If there is any possibility that the
-two are not identical, do not try to bring both up concurrently.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>FIS does not recommend starting both systems concurrently
+two are not identical, do not try to bring both up concurrently.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>FIS does not recommend starting both systems concurrently
 because of the possibility of a network or timing problem resulting
 in two primaries or two secondaries.</p></td></tr></table></div></div><div class="sect4" title="Single-Site to Dual-Site"><div class="titlepage"><div><div><h5 class="title"><a name="sing_site_to_dual"></a>Single-Site to Dual-Site</h5></div></div></div><p>FIS' recommended approach is to bring up the application as a
 single-site, and then bring up the secondary. Enable failover once the
@@ -205,7 +205,7 @@ appropriate.</p></li></ul></div><p>Since the Source Server goes to the journal f
 transactions that are no longer in the journal pool, preserve all
 journal files on the primary along with the back pointers. This
 scenario is most applicable when it is not expected that the primary
-will be operational long before the secondary is up.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>All GT.M activity in the secondary instance must cease and any
+will be operational long before the secondary is up.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>All GT.M activity in the secondary instance must cease and any
 open database files must be run down before copying database
 files onto the secondary, or creating new database files and
 loading them with the extracts from the primary.</p></td></tr></table></div></div><div class="sect5" title="Secondary Starts from Backup of Primary"><div class="titlepage"><div><div><h6 class="title"><a name="sec_back"></a>Secondary Starts from Backup of Primary</h6></div></div></div><p>The more common scenario for bringing up the secondary from the
@@ -371,7 +371,7 @@ up, it will act as the secondary and be forced to rollback all transactions
 performed while it was primary and Site A was down. These transactions
 become non-replicated transactions. If Site B came up first, then the
 non-replicated transactions would occur when Site A restarted. These would
-be the transactions while A was primary after B failed.</p><div class="figure"><a name="id3245439"></a><p class="title"><b>Figure 7.3. Complex Dual-Site Failure</b></p><div class="figure-contents"><div class="mediaobject"><img src="ao_figures/cmplx_dual_site_fail.html" alt="Represents Complex Dual-site Failure"></div></div></div><br class="figure-break"><p>When recovering from these situations, the primary is always the current
+be the transactions while A was primary after B failed.</p><div class="figure"><a name="id3245439"></a><p class="title"><b>Figure 7.3. Complex Dual-Site Failure</b></p><div class="figure-contents"><div class="mediaobject"><img src="ao_figures/cmplx_dual_site_fail.png" alt="Represents Complex Dual-site Failure"></div></div></div><br class="figure-break"><p>When recovering from these situations, the primary is always the current
 system of record when the secondary comes up. The secondary must roll its
 database back to the transaction with the highest journal sequence number
 for which both systems are known to be in agreement, and "catch up" from

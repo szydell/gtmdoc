@@ -37,7 +37,7 @@
 <p>With VIEW "LINK":"RECURSIVE" specified or by starting the process with the environment variable gtm_link set to "RECURSIVE", the ZLINK command adds an executable routine even when a routine with the same name is active and available in the current stack. When a process links a routine with the same name as an existing routine, future calls use the new routine. Prior versions of that routine referenced by the stack remain tied to the stack until they QUIT, at which point they become inaccessible. This provides a mechanism to patch long-running processes.</p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>An active routine is displayed with $STACK() or ZSHOW "S" of the M virtual stack. By default, an attempt to replace an active routine results in a run-time error . To replace an active routine with a new version, either use VIEW "LINK":"RECURSIVE" or  remove the active routine from the stack using ZGOTO or the appropriate number of QUITs and then execute the ZLINK command.</p></td></tr>
@@ -55,7 +55,7 @@
 <p>When the ZLINK command specifies a file, GT.M sets $ZSOURCE to that filename. By default, ZLINK and ZEDIT use $ZSOURCE for a filename when they have a missing or null argument. A subsequent ZLINK without an argument is equivalent to ZLINK $ZSOURCE. <span>For more information on $ZSOURCE, see the appropriate section in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span></p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>In order to ensure compatibility with GT.M versions that do not permit the percent sign (%) in a file name, use an underscore (_) in place of the percent in the ZLINK file name for routines beginning with a percent sign.</p></td></tr>
@@ -249,7 +249,7 @@ GTM&gt;</pre>
 <p>This section describes the procedure to setup the auto-relink functionality. GT.M loads an object file linked from an object directory (in $ZROUTINES) with a *-suffix (i.e. auto-relink-enabled) into a shared memory segment (referred to henceforth as a Rtnobj shared memory segment). At the invocation of DO, GOTO, or ZGOTO, extrinsic functions, ZBREAK, ZPRINT or $TEXT() that specify an entryref which includes a routine name (in contrast to a label without a routine name), GT.M processes (and MUPIP processes executing trigger logic) automatically relink ("auto-relink") and execute published new versions of routines.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -301,7 +301,7 @@ GTM&gt;w $zroutines
 <p>With auto-relink enabled, GT.M loads an object file from an object directory into Rtnobj shared memory segment on an explicit ZLINK, implicit ZLINK (DO, GOTO, ZPRINT, $TEXT()), and extrinsic function invocations ($$) enabling the routines to be accessed by other concurrent/future processes.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top">
@@ -352,7 +352,7 @@ GTM&gt;</pre>
 <p>In GT.M, the name of the source file determines the name of the GT.M routine. The file name of the object file is not required to match the name of the routine. Linking the object file makes the internal routine name (derived from the source file) known to GT.M. This can lead to potential confusion, however, since both ZLINK and auto-ZLINK use the name of the object file to find the routine. When the object file name differs from the name of the routine, auto-ZLINK generates a run-time error.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Auto-ZLINK and ZLINK commands without a .m or .o file extension in their argument determine the need to recompile based on whether the object file was more recently modified than the source file using time in nanoseconds, as provided by the underlying system call. Note that, although the format of the file modification timestamps provides a nanosecond granularity, many supported OSs currently update the file timestamps with an accuracy of one second.</p></td></tr>

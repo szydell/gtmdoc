@@ -247,7 +247,7 @@ single character and ending with "XREF" to the directory
 USR$BCK:[TUESDAY].</p><p>Example:</p><pre class="programlisting">$ MUPIP BACKUP /INCREMENTAL *[19990505]</pre><p>This backs up all changes made since the last BACKUP /FDATABASE
 for all regions of the database defined by the current Global Directory into
 the RMS directory [19990505]. BACKUP creates files in the directory, with
-names corresponding to each dynamic segment's file name.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>GT.M allows multiple regions to have the same database file name. This
+names corresponding to each dynamic segment's file name.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>GT.M allows multiple regions to have the same database file name. This
 occurs because different regions can have the same file names as long as
 they reside in different directories. However, FIS does not
 recommend this practice. If this happens, you should specify explicit
@@ -267,7 +267,7 @@ the termination are usable.</p><p>CONVERT takes only one qualifier:</p><p>
 the default and the only code CONVERT recognizes. </p></div><div class="sect2" title="CReate"><div class="titlepage"><div><div><h3 class="title"><a name="create"></a>CReate<a class="indexterm" name="id3230969"></a></h3></div></div></div><p>CREATE creates and initializes database files using the information in a
 Global Directory file. </p><p>Use the MUPIP CREATE command to create new database files. If a file already
 exists for any segment, CREATE takes no action for that segment.</p><p>The format of the CREATE command is:</p><pre class="programlisting">CR[EATE] [<span>/</span>qualifier]</pre><p>The single optional <span>/</span>REGION qualifier specifies a region for which to create a database
-file.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>To access a large database, a process may need a higher OpenVMS BYTLM. If
+file.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>To access a large database, a process may need a higher OpenVMS BYTLM. If
 you exceed a quota, contact your system manager.</p></td></tr></table></div><p>
 <span class="emphasis"><em>
 <span>/</span>R[EGION]=region-name</em></span>
@@ -312,7 +312,7 @@ B[INARY] | Z[WR]</p></li><li class="listitem"><p>
 . EXTRACT may output to a<span>n
 RMS</span>
  file on any device that
-supports such files, including magnetic tapes. </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Magnetic tapes may have a smaller maximum file size than disks.<span>When directing the output file to a magnetic tape, use DCL to
+supports such files, including magnetic tapes. </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Magnetic tapes may have a smaller maximum file size than disks.<span>When directing the output file to a magnetic tape, use DCL to
 MOUNT the tape /INITIALIZE=CONTINUATION. This causes automatic handling
 of multiple volumes. When mounting a volume to tape for an EXTRACT,
 specify a blocksize that is eight (8) bytes larger than the size of the
@@ -339,7 +339,7 @@ to transport binary data from one computer architecture to another. EXTRACT
 platform to GT.M on another platform.) EXTRACT /FORMAT=GO can be used to
 transport text and data from one M implementation to
 another.</span>
-</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>There is no defined standard to transport binary data from one GT.M
+</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>There is no defined standard to transport binary data from one GT.M
 implementation to another.</p></td></tr></table></div><p>By default, EXTRACT uses <span>/</span>FORMAT=ZWR.</p><p>
 <span class="emphasis"><em>
 <span>/</span>FR[EEZE]</em></span>
@@ -369,7 +369,7 @@ case, EXTRACT selects all globals except ^A, ^B, and ^C.</p><p>
 </p><p>Specifies the global(s) to extract. The caret symbol (^) in the specification
 of the global name is optional. <span>Enclose lowercase global names
 in quotation marks (" "). </span>
-</p><p>The global-specification can be:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>A global name, such as MEF</p></li><li class="listitem"><p>A range of global names, such as A7:B6</p></li><li class="listitem"><p>A list, such as A,B,C</p></li><li class="listitem"><p>Global names with the same prefix, such as TMP*</p></li></ul></div><p>By default, EXTRACT selects all globals, as if it had the qualifier <span>/</span>SELECT=*</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>If the rules for selection are complex, it may be easier to construct an
+</p><p>The global-specification can be:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>A global name, such as MEF</p></li><li class="listitem"><p>A range of global names, such as A7:B6</p></li><li class="listitem"><p>A list, such as A,B,C</p></li><li class="listitem"><p>Global names with the same prefix, such as TMP*</p></li></ul></div><p>By default, EXTRACT selects all globals, as if it had the qualifier <span>/</span>SELECT=*</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>If the rules for selection are complex, it may be easier to construct an
 ad hoc Global Directory that maps the global variables to be extracted to
 the database file. This is not permissible if the database file is part of a
 replicated instance. If this is the case, work with a backup of the
@@ -602,13 +602,13 @@ the data suspected of problems detected by INTEG.</p><p>By default, INTEG displa
 reports.</p><p>
 <span>/</span>NOMAP removes limits on
 incorrectly marked busy reporting so that INTEG reports all map errors. <span>/</span>NOMAP does not accept
-assignment of an argument.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Because incorrectly marked free errors are very dangerous, INTEG always
+assignment of an argument.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Because incorrectly marked free errors are very dangerous, INTEG always
 reports them, and <span>/</span>MAP
 does not affect them.</p></td></tr></table></div><p>An error in an index block prevents INTEG from processing potentially large
 areas of the database. A single "primary" error may cause large numbers of
 "secondary" incorrectly marked busy errors. Because "real" or primary
 incorrectly marked busy errors only make "empty" blocks unavailable to the
-system, they are low impact and do not require immediate repair.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>After a system crash and a database recovery with MUPIP recover or
+system, they are low impact and do not require immediate repair.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>After a system crash and a database recovery with MUPIP recover or
 rollback, the database can legitimately have benign, incorrectly marked busy
 errors. These errors do not require immediate repair. Schedule repairs for
 the next convenient opportunity.</p></td></tr></table></div><p>By default, INTEG reports a maximum of 10 map errors (<span>/</span>MAP=10).</p><p>
@@ -649,7 +649,7 @@ characters * and %. INTEG /REGION requires the logical name GTM$GBLDIR to
 specify a valid Global Directory.</span>
  For more information on defining 
 <span>GTM$GBLDIR</span>, refer to the
-"Global Directory Editor" chapter.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Because a KILL may briefly defer marking the blocks it releases "free" in
+"Global Directory Editor" chapter.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Because a KILL may briefly defer marking the blocks it releases "free" in
 the bit maps, INTEG <span>/</span>REGION may report spurious block incorrectly marked busy errors.
 These errors are benign. If these errors occur in conjunction with a "Kill
 in progress" error, resolve the errors after the "Kill in progress" error is
@@ -667,7 +667,7 @@ to find the block(s) and INTEG <span>/</span>BLOCK.</p><p>The <span>/</span>SUBS
 is incompatible with the <span>/</span>BLOCK and <span>/</span>TN_RESET qualifiers.</p><p>Use <span>/</span>FULL to have INTEG
 report all global names in a region or list of regions.</p><p>Example:</p><pre class="programlisting">MUPIP&gt; INTEG <span>/</span>SUBSCRIPT="^a(100)":"^b(""c"")" <span>/</span>REGION $DEFAULT
 </pre><p>This INTEGs all global variables greater than or equal to ^a (100) and less
-than or equal to ^b("c") in the default region(s).</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>To specify a literal in the command string, use double quotation marks for
+than or equal to ^b("c") in the default region(s).</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>To specify a literal in the command string, use double quotation marks for
 example, ^b(""c"").</p></td></tr></table></div><p>
 <span class="emphasis"><em>
 <span>/</span>TN[_RESET]</em></span>
@@ -685,7 +685,7 @@ a margin of nearly 300 million updates before failure to perform the INTEG
 database to fail. This should give you adequate time to schedule an INTEG
 <span>/</span>TN_RESET. If you use
 MUPIP EXTRACT, delete the file and then MUPIP CREATE and MUPIP LOAD, the
-procedures have the same effect as a <span>/</span>TN_RESET.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Any time a GT.M update opens a database file that was not properly closed,
+procedures have the same effect as a <span>/</span>TN_RESET.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Any time a GT.M update opens a database file that was not properly closed,
 GT.M increments the transaction number by 1000. This automatic increment
 prevents problems induced by abnormal database closes, but it should be
 considered in your operational procedures. The rate at which GT.M "uses up"
@@ -1046,7 +1046,7 @@ a list of files, the command only operates on the first item in the list.</p><p>
 </p><p>Specifies that the argument contains one or more region-names that identify
 database files mapped by the current Global Directory. <span>Region-names may include the DCL wildcards % and *. </span> The <span>/</span>REGION qualifier is
 incompatible with the <span>/</span>FILE qualifier.</p></div><div class="sect2" title="Set"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_set_cmmd"></a>Set<a class="indexterm" name="id3234629"></a></h3></div></div></div><p>SET modifies certain database characteristics. SET operates on either regions
-or files.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>In regions that have journaling enabled and on, you can switch journal
+or files.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>In regions that have journaling enabled and on, you can switch journal
 files without either requiring standalone access or freezing updates.</p></td></tr></table></div><p>Example:</p><pre class="programlisting">MUPIP SET /REGION * /JOURNAL=(ON,NOBEFORE)</pre><p>The format of the SET command is:</p><pre class="programlisting">SE[T] [/qualifier,...] /FILE file-specification | /REGION region-name</pre><p>The file-<span>specification</span>
  (or region-list) identifies the target of the SET.</p><p>Region-names may be lists and may include the DCL wildcards % and
 *.</p><p>The SET command must include one of the following qualifiers which determine
