@@ -77,16 +77,16 @@
 </ol></div>
 <p>After obtaining the values, an unconditional KILL command deletes the previous cross reference index, if it exists. Then, only if a SET invoked the trigger (determined from the ISV $ZTRIGGEROP), the trigger invoked routine creates a new cross reference index node. Note that because GT.M implicitly creates a new context for the trigger logic we do not have to worry about out choice of names or explicitly NEW any variables.</p>
 <p>The following illustration shows the flow of control when the trigger is executed for <code class="code">Set ^CIN(ACN,1)="Paul|John, Doe, Johnny|"</code>. The initial value of <code class="code">^CIN(ACN,1)</code> is <code class="code">"Paul|Doe, John|"</code> and ACN is set to "<code class="code">NY</code>". </p>
-<p><img src="pg_figures/setcin.html"></p>
+<p><img src="pg_figures/setcin.gif"></p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>Within trigger context (Step 1 through 4) , if you modify the value of $ZTVALUE, GT.M commits it to the database at Step 5. GT.M executes all steps (0 through 5) as an Atomic (all or nothing) transactional unit.</p></td></tr>
 </table></div>
 <p>The following illustration shows the flow of control when the trigger is executed for <code class="code">Kill ^CIN(</code>ACN<code class="code">,1)</code>.</p>
-<p><img src="pg_figures/kcin.html"></p>
+<p><img src="pg_figures/kcin.gif"></p>
 </div>
 <div class="navfooter">
 <hr>

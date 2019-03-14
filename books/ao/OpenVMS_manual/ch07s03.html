@@ -318,7 +318,7 @@ system in the <span class="emphasis"><em>
 
 </em></span> is not specified, &lt;extract
 file&gt; lists the post-consistent-state transactions that were undone by
-the rollback procedure to reach a consistent state.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The extracted lost transactions list may contain broken transactions
+the rollback procedure to reach a consistent state.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The extracted lost transactions list may contain broken transactions
 due to system failures that occurred during processing. Do not resolve
 these transactions&#8211;they are not considered to be committed.</p></td></tr></table></div><p>
 <span class="emphasis"><em>
@@ -329,7 +329,7 @@ these transactions&#8211;they are not considered to be committed.</p></td></tr><
 rollback operation. When you specify * for file-list, GT.M uses the journal
 files of the database files listed in the Global Directory that 
 <span>GTM$GBLDIR</span> points
-to for rollback.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Currently, the only value accepted for file-list is *. This prevents
+to for rollback.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Currently, the only value accepted for file-list is *. This prevents
 incomplete input from being supplied to the rollback operation. 
 </p></td></tr></table></div><p>When a database file is rolled back, the corresponding journal file is
 also rolled back so that the two are synchronized. To roll back a journal
@@ -392,7 +392,7 @@ rollback to the previous generation journal file.</p><p>
 </em></span>
 </p><p>Use this qualifier to override the requirement that database files (or
 their corresponding journal files) affected by the set command be available
-standalone.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Changing the previous generation file link when a rollback operation
+standalone.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Changing the previous generation file link when a rollback operation
 is in progress or when the Source Server is actively replicating, can
 damage the journal file and hamper recoverability.</p></td></tr></table></div><p>To eliminate the generation link of a journal file, specify noprevjnlfile
 option as part of the <span class="emphasis"><em>
