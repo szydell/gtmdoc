@@ -52,12 +52,12 @@ specified the BEFORE_IMAGES qualifier.</p><p>In effect, BEFORE_IMAGES creates "m
 update. Backward Recovery uses the mini-backups to restore the database as
 far back in time as specified by the qualifiers used with the MUPIP JOURNAL
 command, then it replays the database updates. </p><p>Using Backward Recovery with the MUPIP JOURNAL qualifiers <span>/</span>SINCE=, <span>/</span>BEFORE=, and <span>/</span>LOOKBACK_LIMIT=, you can specify
-a block of time to recover.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>"Before-image" journaling requires more disk I/O and storage space
+a block of time to recover.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>"Before-image" journaling requires more disk I/O and storage space
 than M-level (or NOBEFORE) journaling.</p></td></tr></table></div><p>Do not delete a database that you want to <span>/</span>BACKWARD recover. Recovery can
 only occur into an existing/used database.</p><p>Use <span>/</span>RECOVER <span>/</span>FORWARD for databases
 that have been recreated. </p><p>Example of Backward Recovery:</p><div class="informalexample"><p>
 
-<img src="ao_figures/ch6_3_b.html">
+<img src="ao_figures/ch6_3_b.png">
 
 
 </p></div><p>This shows a recovery after a system crash at 10:35. The recovery
