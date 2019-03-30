@@ -4,7 +4,7 @@
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>gmtsecshr</title>
-<link rel="stylesheet" href="gtm.html" type="text/css">
+<link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
 <link rel="up" href="ipc_usage.html" title="Appendix A. GT.M's IPC Resource Usage">
@@ -42,7 +42,7 @@
 <p><code class="code"> gtmsecshr</code> automatically shuts down after 60 minutes of inactivity. Normally, there is no need to shut it down, even when a system is making the transition between a secondary and a primary. The only occasions when <code class="code"> gtmsecshr </code>must be explicitly shut down are when a GT.M version is being removed - either a directory containing the GT.M version the running <code class="code"> gtmsecshr </code>process belongs to is being deleted, or when a new GT.M version is being installed in the same directory as an existing one.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>FIS strongly recommends against installing a new GT.M version on top of an existing GT.M version.</p></td></tr>
@@ -58,7 +58,7 @@
 <p>If there are multiple GT.M versions active on a system, FIS recommends different values of <code class="code"> gtm_tmp </code>and <code class="code"> gtm_log </code>be used for each version. This makes system administration easier.</p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
 <th align="left">Caution</th>
 </tr>
 <tr><td align="left" valign="top"><p>A given database file can only be open by processes of a single version of GT.M at any given time. Contemporary releases of GT.M protect against concurrent access to GT.M files by processes executing different versions of GT.M. Since historical versions of GT.M did not protect against this condition, FIS recommends procedural safeguards against inadvertent concurrent access by processes of multiple versions on systems on which old versions of GT.M are installed and active, since such concurrent usage can cause structural damage to the

@@ -4,7 +4,7 @@
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ZWRite</title>
-<link rel="stylesheet" href="gtm.html" type="text/css">
+<link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
@@ -90,7 +90,7 @@ GTM&gt; </pre>
 <p>When ZWRITE displays values for an alias variable, it appends a " ;*" to the name which visually tags the alias without interfering with use of ZWRITE output as arguments to a SET @. ZWRITE can only identify alias variables when at least two aliases for the same data match its argument. When ZWRITE encounters an alias container variable with no current associated alias, it uses the ZWRTAC mechanism to expose the data; SET @ can restore data exposed with the ZWRTAC mechanism. </p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
 <th align="left">Caution</th>
 </tr>
 <tr><td align="left" valign="top"><p>FIS strongly recommends that you should not create or manipulate your own $ZWRTACn "variables". They are not part of the supported functionality for implementing alias variables and containers, but are rather a part of the underlying implementation that is visible to you, the GT.M user. FIS can arbitrarily, for its own convenience change the use of $ZWRTAC in GT.M at any time. They are only documented here since you may see them in the output of ZWRITE and ZSHOW "V".</p></td></tr>

@@ -4,7 +4,7 @@
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Operating in DSE</title>
-<link rel="stylesheet" href="gtm.html" type="text/css">
+<link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
 <link rel="up" href="ch10.html" title="Chapter 10. Database Structure Editor">
@@ -81,7 +81,7 @@ SP[AWN]  </pre>
 <p>Although DSE can operate concurrently with other processes that access the same database file, FIS strongly recommends using DSE in standalone mode when using Change commands. Some DSE operations can adversely impact the database when they occur during active use of the database. Other DSE operations may be difficult to perform in a logically sound fashion because a DSE operator works on a block at a time, while normal database operations update all related blocks almost simultaneously.</p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
 <th align="left">Caution</th>
 </tr>
 <tr><td align="left" valign="top"><p>When DSE attaches to a database with a version that does not match the DSE version, DSE issues an informational message and continues. At this point, you should exit DSE and find the version of DSE that matches the database. You should continue after this warning if and only if you are certain that the DSE is indeed from the GT.M version that has the database open (and hence the error results from a damaged database file header or shared memory that you intend to repair, following instructions from FIS).</p></td></tr>
