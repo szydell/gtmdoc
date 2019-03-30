@@ -4,7 +4,7 @@
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Introduction</title>
-<link rel="stylesheet" href="gtm.css" type="text/css">
+<link rel="stylesheet" href="gtm.html" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Database Replication">
@@ -49,7 +49,7 @@ auditing. There are two types of replication:</p>
 <p>SI replication is a general purpose mechanism whose utility includes applications such as real-time decision support, warehousing, analytics, and auditing.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>In this book, instances {A, B, C...} denote systems of record (BC replication) and instances {P, Q, R...} denote instances that are not systems of record and which include the results of supplementary business logic.</p></td></tr>
@@ -67,7 +67,7 @@ auditing. There are two types of replication:</p>
 <p>BC members of a BC Group can replicate downstream to other BC and SI groups whereas an SI Group cannot replicate downstream to other groups.</p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>Instances can change their roles within an LMS group but they cannot move between groups, however data from one instance / group can be loaded into another group.</p></td></tr>
@@ -87,7 +87,7 @@ auditing. There are two types of replication:</p>
 +-----------------+</pre>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>In this replication configuration, instance B can also replicate to instance Q. However, instance P cannot replicate to an instance in Q's group because it is an SI member of A's BC group.</p></td></tr>
@@ -139,7 +139,7 @@ auditing. There are two types of replication:</p>
 </ol></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Notes">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Notes</th>
 </tr>
 <tr><td align="left" valign="top"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -162,7 +162,7 @@ auditing. There are two types of replication:</p>
 </ol></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note on Using Multiple Instances in the Same Process">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note on Using Multiple Instances in the Same Process</th>
 </tr>
 <tr><td align="left" valign="top"><p>Because this functionality has a wide variety of user stories (use cases) and has substantial complexity, although the code appears robust, we are not confident that we have exercised a sufficient breadth of use cases in our testing. Also, we may make changes in future releases that are not entirely backwards compatible. We encourage you to use this facility in development and testing, and to provide us with feedback. If you are an FIS customer and wish to use this in production, please contact us beforehand to discuss your use case(s).</p></td></tr>
@@ -663,7 +663,7 @@ auditing. There are two types of replication:</p>
 <p>A certain number of each type of helper process maximizes throughput. As a practical matter, as long as the file system bandwidth on a replicating instance is equal to or greater than that of the originating instance providing its replication stream, there need be little concern about having too many helper processes.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top">
@@ -706,7 +706,7 @@ auditing. There are two types of replication:</p>
 <p>This history serves to determine the journal sequence numbers through which both instances are synchronized when two instances attempt to connect. GT.M determines this journal sequence number by going back in the history of both the instance files to find the most recent shared journal sequence number generated by the Originating Instance. If the shared journal sequence number matches the current journal sequence number of the Replicating Instance, the Receiver Server on the replicating instance continues with normal replication.  Otherwise, a synchronization requires a MUPIP JOURNAL -ROLLBACK -FETCHRESYNC on the Replicating Instance to rollback to a common synchronization point from which the originating instance can transmit updates to allow the Replicating Instance to catch up.</p>
 <a class="indexterm" name="idp183942816"></a><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Proper operation requires the Replication Instance file be consistent with the snapshot of the database files in a backup. MUPIP BACKUP -REPLINSTANCE creates a backup of the Replication Instance file.  Before backing up the replication instance file, you must start the Source Server for the instance at least once . If the replication instance file is damaged or deleted, you must create a new instance file, and all recreate all downstream Replicating Instances from backups. </p></td></tr>

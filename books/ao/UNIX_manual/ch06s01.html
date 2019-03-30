@@ -4,7 +4,7 @@
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Introduction</title>
-<link rel="stylesheet" href="gtm.css" type="text/css">
+<link rel="stylesheet" href="gtm.html" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
 <link rel="up" href="journaling.html" title="Chapter 6. GT.M Journaling">
@@ -46,12 +46,12 @@ HH             2-digit-hour in 24 hr format                    such as 14
 MM             2-digit minute                                  such as 40 
 SS             2-digit seconds                                 such as 30</pre>
 <p> The following animation  describes how GT.M uses journal files to record information pertaining to database updates on gtm.dat (the default database file created by gtmprofile). </p>
-<img src="ao_figures/gtmdatj.gif" width="95%"><a class="indexterm" name="idp182420080"></a><a class="indexterm" name="idp182426032"></a><p>At any given time the database file (gtm.dat) has a single active journal file (gtm.mjl) with links to predecessor ("previous generation") journal files. The black arrow between the journal files demonstrate how a journal file is back-linked to its predecessor with file name in the form of gtm.mjl_YYYYJJJHHMMSS to form a chain of journal files. When a switch of journal files occurs, either implicitly (for example, when AUTOSWITCHLIMIT is reached) or explicitly (for example, on a backup event or MUPIP SET -JOURNAL=ON), GT.M renames the existing journal file with the timestamp of its last modification.GT.M creates a new journal file with the name of the journal file for that database, and specifies the previous generation journal file name (after the rename), in the newly created journal file's header.GT.M journaling provides mechanisms for durable recovery/extract from the journal files, replaying database updates to an active database, reverting the database state to a previous consistent state for when replication is in use, and so on. GT.M automatically turns off journaling on encountering run-time conditions such as no available disk space or no authorization for a process attempting to auto-switch a journal file. In such a case, GT.M also logs an appropriate message to the operator log to alert the operational staff. If GT.M detects that the rename-logic yields a filename that already exists (a condition when journal files are switched in the same second), the string "_N[N[N[N...]]]" is appended to the renamed filename where "N[N[N...]]" denotes a sequence of numbers as follows:</p>
+<img src="ao_figures/gtmdatj.html" width="95%"><a class="indexterm" name="idp182420080"></a><a class="indexterm" name="idp182426032"></a><p>At any given time the database file (gtm.dat) has a single active journal file (gtm.mjl) with links to predecessor ("previous generation") journal files. The black arrow between the journal files demonstrate how a journal file is back-linked to its predecessor with file name in the form of gtm.mjl_YYYYJJJHHMMSS to form a chain of journal files. When a switch of journal files occurs, either implicitly (for example, when AUTOSWITCHLIMIT is reached) or explicitly (for example, on a backup event or MUPIP SET -JOURNAL=ON), GT.M renames the existing journal file with the timestamp of its last modification.GT.M creates a new journal file with the name of the journal file for that database, and specifies the previous generation journal file name (after the rename), in the newly created journal file's header.GT.M journaling provides mechanisms for durable recovery/extract from the journal files, replaying database updates to an active database, reverting the database state to a previous consistent state for when replication is in use, and so on. GT.M automatically turns off journaling on encountering run-time conditions such as no available disk space or no authorization for a process attempting to auto-switch a journal file. In such a case, GT.M also logs an appropriate message to the operator log to alert the operational staff. If GT.M detects that the rename-logic yields a filename that already exists (a condition when journal files are switched in the same second), the string "_N[N[N[N...]]]" is appended to the renamed filename where "N[N[N...]]" denotes a sequence of numbers as follows:</p>
 <p><code class="code">0,1,2,3,4,5,6,7,8,9,90,91,92,93,94,95,96,97,98,99,990,991,...</code></p>
 <p>GT.M tries all numbers from the order in the above sequence until it finds a non-existing rename-filename. In the above illustration, if gtm.mjl_2010227 082618 is switched in the same second and gtm.mjl_2010227 082618_0 already exists, the renamed journal file would be gtm.mjl_2010227 082618_1. If the existing file renaming scheme or the default journal file naming scheme discussed above results in a filename longer than 255 characters (due to the suffix creation rules), GT.M produces an error and turns off journaling.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>In a very short time window just before switching a journal file, GT.M create a temporary file with an .mjl_new extension and attempts to write a few initialization journal records. After performing an initial verification, GT.M renames the .mjl_new file to the current .mjl file. In rare cases, you might see an .mjl_new file if the journal file creation process was interrupted midway (possibly due to permission or disk space issues). If a subsequent MUPIP process detects an .mjl_new file and no .mjl file, it automatically deleted it and creates a new .mjl file. </p></td></tr>
@@ -68,7 +68,7 @@ SS             2-digit seconds                                 such as 30</pre>
 </ol></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>In a multi-site database replication configuration, you might use these recovery procedures to refresh a replicating instance from the backup of an originating instance. However, the steps for both these recovery procedures are different.</p></td></tr>
@@ -81,7 +81,7 @@ SS             2-digit seconds                                 such as 30</pre>
 <p>Suppose a system crash occurred at 08:50 hrs and a backup of the database was taken at 08:26 hrs. Using forward recovery, you can replay the database updates between 08:26 hrs to 8:50 hrs (in blue) on the backup copy of the database and restore the database to a state prior to the crash.  In the process you can also identify unfinished or broken transactions that might have occurred at the time of the crash. In the following illustration, X denotes the crash time and the blue updates denote forward processing. </p>
 <p>
         
-        <img src="ao_figures/fpj.gif" width="90%">
+        <img src="ao_figures/fpj.html" width="90%">
    </p>
 <p>A command like <code class="code">mupip journal -recover -forward -before="--8:50" gtm.mjl</code> performs this operation. From the current journal file, forward recovery moves back to the point where the begin transaction number of a journal file matches the current transaction number of the active database (the point when the backup was taken)  and begins forward processing. Since a journal file is back-linked to its predecessor, GT.M facilitates forward processing by activating temporary forward links between journal files that appear only during recovery. These forward links are temporary because they are expensive to maintain as new journal files are created. Note: Forward recovery, by design, begins from a journal file whose "Begin Transaction" matches the "Current Transaction" of the active database. This condition occurs only when a new journal file is created (switched) immediately after a backup.  If a database is backed up with MUPIP BACKUP -NONEWJNLFILES (a backup option where journal files are not switched), forward recovery cannot find a journal file whose Begin Transaction matches the Current Transaction and therefore cannot proceed with forward recovery. Always use a backup option that switches a journal file or switch journal files explicitly after a backup.  Also, once a database has been recovered using forward recovery, you can no longer use it for a future recovery unless you restore the database again from the backup. </p>
 </div>
@@ -92,10 +92,10 @@ SS             2-digit seconds                                 such as 30</pre>
 <p>Backward recovery restores a journaled database to a prior state. Backward processing starts by rolling back updates to a checkpoint (specified by -SINCE)  prior to the desired state and replaying database updates forward till the desired state. </p>
 <p>Backward Recovery uses "BEFORE_IMAGE" journaling. With BEFORE_IMAGE journaling, GT.M captures the database updates, as well as "snapshots" of portions of the database immediately prior to the change caused by the update. Unlike forward recovery which works on a backup database, backward recovery works only on  production (current) database provided it is usable and BEFORE_IMAGE journaling is enabled. </p>
 <p>Suppose a system crash occurred at 10:35 hrs, a command like mupip journal recover backward -lookback_limit="TIME=0 10:10" -since="-- 10:20" -before="-- 10:30" performs backward recovery. The following illustration demonstrates how GT.M performs a recovery after a system crash at 10:35. Backward recovery "un-does" the database updates backward to 10:20, then applies updates forward until the crash. By adding -BEFORE="- - 10:30" to the command, the recovery stops when forward processing encounters updates that originally occurred after 10:30. If the application includes ZTSTART and ZTCOMMIT commands to fence a group of transactions, backward processing may continue back prior to 10:10 searching to resolve fenced transactions that were incomplete at 10:20.  </p>
-<img src="ao_figures/backrecv.png"><p>-LOOKBACK_LIMIT controls the maximum amount of additional backward processing, in this case, 10 minutes. Note that the -SINCE time in this example is slightly exaggerated for the sake of the graphical representation. If the application includes TSTART and TCOMMIT commands to fence transactions, backward processing does not require LOOKBACK_LIMIT because TSTART/TCOMMIT transactions automatically resolve open transaction fences. So, in the above example if the transactions are fenced with TSTART/TCOMMIT, backward recovery automatically increases the backward processing by 10 minutes. </p>
+<img src="ao_figures/backrecv.html"><p>-LOOKBACK_LIMIT controls the maximum amount of additional backward processing, in this case, 10 minutes. Note that the -SINCE time in this example is slightly exaggerated for the sake of the graphical representation. If the application includes TSTART and TCOMMIT commands to fence transactions, backward processing does not require LOOKBACK_LIMIT because TSTART/TCOMMIT transactions automatically resolve open transaction fences. So, in the above example if the transactions are fenced with TSTART/TCOMMIT, backward recovery automatically increases the backward processing by 10 minutes. </p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>ZTSTART and ZTCOMMIT are deprecated in favor of TSTART and COMMIT. FIS no longer validates ZTSTART/ZTCOMMIT and -LOOPBACK_LIMIT (since it applies to ZTSTART/ZTCOMMIT). </p></td></tr>
@@ -128,7 +128,7 @@ SS             2-digit seconds                                 such as 30</pre>
 <p>BEFORE_IMAGE is a form of Journaling that creates "mini-backups" preceding each database update. Backward Recovery uses these mini-backups to restore the database as far back in time then it replays the database updates."BEFORE_IMAGE" journaling requires more disk I/O and storage space than M-level (or NOBEFORE) journaling but delivers faster recovery times from system failures . </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>As stated in the GDE chapter, the MM database access method bypasses the BG buffer pool and relies entirely on the operating/file system to manage traffic between memory and disk. Because with MM, GT.M has no control over the timing of disk updates, BEFORE_IMAGE journaling is not an option with MM; attempts to use these two facilities together produce an error. </p></td></tr>
@@ -184,10 +184,10 @@ SS             2-digit seconds                                 such as 30</pre>
 <a name="backup_jnl_files"></a>Backup Journal Files <a class="indexterm" name="idp182478656"></a> </h3></div></div></div>
 <p>FIS recommends separate backup schemes for database files and journal files. MUPIP BACKUP creates a backup copy of the database. You should backup journal files separately.</p>
 <p>MUPIP BACKUP uses the -BKUPDBJNL and -NEWJNLFILES to interact with journal files. As stated in the General Database Management chapter, BKUPDBJNL enables or turns off the journaling characteristics of the backup database and NEWJNLFILES sets the journaling characteristics of the database being backed up. The following illustration describes how MUPIP BACKUP -NEWJNLFILES=NOPREVLINK cuts the back link between the newly created journal file and the prior generation journal files.  </p>
-<img src="ao_figures/noprevlink.gif" align="middle" width="80%"><p>Because -NEWJNLFILES=NOPREVLINK cuts back link of the newly created  journal file, any subsequent recovery, rollback or request to the source server go back past this discontinuity.</p>
+<img src="ao_figures/noprevlink.html" align="middle" width="80%"><p>Because -NEWJNLFILES=NOPREVLINK cuts back link of the newly created  journal file, any subsequent recovery, rollback or request to the source server go back past this discontinuity.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>When MUPIP SET changes the journal state from DISABLED or OFF to ON, GT.M creates new journal files with no back-links which, like the above example, indicates a fresh start of journaling for the database.  </p></td></tr>
@@ -277,7 +277,7 @@ SS             2-digit seconds                                 such as 30</pre>
 </table></div>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>The term cascading roll-back describes the situation that occurs when dropping one transaction causes previous transactions to be sequentially dropped, until potentially all transactions are dropped. If an application violates this assumption, a JOURNAL -RECOVER may create a database with application-level integrity problems. M LOCKs ensure the isolation of a sequence of updates from interaction with any other updates. TSTART and TCOMMIT transaction fences implicitly exhibit the required isolation whether fences are used with or without associated LOCKs. </p></td></tr>
@@ -285,7 +285,7 @@ SS             2-digit seconds                                 such as 30</pre>
 <p>For more information on TSTART/TCOMMIT, refer to the "Commands" chapter of the <a class="ulink" href="../../pg/UNIX_manual/index.html" target="_top">GT.M Programmer's Guide</a> for more information.  </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>As stated in the beginning of this chapter, ZTSTART and TZTCOMMIT are deprecated in favor of TSTART and TCOMMIT. FIS no longer validate the ZTSTART and ZTCOMMIT functionality so you should always use TSTART and TCOMMIT to fence your transactions. </p></td></tr>

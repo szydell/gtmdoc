@@ -4,7 +4,7 @@
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Global Director Editor Commands</title>
-<link rel="stylesheet" href="gtm.css" type="text/css">
+<link rel="stylesheet" href="gtm.html" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
 <link rel="up" href="gdechap.html" title="Chapter 4. Global Directory Editor">
@@ -60,7 +60,7 @@ of these commands.</p>
 <p>Comments on command lines start with an exclamation mark (!) and run to the end of line. </p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td>
 <th align="left">Caution</th>
 </tr>
 <tr><td align="left" valign="top"><p>An exclamation mark not enclosed in quotation marks ("")(for example in a subscript) causes GDE to
@@ -94,7 +94,7 @@ entered.</p></li>
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>The .dat extension is appended to the file-name when the database file
@@ -333,7 +333,7 @@ local locks to the <span>DEFAULT</span> region .</p>
 the caret symbol, "^" to the region main.</p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td>
 <th align="left">Caution</th>
 </tr>
 <tr><td align="left" valign="top"><p>GT.M associates LOCKs for global names with the database region holding the corresponding unsubscripted global name. Suppose a global called ^EURWest spans multiple regions in multiple global directories, a command like LOCK ^EURWest may not work in the same way as it would do if ^EURWest did not span multiple regions.  Before using a command like LOCK ^EURWest where ^EURWest spans multiple regions in multiple directories, ensure that the corresponding unsubscripted ^EURWest map to the same region in all the global directories. Alternatively, you can use LOCK globalname (with no leading up-arrow) and control LOCK interactions with the LOCKS global directory characteristic or use transaction processing to eliminate the use of LOCKs to protect global access. </p></td></tr>
@@ -452,7 +452,7 @@ SH[OW] -T[EMPLATE]
 <p>SHOW -COMMAND displays the GDE commands for creating names, regions, and segments of the current global directory state in a target environment. However, it does not always include the same template settings (SHOW -TEMPLATE) of the current global directory.  SHOW -COMMAND creates an appropriate set of templates that minimize other adjustments to recreate the current global directory. If the current GDE template settings (SHOW -TEMPLATE) are important for your application, you need set them again after applying the commands from GDE SHOW -COMMAND in the target environment.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>When GDE encounters an error while executing the <code class="code">@command-file</code> command,  it stops processing the command file and returns to the operator prompt, which gives the operator the option of compensating for the error. If you subsequently issue <code class="code">@command-file</code> command again in the same session for the same command-file, GDE resumes processing it at the line after the last error.</p></td></tr>
