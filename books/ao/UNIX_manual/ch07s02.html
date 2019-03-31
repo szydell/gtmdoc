@@ -57,7 +57,7 @@ This section lists key considerations for a transaction processing application t
 <li class="listitem"><p>Ensure that externally driven batch processing also has the ability to resume. The external file driving the batch operation must be available on the replicating instance before starting the batch operation on the originating instance. This is required to handle originating instance failure during the batch process.</p></li>
 <li class="listitem"><p>GT.M produces an error for updates outside the set of database files defined by the instance file. External references are not prohibited as such. In other words, there can be global directory and instance configurations where an external reference update falls within the instance and works correctly. Read references outside an instance are permitted because they currently do not engage replication.</p></li>
 </ul></div>
-<div class="mediaobject"><img src="ao_figures/log_dual_site_arch.png" alt="Represents logical dual-site application architecture."></div>
+<div class="mediaobject"><img src="ao_figures/log_dual_site_arch.html" alt="Represents logical dual-site application architecture."></div>
 <p>This diagram illustrates an application architecture that can reliably perform batch and online updates in a tiered environment.  It addresses the online updates via the Message Transport (which has to be able to reroute communications to the current originating instance after a switchover) and batch updates via an external file (which has to be made available to the current originating instance after a switchover).</p>
 <p>An application server is a GT.M process that accepts, processes, and responds to messages provided through the Message Transport. They may exist as a bunch of application servers in a "cloud" of size determined by the size of the node and the needs of the application. On the originating instance, an application server process receives messages and processes application transactions.  The application logic issues the TSTART command and a series of SET (also KILL and MERGE) commands that [potentially/provisionally] update the database, then a TCOMMIT command to finalize the transaction. The process may directly WRITE a reply, but another process may act as an agent that takes that reply from a database record and sends it to the originator. </p>
 <div class="sect3">
@@ -88,7 +88,7 @@ an application with an LMS configuration.</p>
 <p>To implement a robust, continuously available application, each application instance must come up in the correct state. In particular, there must be exactly one originating instance (-ROOTPRIMARY) at any given time. All database update operations on replicated databases must take place on the originating instance. LMS prohibits independent logical database updates on instances other than the originating instance.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>MUPIP BACKUP -ONLINE and MUPIP REORG -ONLINE update control information or physical representations, not the logical database contents, and can operate freely on a replicating instance.</p></td></tr>
@@ -127,7 +127,7 @@ an application with an LMS configuration.</p>
 <p>MUPIP REPLIC -SOURCE -JNLPOOL -SHOW displays whether the custom errors file is loaded.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>When a processes that is part of an instance configured for instance freeze behavior encounters an error with journaling, it freezes the instance and invokes its own error trap even if it does not have the gtm_custom_errors environment variable set.</p></td></tr>
@@ -143,7 +143,7 @@ an application with an LMS configuration.</p>
 <p>During an Instance Freeze, attempts to update the database and journal files hang but operations like journal file extract which do not require updating the database file(s) continue normally. When an Instance Freeze is cleared, processes automatically continue with no auxiliary operational or programmatic intervention. The Instance Freeze mechanism records both the freeze and the unfreeze in the operator log.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Because there are a large number of errors that GT.M can recognize and because GT.M has several operational states, the GT.M team has tested the errors in the custom_errors_sample.txt which are consistent with what we expect to be common usage. If you experience problems trying to add other errors or have concerns about plans to add other errors, please consult your GT.M support channel.</p></td></tr>
@@ -156,7 +156,7 @@ an application with an LMS configuration.</p>
 <p>GT.M includes a plugin reference implementation that provides the functionality to secure the replication connection between instances using Transport Layer Security (TLS; previously known as SSL). Just as database encryption helps protect against unauthorized access to a database by an unauthorized process that is able to access disk files (data at rest), the plugin reference implementation secures the replication connection between instances and helps prevent unauthorized access to data in transit. FIS has tested GT.M's replication operations of the TLS plugin reference implementation using OpenSSL (<a class="ulink" href="http://www.openssl.org/" target="_top">http://www.openssl.org</a>). A future GT.M release may include support for popular and widely available TLS implementations / cryptography packages other than OpenSSL. Note that a plug-in architecture allows you to choose a TLS implementation and a cryptography package. FIS neither recommends nor supports any specific TLS implementation or cryptography package and you should ensure that you have confidence in and support for whichever package that you intend to use in production.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Database encryption and TLS/SSL replication are just two of many components of a comprehensive security plan. The use of database encryption and TLS replication should follow from a good security plan. This section discusses encrypted GT.M replicating instances and securing the replication connection between them using TLS/SSL; it does not discuss security plans. </p></td></tr>
@@ -392,7 +392,7 @@ tls: {
             key: "/home/jdoe/current/tls/certs/BrynMawr.key";
       };
 };</pre>
-<p>If you are using the environment variable gtm_dbkeys to point to the master key file for database encryption, please convert that file to the libconfig configuration file format as pointed to by the $gtmcrypt_config environment variable at your earliest convenience. Effective V6.1-000, the gtm_dbkeys environment variable and the master key file it points to are deprecated in favor of the gtmencrypt_config environment variable. Although V6.1-000 supports the use of $gtm_dbkeys for database encryption, FIS plans to discontinue support for it in the very near future. To convert master key files to libconfig format configuration files, please click on <a class="ulink" href="downloadables/CONVDBKEYS.html" target="_top"><span class="inlinemediaobject"><img src="images/download.png" alt="Download CONVDBKEYS.m"></span>
+<p>If you are using the environment variable gtm_dbkeys to point to the master key file for database encryption, please convert that file to the libconfig configuration file format as pointed to by the $gtmcrypt_config environment variable at your earliest convenience. Effective V6.1-000, the gtm_dbkeys environment variable and the master key file it points to are deprecated in favor of the gtmencrypt_config environment variable. Although V6.1-000 supports the use of $gtm_dbkeys for database encryption, FIS plans to discontinue support for it in the very near future. To convert master key files to libconfig format configuration files, please click on <a class="ulink" href="downloadables/CONVDBKEYS.html" target="_top"><span class="inlinemediaobject"><img src="images/download.html" alt="Download CONVDBKEYS.m"></span>
 </a> to download the CONVDBKEYS.m program and follow instructions in the comments near the top of the program file. You can also download CONVDBKEYS.m from http://tinco.pair.com/bhaskar/gtm/doc/articles/downloadables/CONVDBKEYS.m.</p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
@@ -484,7 +484,7 @@ tls: {
 <p>A system crash can, and often will, damage a database file, leaving it structurally inconsistent. With before image journaling, normal MUPIP recovery/rollback repairs such damage automatically and restores the database to the logically consistent state as of the end of the last transaction committed to the database by the application. Certain benign errors may also occur (refer to the "Maintaining Database Integrity" chapter). These must be repaired on the (now) replicating instance at an appropriate time, and are not considered "damage" for the purpose of this discussion. Even without before image journaling, a replicating instance (particularly one that is multi-site) may have sufficient durability in the aggregate of its instances so that backups (or copies) from an undamaged instance can always repair a damaged instance.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>If the magnetic media of the database and/or the journal file is damaged
@@ -507,7 +507,7 @@ related database damage to occur on both originating and replicating instances. 
 <p>To maintain application consistency, do not use DSE to repair or change the logical content of a replicated region on an originating instance. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Before attempting manual database repair, FIS strongly recommends backing up the entire database (all regions).</p></td></tr>
