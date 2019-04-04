@@ -212,7 +212,7 @@
 <a class="indexterm" name="idp182855184"></a><a class="indexterm" name="idp182855696"></a><p>GT.M adds a prefix rolled_bak_ to the journal file whose entire contents are eliminated (rolled back) by -RECOVER -BACKWARD. GT.M does not use these files after a successful recovery therefore you might want to consider moving or deleting them. You should never use rolled_bak* files for any future database recovery. If there is a need to process rolled_bak* files, you should extract the journal records from rolled_back* files and process them using a M program.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Using -RECOVER on a replicated database initiates database recovery but turns replication OFF. Under most circumstances, there is no need to perform a -RECOVER operation on replicated regions. </p></td></tr>
@@ -247,7 +247,7 @@
 <p>-ROLLBACK -BACKWARD exits with an error message if a database does not have both journaling and replication either enabled or disabled.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top">
@@ -268,7 +268,7 @@
 <p>Any utility/command attempted while MUPIP JOURNAL -ONLINE -ROLLBACK operates waits for ROLLBACK to complete; the $gtm_db_startup_max_wait environment variable configures the wait period. <span>For more information on $gtm_db_startup_max_wait, refer to <a class="xref" href="ch03s02.html" title="Environment Variables">&#8220;Environment Variables&#8221;</a>.</span> </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Because MUPIP ROLLBACK -ONLINE can take a database backwards in state space, please make sure that you understand what it is that you intend it to do when you invoke it.</p></td></tr>
@@ -434,7 +434,7 @@ Journal file hash F226703EC502E975784
 <p>Specifies that MUPIP JOURNAL processing should proceed from the end of the journal file. If the actions include -RECOVER, JOURNAL -BACKWARD restores before-images from the end-of the file back to an explicitly or implicitly specified point (the turn around point), before it reverses and processes database updates in the forward direction (the forward phase).</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>-BACKWARD is incompatible with -FORWARD. </p></td></tr>
@@ -445,7 +445,7 @@ Journal file hash F226703EC502E975784
 <p>If multiple journal files are specified in the command line, -FORWARD sorts the journal files within each region based on creation time and processes them starting from the earliest journal file. Unless the -NOCHECKTN qualifier is specified, -FORWARD performs checks on journal files corresponding to each region to ensure they are contiguous, both in terms of time span, as well as, transaction number span. -FORWARD errors out if it detects a discontinuity.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>-FORWARD is incompatible with -BACKWARD and -ROLLBACK.</p></td></tr>
@@ -460,7 +460,7 @@ Journal file hash F226703EC502E975784
 <p>Delta time is always relative to the maximum time of the last record in all journal files specified by arguments to the MUPIP JOURNAL command. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>All time qualifiers except -BEFORE are incompatible with -ROLLBACK. </p></td></tr>
