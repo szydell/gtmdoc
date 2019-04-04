@@ -15,7 +15,7 @@ potential level of impact on the database.</p><p>
 <span class="bold"><strong>Non-invasive Commands</strong></span>
 </p><p>The following commands use, but do not change, the database:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>FIND</p></li><li class="listitem"><p>DUMP</p></li><li class="listitem"><p>SAVE</p></li><li class="listitem"><p>RANGE</p></li><li class="listitem"><p>INTEG</p></li></ul></div><p>
 <span class="bold"><strong>Invasive Commands</strong></span>
-</p><p>The following commands modify the database . </p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p> Use these commands only if you are completely sure that you know what you are
+</p><p>The following commands modify the database . </p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p> Use these commands only if you are completely sure that you know what you are
 doing, or under the direction of FIS technical support. Inappropriate use
 of these commands can result in improper operation of the application including
 hangs, crashes, and unrecoverable damage to the database. Under normal
@@ -106,7 +106,7 @@ FIS recommends MUPIP BACKUP/ONLINE as the preferred alternative.</p><p>
 <span>/</span>C[RITINIT]</em></span>
 </p><p>Initializes critical sections for all regions specified by the current
 Global Directory. The <span>/</span>CRITINIT qualifier is incompatible with the <span>/</span>RENEW, <span>/</span>RELEASE, and <span>/</span>SEIZE qualifiers.</p><p>This causes all processes currently accessing the databases
-specified by the current Global Directory to terminate with an error.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Such action may cause database damages when used while concurrent
+specified by the current Global Directory to terminate with an error.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Such action may cause database damages when used while concurrent
 updates are in progress.</p></td></tr></table></div><p>
 <span class="emphasis"><em>
 <span>/</span>[NO]F[REEZE]</em></span>
@@ -263,7 +263,7 @@ except <span>/</span>BLOCK, <span>/</span>OFFSET, <span>/</span>RECORD, and <spa
 <span class="emphasis"><em>
 <span>/</span>RS[IZ]=record_size</em></span>
 </p><p>Changes the record size field of the specified record. The <span>/</span>RSIZ qualifier is
-incompatible with all qualifiers except <span>/</span>CMPC, <span>/</span>OFFSET, and <span>/</span>RECORD.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Changing this number impacts all records following it in the
+incompatible with all qualifiers except <span>/</span>CMPC, <span>/</span>OFFSET, and <span>/</span>RECORD.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Changing this number impacts all records following it in the
 block.</p></td></tr></table></div></div><div class="sect3" title="Change / FILEHEADER Qualifiers"><div class="titlepage"><div><div><h4 class="title"><a name="change_qualifiers_file"></a>
 <span>Change /</span>
 FILEHEADER Qualifiers</h4></div></div></div><p>This section describes the <span>/</span>FILEHEADER qualifier and the other qualifiers that operate on
@@ -680,7 +680,7 @@ incompatible with all qualifiers except <span>/</span>BLOCK.</p><p>
 </p><p>Sets all local bitmaps and the master bitmap to reflect the blocks used in
 the database file. Use <span>/</span>RESTORE_ALL only if the database contents are known to be
 correct, but a large number of the bitmaps require correction. The <span>/</span>RESTORE_ALL qualifier is
-incompatible with all other qualifiers.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The <span>/</span>RESTORE_ALL
+incompatible with all other qualifiers.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The <span>/</span>RESTORE_ALL
 qualifier rebuilds all maps and should be used with a great deal of
 caution as it can destroy important information.</p></td></tr></table></div></div></div><div class="sect2" title="OPen"><div class="titlepage"><div><div><h3 class="title"><a name="open_cmmd_dse"></a>OPen</h3></div></div></div><p>The OPEN command opens a file for sequential output of global variable data.
 OPEN a file to which you want to "dump" information.</p><p>The format of the OPEN command is:</p><pre class="programlisting">OP[EN] F[ILE]=file
