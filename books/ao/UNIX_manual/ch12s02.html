@@ -167,7 +167,7 @@
 <div class="titlepage"><div><div><h4 class="title">
 <a name="Symmetric_and_Asymmetric_Ciphe_"></a>Symmetric and Asymmetric Ciphers </h4></div></div></div>
 <p>For performance, a symmetric cipher is used to encrypt and decrypt data records.  Asymmetric ciphers are used by the reference implementation to secure the symmetric cipher keys stored on disk. A password is used to secure the private key which is stored on a key ring on disk. The following illustration is an overview of GT.M database encryption in the reference implementation using GNU Privacy Guard (GPG) to provide the ciphers.  </p>
-<img src="ao_figures/sym_asym.html" width="100%">
+<img src="ao_figures/sym_asym.png" width="100%">
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
@@ -217,7 +217,7 @@ echo -n "Enter keyring passphrase: " ; export gtm_passwd=`$gtm_dist/plugin/gtmcr
 <p>Database and journal file headers include a cryptographic hash of the encryption key and algorithm used for that file. When opening a file, GT.M uses the key in the memory key ring whose hash matches that in the header - the database_filename in the key ring is ignored. Older keys need not be deleted until they are no longer required (for example, an older key may be required to access a restored backup copy of a database). Permitting the same database_filename to occur multiple times in a master key file also enables one master key file to be used for multiple instances of an application. This ensures that the correct key for a file is always used, even if the file has been renamed, copied from another location, etc. - the correct key must of course be available in the memory key ring; if no such key exists, GT.M triggers a CRYPTKEYFETCHFAILED error. </p>
 <p>Only for MUPIP CREATE does GT.M rely on the database_filename in the key ring. MUPIP CREATE computes the cryptographic hash for the correct key to place in the database file header. If the same database_filename occurs more than once in the master key file (and hence in the memory key ring), MUPIP CREATE uses the key_filename associated with the last occurrence of that database_filename in the master key file. </p>
 <p>This is illustrated by the following illustration:  </p>
-<img src="ao_figures/memory_key_ring.html" width="100%">
+<img src="ao_figures/memory_key_ring.png" width="100%">
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
