@@ -1,0 +1,157 @@
+<html>
+
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/apds02.html]] -->
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>gtmsecshr commands</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="app_security_phil.html" title="Appendix D. GT.M Security Philosophy">
+<link rel="prev" href="apds01.html" title="Philosophy">
+<link rel="next" href="apds03.html" title="Shared Resource Authorization Permissions">
+<link rel="copyright" href="ln-idp70364144.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">gtmsecshr commands</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="apds01.html">Prev</a> </td>
+<th width="60%" align="center">Appendix D. GT.M Security Philosophy</th>
+<td width="20%" align="right"> <a accesskey="n" href="apds03.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="app_security_phil.html">GT.M Security Philosophy</a></span> &gt; <span class="breadcrumb-node">gtmsecshr commands</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="gtmsecshrcom"></a>gtmsecshr commands</h2></div></div></div>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+               <p>Commands</p>
+            </th>
+<th>
+               <p>Action</p>
+            </th>
+<th>
+               <p>Comments</p>
+            </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+            <p><code class="code">WAKE_MESSAGE</code></p>
+            </td>
+<td>
+            <p>Sends <code class="code">SIGALRM</code> to specified process.</p>
+            </td>
+<td>
+               <p>Used to inform receiving process that a resource (such as a critical section) it awaits has become available.</p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p><code class="code">CONTINUE_PROCESS</code></p>
+            </td>
+<td>
+            <p>Sends <code class="code">SIGCONT</code> to specified process.</p>
+            </td>
+<td>
+            <p>Used to awake a process that has been suspended while holding a resource. <sup>[<a name="idp79620912" href="#ftn.idp79620912" class="footnote">a</a>]</sup></p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p><code class="code">CHECK_PROCESS_ALIVE</code></p>
+            </td>
+<td>
+            <p>Test sending a signal to specified process. <sup>[<a name="idp79618672" href="#ftn.idp79618672" class="footnote">b</a>]</sup></p>
+            </td>
+<td>
+               <p>Used to determine if a process owning a resource still exists; if not, the resource is available to be grabbed by another process that needs it.</p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p><code class="code">REMOVE_SEM</code></p>
+            </td>
+<td>
+               <p>Remove a specified POSIX semaphore.</p>
+            </td>
+<td>
+               <p>Used to remove an abandoned semaphore (for example, if the last attached process terminated abnormally).</p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p><code class="code">REMOVE_SHMMEM</code></p>
+            </td>
+<td>
+               <p>Remove a specified shared memory segment.</p>
+            </td>
+<td>
+               <p>Used to remove an abandoned shared memory segment. Before removing the segment, gtmsecshr checks that there are no processes attached to it.</p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p><code class="code">REMOVE_FILE</code></p>
+            </td>
+<td>
+               <p>Remove a specified file.</p>
+            </td>
+<td>
+            <p>Used to remove an abandoned socket file (for example, as a result of abnormal process termination) used for interprocess communication on platforms that do not support memory semaphores (<code class="code">msems</code>); unused on other platforms. Before removal, gtmsecshr verifies that the file is a socket file, in directory <code class="code">$gtm_tmp</code>, and its name matches GT.M socket file naming conventions.</p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p><code class="code">FLUSH_DB_IPCS_INFO</code></p>
+            </td>
+<td>
+               <p>Writes file header of specified database file to disk.</p>
+            </td>
+<td>
+               <p>The ipc resources (shared memory and semaphore) created for a database file are stored in the database file header. The first process opening a database file initializes these fields while the last process to use the database clears them. If neither of them has read-write access permissions to the database file, they set/reset these fields in shared memory and gtmsecshr will write the database file header from shared memory to disk on their behalf.</p>
+            </td>
+</tr>
+</tbody>
+<tbody class="footnotes"><tr><td colspan="3">
+<div class="footnote"><p><sup>[<a name="ftn.idp79620912" href="#idp79620912" class="para">a</a>] </sup>Please do not ever suspend a GT.M processes. In the event GT.M finds a process suspended while holding a resource, it is sent a <code class="code">SIGCONT</code>.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idp79618672" href="#idp79618672" class="para">b</a>] </sup>This function is no longer needed and will be removed soon.</p></div>
+</td></tr></tbody>
+</table></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="apds01.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="app_security_phil.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="apds03.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Philosophy </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Shared Resource Authorization Permissions</td>
+</tr>
+</table>
+</div>
+</body>
+
+<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/apds02.html]] -->
+</html>

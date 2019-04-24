@@ -10,7 +10,7 @@
 <link rel="up" href="index.html" title="GT.M Programmer's Guide">
 <link rel="prev" href="ch07s55.html" title="$ZWRite()">
 <link rel="next" href="ch08s01.html" title="$Device">
-<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp64690800.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,13 +33,18 @@
 <div class="chapter">
 <div class="titlepage"><div>
 <div><h2 class="title">
-<a name="ch_intrinsic_special_variables"></a>Chapter 8. <span>Intrinsic Special Variables</span>
+<a name="chh_intrinsic_special_variables"></a>Chapter 8. <span>Intrinsic Special Variables</span>
 </h2></div>
 <div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
 <tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
 <tr>
+<td align="left">Revision V6.3-008</td>
+<td align="left">24 April 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch08s34.html" title="$ZGbldir">&#8220;$ZGbldir&#8221;</a>, specify that NEWing $ZGBLDIR is the same as SET $ZGBLDIR=""; remove redundant information and the caution note. </p></li></ul></div></td>
+</tr>
+<tr>
 <td align="left">Revision V6.3-007</td>
-<td align="left">01 February 2019</td>
+<td align="left">04 February 2019</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>In <a class="xref" href="ch08s36.html#interrupt_handling" title="Interrupt Handling">&#8220;Interrupt Handling&#8221;</a>, change Typing to READing; modifications in the service of clarity and reduce passive voice.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch08s22.html" title="$ZAUDit">&#8220;$ZAUDit&#8221;</a>, add new section. </p></li>
@@ -128,26 +133,6 @@
 <td align="left">21 March 2013</td>
 <td align="left"><p>In <a class="xref" href="ch08s26.html" title="$ZCOmpile">&#8220;$ZCOmpile&#8221;</a>, added a point about $ZCOMPILE returning a status of 1 after any error in compilation.</p></td>
 </tr>
-<tr>
-<td align="left">Revision V5.5-000/2</td>
-<td align="left">31 October 2012</td>
-<td align="left">Added the descriptions of <a class="xref" href="ch08s21.html" title="$ZALlocstor">&#8220;$ZALlocstor&#8221;</a>, <a class="xref" href="ch08s50.html" title="$ZREalstor">&#8220;$ZREalstor&#8221;</a>, and <a class="xref" href="ch08s62.html" title="$ZUSedstor">&#8220;$ZUSedstor&#8221;</a>.</td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000/1</td>
-<td align="left">05 October 2012</td>
-<td align="left">Improved the description of <a class="xref" href="ch08s61.html" title="$ZTrap">&#8220;$ZTrap&#8221;</a>, added an example of <a class="xref" href="ch08s25.html" title="$ZCMdline">&#8220;$ZCMdline&#8221;</a>, and added Linux, Solaris, and z/OS examples in <a class="xref" href="ch08s52.html#create_shrd_lib_from_obj_files" title="Create a shared library from object (.o) files">&#8220;Create <span>a shared library from object (.o) files</span>&#8221;</a>.</td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000</td>
-<td align="left">15 June 2012</td>
-<td align="left">Added the description of <a class="xref" href="ch08s44.html" title="$ZONLNrlbk">&#8220;$ZONLNrlbk&#8221;</a>. </td>
-</tr>
-<tr>
-<td align="left">Revision V5.4-002B</td>
-<td align="left">26 December 2011</td>
-<td align="left">Conversion to documentation revision history reflecting GT.M releases with revision history for each chapter.</td>
-</tr>
 </table></div></div>
 </div></div>
 <div class="toc">
@@ -233,12 +218,12 @@
 <dt><span class="sect2"><a href="ch08s66.html#ztdelim">$ZTDElim</a></span></dt>
 <dt><span class="sect2"><a href="ch08s66.html#ztlevel">$ZTLevel</a></span></dt>
 <dt><span class="sect2"><a href="ch08s66.html#ztname">$ZTNAME</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp189391328">$ZTOLdval</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp189393936">$ZTRIggerop</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp189428096">$ZTSlate</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp189430800">$ZTUPdate</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp189434688">$ZTVAlue</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp189436240">$ZTWOrmhole</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idp71286064">$ZTOLdval</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idp71288944">$ZTRIggerop</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idp71322448">$ZTSlate</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idp71325152">$ZTUPdate</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idp71329040">$ZTVAlue</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idp71330592">$ZTWOrmhole</a></span></dt>
 </dl></dd>
 </dl>
 </div>

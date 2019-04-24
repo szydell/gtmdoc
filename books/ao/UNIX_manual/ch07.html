@@ -10,7 +10,7 @@
 <link rel="up" href="index.html" title="GT.M Administration and Operations Guide">
 <link rel="prev" href="jnl_ext.html" title="Journal Extract Formats">
 <link rel="next" href="ch07s01.html" title="Introduction">
-<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp70364144.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -32,12 +32,24 @@
 <div class="chapter">
 <div class="titlepage"><div>
 <div><h2 class="title">
-<a name="ch_db_replication"></a>Chapter 7. Database Replication</h2></div>
+<a name="chg_db_replication"></a>Chapter 7. Database Replication</h2></div>
 <div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
 <tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
 <tr>
+<td align="left">Revision V6.3-008</td>
+<td align="left">24 April 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="replication.html#chck_srvr_hlth" title="Checking Server Health">&#8220;Check<span>ing</span> Server Health&#8221;</a>, source -checkhealth does not accept -helpers option</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#chk_srvr_hlth" title="Checking Server Health">&#8220;Check<span>ing Server</span>  Health&#8221;</a>, receiver -checkhealth supports -helpers option</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#downld_repl_ex" title="Download Replication Examples">&#8220;Download Replication Examples&#8221;</a>, remove redundant material.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, specify that MUPIP ignores the -BUFFSIZE qualifier when the Journal Pool is already set up. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s02.html#tls_repl" title="TLS/SSL Replication">&#8220;TLS/SSL Replication&#8221;</a>, remove redundant material. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#tls_repl_proc" title="Setting up a secured TLS replication connection">&#8220;Setting up a secured TLS replication connection&#8221;</a>, remove redundant material. </p></li>
+</ul></div></td>
+</tr>
+<tr>
 <td align="left">Revision V6.3-007</td>
-<td align="left">01 February 2019</td>
+<td align="left">04 February 2019</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html#riborg" title="Replicating Instance Starts from Backup of Originating Instance (A&#8594;B and A&#8594;P )">&#8220;Replicating Instance Starts from Backup of Originating Instance (A&#8594;B and A&#8594;P )&#8221;</a>, Use PREVLINK when taking a backup to be used exclusively for replication.</p></li>
 <li class="listitem"><p>In <a class="xref" href="replication.html#rollback_db_after_sys_fail" title="Rolling Back a Replicated Database">&#8220;<span>Rolling Back a Replicated Database </span>&#8221;</a>, correct the description of -FETCHRESYNC. </p></li>
@@ -59,7 +71,7 @@
 <td align="left">Revision V6.3-005</td>
 <td align="left">03 July 2018</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>In <a class="xref" href="ch07s02.html#create_config" title="Creating a configuration file">&#8220;Creating a configuration file&#8221;</a>, Disable SSLv3</p></li>
+<li class="listitem"><p>In <a class="xref" href="apgs01.html" title="Why do we need a $gtmcrypt_config file?">&#8220;Why do we need a $gtmcrypt_config file?&#8221;</a>, Disable SSLv3</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html#downld_repl_ex" title="Download Replication Examples">&#8220;Download Replication Examples&#8221;</a>, adjust formatting to fix a PDF rendering issue</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s01.html#repl_gesz" title="Using Multiple Instances in the same Process">&#8220;Using Multiple Instances in the same Process&#8221;</a>, fix a typo.</p></li>
 </ul></div></td>
@@ -96,7 +108,7 @@
 <td align="left">20 March 2017</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html#ap_req_rllbk" title="A and P require rollback">&#8220;A and P require rollback&#8221;</a>, used capitals for keywords</p></li>
-<li class="listitem"><p>In <a class="xref" href="ch07s02.html#create_config" title="Creating a configuration file">&#8220;Creating a configuration file&#8221;</a>, fixed a minor typo</p></li>
+<li class="listitem"><p>In <a class="xref" href="apgs01.html" title="Why do we need a $gtmcrypt_config file?">&#8220;Why do we need a $gtmcrypt_config file?&#8221;</a>, fixed a minor typo</p></li>
 <li class="listitem"><p>In <a class="xref" href="replication.html#create_repl_inst" title="Creating the Replication Instance File">&#8220;<span>Creating the Replication Instance File</span>&#8221;</a>, added the description of the -noqdbrundown qualifier. </p></li>
 <li class="listitem"><p>In <a class="xref" href="replication.html#disp_change_repl" title="Displaying/Changing the attributes of Replication Instance File and Journal Pool">&#8220;<span>Displaying/Changing the attributes of Replication Instance File and Journal Pool</span>&#8221;</a>, added the description of the -noqdbrundown qualifier.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html#gldreplupd" title="Changing the global directory in an A&#8594;B replication configuration">&#8220;Changing the global directory in an A&#8594;B replication configuration&#8221;</a>, added a new procedures for changing global directory settings in an A-&gt;B replication configuration; minor tweak to wording</p></li>
@@ -208,71 +220,6 @@ and P&#8594;Q)&#8221;</a></p></li>
 <li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added the description of the -freeze qualifier. </p></li>
 <li class="listitem"><p>Added a new section called <a class="xref" href="ch07s02.html#inst_freeze" title="Instance Freeze">&#8220;Instance Freeze&#8221;</a>.</p></li>
 </ul></div></td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000/10</td>
-<td align="left">28 September 2012</td>
-<td align="left"><p>In <a class="xref" href="replication.html#strt_rcvr_srvr" title="Starting the Receiver Server">&#8220;Start<span>ing the</span> Receiver Server
-
-&#8221;</a>, improved the description of -UPDATERESYNC.</p></td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000/9</td>
-<td align="left">14 August 2012</td>
-<td align="left"><p>Improved the description of the replication WAS_ON state and added the <a class="xref" href="ch07s03.html#recwason" title="Recovering from the replication WAS_ON state">&#8220;Recovering from the replication WAS_ON state &#8221;</a> section.</p></td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000/6</td>
-<td align="left">19 July 2012</td>
-<td align="left"><p>Removed excessive spacing around SVG diagrams in screen and print pdfs. </p></td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000/5</td>
-<td align="left">17 July 2012</td>
-<td align="left"><p>Updated for V5.5-000.</p></td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000/4</td>
-<td align="left">6 June 2012</td>
-<td align="left"><p>Removed -LOG as an option for -STATSLOG.</p></td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000/3</td>
-<td align="left">2 May 2012</td>
-<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>In <a class="xref" href="replication.html#rollback_db_after_sys_fail" title="Rolling Back a Replicated Database">&#8220;<span>Rolling Back a Replicated Database </span>&#8221;</a>, corrected the command syntax and the example.</p></li>
-<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, corrected the quoting of -filter examples. </p></li>
-</ul></div></td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000/1</td>
-<td align="left">5 March 2012</td>
-<td align="left"><p>Improved the description of the -instsecondary qualifier. Added the <a class="xref" href="replication.html#stp_src_srv" title="Stopping a Source Server">&#8220;Stop<span>ping a</span> Source Server&#8221;</a> section and the <a class="xref" href="ch07s03.html#shut_inst" title="Shutting down an instance">&#8220;Shutting down an instance&#8221;</a> procedure. </p></td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000</td>
-<td align="left">27 February 2012</td>
-<td align="left"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added information about using external filters for pre-V5.5-000 versions. </p></td>
-</tr>
-<tr>
-<td align="left">Revision 4</td>
-<td align="left">13 January 2012</td>
-<td align="left"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added an example of a replication filter.</p></td>
-</tr>
-<tr>
-<td align="left">Revision 2</td>
-<td align="left">2 December 2011</td>
-<td align="left">Corrected the usage of the term propagating instance, improved the description of -stopsourcefilter, and changed -nopropagatingprimary to -propagatingprimary. </td>
-</tr>
-<tr>
-<td align="left">Revision 1</td>
-<td align="left">10 November 2011</td>
-<td align="left"><p>In the <a class="xref" href="ch07s03.html" title="Procedures">&#8220;Procedures&#8221;</a> section, changed "Restore the replication instance file" to "Recreate the replication instance file". </p></td>
-</tr>
-<tr>
-<td align="left">Revision V5.4-002B</td>
-<td align="left">24 October 2011</td>
-<td align="left">Conversion to documentation revision history reflecting GT.M releases with revision history for each chapter.</td>
 </tr>
 </table></div></div>
 </div></div>

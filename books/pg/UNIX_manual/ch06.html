@@ -10,7 +10,7 @@
 <link rel="up" href="index.html" title="GT.M Programmer's Guide">
 <link rel="prev" href="ch05s17.html" title="Transaction Processing">
 <link rel="next" href="ch06s01.html" title="Break">
-<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp64690800.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -32,12 +32,22 @@
 <div class="chapter">
 <div class="titlepage"><div>
 <div><h2 class="title">
-<a name="ch_commands"></a>Chapter 6. Commands</h2></div>
+<a name="chf_commands"></a>Chapter 6. Commands</h2></div>
 <div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
 <tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
 <tr>
+<td align="left">Revision V6.3-008</td>
+<td align="left">24 April 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch06s10.html#Examples_of_Job" title="Examples of JOB">&#8220;Examples<span> of JOB</span>&#8221;</a>, Add an example with OUTPUT and ERROR usage</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch06s09.html" title="If">&#8220;If&#8221;</a>, make a spelling correction</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch06s25.html#key_words_view" title="Key Words in VIEW Command">&#8220;Key Words<span> in VIEW Command</span>&#8221;</a>, correct delimiter for VIEW LOCTPRESTART and add section 3 ID</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch06s25.html#view_nolognontp" title="[NO]LOGN[ONTP][:intexpr]">&#8220;<span>[NO]LOGN[ONTP][:intexpr]</span>&#8221;</a>, correct delimiter</p></li>
+</ul></div></td>
+</tr>
+<tr>
 <td align="left">Revision V6.3-007</td>
-<td align="left">01 February 2019</td>
+<td align="left">04 February 2019</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>In <a class="xref" href="ch06s42.html#examples_of_zshow" title="Examples of ZSHow">&#8220;Examples<span> of ZSHow</span>&#8221;</a>, add $ZTIMEOUT and $ZAUDIT to $zjobexam() output </p></li>
 <li class="listitem"><p>In <a class="xref" href="ch06s42.html#zshow_info_codes" title="ZSHOW Information Codes">&#8220;ZSHOW Information Codes&#8221;</a>, mark CQS, CQT, CYS, CYT as * and add a legend; modify CFS definition</p></li>
@@ -152,7 +162,7 @@
 <li class="listitem"><p>In <a class="xref" href="ch06s25.html#undef" title="[NO]UNDEF">&#8220;<span>[NO]</span>UNDEF&#8221;</a>, added a note about NOUNDEF not applying to an undefined FOR control variable.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch06s46.html" title="ZTRigger">&#8220;ZTRigger&#8221;</a>, corrected the description of the ZTRIGGER command.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch06s27.html" title="Xecute">&#8220;Xecute&#8221;</a>, added a note about handling run-time errors.</p></li>
-<li class="listitem"><p> In <a class="xref" href="ch06s21.html" title="TREstart">&#8220;TREstart&#8221;</a>, added information about the handling of TPRESTARTs in an interrupted error. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch06s21.html" title="TREstart">&#8220;TREstart&#8221;</a>, added information about the handling of TPRESTARTs in an interrupted error. </p></li>
 </ul></div></td>
 </tr>
 <tr>
@@ -163,26 +173,6 @@
 <li class="listitem"><p>In <a class="xref" href="ch06s42.html#zshow_info_codes" title="ZSHOW Information Codes">&#8220;ZSHOW Information Codes&#8221;</a>, added information about the new ZSHOW "G" mnemonics. </p></li>
 <li class="listitem"><p>In <a class="xref" href="ch06s12.html" title="Lock">&#8220;Lock&#8221;</a> and <a class="xref" href="ch06s28.html" title="ZAllocate">&#8220;ZAllocate&#8221;</a>, added updates for V6.0-000.</p></li>
 </ul></div></td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000/2</td>
-<td align="left">31 October 2012</td>
-<td align="left">In <a class="xref" href="ch06s42.html#zshow_info_codes" title="ZSHOW Information Codes">&#8220;ZSHOW Information Codes&#8221;</a>, corrected the definitions of LKS and LKF mnemonics.</td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000/1</td>
-<td align="left">05 October 2012</td>
-<td align="left">In <a class="xref" href="ch06s44.html" title="ZSYstem">&#8220;ZSYstem&#8221;</a>, added a note to highlight PIPE devices as an alternative for ZSYSTEM and improved the description of <a class="xref" href="ch06s25.html#jnlflush" title='"JNLFLUSH"[:&lt;region_list&gt;]'>&#8220;<span>"JNLFLUSH"[:&lt;region_list&gt;]</span>&#8221;</a> and <a class="xref" href="ch06s25.html#jnlwait" title="JNLWAIT">&#8220;JNLWAIT&#8221;</a>.</td>
-</tr>
-<tr>
-<td align="left">Revision V5.5-000</td>
-<td align="left">15 June 2012</td>
-<td align="left">Updated <a class="xref" href="ch06s25.html" title="View">&#8220;View&#8221;</a>, <a class="xref" href="ch06s03.html" title="Do">&#8220;Do&#8221;</a>, <a class="xref" href="ch06s22.html" title="TROllback">&#8220;TROllback&#8221;</a>, <a class="xref" href="ch06s39.html" title="ZMessage">&#8220;ZMessage&#8221;</a> for V5.5-000, improved the description of <a class="xref" href="ch06s37.html" title="ZLink">&#8220;ZLink&#8221;</a>, and corrected the syntax of <a class="xref" href="ch06s44.html" title="ZSYstem">&#8220;ZSYstem&#8221;</a>.</td>
-</tr>
-<tr>
-<td align="left">Revision V5.4-002B</td>
-<td align="left">26 December 2011</td>
-<td align="left">Conversion to documentation revision history reflecting GT.M releases with revision history for each chapter.</td>
 </tr>
 </table></div></div>
 </div></div>
@@ -257,7 +247,7 @@
 <dt><span class="sect1"><a href="ch06s34.html">ZGoto</a></span></dt>
 <dd><dl><dt><span class="sect2"><a href="ch06s34.html#examples_of_zgoto">Examples<span> of ZGOTO</span></a></span></dt></dl></dd>
 <dt><span class="sect1"><a href="ch06s35.html">ZHALT</a></span></dt>
-<dd><dl><dt><span class="sect2"><a href="ch06s35.html#idp187136144">Examples<span> of ZHALT</span></a></span></dt></dl></dd>
+<dd><dl><dt><span class="sect2"><a href="ch06s35.html#idp63811136">Examples<span> of ZHALT</span></a></span></dt></dl></dd>
 <dt><span class="sect1"><a href="ch06s36.html">ZHelp</a></span></dt>
 <dd><dl><dt><span class="sect2"><a href="ch06s36.html#ex_of_zhelp">Examples<span> of ZHELP</span></a></span></dt></dl></dd>
 <dt><span class="sect1"><a href="ch06s37.html">ZLink</a></span></dt>

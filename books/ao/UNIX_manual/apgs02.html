@@ -3,23 +3,23 @@
 <!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/apgs02.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Invoking GT.M through a C main() program</title>
+<title>OpenSSL Options</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
-<link rel="up" href="Package_GTM_Apps.html" title="Appendix G. Packaging GT.M Applications">
-<link rel="prev" href="apgs01.html" title="Setting up a Captive User Application with GT.M">
-<link rel="next" href="apgs03.html" title="Defensive Practices">
-<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+<link rel="up" href="TLS_Configuration_File.html" title="Appendix G. Creating a $gtmcrypt_config file">
+<link rel="prev" href="apgs01.html" title="Why do we need a $gtmcrypt_config file?">
+<link rel="next" href="apgs03.html" title="Generating demo TLS certificates">
+<link rel="copyright" href="ln-idp70364144.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">Invoking GT.M through a C main() program</th></tr>
+<tr><th colspan="3" align="center">OpenSSL Options</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="apgs01.html">Prev</a> </td>
-<th width="60%" align="center">Appendix G. Packaging GT.M Applications</th>
+<th width="60%" align="center">Appendix G. Creating a $gtmcrypt_config file</th>
 <td width="20%" align="right"> <a accesskey="n" href="apgs03.html">Next</a>
 </td>
 </tr>
@@ -27,90 +27,98 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="Package_GTM_Apps.html">Packaging GT.M Applications</a></span> &gt; <span class="breadcrumb-node">Invoking GT.M through a C main() program</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="TLS_Configuration_File.html">Creating a $gtmcrypt_config file</a></span> &gt; <span class="breadcrumb-node">OpenSSL Options</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="invoke_gtm_with_c"></a>Invoking GT.M through a C main() program</h2></div></div></div>
-<p>There are several circumstances when it is desirable to invoke a GT.M application with a top-level C main() program rather than with <code class="code">mumps -run</code>. Examples include:</p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>A need to ensure correct values for environment variables, and a shell script cannot be used (for example, when there is a specific operational need to install an application with the setuid bit).</p></li>
-<li class="listitem"><p>Programs that show up on a process display with meaningful names (like <code class="code">friday</code> instead of <code class="code">mumps -run monthstarting friday</code>, in the following example).</p></li>
-</ul></div>
-<p><span class="bold"><strong>To compile and run the <code class="code">monthstarting.zip</code> example, perform the following steps:</strong></span></p>
-<div class="orderedlist"><ol class="orderedlist" type="1">
-<li class="listitem">Download <span class="bold"><strong>monthstarting.zip</strong></span>. <p><span class="bold"><strong>monthstarting.zip</strong></span> contains monthstarting.m, month_starting.c, and monthstarting.ci. To download <span class="bold"><strong>monthstarting.zip</strong></span>, click on <a class="ulink" href="downloadables/monthstarting.zip" target="_top"><span class="inlinemediaobject"><img src="images/download.png" alt="Download monthstarting.zip"></span> </a>.You can also download <span class="bold"><strong>monthstarting.zip</strong></span> from http://tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/downloadables/monthstarting.zip.</p>
-</li>
-<li class="listitem">
-<p>Run the <code class="code">monthstarting.m</code> program that lists months starting with the specified day of the week and year range.</p>
-<pre class="programlisting">$ mumps -run monthstarting Friday 1986 1988      
-FRI AUG 01, 1986
-FRI MAY 01, 1987
-FRI JAN 01, 1988
-FRI APR 01, 1988
-FRI JUL 01, 1988
-$</pre>
-<p>Notice that this program consists of a main program that reads the command line in the intrinsic special variable $ZCMDLINE, and calls <span class="bold"><strong>calcprint^monthstarting()</strong></span>, providing as its first parameter the day of the week to be reported.</p>
-<p>This step is optional as there is no need to explicitly compile <code class="code">monthstarting.m</code> because GT.M autocompiles it  as needed. </p>
-</li>
-<li class="listitem">
-<p>On x86 GNU/Linux (64-bit Ubuntu 12.04), execute the following command to compile month_starting.c and create an executable called <code class="code">friday</code>. </p>
-<pre class="programlisting">$ gcc -c month_starting.c -I$gtm_dist
-$ gcc month_starting.o -o friday -L $gtm_dist -Wl,-rpath=$gtm_dist -lgtmshr</pre>
-<p>For compiling the <code class="code">month_starting.c</code> program on other platforms, refer to the Integrating External Routines chapter of <a class="ulink" href="../../pg/UNIX_manual/index.html" target="_top">GT.M Programmer's Guide</a></p>
-</li>
-<li class="listitem">
-<p>Execute the following command:</p>
-<pre class="programlisting">$ ./friday 1986 1988
-FRI AUG 01, 1986
-FRI MAY 01, 1987
-FRI JAN 01, 1988
-FRI APR 01, 1988
-FRI JUL 01, 1988
-$</pre>
-</li>
-<li class="listitem">
-<p>You can also execute the same program with the name <code class="code">monday</code>. In doing so, the program displays months starting with Monday.</p>
-<pre class="programlisting">$ ln -s friday monday
-$ ./monday 1986 1988
-MON SEP 01, 1986
-MON DEC 01, 1986
-MON JUN 01, 1987
-MON FEB 01, 1988
-MON AUG 01, 1988
-$</pre>
-<p>The <code class="code">month_starting.c</code> program accomplishes this by calling the same GT.M entryref calcprint^monthstarting(), and passing in as the first parameter the C string argv[0], which is the name by which the program is executed. If there are additional parameters, <code class="code">month_starting.c</code> passes them to the M function; otherwise it passes pointers to null strings:</p>
-<pre class="programlisting">/* Initialize and call calcprint^monthstarting() */
-if ( 0 == gtm_init() ) gtm_ci("calcprint", &amp;status, argv[0], argc&gt;1 ? argv[1] : "", argc&gt;2 ? argv[2] : "");</pre>
-<p>Prior to calling the GT.M entryref, the C program also needs to set environment variables if they are not set: gtm_dist to point to the directory where GT.M is installed, gtmroutines to enable GT.M to find the monthstarting M routine as well as GT.M's %DATE utility program, and GTMCI to point to the call-in table:</p>
-<pre class="programlisting">/* Define environment variables if not already defined */
-        setenv( "gtm_dist", "/usr/lib/fis-gtm/V6.1-000_x86_64", 0 );
-        if (NULL == getenv( "gtmroutines" ))
-        {
-                tmp1 = strlen( getenv( "PWD" ));
-                strncpy( strbuf, getenv( "PWD"), tmp1 );
-                strcpy( strbuf+tmp1, " " );
-                tmp2 = tmp1+1;
-                tmp1 = strlen( getenv( "gtm_dist" ));
-                strncpy( strbuf+tmp2, getenv( "gtm_dist" ), tmp1 );
-                tmp2 += tmp1;
-                if ( 8 == sizeof( char * ))
-                {
-                        tmp1 = strlen( "/libgtmutil.so" );
-                        strncpy( strbuf+tmp2, "/libgtmutil.so", tmp1 );
-                        tmp2 += tmp1;
-                }
-                strcpy( strbuf+tmp2, "" );
-                setenv( "gtmroutines", strbuf, 1 );
-        }
-        setenv( "GTMCI", "monthstarting.ci", 0 );
-        if ( 0 == gtm_init() ) gtm_ci("calcprint", &amp;status, argv[0], argc&gt;1 ? argv[1] : "", argc&gt;2 ? argv[2] : "");
-        gtm_exit(); /* Discard status from gtm_exit and return status from function call */</pre>
-<p>Note that on 32-bit platforms, the last element of gtmroutines is $gtm_dist, whereas on 64-bit platforms, it is $gtm_dist/libgtmutil.so. If you are creating a wrapper to ensure that environment variables are set correctly because their values cannot be trusted, you should also review and set the environment variables discussed in <a class="xref" href="apgs01.html" title="Setting up a Captive User Application with GT.M">&#8220;Setting up a Captive User Application with GT.M&#8221;</a>.</p>
-<p>All the C program needs to do is to set environment variables and call a GT.M entryref. A call-in table is a text file that maps C names and parameters to M names and parameters.  In this case, the call-in table is just a single line to map the C function calcprint() to the GT.M entryref <code class="code">calcprint^monthstarting()</code>:</p>
-<pre class="programlisting">calcprint : gtm_int_t* calcprint^monthstarting(I:gtm_char_t*, I:gtm_char_t*, I:gtm_char_t*)</pre>
-</li>
-</ol></div>
+<a name="OpenSSL_options"></a>OpenSSL Options</h2></div></div></div>
+<p>The gtmcrypt_config configuration file has two scopes for the following OpenSSL options. At the root of the TLS configuration, is a global configuration scope that applies to all tlsids listed in the configuration. Each tlsid can override the global configuration by redefining the same parameters. Any overridden option apply only to the specific tlsid configuration that defines it. The supported OpenSSL options are as follows:</p>
+<div class="variablelist"><dl>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>CAfile</strong></span></code>
+</span></dt>
+<dd>
+<p>When used in the tls level points to a file, in PEM format, describing the trusted CAs. The file can contain several CA certificates identified by sequences of:</p>
+<pre class="programlisting">-----BEGIN CERTIFICATE-----
+... (CA certificate in base64 encoding) ...
+-----END CERTIFICATE-----</pre>
+<p>Servers use this parameter, either specified for a tlsid in the configuration or with the WRITE /TLS command, verify certificates and to inform the client of acceptable certificate authorities. The determinant definition for the acceptable list of certificate authorities sent to the client comes in descending order of priority from the one specified by the WRITE /TLS("renegotiate",...) command, the one specified by the CAfile value in the tlsid section used to establish the TLS connection, and finally that specified at the tls level.</p>
+</dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>CApath</strong></span></code>
+</span></dt>
+<dd><p>Points to a directory containing CA certificates in PEM format. The files each contain one CA certificate. The files are looked up by the CA subject name hash value, which must hence be available. If more than once certificate with the same name hash value exists, the extension must be different (e.g. 9d66eef0.0, 9d66eef0.1 etc). The directory is typically created by the OpenSSL tool 'c_rehash'. CApath is an alternative to CAfile.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>cipher-list </strong></span></code>
+</span></dt>
+<dd><p>Specifies which cryptographic algorithms to use. The format of this option is described by the OpenSSL ciphers man page. An empty string uses a default value of "ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH" for replication connections and the OpenSSL default cipher list for socket connections.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>crl</strong></span></code>
+</span></dt>
+<dd><p>Points to a file containing list of revoked certificates. This file is created by the openssl utility.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>dh512 and dh1024</strong></span></code>
+</span></dt>
+<dd><p>Specifies that Diffie-Hellman parameters s used for key-exchange. Either none or both have to be specified. If neither is specified, then then the data is encrypted with the same keys that are used for authentication.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>format</strong></span></code>
+</span></dt>
+<dd><p>Format of the certificate and private key pair. Currently, the GT.M TLS plug-in only supports PEM format.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>cert</strong></span></code>
+</span></dt>
+<dd><p>Path to the certificate.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>key</strong></span></code>
+</span></dt>
+<dd>
+<p>Path to the private key. If the private key is protected by a passphrase, an obfuscated version of the password should be specified in the environment variable which takes the form gtmtls_passwd_&lt;identifier&gt;. Currently, the GT.M TLS plug-in only supports RSA private keys.</p>
+<p>When placing the private key for a certificate at the beginning of the certificate file, you may omit the "key" item from the configuration file. The format of the combined file is:</p>
+<pre class="programlisting">-----BEGIN RSA PRIVATE KEY-----
+ [encoded key]
+ -----END RSA PRIVATE KEY-----
+ [empty line]
+ -----BEGIN CERTIFICATE-----
+ [encoded certificate]
+ -----END CERTIFICATE-----
+  [empty line]</pre>
+</dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>session-id-hex</strong></span></code>
+</span></dt>
+<dd><p>Takes a string value which is used to set the SSL session_id context for server sockets, which may be specified in the tlsid section of a config file or on WRITE /TLS("RENEGOTIATE",...). See the OpenSSL man page for SSL_set_session_id_context for usage details. The value should consist of hexadecimal digits representing the desired value. Application code can call the %UTF2HEX utility routine to translate a character string to the corresponding string of hexadecimal digits. If neither the command or the associated tlsid section in the configuration file specify a session-id-hex option when creating the socket, GT.M uses the current tlsid, translated into hexadecimal digits.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>session-timeout</strong></span></code>
+</span></dt>
+<dd><p>Timeout (in seconds) for a given session. If a connection disconnects and resumes within this time interval, the session is reused to speed up the TLS handshake. A value of 0 forces sessions to not be reused. The default value is 1 hour.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>ssl-options</strong></span></code>
+</span></dt>
+<dd>
+<p>The ssl-options, documented in the man page for SSL_set_options, modify the default behavior of OpenSSL. When specifying multiple options, separate them with a colon (:) delimiter. The ssl-options specified in a labeled section add to, or override, those specified at the "tls" level. An exclamation mark ("!") preceding an option in a labeled section disables any default for that option specified at the tls: level; for example:</p>
+<pre class="programlisting">tls: {
+ ssl-options: "SSL_OP_CIPHER_SERVER_PREFERENCE";
+ mylabel: {
+ ssl-options: "!SSL_OP_CIPHER_SERVER_PREFERENCE";
+ };
+ }</pre>
+</dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>verify-depth</strong></span></code>
+</span></dt>
+<dd>
+<p>Certificate Authority (CA) verify depth provides an upper limit on the number of CAs to look up for verifying a given certificate. The depth count is described as ''level 0:peer certificate'', ''level 1: CA certificate'', ''level 2: higher level CA certificate'', and so on. The default verification depth is 9.</p>
+<p>A verify-depth option specified in a labeled section applies to connections associated with that section.</p>
+</dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>verify-level</strong></span></code>
+</span></dt>
+<dd><p>The verify-level option takes a string value to specify any additional certificate verification in addition to the basic OpenSSL verification. The only value currently accepted is "CHECK" which requests additional checks on the results of the basic OpenSSL certificate verification. A leading exclamation mark ("!") disables a verify-level option. The verify-level options specified at lower levels are merged with those options already specified at higher levels. CHECK is enabled by default for all TLS connections.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>verify-mode</strong></span></code>
+</span></dt>
+<dd><p>The verify-mode option specifies how OpenSSL verifies certificates. If no verify-mode is specified, it defaults to SSL_VERIFY_PEER. See the man page for SSL_set_verify for details. SSL_VERIFY_PEER has two additional flags which modify verification only for the server role; when adding them to the option string, use the colon (:) delimiter.</p></dd>
+</dl></div>
 </div>
 <div class="navfooter">
 <hr>
@@ -118,14 +126,14 @@ if ( 0 == gtm_init() ) gtm_ci("calcprint", &amp;status, argv[0], argc&gt;1 ? arg
 <tr>
 <td width="40%" align="left">
 <a accesskey="p" href="apgs01.html">Prev</a> </td>
-<td width="20%" align="center"><a accesskey="u" href="Package_GTM_Apps.html">Up</a></td>
+<td width="20%" align="center"><a accesskey="u" href="TLS_Configuration_File.html">Up</a></td>
 <td width="40%" align="right"> <a accesskey="n" href="apgs03.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Setting up a Captive User Application with GT.M </td>
+<td width="40%" align="left" valign="top">Why do we need a $gtmcrypt_config file? </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Defensive Practices</td>
+<td width="40%" align="right" valign="top"> Generating demo TLS certificates</td>
 </tr>
 </table>
 </div>

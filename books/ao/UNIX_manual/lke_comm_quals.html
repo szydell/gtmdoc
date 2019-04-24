@@ -10,7 +10,7 @@
 <link rel="up" href="lkechap.html" title="Chapter 8. M Lock Utility (LKE)">
 <link rel="prev" href="introduction.html" title="Introduction">
 <link rel="next" href="lke_command_summ.html" title="Summary">
-<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp70364144.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -35,14 +35,14 @@
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="LKE_Commands_Qualifiers"></a><span>LKE Commands and Qualifiers</span>
-<a class="indexterm" name="idp183107664"></a>
+<a class="indexterm" name="idp76000128"></a>
 </h2></div></div></div>
 <p>The general format of LKE commands is:</p>
 <pre class="programlisting">command [-qualifier[=qualifier-value]]</pre>
 <p>LKE accepts command and qualifier abbreviations. The section describing each command provides the minimal abbreviation that can be used for that command, and the command qualifiers, if any. FIS recommends the use of a minimum of four characters for key words in scripts to ensure new keywords do not conflict with older scripts.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="lke_clear"></a>Clear<a class="indexterm" name="idp185599552"></a><a class="indexterm" name="idp185606672"></a>
+<a name="lke_clear"></a>Clear<a class="indexterm" name="idp76106400"></a><a class="indexterm" name="idp76113520"></a>
 </h3></div></div></div>
 <p>Use the <code class="code">CLEAR</code> command to remove active
         LOCKs.</p>
@@ -66,7 +66,7 @@
 -R[EGION]=region-name</pre>
 <p>By default, CLEAR operates interactively(<code class="code">-INTERACTIVE</code>).</p>
 <p><span class="bold"><strong>Qualifiers for CLEAR</strong></span></p>
-<a class="indexterm" name="idp185604384"></a><pre class="programlisting">-A[LL]</pre>
+<a class="indexterm" name="idp76112064"></a><pre class="programlisting">-A[LL]</pre>
 <p>Specifies all current LOCKs.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>-ALL removes all current LOCKs.</p></li>
@@ -79,7 +79,7 @@
 <li class="listitem"><p>By default, <code class="code">CLEAR -ALL</code> operates interactively
             (<code class="code">-INTERACTIVE</code>).</p></li>
 </ul></div>
-<a class="indexterm" name="idp185601696"></a><pre class="programlisting">-[NO]C[RIT]</pre>
+<a class="indexterm" name="idp76108544"></a><pre class="programlisting">-[NO]C[RIT]</pre>
 <p>Allows <code class="code">LKE CLEAR </code>to work even if another process is
         holding a critical section.</p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
@@ -92,17 +92,17 @@
 </table></div>
 <p>By default LKE operates in CRIT mode and ensures a consistent
         view of LOCKs by using the database critical section(s).</p>
-<a class="indexterm" name="idp185584640"></a><pre class="programlisting">-[NO]EXACT</pre>
+<a class="indexterm" name="idp76075008"></a><pre class="programlisting">-[NO]EXACT</pre>
 <p>Limits the CLEAR command to the exact resource name specified
         with <code class="code">-LOCK=</code><em class="replaceable"><code>resource_name</code></em>. NOEXACT (the default) treats the specified resource name as a prefix and works not only on it, but also on any of its descendants, since their existence effectively LOCK their parent tree.</p>
-<a class="indexterm" name="idp185627280"></a><pre class="programlisting">-L[OCK]=<em class="replaceable"><code>""resource_name""</code></em></pre>
+<a class="indexterm" name="idp76133888"></a><pre class="programlisting">-L[OCK]=<em class="replaceable"><code>""resource_name""</code></em></pre>
 <p>Unless used with <code class="code">-EXACT</code>, specifies the leading prefix for an implicit wild card search of all locks that start with the <em class="replaceable"><code>resource_name</code></em>.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>The <em class="replaceable"><code>resource_name</code></em> is enclosed in <span class="bold"><strong>two</strong></span> double quotation marks ("" ""). Because M resource names are formatted the same as global nodes with punctuation characters, in this context they are usually enclosed in sets of double quotation marks with string subscripts enclosed in sets of two double quotations.</p></li>
 <li class="listitem"><p>When used with CLEAR, -LOCK removes the locks that start with <em class="replaceable"><code>resource_name</code></em>.</p></li>
 <li class="listitem"><p>When used with SHOW,-LOCK provides a precise way to examine the specified lock.</p></li>
 </ul></div>
-<a class="indexterm" name="idp185618672"></a><pre class="programlisting">-[NO]I[NTERACTIVE]</pre>
+<a class="indexterm" name="idp76125408"></a><pre class="programlisting">-[NO]I[NTERACTIVE]</pre>
 <p>Interactively clears one LOCK at a time. LKE displays each
         current LOCK with the <code class="code"> PID </code> of the owner process and
         prompts for verification that the LOCK should be cleared. LKE retains
@@ -119,7 +119,7 @@
             time when many locks are held. To do this, it limits the amount of
             time it waits for each response.</p></li>
 </ul></div>
-<a class="indexterm" name="idp185630688"></a><pre class="programlisting">-O[UTPUT]="<em class="replaceable"><code>file-name</code></em>"</pre>
+<a class="indexterm" name="idp76095680"></a><pre class="programlisting">-O[UTPUT]="<em class="replaceable"><code>file-name</code></em>"</pre>
 <p>Directs the reporting of all specified LOCKs to a file.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>If you specify an existing file, LKE creates a new version
@@ -131,7 +131,7 @@
 <li class="listitem"><p>By default, <code class="code">CLEAR</code> sends output messages to
             <code class="code">stdout</code>.</p></li>
 </ul></div>
-<a class="indexterm" name="idp185616176"></a><pre class="programlisting">-P[ID]=pid</pre>
+<a class="indexterm" name="idp76122912"></a><pre class="programlisting">-P[ID]=pid</pre>
 <p>Specifies the process identification number that holds a LOCK on
         a resource name.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -144,7 +144,7 @@
 <li class="listitem"><p>The <code class="code">-PID</code> qualifier is compatible with all other
             qualifiers.</p></li>
 </ul></div>
-<a class="indexterm" name="idp185647440"></a><pre class="programlisting">-R[EGION]=<em class="replaceable"><code>region-name</code></em></pre>
+<a class="indexterm" name="idp76154128"></a><pre class="programlisting">-R[EGION]=<em class="replaceable"><code>region-name</code></em></pre>
 <p><em class="replaceable"><code>region-name</code></em>specifies the region that
         holds the locked resource names.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -209,7 +209,7 @@ LKE&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="lke_clnup"></a>CLNup<a class="indexterm" name="idp185569856"></a><a class="indexterm" name="idp185675520"></a>
+<a name="lke_clnup"></a>CLNup<a class="indexterm" name="idp76104304"></a><a class="indexterm" name="idp76182208"></a>
 </h3></div></div></div>
 <p>The <code class="code">CLNUP</code> command initiates a cleanup operation of the lock space to remove any abandoned artifacts left by processes that exited without releasing their LOCKs.</p>
 <p>The CLNUP processing also checks for the evidence of any entry that has been misplaced by an "overflow" condition; if it finds any, it attempts to automatically repair it, and, if it cannot, it produces a MLKHASHTABERR warning message. On seeing such a message:</p>
@@ -227,20 +227,20 @@ LKE&gt;</pre>
 -R[EGION]=region-name</pre>
 <p>By default, CLNUP operates on all regions (-ALL). </p>
 <p><span class="bold"><strong>Qualifiers of CLNUP</strong></span></p>
-<a class="indexterm" name="idp185621360"></a><pre class="programlisting">-A[LL]</pre>
+<a class="indexterm" name="idp76140096"></a><pre class="programlisting">-A[LL]</pre>
 <p>Specifies all regions.</p>
-<a class="indexterm" name="idp185612448"></a><pre class="programlisting">-I[NTEG]</pre>
+<a class="indexterm" name="idp76119632"></a><pre class="programlisting">-I[NTEG]</pre>
 <p>Specifies that LKE should validate the integrity of the lock space and report any issues.</p>
-<a class="indexterm" name="idp185681120"></a><pre class="programlisting">-P[ERIODIC]=n</pre>
+<a class="indexterm" name="idp76187680"></a><pre class="programlisting">-P[ERIODIC]=n</pre>
 <p>Specifies that LKE perform a CLNUP every n seconds, which, if you desire active cleanup, is much lighter weight than repeated invocations of LKE from a shell script.</p>
 <p>You can stop LKE CLNUP -PERIODIC with MUPIP STOP &lt;pid&gt;.</p>
 <p>FIS recommends running LKE CLNUP -PERIODIC=n with a value of n that appears to prevent growth in the elements in the lock space as reported by LKE SHOW over substantial periods of time.</p>
-<a class="indexterm" name="idp185683424"></a><pre class="programlisting">-R[EGION]</pre>
+<a class="indexterm" name="idp76189984"></a><pre class="programlisting">-R[EGION]</pre>
 <p>Specifies that LKE restricts CLNUP operations to a region. </p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="LKE_Show"></a>SHow<a class="indexterm" name="idp185654112"></a><a class="indexterm" name="idp185691280"></a>
+<a name="LKE_Show"></a>SHow<a class="indexterm" name="idp76147488"></a><a class="indexterm" name="idp76197728"></a>
 </h3></div></div></div>
 <p>Use the <code class="code"> SHOW </code> command to get status of the LOCK
         mechanism and the LOCK database. The format of the SHOW command is:</p>
@@ -253,7 +253,7 @@ LKE&gt;</pre>
 -P[ID]=pid 
 -R[EGION]=region-name 
 -W[AIT]</pre>
-<a class="indexterm" name="idp185693312"></a><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<a class="indexterm" name="idp76199760"></a><div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>By default, <code class="code">SHOW </code>displays
             <code class="code">-A[LL]</code>.</p></li>
 <li class="listitem"><p>The <code class="code">SHOW </code> command reports active LOCKs. Information includes the LOCK resource name and the process identification (PID) of the LOCK owner.
@@ -287,7 +287,7 @@ LKE&gt;</pre>
 <li class="listitem"><p><code class="code">SHOW -ALL</code> and <code class="code">-WAIT</code> displays both
             <code class="code">-ALL</code> and <code class="code">-WAIT</code> information.</p></li>
 </ul></div>
-<a class="indexterm" name="idp185699856"></a><pre class="programlisting">-L[OCK]=<em class="replaceable"><code>resource_name</code></em></pre>
+<a class="indexterm" name="idp76206304"></a><pre class="programlisting">-L[OCK]=<em class="replaceable"><code>resource_name</code></em></pre>
 <p><em class="replaceable"><code>resource_name</code></em> specifies a single
         lock.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -303,13 +303,13 @@ LKE&gt;</pre>
             </code> qualifier provides a precise way to examine the specified
             lock and any descendant LOCKed resources.</p></li>
 </ul></div>
-<a class="indexterm" name="idp185700272"></a><pre class="programlisting">-[NO]C[RITICAL]</pre>
+<a class="indexterm" name="idp76206720"></a><pre class="programlisting">-[NO]C[RITICAL]</pre>
 <p>Allows the <code class="code">SHOW</code> command to work even if another process is holding a critical section.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>By default LKE operates in <code class="code">CRIT</code> mode and ensures a consistent view of LOCKs by using the database critical section(s).</p></li>
 <li class="listitem"><p><code class="code">-NOCRIT</code> displays the PID of any process currently holding the LOCK critical section.</p></li>
 </ul></div>
-<a class="indexterm" name="idp185718384"></a><pre class="programlisting">-O[UTPUT]="<em class="replaceable"><code>file-name</code></em>"</pre>
+<a class="indexterm" name="idp76224528"></a><pre class="programlisting">-O[UTPUT]="<em class="replaceable"><code>file-name</code></em>"</pre>
 <p>Directs the reporting of all specified LOCKs to a file.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>If you specify an existing file, LKE creates a new version
@@ -319,7 +319,7 @@ LKE&gt;</pre>
 <li class="listitem"><p>By default, the <code class="code">SHOW</code> command send output
             messages to stdout.</p></li>
 </ul></div>
-<a class="indexterm" name="idp185674048"></a><pre class="programlisting">-P[ID]=<em class="replaceable"><code>pid</code></em></pre>
+<a class="indexterm" name="idp76227776"></a><pre class="programlisting">-P[ID]=<em class="replaceable"><code>pid</code></em></pre>
 <p>Specifies the process identification number that holds a LOCK on
         a resource name.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -332,7 +332,7 @@ LKE&gt;</pre>
 <li class="listitem"><p>By default, <code class="code"> SHOW</code> displays the LOCKs for all
             PIDs.</p></li>
 </ul></div>
-<a class="indexterm" name="idp185732416"></a><pre class="programlisting">-R[EGION]=<em class="replaceable"><code>region-name</code></em></pre>
+<a class="indexterm" name="idp76238256"></a><pre class="programlisting">-R[EGION]=<em class="replaceable"><code>region-name</code></em></pre>
 <p>Specifies the region that holds the locked resource
         names.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -343,7 +343,7 @@ LKE&gt;</pre>
 <li class="listitem"><p>By default, <code class="code"> SHOW</code> displays the LOCKs for all
             regions.</p></li>
 </ul></div>
-<a class="indexterm" name="idp185731296"></a><pre class="programlisting">-W[AIT]</pre>
+<a class="indexterm" name="idp76237136"></a><pre class="programlisting">-W[AIT]</pre>
 <p>Displays the LOCK resource name and the process state
         information of all processes waiting for the LOCK to be
         granted.</p>
@@ -402,7 +402,7 @@ No locks were found in CREG</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="LKE_Exit"></a>Exit<a class="indexterm" name="idp185651008"></a><a class="indexterm" name="idp185760880"></a>
+<a name="LKE_Exit"></a>Exit<a class="indexterm" name="idp76139712"></a><a class="indexterm" name="idp76264416"></a>
 </h3></div></div></div>
 <p>The EXIT command ends an LKE session. The format of the EXIT
           command is:</p>
@@ -424,7 +424,7 @@ No locks were found in CREG</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="LKE_SPAWN"></a>SPawn<a class="indexterm" name="idp185736784"></a>
+<a name="LKE_SPAWN"></a>SPawn<a class="indexterm" name="idp76268064"></a>
 </h3></div></div></div>
 <p>Use the <code class="code"> SPAWN</code> command to create a sub-process for
         access to the shell without terminating the current LKE environment.

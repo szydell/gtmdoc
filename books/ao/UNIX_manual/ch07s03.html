@@ -10,7 +10,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Database Replication">
 <link rel="prev" href="ch07s02.html" title="Implementing Replication and Recovery">
 <link rel="next" href="replication.html" title="Commands and Qualifiers">
-<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp70364144.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -59,7 +59,6 @@ export gtmroutines="$PWD/$gtm_repl_instname $gtm_dist"
 # if [ -e  "$gtm_dist/libgtmutil.so" ] ; then export gtmroutines="$PWD/$gtm_repl_instname $gtm_dist/libgtmutil.so"
 else export gtmroutines="$PWD/$gtm_repl_instname* $gtm_dist" ; fi
 # For more examples on setting GT.M related environment variables to reasonable values on POSIX shells, refer to the gtmprofile script.
-#export LD_LIBRARY_PATH=/usr/local/lib
 #export gtmcrypt_config=$PWD/$gtm_repl_instname/config_file
 #echo -n "Enter Password for gtmtls_passwd_${gtm_repl_instname}: ";export gtmtls_passwd_${gtm_repl_instname}="`$gtm_dist/plugin/gtmcrypt/maskpass|tail -n 1|cut -f 3 -d " "`"</pre>
 <p>Modify the env script according to your test environment. </p>
@@ -208,65 +207,6 @@ $gtm_dist/mupip replicate -receive -checkhealth</pre>
   tail -30 $PWD/$1/$1.log
   $gtm_dist/mupip replicate -receiver -checkhealth # Checks the health of the Receiver Server and the Update Process</pre>
 </div>
-<div class="sect3">
-<div class="titlepage"><div><div><h4 class="title">
-<a name="gengcproc"></a>gen_gc</h4></div></div></div>
-<p>Creates the libconfig format configuration file for use with the TLS example.</p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">The first second argument specify the names of all participating instances.  </li></ul></div>
-<p>Example:<code class="code">./gen_gc Helen Phil</code></p>
-<p>Here is the code:</p>
-<pre class="programlisting">#Creates the libconfig format configuration file
-  #$gtm_dist/mumps -r CONVDBKEYS $gtmcrypt_config
-  echo "tls: {"&gt;$gtmcrypt_config
-  echo " verify-depth: 7;" &gt;&gt; $gtmcrypt_config
-  echo "    CAfile: "$PWD/certs/ca.crt";" &gt;&gt; $gtmcrypt_config
-  echo "     $1: {" &gt;&gt; $gtmcrypt_config
-  echo "           format: "PEM";" &gt;&gt; $gtmcrypt_config
-  echo "           cert: "$PWD/certs/$1.crt";" &gt;&gt; $gtmcrypt_config
-  echo "           key: "$PWD/certs/$1.key";" &gt;&gt; $gtmcrypt_config
-  echo "     };" &gt;&gt; $gtmcrypt_config
-  echo "     $2: {" &gt;&gt; $gtmcrypt_config
-  echo "           format: "PEM";" &gt;&gt; $gtmcrypt_config
-  echo "           cert: "$PWD/certs/$2.crt";" &gt;&gt; $gtmcrypt_config
-  echo "           key: "$PWD/certs/$2.key";" &gt;&gt; $gtmcrypt_config
-  echo "     };" &gt;&gt; $gtmcrypt_config
-  echo "};" &gt;&gt; $gtmcrypt_config</pre>
-</div>
-<div class="sect3">
-<div class="titlepage"><div><div><h4 class="title">
-<a name="certsetupproc"></a>cert_setup</h4></div></div></div>
-<p>Sets up the $PWD/certs directory for use with the TLS example.</p>
-<p>Here is the code:</p>
-<pre class="programlisting">echo "Creating cert directories ...in $PWD"
-  mkdir -p $PWD/certs/newcerts
-  touch $PWD/certs/index.txt
-  echo "01" &gt; $PWD/certs/serial
-  echo "Generating root CA...."
-  ./gen_ca
-  </pre>
-</div>
-<div class="sect3">
-<div class="titlepage"><div><div><h4 class="title">
-<a name="gencaproc"></a>gen_ca</h4></div></div></div>
-<p>Creates the root certification authority in the $PWD/certs directory for use with the TLS example.</p>
-<p>Here is the code:</p>
-<pre class="programlisting">#Generates root certification authority and sets it to expire in 365 days. Ensure that you have a properly configured /etc/ssl/openssl.cnf file.
-  mkdir -p $PWD/certs
-  openssl genrsa -des3 -out $PWD/certs/$1ca.key
-  openssl req -new -x509 -days 365 -key $PWD/certs/$1ca.key -out $PWD/certs/$1ca.crt
-  #Important: Keep the self-signed root certificate authority and leaf-level certificates in a secure location. Protect their directories with 0500 permissions and the individual files with 0400 permissions so that unauthorized users cannot access them.</pre>
-</div>
-<div class="sect3">
-<div class="titlepage"><div><div><h4 class="title">
-<a name="genleafproc"></a>gen_leaf</h4></div></div></div>
-<p>Creates the leaf-level certificate and gets it signed from the root certification authority for use with the TLS example.</p>
-<p>Here is the code:</p>
-<pre class="programlisting">#Generates leaf-level certificates in $PWD/certs
-openssl genrsa -des3 -out $PWD/certs/$1${gtm_repl_instname}.key
-openssl req -new -key $PWD/certs/$1${gtm_repl_instname}.key -out $PWD/certs/$gtm_repl_instname.csr
-openssl ca -config $PWD/openssl.cnf -in $PWD/certs/$gtm_repl_instname.csr -out $PWD/certs/$1$gtm_repl_instname.crt
-openssl x509 -in $PWD/certs/$1$gtm_repl_instname.crt -dates -issuer -subject -noout</pre>
-</div>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
@@ -364,7 +304,7 @@ source ./gtmenv A V6.3-000A_x86_64
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>While a backed up instance file helps start replication on the P side of A&#8594;P, it does not prevent the need for taking a backup of the database on A. You need to do a database backup/restore or an extract/load from A to P to ensure P has all of the data as on A at startup.</p></td></tr>
+<tr><td align="left" valign="top"><p>Note that while a backed up instance file helps start replication on the P side of A&#8594;P, it does not prevent the need for taking a backup of the database on A. You need to do a database backup/restore or an extract/load from A to P to ensure P has all of the data as on A at startup.</p></td></tr>
 </table></div>
 </li>
 </ul></div>
@@ -710,7 +650,7 @@ source ./gtmenv P V6.3-000A_x86_64
               <p>S: ... <span class="underline">P34</span>, <span class="bold"><strong>A95</strong></span>, <span class="underline">P35</span>, <span class="underline">P36</span>, <span class="bold"><strong>A96</strong></span>, <span class="bold"><strong>A97</strong></span>, <span class="underline">P37</span>, <span class="underline">P38</span>, <span class="italic">B61</span></p>
             </td>
 <td>
-              <p>For <span class="underline">P</span> to accept replication from <span class="italic">B</span>, it must roll off transactions generated by <span class="bold"><strong>A</strong></span>, (in this case <span class="bold"><strong>A98</strong></span>) that <span class="italic">B</span> does not have in its database, as well as any additional transactions generated and applied locally since transaction number <span class="bold"><strong>A98</strong></span> from <span class="bold"><strong>A</strong></span>.<sup>[<a name="idp184478528" href="#ftn.idp184478528" class="footnote">a</a>]</sup> This rollback is accomplished with a MUPIP JOURNAL -ROLLBACK -FETCHRESYNC operation on <span class="underline">P</span>.<sup>[<a name="idp184485648" href="#ftn.idp184485648" class="footnote">b</a>]</sup> These rolled off transactions (<span class="bold"><strong>A98</strong></span>, <span class="underline">P39</span>, <span class="underline">P40</span>) go into the Unreplicated Transaction Log and can be subsequently reprocessed by application code.<sup>[<a name="idp184479792" href="#ftn.idp184479792" class="footnote">c</a>]</sup> Once the rollback is completed, <span class="underline">P</span> can start accepting replication from <span class="italic">B</span>.<sup>[<a name="idp184492096" href="#ftn.idp184492096" class="footnote">d</a>]</sup> <span class="italic">B</span> in its Originating Primary role processes transactions and provides business continuity, resulting in transactions <span class="italic">B61</span> and <span class="italic">B62</span>.</p>
+              <p>For <span class="underline">P</span> to accept replication from <span class="italic">B</span>, it must roll off transactions generated by <span class="bold"><strong>A</strong></span>, (in this case <span class="bold"><strong>A98</strong></span>) that <span class="italic">B</span> does not have in its database, as well as any additional transactions generated and applied locally since transaction number <span class="bold"><strong>A98</strong></span> from <span class="bold"><strong>A</strong></span>.<sup>[<a name="idp74994560" href="#ftn.idp74994560" class="footnote">a</a>]</sup> This rollback is accomplished with a MUPIP JOURNAL -ROLLBACK -FETCHRESYNC operation on <span class="underline">P</span>.<sup>[<a name="idp75001680" href="#ftn.idp75001680" class="footnote">b</a>]</sup> These rolled off transactions (<span class="bold"><strong>A98</strong></span>, <span class="underline">P39</span>, <span class="underline">P40</span>) go into the Unreplicated Transaction Log and can be subsequently reprocessed by application code.<sup>[<a name="idp74764384" href="#ftn.idp74764384" class="footnote">c</a>]</sup> Once the rollback is completed, <span class="underline">P</span> can start accepting replication from <span class="italic">B</span>.<sup>[<a name="idp74999152" href="#ftn.idp74999152" class="footnote">d</a>]</sup> <span class="italic">B</span> in its Originating Primary role processes transactions and provides business continuity, resulting in transactions <span class="italic">B61</span> and <span class="italic">B62</span>.</p>
             </td>
 </tr>
 <tr>
@@ -729,10 +669,10 @@ source ./gtmenv P V6.3-000A_x86_64
 </tr>
 </tbody>
 <tbody class="footnotes"><tr><td colspan="4">
-<div class="footnote"><p><sup>[<a name="ftn.idp184478528" href="#idp184478528" class="para">a</a>] </sup>As this rollback is more complex, may involve more data than the regular LMS rollback, and may involve reading journal records sequentially; it may take longer.</p></div>
-<div class="footnote"><p><sup>[<a name="ftn.idp184485648" href="#idp184485648" class="para">b</a>] </sup>In scripting for automating operations, there is no need to explicitly test whether <span class="italic">B</span> is behind <span class="underline">P</span> - if it is behind, the Source Server will fail to connect and report an error, which automated shell scripting can detect and effect a rollback on <span class="underline">P</span> followed by a reconnection attempt by <span class="italic">B</span>. On the other hand, there is no harm in <span class="underline">P</span> routinely performing a rollback before having <span class="italic">B</span> connect - if it is not ahead, the rollback will be a no-op. This characteristic of replication is unchanged from releases prior to V5.5-000.</p></div>
-<div class="footnote"><p><sup>[<a name="ftn.idp184479792" href="#idp184479792" class="para">c</a>] </sup>GT.M's responsibility for them ends once it places them in the Unreplicated Transaction Log.</p></div>
-<div class="footnote"><p><sup>[<a name="ftn.idp184492096" href="#idp184492096" class="para">d</a>] </sup>Ultimately, business logic must determine whether the rolled off transactions can simply be reapplied or whether other reprocessing is required. GT.M's $ZQGBLMOD() function can assist application code in determining whether conflicting updates may have occurred.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idp74994560" href="#idp74994560" class="para">a</a>] </sup>As this rollback is more complex, may involve more data than the regular LMS rollback, and may involve reading journal records sequentially; it may take longer.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idp75001680" href="#idp75001680" class="para">b</a>] </sup>In scripting for automating operations, there is no need to explicitly test whether <span class="italic">B</span> is behind <span class="underline">P</span> - if it is behind, the Source Server will fail to connect and report an error, which automated shell scripting can detect and effect a rollback on <span class="underline">P</span> followed by a reconnection attempt by <span class="italic">B</span>. On the other hand, there is no harm in <span class="underline">P</span> routinely performing a rollback before having <span class="italic">B</span> connect - if it is not ahead, the rollback will be a no-op. This characteristic of replication is unchanged from releases prior to V5.5-000.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idp74764384" href="#idp74764384" class="para">c</a>] </sup>GT.M's responsibility for them ends once it places them in the Unreplicated Transaction Log.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idp74999152" href="#idp74999152" class="para">d</a>] </sup>Ultimately, business logic must determine whether the rolled off transactions can simply be reapplied or whether other reprocessing is required. GT.M's $ZQGBLMOD() function can assist application code in determining whether conflicting updates may have occurred.</p></div>
 </td></tr></tbody>
 </table></div>
 <p>The following example creates this scenario.</p>
@@ -1486,19 +1426,11 @@ source ./env A V6.2-001_x86_64
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="tls_repl_proc"></a>Setting up a secured TLS replication connection</h3></div></div></div>
-<p>The following example creates two instances (Alice and Bob) and a basic framework required for setting up a TLS replication connection between them. Alice and Bob are fictional characters from <a class="ulink" href="https://en.wikipedia.org/wiki/Alice_and_Bob" target="_top">https://en.wikipedia.org/wiki/Alice_and_Bob</a> and represent two instances who use the certificates signed by the same root CA. This example is solely for the purpose of explaining the general steps required to encrypt replication data in motion. You must understand, and appropriately adjust, the scripts before using them in a production environment. Note that all certificates created in this example are for the sake of explaining their roles in a TLS replication environment. For practical applications, use certificates signed by a CA whose authority matches your use of TLS.</p>
-<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Important">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
-<th align="left">Important</th>
-</tr>
-<tr><td align="left" valign="top"><p>Use the openssl.conf provided with repl_procedures.tar.gz to create the self-signed root certification authority (ca.crt) and leaf-level certificates used in this example. In production, ensure that you configure openssl.cnf according to your environment and security requirements. For example, in production you would keep root-level certificates in directories with 0500 permissions and the individual files with 0400 permissions so that unauthorized users cannot access them.</p></td></tr>
-</table></div>
+<p>The following example creates two instances (Alice and Bob) and a basic framework required for setting up a TLS replication connection between them. Alice and Bob are fictional characters from <a class="ulink" href="https://en.wikipedia.org/wiki/Alice_and_Bob" target="_top">https://en.wikipedia.org/wiki/Alice_and_Bob</a> and represent two instances who use the certificates signed by the same demo root CA. This example is solely for the purpose of explaining the general steps required to encrypt replication data in motion. You must understand, and appropriately adjust, the scripts before using them in a production environment. Note that all certificates created in this example are for the sake of explaining their roles in a TLS replication environment. For practical applications, use certificates signed by a CA whose authority matches your use of TLS.</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
 <p>Remove the comment tags from the following lines in the gtmenv script:</p>
-<pre class="programlisting">export LD_LIBRARY_PATH=/usr/local/lib
-export gtmcrypt_config=$PWD/$gtm_repl_instname/config_file
+<pre class="programlisting">export gtmcrypt_config=$PWD/$gtm_repl_instname/config_file
 echo -n "Enter Password for gtmtls_passwd_${gtm_repl_instname}: ";export gtmtls_passwd_${gtm_repl_instname}="`$gtm_dist/plugin/gtmcrypt/maskpass|tail -n 1|cut -f 3 -d " "`"</pre>
 </li>
 <li class="listitem">
@@ -1507,95 +1439,21 @@ echo -n "Enter Password for gtmtls_passwd_${gtm_repl_instname}: ";export gtmtls_
 <p>This creates a GT.M environment for replication instance name Alice. When prompted, enter a password for gtmtls_passwd_Alice. </p>
 </li>
 <li class="listitem">
-<p>Create a certificate directory setup in the current directory and a self-signed root certification authority. </p>
-<pre class="programlisting">$ ./cert_setup</pre>
-<p>This creates a self-signed root certification authority (ca.crt) in $PWD/certs/. ca.crt needs to be available on both Source and Receiver Servers. In a production environment, ensure that you keep root-level certificates in directories with 0500 permissions and the individual files with 0400 permissions so that unauthorized users cannot access them. </p>
-<p>The output of this script is like the following"</p>
-<pre class="programlisting">Generating RSA private key, 512 bit long modulus
-...........++++++++++++
-...............++++++++++++
-e is 65537 (0x10001)
-Enter pass phrase for /home/jdoe/certs/ca.key:
-Verifying - Enter pass phrase for /home/jdoe/certs/ca.key:
-Enter pass phrase for /home/jdoe/certs/ca.key:
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter '.', the field will be left blank.
-Country Name (2 letter code) [US]:US
-State or Province Name (full name) [Bobadelphia]:Bobadelphia
-City (e.g., Malvern) [Malvern]:Malvern
-Organization Name (eg, company) [FIS]:FIS
-Organizational Unit Name (eg, section) [GT.M]:GT.M
-Common Name (e.g. server FQDN or YOUR name) [localhost]:fis-gtm.com
-Email Address (e.g. Alice@gt.m) []:root@gt.m</pre>
-</li>
-<li class="listitem">
 <pre class="programlisting">./db_create</pre>
 <p>This creates the global directory and the database for instance Alice. </p>
-<pre class="programlisting">./gen_leaf</pre>
-<p> This creates a leaf-level certificate for Alice. The openssl.conf used to create this example in available in the download for your reference. Ensure that your openssl.cnf file is configured according to your environment and security requirements.</p>
-<p>The output of this script is like the following:</p>
-<pre class="programlisting">Generating RSA private key, 512 bit long modulus
-.++++++++++++
-.......++++++++++++
-e is 65537 (0x10001)
-Enter pass phrase for /home/jdoe/certs/Alice.key: [Specify the password that you entered for gtmtls_passwd_Alice]
-Verifying - Enter pass phrase for /home/jdoe/certs/Alice.key:
-Enter pass phrase for /home/jdoe/certs/Alice.key:
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter '.', the field will be left blank.
-Country Name (2 letter code) [US]:
-State or Province Name (full name) [Bobadelphia]:Illinois
-City (e.g., Malvern) [Malvern]:Chicago
-Organization Name (eg, company) [FIS]:FIS
-Organizational Unit Name (eg, section) [GT.M]:GT.M
-Common Name (e.g. server FQDN or YOUR name) [localhost]:fisglobal.com
-Ename Address (e.g. Alice@gt.m) []:Alice@gt.m
-Please enter the following 'extra' attributes
-to be sent with your certificate request
-A challenge password []:
-An optional company name []:
-Using configuration from /usr/lib/ssl/openssl.cnf
-Enter pass phrase for ./certs/ca.key:
-Check that the request matches the signature
-Signature ok
-Certificate Details:
- Serial Number: 14 (0xe)
- Validity
- Not Before: Jun 11 14:06:53 2014 GMT
- Not After : Jun 12 14:06:53 2014 GMT
- Subject:
- countryName = US
- stateOrProvinceName = Illinois
- organizationName = FIS
- organizationalUnitName = GT.M
- commonName = fisglobal.com
- emailAddress = Alice@gt.m
- X509v3 extensions:
- X509v3 Basic Constraints:
- CA:FALSE
- Netscape Comment:
- OpenSSL Generated Certificate
- X509v3 Subject Key Identifier:
- 96:FD:43:0D:0A:C1:AA:6A:BB:F3:F4:02:D6:1F:0A:49:48:F4:68:52
- X509v3 Authority Key Identifier:
- keyid:DA:78:3F:28:8F:BC:51:78:0C:5F:27:30:6C:C5:FE:B3:65:65:85:C9
-Certificate is to be certified until Jun 12 14:06:53 2014 GMT (1 days)
-Sign the certificate? [y/n]:y
-1 out of 1 certificate requests certified, commit? [y/n]y
-Write out database with 1 new entries
-Data Base Updated</pre>
 </li>
 <li class="listitem">
-<p>Create the $gtmcrypt_config file. Specify the names of all participating instances. </p>
-<pre class="programlisting">./gen_gc Alice Bob</pre>
+<p>Create a demo root CA, leaf-level certificate, and a $gtmcrypt_config file with a tlsid called Alice for instance Alice. Note that in this example, $gtmcrypt_config is set to $PWD/Alice/config_file. For more information on creating the $gtmcrypt_config file and the demo certificates required to run this example, refer to <a class="xref" href="TLS_Configuration_File.html" title="Appendix G. Creating a $gtmcrypt_config file">Appendix G: &#8220;<i>Creating a $gtmcrypt_config file</i>&#8221;</a>. </p>
+<p>Your $gtmcrypt_config file should look something like:</p>
+<pre class="programlisting">tls: {
+    verify-depth: 7;
+     CAfile: "/path/to/certs/ca.crt";
+     Alice: {
+           format: "PEM";
+           cert: "/path/to/certs/Alice.crt";
+           key: "/path/to/certs/Alice.key";
+     };
+  };</pre>
 </li>
 <li class="listitem">
 <p>Turn replication on and create the replication instance file: </p>
@@ -1616,13 +1474,19 @@ Data Base Updated</pre>
 <li class="listitem">
 <pre class="programlisting">$ ./db_create</pre>
 <p>This creates the global directory and the database for instance Bob. </p>
-<pre class="programlisting">$ ./gen_leaf</pre>
-<p> This also creates a leaf-level certificate for Bob. </p>
 </li>
 <li class="listitem">
-<p>Create the $gtmcrypt_config file. Specify the names of all participating instances. </p>
-<pre class="programlisting">./gen_gc Alice Bob</pre>
-<p>Ensure that ca.key generated on Instance Alice is available on instance Bob. </p>
+<p>Create a leaf-level certificate and a $gtmcrypt_config file with a tlsid called Bob for instance Bob. Note that in this example, $gtmcrypt_config is set to $PWD/Bob/config_file. Note that you would use the demo CA that you created before to sign this leaf-level certificate. For replication to proceed, both leaf-level certificates must be signed by the same root CA. For more information, refer to <a class="xref" href="TLS_Configuration_File.html" title="Appendix G. Creating a $gtmcrypt_config file">Appendix G: &#8220;<i>Creating a $gtmcrypt_config file</i>&#8221;</a>. </p>
+<p>Your $gtmcrypt_config file should look something like:</p>
+<pre class="programlisting">tls: {
+    verify-depth: 7;
+     CAfile: "/path/to/certs/ca.crt";
+     Bob: {
+           format: "PEM";
+           cert: "/path/to/certs/Bob.crt";
+           key: "/path/to/certs/Bob.key";
+     };
+  };</pre>
 </li>
 <li class="listitem">
 <p>Turn replication on and create the replication instance file:</p>
@@ -1639,7 +1503,7 @@ Data Base Updated</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="schema_chng_filters"></a>Schema Change Filters<a class="indexterm" name="idp184590176"></a>
+<a name="schema_chng_filters"></a>Schema Change Filters<a class="indexterm" name="idp75331216"></a>
 </h3></div></div></div>
 <p>Filters between the originating and replicating systems perform rolling upgrades that involve database schema changes. The filters manipulate the data under the different schemas when the software revision levels on the systems differ.</p>
 <p>GT.M provides the ability to invoke a filter; however, an application developer must write the filters specifically as part of each application release upgrade when schema changes are involved. </p>

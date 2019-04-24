@@ -10,7 +10,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s33.html" title="$ZError">
 <link rel="next" href="ch08s35.html" title="$ZHorolog">
-<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp64690800.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -32,14 +32,13 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zgbldir"></a>$ZGbldir<a class="indexterm" name="idp189017808"></a>
+<a name="zgbldir"></a>$ZGbldir<a class="indexterm" name="idp70919840"></a>
 </h2></div></div></div>
 <p>$ZG[BLDIR] contains the value of the current Global Directory filename. When $ZGBLDIR specifies an invalid or inaccessible file, GT.M cannot successfully perform database operations.</p>
 <p>GT.M initializes $ZGBLDIR to the translation of the environment variable gtmgbldir. The value of the gtmgbldir environment variable may include a reference to another environment variable. If gtmgbldir is not defined, GT.M initializes $ZGBLDIR to null. When $ZGBLDIR is null, GT.M constructs a file name for the Global Directory using the name $gtmgbldir and the extension .gld in the current working directory. </p>
-<p>$ZGBLDIR is a read-write Intrinsic Special Variable, (i.e., it can appear on the left side of the equal sign (=) in the argument to the SET command). SET $ZGBLDIR="" causes GT.M to assign $ZGBLDIR to the translation of gtmgbldir if that environment variable is defined. If it is not defined, then SET $ZGBLDIR="" causes GT.M to construct a file name using the name $gtmgbldir.gld in the current directory. GT.M permits $ZGBLDIR to be NEW'd. A $ZGBLDIR value may include an environment variable.</p>
+<p>$ZGBLDIR is a read-write Intrinsic Special Variable, (that is, it can appear on the left side of the equal sign (=) in the argument to the SET command). SET $ZGBLDIR="" causes GT.M to assign $ZGBLDIR to the translation of gtmgbldir if that environment variable is defined. If it is not defined, then SET $ZGBLDIR="" causes GT.M to construct a file name using the name $gtmgbldir.gld in the current directory. NEWing $ZGBLDIR is the same as SET $ZGBLDIR="", which as just noted may change its value. For code that immediately SETs $ZGBLDIR after NEW'ng it that behavior doesn't matter, but without an associated SET, such a change may seem counterintuitive. A $ZGBLDIR value may include an environment variable.</p>
 <p>SETting $ZGBLDIR also causes GT.M to attempt to open the specified file. If the file name is invalid or the file is inaccessible, GT.M triggers an error without changing the value of $ZGBLDIR.</p>
 <p>To establish a value for $ZGBLDIR outside of M, use the appropriate shell command to assign a translation to gtmgbldir. Defining gtmgbldir provides a convenient way to use the same Global Directory during a session where you repeatedly invoke and leave GT.M. </p>
-<p>Changes to the value of $ZGBLDIR during a GT.M invocation only last for the current invocation and do not change the value of gtmgbldir.</p>
 <p>Example:</p>
 <pre class="programlisting">$ gtmgbldir=test.gld
 $ export gtmgbldir
@@ -67,13 +66,6 @@ GTM&gt;WRITE $zgbldir
 GTM&gt;halt
 $</pre>
 <p>The SET command attempts to change the value of $ZGBLDIR to test.gld. Because the file does not exist, GT.M reports an error and does not change the value of $ZGBLDIR.</p>
-<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
-<th align="left">Caution</th>
-</tr>
-<tr><td align="left" valign="top"><p>Attempting to restore an inaccessible initial Global Directory that has been NEW'd, can cause an error.</p></td></tr>
-</table></div>
 </div>
 <div class="navfooter">
 <hr>

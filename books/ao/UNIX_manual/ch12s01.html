@@ -10,7 +10,7 @@
 <link rel="up" href="ch12.html" title="Chapter 12. Database Encryption">
 <link rel="prev" href="ch12.html" title="Chapter 12. Database Encryption">
 <link rel="next" href="ch12s02.html" title="Theory of Operation">
-<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp70364144.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -56,11 +56,11 @@
 <div class="titlepage"><div><div><h4 class="title">
 <a name="dar_nt_prtc"></a>Data Not At Rest Not Protected </h4></div></div></div>
 <p>GT.M database encryption is designed to protect data at rest. Applications execute business logic to manipulate and produce unencrypted data. Unencrypted data must exist within application processes, and can be accessed by any process with access rights to the virtual address space of a process containing unencrypted data. Also, data in transit between systems and between processes is not protected by GT.M database encryption. </p>
-<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Before creating a core dump, GT.M attempts to clear any keys that it is aware of within the process address space. The reference implementation also uses the encryption libraries so as to minimize the probability of keys appearing in core dumps. Since it is not possible to guarantee that keys will not appear in a process core dump, depending on your security policy, FIS recommends that you consider whether to disable the creation of core dumps by GT.M processes accessing encrypted databases, or use other means to limit access to core dumps. Note also that the use of random byte sequences as keys makes it harder to discern them in a core dump<sup>[<a name="idp188471440" href="#ftn.idp188471440" class="footnote">4</a>]</sup>.</p></li></ol></div>
+<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Before creating a core dump, GT.M attempts to clear any keys that it is aware of within the process address space. The reference implementation also uses the encryption libraries so as to minimize the probability of keys appearing in core dumps. Since it is not possible to guarantee that keys will not appear in a process core dump, depending on your security policy, FIS recommends that you consider whether to disable the creation of core dumps by GT.M processes accessing encrypted databases, or use other means to limit access to core dumps. Note also that the use of random byte sequences as keys makes it harder to discern them in a core dump<sup>[<a name="idp78950656" href="#ftn.idp78950656" class="footnote">4</a>]</sup>.</p></li></ol></div>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="keys_in_prc_Add"></a>Keys in the Process Address Space / Environment<a class="indexterm" name="idp188268080"></a>
+<a name="keys_in_prc_Add"></a>Keys in the Process Address Space / Environment<a class="indexterm" name="idp78898608"></a>
 </h4></div></div></div>
 <p>This is a corollary of the fact that data not at rest is not protected by GT.M database encryption. </p>
 <p>In order to encrypt and decrypt databases, keys must exist in the address space / environment of GT.M processes. Furthermore, with the reference implementation, processes also need to have access to the user's private key, and to get access to the private key, they need access to the passphrase of the user's GPG keyring. In order to pass encryption to child processes, the passphrase also exists in the process environment, even if obfuscated. This means that any process that can access the address space or environment of a GT.M process accessing encrypted databases has access to the passphrases and keys. </p>
@@ -89,7 +89,7 @@
 <p>Therefore, GT.M provides a "plug-in" architecture for encryption algorithms, which allows you to integrate your preferred encryption software with GT.M. In the GT.M development environment, we created variations on a reference implementation using popular encryption packages for our validation. We tested each reference implementation variation on at least one computing platform, and one reference implementation variation on each computing platform. This document lists which encryption package we tested on which platform. </p>
 <p>You take all responsibility for the selection and use of a specific encryption package. Please be aware that: </p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
-<li class="listitem"><p>All encryption libraries that run within the address space of a GT.M process <span class="bold,italics">must</span> conform to the rules of any functions for GT.M, as documented, including but not limited to being single threaded, not altering GT.M's signal handlers, restricting the use of timers to the API provided by GT.M, etc.<sup>[<a name="idp188466816" href="#ftn.idp188466816" class="footnote">5</a>]</sup></p></li>
+<li class="listitem"><p>All encryption libraries that run within the address space of a GT.M process <span class="bold,italics">must</span> conform to the rules of any functions for GT.M, as documented, including but not limited to being single threaded, not altering GT.M's signal handlers, restricting the use of timers to the API provided by GT.M, etc.<sup>[<a name="idp78968992" href="#ftn.idp78968992" class="footnote">5</a>]</sup></p></li>
 <li class="listitem"><p>Malfunction of encryption software or hardware can render your data irrecoverable. As part of your comprehensive organizational risk management strategy, please consider the use of logical multi-site application configurations, possibly with different encryption packages and certainly with different encryption keys. </p></li>
 <li class="listitem"><p>The cipher used for database encryption must not change the length of the encrypted sequence of bytes. In other words, if the cleartext string is n bytes, the encrypted string must also be n bytes. </p></li>
 </ol></div>
@@ -114,7 +114,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Alternatives_to_Database_Encry"></a>Alternatives to Database Encryption<a class="indexterm" name="idp188452288"></a> </h3></div></div></div>
+<a name="Alternatives_to_Database_Encry"></a>Alternatives to Database Encryption<a class="indexterm" name="idp78904288"></a> </h3></div></div></div>
 <p>On some platforms, you may be able to use disk drives with built-in encryption, or encrypted file systems to protect data at rest. These may or may not be as secure as GT.M database encryption: for example, once an encrypted file system is mounted, files thereon can be accessed by any process that has appropriate permissions; with GT.M database encryption each process accessing a database file must individually have access to the keys for that database file. </p>
 </div>
 <div class="sect2">
@@ -210,8 +210,8 @@
 </div>
 <div class="footnotes">
 <br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a name="ftn.idp188471440" href="#idp188471440" class="para">4</a>] </sup>In the event core dumps are needed to troubleshoot operational issues, they can always be re-enabled.</p></div>
-<div class="footnote"><p><sup>[<a name="ftn.idp188466816" href="#idp188466816" class="para">5</a>] </sup>GT.M provides functions gtm_hiber_start(), gtm_hiber_start_any(), gtm_start_timer(), gtm_cancel_timer(), gtm_jnlpool_detach(), gtm_malloc() and gtm_free() which can be freely used by plug-ins. </p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idp78950656" href="#idp78950656" class="para">4</a>] </sup>In the event core dumps are needed to troubleshoot operational issues, they can always be re-enabled.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idp78968992" href="#idp78968992" class="para">5</a>] </sup>GT.M provides functions gtm_hiber_start(), gtm_hiber_start_any(), gtm_start_timer(), gtm_cancel_timer(), gtm_jnlpool_detach(), gtm_malloc() and gtm_free() which can be freely used by plug-ins. </p></div>
 </div>
 </div>
 <div class="navfooter">

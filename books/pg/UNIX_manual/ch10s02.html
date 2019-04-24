@@ -10,7 +10,7 @@
 <link rel="up" href="ch10.html" title="Chapter 10. Utility Routines">
 <link rel="prev" href="ch10s01.html" title="Using the Utilities">
 <link rel="next" href="ch10s03.html" title="Conversion Utilities">
-<link rel="copyright" href="ln-idp184098304.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp64690800.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -34,7 +34,7 @@
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="date_and_time_utils"></a>
-      Date and Time Utilities<a class="indexterm" name="idp191601136"></a>
+      Date and Time Utilities<a class="indexterm" name="idp73484272"></a>
 </h2></div></div></div>
 <p>The date and time utilities are:</p>
 <p>%D: Displays the current date using the [d]d-mmm-[yy]yy format.</p>
@@ -116,13 +116,13 @@
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="percent_d"></a>
-      %D<a class="indexterm" name="idp191746784"></a>
+      %D<a class="indexterm" name="idp73369072"></a>
 </h3></div></div></div>
 <p>The %D utility displays the current date using the [d]d-mmm-[yy]yy format. If a routine uses this function repetitively, put the utility code directly into the M program.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="util_labels"></a>
-      Utility Labels<a class="indexterm" name="idp191727520"></a>
+      Utility Labels<a class="indexterm" name="idp73638320"></a>
 </h4></div></div></div>
 <p>INT: Sets variable %DAT to current date.</p>
 <p>FUNC[()]: Invokes an extrinsic function returning today's date.</p>
@@ -130,14 +130,14 @@
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="output_variables"></a>
-      Output Variables<a class="indexterm" name="idp191793536"></a>
+      Output Variables<a class="indexterm" name="idp73681888"></a>
 </h4></div></div></div>
 <p>%DAT: Contains the current date..</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_percent_d"></a>
-      Examples of %D<a class="indexterm" name="idp189489040"></a>
+      Examples of %D<a class="indexterm" name="idp71359856"></a>
 </h4></div></div></div>
 <p>For the following examples, $ZDATEFORM is assumed to be one (1).</p>
 <p>Example:</p>
@@ -158,13 +158,13 @@ GTM&gt;ZWRITE
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="percent_date"></a>
-      %DATE<a class="indexterm" name="idp191779024"></a>
+      %DATE<a class="indexterm" name="idp73666960"></a>
 </h3></div></div></div>
 <p>The %DATE utility converts an input date to the $HOROLOG format. The $HOROLOG format represents time as the number of days since December 31, 1840. The routine has entry points for interactive or non-interactive use.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="utility_labels_percent_date"></a>
-      Utility Labels<a class="indexterm" name="idp191805216"></a>
+      Utility Labels<a class="indexterm" name="idp73694080"></a>
 </h4></div></div></div>
 <p>INT: Converts %DS input non-interactively, if defined, otherwise the current date.</p>
 <p>FUNC(t): Invokes an extrinsic function returning $HOROLOG format of the argument.</p>
@@ -172,21 +172,21 @@ GTM&gt;ZWRITE
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="prompts_10"></a>
-      Prompts<a class="indexterm" name="idp191747552"></a>
+      Prompts<a class="indexterm" name="idp73470752"></a>
 </h4></div></div></div>
 <p>Date: Interactively requests a date for conversion to $HOROLOG format.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="input_variables"></a>
-      Input Variables<a class="indexterm" name="idp191780688"></a>
+      Input Variables<a class="indexterm" name="idp73669040"></a>
 </h4></div></div></div>
 <p>%DS: Contains input date; refer to %DATE Input Formats table.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="output_variables_x"></a>
-      Output Variables<a class="indexterm" name="idp191805088"></a>
+      Output Variables<a class="indexterm" name="idp73693952"></a>
 </h4></div></div></div>
 <p>%DN: Contains output date in $HOROLOG format</p>
 </div>
@@ -370,7 +370,7 @@ GTM&gt;ZWRITE
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_date"></a>
-      Examples of %DATE<a class="indexterm" name="idp191799744"></a>
+      Examples of %DATE<a class="indexterm" name="idp73698928"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;DO ^%DATE
@@ -411,7 +411,7 @@ GTM&gt;WRITE $ZDATE(62019)
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="percent_h"></a>
-      %H<a class="indexterm" name="idp191765328"></a>
+      %H<a class="indexterm" name="idp73653680"></a>
 </h3></div></div></div>
 <p>The %H utility converts date and time to and from $HOROLOG format.</p>
 <div class="sect3">
@@ -430,7 +430,7 @@ GTM&gt;WRITE $ZDATE(62019)
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="input_variables_percent_h"></a>
-      Input Variables<a class="indexterm" name="idp191879328"></a>
+      Input Variables<a class="indexterm" name="idp73769328"></a>
 </h4></div></div></div>
 <p>%DT: Contains input date in either $HOROLOG or mm/dd/[yy]yy format, depending on the format expected by the utility entry point.</p>
 <p>%TM: Contains input time in either $HOROLOG or [h]h:mm:ss format, depending on the format expected by the utility entry point.</p>
@@ -438,7 +438,7 @@ GTM&gt;WRITE $ZDATE(62019)
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="output_variables_percent_h"></a>
-      Output Variables<a class="indexterm" name="idp191800944"></a>
+      Output Variables<a class="indexterm" name="idp73689920"></a>
 </h4></div></div></div>
 <p>%DAT: Contains converted output date,</p>
 <p>%TIM: Contains converted output time,</p>
@@ -446,7 +446,7 @@ GTM&gt;WRITE $ZDATE(62019)
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_percent_h"></a>
-      Examples of %H<a class="indexterm" name="idp191857008"></a>
+      Examples of %H<a class="indexterm" name="idp73697984"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;SET %DT=+$H DO %CDS^%H
@@ -493,13 +493,13 @@ GTM&gt;WRITE $ZDATE(55445)
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="percent_t"></a>
-      %T<a class="indexterm" name="idp191871376"></a>
+      %T<a class="indexterm" name="idp73739216"></a>
 </h3></div></div></div>
 <p>The %T utility displays the current time in [h]h:mm AM/PM. If a routine uses this function repetitively, put the utility code directly into the M program.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="percent_t_util_labels"></a>
-      Utility Labels<a class="indexterm" name="idp191885360"></a>
+      Utility Labels<a class="indexterm" name="idp73658032"></a>
 </h4></div></div></div>
 <p>INT: Sets %TIM to current time in [h]h:mm AM/PM format.</p>
 <p>FUNC[()]: Invokes an extrinsic function returning the current time.</p>
@@ -507,14 +507,14 @@ GTM&gt;WRITE $ZDATE(55445)
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="output_variables_percent_t"></a>
-      Output Variables<a class="indexterm" name="idp191856880"></a>
+      Output Variables<a class="indexterm" name="idp73705472"></a>
 </h4></div></div></div>
 <p>%TIM: Contains current time in [h]h:mm AM/PM format.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_percent_t"></a>
-      Examples of %T<a class="indexterm" name="idp191868848"></a>
+      Examples of %T<a class="indexterm" name="idp73769776"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;DO ^%T
@@ -534,13 +534,13 @@ GTM&gt;ZWRITE
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="percent_ti"></a>
-      %TI<a class="indexterm" name="idp191895792"></a>
+      %TI<a class="indexterm" name="idp73727280"></a>
 </h3></div></div></div>
 <p>The %TI utility converts time to $HOROLOG format. The $HOROLOG format represents time as the number of seconds since midnight. %TI returns the converted time in the variable %TN. The routine has entry points for interactive or non-interactive use.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="percent_ti_util_labels"></a>
-      Utility Labels<a class="indexterm" name="idp191901168"></a>
+      Utility Labels<a class="indexterm" name="idp73786848"></a>
 </h4></div></div></div>
 <p>INTNon-interactively converts %TS to $HOROLOG format; if %TS is not defined, then current time is converted.</p>
 <p>FUNC[(ts)]Invokes an extrinsic function returning $HOROLOG format of the argument, or if no argument, the $HOROLOG format of the current time.</p>
@@ -548,14 +548,14 @@ GTM&gt;ZWRITE
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="prompts_percent_ti"></a>
-      Prompts<a class="indexterm" name="idp191902192"></a>
+      Prompts<a class="indexterm" name="idp73759104"></a>
 </h4></div></div></div>
 <p>Time: Requests time in [h]h:mm:ss format to convert to $HOROLOG format.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="percent_ti_input_variables"></a>
-      Input Variables<a class="indexterm" name="idp191896752"></a>
+      Input Variables<a class="indexterm" name="idp73776064"></a>
 </h4></div></div></div>
 <p>%TS Contains input time.</p>
 <p>The following table summarizes input formats accepted by %TI.</p>
@@ -691,14 +691,14 @@ GTM&gt;ZWRITE
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="percent_ti_output_variables"></a>
-      Output Variables<a class="indexterm" name="idp191880032"></a>
+      Output Variables<a class="indexterm" name="idp73670000"></a>
 </h4></div></div></div>
 <p>%TN: Contains output time in $HOROLOG format</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_ti"></a>
-      Examples of %TI<a class="indexterm" name="idp191945936"></a>
+      Examples of %TI<a class="indexterm" name="idp73837456"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;DO ^%TI
@@ -728,34 +728,34 @@ GTM&gt;ZWRITE
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="percent_to"></a>
-      %TO<a class="indexterm" name="idp191900144"></a>
+      %TO<a class="indexterm" name="idp73661424"></a>
 </h3></div></div></div>
 <p>The %TO utility converts the input time from $HOROLOG format to [h]h:mm AM/PM format. Put the utility code directly into the M program if the routine uses this function repetitively.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="util_labels_percent_to"></a>
-      Utility Labels<a class="indexterm" name="idp191960880"></a>
+      Utility Labels<a class="indexterm" name="idp73849776"></a>
 </h4></div></div></div>
 <p>INT: Converts non-interactively %TS, or if %TS is not defined the current time to [h]h:mm AM/PM format.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="input_variables_to"></a>
-      Input Variables<a class="indexterm" name="idp191920624"></a>
+      Input Variables<a class="indexterm" name="idp73833440"></a>
 </h4></div></div></div>
 <p>%TN: Contains input time in $HOROLOG format.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="output_variables_to"></a>
-      Output Variables<a class="indexterm" name="idp191819616"></a>
+      Output Variables<a class="indexterm" name="idp73813904"></a>
 </h4></div></div></div>
 <p>%TS: Contains output time in [h]h:mm AM/PM format.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_to"></a>
-      Examples of %TO<a class="indexterm" name="idp191887984"></a>
+      Examples of %TO<a class="indexterm" name="idp73852784"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;DO INT^%TI,^%TO 

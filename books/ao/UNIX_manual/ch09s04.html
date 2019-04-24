@@ -10,7 +10,7 @@
 <link rel="up" href="ch09.html" title="Chapter 9. GT.M Database Structure(GDS)">
 <link rel="prev" href="ch09s03.html" title="Master Bitmap">
 <link rel="next" href="ch10.html" title="Chapter 10. Database Structure Editor">
-<link rel="copyright" href="ln-idp178646624.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp70364144.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -31,14 +31,14 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="DStructure"></a>Database Structure <a class="indexterm" name="idp185901760"></a> </h2></div></div></div>
+<a name="DStructure"></a>Database Structure <a class="indexterm" name="idp76289200"></a> </h2></div></div></div>
 <p>The GT.M database structure is hierarchical, based on a form of balanced tree called a B-star tree (B*-tree) structure. 
 The B*-tree contains blocks that are either index or data blocks. An index block contains pointers used to locate data in 
 data blocks, while the data blocks actually store the data. Each block contains a header and records. Each record contains a 
 key and data. </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="tree_org"></a>Tree Organization<a class="indexterm" name="idp185876288"></a>
+<a name="tree_org"></a>Tree Organization<a class="indexterm" name="idp76520768"></a>
 </h3></div></div></div>
 <p>GDS structures the data into multiple B*-trees. GT.M creates a new B*-tree, called a Global Variable Tree (GVT), each time the application defines a new named global variable. Each GVT stores the data for one named global, that is all global variables 
 (gvn) that share the same unsubscripted global name. For example, global <code class="code">^A, ^A(1), ^A(2), ^A("A"),</code> and 
@@ -74,20 +74,20 @@ LOAD to remove those empty GVTs. </p></td></tr>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gds_blks"></a>GDS Blocks <a class="indexterm" name="idp185880512"></a>
+<a name="gds_blks"></a>GDS Blocks <a class="indexterm" name="idp76397632"></a>
 </h3></div></div></div>
-<p>Index and data blocks consist of a block header followed by a series of records. The block header has  four fields that contain information. The first field, of two bytes, specifies the block version. The second field, of two byes, specifies the number of bytes currently in use in the block. The third field, of one byte, specifies the block level. The last field of eight bytes represents the transaction number at which the block was last changed. An interpreted form of a block header looks like the following:</p>
+<p>Index and data blocks consist of a block header followed by a series of records. The block header has four fields that contain information. The first field, of two bytes, specifies the block version. The second field, of one byte, specifies the block level. The third field, of four bytes, specifies the number of bytes currently in use in the block. The last field, of eight bytes, specifies the transaction number at which the block was last changed. An interpreted form of a block header looks like the following:</p>
 <pre class="programlisting">File      /home/jdoe/.fis-gtm/V6.0-000_x86_64/g/gtm.dat
 Region    DEFAULT
  
 Block 3   Size 262   Level 0   TN 3845EE V6</pre>
-<p>Depending on the platform, there may also be an empty field containing filler to produce proper alignment. The filler 
-occurs between the second and third data field and causes the length of the header to increase from seven to eight bytes. 
+<p>There is also be an empty field containing filler to produce proper alignment. The filler 
+occurs between the first and second data field and causes the length of the header to increase from fifteen to sixteen bytes. 
 </p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Gds_rec"></a>GDS Records <a class="indexterm" name="idp185883840"></a>
+<a name="Gds_rec"></a>GDS Records <a class="indexterm" name="idp76294128"></a>
 </h3></div></div></div>
 <p>Records consist of a record header, a key, and either a block pointer or the actual value of a global variable name 
 (gvn). Records are also referred to as nodes. </p>
@@ -98,7 +98,7 @@ The second field, of one byte, specifies the compression count. </p>
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>Like the GDS block headers, a filler byte may be added, depending on the platform. </p></td></tr>
+<tr><td align="left" valign="top"><p>Depending on the platform an extra byte may be added to the compression count, allowing compression counts of up to 1020. </p></td></tr>
 </table></div>
 <p>The interpreted form of a block with global <code class="code">^A("Name",1)="Brad" </code>looks like the following: </p>
 <pre class="programlisting">Rec:1  Blk 3  Off 10  Size 14  Cmpc 0  Key ^A("Name",1) 
@@ -110,7 +110,7 @@ Tree also consists of four-byte block pointers. Level 0 data in Global Variable 
 global variable names. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="spanning_nodes"></a>Using GDS records to hold spanning nodes <a class="indexterm" name="idp186034896"></a> <a class="indexterm" name="idp186042656"></a>
+<a name="spanning_nodes"></a>Using GDS records to hold spanning nodes <a class="indexterm" name="idp76543408"></a> <a class="indexterm" name="idp76551168"></a>
 </h4></div></div></div>
 <p>A global variable node spans across multiple blocks if the size of its value exceeds one database block. Such a global variable node is called a "spanning node".  For example, if ^a holds a value that exceeds one database block, GT.M internally spans the value of ^a in records with keys ^a(#SPAN1), ^a(#SPAN2), ^a(#SPAN3), ^a(#SPAN4), and so on. Note that #SPAN1, #SPAN2, #SPAN3, #SPAN4, and so on are special subscripts that are visible to the database but invisible at the M application level. GT.M uses these special subscripts to determine the sequence of the spanning nodes. </p>
 <p>The first special subscript #SPAN1 is called a "special index". A special index contains the details about the size of the spanning node's value and the number of additional records that are necessary to hold its value. #SPAN2 and the rest of the records hold chunks of the value of the spanning node. During the load of a binary extract, GT.M uses these chunks to reconstitute the value of a global. This allows globals to be re-spanned if the block size of the source database is different from the block size of the destination database. </p>
@@ -125,7 +125,7 @@ global variable names. </p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gds_keys_D"></a>GDS Keys<a class="indexterm" name="idp185899152"></a> </h3></div></div></div>
+<a name="gds_keys_D"></a>GDS Keys<a class="indexterm" name="idp76378768"></a> </h3></div></div></div>
 <p>A key is an internal representation of a global variable name. A byte-by-byte comparison of two keys conforms to the 
 collating sequence defined for global variable nodes. The default collating sequence is the one specified by the M standard. 
 <span>For more information on defining collating sequences, see the "Internationalization" chapter in the <a class="ulink" href="../../pg/UNIX_manual/index.html" target="_top">GT.M Programmer's Guide</a>.</span> 
@@ -133,7 +133,7 @@ collating sequence defined for global variable nodes. The default collating sequ
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="compression_count"></a>Compression Count<a class="indexterm" name="idp185877728"></a> </h3></div></div></div>
+<a name="compression_count"></a>Compression Count<a class="indexterm" name="idp76383472"></a> </h3></div></div></div>
 <p>The compression count specifies the number of bytes at the beginning of a key that are common to the previous key in the same block. The first key in each block has a compression count of zero. In a global variable tree, only the first record in a block can legitimately have a compression count of zero. </p>
 <div class="informaltable"><table border="1">
 <colgroup>
@@ -204,7 +204,7 @@ collating sequence defined for global variable nodes. The default collating sequ
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="use_of_keys"></a>Use of Keys<a class="indexterm" name="idp186055744"></a>  </h3></div></div></div>
+<a name="use_of_keys"></a>Use of Keys<a class="indexterm" name="idp76564208"></a>  </h3></div></div></div>
 <p>GT.M locates records by finding the first key in a block lexically greater than, or equal to, the current key. If the block has a level of zero (0), the location is either that of the record in question, or, if the record in question 
 does not exist, that of the (lexically) next record. If the block has a level greater than zero (0), the record contains a 
 pointer to the next level to search.</p>
@@ -223,7 +223,7 @@ The *-key is the smallest possible record, consisting only of a record header an
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="character_keys"></a>Characteristics of Keys<a class="indexterm" name="idp186049312"></a>  </h3></div></div></div>
+<a name="character_keys"></a>Characteristics of Keys<a class="indexterm" name="idp76555408"></a>  </h3></div></div></div>
 <p>
 Keys include a name portion and zero or more subscripts. GT.M formats subscripts differently for string and numeric values. 
 </p>
