@@ -51,7 +51,7 @@
             SET p="Printer"
             OPEN p:(COMMAND="lp":WRITEONLY)::"PIPE" 
         </pre><p>
-            <span class="inlinemediaobject"><a id="PIPE_IO_1"></a><img src="images/PIPE_IO_1.html" alt="Example 1"></img></span>       
+            <span class="inlinemediaobject"><a id="PIPE_IO_1"></a><img src="images/PIPE_IO_1.png" alt="Example 1"></img></span>       
         </p><p>Example 1 shows the use of a PIPE device to spool data to the default printer by spooling to the lp command, opened via the default shell (the shell specified by the SHELL environment variable, and the shell used to start GT.M if SHELL is unspecified).  The WRITEONLY device parameter specifies that the GT.M process will not read data back from the lpr command. </p><p><span class="emphasis"><em>Example 2</em></span></p><pre class="programlisting">
             Set p="MyProcs"
             OPEN p:(COMMAND="ps -ef|grep $USER":READONLY)::"PIPE" 

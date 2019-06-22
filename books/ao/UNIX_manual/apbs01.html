@@ -140,7 +140,7 @@ Journal Pool</p></th>
 <p>When a GT.M process terminates abnormally, it attempts to create a <code class="code">GTM_FATAL_ERROR.ZSHOW_DMP_*.txt </code>file containing a dump of the M execution context and a core file containing a dump of the native process execution context. The M execution context dump is created in the current working directory of the process. Your operating system may offer a means to control the naming and placement of core files; by default they are created the current working directory of the process with a name of core.*. The process context information may be useful to you in understanding the circumstances under which the problem occurred and/or how to deal with the consequences of the failure on the application state. The core files are likely to be useful primarily to your GT.M support channel. If you experience process failures but do not find the expected files, check file permissions and quotas. You can simulate an abnormal process termination by sending the process a SIGILL (with <code class="code">kill -ILL</code> or <code class="code">kill -4</code> on most UNIX/Linux systems).</p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td>
 <th align="left">Caution</th>
 </tr>
 <tr><td align="left" valign="top"><p>Dumps of process state files are likely to contain confidential information, including database encryption keys. Please ensure that you have appropriate confidentiality procedures as mandated by applicable law and corporate policy.</p></td></tr>
@@ -155,7 +155,7 @@ Journal Pool</p></th>
 <p>The shell script or command pointed to by gtm_procstuckexec can send an alert, take corrective actions, and log information.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.html"></td>
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>Make sure user processes have sufficient space and permissions to run the shell command / script. For example for the script to invoke the debugger, the process must be of the same group or have a way to elevate privileges.</p></td></tr>

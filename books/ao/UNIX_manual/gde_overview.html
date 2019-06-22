@@ -39,7 +39,7 @@
 <p>The input to GDE can be a command file. In a production environment, FIS recommends using command files to define database configurations and putting them under version control. </p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td>
 <th align="left">Caution</th>
 </tr>
 <tr><td align="left" valign="top"><p>A global directory stores database attributes and mapping rules. Processes use mapping rules to determine which database file contains a global variable node. MUPIP CREATE uses database attributes to create new database file(s). Once MUPIP CREATE applies the database attributes to create a database file, GT.M does not use the attributes until the next MUPIP CREATE. If you use MUPIP SET (or DSE) to change the attributes of a database file, always perform an equivalent change to any global directory used for a subsequent MUPIP CREATE.  Conversely, if you change attributes with GDE, existing database files must be explicitly changed with MUPIP SET or DSE.</p></td></tr>

@@ -16,8 +16,8 @@ CONVDBKEYS
 	new dst,dfile,nparm,sfile,spat,src
 	use $principal:(ctrap=$char(3))
 	set nparm=$length($zcmdline," ")
-	if 1<nparm set src=%24piece(%24zcmdline%2c_.html ",1),dst=$piece($zcmdline," ",2)
-	else  if 1=nparm set src=%24ztrnlnm(_gtm_dbkeys_)%2cdst%3d%24piece(%24zcmdline%2c_.html ",1)
+	if 1<nparm set src=%24piece(%24zcmdline%2c_ ",1),dst=$piece($zcmdline," ",2)
+	else  if 1=nparm set src=%24ztrnlnm(_gtm_dbkeys_)%2cdst%3d%24piece(%24zcmdline%2c_ ",1)
 	if ""=src set $ecode=$select(""=dst:",U250,",1:",U251,")
 	else  set:""=dst $ecode=",U249,"
 	if $$ISDIR(src) set:'$$ISDIR(dst) $ecode=",U248," do

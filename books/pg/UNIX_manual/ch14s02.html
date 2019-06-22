@@ -61,7 +61,7 @@
 <p>An automatically generated trigger name is a string comprised of two parts. Using the global name as a base, GT.M takes the first part as an alphanumeric string of up to 21 characters starting with an alphabetic character or a percent sign (%). The trailing part consists of an automatically incremented number in the form of #n# where n is a whole number that monotonically increases from 1 to 999999 that uniquely identifies a trigger for the same update. For example, if no trigger names are specified in the trigger definition file, GT.M automatically generates trigger names Account#1#, Account#2#, and Account#3# for the first three triggers defined for global variable ^Account. An attempt to use automatic assignment for more than a million triggers produces an error.  Once the numeric portion of the auto generated names reaches 999999, you must reload all triggers associated with the global variables that use the auto generated name space. At run-time GT.M generates a trailing suffix of a hash-sign (#) followed by up to two characters to ensure that every trigger has a unique designation, even when the environment is complex. The run-time suffix applies to both user-specified and automatically generated trigger names. It helps in differentiating triggers with the same name in different database files.</p>
 <p>Suppose you want to set up a trigger called <code class="code">TrigAcct</code> on every <code class="code">s ^Acct("ID")</code> to invoke the routine <code class="code">^OpenAccount</code>. Your trigger definition file may have an entry like <code class="code">+^Acct("ID") -command=S -xecute="do ^OpenAccount" -name=TrigAcct</code>. The following diagram identifies the different parts of this trigger definition:</p>
 <p>
-<img src="pg_figures/accttrig.gif">
+<img src="pg_figures/accttrig.html">
 
 </p>
 <p>To apply this trigger definition file to GT.M, all you do is to load it using MUPIP TRIGGER -TRIGGERFILE or $ZTRIGGER(). GT.M would invoke trigger name <code class="code">TrigAcct</code> on every SET operation on <code class="code">^Acct("ID")</code>. Internally, GT.M stores trigger <code class="code">TrigAcct</code> in the same database file where <code class="code">^Acct</code> is stored. The syntax of an entry in a trigger definition file is:</p>
@@ -132,7 +132,7 @@
 </table></div>
               <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Warning">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.html"></td>
 <th align="left">Warning</th>
 </tr>
 <tr><td align="left" valign="top"><p> As stated in the Trigger Definition File section, the text of trigger code is a part of the trigger signature. If you use two trigger signatures that have the same semantics (global variable, subscript, value, and command) but different text (for example: <code class="code">set foo=$ztoldval</code>, <code class="code">s foo=$ztoldval</code>, and <code class="code">set foo=$ztol</code>), their signatures become different and GT.M treats them as different triggers. FIS recommends you to use comprehensive and strong coding conventions for trigger code or rely on user-specified names in managing the deletion and replacement of triggers.</p></td></tr>
