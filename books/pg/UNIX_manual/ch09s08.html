@@ -10,7 +10,7 @@
 <link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
 <link rel="prev" href="ch09s07.html" title="Using PIPE Devices">
 <link rel="next" href="ch09s09.html" title="I/O Commands">
-<link rel="copyright" href="ln-idp64690800.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -31,7 +31,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="using_socket_device"></a>Using Socket Devices<a class="indexterm" name="idp72245136"></a>
+<a name="using_socket_device"></a>Using Socket Devices<a class="indexterm" name="idp72039792"></a>
 </h2></div></div></div>
 <p>SOCKET devices are used to access and manipulate sockets. A SOCKET device can have unlimited associated sockets. The default limit is 64. Set the environment 
 variable gtm_max_sockets to the number of maximum associated sockets sockets that you wish to set for a GT.M process. $VIEW("MAX_SOCKETS")returns the 
@@ -58,7 +58,7 @@ sockets of a SOCKET device and IOEROR can be individually turned on or off for e
 </table></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="msg_mngmt"></a>Message Management<a class="indexterm" name="idp72259760"></a>
+<a name="msg_mngmt"></a>Message Management<a class="indexterm" name="idp71929248"></a>
 </h3></div></div></div>
 <p>From an application perspective, the transport layers used by a socket device are stream-oriented, with no provisions for implicit application messages. 
 Therefore, the following are two common protocols used to segment application messages.</p>
@@ -251,7 +251,7 @@ commands to retrieve the entire stream.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="msg_delimiters"></a>Message Delimiters<a class="indexterm" name="idp72283952"></a>
+<a name="msg_delimiters"></a>Message Delimiters<a class="indexterm" name="idp72075056"></a>
 </h3></div></div></div>
 <p>Each device can have from zero (0) to 64 delimiters associated with it. Each delimiter can be from one (1) to 64 characters. All the delimiters declared for a 
 device are valid for any READ from any associated socket, which means, any of the defined delimiters terminate the READ. The actual terminating delimiter is 
@@ -259,7 +259,7 @@ available in $KEY. A WRITE to a socket associated with a device with one or more
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="read_cmmd_g"></a>Read Command<a class="indexterm" name="idp72292080"></a>
+<a name="read_cmmd_g"></a>Read Command<a class="indexterm" name="idp71854352"></a>
 </h3></div></div></div>
 <p>The READ command may be used to obtain data from a socket. <span>A READ operation terminates if any of the following are detected, in the order specified 
 below:</span></p>
@@ -368,7 +368,7 @@ following</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="write_cmmd_g"></a>WRITE Command<a class="indexterm" name="idp72340064"></a>
+<a name="write_cmmd_g"></a>WRITE Command<a class="indexterm" name="idp72133904"></a>
 </h3></div></div></div>
 <p>The WRITE command sends data to a socket.</p>
 <p>WRITE ! inserts the character(s) of the first I/O delimiter (if any) to the sending buffer. If "ZFF=expr" has been specified, WRITE # inserts the characters 
@@ -444,7 +444,7 @@ sockets.</p></li>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="socket_device_operation"></a>Socket Device Operation<a class="indexterm" name="idp72335360"></a>
+<a name="socket_device_operation"></a>Socket Device Operation<a class="indexterm" name="idp72130032"></a>
 </h3></div></div></div>
 <p>Each socket may be in one of the following states (observable through $KEY):</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -792,7 +792,7 @@ enabled; otherwise the application must check $DEVICE for errors.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="socket_device_examples"></a>Socket Device Examples<a class="indexterm" name="idp72344608"></a>
+<a name="socket_device_examples"></a>Socket Device Examples<a class="indexterm" name="idp72148144"></a>
 </h3></div></div></div>
 <p><code class="code">The sockexamplemulti32.m</code> routine shows the use of $KEY and $ZKEY in a basic 
 socket I/O setup. It's functionality is atypical in order to demonstrate a number of features. It launches two jobs: a server process which opens a listening socket 

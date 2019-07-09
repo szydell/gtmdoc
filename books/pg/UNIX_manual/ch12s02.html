@@ -10,7 +10,7 @@
 <link rel="up" href="ch12.html" title="Chapter 12. Internationalization">
 <link rel="prev" href="ch12s01.html" title="Collation Sequence Definitions">
 <link rel="next" href="ch12s03.html" title="Implementing an Alternative Collation Sequence for Unicode(R) characters">
-<link rel="copyright" href="ln-idp64690800.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="creating_the_user_defined_coll_routines"></a><span>Creating the </span>Alternate Collation<span> Routines</span><a class="indexterm" name="idp75061888"></a>
+<a name="creating_the_user_defined_coll_routines"></a><span>Creating the </span>Alternate Collation<span> Routines</span><a class="indexterm" name="idp74889120"></a>
 </h2></div></div></div>
 <p>Each alternative collation sequence requires a set of four user-created routines<span>--gtm_ac_xform_1 (or gtm_ac_xform), gtm_ac_xback_1 (or gtm_ac_xback), gtm_ac_version, and gtm_ac_verify. The original and transformed strings are passed between GT.M and the user-created routines using parameters of type gtm_descriptor or gtm32_descriptor. An "include file" gtm_descript.h, located in the GT.M distribution directory, defines gtm_descriptor (used with gtm_ac_xform and gtm_ac_xback) as:</span></p>
 <pre class="programlisting">typedef struct
@@ -60,7 +60,7 @@
 <p>The interface to each routine is described below.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="transfrm_routine"></a>Transformation<span> Routine (gtm_ac_xform_1 or gtm_ac_xform)</span><a class="indexterm" name="idp75101152"></a>
+<a name="transfrm_routine"></a>Transformation<span> Routine (gtm_ac_xform_1 or gtm_ac_xform)</span><a class="indexterm" name="idp74905008"></a>
 </h3></div></div></div>
 <p>gtm_ac_xform_1 or gtm_ac_xform routines transforms subscripts to the alternative collation sequence.&gt;</p>
 <p>If the application uses subscripted lvns longer than 32,767 bytes (but less than 1,048,576 bytes), the alternative collation library must contain the gtm_ac_xform_1 and gtm_ac_xback_1 routines. Otherwise, the alternative collation library can contain gtm_ac_xform and gtm_ac_xback. </p>
@@ -70,7 +70,7 @@ int gtm_ac_xform_1(gtm32_descriptor* in, int level, gtm32_descriptor* out, int* 
 </pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="input_arg"></a>Input Arguments<a class="indexterm" name="idp75116032"></a>
+<a name="input_arg"></a>Input Arguments<a class="indexterm" name="idp74919824"></a>
 </h4></div></div></div>
 <p>The input arguments for gtm_ac_xform are:</p>
 <p>in:   a gtm32_descriptor containing the string to be transformed.</p>
@@ -79,7 +79,7 @@ int gtm_ac_xform_1(gtm32_descriptor* in, int level, gtm32_descriptor* out, int* 
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="output_arg"></a>Output Arguments<a class="indexterm" name="idp75078848"></a>
+<a name="output_arg"></a>Output Arguments<a class="indexterm" name="idp74850944"></a>
 </h4></div></div></div>
 <p>return value: A long word status code.</p>
 <p>out: A transformed subscript in the string buffer, passed by gtm32_descriptor.</p>
@@ -149,7 +149,7 @@ gtm_ac_xform (in, level, out, outlen)
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="transfrm_rout_char"></a>Transformation Routine Characteristics<a class="indexterm" name="idp75105328"></a>
+<a name="transfrm_rout_char"></a>Transformation Routine Characteristics<a class="indexterm" name="idp74912832"></a>
 </h4></div></div></div>
 <p>The input and output values may contain &lt;NUL&gt; (hex code 00) characters.</p>
 <p>The collation transformation routine may concatenate a sentinel, such as &lt;NUL&gt;, followed by the original subscript on the end of the transformed key. If key length is not an issue, this permits the inverse transformation routine to simply retrieve the original subscript rather than calculating its value based on the transformed key. </p>
@@ -158,7 +158,7 @@ gtm_ac_xform (in, level, out, outlen)
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="inverse_trnsfrm_routine"></a>Inverse Transformation<span> Routine (gtm_ac_xback or gtm_ac_xback_1)</span><a class="indexterm" name="idp75077232"></a>
+<a name="inverse_trnsfrm_routine"></a>Inverse Transformation<span> Routine (gtm_ac_xback or gtm_ac_xback_1)</span><a class="indexterm" name="idp74880656"></a>
 </h3></div></div></div>
 <p>This routine returns altered keys to the original subscripts. The syntax of this routine is:</p>
 <pre class="programlisting">#include "gtm_descript.h"
@@ -213,14 +213,14 @@ long gtm_ac_xback (in, level, out, outlen)
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="version_cntrl_routines"></a>Version Control<span> Routines (gtm_ac_version and gtm_ac_verify)</span><a class="indexterm" name="idp75057056"></a>
+<a name="version_cntrl_routines"></a>Version Control<span> Routines (gtm_ac_version and gtm_ac_verify)</span><a class="indexterm" name="idp74912544"></a>
 </h3></div></div></div>
 <p>Two user-defined version control routines provide a safety mechanism to guard against a collation routine being used on the wrong global, or an attempt being made to modify a collation routine for an existing global. Either of these situations could cause incorrect collation or damage to subscripts.</p>
 <p>When a global is assigned an alternative collation sequence, GT.M invokes a user-supplied routine that returns a numeric version identifier for the set of collation routines, which was stored with the global. The first time a process accesses the global, GT.M determines the assigned collation sequence, then invokes another user-supplied routine. The second routine matches the collation sequence and version identifier assigned to the global with those of the current set of collation routines.</p>
 <p>When you write the code that matches the type and version, you can decide whether to modify the version identifier and whether to allow support of globals created using a previous version of the routine.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="version_id_routine"></a>Version Identifier<span> Routine (gtm_ac_version)</span><a class="indexterm" name="idp75118304"></a>
+<a name="version_id_routine"></a>Version Identifier<span> Routine (gtm_ac_version)</span><a class="indexterm" name="idp74922096"></a>
 </h4></div></div></div>
 <p>This routine returns an integer identifier between 0 and 255. This integer provides a mechanism to enforce compatibility as a collation sequence potentially evolves. When GT.M first uses an alternate collation sequence for a database or global, it captures the version and if it finds the version has changed it at some later startup, it generates an error. The syntax is:</p>
 <pre class="programlisting">int gtm_ac_version()</pre>
@@ -232,7 +232,7 @@ long gtm_ac_xback (in, level, out, outlen)
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="verify_routine"></a>Verification<span> Routine (gtm_ac_verify)</span><a class="indexterm" name="idp75120576"></a>
+<a name="verify_routine"></a>Verification<span> Routine (gtm_ac_verify)</span><a class="indexterm" name="idp74896816"></a>
 </h4></div></div></div>
 <p>This routine verifies that the type and version associated with a global are compatible with the active set of routines. Both the type and version are unsigned characters passed by value. The syntax is:</p>
 <pre class="programlisting">#include "gtm_descript.h"
@@ -257,12 +257,12 @@ gtm_ac_verify (type, ver)
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="using_the_percent_gbldef_util"></a><span>Using the </span>%GBLDEF<span> Utility</span><a class="indexterm" name="idp75115888"></a>
+<a name="using_the_percent_gbldef_util"></a><span>Using the </span>%GBLDEF<span> Utility</span><a class="indexterm" name="idp74918864"></a>
 </h3></div></div></div>
 <p>Use the %GBLDEF utility to get, set, or kill the collation sequence of a global variable mapped by the current global directory. %GBLDEF cannot modify the collation sequence for either a global containing data or a global whose subscripts span multiple regions. To change the collation sequence for a global variable that contains data, extract the data, KILL the variable, change the collation sequence, and reload the data.  Use GDE to modify the collation sequence of a global variable that spans regions.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="assing_the_coll_seq"></a>Assigning<span> the Collation Sequence</span><a class="indexterm" name="idp75085872"></a>
+<a name="assing_the_coll_seq"></a>Assigning<span> the Collation Sequence</span><a class="indexterm" name="idp74931136"></a>
 </h4></div></div></div>
 <p>To assign a collation sequence to an individual global use the extrinsic entry point:</p>
 <pre class="programlisting">set^%GBLDEF(gname,nct,act)</pre>
@@ -284,7 +284,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examine_glbl_coll_char"></a>Examining<span> Global Collation Characteristics</span><a class="indexterm" name="idp75163808"></a>
+<a name="examine_glbl_coll_char"></a>Examining<span> Global Collation Characteristics</span><a class="indexterm" name="idp74910976"></a>
 </h4></div></div></div>
 <p>To examine the collation characteristics currently assigned to a global use the extrinsic entry point:</p>
 <pre class="programlisting">get^%GBLDEF(gname[,reg])</pre>
@@ -313,7 +313,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="deleting_glbl_coll_char"></a>Deleting<span> Global Collation Characteristics</span><a class="indexterm" name="idp75108688"></a>
+<a name="deleting_glbl_coll_char"></a>Deleting<span> Global Collation Characteristics</span><a class="indexterm" name="idp74970704"></a>
 </h4></div></div></div>
 <p>To delete the collation characteristics currently assigned to a global, use the extrinsic entry point:</p>
 <pre class="programlisting">kill^%GBLDEF(gname)</pre>

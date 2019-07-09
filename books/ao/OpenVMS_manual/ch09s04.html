@@ -18,10 +18,10 @@ Levels greater than zero (0) identify non-terminal nodes (that is, index blocks)
 the root. All the B*-trees have the same structure. Block one (1) of the database always holds the root block of the 
 Directory Tree. </p><p>The following illustration describes the internal GDS B*-tree framework GT.M uses to store globals. </p><p>
 
-<img src="ao_figures/gds_struc.png">
+<img src="ao_figures/gds_struc.html">
 </p><p>GT.M creates a new GVT when a SET results in the first use of an unsubscripted global name by referring to a 
 
-subscripted or unsubscripted global variable with a name prefix that has not previously appeared in the database. </p><div class="important" title="Important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p> GVTs continue to exist even after all nodes associated with their unsubscripted name are KILLed. An empty 
+subscripted or unsubscripted global variable with a name prefix that has not previously appeared in the database. </p><div class="important" title="Important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.html"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p> GVTs continue to exist even after all nodes associated with their unsubscripted name are KILLed. An empty 
 GVT occupies negligible space and does not affect GT.M performance. However, if you are facing performance issues because you 
 have many empty GVTs, you need to reorganize your database file using MUPIP EXTRACT, followed by MUPIP CREATE, and the MUPIP 
 LOAD to remove those empty GVTs. </p></td></tr></table></div><p>The following sections describe the details of the database structures. </p></div><div class="sect2" title="GDS Blocks"><div class="titlepage"><div><div><h3 class="title"><a name="id3249834"></a>GDS Blocks </h3></div></div></div><p>Index and data blocks consist of a block header followed by a series of records. 

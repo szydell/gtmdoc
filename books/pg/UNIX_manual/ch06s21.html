@@ -10,7 +10,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s20.html" title="TCommit">
 <link rel="next" href="ch06s22.html" title="TROllback">
-<link rel="copyright" href="ln-idp64690800.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -31,7 +31,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="trestart"></a>TREstart<a class="indexterm" name="idp62745536"></a>
+<a name="trestart"></a>TREstart<a class="indexterm" name="idp60469184"></a>
 </h2></div></div></div>
 <p>The TRESTART command attempts to RESTART the current transaction. A RESTART transfers control back to the initial TSTART and restores much of the process state to what it was when that TSTART was originally executed. A TRESTART issued when no transaction is in progress ($TLEVEL=0) or when the transaction does not have RESTART enabled produces an error.</p>
 <p>A TRESTART command causes the TP transaction to RESTART in the same way that GT.M uses to implicitly restart the transaction in case of resource conflicts. All restarts increment the internal transaction retry count to a maximum of three (3), at which point, GT.M performs the entire TP transaction within a critical section on all databases referenced in the transaction. </p>

@@ -10,7 +10,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s09.html" title="If">
 <link rel="next" href="ch06s11.html" title="Kill">
-<link rel="copyright" href="ln-idp64690800.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -31,10 +31,10 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="Job_Command"></a>Job<a class="indexterm" name="idp62520192"></a>
+<a name="Job_Command"></a>Job<a class="indexterm" name="idp54677808"></a>
 </h2></div></div></div>
 <p>The JOB command initiates another GT.M process that executes the named routine.</p>
-<a class="indexterm" name="idp52299584"></a><p>$ZJOB is set to the pid of the process created by the JOB command. <span>For more details, refer to <a class="xref" href="ch08s39.html" title="$ZJob">&#8220;$ZJob&#8221;</a>.</span></p>
+<a class="indexterm" name="idp53614416"></a><p>$ZJOB is set to the pid of the process created by the JOB command. <span>For more details, refer to <a class="xref" href="ch08s39.html" title="$ZJob">&#8220;$ZJob&#8221;</a>.</span></p>
 <p>The format of the JOB command is:</p>
 <pre class="programlisting">J[OB][:tvexpr] entryref[(expr[,...])]
 [:[(keyword[=value][:...])][:numexpr]][,...]</pre>
@@ -59,12 +59,12 @@
 <p>If GT.M cannot create the process because of something that is unlikely to change during the timeout interval, such as invalid DEFAULT directory specification, or the parameter list is too long, the JOB command generates a run-time error. If the command does not specify a timeout and the environment does not provide adequate resources, the process waits until resources become available to create the resultant process.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="The_Job_Environment"></a>The JOB Environment<a class="indexterm" name="idp62827248"></a>
+<a name="The_Job_Environment"></a>The JOB Environment<a class="indexterm" name="idp63222128"></a>
 </h3></div></div></div>
 <p>When the JOB is <span>forked, UNIX</span> creates the environment for the new process by copying the environment of the process issuing the JOB command and making a few minor modifications. <span>By default, the standard input is assigned to the null device, the standard output is assigned to routinename.mjo, and the standard error is assigned to routinename.mje.</span></p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="Job_Implications_for_Directories"></a>JOB Implications for Directories<a class="indexterm" name="idp60976912"></a>
+<a name="Job_Implications_for_Directories"></a>JOB Implications for Directories<a class="indexterm" name="idp61750208"></a>
 </h4></div></div></div>
 <p>By default, GT.M uses the current <span>working</span> directory of the parent process for the <span>working</span> directory of the initiated process.</p>
 <p> If the files specified by processparameters,  do not exist, and GT.M does not have permission to create them, the JOBed process terminates. When the corresponding files are in the current <span>working</span> directory, the  OUTPUT, INPUT, and ERROR processparameters do not require a <span>full pathname</span>.</p>
@@ -72,7 +72,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Job_Process_Params"></a>JOB Processparameters<a class="indexterm" name="idp67613520"></a>
+<a name="Job_Process_Params"></a>JOB Processparameters<a class="indexterm" name="idp56869248"></a>
 </h3></div></div></div>
 <p>The following sections describe the processparameters available for the JOB command in GT.M.</p>
 <div class="sect3">
@@ -82,7 +82,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="Default_Proc_Param"></a>DEF[AULT]=strlit<a class="indexterm" name="idp64508224"></a>
+<a name="Default_Proc_Param"></a>DEF[AULT]=strlit<a class="indexterm" name="idp63159088"></a>
 </h4></div></div></div>
 <p>The string literal specifies the default directory.</p>
 <p>The maximum directory length is 255 characters.</p>
@@ -90,7 +90,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="Error"></a>ERR[OR]=strlit<a class="indexterm" name="idp65106528"></a>
+<a name="Error"></a>ERR[OR]=strlit<a class="indexterm" name="idp52832720"></a>
 </h4></div></div></div>
 <p>strlit specifies <span>the stderr of the JOBbed process. strlit can either be a file or a DETACHed socket (that is, a socket from the socket pool). To pass a DETACHed socket as the stderr of the JOBbed process, specify strlit in the form of "SOCKET:&lt;handle&gt;" where &lt;handle&gt; is the socket handle. On successful completion of the JOBbed process, the passed socket is closed and is no longer available to the parent process</span>.</p>
 <p>The maximum string length is 255 characters.</p>
@@ -98,7 +98,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="GBLDIR"></a>GBL[DIR]=strlit<a class="indexterm" name="idp63276064"></a>
+<a name="GBLDIR"></a>GBL[DIR]=strlit<a class="indexterm" name="idp61121056"></a>
 </h4></div></div></div>
 <p>The string literal specifies a value for the <span>environment variable gtmgbldir</span>.</p>
 <p>The maximum string length is 255 characters.</p>
@@ -106,7 +106,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="Input"></a>IN[PUT]=strlit<a class="indexterm" name="idp63929440"></a>
+<a name="Input"></a>IN[PUT]=strlit<a class="indexterm" name="idp64571760"></a>
 </h4></div></div></div>
 <p>strlit specifies <span>the stdin of the JOBbed process. strlit can either be a file or a DETACHed socket (that is, a socket from the socket pool). To pass a DETACHed socket as the stdin of the JOBbed process, specify strlit in the form of "SOCKET:&lt;handle&gt;" where &lt;handle&gt; is the socket handle. On successful completion of the JOB command, the passed socket is closed and is no longer available to the parent process</span>.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
@@ -122,7 +122,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="Output"></a>OUT[PUT]=strlit<a class="indexterm" name="idp64080032"></a>
+<a name="Output"></a>OUT[PUT]=strlit<a class="indexterm" name="idp63109328"></a>
 </h4></div></div></div>
 <p>strlit <span>specifies the stdout of the JOBbed process. strlit can either be a file or a DETACHed socket (that is, a socket from the socket pool). To pass a DETACHed socket as the stdout of the job, specify strlit in the form of "SOCKET:&lt;handle&gt;" where &lt;handle&gt; is the socket handle. On successful completion of the JOB command, the passed socket is closed and is no longer available to the parent process</span>.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
@@ -285,7 +285,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Examples_of_Job"></a>Examples<span> of JOB</span><a class="indexterm" name="idp58598784"></a><a class="indexterm" name="idp58094880"></a>
+<a name="Examples_of_Job"></a>Examples<span> of JOB</span><a class="indexterm" name="idp66558992"></a><a class="indexterm" name="idp55078192"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;JOB ^TEST("V54001","")</pre>
