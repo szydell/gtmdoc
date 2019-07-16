@@ -10,7 +10,7 @@
 <link rel="up" href="ch11.html" title="Chapter 11. Maintaining Database Integrity">
 <link rel="prev" href="ch11s03.html" title="Repairing the Database with DSE">
 <link rel="next" href="ch12.html" title="Chapter 12. Database Encryption">
-<link rel="copyright" href="ln-idp70364144.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -31,7 +31,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="finding_and_fixing_db_errors"></a>Finding and Fixing Database Errors<a class="indexterm" name="idp78368384"></a>
+<a name="finding_and_fixing_db_errors"></a>Finding and Fixing Database Errors<a class="indexterm" name="idp71122544"></a>
 </h2></div></div></div>
 <p>The rest of this chapter is arranged loosely in the form of a decision tree. The
 material covers a wide range of scenarios and possible actions. </p>
@@ -1435,7 +1435,7 @@ the data from the sequential file.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="downloadsalvage"></a>Download salvage.m</h4></div></div></div>
-<p>salvage.m is a utility that removes all incorrectly marked busy blocks from the specified region. During execution it displays the DSE commands that it will execute and aborts execution when it encounters an error. It dumps the zwrite formatted content of blocks incorrectly marked busy to a file called &lt;region&gt;_db.zwr. Upon completion, it sets the abandoned_kills and kill_in_prog flags in the database fileheader to false. Click on <a class="ulink" href="downloadables/salvage.m" target="_top"><span class="inlinemediaobject"><img src="images/download.png" alt="Download salvage.m"></span></a> to download salvage.m program. You can also download <span class="bold"><strong>salvage.m</strong></span> from http://tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/downloadables/salvage.m. </p>
+<p>salvage.m is a utility that removes all incorrectly marked busy blocks from the specified region. During execution it displays the DSE commands that it will execute and aborts execution when it encounters an error. It dumps the zwrite formatted content of blocks incorrectly marked busy to a file called &lt;region&gt;_db.zwr. Upon completion, it sets the abandoned_kills and kill_in_prog flags in the database fileheader to false. Click on <a class="ulink" href="downloadables/salvage.html" target="_top"><span class="inlinemediaobject"><img src="images/download.png" alt="Download salvage.m"></span></a> to download salvage.m program. You can also download <span class="bold"><strong>salvage.m</strong></span> from http://tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/downloadables/salvage.m. </p>
 <p>Steps to run the salvage utility are as follows:</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><p>Perform an argumentless MUPIP RUNDOWN before running this utility.</p></li>
@@ -1449,7 +1449,7 @@ the data from the sequential file.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="sal_dam_spa"></a>O5&#8211;Salvage of a damaged spanning node<a class="indexterm" name="idp78517248"></a>
+<a name="sal_dam_spa"></a>O5&#8211;Salvage of a damaged spanning node<a class="indexterm" name="idp71341904"></a>
 </h3></div></div></div>
 <p>The following example shows how to salvage a damaged spanning node in ^mypoem. </p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
@@ -1802,7 +1802,7 @@ extending</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="r2_structure_db_integ"></a>R2&#8211;Structural Database Integrity Errors<a class="indexterm" name="idp78759248"></a>
+<a name="r2_structure_db_integ"></a>R2&#8211;Structural Database Integrity Errors<a class="indexterm" name="idp71557264"></a>
 </h3></div></div></div>
 <p>These run-time errors indicate that the process detected an integrity error within the body of the database.</p>
 <p>Verify the error using the MUPIP command INTEG SUBSCRIPT=, specifying an

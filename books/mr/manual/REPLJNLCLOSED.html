@@ -10,13 +10,12 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="REPLINSTWRITE.html" title="REPLINSTWRITE ">
 <link rel="next" href="REPLJNLCNFLCT.html" title="REPLJNLCNFLCT ">
-<link rel="copyright" href="ln-idp72281648.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">REPLJNLCLOSED <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
-</th></tr>
+<tr><th colspan="3" align="center">REPLJNLCLOSED </th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="REPLINSTWRITE.html">Prev</a> </td>
@@ -28,12 +27,11 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">REPLJNLCLOSED <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span></span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">REPLJNLCLOSED </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="REPLJNLCLOSED"></a>REPLJNLCLOSED <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
-</h2></div></div></div>
+<a name="REPLJNLCLOSED"></a>REPLJNLCLOSED </h2></div></div></div>
 <p><span class="bold"><strong>REPLJNLCLOSED</strong></span>,  Replication in jeopardy as journaling got closed for database file dddd. Current region seqno is xxxx[XXXX] and system seqno is yyyy[YYYY]</p>
 <p>Run Time Warning: This message indicates that GT.M turned OFF journaling and switched replication from ON to WAS_ON on the specified database. Other preceding messages identify the cause (for example, lack of disk space while writing to journal file, permissions issue while auto-switching to new journal files, and so on). The message also displays the region (xxxx decimal and XXXX hexadecimal) and journal (yyyy/YYYY) sequence numbers. From this point, replicating updates on the primary to the secondary might, or might not, work depending on the backlog on the primary until replication/journaling gets turned back ON.</p>
 <p>Action: First, correct the cause (lack of disk space, permission issues, and so on) that turned journaling OFF.</p>
@@ -43,7 +41,7 @@
 <p>If the "sequence number of last transaction sent by source server" is greater than "sequence number of last transaction written to journal pool", it means that the source server successfully sent all journal records during the time interval when journaling was turned OFF. In this case, no further action is required.</p>
 <p>On the other hand, if the "sequence number of last transaction sent by source server" is less than "sequence number of last transaction written to journal pool" and reports the same value across repeated SHOWBACKLOG commands, then check the source server log file for any error messages - most likely a NOPREVLINK error from the source server. This means the source server could not locate the corresponding journal records required from the journal files to replicate a particular sequence number and therefore, it failed to synchronize the primary and secondary. In this case, take an online backup of the primary, restore it on the secondary and start the secondary with the UPDATERESYNC qualifier to synchronize the secondary with the primary. </p>
 <p></p>
-<a class="indexterm" name="idp77234560"></a>
+<a class="indexterm" name="idp173718864"></a>
 </div>
 <div class="navfooter">
 <hr>

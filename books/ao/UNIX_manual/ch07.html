@@ -10,7 +10,7 @@
 <link rel="up" href="index.html" title="GT.M Administration and Operations Guide">
 <link rel="prev" href="jnl_ext.html" title="Journal Extract Formats">
 <link rel="next" href="ch07s01.html" title="Introduction">
-<link rel="copyright" href="ln-idp70364144.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -36,13 +36,30 @@
 <div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
 <tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
 <tr>
+<td align="left">Revision V6.3-009</td>
+<td align="left">27 June 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html#Replication_Architecture" title="Replication Architecture">&#8220;Replication Architecture
+
+&#8221;</a>, add more information about the purpose of a passive Source Server and general content improvements.  </p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#freeze_src_srv_inst" title="Freezing an Instance">&#8220;<span>Freezing an </span> Instance&#8221;</a>, add new section.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html#repl_instance_file" title="Replication Instance File">&#8220;Replication Instance File&#8221;</a>, add a reference to autorollback</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, specify the default value for -connectparams; content improvements; organize qualifiers by relevance. </p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#stop_rec_filtr" title="Stopping the Receiver Filter">&#8220;<span>Stopping the</span> Receiver Filter&#8221;</a>, add new section.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#stop_src_filtr" title="Stopping the Source Filter">&#8220;<span>Stopping the</span> Source Filter&#8221;</a>, add -instsecondary qualifier to specify the Source Server target for stopping the Source filter. </p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#strt_rcvr_srvr" title="Starting the Receiver Server">&#8220;Start<span>ing the</span> Receiver Server
+
+&#8221;</a>, organize qualifiers by relevance. </p></li>
+</ul></div></td>
+</tr>
+<tr>
 <td align="left">Revision V6.3-008</td>
 <td align="left">24 April 2019</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>In <a class="xref" href="replication.html#chck_srvr_hlth" title="Checking Server Health">&#8220;Check<span>ing</span> Server Health&#8221;</a>, source -checkhealth does not accept -helpers option</p></li>
 <li class="listitem"><p>In <a class="xref" href="replication.html#chk_srvr_hlth" title="Checking Server Health">&#8220;Check<span>ing Server</span>  Health&#8221;</a>, receiver -checkhealth supports -helpers option</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html#downld_repl_ex" title="Download Replication Examples">&#8220;Download Replication Examples&#8221;</a>, remove redundant material.</p></li>
-<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, specify that MUPIP ignores the -BUFFSIZE qualifier when the Journal Pool is already set up. </p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, specify that MUPIP ignores the -BUFFSIZE qualifier when the Journal Pool is already set up. </p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s02.html#tls_repl" title="TLS/SSL Replication">&#8220;TLS/SSL Replication&#8221;</a>, remove redundant material. </p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html#tls_repl_proc" title="Setting up a secured TLS replication connection">&#8220;Setting up a secured TLS replication connection&#8221;</a>, remove redundant material. </p></li>
 </ul></div></td>
@@ -81,7 +98,7 @@
 <td align="left">23 March 2018</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html#rollbidle" title="Rollback data from crashed (idle) regions">&#8220;Rollback data from crashed (idle) regions&#8221;</a>, add procedure to rollback data from crashed (idle) regions</p></li>
-<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, specify that the Source Server directs errors to the log file, add fixes for the filter example</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, specify that the Source Server directs errors to the log file, add fixes for the filter example</p></li>
 </ul></div></td>
 </tr>
 <tr>
@@ -93,7 +110,7 @@
 <li class="listitem"><p>In <a class="xref" href="ch07s01.html#repl_gesz" title="Using Multiple Instances in the same Process">&#8220;Using Multiple Instances in the same Process&#8221;</a>, add new section</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s01.html#repl_instance_file" title="Replication Instance File">&#8220;Replication Instance File&#8221;</a>, instance reconnect on the basis of most recent shared journal seq number</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s02.html#repl_recovr" title="Recovery">&#8220;Recovery&#8221;</a>, corrections and improvements</p></li>
-<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, correct the quoting of the -filter qualifier and remove -replicate </p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, correct the quoting of the -filter qualifier and remove -replicate </p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s01.html" title="Introduction">&#8220;Introduction&#8221;</a>, add information about using extended global references or SET $ZGBLDIR to update another source instance.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html#up_re_in_fi" title="Creating a new Replication Instance File">&#8220;Creating a new Replication Instance File&#8221;</a>, Updated GTM version</p></li>
 </ul></div></td>
@@ -122,7 +139,7 @@
 <li class="listitem"><p>In <a class="xref" href="ch07s01.html#si_repl_limits" title="Limitations - SI Replication">&#8220;Limitations - SI Replication&#8221;</a>, removed reference to OpenVMS</p></li>
 <li class="listitem"><p>In <a class="xref" href="replication.html#sour_srvr_shutdown" title="Shutting down the Source Server">&#8220;<span>Shutting down the</span> Source Server&#8221;</a>, added the description of the -zerobacklog qualifier.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s01.html#sppl_exampls" title="Examples">&#8220;Examples&#8221;</a>, used capitals for keywords outside of examples</p></li>
-<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, removed references to Solaris, HP-UX, and OpenVMS; specified that pool limit is  4GiB - 8; specified that GT.M supports the use of IBM provided zlib library for AIX.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, removed references to Solaris, HP-UX, and OpenVMS; specified that pool limit is  4GiB - 8; specified that GT.M supports the use of IBM provided zlib library for AIX.</p></li>
 <li class="listitem"><p>In <a class="xref" href="replication.html#stop_upd_proc" title="Stopping the Update Process and/or the Receiver Server">&#8220;Stop<span>ping the</span> Update Process and/or the Receiver Server&#8221;</a>, added information about the -shutdown qualifier; alphabetized the qualifiers after -shutdown.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s01.html" title="Introduction">&#8220;Introduction&#8221;</a>, language cleanup - intermediate save</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html#tls_repl_proc" title="Setting up a secured TLS replication connection">&#8220;Setting up a secured TLS replication connection&#8221;</a>, Changed Helen and Phil to Alice and Bob.</p></li>
@@ -139,7 +156,7 @@ P&#8594;Q, or A&#8594;P)&#8221;</a>, changed on -&gt; one\n</p></li>
 <tr>
 <td align="left">Revision V6.2-001</td>
 <td align="left">27 February 2015</td>
-<td align="left"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added the NOJNLFILEONLY qualifier. </p></td>
+<td align="left"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, added the NOJNLFILEONLY qualifier. </p></td>
 </tr>
 <tr>
 <td align="left">Revision V6.1-000/1</td>
@@ -150,7 +167,7 @@ P&#8594;Q, or A&#8594;P)&#8221;</a>, changed on -&gt; one\n</p></li>
 <td align="left">Revision V6.1-000</td>
 <td align="left">01 August 2014</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added the description of -TLSID, -[NO]PLAINTEXTFALLBACK, and -RENEGOTIATE_INTERVAL qualifiers.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, added the description of -TLSID, -[NO]PLAINTEXTFALLBACK, and -RENEGOTIATE_INTERVAL qualifiers.</p></li>
 <li class="listitem"><p>In <a class="xref" href="replication.html#strt_rcvr_srvr" title="Starting the Receiver Server">&#8220;Start<span>ing the</span> Receiver Server
 
 &#8221;</a>, added the descriptions of -TLSID, -START, and -LOG qualifiers..</p></li>
@@ -162,7 +179,7 @@ P&#8594;Q, or A&#8594;P)&#8221;</a>, changed on -&gt; one\n</p></li>
 <td align="left">Revision V6.0-003/1</td>
 <td align="left">19 February 2014</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added information about the use of the gtm_ipv4_only environment variable.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, added information about the use of the gtm_ipv4_only environment variable.</p></li>
 <li class="listitem"><p>In <a class="xref" href="gdm.html#mup_reorg" title="REORG">&#8220;REORG
 &#8221;</a>, added a caution note about running successive reorgs.</p></li>
 </ul></div></td>
@@ -174,7 +191,7 @@ P&#8594;Q, or A&#8594;P)&#8221;</a>, changed on -&gt; one\n</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html" title="Procedures">&#8220;Procedures&#8221;</a>, added downloadable script examples for A&#8594;B and A&#8594;P replication scenarios.</p></li>
 <li class="listitem"><p>In <a class="xref" href="replication.html#activate_passive_src_srvr" title="Activating a Passive Source Server">&#8220;<span>Activating a</span> Passive Source Server&#8221;</a>, added information about the ACTIVE_REQUESTED mode.</p></li>
 <li class="listitem"><p>In <a class="xref" href="replication.html#deavtivate_act_src_srvr" title="Deactivating an Active Source Server">&#8220;<span>Deactivating an</span> Active Source Server&#8221;</a>, added information about the PASSIVE_REQUESTED mode.</p></li>
-<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added information about the IPv6 support.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, added information about the IPv6 support.</p></li>
 </ul></div></td>
 </tr>
 <tr>
@@ -217,7 +234,7 @@ and P&#8594;Q)&#8221;</a></p></li>
 <td align="left">Revision V6.0-000</td>
 <td align="left">19 October 2012 </td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the</span> Source Server&#8221;</a>, added the description of the -freeze qualifier. </p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, added the description of the -freeze qualifier. </p></li>
 <li class="listitem"><p>Added a new section called <a class="xref" href="ch07s02.html#inst_freeze" title="Instance Freeze">&#8220;Instance Freeze&#8221;</a>.</p></li>
 </ul></div></td>
 </tr>
@@ -285,11 +302,13 @@ its own set of updates) </a></span></dt>
 <dt><span class="sect2"><a href="replication.html#trng_repl_on_off"><span>Turning Replication On/Off</span></a></span></dt>
 <dt><span class="sect2"><a href="replication.html#create_repl_inst"><span>Creating the Replication Instance File</span></a></span></dt>
 <dt><span class="sect2"><a href="replication.html#disp_change_repl"><span>Displaying/Changing the attributes of Replication Instance File and Journal Pool</span></a></span></dt>
-<dt><span class="sect2"><a href="replication.html#start_src_srvr"><span>Starting the</span> Source Server</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#start_src_srvr"><span>Starting the </span> Source Server</a></span></dt>
 <dt><span class="sect2"><a href="replication.html#sour_srvr_shutdown"><span>Shutting down the</span> Source Server</a></span></dt>
 <dt><span class="sect2"><a href="replication.html#activate_passive_src_srvr"><span>Activating a</span> Passive Source Server</a></span></dt>
 <dt><span class="sect2"><a href="replication.html#deavtivate_act_src_srvr"><span>Deactivating an</span> Active Source Server</a></span></dt>
 <dt><span class="sect2"><a href="replication.html#stop_src_filtr"><span>Stopping the</span> Source Filter</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#stop_rec_filtr"><span>Stopping the</span> Receiver Filter</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#freeze_src_srv_inst"><span>Freezing an </span> Instance</a></span></dt>
 <dt><span class="sect2"><a href="replication.html#chck_srvr_hlth">Check<span>ing</span> Server Health</a></span></dt>
 <dt><span class="sect2"><a href="replication.html#chng_log_file"><span>Changing the Log File</span></a></span></dt>
 <dt><span class="sect2"><a href="replication.html#enable_disable_dtld_log"><span>Enabling/Disabling Detailed</span> Logging</a></span></dt>
