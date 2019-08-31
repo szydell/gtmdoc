@@ -34,7 +34,7 @@ process.</p></li><li class="listitem"><p>Additional requirements for application
 the "Messaging" section which follows. As previously noted, all
 processes accessing a replicated database must use the same Global
 Directory. Do not use M extended references since they can have
-unpredictable results. </p></li></ul></div><div class="figure"><a name="id3245197"></a><p class="title"><b>Figure 7.2. Logical Dual-Site Application Architecture</b></p><div class="figure-contents"><div class="mediaobject"><img src="ao_figures/log_dual_site_arch.html" alt="Represents logical dual-site application architecture."></div></div></div><br class="figure-break"><div class="sect3" title="Messaging"><div class="titlepage"><div><div><h4 class="title"><a name="mssg"></a>Messaging</h4></div></div></div><p>For online operations, application servers on the primary respond to
+unpredictable results. </p></li></ul></div><div class="figure"><a name="id3245197"></a><p class="title"><b>Figure 7.2. Logical Dual-Site Application Architecture</b></p><div class="figure-contents"><div class="mediaobject"><img src="ao_figures/log_dual_site_arch.png" alt="Represents logical dual-site application architecture."></div></div></div><br class="figure-break"><div class="sect3" title="Messaging"><div class="titlepage"><div><div><h4 class="title"><a name="mssg"></a>Messaging</h4></div></div></div><p>For online operations, application servers on the primary respond to
 messages from clients delivered over a network. Each message is assumed to
 result in zero (inquiry) or one (updated) transaction on the server. The
 network that delivers messages must be robust. This means that each message
@@ -371,7 +371,7 @@ up, it will act as the secondary and be forced to rollback all transactions
 performed while it was primary and Site A was down. These transactions
 become non-replicated transactions. If Site B came up first, then the
 non-replicated transactions would occur when Site A restarted. These would
-be the transactions while A was primary after B failed.</p><div class="figure"><a name="id3245439"></a><p class="title"><b>Figure 7.3. Complex Dual-Site Failure</b></p><div class="figure-contents"><div class="mediaobject"><img src="ao_figures/cmplx_dual_site_fail.html" alt="Represents Complex Dual-site Failure"></div></div></div><br class="figure-break"><p>When recovering from these situations, the primary is always the current
+be the transactions while A was primary after B failed.</p><div class="figure"><a name="id3245439"></a><p class="title"><b>Figure 7.3. Complex Dual-Site Failure</b></p><div class="figure-contents"><div class="mediaobject"><img src="ao_figures/cmplx_dual_site_fail.png" alt="Represents Complex Dual-site Failure"></div></div></div><br class="figure-break"><p>When recovering from these situations, the primary is always the current
 system of record when the secondary comes up. The secondary must roll its
 database back to the transaction with the highest journal sequence number
 for which both systems are known to be in agreement, and "catch up" from
