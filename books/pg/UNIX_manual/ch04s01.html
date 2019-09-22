@@ -1,0 +1,190 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Operating in Direct Mode</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch04.html" title="Chapter 4. Operating and Debugging in Direct Mode">
+<link rel="prev" href="ch04.html" title="Chapter 4. Operating and Debugging in Direct Mode">
+<link rel="next" href="ch04s02.html" title="Debugging a Routine in Direct Mode">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">
+<span>Operating in</span> Direct Mode</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch04.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 4. <span>Operating and Debugging in Direct Mode</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch04s02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch04.html"><span>Operating and Debugging in Direct Mode</span></a></span> &gt; <span class="breadcrumb-node"><span>Operating in</span> Direct Mode</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Operate_in_Direct_Mode"></a><span>Operating in</span> Direct Mode</h2></div></div></div>
+<p>This section provides an overview of the following basic operational issues in Direct Mode:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>Entering Direct Mode</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Available functionality</p></li>
+<li class="listitem" style="list-style-type: circle"><p>Exiting Direct Mode</p></li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Entering_Direct_Mode"></a>Entering Direct Mode</h3></div></div></div>
+<p>To enter Direct Mode, <span>type $gtm_dist/mumps -direct at the shell prompt</span>.</p>
+<pre class="programlisting">$ $gtm_dist/mumps -direct
+GTM&gt;</pre>
+<p>This shows using $gtm_dist/mumps -direct at the prompt to enter Direct Mode.</p>
+<p>To create a gtm alias in your shell startup file (in the example below the startup file is assumed to be a .profile file):</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+<p>Open an edition session for your .profile file by typing:</p>
+<pre class="programlisting">$vi .profile</pre>
+</li>
+<li class="listitem">
+<p>Add a function to the file to define your gtm alias:</p>
+<pre class="programlisting">gtm(){ $gtm_dist/mumps -direct}</pre>
+</li>
+<li class="listitem"><p>Save the file.</p></li>
+</ol></div>
+<p>Now, when you want to enter Direct Mode for an editing or debugging session, simply type gtm at the shell prompt.</p>
+<p>Example:</p>
+<pre class="programlisting">$ gtm
+GTM&gt;</pre>
+<p>This shows that the gtm alias typed at the shell prompt also takes you to the Direct Mode.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Funct_in_Direct_Mode"></a>Functionality Available in Direct Mode</h3></div></div></div>
+<p>This section provides an overview of basic functionality and concepts that enhance your use of Direct Mode.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="Cmmd_Recall"></a>Command Recall</h4></div></div></div>
+<p>Direct Mode includes a line command recall function <span>to display</span> previously entered command lines. Use &lt;CTRL-B&gt; or the Up Arrow key at the GTM&gt; prompt to scroll back through command lines. Use the Down Arrow key to scroll forward through the command lines. GT.M displays one command line at a time.<span>You may delete and reenter characters starting at the end of a recalled line.</span></p>
+<p>The RECALL command is another way to access previously entered Direct Mode command lines. RECALL is only valid in Direct Mode and causes an error if it appears in other M code.</p>
+<p>The format of the RECALL command is:</p>
+<pre class="programlisting">REC[ALL] [intlit|strlit]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional integer literal specifies a previously entered command by the counting back from the present.</p></li>
+<li class="listitem"><p>The optional string literal specifies the most recently entered command line that starts with characters matching the (case-sensitive) literal.</p></li>
+<li class="listitem"><p>When the RECALL command has no argument, it displays up to a maximum of 99 available past Direct Mode entries.</p></li>
+</ul></div>
+<p>If the Direct Mode session has just started, you may not have entered 99 lines for GT.M to save and therefore you will not have 99 lines to look at. The most recently entered GT.M command line has the number one (1), older lines have higher numbers. GT.M does not include the RECALL command in the listing. If the RECALL command is issued from a location other than the Direct Mode prompt, GT.M issues a run-time error.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zgbldir 
+/usr/lib/fis-gtm/V5.4-002B_x86/mumps.gld
+GTM&gt;set $zgbldir="test.gld"
+GTM&gt;set a=10
+GTM&gt;set b=a
+GTM&gt;recall
+1 set b=a
+2 set a=10
+3 set $zgbldir="test.gld"
+4 write $zgbldir
+GTM&gt;</pre>
+<p>This REC[ALL] command displays the previously entered commands.</p>
+<p>You can also display a selected command by entering RECALL and the line number of the command you want to retrieve.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;recall 2
+GTM&gt;set a=10</pre>
+<p>This RECALLs the line number two (2).</p>
+<p>If the RE[CALL] command includes a text parameter, GT.M displays the most recent command matching the text after the RE[CALL] command.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;recall write
+GTM&gt;write $zgbldir</pre>
+<p>This RECALLs "WRITE", the command most recently beginning with this text. Note that the RECALL command text is case sensitive. The RECALL command with a text argument treats WRITE and write differently, that is, it treats them case sensitively. If you first type the WRITE command in lower-case and then type WRITE in upper-case to recall it, the RECALL command does not find a match.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="Line_Editing"></a>Line Editing</h4></div></div></div>
+<p>GT.M permits the use of the <span>GT.M</span> command line editor at the Direct Mode prompt and during M READs from a terminal. The <span>GT.M</span> line editor allows cursor positioning using the &lt;CTRL&gt; key, edit keypad and function keys. </p>
+<p>The GT.M Direct Mode line editing keys are as follows:</p>
+<p>Backspace: Deletes the character to the left of the cursor</p>
+<p>Delete: Deletes the character under the cursor</p>
+<p>Up-arrow: Moves to a less recent item in the RECALL list</p>
+<p>Down-arrow: Moves to a more recent item in the RECALL list</p>
+<p>Left-arrow: Moves the cursor one character to the left</p>
+<p>Right-arrow: Moves the cursor one character to the right</p>
+<p>&lt;CTRL-A&gt;: Moves the cursor to the beginning of the line</p>
+<p>&lt;CTRL-B&gt;: Moves the cursor one character towards the beginning of the line</p>
+<p>&lt;CTRL-D&gt;: On an empty line, terminates GT.M and returns control to the shell.</p>
+<p>&lt;CTRL-E&gt;: Moves the cursor to the end of the line</p>
+<p>&lt;CTRL-F&gt;: Moves the cursor one character towards the end of the line</p>
+<p>&lt;CTRL-K&gt;: Deletes all characters from the cursor to the end of the line</p>
+<p>&lt;CTRL-U&gt;: Deletes the entire line</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>When entering commands at the direct mode prompt, the insert mode can be toggled for that line by using the insert key. When GT.M starts, insert mode is enabled unless the value of the gtm_principal_editing environment variable includes the string NOINSERT. If insert mode is disabled or enabled for the $PRINCIPAL device by an USE statement before returning to direct mode, it will remain disabled or enabled at direct mode. The insert mode can be toggled within a direct mode line using the terminal's INSERT key.</p></td></tr>
+</table></div>
+<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<th align="left">Important</th>
+</tr>
+<tr><td align="left" valign="top">
+<p>GT.M deletes the character under the cursor when you press the key on the keyboard that sends the escape sequence which maps to the kdch1 capability in your current terminfo entry (by convention, the Delete key). If the current terminfo entry is missing the kdch1 capability, GT.M uses a default value derived from members of the DEC VT terminal family, as it does for selected other missing terminfo capabilities. If you wish the Backspace and Delete keys to behave the same, the simplest way is to configure your terminal emulator to send the same character sequences for the Delete key that it does for the Backspace key. You can alternatively modify your terminfo setting: for example, create an editable version of your terminfo entry in a temporary file with a command such as: <code class="code">infocmp &gt; /tmp/$$_$TERM</code> and edit the temporary file to replace the entry for the kbs capability with the one in the kdch1 capability. Save your changes, and compile the edited file into a usable terminfo entry, for example:</p>
+<pre class="programlisting">export TERMINFO=$HOME/.terminfo # You may need to add this to your login profile
+profilemkdir -p $TERMINFO
+tic /tmp/$$_$TERM # or whatever your temporary file name was</pre>
+<p>When modifying terminfo capabilities, always look for unintended changes in the behavior of other applications, for example, text editors, that also rely on those capabilities. In the worst case, you may need to toggle between alternate terminfo entries for GT.M and other applications while you evaluate different options. Also, for terminfo entries without the cud1 capability, GT.M uses a linefeed when moving to the next line in direct mode. </p>
+</td></tr>
+</table></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="M_Invocation_Stack"></a>The M Invocation Stack</h4></div></div></div>
+<p>The ANSI M Standard describes certain M operations in terms of how a stack-based virtual machine would operate. A stack is a repository for tracking temporary information on a "last-in/first-out" (LIFO) basis. M program behavior can be understood using a stack-based model. However, the standard is not explicit in defining how an implementation must maintain a stack or even whether it must use one at all.</p>
+<p>The stack model provides a trail of routines currently in progress that shows the location of all the M operations that performed the invocations leading to the current point.</p>
+<p>The ZSHOW command makes this stack information available within GT.M. <span>For more information, see <a class="xref" href="ch04s02.html#Using_Invocation_Stack_in_Debug" title="Using the Invocation Stack in Debugging">&#8220;Using the Invocation Stack in Debugging&#8221;</a> in this chapter, and the  command description at <a class="xref" href="ch06s42.html" title="ZSHow">&#8220;ZSHow&#8221;</a>.</span></p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Exit_Direct_Mode"></a>Exiting Direct Mode</h3></div></div></div>
+<p>Five M commands can terminate a Direct Mode session:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>HALT</p></li>
+<li class="listitem" style="list-style-type: circle"><p>ZHALT</p></li>
+<li class="listitem" style="list-style-type: circle"><p>ZCONTINUE</p></li>
+<li class="listitem" style="list-style-type: circle"><p>GOTO</p></li>
+<li class="listitem" style="list-style-type: circle"><p>ZGOTO</p></li>
+</ul></div>
+<p>The HALT command exits Direct Mode and terminates the M process.</p>
+<p>The ZHALT command exits Direct Mode and returns the exit status to the calling environment. </p>
+<p>The ZCONTINUE command instructs GT.M to exit Direct Mode and resume routine execution at the current point in the M invocation stack. This may be the point where GT.M interrupted execution and entered Direct Mode. However, when the Direct Mode interaction includes a QUIT command, it modifies the invocation stack and causes ZCONTINUE to resume execution at another point.</p>
+<p>The GOTO and ZGOTO commands instruct GT.M to leave Direct Mode, and transfer control to a specified entry reference.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch04.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch04.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch04s02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 4. <span>Operating and Debugging in Direct Mode</span> </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> <span>Debugging a Routine in Direct Mode</span>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

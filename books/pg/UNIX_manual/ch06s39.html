@@ -1,0 +1,147 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>ZMessage</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s38.html" title="ZKill">
+<link rel="next" href="ch06s40.html" title="ZPrint">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">ZMessage</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s38.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s40.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">ZMessage</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zmessage"></a>ZMessage<a class="indexterm" name="idp57982240"></a>
+</h2></div></div></div>
+<p>The ZMESSAGE command raises an exception condition based on the specified message code. </p>
+<p>The format of the ZMESSAGE command is:</p>
+<pre class="programlisting">ZM[ESSAGE][:tvexpr] intexpr[:expr2][:...]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem">
+<p>The required integer expression specifies the message code. There are two types of message codes:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>Message codes from 150339592 are raised from GT.M. For examining the text of a message code, refer to $ZMESSAGE(). </p>
+<p>The three least significant bits (lsb) of these message codes indicate the severity which determines the error handling action: </p>
+<div class="informaltable">
+<a name="tblzmsg"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th><p>3 lsb</p></th>
+<th><p>Severity</p></th>
+<th><p>Action </p></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p>0</p></td>
+<td><p>Warning</p></td>
+<td><p>XECUTEs $ETRAP or $ZTRAP and terminates the process </p></td>
+</tr>
+<tr>
+<td><p>1</p></td>
+<td><p>Success</p></td>
+<td><p>Displays the associated message and continues execution</p></td>
+</tr>
+<tr>
+<td><p>2</p></td>
+<td><p>Error</p></td>
+<td><p>XECUTEs $ETRAP or $ZTRAP and terminates the process</p></td>
+</tr>
+<tr>
+<td><p>3</p></td>
+<td><p>Information (Success&amp;Error)</p></td>
+<td><p>Displays the associated message and continues execution. It does not invoke $ETRAP or $ZTRAP.</p></td>
+</tr>
+<tr>
+<td><p>4</p></td>
+<td>
+<p>Severe/Fatal</p>
+</td>
+<td><p>Displays the associated message and terminates the process.</p></td>
+</tr>
+<tr>
+<td><p>5,6,7</p></td>
+<td><p>Unassigned/Unsupported</p></td>
+<td>
+<p>-</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="listitem"><p>Message codes between 1 and 132 come from OS services. ZMESSAGE treats all such codes as a either a trappable error or a fatal event.</p></li>
+</ul></div>
+</li>
+<li class="listitem"><p>ZMESSAGE can be used as a tool to simulate an error condition. The additional expressions specified after a colon ":" are the  ordered context substitutions for the given exception condition. For example, if the message associated with the condition contains a  substitution directive, passing a string as an additional expression causes the string to be inserted in the message text dat the point of the corresponding substitution directive.</p></li>
+<li class="listitem">
+<p>ZMESSAGE transforms two sets of error messages into SPCLZMSG errors:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>The internal error messages which should not be user visible.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>The error messages which are expected to be driven when their corresponding internal state is available. The list of such errors is as follows: CTRLY, CTRLC, CTRAP, JOBINTRRQST, JOBINTRRETHROW, REPEATERROR, STACKCRIT, SPCLZMSG, TPRETRY, UNSOLCNTERR.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>ZMESSAGE is conceptually similar to SET $ECODE=",&lt;expr&gt;,".</p></li>
+</ul></div>
+</li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_zmessage"></a>Examples<span> of ZMESSAGE</span><a class="indexterm" name="idp60960336"></a>
+</h3></div></div></div>
+<p>All of the following examples issue ZMESSAGE from Direct Mode where exception conditions do not invoke $ZTRAP. </p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZMessage 2
+%SYSTEM-E-ENO2, No such file or directory</pre>
+<p>This ZMESSAGE does not specify substitution text and the message does not include any <span>substitution</span> directives.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZMESSAGE 150372994
+%GTM-E-GVUNDEF, Global Variable undefined:</pre>
+<p>The message specified by this ZMESSAGE command includes <span>a substitution</span> directive but the command does not supply any text.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZMESSAGE 150373850:"x"
+%GTM-E-GVUNDEF, Undefined local variable: x</pre>
+<p>This ZMESSAGE command supplies the substitution text for the message.</p>
+<p><span>GT.M</span> treats its own odd-numbered conditions as "successful." GT.M handles successful conditions by displaying the associated message and continuing execution. <span>GT.M</span> treats its own even-numbered conditions as failures. GT.M handles failure conditions by storing the error information in $ZSTATUS and XECUTEing $ETRAP or $ZTRAP In Direct Mode, GT.M only reports failure conditions to the principal device and does not XECUTE $ETRAP or $ZTRAP or set $ZSTATUS; if $PRINCIPAL is in CENABLE mode, GT.M sends it Informational messages which are not errors but a form of success.  <span>System service errors do not follow the GT.M odd/even pattern.</span></p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s38.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s40.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">ZKill </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> ZPrint</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

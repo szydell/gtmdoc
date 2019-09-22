@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of ZBreak</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zbreak_cmmd.html" title="ZBreak" />
+    <link rel="prev" href="zbreak_cmmd.html" title="ZBreak" />
+    <link rel="next" href="zcompile.html" title="ZCompile" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of ZBreak</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zbreak_cmmd.html">Prev</a>A </td>
+          <th width="60%" align="center">ZBreak</th>
+          <td width="20%" align="right">A <a accesskey="n" href="zcompile.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_zbreak"></a>Examples of ZBreak</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4177802" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+       GTM&gt;ZPRINT ^ZBTEST
+       ZBTEST;
+       DO SUB
+       QUIT
+       SUBWRITE !,&quot;This is ZBTEST&quot;
+       QUIT
+       GTM&gt;ZBREAK SUB^ZBTEST
+       GTM&gt;DO ^ZBTEST
+       %GTM-I-BREAKZBA, Break instruction encountered 
+       during ZBREAK action
+       At M source location SUB^ZBTEST
+       GTM&gt;ZSHOW &quot;B&quot;
+       SUB^ZBTEST
+        </pre>
+      <p>This inserts a ZBREAK with a default action at SUB^ZBTEST. After GT.M encounters the BREAK, the ZSHOW &quot;B&quot; displays this as the only ZBREAK in the image.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+       GTM&gt;ZBREAK -*
+       GTM&gt;ZGOTO
+       GTM&gt;ZBREAK SUB^ZBTEST:&quot;W !,&quot;&quot;Trace&quot;&quot;&quot;
+       GTM&gt;DO ^ZBTEST
+       Trace
+       This is ZBTEST
+       GTM&gt;
+        </pre>
+      <p>This removes all existing ZBREAKs with a ZBREAK -*. Note that it is not necessary to remove ZBREAKs before modifying them. It also clears the process invocation stack with an argumentless ZGOTO. Then it uses a ZBREAK to insert a trace-point. Every time GT.M executes the line to where ZBREAK has established a trace-point, it performs the specified action without entering Direct Mode.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+          ZBREAK PRINT^TIME::5
+        </pre>
+      <p>This BREAKs execution at line PRINT in routine just before the fifth time the line is executed.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+          ZBREAK PRINT^TIME:&quot;WRITE AVE BREAK&quot;:3
+        </pre>
+      <p>This inserts a ZBREAK action of WRITE AVE and BREAK before the third execution of PRINT^TIME.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zbreak_cmmd.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zbreak_cmmd.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="zcompile.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ZBreakA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A ZCompile</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

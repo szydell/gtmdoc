@@ -1,0 +1,298 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Configuring the Restriction facility</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="ch03.html" title="Chapter 3. Basic Operations">
+<link rel="prev" href="ch03s05.html" title="Configuring huge pages for GT.M x86[-64] on Linux">
+<link rel="next" href="gdechap.html" title="Chapter 4. Global Directory Editor">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Configuring the Restriction facility</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch03s05.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 3. Basic Operations</th>
+<td width="20%" align="right"> <a accesskey="n" href="gdechap.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch03.html">Basic Operations</a></span> &gt; <span class="breadcrumb-node">Configuring the Restriction facility</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="cnfg_restrict"></a>Configuring the Restriction facility<a class="indexterm" name="idp54236128"></a>
+</h2></div></div></div>
+<p>Post installation, a system administrator can optionally add a restrict.txt file in $gtm_dist to restrict the use of certain GT.M facilities to a group-name. The owner and group for $gtm_dist/restrict.txt can be different from those used to install GT.M. The file may contain zero or more of the following case-insensitive lines in any order:</p>
+<pre class="programlisting">
+APD_ENABLE:[comma-separated-list-of-options]:{path-to-sock-file|host:port}[:tls-id]
+BREAK[:&lt;group-name&gt;]
+HALT[:&lt;group-name&gt;]
+ZBREAK[:&lt;group-name&gt;]
+ZCMDLINE[:&lt;group-name&gt;]
+ZEDIT[:&lt;group-name&gt;]
+ZHALT[:&lt;group-nam&gt;]
+ZSYSTEM[:&lt;group-name&gt;]
+CENABLE[:&lt;group-name&gt;]
+PIPE_OPEN[:&lt;group-name&gt;]
+DIRECT_MODE[:&lt;group-name&gt;]
+DSE[:&lt;group-name&gt;]
+TRIGGER_MOD[:&lt;group-name&gt;]</pre>
+<p>If the file $gtm_dist/restrict.txt does not exist, GT.M does not restrict any facilities.</p>
+<p>Any non-empty lines that do not match the above format cause processes with read-only permission to behave as if they could not read the file, and GT.M enforces all restrictions.</p>
+<p>Restrictions apply as follows:</p>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+<p>GT.M facility</p>
+</th>
+<th>
+<p>Behavior</p>
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<p>APD_ENABLE</p>
+</td>
+<td>
+<p>GT.M supports the ability to log actions initiated from a principal device including MUMPS commands typed interactively, or piped in by a script or redirect, from the principal device ($PRINCIPAL) and / or any information entered in response to a READ from $PRINCIPAL. An action initiated from $PRINCIPAL executes as usual when Audit Principal Device is disabled, which it is by default. However, when Audit Principal Device is enabled, GT.M attempts to send the action out for logging before acting on it. Additionally, the $ZAUDIT Intrinsic Special Variable (ISV) provides a Boolean value that indicates whether Audit Principal Device is enabled. Please see the Audit Principal Device section below for details.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>BREAK</p>
+</td>
+<td>
+<p>GT.M ignores any BREAK command</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>HALT</p>
+</td>
+<td>
+<p>any HALT produces a RESTRICTEDOP error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>ZBREAK</p>
+</td>
+<td>
+<p>any ZBREAK produces a RESTRICTEDOP error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>ZCMDLINE</p>
+</td>
+<td>
+<p>GT.M returns an empty string for all references to $ZCMDLINE</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>ZEDIT</p>
+</td>
+<td>
+<p>any ZEDIT produces a RESTRICTEDOP error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>ZHALT</p>
+</td>
+<td>
+<p>any ZHALT produces a RESTRICTEDOP error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>ZSYSTEM</p>
+</td>
+<td>
+<p>any ZSYSTEM produces a RESTRICTEDOP error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CENABLE</p>
+</td>
+<td>
+<p>the process acts like $gtm_nocenable is TRUE and ignores any CENABLE deviceparameter</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>PIPE_OPEN</p>
+</td>
+<td>
+<p>any OPEN of a PIPE device produces a RESTRICTEDOP error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>DIRECT_MODE</p>
+</td>
+<td>
+<p><code class="code">mumps -direct </code> terminates immediately with a RESTRICTEDOP error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>DSE</p>
+</td>
+<td>
+<p>terminates immediately with a RESTRICTEDOP error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>TRIGGER_MOD</p>
+</td>
+<td>
+<p>any $ZTRIGGER() or MUPIP TRIGGER that attempts a change or delete produces a RESTRICTEDOP error;
+ in addition, while executing code within a trigger, ZBREAK results in a RESTRICTEDOP error, and both ZBREAK and ZSTEP actions are ignored</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>If the file exists, a process:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>that has write authorization to restrict.txt has no restrictions</p></li>
+<li class="listitem"><p>that has no read access to restrict.txt is restricted from all facilities for which GT.M supports a restriction (currently the above list)</p></li>
+<li class="listitem"><p>that has read-only access to restrict.txt is restricted from any listed facility unless it is a member of the group specified in the optional group-id following the facility name</p></li>
+</ul></div>
+<p> Note that restricting $ZCMDLINE prevents things like: <code class="code">mumps -run %XCMD 'for  read x xecute x' </code> which can act as substitutes for Direct Mode. </p>
+<p>In order to limit pathological looping from restricted HALT or ZHALT, if A GT.M process issues a second occurrence of the restricted command within half a second, the process terminates after sending a fatal error to both the principal device and the syslog, and also producing a GTM_FATAL* context file, but no core file. With these restrictions in place, a process should terminate with, for example: ZGOTO 0. Note that, with or without a restriction, executing these commands as part triggered logic on a replicating instance may cause the Update Server to terminate and thereby stop replication. </p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="zsysfilter"></a>ZSYSTEM and PIPE OPEN command restriction facility</h3></div></div></div>
+<p>The GT.M restriction mechanism recognizes the following lines:</p>
+<pre class="programlisting">
+    ZSYSTEM_FILTER[:M labelref]
+    PIPE_FILTER[:M labelref]
+</pre>
+<p> 
+    The labelref must include a routine name. If a process is restricted by a ZSYSTEM or PIPE_OPEN line in the restrictions file that restriction takes precedence over the corresponding filter restriction. Otherwise when a process is subject to these restrictions, GT.M inserts an invocation of the labelref prior to the restricted command, passing a string containing the argument to the ZSYSTEM command or the command deviceparameter of the  PIPE OPEN. The path to the filter routine must be included in $zroutines. FIS recommends that the filter routine is placed in a location with restricted access such as $gtm_dist. If the filter invocation return is -1,GT.M produces a RESTRICTEDOP error, otherwise it executes the command using the returned string via output parameters as a, possibly identical, replacement for the original string.  Since GT.M uses the call-ins mechanism to execute the filters, a filter invocation inside a TP transaction in call-ins produces a CITPNESTED error. Note that because ZSYSTEM and OPEN are not Isolated actions FIS recommends against their use within a TP transaction.  Filters
+will also increment the nested level of call-ins. A recursive filter invocation produces a NOFILTERNEST error. GT.M reports all filter errors to the operator log accompanied by a COMMFILTERERR.</p>
+<p>
+An example restrict file for this: </p>
+<pre class="programlisting">
+cat $gtm_dist/restrict.txt
+ZSYSTEM_FILTER:^filterzsy
+PIPE_FILTER:^filterzsy
+</pre>
+<p>The actual filter routine:</p>
+<pre class="programlisting">
+filterzsy(inarg,outarg);
+ if ""=inarg set outarg="-1;must provide a command" quit
+ for i=1:1 set arg=$piece(inarg,";",i) quit:""=arg  do  quit:$data(outarg)
+ . for  quit:$zchar(9,32)'[$extract(arg)  set arg=$extract(arg,2,9999)
+ . set cmd=$piece(arg," ")
+ . for restrict="sudo","cd" if cmd=restrict set outarg="-1;command "_restrict_" not permitted" quit
+ . quit:$data(outarg)
+ . if "echo"=cmd set $piece(arg," ")="echo #",$piece(inarg,";",i)=arg    ;example of modification
+ set:'$data(outarg) outarg=inarg
+ quit +outarg
+</pre>
+<p>
+Filter execution starts with $STACK=1 ($ZLEVEL=2).</p>
+<p>
+Following are the GT.M commands, Intrinsic Special Variables, and functions whose behavior changes in the context of a filter invocation.
+</p>
+<p>
+ZGOTO 0 (zero) returns to the processing of the restricted command as does ZGOTO 1 (one) with no entryref, while ZGOTO 1:entryref replaces the originally invoked filter and continues filter execution.</p>
+<p>
+$ZTRAP/$ETRAP NEW'd at level 1. </p>
+<p>
+$ZLEVEL initializes to one (1) in GTM$CI, and increments for every new stack level.</p>
+<p>
+$STACK initializes to zero (0) in GTM$CI frame, and increments for every new stack level.</p>
+<p>
+$ESTACK NEW'd at level one (1) in GTM$CI frame.</p>
+<p>
+$ECODE/$STACK() initialized to the empty string at level one (1) in GTM$CI frame.</p>
+<p>
+After the filter completes, GT.M restores the above to their values at the invocation of the filter.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="audit_principal_device"></a>Audit Principal Device restriction facility</h3></div></div></div>
+<p>
+The "APD_ENABLE" entry in a restrictions definition file turns on APD and enables the logging of all code entered from Direct Mode and optionally any input entered on the principal device ($PRINCIPAL). To enable APD, add a line with the following format to the restriction file:</p>
+<pre class="programlisting">APD_ENABLE:[comma-separated-list-of-options]:{path-to-sock-file|host:port}[:tls-id]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>The optional "comma-separated-list-of-options" can consist of zero or more of these options:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>TLS - Enables TLS connectivity between GT.M and the logger; this option requires the host information (e.g. IP/port or hostname/port)</p></li>
+<li class="listitem" style="list-style-type: circle"><p>RD - Enables logging of all responses READ from $PRINCIPAL in addition to that entered at the Direct Mode prompt. This option is more comprehensive and captures input that might be XECUTEd, but depending on your application architecture may significantly increase the amount of logged information.</p></li>
+</ul></div>
+</li>
+<li class="listitem"><p>The "path-to-sock-file" is the absolute path of the UNIX domain socket file for connecting to the logger.</p></li>
+<li class="listitem"><p>The "host" is the hostname or numeric IPv4/IPv6 address of the logger; numeric IP addresses must be enclosed in square brackets (i.e. '[' and ']').</p></li>
+<li class="listitem"><p>The "port" is the port number the logger listens on.</p></li>
+<li class="listitem"><p>The optional "tls-id" is the label of the section within the GT.M configuration file that contains TLS options and/or certificates for GT.M to use; APD ignores any "tls-id" if the "TLS" option is not specified.</p></li>
+</ul></div>
+<p>If parsing the "APD_ENABLE" line in restriction file or initializing logger information fails, GT.M enforces all restrictions (default restriction file behavior).</p>
+<p>Examples:</p>
+<pre class="programlisting">APD_ENABLE::/path/to/sock/file/audit.sock</pre>
+<p>Adding this line to the restriction file enables APD. GT.M connects with the logger via UNIX domain socket using the domain socket file "/path/to/sock/file/audit.sock" and sends all Direct Mode activity from $PRINCIPAL to logger.</p>
+<pre class="programlisting">APD_ENABLE:RD:[123.456.789.100]:12345</pre>
+<p>Adding this line to the restriction file enables APD. GT.M connects with the logger (listening on port 12345 at the IPv4 address 1enable23.456.789.100) via TCP socket and sends all Direct Mode and READ activities from $PRINCIPAL to logger.</p>
+<pre class="programlisting">APD_ENABLE::loggerhost:56789</pre>
+<p>Adding this line to the restriction file enables APD. GT.M connects with the logger (listening on port 56789 at the hostname "loggerhost") using a TCP socket and sends all Direct Mode activities from $PRINCIPAL to logger.</p>
+<pre class="programlisting">APD_ENABLE:TLS,RD:[1234:5678:910a:bcde::f:]:12345:clicert</pre>
+<p>Adding this line to the restriction file enables APD. GT.M connects with the logger (listening on port 12345 at the IPv6 address 1234:5678:910a:bcde::f:) via TLS socket. GT.M configures its TLS options for APD based on the contents within the section of the configuration file labeled "clicert". GT.M sends all Direct Mode and READ activities from $PRINCIPAL to logger.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="apd_logging"></a>Logging</h4></div></div></div>
+<p>The "logger" is a separate server-like program responsible for receiving the to-be-logged information from GT.M and logging it. This separate program must be introduced by the user, either running in foreground or background, in order for logging to actually work. GT.M distributions include basic example logger programs.</p>
+<p>The six fields in the message, separated by semicolons (';'), contain information on the to-be-logged activity. Each to-be-logged message sent to the logger from GT.M has the following format:</p>
+<pre class="programlisting">dist=&lt;path&gt;; src={0|1|2}; uid=&lt;uid&gt;; euid=&lt;euid&gt;; pid=&lt;pid&gt;; command=&lt;text&gt;</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The "dist" field, shows the path to location of the sender/user's $gtm_dist (GT.M executables).</p></li>
+<li class="listitem"><p>The "src" field shows zero (0) for input from unknown source, one (1) for Direct Mode input, or two (2) for READ input from $PRINCIPAL.</p></li>
+<li class="listitem"><p>The next three fields ("uid", "euid", and "pid") show (respectively) decimal representations of the user ID, effective user ID, and process ID of the process that sent the message.</p></li>
+<li class="listitem"><p>The "command" field is the input provided on the GT.M side.</p></li>
+</ul></div>
+<p>Examples:</p>
+<pre class="programlisting">dist=/path/to/gtm_dist; src=1; uid=112233445; euid=112233445; pid=987654; command=write "Hello world",! 
+dist=/usr/library/V123/dbg; src=2; uid=998877665; euid=998877665; pid=123456; command=set a=789  </pre>
+<p>Click on <a class="ulink" href="downloadables/dm_audit_listener.zip" target="_top"><span class="inlinemediaobject"><img src="images/download.png" alt="Download dm_audit_listener.zip"></span></a> to download sample listener programs. You can also download <span class="bold"><strong>dm_audit_listener.zip</strong></span> from http://tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/downloadables/dm_audit_listener.zip. </p>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch03s05.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="gdechap.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Configuring huge pages for GT.M x86[-64] on Linux </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Chapter 4. Global Directory Editor</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Setting $ZTRAP for Each Level</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="err_actions.html" title="Error Actions" />
+    <link rel="prev" href="uncondition_trnsfr_on_an_err.html" title="Unconditional Transfer on an Error" />
+    <link rel="next" href="nested_err_handling.html" title="Nested Error Handling" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Setting $ZTRAP for Each Level</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="uncondition_trnsfr_on_an_err.html">Prev</a>A </td>
+          <th width="60%" align="center">Error Actions</th>
+          <td width="20%" align="right">A <a accesskey="n" href="nested_err_handling.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="setting_ztrap_for_each_lvl"></a>Setting $ZTRAP for Each Level</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4239076" class="indexterm"></a>
+      <p>The command NEW $ETRAP or NEW $ZTRAP stacks the current value of $ETRAP or $ZTRAP respectively and sets the value equal to the empty string. Normally, a SET $ETRAP or $ZTRAP immediately follows a NEW $ETRAP or $ZTRAP. When GT.M encounters a QUIT command that leaves a level where $ETRAP or $ZTRAP had been NEWed, GT.M deletes any value set to the ISV after the NEW command and restores the value that the ISV held previous to the NEW. NEW $ETRAP or $ZTRAP enables the construction of error handlers corresponding to the nesting of routines. A SET $ETRAP or $ZTRAP implcitily NEWs the other variable if it does not already have the value of the empty string. This enables the interleaving of $ETRAP and $ZTRAP at different levels, although (as mentioned above) such interleaving requires that $ZTRAP handlers deal appropriately with $ECODE.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;ZPRINT ^EP5
+	EP5WRITE !,&quot;THIS IS &quot;_$TEXT(+0)
+	SET $ECODE=&quot;&quot;;this affects only $ETRAP
+	WRITE !,&quot;STARTING $ETRAP: &quot;,$ETRAP
+	WRITE !,&quot;STARTING $ZTRAP: &quot;,$ZTRAP
+	DO SUB1
+	WRITE !,&quot;ENDING $ETRAP: &quot;,$ETRAP
+	WRITE !,&quot;ENDING $ZTRAP: &quot;,$ZTRAP
+	QUIT
+	MAINWRITE !,&quot;THIS IS MAIN&quot;
+	WRITE !,$ZLEVEL: &quot;,$ZLEVEL
+	DO SUB1
+	QUIT
+	SUB1WRITE !,&quot;THIS IS SUB1&quot;
+	NEW $ETRAP SET $ETRAP=&quot;GOTO ET1&quot;
+	;NEW $ZTRAP SET $ZTRAP=&quot;GOTO ET1&quot; ;alternative
+	WRITE !,&quot;$ETRAP FOR SUB1: &quot;,$ETRAP
+	KILL A
+	BADWRITE A
+	WRITE !,&quot;THIS IS NOT DISPLAYED&quot;
+	QUIT
+	ET1WRITE !,&quot;ERROR TRAP 1&quot;
+	WRITE !,&quot;$ETRAP AFTER THE TRAP: &quot;,$ETRAP
+	WRITE !,&quot;$ZTRAP AFTER THE TRAP: &quot;,$ZTRAP
+	SET $ECODE=&quot;&quot;;this affects only $ETRAP
+	QUIT
+	
+	GTM&gt;DO ^EP5
+	
+	THIS IS EP5
+	STARTING $ETRAP:
+	STARTING $ZTRAP: B
+	THIS IS SUB1
+	$ETRAP FOR SUB1: GOTO ET1
+	ERROR TRAP 1
+	$ETRAP AFTER THE TRAP: GOTO ET1
+	$ZTRAP AFTER THE TRAP:
+	ENDING $ETRAP:
+	ENDING $ZTRAP: B
+	GTM&gt;	
+	</pre>
+      <p>At SUB1, this routine NEWs $ETRAP and assigns it a value, which implicitly NEWs $ZTRAP. When the routine encounters an error at the SUB1 level, GT.M transfers control to label ET1 without modifying the value of $ETRAP or $ZTRAP. When the routine encounters a QUIT command in routine ET1, GT.M transfers control to the command after the DO that invoked ET1 and restores $ETRAP or $ZTRAP to the values they held before the NEW and the SET. </p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>If the transfer to ET1 was accomplished with a ZGOTO that reduced the stack level, after the trap, $ETRAP would have the value of the empty string and $ZTRAP would be &quot;B&quot;.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="uncondition_trnsfr_on_an_err.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="err_actions.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="nested_err_handling.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Unconditional Transfer on an ErrorA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Nested Error Handling</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

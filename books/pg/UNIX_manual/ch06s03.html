@@ -1,0 +1,114 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Do</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s02.html" title="Close">
+<link rel="next" href="ch06s04.html" title="Else">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Do</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s02.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s04.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">Do</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Do"></a>Do</h2></div></div></div>
+<a class="indexterm" name="idp56989840"></a><p>The DO command makes an entry in the GT.M invocation stack and transfers execution to the location specified by the entryref.</p>
+<p>The format of the DO command is:</p>
+<pre class="programlisting">D[O][:tvexpr] [entryref[(expr|.lvn[,...])][:tvexpr][,...]]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The optional entryref specifies a location (with some combination of label, offset, and routinename) at which execution continues immediately following the DO.</p></li>
+<li class="listitem"><p>A DO command without an argument (that is, a DO followed by two (2) spaces) transfers execution to the next line in the routine if that line contains an appropriate number of periods (.) after the optional label and before the required linestart. These periods indicate the current level of "immediate" nesting caused by argumentless DOs. If the line following the DO contains too many periods, GT.M reports an error; if the line following the DO contains too few periods, GT.M ignores the DO command.</p></li>
+<li class="listitem"><p>A DO command without an argument stacks the current value of $TEST, in contrast to a DO with an argument, which does not protect the current value of $TEST.</p></li>
+<li class="listitem"><p>The optional parameter list enclosed in parentheses ( ) contains parameters to pass to the routine entry point.</p></li>
+<li class="listitem">
+<p>Label invocations using DO do not require parentheses for calls with no actuallist. If DO or a $$ that does not specify an actuallist invokes a label with a formallist, the missing parameters are undefined in the called routine.</p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Warning">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Warning</th>
+</tr>
+<tr><td align="left" valign="top"><p>If DO or $$ specifies a routine but no label using an actuallist, then whether that routine's top label has a formallist or not, the actuallist applies to it directly, whereas before the actuallist would "fall through" to the first label with executable code.</p></td></tr>
+</table></div>
+</li>
+<li class="listitem"><p>If the DO specifies a parameter list, the entryref location must start with a label and an argument list (M prohibits entryrefs with offsets during parameter passing).</p></li>
+<li class="listitem"><p>If an element in the parameter list starts with a period, it specifies an unsubscripted local variable name and the DO passes that variable by reference. Otherwise, the element specifies an expression that the DO evaluates and passes as a value.</p></li>
+<li class="listitem"><p>The optional truth-valued expression following the parameter list, or the entryref if the argument contains no parameter list, specifies the argument postconditional and controls whether GT.M performs a DO using that argument.</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more DO arguments form a legal argument for a DO.</p></li>
+</ul></div>
+<p>An explicit or implicit QUIT within the scope of the DO, but not within the scope of any other DO, FOR, XECUTE, or extrinsic, returns execution to the instruction following the calling point. This point may be the next DO argument or another command. At the end of a routine, or the end of a nesting level created by an argumentless DO, GT.M performs an implicit QUIT. Any line that reduces the current level of nesting by changing the number of leading periods (.) causes an implicit QUIT, even if that line only contains a comment. Terminating the image and execution of ZGOTO commands are the only ways to avoid eventually returning execution to the calling point.</p>
+<p> A DO command may optionally pass parameters to the invoked subroutine. <span>For more information about entryrefs and parameter passing, refer to <a class="xref" href="ch05.html" title="Chapter 5. General Language Features of M">Chapter 5: &#8220;<i><span>General Language Features of M</span></i>&#8221;</a>.</span></p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Example_of_Do"></a>Examples<span> of DO</span><a class="indexterm" name="idp53776656"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^%RD</pre>
+<p>This example invokes the routine directory utility program (%RD) from Direct Mode. The caret symbol (^) specifies that the DO command invokes %RD as an external routine.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO A(3)</pre>
+<p>This example invokes the subroutine at label A and passes the value 3 as a parameter. The DO argument does not have a caret symbol (^), therefore, it identifies A as a label in the current routine.</p>
+<p>Example:</p>
+<pre class="programlisting">ReportA ; Label for ReportA
+        SET di="" OPEN outfile USE outfile 
+        FOR  SET di=$ORDER(^div(di)) QUIT:di=""  DO PREP DO  DO POST
+        .SET de="",(nr,gr)=0
+        .WRITE "Division ",di,! F   S de=$ORDER(^de(di,de)) QUIT:de=""   DO
+        ..WRITE "Department ",de," Gross Rev: ",^grev(di,de),!
+        ..WRITE "Department ",de," Net Rev: ",^nrev(di,de),!
+        ..SET gr=gr+^grev(di,de),nr=nr+^nrev(di,de)
+        .W "Division Gross Rev: ",gr,!,"Division Net Rev: ",nr,!
+         DO PRINT^OUTPUT(outfile)
+         QUIT</pre>
+<p>This routine first uses a DO with a label argument (PREP) to do some pre-processing. Then, it uses an argumentless DO to loop through each division of a company to format a report. Within the first argumentless DO, a second argumentless DO (line 4) loops through and formats each department within a division. After the processing of all departments, control returns to the first argumentless DO, which prints a summary of the division. Following processing of all divisions, a DO with a label argument (POST) does some post-processing. Finally, at the next-to-last line, the routine uses a DO that invokes a subroutine at a label (PRINT) in an external routine (^OUTPUT), passing the name of the output file (outfile) as a parameter.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zprint ^SQR
+SQR(z);
+  set revert=0
+  if $view("undef") set revert=1 view "noundef"
+  if z="" write "Missing parameter.",!     view:revert "undef" quit
+  else  write z*z,! view:revert "undef" quit  
+GTM&gt;do ^SQR(10)
+100
+GTM&gt;do ^SQR
+Missing parameter.</pre>
+<p>This examples demonstrates label invocations using DO with and without parentheses.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s02.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s04.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Close </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Else</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

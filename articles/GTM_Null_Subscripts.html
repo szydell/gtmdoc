@@ -1,0 +1,459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>
+            GT.M Null Subscripts and Null Subscripts Collation</title><link rel="stylesheet" href="e-novative_article.css" type="text/css"></link><meta name="generator" content="DocBook XSL Stylesheets V1.68.1"></meta><meta name="description" content="
+                                                        
+                    
+                    
+                        
+                        GT.M Group
+                        Fidelity National Information Services, Inc.
+                        2 West Liberty Boulevard, Suite 300
+                        Malvern, PA  19355, 
+                        United States of America
+                     
+                                             
+                     
+                                             
+                     
+                        
+                        GT.M Support: +1 (610) 578-4226 
+                        Switchboard: +1 (610) 296-8877 
+                        Fax: +1 (484) 595-5101 
+                        http://www.fis-gtm.com
+                        gtmsupport@fnf.com
+                    
+                    
+                    
+		  "></meta></head><body><div class="article" lang="en-US"><div class="titlepage"><div><div><h1 class="title"><a id="id877534"></a>
+            <a id="return_to_top"></a>GT.M Null Subscripts and Null Subscripts Collation</h1></div><div><h3 class="subtitle"><i>Technical Bulletin: GT.M Null Subscripts</i></h3></div><div><p class="copyright">Copyright (C) 2006 Fidelity National Information Services, Inc.</p></div><div><div xmlns="" align="center"><a href="legalnotice.html" target="_blank">Legal Notice</a></div></div><div><p class="pubdate">May 03, 2006</p></div><div><div xmlns="" class="revhistory"><table border="1" align="center" width="70%" summary="Revision history"><tr><th align="left" valign="top" colspan="2"><b>Revision History</b></th></tr><tr><td align="left">Revision 1.1</td><td align="left">03 May 2006</td></tr><tr><td align="left">Revision 1.0</td><td align="left">06 September 2005</td></tr></table></div></div><div><div class="abstract"><p class="title"><b></b></p><p>
+                    <div class="informaltable"><table border="0" width="100%"><colgroup><col></col><col></col></colgroup><tbody><tr><td align="left" valign="top">                                    
+                    <p>
+                    <div class="address"><p><br></br>
+                        <p></p><br></br>
+                        GT.M Group<br></br>
+                        Fidelity National Information Services, Inc.<br></br>
+                        <span class="street">2 West Liberty Boulevard, Suite 300</span><br></br>
+                        <span class="city">Malvern, </span><span class="state">PA </span><span class="postcode"> 19355, </span><br></br>
+                        <span class="country">United States of America</span><br></br>
+                     </p></div>
+                     </p>                        
+                     </td><td align="left" valign="top">
+                     <p>                        
+                     <div class="address"><p><br></br>
+                        <p></p><br></br>
+                        <span class="phone">GT.M Support: +1 (610) 578-4226</span> <br></br>
+                        <span class="phone">Switchboard: +1 (610) 296-8877 </span><br></br>
+                        <span class="fax">Fax: +1 (484) 595-5101 </span><br></br>
+                        <a href="http://www.fis-gtm.com" target="_top">http://www.fis-gtm.com</a><br></br>
+                        <a href="mailto:gtmsupport@fnf.com" target="_top">gtmsupport@fnf.com</a><br></br>
+                    </p></div>
+                    </p>
+                    </td></tr></tbody></table></div>
+		  </p></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="GTM_Null_Subscripts.html#id878195">Overview</a></span></dt><dt><span class="sect1"><a href="GTM_Null_Subscripts.html#id878773">Null Subscripts</a></span></dt><dt><span class="sect1"><a href="GTM_Null_Subscripts.html#id878491">Null Subscript Collation</a></span></dt><dd><dl><dt><span class="sect2"><a href="GTM_Null_Subscripts.html#id878921">GDE Changes</a></span></dt><dt><span class="sect2"><a href="GTM_Null_Subscripts.html#id878736">DSE Changes</a></span></dt><dt><span class="sect2"><a href="GTM_Null_Subscripts.html#id878558">M-Commands/Functions</a></span></dt><dt><span class="sect2"><a href="GTM_Null_Subscripts.html#id879188">MUPIP Binary Extract and Load</a></span></dt><dt><span class="sect2"><a href="GTM_Null_Subscripts.html#id879373">Replication Changes</a></span></dt><dt><span class="sect2"><a href="GTM_Null_Subscripts.html#id878470">GTCM_GNP Changes</a></span></dt></dl></dd><dt><span class="sect1"><a href="GTM_Null_Subscripts.html#id878275">Error Messages</a></span></dt><dt><span class="sect1"><a href="GTM_Null_Subscripts.html#id879641">Limitations</a></span></dt><dt><span class="sect1"><a href="GTM_Null_Subscripts.html#id879534">Typographical Conventions</a></span></dt></dl></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h2 class="title"><a id="id878195"></a>Overview</h2></div></div></div><p>This technical bulletin discusses the following new features regarding null subscripts introduced effective V5.0-000:</p><p>
+            <div class="orderedlist"><ol type="1"><li><p>An option for a database to allow existing data with null subscripts but
+                        prohibit creating new data with null subscripts.</p></li><li><p>New keywords for the <span class="emphasis"><em>NULL_SUBSCRIPTS</em></span> qualifier of GDE and DSE.</p></li><li><p>An option to allow M local and global variables to collate the null
+                        subscript before all other subscripts, in compliance with the M
+                        standard.</p></li></ol></div>
+        </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></img></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>UNIX-style command syntax (i.e., "-" for flags/qualifiers) is used throughout this document. On VMS, flags/qualifiers should be preceded with "/"</p></td></tr></table></div><p></p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h2 class="title"><a id="id878773"></a>Null Subscripts</h2></div></div></div><p>Prior to this version, GT.M had an option to either prohibit or permit null subscripts
+            in a database. This version further refines the choices by adding an option to have
+            databases where existing nodes with null subscripts are accepted, but updates with null
+            subscripts (except Kill) are not allowed. At the same time, a database creation time
+            option is added to collate null subscripts before numeric and string subscripts, as
+            specified by the M standard. Prior to this version, GT.M collated null subscripts after
+            numeric subscripts and before string subscripts. With the exception of application logic
+            that makes explicit or implicit assumptions about the collation of null subscripts, any
+            existing GT.M programs continue to operate with no functional change in behavior.</p><p></p><p>The NULL SUBSCRIPTS database file header field which in prior releases had the values
+            TRUE and FALSE is extended to permit the values <span class="emphasis"><em>ALWAYS</em></span> (synonymous with <span class="emphasis"><em>TRUE</em></span>, which is
+            deprecated but continues to be supported), <span class="emphasis"><em>NEVER</em></span> (synonymous with <span class="emphasis"><em>FALSE</em></span>, which is also
+            deprecated and also continues to be supported) and a new value, <span class="emphasis"><em>EXISTING</em></span>. Please
+            note that TRUE and ALWAYS are internally the same, as are <span class="emphasis"><em>FALSE</em></span> and <span class="emphasis"><em>NEVER</em></span>. This means
+            that GDE and DSE will only display the values as <span class="emphasis"><em>ALWAYS</em></span> and <span class="emphasis"><em>NEVER</em></span>.</p><p>There is no change to GT.M behavior for any database file if the field is <span class="emphasis"><em>ALWAYS/TRUE</em></span>
+            or <span class="emphasis"><em>NEVER/FALSE</em></span>. Existing programs and databases therefore continue to operate unchanged.</p><p>For any region for which the <span class="emphasis"><em>NULL SUBSCRIPTS</em></span> field has the value <span class="emphasis"><em>EXISTING</em></span>:</p><div class="itemizedlist"><ul><li><p>SETs to nodes to that region behave as if the value of the file header field
+                    is <span class="emphasis"><em>NEVER/FALSE</em></span></p><div class="itemizedlist"><ul><li><p>A <span class="emphasis"><em>SET</em></span> operation to a global in that region where any subscript of the
+                            global is null generates a runtime error.</p></li><li><p>A <span class="emphasis"><em>MERGE</em></span> operation into a global in that region terminates with an
+                            error if and when any subscript of any node being set is null.</p></li></ul></div></li><li><p>Reads (e.g., <span class="emphasis"><em>$GET</em></span>) from nodes with null subscripts</p><div class="itemizedlist"><ul><li><p>If the node has a value, that value is returned. If the value does not
+                            exist, a null is returned if <span class="emphasis"><em>VIEW "NOUNDEF"</em></span> is set, or a runtime error
+                            is generated if VIEW "UNDEF" is set. The behavior of <span class="emphasis"><em>$DATA(), $ORDER(),
+                            $QUERY()</em></span>, naked references, transaction semantics, etc. remain unchanged
+                            from the present.</p></li></ul></div></li><li><p>Removal of nodes with null subscripts behaves as if the value of the file
+                    header field is <span class="emphasis"><em>ALWAYS/TRUE</em></span>.</p><div class="itemizedlist"><ul><li><p>A <span class="emphasis"><em>KILL</em></span> or <span class="emphasis"><em>ZWITHDRAW</em></span> operation of a global in that region is permitted,
+                            either a direct <span class="emphasis"><em>KILL/ZWITHDRAW</em></span> of a global any subscript of which is
+                            null, or a <span class="emphasis"><em>KILL</em></span> of a higher-level sub-tree in which one or more nodes
+                            have subscripts that are null.</p></li></ul></div></li></ul></div><p>The <span class="emphasis"><em>DSE FILEHEADER</em></span> qualifier <span class="emphasis"><em>NULL_SUBSCRIPTS</em></span> permits the new keywords for values in
+            the <span class="emphasis"><em>NULL_SUBSCRIPTS</em></span> field. Also, the <span class="emphasis"><em>DSE DUMP</em></span> command displays the new keywords in the
+            file header output.</p><p>The <span class="emphasis"><em>GDE REGION</em></span> qualifier <span class="emphasis"><em>NULL_SUBSCRIPTS</em></span> accepts the keywords <span class="emphasis"><em>ALWAYS, NEVER</em></span> and
+            <span class="emphasis"><em>EXISTING</em></span>. The existing argument-less qualifiers <span class="emphasis"><em>NULL_SUBSCRIPTS</em></span> (synonymous with
+            <span class="emphasis"><em>NULL_SUBSCRIPTS=ALWAYS</em></span>) and <span class="emphasis"><em>NONULL_SUBSCRIPTS</em></span> (synonymous with <span class="emphasis"><em>-NULL_SUBSCRIPTS=NEVER</em></span>)
+            will be deprecated but continue to be supported. Also, the <span class="emphasis"><em>GDE SHOW</em></span> command displays the
+            new keywords in the &#8220;Null Subs&#8221; column.</p><p><span class="emphasis"><em>MUPIP CREATE </em></span>creates database files with the new values for <span class="emphasis"><em>NULL_SUBSCRIPTS</em></span>.</p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h2 class="title"><a id="id878491"></a>Null Subscript Collation</h2></div></div></div><p>The default collation of local and global variable subscripts in GT.M has been that
+            the null subscript collates between numeric and string subscripts whereas the M standard
+            collation requires the null subscript to collate before any other subscript. Effective
+            V5.0-000, GT.M supports both null collation methods. The collation method must be
+            specified at the time of database creation.</p><p>A new read-only boolean parameter STDNULLCOLL is introduced in the database fileheader
+            to specify the type of null collation:</p><div class="itemizedlist"><ul><li><p> If <span class="emphasis"><em>STDNULLCOLL</em></span> is set to <span class="emphasis"><em>FALSE</em></span>, subscripts of globals in the database
+                    continue the previous GT.M practice where the null subscript collates between
+                    numeric and string subscripts.</p></li><li><p>If <span class="emphasis"><em>STDNULLCOLL</em></span> is set to <span class="emphasis"><em>TRUE</em></span>, subscripts of globals in the database follow
+                    the M standard where the null subscript collates before all other
+                    subscripts.</p></li></ul></div><p>When a database is created, the <span class="emphasis"><em>STDNULLCOLL</em></span> parameter is initialized to the collation
+            specified for that region in the global directory.</p><p>To establish the null collation method for a specified database, GDE supports a new
+            region parameter <span class="emphasis"><em>STDNULLCOLL</em></span> that can be set to <span class="emphasis"><em>TRUE</em></span> or <span class="emphasis"><em>FALSE</em></span> using a new region
+            qualifier <span class="emphasis"><em>-STDNULLCOLL</em></span> or <span class="emphasis"><em>-NOSTDNULLCOLL</em></span> respectively. These qualifiers are supported
+            with <span class="emphasis"><em>ADD, CHANGE</em></span> and <span class="emphasis"><em>TEMPLATE</em></span> commands. When <span class="emphasis"><em>MUPIP</em></span> creates a new database, the
+            <span class="emphasis"><em>STDNULLCOLL</em></span> value is copied from the global directory into the database file header.</p><p>For M local variables, the null collation can be established either at startup or
+            during run time. Since the same local collation method is established for all locals in
+            a process, changing the null collation within the process is allowed only if there are
+            no local variables defined at that time. At process startup, GT.M uses the following:</p><div class="itemizedlist"><ul><li><p>The M standard null collation if an environment variable <span class="emphasis"><em>gtm_lct_stdnull</em></span>
+                    [UNIX] or <span class="emphasis"><em>GTM_LCT_STDNULL</em></span> [VMS] is defined to either <span class="emphasis"><em>TRUE</em></span> or <span class="emphasis"><em>YES</em></span> (or a
+                    case-insensitive leading substring thereof) or a non-zero integer.</p></li><li><p>The GT.M standard null collation if the environment variable or the logical
+                    name is not defined or defined to any other value.</p></li></ul></div><p>To establish a default collation version for local variables within the process, the
+            percent utility <span class="emphasis"><em>%LCLCOL</em></span> supports establishing the null collation method as well.
+            <span class="emphasis"><em>set^%LCLCOL(col,ncol)</em></span> accepts an optional parameter ncol that determines the null
+            collation type to be used with the collation type col.</p><div class="itemizedlist"><ul><li><p>If the truth value of <span class="emphasis"><em>ncol</em></span> is <span class="emphasis"><em>FALSE(0)</em></span>, local variables use the GT.M standard
+                    null collation.</p></li><li><p>If the truth value of ncol is <span class="emphasis"><em>TRUE(1)</em></span>, local variables use the M standard null
+                    collation.</p></li><li><p>If ncol is not supplied, there is no change to the already established null
+                    collation method.</p></li></ul></div><p>Also using <span class="emphasis"><em>set^%LCLCOL(,ncol)</em></span>, the null collation order can be changed while keeping
+            the alternate collation order unchanged. If subscripted local variables exist, null
+            collation order cannot be changed. In this case, GT.M issues <span class="emphasis"><em>GTM-E-COLLDATAEXISTS</em></span>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></img></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>If the M standard default collation is not enabled by any of the above mechanisms
+                or if numeric subscripts are handled like strings (i.e. NCT is enabled), GT.M
+                behaves in the same manner as before.</p></td></tr></table></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h3 class="title"><a id="id878921"></a>GDE Changes</h3></div></div></div><p>The <span class="emphasis"><em>-REGION</em></span> qualifier <span class="emphasis"><em>&#8211;[NO]NULL_SUBCRIPTS</em></span> now accepts new values with change, add
+                and template commands, default is <span class="emphasis"><em>&#8211;NONULL_SUBSCRIPTS</em></span>, e.g.:</p><p></p><pre class="programlisting">
+            GDE&gt;add &#8211;region areg &#8211;dyn=aseg &#8211;null_subscripts=always
+            GDE&gt;change &#8211;region areg &#8211;null_subscripts=true
+            GDE&gt;change &#8211;region areg &#8211;null_subscripts=false
+            GDE&gt;change &#8211;region areg &#8211;null_subscripts=never
+            GDE&gt;change &#8211;region areg &#8211;null_subscripts=existing
+            GDE&gt;template &#8211;region &#8211;null_subscripts=existing
+            GDE&gt;template &#8211;region &#8211;nonull_subscripts
+            </pre><p></p><p>Also, GDE now supports a new region qualifier <span class="emphasis"><em>&#8211;[NO]STDNULLCOLL</em></span> with add, change
+                and template command, default is <span class="emphasis"><em>&#8211;NOSTDNULLCOLL</em></span>.</p><p>From this version, GT.M supports longer (up to 31 characters) identifiers, label
+                names, region names and segment names. To accommodate all these changes as well as
+                null_subscripts changes, GDE show output has been modified.</p><p></p><pre class="programlisting">
+GDE&gt; template -region -stdnullcoll
+GDE&gt; change -region DEFAULT -stdnullcoll
+GDE&gt; add -segment TEAGLOBALS -file=TEAGLOBALS.dat
+GDE&gt; add -region TEAGLOBALS -dyn=TEAGLOBALS -null_subscripts=existing
+GDE&gt; add -name LapsangSouchong -region=TEAGLOBALS
+GDE&gt; add -name Darjeeling -region=TEAGLOBALS
+GDE&gt; add -name Tea* -region=TEAGLOBALS
+GDE&gt; show -all
+
+                               *** TEMPLATES ***
+                                             Def   Rec   Key Null       Standard
+ Region                                     Coll  Size  Size Subs       NullColl  Journaling
+ --------------------------------------------------------------------------------------------
+ &lt;default&gt;                                     0   256    64 NEVER      Y         N
+
+ Segment          Active              Acc Typ Block      Alloc Exten Options
+ ------------------------------------------------------------------------------
+ &lt;default&gt;          *                 BG  DYN  1024        100   100 GLOB =1024
+                                                                     LOCK = 40
+ &lt;default&gt;                            MM  DYN  1024        100   100 DEFER
+                                                                     LOCK = 40
+
+         *** NAMES ***
+ Global                             Region
+ ------------------------------------------------------------------------------
+ *                                  DEFAULT
+ Darjeeling                         TEAGLOBALS
+ LapsangSouchong                    TEAGLOBALS
+ Tea*                               TEAGLOBALS
+
+                                *** REGIONS ***
+                                 Dynamic                          Def    Rec   Key Null       Standard
+ Region                          Segment                         Coll   Size  Size Subs       NullColl  Journaling
+ ------------------------------------------------------------------------------------------------------------------
+ DEFAULT                         DEFAULT                            0    256    64 NEVER      Y         N
+ TEAGLOBALS                      TEAGLOBALS                         0    256    64 EXISTING   Y         N
+
+                                *** SEGMENTS ***
+ Segment                         File (def ext: .dat)Acc Typ Block      Alloc Exten Options
+ -------------------------------------------------------------------------------------------
+ DEFAULT                         mumps.dat           BG  DYN  1024        100   100 GLOB=1024
+                                                                                    LOCK=  40
+                                                                                    RES =   0
+ TEAGLOBALS                      TEAGLOBALS.dat      BG  DYN  1024        100   100 GLOB=1024
+                                                                                    LOCK=  40
+                                                                                    RES =   0
+
+                                  *** MAP ***
+   -  -  -  -  -  -  -  -  -  - Names -  -  - -  -  -  -  -  -  -
+ From                            Up to                            Region / Segment / File(def ext: .dat)
+ -----------------------------------------------------------------------------------------------------------------------------------
+ %                               Darjeeling                       REG = DEFAULT
+                                                                  SEG = DEFAULT
+                                                                  FILE = mumps.dat
+ Darjeeling                      Darjeeling0                      REG = TEAGLOBALS
+                                                                  SEG = TEAGLOBALS
+                                                                  FILE = TEAGLOBALS.dat
+ Darjeeling0                     LapsangSouchong                  REG = DEFAULT
+                                                                  SEG = DEFAULT
+                                                                  FILE = mumps.dat
+ LapsangSouchong                 LapsangSouchong0                 REG = TEAGLOBALS
+                                                                  SEG = TEAGLOBALS
+                                                                  FILE = TEAGLOBALS.dat
+ LapsangSouchong0                Tea                              REG = DEFAULT
+                                                                  SEG = DEFAULT
+                                                                  FILE = mumps.dat
+ Tea                             Teb                              REG = TEAGLOBALS
+                                                                  SEG = TEAGLOBALS
+                                                                  FILE = TEAGLOBALS.dat
+ Teb                             ...                              REG = DEFAULT
+                                                                  SEG = DEFAULT
+                                                                  FILE = mumps.dat
+ LOCAL LOCKS                                                      REG = DEFAULT
+                                                                  SEG = DEFAULT
+                                                                  FILE = mumps.dat
+GDE&gt;
+            
+            </pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h3 class="title"><a id="id878736"></a>DSE Changes</h3></div></div></div><p>In addition to <span class="emphasis"><em>true</em></span>/<span class="emphasis"><em>false</em></span>, the <span class="emphasis"><em>-null_subscripts</em></span> qualifier now accepts
+                <span class="emphasis"><em>never</em></span>, <span class="emphasis"><em>always</em></span> and <span class="emphasis"><em>existing</em></span>. The default qualifier is <span class="emphasis"><em>never</em></span>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></img></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The null subscript collation order cannot be changed using DSE.</p></td></tr></table></div><p><span class="emphasis"><em>dump &#8211;fileheader</em></span> output reflects these changes for <span class="emphasis"><em>null_subscripts</em></span> as well as null
+                collation order.</p><p>For a region, &#8220;Standard Null Collation&#8221; in <span class="emphasis"><em>dse dump</em></span> output corresponds to
+                <span class="emphasis"><em>-stdnullcoll</em></span> field in .gld file. DSE displays <span class="emphasis"><em>TRUE</em></span> for &#8220;Standard Null Collation&#8221;
+                if the region has <span class="emphasis"><em>&#8211;STDNULLCOLL</em></span>, otherwise it displays <span class="emphasis"><em>FALSE</em></span></p><p>From the example in GDE Changes above, output of <span class="emphasis"><em>dump &#8211;fileheader</em></span> for TEAGLOBALS.dat will
+                be as follows:</p><pre class="programlisting">
+DSE&gt; dump -fileheader
+
+File            /tmp/mumps.dat
+Region          DEFAULT
+Date/Time       19-MAY-2005 18:51:43 [$H = 60039,67903]
+  Access method                   BG        Global Buffers                1024
+  Reserved Bytes                   0        Block size (in bytes)         4096
+  Maximum record size           4088        Starting VBN                    49
+  Maximum key size               255        Total blocks            0x00000065
+  Null subscripts           EXISTING        Free blocks             0x00000049
+  Standard Null Collation      FALSE
+  Last Record Backup      0x00000001        Extension Count                100
+  Last Database Bckup     0x00000001        Number of local maps             1
+  Last Bytestream Bckup   0x00000001        Lock space              0x00000028
+  In critical section     0x00000000        Timers pending                   0
+  Cache freeze id         0x00000000        Flush timer            00:00:01:00
+  Freeze match            0x00000000        Flush trigger                  960
+  Current transaction     0x000007CE        No. of writes/flush              7
+  Create in progress           FALSE        Modified cache blocks            0
+  Reference count                  1        Wait Disk                        0
+  Journal State        [inactive] ON        Journal Before imaging        TRUE
+  Journal Allocation             100        Journal Extension              100
+  Journal Buffer Size           1000        Journal Alignsize              128
+  Journal AutoSwitchLimit    8388600        Journal Epoch Interval         300
+  Journal Yield Limit              8        Journal Sync IO              FALSE
+  Journal File: /tmp/mumps.mjl
+  Mutex Hard Spin Count          128        Mutex Sleep Spin Count         128
+  Mutex Spin Sleep Time         2048        KILLs in progress                0
+  Replication State              OFF        Region Seqno    0x0000000000000001
+  Resync Seqno    0x0000000000000001        Resync transaction      0x00000001
+
+
+           </pre><p>With Standard null collation, the null subscript is represented by 0x01 instead of
+                0xFF with GT.M null collation. So, the output of <span class="emphasis"><em>dse dump -block</em></span> for a null
+                subscript will also be different.</p><pre class="programlisting">
+            DSE&gt;dump -block=3
+            File /testarea1/null_subs/mumps.dat
+            Region DEFAULT
+                         
+                        Block     3       Size    24  Level   0   TN  3
+                        Rec:1  Blk 3  Off 8  Size A  Cmpc 0  Key ^a("")
+                                8 : | 0  A  0  0 61  0  1  0  0 31              |
+                                    |  .  .  .  .  a  .  .  .  . 1              |
+                   
+            </pre><p>With GT.M null collation, for the same command output will be as follows:</p><pre class="programlisting">
+            DSE&gt;dump -block=3
+            File /testarea1/null_subs/mumps.dat
+            Region DEFAULT
+                                
+                     3   Size 24   Level 0   TN 3
+                     Rec:1  Blk 3  Off 8  Size A  Cmpc 0  Key ^a("")
+                                8 : |  0  A  0  0 61  0  FF  0  0 31                              |
+                                    |  .  .  .  .  a  .  .  .  .   1                              |   
+           
+        </pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h3 class="title"><a id="id878558"></a>M-Commands/Functions</h3></div></div></div><p><span class="emphasis"><em>ZWRITE:</em></span></p><p></p><p>Since with standard collation null subscripts collate before numeric and string
+                subscripts, ZWR output will be different if nodes with null subscripts exist.</p><pre class="programlisting">
+           GTM&gt;ZWR
+           lcl("")=2
+           lcl(1)=3
+           lcl("x")=4
+           </pre><p></p><p>With same data and GT.M null collation the output of ZWR will be as follows:</p><p></p><pre class="programlisting">
+            lcl(1)=3
+            lcl("")=2
+            lcl("x")=4
+            </pre><p></p><p><span class="emphasis"><em>$ORDER():</em></span></p><p>If the last subscript in the subscripted global or local variable name passed as a
+                parameter to <span class="emphasis"><em>$Order()</em></span> is null and a subscripted global or local variable with a null
+                subscript exists, <span class="emphasis"><em>$ORDER()</em></span> returns the next node at the specified level.</p><p>If the last subscript in the subscripted global or local variable name passed as a
+                parameter to <span class="emphasis"><em>$Order()</em></span> is null and a subscripted global or local variable with a null
+                subscript does not exist, <span class="emphasis"><em>$ORDER()</em></span> returns first node at the specified level.</p><p>If the last subscript in the subscripted global or local variable name is null and
+                second argument of <span class="emphasis"><em>$ORDER()</em></span> is <span class="emphasis"><em>-1</em></span>, <span class="emphasis"><em>$ORDER()</em></span> will always return the last node at the
+                specified level regardless of the existence of subscripted global or local variable
+                (with null subscript). This allows the user to traverse all the nodes in a specified
+                level starting from the last.</p><p></p><pre class="programlisting">
+            GTM&gt;ZWRITE
+            lcl(1)=3
+            lcl("x")=4
+            
+            GTM&gt;WRITE $ORDER(lcl(""))
+            1
+            
+            GTM&gt;WRITE $ORDER(lcl(1))
+            x
+            
+            GTM&gt;WRITE $ORDER(lcl(""),-1)
+            x
+            
+            GTM&gt;SET lcl("")=2
+            GTM&gt;ZWRITE
+            lcl("")=2
+            lcl(1)=3
+            lcl("x")=4
+            
+            GTM&gt;WRITE $ORDER(lcl(""))
+            1
+            
+            GTM&gt;WRITE $ORDER(lcl(""),-1)
+            x
+            
+            GTM&gt;WRITE $ORDER(lcl("x"),-1)
+            1
+            </pre><p></p><p><span class="emphasis"><em>$ZPREVIOUS()</em></span> : is equivalent to $ORDER() with second argument -1.</p><p></p><p><span class="emphasis"><em>$QUERY()</em></span>: With stdnullcoll, if <span class="emphasis"><em>$D(glvn(""))=1</em></span> (or 11), <span class="emphasis"><em>$Q(glvn(""))</em></span> will return <span class="emphasis"><em>glvn(1)</em></span>
+                [assuming glvn(1) exists]. Software should execute <span class="emphasis"><em>$D(glvn(""))</em></span> to test the
+                existence of <span class="emphasis"><em>glvn("")</em></span>. <span class="emphasis"><em>$Q(glvn("..."))</em></span> will never return the starting-point
+                <span class="emphasis"><em>(glvn(""))</em></span> even though <span class="emphasis"><em>glvn("")</em></span> may exist. </p><p></p><pre class="programlisting">
+            GTM&gt;ZWRITE lcl
+            lcl("")=1
+            lcl(1)=1
+            lcl(1,2)=2
+            lcl(1,2,"")=3
+            lcl(1,2,"","")=4
+            lcl(1,2,"","",4)=5
+            lcl(1,2,0)=6
+            lcl(1,2,"abc",5)=7
+            lcl("x")=1
+            
+            GTM&gt;SET y="x&#8221;
+            
+            GTM&gt;FOR SET y=$QUERY(@y) QUIT:y="" WRITE !,y,"=",@y
+            </pre><p>Output will be the same as <span class="emphasis"><em>ZWRITE</em></span> output.</p><p>For more details about the behavior of these functions with GT.M Null Collation,
+                please consult &#8220;GT.M Programmer&#8217;s Guide.&#8221; </p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h3 class="title"><a id="id879188"></a>MUPIP Binary Extract and Load</h3></div></div></div><p>
+                <div class="orderedlist"><ol type="1"><li><p><span class="emphasis"><em>MUPIP EXTRACT -BINARY</em></span> issues <span class="emphasis"><em>NULLCOLLDIFF</em></span> error if it needs to extract
+                            from multiple databases with different <span class="emphasis"><em>STDNULCOLL</em></span> settings.</p></li><li><p><span class="emphasis"><em>MUPIP EXTRACT -BINARY</em></span> writes a new field in the binary extract header
+                            to note down the first database's <span class="emphasis"><em>STDNULCOLL</em></span> setting.</p></li><li><p><span class="emphasis"><em>MUPIP LOAD &#8211;BINARY</em></span> works with V4 format binary extract files. In this
+                            case, it assumes the <span class="emphasis"><em>STDNULCOLL</em></span> setting is <span class="emphasis"><em>FALSE</em></span> (i.e. GTM null
+                            collation).</p></li><li><p><span class="emphasis"><em>MUPIP LOAD &#8211;BINARY</em></span> on a V5 binary extract transforms the null
+                            subscripts appropriately if the <span class="emphasis"><em>STDNULCOLL</em></span> setting of the target
+                            database is different from the setting in the binary extract
+                            header.</p></li><li><p><span class="emphasis"><em>MUPIP LOAD &#8211;BINARY</em></span> is able to successfully load onto multiple
+                            databases with different <span class="emphasis"><em>STDNULCOLL</em></span> settings.</p></li><li><p><span class="emphasis"><em>MUPIP EXTRACT -ZWR</em></span> and <span class="emphasis"><em>MUPIP LOAD -ZWR</em></span> will work no matter what the
+                            GT.M version of the source and destination databases, and no matter what
+                            the null (or other) collation setting of the source and destination
+                            databases. Note, however, that other restrictions may apply, such as
+                            moving global variables with long names from a V5 database to a V4
+                            database.</p></li></ol></div>
+            </p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h3 class="title"><a id="id879373"></a>Replication Changes</h3></div></div></div><p>In a replicated environment, all databases belonging to an instance should have
+                the same null collation order. If this condition is not met, the source server
+                issues the <span class="emphasis"><em>GTM-E-NULLCOLLDIFF</em></span> error message on the primary. On the secondary, the
+                update process issues the same error message if the condition is not satisfied.</p><p></p><p>Although all databases belonging to an instance must have the same collation
+                method, GT.M allows the primary and secondary to use different null collation
+                methods. Any needed conversion is handled internally and transparently.</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h3 class="title"><a id="id878470"></a>GTCM_GNP Changes</h3></div></div></div><p>The server side's null collation order overrides client side's null collation
+                order. For a given region, on the server side (Version V5.0-000 or later), if
+                <span class="emphasis"><em>NULLSUBS</em></span> is set to <span class="emphasis"><em>EXISTING</em></span> or <span class="emphasis"><em>STD_NULL_COLL</em></span> is set to TRUE and client side is
+                running a version prior to V5, then server side will issue <span class="emphasis"><em>GTM-E-UNIMPOP</em></span> error with
+                <span class="emphasis"><em>GTM-I_TEXT</em></span>- "Client does not support standard null collation or <span class="emphasis"><em>EXISTING</em></span> for
+                null subscripts."</p><p>Again for a given region, on the client side running V5 version, if null_subs is
+                set to <span class="emphasis"><em>EXISTING</em></span> or <span class="emphasis"><em>STD_NULL_COLL</em></span> is set to true and the server side is running
+                a version prior to V5, then client the side's null_subs/null collation order will be
+                overridden by server side's setting (prior to V5.0-000, null_subs can be only true
+                or false and <span class="emphasis"><em>STD_NULL_COLL</em></span> is always false).</p></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h2 class="title"><a id="id878275"></a>Error Messages</h2></div></div></div><p>
+            <div class="informaltable"><table border="0" width="90%"><colgroup><col></col><col></col></colgroup><tbody><tr><td align="left" valign="top">
+                                <p>
+                                    <span class="emphasis"><em> NULLCOLLDIFF</em></span>
+                                </p>
+                            </td><td align="left" valign="top">
+                                <p>
+                                    <span class="emphasis"><em>Null collation order cannot be different for all
+                                        regions </em></span>
+                                </p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>
+                                    Severity:
+                                </p>
+                            </td><td align="left" valign="top">
+                                <p>
+                                    Error
+                                </p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>
+                                    Run Time Error:
+                                </p>
+                            </td><td align="left" valign="top">
+                                <p>
+                                   Standard null collation setting is not same for all
+                                        regions.
+                                </p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>
+                                    Action:
+                                </p>
+                            </td><td align="left" valign="top">
+                                <p>
+                                    Using GDE &#8211;show or DSE dump &#8211;fileheader, check
+                                        standard null collation field for all regions and make sure
+                                        they are same.
+                                </p>
+                            </td></tr><tr><td align="center" valign="top">
+                                <p></p>
+                            </td><td align="center" valign="top">
+                                <p></p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p></p>
+                            </td><td align="left" valign="top">
+                                <p></p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p></p>
+                            </td><td align="left" valign="top">
+                                <p></p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>
+                                    <span class="emphasis"><em>NCTCOLLDIFF</em></span>
+                                </p>
+                            </td><td align="left" valign="top">
+                                <p>
+                                    <span class="emphasis"><em>Source and destination for MERGE cannot have different
+                                        numerical collation type</em></span>
+                                </p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>
+                                    Severity:
+                                </p>
+                            </td><td align="left" valign="top">
+                                <p>
+                                    Error
+                                </p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>
+                                    Run Time Error:
+                                </p>
+                            </td><td align="left" valign="top">
+                                <p>
+                                    This indicates that the merge commands two arguments
+                                        have different numerical collation type.
+                                </p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p>
+                                    <span class="emphasis"><em>Action:</em></span>
+                                </p>
+                            </td><td align="left" valign="top">
+                                <p>
+                                    Using %GBLDEF utility make numerical collation type of
+                                        both arguments same.
+                                </p>
+                            </td></tr><tr><td align="center" valign="top">
+                                <p></p>
+                            </td><td align="center" valign="top">
+                                <p></p>
+                            </td></tr><tr><td align="left" valign="top">
+                                <p></p>
+                            </td><td align="left" valign="top">
+                                <p></p>
+                            </td></tr></tbody></table></div>
+        </p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h2 class="title"><a id="id879641"></a>Limitations</h2></div></div></div><p></p><p>For further information, refer to <a href="GTM_V5.0-000D_Supplementary_Information.html" class="olink">GT.M V5.0-000D Supplementary Information</a>.</p><p></p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><p xmlns="" class="returntotop"><a href="GTM_Null_Subscripts.html#id877534">Return to top</a></p><div><h2 class="title"><a id="id879534"></a>Typographical Conventions</h2></div></div></div><p> <span class="italic">Command Syntax:</span> UNIX syntax (i.e., lowercase text and "-" for flags/qualifiers) is used throughout this document. VMS accepts both lowercase and uppercase text; flags/qualifiers should be preceded with "/".</p><p> <span class="italic">Reference Number:</span> The reference numbers used to track software enhancements and customer support requests appear in parentheses ( ).</p><p> <span class="italic">Platform Identifier:</span> If a new feature or software enhancement does not apply to all platforms, the relevant platform appears in brackets [ ].</p><p>
+      <a href="GTM_Null_Subscripts.html#return_to_top">Return to top</a>
+  </p></div></div><div xmlns="" id="customfooter" align="center">
+For more information, see the <a href="http://www.sanchez-gtm.com" target="_blank" style="color: #000; font-weight: bold;">GT.M</a> web site. 
+</div></body></html>

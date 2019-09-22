@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Optional GT.M Environment Translation Facility</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Global_Var_Name_Environments.html" title="Global Variable Name Environments" />
+    <link rel="prev" href="Global_Var_Name_Environments.html" title="Global Variable Name Environments" />
+    <link rel="next" href="Literals.html" title="Literals" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Optional GT.M Environment Translation Facility</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Global_Var_Name_Environments.html">Prev</a>A </td>
+          <th width="60%" align="center">Global Variable Name Environments</th>
+          <td width="20%" align="right">A <a accesskey="n" href="Literals.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="Optnl_GT.M_Envr_Transltn_Facility"></a>Optional GT.M Environment Translation Facility</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4166435" class="indexterm"></a>
+      <p>For users who wish to dynamically (at run-time) determine a global directory from non-global directory information (typically UCI and VOL) in the environment specification, GT.M provides an interface to add an appropriate translation.</p>
+      <p>Using this facility impacts the performance of every global access that uses environment specification. Make sure you use it only when static determination of the global directory is not feasible. When used, make every effort to keep the translation routines very efficient.</p>
+      <p>The use of this facility is enabled by the definition of the <span>logical GTM_ENV_TRANSLATE</span>, which contains the path of a <span>sharable image</span> with the following entry point:</p>
+      <div class="sect4" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h5 class="title"><a id="gtm_env_xlate"></a>gtm_env_xlate</h5>
+            </div>
+          </div>
+        </div>
+        <a id="id4166486" class="indexterm"></a>
+        <p>If the shared object is not accessible or the entry point is not accessible, GT.M reports an error.</p>
+        <p>The gtm_env_xlate() routine has the following C prototype:</p>
+        <pre class="programlisting">
+        	int gtm_env_xlate(xc_string_t *in1, xc_st
+            ring_t *in2, xc_string *in3, xc_string_t *out)
+            </pre>
+        <p>where xc_string_t is a structure defined in gtmxc_types.h as follows:</p>
+        <pre class="programlisting">
+        typedef struct
+        {
+        int length;
+        char *address;
+        }xc_string_t;
+            </pre>
+        <p>The purpose of the function is to use its three input arguments to derive and return an output argument that can be used as an environment specification by GT.M. Note that the input values passed (in1, in2 and in3) are the result of M evaluation and must not be modified. The first two arguments are the expressions passed within the up-bars &quot;| |&quot; or the square-brackets &quot;[ ]&quot;, and the third argument is the current working directory as described by $ZDIRECTORY.</p>
+        <p>A return value other than zero (0) indicates an error in translation, and is reported by a GT.M error</p>
+        <p>If the length of the output argument is non-zero, GT.M appends a secondary message of GTM-I-TEXT, containing the text found at the address of the output structure.</p>
+        <p>GT.M does not do any memory management related to the output argument - space for the output should be allocated by the external routine. The routine must place the returned environment specification at the address it has allocated and adjust the length accordingly. On a successful return, the return value should be zero. If the translation routine must communicate an error to GT.M, it must return a non-zero value, and if it is to communicate additional error information, place the error text at the address where the environment would normally go and adjust the length to match the length of the error text.</p>
+        <p>Length of the return value may range from 0-32767, otherwise GT.M reports an error.</p>
+        <p>A zero-length (empty) string specifies the current value of $ZGBLDIR. Non-zero lengths must represent the actual length of the file specification pointed to by address, excluding any &lt;NUL&gt; terminator. If the address field of the output argument is NULL, GT.M issues an error.</p>
+        <p>The file specification may be absolute or relative and may contain <span>a logical name</span>. If the file specified is not accessible, or is not a valid global directory, GT.M reports errors in the same way it does for any invalid global directory.</p>
+        <p>It is possible to write this routine in M (as a call-in), however, global variables in such a routine would change the naked indicator, which environment references normally do not. Depending on the conventions of the application, there might be difficult name-space management issues such as protecting the local variables used by the M routine.</p>
+        <p>While it is possible for this routine to take any form that the application designer finds appropriate within the given interface definition, the following paragraphs make some recommendations based on the expectation that a routine invoked for any more than a handful of global references should be efficient.</p>
+        <p>It is expected that the routine loads one or more tables, either at compilation or the first time it is invoked. The logic of the routine performs a look up on the entry in the set of tables. The lookup might be based on the length of the strings and some unique set of characters in the names, or a hash, with collision provisions as appropriate.</p>
+        <p>The routine may have to deal with a case where one or both of the inputs have zero length. A subset of these cases may have the first string holding a comma limited string that needs to be re-interpreted as being equivalent to two input strings (note that the input strings must never be modified). The routine may also have to handle cases where a value (most likely the first) is accidentally or intentionally, already a global directory specification.</p>
+        <p>Example:</p>
+        <pre class="programlisting">
+        &gt;
+              <span>type</span>
+              gtm_env_translate.c
+        #include &lt;stdio.h&gt;
+        #include &lt;string.h&gt;
+        #include &quot;gtmxc_types.h&quot;
+        static int init = 0;
+        
+        typedef struct
+        {
+        xc_string_t field1, field2, ret;
+        } line_entry ;
+        
+        static line_entry table[5], *line, linetmp;
+        /* Since these errors may occur before setup is complete, they are statics */
+        static char *errorstring1 = &quot;Error in function initialization, environment variable GTM_CALLIN_START not defined. Environment translation failed.&quot;;
+        static char *errorstring2 = &quot;Error in function initialization, function pointers could not be determined. Envrironment translation failed.&quot;;
+              
+        void copy_string(char **loc1, char *loc2, int length)
+        {
+        char *ptr;
+        ptr = (char *) <span>GTM_MALLOC</span>(length);
+        strncpy( ptr, loc2, length);
+        *loc1 = ptr;
+        }
+        
+        int init_table(xc_string_t *ptr)
+        {
+        int i = 0;
+        char buf[100];
+        char *buf1, *buf2;
+        FILE *tablefile;
+        char *space = &quot; &quot;;
+        char *errorstr1 = &quot;Error opening table file table.dat&quot;;
+        char *errorstr2 = &quot;UNDETERMINED ERROR FROM GTM_ENV_XLATE&quot;;
+        
+        if ((tablefile = fopen(&quot;table.dat&quot;,&quot;r&quot;)) == (FILE *)NULL)
+        {
+         ptr-&gt;length = strlen(errorstr1);
+         copy_string(&amp;(ptr-&gt;address), errorstr1, strlen(errorstr1));
+         return 1;
+        }
+        while (fgets(buf, (int)sizeof(buf), tablefile) != (char *)NULL) 
+       {
+       line= &amp;table[i++];
+       buf1 = buf;
+       buf2 =strstr(buf1, space);
+       line-&gt;field1.length = buf2 - buf1;
+       copy_string( &amp;(line-&gt;field1.address), buf1, line-&gt;field1.length);
+       buf1 = buf2+1;
+       buf2 = strstr(buf1, space);
+       line-&gt;field2.length = buf2-buf1;
+       copy_string( &amp;(line-&gt;field2.address), buf1, line-&gt;field2.length);
+       buf1 = buf2+1;
+       line-&gt;ret.length = strlen(buf1) - 1;
+       copy_string( &amp;(line-&gt;ret.address), buf1, line-&gt;ret.length);
+       }
+       fclose(tablefile);
+       /* In this example, the last entry in the table is the error string */
+       line = &amp;table[4];
+       copy_string( &amp;(line-&gt;ret.address), errorstr2, strlen(errorstr2));
+       line-&gt;ret.length = strlen(errorstr2);
+       return 0;
+       }
+       
+       int cmp_string(xc_string_t str1, xc_string_t str2)
+       {
+       if (str1.length == str2.length)
+       return strncmp(str1.address, str2.address, (int) str1.length);
+       else
+       return str1.length - str2.length;
+       }
+       
+       int cmp_line(line_entry *line1, line_entry *line2)
+       {
+       return (((cmp_string(line1-&gt;field1, line2-&gt;field1))||(cmp_string(line1-&gt;field2, line2-&gt;field2))));
+       }
+       
+       int look_up_table(line_entry *aline, xc_string_t *ret_ptr)
+       {
+       int i;
+       int ret_v;
+       
+       for(i=0;i&lt;4;i++)
+       {
+       line = &amp;table[i];
+       ret_v = cmp_line( aline, line);
+       if (!ret_v)
+       {
+       ret_ptr-&gt;length = line-&gt;ret.length;
+       ret_ptr-&gt;address = line-&gt;ret.address;
+       return 0;
+       }
+       }
+       /*ERROR OUT*/
+       line = &amp;table[4];   
+       ret_ptr-&gt;length= line-&gt;ret.length;
+       ret_ptr-&gt;address = line-&gt;ret.address;
+       return 1;
+       
+       }
+       
+       int gtm_env_xlate(xc_string_t *ptr1, xc_string_t *ptr2, xc_string_t *ptr_zdir, xc_string_t *ret_ptr)
+       {
+       
+       int return_val, return_val_init;
+       if (!init)
+       {
+       return_val_init = init_functable(ret_ptr);
+       if (return_val_init) return return_val_init;
+       return_val_init = init_table(ret_ptr); 
+       if (return_val_init) return return_val_init;
+       init = 1;
+       }
+       linetmp.field1.length= ptr1-&gt;length;
+       linetmp.field1.address= ptr1-&gt;address;
+       linetmp.field2.length= ptr2-&gt;length;
+       linetmp.field2.address= ptr2-&gt;address;
+       
+       return_val = look_up_table(&amp;linetmp, ret_ptr);
+       return return_val;
+       }
+       &gt; <span>type</span> table.dat
+       day1 week1 mumps
+       day2 week1 a
+       day3 week2 b
+       day4 week2 c.gld
+            </pre>
+        <p>This example demonstrates the mechanism. A table is set up the first time for proper memory management, and for each reference, a table lookup is performed. Note that for the purpose of simplicity, no error checking is done, so table.dat is assumed to be in the correct format, and have exactly four entries. <span>This routine should be built as a shared</span><span>image</span>, refer to the &quot;Integrating External Routines&quot; chapter for information on building as a shared <span>image</span>.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Global_Var_Name_Environments.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Global_Var_Name_Environments.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="Literals.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Global Variable Name EnvironmentsA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Literals</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

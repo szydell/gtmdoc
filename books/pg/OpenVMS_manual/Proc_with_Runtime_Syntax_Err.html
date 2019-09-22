@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Processing with Run-time and Syntax Errors</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Debug_Routine_Direct_Mode.html" title="Debugging a Routine in Direct Mode" />
+    <link rel="prev" href="Exec_M_Routine_Interactively.html" title="Executing M Routines Interactively" />
+    <link rel="next" href="Correct_Errors.html" title="Correcting Errors" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Processing with Run-time and Syntax Errors</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Exec_M_Routine_Interactively.html">Prev</a>A </td>
+          <th width="60%" align="center">Debugging a Routine in Direct Mode</th>
+          <td width="20%" align="right">A <a accesskey="n" href="Correct_Errors.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Proc_with_Runtime_Syntax_Err"></a>Processing with Run-time and Syntax Errors</h3>
+          </div>
+        </div>
+      </div>
+      <p>When GT.M encounters a run-time or syntax error, it stops executing and displays an error message. GT.M reports the error in the message. In this case, GT.M reports an undefined local variable and the line in error, name+3^<span>DMEX</span>. Note that GT.M re-displays the GTM&gt; prompt so that debugging may continue.</p>
+      <p>To re-display the line and identify the error, use the ZPRINT command.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;ZPRINT, name+3
+        %GTM-E-SPOREOL, Either a space or an end-of-line was expected but not found
+        ZP, name+3
+        ^_____ 
+        GTM&gt;
+        </pre>
+      <p>This example shows the result of incorrectly entering a ZPRINT command in Direct Mode. GT.M reports the location of the syntax error in the command line with an arrow. $ECODE and $ZSTATUS do not maintain this error message because GT.M did not produce the message during routine execution. Enter the correct syntax, (i.e., remove the comma) to re-display the routine line in error.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;WRITE $ZPOS
+          <span>
+            name+3^DMEX
+          </span>
+          
+        </pre>
+      <p>This example writes the current line position.</p>
+      <p>$ZPOSITION is a read-only GT.M special variable that provides another tool for locating and displaying the current line. It contains the current entry reference as a character string in the format label+offset^routine, where the label is the closest preceding label. The current entry reference appears at the top of the M invocation stack, which can also be displayed with a ZSHOW &quot;S&quot; command.</p>
+      <p>To display the current value of every local variable defined, use the ZWRITE command with no arguments.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;ZWRITE
+        ln=12
+        name=&quot;Revere, Paul&quot;
+        </pre>
+      <p>This ZWRITE displays a listing of all the local variables currently defined.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>ZWRITE displays the variable name. ZWRITE does not display a value for bame, confirming that it is not defined.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Exec_M_Routine_Interactively.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Debug_Routine_Direct_Mode.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="Correct_Errors.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Executing M Routines InteractivelyA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Correcting Errors</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

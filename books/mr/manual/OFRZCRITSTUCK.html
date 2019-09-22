@@ -1,0 +1,56 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>OFRZCRITSTUCK </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="OFRZCRITREL.html" title="OFRZCRITREL ">
+<link rel="next" href="OFRZNOTHELD.html" title="OFRZNOTHELD ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">OFRZCRITSTUCK </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="OFRZCRITREL.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="OFRZNOTHELD.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">OFRZCRITSTUCK </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="OFRZCRITSTUCK"></a>OFRZCRITSTUCK </h2></div></div></div>
+<p><span class="bold"><strong>OFRZCRITSTUCK</strong></span>, Unable to proceed with a write to region !AD with Online Freeze while holding crit. Region stuck until freeze is removed.</p>
+<p>Operator log Warning: A process needed to do a database write while holding a critical resource, but an Online Freeze was in place without AutoRelease enabled. No other process will be able to acquire the critical resource until the Online Freeze is removed.</p>
+<p>Action: MUPIP FREEZE -OFF will remove the freeze and allow the process to continue, at which time it will send a OFRZCRITREL message to the operator log. This situation can be avoided by specifying MUPIP FREEZE -ON -ONLINE without the -NOAUTORELEASE option, or by including the -AUTORELEASE option.</p>
+<a class="indexterm" name="idp173215552"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="OFRZCRITREL.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="OFRZNOTHELD.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">OFRZCRITREL  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> OFRZNOTHELD </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

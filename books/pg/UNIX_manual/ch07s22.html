@@ -1,0 +1,79 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$Text()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s21.html" title="$STack()">
+<link rel="next" href="ch07s23.html" title="$TRanslate()">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$Text()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s21.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s23.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$Text()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="text"></a>$Text()<a class="indexterm" name="idp69715824"></a>
+</h2></div></div></div>
+<p>Returns source text for the line specified by its argument.</p>
+<p>The format for the $TEXT function is:</p>
+<pre class="programlisting">$T[EXT](entryref)</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The entryref specifies the label, offset, and routine (or trigger name)  of the source line that $TEXT() returns.</p></li>
+<li class="listitem"><p>If the label+offset combination do not fall within the routine, $TEXT returns a null string.</p></li>
+<li class="listitem"><p>If the entryref explicitly or implicitly specifies an offset of zero (0) from the beginning of the routine (or trigger name), $TEXT() returns the routine name or trigger name.</p></li>
+<li class="listitem"><p>If the entryref does not specify a routine/trigger, GT.M assumes the current routine/trigger, that is, the routine/trigger at the top of a ZSHOW "S."</p></li>
+<li class="listitem"><p>A GT.M extension to $TEXT() permits negative offsets; however, every offset must still be preceded by a plus sign (+) delimiter, (for example, LABEL+-3). If a negative offset points to a line prior to the zero line, $TEXT() generates a run-time error.</p></li>
+</ul></div>
+<p>$TEXT() provides a tool for examining routine source code and the name of the current routine or trigger. $TEXT() assists, along with the ZPRINT command, in debugging programs. $TEXT() also allows the insertion of small tables of driver information into a routine. Because $TEXT() is not very efficient and the table-driven technique is generally best suited to minimal program changes, this approach is best used for prototyping and the tables should reside in global variables for production.</p>
+<p>If $TEXT() cannot access the source file for the current object, either because it is not in the location from which it was compiled or because the process does not have access to some piece of the path to the source, or if the located source does not match the object currently in use by the process, $TEXT() returns an empty string.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_text"></a>Examples<span> of $TEXT()</span><a class="indexterm" name="idp69716432"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">for i=1:1 set x=$text(+i) quit:x=""  write !,x</pre>
+<p>This loop uses $TEXT() to write out the entire source for the current routine.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $text(+0)
+GTM$DMOD
+GTM&gt;write $text(+1)
+GTM&gt;</pre>
+<p>This uses $TEXT() to WRITE the name of the current routine, then it tries to access the source and returns an empty string. This occurs because the default Direct Mode image is compiled by FIS and delivered without source. The exact failure message may vary.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s21.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s23.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$STack() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $TRanslate()</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

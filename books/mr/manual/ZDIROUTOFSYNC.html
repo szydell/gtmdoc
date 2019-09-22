@@ -1,0 +1,64 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>ZDIROUTOFSYNC </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="ZDATEFMT.html" title="ZDATEFMT ">
+<link rel="next" href="ZEDFILSPEC.html" title="ZEDFILSPEC ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">ZDIROUTOFSYNC </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ZDATEFMT.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="ZEDFILSPEC.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">ZDIROUTOFSYNC </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="ZDIROUTOFSYNC"></a>ZDIROUTOFSYNC </h2></div></div></div>
+<p><span class="bold"><strong>ZDIROUTOFSYNC</strong></span>,  $ZDIRECTORY xxxx is not the same as its cached value yyyy </p>
+<p>Run Time Warning: For performance purposes, GT.M caches the value of $ZDIRECTORY when it is modified using SET command. This cached value is passed to external environment translation routine. GT.M issues ZDIROUTOFSYNC error when $ZDIRECTORY is referenced and its cached value differs from the current working directory. This might happen if an external routine called from GT.M modifies the current working directory and the application does not modify $ZDIRECTORY to the modified directory.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p> ZSHOW of intrinsic special variables appends -&gt;%GTM-W-ZDIROUTOFSYNC error to the text corresponding to the $ZDIRECTORY if the out of sync condition is detected. </p></td></tr>
+</table></div>
+<p> </p>
+<p>Action: Avoid changing the current working directory except with SET $ZDIRECTORY, or ensure that SET $ZDIRECTORY is used along with the other mechanisms.</p>
+<a class="indexterm" name="idp175161152"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ZDATEFMT.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ZEDFILSPEC.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">ZDATEFMT  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> ZEDFILSPEC </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

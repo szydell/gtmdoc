@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ZALLOCATE</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="ChapterA 6.A Commands" />
+    <link rel="prev" href="examples_of_execute.html" title="Examples of XECUTE" />
+    <link rel="next" href="examples_of_zallocate.html" title="Examples of ZALLOCATE" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ZALLOCATE</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_execute.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 6.A Commands</th>
+          <td width="20%" align="right">A <a accesskey="n" href="examples_of_zallocate.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zallocate"></a>ZALLOCATE</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zallocate.html">Examples of ZALLOCATE</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4176874" class="indexterm"></a>
+      <p>The ZALLOCATE command reserves the specified name without releasing previously reserved names. Other GT.M processes cannot reserve the ZALLOCATEd name with a ZALLOCATE or LOCK command.</p>
+      <p>The ZALLOCATE command provides compatibility with some other GT.M implementations. The M Development Committee chose to add the + and - delimiters to the LOCK command (incremental locking) rather than adopt the ZALLOCATE and ZDEALLOCATE approach. Therefore, when a design requires an incremental lock mechanism, LOCK +/- has the advantage over ZALLOCATE / ZDEALLOCATE of being part of the M standard. LOCK +/- also has the advantage of working symmetrically when routines using LOCKs are nested. That is, a ZALLOCATE command issued by a process for a named resource already ZALLOCATEd by that process results in no change of state. This means that routines that do ZALLOCATE followed by a ZDEALLOCATE on a named resource that is already ZALLOCATEd by the same process (at routine entry time), will end up ZDEALLOCATEing the named resource (which might not be desired). On the other hand, a LOCK + command issued by a process for a named resource already LOCKed by that process causes the LEVEL of the LOCK to be incremented (as seen in a ZSHOW &quot;L&quot; output). Every LOCK - command on that named resource causes the LEVEL to be decremented. When the LEVEL becomes 0, the named resource is no longer LOCKed.</p>
+      <p>For more information on troubleshooting LOCKs with the GT.M Lock Utility (LKE), refer to the appropriate chapter of the GT.M Administration and Operations Guide.</p>
+      <p>The format of the ZALLOCATE command is:</p>
+      <pre class="programlisting">
+        ZA[LLOCATE][:tvexpr] [(]nref[,...][)][:intexpr][,...]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>The nref argument specifies a name in the format of a GT.M name with or without subscripts, and with or without a preceding caret (^).</p>
+          </li>
+          <li>
+            <p>Outside of transactions, only one process in an environment can ZALLOCATE (or LOCK) a particular resource name at any given time.</p>
+          </li>
+          <li>
+            <p>Because the data storage in GT.M uses hierarchical sparse arrays and ZALLOCATE may serve to protect that data from inappropriate &quot;simultaneous&quot; access by multiple processes, ZALLOCATE treats resource names in a hierarchical fashion; a ZALLOCATE protects not only the named resource, but also its ancestors and descendants.</p>
+          </li>
+          <li>
+            <p>When one or more nrefs are enclosed in parentheses (), ZALLOCATE reserves all the enclosed names &quot;simultaneously,&quot; that is, it reserves none of them until all become available.</p>
+          </li>
+          <li>
+            <p>The optional numeric expression specifies a time in seconds after which the command should timeout if unsuccessful; choosing 0 results in a single attempt.</p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom evaluating to a list of one or more ZALLOCATE arguments form a legal argument for a ZALLOCATE.</p>
+          </li>
+        </ul>
+      </div>
+      <p>For an explanation of the LOCK command see the &quot;LOCK&quot; section in the M LOCK Utility chapter of GT.M Administration and Operations Guide.</p>
+      <p>If a ZALLOCATE command specifies a timeout, and GT.M acquires ownership of the named resource before the timeout elapses, ZALLOCATE sets $TEST to TRUE (1). If GT.M cannot acquire ownership of the named resource within the specified timeout, ZALLOCATE sets $TEST to FALSE (0). If a ZALLOCATE command does not specify a timeout, the execution of the command does not affect $TEST.</p>
+      <p>When given a list of nrefs, ZALLOCATE tries to reserve each nref from left to right in the order specified taking into account the timeout specified for each. If the timeout elapses before reserving an nref, GT.M terminates the ZALLOCATE command. Any nrefs already acquired as part of the current ZALLOCATE command stay acquired.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_execute.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="examples_of_zallocate.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of XECUTEA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Examples of ZALLOCATE</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

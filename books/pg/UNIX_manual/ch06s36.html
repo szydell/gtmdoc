@@ -1,0 +1,78 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>ZHelp</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s35.html" title="ZHALT">
+<link rel="next" href="ch06s37.html" title="ZLink">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">ZHelp</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s35.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s37.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">ZHelp</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zhelp_cmmd"></a>ZHelp<a class="indexterm" name="idp55183296"></a>
+</h2></div></div></div>
+<p>The ZHELP command accesses the help information from the GTM help library or from any help library specified in the command argument.</p>
+<p>The format of the ZHELP command is:</p>
+<pre class="programlisting">ZH[ELP][:tvexpr] [expr1[:expr2],...]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The optional first expression specifies the help topic.</p></li>
+<li class="listitem"><p>If ZHELP has no argument or expr1="", ZHELP invokes base level help; at least two (2) spaces must follow a ZHELP command with no argument to separate it from the next command on the line.</p></li>
+<li class="listitem"><p>The optional second expression specifies the name of a Global Directory containing ^HELP.</p></li>
+<li class="listitem"><p>If ZHELP does not specify the second expression,  <span>the Global Directory defaults to $gtm_dist/gtmhelp.gld.</span></p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more ZHELP arguments form a legal argument for a ZHELP</p></li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ex_of_zhelp"></a>Examples<span> of ZHELP</span><a class="indexterm" name="idp54279648"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zhelp "func $data"</pre>
+<p>This lists the help for function $DATA, which is a subtopic of functions topic.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zhelp</pre>
+<p>This uses ZHELP to list all the keywords in the help library.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zhelp "ZSHOW"</pre>
+<p>This lists the help for command ZSHOW.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s35.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s37.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">ZHALT </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> ZLink</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

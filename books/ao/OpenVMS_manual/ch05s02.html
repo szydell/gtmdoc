@@ -1,0 +1,1151 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>MUPIP Commands and Qualifiers</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch05.html" title="Chapter 5. MUPIP"><link rel="prev" href="ch05s01.html" title="Operating In MUPIP"><link rel="next" href="ch05s03.html" title="MUPIP Command Summary"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">MUPIP Commands and Qualifiers</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05s01.html">Prev</a> </td><th width="60%" align="center">Chapter 5. MUPIP</th><td width="20%" align="right"> <a accesskey="n" href="ch05s03.html">Next</a></td></tr></table><hr></div><div class="sect1" title="MUPIP Commands and Qualifiers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mupip_commands_and_qualifiers"></a>MUPIP Commands and Qualifiers<a class="indexterm" name="id3229710"></a></h2></div></div></div><p>The format for MUPIP commands is:</p><pre class="programlisting">MUPIP&gt; command [<span>/</span>qualifier[...]] [object[,...]] [destination]</pre><div class="sect2" title="Backup"><div class="titlepage"><div><div><h3 class="title"><a name="backup_cmmd"></a>Backup<a class="indexterm" name="id3229799"></a></h3></div></div></div><p>The BACKUP command allows you to save the contents of the database. Unless
+used with the <span>/</span>ONLINE qualifier, BACKUP suspends updates to all
+regions specified by the BACKUP command from the time it starts the first region
+until it finishes the last region. BACKUP ensures a consistent application state
+across all database regions involved in the backup. <span>Even with
+the /NOONLINE qualifier,</span> BACKUP does not suspend processes that
+only read from the database.</p><p>
+ BACKUP ONLINE
+creates a backup of the database at the time the backup command is issued. If
+the running processes subsequently update the database, the backup does not
+reflect those updates. <span>Since the state of the database at the
+start of the backup is well defined, (whereas the state of the database at
+the backup completion is not well defined when the backup command is
+issued), a MUPIP BACKUP /ONLINE has the advantage that a meaningful name
+such as "beginning of processing day" can be associated with the
+backup.</span>
+</p><p>The format of the BACKUP command is:</p><pre class="programlisting">B[ACKUP] [/qualifier[...]] region-name[,...] FILE-SPECIFICATION</pre><p>Example: </p><pre class="programlisting">$ BACKUP /BYTESTREAM ACN,HIST [.BKUP]</pre><p>The optional qualifiers are:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+<span>/</span>B[YTESTREAM]</p></li><li class="listitem"><p>
+<span>/</span>C[OMPREHENSIVE]
+<span>(deprecated in favor of /DATABASE; temporarily
+still available for backward compatibility)</span>
+</p></li><li class="listitem"><p>
+<span>/</span>D[ATABASE]</p></li><li class="listitem"><p>
+<span>/</span>I[NCREMENTAL]
+<span>(deprecated in favor of /BYTESTREAM; temporarily
+still available for backward compatibility)</span>
+</p></li><li class="listitem"><p>
+<span>/</span>[NO]J[OURNAL][=options. . .]</p></li><li class="listitem"><p>
+<span>/</span>NET[TIMEOUT]</p></li><li class="listitem"><p>
+<span>/</span>[NO]NEW[JNLFILES]</p></li><li class="listitem"><p>
+<span>/</span>[NO]O[NLINE]</p></li><li class="listitem"><p>
+<span>/</span>R[ECORD]</p></li><li class="listitem"><p>
+<span>/</span>S[INCE]=D[ATABASE] | B[YTESTREAM] | R[ECORD]</p></li><li class="listitem"><p>
+<span>/</span>T[RANSACTION]=transaction-number</p></li></ul></div><p>By default, BACKUP is <span>/</span>DATABASE<span>/</span>ONLINE.</p><p>If any region name does not map to an existing accessible file, or if any
+element of the destination list is invalid, BACKUP rejects the command.</p><p>The BACKUP command may specify more than one region of the current Global
+Directory in a list. Regions are separated by commas. Any region-name may
+include the DCL wildcard characters * and %.</p><p>To BACKUP only one region, the output-specification can resolve to
+either an RMS file or directory name. To BACKUP several regions, the
+output-specification can either resolve to one of the following: </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>A directory</p></li><li class="listitem"><p>A comma-separated list of file names (/DATABASE or /BYTESTREAM)</p></li><li class="listitem"><p>A comma-separated list of file names and TCP connections
+(/BYTESTREAM)</p></li></ul></div><p>If the output-specification is a directory, MUPIP assigns each backup
+file the same name as the file associated with the segment of the corresponding
+region. Therefore, the target directory must not contain any of the database
+files to be backed up, and all regions to be backed up must have unique database
+file names (violating either requirement implies two or more files with the same
+name in the same directory).</p><p>When BACKUP is /BYTESTREAM, and output-specification is not a
+directory, output is not limited to VMS files. A TCP socket can also be
+specified as a destination for the backup of a region. The syntax is:
+TCP://&lt;machine-name&gt;:&lt;port&gt;. There must be an active listener at the
+specified destination. Note that since MUPIP RESTORE can listen at a TCP socket
+and the combination of BACKUP on one machine with a RESTORE on another may well
+be the most efficient way to create remote backups.</p><p>When individual file names or TCP sockets are specified for backup
+(as opposed to specifying a directory), there is a one-to-one, left-to-right
+mapping of region names to the output-specification names. Any wild card in the
+region names or the backup file names is expanded in the same order in which VMS
+expands that wild card. The number of regions must match the number of files,
+and the regions are mapped to the files from left to right in each list. For
+example, if the Global Directory has regions ACN, HIST, UBG1 and UBG2:</p><pre class="programlisting">MUPIP BACK /BYTE * FILE1.BCK,FILE2,BCK,
+TCP://file3.offsite.com:5986,FILE4.BCK
+
+Region ACN maps to FILE1.BCK, HIST maps to
+FILE2.BCK, UBG1 maps to a listener at port
+5986 at file3.offsite.com, and UBG2 maps
+to FILE4.BCK.
+
+MUPIP BACK /BYTE ACN,UBG*,HIST
+FILE1.BCK,FILE2,BCK,TCP://FILE3.OFFSITE.COM:5986,FILE4 .BCK
+
+Region ACN maps to FILE1.BCK, UBG1 maps to
+FILE2.BCK, UBG2 maps to a listener at port
+5986 at file3.offsite.com, and HIST maps to
+FILE4.BCK.
+
+MUPIP BACK /BYTE "*" FILE1.BCK,FILE2,BCK,
+TCP://file3.offsite.com:5986,FILE4.BCK
+
+Region ACN maps to FILE1.BCK, HIST maps to
+FILE2.BCK, UBG1 maps to a listener at port
+5986 at file3.offsite.com, and UBG2 maps to
+FILE4.BCK.
+
+MUPIP BACK /BYTE "ACN,UBG*,HIST" FILE1.BCK,FILE2,BCK,
+TCP://FILE3.OFFSITE.COM:5986,FILE4.BCK
+
+Region ACN maps to FILE1.BCK, UBG1 maps to
+FILE2.BCK, UBG2 maps to a listener at port
+5986 at file3.offsite.com, and HIST maps to
+FILE4.BCK.
+</pre><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>BACKUP protects against overwriting an existing file. <span>If
+a file with the name exists already, BACKUP will complete successfully
+to a file with a higher version number.</span>
+
+</p></td></tr></table></div><p>&lt;CTRL-C&gt; or &lt;CTRL-Y&gt; terminates BACKUP. If a BACKUP
+terminates due to operator intervention or an error, the backup of the region in
+process at the time of the termination is not valid. If the termination was due
+to operator intervention, BACKUP attempts to delete any partially complete
+files. With both types of backups, previously processed regions are structurally
+valid, but may be of limited usefulness since some regions are backed up and
+others are not. This implies that the overall backup lacks application
+consistency; therefore, only trust backups that complete normally.</p><p>When BACKUP /BYTESTREAM delivers its output to a magnetic tape or
+across DECnet, DCL commands preceding the BACKUP must establish an appropriate
+blocksize. When the output is a magnetic tape, the MOUNT command should specify
+/BLOCKSIZE= as a multiple of the GDS database blocksize + 12 bytes for overhead.
+When the output file is on a different DECnet node, SET RMS should specify NET=
+as at least the GDS database blocksize + 12 bytes for overhead. BACKUP uses the
+overhead for /BYTESTREAM operations, but not for /DATABASE operations. When
+directing the output file to a magnetic tape, use DCL to MOUNT the tape
+/INITIALIZE=CONTINUATION. This causes automatic handling of multiple volumes. If
+the block size is too small, the BACKUP fails when it encounters a full
+block.</p><p>
+<span class="emphasis"><em>
+<span>/</span>B[YTESTREAM]</em></span>
+</p><p>The <span>/</span>B[YTESTREAM]
+qualifier specifies that BACKUP only include blocks from the databases that have
+changed since a prior point specified by the <span>/</span>SINCE or <span>/</span>TRANSACTION qualifiers. BACKUP may output to a file on any device
+that supports files, including magnetic tapes. MUPIP RESTORE integrates the
+results of a BACKUP <span>/</span>BYTESTREAM into a database.</p><p>When the <span>/</span>BYTESTREAM
+qualifier is used with the <span>/</span>ONLINE qualifier, you may send the output to a TCP/IP
+connection.</p><p>Example: </p><pre class="programlisting">$MUPIP BACKUP /BYTESTREAM /REG REGA
+TCP://192.168.109.81:2453</pre><p>The <span>/</span>BYTESTREAM
+qualifier is not compatible with the <span>/</span>COMPREHENSIVE or <span>/</span>DATABASE qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>C[OMPREHENSIVE]</em></span>
+</p><p>The <span>/</span>COMPREHENSIVE
+qualifier has been replaced by the <span>/</span>DATABASE qualifier. For upward compatibility, MUPIP temporarily
+continues to support the COMPREHENSIVE qualifier. The function of the
+COMPREHENSIVE qualifier is the same as the <span>/</span>DATABASE qualifier. Refer to the description of the
+<span>/</span>DATABASE qualifier
+for details. </p><p>
+<span class="emphasis"><em>
+<span>/</span>DATABASE</em></span>
+</p><p>Instructs the BACKUP utility to copy the files of all selected regions from
+disk to disk. When complete, the backup copy is ready for use as a GT.M
+database. This option does not support backup to magnetic tape <span>or TCP sockets (the target device must support random access to
+files).</span>
+</p><p>The <span>/</span>DATABASE qualifier
+ensures all the information buffered in cache is first flushed to the disk. The
+<span>/</span>DATABASE qualifier is
+only compatible with the <span>/</span>JOURNAL, <span>/</span>[NO]NEW[JNLFILES], <span>/</span>ONLINE, and <span>/</span>RECORD qualifiers.</p><p>BACKUP /DATABASE produces a result similar to the result produced by
+a DCL COPY command or some variations of the DCL BACKUP command, except that
+consistency of the database is ensured with MUPIP, but must be separately
+implemented (e.g., with a FREEZE and a FLUSH) if the DCL commands are
+used.</p><p>By default, BACKUP is <span>/</span>DATABASE<span>/ONLINE</span>.</p><p>
+<span class="emphasis"><em>
+<span>/</span>I[NCREMENTAL]</em></span>
+</p><p>The <span>/</span>INCREMENTAL
+qualifier has been replaced by the <span>/</span>BYTESTREAM qualifier. For upward compatibility, MUPIP temporarily
+continues to support the <span>/</span>INCREMENTAL qualifier. The function of the <span>/</span>INCREMENTAL qualifier is the same as
+the <span>/</span>BYTESTREAM qualifier.
+Refer to the description of the <span>/</span>BYTESTREAM qualifier for details.</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]J[OURNAL][=options...]</em></span>
+</p><p>When used in conjunction with /DATABASE /NEWJNLFILES, this qualifier
+specifies journaling information to be recorded into the file header of the
+backup of the database file(s).</p><p>The database file header stores the journaling options for the
+current database, including the journal file name. The default behavior, if this
+qualifier is not specified, is for the journaling options in the backup to be
+identical to those of the database. This is appropriate behavior if the backup
+is to be restored and used as a replacement for the database, (e.g., in the
+event of failure of the I/O subsystem on which the database is stored). However,
+if the backup copy of the database is used on the same machine for other
+purposes, such as report generation or for development and testing of new
+software, the journaling information in the database file header could lead to a
+corrupt journal file since updates to the original database and the copy would
+write over each other. Using this qualifier can protect against this
+outcome.</p><p>Also, when new journal files are created for the database files being
+backed up, the new journal files have a "backchain" pointer to the previous
+journal file. MUPIP RECOVER and ROLLBACK will automatically follow these
+backchain pointers as needed to perform their tasks. This qualifier can also be
+used to create new journal files with no backchain pointer.</p><p>/NOJOURNAL creates a backup with all journaling options
+cleared.</p><p>/JOURNAL=OFF creates a backup with journaling turned OFF (equivalent
+to executing a MUPIP SET /JOURNAL=OFF on the backup database)</p><p>/JOURNAL=DISABLE creates a backup with journaling disabled
+(equivalent to executing MUPIP SET /JOURNAL=DISABLE on the backup database.
+/NOJOURNAL is equivalent to /JOURNAL=DISABLE. Both clear journaling options in a
+backup database.</p><p>/[NO]JOURNAL=NOPREVJNLFILES to create new journal files with no
+backchain pointer. /NOJOURNAL cannot have a value.</p><p>Multiple options can be specified by including them in a
+parenthesized list, e.g., /JOURNAL=(DISABLE, NOPREVJNLFILES).</p><p>
+<span class="emphasis"><em>
+<span>/</span>NET[TIMEOUT]=seconds</em></span>
+</p><p>Specifies the timeout period when BACKUP data is sent over a TCP/IP
+connection. This qualifier is meaningful only with the <span>/</span>ONLINE and <span>/</span>BYTESTREAM qualifiers, otherwise GT.M
+ignores the command. The default value is 30 seconds.</p><p>The <span>/</span>NET[TIMEOUT]
+qualifier is not compatible with the <span>/</span>DATABASE and <span>/</span>COMPREHENSIVE qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]NEW[JNLFILES]</em></span>
+</p><p>Specifies whether or not GT.M switches journal files for updates occurring
+after the start of the backup. </p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]O[NLINE]</em></span>
+</p><p>Specifies that while the backup is active, other processes can read from, and
+update, the database without affecting the result of the backup. By default,
+BACKUP is <span>/</span>ONLINE.</p><p>BACKUP -ONLINE allows continued operation of the application using the
+database. The -BYTESTREAM form is able to transfer to output to a TCP/IP
+connection or a pipe.</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[ECORD]</em></span>
+</p><p>Instructs the BACKUP utility to record this backup as a reference point for
+subsequent <span>/</span>BYTESTREAM
+backups. For more information about using the <span>/</span>RECORD qualifier with the <span>/</span>SINCE qualifier, refer to the <span>/</span>SINCE qualifier section
+below.</p><p>Each time a BACKUP specifies <span>/</span>RECORD, that backup, relative to the time stamp or transaction
+number, replaces the previously recorded backup timestamp as the <span>/</span>RECORD reference point for
+the file.</p><p>
+<span class="emphasis"><em>
+<span>/</span>S[INCE]=keyword</em></span>
+</p><p>A BACKUP /BYTESTREAM backs up those blocks that have changed since a
+specified point in the state of the database.</p><p>
+<span>/</span>SINCE accepts the
+following keywords:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>D[ATABASE] - Backup all changes since the last BACKUP <span>/</span>DATABASE.</p></li><li class="listitem"><p>B[YTESTREAM] - Backup all changes since the last BACKUP <span>/</span>BYTESTREAM.</p></li><li class="listitem"><p>R[ECORD] - Backup all changes since the last BACKUP <span>/</span>RECORD.</p></li></ul></div><p>The SINCE qualifier is incompatible with the <span>/</span>COMPREHENSIVE, <span>/</span>DATABASE, and <span>/</span>TRANSACTION qualifiers.</p><p>By default, BACKUP <span>/</span>BYTESTREAM operates as <span>/</span>S[INCE]=DATABASE.</p><p>
+<span class="emphasis"><em>
+<span>/</span>T[RANSACTION]=transaction-number</em></span>
+</p><p>Specifies a starting transaction that causes BACKUP <span>/</span>BYTESTREAM to copy all blocks that
+have been changed by the specified transaction and all subsequent transactions.
+Transaction numbers are hexadecimal. They appear in a DSE DUMP <span>/</span>FILEHEADER with a "Current TN" label.
+If the transaction number is invalid, BACKUP reports an error and rejects the
+command.</p><p>BACKUP <span>/</span>BYTESTREAM
+<span>/</span>TRANSACTION=1 copies
+all in-use blocks, and 
+<span>produces a result similar to the result produced by BACKUP
+/DATABASE. However:</span>
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>It may be faster, if the database is mostly empty.</p></li><li class="listitem"><p>It can be sent through a TCP/IP connection or a pipe, saving disk I/O
+bandwidth, and moving it off the current machine as quickly as
+possible.</p></li></ul></div><p>A point in time that is consistent from an application perspective is unlikely
+to have the same transaction number in all database regions. Therefore, except
+for <span>/</span>TRANSACTION=1, this
+qualifier is not likely to be useful for backup involving multiple
+regions<span>, or where a previous /BYTESTREAM backup file is
+inadvertently deleted and a new backup is required to replace
+it</span>.</p><p>The <span>/</span>TRANSACTION
+qualifier is incompatible with the <span>/</span>COMPREHENSIVE, <span>/</span>DATABASE, and <span>/</span>SINCE qualifiers.</p><div class="sect3" title="BACKUP Examples"><div class="titlepage"><div><div><h4 class="title"><a name="backup_examples"></a>BACKUP Examples<a class="indexterm" name="id3230836"></a></h4></div></div></div><pre class="programlisting">$ MUPIP BACKUP * [GTM.BKUP]</pre><p>Assuming that [GTM.BKUP] exists and that the current Global
+Directory, as specified by the environment variable $GTMGBLDIR, has regions
+that map database files to [GTM.PROD]TBLS.DAT and [GTM.PROD]UBG.DAT, this
+command creates ready-to-run database backup files [GTM.BKUP]TBLS.DAT and
+[GTM.BKUP]UBG.DAT.</p><p>Example: </p><pre class="programlisting">$ MUPIP BACKUP /BYTESTREAM ACN,HIST [.BKUP]</pre><p>This command creates bytestream backup files [.BKUP]ACN.DAT and
+[.BKUP]HIST.DAT, assuming that [.BKUP] is an existing subdirectory and that
+the current Global Directory has regions ACN and HIST that map to files
+ACN.DAT and HIST.DAT.</p><p>Example:</p><pre class="programlisting">$ MUPIP BACKUP * [.backup]</pre><p>Example:</p><pre class="programlisting">$ INIT MSA0: FULL
+$ MOUNT /INIT=CONT BLOCK=2060 MSA0: FULL
+$ MUPIP BACK /BYTE /TRAN=1 MAIN_REG FULL:MAIN</pre><p>In this example, the first command initializes a magnetic tape
+with the label FULL. The second command mounts the tape with OpenVMS
+automatic volume initialization and a block size of 2060. The magnetic tape
+block size of 2060 handles a database block of 2048 bytes. The MUPIP command
+backs up the dynamic segment associated with MAIN_REG to the tape. Because
+of the /TRANSACTION=1, BACKUP copies all blocks in use to the tape.</p><p>Example:</p><pre class="programlisting">$ MUPIP BACKUP MAIN*,%XREF USR$BCK:[TUESDAY]</pre><p>This comprehensively backs up all regions that have a name
+starting with "MAIN," and all regions that have names starting with any
+single character and ending with "XREF" to the directory
+USR$BCK:[TUESDAY].</p><p>Example:</p><pre class="programlisting">$ MUPIP BACKUP /INCREMENTAL *[19990505]</pre><p>This backs up all changes made since the last BACKUP /FDATABASE
+for all regions of the database defined by the current Global Directory into
+the RMS directory [19990505]. BACKUP creates files in the directory, with
+names corresponding to each dynamic segment's file name.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>GT.M allows multiple regions to have the same database file name. This
+occurs because different regions can have the same file names as long as
+they reside in different directories. However, FIS does not
+recommend this practice. If this happens, you should specify explicit
+file names for each region, and do not use the command in the above
+example.</p></td></tr></table></div></div></div><div class="sect2" title="COnvert"><div class="titlepage"><div><div><h3 class="title"><a name="convert"></a>COnvert<a class="indexterm" name="id3230769"></a></h3></div></div></div><p>CONVERT transforms M routines in the sequential format, described by the MDC,
+into individual RMS source files for use by GT.M. Use CONVERT to make MRO format
+files accessible as GT.M routines.</p><p>The format of the CONVERT command is:</p><pre class="programlisting">CO[NVERT] [/qualifier] file-spec directory-spec</pre><p>CONVERT takes its input from the file defined by the file-specification.
+CONVERT places the output files in the directory defined by the
+directory-specification. CONVERT uses the routine name and an ".M" extension as
+the output file name for each routine.</p><p>Because OpenVMS uses the percent (%) character as a wildcard, CONVERT places
+any routine name starting with % to a file-name starting with the under-bar (_)
+character. CONVERT transforms all white space at the beginning of a routine line
+into a single tab character.</p><p>&lt;CTRL-C&gt; or &lt;CTRL-Y&gt; terminates CONVERT. Files converted before
+the termination are usable.</p><p>CONVERT takes only one qualifier:</p><p>
+<span class="emphasis"><em>/F[ORMAT]=RO</em></span>
+</p><p>Specifies the format of the input file. The RO (Routine Output) format code is
+the default and the only code CONVERT recognizes. </p></div><div class="sect2" title="CReate"><div class="titlepage"><div><div><h3 class="title"><a name="create"></a>CReate<a class="indexterm" name="id3230969"></a></h3></div></div></div><p>CREATE creates and initializes database files using the information in a
+Global Directory file. </p><p>Use the MUPIP CREATE command to create new database files. If a file already
+exists for any segment, CREATE takes no action for that segment.</p><p>The format of the CREATE command is:</p><pre class="programlisting">CR[EATE] [<span>/</span>qualifier]</pre><p>The single optional <span>/</span>REGION qualifier specifies a region for which to create a database
+file.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>To access a large database, a process may need a higher OpenVMS BYTLM. If
+you exceed a quota, contact your system manager.</p></td></tr></table></div><p>
+<span class="emphasis"><em>
+<span>/</span>R[EGION]=region-name</em></span>
+</p><p>CREATE /region=reg1 accepts non-alphabetic characters for region
+names.</p><p>Specifies a single region for creation of a database file. By default, the
+CREATE command creates database files for all regions in the current Global
+Directory that do not have files.</p></div><div class="sect2" title="EXit"><div class="titlepage"><div><div><h3 class="title"><a name="exit"></a>EXit<a class="indexterm" name="id3231058"></a></h3></div></div></div><p>Exit or &lt;CTRL Z&gt; stops MUPIP, and returns control to the process from
+which MUPIP was invoked.</p><p>The format of the EXIT command is:</p><pre class="programlisting">EXI[T]</pre><p>The EXIT command does not accept any qualifiers.</p></div><div class="sect2" title="EXTEnd"><div class="titlepage"><div><div><h3 class="title"><a name="extend"></a>EXTEnd<a class="indexterm" name="id3231102"></a></h3></div></div></div><p>EXTEND expands a GDS database file. Databases with a BG access method
+generally extend automatically when they become full. MM databases must be MUPIP
+EXTENDed. For MM segments, EXTEND requires exclusive or stand-alone access to
+the file. When EXTEND requires exclusive database access and cannot obtain it,
+MUPIP rejects the command.</p><p>When the journal file is unable to extend (e.g., if the disk is
+full), GT.M turns off journaling and no longer generates a GTMASSERT.</p><p>EXTEND increases the size of a database file. A database file will
+automatically extend under normal use. There is usually no need to extend a file
+with MUPIP.</p><p>The format of the EXTEND command is:</p><pre class="programlisting">EXTE[ND] <span>/</span>qualifier] region-name
+</pre><p>The required region-name parameter specifies the name of the region you want
+to expand. EXTEND uses the Global Directory to map the region to the dynamic
+segment and the segment to the file.</p><p>EXTEND takes one optional qualifier:</p><p>
+<span class="emphasis"><em>
+<span>/</span>B[LOCKS]=blocks</em></span>
+</p><p>Specifies the number of GDS database blocks by which MUPIP should extend the
+file. GDS files use additional blocks for bitmaps. EXTEND adds the specified
+number of blocks plus the bitmap blocks required as overhead. For more
+information about bitmaps, refer to the "Greystone Database Structure"
+chapter.</p><p>By default, EXTEND uses the extension value in the file header as the number
+of GDS blocks by which to extend the database file. </p></div><div class="sect2" title="EXTRact"><div class="titlepage"><div><div><h3 class="title"><a name="extract"></a>EXTRact<a class="indexterm" name="id3231105"></a></h3></div></div></div><p>EXTRACT copies globals from the current database to a sequential output file
+in one of three formats&#8211;GO, BINARY, or ZWR. Use EXTRACT to backup specific
+globals or to extract data from the database for use by another system. EXTRACT
+uses the Global Directory to determine which database files to use. In addition,
+EXTRACT supports user collation routines. EXTRACT may operate concurrently with
+normal GT.M database access.</p><p>To ensure that an EXTRACT reflects a consistent application state, you
+must:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Suspend database updates to all regions involved in the extract with
+the <span>/</span>FREEZE
+qualifier, or </p></li><li class="listitem"><p>Backup the database with the <span>/</span>ONLINE qualifier and extract files from the
+backup.</p></li></ul></div><p>The format of the EXTRACT command is:</p><pre class="programlisting">EXTR[ACT] [/qualifier[...]] file-specification</pre><p>The optional qualifiers are:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+<span>/</span>FO[RMAT]=GO |
+B[INARY] | Z[WR]</p></li><li class="listitem"><p>
+<span>/</span>FR[EEZE]</p></li><li class="listitem"><p>
+<span>/</span>LA[BEL]=text</p></li><li class="listitem"><p>
+<span>/</span>[NO]LO[G]</p></li><li class="listitem"><p>
+<span>/</span>S[ELECT]=global-name-list</p></li></ul></div><p>EXTRACT places its output in the file defined by the file-<span>specification</span>
+. EXTRACT may output to a<span>n
+RMS</span>
+ file on any device that
+supports such files, including magnetic tapes. </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Magnetic tapes may have a smaller maximum file size than disks.<span>When directing the output file to a magnetic tape, use DCL to
+MOUNT the tape /INITIALIZE=CONTINUATION. This causes automatic handling
+of multiple volumes. When mounting a volume to tape for an EXTRACT,
+specify a blocksize that is eight (8) bytes larger than the size of the
+blocks in the database to accommodate RMS overhead.</span>
+</p></td></tr></table></div><p>For information on extracting globals with the %GO utility, refer to the "M
+Utility Routines" chapter of the <a class="ulink" href="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/VMS_manual/index.html" target="_top">GT.M Programmer's Guide</a>. EXTRACT is typically
+faster, but %GO can be customized.</p><p>&lt;CTRL-Y&gt; or &lt;CTRL-C&gt; produces a status message from
+EXTRACT. Entering &lt;CTRL-C&gt; twice in quick succession terminates EXTRACT.
+An EXTRACT terminated abnormally by operator action or error produces incomplete
+output.</p><p>
+<span class="emphasis"><em>
+<span>/</span>FO[RMAT]=GO|B[INARY] | Z[WR]</em></span>
+</p><p>Specifies the format of the output file.</p><p>The format codes are:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>GO - Global Output format, used for files you want to transport or
+archive</p></li><li class="listitem"><p>B[INARY] - Binary format, used for database reorganization or short
+term backups</p></li><li class="listitem"><p>ZWR - ZWRITE format, used for files you want to transport or archive
+that may contain non-graphical information</p></li></ul></div><p>
+<span>/</span>FORMAT=GO stores the
+data in record pairs. Each global node produces one record for the key and one
+for the data. <span>/</span>FORMAT=GO
+has two header records.</p><p>EXTRACT <span>/</span>FORMAT=BINARY
+works much faster than EXTRACT <span>/</span>FORMAT=GO and EXTRACT <span>/</span>FORMAT=ZWR. <span>However, it cannot be used
+to transport binary data from one computer architecture to another. EXTRACT
+/FORMAT=ZWR can be used to transport text (binary data from GT.M on one
+platform to GT.M on another platform.) EXTRACT /FORMAT=GO can be used to
+transport text and data from one M implementation to
+another.</span>
+</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>There is no defined standard to transport binary data from one GT.M
+implementation to another.</p></td></tr></table></div><p>By default, EXTRACT uses <span>/</span>FORMAT=ZWR.</p><p>
+<span class="emphasis"><em>
+<span>/</span>FR[EEZE]</em></span>
+</p><p>Prevents database updates to all database files from which the EXTRACT is
+copying records. <span>/</span>FREEZE
+ensures that the EXTRACT captures a "sharp" image of the globals, rather than
+one "blurred" by updates occurring while the copy is in progress.</p><p>By default, EXTRACT does not freeze regions during operation.</p><p>
+<span class="emphasis"><em>
+<span>/</span>LA[BEL]=text</em></span>
+</p><p>Specifies the text string that becomes the first record in the output file.
+<span>Enclose labels containing punctuation marks or lowercase
+characters in quotation marks (" ").</span> EXTRACT <span>/</span>FORMAT=BINARY truncates the label
+text to 32 characters.</p><p>By default, EXTRACT uses the label "GT.M MUPIP EXTRACT."</p><p>For more detailed information about the <span>/</span>FORMAT=BINARY header label, refer to the description of
+EXTRACT <span>/</span>FORMAT=BINARY.</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]LO[G]</em></span>
+</p><p>For each global extracted, this qualifier specifies whether or not to display
+a message on <span>SYS$OUTPUT</span>
+. The message displays the number of global nodes, the
+maximum subscript length and maximum data length for each global.</p><p>By default, EXTRACT operates <span>/</span>LOG.</p><p>
+<span class="emphasis"><em>
+<span>/</span>S[ELECT]=global-name</em></span>
+</p><p>Global specification can be a parenthetical list, such as (a,B,C). In this
+case, EXTRACT selects all globals except ^A, ^B, and ^C.</p><p>
+<span class="emphasis"><em>
+<span>/</span>S[ELECT]=global-name-list</em></span>
+</p><p>Specifies the global(s) to extract. The caret symbol (^) in the specification
+of the global name is optional. <span>Enclose lowercase global names
+in quotation marks (" "). </span>
+</p><p>The global-specification can be:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>A global name, such as MEF</p></li><li class="listitem"><p>A range of global names, such as A7:B6</p></li><li class="listitem"><p>A list, such as A,B,C</p></li><li class="listitem"><p>Global names with the same prefix, such as TMP*</p></li></ul></div><p>By default, EXTRACT selects all globals, as if it had the qualifier <span>/</span>SELECT=*</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>If the rules for selection are complex, it may be easier to construct an
+ad hoc Global Directory that maps the global variables to be extracted to
+the database file. This is not permissible if the database file is part of a
+replicated instance. If this is the case, work with a backup of the
+database.</p></td></tr></table></div><div class="sect3" title="EXTRACT Examples"><div class="titlepage"><div><div><h4 class="title"><a name="extract_examples"></a>EXTRACT Examples<a class="indexterm" name="id3231608"></a></h4></div></div></div><p>Example:</p><pre class="programlisting">$ MUPIP EXTRACT <span>/</span>NOLOG FL.GLO</pre><p>This command instructs EXTRACT to create the global output file, FL.GLO,
+(which consists of all global variables in the database) without displaying
+statistics on a global-by-global basis. Because no label is specified, the
+first record in FL.GLO contains the text string "GT.M MUPIP EXTRACT."</p><p>Example:</p><pre class="programlisting">$ INIT MSA0: SPECIAL
+$ MOUNT/INIT=CONT/BLOCK=4104 MSA0: SPECIAL
+$ MUPIP EXTR/FO=BIN/SEL=("a2",M:Z)/LAB="SPSAVE" MSA0:SP.SVX</pre><p>In this example, the first command initializes a magnetic tape
+with the label SPECIAL. The second command mounts the tape with OpenVMS
+automatic volume initialization and a block size of 4104. The magnetic tape
+block size of 4104 handles a database block of 4096 bytes. The MUPIP command
+instructs EXTRACT to create a BINARY output file, SP.SVX, with the label
+SPSAVE. Since the value of the /SELECT qualifier is enclosed in parentheses
+the file contains all globals in the database, except those inside the
+parentheses. In other words, the file contains all globals except ^a2, and
+those globals starting with the letters M through Z. EXTRACT displays
+statistics for each global.</p><p>Example:</p><pre class="programlisting">$ MUPIP EXTRACT/SELECT=DRG TT</pre><p>This instructs EXTRACT to dump the global ^DRG to the device with
+the logical name TT (normally the login terminal).</p><p>The first record of a BINARY format data file contains the header label.
+The header label is 87 characters long. The following table illustrates the
+components of the header label.</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th colspan="2">
+<p>BINARY Format Data File Header Label</p>
+</th></tr><tr><th>
+<p>CHARACTERS</p>
+</th><th>
+<p>EXPLANATION</p>
+</th></tr></thead><tbody><tr><td>
+<p>1-26</p>
+</td><td>
+<p>Fixed-length ASCII text: "GDS BINARY EXTRACT LEVEL
+2".</p>
+</td></tr><tr><td>
+<p>27-40</p>
+</td><td>
+<p>Date and time of extract in the $ZDATE()
+format:"YEARMMDD2460SS".</p>
+</td></tr><tr><td>
+<p>41-45</p>
+</td><td>
+<p>Decimal maximum block size of the union of each region
+from which data was extracted.</p>
+</td></tr><tr><td>
+<p>46-50</p>
+</td><td>
+<p>Decimal maximum record size of the union of each
+region from which data was extracted.</p>
+</td></tr><tr><td>
+<p>51-55</p>
+</td><td>
+<p>Decimal maximum key size of the union of each region
+from which data was extracted.</p>
+</td></tr><tr><td>
+<p>56-87</p>
+</td><td>
+<p>Space-padded label specified by the <span>/</span>LABEL
+qualifier.</p>
+</td></tr></tbody></table></div></div></div><div class="sect2" title="Freeze"><div class="titlepage"><div><div><h3 class="title"><a name="freeze"></a>Freeze<a class="indexterm" name="id3231177"></a></h3></div></div></div><p>FREEZE redirects updates to the database. Use FREEZE to coordinate database
+activity with the invocation of an operating system utility that accesses the
+database file.</p><div class="caution" title="Caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>MUPIP FREEZE <span>/</span>ON
+prevents updates to one or more database files. Processes that are
+attempting updates "hang" until the FREEZE is removed by the MUPIP FREEZE
+<span>/</span>OFF command or
+DSE. Make sure that procedures for using MUPIP FREEZE, whether manual or
+automated, include provisions for removing the FREEZE in all appropriate
+cases, including when errors disrupt the normal flow.</p></td></tr></table></div><p>To ensure that a copy or reorganized version of a database file contains a
+consistent set of records, concurrent MUPIP utilities, such as BACKUP (without
+the ONLINE qualifier) and EXTRACT, include mechanisms to ensure that the
+database does not change while the MUPIP utility is performing an action.
+FIS recommends the use of the <span>/</span>ONLINE qualifier with BACKUP<span>, followed by an
+extract from the backup</span>.</p><p>If you want to use a non-GT.M utility to perform a backup or reorganization,
+you may give that utility stand-alone access to the file.</p><p>Common uses of the FREEZE command are:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Break mirrored disk configuration or remember to flush database
+updates to disk before breaking the mirror</p></li><li class="listitem"><p>Re-integrate a mirror</p></li></ul></div><p>The format of the FREEZE command is:</p><pre class="programlisting">F[REEZE] /ON[/RECORD] | /OFF[/OVERRIDE] region-list</pre><p>The region-list identifies the target of the FREEZE. <span>Region-lists may include the DCL wildcards % and *.</span>
+</p><p>FREEZE must include one of the qualifiers:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+<span>/</span>OF[F]</p></li><li class="listitem"><p>
+<span>/</span>ON</p></li></ul></div><p>The optional qualifiers are:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+<span>/</span>OV[ERRIDE]</p></li><li class="listitem"><p>
+<span>/</span>R[ECORD]</p></li></ul></div><p>
+<span class="emphasis"><em>
+<span>/</span>OF[F]</em></span>
+</p><p>Stops a <span>current</span>
+
+FREEZE, unless used with <span>/</span>OVERRIDE. <span>/</span>OFF
+must be issued by the process that initiated the FREEZE. The <span>/</span>OFF qualifier is incompatible with
+the <span>/</span>ON and <span>/</span>RECORD qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>ON</em></span>
+</p><p>Specifies the start of a FREEZE. The <span>/</span>ON qualifier is incompatible with the <span>/</span>OFF and <span>/</span>OVERRIDE qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>OV[ERRIDE]</em></span>
+</p><p>Enables another process to end a freeze. <span>/</span>OVERRIDE should not be necessary (and may even be
+dangerous) in most schemes. <span>/</span>OVERRIDE is provided to allow error recovery in case a procedure
+with a freeze fails to release. The <span>/</span>OVERRIDE qualifier is incompatible with the <span>/</span>ON and <span>/</span>RECORD qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[ECORD]</em></span>
+</p><p>Specifies that the FREEZE utility should record an event as a reference point
+for subsequent backups. When a FREEZE specifies <span>/</span>RECORD, the current transaction
+identifier replaces the previously RECORDed transaction identifier for the
+database file. <span>/</span>RECORD is
+useful for integrating MUPIP BACKUP <span>/</span>BYTESTREAM with an external backup mechanism. The <span>/</span>RECORD qualifier is
+incompatible with the <span>/</span>OFF
+and <span>/</span>OVERRIDE
+qualifiers.</p><div class="sect3" title="Freeze Examples"><div class="titlepage"><div><div><h4 class="title"><a name="freeze_examples"></a>Freeze Examples<a class="indexterm" name="id3232216"></a></h4></div></div></div><p>Example:</p><pre class="programlisting">$ MUPIP FREEZE MUMPS.DAT</pre><p>This command prevents updates to <span>the MUMPS.DAT file in
+the current default directory</span>
+.</p><p>Example:</p><pre class="programlisting">$ MUPIP FREEZE /OFF /OVERRIDE MUMPS.DAT</pre><p>This command enables updates to the <span>MUMPS.DAT database
+file in the current directory</span>
+, regardless of what process
+might have previously suspended them.</p><p>Example:</p><pre class="programlisting">$ SET NOON
+$ MUPIP FREEZE /ON /RECORD *
+$ BACKUP PROD:[APP1.DATA]*.DAT TAPE:WEEKLY.SAV
+/SAVE /REWIND
+$ MUPIP FREEZE /OFF *
+$ SET ON</pre><p>The SET NOON command specifies that all commands in the sequence
+are attempted, regardless of errors encountered by any command. This ensures
+that the FREEZE /OFF is processed even if the BACKUP command fails. The
+FREEZE prevents updates to all database files identified by the current
+Global Directory. The /RECORD qualifier specifies that the current
+transaction in each database be stored in the RECORD portion of the database
+file header. The BACKUP command creates a save-set on the device TAPE, and
+copies all files from PROD:[APPL1.DATA] that have an extension of .DAT to
+the save-set. Presumably all database files in the current Global Directory
+are stored in that directory, with that extension. The second FREEZE command
+re-enables updates that were suspended by the first FREEZE. The SET ON
+command re-enables normal error handling by DCL.</p></div></div><div class="sect2" title="Help"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_help"></a>Help<a class="indexterm" name="id3232239"></a></h3></div></div></div><p>HELP provides online information about MUPIP commands and qualifiers. HELP
+uses conventions similar to the OpenVMS help facility.</p><p>The format of the HELP command is:</p><pre class="programlisting">H[ELP] [help topic]
+</pre><p>The HELP command does not accept any qualifiers. Enter the MUPIP command for
+which you want information at the TOPIC prompt. Press &lt;RETURN&gt; or
+&lt;CTRL-Z&gt; to exit the help facility.</p></div><div class="sect2" title="INTEG"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_integ"></a>INTEG<a class="indexterm" name="id3232311"></a></h3></div></div></div><p>The INTEG command performs an integrity check on a GT.M database file. INTEG
+operates on one or more regions in the current Global Directory, and suspends
+concurrent updates to those regions during its operation. INTEG of a single file
+database, without a Global Directory, requires exclusive (standalone) access to
+that file. The order in which INTEG selects database regions is a function of
+file system layout and may vary as files are moved or created. If you want to
+generate an integ where the output always lists database files in a predictable
+sequence, run the integs one at a time. For example, to compare output with a
+reference file, run INTEG on one file at a time.</p><p>Use INTEG at the following times:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Periodically - to ensure ongoing integrity of the database(s); regular
+INTEGs help detect integrity problems before they spread throughout the
+database file.</p></li><li class="listitem"><p>After a crash - to ensure the database was not corrupted. (Note: When
+using before-image journaling, when the database is recovered from the
+journal file after a crash, an integ is not required).</p></li><li class="listitem"><p>When database errors are reported - to troubleshoot the
+problem.</p></li></ul></div><p>The format of the INTEG command is:</p><pre class="programlisting">I[NTEG] [/qualifier[...]] [/FILE] file-specification | /REGION region-name</pre><p>INTEG requires the specification of either file(s) or region(s).</p><p>The available qualifiers are:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+<span>/</span>A[DJACENCY]=integer</p></li><li class="listitem"><p>
+<span>/</span>BL[OCK]=block-number</p></li><li class="listitem"><p>
+<span>/</span>BR[IEF]</p></li><li class="listitem"><p>
+<span>/</span>FA[ST]</p></li><li class="listitem"><p>
+<span>/</span>FI[LE]
+file-name</p></li><li class="listitem"><p>
+<span>/</span>FU[LL]</p></li><li class="listitem"><p>
+<span>/</span>[NO]K[EYRANGES]</p></li><li class="listitem"><p>
+<span>/</span>[NO]MAP[=integer]</p></li><li class="listitem"><p>
+<span>/</span>[NO]MAXK[EYSIZE][=integer]</p></li><li class="listitem"><p>
+<span>/</span>[NO]TR[ANSACTION][=integer]</p></li><li class="listitem"><p>
+<span>/</span>R[EGION]
+region-name</p></li><li class="listitem"><p>
+<span>/</span>S[UBSCRIPT]=subscript</p></li><li class="listitem"><p>
+<span>/</span>TN[_RESET]</p></li></ul></div><p>The <span>file-specification</span>
+ directly identifies the database file to INTEG. The
+region-list identifies one or more regions that, in turn, identify database
+files through the current Global Directory.</p><p>Analyze errors reported by INTEG immediately, to prevent further corruption.
+FIS strongly recommends fixing the following errors as soon as they are
+discovered: </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Blocks incorrectly marked free - these may cause accelerating damage
+when processes make updates to any part of the database region.</p></li><li class="listitem"><p>Integrity errors in an index block - these may cause accelerating
+damage when processes make updates to that area of the database region
+using the faulty index. Refer to the "Maintaing Database Integrity"
+chapter for more information.</p></li></ul></div><p>INTEG <span>/</span>FAST and the
+"regular" INTEG both report these errors. Other database errors do not pose the
+threat of rapidly spreading problems in GDS files. However, if operations
+continue, the errors may cause the following problems:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Invalid application operation due to missing or incorrect data</p></li><li class="listitem"><p>Process errors, including inappropriate indefinite looping, when a
+database access encounters an error</p></li><li class="listitem"><p>Degrading application level consistency as a result of incomplete
+update sequences caused by the prior symptoms</p></li></ul></div><p>When you repair the GT.M database you must assess the type of damage, the risk
+of continued operations, and the disruption in normal operation caused by the
+time spent repairing the database. For information on analyzing and correcting
+database errors, refer to the "Maintaining Database Integrity" chapter. Contact
+your regular GT.M support for help assessing INTEG errors.</p><p>&lt;CTRL-C&gt;
+<span>or &lt;CTRL-Y&gt;</span> stops INTEG before the process
+completes. </p><p>
+<span class="emphasis"><em>
+<span>/</span>A[DJACENCY]=integer</em></span>
+</p><p>Specifies the range of blocks that INTEG considers a block adjacent to another
+database block on the same level. The adjacency report from INTEG gives an
+approximation of physical data density which directly affects efficient database
+access. In effect, this measures how well a database is organized. Implementing
+a high degree of adjacency improves system response time. Use the <span>/</span>ADJACENCY qualifier to adjust
+the reporting to reflect characteristics of your disks. For example, select a
+factor that matches the number of sectors on a drive. To improve the adjacency,
+use MUPIP REORG.</p><p>-By default, INTEG uses <span>/</span>ADJACENCY=10.</p><p>
+<span class="emphasis"><em>
+<span>/</span>BL[OCK]=block-number</em></span>
+</p><p>Specifies the block at which to start checking a sub-tree of the database.
+<span>/</span>BLOCK cannot detect
+"incorrectly marked busy errors." Block numbers are displayed in an INTEG error
+report or by using DSE.</p><p>The <span>/</span>BLOCK qualifier is
+incompatible with the <span>/</span>SUBSCRIPT and <span>/</span>TN_RESET qualifiers.</p><p>
+<span class="emphasis"><em>
+<span>/</span>BR[IEF]</em></span>
+</p><p>Specifies an INTEG summary report which displays the total number of
+directory, index and data blocks. The <span>/</span>BRIEF qualifier is incompatible with the <span>/</span>FULL qualifier.</p><p>By default, INTEG reports are <span>/</span>BRIEF.</p><p>
+<span class="emphasis"><em>
+<span>/</span>FA[ST]</em></span>
+</p><p>Specifies that INTEG checks only index blocks. INTEG <span>/</span>FAST does not check data blocks.
+INTEG <span>/</span>FAST produces
+results significantly faster than a full INTEG because the majority of blocks in
+a typical database are data blocks. While INTEG <span>/</span>FAST is not a replacement for a full
+INTEG, it very quickly detects those errors that must be repaired immediately to
+prevent accelerated database damage.</p><p>The <span>/</span>FAST qualifier is
+incompatible with the <span>/</span>TN_RESET qualifier.</p><p>By default, INTEG checks all active index and data blocks in the
+database.</p><p>
+<span class="emphasis"><em>
+<span>/</span>FI[LE]</em></span>
+</p><p>Specifies that the parameter to the INTEG command is a <span>file-specification</span>
+. INTEG FILE requires exclusive
+(stand-alone) access to a database file and does not require a Global Directory.
+Because it has stand-alone access to the file, INTEG <span>/</span>FILE is able to check whether the
+reference count is zero. A non-zero reference count is indicative of the prior
+abnormal termination of the database.</p><p>The <span>/</span>FILE qualifier is
+incompatible with the <span>/</span>REGION qualifier.</p><p>By default, INTEG operates <span>/</span>FILE.</p><p>
+<span class="emphasis"><em>
+<span>/</span>FU[LL]</em></span>
+</p><p>Specifies an expanded INTEG report which displays the number of index and data
+blocks in the directory tree and in each global variable tree as well as the
+total number of directory, index and data blocks. The <span>/</span>FULL qualifier is incompatible with
+the <span>/</span>BRIEF
+qualifier.</p><p>By default, INTEG reports are <span>/</span>BRIEF.</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]K[EYRANGES]</em></span>
+</p><p>Specifies whether or not the INTEG report includes key ranges that identify
+the data suspected of problems detected by INTEG.</p><p>By default, INTEG displays <span>/</span>KEYRANGES</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]MAP[=integer]</em></span>
+</p><p>Specifies the maximum number of "incorrectly marked busy errors" that INTEG
+reports.</p><p>
+<span>/</span>NOMAP removes limits on
+incorrectly marked busy reporting so that INTEG reports all map errors. <span>/</span>NOMAP does not accept
+assignment of an argument.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Because incorrectly marked free errors are very dangerous, INTEG always
+reports them, and <span>/</span>MAP
+does not affect them.</p></td></tr></table></div><p>An error in an index block prevents INTEG from processing potentially large
+areas of the database. A single "primary" error may cause large numbers of
+"secondary" incorrectly marked busy errors. Because "real" or primary
+incorrectly marked busy errors only make "empty" blocks unavailable to the
+system, they are low impact and do not require immediate repair.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>After a system crash and a database recovery with MUPIP recover or
+rollback, the database can legitimately have benign, incorrectly marked busy
+errors. These errors do not require immediate repair. Schedule repairs for
+the next convenient opportunity.</p></td></tr></table></div><p>By default, INTEG reports a maximum of 10 map errors (<span>/</span>MAP=10).</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]MAX[KEYSIZE][=integer]</em></span>
+</p><p>Specifies the maximum number of "key size too large" errors that INTEG
+reports. </p><p>
+<span>/</span>NOMAXKEYSIZE removes
+limits on key size reporting so that INTEG reports all key size too large
+errors. <span>/</span>NOMAXKEYSIZE does
+not accept assignment of an argument.</p><p>"Key size too large" errors should normally only occur after you use DSE
+CHANGE <span>/</span>FILEHEADER <span>/</span>KEY_MAX_SIZE to reduce the
+maximum key size.</p><p>By default, INTEG reports a maximum of 10 key size errors (<span>/</span>MAXKEYSIZE=10).</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]TR[ANSACTION][=integer]</em></span>
+</p><p>Specifies the maximum number of block transaction- number-too-large errors
+that INTEG reports.</p><p>
+<span>/</span>NOTRANSACTION removes
+limits on transaction reporting so INTEG reports all transaction number errors.
+<span>/</span>NOTRANSACTION does
+not accept assignment of an argument.</p><p>A system crash may generate many "block transaction number too large" errors.
+These errors can cause problems for BACKUP <span>/</span>INCREMENTAL and for transaction processing. Normally,
+the automatic increment of 1000 blocks that GT.M adds when a database is
+reopened averts these errors. If a problem still exists after the database is
+reopened, you can use a value in the DSE CHANGE <span>/</span>FILEHEADER <span>/</span>CURRENT_TN= command to quickly fix
+"block transaction number too large number" errors.</p><p>By default, INTEG reports a maximum of 10 block transaction errors (<span>/</span>TRANSACTION=10).</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[EGION]</em></span>
+</p><p>Specifies that the INTEG parameter identifies one or more regions rather than
+a database file.</p><p>INTEG <span>/</span>REGION does not
+require 
+<span>sole</span> access to databases. Instead, it freezes updates
+to the database during the check. The <span>region-name</span>
+ argument may
+specify more than one region of the current Global Directory in a list separated
+with commas. <span>Any region name may include the DCL wildcard
+characters * and %. INTEG /REGION requires the logical name GTM$GBLDIR to
+specify a valid Global Directory.</span>
+ For more information on defining 
+<span>GTM$GBLDIR</span>, refer to the
+"Global Directory Editor" chapter.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Because a KILL may briefly defer marking the blocks it releases "free" in
+the bit maps, INTEG <span>/</span>REGION may report spurious block incorrectly marked busy errors.
+These errors are benign. If these errors occur in conjunction with a "Kill
+in progress" error, resolve the errors after the "Kill in progress" error is
+no longer present. </p></td></tr></table></div><p> THe <span>/</span>REGION qualifier
+is incompatible with the <span>/</span>FILE and <span>/</span>TN_RESET qualifiers.</p><p>By default, INTEG operates <span>/</span>FILE.</p><p>
+<span class="emphasis"><em>
+<span>/</span>S[UBSCRIPT]=subscript</em></span>
+</p><p>Specifies a global or a range of keys to INTEG. The global key may be enclosed
+in quotation marks (" "). Identify a range by separating two subscripts with a
+colon (:). <span>/</span>SUBSCRIPT
+cannot detect incorrectly marked busy errors.</p><p>Use <span>/</span>SUBSCRIPT only if
+you know the path to the keys in the subscript, and have reason to believe the
+path is not damaged. If the path is questionable or known to be damaged, use DSE
+to find the block(s) and INTEG <span>/</span>BLOCK.</p><p>The <span>/</span>SUBSCRIPT qualifier
+is incompatible with the <span>/</span>BLOCK and <span>/</span>TN_RESET qualifiers.</p><p>Use <span>/</span>FULL to have INTEG
+report all global names in a region or list of regions.</p><p>Example:</p><pre class="programlisting">MUPIP&gt; INTEG <span>/</span>SUBSCRIPT="^a(100)":"^b(""c"")" <span>/</span>REGION $DEFAULT
+</pre><p>This INTEGs all global variables greater than or equal to ^a (100) and less
+than or equal to ^b("c") in the default region(s).</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>To specify a literal in the command string, use double quotation marks for
+example, ^b(""c"").</p></td></tr></table></div><p>
+<span class="emphasis"><em>
+<span>/</span>TN[_RESET]</em></span>
+</p><p>Instructs an INTEG <span>/</span>FILE
+to reset the transaction number to one (1) in every database block currently
+holding valid data.</p><p>The <span>/</span>TN_RESET qualifier
+rewrites all blocks holding data. If the transaction overflow resets to zero (0)
+database operation is disrupted. The <span>/</span>TN_RESET qualifier is a protective mechanism that
+prevents the transaction overflow from resetting to 0.</p><p>Transaction numbers can go up to 4,294,967,295 (2**32-1). When the current
+transaction number exceeds four billion, INTEG displays a message warning that
+the transaction number is approaching the limit of the database. Because the
+warning appears when the transaction number reaches four billion, INTEG provides
+a margin of nearly 300 million updates before failure to perform the INTEG
+<span>/</span>TN_RESET causes the
+database to fail. This should give you adequate time to schedule an INTEG
+<span>/</span>TN_RESET. If you use
+MUPIP EXTRACT, delete the file and then MUPIP CREATE and MUPIP LOAD, the
+procedures have the same effect as a <span>/</span>TN_RESET.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Any time a GT.M update opens a database file that was not properly closed,
+GT.M increments the transaction number by 1000. This automatic increment
+prevents problems induced by abnormal database closes, but it should be
+considered in your operational procedures. The rate at which GT.M "uses up"
+transaction numbers is a function of operational procedures and real
+database updates.</p></td></tr></table></div><p>The <span>/</span>TN_RESET qualifier
+is incompatible with the <span>/</span>FAST, <span>/</span>BLOCK,
+<span>/</span>REGION, and <span>/</span>SUBSCRIPT qualifiers.</p><p>By default, INTEG does not modify the block transaction numbers.</p><div class="sect3" title="Using MUPIP INTEG"><div class="titlepage"><div><div><h4 class="title"><a name="using_mupip_integ"></a>Using MUPIP INTEG</h4></div></div></div><p>MUPIP INTEG verifies the integrity of GDS database files. INTEG reports
+errors as it finds them. At the end of the error report there is summary
+information, including the total number of errors. After the error report,
+INTEG provides statistics on the index and data portions of the database.
+The examples in this section illustrate different types of INTEG reports.
+For additional information about INTEG error reports, refer to the GT.M
+Message and Recovery Procedures Reference Manual.</p><p>INTEG requires exclusive access to the database file when used with the
+<span>/</span>REGION qualifier.
+
+</p><p>Example:</p><pre class="programlisting">MUPIP&gt; integ simple.dat
+No errors detected by integ.
+Type    Blocks  Records     %Used    Adjacent
+Directory   2       11      6.835          NA
+Index      10       10      1.367           1
+Data       10       10      2.109           2
+Free       78       NA         NA          NA
+Total     100       31         NA           3
+</pre><p>INTEG <span>/</span>REGION uses a
+Global Directory and takes region-name(s) as its parameter(s). This form of
+the MUPIP INTEG command permits the use of lists and wildcards to identify
+multiple databases. It also permits the INTEG to operate without exclusive
+access to the file(s). While INTEG <span>/</span>REGION does not require exclusive access, it
+prevents updates for the duration of its processing.</p><p>Example:</p><pre class="programlisting">MUPIP&gt; integ <span>/</span>region <span>$</span>DEFAULT
+Integ of region <span>$</span>DEFAULT
+No errors detected by integ.
+
+Type      Blocks      Records     % Used      Adjacent
+Directory   2           11          6.835       NA
+Index      10           10          1.367        1
+Data       10           10          2.109        2
+Free       78           NA            NA        NA
+Total     100           31            NA         3
+</pre><p>MUPIP INTEG <span>/</span>FAST
+verifies only the index and map portions of the file. Because these parts
+are relatively small, but crucial to proper operation, INTEG <span>/</span>FAST provides a quick way
+to determine if the file can support updates without danger of increasing
+damage.</p><p>Example:</p><pre class="programlisting">MUPIP&gt; integ <span>/</span>fast simple.dat
+No errors detected by fast integ.
+
+Type        Blocks      Records     % Used      Adjacent
+Directory       2           11       6.835          NA
+Index          10           10       1.367           0
+Data           10           NA          NA          NA
+Free           78           NA          NA          NA
+Total         100           NA          NA           0
+</pre><p>When INTEG discovers a problem, the system displays a descriptive error
+message and a location (giving a block number). The system displays the
+offset of the error within the block in the following format:</p><pre class="programlisting">Block:Offset Level
+%GTM-E-DBKEYORD,
+2:1E 0 Keys not in order
+Directory Path: 1:8, 2:1E
+Keys from ^c to the end are suspect.
+%GTM-I-DBTNTOOLG,
+8:0 1 Block transaction number too large
+Directory Path: 1:8, 2:13
+Path: 8:0
+Keys from ^A to the end are suspect.
+%GTM-I-DBTN, Block TN is C
+%GTM-I-DBTNTOOLG,
+7:0 0 Block transaction number too large
+Directory Path: 1:8, 2:13
+Path: 8:8, 7:0
+Keys from ^A to the end are suspect.
+%GTM-I-DBTN, Block TN is 15
+%GTM-I-DBMBTNSIZMX,
+0:0 FF Map block transaction number too large
+%GTM-W-DBLOCMBINC,
+0:0 FF Local bitmap incorrect</pre><p>where <em class="replaceable"><code>bbb</code></em> is a hexadecimal block number, <em class="replaceable"><code>ooo</code></em> is a hexadecimal offset
+within a block, lll is a decimal level (refer to the "Greystone Database
+Structure" chapter for information on block levels), and kkk is an M global
+variable name or "the end" as text. The block for errors related to the file
+header provides no additional information and always appears as zero (0).
+The offset for errors not related to a record provides no additional
+information and always appears as zero (0). The sequence of pointers from
+the root block to any block forms its path.</p><p>Example:</p><pre class="programlisting">MUPIP&gt; integ <span>/</span>region <span>$</span>DEFAULT
+Integ of region <span>$</span>DEFAULT
+Block:Offset level
+10:7        1        Keys out of order.
+Directory Path: 1:7, 2:30
+Path: 11:7, 10:7
+Total error count from integ:
+Type    Blocks      Records     % Used      Adjacent
+Directory   2           11       6.835          NA
+Index      10           10       1.367           1
+Data       10           10       2.109           2
+Free       78           NA          NA          NA
+Total     100           31          NA           3
+%GTM-E-INTEGERS, Database integrity errors
+$
+</pre></div></div><div class="sect2" title="Journal"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_journal_cmmd"></a>Journal<a class="indexterm" name="id3233524"></a></h3></div></div></div><p>The JOURNAL command analyzes, extracts, reports, and recovers data using
+journal files. For a description of the JOURNAL command, refer to the "GT.M
+Journaling" chapter.</p></div><div class="sect2" title="Load"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_load_cmmd"></a>Load<a class="indexterm" name="id3233443"></a></h3></div></div></div><p>The LOAD command: </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Enables you to enter global variable names and their corresponding
+data values into a GT.M database from a sequential file.</p></li><li class="listitem"><p>Uses the Global Directory to determine which database files to
+use.</p></li><li class="listitem"><p>Supports user collation routines.</p></li><li class="listitem"><p>Operates concurrently with normal GT.M database access.</p></li></ul></div><p>From an application perspective, loading data while an application is running
+may result in an inconsistent database.</p><p>The format of the LOAD command is:</p><div class="literallayout"><p><br>
+L[OAD] [<span>/</span>qualifier...] file-<span>specification</span><br>
+<br>
+</p></div><p>The optional qualifiers are:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+<span>/</span>FO[RMAT]=GO |
+B[INARY] | ZWR <span>| GOQ</span>
+</p></li><li class="listitem"><p>
+<span>/</span>BE[GIN]=integer</p></li><li class="listitem"><p>
+<span>/</span>E[ND]=integer</p></li><li class="listitem"><p>
+<span>/</span>FI[LLFACTOR]=integer</p></li></ul></div><p>LOAD takes its input from the file defined by the file-<span>specification</span>
+
+</p><p>LOAD FORMAT=GO, =BINARY, or =ZWR may take its input from an RMS file
+on any device that supports such files, including magnetic tapes. However, the
+non-GT.M utility that produces GOQ format files only produces non-RMS magnetic
+tape files. When using an input file on a magnetic tape, use DCL to MOUNT the
+tape, and ensure the block size for the tape corresponds to the size that was
+used to make the tape.</p><p>For information on loading with an M "percent utility," refer to the %GI
+section of the "M Utility Routines" chapter in the <a class="ulink" href="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/VMS_manual/index.html" target="_top">GT.M Programmer's Guide</a>. LOAD
+is typically faster, but the %GI utility can be customized.</p><p>&lt;CTRL-C&gt; produces a status message from LOAD. <span>&lt;CTRL-Y&gt;</span>
+ stops LOAD. A LOAD that is manually stopped or
+stops because of an internal error is incomplete and may lack application level
+integrity, but will not adversely affect the database structure .</p><p>
+<span class="emphasis"><em>
+<span>/</span>FO[RMAT]=GO | B[INARY] | ZWR <span>|
+GOQ</span>
+</em></span>
+</p><p>Specifies the format of the input file. The format must match the actual
+format of the input file for LOAD to operate.</p><p>The format codes are:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>GO - Global Output format</p></li><li class="listitem"><p>B[INARY] - Binary format</p></li><li class="listitem"><p>Z[WR] - ZWRITE format</p></li><li class="listitem"><p>GOQ - Format produced by certain M implementations</p></li></ul></div><p>By default, LOAD uses FORMAT=ZWR<span>, and starts at the beginning
+of the input file</span>.</p><p>
+<span>/</span>FORMAT=GO stores the
+data in record pairs. Each global node produces one record for the key and one
+for the data. <span>For /FORMAT=GO input, the value is usually an odd
+number.</span>
+</p><p>
+<span>/</span>FORMAT=BINARY only
+applies to Greystone Database Structure (GDS) files. A BINARY format file loads
+significantly faster than a GO or ZWR format file. <span>/</span>FORMAT=BINARY stores the data in a
+proprietary format. <span>/</span>FORMAT=BINARY has one header record, therefore LOAD <span>/</span>FORMAT=BINARY starts active work with
+record number two (2). <span>Since /FORMAT=BINARY requires important
+information from the header, this type of load requires an intact file
+header regardless of the /BEGIN value.</span>
+</p><p> For /FORMAT = ZWR input, each record contains a complete set of
+reference and data information. The beginning values are not restricted, except
+to allow two records for the header.</p><p>/FORMAT=GO and /FORMAT=ZWR have two header records, therefore LOAD
+/FORMAT=GO and /FORMAT=ZWR start active work with record number three
+(3).</p><p>/FORMAT=GOQ loads files prepared by certain M implementations, and is
+significantly faster than a GO format file. Use the GOQ format as a conversion
+aid. /FORMAT=GOQ stores the data in fixed length 2048 byte blocks which contain
+a variable number of keys and data. /FORMAT=GOQ has one or more header records
+depending on the number of globals in the tape.</p><p>
+<span class="emphasis"><em>
+<span>/</span>BE[GIN]=integer</em></span>
+</p><p>Specifies the record number of the input file with which LOAD should begin.
+Directing LOAD to begin at a point other than the beginning of a valid key
+causes an error.</p><p>
+<span>Each format has some number of header records to
+consider</span>
+ when choosing a <span>/</span>BEGIN point. For more information, refer to the section
+on <span>/</span>FORMAT.</p><p>
+
+</p><p>
+<span class="emphasis"><em>
+<span>/</span>E[ND]=integer</em></span>
+</p><p>Specifies the record number of the input file at which LOAD should stop.
+<span>/</span>END=integer must be
+greater than the <span>/</span>BEGIN=integer for LOAD to operate. LOAD terminates after processing
+the record of the number specified by <span>/</span>END or reaching the end of the input file.</p><p>The value of <span>/</span>FORMAT=GO
+input should normally be an even number. By default, LOAD continues to the end
+of the input file.</p><p>
+<span class="emphasis"><em>
+<span>/</span>FI[LL_FACTOR]=integer</em></span>
+</p><p>Specifies the quantity of data stored in a database block. Updates to the
+block fill the remaining available space. Blocks that receive subsequent updates
+and avoid block splits operate more efficiently.</p><p>If you have database performance issues or a high rate of database updates,
+you should examine the defined FILL_FACTORs. Unless the application only uses
+uniform records, which is not typical for most applications, FILL_FACTORs do not
+work precisely.</p><p>The FILL_FACTOR for data that is relatively static, or grows by the addition
+of new nodes that collate before or after pre-existing nodes, should be 100
+percent. The FILL_FACTOR for data that is growing by additions to existing nodes
+may be chosen to leave room in the typical node for the forecast growth for some
+period of time. Generally, this is the time between the LOAD and first REORG, or
+between two REORGs. This is also true for additions of nodes that are internal
+to the existing collating sequence.</p><p>For example, if a global is expected to grow by five percent each month (from
+relatively uniformly distributed updates), and REORGs are scheduled once every
+quarter, the FILL_FACTOR for both the original LOAD and subsequent REORGs might
+be 20 percent ((3 months + 1 month "safety" margin) * five percent per
+month).</p><p>By default, LOAD uses <span>/</span>FILL_FACTOR=100 for maximum data density. <span>If you are
+unsure about your data, this is a reasonable value.</span>
+</p></div><div class="sect2" title="REOrg"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_reorg_cmmd"></a>REOrg<a class="indexterm" name="id3233813"></a></h3></div></div></div><p>MUPIP REORG is a tool used to improve performance by defragmenting and
+compacting database files. REORG runs concurrently with other database activity,
+including updates. Competing activity generally increases the time required to
+perform a REORG, as well as that of the competing operations. If you use REORG
+concurrently with normal database access and you notice an impact on the
+performance of normal operation, you can lower the priority of the process
+performing the REORG.</p><p>Note that while REORG optimizes the GDS structure of database files, it does
+not handle native file system file fragmentation. In our experience,
+fragmentation at the native file system level is more likely than fragmentation
+at the GDS structure level. Always create files with appropriate allocations and
+extensions, on disks with large amounts of contiguous free space. Use native
+utilities and, depending on your procedures, MUPIP utilities to eliminate file
+fragmentation when database files have been extended more than a dozen
+times.</p><p>MUPIP REORG does not change the logical contents of the database, and can run
+on either the primary or secondary of a logical dual site application. In such
+cases, resuming REORGs in process should be part of the batch restart. For more
+information about running REORG on a dual site application, see <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</p><p>The format of the REORG command is:</p><pre class="programlisting">REO[RG] [<span>/</span>qualifier...] <span>specification</span>
+</pre><p>The optional qualifiers are:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+<span>/</span>E[XCLUDE]=global-name-list</p></li><li class="listitem"><p>
+<span>/</span>F[ILL_FACTOR]=integer</p></li><li class="listitem"><p>
+<span>/</span>I[NDEX_FILL_FACTOR]=integer</p></li><li class="listitem"><p>
+<span>/</span>R[ESUME</p></li><li class="listitem"><p>
+<span>/</span>S[ELECT]=global-name-list</p></li></ul></div><p>
+<span>Entering &lt;CTRL-C&gt; twice in quick
+succession</span>
+ terminates
+REORG. A REORG terminated abnormally by operator action or error is incomplete
+but does not adversely affect the database structure.</p><p>
+<span class="emphasis"><em>
+<span>/</span>E[XCLUDE]=global-name-list</em></span>
+</p><p>Restricts REORG from swapping blocks used by the specified globals. For
+example, a single MUPIP command might organize a subset of the globals in a
+database or region. If a second MUPIP REORG command were to SELECT the remaining
+globals, it would tend to disrupt the results of the first REORG by
+de-optimizing the previously organized blocks because no information is passed
+from the previous MUPIP REORG command. The EXCLUDE qualifier allows users to
+list the name of the previously REORGed globals, so that the MUPIP REORG
+bypasses the GDS blocks containing these globals.</p><p>If you enter the REORG <span>/</span>EXCLUDE=global-name-list command and the specified globals do not
+exist, REORG issues a message to the screen and continues to process any
+specified globals that exist. If REORG is unable to process any globals, it
+terminates with an error.</p><p>Arguments for this qualifier may be an individual global name, a range of
+global names, or a list of names and prefixes followed by the wildcard symbol.
+Enclose wildcards in double-quotes ("") to prevent inappropriate expansion by
+the shell. The caret symbol (^) in the specification of the global is
+optional.</p><p>The global name can be:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>A global name, such as ACN.</p></li><li class="listitem"><p>A range of global names, such as A7:B7.</p></li><li class="listitem"><p>A list, such as A,B,C.</p></li><li class="listitem"><p>A parenthetical list of global names such as (A, B, C)</p></li><li class="listitem"><p>Global names with the same prefix such as TMP*.</p></li></ul></div><p>In the first case, REORG only excludes global ^ACN. In the second case, REORG
+excludes all global names in the collating sequence A7 to B7. For the third
+<span>and fourth</span> case, REORG excludes A, B, and C. In
+the last case, REORG excludes all globals prefixed with TMP.</p><p>By default, REORG does not EXCLUDE any globals.</p><p>In case any global appears in the argument lists of both <span>/</span>SELECT and <span>/</span>EXCLUDE, REORG terminates with an
+error.</p><p>
+<span class="emphasis"><em>
+<span>/</span>F[ILL_FACTOR]=percent-qualifier</em></span>
+</p><p>Specifies how full you want each database block to be. This is a target
+number. Individual blocks may be more or less full than the fill factor.</p><p>If you have database performance issues or a high rate of database updates,
+you should examine the defined FILL_FACTORs. Unless the application uses
+entirely uniform records, which is not typical for most applications,
+FILL_FACTORs do not work precisely.</p><p>The FILL_FACTOR for data that is relatively static, or grows by the addition
+of new nodes that collate before or after pre-existing nodes, should be 100
+percent. The FILL_FACTOR for data that is growing by additions to existing nodes
+may be chosen to leave room in the typical node for the forecast growth for some
+period of time. Generally, this is the time between the LOAD and first REORG, or
+between two REORGs. This is also true for additions of nodes that are internal
+to the existing collating sequence. </p><p>For example, if a global is expected to grow by five percent per month from
+relatively uniformly distributed updates, and REORGs are scheduled every
+quarter, the FILL_FACTOR for both the original LOAD and subsequent REORGs might
+be 20 percent ((3 months + 1 month "safety" margin) * five percent per month). </p><p>The arguments for the FILL_FACTOR qualifier must be integers from 30 to 100.
+These integers represent the percentage of the data block that REORG can fill.
+By default, the FILL_FACTOR value is 100 for maximum data density. For that
+case, REORG never performs a block split.</p><p>
+<span class="emphasis"><em>
+<span>/</span>I[NDEX_FILL_FACTOR]=percent-qualifier</em></span>
+</p><p>Directs REORG to leave free space within index blocks for future updates.
+Arguments to this qualifier must be integers from 30 to 100 that represent the
+percentage of the index block that REORG can fill. REORG uses this number to
+decide whether to place more information in an index block, or create space by
+moving data to another block.</p><p>Under certain conditions, especially with large database block sizes, it may
+be possible to achieve faster throughput by using a smaller fill factor for
+index blocks than for data blocks. By default the INDEX_FILL_FACTOR is the value
+of FILL_FACTOR regardless of whether that value is explicitly specified or
+implicitly obtained by default.</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[ESUME]</em></span>
+</p><p>If you interrupt REORG, the RESUME qualifier allows you to restart the REORG
+operation from the point where the operation stopped. REORG stores the last key
+value in the database file header. If you enter the RESUME qualifier, the
+program retrieves the last key value, from the database file header, and
+restarts operations from that key.</p><p>
+<span class="emphasis"><em>
+<span>/</span>S[ELECT]=global-name-list</em></span>
+</p><p>Restricts REORG operation to a subset of specified globals. By default, REORG
+operates on all globals in all database files identified by the current Global
+Directory for the process executing the MUPIP command. One of the functions
+performed by REORG is to logically order the globals on which it operates within
+the file. Unless the EXCLUDE qualifier is properly used, repeating the command
+with different selections in the same file wastes work and leaves only the last
+selection well organized.</p><p>If you enter the REORG <span>/</span>SELECT=global-name-list command and the specified globals do not
+exist, REORG issues a message to the screen and continues to process any
+specified globals that exist. If REORG is unable to process any globals, it
+terminates with an error.</p><p>Arguments for this qualifier may be an individual global name, a range of
+global names, or a list of names and prefixes followed by the wildcard symbol.
+The caret symbol (^) in the specification of the global is optional.</p><p>The global name can be:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>A global name, such as ACN</p></li><li class="listitem"><p>A range of global names, such as A7:B7</p></li><li class="listitem"><p>A list, such as A,B,C.</p></li><li class="listitem"><p>A parenthetical list of global names such as (A, B, C).</p></li><li class="listitem"><p>Global names with the same prefix such as TMP*.</p></li></ul></div><p>In the first case, REORG only excludes global ^ACN. In the second case, REORG
+excludes all global names in the collating sequence A7 to B7. For the third
+<span>and fourth</span> case, REORG excludes A, B, and C. In
+the last case, REORG excludes all globals prefixed with TMP.</p><p>By default, REORG selects all globals.</p></div><div class="sect2" title="REPlicate"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_replicate_cmmd"></a>REPlicate<a class="indexterm" name="id3234318"></a></h3></div></div></div><p>The REPLICATE command controls the logical dual-site operation of GT.M. For a
+description of the REPLICATE command, see <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>. 
+chapter.</p></div><div class="sect2" title="REstore"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_restore_cmmd"></a>REstore<a class="indexterm" name="id3234269"></a></h3></div></div></div><p>RESTORE integrates one or more BACKUP <span>/</span>INCREMENTAL files into a corresponding database. The
+transaction number in the first incremental backup must be one more than the
+current transaction number of the database. Otherwise, MUPIP RESTORE will
+terminate with an error and refuse to perform the restore.</p><p>The format of the RESTORE command is:</p><pre class="programlisting">RE[STORE] [/qualifier] file-spec file-list</pre><p>The file-<span>specification</span>
+ identifies the name of the database file that RESTORE uses as
+a starting point. The transaction number in the database must match the starting
+transaction number of each successive input to the RESTORE. If the BACKUP
+<span>/</span>INCREMENTAL was
+created using <span>/</span>TRANSACTION=1, create a new database with MUPIP CREATE and do not
+access it, except the standalone MUPIP commands INTEG <span>/</span>FILE, EXTEND, and SET before
+initiating the RESTORE.</p><p>The file-list specifies one or more files produced by BACKUP <span>/</span>INCREMENTAL to RESTORE into the
+database. The file-<span>specification</span>
+ are separated by commas (,) and must be in sequential order,
+from the oldest transaction number to the most recent transaction number.
+RESTORE may take its input from <span>an RMS</span>
+
+<span>, including magnetic tape devices. When
+using an input file on a magnetic tape, use DCL to MOUNT specifying the same
+/BLOCKSIZE= as the one used to make the tape.</span>
+</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]E[XTEND]</em></span>
+</p><p>Specifies whether RESTORE should extend the database file automatically if it
+is smaller than the size required to load the data. M activity between backups
+may automatically extend a database file. Therefore, the database file specified
+as the starting point for a RESTORE may require an extension before the RESTORE.
+If the database needs an extension and the command specifies <span>/</span>NOEXTEND, MUPIP displays a message.
+The message provides the sizes of the input and output database files and the
+number of blocks by which to extend the database. If the RESTORE specifies more
+than one incremental backup with a file list, the database file may require more
+than one extension.</p><p>By default, RESTORE automatically extends the database file. </p></div><div class="sect2" title="RUndown"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_rundown_cmmd"></a>RUndown<a class="indexterm" name="id3234471"></a></h3></div></div></div><p>When database access has not been properly terminated, RUNDOWN properly closes
+currently inactive databases and releases any IPC resources used. Under normal
+operations, the last process to close a database file performs the RUNDOWN
+actions, and a MUPIP RUNDOWN is not required. In a database file is already
+properly rundown, a MUPIP RUNDOWN has no effect. If in doubt, it is always to
+safe to perform a rundown. FIS recommends the following method to shutdown
+a GT.M application or the system:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Terminate all GT.M processes, and</p></li><li class="listitem"><p>Rundown any and all database files that may be active.</p></li></ul></div><p>MUPIP RUNDOWN checks for version mismatch. If there is a mismatch, it skips
+the region and continues with the next region. This makes it easier for multiple
+(non-interacting) GT.M versions to co-exist on the same machine. Note that GT.M
+does not support concurrent access to the same database file by multiple
+versions of the software.</p><p>MUPIP RUNDOWN reports "RMS-%-FLK-file locked by another user" errors
+when it cannot get exclusive access.</p><p>The only errors considered terminal (i.e., cannot be trapped by the
+application program are %GTM-F- errors, and a few severe OpenVMS errors such as
+ACCVIO.</p><p>The format of the RUNDOWN command is:</p><pre class="programlisting">RU[NDOWN] [/FILE file-specification |/REGION region-list]</pre><p>The file-specification or region-list identifies the target of the
+RUNDOWN. If RUNDOWN has no parameter, it flushes the memory associated with all
+database files opened by the corresonding version of GT.M that currently have
+associated memory and no active users.</p><p>The RUNDOWN command must include one of the following qualifiers:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+<span>/</span>FILE</p></li><li class="listitem"><p>
+<span>/</span>REGION</p></li></ul></div><p>MUPIP RUNDOWN <span>/FILE or /REGION</span> clears certain fields
+in a file that is already closed. This facilitates recovery from a system crash
+or other operational anomaly.</p><p>Use RUNDOWN after a system crash or after the last process accessing a
+database terminates abnormally. RUNDOWN ensures that open databases are properly
+closed and ready for subsequent use. RUNDOWN has no effect on any database that
+is actively being accessed at the time the RUNDOWN is issued.</p><p>To ensure database integrity, all system shutdown algorithms should include
+scripts that stop at GT.M processes and perform RUNDOWN on all database
+files.</p><p>
+<span class="emphasis"><em>
+<span>/</span>F[ILE]</em></span>
+</p><p>Specifies that the argument is a file-<span>specification</span>
+ for a single database
+file. The <span>/</span>FILE qualifier
+is incompatible with the REGION qualifier. If the rundown parameter consists of
+a list of files, the command only operates on the first item in the list.</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[EGION]</em></span>
+</p><p>Specifies that the argument contains one or more region-names that identify
+database files mapped by the current Global Directory. <span>Region-names may include the DCL wildcards % and *. </span> The <span>/</span>REGION qualifier is
+incompatible with the <span>/</span>FILE qualifier.</p></div><div class="sect2" title="Set"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_set_cmmd"></a>Set<a class="indexterm" name="id3234629"></a></h3></div></div></div><p>SET modifies certain database characteristics. SET operates on either regions
+or files.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>In regions that have journaling enabled and on, you can switch journal
+files without either requiring standalone access or freezing updates.</p></td></tr></table></div><p>Example:</p><pre class="programlisting">MUPIP SET /REGION * /JOURNAL=(ON,NOBEFORE)</pre><p>The format of the SET command is:</p><pre class="programlisting">SE[T] [/qualifier,...] /FILE file-specification | /REGION region-name</pre><p>The file-<span>specification</span>
+ (or region-list) identifies the target of the SET.</p><p>Region-names may be lists and may include the DCL wildcards % and
+*.</p><p>The SET command must include one of the following qualifiers which determine
+whether the argument to the SET is a file-<span>specification</span>
+ or a
+region-list</p><p>
+<span class="emphasis"><em>
+<span>/</span>F[ILE]</em></span>
+</p><p>Specifies that the argument is a file-<span>specification</span>
+ for a single database
+file. The <span>/</span>FILE qualifier
+is incompatible with the <span>/</span>REGION qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[EGION]</em></span>
+</p><p>Specifies that the argument is a region-list which identifies database file(s)
+mapped by the current Global Directory. SET <span>/</span>REGION changes multiple files when the parameter
+contains a list and/or wildcards. The <span>/</span>REGION qualifier is incompatible with the <span>/</span>FILE qualifier.</p><p>The optional qualifiers which determine the action(s) for the SET are:</p><p>
+<span class="emphasis"><em>/A[CCESS_METHOD]=BG | MM</em></span>
+</p><p>Specifies the access method for a GDS database file. This qualifier
+requires stand-alone database access. For information on ACCESS_METHOD, refer to
+the "Greystone Database Structure" chapter.</p><p>By default, ACCESS_METHOD is established by MUPIP CREATE from
+information entered in the Global Directory.</p><p>
+<span class="emphasis"><em>
+<span>/</span>E[XTENSION_COUNT]=integer</em></span>
+</p><p>Specifies the number of GDS blocks by which an existing database file extends.
+A file or region name is required. This qualifier requires standalone access.
+The format of the EXTENSION_COUNT qualifier is:</p><pre class="programlisting">MUPIP SET /E=INTEGER</pre><p>
+<span class="emphasis"><em>
+<span>/</span>F[LUSH_TIME]=integer</em></span>
+</p><p>Specifies the amount of time between deferred writes of stale cache buffers.
+This time is specified as an integer number of 
+<span>delta-time format</span>. This
+qualifier requires standalone access. The format of the FLUSH_TIME qualifier
+is:</p><pre class="programlisting">MUPIP SET /F=TIME</pre><p>
+<span class="emphasis"><em>
+<span>/</span>G[LOBAL_BUFFERS]=integer</em></span>
+</p><p>Specifies the number of cache buffers for a BG database. This qualifier
+requires standalone access. For information on determining good working sizes
+for GLOBAL_BUFFERS, refer to the "Global Directory Editor" chapter.</p><p>In general, increasing the number of global buffers improves performance by
+smoothing the peaks of I/O load on the system. However, increasing the number of
+global buffers also increases the memory requirements of the system, and a
+larger number of global buffers can increase the probability of the buffers
+getting swapped out. If global buffers are swapped out, any performance gain
+from increasing the number of global buffers will be more than offset by the
+performance impact of swapping global buffers. Most applications use from 1,000
+to 4,000 global buffers for database regions that are heavily used. FIS
+does not recommend using fewer than 256 buffers except under special
+circumstances.</p><p>The minimum is 64 buffers and the maximum is 65536 buffers. By default, MUPIP
+CREATE establishes GLOBAL_BUFFERS using information entered in the Global
+Directory.</p><p>
+<span class="emphasis"><em>
+<span>/</span>L[OCK]_SPACE=integer</em></span>
+</p><p>Specifies the number of pages allocated to the management of M locks
+associated with the database. For more information on LOCK_SPACE, refer to the
+"Global Directory Editor" chapter. A file or region name is required. This
+qualifier requires standalone access. The format of the LOCK_SPACE qualifier
+is:</p><pre class="programlisting">MUPIP SET /L=integer</pre><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]J[OURNAL][=journal-option-list]</em></span>
+</p><p>Specifies whether the database allows journaling and, if it does,
+characteristics for the journal file.</p><p>
+<span>/</span>NOJOURNAL specifies
+that the database does not allow journaling. And also it does not accept an
+argument assignment.</p><p>
+<span>/</span>JOURNAL specifies
+journaling is allowed. It takes one or more arguments in a journal-option-list.
+For a full description of the <span>/</span>JOURNAL qualifier and its keywords, refer the "GT.M Journaling"
+chapter.</p><p>
+<span class="emphasis"><em>
+<span>/</span>RES[ERVED_BYTES]=size</em></span>
+</p><p>Specifies the size to be reserved in each database block. RESERVED_BYTES is
+generally used to reserve room for compatibility with other implementations of M
+or to observe communications protocol restrictions. RESERVED_BYTES may also be
+used as a user-managed fill factor.</p><p>The minimum RESERVED_BYTES is 0 bytes. The maximum RESERVED_BYTES is the block
+size minus the size of the block header which is 7 or 8 depending on your
+platform. Realistic determinations of this amount should leave room for at least
+one record of maximum size.</p></div><div class="sect2" title="Stop"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_stop_cmmd"></a>Stop<a class="indexterm" name="id3234628"></a></h3></div></div></div><p>STOP terminates a GT.M image. The image executes an orderly rundown of all
+databases that are currently open, and then exits. A MUPIP STOP performs
+a<span>n OpenVMS FORCEX system service</span>
+ and therefore may also be used to stop non-GT.M
+images</p><p>The format of the STOP command is:</p><pre class="programlisting">ST[OP] /N[AME]=process-name | /ID=process-id</pre><p>At least one of the qualifiers must appear. If both qualifiers appear, they
+must refer to the same process or STOP rejects the command.</p><p>Use the <span>DCL command SHOW SYSTEM</span>
+ to display a list of active process names and
+process identifiers (PIDs). <span>PIDs appear as hexadecimal numbers
+on a SHOW SYSTEM display, which is how they are specified to MUPIP
+STOP.</span>
+</p><p>To STOP a process belonging to its own account, a process requires no
+privileges. To STOP a process belonging to another account in the same group, a
+process requires GROUP privilege. To stop a process belonging to an account in a
+different group, a process requires WORLD privilege and must use /ID=.</p><p>
+<span class="emphasis"><em>/I[D]=process-id </em></span>
+</p><p>STOP interprets the /ID qualifier as a hexadecimal number that
+corresponds to the form displayed by the DCL command SHOW SYSTEM.</p><p>
+<span class="emphasis"><em>/N[AME]=process-name</em></span>
+</p><p>Specifies the name of the process to stop. The maximum length of the
+name is 15 characters. Use the /ID qualifier if the process belongs to an owner
+in a different group.</p><p>
+<span class="emphasis"><em>/UP[GRADE] /N[AME] = file-name</em></span>
+</p><p>Upgrades a GT.M version 3.x database file to the GT.M version 4
+format. Ensure that there is a backup copy of any file that is being upgraded,
+and that mupip integ with GT.M 3.x reports that the file is clean. Files must be
+upgraded one at a time. Pressing &lt;CTRL-C&gt; or experiencing a system crash
+while a file upgrade is in progress can leave the file damaged, and require that
+it be restored from the backup.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05s01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Operating In MUPIP </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> MUPIP Command Summary</td></tr></table></div></body></html>

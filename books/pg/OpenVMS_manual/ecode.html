@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ECode</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter8.html" title="ChapterA 8.A Intrinsic Special Variables" />
+    <link rel="prev" href="device.html" title="$Device" />
+    <link rel="next" href="estack.html" title="$EStack" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ECode</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="device.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 8.A Intrinsic Special Variables</th>
+          <td width="20%" align="right">A <a accesskey="n" href="estack.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="ecode"></a>$ECode</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4193182" class="indexterm"></a>
+      <p>$EC[ODE] contains a list of error codes for &quot;active&quot; errors -the error conditions which are not yet resolved. If there are no active errors, $ECODE contains the empty string. Whenever an error occurs, a code for that error is appended to the value of $ECODE in such a way that the value of $ECODE always starts and ends with a comma.</p>
+      <p>The value of $ECODE can be SET, and when it is set to a non-NULL value, error processing starts. </p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>Refer to the Error Processing chapter later in this manual to learn about $ECODE's role in error processing.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>List of codes for $ECODE start with comma seperated by commas. A code starts with &quot;M&quot;, &quot;U&quot;, or &quot;Z&quot;, with rest numeric. &quot;M&quot; codes are assigned by MDC (MUMPS Development Committee), &quot;U&quot; by application (programmers), and &quot;Z&quot; codes by MUMPS implementors (in this case GT.M).</p>
+      <p>An error always has a GT.M specified code and many errors also have an ANSI Standard code. The complete list of standardized error codes can be referenced from GT.M Message and Recovery Procedures Reference Manual version 4.3 and onwards.</p>
+      <pre class="programlisting">
+    IF $ECODE[&quot;,M61,&quot; WRITE &quot;Undefined local variable&quot;
+    </pre>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>The leftmost character of the value of $ECODE is always a comma. This means that every error code that is stored in $ECODE is surrounded by commas. If $ECODE was to contains the error code without the commas (that is, &quot;M61&quot;), the variable would check for subset &quot;M6&quot; as well. Thus, it is recommended that you include the commas in the value to check. For example; check whether $ECODE contains &quot;,M61,&quot;.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>$ECODE can be SET but not NEW'd. When $ECODE is set to the empty string (&quot; &quot;), error handling becomes &quot;inactive&quot; and therefore QUIT does not trigger additional error handling.</p>
+      <p>When $ECODE is not set to the empty string, M error handling is active, which also affects behaviour in some aspects of $STACK.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="device.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter8.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="estack.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$DeviceA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $EStack</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

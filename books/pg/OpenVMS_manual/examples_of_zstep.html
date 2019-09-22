@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of ZSTep</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zstep_cmmd.html" title="ZSTep" />
+    <link rel="prev" href="use_of_zstep.html" title="Use of ZSTep" />
+    <link rel="next" href="zsystem.html" title="ZSYstem" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of ZSTep</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="use_of_zstep.html">Prev</a>A </td>
+          <th width="60%" align="center">ZSTep</th>
+          <td width="20%" align="right">A <a accesskey="n" href="zsystem.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_zstep"></a>Examples of ZSTep</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4180804" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt;ZSTEP INTO:&quot;W ! ZP @$ZPOS W !&quot;
+    </pre>
+      <p>This ZSTEP resumes execution of the current routine. At the beginning of the next line executed, the ZSTEP action ZPRINTs the source code for that line. Because the specified action does not contain a BREAK command, execution continues to the next line and all subsequent lines in the program flow.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt;S curx=$g(x),zact=&quot;ZST:curx=$g(x) I:zact B:curx'=$g(x)&quot;
+    GTM&gt;ZSTEP INTO:zact
+    </pre>
+      <p>This sequence uses ZSTEP to invoke Direct Mode at the beginning of the first line after the line that alters the value of x.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="use_of_zstep.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zstep_cmmd.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="zsystem.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Use of ZSTepA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A ZSYstem</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

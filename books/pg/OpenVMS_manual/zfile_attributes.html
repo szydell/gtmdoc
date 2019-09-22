@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZFILEattributes()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter7.html" title="ChapterA 7.A Functions" />
+    <link rel="prev" href="examples_of_zdate.html" title="Examples of $ZDATE()" />
+    <link rel="next" href="examples_of_zfile.html" title="Examples of $ZFILEATTRIBUTES()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZFILEattributes()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zdate.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 7.A Functions</th>
+          <td width="20%" align="right">A <a accesskey="n" href="examples_of_zfile.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zfile_attributes"></a>$ZFILEattributes()</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zfile.html">Examples of $ZFILEATTRIBUTES()</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4186609" class="indexterm"></a>
+      <p>The $ZFILEATTRIBUTES function returns an item of information about a specified file. The $ZFILEATTRIBUTES function is analogous to the DCL Lexical function F$FILE_ATTRIBUTES.</p>
+      <p>The format for the $ZFILEATTRIBUTES function is:</p>
+      <pre class="programlisting">
+    $ZFILE[ATTRIBUTES](expr1,expr2)
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The first expression specifies the target file </p>
+          </li>
+          <li>
+            <p>The second expression specifies the item keyword identifying the information for $ZFILEATTRIBUTES() to return; keywords may be upper-, lower-, or mixed-case</p>
+          </li>
+        </ul>
+      </div>
+      <p>$ZFILEATTRIBUTES() provides a tool for examining the RMS characteristics of a file from GT.M.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="2">
+    <p>$ZFILEATTRIBUTES() Item Keywords A  </p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ITEM KEYWORD</p>
+    </td>
+              <td>
+    <p>$ZFILEATTRIBUTES() DATA REQUIRED</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ALQ</p>
+    <p>BDT</p>
+    <p>BKS</p>
+    <p>BLS</p>
+    <p>CBT</p>
+    </td>
+              <td>
+    <p>Allocation quantity</p>
+    <p>Backup date/time</p>
+    <p>Bucket size</p>
+    <p>Block size</p>
+    <p>1 if contiguous-best-try, 0 otherwise</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>CDT</p>
+    <p>CTG</p>
+    <p>DEQ</p>
+    <p>DID</p>
+    <p>DVI</p>
+    </td>
+              <td>
+    <p>Creation date/time</p>
+    <p>1 if contiguous, 0 otherwise</p>
+    <p>Default extension quantity</p>
+    <p>Directory identification</p>
+    <p>Device name</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>EDT</p>
+    <p>EOF</p>
+    <p>FID</p>
+    <p>FSZ</p>
+    <p>GRP</p>
+    </td>
+              <td>
+    <p>Expiration date/time</p>
+    <p>One less than the number of blocks used</p>
+    <p>File identification</p>
+    <p>Fized control area size</p>
+    <p>Owner group number</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>MBM</p>
+    <p>MRN</p>
+    <p>MRS</p>
+    <p>NOA</p>
+    <p>NOK</p>
+    </td>
+              <td>
+    <p>Owner member number</p>
+    <p>Maximum record number</p>
+    <p>Maximum record size</p>
+    <p>Number of areas</p>
+    <p>Number of keys</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ORG</p>
+    <p>PRO</p>
+    <p>PVN</p>
+    <p>RAT</p>
+    <p>RCK</p>
+    </td>
+              <td>
+    <p>File organization (SEq, REL, IDX)</p>
+    <p>File protection</p>
+    <p>Prologue version number</p>
+    <p>Record attributes (CR, PRN, FTN)</p>
+    <p>1 if read check, 0 otherwise</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>RDT</p>
+    <p>RFM</p>
+    <p>RVN</p>
+    <p>UIC</p>
+    <p>WCK</p>
+    </td>
+              <td>
+    <p>Revision date/time</p>
+    <p>Record format (VAR, FIX, VFC, UDF)</p>
+    <p>Revision number</p>
+    <p>Owner UIC</p>
+    <p>1 if write check, 0 otherwise</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zdate.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter7.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="examples_of_zfile.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of $ZDATE()A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Examples of $ZFILEATTRIBUTES()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

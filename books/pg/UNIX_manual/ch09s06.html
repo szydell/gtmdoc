@@ -1,0 +1,199 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Using Null Devices</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
+<link rel="prev" href="ch09s05.html" title="FIFO Characteristics">
+<link rel="next" href="ch09s07.html" title="Using PIPE Devices">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Using Null Devices</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch09s05.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 9. <span>Input/Output</span> Processing</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch09s07.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch09.html"><span>Input/Output</span> Processing</a></span> &gt; <span class="breadcrumb-node">Using Null Devices</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="using_null_devices"></a>Using Null Devices<a class="indexterm" name="idp71855472"></a>
+</h2></div></div></div>
+<p>Null devices comprise of a collection of system purpose devices that include /dev/null, /dev/zero, /dev/random, and /dev/urandom.</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>/dev/null returns a null string on READ and sets $ZEOF</p></li>
+<li class="listitem"><p>/dev/random and /dev/urandom return a random value on READ and set $ZEOF</p></li>
+<li class="listitem"><p>/dev/zero returns 0's on READ and does not set $ZEOF</p></li>
+</ul></div>
+<p> A null device discards all output. GT.M maintains a virtual cursor position for null devices as it does for terminals on output. Use null devices for program testing and debugging, or for jobs that permit I/O to be discarded under certain circumstances. For example, JOB processes must have input and output devices associated with them, even though they do not use them. Null devices are low overhead never-fail alternatives for certain classes of I/O.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="null_device_param_summ"></a>Null Deviceparameter Summary</h3></div></div></div>
+<p>The following table provides a brief summary of deviceparameters for null devices. For more detailed information, refer to <a class="xref" href="ch06s16.html" title="Open">&#8220;Open&#8221;</a>, <a class="xref" href="ch06s24.html" title="Use">&#8220;Use&#8221;</a>, and <a class="xref" href="ch09s09.html#close_cmmd_9" title="Close">&#8220;Close&#8221;</a>.</p>
+<div class="informaltable">
+<a name="tblnulldevsum"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="3">
+                <p>Null Deviceparameters</p>
+              </th></tr>
+<tr>
+<th>
+                <p>DEVICEPARAMETER</p>
+              </th>
+<th>
+                <p>COMMAND</p>
+              </th>
+<th>
+                <p>COMMENT</p>
+              </th>
+</tr>
+</thead>
+<tfoot><tr><th colspan="3">
+                <p>O: Applies to the OPEN command</p>
+                <p>U: Applies to the USE command</p>
+                <p>C: Applies to the CLOSE command</p>
+              </th></tr></tfoot>
+<tbody>
+<tr>
+<td>
+                <p>EXCEPTION=expr</p>
+              </td>
+<td>
+                <p>O/U/C</p>
+              </td>
+<td>
+                <p>Controls device-specified error handling. For the null device this is only EOF handling and therefore exceptions can never be invoked except by a READ.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[NO]FILTER[=expr]</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls some $X,$Y maintenance.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[Z]LENGTH=intexpr</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls the length of the virtual page.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[Z]WIDTH=intexpr</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Controls maximum size of a record.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>[Z][NO]WRAP</p>
+              </td>
+<td>
+                <p>O/U</p>
+              </td>
+<td>
+                <p>Controls handling of records longer than the maximum width.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>X=intexpr</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Sets $X to intexpr.</p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>Y=intexpr</p>
+              </td>
+<td>
+                <p>U</p>
+              </td>
+<td>
+                <p>Sets $Y to intexpr.</p>
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="null_device_examples"></a>Null Device Examples<a class="indexterm" name="idp71914640"></a>
+</h3></div></div></div>
+<p>This section contains examples of null device usage.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;do ^runrep
+runrep;
+ zprint ^runrep
+ set dev="/dev/null"
+ set hdr="********* REPORT HEADER ************"
+ open dev use dev
+ set x="" write hdr,!,$zdate($horolog),?30,$job,!
+ for  set x=$order(^tmp($job,x)) quit:x=""  do REPORT
+ quit
+REPORT;
+ ;large amount of code
+ quit;
+</pre>
+<p>This program produces a report derived from the information in the global variable ^tmp. The unspecified routine REPORT may potentially contain a large amount of code. To see that the basic program functions without error, the programmer may discard the output involved in favor of watching the function. To run the program normally, the programmer simply has to change the variable dev to name another device and the routine REPORT writes to the dev device.</p>
+<p>Example:</p>
+<pre class="programlisting">job ^X:(in="/dev/null":out="/dev/null":err="error.log")
+JOB ^X:(IN="/dev/null":OUT="/dev/null":ERR="error.log") </pre>
+<p>This example issues a GT.M JOB command to execute the routine ^X in another process. This routine processes a large number of global variables and produces no output. In the example, the JOBbed process takes its input from a null device, and sends its output to a null device. If the JOBbed process encounters an error, it directs the error message to error.log.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch09s05.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch09.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch09s07.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">FIFO Characteristics </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Using PIPE Devices</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

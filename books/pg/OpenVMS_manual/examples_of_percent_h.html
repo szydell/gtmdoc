@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of %H</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="percent_h.html" title="%H" />
+    <link rel="prev" href="output_variables_percent_h.html" title="Output Variables" />
+    <link rel="next" href="percent_t.html" title="%T" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of %H</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="output_variables_percent_h.html">Prev</a>A </td>
+          <th width="60%" align="center">%H</th>
+          <td width="20%" align="right">A <a accesskey="n" href="percent_t.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="examples_of_percent_h"></a>Examples of %H</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4220548" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;SET %DT=+$H DO %CDS^%H
+	GTM&gt;ZWRITE
+	%DAT=&quot;10/20/2002&quot;
+	%DT=59097
+	</pre>
+      <p>This example sets %DT to the current date in $HOROLOG format and converts it to mm/dd/yyyy format by invoking %H at the label %CDS. %H returns the converted date in the variable %DAT. ZWRITE displays the contents of the variables.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;SET %DT=&quot;10/20/2002&quot; DO %CDN^%H
+	GTM&gt;ZWRITE
+	%DAT=59097
+	%DT=&quot;10/20/2002&quot;
+	</pre>
+      <p>This example sets the variable %DT to a date in mm/dd/yyyy format and invokes %H at the label %CDN. %H returns the converted date in the variable %DAT. ZWRITE displays the contents of the variables.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;SET %TM=$P($H,&quot;,&quot;,2) DO %CTS^%H
+	GTM&gt;ZWRITE
+	%TIM=&quot;17:41:18&quot; 
+	%TM=63678
+	</pre>
+      <p>This example sets the variable %TM to the current time in $HOROLOG format using a $PIECE() function to return only those digits of the $HOROLOG string that represent the time. The example then invokes %H at the label %CTS. %H returns the converted time in the variable %TIM. ZWRITE displays the contents of the variables.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;SET %TM=&quot;17:41:18&quot; DO %CTN^%H
+	GTM&gt;ZWRITE
+	%TIM=63678
+	%TM=&quot;17:41:18&quot; 
+	</pre>
+      <p>This example sets the variable %TM to a time in hh:mm:ss format, and invokes %H at the label %CTN. %H returns the converted time in the variable %TIM. ZWRITE displays the contents of the variables.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;WRITE $$CDS^%H(59130)
+	11/22/2002	
+	</pre>
+      <p>This invokes CDS^%H as an extrinsic function to convert the external argument to external date format. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;WRITE $ZDATEFORM
+	1980
+	GTM&gt;WRITE $$CDN^%H(&quot;10/20/02&quot;)
+	59097
+	GTM&gt;WRITE $ZDATE(59097)
+	10/20/2002
+	GTM&gt;WRITE $$CDN^%H(&quot;10/20/92&quot;)
+	55445
+	GTM&gt;WRITE $ZDATE(55445)
+	10/20/1992	
+	</pre>
+      <p>This example shows the use of a year limit in $ZDATEFORM. Two digit years are interpreted to be in the interval of 1980 - 2079; since $ZDATEFORM is 1980, the input year &quot;02&quot; is interpreted as &quot;2002&quot; and &quot;92&quot; is interpreted as &quot;1992&quot;. This example invokes CDN^%H to convert the argument in mm/dd/yy format to $HOROLOG format. $ZDATE() is used to conver the $HOROLOG format date to mm/dd/yyyy format.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="output_variables_percent_h.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="percent_h.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="percent_t.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Output VariablesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A %T</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

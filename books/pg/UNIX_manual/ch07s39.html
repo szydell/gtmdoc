@@ -1,0 +1,84 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZLength()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s38.html" title="$ZJustify()">
+<link rel="next" href="ch07s40.html" title="$ZMessage()">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZLength()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s38.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s40.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZLength()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zlength"></a>$ZLength()<a class="indexterm" name="idp70154032"></a>
+</h2></div></div></div>
+<p>Returns the length of a sequence of octets measured in bytes, or in "pieces" separated by a delimiter specified by one of its arguments.</p>
+<p>The format for the $ZLENGTH() function is:</p>
+<pre class="programlisting">$ZL[ENGTH](expr1[,expr2])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The first expression specifies the sequence of octets that $ZLENGTH() "measures".</p></li>
+<li class="listitem"><p>The optional second expression specifies the delimiter that defines the measure; if this argument is missing, $ZLENGTH() returns the number of bytes in the sequence of octets.</p></li>
+<li class="listitem"><p>If the second argument is present and not null, $ZLENGTH() returns one more than the count of the number of occurrences of the second byte sequence in the first byte sequence; if the second argument is null , the M standard for the analogous $LENGTH() dictates that $ZLENGTH() returns a zero (0).</p></li>
+<li class="listitem"><p>$ZLENGTH() provides a tool for determining the lengths of a sequence of octets in two ways--bytes and pieces. The two argument $ZLENGTH() returns the number of existing pieces, while the one argument returns the number of bytes.</p></li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="idp70121312"></a>Examples<span> of $ZLength()</span>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zlength("<span class="symbol">&#20027;&#35201;&#38632;&#22312;&#35199;&#29677;&#29273;&#20572;&#30041;&#22312;&#24179;&#21407;</span>")
+36
+GTM&gt;</pre>
+<p>This uses $ZLENGTH() to WRITE the length in bytes of the sequence of octets "<span class="symbol">&#20027;&#35201;&#38632;&#22312;&#35199;&#29677;&#29273;&#20572;&#30041;&#22312;&#24179;&#21407;</span>".</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set x="<span class="symbol">&#20027;</span>"_$zchar(63)_"<span class="symbol">&#35201;</span>"_$zchar(63)_"<span class="symbol">&#38632;</span>"
+GTM&gt;write $zlength(x,$zchar(63))
+3
+GTM&gt;</pre>
+<p>This uses $ZLENGTH() to WRITE the number of pieces in a sequence of octets, as delimited by the byte code $ZCHAR(63).</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set x=$zchar(63)_"<span class="symbol">&#20027;</span>"_$zchar(63)_"<span class="symbol">&#35201;</span>"_$zchar(63)_"<span class="symbol">&#38632;</span>"_$zchar(63)"
+GTM&gt;write $zlength(x,$zchar(63))
+5
+GTM&gt;</pre>
+<p>This also uses $ZLENGTH() to WRITE the number of pieces in a sequence of octets, as delimited by byte code $ZCHAR(63). Notice that GT.M counts both the empty beginning and ending pieces in the string because they are both delimited.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s38.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s40.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZJustify() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZMessage()</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

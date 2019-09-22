@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Quit</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="ChapterA 6.A Commands" />
+    <link rel="prev" href="open_cmmd.html" title="Open" />
+    <link rel="next" href="examples_of_quit.html" title="Examples of Quit" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Quit</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="open_cmmd.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 6.A Commands</th>
+          <td width="20%" align="right">A <a accesskey="n" href="examples_of_quit.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="quit_cmmd"></a>Quit</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_quit.html">Examples of Quit</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <p>Except when a <a id="id4174557" class="indexterm"></a> QUIT appears on a line after a FOR, the QUIT command terminates execution of the current GT.M invocation stack level initiated by a DO, XECUTE, extrinsic function or special variable, and returns control to the next &quot;lower&quot; level. In this case, QUIT restores any values stacked at the current level by NEWs or by parameter passing. When a QUIT appears on the line following a FOR, it terminates execution of the FOR.</p>
+      <p>The format of the QUIT command is:</p>
+      <pre class="programlisting">
+        Q[UIT][:tvexpr] [expr]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>When a QUIT terminates an extrinsic function, it must have an argument that supplies the value returned by the function; in all other cases, QUIT must not have an argument and must be followed by at least two (2) spaces to separate it from the next command on the line.</p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom evaluating to a QUIT argument form a legal argument for a QUIT.</p>
+          </li>
+        </ul>
+      </div>
+      <p>The QUIT performs two similar, but different, functions depending on its context. Because FORs do not add levels to the GT.M invocation stack, QUITs inside FOR loops simply terminate the loop. QUITs that terminate DOs, XECUTEs and extrinsics remove a GT.M invocation stack level and therefore may adjust the local variable environment resulting from previous NEWs or parameter passing. A QUIT from an extrinsic or a frame created by an argumentless DO restores $TEST to its stacked value.</p>
+      <p>Attempting to QUIT (implicitly or explicitly) from code invoked by a DO, XECUTE or extrinsic after that code issued a TSTART not yet matched by a TCOMMIT, produces an error.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="open_cmmd.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="examples_of_quit.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">OpenA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Examples of Quit</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZTIMeout</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
+<link rel="prev" href="ch08s59.html" title="$ZTExit">
+<link rel="next" href="ch08s61.html" title="$ZTrap">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZTIMeout</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch08s59.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 8. <span>Intrinsic Special Variables</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch08s61.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZTIMeout</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="ztimeout"></a>$ZTIMeout</h2></div></div></div>
+<p>$ZTIMEOUT controls a single process wide timer. The format of the $ZTIMEOUT ISV is:</p>
+<pre class="programlisting">$ZTIMeout=([timeout][:labelref]) </pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional timeout in seconds specifies with millisecond accuracy how long from the current time the timer interrupts the process. If the specified timeout is negative, GT.M cancels the timer. If the timeout is zero, GT.M treats it as it would a DO of the vector. </p></li>
+<li class="listitem"><p>The optional labelref specifies a code vector defining a fragment of M code to which GT.M transfers control as if with a DO when the timeout expires. If the timeout is missing, the assignment must start with a colon and only changes the vector, and in this case, if the timeout is the empty string, GT.M removes any current vector.</p></li>
+</ul></div>
+<p>Note that GT.M only recognizes interrupts such as from $ZTIMEOUT at points where it can properly resume operation, such as the beginning of a line, when waiting on a command with a timeout, or when starting a FOR iteration. When a timeout occurs, if the last assignment specified no vector, GT.M uses the current $ETRAP or $ZTRAP. GT.M rejects an attempted KILL of $ZTIMeout with the VAREXPECTED error and an attempted NEW of $ZTIMeout with the SVNONEW error.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zprint ^ztimeout
+ztimeout
+  ; Display $ztimeout
+    write !,$ztimeout               ; display $ZTIMeout - in this case the initial value -1
+                                    ; set with a vector (do ^TIMEOUT)
+    set $ztimeout="60:do ^TIMEOUT"  ; timeout of 1 minute. After timeout expires, XECUTEs do ^TIMEOUT
+    write !,$ztimeout               ; displays the remaining time:vector until timeout
+  ; set without a vector
+    set $ztimeout=120               ; set the timeout to 2 minutes without changing the vector
+    set $ztimeout="1234do ^TIMEOUT" ; missing colon creates a timeout for 1234 seconds
+    set $ztimeout="10:"             ; set the timeout to 10 seconds and vector to current etrap or ztrap
+    set $ztimeout=-1                ; set cancels the timeout
+  ; Note that set to 0 triggers an immediate timeout
+    set $ztimeout=0                 ; triggers the current vector
+    set $ztimeout="0:DO FOO"        ; this has the same effect as DO FOO
+GTM&gt;</pre>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch08s59.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch08.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch08s61.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZTExit </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZTrap</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

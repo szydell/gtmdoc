@@ -1,0 +1,58 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>NOJNLPOOL </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="NOJNL.html" title="NOJNL ">
+<link rel="next" href="NOLBRSRC.html" title="NOLBRSRC ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">NOJNLPOOL <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="NOJNL.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="NOLBRSRC.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">NOJNLPOOL <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span></span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="NOJNLPOOL"></a>NOJNLPOOL <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</h2></div></div></div>
+<p><span class="bold"><strong>NOJNLPOOL</strong></span>, No journal pool info found in the replication instance of xxxx</p>
+<p>Run Time/MUPIP Error: This indicates that GT.M / MUPIP did not get replication information from the instance file specified. Replication instance file was not initialized because replication did not start, or some other process reset the replication instance file. </p>
+<p>Action: Start the Source Server if it was not started. Note that the first Source Server process creates the Journal Pool. Subsequent Source Server processes use the Journal Pool that the first Source Server process creates. If the source server was running, stop the server and perform an optimum recovery using MUPIP JOURNAL -ROLLBACK -BACKWARD "*" and restart the Source Server. If optimum recovery command fails, perform a MUPIP RUNDOWN (or a MUPIP RUNDOWN -REGION "*"),  and then restart the Source Server. </p>
+<a class="indexterm" name="idp172942000"></a><a class="indexterm" name="idp172973984"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="NOJNL.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="NOLBRSRC.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">NOJNL  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> NOLBRSRC </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

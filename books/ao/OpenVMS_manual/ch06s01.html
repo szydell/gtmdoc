@@ -1,0 +1,53 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Deciding Whether to Use Journaling</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch06.html" title="Chapter 6. GT.M Journaling"><link rel="prev" href="ch06.html" title="Chapter 6. GT.M Journaling"><link rel="next" href="ch06s02.html" title="Setting Up for Journaling"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Deciding Whether to Use Journaling</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06.html">Prev</a> </td><th width="60%" align="center">Chapter 6. GT.M Journaling</th><td width="20%" align="right"> <a accesskey="n" href="ch06s02.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Deciding Whether to Use Journaling"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="decide_to_use_journal"></a>Deciding Whether to Use Journaling<a class="indexterm" name="id3234634"></a></h2></div></div></div><p>GT.M's extensive journaling capabilities are optional. You may choose to journal
+some, all, or none of your database files.</p><p>Use the following descriptions of journaling functionality to choose the best
+approach for your organization.</p><div class="sect2" title="Types of Issues Addressed with Journaling"><div class="titlepage"><div><div><h3 class="title"><a name="types"></a>Types of Issues Addressed with Journaling<a class="indexterm" name="id3236975"></a></h3></div></div></div><p>M database management ensures that multiple concurrent updates and retrievals
+of the same information (or information "close together" in ordered sequence)
+are handled in a predictable and logical fashion. Sometimes the database manager
+may have to change multiple records, usually indices, as a result of a single
+update. Interrupting a process that is performing such a "multi-point" update
+violates a design assumption of the M implementation and also results in a
+malformed database. Under normal operation, the database logic handles
+interruptions by deferring their recognition until the update is complete.
+However, occurrences such as power failures  can cause such interruptions. </p></div><div class="sect2" title="Advantages of Journaling"><div class="titlepage"><div><div><h3 class="title"><a name="advatages"></a>Advantages of Journaling<a class="indexterm" name="id3235122"></a></h3></div></div></div><p>When a computer system crashes, the database can be left in a transient state
+that is damaged. Continuing to use such a database can result in unexpected and
+undesirable results; including system hangs, incorrect results, the faulty
+application of business logic, as well as further damage to the database.
+Journaling can provide for automated recovery and repair of the database,
+eventually eliminating the need for manual repair.</p><p>Advantages of journaling options include:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Automatic "replay" of work to the last committed update recorded in a
+journal file. Note that with the use of transaction processing and
+journaling, GT.M provides full ACID properties.</p></li><li class="listitem"><p>Quick recovery options, such as processing only the information
+recorded immediately prior to failure. </p><p>For example, you can recover just the last minute of work instead of
+replaying the entire journal file.</p></li><li class="listitem"><p>Recorded database updates formatted appropriately for processing by an
+M program.</p><p>For example, MUPIP JOURNAL <span>/</span>EXTRACT outputs records specified by time, user,
+the process identification number, global variable, process name, and
+transaction type. </p></li><li class="listitem"><p>Identification of processes active when the system failed.</p><p>The <span>/</span>SHOW
+qualifier identifies these processes, as well as what transactions were
+not completed, and other information about the database updates and
+processes contained in the journal file. </p></li></ul></div></div><div class="sect2" title="Disadvantages of Journaling"><div class="titlepage"><div><div><h3 class="title"><a name="disadvantages"></a>Disadvantages of Journaling<a class="indexterm" name="id3237130"></a></h3></div></div></div><p>While journaling is generally a valuable safeguard in protecting your work,
+there are issues that may deter you from invoking it.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Journaling requires additional CPU cycles, memory, and disk access.
+This can impact application performance.</p></li><li class="listitem"><p>Journaling may duplicate features already built into your
+applications. In that case journaling provides no additional value to
+your organization.</p></li><li class="listitem"><p>A journal file has questionable value in the case where the database
+and the journal share a common point of failure that affects the
+information in both over a significant period of time. This can be
+addressed by using different disks and different disk controllers (where
+possible) for the journal and the associated database files.</p></li></ul></div></div><div class="sect2" title="Additional Considerations"><div class="titlepage"><div><div><h3 class="title"><a name="id3237012"></a>Additional Considerations<a class="indexterm" name="id3237054"></a></h3></div></div></div><p>Without journaling, the most common method of recovery is to load a backup
+copy of the database and then re-enter the work completed since the backup was
+made. </p><p>Most of the overhead costs associated with recovering from a failure usually
+derive from maintaining a state of preparedness for the manual recovery, and the
+potential risk to the organization from damage to the information during the
+relatively infrequent and "abnormal" handling of a recovery. Therefore, you must
+weigh the cost of reduced computer throughput or, alternatively, the additional
+hardware to support journaling with the same level of performance, against the
+reduced likelihood of a prolonged manual re-entry with its associated
+drawbacks.</p><p>Some users may journal only heavily updated globals. However, since
+infrequently changed globals generate little additional load and may present
+significant control problems if not journaled, you may decide that these globals
+should also be journaled to maintain application integrity.</p><p>You can use other means to recreate those globals that contain only static
+information or process-local (temporary) information. Given the disk space and
+disk channel overheads associated with journaling, there is a significant
+performance benefit to separating globals that fit either of these categories
+into separate database files that do not require journaling. </p><p>When databases contain only temporary information, they can be deleted and
+recreated with MUPIP CREATE during a recovery. In the unlikely event that a
+failure damages truly static files, the files can be restored from backups
+without journal recovery.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch06s02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 6. GT.M Journaling </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> Setting Up for Journaling</td></tr></table></div></body></html>

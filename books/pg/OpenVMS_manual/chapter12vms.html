@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ChapterA 12.A Database Access Library</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="prev" href="examples_ext_rtn.html" title="Example" />
+    <link rel="next" href="invoking_DAL_functions.html" title="Invoking DAL Functions from External Routines" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ChapterA 12.A Database Access Library</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_ext_rtn.html">Prev</a>A </td>
+          <th width="60%" align="center">A </th>
+          <td width="20%" align="right">A <a accesskey="n" href="invoking_DAL_functions.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="id4231322"></a>ChapterA 12.A Database Access Library</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <p>
+          <b>Table of Contents</b>
+        </p>
+        <dl>
+          <dt>
+            <span class="sect1">
+              <a href="invoking_DAL_functions.html">Invoking DAL Functions from External Routines</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="initialize_gtm_run.html">Initializing the GT.M Run-time Environment</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="call_arguments_t.html">Call Arguments</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="data_types_and_descriptors.html">Data Types and Descriptors</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="routine_examples.html">Routines Example</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <p>GT.M allows programs written in other VMS programming languages to refer to GT.M M databases in ways analogous to the references made by M commands and functions. External routines, except for GTM$INIT, refer to GT.M databases using symbols in the GT.M run-time library prefaced by GTM (for example, GTM$DATA). The section within the GT.M run-time library containing these GT.M symbols is called the Database Access Library (DAL). Each GT.M symbol points to a specific database function, also called a DAL function. </p>
+      <p>GT.M allows programs written in other programming languages to refer to GT.M databases in ways similar to the references made by M commands and functions. References are made by using symbols in a GT.M run-time library prefaced by gtm (e.g., gtm_data). The GT.M run-time library containing these GT.M symbols is called the Database Access Library (DAL) and is named libgtmrpc.a. Each GT.M symbol represents a specific database function, also called a DAL function.</p>
+      <p>The GT.M run-time library routines conform to the VMS Calling and Condition Handling standard and therefore can be referenced by any VMS programming language that supports that standard. </p>
+      <p>GT.M database functions available to external routines are: </p>
+      <p>gtm_init:			Initializes the GT.M run-time environment.</p>
+      <p>GTM$DATA:			Performs an M $DATA function</p>
+      <p>gtm_data:			Performs an M $DATA function.</p>
+      <p>GTM$DECLOCK:		Decrements LOCKs on M names</p>
+      <p>gtm_declock:		Decrements LOCKs on M names.</p>
+      <p>GTM$GET:			Retrieves an M node</p>
+      <p>gtm_get:			Retrieves an M node.</p>
+      <p>GTM$INCLOCK:		Increments LOCKs on M names</p>
+      <p>GTM$INIT:			Initializes the GT.M run-time environment </p>
+      <p>gtm_inclock:		Increments LOCKs on M names.</p>
+      <p>GTM$INTERRUPT:	Permits another language sharing a process with GT.M to trigger GT.M out-of-band processing when GT.M regains control of the process.</p>
+      <p>gtm_interrupt:	Permits another language sharing a process with GT.M to trigger GT.M out-of-band processing when GT.M regains control of the process.</p>
+      <p>GTM$KILL:			Kills a node and all of its descendants</p>
+      <p>gtm_kill:			Kills a node and all of its descendants.</p>
+      <p>GTM$LOCK:			LOCKs or unLOCKs M names</p>
+      <p>gtm_lock:			LOCKs or unLOCKs M names.</p>
+      <p>GTM$ORDER:		Performs a M $ORDER function</p>
+      <p>gtm_order:		Performs an M $ORDER function.</p>
+      <p>GTM$PREVIOUS:		Performs an M $ZPREVIOUS function</p>
+      <p>gtm_previous:		Performs an M $ZPREVIOUS function.</p>
+      <p>GTM$PUT:			Stores a node in an M variable</p>
+      <p>gtm_put:			Stores a node in an M variable.</p>
+      <p>GTM$QUERY:		Performs a $QUERY function on an M global</p>
+      <p>GTM$RUNDOWN:		Runs down and closes all GT.M M databases opened by the current user</p>
+      <p>gtm_rundown:		Performs an M $NEXT function</p>
+      <p>gtm_query:		Performs a $QUERY function on an M global.</p>
+      <p>GTM$SETGBLDIR:	Sets new value for $ZGBLDIR</p>
+      <p>gtm_setgbldir:	Sets a new value for $ZGBLDIR.</p>
+      <p>GTM$WITHDRAW:		Performs a ZWITHDRAW command on a global variable </p>
+      <p>gtm_withdraw:		Performs a ZWITHDRAW command on a global variable. </p>
+      <p>gtm_halt:			Runs down and closes all GT.M M databases opened by the current user.</p>
+      <p>GTM$XECUTE:		Performs an XECUTE command</p>
+      <p>gtm_xecute:		Performs an XECUTE command.</p>
+      <p>GTM$ZALLOC:		ZALLOCATEs M names</p>
+      <p>gtm_zalloc:		ZALLOCATEs M names.</p>
+      <p>GTM$ZDEALLOC:		ZDEALLOCATEs M names</p>
+      <p>gtm_zdealloc:		ZDEALLOCATEs M names.</p>
+      <p>GTM$ZTCOMMIT:		Closes one or more journaling fences</p>
+      <p>gtm_ztcommit:		Closes one or more journaling fences.</p>
+      <p>GTM$ZTSTART:		Opens a journaling fence</p>
+      <p>gtm_ztstart:		Opens a journaling fence.</p>
+      <p>GTM$ZSTATUS:		Returns current value of $ZSTATUS.</p>
+      <p>For information about the individual command or function underlying a particular DAL database function, refer to the &quot;Commands&quot; and &quot;Functions&quot; chapters.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_ext_rtn.html">Prev</a>A </td>
+          <td width="20%" align="center">A </td>
+          <td width="40%" align="right">A <a accesskey="n" href="invoking_DAL_functions.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ExampleA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Invoking DAL Functions from External Routines</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

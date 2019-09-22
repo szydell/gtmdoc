@@ -1,0 +1,83 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ASCII()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07.html" title="Chapter 7. Functions">
+<link rel="next" href="ch07s02.html" title="$Char()">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ASCII()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ASCII()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="ascii"></a>$ASCII()</h2></div></div></div>
+<a class="indexterm" name="idp52885056"></a><p>Returns the integer ASCII code for a character in the given string. For a mumps process started in UTF-8 mode, $ASCII() returns the integer <span class="trademark">Unicode</span>(R) UTF-8 code-point value of a character in the given string.</p>
+<p>The format for the $ASCII function is:</p>
+<pre class="programlisting">$A[SCII](expr[,intexpr])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The expression is the source string from which $ASCII() extracts the character it decodes.</p></li>
+<li class="listitem"><p>intexpr contains the position within the expression of the character that $ASCII() decodes. If intexpr is missing, $ASCII() returns a result based on the first character position. </p></li>
+<li class="listitem"><p>If intexpr evaluates to before the beginning or after the end of the expression, $ASCII() returns a value of negative one (-1).</p></li>
+</ul></div>
+<p>$ASCII() provides a means of examining non-graphic characters in a string. When used with $CHAR(), $ASCII() also provides a means to perform arithmetic operations on the codes associated with characters.</p>
+<p>$ZASCII() is the parallel function of $ASCII(). $ZASCII() interprets the string argument as a sequence of bytes (rather than a sequence of characters) and can perform all byte-oriented $ASCII() operations. For more information, refer to <a class="xref" href="ch07s26.html" title="$ZAscii()">&#8220;$ZAscii()&#8221;</a>.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_ascii"></a>Examples<span> of $ASCII()</span><a class="indexterm" name="idp57657008"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;For i=0:1:3 Write !,$Ascii("Hi",i)
+-1
+72
+73
+-1
+GTM&gt;</pre>
+<p>This loop displays the result of $ASCII() specifying a character position before, first and second positions, and after the string.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Write $ZCHSET
+UTF-8
+GTM&gt;Write $Ascii("<span class="symbol">&#20027;</span>")
+20027
+GTM&gt;Write $$FUNC^%DH("20027")
+00004E3B</pre>
+<p>In this example, 20027 is the integer equivalent of the hexadecimal value 4E3B. U+4E3B is a character in the CJK Ideograph block of the <span class="trademark">Unicode</span>(R) standard.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 7. Functions </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $Char()</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

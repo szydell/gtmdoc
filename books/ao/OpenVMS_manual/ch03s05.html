@@ -1,0 +1,109 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Ensuring Adequate Disk Storage</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="chapter3.html" title="Chapter 3. Planning for GT.M"><link rel="prev" href="ch03s04.html" title="Setting Privileges"><link rel="next" href="ch03s06.html" title="Ensuring a Correct VMS Version"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Ensuring Adequate Disk Storage</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s04.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Planning for GT.M</th><td width="20%" align="right"> <a accesskey="n" href="ch03s06.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Ensuring Adequate Disk Storage"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ensuring_adequate_disk_storage"></a>Ensuring Adequate Disk Storage</h2></div></div></div><p>GT.M files require approximately 12,000 blocks of disk space. The installation kit temporarily requires 7 MB for Alpha and 4.5 MB for VAX. </p><div class="sect2" title="Planning Directories"><div class="titlepage"><div><div><h3 class="title"><a name="planning_directories"></a>Planning Directories</h3></div></div></div><a class="indexterm" name="id3221786"></a><p>Fidelity advises storing the GT.M distribution files in one directory (e.g., [GTM_DIST]).</p></div><div class="sect2" title="GT.M Files Provided"><div class="titlepage"><div><div><h3 class="title"><a name="gtm_files_provided"></a>GT.M Files Provided</h3></div></div></div><a class="indexterm" name="id3220267"></a><p>Fidelity provides the GT.M files in VMSINSTAL (BACKUP) format in save sets named GTMnnn.a, where "nnn" identifies the version of GT.M and "a" identifies the alphabetically sequenced save set letters. The last save set contains the source code modules for the M "percent" utilities. The other files are:</p><div class="informaltable"><table border="0" width="70%"><colgroup><col><col></colgroup><tbody><tr><td>
+                                <p>GTMSECSHR.EXE</p>
+                           </td><td>
+                                <p>A protected shareable image providing a mechanism for accessing selected system services.</p>
+                            </td></tr><tr><td>
+                                <p>GTMSHR.EXE</p>
+                           </td><td>
+                                <p>A shareable image containing the M run-time system and the compiler.</p>
+                            </td></tr><tr><td>
+                                <p>GTM$DMOD.EXE</p>
+                           </td><td>
+                                <p>An image for initiating Direct Mode.</p>
+                            </td></tr><tr><td>
+                                <p>GTM$STOP.EXE</p>
+                           </td><td>
+                                <p>An image which stops other GT.M images.</p>
+                            </td></tr><tr><td>
+                                <p>MCOMPILE.EXE</p>
+                           </td><td>
+                                <p>An image for initiating the M compiler directly from CLI.</p>
+                            </td></tr><tr><td>
+                                <p>DSE.EXE</p>
+                           </td><td>
+                                <p>An image containing the Data Structure Editor.</p>
+                            </td></tr><tr><td>
+                                <p>GDE.EXE</p>
+                           </td><td>
+                                <p>An image containing the Global Directory Editor.</p>
+                            </td></tr><tr><td>
+                                <p>LKE.EXE</p>
+                           </td><td>
+                                <p>An image containing the M Lock Editor.</p>
+                            </td></tr><tr><td>
+                                <p>LMU.EXE</p>
+                           </td><td>
+                                <p>An image containing the configuration management utility.</p>
+                            </td></tr><tr><td>
+                                <p>MUPIP.EXE</p>
+                           </td><td>
+                                <p>An image for performing data conversion and utility functions.</p>
+                            </td></tr><tr><td>
+                                <p>GTMLIB.OLB</p>
+                           </td><td>
+                                <p>A relocatable object file library containing the routine. GTM_MAIN, which is the mechanism that associates a user image and the GT.M run-time system.</p>
+                            </td></tr><tr><td>
+                                <p>GTMSHR.OLB</p>
+                           </td><td>
+                                <p>A shareable image symbol library containing universal symbols for the GTMSHR image.</p>
+                            </td></tr><tr><td>
+                                <p>GTMZCALL.MLB</p>
+                           </td><td>
+                                <p>A MACRO library for maintaining external call tables.</p>
+                            </td></tr><tr><td>
+                                <p>GTMCOMMANDS.CLD</p>
+                           </td><td>
+                                <p>A command definition file containing the MUMPS command.</p>
+                            </td></tr><tr><td>
+                                <p>GTMCOLLECT.OPT</p>
+                           </td><td>
+                                <p>A sample linker options file.</p>
+                            </td></tr><tr><td>
+                                <p></p>
+                           </td><td>
+                                <p></p>
+                            </td></tr><tr><td>
+                                <p>GTM$DEFAULTS.MAR</p>
+                           </td><td>
+                                <p>A macro source file containing default options for the GT.M run time environment.</p>
+                            </td></tr><tr><td>
+                                <p>DSE.HLB</p>
+                           </td><td>
+                                <p>A help library containing descriptions of the Data Structure Editor commands.</p>
+                            </td></tr><tr><td>
+                                <p>GDE.HLB</p>
+                           </td><td>
+                                <p>A help library containing descriptions of the Global Directory Editor commands.</p>
+                            </td></tr><tr><td>
+                                <p>LKE.HLB</p>
+                           </td><td>
+                                <p>A help library containing descriptions of the M LOCK Editor commands.</p>
+                            </td></tr><tr><td>
+                                <p>LMU.HLB</p>
+                           </td><td>
+                                <p>A help library containing descriptions of the configuration management commands.</p>
+                            </td></tr><tr><td>
+                                <p>MUPIP.HLB</p>
+                           </td><td>
+                                <p>A help library containing descriptions of the MUPIP commands.</p>
+                            </td></tr><tr><td>
+                                <p>GTMINSTALL.COM</p>
+                           </td><td>
+                                <p>A prototype procedure file which installs the GT.M images.</p>
+                            </td></tr><tr><td>
+                                <p>GTMLOGICALS.COM</p>
+                           </td><td>
+                                <p>A prototype procedure file containing the definition of logical names used by GT.M.</p>
+                            </td></tr><tr><td>
+                                <p>GTMLOGIN.COM</p>
+                           </td><td>
+                                <p>A prototype procedure file containing the definitions of symbols which invoke the GT.M utilities. </p>
+                            </td></tr><tr><td>
+                                <p>GTMSTART.COM</p>
+                           </td><td>
+                                <p>A prototype procedure file which invokes GTMINSTALL.COM and GTMLOGICALS.COM. </p>
+                            </td></tr><tr><td>
+                                <p>GTMSTOP.COM</p>
+                           </td><td>
+                                <p>A command file which stops all active GT.M processes and does a MUPIP RUNDOWN. </p>
+                            </td></tr></tbody></table></div></div><div class="sect2" title="Disk Shadowing and Striping"><div class="titlepage"><div><div><h3 class="title"><a name="disk_shadowing"></a>Disk Shadowing and Striping</h3></div></div></div><a class="indexterm" name="id3221019"></a><p>Disk shadowing can yield significant performance improvements for typical M applications. Disk shadowing can reduce read access to the disk by 30 percent or more for a two disk shadow set. While read operations are significantly faster, there is a penalty for write operations. If your site uses applications which require heavy updating, disk shadowing may be inappropriate. For more information on disk shadowing, refer to the Volume Shadowing for OpenVMS or the OpenVMS System Manager's Manual: Essentials. </p><p>Disk striping also can yield significant performance improvements for typical M applications. Disk striping can improve the speed of both read and write operations. However, depending on your configuration, disk striping may reduce the mean time to failure of the disk system. Before deciding if this technique is appropriate for your site, refer to the OpenVMS documentation that describes which types are supported and how to use them.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s04.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="chapter3.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s06.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Setting Privileges </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> Ensuring a Correct VMS Version</td></tr></table></div></body></html>

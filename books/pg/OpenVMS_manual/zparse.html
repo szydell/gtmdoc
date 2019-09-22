@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZPARSE()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter7.html" title="ChapterA 7.A Functions" />
+    <link rel="prev" href="examples_of_zmessage_g.html" title="Examples of $ZMESSAGE()" />
+    <link rel="next" href="examples_of_zparse.html" title="Examples of $ZPARSE()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZPARSE()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zmessage_g.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 7.A Functions</th>
+          <td width="20%" align="right">A <a accesskey="n" href="examples_of_zparse.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zparse"></a>$ZPARSE()</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zparse.html">Examples of $ZPARSE()</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4191203" class="indexterm"></a>
+      <p>The $ZPARSE function expands a file name to a full <span>file-specification</span> and then returns the full <span>file-specification</span> or one of its fields <span>(node, device, directory, name, type, or version)</span>. <span>The $ZPARSE function is analogous to the DCL F$PARSE lexical function. The order of the operands differs from the DCL F$PARSE function.</span></p>
+      <p>The format for the $ZPARSE function is:</p>
+      <pre class="programlisting">
+    $ZPARSE(expr1[,expr2[,expr3[,expr4[,expr5]]]])
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The first expression specifies the file-specification to parse; if the file-specification is not valid, $ZPARSE() returns a null string; if the file-specification contains a VMS wildcard (* and/or %), $ZPARSE() returns a file-specification containing the wildcard(s).</p>
+          </li>
+          <li>
+            <p>The optional second expression specifies the field of the <span>file-specification</span> that $ZPARSE() returns; if this argument is missing or null, $ZPARSE() returns a full <span>file-specification</span> constructed using default values in place of any fields missing for <span>node, directory, file, type, and version</span>.</p>
+          </li>
+          <li>
+            <p>The optional third and fourth expressions specify default values to use during file name expansion for missing fields <span>(node, device, directory, name, type, or version)</span>, if any, in the original file name. For any field missing in the original file name specified in expr1, $ZPARSE() will attempt to substitute the corresponding field from expr3; if that field is not present in expr3, $ZPARSE() will attempt to use the corresponding field from expr4.</p>
+          </li>
+          <li>
+            <p>If the file <span>name, type, or version</span> is missing from all three of expr1, expr3, and expr4, $ZPARSE() will return a null string for the corresponding field. If the file <span>node, device,</span> or directory is missing from all three of expr1, expr3, and expr4, $ZPARSE() will substitute the information from your current <span>default</span> directory.</p>
+          </li>
+          <li>
+            <p>The optional fifth expression specifies the mode or type of parse that $ZPARSE() performs.</p>
+          </li>
+        </ul>
+      </div>
+      <p>$ZPARSE() provides a tool for verifying that a <span>file-specification</span> is syntactically correct, for examining specific fields of a <span>file-specification</span>, and for filling in missing pieces in a partial specification based on a hierarchy of defaults. For information about determining whether a file exists, refer to the description of $ZSEARCH().</p>
+      <p>$ZPARSE() arguments, after the first, are optional. If you use no other arguments, a single argument is sufficient. However, if you use selected arguments $ZPARSE() requires that null strings (&quot;&quot;) be filled in for the unspecified arguments.</p>
+      <p>The acceptable keywords for the second argument are:</p>
+      <p>&quot;NODE&quot;:       Node name</p>
+      <p>&quot;DEVICE&quot;:     Device name</p>
+      <p>&quot;DIRECTORY&quot;:  Directory name</p>
+      <p>&quot;NAME&quot;:       File name (excluding file extension)</p>
+      <p>&quot;TYPE&quot;:       File type extension</p>
+      <p>&quot;VERSION&quot;:    File version number</p>
+      <p>The keywords may be entered in either upper or lower case. Variables that evaluate to these strings and indirection are acceptable for argument two. When the keywords themselves appear as string literals, they must be enclosed in quotation marks (&quot; &quot;).</p>
+      <p>The keywords for the fifth argument $ZPARSE() are:</p>
+      <p>NULL (&quot;&quot;):        Returns a full file-specification or device</p>
+      <p>&quot;SYNTAX_ONLY&quot;:    Disables checking for the existence of the directory or device.</p>
+      <p>&quot;NO_CONCEAL&quot;:     Disables the &quot;conceal&quot; attribute in the translation of logical names in a file-specification.</p>
+      <p>The mode names may be upper or lower case but cannot be abbreviated.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zmessage_g.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter7.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="examples_of_zparse.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of $ZMESSAGE()A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Examples of $ZPARSE()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

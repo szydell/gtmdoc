@@ -1,0 +1,1740 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<base target="_top">
+<style type="text/css">
+  
+
+/* default css */
+
+table {
+  font-size: 1em;
+  line-height: inherit;
+  border-collapse: collapse;
+}
+
+
+tr {
+  
+  text-align: left;
+  
+}
+
+
+div, address, ol, ul, li, option, select {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p {
+  margin: 0px;
+}
+
+
+pre {
+  font-family: Courier New;
+  white-space: pre-wrap;
+  margin:0;
+}
+
+body {
+  margin: 6px;
+  padding: 0px;
+  font-family: Verdana, sans-serif;
+  font-size: 10pt;
+  background-color: #ffffff;
+  color: #000;
+}
+
+
+img {
+  -moz-force-broken-image-icon: 1;
+}
+
+@media screen {
+  html.pageview {
+    background-color: #f3f3f3 !important;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  
+
+  body {
+    min-height: 1100px;
+    
+    counter-reset: __goog_page__;
+  }
+  
+  * html body {
+    height: 1100px;
+  }
+  /* Prevent repaint errors when scrolling in Safari. This "Star-7" css hack
+     targets Safari 3.1, but not WebKit nightlies and presumably Safari 4.
+     That's OK because this bug is fixed in WebKit nightlies/Safari 4 :-). */
+  html*#wys_frame::before {
+    content: '\A0';
+    position: fixed;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+  }
+  
+  .pageview body {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 2px solid #bbb;
+    border-bottom: 2px solid #bbb;
+    width: 648px !important;
+    margin: 15px auto 25px;
+    padding: 40px 50px;
+  }
+  /* IE6 */
+  * html {
+    overflow-y: scroll;
+  }
+  * html.pageview body {
+    overflow-x: auto;
+  }
+  
+
+  
+    
+    .writely-callout-data {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    
+
+    .writely-footnote-marker {
+      background-image: url('http://tinco.pair.com/bhaskar/gtm/doc/articles/MISSING');
+      background-color: transparent;
+      background-repeat: no-repeat;
+      width: 7px;
+      overflow: hidden;
+      height: 16px;
+      vertical-align: top;
+
+      
+      -moz-user-select: none;
+    }
+    .editor .writely-footnote-marker {
+      cursor: move;
+    }
+    .writely-footnote-marker-highlight {
+      background-position: -15px 0;
+      -moz-user-select: text;
+    }
+    .writely-footnote-hide-selection ::-moz-selection, .writely-footnote-hide-selection::-moz-selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection ::selection, .writely-footnote-hide-selection::selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection {
+      cursor: move;
+    }
+
+    /* Comments */
+    .writely-comment-yellow {
+      background-color: #ffffd7;
+    }
+    .writely-comment-orange {
+      background-color: #ffe3c0;
+    }
+    .writely-comment-pink {
+      background-color: #ffd7ff;
+    }
+    .writely-comment-green {
+      background-color: #d7ffd7;
+    }
+    .writely-comment-blue {
+      background-color: #d7ffff;
+    }
+    .writely-comment-purple {
+      background-color: #eed7ff;
+    }
+
+  
+
+
+  
+  .br_fix span+br:not(:-moz-last-node) {
+    
+    position:relative;
+    
+    left: -1ex
+    
+  }
+
+  
+  #cb-p-tgt {
+    font-size: 8pt;
+    padding: .4em;
+    background-color: #ddd;
+    color: #333;
+  }
+  #cb-p-tgt-can {
+    text-decoration: underline;
+    color: #36c;
+    font-weight: bold;
+    margin-left: 2em;
+  }
+  #cb-p-tgt .spin {
+    width: 16px;
+    height: 16px;
+    background: url(http://ssl.gstatic.com/docs/clipboard/spin_16o.gif) no-repeat;
+  }
+}
+
+h6 { font-size: 8pt }
+h5 { font-size: 8pt }
+h4 { font-size: 10pt }
+h3 { font-size: 12pt }
+h2 { font-size: 14pt }
+h1 { font-size: 18pt }
+
+blockquote {padding: 10px; border: 1px #DDD dashed }
+
+.webkit-indent-blockquote { border: none; }
+
+a img {border: 0}
+
+.pb {
+  border-width: 0;
+  page-break-after: always;
+  /* We don't want this to be resizeable, so enforce a width and height
+     using !important */
+  height: 1px !important;
+  width: 100% !important;
+}
+
+.editor .pb {
+  border-top: 1px dashed #C0C0C0;
+  border-bottom: 1px dashed #C0C0C0;
+}
+
+div.google_header, div.google_footer {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+
+/* Table of contents */
+.editor div.writely-toc {
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+}
+.writely-toc > ol {
+  padding-left: 3em;
+  font-weight: bold;
+}
+ol.writely-toc-subheading {
+  padding-left: 1em;
+  font-weight: normal;
+}
+/* IE6 only */
+* html writely-toc ol {
+  list-style-position: inside;
+}
+.writely-toc-none {
+  list-style-type: none;
+}
+.writely-toc-decimal {
+  list-style-type: decimal;
+}
+.writely-toc-upper-alpha {
+  list-style-type: upper-alpha;
+}
+.writely-toc-lower-alpha {
+  list-style-type: lower-alpha;
+}
+.writely-toc-upper-roman {
+  list-style-type: upper-roman;
+}
+.writely-toc-lower-roman {
+  list-style-type: lower-roman;
+}
+.writely-toc-disc {
+  list-style-type: disc;
+}
+
+/* Ordered lists converted to numbered lists can preserve ordered types, and
+   vice versa. This is confusing, so disallow it */
+ul[type="i"], ul[type="I"], ul[type="1"], ul[type="a"], ul[type="A"] {
+  list-style-type: disc;
+}
+
+ol[type="disc"], ol[type="circle"], ol[type="square"] {
+  list-style-type: decimal;
+}
+
+/* end default css */
+
+
+  /* default print css */
+  @media print {
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    div.google_header, div.google_footer {
+      display: block;
+      min-height: 0;
+      border: none;
+    }
+
+    div.google_header {
+      flow: static(header);
+    }
+
+    /* used to insert page numbers */
+    div.google_header::before, div.google_footer::before {
+      position: absolute;
+      top: 0;
+    }
+
+    div.google_footer {
+      flow: static(footer);
+    }
+
+    /* always consider this element at the start of the doc */
+    div#google_footer {
+      flow: static(footer, start);
+    }
+
+    span.google_pagenumber {
+      content: counter(page);
+    }
+
+    span.google_pagecount {
+      content: counter(pages);
+    }
+
+    .endnotes {
+      page: endnote;
+    }
+
+    /* MLA specifies that endnotes title should be 1" margin from the top of the page. */
+    @page endnote {
+      margin-top: 1in;
+    }
+
+    callout.google_footnote {
+      
+      display: prince-footnote;
+      footnote-style-position: inside;
+      /* These styles keep the footnote from taking on the style of the text
+         surrounding the footnote marker. They can be overridden in the
+         document CSS. */
+      color: #000;
+      font-family: Verdana;
+      font-size: 10.0pt;
+      font-weight: normal;
+    }
+
+    /* Table of contents */
+    #WritelyTableOfContents a::after {
+      content: leader('.') target-counter(attr(href), page);
+    }
+
+    #WritelyTableOfContents a {
+      text-decoration: none;
+      color: black;
+    }
+
+    /* Comments */
+    .writely-comment-yellow {
+      background-color: #ffffd7;
+    }
+    .writely-comment-orange {
+      background-color: #ffe3c0;
+    }
+    .writely-comment-pink {
+      background-color: #ffd7ff;
+    }
+    .writely-comment-green {
+      background-color: #d7ffd7;
+    }
+    .writely-comment-blue {
+      background-color: #d7ffff;
+    }
+    .writely-comment-purple {
+      background-color: #eed7ff;
+    }
+  }
+
+  @page {
+    @top {
+      content: flow(header);
+    }
+    @bottom {
+      content: flow(footer);
+    }
+    @footnotes {
+      border-top: solid black thin;
+      padding-top: 8pt;
+    }
+  }
+  /* end default print css */
+
+
+/* custom css */
+
+
+/* end custom css */
+
+/* ui edited css */
+
+body {
+  font-family: Verdana;
+  
+  font-size: 10.0pt;
+  line-height: normal;
+  background-color: #ffffff;
+}
+/* end ui edited css */
+
+
+/* editor CSS */
+.editor a:visited {color: #551A8B}
+.editor table.zeroBorder {border: 1px dotted gray}
+.editor table.zeroBorder td {border: 1px dotted gray}
+.editor table.zeroBorder th {border: 1px dotted gray}
+
+
+.editor div.google_header, .editor div.google_footer {
+  border: 2px #DDDDDD dashed;
+  position: static;
+  width: 100%;
+  min-height: 2em;
+}
+
+.editor .misspell {background-color: yellow}
+
+.editor .writely-comment {
+  font-size: 9pt;
+  line-height: 1.4;
+  padding: 1px;
+  border: 1px dashed #C0C0C0
+}
+
+
+/* end editor CSS */
+
+</style>
+
+  
+  <title>GT.M on z/OS Technical Bulletin</title>
+
+</head>
+
+<body 
+    
+    >
+    
+    
+    
+<h1>
+  <a id=Technical_Bulletin_GT_M_on_IBM_25159387086112633 name=Technical_Bulletin_GT_M_on_IBM_25159387086112633></a>Technical Bulletin - GT.M on IBM eServer zSeries z/OS
+</h1>
+<div class=legalnotice>
+  Copyright A(C) 2010 Fidelity Information Services, Inc.<br>
+  <br>
+  Permission is granted to copy, distribute and/or modify this document under the terms of the <a href=http://www.gnu.org/licenses/fdl.txt id=lpr- target=_blank title="Click here to read the GNU Free Documentation License">GNU Free Documentation License</a>, Version 1.3 or any later version published by the <a href=http://www.fsf.org/ id=pl7z target=_blank title="Click here to visit the Free Software Foundation web site">Free Software Foundation</a>; with no Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.<br>
+  <br>
+  <p>
+    <a href=http://fis-gtm.com/ id=u58d target=_blank title="Click here to visit the GT.M web site">GT.Ma?c</a> is a trademark of <a href=http://fisglobal.com/ id=q.in target=_blank title="Click here to visit the Fidelity Information Services web site">Fidelity Information Services, Inc.</a> (FIS).&nbsp; Other trademarks are the property of their respective owners.<br>
+  </p>
+  <br>
+  <p>
+    This document contains a description of GT.M and the operating instructions pertaining to the various functions that comprise the system.&nbsp; This document does not contain any commitment made by FIS.&nbsp; FIS believes the information in this publication is accurate as of its publication date; such information is subject to change without notice.&nbsp; FIS is not responsible for any errors or defects.
+  </p>
+</div>
+<br>
+<h2>
+  <a id=Revision_History_5023846650535_6650613867263235 name=Revision_History_5023846650535_6650613867263235></a>Revision History
+</h2>
+<table border=1 bordercolor=#000000 cellpadding=3 cellspacing=0 id=ei_.>
+  <tbody>
+  <tr>
+    <td align=middle valign=top>
+      <b>Version<br>
+      </b>
+    </td>
+    <td align=left valign=top>
+      <b>Date<br>
+      </b>
+    </td>
+    <td>
+      <b>Summary<br>
+      </b>
+    </td>
+  </tr>
+  <tr>
+    <td align=middle valign=top>
+      1.0<br>
+    </td>
+    <td align=left valign=top>
+      July 9, 2009<br>
+    </td>
+    <td>
+      First published version<br>
+    </td>
+  </tr>
+  <tr>
+    <td align=middle valign=top>
+      1.1
+    </td>
+    <td align=left valign=top>
+      August 25, 2009
+    </td>
+    <td>
+      Correct zlib version; Specify required hardware for z/OS platform;<br>
+      Correct typographic errors; Corrections to table on IO conversions; Corrected URL for IBM C/C++ programming guide; Fix internal hyperkinks
+    </td>
+  </tr>
+  </tbody>
+</table>
+<br>
+<table border=1 bordercolor=#000000 cellpadding=3 cellspacing=0 id=hp46 width=100%>
+  <tbody>
+  <tr align=left valign=top>
+    <td width=50%>
+      <p>
+        GT.M Group
+      </p>
+      <p>
+        Fidelity National Information Services, Inc.
+      </p>
+      <p>
+        2 West Liberty Boulevard, Suite 300
+      </p>
+      <p>
+        Malvern, Pennsylvania 19355
+      </p>
+      <p>
+        United States of America
+      </p>
+    </td>
+    <td width=50%>
+      <p>
+        GT.M Support for customers: +1 (610) 578-4226 / <a href=mailto:gtmsupport@fisglobal.com title="If you have GT.M support, click here to send e-mail and request support">gtmsupport@fisglobal.com</a>
+      </p>
+      <p>
+        <br>
+      </p>
+      <p>
+        Switchboard: +1 (610) 296-8877
+      </p>
+      <p>
+        Website: <a href=http://fis-gtm.com/ id=j47- target=_blank title="Click here to visit the GT.M home page">http://fis-gtm.com</a><a href=http://fis-gtm.com/></a>
+      </p>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<p>
+  <br>
+</p>
+<p>
+  &nbsp;
+</p>
+<h2>
+  T<a id=toc name=toc></a>able of Contents
+</h2>
+<div class=writely-toc id=WritelyTableOfContents toctype=none+none>
+  <ol class=writely-toc-none>
+    <li>
+      <div>
+        <a href="GTM_on_z_OS.html#Technical_Bulletin_GT_M_on_IBM_25159387086112633" target=_self>Technical Bulletin - GT.M on IBM eServer zSeries z/OS</a>
+      </div>
+    </li>
+    <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0px>
+      <li>
+        <a href="GTM_on_z_OS.html#Revision_History_5023846650535_6650613867263235" target=_self>Revision History</a>
+      </li>
+      <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0px>
+        <li>
+          <a href="GTM_on_z_OS.html#z_OS_for_GT_M_Cognoscenti_0614_9841783245843897" target=_self>z/OS for those with knowledge of GT.M</a>
+        </li>
+        <li>
+          <a href="GTM_on_z_OS.html#GT_M_for_z_OS_Cognoscenti_1673_9817435529400942" target=_self>GT.M for those with knowledge of z/OS</a>
+        </li>
+        <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0px>
+          <li>
+            <a href="GTM_on_z_OS.html#Terminal_08960454600109091_517_8577274685368342" target=_self>Terminal</a>
+          </li>
+        </ol>
+      </ol>
+      <li>
+        <a href="GTM_on_z_OS.html#Platform_Requirements_54245026_33952958356122686" target=_self>Platform</a>
+      </li>
+      <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0px>
+        <li>
+          <a href="GTM_on_z_OS.html#Required_43066754349041725_096_38912287352802455" target=_self>Required</a>
+        </li>
+        <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0px>
+          <li>
+            <a href="GTM_on_z_OS.html#z_OS_05528638142028974_3682192" target=_self>zFS</a>
+          </li>
+          <li>
+            <a href="GTM_on_z_OS.html#Environment_Variables_71241273_5870952285314477" target=_self>Environment Variables</a>
+          </li>
+        </ol>
+        <li>
+          <a href="GTM_on_z_OS.html#Optional_8020519854050024_5729_0780755872354098" target=_self>Optional</a>
+        </li>
+        <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0px>
+          <li>
+            <a href="GTM_on_z_OS.html#Compiling_zlib_1_14_on_z_OS_48_18259441815251898" target=_self>zlib 1.1.4</a>
+          </li>
+        </ol>
+      </ol>
+      <li>
+        <a href="GTM_on_z_OS.html#Device_Handling_69375700369686" target=_self>Device Handling</a>
+      </li>
+      <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0px>
+        <li>
+          <a href="GTM_on_z_OS.html#Background_35395430204330103_7_6982023419238987" target=_self>Background</a>
+        </li>
+        <li>
+          <a href="GTM_on_z_OS.html#Automatic_Conversion_069172695" target=_self>Automatic Conversion</a>
+        </li>
+        <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0px>
+          <li>
+            <a href="GTM_on_z_OS.html#SD_and_FIFO_19453798816762402__44849962196547593" target=_self>SD and FIFO</a>
+          </li>
+          <li>
+            <a href="GTM_on_z_OS.html#PIPE_42744387634639924_4417675_08872874665325236" target=_self>PIPE DEVICE</a>
+          </li>
+        </ol>
+        <li>
+          <a href="GTM_on_z_OS.html#Devices_with_chset_BINARY_8722_46394687715951416" target=_self>Devices with chset="BINARY"</a>
+        </li>
+      </ol>
+      <li>
+        <a href="GTM_on_z_OS.html#External_Calls_876355393487063_5827491513337105" target=_self>External Routines</a>
+      </li>
+      <li>
+        <a href="GTM_on_z_OS.html#Object_files_in_shared_librari_9326408458289879" target=_self>Object files in shared libraries</a>
+      </li>
+    </ol>
+  </ol>
+</div>
+<br>
+<hr class=pb> Overview Effective V5.3-004, GT.M supports the <a href=http://www.ibm.com/systems/z/os/zos/ id=n-0f target=_blank title="Click here to visit the z/OS home page">z/OS</a> operating system on <a href=http://www.ibm.com/systems/z/hardware/ id=srzc target=_blank title="Click here to visit the IBM eServer zSeries home page">IBM eServer zSeries mainframes</a>.<br>
+<h3>
+  <a id=z_OS_for_GT_M_Cognoscenti_0614_9841783245843897 name=z_OS_for_GT_M_Cognoscenti_0614_9841783245843897></a>z/OS for those with knowledge of GT.M
+</h3>
+IBM eServer zSeries z/OS is different from platforms on which GT.M has previously been deployed in that it can present different environments for applications or users at the same time.&nbsp; On z/OS, GT.M runs using the POSIX compliant run-time interfaces.&nbsp; A z/OS userid must have access enabled to POSIX functionality.&nbsp; Some system administration required for GT.M may need to be performed outside the POSIX environment (e.g., via <a href=http://publib.boulder.ibm.com/infocenter/zos/basics/index.jsp?topic=/com.ibm.zos.zconcepts/zconc_zosinterfaces.htm id=p9d5 target=_blank title="Click here for information on different z/OS interfaces">TSO</a>).&nbsp; There are file systems and other large sections of z/OS that are inaccessible to GT.M processes.&nbsp; GT.M provides access to files only on the <a href=http://www.haifa.ibm.com/projects/storage/zFS/index.html id=osj2 target=_blank title="Click here to visit the zFS home page">zFS</a> file system.<br>
+<br>
+Perhaps the most important factor is that z/OS natively uses the <a href=http://en.wikipedia.org/wiki/EBCDIC id=jh9y target=_blank title="Click here to visit the Wikipedia article on EBCDIC">EBCDIC</a> character sets, whereas GT.M uses ASCII as specified by the M standard, with support for Unicode (ISO/IEC-10646) in UTF-8 mode.&nbsp; Metadata for files in the zFS file system allows files to be tagged to specify their encoding.&nbsp; The tags denote a specific code page for use in automatic conversions between code sets.&nbsp; Although this is transparent in many cases, it is not in others, especially when GT.M processes operate in UTF-8 mode.&nbsp; As part of porting an application to GT.M on z/OS from GT.M on another platform, you <i>must</i> review all I/O operations and ensure appropriate tagging / conversion takes place.<br>
+<br>
+<font face=Verdana>A z/OS userid must have access enabled to POSIX functionality</font> by creating an OMVS segment in the native security product (e.g., <a href=http://www.ibm.com/servers/eserver/zseries/zos/racf/ id=c822 target=_blank title="Click here to visit the RACF home page">RACF</a>).&nbsp; Once configured, GT.M on z/OS provides the same M environment in which a GT.M programmer from any other POSIX compliant platform would feel at home.&nbsp; While GT.M source code is highly portable between z/OS and GT.M's other POSIX platforms, you may have to update some <font face="arial narrow">deviceparameter</font>s in order to achieve the desired behavior in the z/OS EBCDIC environment.<br>
+<br>
+While the operation of utility programs MUPIP, DSE, LKE and GDE on z/OS is identical to their operation on other POSIX platforms, there are some operational limitations on this platform.&nbsp; Specifically:<br>
+<br>
+<ul>
+  <li>
+    The total object code for any process must be less than 2GB.
+  </li>
+  <li>
+    The Mapped Memory (MM) database access method works only for database files of 1GB or less and MM database files cannot expand while in use.<br>
+  </li>
+</ul>
+<br>
+These limitations arise from current z/OS limitations.&nbsp; We anticipate removing them in the future when IBM addresses the underlying z/OS limitations.<br>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=qtaq target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a><br>
+<h3>
+  <a id=GT_M_for_z_OS_Cognoscenti_1673_9817435529400942 name=GT_M_for_z_OS_Cognoscenti_1673_9817435529400942></a>GT.M for those with knowledge of z/OS
+</h3>
+GT.M provides a schemaless database and application development platform.&nbsp; It has important differences from traditional database engines and application development platforms:<br>
+<br>
+<ul>
+  <li>
+    Unlike common database systems such as DB2, GT.M has no database daemon or address space acting as a common server.&nbsp; Processes accessing the database manage the database cooperatively, and each process has the database engine logic packaged as a shared library within its address space.
+  </li>
+  <li>
+    With the exception of a small helper process requiring administrative "root" access, processes run with normal POSIX user &amp; group ids and access permissions.&nbsp; GT.M implements no security layer of its own, and leverages security as implemented by the underlying operating system.&nbsp; <font face=Verdana>So, for z/OS, the various features of SAF security apply, as do&nbsp; the various, but optional, BPX.* security profiles.</font>&nbsp; There is a straightforward <a href="GTM_Security_Philosophy.html" id=ittm title="Click here to visit the GT.M Security Philosophy, Implementation and Reccomentations technical bulletin">GT.M security technical bulletin</a>.<br>
+  </li>
+  <li>
+    The daemonless architecture means a database file can be concurrently opened and accessed by hundreds to thousands of processes, all of which are performing random access reads and writes.&nbsp; Like most databases, GT.M uses journal files for recoverability and business continuity, committing records to journal files before applying updates to database files.&nbsp; Like its database files, GT.M journal files are also concurrently opened and written to by hundreds to thousands of processes.&nbsp; Although journal files are written to sequentially, each process performs a seek to the end of a journal file and then writes to it - attempts to tune IO can be thrown off by this behavior which looks like random access but is actually sequential.&nbsp; Also, under normal operation, journal files are almost never read from - only written to.&nbsp; On z/OS, effective zFS file system caching and particularly the non-volatile write cache available on DS83xx disk subsystems are central to high performance GT.M logging of journals.
+  </li>
+  <li>
+    On systems that are not resource starved, I/O subsystem performance and shared memory performance are the two most important factors affecting the throughput of GT.M based applications.
+  </li>
+  <ul>
+    <li>
+      Since processes cooperate to manage the database, a process' I/O activity has little to no correlation to the workload it executes - I/O performed by one process may actually be generated from the workload of another process.&nbsp; <i>Do not impose quotas on process I/O or otherwise penalize I/O intensive processes.</i><br>
+    </li>
+    <li>
+      GT.M makes extensive use of shared memory.&nbsp; A system upgrade which alters a system from a Uniform Memory Architecture to a Non Uniform Memory Architecture (NUMA) may improve throughput less than hoped for, and can even decrease throughput if a result of the upgrade is to force processes to use shared memory that has a high access penalty.
+    </li>
+  </ul>
+  <li>
+    Since all processes concurrently accessing a database must access the same POSIX IPC resources and have the same view of process ids, GT.M does not support concurrent access of a database file by multiple computing nodes in a cluster or Sysplex.&nbsp; However, when multiple nodes have access to the zFS file system supporting GT.M, in the event that node fails, another node can recover the database and application and provide application continuity.
+  </li>
+  <li>
+    For even better continuity of business than clusters provide, GT.M has the ability to deploy "Logical Multi-Site" (LMS) application configurations.&nbsp; Unlike clusters, which provide business continuity in the face of unplanned events (such as system crashes), GT.M LMS configurations can provide business continuity even in the face of planned events such as system and application software upgrades, even many upgrades involving a schema change.&nbsp; LMS has no geographical distance limitations.<br>
+  </li>
+</ul>
+<br>
+Databases and journal files are supported only on files in zFS file systems.<br>
+<br>
+In addition to a database engine, GT.M also has a compiler for its scripting language that generates executable code in object files (with a .o file extension) from program code in source files (with a .m extension).&nbsp; Processes use AMODE 64 addressing.&nbsp; Object files generated by GT.M can optionally be placed in dynamically linked libraries (DLLs) with the standard ld system utility; when so configured, there is only one copy of a routine shared by hundreds or thousands of processes.<br>
+<br>
+A GT.M process has a native internal character set of either ASCII ("M mode") or Unicode (ISO/IEC-10646; "UTF-8 mode").&nbsp; GT.M processes can read and write IBM-1047 EBCDIC sequential files.<br>
+<br>
+Since M source programs should contain only ASCII characters, they should be tagged as ASCII.&nbsp; Note that the GT.M compiler tolerates certain byte sequences (e.g., those representing valid UTF-8 characters) inside string literals and comments.&nbsp; FIS does not recommend this practice because it can result in different string literals between M mode compilation and UTF-8 mode compilation.&nbsp; If your application needs literal strings with non-ASCII characters (those with either byte values or Unicode character values greater than 127), you can use $Char() or $ZChar().&nbsp; For example, the FIS Profile application schema uses $ZChar(254) in cross references to represent a null subscript in the primary reference.&nbsp; To create a string literal with this byte value in a portable manner, use a construct such as: <font face="courier new">"ABC|"_$ZChar(254)_"|DEF</font>".&nbsp; As the GT.M compiler pre-computes such string literals at compile time, this usage incurs no run-time penalty.<br>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=h5hv target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+<h4>
+  <a id=Terminal_08960454600109091_517_8577274685368342 name=Terminal_08960454600109091_517_8577274685368342></a>Terminal
+</h4>
+GT.M treats terminals as full duplex devices supporting either ASCII or UTF-8.&nbsp; FIS has only tested access via <a href=http://en.wikipedia.org/wiki/Secure_Shell id=dtaq target=_blank title="Click here to visit the Wikipedia page on ssh">ssh</a> (see below).&nbsp; If you want cursor addressing to work correctly, you <i>must</i> ensure that your TERMINFO settings match your terminal emulation software.<br>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=hapv target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+<h2>
+  <a id=Platform_Requirements_54245026_33952958356122686 name=Platform_Requirements_54245026_33952958356122686></a>Platform
+</h2>
+<h3>
+  <a id=Required_43066754349041725_096_38912287352802455 name=Required_43066754349041725_096_38912287352802455></a>Required
+</h3>
+GT.M requires a minimum architecture level of z9 and a minimum z/OS release level of V1R10 with the latest POSIX compliant runtime interfaces and the performant zFS file system.&nbsp; Supported hardware includes:<br>
+<br>
+<ul>
+  <li>
+    IBM z10 EC 2097
+  </li>
+  <li>
+    IBM z10 BC 2098
+  </li>
+  <li>
+    IBM z9 EC 2094
+  </li>
+  <li>
+    IBM z9 BC 2096
+  </li>
+</ul>
+<br>
+<p>
+  To use encryption with GT.M requires the addition of the Crypto Express2 card and the ICSF (Integrated Cryptographic Service Facility) software stack.&nbsp; Database users must also have read<font style=BACKGROUND-COLOR:#ffffff>&nbsp;access to the CSFRNG (random number generate service) in the RACF(R) CSFSERV class.</font>
+</p>
+<br>
+GT.M may well run on other compatible hardware, but as of this date has only been validated on the listed configurations.<br>
+<br>
+Please ensure that your system is current with APARs.&nbsp; <font style=BACKGROUND-COLOR:#ff0000><font style=BACKGROUND-COLOR:#ffffff>The following are definitely required</font></font>:<br>
+<br>
+<ul style=FONT-FAMILY:Verdana>
+  <li>
+    <font color=#000000>APAR PK84982</font>
+  </li>
+  <li>
+    <font color=#000000>APAR OA28222</font>
+  </li>
+  <li>
+    <font color=#000000>APAR OA29325</font>
+  </li>
+</ul>
+<br>
+In addition, there are some issues with diagnostic tools which do not affect production operation, but can impact troubleshooting any problems that may arise.&nbsp; IBM is working with FIS to address these issues - contact either for a current set of APARs.<br>
+<br>
+GT.M uses a character mode interface.&nbsp; FIS has only tested access with <a href=http://www.openssh.com/ id=uedf target=_blank title="Click here to visit the OpenSSH web site">OpenSSH</a>, which can be found in <a href=http://www.ibm.com/servers/eserver/zseries/zos/unix/ported/openssh/index.html id=r1gv target=_blank title="Click here to visit the home page for IBM Ported Tools for z/OS">IBM Ported Tools for z/OS</a>.<br>
+<br>
+GT.M requires a shell for the ZSYSTEM command and for I/O to a PIPE device.&nbsp; The GT.M development group at FIS uses an updated version of <a href=http://www.tcsh.org/Welcome id=lf-d target=_blank title="Click here to visit the tcsh home page">tcsh</a> distributed by IBM for z/OS.&nbsp; Use of GT.M's ZEDIT command requires an editor.<br>
+<br>
+For Unicode support, the GT.M installation script requires an installed en_US.UTF-8 locale.&nbsp; Subsequent use of GT.M in UTF-8 mode requires only the locale(s) of your choice.<br>
+<br>
+If the system log daemon (syslogd) is not operating, GT.M processes, including gtmsecshr, will terminate when they attempt to record information in the system log.&nbsp; If you see disappearing processes, and gtmsechsr processes that fail to start when expected, verify that syslogd is operational.<br>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=aqfl target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+<h4>
+  <a id=z_OS_05528638142028974_3682192 name=z_OS_05528638142028974_3682192></a>zFS
+</h4>
+zFS is the only file system supported.&nbsp; If the IPL of z/OS does not automatically start zFS, you must explicitly start it before you run GT.M.<br>
+<br>
+FIS recommends you benchmark your application and configuration prior to production deployment.&nbsp; As a starting point, you can consider the following tuning parameters used for one benchmark of the <a href=http://fis-profile.com/ id=mtry target=_blank title="Click here to go to the FIS Profile home page">FIS Profile</a> real-time core banking application:<br>
+<br>
+<table border=1 bordercolor=#000000 cellpadding=3 cellspacing=0 id=o9sl>
+  <tbody>
+  <tr>
+    <td>
+      adm_threads
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      10<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      aggrgrow<br>
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      ON<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      auto_attach<br>
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      ON<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      cmd_trace<br>
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      OFF<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      convert_auditfid
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      OFF<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      log_cache_size
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      16M<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      meta_cache_size
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      32M<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      nbs
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      ON<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      romount_recovery
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      OFF<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      sync_interval
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      11<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      sysplex_state
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      0<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      tran_cache_size
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      2000<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      user_cache_readahead
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      ON<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      user_cache_size
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      1024M<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      vnode_cache_limit
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      500000
+    </td>
+  </tr>
+  <tr>
+    <td>
+      vnode_cache_size
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      32768<br>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<br>
+Since GT.M accesses databases randomly, you should determine whether NOREADAHEAD for database file systems gives your workloads better performance.&nbsp; As journal files are normally appended to and not read from, the [NO]READAHEAD setting should not affect journal file performance for normal operation.&nbsp; Since journal files are read sequentially when they are read - during system recovery, and when a catching up a replicating secondary instance - you should determine whether a setting of READAHEAD for file systems used for journal files gives better performance.<br>
+<br>
+zFS supports file system cloning.&nbsp; This can be a quick way to take a backup.&nbsp; If you wish to use zFS cloning to take a backup, you <i>must</i> first freeze the database with MUPIP; otherwise, the dirty database blocks in GT.M's global buffers are not flushed to disk and the backup copy of the database is likely to be structurally unsound:<br>
+<br>
+<ol>
+  <li>
+    Freeze updates to the database with MUPIP, e.g.: <font face="courier new">mupip freeze -on "*"</font>
+  </li>
+  <li>
+    Create new journal files with MUPIP, e.g.: <font face="courier new">mupip set -journal="before" -region "*"</font>
+  </li>
+  <li>
+    Clone the database file system(s).&nbsp; If you have multiple database files on different zFS file systems, clone all of them at this time in order to get a snapshot of the database consistent across all the database files that together make up the logical database.
+  </li>
+  <li>
+    Release the freeze with with MUPIP, e.g.: <font face="courier new">mupip freeze -off "*"</font>
+  </li>
+</ol>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=zayw target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a><br>
+<a id=APARs name=APARs></a>
+<h4>
+  <a id=Environment_Variables_71241273_5870952285314477 name=Environment_Variables_71241273_5870952285314477></a>E<a id=environment_variables name=environment_variables></a>nvironment Variables
+</h4>
+Each GT.M process requires several environment variables to have appropriate values. To turn on automatic conversion when GT.M reads from and writes to sequential files:<br>
+<br>
+<ul>
+  <li>
+    <p>
+      <font face="courier new">_BPXK_AUTOCVT="ON"</font>
+    </p>
+  </li>
+  <li>
+    <font face="courier new">_CEE_RUNOPTS="FILETAG(AUTOCVT,AUTOTAG) POSIX(ON) TERMTHDACT(UAONLY)"</font><br>
+  </li>
+</ul>
+<br>
+If you use the /bin/sh or the tcsh shell , set the following additional environment variables:<br>
+<br>
+<ul>
+  <li>
+    <font face="courier new">_TAG_REDIR_ERR</font>, <font face="courier new">_TAG_REDIR_IN</font>, and <font face="courier new">_TAG_REDIR_OUT</font> should all be set to <font face="courier new">"txt"</font>.&nbsp; The first and last ensure any file redirected STDERR or STDOUT is tagged TXTFLAG=ON and CCSID set at first write by the process (819 for GT.M.)
+  </li>
+</ul>
+<br>
+If you want to enable GT.M's UTF-8 mode, the locale should be specified using the <font face="courier new">gtm_chset_locale</font> environment variable instead of the LC_CTYPE variable since the shells require locales with 31-bit addressing, which are not compatible with GT.M.&nbsp; When specifying the locale, omit the suffix (.xplink or .lp64) as show below:<br>
+<br>
+<div style=MARGIN-LEFT:40px>
+  <font face="courier new">$ locale -a |grep en_US.UTF-8</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">en_US.UTF-8.xplink</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">en_US.UTF-8.lp64</font><br style="FONT-FAMILY:Courier New">
+  <font face="courier new">$ export gtm_chset_locale=en_US.UTF-8</font><br>
+</div>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=kias target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+<h3>
+  <a id=Optional_8020519854050024_5729_0780755872354098 name=Optional_8020519854050024_5729_0780755872354098></a>Optional
+</h3>
+For some of its functionality, GT.M has a plug-in architecture that uses external libraries: <a href=http://www.zlib.net/ id=daft target=_blank title="Click here to visit the zlib home page">zlib</a> for compression of the replication stream, <a href=http://icu-project.org/ id=s41a target=_blank title="Click here to visit the ICU home page">ICU</a> for Unicode support, as well as packages such as <a href=http://gnupg.org/ id=xb5w target=_blank title="Click here to visit the GNU Privacy Guard home page">GPG</a> for encryption.&nbsp; These are not part of GT.M, but must be separately installed by you.<br>
+<br>
+<ul>
+  <li>
+    Note: these popular packages are neither distributed by nor supported by FIS GT.M support.&nbsp; GT.M will use them if they are appropriately installed and configured.&nbsp; FIS suggests that you ensure that you have an appropriate level of support for any software that you use in production.&nbsp; Instructions in GT.M documentation reflect the way that we downloaded and built these packages in our environments for GT.M development and testing and are provided solely in the hope that they will be helpful to you when you install them.
+  </li>
+</ul>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=wexw target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+<h4>
+  <a id=Compiling_zlib_1_14_on_z_OS_48_18259441815251898 name=Compiling_zlib_1_14_on_z_OS_48_18259441815251898></a>zlib 1.1.4
+</h4>
+Download the zlib 1.1.4<sup><a href="GTM_on_z_OS.html#FOOTNOTE-1">1</a></sup> from the <a href=http://libpng.sourceforge.net/index.html id=o85v title="libpng sourceforge project page">libpng</a> project's <a href=http://sourceforge.net/project/showfiles.php?group_id=5624 id=a1y- title="download page">download page</a><a id=Environment_Variables_09461921 name=Environment_Variables_09461921></a> on SourceForge.com.&nbsp; Use a transfer mechanism that does not perform automatic conversion to download a source tarball.&nbsp; If pax cannot read the archive, it is a sign that the download mangled the archive.&nbsp; Use pax to unpack the tarball, converting files from ASCII to EBCDIC.<br>
+<br>
+<font face="courier new">pax -r -o setfiletag -ofrom=ISO8859-1,to=IBM-1047 -f zlib-1.1.4.tar.gz</font><br style="FONT-FAMILY:Courier New">
+<br>
+Apply the following patch to the zlib 1.1.4 sources:<br>
+<br>
+<pre class=code-java><blockquote id=wntr>---------------------------------- zlib_1.1.4_zos.patch --------------------------------------------------diff -purN downloads/zlib/src.orig/configure downloads/zlib/src/configure--- downloads/zlib/src.orig/configure Tue Dec 16 14:09:57 2008+++ downloads/zlib/src/configure Mon Feb 9 14:30:49 2009@@ -116,6 +116,11 @@ else SFLAGS=${CFLAGS-"-Kconform_pic -O"} CFLAGS=${CFLAGS-"-O"} LDSHARED=${LDSHARED-"cc -G"};;+ OS/390*)+ CC=xlc+ SFLAGS=${CFLAGS-"-qascii -q64 -Wc,DLL,LP64,XPLINK,EXPORTALL -D_ALL_SOURCE_NOTHREADS"}+ CFLAGS=${CFLAGS-"-qascii -q64 -Wc,DLL,LP64,XPLINK,EXPORTALL -D_ALL_SOURCE_NOTHREADS"}+ LDSHARED=${LDSHARED-"xlc -qascii -q64 -Wl,dll,LP64,XPLINK "};; # send working options for other systems to support@gzip.org *) SFLAGS=${CFLAGS-"-O"} CFLAGS=${CFLAGS-"-O"}</blockquote><br></pre>
+<br>
+Build and install the zlib DLL, placing the xlc compilers in compatibility to mode by setting the environment variable <font face="courier new">C89_CCMODE<font face=verdana> to </font>1</font>.&nbsp; When not in compatibility mode, xlc follows strict placement of command line options.&nbsp; Configure and build the zlib software with <font face="courier new">./configure --shared &amp;&amp; make</font>.&nbsp; By default, the configure script places zlib in <font face="courier new">/usr/local/lib</font>.&nbsp; Install the software with <font face="courier new">make install</font>.&nbsp; To ensure that GT.M finds zlib, include <font face="courier new">/usr/local/lib</font> in <font face="courier new">LIBPATH<font face=Verdana>,</font></font> the environment variable that provides a search path for processes to use when they link DLLs.<br>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=qotk target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+<h2>
+  <a id=Device_Handling_69375700369686 name=Device_Handling_69375700369686></a>Device Handling
+</h2>
+<h3>
+  <a id=Background_35395430204330103_7_6982023419238987 name=Background_35395430204330103_7_6982023419238987></a>Background
+</h3>
+This section applies to GT.M device I/O operations, but not to database I/O.&nbsp; GT.M implicitly manages all database I/O, so the application code never needs to deal with any character representation issues associated with database files.&nbsp; GT.M performs and tags all I/O not under explicit application control as either ASCII or BINARY except for output to log files, for which GT.M uses EBCDIC to conform to the native environment.<br>
+<br>
+The following discussion of I/O controlled by M program source pertains to the following GT.M device types: FIFO (also known as named pipes), PIPEs, and Sequential Disk (SD) files.&nbsp; SOCKET devices operate as byte steams - typically ASCII or UTF-8 and need no z/OS-specific discussion.<sup><a href="GTM_on_z_OS.html#FOOTNOTE-2">2</a></sup><br>
+<br>
+Internally a GT.M process has only two character representations: in M mode as single 8 bit bytes (GT.M only associates meaning to the characters with byte values 0 through 127 - 0x00 through 0x7F - but performs IO on characters with byte values 128 through 255 - 0x80 through 0xFF - without assuming any representation or meaning for them) and in UTF-8 mode as multi-byte Unicode characters encoded in UTF-8.&nbsp; In either mode, GT.M can handle binary data with arbitrary byte values.&nbsp; A GT.M process in M mode conceptually performs I/O on devices one byte at a time with no conversion.&nbsp; A GT.M process in UTF-8 mode conceptually performs I/O one Unicode&nbsp; character at a time.&nbsp; Using the chset <font face="arial narrow">deviceparameter</font>, application code can open a device with the following character sets "M", "UTF-8", "UTF-16", "UTF-16BE", or "UTF-16LE".&nbsp; GT.M enables z/OS' automatic conversion between the internal UTF-8 representation and the external representation as appropriate.&nbsp; On z/OS, GT.M provides the following additional chset options: "ASCII", "BINARY", and "EBCDIC".&nbsp; In the context of GT.M, EBCDIC means codeset IBM-1047.<br>
+<br>
+Other POSIX platforms simply treat files as ordered arrays of bytes.&nbsp; z/OS additionally provides the ability to tag a file with metadata, which can be used in automatically converting between the encoding used by the file and that expected by a program, as well as by a program to detect when an input file has the wrong format.&nbsp; The metadata consists of two tags, a numeric Coded Character Set ID (CCSID) and a Text flag.&nbsp; The following sets of values are pertinent to GT.M:<br>
+<br>
+<table border=1 bordercolor=#000000 cellpadding=3 cellspacing=0 id=jdup>
+  <tbody>
+  <tr>
+    <td align=left valign=top>
+      <b>Type<br>
+      </b>
+    </td>
+    <td>
+      <b>CCSID<br>
+      </b>
+    </td>
+    <td align=middle valign=top>
+      <b>Text Flag<br>
+      </b>
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      ASCII (ISO/IEC 8859 variants)<br>
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      819<br>
+    </td>
+    <td align=middle valign=top>
+      1<br>
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      Binary<br>
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      65535<br>
+    </td>
+    <td align=middle valign=top>
+      0<br>
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      EBCDIC Latin 1 / Open Systems<br>
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      1047<br>
+    </td>
+    <td align=middle valign=top>
+      1<br>
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      UTF-8<br>
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      01208<br>
+    </td>
+    <td align=middle valign=top>
+      1<br>
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      UTF-16<br>
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      01204<br>
+    </td>
+    <td align=middle valign=top>
+      1<br>
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      UTF-16LE<br>
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      01202<br>
+    </td>
+    <td align=middle valign=top>
+      1<br>
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      UTF-16BE<br>
+    </td>
+    <td style=TEXT-ALIGN:left valign=top>
+      01200<br>
+    </td>
+    <td align=middle valign=top>
+      1<br>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<br>
+<a id=External_Calls name=External_Calls></a>Use the <font face="courier new">iconv</font> utility program to convert files between different encodings.&nbsp; For example, to convert a file from EBCDIC to ASCII and tag it as ASCII you can use:
+<p>
+  <br>
+</p>
+<p style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  <font size=1><font face="courier new">iconv</font> -T -f IBM-1047 -t ISO8859-1 <font face="arial narrow">inputfile</font> &gt;<font face="arial narrow">outputfile</font></font>
+</p>
+<p>
+  <br>
+</p>
+<p>
+  The z/OS <font face="courier new">chtag</font> utility program modifes tag metadata.&nbsp; For example, to tag a file as ASCII, you can use:
+</p>
+<p>
+  <br>
+</p>
+<p style="FONT-FAMILY:Courier New;MARGIN-LEFT:40px">
+  <font size=1>chtag -t -c ISO8859-1 <font face="arial narrow">asciifile</font></font>
+</p>
+<p>
+  &nbsp;
+</p>
+<p>
+  Unlike <font face="courier new">iconv</font>, <font face="courier new">chtag</font> changes only the metadata tag, leaving the file contents unchanged.<br>
+  <br>
+  <a href="GTM_on_z_OS.html#toc" id=lhv9 target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+</p>
+<h3>
+  <a id=Automatic_Conversion_069172695 name=Automatic_Conversion_069172695></a>Automatic Conversion
+</h3>
+Only devices for which automatic conversion is provided by GT.M on z/OS are discussed below.&nbsp; Other devices, that behave on z/OS as they do on other POSIX platforms, and for which no automatic conversion exists on z/OS, are not mentioned.<br>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=e2h4 target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+<h4>
+  <a id=SD_and_FIFO_19453798816762402__44849962196547593 name=SD_and_FIFO_19453798816762402__44849962196547593></a>SD and FIFO
+</h4>
+With appropriate values for environment variables, as discussed in the <a href="GTM_on_z_OS.html#environment_variables" id=teqe target=_self title="Click here to go to the Environment Variables section">Environment Variables</a> section above, GT.M and z/OS together perform automatic conversion subject to certain restrictions.<br>
+<br>
+For input to a GT.M process, the table below specifies conversions.&nbsp; Cells with a grey background are meaningful only for processes in UTF-8 mode and are errors in M mode.<br>
+<br>
+<table border=0 bordercolor=#000000 cellpadding=3 cellspacing=0 class=zeroBorder id=qsw->
+  <tbody>
+  <tr>
+    <td align=left valign=top>
+      <b>OPEN <font face="arial narrow">deviceparameter</font> <font face="Courier New">ichset</font> (or simply <font face="Courier New">chset</font> if <font face="Courier New">ichset</font> is not explicitly specified)<br>
+      </b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, tagged 819 (ISO/IEC 8859-1)</b><br>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, tagged 1047 (EBCDIC)</b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, tagged 65535 (Binary)</b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, other ASCII tag</b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, other EBCDIC tag</b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, tagged 1208 (UTF-8)</b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, tagged 1200, 1202 or 1204 (UTF-16 variants)</b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, untagged</b>
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      <b><font face="courier new">"ASCII"</font></b>
+    </td>
+    <td align=left valign=top>
+      No conversion
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      No conversion
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      <b><font face="courier new">"BINARY"</font></b>
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      No conversion
+    </td>
+    <td align=left valign=top>
+      No conversion
+    </td>
+    <td align=left valign=top>
+      No conversion
+    </td>
+    <td align=left valign=top>
+      No conversion
+    </td>
+    <td align=left valign=top>
+      No conversion
+    </td>
+    <td align=left valign=top>
+      No conversion
+    </td>
+    <td align=left valign=top>
+      No conversion
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      <b><font face="courier new">"EBCDIC"</font></b>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Conversion from EBCDIC to ISO/IEC 8859-1 by z/OS
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Conversion from EBCDIC to ISO/IEC 8859-1 by z/OS
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      <b><font face="courier new">"M"</font></b>
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      Conversion from EBCDIC to ISO/IEC 8859-1 by z/OS
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      No conversion (read one byte at a time)<br>
+    </td>
+    <td align=left valign=top>
+      No conversion (read one byte at a time)
+    </td>
+    <td align=left valign=top>
+      No conversion (read one byte at a time)<br>
+    </td>
+  </tr>
+  <tr bgcolor=#cccccc>
+    <td align=left valign=top>
+      <b><font face="courier new">"UTF-8"</font></b>
+    </td>
+    <td align=left valign=top>
+      Parsed for UTF-8 per ICU
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Parsed for UTF-8 per ICU
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Parsed for UTF-8 per ICU
+    </td>
+  </tr>
+  <tr bgcolor=#cccccc>
+    <td align=left valign=top>
+      <b><font face="courier new">"UTF-16"</font>, <font face="courier new">"UTF-16BE"</font> or <font face="courier new">"UTF-16LE"</font></b>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Parsed for appropriate UTF-16 variant per ICU
+    </td>
+    <td align=left valign=top>
+      Parsed for appropriate UTF-16 (as if it were tagged 1204)<br>
+    </td>
+  </tr>
+  <tr align=left bgcolor=#ffffff valign=top>
+    <td>
+      Not specified<br>
+    </td>
+    <td>
+      No conversion in M mode; parsed for UTF-8 per ICU in UTF-8 mode<br>
+    </td>
+    <td>
+      In M mode conversion from EBCDIC to ISO/IEC 8859-1 by z/OS; error in UTF-8 mode<br>
+    </td>
+    <td>
+      No conversion in M mode; error in UTF-8 mode<br>
+    </td>
+    <td>
+      No conversion in M mode; error in UTF- mode<br>
+    </td>
+    <td>
+      Error<br>
+    </td>
+    <td>
+      No conversion in M mode; parsed for UTF-8 per ICU in UTF-8 mode
+    </td>
+    <td bgcolor=#cccccc>
+      Parsed for appropriate UTF-16 variant per ICU
+    </td>
+    <td>
+      No conversion in M mode; parsed for UTF-8 per ICU in UTF-8 mode
+    </td>
+  </tr>
+  </tbody>
+</table>
+<br>
+For output from a GT.M, the table below specifies conversions.&nbsp; Cells with a grey background are meaningful only for processes in UTF-8 mode, and are errors in M mode.<br>
+<br>
+<table border=0 bordercolor=#000000 cellpadding=3 cellspacing=0 class=zeroBorder id=qbgz>
+  <tbody>
+  <tr>
+    <td align=left valign=top>
+      <b>OPEN <font face="arial narrow">deviceparameter</font> <font face="courier new">ochset</font> (or simply <font face="courier new">chset</font> if <font face="courier new">ochset</font> is not explicitly specified)<br>
+      </b>
+    </td>
+    <td align=left valign=top>
+      <b>New file or NEWVERSION specified<br>
+      </b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, tagged 819 (ISO/IEC-8859-1)<br>
+      </b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, tagged 1047 (EBCDIC)<br>
+      </b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, tagged 65535 (Binary)<br>
+      </b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, other ASCII tag<br>
+      </b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, other EBCDIC tag<br>
+      </b>
+    </td>
+    <td align=left style=BACKGROUND-COLOR:#ffffff valign=top>
+      <b>Existing file, tagged 1208 (UTF-8)<br>
+      </b>
+    </td>
+    <td align=left style=BACKGROUND-COLOR:#ffffff valign=top>
+      <b>Existing file, tagged 1200, 1202 or 1204 (UTF-16 variants)<br>
+      </b>
+    </td>
+    <td align=left valign=top>
+      <b>Existing file, untagged<br>
+      </b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b><font face="courier new">"ASCII"</font><br>
+      </b>
+    </td>
+    <td>
+      Tagged as ISO/IEC 819 with no conversion
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left style=BACKGROUND-COLOR:#ffffff valign=top>
+      Error
+    </td>
+    <td align=left bgcolor=#ffffff style=BACKGROUND-COLOR:#ffffff valign=top>
+      Error
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b><font face="courier new">"BINARY"</font><br>
+      </b>
+    </td>
+    <td>
+      Tagged as 65535 with no conversion<br>
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left style=BACKGROUND-COLOR:#ffffff valign=top>
+      No conversion
+    </td>
+    <td align=left style=BACKGROUND-COLOR:#ffffff valign=top>
+      No conversion
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      <b><font face="courier new">"EBCDIC"</font><br>
+      </b>
+    </td>
+    <td align=left valign=top>
+      Tagged as 1047 with conversion from ISO/IEC 8859-1 to EBCDIC by z/OS
+    </td>
+    <td align=left valign=top>
+      <font style=BACKGROUND-COLOR:#ffffff>Error</font><br>
+    </td>
+    <td align=left valign=top>
+      Conversion from ISO/IEC 8859-1 to EBCDIC by z/OS<br>
+    </td>
+    <td align=left valign=top>
+      <font style=BACKGROUND-COLOR:#ffffff>Error</font><br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left style=BACKGROUND-COLOR:#ffffff valign=top>
+      Error
+    </td>
+    <td align=left style=BACKGROUND-COLOR:#ffffff valign=top>
+      Error
+    </td>
+    <td align=left valign=top>
+      Conversion from ISO/IEC 8859-1 to EBCDIC by z/OS
+    </td>
+  </tr>
+  <tr>
+    <td align=left valign=top>
+      <b><font face="courier new">"M"<font face=verdana>, or not specified in M mode</font></font><br>
+      </b>
+    </td>
+    <td align=left valign=top>
+      Tagged as 819 with no conversion<br>
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      Automatic conversion from ISO/IEC 8859-1 to EBCDIC by z/OS
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+    <td align=left valign=top>
+      Error<br>
+    </td>
+    <td align=left style=BACKGROUND-COLOR:#ffffff valign=top>
+      No conversion
+    </td>
+    <td align=left style=BACKGROUND-COLOR:#cccccc valign=top>
+      Conversion from UTF-8 to specified UTF-16 encoding per ICU
+    </td>
+    <td align=left valign=top>
+      No conversion<br>
+    </td>
+  </tr>
+  <tr align=left valign=top>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      <b><font face="courier new">"UTF-8", or not specified in UTF-8 mode</font><br>
+      </b>
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Tagged as 1208 with no conversion<br>
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      No conversion<br>
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error<br>
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error<br>
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error<br>
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error<br>
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      No conversion<br>
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error<br>
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error<br>
+    </td>
+  </tr>
+  <tr align=left valign=top>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      <b><font face="courier new">"UTF-16"</font>, <font face="courier new">"UTF-16BE"</font> or <font face="courier new">"UTF-16LE"</font><br>
+      </b>
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Tagged as 1200, 1202 or 1204, as appropriate, with conversion from UTF-8 to specified UTF-16 encoding per ICU
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Conversion from UTF-8 to specified UTF-16 encoding per ICU
+    </td>
+    <td style=BACKGROUND-COLOR:#cccccc>
+      Error
+    </td>
+  </tr>
+  </tbody>
+</table>
+<br>
+Notes:<br>
+<br>
+<ol>
+  <li>
+    The GT.M device $Principal internally maps to two operating system file descriptors, one for STDIN and another for STDOUT (GT.M does not at present provide the ability to write to STDERR).&nbsp; Since STDIN and STDOUT can be tagged differently, the GT.M runtime system potentially enables different conversions, for READ from $Principal and WRITE to $Principal.
+  </li>
+  <li>
+    MUPIP extracts in ZWR or GO format always contain only ASCII characters, and are tagged as ASCII - ZWR uses $CHAR() representation of non-ASCII characters.&nbsp; MUPIP extracts in BIN format are tagged as binary.&nbsp; Extract files imported into a z/OS environment from other environments must be converted with <font face="courier new">iconv</font> or tagged with <font face="courier new">chtag</font> before they are loaded.
+  </li>
+</ol>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=m_7: target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+<h4>
+  <a id=PIPE_42744387634639924_4417675_08872874665325236 name=PIPE_42744387634639924_4417675_08872874665325236></a>PIPE DEVICE
+</h4>
+<font style=BACKGROUND-COLOR:#ffffff>OPEN of a GT.M PIPE device creates a shell and feeds it a command.&nbsp; The GT.M process can then WRITE to and/or READ </font><font style=BACKGROUND-COLOR:#ffffff>from the device. With the <font face="arial narrow">deviceparameter</font> CHSET, the OPEN command can specify the same character set for both input and output, or it can specify different character sets by specifying both ICHSET and OCHSET <font face="arial narrow">deviceparamter</font>s.&nbsp; When the process specifies the CHSET, GT.M enforces the selection with conversion as appropriate using the same rules above for SD and FIFO (as you would expect, BINARY passes the data unaltered).&nbsp; When the OPEN does not specify the CHSET, the PIPE handling depends on the process character set representation, which can be M mode or UTF-8 mode.</font>&nbsp; When using an EBCDIC character set other than IBM-1047, specify the ASCII character set and pipe the information through iconv to create or consume the appropriate character set.<br>
+<br>
+In M mode, GT.M READ and WRITE operations to a PIPE device default to tagged IBM-1047 with conversion enabled.&nbsp; Tagged with conversion turned on means either ASCII or EBCDIC (IBM-1047) programs on the other side of the PIPE device (initiated by the invoked shell) read GT.M's output in their native format.&nbsp; Anything those programs write in ASCII or IBM-1047 EBCDIC, GT.M reads as ASCII.<br>
+<br>
+In UTF-8 mode GT.M READ and WRITE operations to a PIPE device default to tagged ASCII with conversion enabled.&nbsp; When using the environment variable <font face="courier new">gtm_dont_tag_UTF8_ASCII</font> is defined to <font face="courier new">1</font>, <font face="courier new">"TRUE"</font> or <font face="courier new">"YES"</font> (independent of case), GT.M tags the device as UTF-8 and disables conversion.&nbsp; Note that z/OS shell utility programs and TSO programs do not recognize or convert data with the UTF-8 CCSID.<br>
+<br>
+READ of the STDERR port of the PIPE has conversion enabled and typically expects IBM-1047 EBCDIC, but ASCII works as well.&nbsp; The application program cannot specify the character set for the stderr port.<br>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=l6mc target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+<h3>
+  <a id=Devices_with_chset_BINARY_8722_46394687715951416 name=Devices_with_chset_BINARY_8722_46394687715951416></a>Devices with chset="BINARY"
+</h3>
+A <font face="arial narrow">deviceparameter</font> CHSET of <font face="courier new">"BINARY"</font> is incompatible with the VARIABLE, STREAM and WRAP <font face="arial narrow">deviceparameter</font>s.&nbsp; If the<font face="arial narrow"> deviceparameter</font>s specify BINARY as well as either VARIABLE or STREAM, GT.M uses the last deviceparamter specified and ignores those that conflict.&nbsp; WRAP by itself is insufficient to override BINARY.<br>
+<br>
+With a BINARY file, GT.M cannot deduce how much data to return for a READ command (unlike a text file, for example, where a line terminator can provide a natural boundary).&nbsp; Therefore, for a READ with no length specified, GT.M treats the file as having a FIXED format, and returns RECORDSIZE bytes of data (unless the end of file is encountered first).&nbsp; A BINARY file has no record format so unlike FIXED, no padding is added when writing.<br>
+<br>
+A file tagged as binary can only be opened by GT.M with a CHSET of either <font face="courier new">"M"</font> or <font face="courier new">"BINARY"</font>.<br>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=edzp target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+<h2>
+  <a id=External_Calls_876355393487063_5827491513337105 name=External_Calls_876355393487063_5827491513337105></a><b><span style=FONT-WEIGHT:normal>External Routines</span></b>
+</h2>
+GT.M operates as an AMODE 64 ASCII application using POSIX APIs on z/OS.&nbsp; It has the ability to call out to and be called from external routines written in C.&nbsp; The z/OS XL C/C++ compiler with the <font face="courier new">-q64</font> compiler option is the IBM Language Environment conforming language compiler currently supporting development for GT.M interfaces.&nbsp; The <font face="courier new">-qascii</font> compiler option changes the characteristics of a program from EBCDIC to ASCII.&nbsp; Character strings within these applications are represented as ASCII and not EBCDIC.<br>
+<br>
+When building a shared library for use with GT.M it <i>must</i> be compiled as AMODE 64 and ASCII.&nbsp; In addition to those requirements, software linking to GT.M might need to define MACROs to use advanced POSIX features.&nbsp; Place xlc into compatibility mode by setting the environment variable <font face="courier new">_C89_CCMODE</font> to <font face="courier new">1</font>.&nbsp; Compatibility mode increases the flexibility of command line argument placement for xlc which simplifies porting existing software builds to z/OS.<br>
+<br>
+Compile and Link in one step:<br>
+<ol>
+  <li>
+    <font face="courier new">xlc -q64 -qascii -D_ENHANCED_ASCII_EXT=0xFFFFFFFF -W c,DLL,XPLINK,EXPORTALL,RENT,NOANSIALIAS,LANGLVL(EXTENDED),ARCH(7) -W l,DLL,XPLINK,REUS=RENT $gtm_exe/libgtmshr.x </font><font face="arial narrow">source files</font>
+  </li>
+</ol>
+<br>
+Comple and Link in two steps:<br>
+<ol>
+  <li>
+    Compile source files into object files<br>
+    <font face="courier new">xlc -c&nbsp; -q64 -qascii -D_ENHANCED_ASCII_EXT=0xFFFFFFFF -W c,DLL,XPLINK,EXPORTALL,RENT,NOANSIALIAS,LANGLVL(EXTENDED),ARCH(7) -W l,DLL,XPLINK </font><font face="arial narrow">source files</font>
+  </li>
+  <li>
+    Link object files into an executable or shared library<br>
+    <font face="courier new">xlc -q64 -W l,DLL,XPLINK,REUS=RENT -o <font face="arial narrow">dll name</font> <font face="arial narrow">object files</font> $gtm_exe/libgtmshr.x</font><br>
+  </li>
+</ol>
+<br>
+Depending on the features needed for a shared library the following compile line options may be needed:<br>
+<ol>
+  <li>
+    <font face="courier new">-D_ALL_SOURCE_NO_THREADS</font><br>
+    enables POSIX.1, POSIX.1a, POSIX.2, XPG4.2, and XPG4.2 Ext, DISABLES THREADING
+  </li>
+  <li>
+    <font face="courier new">-D_XOPEN_SOURCE_EXTENDED=1</font><br>
+    enables POSIX.1, POSIX.2, XPG4.2, and XPG4.2 Ext., this should be redundant to -D_ALL_SOURCE_NO_THREADS, but it enables other feature test macros
+  </li>
+  <li>
+    <font face="courier new">-D_UNIX03_SOURCE</font><br>
+    exposes a few of the SUSv3 options, for exmaple dlclose(), dlerror(), dlopen(), dlsym()
+  </li>
+  <li>
+    <font face="courier new">-D_IEEEV1_COMPATIBILITY</font><br>
+    enable IEEE math compatibility<br>
+  </li>
+</ol>
+<br>
+Please reference IBM's documentation in the <i>z/OS V1R10.0 XL C/C++ Programming Guide</i> [<a href=http://publib.boulder.ibm.com/infocenter/zos/v1r10/topic/com.ibm.zos.r10.cbcpx01/dllsim.htm#dllsim id=uiv4 title="Online Documentation">Online Dohttp://publib.boulder.ibm.com/infocenter/zos/v1r10/topic/com.ibm.zos.r10.cee/cee.htmcumentation</a>] [<a href=http://publibz.boulder.ibm.com/epubs/pdf/cbcpg190.pdf id=vncs title=PDF>PDF</a>] for more information on feature test macros and compiling DLLs.<br>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=m5gx target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a>
+<h2>
+  <a id=Object_files_in_shared_librari_9326408458289879 name=Object_files_in_shared_librari_9326408458289879></a>Object files in shared libraries
+</h2>
+As on other 64-bit platforms, GT.M object files can be placed in dynamically linked shared libraries.&nbsp; This allows one copy of each object file in a shared library to be shared by all processes using it.<br>
+<br>
+The DLL binding options for building a shared library for Mumps routines are the same binding options for external calls and call ins.&nbsp; Here is an example of how build a shared library of M routines:<br>
+<ol>
+  <li>
+    Compile your M sources to object files, e.g.<font face="courier new"><font face=verdana>: </font>mumps a.m b.m c.m</font>
+  </li>
+  <li>
+    Link the object files into one DLL, e.g.: <font face="courier new">xlc -q64 -W c,DLL,XPLINK,EXPORTFULL -W l,DLL,XPLINK -o my.dll a.o b.o c.o </font>
+  </li>
+  <li>
+    Include the DLL in the gtmroutines search path, e.g.: <font face="courier new">export gtmroutines=". my.dll $gtm_dist"</font>
+  </li>
+</ol>
+<br>
+<a href="GTM_on_z_OS.html#toc" id=e3fb target=_self title="Click here to return to the Table of Contents">Return to Table of Contents</a><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class=endnotes>
+  <p style="page-break-before:always; TEXT-ALIGN:center">
+    notes
+  </p>
+  <br>
+  <br>
+  <sup>1 </sup><a name=FOOTNOTE-1></a>As of this date, the current version of zlib is 1.2.3.&nbsp; We used the older version because, when we built the newer version on z/OS, it failed its own internal tests.<br>
+  <br>
+  <sup>2 </sup><a name=FOOTNOTE-2></a>Two device types are deprecated and no longer maintained: Magnetic Tapes (MT) and TCP; they are not supported on z/OS.
+</div></body>
+</html>

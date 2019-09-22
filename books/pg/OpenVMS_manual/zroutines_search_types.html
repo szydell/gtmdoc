@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZROutines Search Types</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zroutines.html" title="$ZROutines" />
+    <link rel="prev" href="zro_examples.html" title="$ZROutines Examples" />
+    <link rel="next" href="zroutine_search_examples.html" title="$ZROutines Search Examples" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZROutines Search Types</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zro_examples.html">Prev</a>A </td>
+          <th width="60%" align="center">$ZROutines</th>
+          <td width="20%" align="right">A <a accesskey="n" href="zroutine_search_examples.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="zroutines_search_types"></a>$ZROutines Search Types</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4195856" class="indexterm"></a>
+      <p>GT.M uses $ZRO[UTINES] to perform three types of searches:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Object-only when the command or function using $ZROUTINES requires a .OBJ file extension.</p>
+          </li>
+          <li>
+            <p>Source-only when the command or function using $ZROUTINES requires a file extension other than .OBJ.</p>
+          </li>
+          <li>
+            <p>Object-source match when the command or function using $ZROUTINES does not specify a file extension.</p>
+          </li>
+        </ul>
+      </div>
+      <p>An explicit ZLINK that specifies a non .OBJ .o extension is considered as a function that has not specified a file extension for the above searching purposes.</p>
+      <p>All searches proceed from left to right through $ZROUTINES. By default, GT.M searches directories for both source and object files. GT.M searches /NOSRC directories and object libraries only for object files. GT.M searches directories listed in a /SRC= qualifier only for source files. </p>
+      <p>Once an object-matching search locates an object file, the source search becomes limited. If the directory containing the object file has a /SRC= qualifier, GT.M only searches the directories in the attached list for matching source files. If the directory containing the object files has no qualifier, GT.M restricts the search for matching source files to the same directory. If the object module is in an object library, or a directory qualified by /NOSRC, GT.M cannot perform any operation that references the source file.</p>
+      <p>The following table shows GT.M commands and functions using $ZROUTINES and the search types they support.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td>
+    <p>GT.M Commands and $ZROUTINES Search Types</p>
+    </td>
+              <td class="auto-generated">A </td>
+              <td class="auto-generated">A </td>
+              <td class="auto-generated">A </td>
+            </tr>
+            <tr>
+              <td>
+    <p>SEARCH/</p>
+    <p>FUNCTION</p>
+    </td>
+              <td>
+    <p>FILE </p>
+    <p>EXTENSION</p>
+    <p>SPECIFIED</p>
+    </td>
+              <td colspan="3">
+    <p>SEARCH TYPE</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p>OBJ-ONLY</p>
+    </td>
+              <td>
+    <p>SRC-ONLY</p>
+    </td>
+              <td>
+    <p>MATCH</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>EXPLICIT </p>
+    <p>ZLINK</p>
+    </td>
+              <td>
+    <p><span>.OBJ</span></p>
+    </td>
+              <td>
+    <p>X</p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p>Not <span>.OBJ</span></p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p>X</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p>None</p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p>X</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>AUTO-ZLINK</p>
+    </td>
+              <td>
+    <p>None</p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p>X</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ZEDIT</p>
+    </td>
+              <td>
+    <p>Not <span>.OBJ</span></p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p>X</p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ZPRINT</p>
+    </td>
+              <td>
+    <p>None</p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p>X</p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>$TEXT</p>
+    </td>
+              <td>
+    <p>None</p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+              <td>
+    <p>X</p>
+    </td>
+              <td>
+    <p></p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>If ZPRINT or $TEXT() require a source module for a routine that is not in the current image, GT.M first performs an auto-ZLINK with a matching search.</p>
+      <p>ZPRINT or $TEXT locate the source module using a file specification for the source file located in the object module. If GT.M finds the source module in the directory where it was when it was compiled, the run-time system does not use $ZROUTINES. If GT.M cannot find the source file in the indicated location, the run-time system uses $ZROUTINES.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zro_examples.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zroutines.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="zroutine_search_examples.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZROutines ExamplesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $ZROutines Search Examples</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,380 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>MUPIP Set</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch06.html" title="Chapter 6. GT.M Journaling"><link rel="prev" href="ch06s04.html" title="GT.M Language Extensions for Journaling"><link rel="next" href="ch06s06.html" title="MUPIP JOURNAL"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">MUPIP Set</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06s04.html">Prev</a> </td><th width="60%" align="center">Chapter 6. GT.M Journaling</th><td width="20%" align="right"> <a accesskey="n" href="ch06s06.html">Next</a></td></tr></table><hr></div><div class="sect1" title="MUPIP Set"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mupip_set_jrnl"></a>MUPIP Set<a class="indexterm" name="id3238090"></a></h2></div></div></div><p>MUPIP SET is the primary utility used to establish and activate journaling (using
+the <span>/</span>JOURNAL qualifier) and
+replication (using the <span>/</span>REPLICATION qualifier).</p><p>This section provides a description of the MUPIP SET command with specific
+reference to the journaling related qualifiers, <span>/</span>JOURNAL and <span>/</span>REPLICATION.</p><p>When GDE creates a Global Directory, it stores there either the explicitly
+specified journaling information, or the GDE default value (detailed under each
+journal-option-subsection) for any unspecified characteristics. </p><p>MUPIP CREATE copies existing journaling information from the Global Directory to
+the database file, establishing journaling characteristics for all GDE supported
+journal-options.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The journaling information in the Global Directory is applied to a database
+file only when it is created. Thereafter use MUPIP or possibly DSE to change
+journaling characteristics in database files.</p></td></tr></table></div><p>DSE DUMP <span>/</span>FILEHEADER
+displays the current values for all established journaling characteristics.</p><p>MUPIP SET <span>/</span>JOURNAL or
+<span>/</span>REPLICATION changes some
+database characteristics, such as whether journaling or replication is active for a
+specific file or region(s). MUPIP SET operates on either regions or files.</p><p>The format for the SET command is:</p><p>
+<span class="emphasis"><em>
+<span>SE[T] /qualifier... file-spec or region-list</span>
+
+</em></span>
+</p><p>The file-specification or region-list identifies the target of the SET.
+Region-names separated by commas (,) make up a region-list. <span>Region-names may include the DCL wildcards percent (%) and asterisk
+(*).</span> For a summary table of MUPIP commands and qualifiers including
+MUPIP SET, refer to the "MUPIP" chapter.</p><p>The MUPIP SET command to establish journaling or replication characteristics must
+include one of the following qualifiers:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+<span>/</span>F[ILE] </p></li><li class="listitem"><p>
+<span>/</span>R[EGION]</p></li></ul></div><p>Together with one or more of the qualifiers:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+<span>/</span>[NO]JOURNAL[=journal-option-list]</p></li><li class="listitem"><p>
+<span>/</span>REPLICATION=&lt;replication-option&gt;</p></li></ul></div><div class="sect2" title="SET Object Identifying Qualifiers"><div class="titlepage"><div><div><h3 class="title"><a name="set_obj_qual"></a>SET Object Identifying Qualifiers<a class="indexterm" name="id3238310"></a></h3></div></div></div><p>The following qualifiers identify the journaling targets:</p><p>
+<span class="emphasis"><em>
+<span>/</span>FILE</em></span>
+</p><p>Specifies that the argument contains a file-specification for a single
+database file. The <span>/</span>FILE
+qualifier is incompatible with the <span>/</span>REGION qualifier.</p><p>
+<span class="emphasis"><em>
+<span>/</span>R[EGION]</em></span>
+</p><p>Specifies that the argument contains a region-name which, through the mapping
+of the current Global Directory, identifies a database file. SET <span>/</span>REGION modifies multiple
+files when the parameter contains more than one name <span>and/or
+wildcards</span>. The <span>/</span>REGION qualifier is incompatible with the <span>/</span>FILE qualifier.</p></div><div class="sect2" title="SET Action Qualifiers"><div class="titlepage"><div><div><h3 class="title"><a name="set_act_qual"></a>SET Action Qualifiers<a class="indexterm" name="id3238393"></a></h3></div></div></div><p>The <span>/</span>JOURNAL and <span>/</span>REPLICATION qualifiers are
+the only SET qualifiers relevant for journaling. For information on the other
+MUPIP SET qualifiers, refer to the "MUPIP" chapter.</p><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]J[OURNAL][=journal-option-list]</em></span>
+</p><p>Enables or disables journaling for the specified database file or region(s).
+When enabling the journaling capability, it also establishes characteristics for
+the journal file. </p><p>
+<span>/</span>NOJOURNAL specifies
+that the database does not allow journaling, or disables journaling for a
+database that currently has it enabled. It is equivalent to <span>/</span>JOURNAL=DISABLE. <span>/</span>NOJOURNAL does not accept an argument
+assignment. It does not create new journal files. When a database has been SET
+<span>/</span>NOJOURNAL, it appears
+to have no journaling file name or other characteristics.</p><p>
+<span>/</span>JOURNAL= enables
+journaling for a database file. <span>/</span>JOURNAL= takes one or more arguments in a journal-option-list. As
+long as journaling is ENABLED and turned ON at the end of the command, SET
+<span>/</span>JOURNAL= always
+creates a new version of the specified journal file(s). The journal-option-list
+contains keywords separated with commas (,) enclosed in <span>parentheses ( )</span>
+. When
+the list contains only one keyword, the <span>parentheses (
+)</span>
+ are optional.</p><p>For details on the journal options refer to the SET JOURNAL Options
+section.</p><p>
+<span class="emphasis"><em>
+<span>/</span>REPLICATION=&lt;replication-option&gt;</em></span>
+</p><p>
+<span>/</span>REPLICATION sets
+journal characteristics and changes the replication state simultaneously. It can
+also be used with the <span>/</span>JOURNAL qualifier. As long as journaling is ENABLED and turned ON at
+the end of the command SET <span>/</span>REPLICATION always creates a new version of the specified journal
+file(s).</p></div><div class="sect2" title="SET /JOURNAL Options"><div class="titlepage"><div><div><h3 class="title"><a name="set_jrnl_opt"></a>SET <span>/</span>JOURNAL
+Options<a class="indexterm" name="id3238552"></a></h3></div></div></div><p>The following section describes the SET <span>/</span>JOURNAL= options. </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>This option list is a super set of the journal-option-list available
+through GDE. </p></td></tr></table></div><p>Every MUPIP SET <span>/</span>JOURNAL
+command on a database file which specifies an ON or OFF journal-activation
+option causes the values of all explicitly specified journal-file-options to be
+stored in the database overriding any previously established characterstics for
+those options.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>If both <span>/</span>JOURNAL and
+<span>/</span>NOJOURNAL are
+specified in the same command line, the last of these specifications on the
+line takes effect.</p></td></tr></table></div><p>A new journal file can be created in the following three ways:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Explicitly, by specifying a MUPIP SET <span>/</span>JOURNAL=ON command</p></li><li class="listitem"><p>Implicitly, when the AUTOSWITCHLIMIT (discussed later in the following
+section) for the current journal file is reached</p></li><li class="listitem"><p>Implicitly, when the first process to open the current journal file
+detects that it was not cleanly terminated</p></li></ul></div><p>Whenever GT.M creates a new journal file, it uses any values for
+journal-file-options explicitly specified in the command line for the new
+journal file and takes all journal-file-options that are not explicitly
+specified from the existing journal file characteristics for the corresponding
+database file.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>MUPIP SET supports qualifiers (like <span>/</span>ACCESS_METHOD etc.) to change non-journaling
+characteristics of database file(s). If these qualifiers are specified along
+with the <span>/</span>JOURNAL
+qualifier, MUPIP SET modifies the non-journaling characteristics first and
+the journaling characteristics second. Command execution stops when it
+encounters an error. If MUPIP SET encounters an error in processing the
+command line or the non-journaling characteristics, it makes no changes to
+any characteristics. However, if MUPIP SET encounters an error in processing
+the journaling characteristics, the non-journaling characteristics get
+successfully changed.</p></td></tr></table></div><p>The journal-option-list may include:</p><div class="sect3" title="Journal Activation Options"><div class="titlepage"><div><div><h4 class="title"><a name="jrnl_activ_opt"></a>Journal Activation Options<a class="indexterm" name="id3238700"></a></h4></div></div></div><p>
+<span class="emphasis"><em>DISABLE</em></span>
+</p><p>DISABLE is functionally equivalent to the <span>/</span>NOJOURNAL qualifier of MUPIP SET.
+It specifies that journaling is not an option for the region or file named.
+If DISABLE is specified, no other options are allowed in the
+journal-option-list.</p><p>
+<span class="emphasis"><em>ENABLE</em></span>
+</p><p>ENABLE specifies that the database file or region is available for
+journaling. By default, specifying ENABLE also turns journaling ON unless
+OFF is specified in the same option list, you must also specify
+BEFORE_IMAGES or NOBEFORE_IMAGES.</p><p>
+<span class="emphasis"><em>OFF</em></span>
+</p><p>OFF specifies that GT.M cease recording subsequent updates to the database
+in the journal file. OFF may also be used to establish journaling
+characteristics without creating a journal file or starting journaling. When
+a database has been SET <span>/</span>JOURNAL=OFF, it has established journal characteristics ready
+to turn ON, but GT.M does not write journal updates to that file.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The default for SET <span>/</span>JOURNAL= is ON.</p></td></tr></table></div><p>
+<span class="emphasis"><em>ON</em></span>
+</p><p>ON instructs MUPIP to create a new journal file and GT.M to record
+subsequent database updates in that journal file. A SET <span>/</span>JOURNAL=ON must include either
+BEFORE_IMAGES or NOBEFORE_IMAGES in the accompanying
+journal-option-list.</p><p>Note that ON can be specified only for a file or region with journaling
+already ENABLE'd, or, if ENABLE is specified at the same time. ON is ignored
+if journaling is currently DISABLE'd for the database.</p><p>Example:</p><pre class="programlisting">MUPIP SET <span>/</span>JOURNAL=<span>(</span>
+ON,BEFORE_IMAGES<span>)</span>
+
+<span>/</span>REGION "*"
+</pre><p>This command turns journaling on only for the regions with journaling
+already ENABLE'd.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The default for SET <span>/</span>JOURNAL= is ON.</p></td></tr></table></div></div><div class="sect3" title="Journal File Options"><div class="titlepage"><div><div><h4 class="title"><a name="jrnl_file_opt"></a>Journal File Options<a class="indexterm" name="id3238819"></a></h4></div></div></div><p>
+<span class="emphasis"><em>ALI[GNSIZE]=blocks</em></span>
+</p><p>ALIGNSIZE=blocks specifies in number of 512-byte-blocks, the alignsize of
+the journal file.</p><p>Since a journal file consits of a sequential stream of journal records
+each of varying size, it is not easy normally to detect the beginning of the
+last valid journal record in an abnormally terminated journal file (for
+example, system crash). To facilitate journal recovery in such
+circumstances, the GT.M run-time system ensures that offsets in the journal
+file which are multiple of ALIGNSIZE (excepting offset 0 which houses the
+journal file header) will always be the beginning of a valid journal record.
+In order to ensure this, GT.M run-time system writes padding data (if
+necessary) in the form of ALIGN journal records just before the ALIGNSIZE
+boundary. These ALIGN records also help in skipping past invalid records in
+the middle of a journal file allowing MUPIP JOURNAL <span>/</span>EXTRACT <span>/</span>FORWARD <span>/</span>FULL to extract as much data of a
+corrupt journal file as possible.</p><p>If the specified ALIGNSIZE is not a perfect power of 2, it is rounded up
+to the nearest power of 2.</p><p>The default ALIGNSIZE value is 128 blocks (=64 kilobytes) and the minimum
+value is 32 blocks (=16 KiloBytes). The maximum value is 4194304 (=2
+GigaBytes).</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The minimum ALIGNSIZE supported will always be greater than or equal
+to the maximum journal record size which in turn depends on the maximum
+database block size.</p></td></tr></table></div><p>Note that a large value of ALIGNSIZE implies less aligned boundaries for
+recovery to use and hence slows backward recovery down so drastically that a
+value of 4194304 causes backward recovery (in case of a crash) to take as
+much time as forward recovery on that journal file.</p><p>
+<span class="emphasis"><em>ALL[OCATION]=blocks</em></span>
+</p><p>
+<span>ALLOCATION=blocks specifies in 512 byte-blocks, the
+initial size of the journal file allocated on creation. Because,
+frequent journal file extensions degrade run-time performance, make
+journal file allocation ample for a production database.</span>
+</p><p>
+
+</p><p>GT.M issues informational messages to the system log whenever the free
+space available is not much more than the extension size. GT.M provides
+these extension checks as an operational aid for identifying, before space
+runs out, that a file system holding the journal file is low on space. When
+there is no more free space available on the file system holding a journal
+file, GT.M shuts off journaling for the corresponding database file.</p><p>The default ALLOCATION value is 100 blocks. The minimum value allowed is
+10. The maximum value is 8,388,607 (4GB-512 bytes, the maximum journal file
+size).</p><p>
+<span class="emphasis"><em>AU[TOSWITCHLIMIT]=blocks</em></span>
+</p><p>AUTOSWITCHLIMIT=blocks specifies in 512-byte blocks, a limit on the size
+of a journal file. When the journal file size reaches the limit, GT.M
+automatically performs an implicit online switch to a new journal file. </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>It is possible to set the AUTOSWITCHLIMIT to a value higher than the
+maximum file size (in blocks) for the file system. Currently GT.M does
+not attempt to check for this condition at specification time. When the
+maximum file-system size is reached, this can cause serious run-time
+errors. Therefore, ensure that the AUTOSWITCHLIMIT never exceeds the
+file-system limit.</p></td></tr></table></div><p>The default value for AUTOSWITCHLIMIT is 8388600 &amp; the maximum value
+is 8388607 blocks (4GB-512 bytes). The minimum value for AUTOSWITCHLIMIT is
+2048 (number of blocks needed to have 64 ALIGNSIZE boundaries each 16 KB,
+which is the minimum ALIGNSIZE). If the AUTOSWITCHLIMIT value is less than
+the sum of allocation and extension values, an error is issued. If the
+difference between the AUTOSWITCHLIMIT and the allocation value is not a
+multiple of the extension value, MUPIP rounds-down the value to make it a
+multiple of the extension value. An informational message to this effect is
+issued. In the event of the rounded value of AUTOSWITCHLIMIT being less than
+the minimum, an error is issued.</p><p>
+<span class="emphasis"><em>[NO]BEFORE_IMAGES</em></span>
+</p><p>[NO]BE[FORE_IMAGES] controls whether or not the journal should capture
+BEFORE_IMAGES of GDS blocks that an update is about to modify. <span>Databases using MM access must use NOBEFORE_IMAGES
+journaling.</span> A SET <span>/</span>JOURNAL=ON must include either BEFORE_IMAGES or
+NOBEFORE_IMAGES in the accompanying journal-option-list.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>If both NOBEFORE_IMAGES and BEFORE_IMAGES are specified in the same
+journal-option-list, the last of these specifications overrides any
+previous one(s).</p></td></tr></table></div><p>A BEFORE_IMAGES journal provides the option of performing Rollback
+Recovery (that is, Backward Recovery) of the associated database.
+BEFORE_IMAGES increases the load on I/O and CPU resources, and therefore may
+affect performance.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Since new journal files are created only with the ON option and since
+every ON specification must include either BEFORE_IMAGES or
+NOBEFORE_IMAGES, specifying [NO]BEFORE_IMAGES along with the OFF option
+establishes a value for the BEFORE_IMAGES option that always gets
+overridden by a later ON option specification.</p></td></tr></table></div><p>Although it is possible to perform an online switch of a database from (or
+to) NOBEFORE-IMAGE journaling to (or from) BEFORE-IMAGE journaling, it is
+important to understand that backward recovery can never succeed if it
+encounters even one in a set of journal files for a database without
+BEFORE-IMAGES.</p><p>
+<span class="emphasis"><em>BU[FFER_SIZE]=blocks</em></span>
+</p><p>BUFFER_SIZE=blocks specifies, in 512-byte blocks, the amount of memory
+used to buffer journal file output.</p><p>MUPIP requires standalone access to the database in order to actually
+modify BUFFER_SIZE. Therefore, this option cannot be used to change the
+current journal-buffer-size as part of an online switch of the journal
+files.</p><p>The minimum BUFFER_SIZE is one more than the number of 512-byte blocks
+required to hold one GDS database block. The maximum is 2000 blocks. The
+default value is 128 blocks.</p><p>
+<span class="emphasis"><em>EP[OCH_INTERVAL]=seconds</em></span>
+</p><p>EPOCH_INTERVAL=seconds specifies the elapsed time interval between two
+successive EPOCHs. An EPOCH is a checkpoint, at which all updates to a
+database file are committed to disk.</p><p>A smaller EPOCH_INTERVAL reduces the time to recover after a crash at the
+cost of increased I/O load on the run-time system (due to more frequent
+checkpoints). A larger EPOCH_INTERVAL has the opposite effect.</p><p>The default EPOCH_INTERVAL value is 300 seconds (5 minutes). The minimum
+value is 1 second. The maximum value is 32,767 (one less than 32K) seconds,
+or approximately 9.1 hours.</p><p>
+<span class="emphasis"><em>EX[TENSION]=blocks</em></span>
+</p><p>EXTENSION=blocks specifies the size of the journal file extension
+performed when the file expands and becomes full.</p><p>
+
+</p><p>
+
+<span>Every
+extension triggers a check of free space available on the device used
+for the journal file. GT.M issues informational messages to the system
+log whenever the free space available is not much more than the
+extension size. GT.M provides these extension checks as an operational
+aid for identifying, before space runs out, that a file system holding
+the journal file is low on space. When there is no more free space
+available on the file system holding a journal file, GT.M shuts off
+journaling for the corresponding database file.</span>
+</p><p>The <span>Allocation and extension</span> values determine
+when a check is done on the filesystems to see if it has enough space to
+hold an extension worth of journal data. When a journal file reaches the
+size specified by the sum of ALLOCATION and any multiple of EXTENSION, GT.M
+checks the file system for room, and if the available space is less than
+three times the EXTENSION, it writes warnings to the operator log. GT.M
+provides these extension checks as an operational aid for identifying,
+before space runs out, that a file system holding the journal file is low on
+space. When there is no more free space available on the file system holding
+a journal file, GT.M shuts off journaling for the corresponding database
+file.</p><p>The default EXTENSION value is 100 blocks. The minimum EXTENSION is zero
+(0) blocks and the maximum is 65,535 (one less than 64K) blocks.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Use EXTENSION size of zero (0) with caution, since it shuts journaling
+off whenever the first extension becomes necessary.</p></td></tr></table></div><p>
+<span class="emphasis"><em>F[ILENAME]=journal filename</em></span>
+</p><p>F[ILENAME]=journal filename, specifies the name of the journal file.
+FILENAME is incompatible with SET <span>/</span>REGION, if more than one region is specified.</p><p>
+
+</p><p>The default value for the journal-option is based on the following
+convention:</p><p>If the database has a dat extension, the basename of the database filename
+is taken as the basename for the journal file with an extension of mjl. For
+example, database name mumps.dat results in a default name mumps.mjl. If the
+database filename does not have a dat extension, the full database filename
+is taken replacing ALL occurrences of periods (.) with underscores (_) with
+an extension of mjl. For example, database name mumps.acn results in a
+default name mumps_acn.mjl.</p><p>Therefore, a journal file always has an extension of mjl. If the new
+journal filename (the one specified in the FILENAME option or the default)
+already exists, the existing file is renamed with the string
+"_YYYYJJJHHMMSS" appended to the existing file extension where the string
+denotes the time of creation of the existing journal file in the following
+format:</p><pre class="programlisting">YYYY           4-digit-year                                    such as 2001
+JJ             3-digit-Julian-day (between 1 and 366)          such as 199
+HH             2-digit-hour in 24 hr format                    such as 14
+MM             2-digit minute                                  such as 40
+SS             2-digit seconds                                 such as 30</pre><p>Assuming the above example for the string value, a journal file mumps.mjl
+might be renamed to mumps.mjl_2001199144030.</p><p>If GT.M detects that the rename-logic yields a filename that already
+exists, the string "_N[N[N[N...]]]" is appended to the renamed filename
+where "N[N[N...]]" denotes the sequence of numbers</p><p>0,1,2,3,4,5,6,7,8,9,90,91,92,93,94,95,96,97,98,99,990,991,...</p><p>Numbers from the above sequence are tried in that order until a
+non-existing rename-filename string is found.</p><p>Taking the same example as above, in case mumps.mjl_2001199144030 and
+mumps.mjl_2001119144030_0 already exists, the rename string would be
+mumps.mjl_2001199144030_1.</p><p>If the existing file renaming scheme or the default journal file naming
+scheme discussed above results in a filename longer than 255 characters (due
+to the suffix creation rules), GT.M issues an error and turns off journaling
+(and replication, if it is active).</p><p>For journal recovery purposes, a field is maintained in every journal
+file&#8217;s header that stores the name of the previous generation journal file
+for the same database file. When a MUPIP SET changes the journal state from
+DISABLED or OFF to ON, GT.M creates new journal files with no previous
+generation journal file name. This indicates that this is a fresh start of
+journaling for the particular database. When journaling is already ON, and
+GT.M is implicitly (due to AUTOSWITCHLIMIT being reached) or explicitly (due
+to MUPIP SET JOURNAL) required to create new journal files, GT.M maintains
+the previous generation journal filename (after any appropriate rename), in
+the new journal file&#8217;s header.</p><p>In all cases where journaling is ON both before and after a journal file
+switch, the previous generation journal file name is maintained in the new
+journal file's header excepting the following cases, where it is
+cleared:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>If the new journal file is being created due to an implicit switch
+because of the detection of an abnormally terminated current journal
+file.</p></li><li class="listitem"><p>If REPLICATION is turned ON as part of a MUPIP SET command on a
+database that has journaling ENABLED and turned ON, but does not
+have REPLICATION already turned ON.</p></li></ul></div><p>The previous generation journal filename is a back link from the current
+generation journal.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>If a FILENAME is explicitly specified in a MUPIP SET <span>/</span>JOURNAL command and the
+specified FILENAME coincides with an already existing file that is not
+the currently active journal file for the database specified and the
+database has journaling currently ENABLED and turned ON, then GT.M
+returns an error status and makes no change to the journaling state of
+the database. This is done in order to avoid possible cycles in the
+back-links (such as, a3.mjl has a back-link to a2.mjl which in turn has
+a back-link to a1.mjl which in turn has a back-link to a3.mjl thereby
+creating a cycle). Cycles could prevent journal recovery. Also note that
+cycles in back-links are possible only due to explicit FILENAME
+specifications and never due to picking up existing FILENAME
+characteristics from the database or by using the default
+FILENAME.</p></td></tr></table></div><p>Specification of SYNC_IO causes every WRITE to a journal file to be
+committed directly to disk. On high-end disk subsystems (for example, those
+that include non-volatile cache and that consider the data to be committed
+when it reaches this cache), this might result in better performance than
+the NOSYNC_IO option.</p></div></div><div class="sect2" title="SET /JOURNAL Examples"><div class="titlepage"><div><div><h3 class="title"><a name="set_jrnl_exmpl"></a>SET <span>/</span>JOURNAL
+Examples<a class="indexterm" name="id3239087"></a></h3></div></div></div><p>Example:</p><pre class="programlisting">$ MUPIP SET /FILE /JOUR=(ENABLE,NOBEFORE,BUFF=128) CUS.DAT</pre><p>This initiates NOBEFORE_IMAGE journaling for the database file
+CUS.DAT with a journal buffer size of 64KB (=128blocks) and establishes its
+characteristics. The journal file created has the name CUS.MJL. This command
+assumes that journaling for CUS.DAT is already enabled.</p><p>Example:</p><pre class="programlisting">MUPIP SET /REG /JOURNAL=(ENAB,BEFO,ALLOC=50000,EXT=5000) *</pre><p>This enables journaling with BEFORE_IMAGES on all regions of the
+current Global Directory and gives each journal file an ALLOCATION of 50000 RMS
+blocks and an EXTENSION of 5000 RMS blocks. If the regions have significantly
+different levels of update, either set the ALLOCATION and EXTENSION in the
+Global Directory before the MUPIP CREATE(s) or use several MUPIP SET /FILE or
+/REGION commands.</p><p>Example:</p><pre class="programlisting">MUPIP SET /REGION /JOURNAL=BEFORE (*)</pre><p>This command activates journaling with before-images for all regions
+of the current Global Directory that have previously had journaling enabled.
+This activation occurs the next time the associated database file is
+opened.</p><pre class="programlisting">MUPIP SET /REGION /JOURNAL=(ENABLE,BEFORE) AREG,BREG</pre><p>This declares journaling active with before-images for the regions <span>AREG and BREG</span>
+ of
+the current Global Directory the next time they are opened.</p><p>Example:</p><pre class="programlisting">MUPIP SET /FILE /NOJOURNAL MUMPS.DAT
+</pre><p>This disables journaling on the database file MUMPS.DAT.</p></div><div class="sect2" title="SET /REPLICATION options"><div class="titlepage"><div><div><h3 class="title"><a name="set_repl_opt"></a>SET <span>/</span>REPLICATION
+options<a class="indexterm" name="id3239299"></a></h3></div></div></div><p>This section describes the SET <span>/</span>REPLICATION=options. The replication-option-list may
+include:</p><p>
+<span class="emphasis"><em>OFF</em></span>
+</p><p>Use this option to disable replication of the database file(s) or region(s).
+MUPIP SET <span>/</span>REPLICATION=OFF
+switches journal files in case journaling was ENABLE'd and turned ON in the
+database before and after the command.</p><p>This requires standalone access to the databse if replication is not already
+turned OFF for the database file.</p><p>Turning replication OFF for a database file has no effect on the journaling
+state of the database file unless a simultaneous <span>/</span>JOURNAL= is specified in the same
+command line.</p><p>
+<span class="emphasis"><em>ON</em></span>
+</p><p>Use this option to enable replication for the selected database file(s) or
+region(s). This option requires standalone access to the database file unless
+replication is already turned ON.</p><p>Since replication requires BEFORE_IMAGE journaling, turning replication ON for
+a database file has the same effect on the journaling state of the database file
+as if a JOURNAL=(ENABLE,ON,BEFORE_IMAGE) was specified at the same time.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The previous generation journal-file name is cleared in the new journal
+file header if replication is not already turned ON even though journaling
+is already ENABLE'd and turned ON.</p></td></tr></table></div></div><div class="sect2" title="MUPIP SET &amp; Standalone Acess to Database"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_set_standalone"></a>MUPIP SET &amp; Standalone Acess to Database<a class="indexterm" name="id3239379"></a></h3></div></div></div><p>A MUPIP SET <span>/</span>JOURNAL
+command typically changes the database file journaling state. A MUPIP SET
+<span>/</span>REPLICATION command
+changes the database file replication state. Any MUPIP SET command, that uses
+one or more of the <span>/</span>JOURNAL and <span>/</span>REPLICATION qualifiers might change both the journaling and the
+replication state of the database file. There are few combinations of these
+qualifiers along with a combination of journal-option-list and
+replication-option that require exclusive (standalone) access to the database
+file. Any combination that can cause at least one of the following to be true
+requires standalone access to the database file.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>the database file transitions from JOURNAL=DISABLED (NOJOURNAL) to
+JOURNAL=ON or =OFF</p></li><li class="listitem"><p>the database file transitions from JOURNAL=ON or =OFF to
+JOURNAL=DISABLED (NO JOURNAL)</p></li><li class="listitem"><p>the database file transitions from REPLICATION=OFF to REPLICATION=ON
+</p></li><li class="listitem"><p>the database file transitions from REPLICATION=ON to
+REPLICATION=OFF</p></li><li class="listitem"><p>the journal-option-list specifies a BUFFER_SIZE that is different from
+the current BUFFER_SIZE setting.</p></li></ul></div><p>Any other combination of <span>/</span>JOURNAL and or <span>/</span>REPLICATION qualifiers, and their respective options do not need
+standalone access to the database file.</p></div><div class="sect2" title="MUPIP BACKUP Qualifiers"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_bckup_quali"></a>MUPIP BACKUP Qualifiers<a class="indexterm" name="id3239444"></a></h3></div></div></div><p>MUPIP BACKUP supports the following two qualifiers for establishing journaling
+characteristics on the backup as well as the active databases.</p><p>
+<span class="emphasis"><em>
+<span>/</span>BKUPDBJNL="DISABLE | OFF"</em></span>
+</p><p>The purpose of the optional <span>/</span>BKUPDBJNL qualifier is to define the journaling characteristics
+of the BACKUP database. This qualifier must be used if the backup database is to
+be opened at the same time in the same environment as the original database.
+This is because two database files cannot share a single journal file.</p><p>A value of DISABLE indicates journaling is disabled in the backup database. A
+value of OFF indicates journaling is turned off in the backup database. Only one
+of the qualifiers DISABLE or OFF can be specified at any given point in
+time.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>By default, the journaling characteristics of the current database are
+preserved in the backup database. This produces a database that is ready for
+use (inserted in place of the current database file), with the existing
+journal files.</p></td></tr></table></div><p>
+<span class="emphasis"><em>
+<span>/</span>[NO]NEWJNLFILES[=[NO]PREVLINK]</em></span>
+</p><p>
+<span>/</span>NEWJNLFILES causes a
+transaction-consistent set of new journal files to be created, for database
+files in the backup. All established journaling characteristics apply to the new
+journal files. This qualifier is effective only for an ONLINE backup (the
+default), when the database has journaling enabled. The <span>/</span>NEWJNLFILES qualifier can take on the
+following two values:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>PREVLINK (the default value), to indicate that there should be back
+linking of the newly created journals with the current journals.</p></li><li class="listitem"><p>NOPREVLINK, to indicate that there is no back linking between the
+newly created journals and current journals.</p></li></ul></div><p>Specification of the <span>/</span>NEWJNLFILES qualifier causes new journal files to be created as if a
+MUPIP SET <span>/</span>JOURNAL=(ON,
+xxxx) command was specified. Where xxxx is BEFORE_IMAGES or NOBEFORE_IMAGES
+based on the current database characteristics.</p><p>The <span>/</span>NONEWJNLFILES
+qualifier causes processing to continue using the current journal files and does
+not accept an argument assignment. The default is <span>/</span>NEWJNLFILES.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06s04.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch06s06.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">GT.M Language Extensions for Journaling </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> MUPIP JOURNAL</td></tr></table></div></body></html>

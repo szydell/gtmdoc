@@ -1,0 +1,57 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>HTEXPFAIL </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="HOSTCONFLICT.html" title="HOSTCONFLICT ">
+<link rel="next" href="HTOFLOW.html" title="HTOFLOW ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">HTEXPFAIL </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="HOSTCONFLICT.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="HTOFLOW.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">HTEXPFAIL </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="HTEXPFAIL"></a>HTEXPFAIL </h2></div></div></div>
+<p>Last used version: V5.3-001A</p>
+<p><span class="bold"><strong>HTEXPFAIL</strong></span>,    Hash table expansion failed for lack of memory</p>
+<p>Run Time/MUPIP Error: The hash table, an internally expanding data structure maintained by GT.M, has exceeded its maximum capacity. In GT.M, each unique local variable name uses up some hash table space. In MUPIP, it is backward recovery (or rollback) that might encounter this error. Here each TP transaction that is encountered in the backward processing phase of recovery uses up some hash table space. In either case, it is more likely that a process will run out of virtual memory much before it reaches the maximum hashtable capacity.</p>
+<p>Action: Increase process memory quotas to increase available process virtual memory. Reduce the number of unique local variable names referenced by the GT.M process. For MUPIP backward recovery/rollback, reduce the number of TP transactions encountered in the backward processing phase by using a later timestamp in the SINCE_TIME qualifier or higher RESYNC_SEQNO for rollback.</p>
+<a class="indexterm" name="idp171225904"></a><a class="indexterm" name="idp171226976"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="HOSTCONFLICT.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="HTOFLOW.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">HOSTCONFLICT  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> HTOFLOW </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

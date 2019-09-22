@@ -1,0 +1,178 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Using GDE</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="gdechap.html" title="Chapter 4. Global Directory Editor">
+<link rel="prev" href="gde_overview.html" title="GDE Overview">
+<link rel="next" href="gdecmds.html" title="Global Director Editor Commands">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Using GDE</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="gde_overview.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 4. Global Directory Editor</th>
+<td width="20%" align="right"> <a accesskey="n" href="gdecmds.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="gdechap.html">Global Directory Editor</a></span> &gt; <span class="breadcrumb-node">Using GDE</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="using_gde"></a>Using GDE<a class="indexterm" name="idp57238720"></a>
+</h2></div></div></div>
+<p>The default installation procedure places the GDE utility into a directory
+assigned to the environment variable gtm_dist. 
+</p>
+<p>To invoke GDE:</p>
+<p>from within GTM, use the command:</p>
+<pre class="programlisting">GTM&gt;do ^GDE</pre>
+<p>from the shell, enter:</p>
+<pre class="programlisting">$ mumps -r GDE</pre>
+<p>GDE displays informational messages like the following, and then the GDE&gt;
+prompt:</p>
+<pre class="programlisting">%GDE-I-LOADGD, loading Global Directory file /prod/mumps.gld
+%GDE-I-VERIFY, Verification OK
+GDE&gt;
+</pre>
+<p>If this does not work, contact your system manager to investigate setup and file
+access issues.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Even when invoked from within GT.M, GDE always uses the gtmgbldir environment variable to identify its target</p></td></tr>
+</table></div>
+<p>To leave GDE:</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+<p>Use the GDE EXIT command to save all changes and return to the caller.</p>
+<pre class="programlisting">GDE&gt; EXIT</pre>
+</li>
+<li class="listitem">
+<p>Use the GDE QUIT command to discard all changes and return to the caller. This will not
+save any changes.</p>
+<pre class="programlisting">GDE&gt; QUIT</pre>
+</li>
+</ol></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="map_guides"></a>Guidelines for Mapping<a class="indexterm" name="idp53362912"></a>
+</h3></div></div></div>
+<p>This section lists the parameters that apply to defining each component of a
+mapping.</p>
+<p><span class="emphasis"><em>NAMES</em></span></p>
+<p>The NAMES section contains mappings of M global name spaces. More than one name space can map to a single region but a single name space can only map to one region.</p>
+<p>A name space:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Is case sensitive.</p></li>
+<li class="listitem"><p>Must begin with an alphabetic character or a percent sign (%).</p></li>
+<li class="listitem"><p>Can be a discrete "global" name, for example, aaa corresponds to the global variable ^aaa.</p></li>
+<li class="listitem"><p>Can be a global name ending with a wild card ("*"), for example, abc* represents the set of global nodes which have abc as the starting prefix.</p></li>
+<li class="listitem"><p>Can be a subtree of a global name, for example, abc(1) represents a subtree of the global ^abc. </p></li>
+<li class="listitem"><p>Can be a subscript range, for example, abc(1:10) represents all nodes starting from ^abc(1) up to (but not including) to ^abc(10).</p></li>
+<li class="listitem"><p>A global name can be one to 31 alphanumeric characters. However, the combined length of a global and its subscripts is limited to 1,019 bytes (the maximum key size supported by GT.M). Note that the byte length of the subscripted global specification can exceed the maximum KeySize specified for its region. </p></li>
+<li class="listitem"><p>Maps to only one region in the Global Directory.</p></li>
+</ul></div>
+<p><span class="emphasis"><em>REGIONS</em></span></p>
+<p>The REGIONS section contain mappings of database region. A region is a logical structure that holds information about a portion of
+a database, such as key-size and record-size. A key is the internal
+representation of a global variable name. In this chapter the terms global
+variable name and key are used interchangeably. A record refers to a key and
+its data. </p>
+<p>A Global Directory must have at least one region. A region only maps to a
+single segment. More than one name may map to a region.</p>
+<p>A region name:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Can include alphanumerics, dollar signs ($), and underscores ( _
+).</p></li>
+<li class="listitem"><p>Can have from 1 to 31 characters.</p></li>
+</ul></div>
+<p>GDE automatically converts region names to uppercase, and uses DEFAULT for the default region name. </p>
+<p><span class="emphasis"><em>SEGMENTS</em></span></p>
+<p>The SEGMENTS section contains mappings for segments. A segment defines file-related database storage characteristics. A segment must map to a single
+file. A segment can be mapped by only one region.</p>
+<p>GT.M uses a segment to define a physical file and access method for the
+database stored in that file. </p>
+<p>A segment-name:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Can include alphanumerics, dollar signs ($), and underscores ( _
+)</p></li>
+<li class="listitem"><p>Can have from one to 31 characters</p></li>
+</ul></div>
+<p>GDE automatically converts segment names to uppercase. GDE uses DEFAULT for the default segment name. </p>
+<p><span class="emphasis"><em>FILE</em></span></p>
+<p>Files are the structures provided by UNIX for the storage and retrieval of information.
+Files used by GT.M must be random-access files resident on disk.</p>
+<p>By default, GDE uses the file-name mumps.dat for the DEFAULT
+segment. GDE adds the .dat to the file name when you do not specify an extension. Avoid non-graphic and punctuation characters with potential semantic significance to the file system in file names as they will produce operational difficulties.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="basic_map"></a>Example of a Basic Mapping<a class="indexterm" name="idp59317616"></a>
+</h4></div></div></div>
+<p>To complete this procedure, you must have already opened a Global
+Directory.</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>ADD a new global variable name.</p>
+<pre class="programlisting">GDE&gt; add -name cus -region=cusreg</pre>
+<p>This maps the global name cus to the region
+cusreg.</p>
+</li>
+<li class="listitem">
+<p>ADD region cusreg, if it does not exist.</p>
+<pre class="programlisting">GDE&gt; add -region cusreg -dynamic=cusseg</pre>
+<p>This creates the region cusreg and connects it to the
+segment cusseg. -d[ynamic] is a required qualifier that takes the
+associated segment-name as a value.</p>
+</li>
+<li class="listitem">
+<p>ADD segment cusreg, if it does not exist, and link it to a
+file.</p>
+<pre class="programlisting">GDE&gt; add -segment cusseg -file=cus.dat</pre>
+<p>This creates the segment cusseg and connects it to the
+file cus.dat.</p>
+</li>
+</ul></div>
+<p>To review the information you have added to the Global Directory, use the SHOW command. </p>
+<p>To perform a consistency check of the configuration, use the
+VERIFY command.</p>
+<p>To exit the Global Directory and save your changes, use the EXIT command. GDE performs an automatic verification. If
+successful, the mappings and database specifications become part
+of the Global Directory, available for access by processes,
+utilities, and the run-time system.</p>
+<p>Only MUPIP CREATE uses the database specifications; run-time processes and other utility functions use only the map. </p>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="gde_overview.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="gdechap.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="gdecmds.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">
+<span>GDE </span>Overview </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> <span>Global Director Editor </span>Commands</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

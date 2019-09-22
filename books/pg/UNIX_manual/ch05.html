@@ -1,0 +1,199 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Chapter 5. General Language Features of M</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="index.html" title="GT.M Programmer's Guide">
+<link rel="prev" href="ch04s03.html" title="Summary of GT.M Debugging Tools">
+<link rel="next" href="ch05s01.html" title="Data Types">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Chapter 5. <span>General Language Features of M</span>
+</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch04s03.html">Prev</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="ch05s01.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-node"><span>General Language Features of M</span></span>
+</div>
+<div class="chapter">
+<div class="titlepage"><div>
+<div><h2 class="title">
+<a name="che_general_language_features"></a>Chapter 5. <span>General Language Features of M</span>
+</h2></div>
+<div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
+<tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V6.3-007</td>
+<td align="left">04 February 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch05s07.html#Timeout" title="Timeouts">&#8220;Timeouts&#8221;</a>, correct the max timeout value.</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-006</td>
+<td align="left">26 October 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch05s04.html#String_Literals" title="String Literals">&#8220;String Literals&#8221;</a>, UTF-8 mode tweaks.</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-005</td>
+<td align="left">29 June 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch05s17.html#TP_Characteristics" title="Key Considerations - Writing TP Code">&#8220;Key Considerations - Writing TP Code&#8221;</a>, change title to "Key Considerations - Writing TP Code", add introduction material, and enhance the TPNOTACID discussion.</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-003</td>
+<td align="left">12 December 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch05s11.html#Entry_Ref" title="Entry References">&#8220;Entry References&#8221;</a>, remove a redundant note and specify that GT.M accepts an offset without a label for an entryref argument for DO, GOTO, and ZGOTO. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch05s06.html#Patrn_Match_Operator" title="Pattern Match Operator">&#8220;Pattern Match Operator&#8221;</a>, add sentence about XECUTE deferral</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-002</td>
+<td align="left">22 August 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch05s17.html#TP_Performance" title="TP Performance">&#8220;TP Performance&#8221;</a>, add a note about the VIEW [NO]LOGN[ONTP] and VIEW [NO]LOGT[PRESTART] facilities.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch05s07.html#Timeout" title="Timeouts">&#8220;Timeouts&#8221;</a>, describe precision and cap.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-001</td>
+<td align="left">20 March 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch05s06.html#Arithmetic_Operators" title="Arithmetic Operators">&#8220;Arithmetic Operators&#8221;</a>, added a statement about divide by literal zero being a run-time only error.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch05s12.html#Atomic_Indirection" title="Atomic Indirection">&#8220;Atomic Indirection&#8221;</a>, fixed typo by changing double to single underbar for concatenation</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch05s12.html#Name_Indirection" title="Name Indirection">&#8220;Name Indirection&#8221;</a>, Fixed a typo in the Name Indirection sample</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch05s07.html#Postconditionals" title="Postconditionals">&#8220;Postconditionals&#8221;</a>, added explanation of behavior of literal FALSE.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch05s17.html#TP_Characteristics" title="Key Considerations - Writing TP Code">&#8220;Key Considerations - Writing TP Code&#8221;</a>, corrected typo: whose affects -&gt; whose effects</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch05s17.html#TP_Example" title="TP Example">&#8220;TP Example&#8221;</a>, added a link to the description of the gtm_tpnotacidtime environment variable in the Administration and Operations Guide.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch05s17.html#TP_Performance" title="TP Performance">&#8220;TP Performance&#8221;</a>, Removed VMS-only text. Added description of TPRESTART message fields.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.2-001</td>
+<td align="left">27 February 2015</td>
+<td align="left"><p>In <a class="xref" href="ch05s11.html#Labels" title="Labels">&#8220;Labels&#8221;</a>, improved the description of "local" labels.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-001</td>
+<td align="left">21 March 2013</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch05s06.html#Num_Relational_Operators" title="Numeric Relational Operators">&#8220;Numeric Relational Operators&#8221;</a>, added &lt;= and &gt;= as new operators.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch05s12.html#Indirection_Concerns" title="Indirection Concerns">&#8220;Indirection Concerns&#8221;</a>, added a note on the handling of run-time errors.</p></li>
+</ul></div></td>
+</tr>
+</table></div></div>
+</div></div>
+<div class="toc">
+<p><b>Table of Contents</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch05s01.html">Data Types</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05s01.html#Numeric_Expressions">Numeric Expressions</a></span></dt>
+<dt><span class="sect2"><a href="ch05s01.html#Numeric_Accuracy">Numeric Accuracy</a></span></dt>
+<dt><span class="sect2"><a href="ch05s01.html#Integer_Expressions">Integer Expressions</a></span></dt>
+<dt><span class="sect2"><a href="ch05s01.html#Truth_Valued_Expressions">Truth-valued Expressions</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch05s02.html">M Names</a></span></dt>
+<dt><span class="sect1"><a href="ch05s03.html">Variables</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05s03.html#Arrays_and_Subscripts">Arrays and Subscripts</a></span></dt>
+<dt><span class="sect2"><a href="ch05s03.html#M_Collation_Seq">M Collation Sequences</a></span></dt>
+<dt><span class="sect2"><a href="ch05s03.html#Local_Variables">Local Variables</a></span></dt>
+<dt><span class="sect2"><a href="ch05s03.html#Global_Var_Resource_Name_Env"><span>Global Variables</span> and Resource Name Env<span>ironments</span></a></span></dt>
+<dt><span class="sect2"><a href="ch05s03.html#Naked_Ref">Naked References</a></span></dt>
+<dt><span class="sect2"><a href="ch05s03.html#Global_Var_Name_Environments">Global Variable Name Environments</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch05s04.html">Literals</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05s04.html#String_Literals">String Literals</a></span></dt>
+<dt><span class="sect2"><a href="ch05s04.html#Numeric_Literals">Numeric Literals</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch05s05.html">Expressions</a></span></dt>
+<dt><span class="sect1"><a href="ch05s06.html">Operators</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05s06.html#Precedence">Precedence</a></span></dt>
+<dt><span class="sect2"><a href="ch05s06.html#Arithmetic_Operators">Arithmetic Operators</a></span></dt>
+<dt><span class="sect2"><a href="ch05s06.html#Logical_Operators">Logical Operators</a></span></dt>
+<dt><span class="sect2"><a href="ch05s06.html#String_Operators">String Operators</a></span></dt>
+<dt><span class="sect2"><a href="ch05s06.html#Num_Relational_Operators">Numeric Relational Operators</a></span></dt>
+<dt><span class="sect2"><a href="ch05s06.html#Str_Relational_Operators">String Relational Operators</a></span></dt>
+<dt><span class="sect2"><a href="ch05s06.html#Patrn_Match_Operator">Pattern Match Operator</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch05s07.html">Commands</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05s07.html#Postconditionals">Postconditionals</a></span></dt>
+<dt><span class="sect2"><a href="ch05s07.html#Timeout">Timeouts</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch05s08.html">M Locks</a></span></dt>
+<dt><span class="sect1"><a href="ch05s09.html">Intrinsic Functions</a></span></dt>
+<dt><span class="sect1"><a href="ch05s10.html">Intrinsic Special Variables</a></span></dt>
+<dt><span class="sect1"><a href="ch05s11.html">Routines</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05s11.html#Lines">Lines</a></span></dt>
+<dt><span class="sect2"><a href="ch05s11.html#Entry_Ref">Entry References</a></span></dt>
+<dt><span class="sect2"><a href="ch05s11.html#Label_Ref">Label References</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch05s12.html">Indirection</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05s12.html#Arg_Indirection">Argument Indirection</a></span></dt>
+<dt><span class="sect2"><a href="ch05s12.html#Atomic_Indirection">Atomic Indirection</a></span></dt>
+<dt><span class="sect2"><a href="ch05s12.html#Entryref_Indirection">Entryref Indirection</a></span></dt>
+<dt><span class="sect2"><a href="ch05s12.html#Pattrn_Code_Indirection">Pattern Code Indirection</a></span></dt>
+<dt><span class="sect2"><a href="ch05s12.html#Name_Indirection">Name Indirection</a></span></dt>
+<dt><span class="sect2"><a href="ch05s12.html#Indirection_Concerns">Indirection Concerns</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch05s13.html">Parameter Passing</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05s13.html#Actuallists">Actuallists</a></span></dt>
+<dt><span class="sect2"><a href="ch05s13.html#Actualnames">Actualnames</a></span></dt>
+<dt><span class="sect2"><a href="ch05s13.html#Formallists">Formallists</a></span></dt>
+<dt><span class="sect2"><a href="ch05s13.html#Formallabel">Formallabel</a></span></dt>
+<dt><span class="sect2"><a href="ch05s13.html#Param_Pass_Opertn">Parameter Passing Operation</a></span></dt>
+<dt><span class="sect2"><a href="ch05s13.html#Param_Pass_Mechanism">Parameter Passing Mechanisms</a></span></dt>
+<dt><span class="sect2"><a href="ch05s13.html#GTM_Param_Pass_Extn"><span>GT.M </span>Parameter Passing Extensions</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch05s14.html">External Calls</a></span></dt>
+<dt><span class="sect1"><a href="ch05s15.html">Extrinsic Functions</a></span></dt>
+<dt><span class="sect1"><a href="ch05s16.html">Extrinsic Special Variables</a></span></dt>
+<dt><span class="sect1"><a href="ch05s17.html">Transaction Processing</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05s17.html#TP_Defnts">TP Definitions</a></span></dt>
+<dt><span class="sect2"><a href="ch05s17.html#TP_Characteristics">Key Considerations - Writing TP Code</a></span></dt>
+<dt><span class="sect2"><a href="ch05s17.html#TP_Performance">TP Performance</a></span></dt>
+<dt><span class="sect2"><a href="ch05s17.html#TP_Example">TP Example</a></span></dt>
+</dl></dd>
+</dl>
+</div>
+<p>This chapter describes general features of the M language, as well as general information about the operation of GT.M. Commands, Functions, and Intrinsic Special Variables are each described in separate chapters. This chapter contains information about exceptions, as well as information about general M features.</p>
+<p>MUMPS is a general purpose language with an embedded database system. This section describes the features of the language that are not covered as Commands, Functions, or Intrinsic Special Variables chapters.</p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch04s03.html">Prev</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="ch05s01.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Summary<span> of GT.M Debugging Tools</span> </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Data Types</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

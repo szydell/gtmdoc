@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZDate()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter7.html" title="ChapterA 7.A Functions" />
+    <link rel="prev" href="zcaLL.html" title="$Zcall()" />
+    <link rel="next" href="zdate_format_spec.html" title="$ZDATE Format Specification Elements" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZDate()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zcaLL.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 7.A Functions</th>
+          <td width="20%" align="right">A <a accesskey="n" href="zdate_format_spec.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zdate_g"></a>$ZDate()</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="zdate_format_spec.html">$ZDATE Format Specification Elements</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zdate.html">Examples of $ZDATE()</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4186183" class="indexterm"></a>
+      <p>The $ZDATE function returns a date and/or time formatted as text based on an argument formatted in the manner of $HOROLOG. For information on the format of $HOROLOG, refer to the &quot;Intrinsic Special Variables&quot; chapter in this manual.</p>
+      <p>The format for the $ZDATE function is:</p>
+      <pre class="programlisting">
+    $ZD[ATE](expr1[,expr2[,expr3[,expr4]]]])
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The first expression specifies in $HOROLOG format the date and/or time that $ZDATE() returns in text format. If the output requires only the date or the time, the other piece of the argument that is delimited by a comma (,) may be null.</p>
+          </li>
+          <li>
+            <p>The optional second expression specifies a string providing $ZDATE() with a &quot;picture&quot; of the desired output format. If this argument is missing or null, $ZDATE() uses the default format string &quot;MM/DD/YY&quot;. If the optional second expression exceeds 64 characters, $ZDATE() generates a run-time error.</p>
+          </li>
+          <li>
+            <p>The optional third expression specifies a list of 12 month codes, separated by commas (,), that $ZDATE() uses in formatting text months called for by the &quot;MON&quot; picture, (i.e., $ZDATE() outputs $PIECE(expr3,&quot;,&quot;,month-number) when &quot;MON&quot; appears in the second expression). If this argument is missing or null, $ZDATE() uses three-character English abbreviations for months.</p>
+          </li>
+          <li>
+            <p>The optional fourth expression specifies a list of seven day codes, separated by commas (,), which $ZDATE() uses in formatting text days of the week called for by the &quot;DAY&quot; picture, $ZDATE() outputs $PIECE (expr4,&quot;,&quot;,day-of-week-number) when &quot;DAY&quot; appears in the second expression; if this argument is missing or null, $ZDATE() uses three-character English abbreviations for days of the week.</p>
+          </li>
+        </ul>
+      </div>
+      <p>$ZDATE() provides an easy and flexible tool for putting M internal date/time ($HOROLOG) formats into more user-friendly formats. </p>
+      <p>The Intrinsic Special Variable $ZDATEFORM determines the output format for years. The default value is zero (0), in which case $ZDATE() with one argument (no format specification) uses a &quot;YY&quot; (two digit) format for all years. If $ZDATEFORM is one (1), a &quot;YYYY&quot; (four digit) format is used for years later than 1999. For all other values of $ZDATEFORM, &quot;YYYY&quot; (four digit) format is used for all years. $ZDATEFORM does not affect $ZDATE() when the format argument is specified. </p>
+      <p>The following table summarizes the usage of $ZDATE() when only first argument is specified.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td>
+    <p>Value of $ZDATEFORM</p>
+    </td>
+              <td>
+    <p>$ZDATE() Output Format A </p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>0</p>
+    </td>
+              <td>
+    <p>2 digits</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>1</p>
+    </td>
+              <td>
+    <p>4 digits for years 2000 and after</p>
+    <p>2 digits otherwise (for years ranging between 1840, 1999)</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>other</p>
+    </td>
+              <td>
+    <p>4 digits</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zcaLL.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter7.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="zdate_format_spec.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$Zcall()A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $ZDATE Format Specification Elements</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

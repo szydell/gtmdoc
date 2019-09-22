@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$Get()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter7.html" title="ChapterA 7.A Functions" />
+    <link rel="prev" href="examples_of_fnumber.html" title="Examples of $FNUMBER()" />
+    <link rel="next" href="examples_of_get.html" title="Examples of $GET()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$Get()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_fnumber.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 7.A Functions</th>
+          <td width="20%" align="right">A <a accesskey="n" href="examples_of_get.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="get"></a>$Get()</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_get.html">Examples of $GET()</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4182629" class="indexterm"></a>
+      <p>The $GET function returns the value of a local or global variable if the variable has a value. If the variable has no value, the function returns a value specified by an optional second argument, and otherwise returns a null string.</p>
+      <p>The format for the $GET function is:</p>
+      <pre class="programlisting">
+    $G[ET](glvn[,expr])
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The subscripted or unsubscripted global or local variable name specifies the node for which $GET() returns a value.</p>
+          </li>
+          <li>
+            <p>If the global or local variable has a data value, $GET() returns the value of the variable.</p>
+          </li>
+          <li>
+            <p>If the global or local variable has no data value, $GET() returns the value of the optional expression (second argument), or a null string if the expression is not specified.</p>
+          </li>
+        </ul>
+      </div>
+      <p>M defines $GET(x,y) as equivalent to:</p>
+      <pre class="programlisting">
+    $SELECT($DATA(x)[0:y,1:x)
+    </pre>
+      <p>and $GET(x) as equivalent to:</p>
+      <pre class="programlisting">
+    $GET(x,&quot;&quot;)
+    </pre>
+      <p>$GET() provides a tool to eliminate separate initialization of variables. This technique may provide performance benefits when used to increase the density of a sparse global array by eliminating nodes that would otherwise hold absent optional information. On the other hand, some uses of one argument $GET() can mask logic problems.</p>
+      <p>GT.M has a &quot;NOUNDEF&quot; mode of operation, which treats all variable references as if they were arguments to a one argument $GET(). The VIEW command <span>and GTM$DEFAULTS</span> controls &quot;NOUNDEF&quot; mode. <span>For more information about GTM$DEFAULTS, refer to the &quot;Program Development Cycle&quot; chapter in this manual.</span></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_fnumber.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter7.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="examples_of_get.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of $FNUMBER()A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Examples of $GET()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

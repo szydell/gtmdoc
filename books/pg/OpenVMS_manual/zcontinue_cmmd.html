@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ZContinue</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="ChapterA 6.A Commands" />
+    <link rel="prev" href="examples_of_zcompile.html" title="Examples of ZCompile" />
+    <link rel="next" href="zdeallocate_cmmd.html" title="ZDeallocate" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ZContinue</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zcompile.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 6.A Commands</th>
+          <td width="20%" align="right">A <a accesskey="n" href="zdeallocate_cmmd.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zcontinue_cmmd"></a>ZContinue</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4178030" class="indexterm"></a>
+      <p>The ZCONTINUE command continues routine execution after a BREAK command or a &lt;CTRL-C&gt;.</p>
+      <p>The format of the ZCONTINUE command is:</p>
+      <pre class="programlisting">
+        ZC[ONTINUE][:tvexpr]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>Because ZCONTINUE changes the flow of execution away from control of the principal device back to the current routine, it is usually the final command on a line; however, if it is not, because the ZCONTINUE has no argument, at least two (2) spaces must follow the command to separate it from the next command on the line.</p>
+          </li>
+          <li>
+            <p>If the process is not in Direct Mode, ZCONTINUE has no effect.</p>
+          </li>
+        </ul>
+      </div>
+      <p>For more information, refer to &quot;Operating and Debugging in Direct Mode&quot; chapter in this manual.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zcompile.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="zdeallocate_cmmd.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of ZCompileA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A ZDeallocate</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

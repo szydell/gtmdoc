@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>/[NO]M[AP][=file-spec]</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Qualifiers_for_LINK.html" title="Qualifiers for the LINK Command" />
+    <link rel="prev" href="no_exec_file_spec.html" title="/[NO]E[XECUTABLE][=file-spec]" />
+    <link rel="next" href="no_share_file_spec.html" title="/[NO]SH[AREABLE][=file-spec]" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">/[NO]M[AP][=file-spec]</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="no_exec_file_spec.html">Prev</a>A </td>
+          <th width="60%" align="center">Qualifiers for the LINK Command</th>
+          <td width="20%" align="right">A <a accesskey="n" href="no_share_file_spec.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="no_map_file_spec"></a>/[NO]M[AP][=file-spec]</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4162457" class="indexterm"></a>
+      <p>Instructs the compiler to produce a memory allocation map file and optionally specifies the file name for the map using the file-specification argument.</p>
+      <p>If you do not specify a file name using the optional file-specification argument, the compiler produces a file with the same name as the file in the first input file list, but with a .MAP file extension.</p>
+      <p>The default map contains five sections:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>an object module synopsis</p>
+          </li>
+          <li>
+            <p>a program section synopsis</p>
+          </li>
+          <li>
+            <p>a list of global symbols by name</p>
+          </li>
+          <li>
+            <p>an image synopsis</p>
+          </li>
+          <li>
+            <p>link run statistics</p>
+          </li>
+        </ul>
+      </div>
+      <p>The most useful sections to the GT.M user are the program section synopsis and the global symbols. The Linker uses program sections (psects) to partition the output image into functional blocks. The compiler produces several psects in its output and assigns them names beginning with &quot;GTM$&quot;.</p>
+      <p>Most users are interested in the psect &quot;GTM$CODE&quot; that contains the M code in compiled form. The map lists executable code in each psect from each object module. By looking at the statistics for GTM$CODE, you may easily identify executable code corresponding to each object module.</p>
+      <p>The Linker resolves references between object modules using Linker global symbols. The compiler instructs the Linker to create a global symbol with the name &quot;RTN.LAB&quot; for every label LAB in a routine RTN, including a null label at the first line of the routine, with symbol &quot;RTN.&quot;. M also constructs a global symbol with the name &quot;RTN&quot;, which references the routine header of each routine RTN. The values of these symbols are addresses in the psect GTM$CODE for the corresponding object.</p>
+      <p>By default, interactive links produce /NOMAP and batch links produce a /MAP.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="no_exec_file_spec.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Qualifiers_for_LINK.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="no_share_file_spec.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">/[NO]E[XECUTABLE][=file-spec]A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A /[NO]SH[AREABLE][=file-spec]</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

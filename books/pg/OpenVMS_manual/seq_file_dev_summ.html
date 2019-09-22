@@ -1,0 +1,1096 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Sequential File Deviceparameter Summary</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="using_seq_files.html" title="Using Sequential (RMS) Files" />
+    <link rel="prev" href="spool_or_submit_for_seq_file.html" title="SPOOL or SUBMIT for Sequential Files" />
+    <link rel="next" href="seq_file_examples.html" title="Sequential File Examples" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Sequential File Deviceparameter Summary</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="spool_or_submit_for_seq_file.html">Prev</a>A </td>
+          <th width="60%" align="center">Using Sequential <span>(RMS)</span> Files</th>
+          <td width="20%" align="right">A <a accesskey="n" href="seq_file_examples.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="seq_file_dev_summ"></a>Sequential File Deviceparameter Summary</h3>
+          </div>
+        </div>
+      </div>
+      <p>The following tables provide a brief summary of deviceparameters for sequential files grouped into related areas. For more detailed information, refer to the sections following the OPEN, USE, and CLOSE commands.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="4" align="center">
+    <p>Error Processing Deviceparameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICEPARAMETER</p>
+    </td>
+              <td>
+    <p>CMD</p>
+    </td>
+              <td>
+    <p>DEV</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>EXCEPTION=expr</p>
+    </td>
+              <td>
+    <p>O/U/C</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Controls device-specific error handling.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p></p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="4" align="center">
+    <p>File Positioning Deviceparameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICEPARAMETER</p>
+    </td>
+              <td>
+    <p>CMD</p>
+    </td>
+              <td>
+    <p>DEV</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>APPEND</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Positions file pointer at EOF.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>REWIND</p>
+    </td>
+              <td>
+    <p>O/U/C</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Positions file pointer at start of the file.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="4" align="center">
+    <p>File Format Deviceparameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICEPARAMETERS</p>
+    </td>
+              <td>
+    <p>CMD</p>
+    </td>
+              <td>
+    <p>DEV</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>ALLOCATION=intexpr</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Specifies initial size of the file.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>BLOCKSIZE=intexpr</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>M11</p>
+    </td>
+              <td>
+    <p>Specifies buffer size for Files-11 magnetic tape.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>CONTIGUOUS</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Controls whether file creation requires physically contiguous space.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>EXTENSION=intexpr</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Specifies the extension size of the file.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]FIXED</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Controls whether records have fixed length.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>LENGTH=intexpr</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Controls the virtual page length.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>RECORDSIZE=intexpr</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Specifies the maximum record size.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>VARIABLE</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Controls whether records have variable length.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>WIDTH=intexpr</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Controls maximum width of an output line.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]WRAP</p>
+    </td>
+              <td>
+    <p>O/U</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Controls handling of records longer than device width.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="4" align="center">
+    <p>File Access Deviceparameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICEPARAMETER</p>
+    </td>
+              <td>
+    <p>CMD</p>
+    </td>
+              <td>
+    <p>DEV</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DELETE</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Specifies file be deleted by CLOSE.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>GROUP=expr</p>
+    </td>
+              <td>
+    <p>O/C</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Specifies file permissions for other users in the owner's group.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>NEWVERSION</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Specifies GT.M create a new version of file.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>OWNER=expr</p>
+    </td>
+              <td>
+    <p>O/C</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Specifies file permissions for the owner of file.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]READONLY</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Controls read-only file access.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>RENAME=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Specifies CLOSE replace name of a disk file with a name specified by the expression.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>SYSTEM=expr</p>
+    </td>
+              <td>
+    <p>O/C</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Specifies file permissions for the owner of the file (same as OWNER).</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>SHARED</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Controls shared access to a file.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]TRUNCATE</p>
+    </td>
+              <td>
+    <p>O/U</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Controls overwriting of existing data in file.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>UIC=expr</p>
+    </td>
+              <td>
+    <p>O/U/C</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Specifies file's owner UIC.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>WORLD=expr</p>
+    </td>
+              <td>
+    <p>O/C</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Specifies file permissions for users not in the owner's group.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="4" align="center">
+    <p>Queue Management Deviceparameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICEPARAMETER</p>
+    </td>
+              <td>
+    <p>CMD</p>
+    </td>
+              <td>
+    <p>DEV</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>AFTER=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Specifies starting time of job.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>CHARACTERISTIC=intexpr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Controls queue selection.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>CPULIMIT=intexpr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Specifies maximum CPU use for job.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]HOLD</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Specifies whether the VMS job controller holds the file for operator release.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>NAME=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Specifies the job name.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]NOTIFY</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Controls notification of user upon job completion.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>OPERATOR=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Controls operator class for OPCOM communications.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>P1=expr to P8=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Specify job parameters.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>PRIORITY=intexpr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Specifies job priority.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>QUEUE=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Specifies a queue for the job.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>REMOTE=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Specifies a remote node for the SPOOL or SUBMIT job to execute on.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]RESTART</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Controls the automatic restart of a job after a system failure.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>USER=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>S/S</p>
+    </td>
+              <td>
+    <p>Specifies the user name for a job.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p></p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="4" align="center">
+    <p>Print Control Deviceparameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICEPARAMETERS</p>
+    </td>
+              <td>
+    <p>CMD</p>
+    </td>
+              <td>
+    <p>DEV</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]BURST</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Controls burst flags.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>COPIES=intexpr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Specifies number of copies to print.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]DOUBLESPACE</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Controls use of double spacing for printing.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>FIRSTPAGE=intexpr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Specifies the starting page of print.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]FLAG</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Controls printing of flag page before the file.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>FORM=intexpr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Specifies a print form.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]HEADER</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Controls printing of page header.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>LASTPAGE=intexpr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Specifies the ending page of print.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]LOWERCASE</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Controls whether the queue manager requires a lowercase printer.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>NOTE=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Specifies text for printing on flag pages.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]PAGINATE</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Controls insertion of carriage control.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]PASSALL</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Controls suppression of non-printing characters.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>SETUP=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Specifies a setup module to precede the file on the printer.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>SPOOL</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SD</p>
+    </td>
+              <td>
+    <p>Queues a file to spooled printer.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]TRAILER</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SPL</p>
+    </td>
+              <td>
+    <p>Controls printing of a flag page after the file.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="4" align="center">
+    <p>Batch Processing Control Deviceparameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICEPARAMETER</p>
+    </td>
+              <td>
+    <p>CMD</p>
+    </td>
+              <td>
+    <p>DEV</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>CLI=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SUB</p>
+    </td>
+              <td>
+    <p>Specifies command language for the job.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>LOGFILE=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SUB</p>
+    </td>
+              <td>
+    <p>Specifies the log file for the job.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>LOGQUEUE=expr</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SUB</p>
+    </td>
+              <td>
+    <p>Specifies the print queue for the log file.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]PRINT</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SUB</p>
+    </td>
+              <td>
+    <p>Controls printing of the log file.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>SUBMIT</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>SUB</p>
+    </td>
+              <td>
+    <p>Sends a file to batch processing.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p>O:    Applies to the OPEN command</p>
+      <p>U:    Applies to the USE command</p>
+      <p>C:    Applies to the CLOSE command</p>
+      <p>S/S:  Valid when used with SPOOL or SUBMIT</p>
+      <p>SUB:  Valid when used with SUBMIT</p>
+      <p>SPL:  Valid when used with SPOOL</p>
+      <p>SD:   Valid for all sequential files independent of SPOOL or SUBMIT</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="spool_or_submit_for_seq_file.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="using_seq_files.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="seq_file_examples.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">SPOOL or SUBMIT for Sequential FilesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Sequential File Examples</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

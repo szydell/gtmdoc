@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Open</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="io_commands_9.html" title="I/O Commands" />
+    <link rel="prev" href="io_commands_9.html" title="I/O Commands" />
+    <link rel="next" href="examples_of_open_9.html" title="Examples of OPEN" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Open</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="io_commands_9.html">Prev</a>A </td>
+          <th width="60%" align="center">I/O Commands</th>
+          <td width="20%" align="right">A <a accesskey="n" href="examples_of_open_9.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="open_cmmd_9"></a>Open</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4204752" class="indexterm"></a>
+      <p>The OPEN command establishes a connection from a GT.M process to a device.</p>
+      <p>The format of the OPEN command is:</p>
+      <pre class="programlisting">
+	O[PEN][:tvexpr] expr[:[(keyword[=expr][:...])][:numexpr][:expr]][,...]
+	</pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>The required expression specifies the device to OPEN.</p>
+          </li>
+          <li>
+            <p>The optional keywords specify deviceparameters that control device behavior; some deviceparameters take arguments delimited by an equal sign (=); if the argument only contains one deviceparameter, the surrounding parentheses are optional.</p>
+          </li>
+          <li>
+            <p>The optional numeric expression specifies a time in seconds after which the command should timeout if unsuccessful; 0 provides a single attempt to open the device.</p>
+          </li>
+          <li>
+            <p>When an OPEN command specifying a timeout contains no deviceparameters, double colons (::) separate the timeout numeric expression from the device expression.</p>
+          </li>
+          <li>
+            <p>The optional expression specifies a mnemonicspace that selects a device binding. The only mnemonicspace that GT.M currently accepts is SOCKET.</p>
+          </li>
+          <li>
+            <p>When an OPEN command specifies a mnemonicspace with no timeout, double colons separate the mnemonicspace string expression from the deviceparameters; if there are neither a timeout nor deviceparameters, triple colons separate the mnemonicspace from the device expression. </p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom evaluating to a list of one or more OPEN arguments form a legal argument for an OPEN.</p>
+          </li>
+        </ul>
+      </div>
+      <p>With the exception of mailboxes, spooled devices and SHARED sequential disk files, VMS device access is exclusive. READONLY sequential disk files may be shared among many readers, but no writers. Spooled devices are devices, usually printers, which buffer output from multiple sources, processing it after the writing process CLOSEs the file. Spooled devices appear to GT.M as a terminal type device. For more information on spooled devices, refer to the OpenVMS System Managera??s Manual. When one process successfully OPENs a device exclusively, no other process can access that device until the first process CLOSEs that device.</p>
+      <p>By default, when a device is unavailable, GT.M retries the OPEN indefinitely at approximately one second intervals. A device is unavailable when another process is using it exclusively, or when the OPENing process does not have the resources left to open the device. </p>
+      <p>All other errors on OPEN raise an error condition and interrupt program flow. A timeout is a tool that lets a GT.M routine regain program control when a device remains unavailable. When the OPEN specifies a timeout, GT.M keeps retrying until either the OPEN succeeds or the timeout expires. </p>
+      <p>If OPEN establishes a connection with a device before the timeout expires, GT.M sets $TEST to TRUE (1). If the timeout expires, GT.M sets $TEST to FALSE (0). If an OPEN command does not specify a timeout, the execution of the command does not affect $TEST.</p>
+      <p>If a process has not previously OPENed a device within the context of an image, any deviceparameters not supplied on the OPEN take their default values. When reOPENing a device that it previously closed, a GT.M process restores all characteristics not specified on the OPEN to the values the device had when it was last CLOSEd, except with sequential disk files. If you have a menu-driven application that OPENs and CLOSEs devices based on user selections, take care that every OPEN explicitly includes all deviceparameters important to the application.</p>
+      <p>GT.M treats sequential disk files differently and uses defaults for unspecified sequential disk file characteristics on every OPEN (i.e., GT.M does not retain sequential disk file characteristics on a CLOSE).</p>
+      <p><span>VMS does not permit the alteration of certain characteristics once the device or file has been OPENed.</span> If a process OPENs an already OPEN device, GT.M modifies any characteristics that accept changes when a device is OPEN to reflect any new deviceparameter specifications.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="io_commands_9.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="io_commands_9.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="examples_of_open_9.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">I/O CommandsA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Examples of OPEN</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

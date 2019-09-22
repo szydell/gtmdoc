@@ -1,0 +1,233 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Introduction</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="ch12.html" title="Chapter 12. Database Encryption">
+<link rel="prev" href="ch12.html" title="Chapter 12. Database Encryption">
+<link rel="next" href="ch12s02.html" title="Theory of Operation">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Introduction </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch12.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 12. Database Encryption</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch12s02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch12.html">Database Encryption</a></span> &gt; <span class="breadcrumb-node">Introduction </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="encrypt_overview"></a>Introduction </h2></div></div></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="encrypt_overview_desc"></a>Overview </h3></div></div></div>
+<p>GT.M on selected platforms can encrypt data in database and journal files. Encryption protects data at rest (DAR), that is it protects against unauthorized access to data by an unauthorized process that is able to access disk files.</p>
+<p>A plug-in architecture allows you to use your choice of encryption package. The characteristics of encryption are entirely determined by the package you choose - for example, GT.M implements no "back doors" or "key recovery", and if you want such functionality, you need to choose or construct an encryption package that provides the features you want. </p>
+<p>FIS distributes only the source code for the reference implementation of a plug-in that uses popular, widely available, encryption libraries. If the reference implementation plug-in meets your needs, you are welcome to compile and use it as distributed, but please read and understand the section <a class="xref" href="ch12s01.html#encrypt_disclaim" title="Disclaimer">&#8220;Disclaimer &#8221;</a>. You can also use it as a base to implement your own plug-in.</p>
+<p>In the reference implementation, GT.M uses a symmetric cipher to encrypt data. The reference implementation encrypts the key for the symmetric cipher with an asymmetric cipher using public and private keys. The private keys are stored in a key ring on disk locked with a password (or passphrase - the terms are used interchangeably). </p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="encrypt_disclaim"></a>Disclaimer </h3></div></div></div>
+<p>Database encryption is only useful as one component of a comprehensive security plan and is insufficient as the sole means of securing data. The use of database encryption should follow from a good security plan. This document describes implementing encrypted GT.M databases; it does not discuss security plans. </p>
+<p>Proper security protocol never places an unencrypted password, even in obfuscated form and/or in an obscure location, on disk. With GT.M database encryption, unencrypted passwords exist in the address space of processes accessing the database, which means that unencrypted passwords can theoretically be written to swap files when process memory is paged out. To be secure, an installation must handle this by means such as: using encrypted swap devices or files, ensuring that GT.M processes are not paged out, or some other means to ensure that information in swap files is available only to the running process. In other words, <span class="bold">even with respect to encryption, GT.M database encryption is only part of a complete security infrastructure.</span> </p>
+<p>Our expertise is in GT.M, not in encryption. Encryption needs vary. Furthermore, the use of encryption may be restricted - or required - by regulations applicable to your location and circumstances. Therefore, our approach is to create a plug-in architecture where you can choose your preferred encryption software. In the course of development, we tested it primarily with <a class="ulink" href="http://gnupg.org/" target="_top">GNU Privacy Guard</a>, the widely available implementation of Pretty Good Privacy (see "PGP: Pretty Good Privacy" by Simson Garfinkel). Ensure that you have confidence in (and confidence in the support for) whichever encryption software you choose, because failure of the encryption software is likely to leave your data unrecoverable. GT.M itself performs no encryption, and encryption is performed exclusively by software that you install and configure. <span class="bold">FIS neither endorses nor supports any specific encryption algorithm or library. </span></p>
+<p>Furthermore, just as GT.M allows for the use of your choice of encryption libraries, encryption libraries in turn require keys that must be managed. In its simplest form, key management requires both that only those who need a key have that key, and also that keys are not lost. Key management is two steps removed from GT.M's implementation of database encryption, but is important to the successful use of encrypted databases. It must be part of your operations policies and procedures. <span class="bold">FIS strongly recommends that you understand in detail how to implement the infrastructure for whichever specific encryption you choose. </span></p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="encryption_limit"></a>Limitations of GT.M Database Encryption </h3></div></div></div>
+<p>Elements of your security infrastructure and management processes outside of GT.M database encryption need to manage issues discussed in the following sections. </p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="dar_nt_prtc"></a>Data Not At Rest Not Protected </h4></div></div></div>
+<p>GT.M database encryption is designed to protect data at rest. Applications execute business logic to manipulate and produce unencrypted data. Unencrypted data must exist within application processes, and can be accessed by any process with access rights to the virtual address space of a process containing unencrypted data. Also, data in transit between systems and between processes is not protected by GT.M database encryption. </p>
+<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Before creating a core dump, GT.M attempts to clear any keys that it is aware of within the process address space. The reference implementation also uses the encryption libraries so as to minimize the probability of keys appearing in core dumps. Since it is not possible to guarantee that keys will not appear in a process core dump, depending on your security policy, FIS recommends that you consider whether to disable the creation of core dumps by GT.M processes accessing encrypted databases, or use other means to limit access to core dumps. Note also that the use of random byte sequences as keys makes it harder to discern them in a core dump<sup>[<a name="idp71750560" href="ch12s01.html#ftn.idp71750560" class="footnote">3</a>]</sup>.</p></li></ol></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="keys_in_prc_Add"></a>Keys in the Process Address Space / Environment<a class="indexterm" name="idp71571296"></a>
+</h4></div></div></div>
+<p>This is a corollary of the fact that data not at rest is not protected by GT.M database encryption. </p>
+<p>In order to encrypt and decrypt databases, keys must exist in the address space / environment of GT.M processes. Furthermore, with the reference implementation, processes also need to have access to the user's private key, and to get access to the private key, they need access to the passphrase of the user's GPG keyring. In order to pass encryption to child processes, the passphrase also exists in the process environment, even if obfuscated. This means that any process that can access the address space or environment of a GT.M process accessing encrypted databases has access to the passphrases and keys. </p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>If an application provides some or all users access to a shell prompt or a GT.M direct mode prompt, or allows that user to specify arbitrary code that can be XECUTE'd, those users can find ways to view and capture keys and passphrases. Note that, if a key or passphrase can be captured, it can be misused - for example, a captured GPG keyring passphrase is captured, it can be used to change the passphrase. You must therefore ensure that your application does not provide such access to users who should not view keys and passphrases. </p></li>
+<li class="listitem"><p>This limitation makes it all the more important that those who have access to shell prompts, GT.M direct mode prompts, etc. not leave sessions unlocked, even briefly, if it is at all possible for someone who should not have knowledge of keys and passphrases to access the sessions during that time. Consider using the GT.M restriction facility to restrict the access to GT.M facilities which can be used to obtain a shell prompt or the GT.M direct mode prompt. For more information on configuring the GT.M restriction facility, refer to <a class="xref" href="ch03s06.html" title="Configuring the Restriction facility">&#8220;Configuring the Restriction facility&#8221;</a>. </p></li>
+<li class="listitem"><p>If you forget the passphrase, there is no way to decrypt the data from the encrypted regions of a database. Therefore, ensure that you have secure password management procedures to handle password storage and retrieval of the keyring passphrase. </p></li>
+</ol></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="long_lived_keys"></a>Long Lived Keys </h4></div></div></div>
+<p>A database file has an extended life. In typical operation, only a minuscule fraction of the data within a database changes each day. As changing an encryption key requires re-encrypting all the data, this means encryption keys for files have long lives. Since long-lived keys are security risks - for example, it may not be feasible to change them when an employee leaves - key management must therefore be part of the overall security plan. At a minimum, long lived keys require two stage key management - a database key with a long life, not normally accessed or viewed by a human, stored in a form encrypted by another key that can be changed more easily. </p>
+<p>Furthermore, a key must be retained at least as long as any backup encrypted with that key; otherwise the backup becomes useless. You must have appropriate procedures to retain and manage old keys. Since successful data recovery requires both keys and algorithms, the retention processes must also preserve the encryption algorithm. </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="volumin_sampl_enc_data"></a>Voluminous Samples of Encrypted Data </h4></div></div></div>
+<p>Database and journal files are large (GB to hundreds of GB). This large volume makes database encryption more amenable to attack than a small encrypted message because having many samples of encrypted material makes it easier to break a key. </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="Encry_algo_nt_Supprt"></a>Encryption Algorithms Neither Endorsed Nor Supported by FIS </h4></div></div></div>
+<p>FIS neither endorses nor supports any specific encryption algorithm. </p>
+<p>The selection of an encryption algorithm is determined by many factors, including but not limited to, organizational preferences, legal requirements, industry standards, computational performance, robustness, the availability of encryption hardware, etc. No algorithm meets all needs. </p>
+<p>Therefore, GT.M provides a "plug-in" architecture for encryption algorithms, which allows you to integrate your preferred encryption software with GT.M. In the GT.M development environment, we created variations on a reference implementation using popular encryption packages for our validation. We tested each reference implementation variation on at least one computing platform, and one reference implementation variation on each computing platform. This document lists which encryption package we tested on which platform. </p>
+<p>You take all responsibility for the selection and use of a specific encryption package. Please be aware that: </p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>All encryption libraries that run within the address space of a GT.M process <span class="bold,italics">must</span> conform to the rules of any functions for GT.M, as documented, including but not limited to being single threaded, not altering GT.M's signal handlers, restricting the use of timers to the API provided by GT.M, etc.<sup>[<a name="idp71768704" href="ch12s01.html#ftn.idp71768704" class="footnote">4</a>]</sup></p></li>
+<li class="listitem"><p>Malfunction of encryption software or hardware can render your data irrecoverable. As part of your comprehensive organizational risk management strategy, please consider the use of logical multi-site application configurations, possibly with different encryption packages and certainly with different encryption keys. </p></li>
+<li class="listitem"><p>The cipher used for database encryption must not change the length of the encrypted sequence of bytes. In other words, if the cleartext string is n bytes, the encrypted string must also be n bytes. </p></li>
+</ol></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="no_key_recov"></a>No Key Recovery </h4></div></div></div>
+<p>The reference implementation of GT.M database encryption has no "back door" or other means to recover lost keys. We are also not aware of back doors in any of the packages used by the reference implementation. </p>
+<p>Lost keys make your data indistinguishable from random ones and zeros. While FIS recommends implementing a documented key management process including techniques such as key escrow, ultimately, you take all responsibility for managing your keys. </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="human_intervention"></a>Human Intervention Required </h4></div></div></div>
+<p>At some point in the process invocation chain, the reference implementation requires a human being to provide a password that is placed (in obfuscated form) in the process environment where child processes can inherit it. If you want to be able to access encrypted databases without any human interaction, you must modify the reference implementation, or create your own implementation. </p>
+<p>For example, if you have a GT.M based application server process that is started by <a class="ulink" href="http://xinetd.org/" target="_top">xinetd</a> in response to an incoming connection request from a client, you may want to consider an approach where the client sends in a key that is used to extract an encrypted password for the master key ring from the local disk, obfuscates it, and places it in the environment of the server process started by xinetd. If the application protocol cannot be modified to allow the client to provide an additional password, xinetd can be started with the $gtm_passwd obfuscated password in its environment, and the xinetd passenv parameter used to pass $gtm_passwd from the xinetd process to the spawned server process. </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="mm_databases"></a>MM Databases </h4></div></div></div>
+<p>GT.M database encryption is only supported for the Buffered Global (BG) access method. It is not supported for the Mapped Memory (MM) access method. See <a class="xref" href="ch12s01.html#Alternatives_to_Database_Encry" title="Alternatives to Database Encryption">&#8220;Alternatives to Database Encryption &#8221;</a>, for other options. </p>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Alternatives_to_Database_Encry"></a>Alternatives to Database Encryption<a class="indexterm" name="idp71686208"></a> </h3></div></div></div>
+<p>On some platforms, you may be able to use disk drives with built-in encryption, or encrypted file systems to protect data at rest. These may or may not be as secure as GT.M database encryption: for example, once an encrypted file system is mounted, files thereon can be accessed by any process that has appropriate permissions; with GT.M database encryption each process accessing a database file must individually have access to the keys for that database file. </p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Device_IO"></a>Device IO </h3></div></div></div>
+<p>The built-in interface to encryption is implemented only for data in database, journal, backup and certain formats of extract files. To encrypt IO (say for sequential disk files), you can use IO to PIPE devices. Alternatively, you can call encryption routines from GT.M using the external call interface. </p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Replication_and_GT_CM"></a>GT.CM </h3></div></div></div>
+<p>GT.M encrypts does not encrypt GT.CM (GNP/OMI) network traffic. When needed, there are excellent third party products for implementing secure TCP/IP connections: software solutions as well as hardware solutions such as encrypting routers. </p>
+<p>As with any GT.M process that accesses databases, the Update Process, helper processes and GT.CM server all require provisioning with keys to enable their access to encrypted databases. </p>
+<p>When a GT.CM server has a key for an encrypted database, any client connecting to the server can access encrypted records in that database. </p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="fips"></a>FIPS Mode</h3></div></div></div>
+<p>For database encryption, the plugin reference implementation also provides an option to use libgcrypt (from GnuPG) and libcrypto (OpenSSL) in "FIPS mode" removing a need to modify the plugin for sites that require certification for compliance with FIPS 140-2. When the environment variable $gtmcrypt_FIPS is set to 1 (or evaluates to a non-zero integer, or any case-independent string or leading substring of "TRUE" or "YES"), the plugin reference implementation attempts to use either OpenSSL or Libgcrypt to provide database encryption that complies with FIPS 140-2. The supported platforms are as follows:</p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+<p>Platform</p>
+</th>
+<th>
+<p>Libgcrypt</p>
+</th>
+<th>
+<p>OpenSSL</p>
+</th>
+<th>
+<p>OpenSSL FIPS</p>
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<p>Linux x86_64</p>
+</td>
+<td>
+<p>1.4.5</p>
+</td>
+<td>
+<p>1.0.0</p>
+</td>
+<td>
+<p>1.0.1e</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Linux x86</p>
+</td>
+<td>
+<p>1.4.5</p>
+</td>
+<td>
+<p>1.0.0</p>
+</td>
+<td>
+<p>1.0.1e</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>AIX RS600</p>
+</td>
+<td>
+<p>1.5.1</p>
+</td>
+<td>
+<p>1.0.0e</p>
+</td>
+<td>
+<p>1.0.1e</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Before using FIPS mode on these platforms, ensure that your OpenSSL or Libgcrypt installation provides a validated FIPS 140-2 implementation (see <a class="ulink" href="http://www.openssl.org/docs/fips/" target="_top">http://www.openssl.org/docs/fips/</a>). </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Achieving FIPS 140-2 certification requires actions and controls well beyond the purview of GT.M, including underlying cryptographic libraries that are certifiably FIPS compliant, administrative controls, and so on. FIS neither provides cryptographic libraries with GT.M nor recommends the use of any specific library.</p></td></tr>
+</table></div>
+</div>
+<div class="footnotes">
+<br><hr width="100" align="left">
+<div class="footnote"><p><sup>[<a name="ftn.idp71750560" href="ch12s01.html#idp71750560" class="para">3</a>] </sup>In the event core dumps are needed to troubleshoot operational issues, they can always be re-enabled.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idp71768704" href="ch12s01.html#idp71768704" class="para">4</a>] </sup>GT.M provides functions gtm_hiber_start(), gtm_hiber_start_any(), gtm_start_timer(), gtm_cancel_timer(), gtm_jnlpool_detach(), gtm_malloc() and gtm_free() which can be freely used by plug-ins. </p></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch12.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch12.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch12s02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 12. Database Encryption </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Theory of Operation </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

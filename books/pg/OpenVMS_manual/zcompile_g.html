@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZCOmpile</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter8.html" title="ChapterA 8.A Intrinsic Special Variables" />
+    <link rel="prev" href="zcmdline.html" title="$ZCMdline" />
+    <link rel="next" href="zcstatus.html" title="$ZCstatus" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZCOmpile</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zcmdline.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 8.A Intrinsic Special Variables</th>
+          <td width="20%" align="right">A <a accesskey="n" href="zcstatus.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zcompile_g"></a>$ZCOmpile</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4194397" class="indexterm"></a>
+      <p>$ZCO[MPILE] contains a string value composed of one or more qualifiers that control the GT.M compiler. Explicit ZLINKs and auto-ZLINKs use these qualifiers as defaults for any compilations that they perform.</p>
+      <p>$ZCOMPILE is a read-write Intrinsic Special Variable, that is, it can appear on the left side of the equal sign (=) in the argument to the SET command. A $ZCOMPILE value has the form of a list of M command qualifiers, separated with a slash (/).</p>
+      <p>When the logical name GTM$COMPILE is defined, GT.M initializes $ZCOMPILE to the translation of GTM$COMPILE. Otherwise, GT.M initializes $ZCOMPILE to null. Changes to the value of $ZCOMPILE during a GT.M invocation only last for the current invocation and do not change the value of GTM$COMPILE. </p>
+      <p>When $ZCOMPILE is null, GT.M uses the default M command qualifiers /IGNORE, /LABEL=LOWER, /NOLIST and /OBJECT. For detailed descriptions of the M command qualifiers, refer to the &quot;Program Development Cycle&quot; chapter of this manual in GT.M Programmer's Guide. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    $ DEFINE GTM$COMPILE &quot;/LIST/LENGTH=56/SPACE=2&quot;
+    $ GTM
+    GTM&gt; WRITE $ZCOMPILE
+    /LIST/LENGTH=56/SPACE=2
+    GTM&gt; SET $ZCOMPILE=&quot;/LIST/NOIGNORE&quot;
+    GTM&gt; WRITE $ZCOMPILE
+    /LIST/NOIGNORE
+    GTM&gt; ZLINK &quot;A.M&quot;
+    GTM&gt; HALT
+    $ SHOW LOGICAL GTM$COMPILE
+    &quot;GTM$COMPILE&quot; = &quot;/LIST/LENGTH=56/SPACE=2&quot;      
+    </pre>
+      <p>This uses the logical name GTM$COMPILE to set up $ZCOMPILE. Then it modifies $ZCOMPILE with an M SET command. The ZLINK argument specifies a file with a .M extension (type), which forces a compile. The compile produces a listing for routine A.M and does not produce an object module if ^A contains errors. After GT.M terminates, the DCL command SHOW LOGICAL demonstrates that the M SET command did not change the logical name equivalence.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zcmdline.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter8.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="zcstatus.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZCMdlineA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $ZCstatus</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

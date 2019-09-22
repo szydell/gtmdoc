@@ -1,0 +1,109 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZCOnvert()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s30.html" title="$ZCOllate()">
+<link rel="next" href="ch07s32.html" title="$ZDATA()">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZCOnvert()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s30.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s32.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZCOnvert()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zconvert"></a>$ZCOnvert()<a class="indexterm" name="idp69972320"></a>
+</h2></div></div></div>
+<p>Returns its first argument as a string converted to a different encoding. The two argument form changes the encoding for case within a character set. The three argument form changes the encoding scheme.</p>
+<p>The format for the $ZCONVERT() function is:</p>
+<pre class="programlisting">$ZCO[NVERT](expr1, expr2,[expr3])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The first expression is the string to convert. If the expression contains a code-point value that is not in the character set, $ZCONVERT() generates a run-time error.</p></li>
+<li class="listitem"><p>In the two argument form, the second expression specifies a code that determines the form of the result. In the three-argument form, the second expression specifies a code that controls the character set interpretation of the first argument. If the expression does not evaluate to one of the defined codes corresponding to a valid code for the number of available arguments, $ZCONVERT() generates a run-time error.</p></li>
+<li class="listitem"><p>The optional third expression specifies the a code that determines the character set of the result. If the expression does not evaluate to one of the defined codes $ZCONVERT() generates a run-time argument. The three-argument form is not supported in M mode.</p></li>
+<li class="listitem">
+<p>The valid (case insensitive) character codes for expr2 in the two-argument form are:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem"><p>U converts the string to UPPER-CASE. "UPPER-CASE" refers to words where all the characters are converted to their "capital letter" equivalents. $ZCONVERT() retains characters already in UPPER-CASE "capital letter" form unchanged.</p></li>
+<li class="listitem"><p>L converts the string to lower-case. "lower-case" refers to words where all the letters are converted to their "small letter" equivalents. $ZCONVERT() retains characters already in lower-case or having no lower-case equivalent unchanged.</p></li>
+<li class="listitem"><p>T converts the string to title case. "Title case" refers to a string with the first character of each word in  upper-case and the remaining characters in the lower-case. $ZCONVERT() retains characters already conforming to "Title case" unchanged. "T" (title case) is not supported in M mode.</p></li>
+</ul></div>
+</li>
+</ul></div>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<p>The valid (case insensitive) codes for character set encoding for expr2 and expr3 in the three-argument form are:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem"><p>"UTF-8"-- a multi-byte variable length <span class="trademark">Unicode</span>(R) encoding form.</p></li>
+<li class="listitem"><p>"UTF-16LE"-- a multi-byte 16-bit <span class="trademark">Unicode</span>(R) encoding form in little-endian.</p></li>
+<li class="listitem"><p>"UTF-16BE"-- a multi-byte 16-bit <span class="trademark">Unicode</span>(R) encoding form in big-endian.</p></li>
+<li class="listitem"><p>"UTF-16"-- a multi-byte 16-bit <span class="trademark">Unicode</span>(R) encoding form which uses the same endian level as that of the current system. </p></li>
+</ul></div>
+</li></ul></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>When UTF-8 mode is enabled, GT.M uses the ICU Library to perform case conversion. As mentioned in the Theory of Operation section, the case conversion of the strings occurs according to UTF-8 code-point values. This may not be the linguistically or culturally correct case conversion, for example, of the names in the telephone directories. Therefore, application developers must ensure that the actual case conversion is linguistically and culturally correct for their specific needs. The two-argument form of the $ZCONVERT() function in M mode does not use the ICU Library to perform operation related to the case conversion of the strings.</p></td></tr>
+</table></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="idp69718864"></a>Examples<span> of $ZCONVERT()</span>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zconvert("Happy New Year","U")
+HAPPY NEW YEAR</pre>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $ZCHSET
+M
+GTM&gt;Write $zconvert("HAPPY NEW YEAR","T")
+%GTM-E-BADCASECODE, T is not a valid case conversion code</pre>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Set T8="<span class="symbol">&#20027;&#35201;&#38632;&#22312;&#35199;&#29677;&#29273;&#20572;&#30041;&#22312;&#24179;&#21407;</span>"
+GTM&gt;Write $Length(T8)
+12
+GTM&gt;Set T16=$zconvert(T8,"UTF-8","UTF-16LE")
+GTM&gt;Write $length(T16)
+%GTM-E-BADCHAR, $ZCHAR(129,137,232,150) is not a valid character in the UTF-8 encoding form
+GTM&gt;Set T16=$ZCOnvert(T16,"UTF-16LE","UTF-8")
+GTM&gt;Write $length(T16)
+9</pre>
+<p>In the above example, $LENGTH() function triggers an error because it takes only UTF-8 encoding strings as the argument.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s30.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s32.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZCOllate() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZDATA()</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

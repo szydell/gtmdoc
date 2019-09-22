@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Parameter Passing Operation</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Param_Passing.html" title="Parameter Passing" />
+    <link rel="prev" href="Formallabel.html" title="Formallabel" />
+    <link rel="next" href="Param_Pass_Mechanism.html" title="Parameter Passing Mechanisms" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Parameter Passing Operation</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Formallabel.html">Prev</a>A </td>
+          <th width="60%" align="center">Parameter Passing</th>
+          <td width="20%" align="right">A <a accesskey="n" href="Param_Pass_Mechanism.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Param_Pass_Opertn"></a>Parameter Passing Operation</h3>
+          </div>
+        </div>
+      </div>
+      <p>M performs an implicit NEW on the formallist names and replaces the formallist items with the actuallist items.</p>
+      <p>M provides the actuallist values to the invoked procedure by giving each element in the formallist the value or reference provided by the corresponding element in the actuallist. M associates the first name in the formallist with the first item in the actuallist, the second name in the formallist with the second item in the actuallist and so on. If the actuallist is shorter than the formallist, M ensures that the formallist items with no corresponding value are in effect NEWed. If the formallist item has no corresponding item in the actuallist (indicated by two adjacent commas in the actuallist), that item in the formallist becomes undefined.</p>
+      <p>If the actuallist item is an expression and the corresponding formallist variable is an array, parameter passing does not affect the subscripted elements of the array. If an actualname corresponds to a formallist variable, M reflects array operations on the formallist variable, by reference, in the variable specified by the actualname.</p>
+      <p>M treats variables that are not part of the formallist as if parameter passing did not exist (i.e., M makes them available to the invoked routine).</p>
+      <p>M initiates execution at the first command following the formallabel.</p>
+      <p>A QUIT command terminates execution of the invoked routine. At the time of the QUIT, M restores the formallist items to the values they had at the invocation of the routine.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>In the case where a variable name appears as an actualname in the actuallist, and also as a variable in the formallist, the restored value reflects any change made by reference.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>A QUIT from a DO does not take an argument, while a QUIT from an extrinsic must have an argument. This represents one of the two major differences between the DO command with parameters and the extrinsics. M returns the value of the QUIT command argument as the value of the extrinsic function or special variable. The other difference is that M stacks $TEST for extrinsics.</p>
+      <p>For more information, refer to the sections on extrinsics in this chapter.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+       SET X=30,Z=&quot;Hello&quot;
+       DO WRTSQR(X)
+       ZWRITE
+       QUIT
+       WRTSQR(Z)
+       SET Z=Z*Z
+       WRITE Z,!
+       QUIT
+        </pre>
+      <p>Produces:</p>
+      <pre class="programlisting">
+       900
+       X=30
+       Z=&quot;Hello&quot;
+        </pre>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Formallabel.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Param_Passing.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="Param_Pass_Mechanism.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">FormallabelA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Parameter Passing Mechanisms</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

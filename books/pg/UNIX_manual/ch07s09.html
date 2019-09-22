@@ -1,0 +1,105 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$Justify()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s08.html" title="$Increment()">
+<link rel="next" href="ch07s10.html" title="$Length()">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$Justify()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s08.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s10.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$Justify()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="justify"></a>$Justify()<a class="indexterm" name="idp69487680"></a>
+</h2></div></div></div>
+<p>Returns a formatted string.</p>
+<p>The format for the $JUSTIFY function is:</p>
+<pre class="programlisting">$J[USTIFY](expr,intexpr1[,intexpr2])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The expression specifies the string to be formatted by $JUSTIFY().</p></li>
+<li class="listitem"><p>The first integer expression (second argument) specifies the minimum size of the resulting string. If the first integer expression is larger than the length of the expression, $JUSTIFY() right justifies the expression to a string of the specified length by adding leading spaces. Otherwise, $JUSTIFY() returns the expression unmodified unless specified by the second integer argument.</p></li>
+<li class="listitem"><p>The optional second integer expression (third argument) specifies the number of digits to follow the decimal point in the result, and forces $JUSTIFY() to evaluate the expression as numeric. If the numeric expression has more digits than this argument specifies, $JUSTIFY() rounds to obtain the result. If the expression had fewer digits than this argument specifies, $JUSTIFY() zero-fills to obtain the result.</p></li>
+<li class="listitem"><p>When the second argument is specified and the first argument evaluates to a fraction between -1 and 1, $JUSTIFY() returns a number with a leading zero (0) before the decimal point (.).</p></li>
+</ul></div>
+<p>$JUSTIFY() fills expressions to create fixed length values. However, if the length of the specified expression exceeds the specified field size, $JUSTIFY() does not truncate the result (although it may still round based on the third argument). When required, use $EXTRACT() to perform truncation.</p>
+<p>$JUSTIFY() optionally rounds the portion of the result after the decimal point. In the absence of the third argument, $JUSTIFY() does not restrict the evaluation of the expression. In the presence of the third (rounding) argument, $JUSTIFY() evaluates the expression as a numeric value. The rounding algorithm can be understood as follows: </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>If necessary, the rounding algorithm extends the expression to the right with 0s (zeros) to have at least one more digit than specified by the rounding argument.</p></li>
+<li class="listitem"><p>Then, it adds 5 (five) to the digit position after the digit specified by the rounding argument. </p></li>
+<li class="listitem"><p>Finally, it truncates the result to the specified number of digits. The algorithm rounds up when excess digits specify a half or more of the last retained digit and rounds down when they specify less than a half.</p></li>
+<li class="listitem"><p>For a process started in UTF-8 mode, $JUSTIFY() interprets the string argument as UTF-8 encoded. With VIEW "BADCHAR" enabled, $JUSTIFY() produces a run-time error when it encounters a malformed character.  </p></li>
+<li class="listitem"><p>$ZJUSTIFY() is the parallel function of $JUSTIFY(). Irrespective of the settings of VIEW "BADCHAR" and $ZCHSET, $ZJUSTIFY() interprets argument as a sequence of bytes (rather than a sequence of characters) and can perform all byte-oriented $JUSTIFY() operations. <span>For more information, refer to <a class="xref" href="ch07s38.html" title="$ZJustify()">&#8220;$ZJustify()&#8221;</a>. </span></p></li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_justify"></a>Examples<span> of $JUSTIFY()</span><a class="indexterm" name="idp69543456"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write ":",$justify("HELLO",10),":",!,":",$justify("GOODBYE",5),":"
+:     HELLO:
+:GOODBYE:
+GTM&gt;</pre>
+<p>This uses $JUSTIFY() to display "HELLO" in a field of 10 spaces and "GOODBYE" in a field of 5 spaces. Because the length of "GOODBYE" exceeds five spaces, the result overflows the specification.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write "1234567890",!,$justify(10.545,10,2)
+1234567890
+     10.55
+GTM&gt;</pre>
+<p>This uses $JUSTIFY() to WRITE a rounded value right justified in a field of 10 spaces. Notice that the result has been rounded up.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write "1234567890",!,$justify(10.544,10,2)
+1234567890
+     10.54
+GTM&gt;</pre>
+<p>Again, this uses $JUSTIFY() to WRITE a rounded value right justified in a field of 10 spaces. Notice that the result has been rounded down.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write "1234567890",!,$justify(10.5,10,2)
+1234567890
+     10.50
+GTM&gt;</pre>
+<p>Once again, this uses $JUSTIFY() to WRITE a rounded value right justified in a field of 10 spaces. Notice that the result has been zero-filled to 2 places.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $justify(.34,0,2)
+0.34
+GTM&gt;</pre>
+<p>This example uses $JUSTIFY to ensure that the fraction has a leading zero. Note the use of a second argument of zero in the case that rounding is the only function that $JUSTIFY is to perform.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s08.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s10.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$Increment() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $Length()</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

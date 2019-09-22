@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>I/O Device Recognition</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="io_devices_9.html" title="I/O Devices" />
+    <link rel="prev" href="io_devices_9.html" title="I/O Devices" />
+    <link rel="next" href="device_spec_defaults.html" title="Device Specification Defaults" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">I/O Device Recognition</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="io_devices_9.html">Prev</a>A </td>
+          <th width="60%" align="center">I/O Devices</th>
+          <td width="20%" align="right">A <a accesskey="n" href="device_spec_defaults.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="io_device_recognition"></a>I/O Device Recognition</h3>
+          </div>
+        </div>
+      </div>
+      <p>GT.M OPEN, USE, and CLOSE commands have an argument expression specifying a device name. In the <span>OpenVMS</span> environment, a device may be referred to either by its physical name or <span>by a logical name to which its physical name has been assigned</span>.<span>Because logical names permit program coding independent of hardware configuration, logical names are more common than physical names.</span> </p>
+      <p>During an OPEN, GT.M attempts to resolve the specified device names to physical names. When GT.M successfully resolves a device name to a physical device, that device becomes the target of the OPEN. When the device name does not resolve to a physical device, GT.M attempts logical name translation; the result becomes the name of an RMS sequential disk file. The TMPMBX and PRMMBX deviceparameters on an OPEN command override the default mechanism, and specify that the device is a VMS mailbox.</p>
+      <p>Once a device is OPEN, GT.M establishes an internal correspondence between a name and the device or file. Therefore, while the device is OPEN, changing the translation of <span>a logical name</span> in the device specification does not change the device.</p>
+      <p>The following names identify the original $IO for the process:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>$PRINCIPAL</p>
+          </li>
+          <li>
+            <p>0</p>
+          </li>
+          <li>
+            <p>&quot;SYS$INPUT&quot;</p>
+          </li>
+          <li>
+            <p>&quot;SYS$OUTPUT&quot;</p>
+          </li>
+        </ul>
+      </div>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>Some versions of GT.M also treat the empty string as identifying $P. However, Sanchez recommends using the empty string to identify a null device, so it would be wise to avoid or eliminate this behavior.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="io_devices_9.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="io_devices_9.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="device_spec_defaults.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">I/O DevicesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Device Specification Defaults</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

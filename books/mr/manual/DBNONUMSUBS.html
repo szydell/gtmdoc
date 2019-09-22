@@ -1,0 +1,56 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>DBNONUMSUBS </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="DBNOCRE.html" title="DBNOCRE ">
+<link rel="next" href="DBNOREGION.html" title="DBNOREGION ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">DBNONUMSUBS </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="DBNOCRE.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="DBNOREGION.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">DBNONUMSUBS </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="DBNONUMSUBS"></a>DBNONUMSUBS </h2></div></div></div>
+<p><span class="bold"><strong>DBNONUMSUBS</strong></span>, XXXX Key contains a numeric form of subscript in a global defined to collate all subscripts as strings</p>
+<p>Run Time/MUPIP Error: The record has a numeric subscript but the collation setting for the global or region indicates all subscripts are filed as strings. The leading context (XXXX) identifies the block and offest of the problematic record. This can arise if an operator uses DSE to force a change to a collation setting or to modify a key when the global already has content.</p>
+<p>Action: If you can determine the cause of, and reason for, the change and you may choose to reverse it. If you need to change the collation, the appropriate procedure is to EXTRACT the data, KILL the global, or remove and recreate the database file, and them LOAD the extracted data.</p>
+<a class="indexterm" name="idp170237760"></a><a class="indexterm" name="idp170238640"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="DBNOCRE.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="DBNOREGION.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">DBNOCRE  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> DBNOREGION </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

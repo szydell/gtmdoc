@@ -1,0 +1,56 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>KILLABANDONED </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="KEYWRDBAD.html" title="KEYWRDBAD ">
+<link rel="next" href="KILLBYSIG.html" title="KILLBYSIG ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">KILLABANDONED </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="KEYWRDBAD.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="KILLBYSIG.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">KILLABANDONED </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="KILLABANDONED"></a>KILLABANDONED </h2></div></div></div>
+<p><span class="bold"><strong>KILLABANDONED</strong></span>,  Abandoned kills counter is greater than zero for file ffff, tttt</p>
+<p>Run Time Error: This indicates a process terminated during KILL cleanup in database file ffff; tttt is text waring of the implications. Generally, this leaves a database with block incorrectly marked busy errors. Such errors are benign in that they only cause blocks to be inappropriately unavailable. Nonetheless they should be addressed promptly to avoid operators becoming desensitized to errors in INTEGs.</p>
+<p>Action: Use DSE MAP to carefully FREE individual incorrectly marked busy block. If there are many blocks, you can edit the output of the integ (run with NOMAP) to create a script for driving repeated DSE MAP FREE. Alternatively, if you can get standalone access, to the database you may use DSE MAP RESTORE - never use MAP RESTORE on an active database.</p>
+<a class="indexterm" name="idp172019136"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="KEYWRDBAD.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="KILLBYSIG.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">KEYWRDBAD  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> KILLBYSIG </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

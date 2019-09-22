@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZCMdline</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter8.html" title="ChapterA 8.A Intrinsic Special Variables" />
+    <link rel="prev" href="zb.html" title="$ZB" />
+    <link rel="next" href="zcompile_g.html" title="$ZCOmpile" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZCMdline</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zb.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 8.A Intrinsic Special Variables</th>
+          <td width="20%" align="right">A <a accesskey="n" href="zcompile_g.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zcmdline"></a>$ZCMdline</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4194281" class="indexterm"></a>
+      <p>$ZCM[DLINE] contains a string value specifying the &quot;excess&quot; portion of the command line that invoked the GT.M process. By &quot;excess&quot; is meant the portion of the command line <span>excluding the first argument (the VMS command that corresponds to an image).</span> For example, a command line mumps -direct extra1 extra2 causes GT.M to process the command line upto mumps -direct and place the &quot;excess&quot; of the command line, that is &quot;extra1 extra2&quot; in $ZCMDLINE. $ZCMDLINE gives the M routine access to the shell command line input.</p>
+      <p>When the VMS Command Language Interpreter (CLI) invokes an image with a foreign command, it does not process the &quot;excess&quot; of the command line. GT.M places this part of the command line in $ZCMDLINE. $ZCMDLINE gives the M routine access to any user DCL command line input. The DCL Shell interpretation of the input removes one level of quotes. By default, if the input is not enclosed in quotes (&quot;&quot;), the CLI parser forces the input to upper case. M routines cannot modify $ZCMDLINE.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    $ create test.M
+    write $ZCMDLINE
+    halt
+    $ mumps test
+    $ link test
+    $ test == &quot;$&quot; + f$parse(&quot;TEST.EXE;&quot;)
+    $ test other information
+    OTHER INFORMATION        
+    $
+    </pre>
+      <p>This creates the program test.M, then compiles and links it. The example then assigns the symbol &quot;test&quot; and invokes &quot;test&quot; as a foreign command. The M program writes out the remaining text from the invoking DCL command line.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    $ DCL2M :== $'f$parse(&quot;BASE.EXE;&quot;)
+    $ DCL2M PRINT^RPT2
+    </pre>
+      <p>This assigns the symbol DCL2M a value that is used to invoke BASE.EXE as a foreign command. Then the example uses DCL2M with the &quot;parameter&quot; PRINT^RPT2. Assuming BASE is a GT.M image, when the image activates, $ZCMDLINE contains PRINT^RPT2.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    BASE SET XECSTR=&quot;SET LEN=$LENGTH($T(&quot;_$ZCMDLINE_&quot;))&quot; X XECSTR IF $L($ZCMDLINE),LEN DO @$ZCMDLINE
+    If $TEXT() can locate the entryref, this dispatches to a (sub-)routine specified in $ZCMDLINE.
+    </pre>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zb.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter8.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="zcompile_g.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZBA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $ZCOmpile</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

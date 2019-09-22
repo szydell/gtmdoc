@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Editing from DCL</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Create_and_Edit_a_Src_Prgrm.html" title="Creating and Editing a Source Program" />
+    <link rel="prev" href="edit_from_gtm.html" title="Editing from GT.M" />
+    <link rel="next" href="Compile_Src.html" title="Compiling a Source Program" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Editing from DCL</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="edit_from_gtm.html">Prev</a>A </td>
+          <th width="60%" align="center">Creating and Editing a Source Program</th>
+          <td width="20%" align="right">A <a accesskey="n" href="Compile_Src.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Edit_from_DCL"></a>Editing from DCL</h3>
+          </div>
+        </div>
+      </div>
+      <p>If you wish to focus on program development from the GT.M environment rather than from the VMS, skip over this section and continue with the section &quot;Compiling a Source Program&quot;.</p>
+      <p>To create and edit a source program from DCL, invoke any VMS editor at the DCL prompt, specifying an RMS file for the source. The GT.M environment works best when you give a file the name of the M routine that it contains, and a type of .M.</p>
+      <p>The Guide to VMS Text Processing describes in more detail how to use VMS editors. The default editor for VMS is EDT. For a complete description of all the EDT commands, refer to the VMS EDT Reference Manual.</p>
+      <p>Example</p>
+      <pre class="programlisting">
+          $ EDIT PAYROLL.M
+        </pre>
+      <p>The EDIT command initiates an editing session for PAYROLL.M from the DCL prompt. If PAYROLL.M does not already exist, EDT creates it.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+          $ EDIT/TPU PAYROLL.M
+        </pre>
+      <p>This EDIT/TPU command initiates an editing session for PAYROLL.M. Your installation may have more than one TPU based editor. The logical name TPU$SECTION specifies the default TPU editor. Again, if PAYROLL.M does not already exist, TPU creates it.</p>
+      <p>Because these examples use VMS rather than GT.M tools, in both cases we must specify the .M file extension.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="edit_from_gtm.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Create_and_Edit_a_Src_Prgrm.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="Compile_Src.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Editing from GT.MA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Compiling a Source Program</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Using the Invocation Stack in Debugging</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Debug_Routine_Direct_Mode.html" title="Debugging a Routine in Direct Mode" />
+    <link rel="prev" href="Interrupt_Execution.html" title="Interrupting Execution" />
+    <link rel="next" href="Determine_Level_of_Nesting.html" title="Determining Levels of Nesting" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Using the Invocation Stack in Debugging</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Interrupt_Execution.html">Prev</a>A </td>
+          <th width="60%" align="center">Debugging a Routine in Direct Mode</th>
+          <td width="20%" align="right">A <a accesskey="n" href="Determine_Level_of_Nesting.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Using_Invocation_Stack_in_Debug"></a>Using the Invocation Stack in Debugging</h3>
+          </div>
+        </div>
+      </div>
+      <p>M DOs, XECUTEs, and extrinsics add a level to the invocation stack. Matching QUITs take a level off the stack. When GT.M executes either of these commands, an extrinsic function, or an extrinsic special variable, it &quot;pushes&quot; information about the new environment on the stack. When GT.M executes the QUIT, it &quot;pops&quot; the information about the discarded environment off the stack. It then reinstates the invoking routine information using the entries that have now arrived at the active end of the stack.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>In the M stack model, a FOR command does not add a stack frame, and a QUIT that terminates a FOR loop does not remove a stack frame.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Interrupt_Execution.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Debug_Routine_Direct_Mode.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="Determine_Level_of_Nesting.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Interrupting ExecutionA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Determining Levels of Nesting</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

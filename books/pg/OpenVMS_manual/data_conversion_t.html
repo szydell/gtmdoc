@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Data Conversion</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="data_types_and_descriptors.html" title="Data Types and Descriptors" />
+    <link rel="prev" href="data_types_and_descriptors.html" title="Data Types and Descriptors" />
+    <link rel="next" href="routine_examples.html" title="Routines Example" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Data Conversion</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="data_types_and_descriptors.html">Prev</a>A </td>
+          <th width="60%" align="center">Data Types and Descriptors</th>
+          <td width="20%" align="right">A <a accesskey="n" href="routine_examples.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="data_conversion_t"></a>Data Conversion</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4234988" class="indexterm"></a>
+      <p>Exercise caution in choosing arguments of appropriate type and size. The mechanism for passing arguments for the DAL functions does not perform extensive checking, such as whether the arguments are properly sized or meaningfully typed.</p>
+      <p>GT.M interprets arguments passed by a numeric descriptor, for example, DSK$K_DTYPE_L or DSK$K_DTYPE_W type descriptors to a DAL function as numbers. GT.M interprets arguments passed by means of string descriptors as strings, unless the argument provides a subscript and contains an M canonical number. In this case, GT.M converts the string to numeric format. </p>
+      <p>GT.M interprets arguments passed by a numeric descriptor, (e.g., GTM_LONG or GTM_SHORT type descriptors to a DAL function as numbers). GT.M interprets arguments passed by means of string descriptors as strings, unless the argument provides a subscript and contains an M canonical number. In this case, GT.M converts the string to numeric format. </p>
+      <p>GT.M converts arguments passed by a numeric descriptor out of a DAL function from string to number. GT.M returns arguments passed by string descriptors out of a DAL function using the GTM_ARRAY_OF_CHARS descriptors, with CLASS_D (dynamic) or CLASS_S (static). In the case of static strings, if the descriptor specifies a destination shorter than the M string, the database function truncates the output. If the descriptor specifies a destination longer than the M string, the database function pads the destination with NULLS. </p>
+      <p>In addition, for descriptor arguments with read-only access method, GT.M might need to do type conversion of the input argument type to GT.Ma??s desired data type as well as for descriptor arguments with write-only access method, GT.M might need to do type conversion of its data type to the desired argument type. For these type conversions, it uses the VMS run-time library routine LIB$CVT_DX_DX. Refer to &quot;VMS Run-Time Library&quot; manual for details on the conversion.</p>
+      <p>If a write-only access method fixed length (DSC$K_CLASS_S) argument descriptor specifies a destination that is shorter than the M string returned by the database function, GT.M truncates the output. If the same argument descriptor specifies a destination that is longer than the M string, GT.M pads the destination with NULLs.</p>
+      <p>If a write-only access method dynamic string (DSC$K_CLASS_D) argument descriptor specifies a destination that is not equal to the length of the M string returned by the database function, GT.M frees up any string that the descriptor already points to, and allocates a string that can hold the M string.</p>
+      <p>The recommended way to return a string is with a dynamic string descriptor. Initialize the destination either with LIB$CVT_DX_DX or by establishing a DSK$K_CLASS_D (dynamic string class), DSK$K_DTYPE_T (character string type) descriptor that has a length of zero (0) and a NULL string pointer.</p>
+      <p>The recommended way to return a string is with a dynamic string descriptor. Initialize the destination either with LIB_CVT_DX_DX or by establishing a CLASS_D, GTM_ARRAY_OF_CHARS (character string) descriptor that has a length of zero (0). </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="data_types_and_descriptors.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="data_types_and_descriptors.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="routine_examples.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Data Types and DescriptorsA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Routines Example</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

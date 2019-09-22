@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Job</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="ChapterA 6.A Commands" />
+    <link rel="prev" href="Examples_of_If.html" title="Examples of If" />
+    <link rel="next" href="The_Job_Environment.html" title="The JOB Environment" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Job</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Examples_of_If.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 6.A Commands</th>
+          <td width="20%" align="right">A <a accesskey="n" href="The_Job_Environment.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="Job_Command"></a>Job</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="The_Job_Environment.html">The JOB Environment</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="Job_Process_Params.html">JOB Processparameters</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="Examples_of_Job.html">Examples of JOB</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4171250" class="indexterm"></a>
+      <p>The JOB command creates another process, activates the current image or another specified GT.M executable image, and executes a named routine.</p>
+      <p>$ZJOB is set to the pid of the process created by the <a id="id4171268" class="indexterm"></a>JOB command. For details refer to the &quot;$ZJOB&quot; section in the &quot;Intrinsic Special Variable&quot; chapter of GT.M Programmer's Guide.</p>
+      <p>The format of the JOB command is:</p>
+      <pre class="programlisting">
+        J[OB][:tvexpr] entryref[(expr[,...])]
+        [:[(keyword[=value][:...])][:numexpr]][,...]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>The required entryref specifies a location at which the new process starts.</p>
+          </li>
+          <li>
+            <p>The optional parameter list enclosed in parentheses () contains parameters to pass to the routine entry point.</p>
+          </li>
+          <li>
+            <p>If the JOB specifies a parameter list, the entryref location must start with a label and a formallist. GT.M prohibits entryrefs with offsets during parameter passing.</p>
+          </li>
+          <li>
+            <p>The optional elements in the parameter list specify expressions that the JOB evaluates and passes as values.</p>
+          </li>
+          <li>
+            <p>The keywords specify optional processparameters that control aspects of the environment for the new process.</p>
+          </li>
+          <li>
+            <p>If the JOB command has only one processparameter, the surrounding parentheses are optional.</p>
+          </li>
+          <li>
+            <p>Some keywords take numeric or string literals delimited by an equal sign (=) as arguments. Because the values are constants, strings must be enclosed in quotation marks (&quot; &quot;), and variable arguments require that the entire argument be constructed and referenced using indirection.</p>
+          </li>
+          <li>
+            <p>The optional numeric expression specifies a time in seconds after which the command should timeout if unsuccessful; 0 results in a single attempt.</p>
+          </li>
+          <li>
+            <p>When a JOB command contains no processparameters, double colons (::) separate the time-out numeric expression from the entryref.</p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom, evaluating to a list of one or more JOB command arguments, form a legal argument for a JOB command.</p>
+          </li>
+          <li>
+            <p>The maximum command-line length from a JOB command is 8192 bytes.</p>
+          </li>
+        </ul>
+      </div>
+      <p>The resultant process can be detached or spawned. VMS deletes the resultant process when the image completes execution. If the job is spawned, VMS deletes the image when the parent process terminates. A detached job can continue after the parent process terminates.</p>
+      <p>By default, the new process uses the same base image as the parent process. The IMAGE processparameter specifies an alternative image. If the routine specified by the entryref is not in the linked image, the created process attempts to auto-ZLINK the missing routine. For more information on entryrefs, refer to the &quot;General Language Features of M&quot; chapter in this manual.</p>
+      <p>If a JOB command specifies a timeout, and GT.M creates the resultant process before the timeout elapses, JOB sets $TEST to true (1). If GT.M cannot create the process within the specified timeout, JOB sets $TEST to false (0). If a JOB command does not specify a timeout, the execution of the command does not affect $TEST.</p>
+      <p>If GT.M cannot create the process because of something that is unlikely to change during the timeout interval, such as insufficient privileges or failure to find the specified image, the JOB command generates a run-time error. If the command does not specify a timeout and the environment does not provide adequate resources, the process waits until resources become available to create the resultant process.</p>
+      <p>The resultant process executes asynchronously with the current process. Once GT.M starts the resultant process, the current process continues, regardless of whether the JOB is detached or spawned.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Examples_of_If.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="The_Job_Environment.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of IfA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A The JOB Environment</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

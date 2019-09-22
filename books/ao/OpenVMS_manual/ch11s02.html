@@ -1,0 +1,69 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Approaches to Database Recovery</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch11.html" title="Chapter 11. Maintaining Database Integrity"><link rel="prev" href="ch11s01.html" title="Verifying Database Integrity"><link rel="next" href="ch11s03.html" title="Repairing the Database with DSE"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Approaches to Database Recovery</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch11s01.html">Prev</a> </td><th width="60%" align="center">Chapter 11. Maintaining Database Integrity</th><td width="20%" align="right"> <a accesskey="n" href="ch11s03.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Approaches to Database Recovery"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="approahes_to_database_recovery"></a>Approaches to Database Recovery</h2></div></div></div><p>If you experience database integrity problems, there are three strategies to
+consider when approaching the recovery:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Recover with journaling</p></li><li class="listitem"><p>Restore from backup and redo any lost work</p></li><li class="listitem"><p>Repair the database</p></li></ul></div><p>To achieve the intended result, correction of database errors requires careful
+planning. Each strategy differs from the others in the scope of damage it can
+handle, in skills needed, and in database availability.</p><div class="sect2" title="Recover from Journals"><div class="titlepage"><div><div><h3 class="title"><a name="recover_frm_jrnls"></a>Recover from Journals</h3></div></div></div><p>Journaling is generally the most attractive approach to recovery from
+integrity problems. It allows management of recovery using logical rather than
+physical constructs, including suppression of updates based on time and/or
+source and preservation of application-level logical transactions. Backward
+journal recovery is generally the fastest means of repair. The cost of
+journaling is the added load it imposes on normal operation to make and store
+the journal files. For more information on journaling, refer to the "GT.M
+Journaling" chapter.</p></div><div class="sect2" title="Restore from Backup"><div class="titlepage"><div><div><h3 class="title"><a name="restore_frm_backup"></a>Restore from Backup</h3></div></div></div><p>Restoring the database from the backup is the least technically sophisticated
+approach to handling integrity problems. This strategy is most beneficial when
+the data in the database is static or can be recomputed. In other cases, it
+requires operational controls to identify, and people to reenter, the work
+performed between the backup and the failure. For more information on MUPIP
+BACKUP, RESTORE, EXTRACT, and LOAD, refer to the "MUPIP" chapter. You may also
+use <span>OpenVMS utilities such as BACKUP and COPY</span>
+.</p><p>Some database regions may be setup to hold only temporary data, typically only
+valid for the life of a GT.M process or even just during some operation
+performed by a process. Rather than restoring such a region, it is generally
+more appropriate to delete it and recreate it using MUPIP CREATE. </p></div><div class="sect2" title="Repair with DSE"><div class="titlepage"><div><div><h3 class="title"><a name="repair_with_dse"></a>Repair with DSE</h3></div></div></div><p>Database repair with DSE requires more skill, and potentially more time than
+the other approaches. Using DSE requires vigilant attention to, and a clear
+understanding of, GDS. DSE can generally access and change almost any data in
+the database file. When using DSE, you assume the responsibility that GT.M
+normally carries for ensuring the integrity of the database structure. Because
+DSE may be used concurrently with other processes, updates by concurrent
+processes may interfere with repair actions. When possible, prevent other users
+from accessing the region during repairs.</p><p>If you elect to repair the database, you may want to seek assistance from an
+available source of expertise such as FIS or your GT.M
+Value Added Reseller (VAR). If your organization plans to perform repairs beyond
+straightforward corrections to the file header, FIS 
+strongly recommends that the responsible person(s) familiarize themselves with
+the material in the INTEG section of the MUPIP chapter, the GDS and DSE
+chapters, and this chapter. FIS recommends using DSE
+on test files, in advance of any work on production files.</p></div><div class="sect2" title="Preventive Maintenance"><div class="titlepage"><div><div><h3 class="title"><a name="preventive_maintenance"></a>Preventive Maintenance</h3></div></div></div><p>Once you understand the cause of a database integrity problem, you can correct
+or improve the environment to prevent or minimize future damage. These changes
+may include hardware reconfiguration, such as improving the quality of power;
+changes to the operational procedures, such as implementing journaling; and/or
+changes to the Global Directories, such as balancing data assignment into files
+of more manageable sizes.</p><p>Use the following tools to help determine the cause of a database integrity
+problem.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Knowledge of the application and how it is used</p></li><li class="listitem"><p>Context dumps produced by application programs</p></li><li class="listitem"><p>Core dumps produced by application programs</p></li><li class="listitem"><p>Core dumps produced by GT.M</p></li><li class="listitem"><p>Interviews with users to discover their actions</p></li><li class="listitem"><p>The DCL command ANALYZE /ERROR to examine the OpenVMS error log</p></li><li class="listitem"><p>Review of messages in operator facility</p></li><li class="listitem"><p>Review of all recent changes to hardware, <span>VMS</span>
+, GT.M, the application,
+procedures, etc. </p></li><li class="listitem"><p>Copies of damaged files</p></li><li class="listitem"><p>The trail from DSE sessions in the form of notes, <span>SET
+HOST /LOG files,</span>a script file recording the session,
+sequential files, and saved blocks.</p></li></ul></div><div class="sect3" title="Determining the Cause of the Problem"><div class="titlepage"><div><div><h4 class="title"><a name="determine_the_cause_of_the_problem"></a>Determining the Cause of the Problem</h4></div></div></div><p>The following questions may help you understand the type of information
+required to determine the nature of a database integrity problem.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>How seriously are operations affected?</p></li><li class="listitem"><p>What level of urgency do you assign to getting the problem
+resolved?</p></li><li class="listitem"><p>What were the circumstances under which the database became
+damaged or inaccessible?</p></li><li class="listitem"><p>How was the problem first recognized?</p></li></ul></div><p>Examine the accounting logs for information about recent process
+terminations. Capture information about what functions were in use. Look for
+any information which might be helpful in establishing patterns in case the
+problem is repetitive.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Has the system crashed recently? If so, what caused the crash?
+<span> Use ANAL/ERROR to investigate.</span>
+</p></li><li class="listitem"><p>Is there database damage?</p><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>What region(s) are affected? What globals?</p></li><li class="listitem"><p>What are the error messages? </p></li><li class="listitem"><p>What do you see when you examine the database? </p></li><li class="listitem"><p>Are you comfortable with fixing the problem? </p></li></ul></div></li><li class="listitem"><p>What version of GT.M are you using? What version of
+OpenVMS?</p></li></ul></div></div><div class="sect3" title="MUPIP Recovery"><div class="titlepage"><div><div><h4 class="title"><a name="chp11_mupip_recovery"></a>MUPIP Recovery</h4></div></div></div><p>Bring down the damaged application using appropriate utilities, MUPIP
+RUNDOWN <span>/</span>REGION region
+or <span>/</span>FILE <span>file-spec</span>
+ naming
+the problem database. Restart the application. Consider writing programs or
+procedures to partially automate shutting down one or all applications; to
+reduce the chance of errors.</p></div><div class="sect3" title="Follow-up"><div class="titlepage"><div><div><h4 class="title"><a name="follow_up_chapter11_mupip_recovery"></a>Follow-up</h4></div></div></div><p>Make sure to transfer any relevant files or reports <span>the
+SYS$MANAGER:CCEDUMP.DMP file, the SDA log file, and any output from SHOW
+PROC </span> to FIS. Please also communicate
+any information regarding the circumstances surrounding the problem,
+including the answers to the questions above. Consider the following:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Has any hardware or software component of your system recently
+changed?</p></li><li class="listitem"><p>Was anyone doing anything new or unusual? </p></li><li class="listitem"><p>Was the problem preceded or followed by any other notable events?
+</p></li><li class="listitem"><p>Does SYS$MANAGER:OPERATOR.LOG or an ANALYZE/ERROR show any entries
+around the time of the problem? </p></li><li class="listitem"><p>Are there any GTMDUMP.DMP, process dump or other [.dmp] files that
+might be related to the problem? </p></li><li class="listitem"><p>Did you have any unusual problems during the analysis or recovery?
+</p></li><li class="listitem"><p>Do you have any suggestions about this procedure? </p></li></ul></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch11s01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch11.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch11s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Verifying Database Integrity </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> Repairing the Database with DSE</td></tr></table></div></body></html>

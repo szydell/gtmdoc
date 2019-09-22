@@ -1,0 +1,83 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZFind()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s34.html" title="$ZExtract()">
+<link rel="next" href="ch07s36.html" title="$ZGetjpi()">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZFind()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s34.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s36.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZFind()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zfind"></a>$ZFind()</h2></div></div></div>
+<a class="indexterm" name="idp70056320"></a><p>Returns an integer byte position that locates the occurrence of a byte sequence within a sequence of octets(8-bit bytes).</p>
+<p>The format of the $ZFIND function is:</p>
+<pre class="programlisting">$ZF[IND](expr1,expr2[,intexpr])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The first expression specifies the sequence of octets (8-bit bytes) in which $ZFIND() searches for the byte sequence.</p></li>
+<li class="listitem"><p>The second expression specifies the byte sequence for which $ZFIND() searches.</p></li>
+<li class="listitem"><p>The optional integer expression identifies the starting byte position for the $ZFIND() search. If this argument is missing, zero (0), or negative, $ZFIND() begins to search from the first position of the sequence of octets (8-bite bytes).</p></li>
+<li class="listitem"><p>If $ZFIND() locates the byte sequence, it returns the position after its last byte. If the end of the byte sequence coincides with the end of the the sequence of octets (expr1), it returns an integer equal to the byte length of the expr1 plus one ($L(expr1)+1).</p></li>
+<li class="listitem"><p>If $ZFIND() does not locate the byte sequence, it returns zero (0).</p></li>
+<li class="listitem"><p>$ZFIND() provides a tool to locate byte sequences. The ( [ ) operator and the two-argument $ZLENGTH() are other tools that provide related functionality.</p></li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_zfind"></a>Examples<a class="indexterm" name="idp70100000"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zfind("<span class="symbol">&#20027;&#35201;&#38632;</span>",$zchar(187))
+4
+GTM&gt;</pre>
+<p>This example uses $ZFIND() to WRITE the position of the first occurrence of the numeric byte code 150. The return of 3 gives the position after the "found" byte.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zfind("<span class="symbol">&#26032;&#24180;&#22909;</span>",$zchar(229),5)
+8
+GTM&gt;</pre>
+<p>This example uses $ZFIND() to WRITE the position of the next occurrence of the byte code 229 starting in byte position five.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set t=1 for  set t=$zfind("<span class="symbol">&#26032;&#24180;&#22909;</span>",$zchar(230,150,176),t) quit:'t  write !,t
+4
+GTM&gt;</pre>
+<p>This example uses a loop with $ZFIND() to locate all the occurrences of the byte sequence $ZCHAR(230,150,176) in the sequence of octets ("<span class="symbol">&#26032;&#24180;&#22909;</span>"). The $ZFIND() returns 4 giving the position after the occurrence of byte sequence $ZCHAR(230,150,176).</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s34.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s36.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZExtract() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZGetjpi()</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

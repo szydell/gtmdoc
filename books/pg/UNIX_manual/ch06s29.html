@@ -1,0 +1,103 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>ZBreak</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s28.html" title="ZAllocate">
+<link rel="next" href="ch06s30.html" title="ZCOMpile">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">ZBreak</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s28.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s30.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">ZBreak</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zbreak_cmmd"></a>ZBreak<a class="indexterm" name="idp64948176"></a>
+</h2></div></div></div>
+<p>The ZBREAK command sets or clears routine breakpoints during debugging.</p>
+<p>The format of the ZBREAK command is:</p>
+<pre class="programlisting">ZB[REAK][:tvexpr] [-]entryref[:[expr][:intexpr]][,...]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The required entryref specifies a location within a routine or a trigger at which to set or remove a breakpoint.</p></li>
+<li class="listitem"><p>The optional minus sign (-) specifies that ZBREAK remove the breakpoint; -* means remove all breakpoints.</p></li>
+<li class="listitem"><p>The optional expression specifies a fragment of GT.M code to XECUTE when GT.M execution encounters the breakpoint; if the ZBREAK argument does not specify an action, the default action is "BREAK".</p></li>
+<li class="listitem"><p>The optional integer expression immediately following the expression specifies a count of process transits through the breakpoint before the breakpoint action takes effect; once GT.M exhausts the count and the action takes effect, the action occurs every time the process encounters the breakpoint. If the action expression is omitted, the optional integer expression must be separated from the entryref by two adjacent colons (::).</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more ZBREAK arguments form a legal argument for a ZBREAK.</p></li>
+<li class="listitem"><p>If a concurrent process reloads a trigger in which a process has an active ZBREAK, GT.M automatically removes the breakpoint and issues a TRIGZBRKREM warning message when it refreshes the trigger; the TRIGZBRKREM warning message respects a message mask of 8 as maintained by the VIEW "BREAKMSG" command.</p></li>
+</ul></div>
+<p>When GT.M encounters the entryref, GT.M suspends execution of the routine code and XECUTEs the breakpoint action before executing any of the commands on the line. <span>For more information on entryrefs, see <a class="xref" href="ch05.html" title="Chapter 5. General Language Features of M">Chapter 5: &#8220;<i><span>General Language Features of M</span></i>&#8221;</a>.</span></p>
+<p>When the optional integer expression is used, GT.M activates the breakpoint on the intexpr-th time the process encounters the breakpoint during routine execution. Once GT.M activates the breakpoint, that breakpoint remains active for the process until explicitly replaced or removed, or until the process terminates.</p>
+<p>For more information, refer to <a class="xref" href="ch04.html" title="Chapter 4. Operating and Debugging in Direct Mode">Chapter 4: &#8220;<i><span>Operating and Debugging in Direct Mode</span></i>&#8221;</a>.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_zbreak"></a>Examples<span> of ZBREAK</span><a class="indexterm" name="idp62067952"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZPRint ^ZBTEST
+ZBTEST;
+     Do SUB
+     Quit
+SUB  Write !,"This is ZBTEST"
+     Quit
+GTM&gt;ZBREAK SUB^ZBTEST
+GTM&gt;Do ^ZBTEST
+%GTM-I-BREAKZBA, Break instruction encountered during ZBREAK action
+At M source location SUB^ZBTEST
+GTM&gt;ZSHOW "B"
+SUB^ZBTEST</pre>
+<p>This inserts a ZBREAK with a default action at SUB^ZBTEST. After GT.M encounters the BREAK, the ZSHOW "B" displays this as the only ZBREAK in the image.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZBREAK -*
+                
+GTM&gt;ZGOTO
+GTM&gt;ZBREAK SUB^ZBTEST:"W !,""Trace"""
+GTM&gt;Do ^ZBTEST
+Trace
+This is ZBTEST
+GTM&gt;</pre>
+<p>This removes all existing ZBREAKs with a ZBREAK -*. Note that it is not necessary to remove ZBREAKs before modifying them. It also clears the process invocation stack with an argumentless ZGOTO. Then it uses a ZBREAK to insert a trace-point. Every time GT.M executes the line to where ZBREAK has established a trace-point, it performs the specified action without entering Direct Mode.</p>
+<p>Example:</p>
+<pre class="programlisting">ZBreak PRINT^TIME::5</pre>
+<p>This BREAKs execution at line PRINT in routine just before the fifth time the line is executed.</p>
+<p>Example:</p>
+<pre class="programlisting">ZBREAK PRINT^TIME:"WRITE AVE BREAK":3</pre>
+<p>This inserts a ZBREAK action of WRITE AVE and BREAK before the third execution of PRINT^TIME.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s28.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s30.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">ZAllocate </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> ZCOMpile</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

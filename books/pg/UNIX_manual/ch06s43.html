@@ -1,0 +1,126 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>ZSTep</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s42.html" title="ZSHow">
+<link rel="next" href="ch06s44.html" title="ZSYstem">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">ZSTep</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s42.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s44.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">ZSTep</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zstep_cmmd"></a>ZSTep<a class="indexterm" name="idp67877616"></a>
+</h2></div></div></div>
+<p>The ZSTEP command provides the ability to control GT.M execution. When a ZSTEP is issued from Direct Mode, execution continues to the beginning of the next target line and then GT.M XECUTEs the ZSTEP action. The keyword in the optional ZSTEP argument determines the class of eligible target lines. </p>
+<p>The format of the ZSTEP command is:</p>
+<pre class="programlisting">ZST[EP][:tvexpr] [keyword[:expr]][,...]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The optional keyword specifies the nature of the step; the keywords are INTO, OVER, and OUTOF.</p></li>
+<li class="listitem"><p>A ZSTEP with no argument performs the default action OVER; in this case, at least two (2) spaces must follow the ZSTEP to separate it from the next command on the line, which will be ignored. </p></li>
+<li class="listitem"><p>The optional expression specifies GT.M code to XECUTE when the ZSTEP arrives at its destination.</p></li>
+<li class="listitem"><p>If the ZSTEP argument does not contain an expression argument, ZSTEP defaults the action to the value of $ZSTEP, which defaults to "BREAK."</p></li>
+</ul></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>The ZSTEP argument keywords are not expressions and ZSTEP does not accept argument indirection.</p></td></tr>
+</table></div>
+<p>In Direct Mode, ZSTEP performs an implicit ZCONTINUE and therefore GT.M ignores all commands on the Direct Mode command line after the ZSTEP.</p>
+<p>The keyword arguments define the class of lines where ZSTEP next pauses execution to XECUTE the ZSTEP action. When a ZSTEP command has multiple arguments, it ignores all arguments except the last.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="zstep_into"></a>ZSTEP Into<a class="indexterm" name="idp57996368"></a>
+</h3></div></div></div>
+<p>ZSTEP INTO pauses at the beginning of the next line, regardless of transfers of control. When the ZSTEPed line invokes another routine or a subroutine in the current routine, ZSTEP INTO pauses at the first line of code associated with the new GT.M stack level.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="zstep_outof"></a>ZSTep OUtof<a class="indexterm" name="idp55652960"></a>
+</h3></div></div></div>
+<p>ZSTEP OUTOF pauses at the beginning of the next line executed after an explicit or implicit QUIT from the current GT.M invocation stack level. A ZSTEP OUTOF does not pause at lines associated with the current GT.M stack level or with levels invoked from the current level.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="zstep_over"></a>ZSTep OVer<a class="indexterm" name="idp53791552"></a>
+</h3></div></div></div>
+<p>ZSTEP OVER pauses at the beginning of the next line in the code associated with either the current GT.M stack level or a previous GT.M stack level if the ZSTEPed line contains an explicit or implicit QUIT from the current level. A ZSTEP OVER does not pause at lines invoked from the current line by DOs, XECUTEs or extrinsics.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="zstep_actions"></a>ZSTEP Actions<a class="indexterm" name="idp59984512"></a>
+</h3></div></div></div>
+<p>The optional action parameter of a ZSTEP must contain an expression evaluating to valid GT.M code. By default, ZSTEP uses the value of $ZSTEP, which defaults to "B" ("BREAK"), and enters Direct Mode. When a ZSTEP command specifies an action, the process does not enter Direct Mode unless the action explicitly includes a BREAK command.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="zstep_interactions"></a>ZSTEP Interactions<a class="indexterm" name="idp61376848"></a>
+</h3></div></div></div>
+<p>ZSTEP currently interacts with certain other elements in the GT.M environment.</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>If a &lt;CTRL-C&gt; or a CTRAP character arrives at certain points in ZSTEP processing, there is a small chance GT.M may ignore the &lt;CTRL-C&gt; or CTRAP; in a later release, &lt;CTRL-C&gt; and CTRAPs will always have priority over ZSTEP.</p></li>
+<li class="listitem"><p>If GT.CM reports an asynchronous network error, a ZSTEP may cause the network error to go unreported; the chance of such an occurrence is small and the chance the error would subsequently be reported is high; in a later release, network errors will always be given priority over ZSTEP.</p></li>
+</ul></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="use_of_zstep"></a>Use of ZSTEP<a class="indexterm" name="idp54785088"></a>
+</h3></div></div></div>
+<p>Use ZSTEP to incrementally execute a routine or series of routines. Execute any GT.M command from Direct Mode at any ZSTEP pause. To resume normal execution, use ZCONTINUE. </p>
+<p>Note that ZSTEP arguments are keywords rather than expressions. They do not allow indirection, and argument lists have no utility. </p>
+<p>ZSTEP actions that include commands followed by a BREAK perform some action before entering Direct Mode. ZSTEP actions that do not include a BREAK perform the command action and continue execution. Use ZSTEP actions that issue conditional BREAKs and subsequent ZSTEPs to do such things as test for changes in the value of a variable.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_zstep"></a>Examples<span> of ZSTEP</span><a class="indexterm" name="idp66483360"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZSTEP INTO:"W ! ZP @$ZPOS W !"</pre>
+<p>This ZSTEP resumes execution of the current routine. At the beginning of the next line executed, the ZSTEP action ZPRINTs the source code for that line. Because the specified action does not contain a BREAK command, execution continues to the next line and all subsequent lines in the program flow.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Set curx=$get(x),zact="ZSTEP:$get(curx)=$get(x) INTO:zact Break:$get(curx)'=$get(x)"
+GTM&gt;ZSTEP INTO:zact</pre>
+<p>This sequence uses ZSTEP to invoke Direct Mode at the beginning of the first line after the line that alters the value of x.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s42.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s44.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">ZSHow </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> ZSYstem</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

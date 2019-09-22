@@ -1,0 +1,86 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Else</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s03.html" title="Do">
+<link rel="next" href="ch06s05.html" title="For">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Else</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s03.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s05.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">Else</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Else"></a>Else<a class="indexterm" name="idp52193376"></a>
+</h2></div></div></div>
+<p>ELSE executes the remainder of the line after the ELSE if $TEST is FALSE (0). GT.M does not execute the rest of the line if $TEST is TRUE (1).</p>
+<p>The format of the ELSE command is:</p>
+<pre class="programlisting">E[LSE]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Because ELSE is a conditional command, it does not support a command postconditional.</p></li>
+<li class="listitem"><p>The scope of the ELSE is the remainder of the line. The scope of an ELSE can be extended with DO (or XECUTE) commands.</p></li>
+<li class="listitem"><p>Because the ELSE has no argument, at least two (2) spaces must follow the command to separate it from the next command on the line.</p></li>
+</ul></div>
+<p>Because the scopes of both the IF and the ELSE commands extend to the rest of the GT.M line, placing an ELSE on the same line as the corresponding IF cannot achieve the desired result (unless the intent of the ELSE is to test the result of a command using a timeout). If an ELSE were placed on the same line as its corresponding IF, then the expression tested by the IF would be either TRUE or FALSE. If that condition is TRUE, the code following the ELSE would not execute; if that condition is FALSE, the ELSE would not be in the execution path.</p>
+<p>ELSE is analogous to IF '$TEST, except the latter statement switches $TEST to its complement and ELSE never alters $TEST.</p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top"><p>Use ELSE with care. Because GT.M stacks $TEST only at the execution of an extrinsic or an argumentless DO command, any XECUTE or DO with an argument has the potential side effect of altering $TEST. <span>For information about $TEST, refer to <a class="xref" href="ch08s15.html" title="$Test">&#8220;$Test&#8221;</a>.</span></p></td></tr>
+</table></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Examples_of_Else"></a>Examples<span> of ELSE</span><a class="indexterm" name="idp59591824"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">If x=+x Set x=x+y
+Else  Write !,x</pre>
+<p>The IF command evaluates the conditional expression x=+x and sets $TEST. If $TEST=1 (TRUE), GT.M executes the commands following the IF. The ELSE on the following line specifies an alternative action to take if the expression is false.</p>
+<p>Example:</p>
+<pre class="programlisting">If x=+x Do ^GOFISH
+Else  Set x=x_"^"_y</pre>
+<p>The DO with an argument after the IF raises the possibility that the routine ^GOFISH changes the value of $TEST, thus making it possible to execute both the commands following the IF and the commands following the ELSE.</p>
+<p>Example:</p>
+<pre class="programlisting">Open dev::0 Else  Write !,"Device unavailable" QUIT</pre>
+<p>This ELSE depends on the result of the timeout on the OPEN command. If the OPEN succeeds, it sets $TEST to one (1) and GT.M skips the rest of the line after the ELSE. If the OPEN fails, it sets $TEST to zero (0), and GT.M executes the remainder of the line after the ELSE.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s03.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s05.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Do </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> For</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

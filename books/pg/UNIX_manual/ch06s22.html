@@ -1,0 +1,68 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>TROllback</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s21.html" title="TREstart">
+<link rel="next" href="ch06s23.html" title="TStart">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">TROllback</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s21.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s23.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">TROllback</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="trollback"></a>TROllback<a class="indexterm" name="idp61239200"></a>
+</h2></div></div></div>
+<p>The TROLLBACK command terminates a transaction by causing a ROLLBACK, which removes all database updates performed within a transaction. A TROLLBACK without an argument also sets $TLEVEL and $TRESTART to zero (0). Issuing a TROLLBACK when no transaction is in progress ($TLEVEL=0) produces an error.</p>
+<p>The format of the TROLLBACK command is:</p>
+<pre class="programlisting">TRO[LLBACK][:tvexpr] [intexpr]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The optional integer expression indicates an argument specifying incremental rollback. If the value of the argument expression is greater than zero, it specifies the value of $TLEVEL to be achieved by the rollback. If the value of the expression is less than zero, the result is the number of levels to rollback. For example; -1 means rollback one level. If the argument expression is zero, the effect is same as not specifying the argument, that is, the entire GT.M transaction is rolled back.</p></li>
+<li class="listitem"><p>Attempting to rollback more than $TLEVEL levels (the outermost transaction) generates an error.</p></li>
+<li class="listitem">
+<p>When the TROLLBACK has no argument, at least two (2) spaces must follow the command to separate it from the next command on the line.</p>
+<p>In order to allow for error recovery and/or access to the global context of the error, errors do not initiate implicit ROLLBACKs. Therefore, the code for handling errors during transactions should generally include a TROLLBACK. Because the TROLLBACK releases resources held by the transaction, it should appear as early as possible in the error handling code.</p>
+</li>
+<li class="listitem"><p>A TROLLBACK does not cause a transfer of control but is typically associated with one such as a QUIT (or GOTO).</p></li>
+<li class="listitem"><p>TROLLBACK to a $TLEVEL other than zero (0) leaves $REFERENCE empty. This behavior is same as a full TROLLBACK to $TEVEL=0.</p></li>
+</ul></div>
+<p>For an example of the use of the TROLLBACK command, see <a class="xref" href="ch05.html" title="Chapter 5. General Language Features of M">Chapter 5: &#8220;<i><span>General Language Features of M</span></i>&#8221;</a>.</p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s21.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s23.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">TREstart </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> TStart</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

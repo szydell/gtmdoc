@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>String Literals</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Literals.html" title="Literals" />
+    <link rel="prev" href="Literals.html" title="Literals" />
+    <link rel="next" href="Numeric_Literals.html" title="Numeric Literals" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">String Literals</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Literals.html">Prev</a>A </td>
+          <th width="60%" align="center">Literals</th>
+          <td width="20%" align="right">A <a accesskey="n" href="Numeric_Literals.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="String_Literals"></a>String Literals</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4166798" class="indexterm"></a>
+      <p>String literals (strlit) are enclosed in quotation marks (&quot; &quot;) and must only contain graphic characters. In other words, control characters (ASCII 0-31 and 127) cannot appear in a strlit. M attempts to use character text that appears outside of quotation mark delimiters according to context, which generally means as a local variable name.</p>
+      <p>To include a quotation mark (&quot;) within a strlit, use a set of two quotation marks (&quot;&quot; &quot;&quot;).</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+       GTM&gt;WRITE &quot;&quot;&quot;&quot;
+       &quot;
+       GTM&gt;
+        </pre>
+      <p>The WRITE displays a single quotation mark because the first quotation mark delimits the beginning of the string literal, the next two quotation marks denote a single quote within the string, and the last quotation mark delimits the end of the string literal.</p>
+      <p>Use the $CHAR function and the concatenation operator to include control characters within a string.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+       GTM&gt;WRITE &quot;A&quot;_$CHAR(9)_&quot;B&quot;
+       A B
+       GTM&gt;
+        </pre>
+      <p>The WRITE displays an &quot;A,&quot; followed by a tab (&lt;HT&gt;), followed by a &quot;B&quot; using $CHAR(), to introduce the non-graphic character.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Literals.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Literals.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="Numeric_Literals.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">LiteralsA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Numeric Literals</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

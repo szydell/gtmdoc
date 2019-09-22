@@ -1,0 +1,272 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Chapter 7. Functions</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="index.html" title="GT.M Programmer's Guide">
+<link rel="prev" href="ch06s49.html" title="ZWRite">
+<link rel="next" href="ch07s01.html" title="$ASCII()">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Chapter 7. Functions</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s49.html">Prev</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s01.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-node">Functions</span>
+</div>
+<div class="chapter">
+<div class="titlepage"><div>
+<div><h2 class="title">
+<a name="chg_functions"></a>Chapter 7. Functions</h2></div>
+<div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
+<tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V6.3-007</td>
+<td align="left">04 February 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s24.html#argument__keys_of_view" title="Argument Keywords of $VIEW()">&#8220;Argument Keywords of $VIEW()&#8221;</a>, adjust probecrit output for V6.3-007</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s39.html" title="$ZLength()">&#8220;$ZLength()&#8221;</a>, separate the last bullet points into two parts.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-006</td>
+<td align="left">26 October 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html" title="$ASCII()">&#8220;$ASCII()&#8221;</a>, UTF-8 mode tweaks.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s02.html" title="$Char()">&#8220;$Char()&#8221;</a>, UTF-8 mode tweaks.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s01.html#examples_of_ascii" title="Examples of $ASCII()">&#8220;Examples<span> of $ASCII()</span>&#8221;</a>, UTF-8 mode tweaks.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s02.html#examples_of_char" title="Examples of $CHAR()">&#8220;Examples<span> of $CHAR()</span>&#8221;</a>, UTF-8 mode tweaks</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s54.html#examples_of_zwidth" title="Examples of $ZWIDTH()">&#8220;Examples<span> of $ZWIDTH()</span>&#8221;</a>, UTF-8 tweaks and minor corrections.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s04.html" title="$Extract()">&#8220;$Extract()&#8221;</a>, UTF-8 mode tweaks.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s31.html" title="$ZCOnvert()">&#8220;$ZCOnvert()&#8221;</a>, minor corrections.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s50.html" title="$ZSUBstr()">&#8220;$ZSUBstr()&#8221;</a>, UTF-8 mode tweaks.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s54.html" title="$ZWidth()">&#8220;$ZWidth()&#8221;</a>, minor corrections. </p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-005</td>
+<td align="left">29 June 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s24.html#argument__keys_of_view" title="Argument Keywords of $VIEW()">&#8220;Argument Keywords of $VIEW()&#8221;</a>, update the description of STATSHARE argument keyword.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s45.html" title="$ZSOCKET()">&#8220;$ZSOCKET()&#8221;</a>, add note on SSLv3 default</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s53.html" title="$ZTRNLNM()">&#8220;$ZTRNLNM()&#8221;</a>, state that expr6 is optional and add an example</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-004</td>
+<td align="left">23 March 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch07s24.html#argument__keys_of_view" title="Argument Keywords of $VIEW()">&#8220;Argument Keywords of $VIEW()&#8221;</a>, add information about the STATSHARE keyword; improve the description of GVSTAT</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-003</td>
+<td align="left">12 December 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s24.html#argument__keys_of_view" title="Argument Keywords of $VIEW()">&#8220;Argument Keywords of $VIEW()&#8221;</a>, fix format for gvstats</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s32.html" title="$ZDATA()">&#8220;$ZDATA()&#8221;</a>, typo "reflects" -&gt; "reflect"</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-001</td>
+<td align="left">20 March 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch07s24.html#argument__keys_of_view" title="Argument Keywords of $VIEW()">&#8220;Argument Keywords of $VIEW()&#8221;</a>, Update description of $VIEW("SPSIZE") to include two additional values returned.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s24.html#examples_of_view_g" title="Examples of $VIEW()">&#8220;Examples<span> of $VIEW()</span>&#8221;</a>, updated gvstats output</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s27.html" title="$ZATRansform">&#8220;$ZATRansform&#8221;</a>, added the description of $ZATRANSFORM().</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s30.html" title="$ZCOllate()">&#8220;$ZCOllate()&#8221;</a>, add the description of $ZCOLLATE().</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s42.html" title="$ZPIece()">&#8220;$ZPIece()&#8221;</a>, removed spurious characters from an example;corrected the abbreviation for $ZPIECE()</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s49.html" title="$ZSIGPROC()">&#8220;$ZSIGPROC()&#8221;</a>, removed Tru64.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s45.html" title="$ZSOCKET()">&#8220;$ZSOCKET()&#8221;</a>, added the ALL, SESSION, OPTIONS, and TLS keywords </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s55.html" title="$ZWRite()">&#8220;$ZWRite()&#8221;</a>, added information about the second argument and information about string inflation going to zwrite format. Modified description to use "argument" as a user found the use of expression unclear.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.2-001</td>
+<td align="left">27 February 2015</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Updated <a class="xref" href="ch07s52.html" title="$ZTRIgger()">&#8220;$ZTRIgger()&#8221;</a> for V6.2-001 multi-line XECUTE string enhancements, $ZTRIGGER() return status, specified that $ZTRIGGER() always operates within a TP transaction even if it needs to implicitly create one, and added a note on the support of triggers in spanning regions. </p></li>
+<li class="listitem"><p>Added a new section called <a class="xref" href="ch07s45.html" title="$ZSOCKET()">&#8220;$ZSOCKET()&#8221;</a>. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s43.html" title="$ZPEEK()">&#8220;$ZPEEK()&#8221;</a>, specified that $ZPEEK() function generates an UNDEF error when VIEW UNDEF is not set and format parameter is specified but is undefined and added the JNL[REG]:region and JBF[REG]:region keyword first arguments.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s24.html#argument__keys_of_view" title="Argument Keywords of $VIEW()">&#8220;Argument Keywords of $VIEW()&#8221;</a>, added "RTNCHECKSUM" as a new ARG1. </p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.1-000</td>
+<td align="left">28 August 2014</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch07s36.html" title="$ZGetjpi()">&#8220;$ZGetjpi()&#8221;</a>, corrected the descriptions of CSTIME and CUTIME keywords.</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-003</td>
+<td align="left">24 February 2014</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Added the description of <a class="xref" href="ch07s43.html" title="$ZPEEK()">&#8220;$ZPEEK()&#8221;</a>.</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-001</td>
+<td align="left">21 March 2013</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Added the descriptions of <a class="xref" href="ch07s55.html" title="$ZWRite()">&#8220;$ZWRite()&#8221;</a> and <a class="xref" href="ch07s36.html" title="$ZGetjpi()">&#8220;$ZGetjpi()&#8221;</a>.</p></li>
+<li class="listitem"><p>Added information about TRIGGER and ZINTR  return values for $STACK(lvl) in <a class="xref" href="ch07s21.html" title="$STack()">&#8220;$STack()&#8221;</a>.</p></li>
+</ul></div></td>
+</tr>
+</table></div></div>
+</div></div>
+<div class="toc">
+<p><b>Table of Contents</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch07s01.html">$ASCII()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s01.html#examples_of_ascii">Examples<span> of $ASCII()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s02.html">$Char()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s02.html#examples_of_char">Examples<span> of $CHAR()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s03.html">$Data()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s03.html#examples_of_data">Examples<span> of $DATA()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s04.html">$Extract()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s04.html#examples_of_extract">Examples<span> of $EXTRACT()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s05.html">$Find()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s05.html#examples_of_find">Examples<span> of $FIND()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s06.html">$FNumber()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s06.html#examples_of_fnumber">Examples<span> of $FNUMBER()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s07.html">$Get()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s07.html#examples_of_get">Examples<span> of $GET()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s08.html">$Increment()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s08.html#examples_of_increment">Examples<span> of $INCREMENT()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s09.html">$Justify()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s09.html#examples_of_justify">Examples<span> of $JUSTIFY()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s10.html">$Length()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s10.html#examples_of_length">Examples<span> of $LENGTH()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s11.html">$NAme()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s11.html#examples_of_name">Examples<span> of $NAME()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s12.html">$Next()</a></span></dt>
+<dt><span class="sect1"><a href="ch07s13.html">$Order()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s13.html#examples_of_order">Examples<span> of $ORDER()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s14.html">$Piece()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s14.html#examples_of_piece">Examples<span> of $PIECE()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s15.html">$Qlength()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s15.html#examples_of_qlength">Examples<span> of $QLENGTH()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s16.html">$QSubscript()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s16.html#examples_of_qsubscript">Examples<span> of $QSUBSCRIPT()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s17.html">$Query()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s17.html#examples_of_query">Examples<span> of $QUERY()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s18.html">$Random()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s18.html#examples_of_random">Examples<span> of $RANDOM()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s19.html">$REverse()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s19.html#examples_of_reverse">Examples<span> of $REVERSE()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s20.html">$Select()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s20.html#examples_of_select">Examples<span> of $SELECT()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s21.html">$STack()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s21.html#examples_of_stack">Examples<span> of $STACK()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s22.html">$Text()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s22.html#examples_of_text">Examples<span> of $TEXT()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s23.html">$TRanslate()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s23.html#examples_of_translate">Examples<span> of $TRANSLATE()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s24.html">$View()</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch07s24.html#argument__keys_of_view">Argument Keywords of $VIEW()</a></span></dt>
+<dt><span class="sect2"><a href="ch07s24.html#examples_of_view_g">Examples<span> of $VIEW()</span></a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch07s25.html">$ZAHandle()</a></span></dt>
+<dt><span class="sect1"><a href="ch07s26.html">$ZAscii()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s26.html#idp69756672">Examples<span> of $ZASCII()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s27.html">$ZATRansform</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s27.html#examples_of_zatransform">Examples<span> of $ZATRANSFORM()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s28.html">$ZBIT Functions</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch07s28.html#zbit_and">$ZBITAND()</a></span></dt>
+<dt><span class="sect2"><a href="ch07s28.html#zbit_count">$ZBITCOUNT()</a></span></dt>
+<dt><span class="sect2"><a href="ch07s28.html#zbit_find">$ZBITFIND()</a></span></dt>
+<dt><span class="sect2"><a href="ch07s28.html#zbitget">$ZBITGET()</a></span></dt>
+<dt><span class="sect2"><a href="ch07s28.html#zbitlen">$ZBITLEN()</a></span></dt>
+<dt><span class="sect2"><a href="ch07s28.html#zbitnot">$ZBITNOT()</a></span></dt>
+<dt><span class="sect2"><a href="ch07s28.html#zbitor">$ZBITOR()</a></span></dt>
+<dt><span class="sect2"><a href="ch07s28.html#zbitset">$ZBITSET()</a></span></dt>
+<dt><span class="sect2"><a href="ch07s28.html#zbitstr">$ZBITSTR()</a></span></dt>
+<dt><span class="sect2"><a href="ch07s28.html#zbitxor">$ZBITXOR()</a></span></dt>
+<dt><span class="sect2"><a href="ch07s28.html#examples_of_zbit_funtions">Examples<span> of $ZBIT Functions</span></a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch07s29.html">$ZCHar()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s29.html#idp69928288">Example of $ZCHAR()</a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s30.html">$ZCOllate()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s30.html#examples_of_zcollate">Example of $ZCOllate()</a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s31.html">$ZCOnvert()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s31.html#idp69718864">Examples<span> of $ZCONVERT()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s32.html">$ZDATA()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s32.html#idp70038912">Examples<span> of $ZDATA()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s33.html">$ZDate()</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch07s33.html#zdate_format_spec">$ZDATE Format Specification Elements</a></span></dt>
+<dt><span class="sect2"><a href="ch07s33.html#examples_of_zdate">Examples<span> of $ZDATE()</span></a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch07s34.html">$ZExtract()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s34.html#idp70021440">Examples<span> of $ZEXTRACT()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s35.html">$ZFind()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s35.html#examples_of_zfind">Examples</a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s36.html">$ZGetjpi()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s36.html#examples_of_zgetjpi_u"></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s37.html">$ZJOBEXAM()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s37.html#examples_of_zjobexam">Examples<span> of $ZJOBEXAM()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s38.html">$ZJustify()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s38.html#idp70003808">Examples<span> of $ZJUSTIFY()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s39.html">$ZLength()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s39.html#idp70121312">Examples<span> of $ZLength()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s40.html">$ZMessage()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s40.html#examples_of_zmessage_g">Examples<span> of $ZMESSAGE()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s41.html">$ZPARSE()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s41.html#examples_of_zparse">Examples<span> of $ZPARSE()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s42.html">$ZPIece()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s42.html#idp70163200">Examples<span> of $ZPIECE()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s43.html">$ZPEEK()</a></span></dt>
+<dt><span class="sect1"><a href="ch07s44.html">$ZPrevious()</a></span></dt>
+<dt><span class="sect1"><a href="ch07s45.html">$ZSOCKET()</a></span></dt>
+<dt><span class="sect1"><a href="ch07s46.html">$ZSYSLOG()</a></span></dt>
+<dt><span class="sect1"><a href="ch07s47.html">$ZQGBLMOD()</a></span></dt>
+<dt><span class="sect1"><a href="ch07s48.html">$ZSEARCH()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s48.html#examples_of_zsearch">Examples<span> of $ZSEARCH()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s49.html">$ZSIGPROC()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s49.html#examples_of_zsigproc">Examples<span> of $ZSIGPROC()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s50.html">$ZSUBstr()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s50.html#idp70426064">Examples<span> of $ZSUBSTR()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s51.html">$ZTRanslate()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s51.html#idp70429936">Examples<span> of $ZTRANSLATE()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s52.html">$ZTRIgger()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s52.html#examples_func_ztrigger">Examples of $ZTRIGGER()</a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s53.html">$ZTRNLNM()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s53.html#examples_of_ztrnlnm">Examples<span> of $ZTRNLNM()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s54.html">$ZWidth()</a></span></dt>
+<dd><dl><dt><span class="sect2"><a href="ch07s54.html#examples_of_zwidth">Examples<span> of $ZWIDTH()</span></a></span></dt></dl></dd>
+<dt><span class="sect1"><a href="ch07s55.html">$ZWRite()</a></span></dt>
+</dl>
+</div>
+<p>This chapter describes M language Intrinsic Functions implemented in GT.M. Traditional string processing functions have parallel functions that start with the letter "z". <span>The parallel functions extend the byte-oriented functionality of their counterparts to UTF-8 mode.</span> They are helpful when applications need to process binary data including blobs, binary byte streams, bit-masks, and so on.</p>
+<p>Other functions that start with the letter "z" and do not have counterparts implement new functionality and are GT.M additions to the ANSI standard Intrinsic Functions. The M standard specifies standard abbreviations for Intrinsic Functions and rejects any non-standard abbreviations.</p>
+<p>M Intrinsic Functions start with a single dollar sign ($) and have one or more arguments enclosed in parentheses () and separated by commas (,). These functions provide expression results by performing actions that are impossible or difficult to perform using M commands.</p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s49.html">Prev</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s01.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">ZWRite </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ASCII()</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>NOMORESEMCNT </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="NOLOG.html" title="NOLOG ">
+<link rel="next" href="NONASCII.html" title="NONASCII ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">NOMORESEMCNT </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="NOLOG.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="NONASCII.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">NOMORESEMCNT </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="NOMORESEMCNT"></a>NOMORESEMCNT </h2></div></div></div>
+<p><span class="bold"><strong>NOMORESEMCNT</strong></span>, SSSS counter semaphore has reached its maximum and stopped counting for database DDDD. Run MUPIP JOURNAL -ROLLBACK -BACKWARD, MUPIP JOURNAL -RECOVER -BACKWARD or MUPIP RUNDOWN to restore the database files and shared resources to a clean state</p>
+<p>All GT.M Components Information: The counter semaphore reached its system-imposed limit so GT.M no longer maintains the count. SSSS is either "access" or "ftok" signifying the particular counter type that stopped. DDDD is the database of the corresponding counter.</p>
+<p>Action: GT.M will not automatically shutdown the database. To clean the database file header and shared resources after the last process has exited the database file, do an explicit MUPIP -ROLLBACK -BACKWARD (for replicated database files), MUPIP JOURNAL -RECOVER -BACKWARD (for database files that are journaled but not replicated), or MUPIP RUNDOWN (for database files that are neither replicated nor journaled), on the database file DDDD.</p>
+<a class="indexterm" name="idp172989728"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="NOLOG.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="NONASCII.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">NOLOG  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> NONASCII </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

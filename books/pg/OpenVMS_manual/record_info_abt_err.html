@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Recording Information about Errors</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="err_actions.html" title="Error Actions" />
+    <link rel="prev" href="errors_in_ztrap.html" title="Errors in $ZTRAP" />
+    <link rel="next" href="prgrm_to_rec_info.html" title="Program to Record Information on an Error using $ZTRAP" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Recording Information about Errors</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="errors_in_ztrap.html">Prev</a>A </td>
+          <th width="60%" align="center">Error Actions</th>
+          <td width="20%" align="right">A <a accesskey="n" href="prgrm_to_rec_info.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="record_info_abt_err"></a>Recording Information about Errors</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4239836" class="indexterm"></a>
+      <p>GT.M provides a number of extensions to examine and record information about an error condition.</p>
+      <p>The extensions are: </p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>ZSHOW </p>
+          </li>
+          <li>
+            <p>ZWRITE </p>
+          </li>
+          <li>
+            <p>$ECODE</p>
+          </li>
+          <li>
+            <p>$STACK</p>
+          </li>
+          <li>
+            <p>$STACK()</p>
+          </li>
+          <li>
+            <p>$ZSTATUS</p>
+          </li>
+          <li>
+            <p>$ZLEVEL</p>
+          </li>
+        </ul>
+      </div>
+      <p>The ZSHOW command displays information about the current M environment. A ZSHOW argument may contain an expression that contains codes selecting one or more types of information for output.</p>
+      <p>B:	selects ZBREAK information</p>
+      <p>C:	selects available $ZCALL() table entry names</p>
+      <p>D:	selects open device information</p>
+      <p>I:	selects intrinsic special variables</p>
+      <p>L:	selects locks held by the process</p>
+      <p>S:	selects the M stack</p>
+      <p>V:	selects local variables</p>
+      <p>*:	selects all possible ZSHOW information</p>
+      <p>A ZSHOW with no argument displays the M stack on the current device. It lists the program stack from initiation to the current execution level. </p>
+      <p>The ZWRITE command prints the current value of defined variables. ZWRITE provides a tool for examining or saving variable context. ZWRITE and ZSHOW can only display the current local variables, not any local variable states that have been protected by NEW commands. A WRITE may also display current global variables.</p>
+      <p>The $ECODE special variable contains a M standardized/user defined/GT.M specific error code. For details on $ECODE refer to the &quot;Intrinsic Special Variable&quot; chapter in this manual.</p>
+      <p>The $STACK special variable contains the current level of M execution stack depth. For details on $STACK refer to the &quot;Intrinsic Special Variable&quot; chapter in this manual.</p>
+      <p>The $STACK() function returns strings describing aspects of the execution environment. For details on $STACK() refer to the &quot;Functions&quot; chapter in this manual.</p>
+      <p>The $ZLEVEL special variable maintains an integer that indicates the level of nesting of DO and XECUTE commands. $ZLEVEL always contains an integer count of the number of levels displayed by issuing a ZSHOW &quot;S&quot; in that context.</p>
+      <p>The $ZSTATUS special variable records the error condition code and location of the last error condition during execution.</p>
+      <p>For I/O operations, GT.M uses the $ZA, $ZB and $ZEOF special variables. $ZA contains a status determined by the last read on the current device. For more information about I/O operations, refer to the &quot;Input/Output Processing&quot; chapter in this manual.</p>
+      <p>To simplify record keeping, an application may set $ZTRAP to an error-handling routine that records information about an error. The next section provides an example of a routine <span>ERR.M</span> that does this. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="errors_in_ztrap.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="err_actions.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="prgrm_to_rec_info.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Errors in $ZTRAPA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Program to Record Information on an Error using $ZTRAP</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

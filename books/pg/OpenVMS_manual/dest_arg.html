@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Destination Argument</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="call_arguments_t.html" title="Call Arguments" />
+    <link rel="prev" href="cmmd_arg_descr.html" title="Command Argument Description:" />
+    <link rel="next" href="dest_arg_desc.html" title="Destination Argument Description:" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Destination Argument</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="cmmd_arg_descr.html">Prev</a>A </td>
+          <th width="60%" align="center">Call Arguments</th>
+          <td width="20%" align="right">A <a accesskey="n" href="dest_arg_desc.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="dest_arg"></a>Destination Argument</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4233470" class="indexterm"></a>
+      <p>In a similar M statement: </p>
+      <pre class="programlisting">
+	LOCK +[&quot;XX&quot;]A(7):3, &quot;XX&quot; 
+	</pre>
+      <p>The destination is a VMS descriptor that receives the value returned from a database function. GT.M has write-only access to the destination. </p>
+      <p>The database functions which return a value and therefore require specification of a destination are:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>GTM$DATA </p>
+          </li>
+          <li>
+            <p>GTM$GET </p>
+          </li>
+          <li>
+            <p>GTM$ORDER </p>
+          </li>
+          <li>
+            <p>GTM$PREVIOUS</p>
+          </li>
+          <li>
+            <p>GTM$QUERY </p>
+          </li>
+          <li>
+            <p>GTM$ZSTATUS</p>
+          </li>
+        </ul>
+      </div>
+      <p>The function returns a MUMPS datum which GT.M converts according to the class and data type of the descriptor. A subsequent section a??Data Types and Descriptorsa??, provides the legal combinations of the class and data types of the destination descriptor.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	gtm$get(GTMI$_EXTGBL, &amp;data, &amp;gdir, &amp;gname)
+	</pre>
+      <p>This specifies GTMI$_EXTGBL as the mode, the variable data as the destination, the global directory gdir as key1 and the global name gname as key2. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="cmmd_arg_descr.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="call_arguments_t.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="dest_arg_desc.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Command Argument Description:A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Destination Argument Description:</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

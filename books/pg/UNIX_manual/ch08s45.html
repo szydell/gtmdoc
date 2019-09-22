@@ -1,0 +1,187 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZPATNumeric</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
+<link rel="prev" href="ch08s44.html" title="$ZONLNrlbk">
+<link rel="next" href="ch08s46.html" title="$ZPIN">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZPATNumeric</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch08s44.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 8. <span>Intrinsic Special Variables</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch08s46.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZPATNumeric</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zpatnumeric"></a>$ZPATNumeric<a class="indexterm" name="idp70759104"></a>
+</h2></div></div></div>
+<p>$ZPATN[UMERIC] is a read-only intrinsic special variable that determines how GT.M interprets the patcode "N" used in the pattern match operator. </p>
+<p>With $ZPATNUMERIC="UTF-8", the patcode "N" matches any numeric character as defined by UTF-8 encoding. With $ZPATNUMERIC="M", GT.M restricts the patcode "N" to match only ASCII digits 0-9 (that is, ASCII 48-57). When a process starts in UTF-8 mode, intrinsic special variable $ZPATNUMERIC takes its value from the environment variable gtm_patnumeric. GT.M initializes the intrinsic special variable $ZPATNUMERIC to "UTF-8" if the environment variable gtm_patnumeric is defined to "UTF-8". If the environment variable gtm_patnumeric is not defined or set to a value other than "UTF-8", GT.M initializes $ZPATNUMERIC to "M".</p>
+<p>GT.M populates $ZPATNUMERIC at process initialization from the environment variable gtm_patnumeric and does not allow the process to change the value.</p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Warning">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Warning</th>
+</tr>
+<tr><td align="left" valign="top"><p>GT.M performs operations on literals at compile time and the pattern codes settings may have an impact on such operations. Therefore, always compile with the same pattern code settings as those used at runtime.</p></td></tr>
+</table></div>
+<p>For UTF-8 characters, GT.M assigns patcodes based on the default classification of the <span class="trademark">Unicode</span>(R) character set by the ICU library with three adjustments: </p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p> If $ZPATNUMERIC is not "UTF-8", non-ASCII decimal digits are classified as A.</p></li>
+<li class="listitem"><p> Non-decimal numerics (Nl and No) are classified as A.</p></li>
+<li class="listitem"><p>The remaining characters (those not classified by ICU functions: u_isalpha, u_isdigit, u_ispunct, u_iscntrl, 1), or 2) above) are classified into either patcode P or C. The ICU function u_isprint is used since is returns "TRUE" for non-control characters.</p></li>
+</ol></div>
+<p>The following table contains the resulting general category as per the Unicode standard to M patcode mapping:</p>
+<div class="informaltable">
+<a name="tblunicpad"></a><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                  <p>General category as per the <span class="trademark">Unicode</span>(R) standard</p>
+               </th>
+<th>
+                  <p>GT.M patcode class</p>
+               </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+               <p>L* (all letters)</p>
+            </td>
+<td>
+               <p>A</p>
+            </td>
+</tr>
+<tr>
+<td>
+               <p>M* (all marks)</p>
+            </td>
+<td>
+               <p>P</p>
+            </td>
+</tr>
+<tr>
+<td>
+               <p>Nd (decimal numbers)</p>
+            </td>
+<td>
+               <p>N (if decimal digit is ASCII or $ZPATNUMERIC is "UTF-8", otherwise A </p>
+            </td>
+</tr>
+<tr>
+<td>
+               <p>Nl (letter numbers)</p>
+            </td>
+<td>
+               <p>A (examples of Nl are Roman numerals)</p>
+            </td>
+</tr>
+<tr>
+<td>
+               <p>No (other numbers)</p>
+            </td>
+<td>
+               <p>A (examples of No are fractions)</p>
+            </td>
+</tr>
+<tr>
+<td>
+               <p>P* (all punctuation)</p>
+            </td>
+<td>
+               <p>P</p>
+            </td>
+</tr>
+<tr>
+<td>
+               <p>S* (all symbols)</p>
+            </td>
+<td>
+               <p>P</p>
+            </td>
+</tr>
+<tr>
+<td>
+               <p>Zs (spaces)</p>
+            </td>
+<td>
+               <p>P</p>
+            </td>
+</tr>
+<tr>
+<td>
+               <p>Zl (line separators)</p>
+            </td>
+<td>
+               <p>C</p>
+            </td>
+</tr>
+<tr>
+<td>
+               <p>Zp (paragraph separators)</p>
+            </td>
+<td>
+               <p>C</p>
+            </td>
+</tr>
+<tr>
+<td>
+               <p>C* (all control code points)</p>
+            </td>
+<td>
+               <p>C</p>
+            </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For a description of the Unicode general categories, refer to <a class="ulink" href="http://unicode.org/charts/" target="_top">http://unicode.org/charts/</a>.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zpatnumeric
+UTF-8
+GTM&gt;Write $Char($$FUNC^%HD("D67"))?.N ; This is the Malayalam decimal digit 1                            
+1
+GTM&gt;Write 1+$Char($$FUNC^%HD("D67"))
+1
+GTM&gt;Write 1+$Char($$FUNC^%HD("31")) ; This is the ASCII digit 1
+2</pre>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch08s44.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch08.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch08s46.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZONLNrlbk </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZPIN</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

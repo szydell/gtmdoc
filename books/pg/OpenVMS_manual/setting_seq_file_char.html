@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Setting Sequential File Characteristics</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="using_seq_files.html" title="Using Sequential (RMS) Files" />
+    <link rel="prev" href="using_seq_files.html" title="Using Sequential (RMS) Files" />
+    <link rel="next" href="logical_records_for_seq_files.html" title="Logical Records for Sequential Files" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Setting Sequential File Characteristics</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="using_seq_files.html">Prev</a>A </td>
+          <th width="60%" align="center">Using Sequential <span>(RMS)</span> Files</th>
+          <td width="20%" align="right">A <a accesskey="n" href="logical_records_for_seq_files.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="setting_seq_file_char"></a>Setting Sequential File Characteristics</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4199948" class="indexterm"></a>
+      <p>The ANSI standard specifies that when a process CLOSEs and then reOPENs a device, GT.M restores any characteristics not explicitly specified with deviceparameters to the values they had prior to the last CLOSE. However, because it is difficult for a large menu-driven application to ensure the previous OPEN state, GT.M always sets unspecified sequential file characteristics to their default value on OPEN. This approach also reduces potential memory overhead imposed by OPENing and CLOSEing a large number of sequential files during the life of a process.</p>
+      <p>GT.M does not restrict multiple OPEN commands. However, if a file is already open, GT.M ignores attempts to modify sequential file OPEN characteristics, except for RECORDSIZE and for deviceparameters that also exist for USE.</p>
+      <p>Sequential files can be READONLY, or read/write (NOREADONLY). <span>Disk files can also be SHARED or exclusive. A file OPENed SHARED can accommodate a theoretically unlimited number of readers and a single writer. OPENing a file SHARED complicates access to the file, and therefore significantly reduces the performance of I/O to that file.</span></p>
+      <p>Sequential files can be composed of either FIXED or VARIABLE (NOFIXED) length records. By default, records have VARIABLE length. <span>A BLOCKSIZE for VARIABLE length records must specify at least four bytes more than the maximum record length. In order to use FIXED length records, the command must explicitly include the FIXED deviceparameter. Changing the RECORDSIZE for FIXED length record files produces subsequent errors on READ or WRITE.</span> </p>
+      <p>VMS enforces its standard security when GT.M OPENs a Files-11 RMS file. This includes any directory access required to locate or create the file. If you are unable to OPEN a file, contact your system manager. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="using_seq_files.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="using_seq_files.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="logical_records_for_seq_files.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Using Sequential <span>(RMS)</span> FilesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Logical Records for Sequential Files</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

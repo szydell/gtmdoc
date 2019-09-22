@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Functions of the External Call Table</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="external_call_tables.html" title="External Call Tables" />
+    <link rel="prev" href="external_call_tables.html" title="External Call Tables" />
+    <link rel="next" href="creating_an_external_call_table_file.html" title="Creating an External Call Table File" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Functions of the External Call Table</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="external_call_tables.html">Prev</a>A </td>
+          <th width="60%" align="center">External Call Tables</th>
+          <td width="20%" align="right">A <a accesskey="n" href="creating_an_external_call_table_file.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="functions_of_the_ext_call_table"></a>Functions of the External Call Table</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4227712" class="indexterm"></a>
+      <p>The external call table is a data structure that GT.M uses to: </p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Translate the invoked external routine name into the actual external routine name.</p>
+          </li>
+          <li>
+            <p>Determine how to handle the information returned by the external routine in registers used by the calling standard for return values. The VMS Calling Standard specifies the return register(s) are used for returning status information or simple values.</p>
+          </li>
+          <li>
+            <p>Build the argument list for the external routine using the external call arguments.</p>
+          </li>
+          <li>
+            <p>Build the return argument for the external call using the outputs from the external routine.</p>
+          </li>
+          <li>
+            <p>Specify argument data types and passing mechanisms for data passed in both directions.</p>
+          </li>
+          <li>
+            <p>Specify default and constant values not provided by other components.</p>
+          </li>
+          <li>
+            <p>Reorder parameters, if necessary, from their order in the M external call to the order used in the actual external routine. </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="external_call_tables.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="external_call_tables.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="creating_an_external_call_table_file.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">External Call TablesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Creating an External Call Table File</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

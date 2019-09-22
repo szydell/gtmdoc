@@ -1,0 +1,101 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Goto</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s05.html" title="For">
+<link rel="next" href="ch06s07.html" title="Halt">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Goto</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s05.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s07.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">Goto</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Goto"></a>Goto<a class="indexterm" name="idp60810160"></a>
+</h2></div></div></div>
+<p>The GOTO command transfers execution to a location specified by its argument.</p>
+<p>The format of the GOTO command is:</p>
+<pre class="programlisting">G[OTO][:tvexpr] entryref[:tvexpr][,...]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The required entryref specifies the target location for the control transfer.</p></li>
+<li class="listitem"><p>The optional truth-valued expression immediately following the entryref specifies the argument postconditional, and controls whether GT.M performs a GOTO with that argument.</p></li>
+<li class="listitem"><p>Additional commands on a line following a GOTO do not serve any purpose unless the GOTO has a postconditional. </p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more GOTO arguments form a legal argument to a GOTO.</p></li>
+</ul></div>
+<p>A GOTO command within a line following a FOR command terminates that FOR command.</p>
+<p>For more information on entryrefs, refer to <a class="xref" href="ch05.html" title="Chapter 5. General Language Features of M">Chapter 5: &#8220;<i><span>General Language Features of M</span></i>&#8221;</a>.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Examples_of_Goto"></a>Examples<span> of GOTO</span><a class="indexterm" name="idp66884224"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;GOTO TIME+4</pre>
+<p>This GOTO command transfers control from Direct Mode to the line that is four (4) lines after the line labeled TIME (in the currently active routine). Using an offset is typically a debugging technique and rarely used in production code.</p>
+<p>Example:</p>
+<pre class="programlisting">GOTO A:x&lt;0,^A:x=0,A^B</pre>
+<p>This GOTO command transfers control to label A in the current routine, if x is less than zero (0), to routine ^A if x is equal to zero (0), and otherwise to label A in routine ^B. Once any of the transfers occurs, the rest of the arguments have no effect.</p>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody><tr valign="top">
+<td align="left" valign="top">
+<p></p>
+<p class="relatedtopics">See Also</p>
+</td>
+<td align="left" valign="top">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc" compact>
+<li class="listitem"><p>
+<a class="xref" href="ch05s11.html#Entry_Ref" title="Entry References">&#8220;Entry References&#8221;</a></p></li>
+<li class="listitem"><p><a class="xref" href="ch04s02.html#Transfer_Routine_Control" title="Transferring Routine Control">&#8220;Transferring Routine Control&#8221;</a></p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch06s34.html" title="ZGoto">&#8220;ZGoto&#8221;</a></p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch04s01.html#Exit_Direct_Mode" title="Exiting Direct Mode">&#8220;Exiting Direct Mode&#8221;</a></p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch14s07.html#trig_zgoto" title="ZGoto">&#8220;ZGoto&#8221;</a></p></li>
+</ul></div>
+            </td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s05.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s07.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">For </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Halt</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

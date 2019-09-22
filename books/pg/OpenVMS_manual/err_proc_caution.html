@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Error Processing Cautions</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="prgrm_handling_of_error.html" title="Program Handling of Errors" />
+    <link rel="prev" href="example4_access_to_cause_of_error.html" title="Example 4: Access to &quot;cause of error&quot;" />
+    <link rel="next" href="input_output_errors.html" title="Input/Output Errors" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Error Processing Cautions</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="example4_access_to_cause_of_error.html">Prev</a>A </td>
+          <th width="60%" align="center">Program Handling of Errors</th>
+          <td width="20%" align="right">A <a accesskey="n" href="input_output_errors.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="err_proc_caution"></a>Error Processing Cautions</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4238641" class="indexterm"></a>
+      <p>$ETRAP and $ZTRAP offer many features for catching, recognizing, and recovering from errors. Code within an error processing subroutines may cause its own errors and these need to be processed without causing an infinite loop (where an error is caught, which, while being processed causes another error, which is caught, and so on).</p>
+      <p>During the debugging phase, such loops are typically the result of typographical errors in code. Once these typographical errors are corrected, the risk remains that an error trapping subroutine was designed specifically to deal with an expected condition; such as the loss of a network connection. This then creates an unexpected error of its own, such as:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>a device that had not yet been opened because the loss of network connectivity occured sooner than expected</p>
+          </li>
+          <li>
+            <p>an unexpected data configuration caused by the fact that an earlier instance of the same program did not complete its task for the same reason</p>
+          </li>
+        </ul>
+      </div>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>It is important to remain aware of any issues that may arise within an error trapping procedure, and also of the conditions that might cause the code in question to be invoked.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>$ETRAP is recursively invoked if it invokes a GOTO or a ZGOTO and the error condition persists in the code path and the code SETs $ECODE=&quot;&quot;. $ZTRAP is recursively invoked if the error condition persists in the code path.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="example4_access_to_cause_of_error.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="prgrm_handling_of_error.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="input_output_errors.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Example 4: Access to &quot;cause of error&quot;A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Input/Output Errors</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

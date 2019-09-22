@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Parameter Handling</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="calls_from_external_routines.html" title="Calls from External Routines" />
+    <link rel="prev" href="the_mumps_binding_macro.html" title="The MUMPS_BINDING Macro" />
+    <link rel="next" href="current_restrictions.html" title="Current Restrictions" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Parameter Handling</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="the_mumps_binding_macro.html">Prev</a>A </td>
+          <th width="60%" align="center">Calls from External Routines</th>
+          <td width="20%" align="right">A <a accesskey="n" href="current_restrictions.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="param_handling"></a>Parameter Handling</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4231198" class="indexterm"></a>
+      <p>With the exception of the return value described below, all parameters appear to the calling routine as read-only (by the called M program) pass-by-descriptor, and to the M routine as pass-by-value. If the M routine is coded as an extrinsic function or special variable, the MACRO should be coded with OUTPUT=YES. In that case, the first parameter appears to the calling routine as write-only (by the called M program) pass-by-descriptor, and to the M routine as the value of the expression that is the argument to the QUIT.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="the_mumps_binding_macro.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="calls_from_external_routines.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="current_restrictions.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">The MUMPS_BINDING MacroA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Current Restrictions</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

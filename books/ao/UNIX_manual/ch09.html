@@ -1,0 +1,134 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Chapter 9. GT.M Database Structure(GDS)</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="prev" href="lke_exercises.html" title="LKE Exercises">
+<link rel="next" href="ch09s01.html" title="Database File Organization with GDS">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Chapter 9. GT.M Database Structure(GDS)</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="lke_exercises.html">Prev</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="ch09s01.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-node">GT.M Database Structure(GDS)</span>
+</div>
+<div class="chapter">
+<div class="titlepage"><div>
+<div><h2 class="title">
+<a name="chi_gds"></a>Chapter 9. GT.M Database Structure(GDS)<a class="indexterm" name="idp69138336"></a>
+</h2></div>
+<div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
+<tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V6.3-008</td>
+<td align="left">24 April 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch09s04.html#Gds_rec" title="GDS Records">&#8220;GDS Records &#8221;</a>, Update breakdown of the record header fields.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch09s04.html#gds_blks" title="GDS Blocks">&#8220;GDS Blocks &#8221;</a>, Update breakdown of field within the block header.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-007</td>
+<td align="left">04 February 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch09s01.html#FHDE" title="File Header Data Elements">&#8220;File Header Data Elements &#8221;</a>, Add a missing word to the Maximum Record Size description</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-006</td>
+<td align="left">26 October 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch09s04.html#str_subscr" title="String Subscripts">&#8220;String Subscripts &#8221;</a>, UTF-8 tweaks</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-005</td>
+<td align="left">03 July 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="lke_exercises.html#lke_exer2" title="Exercise 2: Rectifying a deadlock situation">&#8220;Exercise 2: Rectifying a deadlock situation&#8221;</a>, made formatting adjustments for the caution note.</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-001</td>
+<td align="left">20 March 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch09s01.html#FHDE" title="File Header Data Elements">&#8220;File Header Data Elements &#8221;</a>, removed references to OpenVMS and added the descriptions of WIP queue cache blocks, DB is auto-created,  DB shares gvstats. LOCK crit sharing, AsyncIO</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-003/1</td>
+<td align="left">19 February 2014</td>
+<td align="left"><p>In <a class="xref" href="ch09s01.html#FHDE" title="File Header Data Elements">&#8220;File Header Data Elements &#8221;</a>, updated the descriptions for V6.0-003.</p></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-003</td>
+<td align="left">27 January 2014</td>
+<td align="left"><p>In <a class="xref" href="ch09s04.html#gds_blks" title="GDS Blocks">&#8220;GDS Blocks &#8221;</a>, corrected the description of block header fields. </p></td>
+</tr>
+</table></div></div>
+</div></div>
+<div class="toc">
+<p><b>Table of Contents</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch09s01.html">Database File Organization with GDS  </a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch09s01.html#DFH">Database File Header </a></span></dt>
+<dt><span class="sect2"><a href="ch09s01.html#FHDE">File Header Data Elements </a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch09s02.html">Local Bitmaps  </a></span></dt>
+<dt><span class="sect1"><a href="ch09s03.html">Master Bitmap  </a></span></dt>
+<dt><span class="sect1"><a href="ch09s04.html">Database Structure  </a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch09s04.html#tree_org">Tree Organization</a></span></dt>
+<dt><span class="sect2"><a href="ch09s04.html#gds_blks">GDS Blocks </a></span></dt>
+<dt><span class="sect2"><a href="ch09s04.html#Gds_rec">GDS Records </a></span></dt>
+<dt><span class="sect2"><a href="ch09s04.html#gds_keys_D">GDS Keys </a></span></dt>
+<dt><span class="sect2"><a href="ch09s04.html#compression_count">Compression Count </a></span></dt>
+<dt><span class="sect2"><a href="ch09s04.html#use_of_keys">Use of Keys  </a></span></dt>
+<dt><span class="sect2"><a href="ch09s04.html#character_keys">Characteristics of Keys  </a></span></dt>
+<dt><span class="sect2"><a href="ch09s04.html#gvnameD">Global Variable Names </a></span></dt>
+<dt><span class="sect2"><a href="ch09s04.html#str_subscr">String Subscripts </a></span></dt>
+<dt><span class="sect2"><a href="ch09s04.html#numeric_Subsr">Numeric Subscripts </a></span></dt>
+</dl></dd>
+</dl>
+</div>
+<p>GDS is an FIS proprietary internal database structure used to store global variables and lock resource names. A 
+high-level understanding of GDS can help database administrators correctly interpret GT.M logs/error messages, and maintain 
+database metrics. You should always consult GT.M support (<a class="ulink" href="http://tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/gtmsupport@fisglobal.com" target="_top">gtmsupport@fisglobal.com</a>) in 
+the unlikely event of getting database integrity issues. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>This chapter provides a high-level overview of GDS components. A comprehensive description of all the components 
+of GDS is beyond the scope of this chapter.</p></td></tr>
+</table></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="lke_exercises.html">Prev</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="ch09s01.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">
+<span>LKE </span>Exercises </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Database File Organization with GDS  </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

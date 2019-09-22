@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Mailbox Deviceparameter Summary</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="using_mailbox.html" title="Using Mailboxes" />
+    <link rel="prev" href="logical_rec_for_mailbox.html" title="Logical Records for Mailboxes" />
+    <link rel="next" href="mailbox_examples.html" title="Mailbox Examples" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Mailbox Deviceparameter Summary</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="logical_rec_for_mailbox.html">Prev</a>A </td>
+          <th width="60%" align="center">Using Mailboxes</th>
+          <td width="20%" align="right">A <a accesskey="n" href="mailbox_examples.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="mailbox_device_parameter_summ"></a>Mailbox Deviceparameter Summary</h3>
+          </div>
+        </div>
+      </div>
+      <p>The following table provides a brief summary of deviceparameters for mailboxes. For more detailed information, refer to the sections following the OPEN, USE, and CLOSE commands.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3">
+    <p>Mailbox Deviceparameters</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DEVICEPARAMETER</p>
+    </td>
+              <td>
+    <p>COMMAND</p>
+    </td>
+              <td>
+    <p>COMMENT</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>BLOCKSIZE=intexpr</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>Specifies the buffer size.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>DELETE</p>
+    </td>
+              <td>
+    <p>C</p>
+    </td>
+              <td>
+    <p>Marks a mailbox so GT.M deletes it as soon as all processes CLOSE it.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>EXCEPTION=expr</p>
+    </td>
+              <td>
+    <p>O/U/C</p>
+    </td>
+              <td>
+    <p>Controls device-specific error handling.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>LENGTH=intexpr</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Controls the virtual page lengtha??the point at which the device driver automatically resets $Y to 0.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>PRMMBX</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>Identifies the device as a permanent mailbox.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]READONLY</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>Controls whether writes are allowed.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>TMPMBX</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>Identifies the device as a temporary mailbox.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]WAIT</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Specifies if a WRITE must wait for a corresponding READ.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>WRITEOF</p>
+    </td>
+              <td>
+    <p>U</p>
+    </td>
+              <td>
+    <p>Writes end-of-transmission to a mailbox.</p>
+    </td>
+            </tr>
+            <tr>
+              <td>
+    <p>[NO]WRITEONLY</p>
+    </td>
+              <td>
+    <p>O</p>
+    </td>
+              <td>
+    <p>Controls whether reads are allowed.</p>
+    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>O:    Applies to the OPEN command</p>
+      <p>U:    Applies to the USE command</p>
+      <p>C:    Applies to the CLOSE command</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="logical_rec_for_mailbox.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="using_mailbox.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="mailbox_examples.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Logical Records for MailboxesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Mailbox Examples</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

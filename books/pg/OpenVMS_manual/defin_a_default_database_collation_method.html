@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Defining a Default Database Collation Method</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="collation_seq.html" title="Collation Sequence Definitions" />
+    <link rel="prev" href="considerations_in_establish_alt_collations.html" title="Considerations in Establishing Alternative Collations" />
+    <link rel="next" href="using_the_percent_gbldef_util.html" title="Using the %GBLDEF Utility" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Defining a Default Database Collation Method</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="considerations_in_establish_alt_collations.html">Prev</a>A </td>
+          <th width="60%" align="center">Collation Sequence Definitions</th>
+          <td width="20%" align="right">A <a accesskey="n" href="using_the_percent_gbldef_util.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="defin_a_default_database_collation_method"></a>Defining a Default Database Collation Method</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4235644" class="indexterm"></a>
+      <p>GT.M lets you define an alternative collation sequence as the default when creating a new database. Subsequently, this default is applied when each new global is created. </p>
+      <p>This default collation sequence is set as a GDE qualifier for the ADD, CHANGE, and TEMPLATE commands using the following syntax: </p>
+      <pre class="programlisting">
+	<span>
+	GDE&gt;CHANGE/REGION $DEFAULT /COLLATION_DEFAULT=&lt;0-255&gt;
+	</span>
+	
+	</pre>
+      <p>This qualifier always applies to regions, and takes effect when a database is created with MUPIP CREATE. The output of GDE SHOW and DSE DUMP/FILEHEADER display this value. The default collation sequence is 0, or ASCII.</p>
+      <p>The value cannot be changed once a database file is created, and will be in effect for the life of the database file. The same restriction applies to the version of the collation sequence. The version of a collation sequence implementation is also stored in the database fileheader and cannot be modified except by recreating the file.</p>
+      <p>If the code of the collation sequence changes, making it incompatible with the collation sequence in use when the database was created, use the following procedure to ensure the continued validity of the database. MUPIP EXTRACT the database using the older compatible collation routines, then recreate and MUPIP LOAD using the newer collation routines.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="considerations_in_establish_alt_collations.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="collation_seq.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="using_the_percent_gbldef_util.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Considerations in Establishing Alternative CollationsA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Using the %GBLDEF Utility</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

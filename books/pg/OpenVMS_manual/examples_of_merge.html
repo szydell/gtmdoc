@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of Merge</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="merge.html" title="Merge" />
+    <link rel="prev" href="merge.html" title="Merge" />
+    <link rel="next" href="new_cmmd.html" title="New" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of Merge</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="merge.html">Prev</a>A </td>
+          <th width="60%" align="center">Merge</th>
+          <td width="20%" align="right">A <a accesskey="n" href="new_cmmd.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_merge"></a>Examples of Merge</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4174207" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;SET ^gbl1=&quot;one&quot;
+        GTM&gt;SET ^gbl1(1,1)=&quot;oneone&quot;
+        GTM&gt;SET ^gbl1(1,1,3)=&quot;oneonethree&quot;
+        GTM&gt;SET ^gbl1(1,2,4)=&quot;onetwofour&quot;
+        GTM&gt;SET ^gbl2(2)=&quot;gbl2_2&quot;
+        GTM&gt;SET ^gbl2(2,1,3)=&quot;gbl2_2_1_3&quot;
+        GTM&gt;SET ^gbl2(2,1,4,5)=&quot;gbl2_2_1_4_5&quot;
+        GTM&gt;MERGE ^gbl1(1)=^gbl2(2)
+        GTM&gt;WRITE $REFERENCE
+        ^gbl1(1)
+        GTM&gt;ZWRITE ^gbl1
+        ^gbl1=&quot;one&quot;
+        ^gbl1(1)=&quot;gbl2_2&quot;
+        ^gbl1(1,1)=&quot;oneone&quot;
+        ^gbl1(1,1,3)=&quot;gbl2_2_1_3&quot;
+        ^gbl1(1,1,4,5)=&quot;gbl2_2_1_4_5&quot;
+        ^gbl1(1,2,4)=&quot;onetwofour&quot;
+        GTM&gt;ZWRITE ^gbl2
+        ^gbl2(2)=&quot;gbl2_2&quot;
+        ^gbl2(2,1,3)=&quot;gbl2_2_1_3&quot;
+        ^gbl2(2,1,4,5)=&quot;gbl2_2_1_4_5&quot;
+        GTM&gt;
+        </pre>
+      <p>The example illustrates how MERGE copies a sub-tree of one global into another. The nodes in the sub-tree of ^gbl(2), for which $DATA() value is 1 or 11, are copied to sub-tree of ^gbl1(1) as follows:</p>
+      <pre class="programlisting">
+        ^gbl1(1) is updated with value of ^gbl2(2)
+        ^gbl1(1,1,3) is updated with value of ^gbl2(2,1,3)
+        ^gbl1(1,1,4,5) is updated with value of ^gbl2(2,1,4,5)
+        </pre>
+      <p>Since ^gbl1(2,1) and ^gbl2(2,2,4) do not have values ($DATA()=0), the corresponding nodes ^gbl1(1,1) and ^gbl(1,2,4) respectively are left unchanged. The naked indicator takes the value ^gbl(1) as if SET replaced MERGE. Notice that the MERGE command does not change ^gbl2(2) or its descendants. Ancestor nodes of ^gbl(1) are also left unchanged.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;KILL
+        GTM&gt;SET ^gbl(1,2)=&quot;1,2&quot;
+        GTM&gt;MERGE lcl(3,4)=^gbl(1)
+        GTM&gt;SET ^(&quot;naked&quot;)=2
+        GTM&gt;ZWRITE ^gbl
+        ^gbl(1,2)=&quot;1,2&quot;
+        ^gbl(&quot;naked&quot;)=2
+        GTM&gt;ZWRITE lcl
+        lcl(3,4,2)=&quot;1,2&quot;
+        GTM&gt;
+        </pre>
+      <p>The example illustrates how MERGE creates a sub-tree of a variable when the variable does not exist. Also, notice how the naked indicator is set when the source of the MERGE is a global and the destination a local.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="merge.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="merge.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="new_cmmd.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">MergeA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A New</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ZGoto</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="ChapterA 6.A Commands" />
+    <link rel="prev" href="examples_of_zedit.html" title="Examples of ZEdit" />
+    <link rel="next" href="examples_of_zgoto.html" title="Examples of ZGOTO" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ZGoto</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zedit.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 6.A Commands</th>
+          <td width="20%" align="right">A <a accesskey="n" href="examples_of_zgoto.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zgoto_cmmd"></a>ZGoto</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zgoto.html">Examples of ZGOTO</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4178531" class="indexterm"></a>
+      <p>The ZGOTO command transfers control to various levels in the GT.M invocation stack. It also can transfer control from one part of the routine to another or from one routine to another using the specified entryref.</p>
+      <p>The format of the ZGOTO command is:</p>
+      <pre class="programlisting">
+        ZG[OTO][:tvexpr] [[intexpr][:entryref[:tvexpr]],...]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>The optional integer expression specifies the stack frame nesting level reached by performing the ZGOTO.</p>
+          </li>
+          <li>
+            <p>A ZGOTO with no argument returns control to the next command at the bottom of the stack (level 1); in this case, at least two (2) spaces must follow the command to separate it from the next command on the line.</p>
+          </li>
+          <li>
+            <p>The optional entryref specifies a location to which ZGOTO transfers control.</p>
+          </li>
+          <li>
+            <p>If ZGOTO specifies no entryref, it returns control to the next command at the level specified by the integer expression.</p>
+          </li>
+          <li>
+            <p>The optional truth-valued expression immediately following the entryref specifies the argument postconditional and controls whether GT.M uses the argument.</p>
+          </li>
+          <li>
+            <p>If the ZGOTO includes the level and the argument postconditional but not the entryref, two colons (::) separate the integer expression from the truth-valued expression.</p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom evaluating to a list of one or more ZGOTO arguments form a legal argument for a ZGOTO.</p>
+          </li>
+        </ul>
+      </div>
+      <p>A ZGOTO command with an entryref performs a similar function to the GOTO command, with the additional capability of reducing the GT.M stack level. In a single operation, ZGOTO executes ($ZLEVEL - intexpr) implicit QUITs and a GOTO operation, transferring control to the named entryref. <span>For more information on entryrefs, refer to the &quot;General Language Features of M&quot; chapter in this manual.</span></p>
+      <p>The ZGOTO command leaves the invocation stack at the level specified by the integer expression. GT.M implicitly terminates any intervening FOR loops and unstacks variables stacked with NEW commands as appropriate.</p>
+      <p>Using ZGOTO results in an exit from the current GT.M invocation. ZGOTO resembles HALT (and not QUIT) in that it causes an exit regardless of the number of active levels in the current invocation. ZGOTO resembles QUIT (and not HALT) in that it destroys the GT.M context and terminates the process only if the current GT.M invocation is at the base of the process. Understanding the difference between ZGOTO and HALT has an impact only in an environment where GT.M is invoked recursively <span>by means of the external calling syntax or</span> from other languages.</p>
+      <p>ZGOTO $ZLEVEL:LABEL^ROUTINE produces identical results to GOTO LABEL^ROUTINE. ZGOTO $ZLEVEL-1 responds like a QUIT (followed by ZCONTINUE, if in Direct Mode). If the integer expression evaluates to a value greater than the current value of $ZLEVEL or less than zero (0), GT.M issues a run-time error.</p>
+      <p>If ZGOTO has no entryref, it performs some number of implicit QUITs and transfers control to the next command at the specified level. If ZGOTO has no argument, it behaves like ZGOTO 1, which resumes operation of the lowest level GT.M routine as displayed by ZSHOW &quot;S&quot;. In the image invoked by <span>MUMPS/DIRECT or a similar image</span>, a ZGOTO without arguments returns the process to Direct Mode.</p>
+      <p>ZGOTO provides a useful debugging tool in Direct Mode. However, because ZGOTO is not conducive to structured coding, it is best to restrict its use in production programs to error handling. For more information on error handling, refer to the &quot;Error Processing&quot; chapter in this manual.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zedit.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="examples_of_zgoto.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of ZEditA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Examples of ZGOTO</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

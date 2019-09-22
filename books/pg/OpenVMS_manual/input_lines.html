@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Input Lines</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="external_call_tables.html" title="External Call Tables" />
+    <link rel="prev" href="ignored_return_line.html" title="IGNORED" />
+    <link rel="next" href="value_input_lines.html" title="VALUE" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Input Lines</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ignored_return_line.html">Prev</a>A </td>
+          <th width="60%" align="center">External Call Tables</th>
+          <td width="20%" align="right">A <a accesskey="n" href="value_input_lines.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="input_lines"></a>Input Lines</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4228774" class="indexterm"></a>
+      <p>Input lines describe the values (arguments) that the external call passes to the external routine during invocation, and the mechanisms by which the external call passes the arguments. The number of input lines in a zcentry must equal the number previously specified by the INPUTS keyword in the routine line. If the INPUTS keyword in the routine line defaults or is set to zero (0), the zcentry should contain no output lines. Any input lines in the zcentry must precede the output lines.</p>
+      <p>The format for the input line is:</p>
+      <pre class="programlisting">
+	INPUT inpkeyword=value [, ... ]
+	Valid inpkeywords:
+	* MECHANISM = VALUE | REFERENCE | DESCRIPTOR
+	* POSITION = number
+	* TYPE = DOUBLE | FLOATING | G_FLOATING | 
+	H_FLOATING | LONG | QUAD | STRING | 
+	BYTE | BYTEU | WORD | WORDU | LONGU
+	[QUALIFIER =] CONSTANT | OPTIONAL | 
+	OPTIONAL_0 | DEFAULT | REQUIRED
+	VALUE = number | string
+	</pre>
+      <p>(*) - Denotes required keyword</p>
+      <p>The order of the input lines in the external call table corresponds to the sequence of the input arguments in the actual external call.</p>
+      <p>Input line keywords and their values must appear on a single MACRO line. MACRO lines may be continued by terminating them with a dash.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO &amp;COMP(expr1,expr2,expr3)
+	or
+
+	GTM&gt;SET X=$ZC(expr1,expr2,expr3,expr4)	
+	</pre>
+      <p>The following table shows the order of input lines for this examNote that the first $ZCALL argument specifies the callname.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3">
+	<p>Order of Input Arguments in External Call Table</p>
+	</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+	<p>INPUT ARGUMENTS</p>
+	</td>
+              <td>
+	<p>ARGUMENT DESCRIBED BY</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>Externref</p>
+	</td>
+              <td>
+	<p>$ZCALL</p>
+	</td>
+              <td>
+	<p></p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>expr1</p>
+	</td>
+              <td>
+	<p>expr2</p>
+	</td>
+              <td>
+	<p>INPUT LINE1</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>expr2</p>
+	</td>
+              <td>
+	<p>expr3</p>
+	</td>
+              <td>
+	<p>INPUT LINE2</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>expr3</p>
+	</td>
+              <td>
+	<p>expr4</p>
+	</td>
+              <td>
+	<p>INPUT LINE3</p>
+	</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The TYPE keyword describes the data type of the input line arguments. The table in the previous section on the Return line lists all external call data types supported by GT.M. The appropriate data type depends on the function of the external routine. For example, a routine to calculate the square root of a real number typically requires one of the floating point data types, and a routine to manipulate strings requires the string data type.</p>
+      <p>The MECHANISM keyword specifies the mechanism by which the external call passes the input arguments to the external routine. </p>
+      <p>The following table lists the argument passing mechanisms.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="4">
+	<p>Argument Passing Mechanisms</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>MECHANISM</p>
+	</td>
+              <td>
+	<p>EXPLANATION</p>
+	</td>
+              <td colspan="2">
+	<p>APPLIES TO:</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p></p>
+	</td>
+              <td>
+	<p></p>
+	</td>
+              <td>
+	<p>INPUT</p>
+	</td>
+              <td>
+	<p>OUTPUT</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>VALUE</p>
+	</td>
+              <td>
+	<p>Pass argument by value</p>
+	</td>
+              <td>
+	<p>X</p>
+	</td>
+              <td>
+	<p></p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>REFERENCE</p>
+	</td>
+              <td>
+	<p>Pass argument by referring to an address</p>
+	</td>
+              <td>
+	<p>X</p>
+	</td>
+              <td>
+	<p>X</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>DESCRIPTOR</p>
+	</td>
+              <td>
+	<p>Pass argument by referring to an address of a VMS </p>
+	<p>descriptor</p>
+	</td>
+              <td>
+	<p>X</p>
+	</td>
+              <td>
+	<p>X</p>
+	</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ignored_return_line.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="external_call_tables.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="value_input_lines.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">IGNOREDA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A VALUE</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

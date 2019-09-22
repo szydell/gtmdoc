@@ -1,0 +1,120 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Indirection</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
+<link rel="prev" href="ch05s11.html" title="Routines">
+<link rel="next" href="ch05s13.html" title="Parameter Passing">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Indirection</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch05s11.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 5. <span>General Language Features of M</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch05s13.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch05.html"><span>General Language Features of M</span></a></span> &gt; <span class="breadcrumb-node">Indirection</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Indirection"></a>Indirection<a class="indexterm" name="idp52326464"></a>
+</h2></div></div></div>
+<p>M provides indirection as a means to defer definition of elements of the code until run-time. Indirection names a variable that holds or "points" to the element. The indirection operator is the "at" symbol (@).</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Arg_Indirection"></a>Argument Indirection<a class="indexterm" name="idp68147792"></a>
+</h3></div></div></div>
+<p>Most commands accept indirection of their entire argument.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set x="^INDER"
+GTM&gt;do @x</pre>
+<p>This example is equivalent to <code class="code">do ^INDER</code>.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Atomic_Indirection"></a>Atomic Indirection<a class="indexterm" name="idp52308864"></a>
+</h3></div></div></div>
+<p>Any expratom or any local or global variable name may be replaced by indirection.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set x="HOOP",b="x"
+GTM&gt;set a="HULA "_@b
+GTM&gt;write a
+HULA HOOP
+GTM&gt;</pre>
+<p>This example uses indirection within a concatenation operation.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Entryref_Indirection"></a>Entryref Indirection<a class="indexterm" name="idp46444064"></a>
+</h3></div></div></div>
+<p>Any element of an entryref may be replaced by indirection.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set lab="START",routine="PROG"
+GTM&gt;do @lab^@routine</pre>
+<p>This example is equivalent to <code class="code">do START^PROG</code>.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Pattrn_Code_Indirection"></a>Pattern Code Indirection<a class="indexterm" name="idp53019024"></a>
+</h3></div></div></div>
+<p>A pattern code may be replaced by indirection.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;FOR p="1U.20A1"",""1U.20A",5N IF x?@p QUIT
+GTM&gt;ELSE WRITE !,"Incorrect format" QUIT</pre>
+<p>This example uses pattern code indirection to test x for either a name or a number.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Name_Indirection"></a>Name Indirection<a class="indexterm" name="idp53030640"></a>
+</h3></div></div></div>
+<p>Indirection may replace the prefix of a subscripted global or local variable name. This "name" indirection requires two indirection operators, a leading operator similar to the other forms of indirection, and a trailing operator marking the transition to those subscripts that are not specified by indirection.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;SET from="B",to="^A(15)",x=""
+GTM&gt;FOR SET x=$O(@from@(x)) Q:x="" S @to@(x)=@from@(x)</pre>
+<p>This example uses name indirection to copy the level contents of a local array to a part of a global array. The example assumes that all existing first level nodes of variable B have data.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Indirection_Concerns"></a>Indirection Concerns<a class="indexterm" name="idp67636496"></a>
+</h3></div></div></div>
+<p>M indirection provides a very powerful tool for allowing program abstraction. However, because indirection is frequently unnecessary and has some disadvantages, use it carefully.</p>
+<p>Because routines that use indirection in some ways do not contain adequate information for easy reading, such routines tend to be more difficult to debug and maintain.</p>
+<p>To improve run-time performance, GT.M tends to move work from run-time to compile-time. Indirection forces compiler actions to occur at run-time, which minimizes the benefits of compilation.</p>
+<p>M allows most forms of indirection to be recursive. However, in real applications, recursive indirection typically makes the code obscure and slow.</p>
+<p>There are circumstances where indirection serves a worthwhile purpose. For instance, certain utility functions with a general nature may be clearly abstracted and coded using indirection. Because M has no "CASE" command, DO (or GOTO) with argument indirection provides a clear solution to the problem of providing complex branching.</p>
+<p>Some M users prototype with indirection and then replace indirection with generated code that reduces run-time overhead. In any case, always consider whether indirection can be replaced with a clearer or more efficient approach.</p>
+<p>Run-time errors from indirection or XECUTEs maintain $STATUS and $ZSTATUS related information and cause normal error handling but do not provide compiler supplied information on the location of any error within the code fragment.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch05s11.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch05s13.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Routines </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Parameter Passing</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

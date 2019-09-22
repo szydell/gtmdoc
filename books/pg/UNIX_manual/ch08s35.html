@@ -1,0 +1,91 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZHorolog</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
+<link rel="prev" href="ch08s34.html" title="$ZGbldir">
+<link rel="next" href="ch08s36.html" title="$ZINTerrupt">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZHorolog</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch08s34.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 8. <span>Intrinsic Special Variables</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch08s36.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZHorolog</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zhorolog"></a>$ZHorolog</h2></div></div></div>
+<p>$ZH[OROLOG] returns 4 comma-separated pieces (for example, "63638,39194,258602,14400"). The first two pieces are identical to the two pieces of $HOROLOG. $ZHOROLOG is a drop-in replacement for $HOROLOG in all application code of the form $PIECE($HOROLOG,",",...). For example, $ZHOROLOG can be used as the first argument of $ZDATE(). The third piece is the number of microseconds in the current second. The accuracy of the third piece is subject to the precision of the system clock. The fourth piece is an offset in seconds to UTC. For any valid UTC time offset, the fourth piece is a number between -43200 (for UTC-12:00) and +50400 (for UTC+14:00). The value of the fourth piece remains constant all through the year except for those places that observe daylight saving time. To obtain the $HOROLOG representation of UTC, add the fourth piece to the second piece of $ZHOROLOG and proceed as follows: </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>If the result is a negative number, subtract one from the first piece and add 86400 (number of seconds in a day) to the second piece. </p></li>
+<li class="listitem"><p>If the result is a positive number greater than 86400, add one to the first piece and subtract 86400 from the second piece.</p></li>
+</ul></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zprint ^zhoro
+zhoro(zone)
+ set:'$data(zone) zone="Europe/London"
+ new zutzh
+ set zutzh=$$getzutzh(zone)
+ do displaytzdetails(zutzh,zone)
+ quit
+getzutzh(zone)
+  set shcommand="TZ="_zone_" $gtm_dist/mumps -run %XCMD 'write $zut,"" "",$zhorolog,"" "",$zdate($horolog,""MON DD,YYYY 12:60:SS AM""),!'"
+  set descname="tzpipe"
+  open descname:(shell="/bin/sh":command=shcommand:readonly)::"pipe"
+  use descname read dateline use $principal close descname
+  quit dateline
+displaytzdetails(zutzh,zone)  
+ set zut=$piece(zutzh," ",1)   ; $ZUT
+ set zh=$piece(zutzh," ",2)    ; $ZHOROLOG
+ set zhfp=$piece(zh,",",1)     ; first piece of $ZH of zone
+ set zhsp=$piece(zh,",",2)
+ set zhtp=$piece(zh,",",3)
+ set zhfop=$piece(zh,",",4)
+ set tz=zhfop/3600,hours=$select(tz*tz=1:" Hour ",1:" Hours ")
+ write "Time in ",zone," ",$piece(zutzh," ",3,6)," $ZUT=",zut,!,$select(tz&lt;0:-tz_hours_"Ahead of",1:tz_hours_"Behind")," UTC",!
+ set zhsp=zhsp+zhfop
+ if zhsp&gt;86400 set zhfp=zhfp+1,zhsp=zhsp-86400     ; 86400 seconds in a day
+ else  if zhsp&lt;1 set zhfp=zhfp-1,zhsp=zhsp+86400
+ write "Time in UTC ",$zdate(zhfp_","_zhsp,"MON DD,YYYY 12:60:SS AM")
+ quit
+GTM&gt;do ^zhoro
+Time in Europe/London APR 10,2015 05:20:29 PM $ZUT=1428682829213711
+1 Hour Ahead of UTC
+Time in UTC APR 10,2015 04:20:29 PM
+GTM&gt;</pre>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch08s34.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch08.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch08s36.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZGbldir </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZINTerrupt</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

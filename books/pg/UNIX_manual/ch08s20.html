@@ -1,0 +1,69 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZA</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
+<link rel="prev" href="ch08s19.html" title="$Y">
+<link rel="next" href="ch08s21.html" title="$ZALlocstor">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZA</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch08s19.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 8. <span>Intrinsic Special Variables</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch08s21.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZA</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="za"></a>$ZA<a class="indexterm" name="idp70650896"></a>
+</h2></div></div></div>
+<p>$ZA contains a status determined by the last read on the device. The value is a decimal integer with a meaning determined by the device as follows:</p>
+<p>For Terminal I/O: </p>
+<p>0Indicating normal termination of a read operation</p>
+<p>1:    Indicating a parity error</p>
+<p>2:    Indicating that the terminator sequence was too long</p>
+<p>9:    Indicating a default for all other errors</p>
+<p>For Sequential Disk and Tape Files I/O: </p>
+<p>0:    Indicating normal termination of a read operation</p>
+<p>9:    Indicating a failure of a read operation</p>
+<p>For Fifos I/O:</p>
+<p>Decimal representing $JOB (identifier) of the process that wrote the last message the current process read</p>
+<p></p>
+<p>$ZA refers to the status of the current device. Therefore, exercise care in sequencing USE commands and references to $ZA.</p>
+<p>GT.M does not permit the SET command to modify $ZA.</p>
+<p>For more information on $ZA, refer "Input/Output Processing".</p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch08s19.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch08.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch08s21.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$Y </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZALlocstor</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

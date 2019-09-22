@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ETrap</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter8.html" title="ChapterA 8.A Intrinsic Special Variables" />
+    <link rel="prev" href="estack.html" title="$EStack" />
+    <link rel="next" href="horolog.html" title="$Horolog" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ETrap</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="estack.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 8.A Intrinsic Special Variables</th>
+          <td width="20%" align="right">A <a accesskey="n" href="horolog.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="etrap"></a>$ETrap</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4193306" class="indexterm"></a>
+      <p>$ET[RAP] contains a string value that GT.M invokes when an error occurs during routine execution. When a process is initiated, but before any commands are processed, the value of $ETRAP is empty string.</p>
+      <p>The value of this variable is the M[UMPS] code that gets executed when an error occurs.</p>
+      <pre class="programlisting">
+    SET $ETRAP=&quot;QUIT:$ESTACK GOTO LABEL^ROUTINE&quot;
+    </pre>
+      <p>The value of $ETRAP is changed with the SET command. Changing the value of $ETRAP with the SET command initiates a new trap; it does not save the old trap.</p>
+      <p>For more examples of the use of special variable $ETRAP, see the function $STACK().</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="estack.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter8.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="horolog.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$EStackA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $Horolog</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

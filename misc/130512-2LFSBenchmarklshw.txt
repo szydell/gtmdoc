@@ -1,0 +1,513 @@
+fayazia
+    description: Desktop Computer
+    product: To be filled by O.E.M. (To be filled by O.E.M.)
+    vendor: To be filled by O.E.M.
+    version: To be filled by O.E.M.
+    serial: To be filled by O.E.M.
+    width: 64 bits
+    capabilities: smbios-2.7 dmi-2.7 vsyscall32
+    configuration: boot=normal chassis=desktop family=To be filled by O.E.M. sku=To be filled by O.E.M. uuid=60166378-3FB8-DC11-99DB-10BF48BA288B
+  *-core
+       description: Motherboard
+       product: M5A97
+       vendor: ASUSTeK COMPUTER INC.
+       physical id: 0
+       version: Rev 1.xx
+       serial: MT7025042504275
+       slot: To be filled by O.E.M.
+     *-firmware
+          description: BIOS
+          vendor: American Megatrends Inc.
+          physical id: 0
+          version: 1208
+          date: 04/18/2012
+          size: 64KiB
+          capacity: 4032KiB
+          capabilities: pci upgrade shadowing cdboot bootselect socketedrom edd int13floppy1200 int13floppy720 int13floppy2880 int5printscreen int9keyboard int14serial int17printer acpi usb biosbootspecification uefi
+     *-cpu
+          description: CPU
+          product: AMD Phenom(tm) II X4 965 Processor
+          vendor: Advanced Micro Devices [AMD]
+          physical id: 4
+          bus info: cpu@0
+          version: AMD Phenom(tm) II X4 965 Processor
+          serial: To Be Filled By O.E.M.
+          slot: AM3r2
+          size: 800MHz
+          capacity: 3400MHz
+          width: 64 bits
+          clock: 200MHz
+          capabilities: x86-64 fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp 3dnowext 3dnow constant_tsc rep_good nopl nonstop_tsc extd_apicid pni monitor cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr hw_pstate npt lbrv svm_lock nrip_save cpufreq
+          configuration: cores=4 enabledcores=4 threads=4
+        *-cache:0
+             description: L1 cache
+             physical id: 5
+             slot: L1-Cache
+             size: 512KiB
+             capacity: 512KiB
+             clock: 1GHz (1.0ns)
+             capabilities: pipeline-burst internal write-back unified
+        *-cache:1
+             description: L2 cache
+             physical id: 6
+             slot: L2-Cache
+             size: 2MiB
+             capacity: 2MiB
+             clock: 1GHz (1.0ns)
+             capabilities: pipeline-burst internal write-back unified
+        *-cache:2
+             description: L3 cache
+             physical id: 7
+             slot: L3-Cache
+             size: 6MiB
+             capacity: 6MiB
+             clock: 1GHz (1.0ns)
+             capabilities: pipeline-burst internal write-back unified
+     *-memory
+          description: System Memory
+          physical id: 26
+          slot: System board or motherboard
+          size: 8GiB
+        *-bank:0
+             description: DIMM Synchronous [empty]
+             product: Array1_PartNumber0
+             vendor: Manufacturer0
+             physical id: 0
+             serial: SerNum0
+             slot: DIMM0
+        *-bank:1
+             description: DIMM DDR3 Synchronous 1600 MHz (0.6 ns)
+             product: Array1_PartNumber1
+             vendor: Manufacturer1
+             physical id: 1
+             serial: SerNum1
+             slot: DIMM1
+             size: 4GiB
+             width: 64 bits
+             clock: 1600MHz (0.6ns)
+        *-bank:2
+             description: DIMM Synchronous [empty]
+             product: Array1_PartNumber2
+             vendor: Manufacturer2
+             physical id: 2
+             serial: SerNum2
+             slot: DIMM2
+        *-bank:3
+             description: DIMM DDR3 Synchronous 1600 MHz (0.6 ns)
+             product: Array1_PartNumber3
+             vendor: Manufacturer3
+             physical id: 3
+             serial: SerNum3
+             slot: DIMM3
+             size: 4GiB
+             width: 64 bits
+             clock: 1600MHz (0.6ns)
+     *-generic UNCLAIMED
+          physical id: 2010
+          bus info: parisc@2010
+     *-pci:0
+          description: Host bridge
+          product: RD890 PCI to PCI bridge (external gfx0 port B)
+          vendor: Advanced Micro Devices [AMD] nee ATI
+          physical id: 100
+          bus info: pci@0000:00:00.0
+          version: 02
+          width: 32 bits
+          clock: 33MHz
+        *-pci:0
+             description: PCI bridge
+             product: RD890 PCI to PCI bridge (PCI express gpp port B)
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 2
+             bus info: pci@0000:00:02.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci pm pciexpress msi ht normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:52 ioport:e000(size=4096) memory:fd000000-fe0fffff ioport:c0000000(size=301989888)
+           *-display
+                description: VGA compatible controller
+                product: GT218 [GeForce 8400 GS]
+                vendor: NVIDIA Corporation
+                physical id: 0
+                bus info: pci@0000:01:00.0
+                version: a2
+                width: 64 bits
+                clock: 33MHz
+                capabilities: pm msi pciexpress vga_controller bus_master cap_list rom
+                configuration: driver=nvidia latency=0
+                resources: irq:24 memory:fd000000-fdffffff memory:c0000000-cfffffff memory:d0000000-d1ffffff ioport:e000(size=128) memory:fe000000-fe07ffff
+           *-multimedia
+                description: Audio device
+                product: High Definition Audio Controller
+                vendor: NVIDIA Corporation
+                physical id: 0.1
+                bus info: pci@0000:01:00.1
+                version: a1
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pm msi pciexpress bus_master cap_list
+                configuration: driver=snd_hda_intel latency=0
+                resources: irq:25 memory:fe080000-fe083fff
+        *-pci:1
+             description: PCI bridge
+             product: RD890 PCI to PCI bridge (PCI express gpp port D)
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 4
+             bus info: pci@0000:00:04.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci pm pciexpress msi ht normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:52 ioport:d000(size=4096) ioport:d2100000(size=1048576)
+           *-network
+                description: Ethernet interface
+                product: RTL8111/8168B PCI Express Gigabit Ethernet controller
+                vendor: Realtek Semiconductor Co., Ltd.
+                physical id: 0
+                bus info: pci@0000:02:00.0
+                logical name: eth0
+                version: 06
+                serial: 10:bf:48:ba:28:8b
+                size: 100Mbit/s
+                capacity: 1Gbit/s
+                width: 64 bits
+                clock: 33MHz
+                capabilities: pm msi pciexpress msix vpd bus_master cap_list ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation
+                configuration: autonegotiation=on broadcast=yes driver=r8169 driverversion=2.3LK-NAPI duplex=full firmware=rtl8168e-3_0.0.4 03/27/12 ip=10.113.71.29 latency=0 link=yes multicast=yes port=MII speed=100Mbit/s
+                resources: irq:77 ioport:d000(size=256) memory:d2104000-d2104fff memory:d2100000-d2103fff
+        *-pci:2
+             description: PCI bridge
+             product: RD890 PCI to PCI bridge (PCI express gpp port G)
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 7
+             bus info: pci@0000:00:07.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci pm pciexpress msi ht normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:53 memory:fe100000-fe1fffff
+           *-usb
+                description: USB controller
+                product: ASM1042 SuperSpeed USB Host Controller
+                vendor: ASMedia Technology Inc.
+                physical id: 0
+                bus info: pci@0000:03:00.0
+                version: 00
+                width: 64 bits
+                clock: 33MHz
+                capabilities: msi msix pm pciexpress xhci bus_master cap_list
+                configuration: driver=xhci_hcd latency=0
+                resources: irq:50 memory:fe100000-fe107fff
+        *-storage
+             description: SATA controller
+             product: SB7x0/SB8x0/SB9x0 SATA Controller [AHCI mode]
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 11
+             bus info: pci@0000:00:11.0
+             version: 40
+             width: 32 bits
+             clock: 66MHz
+             capabilities: storage ahci_1.0 bus_master cap_list
+             configuration: driver=ahci latency=32
+             resources: irq:19 ioport:f040(size=8) ioport:f030(size=4) ioport:f020(size=8) ioport:f010(size=4) ioport:f000(size=16) memory:fe20b000-fe20b3ff
+        *-usb:0
+             description: USB controller
+             product: SB7x0/SB8x0/SB9x0 USB OHCI0 Controller
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 12
+             bus info: pci@0000:00:12.0
+             version: 00
+             width: 32 bits
+             clock: 66MHz
+             capabilities: ohci bus_master
+             configuration: driver=ohci_hcd latency=32
+             resources: irq:18 memory:fe20a000-fe20afff
+        *-usb:1
+             description: USB controller
+             product: SB7x0/SB8x0/SB9x0 USB EHCI Controller
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 12.2
+             bus info: pci@0000:00:12.2
+             version: 00
+             width: 32 bits
+             clock: 66MHz
+             capabilities: pm debug ehci bus_master cap_list
+             configuration: driver=ehci_hcd latency=32
+             resources: irq:17 memory:fe209000-fe2090ff
+        *-usb:2
+             description: USB controller
+             product: SB7x0/SB8x0/SB9x0 USB OHCI0 Controller
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 13
+             bus info: pci@0000:00:13.0
+             version: 00
+             width: 32 bits
+             clock: 66MHz
+             capabilities: ohci bus_master
+             configuration: driver=ohci_hcd latency=32
+             resources: irq:20 memory:fe208000-fe208fff
+        *-usb:3
+             description: USB controller
+             product: SB7x0/SB8x0/SB9x0 USB EHCI Controller
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 13.2
+             bus info: pci@0000:00:13.2
+             version: 00
+             width: 32 bits
+             clock: 66MHz
+             capabilities: pm debug ehci bus_master cap_list
+             configuration: driver=ehci_hcd latency=32
+             resources: irq:21 memory:fe207000-fe2070ff
+        *-serial
+             description: SMBus
+             product: SBx00 SMBus Controller
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 14
+             bus info: pci@0000:00:14.0
+             version: 42
+             width: 32 bits
+             clock: 66MHz
+             configuration: driver=piix4_smbus latency=0
+             resources: irq:0
+        *-multimedia
+             description: Audio device
+             product: SBx00 Azalia (Intel HDA)
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 14.2
+             bus info: pci@0000:00:14.2
+             version: 40
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm bus_master cap_list
+             configuration: driver=snd_hda_intel latency=32
+             resources: irq:16 memory:fe200000-fe203fff
+        *-isa
+             description: ISA bridge
+             product: SB7x0/SB8x0/SB9x0 LPC host controller
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 14.3
+             bus info: pci@0000:00:14.3
+             version: 40
+             width: 32 bits
+             clock: 66MHz
+             capabilities: isa bus_master
+             configuration: latency=0
+        *-pci:3
+             description: PCI bridge
+             product: SBx00 PCI to PCI Bridge
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 14.4
+             bus info: pci@0000:00:14.4
+             version: 40
+             width: 32 bits
+             clock: 66MHz
+             capabilities: pci subtractive_decode bus_master vga_palette
+        *-usb:4
+             description: USB controller
+             product: SB7x0/SB8x0/SB9x0 USB OHCI2 Controller
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 14.5
+             bus info: pci@0000:00:14.5
+             version: 00
+             width: 32 bits
+             clock: 66MHz
+             capabilities: ohci bus_master
+             configuration: driver=ohci_hcd latency=32
+             resources: irq:18 memory:fe206000-fe206fff
+        *-usb:5
+             description: USB controller
+             product: SB7x0/SB8x0/SB9x0 USB OHCI0 Controller
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 16
+             bus info: pci@0000:00:16.0
+             version: 00
+             width: 32 bits
+             clock: 66MHz
+             capabilities: ohci bus_master
+             configuration: driver=ohci_hcd latency=32
+             resources: irq:22 memory:fe205000-fe205fff
+        *-usb:6
+             description: USB controller
+             product: SB7x0/SB8x0/SB9x0 USB EHCI Controller
+             vendor: Advanced Micro Devices [AMD] nee ATI
+             physical id: 16.2
+             bus info: pci@0000:00:16.2
+             version: 00
+             width: 32 bits
+             clock: 66MHz
+             capabilities: pm debug ehci bus_master cap_list
+             configuration: driver=ehci_hcd latency=32
+             resources: irq:23 memory:fe204000-fe2040ff
+     *-pci:1
+          description: Host bridge
+          product: Family 10h Processor HyperTransport Configuration
+          vendor: Advanced Micro Devices [AMD]
+          physical id: 101
+          bus info: pci@0000:00:18.0
+          version: 00
+          width: 32 bits
+          clock: 33MHz
+     *-pci:2
+          description: Host bridge
+          product: Family 10h Processor Address Map
+          vendor: Advanced Micro Devices [AMD]
+          physical id: 102
+          bus info: pci@0000:00:18.1
+          version: 00
+          width: 32 bits
+          clock: 33MHz
+     *-pci:3
+          description: Host bridge
+          product: Family 10h Processor DRAM Controller
+          vendor: Advanced Micro Devices [AMD]
+          physical id: 103
+          bus info: pci@0000:00:18.2
+          version: 00
+          width: 32 bits
+          clock: 33MHz
+     *-pci:4
+          description: Host bridge
+          product: Family 10h Processor Miscellaneous Control
+          vendor: Advanced Micro Devices [AMD]
+          physical id: 104
+          bus info: pci@0000:00:18.3
+          version: 00
+          width: 32 bits
+          clock: 33MHz
+          configuration: driver=k10temp
+          resources: irq:0
+     *-pci:5
+          description: Host bridge
+          product: Family 10h Processor Link Control
+          vendor: Advanced Micro Devices [AMD]
+          physical id: 105
+          bus info: pci@0000:00:18.4
+          version: 00
+          width: 32 bits
+          clock: 33MHz
+     *-scsi:0
+          physical id: 1
+          logical name: scsi0
+          capabilities: emulated
+        *-disk
+             description: ATA Disk
+             product: ST1000DM003-9YN1
+             vendor: Seagate
+             physical id: 0.0.0
+             bus info: scsi@0:0.0.0
+             logical name: /dev/sda
+             version: CC4C
+             serial: S1D2F031
+             size: 931GiB (1TB)
+             capabilities: partitioned partitioned:dos
+             configuration: ansiversion=5 sectorsize=4096 signature=000d3fe4
+           *-volume:0
+                description: EXT4 volume
+                vendor: Linux
+                physical id: 1
+                bus info: scsi@0:0.0.0,1
+                logical name: /dev/sda1
+                logical name: /spare
+                version: 1.0
+                serial: ed773547-d520-40d2-8350-a04ad5d694a9
+                size: 38GiB
+                capacity: 38GiB
+                capabilities: primary bootable journaled extended_attributes large_files huge_files dir_nlink recover extents ext4 ext2 initialized
+                configuration: created=2008-01-07 11:46:21 filesystem=ext4 lastmountpoint=/ modified=2013-04-29 11:23:40 mount.fstype=ext4 mount.options=rw,relatime,data=ordered mounted=2013-04-29 11:23:40 state=mounted
+           *-volume:1
+                description: Linux filesystem partition
+                physical id: 2
+                bus info: scsi@0:0.0.0,2
+                logical name: /dev/sda2
+                capacity: 186GiB
+                capabilities: primary
+           *-volume:2
+                description: Linux filesystem partition
+                physical id: 3
+                bus info: scsi@0:0.0.0,3
+                logical name: /dev/sda3
+                serial: ErjUQs-pweU-tOlF-JKFE-aYim-q0z8-Evk9df
+                size: 702GiB
+                capacity: 702GiB
+                capabilities: primary lvm2
+           *-volume:3
+                description: Linux filesystem partition
+                physical id: 4
+                bus info: scsi@0:0.0.0,4
+                logical name: /dev/sda4
+                capacity: 4768MiB
+                capabilities: primary
+     *-scsi:1
+          physical id: 2
+          logical name: scsi1
+          capabilities: emulated
+        *-disk
+             description: ATA Disk
+             product: ST1000DM003-9YN1
+             vendor: Seagate
+             physical id: 0.0.0
+             bus info: scsi@1:0.0.0
+             logical name: /dev/sdb
+             version: CC4C
+             serial: S1D2F0QZ
+             size: 931GiB (1TB)
+             capabilities: partitioned partitioned:dos
+             configuration: ansiversion=5 sectorsize=4096 signature=0006517a
+           *-volume:0
+                description: EXT4 volume
+                vendor: Linux
+                physical id: 1
+                bus info: scsi@1:0.0.0,1
+                logical name: /dev/sdb1
+                logical name: /
+                version: 1.0
+                serial: f485b8c2-3257-46ba-9032-916afb4304d8
+                size: 38GiB
+                capacity: 38GiB
+                capabilities: primary journaled extended_attributes large_files huge_files dir_nlink recover extents ext4 ext2 initialized
+                configuration: created=2008-01-07 11:46:22 filesystem=ext4 lastmountpoint=/ modified=2013-04-29 11:23:40 mount.fstype=ext4 mount.options=rw,relatime,errors=remount-ro,data=ordered mounted=2013-04-29 11:23:40 state=mounted
+           *-volume:1
+                description: Linux filesystem partition
+                physical id: 2
+                bus info: scsi@1:0.0.0,2
+                logical name: /dev/sdb2
+                capacity: 186GiB
+                capabilities: primary
+           *-volume:2
+                description: Linux filesystem partition
+                physical id: 3
+                bus info: scsi@1:0.0.0,3
+                logical name: /dev/sdb3
+                serial: azG9T0-a9HO-wb1i-waKn-ssA9-QswW-PtLHwH
+                size: 702GiB
+                capacity: 702GiB
+                capabilities: primary lvm2
+           *-volume:3
+                description: Linux filesystem partition
+                physical id: 4
+                bus info: scsi@1:0.0.0,4
+                logical name: /dev/sdb4
+                capacity: 4768MiB
+                capabilities: primary
+     *-scsi:2
+          physical id: 3
+          logical name: scsi3
+          capabilities: emulated
+        *-cdrom
+             description: DVD-RAM writer
+             product: DVD RW AD-7280S
+             vendor: Optiarc
+             physical id: 0.0.0
+             bus info: scsi@3:0.0.0
+             logical name: /dev/cdrom1
+             logical name: /dev/cdrw1
+             logical name: /dev/dvd1
+             logical name: /dev/dvdrw1
+             logical name: /dev/sr0
+             version: 1.R0
+             capabilities: removable audio cd-r cd-rw dvd dvd-r dvd-ram
+             configuration: ansiversion=5 status=nodisc

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Naked References</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Variables.html" title="Variables" />
+    <link rel="prev" href="Global_Var_Resource_Name_Env.html" title="Global Variables and Resource Name Environments" />
+    <link rel="next" href="Global_Var_Name_Environments.html" title="Global Variable Name Environments" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Naked References</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Global_Var_Resource_Name_Env.html">Prev</a>A </td>
+          <th width="60%" align="center">Variables</th>
+          <td width="20%" align="right">A <a accesskey="n" href="Global_Var_Name_Environments.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Naked_Ref"></a>Naked References</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4166188" class="indexterm"></a>
+      <p>M accepts an abbreviation of the global name under some circumstances. When the leading caret symbol (^) immediately precedes the left parenthesis delimiting subscripts, the global variable reference is called a naked reference. M evaluates a naked reference by prefixing the last used global variable name, except for its last subscript, to the list of subscripts specified by the naked reference. The prefixed portion is known as the naked indicator. An attempt to use a naked reference when the prior global reference does not exist, or did not contain a subscript, generates an error.</p>
+      <p>Because M has only one process-wide naked indicator which it maintains as a side affect of every evaluation of a global variable, using the naked reference requires an understanding of M execution sequence. M execution generally proceeds from left to right within a line, subject to commands that change the flow of control. However, M evaluates the portion of a SET command argument to the right side of the equal sign before the left side. Also, M does not evaluate any further $SELECT() arguments within the function after it encounters a true selection argument.</p>
+      <p>In general, using naked references only in very limited circumstances prevents problems associated with the naked indicator.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Global_Var_Resource_Name_Env.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Variables.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="Global_Var_Name_Environments.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Global Variables and Resource Name EnvironmentsA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Global Variable Name Environments</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

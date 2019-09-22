@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>The Externref</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="calls_to_external_routines.html" title="Calls to External Routines" />
+    <link rel="prev" href="calls_to_external_routines.html" title="Calls to External Routines" />
+    <link rel="next" href="the_zcall_function.html" title="The $ZCALL() Function" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">The Externref</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="calls_to_external_routines.html">Prev</a>A </td>
+          <th width="60%" align="center">Calls to External Routines</th>
+          <td width="20%" align="right">A <a accesskey="n" href="the_zcall_function.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="the_externref"></a>The Externref</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4227436" class="indexterm"></a>
+      <p>The externref specifies a destination for subroutine invocation. The format for an externref is:</p>
+      <pre class="programlisting">
+	&amp;[packagename.]name[^name]
+	</pre>
+      <p>Where packagename, like the name elements is a valid GT.M name. Because of the parsing conventions of GT.M, the identifier between the ampersand (&amp;) and the optional parameter-list has precisely constrained punctuation a?? a later section describes how to transform this into a more richly punctuated name should that be appropriate for the called function. While the intent of the syntax is to permit the name^name to match an GT.M labelref, there is no semantic implication to any use of the up-arrow (^). For more information on M names, labelrefs and parameter-lists, refer to the &quot;General Language Features&quot; chapter in this manual.</p>
+      <p>The name after the period follows M rules for a single name or two names separated by a caret (^), and thus permits specifications in the M form label^routinename.</p>
+      <p>name[^name] specifies an external routine that appears within the name-space identified by packagename in the external call table. name[^name] must be unique within that name-space. If the name-space does not contain an entry corresponding to name[^name], the VMS LINKER generates a warning and GT.M generates a run-time error.</p>
+      <p>DO commands may specify an externref in place of an M entryref. Extrinsic functions and extrinsic special variables may specify an externref in place of a labelref.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	SET X=$&amp;MATH.NATRLOG(Y)
+	</pre>
+      <p>This invokes the NATRLOG function in the MATH package and passes the value of Y by value.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	DO &amp;UNIX.DATE(.A)	
+	</pre>
+      <p>This invokes the DATE subroutine in the &quot;UNIX&quot; package and passes A by reference. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="calls_to_external_routines.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="calls_to_external_routines.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="the_zcall_function.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Calls to External RoutinesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A The $ZCALL() Function</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

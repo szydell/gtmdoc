@@ -1,0 +1,117 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Verifying Database Integrity</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="ch11.html" title="Chapter 11. Maintaining Database Integrity">
+<link rel="prev" href="ch11.html" title="Chapter 11. Maintaining Database Integrity">
+<link rel="next" href="ch11s02.html" title="Approaches to Database Recovery">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Verifying Database Integrity</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch11.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 11. Maintaining Database Integrity</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch11s02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch11.html">Maintaining Database Integrity</a></span> &gt; <span class="breadcrumb-node">Verifying Database Integrity</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="verfiy_database_integrity_11"></a>Verifying Database Integrity<a class="indexterm" name="idp71020432"></a>
+</h2></div></div></div>
+<p>A consistent verification strategy expedites the process of rapid identification
+and correction of database damage, while minimizing the overhead of integrity
+checking. In GT.M, this strategy is logically developed around MUPIP INTEG and its
+numerous options for verifying GDS integrity. For detailed information on MUPIP
+INTEG, refer to the "MUPIP" chapter. The following sections describe situations when
+executing MUPIP INTEG is the appropriate action. </p>
+<p>GTMASSERT sends an operator log message in addition to the usual user message.
+Because these are potentially dangerous conditions, all GTMASSERTs should be
+immediately reported to FIS. Check database integrity with
+the <span>-</span>FAST qualifier, if
+appropriate, as soon as possible. GT.MCHECK is similar to GTMASSERT but less
+sophisticated. It does not send an operation log message; however, it sends a
+message to the Principal Device.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="regular_scheduled_verfication"></a>Regularly Scheduled Verification</h3></div></div></div>
+<p>Schedule INTEGs at regular intervals to ensure that no unobserved or
+unreported events corrupt the database. These regular checks minimize the
+occurrence of damaged pointers, which may cause updates to incorrect places in
+the file, likely resulting in escalating damage.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="before_or_after_major_transfer"></a>Before or After Major Transfers</h3></div></div></div>
+<p>Because of the time they require, and their relative value to the total
+database organization, operations that move large amounts of information into or
+out of a database should be accompanied by an INTEG. INTEG should precede output
+operations such as MUPIP EXTRACT, and follow input operations such as MUPIP
+LOAD, RESTORE, and JOURNAL RECOVER.</p>
+<p>One consistent occurrence of large information transfers occurs during
+database backups. In many cases, successful recovery from catastrophic events
+depends on having a reliable backup copy of the database. Therefore, backup
+procedures should be designed to complement database integrity verification.
+When the backup is to disk, the fastest method may be to INTEG the backup copy
+immediately after making it. If the backup is not in GDS format, the INTEG
+should precede the backup.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="imm_after_catastrophic_events"></a>Immediately after Catastrophic Events<a class="indexterm" name="idp69415456"></a>
+</h3></div></div></div>
+<p>Any catastrophic event, such as hardware or operating system
+failure, should be immediately followed by an INTEG. To determine the cause of
+the failure, examine the system error messages, operator messages, and system
+log files, if available.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="imm_after_run_time_errors"></a>Immediately after Run-Time Database Errors<a class="indexterm" name="idp71054128"></a> </h3></div></div></div>
+<p>Check database integrity when the GT.M run-time system reports database access
+errors. The table in section R1 lists all run-time errors that indicate system
+problems. Most of these errors should be followed by an INTEG, or by one of the
+appropriate alternatives discussed in the section identified by the
+table.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="imm_after_database_repair"></a>Immediately After Database Repairs</h3></div></div></div>
+<p>Since the GT.M run-time system normally performs GDS maintenance, based on a
+fairly complex set of rules, DSE depends on its operator to determine whatever
+subset of those rules apply to the repair. Even when you have skill and
+confidence, FIS recommends you verify the result of
+all database repairs with a database integrity check.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch11.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch11.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch11s02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 11. Maintaining Database Integrity </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Approaches to Database Recovery</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Socket Deviceparameter Summary</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="using_socket_device.html" title="Using Socket Devices" />
+    <link rel="prev" href="socket_device_operation.html" title="Socket Device Operation" />
+    <link rel="next" href="socket_device_examples.html" title="Socket Device Examples" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Socket Deviceparameter Summary</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="socket_device_operation.html">Prev</a>A </td>
+          <th width="60%" align="center">Using Socket Devices</th>
+          <td width="20%" align="right">A <a accesskey="n" href="socket_device_examples.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="socket_device_param_summ"></a>Socket Deviceparameter Summary</h3>
+          </div>
+        </div>
+      </div>
+      <p>The following table provides a brief summary of deviceparameters for socket devices. For more information, refer to the sections describing the OPEN, USE, and CLOSE commands.</p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3">
+	<p>Error Processing Deviceparameters</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>DEVICEPARAMETER</p>
+	</td>
+              <td>
+	<p>COMMAND</p>
+	</td>
+              <td>
+	<p>COMMENT</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>EXCEPTION=expr</p>
+	</td>
+              <td>
+	<p>O/U/C</p>
+	</td>
+              <td>
+	<p>Controls device-specific error handling.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>IOERROR=expr</p>
+	</td>
+              <td>
+	<p>O/U</p>
+	</td>
+              <td>
+	<p>If $LENGTH(expr)&amp;(&quot;Tt&quot;[$EXTRACT(expr)) then Error Trapping is enabled; otherwise the logic must rely on $DEVICE to recognize the handle errors.</p>
+	</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3">
+	<p>Format Deviceparameters</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>DEVICEPARAMETER</p>
+	</td>
+              <td>
+	<p>COMMAND</p>
+	</td>
+              <td>
+	<p>COMMENT</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>[NO]DELIMITER=expr</p>
+	</td>
+              <td>
+	<p>O/U</p>
+	</td>
+              <td>
+	<p>Specifies socket delimiter(s).</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>[NO]FILTER=expr</p>
+	</td>
+              <td>
+	<p>U</p>
+	</td>
+              <td>
+	<p>Specifies character filtering for socket output.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>LENGTH=expr, or</p>
+	<p>ZLENGTH=expr</p>
+	</td>
+              <td>
+	<p>U</p>
+	</td>
+              <td>
+	<p>Sets virtual page length for socket device.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>IPCHSET=expr</p>
+	</td>
+              <td>
+	<p>O/U/C</p>
+	</td>
+              <td>
+	<p>Specifies input character set</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>OPCHSET=expr</p>
+	</td>
+              <td>
+	<p>O/U/C</p>
+	</td>
+              <td>
+	<p>Specifies output character set</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>[NO]WRAP, or</p>
+	<p>Z[NO]WRAP</p>
+	</td>
+              <td>
+	<p>O/U</p>
+	</td>
+              <td>
+	<p>Controls handling of records longer than the device width.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>[Z]WIDTH=expr</p>
+	</td>
+              <td>
+	<p>U</p>
+	</td>
+              <td>
+	<p>Controls the maximum length of an output message.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>ZBFSIZE=intexpr</p>
+	</td>
+              <td>
+	<p>O/U</p>
+	</td>
+              <td>
+	<p>Specifies receive buffer size.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>Z[NO]FF=expr</p>
+	</td>
+              <td>
+	<p>O/U</p>
+	</td>
+              <td>
+	<p>Controls whether and what characters to send in response to a WRITE #.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>ZIBFSIZE=intexpr</p>
+	</td>
+              <td>
+	<p>O</p>
+	</td>
+              <td>
+	<p>Specifies internal read buffer size to minimize calls to the underlying protocol stack.</p>
+	</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="3">
+	<p>Socket Establishment/Disconnect Deviceparameters</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>DEVICEPARAMETER</p>
+	</td>
+              <td>
+	<p>COMMAND</p>
+	</td>
+              <td>
+	<p>COMMENT</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>ATTACH=expr</p>
+	</td>
+              <td>
+	<p>O/U</p>
+	</td>
+              <td>
+	<p>Attaches the socket specified by expr to the device</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>CONNECT=expr</p>
+	</td>
+              <td>
+	<p>O/U</p>
+	</td>
+              <td>
+	<p>expr specifies protocol, and protocol specific information</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>DETACH=expr</p>
+	</td>
+              <td>
+	<p>U</p>
+	</td>
+              <td>
+	<p>Detaches the socket specified by expr from the device</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>SOCKET=expr</p>
+	</td>
+              <td>
+	<p>U/C</p>
+	</td>
+              <td>
+	<p>Makes the socket specified by expr the current socket</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>Z[NO]DELAY</p>
+	</td>
+              <td>
+	<p>O/U</p>
+	</td>
+              <td>
+	<p>Controls buffering of data packets by the network software according to the Nagle algorithm (ZDELAY) or disables it (NOZDELAY). ZDELAY is the default</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>ZLISTEN=expr</p>
+	</td>
+              <td>
+	<p>O/U</p>
+	</td>
+              <td>
+	<p>Similar to CONNECT but binds the socket for subsequent /LISTEN and /WAIT</p>
+	</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p></p>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="socket_device_operation.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="using_socket_device.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="socket_device_examples.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Socket Device OperationA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Socket Device Examples</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

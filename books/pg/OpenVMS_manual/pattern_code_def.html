@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Pattern Code Definition</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="match_alt_pattern.html" title="Matching Alternative Patterns" />
+    <link rel="prev" href="match_alt_pattern.html" title="Matching Alternative Patterns" />
+    <link rel="next" href="patt_code_selection.html" title="Pattern Code Selection" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Pattern Code Definition</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="match_alt_pattern.html">Prev</a>A </td>
+          <th width="60%" align="center">Matching Alternative Patterns</th>
+          <td width="20%" align="right">A <a accesskey="n" href="patt_code_selection.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="pattern_code_def"></a>Pattern Code Definition</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4236648" class="indexterm"></a>
+      <p>This section explains the requirements for specifying alternative pattern codes. These specifications are created as a table in a file which GT.M loads at run time.</p>
+      <p>Use the following keywords to construct your text file. Each keyword must:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Appear as the first non-whitespace entry on a line.</p>
+          </li>
+          <li>
+            <p>Be upper case.</p>
+          </li>
+        </ul>
+      </div>
+      <p>The table names also must be uppercase. The patcodes are not case-sensitive.</p>
+      <p>PATSTART indicates the beginning of the definition text and must appear before the first table definition.</p>
+      <p>PATTABLE indicates the beginning of the table definition. The keyword PATTABLE is followed by whitespace, then the table name. The text file can contain multiple PATTABLEs.</p>
+      <p>PATCODE indicates the beginning of a patcode definition. The keyword PATCODE is followed by whitespace, then the patcode identifying character. On the next line enter a comma-delimited list of integer codes that satisfy the patcode. A PATCODE definition is always included in the most recently named PATTABLE. A PATTABLE can contain multiple PATCODEs.</p>
+      <p>PATEND indicates the end of the definition text; it must appear after the last table definition.</p>
+      <p>To continue the comma-delimited list on multiple lines, place a dash (-) at the end of each line that is not the last one in the sequence. To enter comments in the file, begin the line with a semi-colon (;).</p>
+      <p>The following example illustrates a possible patcode table called &quot;NEWLANGUAGE,&quot; The example has definitions for patcodes &quot;S,&quot; which would be a non-standard pattern character, and &quot;L,&quot; which would substitute alternative definitions for the standard &quot;L&quot; (or lower case) pattern characters.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	PATSTART
+	PATTABLE NEWLANGUAGE
+	PATCODE S
+	144,145,146,147,148,149,150
+	PATCODE L
+	230,231,232,233,234,235,236,237,238,239,240,241-,242,243,244,245,246,247,248,249,250,251,252,253,254,255
+	PATEND
+	</pre>
+      <p>Be mindful of the following items as you define your patcode table. </p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>A table name can only be loaded once during an invocation of GT.M. It cannot be edited and reloaded, while the M process is running.</p>
+          </li>
+          <li>
+            <p>The table name &quot;M&quot; is a reserved designation for standard M, which is included in the GT.M run-time library.</p>
+          </li>
+          <li>
+            <p>Standard patcodes A and E cannot be explicitly redefined.</p>
+            <p>A is always the union of codes U and L; E always designates the set of all characters.</p>
+          </li>
+          <li>
+            <p>The C pattern code you define is used by GT.M to determine those characters which are to be treated as unprintable.</p>
+          </li>
+        </ul>
+      </div>
+      <p>All characters not defined as C are treated as printable.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="match_alt_pattern.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="match_alt_pattern.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="patt_code_selection.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Matching Alternative PatternsA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Pattern Code Selection</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

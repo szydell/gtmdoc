@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZROutines Examples</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="zroutines.html" title="$ZROutines" />
+    <link rel="prev" href="setting_a_value.html" title="Setting a Value for $ZROutines" />
+    <link rel="next" href="zroutines_search_types.html" title="$ZROutines Search Types" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZROutines Examples</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="setting_a_value.html">Prev</a>A </td>
+          <th width="60%" align="center">$ZROutines</th>
+          <td width="20%" align="right">A <a accesskey="n" href="zroutines_search_types.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="zro_examples"></a>$ZROutines Examples</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4195717" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+    $ DEFINE GTM$ROUTINES &quot;[JONES],[SMITH]&quot;
+    $ GTM
+    GTM&gt; WRITE $ZROUTINES
+    &quot;[JONES],[SMITH]&quot;
+    GTM&gt; SET $ZRO=&quot;[JONES.UTL],[SMITH.UTL]&quot;
+    GTM&gt; WRITE $ZRO
+    [JONES.UTL],[SMITH.UTL]
+    GTM&gt; HALT
+    $ SHOW LOGICAL GTM$ROUTINES
+    &quot;GTM$ROUTINES&quot; = &quot;[JONES],[SMITH]&quot;(LNM$PROCESS_TABLE)                 
+    </pre>
+      <p>This defines the logical name, GTM$ROUTINES. Upon entering GT.M Direct Mode $ZROUTINES has the value supplied by GTM$ROUTINES. The SET command changes the value. When the GT.M image terminates, the DCL command SHOW demonstrates that GTM$ROUTINES has not been modified by the M SET command.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; SET $ZRO=&quot;[],[SMITH],MYLIB.OLB&quot;
+    </pre>
+      <p>This sets $ZROUTINES to a list containing two directories and an object library in the process current default directory.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; SET $ZRO=&quot;[SMITH]/SRC=([SMITH.TAX],[SMITH.FICA])&quot;
+    </pre>
+      <p>This specifies that GT.M should search the directory [SMITH] for object files and the directories [SMITH.TAX] and [SMITH.FICA] for source files. Note that in this example, GT.M does not search [SMITH] for source files.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; SET $ZRO=&quot;[SMITH]/SRC=([SMITH],[SMITH.TAX],[SMITH.FICA])&quot;
+    </pre>
+      <p>This specifies that GT.M should search the directory [SMITH] for object files and the directories [SMITH.TAX] and [SMITH.FICA] for source files. Note that the difference between this example and the previous one is that in this example GT.M searches [SMITH] for both object and source files.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; SET $ZRO=&quot;[SMITH],[SMITH.TAX]/NOSRC,[SMITH.FICA]&quot;
+    </pre>
+      <p>This specifies that GT.M should search [SMITH] and [SMITH.FICA] for object and source files. However, because the /NOSRC qualifier indicates directories searched only for object files, GT.M does not search [SMITH.TAX] for source files.</p>
+      <p>Omission of the /SRC= and /NOSRC indicates GT.M can search the directory for both source and object files. $ZROUTINES=&quot;[SMITH]&quot; is equivalent to $ZROUTINES=&quot;[SMITH]/SRC=[SMITH]&quot;.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="setting_a_value.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="zroutines.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="zroutines_search_types.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Setting a Value for $ZROutinesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $ZROutines Search Types</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

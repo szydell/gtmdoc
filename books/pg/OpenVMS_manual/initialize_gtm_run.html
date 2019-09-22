@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Initializing the GT.M Run-time Environment</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter12vms.html" title="ChapterA 12.A Database Access Library" />
+    <link rel="prev" href="invoking_DAL_functions.html" title="Invoking DAL Functions from External Routines" />
+    <link rel="next" href="placing_gtminst_in_share_image.html" title="Placing GTM$INIT in a Shareable Image" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Initializing the GT.M Run-time Environment</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="invoking_DAL_functions.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 12.A Database Access Library</th>
+          <td width="20%" align="right">A <a accesskey="n" href="placing_gtminst_in_share_image.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="initialize_gtm_run"></a>Initializing the GT.M Run-time Environment</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="placing_gtminst_in_share_image.html">Placing GTM$INIT in a Shareable Image</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4231563" class="indexterm"></a>
+      <p>The GTM$INIT library routine initializes the GT.M run-time environment. A process using the GT.M database functions must call the GTM$INIT routine first. GTM$INIT does not accept arguments. GT.M ignores multiple invocations of GTM$INIT except the first time.</p>
+      <p>The gtm_init library routine initializes the GT.M run-time environment. A process using the GT.M database functions must call the gtm_init routine first; GT.M ignores invocations of gtm_init after the first. gtm_init does not accept arguments.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	$DESCRIPTOR(gname,&quot;A&quot;) ;
+	$DESCRIPTOR(subscript,&quot;1&quot;) ;
+	$DESCRIPTOR(data,&quot;Data of A&quot;) ;
+	gtm$init();
+	gtm$kill(GTMI$_GLOBAL, &amp;gname) ;
+	gtm$put(GTMI$_GLOBAL, &amp;data, &amp;gname, &amp;subscript) ; 
+	</pre>
+      <p>This VMS C example invokes GTM$INIT before invoking GTM$KILL and GTM$PUT.</p>
+      <pre class="programlisting">
+		status=gtm_init();status=gtm_kill (gname);status=gtm_put(gname,gdata);
+	</pre>
+      <p>This C example invokes gtm_init before invoking gtm_kill and gtm_put.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="invoking_DAL_functions.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter12vms.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="placing_gtminst_in_share_image.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Invoking DAL Functions from External RoutinesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Placing GTM$INIT in a Shareable Image</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

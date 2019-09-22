@@ -1,0 +1,106 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Xecute</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s26.html" title="Write">
+<link rel="next" href="ch06s28.html" title="ZAllocate">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Xecute</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s26.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s28.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">Xecute</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="execute"></a>Xecute<a class="indexterm" name="idp55383488"></a>
+</h2></div></div></div>
+<p>The XECUTE command makes an entry in the GT.M invocation stack and executes the argument as GT.M code.</p>
+<p>The format of the XECUTE command is:</p>
+<pre class="programlisting">X[ECUTE]:tvexpr expr[:tvexpr][,...]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The required expression specifies a fragment of GT.M source code. The maximum length of the expression is 8192 bytes.</p></li>
+<li class="listitem"><p>The optional truth-valued expression immediately following the argument expression specifies the argument postconditional and controls whether GT.M performs an XECUTE with that argument.</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more XECUTE arguments form a legal argument for an XECUTE.</p></li>
+<li class="listitem"><p>Run-time errors from indirection or XECUTEs maintain $STATUS and $ZSTATUS related information and cause normal error handling but do not provide compiler supplied information on the location of any error within the code fragment.</p></li>
+</ul></div>
+<p>An explicit or implicit QUIT within the scope of the XECUTE, but not within the scope of any closer DO, FOR, XECUTE or extrinsic, returns execution to the instruction following the calling point. This may be the next XECUTE argument or another command. At the end of the code specified by the XECUTE argument expression, GT.M performs an implicit QUIT.</p>
+<p>Because XECUTE causes run-time compilation in GT.M, and because it tends to obscure code, use XECUTE only when other approaches clearly do not meet your particular requirement.</p>
+<p> GT.M compiles XECUTE &lt;literal&gt; at compile time when the literal is valid GT.M code that has minimal impact on the M virtual machine. An XECUTE literal containing GOTO, NEW, QUIT, (nested) XECUTE and indirection can't be precompiled because of the interaction of those features with the stack architecture of the M virtual machine. Precompiled XECUTE literals do not show up in $STATCK() as having a separate stack level, but rather "disappear" into the stack level of the original XECUTE. Please observe the following cautions: </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>ensure you compile with the same GT.M version, $gtm_chset, $gtm_local_collate, $gtm_patnumeric, $gtm_pattern_file and $gtm_pattern_table values (or lack thereof) as those used to run your application.</p></li>
+<li class="listitem"><p>If the application changes the run time values controlled by those environment variables, use variable operands or indirection, rather than literals for operands with pattern match (?) or sorts-after (]]). </p></li>
+</ul></div>
+<p>Note that indirection almost always performs better than an XECUTE that can't be precompiled. Note also that adding a QUIT at the end of an XECUTE that does not contain a FOR will leave it for run time compilation.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_execute"></a>Examples<span> of XECUTE</span><a class="indexterm" name="idp57766320"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Xecute "Write ""HELLO"""
+HELLO
+GTM&gt;</pre>
+<p>This demonstrates a simple use of Xecute.</p>
+<p>Example:</p>
+<pre class="programlisting">Set x="" For Set x=$Order(^%x(x)) Quit:x=""  Xecute x</pre>
+<p>This $ORDER() loop XECUTEs code out of the first level of the global array ^%x. Note that, in most cases, having the code in a GT.M source file, for example TMPX.m, and using a Do ^TMPX improves efficiency.</p>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody><tr valign="top">
+<td align="left" valign="top">
+<p></p>
+<p class="relatedtopics">See Also</p>
+</td>
+<td align="left" valign="top">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc" compact>
+<li class="listitem"><p>
+<a class="xref" href="ch14s02.html" title="Trigger Definition File">&#8220;Trigger Definition<span> File</span>&#8221;</a></p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch08s61.html" title="$ZTrap">&#8220;$ZTrap&#8221;</a></p></li>
+<li class="listitem"><p>
+<a class="xref" href="ch02s03.html" title="Exception Handling Facilities">&#8220;Exception Handling Facilities&#8221;</a></p></li>
+</ul></div>
+            </td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s26.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s28.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Write </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> ZAllocate</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

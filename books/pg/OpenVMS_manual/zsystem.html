@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ZSYstem</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="ChapterA 6.A Commands" />
+    <link rel="prev" href="examples_of_zstep.html" title="Examples of ZSTep" />
+    <link rel="next" href="examples_of_zsystem.html" title="Examples of ZSYstem" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ZSYstem</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zstep.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 6.A Commands</th>
+          <td width="20%" align="right">A <a accesskey="n" href="examples_of_zsystem.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zsystem"></a>ZSYstem</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zsystem.html">Examples of ZSYstem</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4180853" class="indexterm"></a>
+      <p>The ZSYSTEM command creates a <span>subprocess</span> of the current process <span>in a fashion analogous to the DCL SPAWN command</span>. </p>
+      <p>The format of the ZSYSTEM command is:</p>
+      <pre class="programlisting">
+    ZSY[STEM][:tvexpr] [expr[:tvexpr][,...]]
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>The optional expression specifies the command passed to the <span>Command Language Interpreter (CLI), usually DCL</span>; after processing the command, <span>CLI</span> returns control to GT.M.</p>
+          </li>
+          <li>
+            <p>If ZSYSTEM has no argument or expr=&quot;&quot;, the <span>CLI</span> prompts for input until provided with an exit command; at least two (2) spaces must follow a ZSYSTEM command with no argument to separate it from the next command on the line.</p>
+          </li>
+          <li>
+            <p>The optional truth-valued expression following the argument expression specifies the argument postconditional and controls whether ZSYSTEM processes that argument.</p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom evaluating to a list of one or more ZSYSTEM arguments form a legal argument for a ZSYSTEM.</p>
+          </li>
+        </ul>
+      </div>
+      <p>The ZSYSTEM command creates a new process and passes its argument to a <span>Command Language Interpreter (CLI), usually DCL</span> for execution. The new process executes in the same directory as the initiating process . The new process has the same operating system environment, such as <span>logical names</span> and input/output devices, as the initiating process. The initiating process pauses until the new process completes before continuing execution. The return status of the <span> spawned</span> process is reflected in $ZSYSTEM.</p>
+      <p>Note that, like any other VMS-spawned process, a process created by ZSYSTEM acquires the privileges currently held by its parent process at the time of its creation.</p>
+      <p>If a ZSYSTEM command has multiple arguments, it starts a new process for each argument, one at a time. ZSYSTEM waits for one process to complete before starting the next one.</p>
+      <p>A ZSYSTEM with a null argument causes CLI to prompt on SYS$OUTPUT, and accept commands from SYS$INPUT, until it receives a DCL LOGOUT command or other input terminator. For an interactive process, both SYS$OUTPUT and SYS$INPUT generally translate to the user's terminal. A ZSYSTEM with no arguments is equivalent to a ZSYSTEM with a single null string argument.</p>
+      <p>If a command postconditional is false, GT.M does not process the ZSYSTEM command. If an argument postconditional is false, GT.M does not process that argument.</p>
+      <p>Issuing a ZSYSTEM command inside a transaction destroys the Isolation of that transaction. Because of the way that GT.M implements transaction processing, a ZSYSTEM within a transaction may suffer an indefinite number of restarts (&quot;live lock&quot;).</p>
+      <p>The flags arguments used by GT.M to call the OpenVMS function LIB$SPAWN to implement the ZSYSTEM command can be set in GTM$DEFAULTS.MAR with a GTM$USER_SPAWN_FLAG == n line, where the bits in n specify various properties as below. Since the exact values are subject to change by Hewlett-Packard, please validate your choice using the OpenVMS RTL Library Manual and the include files in SYS$LIBRARY. In order to prevent unauthorized subversion of OpenVMS security, the default value (0), will be used unless both GTMSHR.EXE and the application image are installed with the CMEXEC privilege.</p>
+      <p>NOWAIT:       1</p>
+      <p>NOCLISYM:     2</p>
+      <p>NOLOGNAM:     4</p>
+      <p>NOKEYPAD:     8</p>
+      <p>NOTIFY:      16</p>
+      <p>NOCONTROL:   32</p>
+      <p>TRUSTED:     64</p>
+      <p>AUTHPRIV:   128</p>
+      <p>SUBSYSTEM:  256</p>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zstep.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="examples_of_zsystem.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of ZSTepA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Examples of ZSYstem</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

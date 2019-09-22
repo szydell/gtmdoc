@@ -1,0 +1,139 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>OpenSSL Options</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="TLS_Configuration_File.html" title="Appendix G. Creating a $gtmcrypt_config file">
+<link rel="prev" href="apgs01.html" title="Why do we need a $gtmcrypt_config file?">
+<link rel="next" href="apgs03.html" title="Generating demo TLS certificates">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">OpenSSL Options</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="apgs01.html">Prev</a> </td>
+<th width="60%" align="center">Appendix G. Creating a $gtmcrypt_config file</th>
+<td width="20%" align="right"> <a accesskey="n" href="apgs03.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="TLS_Configuration_File.html">Creating a $gtmcrypt_config file</a></span> &gt; <span class="breadcrumb-node">OpenSSL Options</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="OpenSSL_options"></a>OpenSSL Options</h2></div></div></div>
+<p>The gtmcrypt_config configuration file has two scopes for the following OpenSSL options. At the root of the TLS configuration, is a global configuration scope that applies to all tlsids listed in the configuration. Each tlsid can override the global configuration by redefining the same parameters. Any overridden option apply only to the specific tlsid configuration that defines it. The supported OpenSSL options are as follows:</p>
+<div class="variablelist"><dl>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>CAfile</strong></span></code>
+</span></dt>
+<dd>
+<p>When used in the tls level points to a file, in PEM format, describing the trusted CAs. The file can contain several CA certificates identified by sequences of:</p>
+<pre class="programlisting">-----BEGIN CERTIFICATE-----
+... (CA certificate in base64 encoding) ...
+-----END CERTIFICATE-----</pre>
+<p>Servers use this parameter, either specified for a tlsid in the configuration or with the WRITE /TLS command, verify certificates and to inform the client of acceptable certificate authorities. The determinant definition for the acceptable list of certificate authorities sent to the client comes in descending order of priority from the one specified by the WRITE /TLS("renegotiate",...) command, the one specified by the CAfile value in the tlsid section used to establish the TLS connection, and finally that specified at the tls level.</p>
+</dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>CApath</strong></span></code>
+</span></dt>
+<dd><p>Points to a directory containing CA certificates in PEM format. The files each contain one CA certificate. The files are looked up by the CA subject name hash value, which must hence be available. If more than once certificate with the same name hash value exists, the extension must be different (e.g. 9d66eef0.0, 9d66eef0.1 etc). The directory is typically created by the OpenSSL tool 'c_rehash'. CApath is an alternative to CAfile.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>cipher-list </strong></span></code>
+</span></dt>
+<dd><p>Specifies which cryptographic algorithms to use. The format of this option is described by the OpenSSL ciphers man page. An empty string uses a default value of "ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH" for replication connections and the OpenSSL default cipher list for socket connections.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>crl</strong></span></code>
+</span></dt>
+<dd><p>Points to a file containing list of revoked certificates. This file is created by the openssl utility.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>dh512 and dh1024</strong></span></code>
+</span></dt>
+<dd><p>Specifies that Diffie-Hellman parameters s used for key-exchange. Either none or both have to be specified. If neither is specified, then then the data is encrypted with the same keys that are used for authentication.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>format</strong></span></code>
+</span></dt>
+<dd><p>Format of the certificate and private key pair. Currently, the GT.M TLS plug-in only supports PEM format.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>cert</strong></span></code>
+</span></dt>
+<dd><p>Path to the certificate.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>key</strong></span></code>
+</span></dt>
+<dd>
+<p>Path to the private key. If the private key is protected by a passphrase, an obfuscated version of the password should be specified in the environment variable which takes the form gtmtls_passwd_&lt;identifier&gt;. Currently, the GT.M TLS plug-in only supports RSA private keys.</p>
+<p>When placing the private key for a certificate at the beginning of the certificate file, you may omit the "key" item from the configuration file. The format of the combined file is:</p>
+<pre class="programlisting">-----BEGIN RSA PRIVATE KEY-----
+ [encoded key]
+ -----END RSA PRIVATE KEY-----
+ [empty line]
+ -----BEGIN CERTIFICATE-----
+ [encoded certificate]
+ -----END CERTIFICATE-----
+  [empty line]</pre>
+</dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>session-id-hex</strong></span></code>
+</span></dt>
+<dd><p>Takes a string value which is used to set the SSL session_id context for server sockets, which may be specified in the tlsid section of a config file or on WRITE /TLS("RENEGOTIATE",...). See the OpenSSL man page for SSL_set_session_id_context for usage details. The value should consist of hexadecimal digits representing the desired value. Application code can call the %UTF2HEX utility routine to translate a character string to the corresponding string of hexadecimal digits. If neither the command or the associated tlsid section in the configuration file specify a session-id-hex option when creating the socket, GT.M uses the current tlsid, translated into hexadecimal digits.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>session-timeout</strong></span></code>
+</span></dt>
+<dd><p>Timeout (in seconds) for a given session. If a connection disconnects and resumes within this time interval, the session is reused to speed up the TLS handshake. A value of 0 forces sessions to not be reused. The default value is 1 hour.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>ssl-options</strong></span></code>
+</span></dt>
+<dd>
+<p>The ssl-options, documented in the man page for SSL_set_options, modify the default behavior of OpenSSL. When specifying multiple options, separate them with a colon (:) delimiter. The ssl-options specified in a labeled section add to, or override, those specified at the "tls" level. An exclamation mark ("!") preceding an option in a labeled section disables any default for that option specified at the tls: level; for example:</p>
+<pre class="programlisting">tls: {
+ ssl-options: "SSL_OP_CIPHER_SERVER_PREFERENCE";
+ mylabel: {
+ ssl-options: "!SSL_OP_CIPHER_SERVER_PREFERENCE";
+ };
+ }</pre>
+</dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>verify-depth</strong></span></code>
+</span></dt>
+<dd>
+<p>Certificate Authority (CA) verify depth provides an upper limit on the number of CAs to look up for verifying a given certificate. The depth count is described as ''level 0:peer certificate'', ''level 1: CA certificate'', ''level 2: higher level CA certificate'', and so on. The default verification depth is 9.</p>
+<p>A verify-depth option specified in a labeled section applies to connections associated with that section.</p>
+</dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>verify-level</strong></span></code>
+</span></dt>
+<dd><p>The verify-level option takes a string value to specify any additional certificate verification in addition to the basic OpenSSL verification. The only value currently accepted is "CHECK" which requests additional checks on the results of the basic OpenSSL certificate verification. A leading exclamation mark ("!") disables a verify-level option. The verify-level options specified at lower levels are merged with those options already specified at higher levels. CHECK is enabled by default for all TLS connections.</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>verify-mode</strong></span></code>
+</span></dt>
+<dd><p>The verify-mode option specifies how OpenSSL verifies certificates. If no verify-mode is specified, it defaults to SSL_VERIFY_PEER. See the man page for SSL_set_verify for details. SSL_VERIFY_PEER has two additional flags which modify verification only for the server role; when adding them to the option string, use the colon (:) delimiter.</p></dd>
+</dl></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="apgs01.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="TLS_Configuration_File.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="apgs03.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Why do we need a $gtmcrypt_config file? </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Generating demo TLS certificates</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

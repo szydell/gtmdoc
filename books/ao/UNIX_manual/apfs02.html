@@ -1,0 +1,131 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Invoking GT.M through a C main() program</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="Package_GTM_Apps.html" title="Appendix F. Packaging GT.M Applications">
+<link rel="prev" href="apfs01.html" title="Setting up a Captive User Application with GT.M">
+<link rel="next" href="apfs03.html" title="Defensive Practices">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Invoking GT.M through a C main() program</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="apfs01.html">Prev</a> </td>
+<th width="60%" align="center">Appendix F. Packaging GT.M Applications</th>
+<td width="20%" align="right"> <a accesskey="n" href="apfs03.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="Package_GTM_Apps.html">Packaging GT.M Applications</a></span> &gt; <span class="breadcrumb-node">Invoking GT.M through a C main() program</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="invoke_gtm_with_c"></a>Invoking GT.M through a C main() program</h2></div></div></div>
+<p>There are several circumstances when it is desirable to invoke a GT.M application with a top-level C main() program rather than with <code class="code">mumps -run</code>. Examples include:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>A need to ensure correct values for environment variables, and a shell script cannot be used (for example, when there is a specific operational need to install an application with the setuid bit).</p></li>
+<li class="listitem"><p>Programs that show up on a process display with meaningful names (like <code class="code">friday</code> instead of <code class="code">mumps -run monthstarting friday</code>, in the following example).</p></li>
+</ul></div>
+<p><span class="bold"><strong>To compile and run the <code class="code">monthstarting.zip</code> example, perform the following steps:</strong></span></p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">Download <span class="bold"><strong>monthstarting.zip</strong></span>. <p><span class="bold"><strong>monthstarting.zip</strong></span> contains monthstarting.m, month_starting.c, and monthstarting.ci. To download <span class="bold"><strong>monthstarting.zip</strong></span>, click on <a class="ulink" href="downloadables/monthstarting.zip" target="_top"><span class="inlinemediaobject"><img src="images/download.png" alt="Download monthstarting.zip"></span> </a>.You can also download <span class="bold"><strong>monthstarting.zip</strong></span> from http://tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/downloadables/monthstarting.zip.</p>
+</li>
+<li class="listitem">
+<p>Run the <code class="code">monthstarting.m</code> program that lists months starting with the specified day of the week and year range.</p>
+<pre class="programlisting">$ mumps -run monthstarting Friday 1986 1988      
+FRI AUG 01, 1986
+FRI MAY 01, 1987
+FRI JAN 01, 1988
+FRI APR 01, 1988
+FRI JUL 01, 1988
+$</pre>
+<p>Notice that this program consists of a main program that reads the command line in the intrinsic special variable $ZCMDLINE, and calls <span class="bold"><strong>calcprint^monthstarting()</strong></span>, providing as its first parameter the day of the week to be reported.</p>
+<p>This step is optional as there is no need to explicitly compile <code class="code">monthstarting.m</code> because GT.M autocompiles it  as needed. </p>
+</li>
+<li class="listitem">
+<p>On x86 GNU/Linux (64-bit Ubuntu 12.04), execute the following command to compile month_starting.c and create an executable called <code class="code">friday</code>. </p>
+<pre class="programlisting">$ gcc -c month_starting.c -I$gtm_dist
+$ gcc month_starting.o -o friday -L $gtm_dist -Wl,-rpath=$gtm_dist -lgtmshr</pre>
+<p>For compiling the <code class="code">month_starting.c</code> program on other platforms, refer to the Integrating External Routines chapter of <a class="ulink" href="../../pg/UNIX_manual/index.html" target="_top">GT.M Programmer's Guide</a></p>
+</li>
+<li class="listitem">
+<p>Execute the following command:</p>
+<pre class="programlisting">$ ./friday 1986 1988
+FRI AUG 01, 1986
+FRI MAY 01, 1987
+FRI JAN 01, 1988
+FRI APR 01, 1988
+FRI JUL 01, 1988
+$</pre>
+</li>
+<li class="listitem">
+<p>You can also execute the same program with the name <code class="code">monday</code>. In doing so, the program displays months starting with Monday.</p>
+<pre class="programlisting">$ ln -s friday monday
+$ ./monday 1986 1988
+MON SEP 01, 1986
+MON DEC 01, 1986
+MON JUN 01, 1987
+MON FEB 01, 1988
+MON AUG 01, 1988
+$</pre>
+<p>The <code class="code">month_starting.c</code> program accomplishes this by calling the same GT.M entryref calcprint^monthstarting(), and passing in as the first parameter the C string argv[0], which is the name by which the program is executed. If there are additional parameters, <code class="code">month_starting.c</code> passes them to the M function; otherwise it passes pointers to null strings:</p>
+<pre class="programlisting">/* Initialize and call calcprint^monthstarting() */
+if ( 0 == gtm_init() ) gtm_ci("calcprint", &amp;status, argv[0], argc&gt;1 ? argv[1] : "", argc&gt;2 ? argv[2] : "");</pre>
+<p>Prior to calling the GT.M entryref, the C program also needs to set environment variables if they are not set: gtm_dist to point to the directory where GT.M is installed, gtmroutines to enable GT.M to find the monthstarting M routine as well as GT.M's %DATE utility program, and GTMCI to point to the call-in table:</p>
+<pre class="programlisting">/* Define environment variables if not already defined */
+        setenv( "gtm_dist", "/usr/lib/fis-gtm/V6.1-000_x86_64", 0 );
+        if (NULL == getenv( "gtmroutines" ))
+        {
+                tmp1 = strlen( getenv( "PWD" ));
+                strncpy( strbuf, getenv( "PWD"), tmp1 );
+                strcpy( strbuf+tmp1, " " );
+                tmp2 = tmp1+1;
+                tmp1 = strlen( getenv( "gtm_dist" ));
+                strncpy( strbuf+tmp2, getenv( "gtm_dist" ), tmp1 );
+                tmp2 += tmp1;
+                if ( 8 == sizeof( char * ))
+                {
+                        tmp1 = strlen( "/libgtmutil.so" );
+                        strncpy( strbuf+tmp2, "/libgtmutil.so", tmp1 );
+                        tmp2 += tmp1;
+                }
+                strcpy( strbuf+tmp2, "" );
+                setenv( "gtmroutines", strbuf, 1 );
+        }
+        setenv( "GTMCI", "monthstarting.ci", 0 );
+        if ( 0 == gtm_init() ) gtm_ci("calcprint", &amp;status, argv[0], argc&gt;1 ? argv[1] : "", argc&gt;2 ? argv[2] : "");
+        gtm_exit(); /* Discard status from gtm_exit and return status from function call */</pre>
+<p>Note that on 32-bit platforms, the last element of gtmroutines is $gtm_dist, whereas on 64-bit platforms, it is $gtm_dist/libgtmutil.so. If you are creating a wrapper to ensure that environment variables are set correctly because their values cannot be trusted, you should also review and set the environment variables discussed in <a class="xref" href="apfs01.html" title="Setting up a Captive User Application with GT.M">&#8220;Setting up a Captive User Application with GT.M&#8221;</a>.</p>
+<p>All the C program needs to do is to set environment variables and call a GT.M entryref. A call-in table is a text file that maps C names and parameters to M names and parameters.  In this case, the call-in table is just a single line to map the C function calcprint() to the GT.M entryref <code class="code">calcprint^monthstarting()</code>:</p>
+<pre class="programlisting">calcprint : gtm_int_t* calcprint^monthstarting(I:gtm_char_t*, I:gtm_char_t*, I:gtm_char_t*)</pre>
+</li>
+</ol></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="apfs01.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="Package_GTM_Apps.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="apfs03.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Setting up a Captive User Application with GT.M </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Defensive Practices</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

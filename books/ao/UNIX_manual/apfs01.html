@@ -1,0 +1,89 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Setting up a Captive User Application with GT.M</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="Package_GTM_Apps.html" title="Appendix F. Packaging GT.M Applications">
+<link rel="prev" href="Package_GTM_Apps.html" title="Appendix F. Packaging GT.M Applications">
+<link rel="next" href="apfs02.html" title="Invoking GT.M through a C main() program">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Setting up a Captive User Application with GT.M</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="Package_GTM_Apps.html">Prev</a> </td>
+<th width="60%" align="center">Appendix F. Packaging GT.M Applications</th>
+<td width="20%" align="right"> <a accesskey="n" href="apfs02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="Package_GTM_Apps.html">Packaging GT.M Applications</a></span> &gt; <span class="breadcrumb-node">Setting up a Captive User Application with GT.M</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="captive"></a>Setting up a Captive User Application with GT.M</h2></div></div></div>
+<p>This section discusses wholesome practices in setting up a GT.M based application on UNIX/Linux such that, when "captive" users log in to the system, they are taken directly into the application, and when they exit the application, they are logged off the system. Unless part of the application design, a captive user should not get to a shell or GT.M prompt.</p>
+<p>The example in <a class="xref" href="apfs01.html#sample_profile" title="Sample .profile">&#8220;Sample .profile&#8221;</a> is for <code class="code">/bin/sh</code> on GNU/Linux, and may need to be adapted for use with other shells on other platforms.</p>
+<p>At a high level, preventing a captive user from getting to a shell or GT.M prompt involves:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>trapping signals that may cause the login shell to give the user interactive access, for example, by pressing &lt;CTRL-Z&gt; to suspend the mumps application;</p></li>
+<li class="listitem"><p>preventing a mumps process from responding to a &lt;CTRL-C&gt; until the application code sets up a handler; and</p></li>
+<li class="listitem"><p>preventing an error in the application, or a bug in an error handler, from putting a captive user into direct mode.</p></li>
+</ul></div>
+<p>Note that other users on the system who have appropriate privileges as managed by the operating system can still interfere with captive users. In order to secure a system for captive applications, you must protect it from untrusted other users. Users should only have credentials that permit them the level of access appropriate to their level of trustworthiness, thus: untrusted users should not have credentials to access a system with captive applications.</p>
+<p>Defensive configuration implies setting up layers of defenses, so that an error in one layer does not compromise the system.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="sample_profile"></a>Sample .profile</h3></div></div></div>
+<p>After initialization common to all users of a system, a login shell sources the <code class="code">.profile</code> file in the user's home directory. A captive user's <code class="code">.profile</code> might look something like this, where "..." denotes a value to be provided.</p>
+<pre class="programlisting">trap "" int quit        # terminate on SIGINT and SIGQUIT
+stty susp \000         # prevent &lt;CTRL-Z&gt; from sending SIGSUSP
+# set environment variables needed by GT.M and by application, for example
+export gtm_dist=...
+export gtmgbldir=...
+export gtmroutines=...
+export gtm_repl_instance=...
+export gtm_tmp=...
+# disable mumps ^C until application code sets up handler
+export gtm_nocenable=1
+# override default of $ZTRAP="B"
+export gtm_etrap='I 0=$ST W "Process terminated by: ",$ZS,! ZHALT 1'
+# set other environment variables as appropriate, for example
+export EDITOR=...        # a preferred editor for ZEDIT
+export TZ=...          # a timezone different from system default
+export HUGETLB_SHM=yes      # example of a potential performance setting
+export PATH=/usr/bin:/bin    # only the minimum needed by application
+export SHELL=/bin/false     # disable ZSYSTEM from command prompt
+# execute captive application starting with entryref ABC^DEF then exit
+exec $gtm_dist/mumps -run ABC^DEF</pre>
+<p>Note the use of <code class="code">exec</code> to run the application - this terminates the shell and disconnects users from the system when they exit the GT.M application.</p>
+<p>If an incoming connection is via an Internet superserver such as xinetd, some of these are not applicable, such as disabling &lt;CTRL-C&gt; and &lt;CTRL-Z&gt;.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="Package_GTM_Apps.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="Package_GTM_Apps.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="apfs02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Appendix F. Packaging GT.M Applications </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Invoking GT.M through a C main() program</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

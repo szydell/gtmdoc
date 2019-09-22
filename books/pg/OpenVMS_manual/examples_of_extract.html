@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of $EXTRACT()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="extract.html" title="$Extract()" />
+    <link rel="prev" href="extract.html" title="$Extract()" />
+    <link rel="next" href="find.html" title="$Find()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of $EXTRACT()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="extract.html">Prev</a>A </td>
+          <th width="60%" align="center">$Extract()</th>
+          <td width="20%" align="right">A <a accesskey="n" href="find.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_extract"></a>Examples of $EXTRACT()</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4182258" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; FOR i=0:1:3 WRITE !,$EXTRACT(&quot;HI&quot;,i),&quot;&lt;&quot;
+    &lt;
+    H&lt;
+    I&lt;
+    &lt;
+    GTM&gt;
+    </pre>
+      <p>This loop displays the result of $EXTRACT(), specifying no ending character position and a beginning character position &quot;before, &quot; first and second positions, and &quot;after&quot; the string.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt; FOR i=0:1:3 WRITE !,$E(&quot;HI&quot;,1,i),&quot;&lt;&quot;
+    &lt;
+    H&lt;
+    HI&lt;
+    HI&lt;
+    GTM&gt;    
+    </pre>
+      <p>This loop displays the result of $EXTRACT() specifying a beginning character position of 1 and an ending character position &quot;before, &quot; first and second positions, and &quot;after&quot; the string.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    TRIM(x)
+    NEW i,j
+    FOR j=$L(x):-1:0 S nx=$E(x,1,j) Q:$EXTRACT(x,j)'=&quot; &quot;
+    FOR i=1:1:j S fx=$E(nx,i,$L(x)) Q:$EXTRACT(x,i)'=&quot; &quot;
+    QUIT fx
+    GTM&gt;SET str=&quot; MUMPS &quot;
+    GTM&gt;WRITE $LENGTH(str)
+    7
+    GTM&gt;WRITE $LENGTH($$TRIM^trim(str))
+    5    
+    </pre>
+      <p>This extrinsic function uses $EXTRACT() to remove extra leading and trailing spaces from its argument.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="extract.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="extract.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="find.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$Extract()A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $Find()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

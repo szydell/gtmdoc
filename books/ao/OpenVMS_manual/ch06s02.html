@@ -1,0 +1,109 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Setting Up for Journaling</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch06.html" title="Chapter 6. GT.M Journaling"><link rel="prev" href="ch06s01.html" title="Deciding Whether to Use Journaling"><link rel="next" href="ch06s03.html" title="Journal File Operations"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Setting Up for Journaling</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06s01.html">Prev</a> </td><th width="60%" align="center">Chapter 6. GT.M Journaling</th><td width="20%" align="right"> <a accesskey="n" href="ch06s03.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Setting Up for Journaling"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setup_journaling"></a>Setting Up for Journaling<a class="indexterm" name="id3237133"></a></h2></div></div></div><p>The GT.M Journaling facility has impact on a number of components:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>DSE - used to examine current journaling configuration and historical
+statistics </p></li><li class="listitem"><p>GDE - used to set up default journaling characteristics for database
+regions</p></li><li class="listitem"><p>MUPIP JOURNAL - used to process journal files for recovery or
+analysis</p></li><li class="listitem"><p>MUPIP JOURNAL <span>/</span>ROLLBACK - used to recover databases when replication is enabled
+- relies on journal files</p></li><li class="listitem"><p>MUPIP BACKUP - used to make database backups - can initiate new journal
+files</p></li><li class="listitem"><p>MUPIP SET <span>/</span>JOURNAL -
+used to modify journaling characteristics, and to initiate new journal
+files</p></li><li class="listitem"><p>MUPIP SET <span>/</span>REPLICATION - used to modify replication characteristics -
+replication requires journaling</p></li><li class="listitem"><p>GT.M compiler - supports language features (with run-time system support)
+to examine journaling status and, when journaling is on, affect journaling
+behavior</p></li><li class="listitem"><p>GT.M run-time system - creates journal file entries; may create new
+journal files or turn off journaling under some circumstances;</p></li></ul></div><p>In order to use journaling you should familiarize yourself with the tools. One
+critical choice is deciding whether and how to use journal fences. Another is how to
+manage the journal files in coordination with an appropriate database backup scheme.
+Whether or not to use replication affects these choices.</p><p>The following sections address these journaling topics in more detail.</p><div class="sect2" title="Fencing Transactions"><div class="titlepage"><div><div><h3 class="title"><a name="id3227006"></a>Fencing Transactions<a class="indexterm" name="id3237234"></a></h3></div></div></div><p>The programming practice of fencing logical transactions protects database
+integrity during a system interruption. A logical transaction is a logical unit
+that is not complete unless all parts of the transaction are captured. For
+instance, the logical transaction "transfer funds between accounts" consists of
+a debit update to one account and a credit update to another account.</p><p>Establishing fences around a logical transaction assures that the transaction
+is committed as a unit, thereby avoiding logical inconsistencies. These logical
+inconsistencies, sometimes referred to as application-level database integrity
+problems, manifest themselves as run-time errors, inappropriate branching, and
+incorrect reports.</p><p>In GT.M, there are two methods of defining application transaction boundaries.
+One method is using the transaction commands TSTART and TCOMMIT. The other
+method uses the GT.M journal fencing commands ZTSTART and ZTCOMMIT. </p><p>TSTART or ZTSTART activate transaction fence control. Subsequent SETs and
+KILLs across all accessed regions are marked as belonging to a fenced
+transaction. The TCOMMIT or ZTCOMMIT commands respectively, close the fenced
+transaction and write the TCOMMIT and ZTCOMMIT journal records in all the
+journal files of all regions involved in the transaction.</p><p>If a TSTART has been processed, and another TSTART is encountered prior to a
+TCOMMIT, then the second TSTART does not cause another fence to be emitted to
+the journal file, instead increments a "transaction depth" counter accessible as
+$TLEVEL. Succeeding TCOMMIT directives cause decrementing of this transaction
+depth counter. The TCOMMIT fence is emitted to the journal file when the
+"transaction depth" returns to zero (0) (such occurrences are referred to as
+"nested" transactions or sub-transactions). </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The maximum depth of a TP transaction nesting is 127 levels.</p><p>Similarly, if a ZTSTART has been processed, and another ZTSTART is
+encountered prior to a ZTCOMMIT, then the second ZTSTART does not cause
+another fence to be emitted to the journal file. Instead the second
+ZTSTART increments a "transaction depth" counter. Succeeding ZTCOMMIT
+directives cause decrementing of this transaction depth counter. The
+ZTCOMMIT fence is emitted to the journal file when the "transaction
+depth" returns to zero (0) (such occurrences are referred to as "nested"
+transactions or sub-transactions). </p></li><li class="listitem"><p>The maximum depth of a ZTSTART transaction nesting is 255
+levels.</p><p>The command ZTCOMMIT numexpr where numexpr is greater than zero (0),
+is functionally equivalent to the code:</p><pre class="programlisting">X "NEW X F X=1:1:numexpr ZTCOMMIT"
+</pre><p>and the command ZTCOMMIT 0 is equivalent to the command:</p><pre class="programlisting">ZTCOMMIT $VIEW("JNLTRANSACTION")
+</pre><p>This essentially means, ZTCOMMIT 0 closes the transaction, and any and
+all open sub-transactions. </p></li><li class="listitem"><p>Negative values of numexpr are erroneous.</p><p>In case of TSTART/TCOMMIT, journal records for all fenced updates
+involved in the transaction are written to journal files of all regions
+only during the time of TCOMMIT, that is, only when the TCOMMIT journal
+records get written. While, in the case of ZTSTART/ZTCOMMIT, journal
+records are written as and when each SET or KILL is encountered in the
+fenced transaction.</p><p>While TSTART and TCOMMIT produce transactions with ACID properties
+(when certain conventions are followed), ZTSTART and ZTCOMMIT do not
+modify M semantics at all. These commands only generate fencing
+information in the journals. The M and Z transaction commands cannot be
+mixed in a single transaction. MUPIP JOURNAL uses the information
+provided by TSTART and TCOMMIT or ZTSTART and ZTCOMMIT, to restore the
+entire set of updates that comprise the transaction (unless specifically
+instructed to restore only part of the update).</p><p>Using TSTART and TCOMMIT or ZTSTART and ZTCOMMIT significantly
+improves the benefit of journaling. When recovering from journal files,
+MUPIP JOURNAL <span>/</span>RECOVER processing by default recovers either all updates
+within the transaction fences or none of them, and reports the latter
+case during recovery.</p></li><li class="listitem"><p>In MUPIP documentation, the term transaction means "database
+update".</p></li></ul></div><div class="sect3" title="Deciding Whether to Use Fencing"><div class="titlepage"><div><div><h4 class="title"><a name="deciding"></a>Deciding Whether to Use Fencing<a class="indexterm" name="id3237271"></a></h4></div></div></div><p>You can fence some, all, or none of your application programs. When you
+program with fences, you can still force a recovery to ignore the fences by
+using additional qualifiers to MUPIP JOURNAL <span>/</span>RECOVER. The following lists
+advantages and disadvantages for fencing transactions.</p><p>Fencing Advantages:<a class="indexterm" name="id3237398"></a></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Faster recovery</p></li><li class="listitem"><p>Minimum risk recovery</p></li><li class="listitem"><p>Databases recovered from journals that include fences do not
+require post-recovery checks and repairs for logical
+consistency</p></li></ul></div><p>Fencing Disadvantages:<a class="indexterm" name="id3237451"></a></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Must be programmed into the M code</p><p>If the application is already structured to minimize logical
+transaction breakage problems, inserting the fencing commands may be
+a largely mechanical task. In less structured applications,
+inserting fences immediately "inside" the M LOCKs associated with
+transactions may provide an excellent first approximation of proper
+fencing.</p></li><li class="listitem"><p>Fencing requires additional CPU resources and adds entries to the
+journal file(s)</p></li><li class="listitem"><p>Fencing may duplicate methods of recovery already established to
+address these issues</p><p>An application structured so that all information for each logical
+transaction is stored in a single global node (while other nodes
+hold only redundant information), permits rebuild programs to
+completely correct logical inconsistencies. With less restrictive
+designs, logical inconsistencies may be corrected manually or by
+using semi-automated techniques. </p></li></ul></div></div><div class="sect3" title="Transaction Fencing and LOCKs"><div class="titlepage"><div><div><h4 class="title"><a name="trans_fenc_locks"></a>Transaction Fencing and LOCKs<a class="indexterm" name="id3237291"></a></h4></div></div></div><p>LOCKs and ZTSTART and ZTCOMMIT transaction fences have an important
+relationship. MUPIP JOURNAL <span>/</span>RECOVER assumes that fenced transactions are isolated and
+never performs a cascading roll-back. The term cascading roll-back describes
+the situation that occurs when dropping one transaction causes previous
+transactions to be sequentially dropped, until potentially all transactions
+are dropped. If an application violates this assumption, a JOURNAL <span>/</span>RECOVER may create a
+database with application-level integrity problems. M LOCKs ensure the
+isolation of a sequence of updates from interaction with any other updates.
+TSTART and TCOMMIT transaction fences implicitly exhibit the required
+isolation whether fences are used with or without associated LOCKs.</p><p>Example of a non-isolated transaction:</p><div class="informalexample"><pre class="programlisting">Process A                    Process B
+---------                    ---------
+ZTS
+S ^(acct)=^AMT(d,acct)+amt
+                             ZTS
+                             S ^(acct)=^AMT(d,acct)+amt
+                             S (j,^(0))=^JNL(acct,0)+1
+                             S ^JNL(acct,j)=stf
+                             ZTC
+S (j,^(0))=^JNL(acct,0)+1
+-- failure --</pre></div><p>These two sets of transactions are not isolated from each other. After the
+system fails, Process A's transaction must be removed by a <span>/</span>RECOVER <span>/</span>BACKWARD or not replayed by a
+<span>/</span>RECOVER <span>/</span>FORWARD. However, if acct has the same value for
+both processes when Process B's transaction is recovered, ^AMT(d,acct)
+includes Process A's amt as well as Process B's amt.</p><p>Adding a LOCK to the program (e.g., L ^JNL(acct) just before the ZTSTART
+and a LOCK with no argument after the ZTCOMMIT,) isolates the transactions
+and prevents the two processes from overlapping. Because M does not treat
+the SET command as an atomic database operation, in the absence of
+TSTART/TCOMMIT commands, such LOCKs should exist independent of journaling
+considerations to protect the updates to ^AMT(d,acct) and ^JNL(0).</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06s01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch06s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Deciding Whether to Use Journaling </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> Journal File Operations</td></tr></table></div></body></html>

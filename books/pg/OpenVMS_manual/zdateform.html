@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZDAteform</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter8.html" title="ChapterA 8.A Intrinsic Special Variables" />
+    <link rel="prev" href="zcstatus.html" title="$ZCstatus" />
+    <link rel="next" href="zdirectory.html" title="$ZDirectory" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZDAteform</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zcstatus.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 8.A Intrinsic Special Variables</th>
+          <td width="20%" align="right">A <a accesskey="n" href="zdirectory.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zdateform"></a>$ZDAteform</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4194491" class="indexterm"></a>
+      <p>$ZDA[TEFORM] contains an integer value, specifying the output year format of $ZDATE(). $ZDATEFORM can be modified using the SET command. GT.M initializes $ZDATEFORM to the translation of the <span>logical name</span> gtm_zdate_form. If gtm_zdate_form is not defined, GT.M initializes $ZDATEFORM to zero (0). </p>
+      <p>Refer to the $ZDATE section in &quot;Functions&quot; for the usage of $ZDATEFORM. $ZDATEFORM also defines the behavior of some date and time utility routines; refer &quot;M utility Routines&quot;.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt;WRITE $ZDATEFROM
+    0
+    GTM&gt;WRITE $ZDATE($H)
+    11/15/02
+    GTM&gt;SET $ZDATEFORM=1
+    GTM&gt;WRITE $ZDATE($H)
+    11/15/2002    
+    </pre>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zcstatus.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter8.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="zdirectory.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZCstatusA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $ZDirectory</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

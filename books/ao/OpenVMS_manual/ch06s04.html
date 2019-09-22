@@ -1,0 +1,38 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>GT.M Language Extensions for Journaling</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch06.html" title="Chapter 6. GT.M Journaling"><link rel="prev" href="ch06s03.html" title="Journal File Operations"><link rel="next" href="ch06s05.html" title="MUPIP Set"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">GT.M Language Extensions for Journaling</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06s03.html">Prev</a> </td><th width="60%" align="center">Chapter 6. GT.M Journaling</th><td width="20%" align="right"> <a accesskey="n" href="ch06s05.html">Next</a></td></tr></table><hr></div><div class="sect1" title="GT.M Language Extensions for Journaling"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="lang_ext_for_jrnl"></a>GT.M Language Extensions for Journaling</h2></div></div></div><p>In addition to the explicit MUPIP SET and JOURNAL commands, GT.M provides several
+language extensions that enhance journaling.</p><div class="sect2" title="ZTSTART and ZTCOMMIT"><div class="titlepage"><div><div><h3 class="title"><a name="ztstart_ztcommit"></a>ZTSTART and ZTCOMMIT<a class="indexterm" name="id3237966"></a></h3></div></div></div><p>While TSTART and TCOMMIT are generally the preferred way to fence
+transactions, ZTSTART and ZTCOMMIT commands are also available to fence logical
+transactions. When an application contains fenced transactions, MUPIP JOURNAL
+processing treats updates within the transaction as a unit and either restores
+them completely or not at all.</p><p>For more information about ZTSTART and ZTCOMMIT, refer to the "Fencing
+Transactions" section in this document and also the "Commands" chapter of the
+<a class="ulink" href="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/VMS_manual/index.html" target="_top">GT.M Programmer's Guide</a>.</p></div><div class="sect2" title="VIEW Keywords"><div class="titlepage"><div><div><h3 class="title"><a name="jrnl_view"></a>VIEW Keywords<a class="indexterm" name="id3237997"></a></h3></div></div></div><p>GT.M provides the JNLFLUSH and JNLWAIT keywords as arguments to the VIEW
+command. Normal operation does not require VIEW commands to control journaling.
+However, under special circumstances, such as debugging, VIEW commands with
+journal keywords allow an M program to ensure that GT.M has transferred all its
+updates to the journal file(s).</p><p>VIEW "JNLFLUSH":region initiates a complete transfer of all buffered journal
+records for a given region from memory to the disk. Normally, the transfer of
+journal buffers to disk happens automatically. The transfer is triggered by room
+requirements to hold new journal records and/or the passage of time since the
+last update. VIEW "JNLFLUSH" (without a specified region) flushes all regions in
+the current Global Directory. </p><p>VIEW "JNLWAIT" causes GT.M to suspend process execution until all updates
+initiated by the process in all regions have been transferred to the journal
+file (on disk). Updates within M TRANSACTIONS typically behave as if they
+included an implicit VIEW "JNLWAIT" with their final TCOMMIT. TRANSACTIONS with
+a TRANSACTION ID="BATCH" or "BA" are exempted from the implicit "JNLWAIT".
+Normally, process execution for updates outside of M transactions continues
+asynchronously with the transfer of journal records to disk.</p><p>For more information on the VIEW command, refer to the "Commands" chapter in
+the <a class="ulink" href="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/VMS_manual/index.html" target="_top">GT.M Programmer's Guide</a>.</p></div><div class="sect2" title="$VIEW() Keywords"><div class="titlepage"><div><div><h3 class="title"><a name="view"></a>$VIEW() Keywords<a class="indexterm" name="id3238082"></a></h3></div></div></div><p>GT.M provides the JNLACTIVE, JNLFILE, REGION and JNLTRANSACTION keywords as
+arguments to the $VIEW function. Normal operation does not require $VIEW() to
+examine journaling status. However, under certain circumstances, such as during
+debugging of logical transaction design and implementation, $VIEW() may provide
+a useful tool.</p><p>$VIEW("JNLACTIVE", region) returns a zero (0) indicating journaling is
+disabled for the region, one (1) indicating journaling is enabled but OFF, or
+two (2) indicating journaling is enabled and ON for the named region.</p><p>$VIEW("JNLFILE", region) returns the journal file name. If no journal filename
+has been established it returns a null string. Otherwise it is a fully
+translated filename.</p><p>$VIEW("REGION", expr) where expr evaluates to a gvn, returns the name of the
+region associated with the named gvn. This parameter may be used in conjuction
+with the above two parameters (JNLACTIVE &amp; JNLFILE), to get journaling
+status in a configuration-independent manner.</p><p>$VIEW("JNLTRANSACTION") returns the difference between the number of ZTSTARTs
+that have been issued and the number of ZTCOMMITs. If no fenced transaction is
+in progress, then a zero (0) is returned. This serves an analogous function to
+$TLEVEL for transactions that use TSTART and TCOMMIT. </p><p>For more information on $VIEW(), refer to the "Functions" chapter in the <a class="ulink" href="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/VMS_manual/index.html" target="_top">GT.M Programmer's Guide</a>.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06s03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch06s05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Journal File Operations </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> MUPIP Set</td></tr></table></div></body></html>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZPID()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter7.html" title="ChapterA 7.A Functions" />
+    <link rel="prev" href="examples_of_zparse.html" title="Examples of $ZPARSE()" />
+    <link rel="next" href="examples_of_zpid.html" title="Examples of $ZPID()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZPID()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zparse.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 7.A Functions</th>
+          <td width="20%" align="right">A <a accesskey="n" href="examples_of_zpid.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zpid"></a>$ZPID()</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zpid.html">Examples of $ZPID()</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4191569" class="indexterm"></a>
+      <p>The $ZPID function returns the process identification number (PID) of the first or next currently accessible process in the system. The $ZPID() function is similar to the DCL lexical function F$PID except that M represents the resulting PIDs in decimal.</p>
+      <p>The format for the $ZPID function is:</p>
+      <pre class="programlisting">
+    $ZPID(tvexpr)
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>If the truth-valued expression is false (0), $ZPID returns the first accessible, currently active PID in the VMS system; if the truth-valued expression is true (non-zero), $ZPID returns the &quot;next&quot; PID, with respect to the last call to $ZPID; if $ZPID() has a non-zero argument before it has a zero (0) argument, the function generates a run-time error.</p>
+          </li>
+          <li>
+            <p>If the last prior PID returned is the last PID accessible, $ZPID() returns a null string. </p>
+          </li>
+        </ul>
+      </div>
+      <p>$ZPID() provides a tool for identifying processes in the VMS environment from within GT.M. Accessing information about processes belonging to other users requires certain VMS privileges. Consult your system manager if you feel you require additional privileges.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zparse.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter7.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="examples_of_zpid.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of $ZPARSE()A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Examples of $ZPID()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

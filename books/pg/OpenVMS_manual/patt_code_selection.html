@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Pattern Code Selection</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="match_alt_pattern.html" title="Matching Alternative Patterns" />
+    <link rel="prev" href="pattern_code_def.html" title="Pattern Code Definition" />
+    <link rel="next" href="chapter14.html" title="ChapterA 14.A Error Processing" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Pattern Code Selection</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="pattern_code_def.html">Prev</a>A </td>
+          <th width="60%" align="center">Matching Alternative Patterns</th>
+          <td width="20%" align="right">A <a accesskey="n" href="chapter14.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="patt_code_selection"></a>Pattern Code Selection</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4236779" class="indexterm"></a>
+      <p>To establish a default patcode table for a database define the logical name:</p>
+      <pre class="programlisting">
+	$ DEFINE GTM_PATTERN_FILE pattable-filename
+	</pre>
+      <p>where pattable-filename is the text file containing the patcode table definition, and </p>
+      <pre class="programlisting">
+	$ DEFINE GTM_PATTERN_TABLE table-name
+	</pre>
+      <p>where table-name is the name of the patcode table within the file specification pointed to by GTM_PATTERN_FILE. </p>
+      <p>Within an active process, the patcode table is established using the M VIEW command and the %PATCODE utility. Before invoking the %PATCODE utility, you may use VIEW to load pattern definition files for GT.M. The required keyword and value are:</p>
+      <pre class="programlisting">
+	VIEW &quot;PATLOAD&quot;:&quot;pathname&quot;	
+	</pre>
+      <p>This allows you to use the %PATCODE utility or the VIEW command to set current patcode table. The format of the VIEW command to set the patcode table is:</p>
+      <pre class="programlisting">
+	VIEW &quot;PATCODE&quot;:&quot;tablename&quot;
+	</pre>
+      <p>This is equivalent to set ^%PATCODE explained below.</p>
+      <p>%PATCODE has the following extrinsic entry points:</p>
+      <pre class="programlisting">
+	set^%PATCODE(tn)
+	</pre>
+      <p>sets the current patcode table to the one having the name specified by tn, in the defined file specification.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt; WRITE $$set^%PATCODE(&quot;NEWLANGUAGE&quot;)
+	1
+	</pre>
+      <p>If there is no table with that name, the function returns a false (0) and does not modify the current patcode table.</p>
+      <pre class="programlisting">
+	get^%PATCODE
+	</pre>
+      <p>returns the current patcode table name.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt; WRITE $$get^%PATCODE
+	NEWLANGUAGE	
+	</pre>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="pattern_code_def.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="match_alt_pattern.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="chapter14.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Pattern Code DefinitionA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A ChapterA 14.A Error Processing</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

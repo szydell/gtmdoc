@@ -1,0 +1,518 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>DSE Command Summary</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch10.html" title="Chapter 10. Database Structure Editor"><link rel="prev" href="ch10s02.html" title="DSE Commands and Qualifiers"><link rel="next" href="ch11.html" title="Chapter 11. Maintaining Database Integrity"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">DSE Command Summary</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch10s02.html">Prev</a> </td><th width="60%" align="center">Chapter 10. Database Structure Editor</th><td width="20%" align="right"> <a accesskey="n" href="ch11.html">Next</a></td></tr></table><hr></div><div class="sect1" title="DSE Command Summary"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dse_cmmd_summary"></a>DSE Command Summary</h2></div></div></div><div class="informaltable"><table border="1"><colgroup><col><col><col></colgroup><thead><tr><th colspan="3">
+<p>DSE Command Summary </p>
+</th></tr><tr><th>
+<p>COMMAND</p>
+</th><th>
+<p>QUALIFIERS</p>
+</th><th>
+<p>COMMENTS</p>
+</th></tr></thead><tbody><tr><td>
+<p>AD[D]</p>
+</td><td>
+<p>
+<span>/</span>B[LOCK]=block-number</p>
+</td><td>-</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>D[ATA]=string</p>
+</td><td>
+<p>Incompatible with <span>/</span>POINTER, <span>/</span>STAR</p>
+</td></tr><tr><td> -</td><td>
+<p>
+<span>/</span>K[EY]=key</p>
+</td><td>
+<p>Incompatible with <span>/</span>STAR</p>
+</td></tr><tr><td> -</td><td>
+<p>
+<span>/</span>O[FFSET]=offset</p>
+</td><td>
+<p>Incompatible with <span>/</span>RECORD, <span>/</span>STAR</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>P[OINTER]=pointer</p>
+</td><td>
+<p>Incompatible with <span>/</span>DATA</p>
+</td></tr><tr><td> -</td><td>
+<p>
+<span>/</span>R[ECORD]=record-number</p>
+</td><td>
+<p>Incompatible with <span>/</span>OFFSET, <span>/</span>STAR</p>
+</td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>S[TAR]</p>
+</td><td>
+<p>Incompatible with <span>/</span>DATA,<span>/</span>KEY, <span>/</span>OFFSET, <span>/</span>RECORD</p>
+</td></tr><tr><td>
+<p>AL[L]</p>
+</td><td>
+<p>
+<span>/</span>B[UFFER_FLUSH]</p>
+</td><td>
+<p>Incompatible with <span>/</span>RENEW</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>C[RITINIT]</p>
+</td><td>
+<p>Incompatible with <span>/</span>RENEW, <span>/</span>RELEASE, <span>/</span>SEIZE</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>[NO]F[REEZE]</p>
+</td><td>
+<p>Incompatible with <span>/</span>RENEW</p>
+</td></tr><tr><td>
+<p>-</p>
+</td><td>
+<p>
+<span>/</span>O[VERRIDE]</p>
+</td><td>
+<p>Meaningful only with <span>/</span>[NO]FREEZE</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>REF[ERENCE]</p>
+</td><td>
+<p>Incompatible with <span>/</span>RENEW</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>REL[EASE]</p>
+</td><td>
+<p>Incompatible with <span>/</span>CRITINIT, <span>/</span>RENEW,<span>/</span>SEIZE</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>REN[EW]</p>
+</td><td>
+<p>Use alone</p>
+</td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>S[EIZE]</p>
+</td><td>
+<p>Incompatible with <span>/</span>RENEW, <span>/</span>RELEASE, <span>/</span>CRITINIT</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>W[CINIT]</p>
+</td><td>
+<p>Incompatible with <span>/</span>RENEW</p>
+</td></tr><tr><td>
+<p>B[UFFER _FLUSH]</p>
+</td><td>-</td><td>-</td></tr><tr><td>
+<p>CH[ANGE]</p>
+</td><td>
+<p>
+<span>/</span>BL[OCK]=block-number</p>
+</td><td>
+<p>Incompatible with <span>/</span>FILEHEADER and qualifiers used with <span>/</span>FILEHEADER</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>BS[IZ]=block-size</p>
+</td><td>
+<p>Use only with <span>/</span>BLOCK, <span>/</span>LEVEL, <span>/</span>TN</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>L[EVEL]=level</p>
+</td><td>
+<p>Use only with <span>/</span>BLOCK, <span>/</span>BSIZ, <span>/</span>TN</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>TN
+[=transaction-nmbr]</p>
+</td><td>
+<p>Use only with <span>/</span>BLOCK, <span>/</span>BSIZ, <span>/</span>LEVEL</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>OF[FSET]=offset</p>
+</td><td>
+<p>Use only with <span>/</span>BLOCK, <span>/</span>CMPC, <span>/</span>RSIZ</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>RE[CORD]=record-number</p>
+</td><td>
+<p>Use only with <span>/</span>BLOCK, <span>/</span>CMPC, <span>/</span>RSIZ</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>CM[PC]=
+compression-count</p>
+</td><td>
+<p>Use only with <span>/</span>BLOCK, <span>/</span>RECORD, <span>/</span>OFFSET, <span>/</span>RSIZ</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>RS[IZ]=record-size</p>
+</td><td>
+<p>Use only with <span>/</span>CMPC <span>/</span>OFFSET, <span>/</span>RECORD, <span>/</span>BLOCK</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>F[ILEHEADER]</p>
+</td><td>
+<p>Incompatible with <span>/</span>BSIZ, <span>/</span>CMPC, <span>/</span>TN, <span>/</span>LEVEL, <span>/</span>OFFSET, <span>/</span>RECORD,
+<span>/</span>RSIZ</p>
+</td></tr><tr><td>-</td><td>
+<p>*<span>/</span>BLK[_SIZE]=block-size</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>BLO[CKS_FREE]=free-blocks</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>B_C[OMPREHENSIVE]=transaction-number</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>B_I[NCREMENTAL]=transaction-number</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>B_R[ECORD]=transaction-number</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>CO[RRUPT_FILE]=value</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER</p>
+</td></tr><tr><td>- </td><td>
+<p>
+<span>/</span>CU[RRENT_TN]=transaction-number </p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER</p>
+</td></tr><tr><td>-</td><td>
+<p>*<span>/</span>FL[USH_TIME][=delta-time]</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>FR[EEZE]=value</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER</p>
+</td></tr><tr><td> -</td><td>
+<p>
+<span>/</span>K[EY_MAX_SIZE]=key-max-size</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>N[ULL_SUBSCRIPTS]=value</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER</p>
+</td></tr><tr><td> -</td><td>
+<p>*<span>/</span>Q[UANTUM_INTERVAL] [=delta-time]</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>REC[ORD_MAX_SIZE]=record-max-size</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>REF[ERENCE_COUNT]=reference-count</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td>-</td><td>
+<p>*<span>/</span>[NO]RES[PONSE_INTERVAL] [=delta-time]</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td> -</td><td>
+<p>*<span>/</span>[NO]S[TALENESS_TIMER] [=delta-time]</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td>-</td><td>
+<p>*<span>/</span>TIC[K_INTERVAL] [=delta-time]</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td> - </td><td>
+<p>*<span>/</span>TIM[ERS_PENDING]=timers-pending</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td> -</td><td>
+<p>
+<span>/</span>TO[TAL_BLKS]=total-blocks</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER</p>
+</td></tr><tr><td> -</td><td>
+<p>*<span>/</span>TR[IGGER_FLUSH]=trigger-flush</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER</p>
+</td></tr><tr><td> - </td><td>
+<p>*<span>/</span>W[RITES_PER_FLUSH]=writes-per-flush</p>
+</td><td>
+<p>Use only with <span>/</span>FILEHEADER; decimal</p>
+</td></tr><tr><td>
+<p>CL[OSE]</p>
+</td><td>-</td><td>-</td></tr><tr><td>
+<p>CR[ITICAL]</p>
+</td><td>
+<p>
+<span>/</span>I[NIT]</p>
+</td><td>
+<p>Use only with <span>/</span>RESET</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>O[WNER]</p>
+</td><td>
+<p>Use alone</p>
+</td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>REL[EASE]</p>
+</td><td>
+<p>Use alone</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>REM[OVE]</p>
+</td><td>
+<p>Use alone</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>RES[ET]</p>
+</td><td>
+<p>Use only with <span>/</span>INIT</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>S[EIZE]</p>
+</td><td>
+<p>Use alone</p>
+</td></tr><tr><td>
+<p>D[UMP]</p>
+</td><td>
+<p>
+<span>/</span>B[LOCK]=block-number</p>
+</td><td>
+<p>Incompatible with <span>/</span>FILEHEADER</p>
+</td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>C[OUNT]=count</p>
+</td><td>
+<p>Incompatible with <span>/</span>FILEHEADER</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>F[ILEHEADER]</p>
+</td><td>
+<p>Use alone</p>
+</td></tr><tr><td> -</td><td>
+<p>
+<span>/</span>G[LO]</p>
+</td><td>
+<p>Incompatible with <span>/</span>FILEHEADER, <span>/</span>HEADER</p>
+</td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>[NO]H[EADER]</p>
+</td><td>
+<p>Incompatible with <span>/</span>FILEHEADER, <span>/</span>GLO</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>O[FFSET]=offset</p>
+</td><td>
+<p>Incompatible with <span>/</span>FILEHEADER, <span>/</span>RECORD</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>R[ECORD]=record-number</p>
+</td><td>
+<p>Incompatible with <span>/</span>FILEHEADER, <span>/</span>OFFSET</p>
+</td></tr><tr><td>
+<p>EV[ALUATE]</p>
+</td><td>
+<p>
+<span>/</span>D[ECIMAL]</p>
+</td><td>
+<p>Incompatible with <span>/</span>HEXADECIMAL</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>H[EXADECIMAL]</p>
+</td><td>
+<p>Incompatible with <span>/</span>DECIMAL</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>N[UMBER]=number</p>
+</td><td>
+<p>Required</p>
+</td></tr><tr><td>
+<p>EX[IT]</p>
+</td><td>-</td><td>-</td></tr><tr><td>
+<p>F[IND]</p>
+</td><td>
+<p>
+<span>/</span>B[LOCK]=block-number</p>
+</td><td>
+<p>Incompatible with <span>/</span>KEY, <span>/</span>REGION</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>E[XHAUSTIVE]</p>
+</td><td>
+<p>Incompatible with <span>/</span>KEY, <span>/</span>REGION, <span>/</span>FREEBLOCK </p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>F[REEBLOCK]</p>
+</td><td>
+<p>Required with <span>/</span>HINT; compatible with <span>/</span>BLOCK </p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>H[INT]=block-number</p>
+</td><td>
+<p>Required with <span>/</span>FREEBLOCK</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>K[EY]=key</p>
+</td><td>
+<p>Use alone</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>R[EGION][=region]</p>
+</td><td>
+<p>Use alone</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>S[IBLINGS]</p>
+</td><td>
+<p>Incompatible with <span>/</span>FREEBLOCK, <span>/</span>HINT, <span>/</span>KEY, <span>/</span>REGION</p>
+</td></tr><tr><td>
+<p>H[ELP]</p>
+</td><td>
+<p>[help topic]</p>
+</td><td>-</td></tr><tr><td>
+<p>I[NTEGRIT]</p>
+</td><td>
+<p>
+<span>/</span>B[LOCK]=block-number</p>
+</td><td> - </td></tr><tr><td>
+<p>M[APS]</p>
+</td><td>
+<p>
+<span>/</span>BL[OCK]=block-number</p>
+</td><td>
+<p>Incompatible with <span>/</span>RESTORE_ALL</p>
+</td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>BU[SY]</p>
+</td><td>
+<p>Compatible only with <span>/</span>BLOCK</p>
+</td></tr><tr><td>- </td><td>
+<p>
+<span>/</span>F[REE]</p>
+</td><td>-</td></tr><tr><td>- </td><td>
+<p>
+<span>/</span>M[ASTER]</p>
+</td><td>- </td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>R[ESTORE_ALL]</p>
+</td><td>
+<p>Use alone</p>
+</td></tr><tr><td>
+<p>OP[EN]</p>
+</td><td>
+<p>
+<span>/</span>F[ILE]=file</p>
+</td><td>- </td></tr><tr><td>
+<p>OV[ERWRITE]</p>
+</td><td>
+<p>
+<span>/</span>B[LOCK]=block number</p>
+<p>
+<span>/</span>D[ATA]=string</p>
+</td><td>- </td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>O[FFSET]=offset</p>
+</td><td>-</td></tr><tr><td>
+<p>P[AGE]</p>
+</td><td>-</td><td>-</td></tr><tr><td>
+<p>RA[NGE]</p>
+</td><td>
+<p>
+<span>/</span>F[ROM]=block-number</p>
+</td><td>-</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>T[O]=block-number</p>
+</td><td>-</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>I[NDEX]=block_number</p>
+<p>
+<span>/</span>L[OST]=block_number</p>
+<p>
+<span>/</span>[NOT]BUSY=busy/free </p>
+<p>
+<span>/</span>S[TAR]=block_number</p>
+<p>
+<span>/</span>L[OWER]=key</p>
+</td><td>-</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>U[PPER]=key</p>
+</td><td>-</td></tr><tr><td>
+<p>REM[OVE]</p>
+</td><td>
+<p>
+<span>/</span>B[LOCK]=block-number</p>
+</td><td>-</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>C[OUNT]=count</p>
+</td><td>
+<p>Incompatible with <span>/</span>VERSION</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>O[FFSET]=offset</p>
+</td><td>
+<p>Incompatible with <span>/</span>VERSION, <span>/</span>RECORD</p>
+</td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>R[ECORD]=record-number</p>
+</td><td>
+<p>Incompatible with <span>/</span>VERSION, <span>/</span>OFFSET</p>
+</td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>V[ERSION]=version-number</p>
+</td><td>
+<p>Use only with <span>/</span>BLOCK; decimal</p>
+</td></tr><tr><td>
+<p>RES[TORE]</p>
+</td><td>
+<p>
+<span>/</span>B[LOCK]=block-number</p>
+</td><td> - </td></tr><tr><td>- </td><td>
+<p>
+<span>/</span>F[ROM]=block-number</p>
+</td><td> - </td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>R[EGION]=region</p>
+</td><td>- </td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>V[ERSION]=version-number</p>
+</td><td>
+<p>Required; decimal</p>
+</td></tr><tr><td>
+<p>SA[VE]</p>
+</td><td>
+<p>
+<span>/</span>B[LOCK]=block-number</p>
+</td><td>-</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>C[OMMENT]=string</p>
+</td><td>
+<p>Incompatible with <span>/</span>LIST</p>
+</td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>L[IST]</p>
+</td><td>
+<p>Incompatible with <span>/</span>COMMENT</p>
+</td></tr><tr><td>
+<p>SH[IFT]</p>
+</td><td>
+<p>
+<span>/</span>B[ACKWARD]=shift</p>
+</td><td>
+<p>Incompatible with <span>/</span>FORWARD</p>
+</td></tr><tr><td> - </td><td>
+<p>
+<span>/</span>F[ORWARD]=shift</p>
+</td><td>
+<p>Incompatible with <span>/</span>BACKWARD</p>
+</td></tr><tr><td>- </td><td>
+<p>
+<span>/</span>O[FFSET]=offset</p>
+</td><td>- </td></tr><tr><td>
+<p>SP[AWN]</p>
+</td><td>
+<p>[CLI command]</p>
+</td><td> -</td></tr><tr><td>
+<p>W[CINIT]</p>
+</td><td> - </td><td> - </td></tr><tr><td colspan="3">
+<p>* Use these qualifiers only with instructions from FIS.</p>
+</td></tr></tbody></table></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch10s02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch10.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch11.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">DSE Commands and Qualifiers </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 11. Maintaining Database Integrity</td></tr></table></div></body></html>

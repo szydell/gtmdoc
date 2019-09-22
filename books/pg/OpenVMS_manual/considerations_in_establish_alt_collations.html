@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Considerations in Establishing Alternative Collations</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="creating_the.html" title="Creating the Executable Image" />
+    <link rel="prev" href="creating_the.html" title="Creating the Executable Image" />
+    <link rel="next" href="defin_a_default_database_collation_method.html" title="Defining a Default Database Collation Method" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Considerations in Establishing Alternative Collations</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="creating_the.html">Prev</a>A </td>
+          <th width="60%" align="center"><span>Creating the Executable Image</span></th>
+          <td width="20%" align="right">A <a accesskey="n" href="defin_a_default_database_collation_method.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="considerations_in_establish_alt_collations"></a>Considerations in Establishing Alternative Collations</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4235595" class="indexterm"></a>
+      <p>Alternative collation sequences for a global must be set when the global contains no data. When the global is defined the collation sequence is stored in the global. This ensures the future integrity of the global's collation. If it becomes necessary to change the collation sequence of a global containing data, you must copy the data to a temporary repository, modify the variablea??s collation sequence, and restore the data from the temporary repository.</p>
+      <p>Since the user-defined routines for transformation, inverse transformation, version identification, and verification are packaged in a single executable, the performance of the image typically improves if it is installed using the VMSINSTAL command.</p>
+      <p>Be careful when creating the transformation and inverse transformation routines. The transformation routine must unambiguously and reliably encode every possible input value. The inverse routine must faithfully return the original value in every case. Errors in these routines can produce delayed symptoms that could be hard to debug. These routines may not be written in M.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="creating_the.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="creating_the.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="defin_a_default_database_collation_method.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top"><span>Creating the Executable Image</span>A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Defining a Default Database Collation Method</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZQGBLMOD()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter7.html" title="ChapterA 7.A Functions" />
+    <link rel="prev" href="zpriveleges_examples.html" title="Examples of $ZPRIVILEGE()" />
+    <link rel="next" href="zsearch.html" title="$ZSEARCH()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZQGBLMOD()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zpriveleges_examples.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 7.A Functions</th>
+          <td width="20%" align="right">A <a accesskey="n" href="zsearch.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zqgblmod"></a>$ZQGBLMOD()</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4191853" class="indexterm"></a>
+      <p>The $ZQGBLMOD function enables an application to determine whether it can safely apply a lost transaction to the database. A lost transaction is a transaction that must be rolled off a database to maintain dual-site consistency. </p>
+      <p>The format for the $ZQGBLMOD function is:</p>
+      <pre class="programlisting">
+    $ZQGBLMOD(gvn)        
+    </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The subscripted or non-subscripted global variable name (gvn) specifies the target node. </p>
+          </li>
+          <li>
+            <p>A return value of zero (0) means the value of the global variable has not changed since the last synchronization of the primary and secondary.</p>
+          </li>
+          <li>
+            <p>A return value of one (1) means the value of the global variable may have changed since the last synchronization of the primary and secondary.</p>
+          </li>
+        </ul>
+      </div>
+      <p>$ZQGBLMOD function produces an error if you submit an argument that is not a global variable name. </p>
+      <p>Internally, $ZQGBLMOD (gvn) compares the GT.M transaction number in the database block in which the global variable name is stored with the value in the resync_tn field stored in the database file header.</p>
+      <p>For example, if x is the transaction number of the level-0 database block in which gvn resides, and y is the value of resync_tn of region reg containing gvn, then the following is true:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>If x AGBP y, no transaction modified the level-0 database block z in which gvn resides since the databases at primary and secondary became synchronized with each other. $ZQGBLMOD() returns a zero (0).</p>
+          </li>
+          <li>
+            <p>If x &gt; y, some transaction modified z, but not necessarily gvn, after the primary and secondary system databases synchronized with each other. $ZQGBLMOD() returns a one (1). </p>
+          </li>
+        </ul>
+      </div>
+      <p>If a transaction is a lost transaction that has been rolled back and it is determined that for all the M globals set and killed in the transaction $ZQGBLMOD() is zero (0), it is probably safe to apply the updates automatically. However, this determination of safety can only be made by the application designer and not by GT.M. If the $ZQGBLMOD() is one (1) for any set or kill in the transaction, it is not safe to apply the update.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>The test of $ZQGBLMOD() and applying the updates must be encapsulated inside a GT.M transaction.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>Another approach to handling lost transactions would be to store in the database the initial message sent by a client, as well as the outcome and the response, and to reprocess the message with normal business logic. If the outcome is the same, the transaction can be safely applied. </p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>If restartable batch operations are implemented, lost batch transactions can be ignored since a subsequent batch restart will process them correctly.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zpriveleges_examples.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter7.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="zsearch.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of $ZPRIVILEGE()A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $ZSEARCH()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

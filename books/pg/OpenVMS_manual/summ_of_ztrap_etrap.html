@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Summary of $ETRAP &amp; $ZTRAP Error-Handling Options</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="err_actions.html" title="Error Actions" />
+    <link rel="prev" href="setting_ztrap_and_other_actions.html" title="Setting $ZTRAP to Other Actions " />
+    <link rel="next" href="errors_in_ztrap.html" title="Errors in $ZTRAP" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Summary of $ETRAP &amp; $ZTRAP Error-Handling Options</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="setting_ztrap_and_other_actions.html">Prev</a>A </td>
+          <th width="60%" align="center">Error Actions</th>
+          <td width="20%" align="right">A <a accesskey="n" href="errors_in_ztrap.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="summ_of_ztrap_etrap"></a>Summary of $ETRAP &amp; $ZTRAP Error-Handling Options</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4239506" class="indexterm"></a>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td colspan="2">
+	<p>Summary of Error-Handling Options</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>ERROR-HANDLING FEATURE</p>
+	</td>
+              <td>
+	<p>DESCRIPTION AND POSSIBLE USES</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>$ETRAP=&quot;BREAK&quot;</p>
+	<p>$ZTRAP=&quot;BREAK&quot;</p>
+	</td>
+              <td>
+	<p>Returns to Direct Mode upon encountering an error that enables interactive debugging to determine the nature of the error.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>$ETRAP=&quot;GOTO..&quot;</p>
+	<p>$ZTRAP=&quot;GOTO..&quot;</p>
+	</td>
+              <td>
+	<p>Transfers control upon encountering an error and allows for continuation of execution after the error. Use with an error handling routine that may record or report an error.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>$ETRAP=&quot;ZGOTO..&quot;</p>
+	<p>$ZTRAP=&quot;ZGOTO..&quot;</p>
+	</td>
+              <td>
+	<p>Similar to GOTO, but additionally allows for removal of levels from the stack. Use to allow recovery to specific point, such as a menu.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>NEW $ETRAP</p>
+	<p>NEW $ZTRAP</p>
+	</td>
+              <td>
+	<p>Stacks the old value of $ETRAP or $ZTRAP and sets the new value to the empty string. Usually followed by a SET $ETRAP or SET $ZTRAP. After a QUIT from a given level, GT.M restores the value held prior to the NEW. Use to enable different methods of error handling at different levels within an application.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>$ETRAP=&quot;DO...&quot;</p>
+	</td>
+              <td>
+	<p>Transfers execution temporarily to another label upon encountering an error. After return from a DO, GT.M QUITs from the stack level at which the error occured. Whether control returns to the invoking code or to the trap handler at the less nested level, depends on the value of $ECODE.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>$ZTRAP=&quot;DO...&quot;</p>
+	</td>
+              <td>
+	<p>Transfers execution temporarily to another label upon encountering an error. When GT.M returns from a DO and completes the $ZTRAP action, execution continues at the beginning of the line containing the error and re-executes the entire line containing the error. Use with I/O device errors where operator may intervene to correct the error condition.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>$ZTRAP=&quot;&quot;</p>
+	</td>
+              <td>
+	<p>Returns to <span>DCL</span> with the Status Code and terminates execution. If SET in error handling routines, prevents infinite loops. Prevents access to Direct Mode. Use in production code when the invoking <span>DCL</span> needs to test <span>$Status</span>.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>$ETRAP=&quot;SET $ECODE=&quot;&quot;&quot;&quot;&quot;</p>
+	<p>$ZTRAP=&quot;QUIT&quot;</p>
+	</td>
+              <td>
+	<p>Terminates execution at that level upon encountering an error, and returns to the invocation level at the point immediately following the invocation. Use to ignore errors on a particular level and continue executing.</p>
+	</td>
+            </tr>
+            <tr>
+              <td>
+	<p>$ZTRAP=&quot;HALT&quot;</p>
+	</td>
+              <td>
+	<p>Returns to <span>DCL</span> as if normal termination occurred. Avoids access to Direct Mode. Use in production code when the invoking <span>DCL</span> does not need to examine the exit status of the GT.M process.</p>
+	</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="setting_ztrap_and_other_actions.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="err_actions.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="errors_in_ztrap.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Setting $ZTRAP to Other Actions A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Errors in $ZTRAP</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

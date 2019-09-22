@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Maintenance of $X and $Y</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="cursor_position_variable.html" title="Cursor Position Variables" />
+    <link rel="prev" href="y_cpv.html" title="$Y" />
+    <link rel="next" href="status_variables.html" title="Status Variables" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Maintenance of $X and $Y</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="y_cpv.html">Prev</a>A </td>
+          <th width="60%" align="center">Cursor Position Variables</th>
+          <td width="20%" align="right">A <a accesskey="n" href="status_variables.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="mainetance_of_z_and_y"></a>Maintenance of $X and $Y</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4197778" class="indexterm"></a>
+      <p>In GT.M, the following factors affect the maintenance of the virtual cursor position ($X and $Y):</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The bounds of the virtual &quot;page&quot;</p>
+          </li>
+          <li>
+            <p>GT.M format control characters</p>
+          </li>
+          <li>
+            <p>GT.M character filtering</p>
+          </li>
+        </ul>
+      </div>
+      <p>Each device has a WIDTH and a LENGTH that define the virtual &quot;page.&quot; The WIDTH determines the maximum size of a record for a device, while the LENGTH determines how many records fit on a page. GT.M starts a new record when the current record size ($X) reaches the maximum WIDTH and the device has WRAP enabled. When the current line ($Y) reaches the maximum LENGTH, GT.M starts a new page.</p>
+      <p>GT.M has several format control characters that allow the manipulation of the virtual cursor. For all I/O devices, the GT.M format control characters do the following:</p>
+      <p>!:    Sets $X to zero (0) and increments $Y, and terminates the logical record in progress. The definition of &quot;logical record&quot; varies from device to device, and is discussed in each device section.</p>
+      <p>#:    Sets $X and $Y to zero (0), and terminates the logical record in progress.</p>
+      <p>?n:   If n is greater than $X, writes n-$X spaces to the device, bringing $X to n. If n is less than or equal to $X, ?n has no effect. When WRAP is enabled and n exceeds the WIDTH of the line, WRITE ?n increments $Y and sets $X equal to n#WIDTH, where # is the GT.M modulo operator.</p>
+      <p>GT.M provides two modes of character filtering. When filtering is enabled, certain &lt;CTRL&gt; characters and/or escape sequences have special effects on the cursor position (e.g., &lt;BS&gt; (ASCII 8) may decrement $X, if $X is non-zero). For more information on write filtering, refer to the section on the [NO]FILTER deviceparameter <span>later in this chapter</span>.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="y_cpv.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="cursor_position_variable.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="status_variables.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$YA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Status Variables</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

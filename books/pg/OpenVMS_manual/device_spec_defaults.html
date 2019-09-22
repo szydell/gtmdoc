@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Device Specification Defaults</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="io_devices_9.html" title="I/O Devices" />
+    <link rel="prev" href="io_device_recognition.html" title="I/O Device Recognition" />
+    <link rel="next" href="how_io_device_params_work.html" title="How I/O Device parameters Work" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Device Specification Defaults</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="io_device_recognition.html">Prev</a>A </td>
+          <th width="60%" align="center">I/O Devices</th>
+          <td width="20%" align="right">A <a accesskey="n" href="how_io_device_params_work.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="device_spec_defaults"></a>Device Specification Defaults</h3>
+          </div>
+        </div>
+      </div>
+      <p>GT.M uses standard <span>OpenVMS file-specifications</span> for device specifiers.</p>
+      <p>The complete format for a <span>file-specification</span> is:</p>
+      <pre class="programlisting">
+    <span>
+    node::device:[directory]file.filetype;version
+    </span>
+    
+    </pre>
+      <p>If the expression specifying a device does not contain a complete <span>file-specification</span>, the expression may start with <span>a logical name</span> that translates to one or more leading components of the file-specification filename. GT.M applies default values for the missing components. </p>
+      <p>The GT.M <span>file-specification</span> defaults are the following:</p>
+      <p></p>
+      <p>Node:         Current user node</p>
+      <p>Device:       Current default OpenVMS device </p>
+      <p>Directory:    Current default OpenVMS directory</p>
+      <p>Filetype:     .DAT for the file extension</p>
+      <p>Version:      Latest version number</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="io_device_recognition.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="io_devices_9.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="how_io_device_params_work.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">I/O Device RecognitionA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A How I/O Device parameters Work</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

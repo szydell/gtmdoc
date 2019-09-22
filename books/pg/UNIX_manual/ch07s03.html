@@ -1,0 +1,141 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$Data()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s02.html" title="$Char()">
+<link rel="next" href="ch07s04.html" title="$Extract()">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$Data()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s02.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s04.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$Data()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="data"></a>$Data()<a class="indexterm" name="idp55373984"></a>
+</h2></div></div></div>
+<p>Returns an integer code describing the value and descendent status of a local or <span>global</span> variable.</p>
+<p>The format for the $DATA function is:</p>
+<pre class="programlisting">$D[ATA](glvn)</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The subscripted or unsubscripted global or local variable name specifies the target node. </p></li>
+<li class="listitem"><p>If the variable is undefined, $DATA() returns 0.</p></li>
+<li class="listitem"><p>If the variable has a value but no descendants, $DATA() returns 1.</p></li>
+<li class="listitem"><p>If the variable has descendants but no value, $DATA() returns 10.</p></li>
+<li class="listitem"><p>If the variable has a value and descendants, $DATA() returns 11.</p></li>
+<li class="listitem"><p>$ZDATA() extends $DATA() to reflects the current alias state of the lvn or name argument to identify alias and alias container variables. For more information, refer to <a class="xref" href="ch07s32.html" title="$ZDATA()">&#8220;$ZDATA()&#8221;</a>.</p></li>
+</ul></div>
+<p>The following table summarizes $DATA() return values.</p>
+<div class="informaltable">
+<a name="tbldataret"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="3">
+<p>$DATA() Results</p>
+</th></tr>
+<tr><th colspan="3">
+<p>VALUE</p>
+</th></tr>
+<tr>
+<th> </th>
+<th>
+<p>DESCENDANTS (NO)</p>
+</th>
+<th>
+<p>DESCENDANTS (YES)</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>NO</p>
+</td>
+<td>
+<p>0</p>
+</td>
+<td>
+<p>10</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>YES</p>
+</td>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>11</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>$DATA() return values can also be understood as a pair of truth-values where the left describes descendants and the right describes data 1 and where M suppresses any leading zero (representing no descendants).</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_data"></a>Examples<span> of $DATA()</span><a class="indexterm" name="idp57285392"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;Kill  Write $Data(a)
+0
+GTM&gt;Set a(1)=1 Write $Data(a(1))
+1
+GTM&gt;Write $Data(a)
+10
+GTM&gt;Set a=0 Write $Data(a)
+11
+GTM&gt;</pre>
+<p>This uses $DATA to display all possible $DATA() results.</p>
+<p>Example:</p>
+<pre class="programlisting">lock ^ACCT(0)
+if '$data(^ACCT(0)) set ^ACCT(0)=0
+set (ACCT,^ACCT(0))=^ACCT(0)+1
+lock</pre>
+<p>This uses $DATA() to determine whether a global node requires initialization.</p>
+<p>Example:</p>
+<pre class="programlisting">for  set cus=$O(^cus(cus)) quit:cus=""  if $data(^(cus))&gt;1 do WORK</pre>
+<p>This uses $DATA() to determine whether a global node has descendants and requires additional processing.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s02.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s04.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$Char() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $Extract()</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

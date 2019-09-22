@@ -1,0 +1,444 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>GDE Command Summary</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch04.html" title="Chapter 4. Global Directory Editor"><link rel="prev" href="ch04s05.html" title="Name, Region, and Segment Qualifiers"><link rel="next" href="ch05.html" title="Chapter 5. MUPIP"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">GDE Command Summary</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04s05.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Global Directory Editor</th><td width="20%" align="right"> <a accesskey="n" href="ch05.html">Next</a></td></tr></table><hr></div><div class="sect1" title="GDE Command Summary"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gde_command_summary"></a>GDE Command Summary<a class="indexterm" name="id3227147"></a></h2></div></div></div><p>The following table summarizes GDE commands, abbreviations, object types, required
+object names, and optional qualifiers.</p><div class="informaltable"><table width="100%" border="1"><colgroup><col><col><col></colgroup><thead><tr><th colspan="3">
+<p>GDE Command Summary</p>
+</th></tr><tr><th>
+<p>Command</p>
+</th><th>
+<p>Specified Object Type</p>
+</th><th>
+<p>Required Object Name/[Optional] Qualifier</p>
+</th></tr></thead><tfoot><tr><th colspan="3">
+<p>* 
+<span>/</span>ALL
+is the default for the SHOW and VERIFY commands.</p>
+</th></tr></tfoot><tbody><tr><td>
+<p>@</p>
+</td><td>
+<p>N/A</p>
+</td><td>
+<p>file-<span>spec</span></p>
+</td></tr><tr><td>
+<p>A[DD]</p>
+</td><td>
+<p>
+<span>/</span>N[AME]</p>
+</td><td>
+<p>name-space</p>
+<p><span>/</span>R[EGION]=region-name</p>
+</td></tr><tr><td>-</td><td>
+<p><span>/</span>R[EGION]</p>
+</td><td>
+<p>region-name</p>
+<p>
+<span>/</span>D[YNAMIC]=segment-name [<span>/</span>REGION-qualifier...]</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>S[EGMENT]</p>
+</td><td>
+<p>segment-name</p>
+<p>
+<span>/</span>F[ILE_NAME]=file-<span>spec</span> [<span>/</span>SEGMENT-qualifier...]</p>
+</td></tr><tr><td>
+<p>C[HANGE]</p>
+</td><td>
+<p>
+<span>/</span>N[AME]</p>
+</td><td>
+<p>name-space</p>
+<p>
+<span>/</span>R[EGION]=new-region</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>R[EGION]</p>
+</td><td>
+<p>region-name</p>
+<p>[<span>/</span>REGION-qualifier...]</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>S[EGMENT]</p>
+</td><td>
+<p>segment-name</p>
+<p>[<span>/</span>SEGMENT-qualifier]</p>
+</td></tr><tr><td>
+<p>D[ELETE]</p>
+</td><td>
+<p>
+<span>/</span>N[AME]</p>
+</td><td>
+<p>name-space</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>R[EGION]</p>
+</td><td>
+<p>region-name</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>S[EGMENT]</p>
+</td><td>
+<p>segment-name</p>
+</td></tr><tr><td>
+<p>E[XIT]</p>
+</td><td>
+<p>N/A</p>
+</td><td>
+<p>N/A</p>
+</td></tr><tr><td>
+<p>HE[LP]</p>
+</td><td>
+<p>N/A</p>
+</td><td>
+<p>
+<span>topic</span>
+</p>
+</td></tr><tr><td>
+<p>LOC[KS]</p>
+</td><td>
+<p>N/A</p>
+</td><td>
+<p>
+<span>/</span>R[EGION]=region-name</p>
+</td></tr><tr><td>
+<p>LOG</p>
+</td><td>
+<p>N/A</p>
+</td><td>
+<p>[<span>/</span>ON][=file-<span>spec</span>]</p>
+<p>[<span>/</span>OF[F]]</p>
+</td></tr><tr><td>
+<p>Q[UIT]</p>
+</td><td>
+<p>N/A</p>
+</td><td>
+<p>N/A</p>
+</td></tr><tr><td>
+<p>R[ENAME]</p>
+</td><td>
+<p>
+<span>/</span>N[AME]</p>
+</td><td>
+<p>old-name new-name</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>R[EGION]</p>
+</td><td>
+<p>old-reg-name new-reg-name</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>S[EGMENT]</p>
+</td><td>
+<p>old-seg-name new-seg-name</p>
+</td></tr><tr><td>
+<p>SE[TGD]</p>
+</td><td>
+<p>N/A</p>
+</td><td>
+<p>
+<span>/</span>F[ILE]=file-<span>spec</span> [<span>/</span>Q[UIT]]</p>
+</td></tr><tr><td>
+<p>SH[OW]</p>
+</td><td>
+<p>
+<span>/</span>N[AME]</p>
+</td><td>
+<p>[name-space]</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>R[EGION]</p>
+</td><td>
+<p>[region-name]</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>S[EGMENT]</p>
+</td><td>
+<p>[segment-name]</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>M[AP]</p>
+</td><td>
+<p>[R[EGION]=region-name]</p>
+</td></tr><tr><td>-</td><td>
+<p>T[EMPLATE]</p>
+</td><td>
+<p>N/A</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>A[LL]*</p>
+</td><td>
+<p>N/A</p>
+</td></tr><tr><td>
+<p>SPAWN</p>
+</td><td>
+<p>N/A</p>
+</td><td>
+<p>[DCLshell-command]</p>
+</td></tr><tr><td>
+<p>T[EMPLATE]</p>
+</td><td>
+<p>
+<span>/</span>R[EGION]</p>
+</td><td>
+<p>[<span>/</span>REGION-qualifier...]</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>S[EGMENT]</p>
+</td><td>
+<p>[
+<span>/</span>SEGMENT-qualifier...]</p>
+</td></tr><tr><td>
+<p>V[ERIFY]</p>
+</td><td>
+<p>
+<span>/</span>N[AME]</p>
+</td><td>
+<p>[name-space]</p>
+</td></tr><tr><td>-</td><td>
+<p><span>/</span>R[EGION]</p>
+</td><td>
+<p>[region-name]</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>S[EGMENT]</p>
+</td><td>
+<p>[segment-name]</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>M[AP]</p>
+</td><td>
+<p>N/A</p>
+</td></tr><tr><td>-</td><td>
+<p>
+<span>/</span>T[EMPLATE]</p>
+</td><td>
+<p>N/A</p>
+</td></tr><tr><td>-</td><td>
+<p><span>/</span>A[LL]*</p>
+</td><td>
+<p>N/A</p>
+</td></tr></tbody></table></div><div class="sect2" title="GDE Command Qualifier Summary"><div class="titlepage"><div><div><h3 class="title"><a name="command_qaulifier_summary_gde"></a>GDE Command Qualifier Summary<a class="indexterm" name="id3227151"></a></h3></div></div></div><p>The following table summarizes all qualifiers for the ADD, CHANGE, and
+TEMPLATE commands. The defaults are those supplied by FIS. </p><div class="informaltable"><table width="100%" border="1"><colgroup><col><col><col><col><col><col><col><col><col></colgroup><thead><tr><th colspan="9">
+<p>GDE Command Qualifiers</p>
+</th></tr><tr><th>
+<p>QUALIFIER</p>
+</th><th>
+<p>DEF</p>
+</th><th>
+<p>MIN</p>
+</th><th>
+<p>MAX</p>
+</th><th>
+<p>NAM</p>
+</th><th>
+<p>REG</p>
+</th><th>
+<p>SEG</p>
+</th><th>
+<p>BG</p>
+</th><th>
+<p>MM</p>
+</th></tr></thead><tfoot><tr><th colspan="9">
+<p>* $DEFAULT is the default region- and segment-name</p>
+<p>** MUMPS is the default file-name</p>
+<p>*** May vary by platform</p>
+</th></tr></tfoot><tbody><tr><td>
+<p>/AC[CESS_METHOD]=code</p>
+</td><td>
+<p>BG</p>
+</td><td>-</td><td>-</td><td>-</td><td>-</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/AL[LOCATION]=size (blocks)</p>
+</td><td>
+<p>100</p>
+</td><td>
+<p>10</p>
+</td><td>
+<p>2**24</p>
+</td><td>-</td><td>-</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/BL[OCK_SIZE]=size (bytes)</p>
+</td><td>
+<p>1024</p>
+</td><td>
+<p>512</p>
+</td><td>
+<p>65024</p>
+</td><td>-</td><td>-</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/C[OLLATION_SEQUENCE]= id number (integer)</p>
+</td><td>
+<p>0</p>
+</td><td>
+<p>0</p>
+</td><td>
+<p>255</p>
+</td><td>-</td><td>
+<p>X</p>
+</td><td> - </td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/[NO]D[EFER] DEFER</p>
+</td><td>
+<p>D</p>
+</td><td>-</td><td>-</td><td>-</td><td>-</td><td>
+<p>X</p>
+</td><td>-</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/D[YNAMIC_SEGMENT]=segment-name (chars)</p>
+</td><td>
+<p>*</p>
+</td><td>
+<p>1</p>
+</td><td>
+<p>16</p>
+</td><td>-</td><td>
+<p>X</p>
+</td><td>-</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/E[XTENSION_COUNT]=size (blocks)</p>
+</td><td>
+<p>100</p>
+</td><td>
+<p>0</p>
+</td><td>
+<p>65535</p>
+</td><td>-</td><td>-</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/F[ILE_NAME]=file-spec (chars)</p>
+</td><td>
+<p>**</p>
+</td><td>
+<p>1</p>
+</td><td>
+<p>255</p>
+</td><td>-</td><td> - </td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/G[LOBAL_BUFFER_COUNT]=size (blocks)</p>
+</td><td>
+<p>1024 ***</p>
+</td><td>
+<p>64</p>
+</td><td>
+<p>4096</p>
+</td><td>-</td><td>-</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td><td>-</td></tr><tr><td>
+<p>/[NO]J[OURNAL][=jnl-optn-lst]</p>
+</td><td>
+<p>N</p>
+</td><td>-</td><td>-</td><td>-</td><td>
+<p>X</p>
+</td><td>-</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/K[EY_SIZE]=size (bytes)</p>
+</td><td>
+<p>64</p>
+</td><td>
+<p>3</p>
+</td><td>
+<p>255</p>
+</td><td>- </td><td>
+<p>X</p>
+</td><td>-</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/L[OCK_SPACE]=size (pages)</p>
+</td><td>
+<p>40</p>
+</td><td>
+<p>10</p>
+</td><td>
+<p>1000</p>
+</td><td>-</td><td>-</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/[NO]N[ULL_SUBSCRIPTS]</p>
+</td><td> - </td><td> - </td><td> - </td><td> - </td><td>
+<p>X</p>
+</td><td> - </td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/R[ECORD_SIZE]=size (bytes)</p>
+</td><td>
+<p>256</p>
+</td><td>
+<p>7</p>
+</td><td>
+<p>32767</p>
+</td><td> - </td><td>
+<p>X</p>
+</td><td> - </td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/R[EGION] region-name (chars)</p>
+</td><td>
+<p>*</p>
+</td><td>
+<p>1</p>
+</td><td>
+<p>16</p>
+</td><td>
+<p>X</p>
+</td><td> - </td><td> - </td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr><tr><td>
+<p>/R[ESERVED_BYTES]=size (bytes)</p>
+</td><td>
+<p>0</p>
+</td><td>
+<p>0</p>
+</td><td>
+<p>blk-sz-7</p>
+</td><td> - </td><td> - </td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td><td>
+<p>X</p>
+</td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04s05.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch04.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Name, Region, and Segment Qualifiers </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 5. MUPIP</td></tr></table></div></body></html>

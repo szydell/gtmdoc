@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>The $ZCALL() Function</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="calls_to_external_routines.html" title="Calls to External Routines" />
+    <link rel="prev" href="the_externref.html" title="The Externref" />
+    <link rel="next" href="externref_vs_zcall.html" title="Externref vs. $ZCALL()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">The $ZCALL() Function</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="the_externref.html">Prev</a>A </td>
+          <th width="60%" align="center">Calls to External Routines</th>
+          <td width="20%" align="right">A <a accesskey="n" href="externref_vs_zcall.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="the_zcall_function"></a>The $ZCALL() Function</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4227525" class="indexterm"></a>
+      <p>The second external call syntax is in the form of the $ZCALL function. GT.M used this syntax before external calls were standardized. The format for the $ZCALL function is:</p>
+      <pre class="programlisting">
+	$ZC[ALL](expr1[,expr2,...])
+	</pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The first expression specifies the name of the external routine</p>
+          </li>
+          <li>
+            <p>The remaining optional expressions specify the arguments that $ZCALL() passes to the external routine</p>
+          </li>
+        </ul>
+      </div>
+      <p>The external call table must contain an entry corresponding to the name specified by expr1; if not, GT.M generates a run-time error. </p>
+      <p>Each external call returns a string value consisting of zero (0) or more pieces made up of the arguments returned by the named external routine. The string is delimited by commas. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;WRITE $ZC(&quot;trnlnm&quot;,&quot;GTM$GBLDIR&quot;)
+	</pre>
+      <p>This WRITEs the result of a $ZCALL() that invokes the routine &quot;trnlnm&quot;, passing the argument &quot;GTM$GBLDIR&quot;. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;SET A=$ZC(&quot;AVERAGE&quot;,53,76,80)
+	</pre>
+      <p>This SETs A to the value returned from a $ZCALL() that invokes the routine &quot;AVERAGE&quot;, passing the arguments 53, 76, and 80.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="the_externref.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="calls_to_external_routines.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="externref_vs_zcall.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">The ExternrefA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Externref vs. $ZCALL()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

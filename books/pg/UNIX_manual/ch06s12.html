@@ -1,0 +1,128 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Lock</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s11.html" title="Kill">
+<link rel="next" href="ch06s13.html" title="Using Locks within Transactions">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Lock</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s11.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s13.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">Lock</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Lock_Cmmd"></a>Lock</h2></div></div></div>
+<a class="indexterm" name="idp63252176"></a><p>The LOCK command reserves and releases resource names, and provides a semaphore capability for GT.M processes. This capability can be used for interprocess synchronization and signaling.</p>
+<p>Assigning a LOCK does not specify any explicit control over variables and does not directly effect either read or write access to global (or local) data. However, an application that adheres to clearly defined conventions of LOCKing before any access can indirectly achieve such an effect.</p>
+<p>FIS recommends implementing database Consistency using transaction processing rather than LOCKs. If you wish to avoid GT.M's use of optimistic concurrency for TP, place the LOCK just before the original TSTART and release it after the final TCOMMIT.</p>
+<p>The format of the LOCK command is:</p>
+<pre class="programlisting">L[OCK][:tvexpr] [[-|+]nref|(nref[,...])[:numexpr] [,...]]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The nref argument specifies a resource name in the format of the GT.M name, with or without subscripts and with or without a preceding caret (^). An nref can optionally have an environment specification, including one without a preceding caret (^).</p></li>
+<li class="listitem"><p>Outside of transactions, only one process in an environment can own a particular LOCK at any given time.</p></li>
+<li class="listitem"><p>Because the data storage in GT.M uses hierarchical sparse arrays, and LOCK frequently serves to protect that data from inappropriate "simultaneous" access by multiple processes, LOCK treats resource names in a hierarchical fashion; a LOCK protects not only the named resource, but also its ancestors and descendants.</p></li>
+<li class="listitem"><p>When one or more nrefs are enclosed in parentheses (), LOCK reserves all the enclosed names "simultaneously," that is, it reserves none of them until all become available.</p></li>
+<li class="listitem"><p>A LOCK with no argument or an argument with no leading sign releases all names currently reserved with previous LOCK commands by the process; when a LOCK has no argument, at least two (2) spaces must follow the LOCK to separate it from the next command on the line.</p></li>
+<li class="listitem"><p>A LOCK argument with a leading plus sign (+) acquires the named resources without releasing currently held resources; if the named resource is already LOCKed, such a LOCK "counts up" the process interest in the resource.</p></li>
+<li class="listitem"><p>A LOCK argument with a leading minus sign (-) "counts down" the process interest in a named resource; if the count on a particular lock reaches zero (0), GT.M releases the lock without releasing any other currently held locks; a LOCK that releases a named resource not currently owned by the process has no effect.</p></li>
+<li class="listitem"><p>GT.M allows the "process interest" lock counter on a named resource to increment up to 511.</p></li>
+<li class="listitem"><p>The optional numeric expression specifies a time in seconds after which the command should timeout if unsuccessful; 0 provides a single attempt; timed LOCK commands maintain $TEST: 1 for a successful LOCK action, 0 for an unsuccessful (within the specified time) LOCK action. Note that untimed LOCK commands do not change $TEST.</p></li>
+<li class="listitem"><p>A LOCK operation that finds no room in LOCK_SPACE to queue a waiting LOCK so another process releasing a blocking LOCK can wake it, does a slow poll waiting for LOCK_SPACE to become available. If LOCK does not acquire the ownership of the named resource with the specified timeout, it returns control to the application with $TEST=0. If timeout is not specified, LOCK continues slow poll till space becomes available. </p></li>
+<li class="listitem"><p>If a LOCK command in a TP transaction specifies no timeout or a timeout that exceeds the limit specified by $gtm_tpnotacidtime when 2 is less than $TRESTART, the process releases the database critical sections and generates TPNOACID messages, which may live-lock the process, possibly until the transaction terminates because it reaches $ZMAXTPTIME. While such a process may have an impact on system performance this behavior moderates the impact of potential deadlocks on other database operations.</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more LOCK arguments form a legal argument for a LOCK.</p></li>
+</ul></div>
+<p>GT.M records LOCK and ZALLOCATE information in the "lock database." GT.M distributes the lock database in space associated with the database identified by the current Global Directory. However, the lock database does not overlap or coincide with the body of the database files holding the global data. Only the LOCK, ZALLOCATE and ZDEALLOCATE commands, and the LKE utility program access the lock database.</p>
+<p>GT.M maps reservations of names starting with ^ to the database file used to map global variables of the same name. If the Global Directory maps the name A to file A.DAT, GT.M maps all reservations on ^A to file space associated with A.DAT.</p>
+<p>GT.M maps reservations on names not starting with ^ to the region of the database specified with the GDE command LOCK <span>-REGION=</span>. By default, when GDE creates a Global Directory any reservations of local names are mapped to the region DEFAULT.</p>
+<p>These two factors effect the following result in the programming environment:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>^ reservations automatically intersect for all users of the same data in any database file independent of the Global Directory mapping that file.</p></li>
+<li class="listitem"><p>reservations without a leading ^ intersect in an arbitrary pattern dependent on the Global Directory and therefore controlled by a design decision potentially made independently of application code design.</p></li>
+</ul></div>
+<p>Since GT.M uses resource names as semaphores for signaling among multiple processes in a database environment, they interlock in a tree structured fashion. When LOCK or ZALLOCATE reserves a subscripted resource name such as ^D(1), other users of the database mapped by the LOCKing (or ZALLOCATEing) process cannot reserve ancestors of that name, such as ^D, or descendants, such as ^D(1,2), until LOCK or ZDEALLOCATE releases that name.</p>
+<p>Execution of the LOCK command does not affect the value or the state of a variable. LOCK tests each argument to determine whether the process can claim the name space. If another GT.M process has a LOCK on that name space, GT.M suspends the current process until the other process releases the name space. To prevent the potential "indefinite" suspension of a routine execution, specify a timeout for the LOCK command.</p>
+<p>LOCK with a leading plus (+) or minus (-) sign (incremental LOCKing) allows the acquisition and release of locks without releasing all currently held locks. This can lead to deadlocks. <span>For example, a deadlock occurs if two users LOCK resources named A and B in the following sequence.</span></p>
+<div class="informaltable">
+<a name="tbldeadlck"></a><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="2">
+               <p>Deadlock Situation</p>
+             </th></tr>
+<tr>
+<th>
+               <p>USER X</p>
+             </th>
+<th>
+               <p>USER Y</p>
+             </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+               <p>L +A</p>
+             </td>
+<td>
+               <p>L +B</p>
+             </td>
+</tr>
+<tr>
+<td>
+               <p>L +B</p>
+             </td>
+<td>
+               <p>L +A</p>
+             </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></p>
+<p>To avoid deadlocks, use LOCK without a leading + or - sign on its arguments because such a command releases all previously LOCKed resources, or uniformly implement well designed LOCK accumulation orders and/or use a timeout with the LOCK command.</p>
+<p>If a LOCK command specifies a timeout, and GT.M acquires ownership of the named resource before the timeout elapses, LOCK sets $TEST to TRUE (1). If GT.M cannot acquire ownership of the named resource within the specified timeout, LOCK sets $TEST to FALSE (0). If a LOCK command does not specify a timeout, the execution of the command does not affect $TEST. If a LOCK with an argument having a leading minus sign (-) specifies a timeout, the command always sets $TEST to TRUE (1).</p>
+<p>If a process issues a LOCK command for a named resource already ZALLOCATEd by that process, the resource is both ZALLOCATEd and LOCKed. LOCK does not release ZALLOCATEd resources. To release such a named resource, the process must both ZDEALLOCATE and unLOCK the resource. For more information, <span>refer to <a class="xref" href="ch06s28.html" title="ZAllocate">&#8220;ZAllocate&#8221;</a></span>.</p>
+<p>Currently, LOCK of an argument within a parenthetical list where the argument includes an extrinsic function that performs LOCK, ZALLOCATE or ZDEALLOCATE actions produces a BADLOCKNEST error except where there is only one such argument, it is the first argument in the list and the LOCK'ng as a consequence of the extrinsic function(s) is simple. Note that this pattern may still produce some unintended outcomes, so FIS recommends against its use. </p>
+<p>For more information on troubleshooting locks with the GT.M Lock Utility (LKE), refer to the chapter on that utility in the <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s11.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s13.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Kill </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Using Locks within Transactions</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>External Call Tables</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter11vms.html" title="ChapterA 11.A Integrating External Routines" />
+    <link rel="prev" href="externref_vs_zcall.html" title="Externref vs. $ZCALL()" />
+    <link rel="next" href="functions_of_the_ext_call_table.html" title="Functions of the External Call Table" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">External Call Tables</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="externref_vs_zcall.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 11.A Integrating External Routines</th>
+          <td width="20%" align="right">A <a accesskey="n" href="functions_of_the_ext_call_table.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="external_call_tables"></a>External Call Tables</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="functions_of_the_ext_call_table.html">Functions of the External Call Table</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="creating_an_external_call_table_file.html">Creating an External Call Table File</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="format_of_the_external_call_in_table.html">Format of the External Call Table</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="the_zcentry_elements.html">The Zcentry Elements</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="the_package_line.html">The Package Line</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="the_routine_line.html">The Routine Line</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="the_return_line.html">The Return Line</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="input_lines.html">Input Lines</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="output_lines.html">Output Lines</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="overlapping_input_and_output_lines.html">Overlapping Input and Output Lines</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4227666" class="indexterm"></a>
+      <p>An external call table holds information that defines the interaction between GT.M and non-M routines. Unlike most programming languages, M does not enforce data types; instead, the M language standard specifies rules and argument types in such a way that data automatically conforms to the context in which it is used. As most languages require typed data, interactions between M and other languages require an interface that translates GT.M values to a non-M context and vice-versa. </p>
+      <p>GT.M provides external call tables to interface between the typeless data of M and the typed data supported by the VMS calling standard. The entries in the external call table specify the order and data types of arguments passed to and returned from external routines. </p>
+      <p>The presence or absence of the tables and of external routines does not disrupt the activity of GT.M in any way. </p>
+      <p>External call tables rely on the VMS Procedure Calling and Condition Handling Standard, which defines conventions for passing arguments and routine calls. </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="externref_vs_zcall.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter11vms.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="functions_of_the_ext_call_table.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Externref vs. $ZCALL()A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Functions of the External Call Table</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

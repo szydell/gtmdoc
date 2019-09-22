@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of Lock</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="locks_within_trans.html" title="Using Locks within Transactions" />
+    <link rel="prev" href="locks_within_trans.html" title="Using Locks within Transactions" />
+    <link rel="next" href="merge.html" title="Merge" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of Lock</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="locks_within_trans.html">Prev</a>A </td>
+          <th width="60%" align="center">Using Locks within Transactions</th>
+          <td width="20%" align="right">A <a accesskey="n" href="merge.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_lock"></a>Examples of Lock</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4174023" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+       LOCK A,^B,@C
+       LOCK (A,B,@C)
+        </pre>
+      <p>The first LOCK command LOCKs A and unLOCKs A before LOCKing ^B, then unLOCKs ^B before locking the name specified by the variable C. The second LOCK command acquires all three resources at once. GT.M waits until all the named resources in the argument list become available before LOCKing all the resources. For example, if the resource specified by the variable C is not available for LOCKing, GT.M waits until that resource becomes available before LOCKing A and ^B.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+       LOCK (A,B)
+       LOCK +C
+       LOCK -B
+        </pre>
+      <p>This LOCKs A and B, then incrementally LOCKs C. Finally it releases the LOCK on B, while retaining the LOCKs on A and C.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+       LOCK (A,B,C) 
+       LOCK +(B,C)
+       LOCK -(B)
+        </pre>
+      <p>This LOCKs A, B and C together. It then increments the lock &quot;counts&quot; of B and C. The last LOCK command removes one &quot;count&quot; of B, leaving one count of A and B and two counts of C.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+          LOCK ^D:5
+        </pre>
+      <p>This command attempts to LOCK ^D with a timeout of five seconds. If LOCK acquires the named resource before the timeout elapses, GT.M sets $TEST to 1 (TRUE). If LOCK fails to acquire the named resource before the timeout elapses, GT.M sets $TEST to 0 (FALSE).</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="locks_within_trans.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="locks_within_trans.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="merge.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Using Locks within TransactionsA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Merge</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

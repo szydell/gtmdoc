@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>$ZDirectory</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter8.html" title="ChapterA 8.A Intrinsic Special Variables" />
+    <link rel="prev" href="zdateform.html" title="$ZDAteform" />
+    <link rel="next" href="zedit.html" title="$ZEDit" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">$ZDirectory</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zdateform.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 8.A Intrinsic Special Variables</th>
+          <td width="20%" align="right">A <a accesskey="n" href="zedit.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zdirectory"></a>$ZDirectory</h2>
+          </div>
+        </div>
+      </div>
+      <a id="id4194539" class="indexterm"></a>
+      <p>$ZD[IRECTORY] contains the string value of the full path of the current directory. Initially $ZDIRECTORY contains the default/current directory from which the GT.M image/process was activated.</p>
+      <p>GT.M supports different forms for the intrinsic special variable $ZDIRECTORY. The symbol GTM$ZDIR_FORM in GTM$DEFAULTS controls the form of $ZDIRECTORY. By default, $ZDIRECTORY contains the full path of the default directory, including the device and directory specification. The default form corresponds to GTM$ZDIR_FORM holding the value zero (0). The other possible value for GTM$ZDIR_FORM is one (1). This value causes $ZDIRECTORY to contain only the directory specification, excluding the device specification. </p>
+      <p>If the application would like to use the non-default form of $ZDIRECTORY, one can modify the value for GTM$ZDIR_FORM in GTM$DEFAULTS appropriately before creating a linked image of the application. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+    GTM&gt;WRITE $ZDIR
+    DISK$USER11:[PROD.AP.ROUTINES]
+    GTM&gt;SET $ZDIR=&quot;[-]&quot;
+    GTM&gt;WRITE $ZDIR
+    DISK$USER11:[PROD.AP]    
+    </pre>
+      <p>This example displays the current default directory in the default form of ZDIRECTORY which includes both the device and the directory specification. It also changes $ZDIRECTORY to point to the parent directory. </p>
+      <p>$ZDIRECTORY is a read-write Intrinsic Special Variable, that is, it can appear on the left side of the equal sign (=) in the argument to a SET command. If an attempt is made to set $ZDIRECTORY to a non-existent directory specification, GT.M issues an error and keeps the value of $ZDIRECTORY unchanged.</p>
+      <p>At image exit, GT.M restores the working directory to the directory that was the default when GT.M was invoked. The only exception to this is in case the directory does not exist and GT.M had successfully modified its default directory using SET $ZDIR at least once. In such cases, the default directory at image exit is the last directory to which GT.M successfully changed its default directory using SET $ZDIR.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zdateform.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter8.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="zedit.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZDAteformA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $ZEDit</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

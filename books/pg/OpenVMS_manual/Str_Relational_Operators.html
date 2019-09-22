@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>String Relational Operators</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Operators.html" title="Operators" />
+    <link rel="prev" href="Num_Relational_Operators.html" title="Numeric Relational Operators" />
+    <link rel="next" href="Patrn_Match_Operator.html" title="Pattern Match Operator" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">String Relational Operators</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Num_Relational_Operators.html">Prev</a>A </td>
+          <th width="60%" align="center">Operators</th>
+          <td width="20%" align="right">A <a accesskey="n" href="Patrn_Match_Operator.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Str_Relational_Operators"></a>String Relational Operators</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4167335" class="indexterm"></a>
+      <p>M relational operators always generate a result of TRUE (1) or FALSE (0). All string relational operators force M to evaluate the expressions to which they apply as strings. The string relational operators are:</p>
+      <p>=     binary operator causes M to produce a TRUE if the expressions are equal.</p>
+      <p>[     binary operator causes M to produce a TRUE if the first expression contains the ordered sequence of characters in the second expression.</p>
+      <p>]     binary operator causes M to produce a TRUE if the first expression lexically follows the second expression in the character encoding sequence, which by default is ASCII.</p>
+      <p>]]    binary operator causes M to produce a TRUE if the first expression lexically sorts after the second expression in the subscript collation sequence.</p>
+      <p>Note that all non-empty strings lexically follow the empty string, and every string contains the empty string.</p>
+      <p>Other string relations are formed using the logical NOT operator apostrophe (') as follows:</p>
+      <p>'[    does not contain.</p>
+      <p>']    does not follow, that is, lexically less than or equal to.</p>
+      <p>']]   does not sort after, that is, lexically less than or equal to in the subscript collation sequence.</p>
+      <p>'=    not equal, numeric or string operation.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;WRITE &quot;A&quot;=&quot;B&quot;
+        0
+        GTM&gt;WRITE &quot;C&quot;=&quot;C&quot;
+        1
+        GTM&gt;WRITE &quot;A&quot;[&quot;B&quot;
+        0
+        GTM&gt;WRITE &quot;ABC&quot;[&quot;C&quot;
+        1
+        GTM&gt;WRITE &quot;A&quot;]&quot;B&quot;
+        0
+        GTM&gt;WRITE &quot;B&quot;]&quot;A&quot;
+        1
+        GTM&gt;WRITE &quot;A&quot;]]&quot;B&quot;
+        0
+        GTM&gt;WRITE &quot;B&quot;]]&quot;A&quot;
+        1
+        </pre>
+      <p>These examples demonstrate the string relational operators using string literals.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;WRITE 2]10
+        1
+        GTM&gt;WRITE 2]]10
+        0
+        GTM&gt;WRITE 0]&quot;$&quot;
+        1
+        GTM&gt;WRITE 0]]&quot;$&quot;
+        0
+        </pre>
+      <p>These examples illustrate that when using the primary ASCII character set, the main difference in the &quot;follows&quot; (]) operator and the &quot;sorts-after&quot; (]]) operator is the way they treat numbers.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;WRITE 1=1
+        1
+        GTM&gt;WRITE 1=2
+        0
+        GTM&gt;WRITE 1=&quot;1&quot;
+        1
+        GTM&gt;WRITE 1=01
+        1
+        GTM&gt;WRITE 1=&quot;01&quot;
+        0
+        GTM&gt;WRITE 1=+&quot;01&quot;
+        1
+        GTM&gt;
+        </pre>
+      <p>These examples illustrate the dual nature of the equal sign operator. If both expressions are string or numeric, the results are straight forward. However, when the expressions are mixed, the native string data type prevails.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;WRITE &quot;a&quot;'=&quot;A&quot;
+        1
+        GTM&gt;WRITE &quot;FRED&quot;'[&quot;RED&quot;
+        0
+        GTM&gt;WRITE &quot;ABC&quot;']&quot;&quot;
+        0
+        </pre>
+      <p>These examples demonstrate combinations of the string relational operators with the NOT operator.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Num_Relational_Operators.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Operators.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="Patrn_Match_Operator.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Numeric Relational OperatorsA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Pattern Match Operator</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

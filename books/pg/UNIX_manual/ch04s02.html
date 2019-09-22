@@ -1,0 +1,495 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Debugging a Routine in Direct Mode</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch04.html" title="Chapter 4. Operating and Debugging in Direct Mode">
+<link rel="prev" href="ch04s01.html" title="Operating in Direct Mode">
+<link rel="next" href="ch04s03.html" title="Summary of GT.M Debugging Tools">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center"><span>Debugging a Routine in Direct Mode</span></th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch04s01.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 4. <span>Operating and Debugging in Direct Mode</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch04.html"><span>Operating and Debugging in Direct Mode</span></a></span> &gt; <span class="breadcrumb-node"><span>Debugging a Routine in Direct Mode</span></span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Debug_Routine_Direct_Mode"></a><span>Debugging a Routine in Direct Mode</span>
+</h2></div></div></div>
+<p>To begin a debugging session on a specific routine, type the following command at the GTM prompt:</p>
+<pre class="programlisting">GTM&gt;DO ^routinename</pre>
+<p>You can also begin a debugging session by pressing &lt;CTRL-C&gt; after running an M application <span>at the shell</span>. To invoke Direct Mode by pressing &lt;CTRL-C&gt;, process must have the Principal Device in the CENABLE state and not have the device set to CTRAP=$C(3).</p>
+<p>When GT.M receives a &lt;CTRL-C&gt; command from the principal device, it invokes Direct Mode at the next opportunity, (usually at a point corresponding to the beginning of the next source line). GT.M can also interrupt at a FOR loop iteration or during a command of indeterminate duration such as LOCK, OPEN or READ. The GT.M USE command enables/disables the &lt;CTRL-C&gt; interrupt with the [NO]CENABLE deviceparameter. <span>By default, GT.M starts &lt;CTRL-C&gt; enabled.</span>  The default setting for &lt;CTRL-C&gt; is controlled by $gtm_nocenable which controls whether &lt;CTRL-C&gt; is enabled at process startup. If $gtm_nocenable has a value of 1, "TRUE" or "YES" (case-insensitive), and the process principal device is a terminal, $PRINCIPAL is initialized to a NOCENABLE state where the process does not recognize &lt;CTRL-C&gt; as a signal to enter direct mode. No value, or other values of $gtm_nocenable initialize $PRINCIPAL with the CENABLE state. The [NO]CENABLE deviceparameter on a USE command can still control this characteristic from within the process. </p>
+<p>GT.M displays the GTM&gt; prompt on the principal device. Direct Mode accepts commands from, and reports errors to, the principal device. GT.M uses the current device for all other I/O. If the current device does not match the principal device when GT.M enters Direct Mode, GT.M issues a warning message on the principal device. A USE command changes the current device. For more information on the USE command, see <a class="xref" href="ch09.html" title="Chapter 9. Input/Output Processing">Chapter 9: &#8220;<i><span>Input/Output</span> Processing</i>&#8221;</a>.</p>
+<p>The default "compile-as-written" mode of the GT.M compiler lets you run a program with errors as part of the debugging cycle. The object code produced includes all lines that are correct and all commands on a line with an error, up to the error. When GT.M encounters an error, it XECUTEs non empty values of $ETRAP or $ZTRAP. By default $ZTRAP contains a BREAK command, so GT.M enters Direct Mode.</p>
+<p>The rest of the chapter illustrates the debugging capabilities of GT.M by taking a sample routine, dmex, through the debugging process. dmex is intended to read and edit a name, print the last and first name, and terminate if the name is an upper-case or lower-case "Q".</p>
+<p>Each of the remaining sections of the chapter uses dmex to illustrate an aspect of the debugging process in GT.M.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Creat_Display_M_Rtn"></a><span>Creating and Displaying M</span> Routines</h3></div></div></div>
+<p>To create or edit a routine, use the ZEDIT command. ZEDIT invokes the <span>editor specified by the EDITOR environment variable,</span> and opens the specified file. dmex.m, for editing.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZEDIT "dmex"</pre>
+<p>Once in the editor, <span>use the standard editing commands to enter and edit text</span>. When you finish editing,  save the changes, which returns you to Direct Mode.</p>
+<p>To display M source code for dmex, use the ZPRINT command.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZPRINT ^dmex
+dmex;dmex - Direct Mode example
+;
+beg
+   for  read !,"Name: ",name do name 
+   quit
+name
+   set ln=$l(name)
+   if ln,$extract("QUIT",1,ln)=$tr(name,"quit","QUIT") do
+   . s name="Q"
+   . quit
+   if ln&lt;30,bame?1.a.1"-".a1","1" "1a.ap do print quit
+   write !,"Please use last-name, "
+   write "first-name middle-initial or 'Q' to Quit."
+   quit
+print
+   write !,$piece(name,", ",2)," ",$piece(name,", ")
+   quit
+GTM&gt;</pre>
+<p>This uses the ZPRINT command to display the routine dmex.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>The example misspells the variable name as bame.</p></td></tr>
+</table></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Exec_M_Routine_Interactively"></a>Executing M Routines Interactively</h3></div></div></div>
+<p>To execute an M routine interactively, it is not necessary to explicitly compile and link your program. When you refer to an M routine that is not part of the current image, GT.M automatically attempts to compile and ZLINK the program.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;DO ^dmex
+Name: Revere, Paul
+%GTM-E-UNDEF, Undefined local variable: bame
+At M source location name+3^dmex
+GTM&gt;</pre>
+<p>In this example GT.M places you in Direct Mode, but also cites an error found in the program with a run-time error message. In this example, it was a reference to bame, which is undefined.</p>
+<p>To see additional information about the error message, examine the $ECODE or $ZSTATUS special variables.</p>
+<p>$ECODE is read-write intrinsic special variable that maintains a list of comma delimited codes that describe a history of past errors - the most recent ones appear at the end of the list. In $ECODE, standard errors are prefixed with an "M", user defined errors with a "U", and GT.M errors with a "Z". A GT.M code always follows a standard code.</p>
+<p>$ZSTATUS is a read-write intrinsic special variable that maintains a string containing the error condition code and location of the last exception condition occurring during routine execution.  GT.M updates $ZSTATUS only for errors found in routines and not for errors entered at the Direct Mode prompt.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>For more information on $ECODE and $STATUS see <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</p></td></tr>
+</table></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $ECODE
+,M6,Z150373850</pre>
+<p>This example uses a WRITE command to display $ECODE.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $ZS
+150373850,name+3^dmex,%GTM-E-UNDEF, Undefined
+local variable: bame</pre>
+<p>This example uses a WRITE command to display $ZSTATUS. Note that the $ZSTATUS code is the same as the "Z" code in $ECODE.</p>
+<p>You can record the error message number, and use the $ZMESSAGE function later to re-display the error message text.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $ZM(150373850)
+%GTM-E-UNDEF, Undefined local variable: !AD</pre>
+<p>This example uses a WRITE command and the $ZMESSAGE function to display the error message generated in the previous example. $ZMESSAGE() is useful when you have a routine that produces several error messages that you may want to examine later. The error message reprinted using $ZMESSAGE() is generic; therefore, the code !AD appears instead of the specific undefined local variable displayed with the original message.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Proc_with_Runtime_Syntax_Err"></a>Processing with Run-time and Syntax Errors</h3></div></div></div>
+<p>When GT.M encounters a run-time or syntax error, it stops executing and displays an error message. GT.M reports the error in the message. In this case, GT.M reports an undefined local variable and the line in error, name+3^<span>dmex</span>. Note that GT.M re-displays the GTM&gt; prompt so that debugging may continue.</p>
+<p>To re-display the line and identify the error, use the ZPRINT command.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZPRINT, name+3
+%GTM-E-SPOREOL, Either a space or an end-of-line was expected but not found
+ZP, name+3
+^_____ 
+GTM&gt;</pre>
+<p>This example shows the result of incorrectly entering a ZPRINT command in Direct Mode. GT.M reports the location of the syntax error in the command line with an arrow. $ECODE and $ZSTATUS do not maintain this error message because GT.M did not produce the message during routine execution. Enter the correct syntax, (i.e., remove the comma) to re-display the routine line in error.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $ZPOS
+name+3^dmex</pre>
+<p>This example writes the current line position.</p>
+<p>$ZPOSITION is a read-only GT.M special variable that provides another tool for locating and displaying the current line. It contains the current entry reference as a character string in the format label+offset^routine, where the label is the closest preceding label. The current entry reference appears at the top of the M invocation stack, which can also be displayed with a ZSHOW "S" command.</p>
+<p>To display the current value of every local variable defined, use the ZWRITE command with no arguments.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZWRITE
+ln=12
+name="Revere, Paul"</pre>
+<p>This ZWRITE displays a listing of all the local variables currently defined.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>ZWRITE displays the variable name. ZWRITE does not display a value for bame, confirming that it is not defined.</p></td></tr>
+</table></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Correct_Errors"></a>Correcting Errors</h3></div></div></div>
+<p>Use the ZBREAK command to establish a temporary breakpoint and specify an action. ZBREAK sets or clears routine-transparent breakpoints during debugging. This command simplifies debugging by interrupting execution at a specific point to examine variables, execute commands, or to start using ZSTEP to execute the routine line by line.</p>
+<a class="indexterm" name="idp55227200"></a><p>GT.M suspends execution during execution when the entry reference specified by ZBREAK is encountered. If the ZBREAK does not specify an expression "action", the process uses the default, BREAK, and puts GT.M into Direct Mode. If the ZBREAK does specify an expression "action", the process XECUTEs the value of "action", and does not enter Direct Mode unless the action includes a BREAK. The action serves as a "trace-point". The trace-point is silent unless the action specifies terminal output.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZBREAK name+3^dmex:"set bame=name"</pre>
+<p>This uses a ZBREAK with an action that SETs the variable bame equal to name.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Stepping_Thru_Routine"></a>Stepping Through a Routine</h3></div></div></div>
+<p>The ZSTEP command provides a powerful tool to direct GT.M execution. When you issue a ZSTEP from Direct Mode, GT.M executes the program to the beginning of the next target line and performs the ZSTEP action.</p>
+<p>The optional keyword portion of the argument specifies the class of lines where ZSTEP pauses its execution, and XECUTEs the ZSTEP action specified by the optional action portion of the ZSTEP argument. If the action is specified, it must be an expression that evaluates to valid GT.M code. If no action is specified, ZSTEP XECUTEs the code specified by the $ZSTEP intrinsic special variable; by default $ZSTEP has the value "B", which causes GT.M to enter Direct Mode.</p>
+<p>ZSTEP actions, that include commands followed by a BREAK, perform the specified action, then enter Direct Mode. ZSTEP actions that do not include a BREAK perform the command action and continue execution. Use ZSTEP actions that issue conditional BREAKs and subsequent ZSTEPs to perform tasks such as test for changes in the value of a variable.</p>
+<p>Use ZSTEP to incrementally execute a routine or a series of routines. Execute any GT.M command from Direct Mode at any ZSTEP pause. To resume normal execution, use ZCONTINUE. Note that ZSTEP arguments are keywords rather than expressions, and they do not allow indirection.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZSTEP INTO
+Break instruction encountered during ZSTEP action
+At M source location print^dmex
+GTM&gt;ZSTEP OUTOF
+Paul Revere
+Name: Q
+%GTM-I-BREAKZST, Break instruction encountered during ZSTEP action
+At M source location name^dmex
+GTM&gt;ZSTEP OVER
+Break instruction encountered during ZSTEP action
+At M source location name+1^dmex</pre>
+<p>This example shows using the ZSTEP command to step through the routine dmex, starting where execution was interrupted by the undefined variable error. The ZSTEP INTO command executes line name+3 and interrupts execution at the beginning of line print.</p>
+<p>The ZSTEP OUTOF continues execution until line name. The ZSTEP OVER, which is the default, executes until it encounters the next line at this level on the M invocation stack. In this case, the next line is name+1. The ZSTEP OVER could be replaced with a ZSTEP with no argument because they do the same thing.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Cont_Exec_frm_Breakpt"></a>Continuing Execution From a Breakpoint</h3></div></div></div>
+<p>Use the ZCONTINUE command to continue execution from the breakpoint.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZCONTINUE
+Paul Revere
+Name: q
+Name: QUIT
+Name: ?
+Please use last-name, first name middle-initial
+or 'Q' to Quit.
+Name:</pre>
+<p>This uses a ZCONTINUE command to resume execution from the point where it was interrupted. As a result of the ZBREAK action, bame is defined and the error does not occur again. Because the process does not terminate as intended when the name read has q as a value, we need to continue debugging.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Interrupt_Execution"></a>Interrupting Execution</h3></div></div></div>
+<p>Press &lt;CTRL-C&gt; to interrupt execution, and return to the GTM prompt to continue debugging the program.</p>
+<p>Example:</p>
+<pre class="programlisting">%GTM-I-CTRLC, CTRLC_C encountered.
+GTM&gt;</pre>
+<p>This invokes direct mode with a &lt;CTRL-C&gt;.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Using_Invocation_Stack_in_Debug"></a>Using the Invocation Stack in Debugging</h3></div></div></div>
+<p>M DOs, XECUTEs, and extrinsics add a level to the invocation stack. Matching QUITs take a level off the stack. When GT.M executes either of these commands, an extrinsic function, or an extrinsic special variable, it "pushes" information about the new environment on the stack. When GT.M executes the QUIT, it "pops" the information about the discarded environment off the stack. It then reinstates the invoking routine information using the entries that have now arrived at the active end of the stack.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>In the M stack model, a FOR command does not add a stack frame, and a QUIT that terminates a FOR loop does not remove a stack frame.</p></td></tr>
+</table></div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="Determine_Level_of_Nesting"></a>Determining Levels of Nesting</h4></div></div></div>
+<p>$STACK contains an integer value indicating the "level of nesting" caused by DO commands, XECUTE commands, and extrinsic functions in the M virtual stack.</p>
+<p>$STACK has an initial value of zero (0), and increments by one with each DO, XECUTE, or extrinsic function. Any QUIT that does not terminate a FOR loop or any ZGOTO command decrements $STACK. In accordance with the M standard, a FOR command does not increase $STACK. M routines cannot modify $STACK with the SET or KILL commands.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $STACK
+2
+GTM&gt;WRITE $ZLEVEL
+3
+GTM&gt;</pre>
+<p>This example shows the current values for $STACK and $ZLEVEL. $ZLEVEL is like $STACK except that uses one (1) as the starting level for the M stack, which $STACK uses zero (0), which means that $ZLEVEL is always one more than $STACK. Using $ZLEVEL with "Z" commands and functions, and $STACK with standard functions avoids the need to calculate the adjustment.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="look_invoc_stack"></a>Looking at the Invocation Stack</h4></div></div></div>
+<p>The $STACK intrinsic special variable and the $STACK() function provide a mechanism to access M stack context information.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $STACK
+2
+GTM&gt;WRITE $STACK(2,"ecode")
+,M6,Z150373850,
+GTM&gt;WRITE $STACK(2,"place")
+name+3^dmex
+GTM&gt;WRITE $STACK(2,"mcode")
+if ln&lt;30,bame?1.a.1"-".a1","1" "1a.ap do print q
+GTM&gt;</pre>
+<p>This example gets the value of $STACK and then uses that value to get various types of information about that stack level using the $STACK() function. The "ecode" value of the error information for level two, "place" is similar to $ZPOSITION, "mcode" is the code for the level.</p>
+<p>In addition to the $STACK intrinsic special variable, which provides the current stack level, $STACK(-1) gives the highest level for which $STACK() can return valid information. Until there is an error $STACK and $STACK(-1) are the same, but once $ECODE shows that there is an "current" error, the information returned by $STACK() is frozen to capture the state at the time of the error; it unfreezes after a SET $ECODE="".</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $STACK
+2
+GTM&gt;WRITE $STACK(-1)
+2
+GTM&gt;</pre>
+<p>This example shows that under the conditions created (in the above example), $STACK and $STACK(-1) have the same value.</p>
+<p>The $STACK() can return information about lower levels.</p>
+<p>Example:</p>
+<pre class="programlisting">+1^GTM$DMOD
+GTM&gt;WRITE $STACK(1,"ecode")
+GTM&gt;WRITE $STACK(1,"place")
+beg^dmex
+GTM&gt;WRITE $STACK(1,"mcode")
+beg for read !,"Name:",namde do name
+GTM&gt;</pre>
+<p>This example shows that there was no error at $STACK level one, as well as the "place" and "mcode" information for that level.</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="Using_ZSHOW_Examine_Context_Info"></a>Using ZSHOW to Examine Context Information</h4></div></div></div>
+<p>The ZSHOW command displays information about the M environment.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zshow "*"
+$DEVICE=""
+$ECODE=",M6,Z150373850,"
+$ESTACK=2
+$ETRAP=""
+$HOROLOG="64813,21971"
+$IO="/dev/pts/0"
+$JOB=14550
+$KEY=$C(13)
+$PRINCIPAL="/dev/pts/0"
+$QUIT=0
+$REFERENCE=""
+$STACK=2
+$STORAGE=2147483647
+$SYSTEM="47,gtm_sysid"
+$TEST=1
+$TLEVEL=0
+$TRESTART=0
+$X=0
+$Y=26
+$ZA=0
+$ZALLOCSTOR=680360
+$ZAUDIT=0
+$ZB=$C(13)
+$ZCHSET="M"
+$ZCLOSE=0
+$ZCMDLINE=""
+$ZCOMPILE=""
+$ZCSTATUS=0
+$ZDATEFORM=0
+$ZDIRECTORY="/path/to/the/current/directory"
+$ZEDITOR=0
+$ZEOF=0
+$ZERROR="Unprocessed $ZERROR, see $ZSTATUS"
+$ZGBLDIR="/path/to/the/global/directory"
+$ZHOROLOG="64813,21971,720675,14400"
+$ZININTERRUPT=0
+$ZINTERRUPT="IF $ZJOBEXAM()"
+$ZIO="/dev/pts/0"
+$ZJOB=0
+$ZKEY=""
+$ZLEVEL=3
+$ZMAXTPTIME=0
+$ZMODE="INTERACTIVE"
+$ZONLNRLBK=0
+$ZPATNUMERIC="M"
+$ZPIN="/dev/pts/0"
+$ZPOSITION="name+5^dmex"
+$ZPOUT="/dev/pts/0"
+$ZPROMPT="GTM&gt;"
+$ZQUIT=0
+$ZREALSTOR=697936
+$ZRELDATE="20180614 00:33"
+$ZROUTINES=". /usr/lib/fis-gtm/V6.3-005_x86_64 /usr/lib/fis-gtm/V6.3-005_x86_64/plugin/o(/usr/lib/fis-gtm/V6.3-005_x86_64/plugin/r)"
+$ZSOURCE=""
+$ZSTATUS="150373850,name+5^dmex,%GTM-E-UNDEF, Undefined local variable: bame"
+$ZSTEP="B"
+$ZSTRPLLIM=0
+$ZSYSTEM=0
+$ZTIMEOUT=-1
+$ZTDATA=0
+$ZTDELIM=""
+$ZTEXIT=""
+$ZTLEVEL=0
+$ZTNAME=""
+$ZTOLDVAL=""
+$ZTRAP="B"
+$ZTRIGGEROP=""
+$ZTSLATE=""
+$ZTUPDATE=""
+$ZTVALUE=""
+$ZTWORMHOLE=""
+$ZUSEDSTOR=671689
+$ZUT=1528970771720738
+$ZVERSION="GT.M V6.3-005 Linux x86_64"
+$ZYERROR=""
+ln=8
+name="John Doe"
+/dev/pts/0 OPEN TERMINAL NOPAST NOESCA NOREADS TYPE WIDTH=165 LENG=48
+MLG:0,MLT:0
+GLD:*,REG:*,SET:0,KIL:0,GET:0,DTA:0,ORD:0,ZPR:0,QRY:0,LKS:0,LKF:0,CTN:0,DRD:0
+DWT:0,NTW:0,NTR:0,NBW:0,NBR:0,NR0:0,NR1:0,NR2:0,NR3:0,TTW:0,TTR:0,TRB:0,TBW:0,
+TBR:0,TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0,ZTR:0,DFL:0,
+DFS:0,JFL:0,JFS:0,JBB:0,JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,
+CAT:0,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0
+name+5^dmex    ($ZTRAP)
+    (Direct mode)
+beg+1^dmex:51a6a6c4739b004094c4545246ce4d68
++1^GTM$DMOD    (Direct mode)
+GTM&gt;</pre>
+<p>This example uses the asterisk (*) argument to show all information that ZSHOW offers in the context debugging the error in the ^dmex routine. First are the Intrinsic Special Variables ($DEVICE-$ZYERROR, also available with ZSHOW "I"), then the local variables (bame, ln and name, also available with ZSHOW "V"), then the ZBREAK locations (name+3^<span>dmex</span>, also available with ZSHOW "B"), then the device information (also available with ZSHOW "D"), then the M stack (also available with ZSHOW "S"). ZSHOW "S" is the default for ZSHOW with no arguments.</p>
+<p>Context information that does not exist in this example includes M LOCKs of this process (ZSHOW "L").</p>
+<p>In addition to directing its output to the current device, ZSHOW can place its output in a local or global variable array. For more information, <span>see the command description <a class="xref" href="ch06s42.html" title="ZSHow">&#8220;ZSHow&#8221;</a></span>.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>ZSHOW "V" produces the same output as ZWRITE with no arguments, but ZSHOW "V" can be directed to a variable as well as a device.</p></td></tr>
+</table></div>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Transfer_Routine_Control"></a>Transferring Routine Control</h3></div></div></div>
+<p>The ZGOTO command transfers control from one part of the routine to another, or from one routine to another, using the specified entry reference. The ZGOTO command takes an optional integer expression that indicates the M stack level reached by performing the ZGOTO, and an optional entry reference specifying the location to where ZGOTO transfers control. A ZGOTO command, with an entry reference, performs a function similar to the GOTO command with the additional capability of reducing the M stack level. In a single operation, the process executes $ZLEVEL-intexpr, implicit QUITs from DO or extrinsic operations, and a GOTO operation transferring control to the named entry reference.</p>
+<p>The ZGOTO command leaves the invocation stack at the level of the value of the integer expression. GT.M implicitly terminates any intervening FOR loops and unstacks variables stacked with NEW commands, as appropriate.</p>
+<p>ZGOTO $ZLEVEL:LABEL^ROUTINE takes the same action as GO LABEL^ROUTINE.</p>
+<p>ZGOTO $ZLEVEL-1 produces the same result as QUIT (followed by ZCONTINUE, if in Direct Mode).</p>
+<p>If the integer expression evaluates to a value greater than the current value of $ZLEVEL, or less than zero (0), GT.M issues a run-time error.</p>
+<p>If ZGOTO has no entry reference, it performs some number of implicit QUITs and transfers control to the next command at the specified level. When no argument is specified, ZGOTO 1 is the result, and operation resumes at the lowest level M routine as displayed by ZSHOW "S". In the image invokedby <span>mumps -direct</span>, or a similar image, a ZGOTO without arguments returns the process to Direct Mode.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Disp_Source_Code"></a>Displaying Source Code</h3></div></div></div>
+<p>Use the ZPRINT command to display source code lines selected by its argument. ZPRINT allows you to display the source for the current routine and any other related routines. Use the ZPRINT command to display the last call level.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZPRINT beg
+beg for read !,"Name: ",name do name</pre>
+<p>This example uses a ZPRINT command to print the line indicated as the call at the top of the stack. Notice that the routine has an error in logic. The line starting with the label beg has a FOR loop with no control variable, no QUIT, and no GOTO. There is no way out of the FOR loop.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Correct_Errors_in_M_Routine"></a>Correcting Errors in an M Routine</h3></div></div></div>
+<p>Now that the routine errors have been identified, correct them in the M source file. Use ZEDIT to invoke the editor and open the file for editing. Correct the errors previously identified and enter  to exit the editor.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zedit "dmex.m"
+dmex;dmex - Direct Mode example
+;
+beg
+   for  read !,"Name: ",name do name quit:name="Q"
+   quit
+name
+   set ln=$length(name)
+   if ln,$extract("QUIT",1,ln)=$tr(name,"quit","QUIT") do
+   . set name="Q"
+   . quit
+   if ln&lt;30,name?1.a.1"-".a1","1" "1a.ap do print quit
+   write !,"Please use last-name, "
+   write "first-name middle-initial or 'Q' to Quit."
+   quit
+print
+   write !,$piece(name,", ",2)," ",$piece(name,", ")
+   quit</pre>
+<p>This example shows the final state of a ZEDIT session of dmex.m. Note that the infinite FOR loop at line beg is corrected.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Relink_Edited_Routine"></a>Relinking the Edited Routine</h3></div></div></div>
+<p>Use the ZLINK command to add the edited routine to the current image. ZLINK automatically recompiles and relinks the routine. If the routine was the most recent one ZEDITed or ZLINKed, you do not have to specify the routine name with the ZLINK command.</p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top"><p>When you issue a DO command, GT.M determines whether the routine is part of the current image, and whether compiling or linking is necessary. Because this routine is already part of the current image, GT.M does not recompile or relink the edited version of the routine if you run the routine again without ZLINKing it first. Therefore, GT.M executes the previous routine image and not the edited routine.</p></td></tr>
+</table></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>You may have to issue a ZGOTO or a QUIT command to remove the unedited version of the routine from the M invocation stack before ZLINKing the edited version.</p></td></tr>
+</table></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZLINK
+ Cannot ZLINK an active routine</pre>
+<p>This illustrates a GT.M error report caused by an attempt to ZLINK a routine that is part of the current invocation stack.</p>
+<p>To ZLINK the routine, remove any invocation levels for the routine off of the call stack. You may use the ZSHOW "S" command to display the current state of the call stack. Use the QUIT command to remove one level at a time from the call stack. Use the ZGOTO command to remove multiple levels off of the call stack.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZSHOW "S"
+name+3^dmex ($ZTRAP) (Direct mode)
+beg^dmex (Direct mode)
+ ^GTM$DMOD (Direct mode)
+GTM&gt;ZGOTO
+GTM&gt;ZSHOW "S"
+ ^GTM$DMOD (Direct mode)
+GTM&gt;ZLINK</pre>
+<p>This example uses a ZSHOW "S" command to display the current state of the call stack. A ZGOTO command without an argument removes all the calling levels above the first from the stack. The ZLINK automatically recompiles and relinks the routine, thereby adding the edited routine to the current image.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Re-execute_the_Routine"></a>Re-executing the Routine</h3></div></div></div>
+<p>Re-display the DO command using the RECALL command.</p>
+<p>Execute the routine using the DO command.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;D ^dmex
+Name: Revere, Paul
+Paul Revere
+Name: q</pre>
+<p>This example illustrates a successful execution of dmex.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Using_Processes"></a>Using <span>Forked</span> Processes</h3></div></div></div>
+<p>The ZSYSTEM command creates a new process called the child process, and passes its argument to <span>the shell</span> for execution. The new process executes in the same directory as the initiating process. The new process has the same <span>operating system environment, such as environment variables</span> and input/output devices, as the initiating process. The initiating process pauses until the new process completes before continuing execution.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;ZSYSTEM
+$ ls dmex.*
+dmex.m dmex.o
+$ ps
+PID TTY TIME COMMAND
+7946 ttyp0 0:01 sh
+7953 ttyp0 0:00 gtm
+7955 ttyp0 0:00 ps
+$ exit
+GTM&gt;</pre>
+<p>This example uses ZSYSTEM to create a child process, perform some shell actions, and return to GT.M.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch04s01.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch04.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">
+<span>Operating in</span> Direct Mode </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Summary<span> of GT.M Debugging Tools</span>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

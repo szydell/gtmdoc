@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ZATtach</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter6.html" title="ChapterA 6.A Commands" />
+    <link rel="prev" href="examples_of_zallocate.html" title="Examples of ZALLOCATE" />
+    <link rel="next" href="examples_of_zattach.html" title="Examples of ZATTACH" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ZATtach</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="examples_of_zallocate.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 6.A Commands</th>
+          <td width="20%" align="right">A <a accesskey="n" href="examples_of_zattach.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="zattach"></a>ZATtach</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="examples_of_zattach.html">Examples of ZATTACH</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4177552" class="indexterm"></a>
+      <p>The ZATTACH command switches control from the current process to another process in the current job. Use ZATTACH to switch control from one subprocess to another subprocess. ZATTACH puts the current process into hibernation and connects the input stream to the process specified by the ZATTACH command.</p>
+      <p>The format of the ZATTACH command is:</p>
+      <pre class="programlisting">
+        ZAT[TACH][:tvexpr] [expr,...]
+      </pre>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p>
+          </li>
+          <li>
+            <p>The optional expression specifies the name of a subprocess in the same VMS job to which the ZATTACH transfers control; the process name can be one (1) to 15 alphanumeric characters.</p>
+          </li>
+          <li>
+            <p>If ZATTACH has a list of arguments, each time control returns to this process, the command transfers control to the next argument in the list.</p>
+          </li>
+          <li>
+            <p>If ZATTACH has no argument or expr=&quot;&quot;, the command attaches to the original process for the VMS job; at least two (2) spaces must follow a ZATTACH with no argument to separate it from the next command on the line.</p>
+          </li>
+          <li>
+            <p>An indirection operator and an expression atom evaluating to a list of one or more ZATTACH arguments form a legal argument for a ZATTACH.</p>
+          </li>
+        </ul>
+      </div>
+      <p>A run-time error occurs on an attempt to ZATTACH:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>the current process</p>
+          </li>
+          <li>
+            <p>a process that is not part of the current job</p>
+          </li>
+          <li>
+            <p>a process that does not exist</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="examples_of_zallocate.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter6.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="examples_of_zattach.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Examples of ZALLOCATEA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Examples of ZATTACH</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

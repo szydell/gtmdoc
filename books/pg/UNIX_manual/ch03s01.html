@@ -1,0 +1,165 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Overview of the Program Development Cycle</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch03.html" title="Chapter 3. Development Cycle">
+<link rel="prev" href="ch03.html" title="Chapter 3. Development Cycle">
+<link rel="next" href="ch03s02.html" title="Defining Environment Variables">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Overview<span> of the Program Development Cycle</span>
+</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch03.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 3. <span>Development</span> Cycle</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch03s02.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch03.html"><span>Development</span> Cycle</a></span> &gt; <span class="breadcrumb-node">Overview<span> of the Program Development Cycle</span></span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="over_prog_devel"></a>Overview<span> of the Program Development Cycle</span>
+</h2></div></div></div>
+<p>This section provides an overview of the steps involved in generating executable programs in GT.M.</p>
+<p>The steps begin with your initial use of GT.M. The first two steps are part of your initial setup and will generally be performed only the first time you use GT.M. The remaining steps are those you will use regularly when generating your programs.</p>
+<p>Each of these remaining steps can be performed either from the GT.M prompt or the shell prompt. To clearly describe the two ways to perform each step, this section is set up in the format of a table with one column illustrating the GT.M method, and one column illustrating the shell method.</p>
+<div class="informaltable">
+<a name="tblover1"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr><th class="bold" colspan="3" align="left">
+<p>Creating a GT.M Routine</p>
+</th></tr></thead>
+<tbody>
+<tr>
+<td>
+<p>1) Define environment variables (shell)</p>
+</td>
+<td colspan="2">
+<p>define</p>
+<p>gtm_dist</p>
+<p>gtmgbldir</p>
+<p>gtmroutines</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>2) Prepare database (GT.M)</p>
+</td>
+<td colspan="2">
+<p>define Global Directory with GDE,</p>
+<p>create database with MUPIP CREATE</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>-</p>
+</td>
+<td class="bold">
+<p>SHELL</p>
+</td>
+<td>
+<p>GT.M</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>3) Create/Edit routine</p>
+</td>
+<td>
+<p>Create file with UNIX editor; assign .m extension</p>
+</td>
+<td>
+<p>ZEDIT "routine" .m extension added by GT.M</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>4) Compile routine</p>
+</td>
+<td>
+<p>invoke mumps routine.m</p>
+</td>
+<td>
+<p>ZLINK "routine"</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>5) Execute routine</p>
+</td>
+<td>
+<p>invoke mumps -run routine</p>
+<p>calls from other routines invoke auto-ZLINK</p>
+</td>
+<td>
+<p>Do ^routine calls from other routines invoke auto-ZLINK</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>6) Debug routine</p>
+</td>
+<td>
+<p>edit file with UNIX editor; repeat steps 4, 5</p>
+</td>
+<td>
+<p>utilize GT.M debug commands such as:</p>
+<p>ZGOTO</p>
+<p>ZLINK</p>
+<p>ZMESSAGE</p>
+<p>ZPRINT</p>
+<p>ZSHOW</p>
+<p>ZSTEP</p>
+<p>ZSYSTEM</p>
+<p>ZWRITE</p>
+<p>repeat steps 4, 5</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The table is presented as an overview of the GT.M routine generation process, and as a comparison of the available methods. More complete information on each of the steps can be found in the following parts of this manual set.</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Debugging routines: <a class="xref" href="ch04.html" title="Chapter 4. Operating and Debugging in Direct Mode">Chapter 4: &#8220;<i><span>Operating and Debugging in Direct Mode</span></i>&#8221;</a>.</p></li>
+<li class="listitem"><p>Defining environment variables: <a class="xref" href="ch03s02.html" title="Defining Environment Variables">&#8220;Defining Environment Variables&#8221;</a>.</p></li>
+<li class="listitem"><p>Defining/creating Global Directories: <a class="xref" href="ch03s03.html" title="Preparing the Database">&#8220;Preparing the Database&#8221;</a> and <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>, "Global Directory Editor" and "MUPIP" chapters.</p></li>
+<li class="listitem"><p>Creating/editing routines: <a class="xref" href="ch03s04.html" title="Creating and Editing a Source Program">&#8220;<span>Creating and Editing a Source Program</span>&#8221;</a>.</p></li>
+<li class="listitem"><p>Compiling routines: <a class="xref" href="ch03s05.html" title="Compiling a Source Program">&#8220;<span>Compiling a</span> Source Program&#8221;</a>.</p></li>
+<li class="listitem"><p>Executing routines: <a class="xref" href="ch03s06.html" title="Executing a Source Program">&#8220;<span>Executing a </span>Source Program&#8221;</a>.</p></li>
+</ol></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch03.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch03s02.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 3. <span>Development</span> Cycle </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Defining Environment Variables</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

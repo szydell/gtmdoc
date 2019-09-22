@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Link Argument Qualifiers Summary</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Qualifiers_for_LINK.html" title="Qualifiers for the LINK Command" />
+    <link rel="prev" href="Shareable_Link.html" title="/SH[AREABLE]" />
+    <link rel="next" href="Executing_from_DCL.html" title="Executing from DCL" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Link Argument Qualifiers Summary</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Shareable_Link.html">Prev</a>A </td>
+          <th width="60%" align="center">Qualifiers for the LINK Command</th>
+          <td width="20%" align="right">A <a accesskey="n" href="Executing_from_DCL.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="Link_Argument_Qualifiers_Summ"></a>Link Argument Qualifiers Summary</h4>
+          </div>
+        </div>
+      </div>
+      <p></p>
+      <div class="informaltable">
+        <table border="1">
+          <colgroup>
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td>
+                    <p>LINK ARGUMENT QUALIFIERS</p>
+                  </td>
+            </tr>
+            <tr>
+              <td>
+                    <p>/I[NCLUDE]=(module-name, ...)</p>
+                  </td>
+            </tr>
+            <tr>
+              <td>
+                    <p>/LIB[RARY]</p>
+                  </td>
+            </tr>
+            <tr>
+              <td>
+                    <p>/OPT[IONS]</p>
+                  </td>
+            </tr>
+            <tr>
+              <td>
+                    <p>/SH[AREABLE]</p>
+                  </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The compiler uses Linker global symbols to resolve external references. Because the Linker does not permit the percent sign (%) in a symbol name, GT.M converts any legal occurrences of the percent sign to an underscore (_).</p>
+      <p>The Linker does not permit lower case letters in global symbol names. The compiler converts routine names to upper case, and optionally maintains case sensitivity for labels. Note this requires attention in cases where you would otherwise distinguish routine names only by case.</p>
+      <p>The most common error for the Linker to detect is an undefined global symbol. Usually, the undefined global symbol results from mistyping a routine or label name, or leaving a module out of the Link parameter list. The Linker produces an image even when it encounters an undefined symbol. VMS can run an image with unresolved symbols as long as no instructions attempt to use the &quot;missing&quot; symbols.</p>
+      <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Caution">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Caution]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/caution.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>GT.M cannot auto-ZLINK a routine that has been the subject of a VMS LINK missing reference error. To include the missing symbol, correct the routines containing the offending references, or edit your input file list. Re-link the routines using VMS LINK. You may also &quot;fix&quot; the &quot;defective&quot; image by explicitly ZLINKing the missing routines, or the successfully linked included routines that invoke them.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>For more information on Linker error messages refer to the VMS Linker Reference Manual.</p>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Shareable_Link.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Qualifiers_for_LINK.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="Executing_from_DCL.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">/SH[AREABLE]A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Executing from DCL</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

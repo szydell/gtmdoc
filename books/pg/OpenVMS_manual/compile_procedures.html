@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Compiling Procedures</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter11vms.html" title="ChapterA 11.A Integrating External Routines" />
+    <link rel="prev" href="receiving_string_arguments.html" title="Receiving String Arguments from External Routines" />
+    <link rel="next" href="compiling_errors.html" title="Compiling Errors" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Compiling Procedures</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="receiving_string_arguments.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 11.A Integrating External Routines</th>
+          <td width="20%" align="right">A <a accesskey="n" href="compiling_errors.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="compile_procedures"></a>Compiling Procedures</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="compiling_errors.html">Compiling Errors</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4230514" class="indexterm"></a>
+      <p>Compile the external routine using the appropriate language processor. Refer to the manual that applies to the programming language of your external routine for compiling procedures.</p>
+      <p>Use the GT.M compiler to compile your M routine.</p>
+      <pre class="programlisting">
+	$ MUMPS CAL
+	</pre>
+      <p>For more information on how to compile an M routine, refer to the &quot;Program Development Cycle&quot; chapter in this manual.</p>
+      <p>External call tables are processed as MACRO source files. MACRO source files have the default file extension of .MAR. Assemble the external call table source file using the DCL MACRO command. The LINK must reference the GT.M-supplied macro library, GTMZCALL.MLB, which contains functions to process external call tables. The following examples show two ways of including the library.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	$ MACRO GTMZCTAB.MAR+GTM$DIST:GTMZCALL.MLB/LIBRARY
+	</pre>
+      <p>This MACRO command explicitly references the macro library at the DCL command level.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	.title zctablexample
+	.library &quot;gtm$dist:gtmzcall.mlb&quot;
+	zcinit
+	.
+	.
+	.
+	.end
+	</pre>
+      <p>This external call table source includes a .LIBRARY directive at the beginning. In this case, the MACRO command does not need to include the library name.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	$ MACRO GTMZCTAB
+	</pre>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="receiving_string_arguments.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter11vms.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="compiling_errors.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Receiving String Arguments from External RoutinesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Compiling Errors</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

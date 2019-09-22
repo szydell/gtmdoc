@@ -1,0 +1,386 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Repairing the Database with DSE</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="ch11.html" title="Chapter 11. Maintaining Database Integrity">
+<link rel="prev" href="ch11s02.html" title="Approaches to Database Recovery">
+<link rel="next" href="ch11s04.html" title="Finding and Fixing Database Errors">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Repairing the Database with DSE</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch11s02.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 11. Maintaining Database Integrity</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch11s04.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch11.html">Maintaining Database Integrity</a></span> &gt; <span class="breadcrumb-node">Repairing the Database with DSE</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="repairing_the_db_with_dse"></a>Repairing the Database with DSE</h2></div></div></div>
+<p>When doing repairs with DSE, understanding the nature of the information in the
+database provides a significant advantage in choosing an appropriate and efficient
+repair design.</p>
+<p>For example, if you know that certain data is purged weekly, and you find damage
+in some of this type of data that is already five or six days old, you may be able
+to discard rather than repair it. Similarly, you might find damage to a small
+cross-index global and have a program that can quickly rebuild it. </p>
+<p>When you know what the data "looks" like, you are in a much better position to
+recognize anomalies and clues in both keys and data. For example, if you understand
+the format of a particular type of node, you might recognize a case where two pieces
+of data have been combined into a single GDS record. </p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="using_the_proper_db_file"></a>Using the Proper Database File</h3></div></div></div>
+<p>Because DSE lets you perform arbitrary actions without imposing any logical
+constraints, you must ensure that they are applied to the proper file.</p>
+<p>First, verify that 
+<span>gtmgbldir</span>names an appropriate Global Directory. Check the
+definition with the <span>printenv command</span>
+. You may create or use Global Directories
+that differ from the "normal" Global Directory. For instance, you might create a
+Global Directory that mapped all global names except a normally unused name to a
+file with integrity problems, and map that unused name to a new file. Then you
+could use MUPIP to CREATE the new file and use DSE to SAVE blocks from the
+damaged file and RESTORE them to the new file for later analysis.</p>
+<p>When you initiate DSE, it operates on the default region specified by the
+Global Directory. Once DSE is invoked, use FIND <span>-</span>REGION to determine the available
+regions, and then to select the appropriate region. The technique of creating a
+temporary Global Directory, with the target region for the repair as the default
+region, prevents accidental changes to the wrong region.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="locating_struc_with_dse"></a>Locating Structures with DSE</h3></div></div></div>
+<p>DSE provides the FIND command and the RANGE command for locating
+information.</p>
+<p>FIND <span>-</span>REGION=redirects
+DSE actions to a specified region.</p>
+<p>FIND <span>-</span>BLOCK= locates a
+block by using the key in the first record of the block to try to look up that
+block through the B-tree index. If the block is not part of the tree, or the
+indexing of the block is damaged, DSE reports that the search failed.</p>
+<p>FIND <span>-</span>SIBLING <span>-</span>BLOCK= operates like FIND
+<span>-</span>BLOCK; however it
+reports the numbers of the blocks that logically fall before and after the
+specified block on the same level.</p>
+<p>FIND <span>-</span>EXHAUSTIVE <span>-</span>BLOCK= locates a block by
+looking through the B-tree index for any pointer to the block. This should find
+the block in the case where the block is connected to the tree but the first key
+in the block does not match the index path. FIND <span>-</span>EXHAUSTIVE is useful in locating all
+paths to a "doubly allocated" block.</p>
+<p>FIND <span>-</span>KEY= uses the
+index to locate the level zero (0) block , or data block, containing the key. If
+the key does not exist, it uses the index to locate the block in which it would
+reside. Note that FIND only works with the index as currently composed. In other
+words, it cannot FIND the "right" place, only the place pointed to by the index
+at the time the command is issued. These two locations should be, and may well
+be, the same; however, remind yourself to search for and take into account all
+information describing the failure.</p>
+<p>FIND <span>-</span>FREE <span>-</span>HINT locates the "closest"
+free block to the hint. This provides a tool for locating blocks to add to the
+B-tree, or to hold block copies created with SAVE that would otherwise be lost
+when DSE exits. FIND <span>-</span>FREE
+relies on the bitmaps to locate its target, so be sure to fix any blocks
+incorrectly marked "FREE" before using this command.</p>
+<p>The RANGE command sifts through blocks looking for keys. RANGE checks blocks
+without regard to whether they are in the B-tree, and without regard to whether
+they are marked free or busy in the bitmaps. RANGE provides a brute force way to
+find a key if it exists and can be very time consuming in a large database. Note
+that RANGE may report blocks that were previously used and were legitimately
+removed from the tree by an M KILL command.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="safety_in_repairs"></a>Safety in Repairs<a class="indexterm" name="idp71117552"></a>
+</h3></div></div></div>
+<p>DSE is a powerful tool with few restrictions that places great responsibility
+on the user. Establishing the following habits can greatly increase the safety
+margin.</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Plan your fallback strategy before starting repairs with DSE.</p>
+<p>This will enable you to make the best choice between repair and
+restore and/or recovery strategies as your analysis proceeds. In
+addition, you will be able to reasonably assess the potential risks of
+your decision. </p>
+</li>
+<li class="listitem"><p>Determine, at least approximately, the extent of the damage, and how
+much work has been done since the last backup.</p></li>
+<li class="listitem"><p>Check the existence, dates, and sizes of all files; do not assume that
+everything is as it "should" be.</p></li>
+<li class="listitem"><p>Estimate the time required to restore and redo the work. Determine if
+there are special circumstances, such as imminent deadlines.</p></li>
+<li class="listitem"><p>Consider whether you have the disk space to pursue two courses in
+parallel.</p></li>
+<li class="listitem"><p>Consider whether you should back up the damaged database for
+additional protection or for later analysis.</p></li>
+<li class="listitem">
+<p>Before changing any block in the database, always use the DSE SAVE
+command to make an in-memory copy of that block. </p>
+<p>If a modification fails to accomplish its intended goal, you can use
+the DSE RESTORE command to get the block back to its previous state. For
+instance, a CHANGE <span>-</span>BSIZ= that specifies a smaller block size causes DSE to
+discard all information falling beyond the new size.</p>
+<p>An important aspect of this strategy is recognizing that testing some
+modifications requires using other tools such as MUPIP INTEG, but once
+you leave DSE to invoke MUPIP you lose anything saved in memory. To
+avoid this problem, use SPAWN to access those tools.</p>
+<p>To save a copy of the block for further analysis, SAVE it, and then
+RESTORE it to an empty block. The best place to put such a copy, using
+RESTORE <span>-</span>REGION=,
+is in a special region created just to receive such blocks.</p>
+<p>Alternatively, you can RESTORE it temporarily in a free block within
+the region, preferably near the end of the file. If you RESTORE the
+block to the original database, it may be overlaid when normal operation
+requires more blocks. You may prevent this overlay by using MAP <span>-</span>BUSY on the target
+block of the RESTORE. However this causes INTEG to report "incorrectly
+marked busy" errors.</p>
+</li>
+<li class="listitem">
+<p>After changing a block, always check the quality of the result by
+using the DSE INTEG command.</p>
+<p>DSE INTEG does not check the placement of the block in the tree. It
+checks only the single block specified explicitly with the <span>-</span>BLOCK= qualifier or
+implicitly (the current block) when <span>-</span>BLOCK= is omitted. If you need to verify the
+index structure related to a block, SPAWN and use MUPIP INTEG <span>-</span>REGION <span>-</span>FAST, possibly with
+the <span>-</span>BLOCK or
+<span>-</span>SUBSCRIPT
+qualifiers.</p>
+<p>Specifying <span>-</span>BLOCK= tends to avoid incorrect assumptions about which block
+DSE last handled. Not specifying <span>-</span>BLOCK= tends to minimize typographical errors in
+identifying the block.</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="discarding_data"></a>Discarding Data</h3></div></div></div>
+<p>When you must discard a block or a record, take steps to preserve or create
+structures that have integrity.</p>
+<p>DSE has no single command that discards a block. You must locate the last
+block in its path with FIND [<span>-</span>BLOCK] or FIND <span>-</span>EXHAUSTIVE and REMOVE the record that points to the block being
+discarded. Then MAP the deleted block <span>-</span>FREE.</p>
+<p>When you discard the only record in any block you must MAP that block <span>-</span>FREE and REMOVE the record
+(up one level) that points to the deleted block. The only exception is when it
+is the only block pointed to by the root block of the tree. Leaving empty blocks
+(except as the data level of empty or undefined globals) violates standard
+operating assumptions of GDS databases.</p>
+<p>When you must discard the top block in a Global Variable Tree, you can
+alternatively use the method employed by GT.M when it processes a KILL command.
+This method maintains a record of the global variable name. To use this method,
+use FIND <span>-</span>FREE to locate a
+free block, and MAP the new block <span>-</span>BUSY. Next, CHANGE the new block <span>-</span>BSIZ=header-size (7/8) <span>-</span>LEVEL=0. Finally, CHANGE the
+top level block <span>-</span>BSIZ=header-size (7/8) <span>-</span>LEVEL=1 and ADD <span>-</span>STAR <span>-</span>POINTER=the-new-block.</p>
+<p>Never delete the only remaining record in block one (1). Block one (1) is the
+root block of the Directory Tree for the entire file. </p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="concurrent_repairs"></a>Concurrent Repairs</h3></div></div></div>
+<p>DSE can operate concurrently with normal access by the GT.M run-time system.
+This lets you perform an investigation and some types of repairs with minimal
+disruption.</p>
+<p>Some repairs should only be undertaken by a process that has standalone access
+to the database, while other repairs present no danger when performed with other
+users accessing the file. However, there is still some risk with the latter type
+of repairs, depending on the "placement" of the error and the likelihood of
+concurrent access to that area of the database.</p>
+<p>Unless availability is a critical problem, FIS
+recommends performing all repairs in standalone mode to ensure the safety of
+data. For environments where availability is an issue, your knowledge of the
+application and how it is used are the best guides in assessing the risk of
+performing concurrent repairs. To help you assess the amount of risk, the
+following sections identify repairs that should only be undertaken with
+standalone access.</p>
+<p>If you attempt concurrent repairs, plan the order of your updates carefully.
+Always REMOVE the index record that points to a block before using MAP <span>-</span>FREE on that block. Always
+MAP a block <span>-</span>BUSY and
+assure that it meets GDS design criteria and accomplishes the repair goal before
+using ADD to create an index record that points to that block.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="terminate_processes"></a>Terminating Processes</h3></div></div></div>
+<p>In performing some types of repairs, you may have to stop one or more
+processes. You can choose from several methods. </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>If the process' principal device is not available, or the process does
+not respond to pressing &lt;CTRL-C&gt;, use MUPIP STOP. This allows GT.M
+to disengage the process from all shared resources, such as I/O devices
+and open database files.</p></li>
+<li class="listitem"><p>The DSE command CRITICAL <span>-</span>INITIALIZE <span>-</span>RESET causes GT.M to terminate all images that are
+actively accessing the target database. This DSE command has a similar
+effect on processes to that of <span>MUPIP
+STOP</span>
+, except
+that it simultaneously terminates all processes actively using a
+database. 
+</p></li>
+<li class="listitem"><p>Finally, if the process does not respond to MUPIP STOP, use 
+<span>KILL-9.</span> This terminates the process abruptly and may leave
+database files improperly closed and require a MUPIP RUNDOWN. 
+<span>Since KILL-9 may cause database
+damage, it should be followed by a MUPIP INTEG.</span>
+</p></li>
+</ul></div>
+<p>When processes have stopped or terminated abnormally, FIS recommends shutting down all GT.M processes, checking the
+integrity of the database, then restarting the processes. First, use ps -af to
+determine the process IDs. Then use MUPIP STOP or KILL-15 to terminate all the
+GT.M processes. Repeat the ps -af command to assure that all processes have
+terminated. If they have not, use KILL-9 instead of KILL-15.</p>
+<p>When you have terminated all processes, do a MUPIP RUNDOWN on all database
+files:</p>
+<pre class="programlisting">mupip rundown -file &lt;name of database&gt;</pre>
+<p>Use the UNIX ipcs utility to examine the states of message queues,
+shared memory, and semaphores. If any of these resources are left from the
+processes that have just been killed, use the UNIX ipcrm utility to remove them.
+Refer to the "Appendix" for more information.</p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top"><p>Use ipcrm with extreme care, as removing the wrong resources can have
+disastrous results.</p></td></tr>
+</table></div>
+<p>Example:</p>
+<pre class="programlisting">ipcs
+IPC status from /dev/kmem as of Sat Feb 16 13:13:11 1999
+T     ID     KEY        MODE       OWNER    GROUP
+Shared Memory:
+m   1800 0x01021233 --rw-rw-rw-      uuu      dev
+m     91 0x01021232 --rw-rw-rw-      uuu      dev
+Semaphores:
+s   1360 0x01021233 --ra-ra-ra-      uuu      dev
+s     61 0x01021232 --ra-ra-ra-      uuu      dev</pre>
+<p>This shows the state of these resources with a user uuu working on
+two databases -m1800 -s1360 and -m91 -s61.</p>
+<p>Check the integrity of the database:</p>
+<pre class="programlisting">mupip integ -file &lt;name of database&gt;</pre>
+<p>To preserve database integrity, always verify that all GT.M images have
+terminated and all GDS databases are RUNDOWN before shutting down your
+system.</p>
+<p>Terminating GT.M abnormally with KILL-9 can leave the terminal
+parameters improperly adjusted, making them unsuited for interactive use. If you
+terminate GT.M with KILL-9 without terminating the job, logout to reset the
+terminal characteristics.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="rec_dam_spa"></a>Recovering data from damaged binary extracts</h3></div></div></div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="currupt_errors"></a>CORRUPT Errors</h4></div></div></div>
+<p>You can recover the value of a corrupt global using the global variable name and the dump (in ZWRITE format) of rest of the block from the point of corruption and then insert it into the database. </p>
+<p>Because the ZWRITE format is used for reconstructing the value of the global, the part of the block after the point of corruption may contain internal structures, for example, a record header and other globals. Therefore, always take extra precautions while identifying the value portion of the global. In addition, ZWRITE format displays byte values as characters whenever it can. This may not reflect the actual usage of those bytes, for example, for internal structures. If the extract is damaged, you might need to do  additional work to reconstruct the value.</p>
+<p>After you reconstruct the value of a global, add it to the database using an M SET command. For very long values, build the value may using successive SETs with the concatenation operator or SET $EXTRACT().</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ldspan_errors"></a>LDSPANGLOINCMP Errors</h4></div></div></div>
+<p>To fix an LDSPANGLOINCMP error, use the following to reconstruct the value of the global and insert it into the database. </p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>The global variable name of the spanning node which has the LDSPANGLOINCMP error.</p></li>
+<li class="listitem"><p>The ZWRITE dump of the partial value corresponding to that global variable name, that is, whatever was accumulated.</p></li>
+<li class="listitem"><p>The global variable name found in the record.</p></li>
+<li class="listitem"><p>ZWRITE dump(s) of the errant chunk(s) from the point of corruption.</p></li>
+</ol></div>
+<p>The conditions that lead to an LDSPANGLOINCMP error are as follows: </p>
+<pre class="programlisting">Case SN1 - While loading a spanning node the next record contained a non-spanning node:
+"Expected chunk number : ccccc but found a non-spanning node"</pre>
+<p>The partial value can be used as the basis for reconstructing the spanning node.</p>
+<pre class="programlisting">Case SN2 - While loading a spanning node the next record did contain the expected chunk: 
+"Expected chunk number : ccccc but found chunk number : ddddd"</pre>
+<p>Use the partial value and the errant chunk as the basis for reconstructing the spanning node. After encountering this error, the binary load continues looking for the next global variable. If there are additional chunks from the damaged spanning node in the binary extract file, there is a case SN3 error for each of them. Use the errant chunk dumps from them as part of the reconstruction.</p>
+<pre class="programlisting">Case SN3 - Not loading a spanning node but found a record with a spanning node chunk:
+"Not expecting a spanning node chunk but found chunk : ccccc"</pre>
+<p>This can be the result of an immediately prior case SN2 error (as described in prior paragraphs) or an isolated errant chunk.</p>
+<pre class="programlisting">Case SN4 - While loading a spanning node adding the next chunk caused the value to go over expected size: 
+"Global value too large: expected size : sssss actual size : tttttt chunk number : ccccc"</pre>
+<p>Adding the next chunk caused the value to go over the expected size. Examine the partial value and errant chunk dump.</p>
+<p>Case SN5 - While loading a spanning node all of the chunks have been added but the value is not the expected size:</p>
+<pre class="programlisting">"Expected size : sssss actual size : ttttt</pre>
+<p>All of the chunks were found but the size of the value is not what was expected.
+</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="rep_example"></a>Example&#8211;Repairing an error in a binary extract </h4></div></div></div>
+<p>Here is an example for repairing an error in a binary extract. </p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+<p>Assume that during the load of a binary extract, you get the following error:</p>
+<pre class="programlisting">%GTM-E-LDSPANGLOINCMP, Incomplete spanning node found during load
+        at File offset : [0x0000027E]
+        Expected Spanning Global variable : ^mypoem
+        Global variable from record: ^mypoem(#SPAN32)
+        Expected chunk number : 3 but found chunk number : 32
+        Partial Value :
+"Half a league, half a league,Half a league onward,All in the valley of Death Rode the six hundred. Forward, the Light Brigade! Charge for the guns he said: Into the valley of Death Rode the six hundred. Forward, the Light Brigade! Was there a man dismayed? Not tho the soldiers knew Some one had blundered: Theirs not to make reply, Theirs not to reason why, Theirs but to do and die: Into the valley of Death Rode the six hundred. Cannon to right of them, Cannon to left of "
+        Errant Chunk :
+"them, Cannon in front of them Volleyed and thundered; Stormed at with shot and shell, Boldly they rode and well, Into the jaws of Death, Into the mouth of Hell Rode the six hundred.  Flashed all their sabres bare, Flashed as they turned in air Sabring the gunners there, Charging an army while All the world wondered: Plunged in the battery-smoke Right thro the line they broke; Cossack and Russian Reeled from the sabre-stroke Shattered and sundered.  Then they rode back, but no"
+%GTM-E-LDSPANGLOINCMP, Incomplete spanning node found during load
+        at File offset : [0x00000470]
+        Global variable from record: ^mypoem(#SPAN4)
+        Not expecting a spanning node chunk but found chunk : 4
+        Errant Chunk :
+"t Not the six hundred. Cannon to right of them, Cannon to left of them, Cannon behind them Volleyed and thundered; Stormed at with shot and shell, While horse and hero fell, They that had fought so well Came thro the jaws of Death, Back from the mouth of Hell, All that was left of them, Left of six hundred. When can their glory fade? O the wild charge they made! All the world wondered. Honour the charge they made! Honour the Light Brigade, Noble six hundred!"</pre>
+<p>Because the only issue in this case is that one of the chunk's keys has been damaged, put the value back together from the partial value and the contents of the errant chunks. </p>
+</li>
+<li class="listitem">
+<p>Execute:</p>
+<pre class="programlisting">$ $gtm_dist/mumps -direct</pre>
+<p>From the first error message pick :</p>
+<pre class="programlisting">Expected Spanning Global variable : ^mypoem</pre>
+</li>
+<li class="listitem">
+<p>Use it together with the partial value:</p>
+<pre class="programlisting">GTM&gt;set ^mypoem="Half a league, half a league,Half a league onward,All in the valley of Death Rode the six hundred. Forward, the Light Brigade! Charge for the guns he said: Into the valley of Death Rode the six hundred. Forward, the Light Brigade! Was there a man dismayed? Not tho the soldiers knew Some one had blundered: Theirs not to make reply, Theirs not to reason why, Theirs but to do and die: Into the valley of Death Rode the six hundred. Cannon to right of them, Cannon to left of "</pre>
+</li>
+<li class="listitem">
+<p>Add in the chunk that has the bad internal subscript:</p>
+<pre class="programlisting">GTM&gt;set ^mypoem=^mypoem_"them, Cannon in front of them Volleyed and thundered; Stormed at with shot and shell, Boldly they rode and well, Into the jaws of Death, Into the mouth of Hell Rode the six hundred.  Flashed all their sabres bare, Flashed as they turned in air Sabring the gunners there, Charging an army while All the world wondered: Plunged in the battery-smoke Right thro the line they broke; Cossack and Russian Reeled from the sabre-stroke Shattered and sundered.  Then they rode back, but no"</pre>
+</li>
+<li class="listitem">
+<p>Finally, add the last chunk for that spanning node:</p>
+<pre class="programlisting">GTM&gt;set ^mypoem=^mypoem_"t Not the six hundred. Cannon to right of them, Cannon to left of them, Cannon behind them Volleyed and thundered; Stormed at with shot and shell, While horse and hero fell, They that had fought so well Came thro the jaws of Death, Back from the mouth of Hell, All that was left of them, Left of six hundred. When can their glory fade? O the wild charge they made!  All the world wondered. Honour the charge they made! Honour the Light Brigade, Noble six hundred!"</pre>
+<p>You have successfully reconstructed the global from the damaged binary load:</p>
+<pre class="programlisting">GTM&gt;w ^mypoem
+Half a league, half a league,Half a league onward,All in the valley of Death Rode the six hundred. Forward, the Light Brigade! Charge for the guns he said: Into the valley of Death Rode the six hundred. Forward, the Light Brigade! Was there a man dismayed? Not tho the soldiers knew Some one had blundered: Theirs not to make reply, Theirs not to reason why, Theirs but to do and die: Into the valley of Death Rode the six hundred. Cannon to right of them, Cannon to left of them, Cannon in front of them Volleyed and thundered; Stormed at with shot and shell, Boldly they rode and well, Into the jaws of Death, Into the mouth of Hell Rode the six hundred. Flashed all their sabres bare, Flashed as they turned in air Sabring the gunners there, Charging an army while All the world wondered: Plunged in the battery-smoke Right thro the line they broke; Cossack and Russian Reeled from the sabre-stroke Shattered and sundered. Then they rode back, but not Not the six hundred. Cannon to right of them, Cannon to left of them, Cannon behind them Volleyed and thundered; Stormed at with shot and shell, While horse and hero fell, They that had fought so well Came thro the jaws of Death, Back from the mouth of Hell, All that was left of them, Left of six hundred. When can their glory fade? O the wild charge they made! All the world wondered. Honour the charge they made! Honour the Light Brigade, Noble six hundred!</pre>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch11s02.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch11.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch11s04.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Approaches to Database Recovery </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Finding and Fixing Database Errors</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

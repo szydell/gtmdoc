@@ -1,0 +1,56 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>SIDEEFFECTEVAL </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="SHRMEMEXHAUSTED.html" title="SHRMEMEXHAUSTED ">
+<link rel="next" href="SIGACCERR.html" title="SIGACCERR ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">SIDEEFFECTEVAL </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="SHRMEMEXHAUSTED.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="SIGACCERR.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">SIDEEFFECTEVAL </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="SIDEEFFECTEVAL"></a>SIDEEFFECTEVAL </h2></div></div></div>
+<p><span class="bold"><strong>SIDEEFFECTEVAL</strong></span>,  Extrinsic ($$), External call ($&amp;) or $INCREMENT() with potential side effects in actuallist, function arguments, non-Boolean binary operands or subscripts</p>
+<p>Compile Time Warning: A side effect expression appeared to the right of a global or local variable (glvn) in an order within an outer expression where the side effect might modify the glvn. Setting the gtm_side_effects environment variable in UNIX or logical name in OpenVMS to 2 (two) activates this check.</p>
+<p>Action: Analyze the effect(s) of the side effect expressions, which are $INCREMENT(). extrinsics ($$), external calls ($&amp; or $ZCALL()) as to whether they modify a glvn earlier in the expression. If they do, the setting of gtm_side_effects modifies the behavior and you either need to modify the code to eliminate the side effect interaction or be sure to select the behavior you desire.</p>
+<a class="indexterm" name="idp174142016"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="SHRMEMEXHAUSTED.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="SIGACCERR.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">SHRMEMEXHAUSTED  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> SIGACCERR </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

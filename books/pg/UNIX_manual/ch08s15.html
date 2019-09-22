@@ -1,0 +1,72 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$Test</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
+<link rel="prev" href="ch08s14.html" title="$SYstem">
+<link rel="next" href="ch08s16.html" title="$TLevel">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$Test</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch08s14.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 8. <span>Intrinsic Special Variables</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch08s16.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$Test</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="dtest"></a>$Test<a class="indexterm" name="idp70587024"></a>
+</h2></div></div></div>
+<p>$T[EST] contains a truth value specifying the evaluation of the last IF argument or the result of the last operation with timeout. If the last timed operation timed out, $TEST contains FALSE (0); otherwise, it contains TRUE (1).</p>
+<p>$TEST serves as the implicit argument for ELSE commands and argumentless IF commands.</p>
+<p>M stacks $TEST when invoking an extrinsic and performing an argumentless DO. After these operations complete with an implicit or explicit QUIT, M restores the corresponding stacked value. Because, with these two exceptions, $TEST reflects the last IF argument or timeout result on a process wide basis. Use $TEST only in immediate proximity to the operation that last updated it. </p>
+<p>Neither $SELECT() nor post-conditional expressions modify $TEST.</p>
+<p>M routines cannot modify $TEST with the SET command.</p>
+<p>Example:</p>
+<pre class="programlisting">IF x=+x DO ^WORK
+ELSE SET x=0</pre>
+<p>The ELSE statement causes M to use the value of $TEST to determine whether to execute the rest of the line. Because the code in routine WORK may use IFs and timeouts, this use of $TEST is not recommended.</p>
+<p>Example:</p>
+<pre class="programlisting">SET MYFLG=x=+x
+IF MYFLG DO ^WORK
+IF 'MYFLG SET x=0</pre>
+<p>This example introduces a local variable flag to address the problems of the prior example. Note that its behavior results in the opposite $TEST value from the prior example. </p>
+<p>Example:</p>
+<pre class="programlisting">IF x=+x DO ^WORK IF 1
+ELSE SET x=0</pre>
+<p>This example uses the IF 1 to ensure that the ELSE works counter to the IF.</p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch08s14.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch08.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch08s16.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$SYstem </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $TLevel</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Choosing $ETRAP or $ZTRAP</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="prgrm_handling_of_error.html" title="Program Handling of Errors" />
+    <link rel="prev" href="ztrap_idnt_with_etrap.html" title="$ZTRAP Interaction With $ETRAP" />
+    <link rel="next" href="example1_return_cntrl.html" title="Example 1: Returning control to a specific execution level" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Choosing $ETRAP or $ZTRAP</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ztrap_idnt_with_etrap.html">Prev</a>A </td>
+          <th width="60%" align="center">Program Handling of Errors</th>
+          <td width="20%" align="right">A <a accesskey="n" href="example1_return_cntrl.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="choosing_etrap_and_ztrap"></a>Choosing $ETRAP or $ZTRAP</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4238458" class="indexterm"></a>
+      <p>Making a choice between the two mechanisms for error handling is mostly a matter of compatibility. If compatibility with existing GT.M code is important, and that code happens to use $ZTRAP, then $ZTRAP is the best effort choice. If compatibility with code written in MUMPS dialects from other vendors is important, then $ETRAP or a non-default form of $ZTRAP probably is the better choice.</p>
+      <p>When no pre-existing code exists that favors one mechanism, the features of the mechanisms themselves should be examined. </p>
+      <p>Almost any effect that can be achieved using one mechanism can also be achieved using the other. However, some effects are easier to achieve using one method, and some are easier using with the other. </p>
+      <p>If the mechanisms are mixed, or there is a desire to refer to $ECODE in an environment using $ZTRAP, it is recommended to have $ZTRAP error code SET $ECODE=&quot;&quot; at some appropriate time, so that $ECODE does not become cluttered with errors that have been successfully handled.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ztrap_idnt_with_etrap.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="prgrm_handling_of_error.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="example1_return_cntrl.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$ZTRAP Interaction With $ETRAPA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Example 1: Returning control to a specific execution level</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

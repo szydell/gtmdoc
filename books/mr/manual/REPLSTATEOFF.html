@@ -1,0 +1,56 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>REPLSTATEOFF </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="REPLSTATEERR.html" title="REPLSTATEERR ">
+<link rel="next" href="REPLTRANS2BIG.html" title="REPLTRANS2BIG ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">REPLSTATEOFF </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="REPLSTATEERR.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="REPLTRANS2BIG.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">REPLSTATEOFF </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="REPLSTATEOFF"></a>REPLSTATEOFF </h2></div></div></div>
+<p><span class="bold"><strong>REPLSTATEOFF</strong></span>,    MUPIP JOURNAL -ROLLBACK -BACKWARD cannot proceed as database xxxx does not have replication ON</p>
+<p>MUPIP Error: This indicates that a MUPIP JOURNAL -ROLLBACK -BACKWARD command cannot proceed because the specified database xxxx does not have replication state ON. In most situations, this error occurs when the journal file storage runs out of disk space.</p>
+<p>Action: Ensure replication is turned ON for a database, before executing the MUPIP JOURNAL -ROLLBACK -BACKWARD command. If the database is in the WAS_ON state, refer to the "Recovering from the WAS_ON state" section in the Database Replication chapter of the Administration and Operations Guide. Alternatively, if replication was not in use on the database, use MUPIP JOURNAL -RECOVER.</p>
+<a class="indexterm" name="idp173790896"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="REPLSTATEERR.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="REPLTRANS2BIG.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">REPLSTATEERR  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> REPLTRANS2BIG </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

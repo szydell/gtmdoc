@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of $QSUBSCRIPT()</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="qsubscript.html" title="$Qsubscript()" />
+    <link rel="prev" href="qsubscript.html" title="$Qsubscript()" />
+    <link rel="next" href="query.html" title="$Query()" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of $QSUBSCRIPT()</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="qsubscript.html">Prev</a>A </td>
+          <th width="60%" align="center">$Qsubscript()</th>
+          <td width="20%" align="right">A <a accesskey="n" href="query.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="examples_of_qsubscript"></a>Examples of $QSUBSCRIPT()</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4183781" class="indexterm"></a>
+      <p>Example:</p>
+      <p>Assume that X is defined as in the &quot;Examples of $Qlength()&quot; earlier in this chapter; </p>
+      <pre class="programlisting">
+    $QLENGTH (X=&quot;^|&quot;&quot;XXX&quot;&quot;|ABC(1,2,3,5,6)&quot;)
+    WRITE $QSUBSCRIPT(X,-2)
+    GTM&gt;error
+    WRITE $QSUBSCRIPT(X,-1)
+    GTM&gt;XXX
+    WRITE $QSUBSCRIPT(X,0)
+    GTM&gt;^ABC
+    WRITE $QSUBSCRIPT(X,1)
+    GTM&gt;1
+    WRITE $QSUBSCRIPT(X,4)
+    GTM&gt;5
+    WRITE $QSUBSCRIPT(X,7)
+    GTM&gt;&quot;&quot;
+    </pre>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="qsubscript.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="qsubscript.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="query.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">$Qsubscript()A </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A $Query()</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

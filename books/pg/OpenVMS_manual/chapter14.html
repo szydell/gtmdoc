@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ChapterA 14.A Error Processing</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="prev" href="patt_code_selection.html" title="Pattern Code Selection" />
+    <link rel="next" href="compile_time_error_msg_format.html" title="Compile Time Error Message Format" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ChapterA 14.A Error Processing</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="patt_code_selection.html">Prev</a>A </td>
+          <th width="60%" align="center">A </th>
+          <td width="20%" align="right">A <a accesskey="n" href="compile_time_error_msg_format.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="id4236904"></a>ChapterA 14.A Error Processing</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <p>
+          <b>Table of Contents</b>
+        </p>
+        <dl>
+          <dt>
+            <span class="sect1">
+              <a href="compile_time_error_msg_format.html">Compile Time Error Message Format</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="processing_compile_time_errors.html">Processing Compile Time Errors</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="run_time_err_msg_frmt.html">Run-time Error Message Format</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="processing_run_time_info.html">Processing Run-time Errors</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="prgrm_handling_of_error.html">Program Handling of Errors</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="err_actions.html">Error Actions</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <p>This chapter describes GT.M features and techniques for handling errors. Errors in programs may be classified as &quot;predictable&quot; meaning foreseen, or &quot;unpredictable&quot; meaning unforeseen.</p>
+      <p>M programs may attempt to recover from predictable errors. Device errors that can be remedied by an operator are the most common class of errors for which recovery provides a large benefit. Predictable errors from which the program does not attempt to recover are generally treated the same as unpredictable errors.</p>
+      <p>A typical application handles unpredictable errors by logging as much information about the error as the designer considers useful, then terminating or restarting the application from a known point.</p>
+      <p>Because GT.M invokes error handling when things are not normal, careful design and implementation of error handling are required to minimize the impact of errors and the cost of subsequent prevention.</p>
+      <p>The GT.M compiler detects and reports syntax errors at:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Compile time while producing the object module from a source file.</p>
+          </li>
+          <li>
+            <p>Run time while compiling code for M indirection and XECUTEs.</p>
+          </li>
+          <li>
+            <p>Run time when the user is working in Direct Mode.</p>
+          </li>
+        </ul>
+      </div>
+      <p>The GT.M run-time system:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Recognizes and reports execution errors when they occur. </p>
+          </li>
+          <li>
+            <p>Reports errors flagged by the compiler when they fall in the execution path.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="patt_code_selection.html">Prev</a>A </td>
+          <td width="20%" align="center">A </td>
+          <td width="40%" align="right">A <a accesskey="n" href="compile_time_error_msg_format.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Pattern Code SelectionA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Compile Time Error Message Format</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

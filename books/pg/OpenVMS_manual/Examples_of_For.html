@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of For</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="For_Command.html" title="For" />
+    <link rel="prev" href="For_Command.html" title="For" />
+    <link rel="next" href="Goto.html" title="Goto" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of For</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="For_Command.html">Prev</a>A </td>
+          <th width="60%" align="center">For</th>
+          <td width="20%" align="right">A <a accesskey="n" href="Goto.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Examples_of_For"></a>Examples of For</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4170618" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;KILL i FOR i=1:1:5 WRITE !,i
+        1
+        2
+        3
+        4
+        5
+        GTM&gt;WRITE i
+        5
+        GTM&gt;
+        </pre>
+      <p>This FOR loop has a control variable, i, which has the value one (1) on the first iteration, then the value two (2), and so on, until in the last iteration i has the value five (5). The FOR terminates because incrementing i would cause it to exceed the limit. Notice that i is not incremented beyond the limit.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;FOR x=&quot;hello&quot;,2,&quot;goodbye&quot; WRITE !,x
+        hello
+        2
+        goodbye
+        GTM&gt;
+        </pre>
+      <p>This FOR loop uses the control variable x and a series of arguments that have no increments or limits. Notice that the control variable may have a string value.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;FOR x=&quot;hello&quot;:1:-1 WRITE !,x
+        GTM&gt;ZWRITE x
+        x=0
+        GTM&gt;
+        </pre>
+      <p>Because the argument has an increment, the FOR initializes the control variable x to the numeric evaluation of &quot;hello&quot; (0). Then, GT.M never executes the remainder of the line because the increment is positive, and the value of the control variable (0) is greater than the limiting value (-1).</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;FOR y=-1:-3:-6,y:4:y+10,&quot;end&quot; WRITE !,y
+        -1
+        -4
+        -4
+        0
+        4
+        end
+        GTM&gt;
+        </pre>
+      <p>This FOR uses two limited loop arguments and one value argument. The first argument initializes y to negative one (-1), then increments y to negative four (-4). Because another increment would cause y to be less than the limit (-6), the first argument terminates with y equal to negative four (-4). The second argument initializes the loop control variable to its current value and establishes a limit of six (6=-4+10). After two iterations, incrementing y again would cause it to be greater than the limit (6), so the second argument terminates with y equal to four (4). Because the final argument has no increment, the FOR sets y to the value of the argument, and GT.M executes the commands following the FOR one more time.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+          GTM&gt;S x=&quot;&quot; F S x=$O(ar(x)) Q:x=&quot;&quot; W !,x
+        </pre>
+      <p>This example shows an argumentless FOR used to examine all first level subscripts of the local array ar. When $ORDER indicates that this level contains no more subscripts, the QUIT with the postconditional terminates the loop.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="For_Command.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="For_Command.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="Goto.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ForA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Goto</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Chapter 11. Integrating External Routines</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="index.html" title="GT.M Programmer's Guide">
+<link rel="prev" href="ch10s11.html" title="GT.M Utilities Summary Table">
+<link rel="next" href="ch11s01.html" title="Introduction">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Chapter 11. <span>Integrating</span> External<span> Routines</span>
+</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch10s11.html">Prev</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="ch11s01.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-node"><span>Integrating</span> External<span> Routines</span></span>
+</div>
+<div class="chapter">
+<div class="titlepage"><div>
+<div><h2 class="title">
+<a name="chk_unix_integrating_external_routines"></a>Chapter 11. <span>Integrating</span> External<span> Routines</span>
+</h2></div>
+<div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
+<tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V6.3-009</td>
+<td align="left">27 June 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch11s04.html" title="Using External Calls">&#8220;<span>Using </span>External Calls&#8221;</a>, Add null address and negative length handling</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-006</td>
+<td align="left">26 October 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html" title="Using External Calls">&#8220;<span>Using </span>External Calls&#8221;</a>, added SIGSAFE keyword</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#pre_allocation_of_output_params" title="Pre-allocation of Output Parameters">&#8220;Pre-allocation<span> of Output Parameters</span>&#8221;</a>, specify that when an external call exceeds its specified preallocation (gtm_string_t * or gtm_char_t * output), GT.M produces an EXCEEDSPREALLOC error. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s05.html#rules_to_follow_in_call_ins" title="Rules to Follow in Call-Ins">&#8220;Rules to Follow in Call-Ins&#8221;</a>, specify that using gtm_malloc is mandatory to allocate returns of pointer types to prevent memory leaks. </p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-005</td>
+<td align="left">29 June 2018</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch11s05.html#nested_call_ins" title="Nested Call-Ins">&#8220;Nested Call-Ins&#8221;</a>, tweak ZGOTO description for GTMCI behavior</p></li></ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.3-001</td>
+<td align="left">20 March 2017</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch11s05.html#building_stand_alone_programs" title="Building Standalone Programs">&#8220;<span>Building </span>Standalone Programs&#8221;</a>, removed instructions for platforms that are no longer supported.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s03.html" title="Creating a Shareable Library">&#8220;Creat<span>ing a </span> Shareable Library&#8221;</a>, removed examples for currently unsupported platforms. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html" title="Using External Calls">&#8220;<span>Using </span>External Calls&#8221;</a>, removed Tru64 and fixed formatting</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s05.html#gtmxc_types_h" title="gtmxc_types.h">&#8220;gtmxc_types.h&#8221;</a>, removed Tru64</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s05.html#relevant_files_for_call_ins" title="Relevant files for Call-Ins">&#8220;Relevant files<span> for Call-Ins</span>&#8221;</a>, removed HP-UX</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.1-000</td>
+<td align="left">28 August 2014</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch11s02.html" title="Access to Non-M Routines">&#8220;Access<span> to</span> Non-M Routines&#8221;</a>, added information about the external call arguments that do not specify a value and corrected the examples. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html" title="Using External Calls">&#8220;<span>Using </span>External Calls&#8221;</a>, added a note about how arguments that do not specify a value translate to default values in C. </p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-003</td>
+<td align="left">24 February 2014</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Improved the description of the <a class="xref" href="ch11s04.html#pre_allocation_of_output_params" title="Pre-allocation of Output Parameters">&#8220;Pre-allocation<span> of Output Parameters</span>&#8221;</a> section.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s05.html#rules_to_follow_in_call_ins" title="Rules to Follow in Call-Ins">&#8220;Rules to Follow in Call-Ins&#8221;</a>, added a recommendation to not mix GT.M device input using read() system service with bufferred input services in fgets() family.</p></li>
+<li class="listitem"><p>Added a section called <a class="xref" href="ch11s06.html" title="Type Limits for Call-ins and Call-outs">&#8220;Type Limits for Call-ins and Call-outs&#8221;</a>.</p></li>
+</ul></div></td>
+</tr>
+<tr>
+<td align="left">Revision V6.0-001</td>
+<td align="left">21 March 2013</td>
+<td align="left"><p>In <a class="xref" href="ch11s04.html" title="Using External Calls">&#8220;<span>Using </span>External Calls&#8221;</a> and <a class="xref" href="ch11s05.html#gtmxc_types_h" title="gtmxc_types.h">&#8220;gtmxc_types.h&#8221;</a>, added information about V6.0-001 enhancements for gtmxc_types.h.</p></td>
+</tr>
+</table></div></div>
+</div></div>
+<div class="toc">
+<p><b>Table of Contents</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch11s01.html">Introduction</a></span></dt>
+<dt><span class="sect1"><a href="ch11s02.html">Access<span> to</span> Non-M Routines</a></span></dt>
+<dt><span class="sect1"><a href="ch11s03.html">Creat<span>ing a </span> Shareable Library</a></span></dt>
+<dt><span class="sect1"><a href="ch11s04.html"><span>Using </span>External Calls</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch11s04.html#idp74480448"><span>Database </span>Encryption Extensions<span> to the GT.M External Interface</span></a></span></dt>
+<dt><span class="sect2"><a href="ch11s04.html#pre_allocation_of_output_params">Pre-allocation<span> of Output Parameters</span></a></span></dt>
+<dt><span class="sect2"><a href="ch11s04.html#callback_mechanism">Callback Mechanism</a></span></dt>
+<dt><span class="sect2"><a href="ch11s04.html#limitations_on_the_external_program">Limitations<span> on the External Program</span></a></span></dt>
+<dt><span class="sect2"><a href="ch11s04.html#examples_fo_using_ext_calls">Examples<span> of Using External Calls</span></a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch11s05.html"><span>Calls from External Routines: </span>Call-Ins</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch11s05.html#relevant_files_for_call_ins">Relevant files<span> for Call-Ins</span></a></span></dt>
+<dt><span class="sect2"><a href="ch11s05.html#call_in_interface"><span>Call-In </span>Interface</a></span></dt>
+<dt><span class="sect2"><a href="ch11s05.html#building_stand_alone_programs"><span>Building </span>Standalone Programs</a></span></dt>
+<dt><span class="sect2"><a href="ch11s05.html#nested_call_ins">Nested Call-Ins</a></span></dt>
+<dt><span class="sect2"><a href="ch11s05.html#rules_to_follow_in_call_ins">Rules to Follow in Call-Ins</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch11s06.html">Type Limits for Call-ins and Call-outs</a></span></dt>
+</dl>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch10s11.html">Prev</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="ch11s01.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">GT.M Utilities Summary Table </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Introduction</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

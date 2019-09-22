@@ -1,0 +1,143 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Defining Environment Variables</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch03.html" title="Chapter 3. Development Cycle">
+<link rel="prev" href="ch03s01.html" title="Overview of the Program Development Cycle">
+<link rel="next" href="ch03s03.html" title="Preparing the Database">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Defining Environment Variables</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch03s01.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 3. <span>Development</span> Cycle</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch03.html"><span>Development</span> Cycle</a></span> &gt; <span class="breadcrumb-node">Defining Environment Variables</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="def_env_var"></a>Defining Environment Variables<a class="indexterm" name="idp67570208"></a>
+</h2></div></div></div>
+<p>GT.M requires the definition of certain environment variables as part of setting up the environment. These environment variables are used for the following purposes:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>To locate the files that FIS provides as part of GT.M</p></li>
+<li class="listitem" style="list-style-type: circle"><p>To hold some user-controlled information which GT.M uses for run-time operation</p></li>
+</ul></div>
+<p>GT.M limits environment variables to 8192 bytes, but items they specify such as a path may have a lower limit.</p>
+<p>The procedure below describes how to define an environment variable. Use this procedure to define an environment variable either at the shell prompt or in your shell startup file. If you define the variable at the shell prompt, it will be effective only until you logout. If you define it in your .profile file (.cshrc, if using a C shell variant), it will be in effect whenever you log in. Your system manager may have already defined some of these variables.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Each environment variable required by GT.M is described and illustrated in individual sections following the procedure. Only gtm_dist, and in some cases gtmgbldir, gtm_principal and gtmroutines, are required by users who do not perform programming activities.</p></td></tr>
+</table></div>
+<p>To define an environment variable type the following commands:</p>
+<pre class="programlisting">$ env_variable=env_variable_value
+$ export env_variable</pre>
+<p>The example above may differ from the syntax supported by some shells</p>
+<p>The following environment variables hold information that determines some details of GT.M run-time operation, over which the user has control.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gtm_dist"></a>gtm_dist<a class="indexterm" name="idp67575728"></a>
+</h3></div></div></div>
+<p>gtm_dist is used to establish the location of the installed GT.M program and support files.</p>
+<p>The syntax for gtm_dist is as follows:</p>
+<p></p>
+<pre class="programlisting">$ gtm_dist=&lt;GT.M-distribution-directory&gt;</pre>
+<p>The standard installation places these files in /usr/lib/fis-gtm.</p>
+<p>Example:</p>
+<pre class="programlisting">$ gtm_dist=/usr/lib/fis-gtm/V6.0-002_x86_64
+$ export gtm_dist</pre>
+<p>This identifies /usr/lib/fis-gtm/V6.0-002_x86_64 as the location of the installed GT.M files.</p>
+<p>Add gtm_dist to your PATH environment variable to have UNIX search the GT.M installation directory (when processing a command to activate or run an image). This allows you to activate GT.M and the utilities without explicitly specifying a path.</p>
+<p>To add gtm_dist to your PATH type the following commands:</p>
+<pre class="programlisting">$ PATH=$PATH:$gtm_dist
+$ export PATH</pre>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>Most of the examples in this manual assume that you have added gtm_dist to your PATH.</p></td></tr>
+</table></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gtmgbldir"></a>gtmgbldir<a class="indexterm" name="idp67169472"></a>
+</h3></div></div></div>
+<p>gtmgbldir defines the path to a Global Directory. A Global Directory maps global variables to physical database files, and is required to locate M global variables. gtmgbldir provides the initial value for $ZGBLDIR, the intrinsic special variable that connects the GT.M run-time system to the Global Directory. It also connects the Global Directory to the utilities requiring one.</p>
+<p>If you maintain multiple global directories, define gtmgbldir to the Global Directory you currently want to use.</p>
+<p>The syntax of a gtmgbldir definition is:</p>
+<pre class="programlisting">$ gtmgbldir=/directory/filename.gld</pre>
+<p>Example:</p>
+<pre class="programlisting">$ gtmgbldir=/usr/staff/mumps.gld
+$ export gtmgbldir</pre>
+<p>This specifies /usr/staff as the directory containing the Global Directory file named mumps.gld.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gtm_principal"></a>gtm_principal<a class="indexterm" name="idp68010576"></a>
+</h3></div></div></div>
+<p>The gtm_principal environment variable specifies the value for $principal, which designates the absolute pathname of the principal $IO device. This is an MDC Type A enhancement to standard M.</p>
+<p>The following is an example of gtm_principal definition:</p>
+<pre class="programlisting">$ gtm_principal=/usr/filename
+$ export gtm_principal</pre>
+<p>This specifies the /usr/filename as the principal $IO device, effective until changed further or until you logout of the particular session.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gtmroutines"></a>gtmroutines<a class="indexterm" name="idp64469072"></a>
+</h3></div></div></div>
+<p>The gtmroutines environment variable specifies a search list of possible locations for M routines. This value is used to initialize $ZROUTINES, (the intrinsic special variable that enables GT.M to find the routine (program) you want to run). gtmroutines is required for ZLINKing. gtmroutines is particularly helpful in calling percent utilities and the Global Directory Editor (GDE), which are in gtm_dist.</p>
+<pre class="programlisting">$ gtmroutines="directories in search list"</pre>
+<p>The directories in the search list must be separated by a space and enclosed in quotation marks (" "). Environment variables are accepted in the search list.</p>
+<p>The following is an example of gtmroutines definition:</p>
+<pre class="programlisting">$ gtmroutines=". $gtm_dist"
+$ export gtmroutines</pre>
+<p>This specifies that GT.M search for a routine first in the current directory (.), then in the distribution directory (which is identified by the environment variable gtm_dist). The distribution directory is included in the list because it contains the percent routines. You will probably want the search list to contain these two items at a minimum. In addition, you may want to add directories of your own.</p>
+<p>For additional information about how GT.M uses the routine search list, see <a class="xref" href="ch08s52.html" title="$ZROutines">&#8220;$ZROutines&#8221;</a>.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Editor"></a>Editor<a class="indexterm" name="idp64422832"></a>
+</h3></div></div></div>
+<p>The EDITOR environment variable specifies the UNIX text editor used when editing a routine either from the shell or with ZEDIT. Since this is a standard part of establishing your UNIX environment, you will probably only need to define this when you want to use a different editor than the one defined in your shell startup file.</p>
+<p>Example:</p>
+<pre class="programlisting">$ EDITOR=/usr/bin/vi
+$ export EDITOR</pre>
+<p>This defines the current text editor to vi.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch03s01.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Overview<span> of the Program Development Cycle</span> </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Preparing the Database</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

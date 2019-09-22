@@ -1,0 +1,183 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>GDE Overview</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch04.html" title="Chapter 4. Global Directory Editor"><link rel="prev" href="ch04s01.html" title="Global Directory"><link rel="next" href="ch04s03.html" title="Using GDE"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">GDE Overview</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04s01.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Global Directory Editor</th><td width="20%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a></td></tr></table><hr></div><div class="sect1" title="GDE Overview"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gde_overview"></a>GDE Overview<a class="indexterm" name="id3222642"></a></h2></div></div></div><p>The GT.M Global Directory Editor (GDE) is a utility that enables you to create, examine, and modify a global directory. GDE is a program written in M and you can invoke it from the shell with <code class="code">$gtm_dist/mumps -run ^GDE</code>, with the gtm alias <code class="code">gtm -run GDE</code>, or from inside the direct mode with <code class="code">Do ^GDE</code>.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The input to GDE can be a text file. In a production environment, FIS recommends using text files to define database configurations, and putting these text files under version control. </p></td></tr></table></div><p>MUPIP CREATE uses a global directory to create new database files. At other times, the global directory is used only to map global variable names to database files. So, if you change the global directory, the database file is not changed and vice versa.</p><div class="sect2" title="Identifying the Current Global Directory"><div class="titlepage"><div><div><h3 class="title"><a name="id3223181"></a>Identifying the Current Global Directory<a class="indexterm" name="id3223085"></a></h3></div></div></div><p>GT.M identifies the current Global Directory by referring to the environment
+variable gtmgbldir. GDE, MUPIP, LKE, DSE, and the GT.M run-time
+system use this environment variable. The run-time system normally uses this environment variable, but may also
+access a Global Directory by setting $ZGBLDIR or by using the extended
+global reference || or {} syntax.
+</p><p>If you maintain multiple Global Directories, define gtmgbldir to
+point to the currently active Global Directory. You may want to define gtmgbldir
+in your login file. Note that this definition is a pathname. If it does not
+start with a "/", then it is a relative pathname and GT.M searches for it
+starting in the current working directory. </p><p>To change the current Global Directory assignment, specify a new
+definition for gtmgbldir.</p><p>Example:</p><pre class="programlisting">$ gtmgbldir=prod.gld
+$ export gtmgbldir
+</pre></div><div class="sect2" title="Creating a Default Global Directory"><div class="titlepage"><div><div><h3 class="title"><a name="create_default_glbl_dir"></a>Creating a Default Global Directory<a class="indexterm" name="id3223501"></a></h3></div></div></div><p>When you invoke GDE and no Global Directory exists for gtmgbldir, GDE produces a
+default Global Directory that contains a minimal set of required components and
+values for database characteristics. It can be used for purposes such as
+development and testing work. A default Global Directory also serves as a
+starting point or template for building custom global directories.</p><p>To retain this default Global Directory, exit GDE without making any
+changes.</p><p>Example:</p><pre class="programlisting">$ gtmgbldir=./mumps.gld
+$ export gtmgbldir
+$ gtm
+GTM&gt;d ^GDE
+%GDE-I-GDUSEDEFS, Using defaults for Global Directory
+/usr/accntg/jones/mumps.gld
+GDE&gt; EXIT
+%GDE-I-VERIFY, Verification OK
+%GDE-I-GDCREATE, Creating Global Directory file
+/usr/accntg/jones/mumps.gld
+</pre></div><div class="sect2" title="Mapping Global Variables in a Global Directory"><div class="titlepage"><div><div><h3 class="title"><a name="map_glbl_dir"></a>Mapping Global Variables in a Global Directory<a class="indexterm" name="id3223541"></a></h3></div></div></div><p>Mapping is the process of connecting a global variable name to a database
+file. </p><p>A complete mapping has the following four components:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>NAME</p></li><li class="listitem"><p>REGION</p></li><li class="listitem"><p>SEGMENT</p></li><li class="listitem"><p>FILE</p></li></ul></div><p>These components may be defined in any order, but the final result must be a
+complete logical path from name to file:</p><pre class="programlisting">NAME(s) ---&gt; REGION ---&gt; SEGMENT ---&gt; FILE
+</pre><p>The default Global Directory contains one complete mapping that comprises
+these entries for name, region, segment, and file.</p><pre class="programlisting">* ---&gt; DEFAULT ---&gt; DEFAULT ---&gt; mumps.dat
+(NAME) (REGION) (SEGMENT) (FILE)
+</pre><p>The * wildcard identifies all possible global names. Subsequent edits create
+entries for individual global names or name prefixes.</p><p>Regions and segments store information used to control the creation of the
+file. The characteristics stored with the region and segment are passed to MUPIP
+only when creating the database file using the CREATE command, so subsequent changes
+to these characteristics in the Global Directory have no effect on an existing
+database.</p><p>When you create a new mapping, GDE ensures that it has all these components by
+refusing to complete the EXIT command until all components of the mapping exist.
+Informational messages inform you of any missing or extra components.</p></div><div class="sect2" title="Examining the Default Global Directory"><div class="titlepage"><div><div><h3 class="title"><a name="examine_the_defualt_glbl_dir"></a>Examining the Default Global Directory<a class="indexterm" name="id3223524"></a></h3></div></div></div><p>The default Global Directory looks like this:</p><pre class="programlisting">                        *** TEMPLATES ***
+                              Def   Rec   Key   Null      Standard
+Region                        Coll  Size  Size  Subs      NullColl  Journaling
+------------------------------------------------------------------------------
+&lt;default&gt;                     0     256    64   NEVER      N         N
+  
+Segment          Active       Acc Typ Block    Alloc  Exten   Options
+------------------------------------------------------------------------------
+&lt;default&gt;          *          BG  DYN  1024      100    100   GLOB =1024
+                                                               LOCK = 40
+&lt;default&gt;                     MM  DYN  1024      100    100   DEFER
+                                                               LOCK = 40
+ 
+                        *** NAMES ***
+Global                             Region
+------------------------------------------------------------------------------
+*                                  DEFAULT
+Gharial                            REPTILES
+Hoopoe                             BIRDS
+Jacare                             REPTILES
+Trogon                             BIRDS
+ 
+                        *** REGIONS ***
+             Dynamic         Def    Rec   Key Null       Standard
+Region       Segment        Coll   Size  Size Subs       NullColl  Journaling
+------------------------------------------------------------------------------
+BIRDS        BIRDS             0    256    64 NEVER      N         N
+DEFAULT      DEFAULT           0    256    64 NEVER      N         N
+REPTILES     REPTILES          0    256    64 NEVER      N         N
+ 
+                        *** SEGMENTS ***
+Segment      File (def ext: .dat)    Acc Typ Block      Alloc Exten Options
+------------------------------------------------------------------------------
+BIRDS        flap.dat                BG  DYN  1024        100   100 GLOB=1024
+                                                                     LOCK=  40
+                                                                     RES =   0
+                                                                     ENCR=OFF
+DEFAULT      mumps.dat               BG  DYN  1024        100   100 GLOB=1024
+                                                                     LOCK=  40
+                                                                     RES =   0
+                                                                     ENCR=OFF
+REPTILES     creep.dat               BG  DYN  1024        100   100 GLOB=1024
+                                                                     LOCK=  40
+                                                                     RES =   0
+                                                                     ENCR=OFF
+ 
+                        *** MAP ***
+-  -  -  -  -  -  -  -  -  - Names -  -  - -  -  -  -  -  -  -
+
+From              Up to                 Region / Segment / File(def ext: .dat)
+------------------------------------------------------------------------------
+
+%                 Gharial               REG = DEFAULT
+                                         SEG = DEFAULT
+                                         FILE = mumps.dat
+Gharial           Gharial0              REG = REPTILES
+                                         SEG = REPTILES
+                                         FILE = creep.dat
+Gharial0          Hoopoe                REG = DEFAULT
+                                         SEG = DEFAULT
+                                         FILE = mumps.dat
+Hoopoe            Hoopoe0               REG = BIRDS
+                                         SEG = BIRDS
+                                         FILE = flap.dat
+Hoopoe0           Jacare                REG = DEFAULT
+                                         SEG = DEFAULT
+                                         FILE = mumps.dat
+Jacare            Jacare0               REG = REPTILES
+                                         SEG = REPTILES
+                                         FILE = creep.dat
+Jacare0           Trogon                REG = DEFAULT
+                                         SEG = DEFAULT
+                                         FILE = mumps.dat
+Trogon            Trogon0               REG = BIRDS
+                                         SEG = BIRDS
+                                         FILE = flap.dat
+Trogon0           ...                   REG = DEFAULT
+                                         SEG = DEFAULT
+                                         FILE = mumps.dat
+LOCAL LOCKS                             REG = DEFAULT
+                                         SEG = DEFAULT
+                                         FILE = mumps.dat
+</pre><p>There are five primary sections in a Global Directory:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>TEMPLATES</p></li><li class="listitem"><p>NAMES</p></li><li class="listitem"><p>REGIONS</p></li><li class="listitem"><p>SEGMENTS</p></li><li class="listitem"><p>MAP</p></li></ul></div><p>The function of each section in the Global Directory is described
+below.</p><div class="sect3" title="TEMPLATES"><div class="titlepage"><div><div><h4 class="title"><a name="templates_gde"></a>TEMPLATES<a class="indexterm" name="id3223717"></a></h4></div></div></div><p>This section of the Global Directory provides a default value for every
+database or file parameter passed to GT.M as part of a region or segment
+definition. GDE uses templates to complete a region or segment definition
+where one of these necessary values is not explicitly defined. </p><p>GDE provides initial default values when creating a new Global Directory. You can then change any of the values using the appropriate 
+-REGION or -SEGMENT qualifiers with
+the TEMPLATE command.</p></div><div class="sect3" title="NAMES"><div class="titlepage"><div><div><h4 class="title"><a name="names_gde"></a>NAMES<a class="indexterm" name="id3223713"></a></h4></div></div></div><p>An M program sees a monolithic global variable name space. The NAMES
+section of the Global Directory partitions the name space so that
+different globals reside in different files. While each M
+global can reside in only one file, each file can store many M globals.
+</p></div><div class="sect3" title="REGIONS"><div class="titlepage"><div><div><h4 class="title"><a name="region_gde_3"></a>REGIONS<a class="indexterm" name="id3223811"></a></h4></div></div></div><p>The REGIONS section lists all of the regions in the Global Directory. Each
+region defines common properties for all the M global variables; therefore,
+multiple sets of names from the NAMES section map onto a single
+region.</p><p>You assign these values by specifying the appropriate qualifier when you
+create or modify individual regions. If you do not specify a value for a
+particular parameter, GDE assigns the default value from the TEMPLATES
+section.</p></div><div class="sect3" title="SEGMENTS"><div class="titlepage"><div><div><h4 class="title"><a name="segments_gde"></a>SEGMENTS<a class="indexterm" name="id3223838"></a></h4></div></div></div><p>This section of the Global Directory lists currently defined segments.
+While regions specify properties of global variables, segments specify the
+properties of files. There is a one-to-one mapping between regions and
+segments. You assign these values by specifying the appropriate qualifier
+when you create or modify individual segments. If you do not specify a value
+for a particular parameter, GDE assigns the default value from the TEMPLATES
+section.</p></div><div class="sect3" title="MAP"><div class="titlepage"><div><div><h4 class="title"><a name="map_gde"></a>MAP<a class="indexterm" name="id3223864"></a></h4></div></div></div><p>This section of the Global Directory lists the current mapping of names to
+region to segment to file. In the default Global Directory, there are two
+lines in this section: one specifies the destination for all globals, the
+other one is for local locks. If you add any new mapping component
+definitions (that is, any new names, regions, or segments), this section
+displays the current status of that mapping. Any components of the mapping
+not currently defined display "NONE". Because GDE requires all elements
+of a mapping to be defined, you will not be able to EXIT (and save) your
+Global Directory until you complete all mappings.</p></div><div class="sect3" title="Global Directory Abbreviations"><div class="titlepage"><div><div><h4 class="title"><a name="abbrev_gd"></a>Global Directory Abbreviations<a class="indexterm" name="id3223748"></a></h4></div></div></div><p>GDE uses the following abbreviations to display the output of a global directory. The following list show global directory abbreviations with the associated qualifiers. For a description of the function of
+individual qualifiers, see "GDE Comman Summary". </p><pre class="programlisting">Abbreviation    Full Form
+Acc             ACCESS_METHOD
+Alloc           ALLOCATION
+Block           BLOCK_SIZE
+Def Coll        COLLATION_DEFAULT
+Exten           EXTENSION_COUNT
+File            FILE_NAME
+GLOB            GLOBAL_BUFFER_COUNT
+Journaling      [NO]JOURNAL
+KeySize         KEY_SIZE
+LOCK            LOCK_SPACE
+NullSubs        [NO]NULL_SUBSCRIPTS
+RecSize         RECORD_SIZE
+RES             RESERVED_BYTES
+Region          REGION
+Typ             DYNAMIC_SEGMENT</pre></div></div><div class="sect2" title="Customizing a Global Directory"><div class="titlepage"><div><div><h3 class="title"><a name="custom_glbl_dir"></a>Customizing a Global Directory<a class="indexterm" name="id3223754"></a></h3></div></div></div><p>Once you have installed GT.M and verified its operation, create a Global
+Directory based on your needs. To create this customized Global Directory, use
+the appropriate GDE commands and qualifiers to build the desired Global
+Directory. The GDE commands are described later in this chapter.</p><p>You can also create a text file of GDE commands with a standard text editor
+and process this file with GDE. In a production environment, this gives better
+configuration control than interactive usage with GDE.</p><div class="sect3" title="Adding a Journaling Information Section"><div class="titlepage"><div><div><h4 class="title"><a name="add_jrnl_info"></a>Adding a Journaling Information Section<a class="indexterm" name="id3223954"></a></h4></div></div></div><p>If you select the -JOURNAL option when you ADD or CHANGE a region in a Global
+Directory, the following section is added to your Global Directory and
+displays when you invoke SHOW. The columns provided display the values you
+selected with the journal options, or defaults provided by FIS for any
+options not explicitly defined.</p><pre class="programlisting">*** JOURNALING INFORMATION ***
+Region Jnl File(ext:.mjl)   Before  Buff  Alloc    Exten
+--------------------------------------------------------------
+DEFAULT &lt;based on DB file&gt; Y   128  100   100
+</pre><p>For more information about journaling, see the section on the JOURNAL
+qualifier in this chapter and <a class="xref" href="ch06.html" title="Chapter 6. GT.M Journaling">Chapter 6: &#8220;<i>GT.M Journaling</i>&#8221;</a>.</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04s01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch04.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Global Directory </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> Using GDE</td></tr></table></div></body></html>

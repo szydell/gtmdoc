@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Relinking the Edited Routine</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="Debug_Routine_Direct_Mode.html" title="Debugging a Routine in Direct Mode" />
+    <link rel="prev" href="Correct_Errors_in_M_Routine.html" title="Correcting Errors in an M Routine" />
+    <link rel="next" href="Re-execute_the_Routine.html" title="Re-executing the Routine" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Relinking the Edited Routine</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="Correct_Errors_in_M_Routine.html">Prev</a>A </td>
+          <th width="60%" align="center">Debugging a Routine in Direct Mode</th>
+          <td width="20%" align="right">A <a accesskey="n" href="Re-execute_the_Routine.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="Relink_Edited_Routine"></a>Relinking the Edited Routine</h3>
+          </div>
+        </div>
+      </div>
+      <p>Use the ZLINK command to add the edited routine to the current image. ZLINK automatically recompiles and relinks the routine. If the routine was the most recent one ZEDITed or ZLINKed, you do not have to specify the routine name with the ZLINK command.</p>
+      <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Caution">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Caution]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/caution.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>When you issue a DO command, GT.M determines whether the routine is part of the current image, and whether compiling or linking is necessary. Because this routine is already part of the current image, GT.M does not recompile or relink the edited version of the routine if you run the routine again without ZLINKing it first. Therefore, GT.M executes the previous routine image and not the edited routine.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>You may have to issue a ZGOTO or a QUIT command to remove the unedited version of the routine from the M invocation stack before ZLINKing the edited version.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;ZLINK
+        <span>%GTM-E-LOADRUNNING,</span> Cannot ZLINK an active routine
+        </pre>
+      <p>This illustrates a GT.M error report caused by an attempt to ZLINK a routine that is part of the current invocation stack.</p>
+      <p>To ZLINK the routine, remove any invocation levels for the routine off of the call stack. You may use the ZSHOW &quot;S&quot; command to display the current state of the call stack. Use the QUIT command to remove one level at a time from the call stack. Use the ZGOTO command to remove multiple levels off of the call stack.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+        GTM&gt;ZSHOW &quot;S&quot;
+        name+3^<span>DMEX</span> ($ZTRAP) (Direct mode)
+        beg^<span>DMEX</span> (Direct mode)
+        <span>+1</span> ^GTM$DMOD (Direct mode)
+        
+        GTM&gt;ZGOTO
+        
+        GTM&gt;ZSHOW &quot;S&quot;
+        <span>+1</span> ^GTM$DMOD (Direct mode)
+        GTM&gt;ZLINK
+        </pre>
+      <p>This example uses a ZSHOW &quot;S&quot; command to display the current state of the call stack. A ZGOTO command without an argument removes all the calling levels above the first from the stack. The ZLINK automatically recompiles and relinks the routine, thereby adding the edited routine to the current image.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="Correct_Errors_in_M_Routine.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Debug_Routine_Direct_Mode.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="Re-execute_the_Routine.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Correcting Errors in an M RoutineA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Re-executing the Routine</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

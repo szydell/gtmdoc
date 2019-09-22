@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Using Socket Devices</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="chapter9.html" title="ChapterA 9.A Input/Output Processing" />
+    <link rel="prev" href="null_device_examples.html" title="Null Device Examples" />
+    <link rel="next" href="msg_mngmt.html" title="Message Management" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Using Socket Devices</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="null_device_examples.html">Prev</a>A </td>
+          <th width="60%" align="center">ChapterA 9.A Input/Output Processing</th>
+          <td width="20%" align="right">A <a accesskey="n" href="msg_mngmt.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="using_socket_device"></a>Using Socket Devices</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <dl>
+          <dt>
+            <span class="sect2">
+              <a href="msg_mngmt.html">Message Management</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="msg_delimiters.html">Message Delimiters</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="read_cmmd_g.html">Read Command</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="write_cmmd_g.html">WRITE Command</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="socket_device_operation.html">Socket Device Operation</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="socket_device_param_summ.html">Socket Deviceparameter Summary</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect2">
+              <a href="socket_device_examples.html">Socket Device Examples</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <a id="id4203480" class="indexterm"></a>
+      <p>SOCKET devices are used to access and manipulate sockets. A SOCKET device can have from zero (0) to 64 associated sockets. At any time, only one socket from the collection can be the current socket. If there is no current socket, an attempt to READ from, or WRITE to the device, generates an error. </p>
+      <p>Sockets can be attached and detached from the collection of sockets associated with a device. Detached sockets belong to a pseudo-device called the &quot;socketpool&quot;. A process can detach a socket from a device and later attach it to the same device or another device.</p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/OpenVMS_manual/images/note.png" />
+            </td>
+            <th align="left"></th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>The GT.M socket device interface does not have the ability to pass sockets between related or unrelated processes. Currently error trapping operates on a device, rather than on a socket.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p></p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="null_device_examples.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="chapter9.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="msg_mngmt.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Null Device ExamplesA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Message Management</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

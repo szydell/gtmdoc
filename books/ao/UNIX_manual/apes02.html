@@ -1,0 +1,475 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Usage</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="ape.html" title="Appendix E. GTMPCAT - GT.M Process/Core Analysis Tool">
+<link rel="prev" href="apes01.html" title="Overview">
+<link rel="next" href="apes03.html" title="Interactive Mode">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Usage</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="apes01.html">Prev</a> </td>
+<th width="60%" align="center">Appendix E. GTMPCAT - GT.M Process/Core Analysis Tool </th>
+<td width="20%" align="right"> <a accesskey="n" href="apes03.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ape.html">GTMPCAT - GT.M Process/Core Analysis Tool </a></span> &gt; <span class="breadcrumb-node">Usage</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="tmpcatusage"></a>Usage</h2></div></div></div>
+<p>gtmpcat consists of two routine files -- a platform-independent main program (gtmpcat.m), and an initialization file, which is specific to the CPU architecture, operating system and GT.M version. Both the main program and the appropriate initialization file must be available in the $gtmroutines search path. Run gtmpcat as follows:</p>
+<pre class="programlisting">$gtm_dist/mumps -run gtmpcat &lt;options&gt; corename|processid</pre>
+<p>As it executes, gtmpcat provides a running account of its actions on its stdout, as well as a detailed report in a file whose name it provides on stdout at the end of its processing.</p>
+<p>Option values are separated from option flags by whitespace. The options are:</p>
+<div class="informaltable"><table border="1" width="70%">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+  
+<p>Options</p>
+ </th>
+<th>
+ <p></p> </th>
+<th>
+  
+<p>Abbr</p>
+ </th>
+<th>
+  
+<p>Description</p>
+ </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<p>--asver <em class="replaceable"><code>&lt;V6.X-XXX&gt;</code></em></p>
+ </td>
+<td>
+ <p></p> </td>
+<td>
+<p>-a</p>
+ </td>
+<td>
+<p>Specify an explicit GTM version for the core/process, if it is not the same as that specified by the -version option (which in turn defaults to that of the gtmpcat process). Note that GT.M versions are not abbreviated, for example, V6.0-001, not V60001.</p>
+ </td>
+</tr>
+<tr>
+<td>
+<p>--callin <em class="replaceable"><code>&lt;path&gt;</code></em></p>
+ </td>
+<td>
+ <p></p> </td>
+<td>
+<p>n/a</p>
+ </td>
+<td>
+<p>Specifies the path of the executable that created the core or the path to load in the given process to run against. Typically, this is a call-in type module that can also be used to diagnose LKE or DSE cores or processes.</p>
+ </td>
+</tr>
+<tr>
+<td>
+<p>--cmdscript <em class="replaceable"><code>&lt;entryref&gt;</code></em></p>
+ </td>
+<td>
+ <p></p> </td>
+<td>
+<p>-s</p>
+ </td>
+<td>
+<p>Use this option for the prototyping of additional information extraction. This option executes once every time you run GTMPCAT. This option also implies interactive mode. As soon as interactive mode setup is complete, GTMPCAT invokes the specified entryref. This options is like a gtmpcat-plugin in a way that it runs with full access to GTMPCAT routines, variables, and the debugger. </p>
+ </td>
+</tr>
+<tr>
+<td>
+<p>--cmdfile <em class="replaceable"><code>&lt;/path/to/file-name&gt;</code></em></p>
+ </td>
+<td>
+ <p></p> </td>
+<td>
+<p>-c</p>
+ </td>
+<td>
+<p>Specifies the path of the file containing interactive mode commands. It is ignored unless specified with --interactive (i). </p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--debug</p>
+ </td>
+<td>
+  
+<p>*</p>
+ </td>
+<td>
+  
+<p>-d</p>
+ </td>
+<td>
+  
+<p>Enable interactive debugging of gtmpcat itself. On encountering an error, gtmpcat executes a BREAK command before gtmpcat either continues or exits depending on the error severity and whether an error resume point is defined. This enables some interactive debugging. Also, for a successful run, a ZSHOW dump is created with the name gtmpcat-DEBUG.zshowdump.txt. This file is overwritten/recreated as needed. The default is -nodebug.</p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--debuglines </p>
+ </td>
+<td>
+  
+<p>*</p>
+ </td>
+<td>
+  
+<p>n/a</p>
+ </td>
+<td>
+  
+<p>Enables debugging of the lines written to and read from the debugger. Used for debugging gtmpcat. The default is --nodebuglines. </p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--devicedetail</p>
+ </td>
+<td>
+  
+<p>*</p>
+ </td>
+<td>
+  
+<p>-e</p>
+ </td>
+<td>
+  
+<p>Include a separate section in the report to show the actual control blocks in use and their addresses.</p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--gtmdeftypes</p>
+ </td>
+<td>
+  
+<p></p>
+ </td>
+<td>
+  
+<p>-g</p>
+ </td>
+<td>
+  
+<p>Specifies the location of GTMDefinedTypesInit.m when it is not there in the current path.</p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--ignoreunexprslt </p>
+ </td>
+<td>
+  
+<p>*</p>
+ </td>
+<td>
+  
+<p>-u</p>
+ </td>
+<td>
+  
+<p>When a GTM version is built with debugging flags, GTM can output extra lines when, for example, starting up and/or displaying the results of simple commands like .Write $Zversion.. As part of determining what version a particular install directory has, gtmpcat executes the Write $ZVersion command in a mumps process. If this command prints extra lines, it can cause gtmpcat initialization to fail. This option can be used to ignore the extra lines returned. The default is --noignoreunexprslt .</p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--interactive </p>
+ </td>
+<td>
+  
+<p>*</p>
+ </td>
+<td>
+  
+<p>-i</p>
+ </td>
+<td>
+  
+<p>Tells gtmpcat to enter interactive mode, as described below. Use this only under the direction of FIS GT.M Support. The default is --nointeractive . </p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--localvar </p>
+ </td>
+<td>
+  
+<p>*</p>
+ </td>
+<td>
+  
+<p>-l</p>
+ </td>
+<td>
+  
+<p>Include local variables, both the current local vars plus any saved (NEW'd) vars on the M stack (either explicit or implicit) in the report. Since the local variables of a process are likely to contain protected (confidential) information that is being processed, the default is ---nolocalvar to omit them. Before sharing a gtmpcat report with anyone, you must determine whether the report contains protected information and whether the recipient is permitted to view the information in the report. GT.M Support at FIS does not accept protected information.</p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--lockdetail </p>
+ </td>
+<td>
+  
+<p>*</p>
+ </td>
+<td>
+  
+<p>n/a</p>
+ </td>
+<td>
+  
+<p>Include a detailed dump of M lock related control blocks showing the block addresses and relationships. The default is --nolockdetail. This option is useful only to debug GT.M itself.</p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--lvdetail </p>
+ </td>
+<td>
+  
+<p>*</p>
+ </td>
+<td>
+  
+<p>n/a</p>
+ </td>
+<td>
+  
+<p>Include a detailed dump of the actual local variable structures. As this option can produce a report with protected information in local variable subscripts, please review the warnings above in the -localvar option. The default is --nolvdetail. This option is useful only to debug GT.M itself.</p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--memorydump </p>
+ </td>
+<td>
+  
+<p>*</p>
+ </td>
+<td>
+  
+<p>-m</p>
+ </td>
+<td>
+  
+<p>Includes a memory map dump of all allocated storage. Only available when the core file or process is running GT.M V5.3-001 or later, and then only if $gtmdbglvl is non-zero in the process. The default is -nodump. Use this only under the direction of FIS GT.M Support.</p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--mprof</p>
+ </td>
+<td>
+  
+<p>*</p>
+ </td>
+<td>
+  
+<p>-p</p>
+ </td>
+<td>
+  
+<p>Enable M-profiling across the gtmpcat run. After loading the initialization file, gtmpcat turns on M-profiling, Just before gtmpcat completes execution, it turns off M-profiling and dumps the result in a global called ^trace. This option requires a GT.M database and global directory be available. </p>
+ <p></p> </td>
+</tr>
+<tr>
+<td>
+  
+<p>--msdetail </p>
+ </td>
+<td>
+ <p></p> </td>
+<td>
+  
+<p>n/a</p>
+ </td>
+<td>
+  
+<p>Includes additional fields from the M stack-frame. The default is --msdetail.</p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--mumps </p>
+ </td>
+<td>
+ <p></p> </td>
+<td>
+  
+<p>n/a</p>
+ </td>
+<td>
+  
+<p>the core or process is a mumps executable (default).</p>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--mupip </p>
+ </td>
+<td>
+ <p></p> </td>
+<td>
+  
+<p>n/a</p>
+ </td>
+<td>
+  
+<p>the core or process is a mupip executable.</p>
+ <p></p> </td>
+</tr>
+<tr>
+<td>
+  
+<p>--output <em class="replaceable"><code>&lt;file/directory&gt;</code></em> </p>
+ </td>
+<td>
+ <p></p> </td>
+<td>
+  
+<p>-o</p>
+ </td>
+<td>
+  
+<p>Specifies the desired output file/directory. If the value given is a directory (relative or absolute), the default file name is created in the given directory. If the value is a file, that is the file-name used to hold the report.</p>
+ <p></p> </td>
+</tr>
+<tr>
+<td>
+  
+<p>--ppi </p>
+ </td>
+<td>
+   <p>*</p>
+     </td>
+<td>
+  
+<p>n/a</p>
+ </td>
+<td>
+  
+<p>Specifies whether to extract personally identifying information from the core. If --ppi is not specified, GTMPCAT does not:</p>
+   <div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>invoke the -l option.</p></li>
+<li class="listitem"><p>extract local var information on the M stack. </p></li>
+<li class="listitem"><p>dump database clues in the region output.</p></li>
+</ul></div>
+ </td>
+</tr>
+<tr>
+<td>
+  
+<p>--regiondetail </p>
+ </td>
+<td>
+ <p></p> </td>
+<td>
+  
+<p>n/a</p>
+ </td>
+<td>
+  
+<p>Collects spanning regions information. Currently, this option collects data but does not display the output.</p>
+ <p></p> </td>
+</tr>
+<tr>
+<td>
+  
+<p>--tracedump </p>
+ </td>
+<td>
+ <p></p> </td>
+<td>
+  
+<p>-t</p>
+ </td>
+<td>
+  
+<p>Read and format the internal GTM trace table. Default is --notracedump. This is useful only to debug GT.M itself.</p>
+ <p></p> </td>
+</tr>
+<tr>
+<td>
+  
+<p>--version <em class="replaceable"><code>&lt;location of the GT.M version of the core/process&gt;</code></em></p>
+ </td>
+<td>
+ <p></p> </td>
+<td>
+  
+<p>-v</p>
+ </td>
+<td>
+  
+<p>Specifies the directory with the GT.M version of the core/process. The default is the version used by gtmpcat itself, that is, in $gtm_dist.</p>
+ </td>
+</tr>
+<tr><td colspan="4">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Abbr specifies the single character abbreviation for an option. You can combine two or more options using their single character abbreviations with a common "-" prefix and no white space in between. Specify values in the same order in which you combine the abbreviations. For example, -lov output.txt /usr/lib/fis-gtm/V6.0-001_x86_64 means --localvar --output output.txt --version /usr/lib/fis-gtm/V6.0-001_x86_64.</p></li>
+<li class="listitem"><p>* specifies options that can be negated. To negate a single character abbreviation, use its upper case equivalent or use the full option name prefixed by "no" . For example, -P means --nomprof. </p></li>
+</ul></div>
+ </td></tr>
+</tbody>
+</table></div>
+<p>When gtmpcat runs, it needs to know how the structures and fields for a given version of GT.M are defined. There is one of these initialization files for each OS, architecture, and GT.M version. Once gtmpcat knows the architecture and GT.M version of the process/core, it invokes the proper initialization file to define the layout of everything it is interested in. The format of the gtmpcat initialization file is:</p>
+<pre class="programlisting">gtmpcat&lt;OS&gt;On&lt;architecture&gt;&lt;gtmversion&gt;.m </pre>
+<p>For example, the name of gtmpcat initialization file on Linux x86_64 running GT.M V6.0-000 is gtmpcatLinuxOnX8664V60000.m</p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="apes01.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ape.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="apes03.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Overview </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Interactive Mode</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

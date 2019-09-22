@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Input/Output Errors</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="prgrm_handling_of_error.html" title="Program Handling of Errors" />
+    <link rel="prev" href="err_proc_caution.html" title="Error Processing Cautions" />
+    <link rel="next" href="err_actions.html" title="Error Actions" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Input/Output Errors</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="err_proc_caution.html">Prev</a>A </td>
+          <th width="60%" align="center">Program Handling of Errors</th>
+          <td width="20%" align="right">A <a accesskey="n" href="err_actions.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect2" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h3 class="title"><a id="input_output_errors"></a>Input/Output Errors</h3>
+          </div>
+        </div>
+      </div>
+      <a id="id4238703" class="indexterm"></a>
+      <p>When GT.M encounters an error in the operation of an I/O device, GT.M executes the EXCEPTION deviceparameter for the OPEN/USE/CLOSE commands. An EXCEPTION deviceparameter specifies an action to take when an error occurs in the operation of an I/O device. The form of the EXCEPTION action is subject to the gtm_ztrap_form setting described for $ZTRAP, except that there is never any implicit popping with EXCEPTION actions. If a device has no current EXCEPTION, GT.M uses $ETRAP or $ZTRAP to handle an error from that device. </p>
+      <p>GT.M provides the option to:</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>Trap or process an exception based on device error.</p>
+          </li>
+          <li>
+            <p>Trap or process an exception based on terminal input.</p>
+          </li>
+        </ul>
+      </div>
+      <p>An EXCEPTION based on an error for the device applies only to that device, and provides a specific error handler for a specific I/O device.</p>
+      <p>The CTRAP deviceparameter for USE establishes a set of trap characters for terminal input. When GT.M encounters an input character in that set, GT.M executes the EXCEPTION deviceparamenter, or, $ETRAP or $ZTRAP if the device has no current EXCEPTION.</p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;ZPRINT ^EP12
+	EP12WRITE !,&quot;THIS IS &quot;,$TEXT(+0)
+	SET $ECODE=&quot;&quot;;this only affects $ETRAP
+	SET $ETRAP=&quot;GOTO ET&quot;
+	;N $ZT S $ZT=&quot;W !,&quot;CANa??T TAKE RECIPROCAL OF 0&quot;&quot;,*7&quot;
+	USE $P:(EXCEPTION=&quot;D BYE&quot;:CTRAP=$C(3))
+	WRITE !,&quot;TYPE &lt;CTRL-C&gt; TO STOP&quot;
+	LOOPFOR DO
+	. READ !,&quot;TYPE A NUMBER: &quot;,X
+	. WRITE ?20,&quot;HAS RECIPROCAL OF: &quot;,1/X
+	. QUIT
+	ET. WRITE !,&quot;CANa??T TAKE RECIRPOCAL OF 0&quot;,*7
+	. SET $ECODE=&quot;&quot;
+	QUIT
+	BYEWRITE !,&quot;YOU TYPED &lt;CTRL-C&gt; YOU MUST BE DONE!&quot;
+	USE $P:(EXCEPTION=&quot;&quot;:CTRAP=&quot;&quot;)
+	WRITE !,&quot;$ZSTATUS=&quot;,$ZSTATUS
+	ZGOTO 1
+	GTM&gt;DO ^EP12
+	THIS IS EP12
+	TYPE &lt;CTRL-C&gt; TO STOP
+	TYPE A NUMBER: 1 HAS RECIPROCAL OF: 1
+	TYPE A NUMBER: 2 HAS RECIRPOCAL OF: .5
+	TYPE A NUMBER: 3 HAS RECIPROCAL OF: .33333333333333
+	TYPE A NUMBER: 4 HAS RECIPROCAL OF: .25
+	TYPE A NUMBER: HAS RECIPROCAL OF:
+	CANa??T TAKE RECIPROCAL OF 0
+	TYPE A NUMBER:
+	YOU TYPED &lt;CTRL-C&gt; YOU MUST BE DONE!
+	$ZSTATUS=150372498,LOOP+1^EP12,%GTM-E-CTRAP,Character trap $C(3) encountered
+	GTM&gt;
+	</pre>
+      <p>This routine prompts the user to enter a number at the terminal. If the user enters a zero, GT.M encounters an error and executes $ETRAP (or $ZTRAP). The action specified reports the error and returns to prompt the user to enter a number. With $ZTRAP, this is very straightforward. With $ETRAP, some care is required to get the code to resume at the proper place. The CTRAP deviceparameter establishes &lt;CTRL-C&gt; as a trap character. When GT.M encounters a &lt;CTRL-C&gt;, GT.M executes the EXCEPTION string whcih transfers control to the label BYE. At the label BYE, the routine terminates execution with an error message. Using the EXCEPTION deviceparameter with CTRAP generally simplifies $ETRAP or $ZTRAP handling.</p>
+      <p>$ZSTATUS allows the routine to find out which trap character GT.M encountered. When a routine has several character traps set, $ZSTATUS provides useful information for identifying which character triggered the trap, and thereby allows a custom response to a specific input.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="err_proc_caution.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="prgrm_handling_of_error.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="err_actions.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Error Processing CautionsA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A Error Actions</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

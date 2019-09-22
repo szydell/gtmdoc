@@ -1,0 +1,81 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>ZWIthdraw</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s47.html" title="ZTStart">
+<link rel="next" href="ch06s49.html" title="ZWRite">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">ZWIthdraw</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s47.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s49.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">ZWIthdraw</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zwithdraw"></a>ZWIthdraw<a class="indexterm" name="idp55549840"></a>
+</h2></div></div></div>
+<p>The ZWITHDRAW command KILLs the data value for a variable name without affecting the nodes descended from that node. </p>
+<p>The format of the ZWITHDRAW command is:</p>
+<pre class="programlisting">ZWI[THDRAW][:tvexpr] glvn</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The global or local variable name identifies the variable for which ZWITHDRAW removes the data value.</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more ZWITHDRAW arguments form a legal argument for a ZWITHDRAW.</p></li>
+</ul></div>
+<p>ZWITHDRAW provides a tool to quickly restore a node to a state where it has descendants and no value-- that is, where $DATA for that node will have a value of 10 -- for the case where such a state has some control meaning. GT.M also provides the ZKILL command, with functionality identical to ZWITHDRAW.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_zwithdraw"></a>Examples<span> of ZWITHDRAW</span><a class="indexterm" name="idp66958528"></a>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">Kill A
+Set A="A",A(1)=1,A(1,1)=1
+WRite $Data(A(1)),!
+ZWIthdraw A(1)
+WRite $D(A(1)),!
+ZWRite A
+Quit</pre>
+<p>produces the result:</p>
+<pre class="programlisting">11
+10
+A="A"
+A(1,1)=1</pre>
+<p>This sets up local variables A and A(1) and A(1,1). It then deletes the data for A(1) with ZWITHDRAW. The ZWRITE command shows ZWITHDRAW KILLed A(1) but left A and A(1,1).</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s47.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s49.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">ZTStart </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> ZWRite</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

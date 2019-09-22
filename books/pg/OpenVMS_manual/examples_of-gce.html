@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Examples of %GCE</title>
+    <link rel="stylesheet" href="ede.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="start" href="index.html" title="GT.M Programmer's Guide" />
+    <link rel="up" href="percent_gce.html" title="%GCE" />
+    <link rel="prev" href="prompts_gce.html" title="Prompts" />
+    <link rel="next" href="percent_gd.html" title="%GD" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Examples of %GCE</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="prompts_gce.html">Prev</a>A </td>
+          <th width="60%" align="center">%GCE</th>
+          <td width="20%" align="right">A <a accesskey="n" href="percent_gd.html">Next</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="sect3" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h4 class="title"><a id="examples_of-gce"></a>Examples of %GCE</h4>
+          </div>
+        </div>
+      </div>
+      <a id="id4224054" class="indexterm"></a>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;DO ^%GCE
+	Global Change Every occurrence
+	Global ^a:^b
+	^a ^b
+	Current total of 2 globals.
+	Global ^ &lt;RETURN&gt;
+	Old String: hello
+	New String: good-bye
+	Show changed nodes &lt;Yes&gt;?: &lt;RETURN&gt;
+	Output Device: &lt;terminal&gt;: &lt;RETURN&gt;
+	^a
+	No changes made in total 1 nodes.
+	^b
+	^b(10)
+	Was : hello Adam
+	Now : good-bye Adam
+	1 changes made in total 25 nodes.
+	Global ^ &lt;RETURN&gt;
+	GTM&gt;
+	</pre>
+      <p>This example searches a range of globals and its nodes for the old string value entered. GT.M searches each global and displays the changes and number of nodes changed and checked. </p>
+      <p>Example:</p>
+      <pre class="programlisting">
+	GTM&gt;set ^b(12)=12
+	GTM&gt;set ^b(122)=122
+	GTM&gt;set ^b(30)=656
+	GTM&gt;set ^b(45)=344
+	GTM&gt;set ^b(1212)=012212
+	GTM&gt;DO ^%GCE
+	Global Change Every occurrence
+	Global ^b
+	Current total of 1 global.
+	Global ^ &lt;RETURN&gt; 
+	Old String: 12
+	New String: 35
+	Show changed nodes &lt;Yes&gt;?: &lt;RETURN&gt;
+	Output Device: &lt;terminal&gt;: &lt;RETURN&gt; 
+	^b(12)
+	Was : 12
+	Now : 35
+	^b(122)
+	Was : 122
+	Now : 352
+	^b(1212)
+	Was : 12212
+	Now : 35235
+	5 changes made in total 5 nodes
+	Global ^ &lt;RETURN&gt; 
+	GTM&gt;DO ^%G
+	Output device: &lt;terminal&gt;: &lt;RETURN&gt;
+	List ^b
+	^b(12)=35
+	^b(30)=656
+	^b(45)=344
+	^b(122)=352
+	^b(1212)=35235		
+	</pre>
+      <p>This example shows that executing %GCE replaces all occurrences of &quot;12&quot; in the data stored in the global ^b with &quot;35&quot; and displays the affected nodes before and after the change. Then the %G demonstrates that &quot;12&quot; as data was changed, while &quot;12&quot; in the subscripts remained untouched.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="prompts_gce.html">Prev</a>A </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="percent_gce.html">Up</a>
+          </td>
+          <td width="40%" align="right">A <a accesskey="n" href="percent_gd.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">PromptsA </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top">A %GD</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

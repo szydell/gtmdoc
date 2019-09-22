@@ -1,0 +1,99 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Literals</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
+<link rel="prev" href="ch05s03.html" title="Variables">
+<link rel="next" href="ch05s05.html" title="Expressions">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Literals</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch05s03.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 5. <span>General Language Features of M</span>
+</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch05s05.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch05.html"><span>General Language Features of M</span></a></span> &gt; <span class="breadcrumb-node">Literals</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="Literals"></a>Literals<a class="indexterm" name="idp63057536"></a>
+</h2></div></div></div>
+<p>M has both string and numeric literals.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="String_Literals"></a>String Literals<a class="indexterm" name="idp60328896"></a>
+</h3></div></div></div>
+<p>A string literal (strlit) is enclosed in quotation marks (" ") and can contain a sequence of ASCII and <span class="trademark">Unicode</span>(R) UTF-8 characters. While the standard indicates the characters must be graphic, GT.M accepts non-graphic characters and, at compile-time, gives a warning. Using $CHAR() and concatenate to represent non-graphic characters in strings not only avoids the warning but is less error prone and makes for easier understanding. M attempts to use character text that appears outside of quotation mark delimiters according to context, which generally means as a local variable name.</p>
+<p>To include a quotation mark (") within a strlit, use a set of two quotation marks ("" "").</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write """"
+"
+GTM&gt;</pre>
+<p>The WRITE displays a single quotation mark because the first quotation mark delimits the beginning of the string literal, the next two quotation marks denote a single quote within the string, and the last quotation mark delimits the end of the string literal.</p>
+<p>Use the $[Z]CHAR() function and the concatenation operator to include control characters within a string.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE "A"_$CHAR(9)_"B"
+A B
+GTM&gt;</pre>
+<p>The WRITE displays an "A," followed by a tab (&lt;HT&gt;), followed by a "B" using $CHAR(), to introduce the non-graphic character.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Numeric_Literals"></a>Numeric Literals</h3></div></div></div>
+<p>In M, numeric literals (numlit) are entered without surrounding delimiters.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE 1
+1
+GTM&gt; WRITE 1.1
+1.1</pre>
+<p>These display numeric literals that are integer and decimal.</p>
+<p>M also accepts numeric literals in the form of a mantissa and an exponent, separated by a delimiter of "E" in uppercase. The mantissa may be an integer or a decimal fraction. The integer exponent may have an optional leading minus sign (-).</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE 8E6
+8000000
+GTM&gt; WRITE 8E-6
+.000008
+GTM&gt;</pre>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top"><p>The exponential numeric form may lead to ambiguities in the meaning of subscripts. Because numeric subscripts collate ahead of string subscripts, the string subscript "01E5" is not the same as the numeric subscript 01E5.</p></td></tr>
+</table></div>
+<p>GT.M handles numeric strings which are not canonical within the implementation as strings unless the application specifically requests they be treated as numbers. Any use in a context defined as numeric elicits numeric treatment; this includes operands of numeric operators, numeric literals, and some intrinsic function arguments. When the code creates a large number out of range , GT.M gives a NUMOFLOW error. When the code creates a small fractional number out of range GT.M treats it as zero (0). The GT.M number range is (to the limit of accuracy) 1E-43 to 1E47. When the application creates an in-range number that exceeds the GT.M numeric accuracy of 18 significant digits, GT.M silently retains the most significant digits. With standard collation, GT.M collates canonic numeric strings used as subscripts numerically, while it collates non-canonic numbers as strings. </p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch05s03.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch05s05.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Variables </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Expressions</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

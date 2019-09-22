@@ -1,0 +1,382 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Journal Extract Formats</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="journaling.html" title="Chapter 6. GT.M Journaling">
+<link rel="prev" href="mup_journal.html" title="JOURNAL">
+<link rel="next" href="ch07.html" title="Chapter 7. Database Replication">
+<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">
+<span>Journal </span>Extract Formats</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="mup_journal.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. <span>GT.M </span>Journaling</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="journaling.html"><span>GT.M </span>Journaling</a></span> &gt; <span class="breadcrumb-node"><span>Journal </span>Extract Formats</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="journal_extract"></a><span>Journal </span>Extract Formats<a class="indexterm" name="idp66168976"></a>
+</h2></div></div></div>
+<p>Journal EXTRACT files always start with a label. For the current release of GT.M, the label is GDSJEX07 for a simple journal extract file. This label is necessary to identify the format of the file.</p>
+<p>If the environment variable gtm_chset is set of UTF-8, then file format label is followed by another label called "UTF-8" to indicate UTF-8 mode. </p>
+<p>After this label, the journal record extracts follow. These journal record extracts include fields or pieces delimited by a back slash (\). </p>
+<p>The first piece of an -EXTRACT output record contains a two-digit decimal transaction record type (for example, 01 for a process initialization record). The second piece contains the full date and time of the operation, represented in the $HOROLOG format. The third piece contains a GT.M assigned number (database transaction number) which uniquely identifies the transaction within the time covered by the journal file. The fourth piece contains the process ID (PID) of the process that performed the operation, represented as a decimal number. The remainder of the record depends on the record type. </p>
+<p>Records of type SET, KILL, ZKILL, TSTART, and TCOMMIT include the token_seq as part of the output. It is the sixth field in the output of the journal record extract. When replication is in use, token_seq is a journal sequence number (jsnum) that uniquely identifies each transaction<span>(for more information on journal sequence number refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>)</span>. When replication is not in use and the transaction is a TP transaction, token_seq is an 8-byte token that uniquely identifies the entire TP transaction. For non-replicated, non-TP journal records, token_seq has a zero (0) value. </p>
+<p>The format of the plain journal extract is as follows:</p>
+<pre class="programlisting">
+NULL    00\time\tnum\pid\clntpid\jsnum\strm_num\strm_seq
+PINI(U) 01\time\tnum\pid\nnam\unam\term\clntpid\clntnnam\clntunam\clntterm
+PINI(V) 01\time\tnum\pid\nnam\unam\term\mode\logintime\image_count\pname\clntpid\clntnnam\clntunam\clntterm\clntmode\clntlogintime\clntimage_count\clntpname
+PFIN    02\time\tnum\pid\clntpid
+EOF     03\time\tnum\pid\clntpid\jsnum
+KILL    04\time\tnum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+SET     05\time\tnum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node=sarg
+ZTSTART 06\time\tnum\pid\clntpid\token
+ZTCOM   07\time\tnum\pid\clntpid\token\partners
+TSTART  08\time\tnum\pid\clntpid\token_seq\strm_num\strm_seq
+TCOM    09\time\tnum\pid\clntpid\token_seq\strm_num\strm_seq\partners\tid
+ZKILL   10\time\tnum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+ZTWORM  11\time\tnum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\ztwormhole
+ZTRIG   12\time\tnum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+LGTRIG  13\time\tnum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\trigdefinition</pre>
+<p>where:</p>
+<p>01 record indicates a process/image-initiated update (PINI) into the current journal file for the first time.</p>
+<p>02 record indicates a process/image dropped interest (PFIN) in the current journal file.</p>
+<p>03 record indicates all GT.M images dropped interest in this journal file and the journal file was closed normally.</p>
+<p>04 record indicates a database update caused by a KILL command.</p>
+<p>05 record indicates a database update caused by a SET command.</p>
+<p>06 record indicates a ZTSTART command.</p>
+<p>07 record indicates a ZTCOMMIT command.</p>
+<p>08 record indicates a TSTART command.</p>
+<p>09 record indicates a TCOMMIT command.</p>
+<p>10 record indicates a database update caused by a ZKILL command.</p>
+<p>11 records indicates a value for/from $ZTWORMHOLE (when replication is turned on).</p>
+<p>12 record indicates a ZTRIGGER command.</p>
+<p>13 record indicates a trigger definition as a logical action from an originating/primary instance to a replicating/secondary instance</p>
+<p>Journal extracts contain NULL records only in a multisite replication configuration where triggers or external M-filters are active. Here are two examples when NULL records are sent to the journal files:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>An external filter on an instance transforms a SET record to a NULL record that has a different schema.</p></li>
+<li class="listitem"><p>If the source side has triggers enabled and its receiver side either runs a pre-trigger version of GT.M or runs on a platform where triggers are not supported, trigger definition journal records from the source side are transformed to NULL records on the receiver side.</p></li>
+</ul></div>
+<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<th align="left">Important</th>
+</tr>
+<tr><td align="left" valign="top"><p>A NULL record does not have global information. Therefore, it resides in the alphabetically last replicated region of the global directory.</p></td></tr>
+</table></div>
+<p>The format of the detail journal extract is as follows: </p>
+<pre class="programlisting">PINI(U)  time\tnum\chksum\pid\nnam\unam\term\clntpid\clntnnam\clntunam\clntterm
+PINI(V)  time\tnum\chksum\pid\nnam\unam\term\mode\logintime\image_count\pname\clntpid\clntnnam\clntunam\clntterm\clntmode\clntlogintime\clntimage_count\clntpname
+PFIN     time\tnum\chksum\pid\clntpid
+EOF      time\tnum\chksum\pid\clntpid\jsnum
+SET      time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node=sarg
+KILL     time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+ZKILL    time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+ZTWORM   time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\ztwormhole
+ZTRIG    time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+TSTART   time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq
+TSET     time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node=sarg
+TKILL    time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+TZKILL   time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+TZTWORM  time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\ztwormhole
+TZTRIG   time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+TLGTRIG  time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\trigdefinition
+USET     time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node=sarg
+UKILL    time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+UZKILL   time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+UZTWORM  time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\ztwormhole
+UZTRIG   time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+ULGTRIG  time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\trigdefinition
+TCOM     time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\partners\tid
+INCTN    time\tnum\chksum\pid\clntpid\opcode\incdetail
+EPOCH    time\tnum\chksum\pid\clntpid\jsnum\blks_to_upgrd\free_blocks\total_blks\fully_upgraded[\strm_num\strm_seq]...
+PBLK     time\tnum\chksum\pid\clntpid\blknum\bsiz\blkhdrtn\ondskbver
+AIMG     time\tnum\chksum\pid\clntpid\blknum\bsiz\blkhdrtn\ondskbver
+NULL     time\tnum\chksum\pid\clntpid\jsnum\strm_num\strm_seq
+ZTSTART  time\tnum\chksum\pid\clntpid\token
+FSET     time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node=sarg
+FKILL    time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+FZKILL   time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+GSET     time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node=sarg
+GKILL    time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+GZKILL   time\tnum\chksum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\nodeflags\node
+ZTCOM    time\tnum\chksum\pid\clntpid\token\partners
+ALIGN    time\tnum\chksum\pid\clntpid</pre>
+<p>where:</p>
+<p>AIMG records are unique to DSE action and exist because those actions do not have a "logical" representation.</p>
+<p>EPOCH records are status records that record information related to check pointing of the journal.</p>
+<p>NCTN records are the transaction numbers of the sequence of critical sections in which the process and marked the database blocks of the globals as previously used but no longer in use in the bit maps. </p>
+<p>PBLK records are the before image records of the bit maps.</p>
+<p>ALIGN records pad journal records so every alignsize boundary (set with MUPIP SET -JOURNAL and is visible in DSE DUMP -FILEHEADER output) in the journal file starts with a fresh journal record. The sole purpose of these records is to help speed up journal recovery.</p>
+<p>Legend (All hexadecimal fields have a 0x prefix. All numeric fields otherwise are decimal):</p>
+<div class="informaltable">
+<a name="tbljnlformatlegend"></a><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td>
+ <p><code class="code">tnum </code></p>
+</td>
+<td>
+ <p>Transaction number</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">chksum </code></p>
+</td>
+<td>
+ <p>Checksum for the record.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">fully_upgraded</code></p>
+</td>
+<td>
+<p>1 if the db was fully upgraded (indicated by a dse dump -file -all) at the time of writing the EPOCH</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">pid</code> </p>
+</td>
+<td>
+ <p>Process id that wrote the jnl record.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">clntpid </code></p>
+</td>
+<td>
+ <p>If non-zero, clntpid is the process id of the GT.CM client that initiated this update on the server side.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">jsnum</code></p>
+</td>
+<td>
+ <p>Journal sequence number.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">token</code></p>
+</td>
+<td>
+ <p>Unique 8-byte token.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code class="code">strm_num</code></p>
+</td>
+<td>
+<p>If replication is true and this update originated in a non-supplementary instance but was replicated to and updated a supplementary instance, this number is a non-zero value anywhere from 1 to 15 (both inclusive) indicating the non-supplementary stream number. In all other cases, this stream # value is 0. In case of an EPOCH record, anywhere from 0 to 16 such "strm_num" numbers might be displayed depending on how many sources of supplementary instance replication have replicated to the instance in its lifetime.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">strm_seq</code></p>
+</td>
+<td>
+<p>If replication is true and this update originated in a non-supplementary instance but was replicated to and updated a supplementary instance, this is the journal sequence number of the update on the originating non-supplementary instance. If replication is true and this update originated in a supplementary instance, this is the journal sequence number of the update on the originating supplementary instance. In all other cases, this stream sequence number is 0. Note that the journal seqno is actually 1 more than the most recent update originating on that stream number. In case of an EPOCH record, anywhere from 0 to 16 such "strm_seq" numbers might be displayed depending on how many sources of supplementary instance replication have replicated to the instance in its lifetime.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><code class="code">tid</code></p>
+</td>
+<td>
+<p>TRANSACTIONID string (BATCH or any string of descriptive text chosen by the application) specified as an argument of the corresponding TSTART command. If TRANSACTIONID is not specified with TSTART, GT.M sets <code class="code">tid</code> to null. TRANSACTIONID can specify any value for <code class="code">tid</code> but affects GT.M behavior only when TRANSACTIONID specifies BATCH or BA.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">token_seq </code></p>
+</td>
+<td>
+ <p>If replication is turned on, it is the journal sequence number. If not, it is a unique 8-byte token.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">trigdefinition</code></p>
+</td>
+<td>
+ <p>Trigger definition string corresponding to an LGTRIG journal record.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">updnum</code></p>
+</td>
+<td>
+ <p>=n where this is the nth update in the TP transaction. n=1 for the 1st update etc. 0 for non-TP.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">nodeflags</code></p>
+</td>
+<td>
+<p>Decimal number interpreted as a binary mask.. Currently only 5 bits are used.</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>00001 (1) =&gt; update journaled but NOT replicated (For example, update inside a trigger)</p></li>
+<li class="listitem"><p>00010 (2) =&gt; update to a global that had at least one trigger defined, even if no trigger matched this update</p></li>
+<li class="listitem"><p>00100 (4) =&gt; $ZTWORMHOLE holds the empty string ("") at the time of this update or was not referenced during this update</p></li>
+<li class="listitem"><p>01000 (8) =&gt; update did not invoke any triggers even if they existed (For example, MUPIP LOAD)</p></li>
+<li class="listitem"><p>10000 (16) =&gt; whether the update (set or kill) is a duplicate. In case of a KILL, it is a kill of some non-existing node aka duplicate kill. Note that the dupkill occurs only in case of the Update Process. In case of GT.M, the KILL is entirely skipped. In both cases (duplicate set or kill), only a jnl record is written, the db is untouched.</p></li>
+</ul></div>
+<p>Combinations of the above bits would mean each of the individual bit characteristics. For example, 00011 =&gt; update within a trigger context, and to a global with at least one trigger defined. Certain bit combinations are impossible. For example, 01001 since GT.M replicates any update that does not invoke triggers.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">node</code></p>
+</td>
+<td>
+ <p>Key that is being updated in a SET or KILL.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">sarg</code></p>
+</td>
+<td>
+ <p>Right-hand side argument to the SET (that is, the value that the key is being SET to).</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">partners</code> </p>
+</td>
+<td>
+ <p>Number of journaled regions participating in this TP (TCOM/ZTCOM record written in this TP) .</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">opcode</code></p>
+</td>
+<td>
+ <p>Inctn opcode. See gdsfhead.h inctn_opcode_t for all possible values.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">blknum</code></p>
+</td>
+<td>
+ <p>Block number corresponding to a PBLK or AIMG or INCTN record.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">bsiz</code> </p>
+</td>
+<td>
+ <p>Block size from the header field of a PBLK or AIMG record.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">blkhdrtn</code></p>
+</td>
+<td>
+ <p>Transaction number from the block header of a PBLK or AIMG record.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">ondskbver</code></p>
+</td>
+<td>
+ <p>On disk block version of this block at the time of writing the PBLK or AIMG record. 0 =&gt; V4, 1 =&gt; V5.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">incdetail</code></p>
+</td>
+<td>
+ <p>0 if opcode=1,2,3; blks2upgrd if opcode=4,5,6; blknum if opcode=7,8,9,10,11,12,13</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">ztwormhole</code></p>
+</td>
+<td>
+ <p>string corresponding to $ZTWORMHOLE</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">blks2upgrd</code></p>
+</td>
+<td>
+ <p># of new V4 format bitmap blocks created if opcode=4,5; csd-&gt;blks_to_upgrd if opcode=6</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">uname</code></p>
+</td>
+<td>
+ <p>Name of the user that wrote this PINI record.</p>
+</td>
+</tr>
+<tr>
+<td>
+ <p><code class="code">clntunam</code></p>
+</td>
+<td>
+ <p>If non-empty, clntunam is the name of the GT.CM client that initiated this update on the server side. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="mup_journal.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="journaling.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">JOURNAL
+ </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> Chapter 7. Database Replication</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>REPLUPGRADEPRI </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="REPLTRANS2BIG.html" title="REPLTRANS2BIG ">
+<link rel="next" href="REPLUPGRADESEC.html" title="REPLUPGRADESEC ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">REPLUPGRADEPRI </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="REPLTRANS2BIG.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="REPLUPGRADESEC.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">REPLUPGRADEPRI </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="REPLUPGRADEPRI"></a>REPLUPGRADEPRI </h2></div></div></div>
+<p>Last used version: V5.4-002B</p>
+<p><span class="bold"><strong>REPLUPGRADEPRI</strong></span>,   Attempted operation requires primary instance xxxx to support multi-site replication</p>
+<p>MUPIP Error: This error is issued if an attempt is made to start an active source server or activate a passive source server on a propagating primary instance while the receiver server on that instance is connected to a primary that has not yet been upgraded to the multi-site version of GT.M. This error is also issued when the receiver server on a propagating primary finds that the primary it connects to does not support multi-site replication and that there is at least one active source server running on the instance at that time.</p>
+<p>Action: An active source server cannot be running on a secondary instance at the same time that the receiver server on this instance is connected to a primary that does not support multi-site functionality. Upgrade the primary instance identified in the message to the version of GT.M that supports multi-site replication functionality and then start active source servers.</p>
+<a class="indexterm" name="idp173798960"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="REPLTRANS2BIG.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="REPLUPGRADESEC.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">REPLTRANS2BIG  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> REPLUPGRADESEC </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>TOTALBLKMAX </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="TOOMANYCLIENTS.html" title="TOOMANYCLIENTS ">
+<link rel="next" href="TPFAIL.html" title="TPFAIL ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">TOTALBLKMAX </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="TOOMANYCLIENTS.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="TPFAIL.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">TOTALBLKMAX </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="TOTALBLKMAX"></a>TOTALBLKMAX </h2></div></div></div>
+<p><span class="bold"><strong>TOTALBLKMAX</strong></span>, Extension exceeds maximum total blocks, not extending</p>
+<p>Run Time Error: This indicates that the database file extension specified implicitly or explicitly (using MUPIP EXTEND) would cause the GDS file to exceed its maximum size. The following table summarizes the maximum database size for all GT.M versions starting from V5.-000.  To upgrade your GT.M to the latest version, refer to the "Upgrading to GT.M &lt;LatestVersion&gt;" section of the release notes to select an appropriate upgrade path for your environment. </p>
+<p>
+</p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+            <p>GT.M Versions</p>
+          </th>
+<th>
+            <p>Format</p>
+          </th>
+<th>
+            <p>Max blocks in a DB file (MiB)</p>
+          </th>
+<th>
+            <p>Max DB Size* (GiB)</p>
+          </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+            <p>V6.0-000 (or above)</p>
+          </td>
+<td>
+            <p>V6</p>
+          </td>
+<td>
+            <p>992 </p>
+          </td>
+<td>
+            <p>7936</p>
+          </td>
+</tr>
+<tr>
+<td>
+            <p>V5.4-000 through V5.5-000</p>
+          </td>
+<td>
+            <p>V5</p>
+          </td>
+<td>
+            <p>224</p>
+          </td>
+<td>
+            <p>1792</p>
+          </td>
+</tr>
+<tr>
+<td>
+            <p>V5.0-000 through V5.3-003</p>
+          </td>
+<td>
+            <p>V5</p>
+          </td>
+<td>
+            <p>128</p>
+          </td>
+<td>
+            <p>1024</p>
+          </td>
+</tr>
+</tbody>
+</table></div>
+<p>
+</p>
+<p><span class="bold"><strong>*</strong></span> for a database file with block size of 8192 bytes.
+</p>
+<p>Action: Modify the extension to use a smaller size. This may indicate that you should move some contents of the database file to another file.</p>
+<a class="indexterm" name="idp174613616"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="TOOMANYCLIENTS.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="TPFAIL.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">TOOMANYCLIENTS  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> TPFAIL </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

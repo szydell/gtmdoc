@@ -1,0 +1,259 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>ZAllocate</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="prev" href="ch06s27.html" title="Xecute">
+<link rel="next" href="ch06s29.html" title="ZBreak">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">ZAllocate</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch06s27.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s29.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch06.html">Commands</a></span> &gt; <span class="breadcrumb-node">ZAllocate</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zallocate"></a>ZAllocate<a class="indexterm" name="idp52732400"></a>
+</h2></div></div></div>
+<p>The ZALLOCATE command reserves the specified name without releasing previously reserved names. Other GT.M processes cannot reserve the ZALLOCATEd name with a ZALLOCATE or LOCK command.</p>
+<p>The ZALLOCATE command provides compatibility with some other GT.M implementations. The M Development Committee chose to add the + and - delimiters to the LOCK command (incremental locking) rather than adopt the ZALLOCATE and ZDEALLOCATE approach. Therefore, when a design requires an incremental lock mechanism, LOCK +/- has the advantage over ZALLOCATE / ZDEALLOCATE of being part of the M standard. LOCK +/- also has the advantage of working symmetrically when routines using LOCKs are nested. That is, a ZALLOCATE command issued by a process for a named resource already ZALLOCATEd by that process results in no change of state. This means that routines that do ZALLOCATE followed by a ZDEALLOCATE on a named resource that is already ZALLOCATEd by the same process (at routine entry time), will end up ZDEALLOCATEing the named resource (which might not be desired). On the other hand, a LOCK + command issued by a process for a named resource already LOCKed by that process causes the LEVEL of the LOCK to be incremented (as seen in a ZSHOW "L" output). Every LOCK - command on that named resource causes the LEVEL to be decremented. When the LEVEL becomes 0, the named resource is no longer LOCKed.</p>
+<p>For more information on troubleshooting LOCKs with the GT.M Lock Utility (LKE), refer to the appropriate chapter of the <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p>
+<p>The format of the ZALLOCATE command is:</p>
+<pre class="programlisting">ZA[LLOCATE][:tvexpr] [(]nref[,...][)][:intexpr][,...]</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>The nref argument specifies a name in the format of a GT.M name with or without subscripts, and with or without a preceding caret (^).</p></li>
+<li class="listitem"><p>Outside of transactions, only one process in an environment can ZALLOCATE (or LOCK) a particular resource name at any given time.</p></li>
+<li class="listitem"><p>Because the data storage in GT.M uses hierarchical sparse arrays and ZALLOCATE may serve to protect that data from inappropriate "simultaneous" access by multiple processes, ZALLOCATE treats resource names in a hierarchical fashion; a ZALLOCATE protects not only the named resource, but also its ancestors and descendants.</p></li>
+<li class="listitem"><p>When one or more nrefs are enclosed in parentheses (), ZALLOCATE reserves all the enclosed names "simultaneously," that is, it reserves none of them until all become available.</p></li>
+<li class="listitem"><p>The optional numeric expression specifies a time in seconds after which the command should timeout if unsuccessful; choosing 0 results in a single attempt. If a ZALLOCATE command specifies a timeout that do not exceed $ZMAXTPTIME and the resource name is locked on the final retry, the process may generate TPNOACID messages while it tries to ensure there is no possibility of a deadlock.</p></li>
+<li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more ZALLOCATE arguments form a legal argument for a ZALLOCATE.</p></li>
+</ul></div>
+<p>For additional information on the GT.M locking mechanism, refer to the "LOCK" section in the M LOCK Utility chapter of <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p>
+<p>If a ZALLOCATE command specifies a timeout, and GT.M acquires ownership of the named resource before the timeout elapses, ZALLOCATE sets $TEST to TRUE (1). If GT.M cannot acquire ownership of the named resource within the specified timeout, ZALLOCATE sets $TEST to FALSE (0). If a ZALLOCATE command does not specify a timeout, the execution of the command does not affect $TEST.</p>
+<p>When given a list of nrefs, ZALLOCATE tries to reserve each nref from left to right in the order specified taking into account the timeout specified for each. If the timeout elapses before reserving an nref, GT.M terminates the ZALLOCATE command. Any nrefs already acquired as part of the current ZALLOCATE command stay acquired.</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_zallocate"></a>Examples<span> of ZALLOCATE</span><a class="indexterm" name="idp65191824"></a>
+</h3></div></div></div>
+<p>Examples:</p>
+<pre class="programlisting">ZAllocate A
+ZAllocate ^A
+ZAllocate ^A(1)
+ZAllocate (^B("smith"),^C("jones"))
+ZAllocate @A</pre>
+<p>The first command ZALLOCATEs A; the second, ^A; the third, ^A(1) and the fourth, both ^B("smith") and ^C("jones") simultaneously. The last command ZALLOCATEs the resources named by the value of the variable A.</p>
+<p>Example:</p>
+<pre class="programlisting">ZAllocate A,^B,@C
+ZALLOCATE (A,B,C)</pre>
+<p>If ZALLOCATE arguments are enclosed in parentheses, the command waits until all names in the argument list become available before reserving any of the names. For example, in the statement ZA (A,B,C), if the resource named C is not available, ZALLOCATE waits until C becomes available before reserving A and B. Using the format illustrated in the first line above, can cause deadlocks because the resource names are reserved as they come available.</p>
+<p>When a process attempts to ZALLOCATE a name currently ZALLOCATEd or LOCKed (with the LOCK command) by another process, the ZALLOCATEing process hangs until the other process releases the name. In the event that names remain unavailable for significant periods of time, timeouts allow the process issuing a ZALLOCATE to regain program control.</p>
+<p>Example:</p>
+<pre class="programlisting">ZAllocate ^D:5</pre>
+<p>This example specifies a timeout of five seconds. If GT.M reserves ^D before the five seconds elapses, ZALLOCATE sets $TEST to TRUE. If GT.M cannot reserve ^D within the five second timeout, ZALLOCATE sets $TEST to FALSE.</p>
+<p>At the time of ZALLOCATEing a name, no names previously reserved with ZALLOCATE or the LOCK command are released (similarly, LOCKing a name does not release names that have been ZALLOCATEd). For example, after ZALLOCATEing A and LOCKing B, LOCKing B does not release A, and ZALLOCATEing C does not release A or B.</p>
+<p>ZDEALLOCATE releases ZALLOCATED resource names. The ZDEALLOCATE command can only release previously ZALLOCATEd (not LOCKed) names.</p>
+<p>Resource name arguments for LOCKs and ZALLOCATEs intersect. That is, if one process holds a LOCK or ZALLOCATE, another process can neither LOCK nor ZALLOCATE any name falling in the hierarchy of the resource name held by the first process. When a process holds a LOCK or ZALLOCATE, that same process may also LOCK or ZALLOCATE resource names falling in the hierarchy of the currently held resource name. When a single process holds both LOCKs and ZALLOCATEs, a LOCK does not release the ZALLOCATEd resource(s) and a ZDEALLOCATE does not release the LOCKed resource(s).</p>
+<p>Also see the description of the ZDEALLOCATE command described later in this chapter.</p>
+<p>Example:</p>
+<pre class="programlisting">Lock ^AR(PNT)
+.
+.
+.
+ZAllocate ^AR(PNT,SUB)
+.
+.
+.
+Lock ^TOT(TDT)
+.
+.
+ZDEALLOCATE ^AR(PNT,SUB)</pre>
+<p>This LOCKs ^AR(PNT)and all its descendents, then, after performing some unspecified commands, it ZALLOCATEs ^AR(PNT,SUB). ZALLOCATE does not imply any change to LOCKs or existing ZALLOCATEd resource names, therefore, the LOCK of ^AR(PNT) remains in effect. ^AR(PNT,SUB) is already protected by the LOCK. Next, because an unsigned LOCK releases all resource names currently LOCKed by the process, the routine releases ^AR(PNT) with the LOCK of ^TOT(TDT). This leaves the ZALLOCATE of ^AR(PNT,SUB). The name ^AR and all its subscripts except for ^AR(PNT) and those that begin with ^AR(PNT,SUB) are now available for LOCKing by other processes. Finally the routine releases ^AR(PNT,SUB) with a ZDEALLOCATE command. The ZDEALLOCATE does not affect the LOCK on ^TOT(TDT). Note that this example was constructed to illustrate the interaction between LOCK, ZALLOCATE and ZDEALLOCATE, and not to illustrate sound programming practice..</p>
+<p>Because the ZALLOCATE command reserves names without releasing previously reserved names, it can lead to deadlocks. For example, a deadlock occurs if two users ZALLOCATE names A and B in the following sequence:</p>
+<div class="informaltable">
+<a name="tblzalldlk"></a><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="2">
+                  <p>Deadlock Situation</p>
+                </th></tr>
+<tr>
+<th>
+                  <p>USER X</p>
+                </th>
+<th>
+                  <p>USER Y</p>
+                </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+                  <p>ZAllocate A</p>
+                </td>
+<td>
+                  <p>ZAllocate B</p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>ZAllocate B</p>
+                </td>
+<td>
+                  <p>ZAllocate A</p>
+                </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To avoid deadlocks, use a timeout. Because unsigned LOCKs always release previously reserved names, such LOCKs inherently prevent deadlocks.</p>
+<div class="informaltable">
+<a name="tblzallsumm"></a><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="3">
+                  <p>ZALLOCATE Operation Summary</p>
+                </th></tr>
+<tr>
+<th>
+                  <p>PREEXISTING CONDITION</p>
+                </th>
+<th>
+                  <p>COMMAND ISSUED</p>
+                </th>
+<th>
+                  <p>RESULT</p>
+                </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="3">
+                  <p>Another user reserved M</p>
+                </td>
+<td>
+                  <p>ZA M</p>
+                </td>
+<td>
+                  <p>Your process waits</p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>LOCK M</p>
+                </td>
+<td>
+                  <p>Your process waits</p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>ZD M</p>
+                </td>
+<td>
+                  <p>No effect</p>
+                </td>
+</tr>
+<tr>
+<td rowspan="3">
+                  <p>You reserved M</p>
+                  <p>with LOCK M</p>
+                </td>
+<td>
+                  <p>ZA M</p>
+                </td>
+<td>
+                  <p>M is ZALLOCATEd and LOCKed; use both ZDEALLOCATE and LOCK (L or L -M) to clear M</p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>LOCK M</p>
+                </td>
+<td>
+                  <p>Release M and reserve M again</p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>ZD M</p>
+                </td>
+<td>
+                  <p>No effect</p>
+                </td>
+</tr>
+<tr>
+<td rowspan="3">
+                  <p>You reserved M</p>
+                  <p>with ZA M</p>
+                </td>
+<td>
+                  <p>ZA M</p>
+                </td>
+<td>
+                  <p>No effect</p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>LOCK M</p>
+                </td>
+<td>
+                  <p>M is ZALLOCATEd and LOCKed; use both ZDEALLOCATE and LOCK (L or L -M) to clear M</p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>ZD M</p>
+                </td>
+<td>
+                  <p>No effect</p>
+                </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch06s27.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s29.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Xecute </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> ZBreak</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

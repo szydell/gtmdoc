@@ -1,0 +1,80 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>MUTEXLCKALERT </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="MUTEXFRCDTERM.html" title="MUTEXFRCDTERM ">
+<link rel="next" href="MUTEXRELEASED.html" title="MUTEXRELEASED ">
+<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">MUTEXLCKALERT </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="MUTEXFRCDTERM.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="MUTEXRELEASED.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">MUTEXLCKALERT </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="MUTEXLCKALERT"></a>MUTEXLCKALERT </h2></div></div></div>
+<p><span class="bold"><strong>MUTEXLCKALERT</strong></span>,  Mutual Exclusion subsystem ALERT - Lock attempt threshold crossed for region rrrr. Process pppp is in crit cycle cccc.</p>
+<p>Run Time Error: This warning indicates that a process could not obtain a critical section lock for region rrrr even after waiting longer than the GT.M determined threshold (approximately 45 seconds) because the critical section lock was held that entire time by another process pppp. cccc is the crit cycle count which GT.M increases by one every time it successfully grants the mutual exclusion (mutex) lock to a process. cccc provides a measure of the frequency of mutex lock use. MUTEXLCKALERT messages indicate that process pppp is blocking access to region rrrr for inappropriately long periods of time and thereby impacting performance for other processes needing access that region.</p>
+<p> GT.M produces this warning when:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p> A process owning a critical section dies (most likely because of a kill -9) and the OS gives its PID to another process. To reclaim the inappropriately held critical section, GT.M first checks whether the process is alive and whether it holds hold the critical section. On finding that the process is alive but does not hold the critical section, GT.M concludes that it is not safe to free the critical section and alerts the operator with this message.</p></li>
+<li class="listitem"><p> The process holding the critical section is using a non-Isolated command such as ZSYSTEM, BREAK or a timed command in a way that creates a deadlock or a live-lock. GT.M attempts to limit this by limiting the time a process using one of these commands can hold a critical section, but your use of non-Isolated commands and your settings for $ZMAXTPTIM and / or the environment variable $gtm_tpnotacidtime may be such that you set get MUTEXLCKALERT messages. Revise your settings for $gtm_tpnotacidtime and $ZMAXTPTIM appropriately. </p></li>
+<li class="listitem"><p> There is an IO bottleneck that caused GT.M to slow down: GT.M detects that process pppp is currently using the critical section lock.</p></li>
+</ul></div>
+<p> </p>
+<p>Action: Monitor the system to determine whether there is a process with process id pppp and whether that process is a GT.M process.</p>
+<p> Implement a script to get a stack trace for process pppp or take other appropriate action and use the $gtm_procstuckexec environment variable to activate it before the block process sends the MUTEXLCKALERT message.</p>
+<p> Identify and terminate process pppp to release control of that resource. If the process is a GT.M process, use a MUPIP STOP to terminate it. If a process of another application, use an appropriate mechanism to stop it.</p>
+<p> If this message is due to an IO bottleneck, adopt a strategy that reduces IO. Some of the IO reducing strategies are:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p> Revisit your database configuration parameters (especially block size, number of global buffers, journal buffers, and so on) to see if you can make improvements.</p></li>
+<li class="listitem"><p> Create separate region (database) for temporary globals and do not replicate them.</p></li>
+<li class="listitem"><p> Consider whether a different database access method and journaling strategy could improve throughput while satisfying your operational needs.</p></li>
+<li class="listitem"><p> For application configurations with large numbers of concurrent processes and/or large process memory footprints, consider placing object code in shared libraries on GT.M editions that support it. This may free system memory which the OS can use for its file system cache, or which you can use to increase the number of global buffers.</p></li>
+</ul></div>
+<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<th align="left"></th>
+</tr>
+<tr><td align="left" valign="top"><p> Do not apply IO reduction strategies all at once. Try them one at a time and always verify/measure the results of each strategy.</p></td></tr>
+</table></div>
+<p></p>
+<a class="indexterm" name="idp172702800"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="MUTEXFRCDTERM.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="MUTEXRELEASED.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">MUTEXFRCDTERM  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> MUTEXRELEASED </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZTRanslate()</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s50.html" title="$ZSUBstr()">
+<link rel="next" href="ch07s52.html" title="$ZTRIgger()">
+<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZTRanslate()</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s50.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s52.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZTRanslate()</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="ztranslate"></a>$ZTRanslate()<a class="indexterm" name="idp70423312"></a>
+</h2></div></div></div>
+<p>Returns a byte sequence that results from replacing or dropping bytes in the first of its arguments as specified by the patterns of its other arguments.</p>
+<p>The format for the $ZTRANSLATE() function is:</p>
+<pre class="programlisting">$ZTR[ANSLATE](expr1[,expr2[,expr3]])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The first expression specifies the sequence of octets on which $ZTRANSLATE() operates. If the other arguments are omitted, $ZTRANSLATE() returns this expression.</p></li>
+<li class="listitem"><p>The optional second expression specifies the byte for $TRANSLATE() to replace. If a byte occurs more than once in the second expression, the first occurrence controls the translation, and $ZTRANSLATE() ignores subsequent occurrences. If this argument is omitted, $ZTRANSLATE() returns the first expression without modification.</p></li>
+<li class="listitem"><p>The optional third expression specifies the replacement bytes for the positionally corresponding bytes in the second expression. If this argument is omitted or shorter than the second expression, $ZTRANSLATE() drops all occurrences of the bytes in the second expression that have no replacement in the corresponding position of the third expression.</p></li>
+<li class="listitem"><p>$ZTRANSLATE() provides a tool for tasks such as encryption.</p></li>
+</ul></div>
+<p>The $ZTRANSLATE() algorithm can be understood as follows:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>$ZTRANSLATE() evaluates each byte in the first expression, comparing it byte by byte to the second expression looking for a match. If there is no match in the second expression, the resulting expression contains the byte without modification.</p></li>
+<li class="listitem"><p>When it locates a byte match, $ZTRANSLATE() uses the position of the match in the second expression to identify the appropriate replacement for the original expression. If the second expression has more bytes than the third expression, $ZTRANSLATE() replaces the original byte with a null, thereby deleting it from the result. By extension of this principle, if the third expression is missing, $ZTRANSLATE() deletes all bytes from the first expression that occur in the second expression.</p></li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="idp70429936"></a>Examples<span> of $ZTRANSLATE()</span>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set hiraganaA=$char(12354) ; $zchar(227,129,130) 
+GTM&gt;set temp1=$zchar(130)
+GTM&gt;set temp2=$zchar(140)
+GTM&gt;set tr=$ztranslate(hiraganaA,temp1,temp2)
+GTM&gt;w $ascii(tr)
+12364 
+GTM&gt;</pre>
+<p>In the above example, $ZTRANSLATE() replaces byte $ZCHAR(130) in first expression and matching the first (and only) byte in the second expression with byte $ZCHAR(140) - the corresponding byte in the third expression. </p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s50.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s52.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZSUBstr() </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZTRIgger()</td>
+</tr>
+</table>
+</div>
+</body>
+</html>
