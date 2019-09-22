@@ -1,37 +1,35 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/JNLRDERR.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>JNLRDERR </title>
+<title>JNLRDERR </title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
-<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
-<link rel="prev" href="JNLQIOSALVAGE.html" title="JNLQIOSALVAGE ">
-<link rel="next" href="JNLRDONLY.html" title="JNLRDONLY ">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="JNLQIOSALVAGE.html" title="JNLQIOSALVAGE ">
+<link rel="next" href="JNLRDONLY.html" title="JNLRDONLY ">
 <link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">JNLRDERR </th></tr>
+<tr><th colspan="3" align="center">JNLRDERR </th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="JNLQIOSALVAGE.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 1. Error Messages</th>
-<td width="20%" align="right"> <a accesskey="n" href="JNLRDONLY.html">Next</a>
+<a accesskey="p" href="JNLQIOSALVAGE.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="JNLRDONLY.html">Next</a>
 </td>
 </tr>
 </table>
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">JNLRDERR </span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">JNLRDERR </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="JNLRDERR"></a>JNLRDERR </h2></div></div></div>
+<a name="JNLRDERR"></a>JNLRDERR </h2></div></div></div>
 <p><span class="bold"><strong>JNLRDERR</strong></span>,    Error reading journal file xxxx: unable to initialize.</p>
 <p>Run Time Error: This indicates that GT.M encountered an error while trying to read from the journal file xxxx. This can happen if the journal file size is less than the minimum size of the journal file header, or if the journal-file-specification does not match the intended file, or if the intended file is not accessible by the processes that update the database. GT.M automatically attempts to create a new journal file. If the attempt to create a new journal file fails, GT.M issues another error and  the intended update is lost and does not get registered in the database and journal.</p>
 <p>Action: To reestablish durability, perform a MUPIP BACKUP that switches to a new set of journal files.</p>
@@ -42,19 +40,17 @@
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="JNLQIOSALVAGE.html">Prev</a> </td>
+<a accesskey="p" href="JNLQIOSALVAGE.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="JNLRDONLY.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="JNLRDONLY.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">JNLQIOSALVAGE  </td>
+<td width="40%" align="left" valign="top">JNLQIOSALVAGE  </td>
 <td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
-<td width="40%" align="right" valign="top"> JNLRDONLY </td>
+<td width="40%" align="right" valign="top"> JNLRDONLY </td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/JNLRDERR.html]] -->
 </html>

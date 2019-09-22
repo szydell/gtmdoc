@@ -1,13 +1,11 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch08s36.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>$ZINTerrupt</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
+<link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s35.html" title="$ZHorolog">
 <link rel="next" href="ch08s37.html" title="$ZINInterrupt">
 <link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
@@ -18,10 +16,10 @@
 <tr><th colspan="3" align="center">$ZINTerrupt</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch08s35.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 8. <span>Intrinsic Special Variables</span>
+<a accesskey="p" href="ch08s35.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 8. <span>Intrinsic Special Variables</span>
 </th>
-<td width="20%" align="right"> <a accesskey="n" href="ch08s37.html">Next</a>
+<td width="20%" align="right"> <a accesskey="n" href="ch08s37.html">Next</a>
 </td>
 </tr>
 </table>
@@ -74,7 +72,7 @@
 <p>Code in $ZINTERRUPT must use routine names in any entryref argument to a DO, GOTO, JOB, ZGOTO or any extrinsic as the arrival of the interrupt can activate the code while executing an arbitrary routine in the application.</p>
 <p>During the execution of the interrupt handling code, $ZINITERRUPT evaluates to 1 (TRUE).</p>
 <p>If an error occurs while compiling the $ZINTERRUPT code, the error handler is not invoked, GT.M sends the ERRWZINTR message and the compiler error message to the operator log facility.  If the GT.M process is at a direct mode prompt or is executing a direct mode command (for example, a FOR loop), GT.M sends also sends the ERRWZINTR error message to the user console along with the compilation error. In both cases, the interrupted process resumes execution without performing any action specified by the defective $ZINTERRUPT vector. </p>
-<p>The error handler is invoked if an error occurs while executing the $ZINTERRUPT code. If an error occurs during execution of the interrupt handler's stack frame (before it calls anything), that error is prefixed with the ERRWZINTR error. The error handler then executes normal error processing associated with the module that was interrupted. Any other errors that occur in code called by the interrupt handler are handled by normal error handling. <span>See <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</span></p>
+<p>The error handler is invoked if an error occurs while executing the $ZINTERRUPT code. If an error occurs during execution of the interrupt handler's stack frame (before it calls anything), that error is prefixed with the ERRWZINTR error. The error handler then executes normal error processing associated with the module that was interrupted. Any other errors that occur in code called by the interrupt handler are handled by normal error handling. <span>See <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</span></p>
 <p> TP transaction is in progress (0&lt;$TLEVEL), updates to globals are not safe since a TP restart can be signaled at any time prior to the transaction being committed - even after the interrupt handler returns. A TP restart reverses all global updates and unwinds the M stack so it is as if the interrupt never occurred. The interrupt handler is not redriven as part of a transaction restart. Referencing (reading) globals inside an interrupt handler can trigger a TP restart if a transaction is active. When programming interrupt handling, either discard interrupts when 0&lt;$TLEVEL (forcing the interrupting party to try again), or use local variables that are not restored by a TRESTART to defer the interrupt action until after the final TCOMMIT.</p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
@@ -96,19 +94,17 @@ interrupthandler(currentdev)
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch08s35.html">Prev</a> </td>
+<a accesskey="p" href="ch08s35.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch08.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch08s37.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch08s37.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZHorolog </td>
+<td width="40%" align="left" valign="top">$ZHorolog </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZINInterrupt</td>
+<td width="40%" align="right" valign="top"> $ZINInterrupt</td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch08s36.html]] -->
 </html>

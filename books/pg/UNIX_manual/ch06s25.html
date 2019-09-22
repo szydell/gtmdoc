@@ -1,13 +1,11 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s25.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>View</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s24.html" title="Use">
 <link rel="next" href="ch06s26.html" title="Write">
 <link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
@@ -18,9 +16,9 @@
 <tr><th colspan="3" align="center">View</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch06s24.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 6. Commands</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch06s26.html">Next</a>
+<a accesskey="p" href="ch06s24.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s26.html">Next</a>
 </td>
 </tr>
 </table>
@@ -264,13 +262,13 @@ the "ACID" properties of TP. This shifts the responsibility for Isolation from G
 <div class="titlepage"><div><div><h4 class="title">
 <a name="patcode"></a><span>"PATCODE":"tablename"</span><a class="indexterm" name="idp55150704"></a>
 </h4></div></div></div>
-<p>Identifies the alternative table of unique patterns for use with the "?" operator to be loaded from the pattern definition file. For additional information, <span>refer to <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a></span>.</p>
+<p>Identifies the alternative table of unique patterns for use with the "?" operator to be loaded from the pattern definition file. For additional information, <span>refer to <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a></span>.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="patload"></a><span>"PATLOAD":"file-specification"</span><a class="indexterm" name="idp56061632"></a>
 </h4></div></div></div>
-<p>Identifies the file containing definitions of unique patterns for use with the "?" operator. These pattern definitions can be used in place of, or in addition to, the standard C, N, U, L, and P. <span>For more information on creating the file-specification, refer to <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a>.</span></p>
+<p>Identifies the file containing definitions of unique patterns for use with the "?" operator. These pattern definitions can be used in place of, or in addition to, the standard C, N, U, L, and P. <span>For more information on creating the file-specification, refer to <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a>.</span></p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
@@ -341,7 +339,7 @@ the "ACID" properties of TP. This shifts the responsibility for Isolation from G
 <a name="trace"></a><span>"TRACE":value:&lt;expr&gt;</span><a class="indexterm" name="idp55674016"></a>
 </h4></div></div></div>
 <p>Traces GT.M program execution and generates profiling information about the lines and functions executed; with low impact on the run-time performance.</p>
-<p>The feature turns on (value=1) or turns off (value=0) M-profiling. This expression must evaluate to a string containing the name of a GT.M global variable. The global may also have subscripts; however the subscripts must be literals or the special variable $JOB. <span>For the $JOB process identifier description, refer to <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span></p>
+<p>The feature turns on (value=1) or turns off (value=0) M-profiling. This expression must evaluate to a string containing the name of a GT.M global variable. The global may also have subscripts; however the subscripts must be literals or the special variable $JOB. <span>For the $JOB process identifier description, refer to <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span></p>
 <p>The expression is optional when turning M-profiling off, if it exists, it overrides the global variable set when M-profiling was turned on.</p>
 <p>gtm_trace_gbl_name enables GT.M tracing at process startup. Setting gtm_trace_gbl_name to a valid global variable name instructs GT.M to report the data in the specified global when a VIEW command disables the tracing, or implicitly at process termination. This setting behaves as if the process issued a VIEW "TRACE" command at process startup. However, gtm_trace_gbl_name has a capability not available with the VIEW command, such that if the environment variable is defined but evaluates to zero (0) or, only on UNIX, to the empty string, GT.M collects the M-profiling data in memory and discards it when the process terminates (this feature is mainly used for in-house testing). Note that having this feature activated for process that otherwise do not open a database file (such as GDE) can cause them to encounter an error.</p>
 <p>In addition, if a process issues a malformed VIEW command that attempts to turn tracing off, GT.M issues an error but retains all accumulated profiling data and continues tracing. If the tracing is still enabled at the process shutdown and the trace start specified a reporting location, GT.M attempts to place the trace data there. Note that if there is a problem updating the specified trace-reporting global variable, GT.M issues an error at process termination.</p>
@@ -749,19 +747,17 @@ GTM&gt;</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch06s24.html">Prev</a> </td>
+<a accesskey="p" href="ch06s24.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch06s26.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s26.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Use </td>
+<td width="40%" align="left" valign="top">Use </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Write</td>
+<td width="40%" align="right" valign="top"> Write</td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s25.html]] -->
 </html>

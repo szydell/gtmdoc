@@ -1,13 +1,11 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/gdm.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Commands and Qualifiers</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
-<link rel="up" href="mupipchap.html" title="Chapter 5. General Database Management">
+<link rel="up" href="mupipchap.html" title="Chapter 5. General Database Management">
 <link rel="prev" href="mup_intro.html" title="Introduction">
 <link rel="next" href="mup_summary.html" title="MUPIP Command Summary">
 <link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
@@ -18,9 +16,9 @@
 <tr><th colspan="3" align="center"><span>Commands and Qualifiers</span></th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="mup_intro.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 5. General Database Management</th>
-<td width="20%" align="right"> <a accesskey="n" href="mup_summary.html">Next</a>
+<a accesskey="p" href="mup_intro.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 5. General Database Management</th>
+<td width="20%" align="right"> <a accesskey="n" href="mup_summary.html">Next</a>
 </td>
 </tr>
 </table>
@@ -416,7 +414,7 @@ BACKUP COMPLETED.</pre>
 <pre class="programlisting">-R[EGION] region-list</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>The region-list identifies the target of DUMPFHEAD. region-list may specify more than one region of the current global directory in a list. Regions are case-insensitive, separated by a comma, and wildcards can be used to specify them. Any region-name may include the wildcard characters * and ? (remember to escape them to protect them from inappropriate expansion by the shell). Any region name expansion occurs in M (ASCII) collation order.</p></li>
-<li class="listitem"><p>The region-list argument may specify more than one region of the current Global Directory in a list separated with commas. DUMPFHEAD -REGION requires the environment variable gtmgbldir to specify a valid Global Directory.<span> For more information on defining gtmgbldir, refer to  <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">Chapter 4: &#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p></li>
+<li class="listitem"><p>The region-list argument may specify more than one region of the current Global Directory in a list separated with commas. DUMPFHEAD -REGION requires the environment variable gtmgbldir to specify a valid Global Directory.<span> For more information on defining gtmgbldir, refer to  <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">Chapter 4: &#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p></li>
 <li class="listitem"><p>The -REGION qualifier is incompatible with the -FILE qualifier.</p></li>
 </ul></div>
 </div>
@@ -509,7 +507,7 @@ Proceed [yes/no] ?</pre>
 <div class="titlepage"><div><div><h4 class="title">
 <a name="extend_blocks"></a>-Blocks<a class="indexterm" name="idp64444672"></a>
 </h4></div></div></div>
-<p>Specifies the number of GDS database blocks by which MUPIP should extend the file. GDS files use additional blocks for bitmaps. MUPIP EXTEND adds the specified number of blocks plus the bitmap blocks required as overhead. <span>For more information about bitmaps, refer to <a class="xref" href="ch09.html" title="Chapter 9. GT.M Database Structure(GDS)">Chapter 9: &#8220;<i>GT.M Database Structure(GDS)</i>&#8221;</a>.</span></p>
+<p>Specifies the number of GDS database blocks by which MUPIP should extend the file. GDS files use additional blocks for bitmaps. MUPIP EXTEND adds the specified number of blocks plus the bitmap blocks required as overhead. <span>For more information about bitmaps, refer to <a class="xref" href="ch09.html" title="Chapter 9. GT.M Database Structure(GDS)">Chapter 9: &#8220;<i>GT.M Database Structure(GDS)</i>&#8221;</a>.</span></p>
 <p>The format of the BLOCK qualifier is:</p>
 <pre class="programlisting">-BLOCKS=data-blocks-to-add</pre>
 <p>By default, EXTEND uses the extension value in the file header as the number of GDS blocks by which to extend the database file. You can specify as many blocks as needed as long as you are within the maximum total blocks limit (which could be as high as 224 million GDS blocks).</p>
@@ -1010,9 +1008,9 @@ $ set -e</pre>
 <p>FIS strongly recommends fixing the following errors as soon as they are discovered:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>Blocks incorrectly marked free - these may cause accelerating damage when processes make updates to any part of the database region.</p></li>
-<li class="listitem"><p>Integrity errors in an index block - these may cause accelerating damage when processes make updates to that area of the database region using the faulty index. <span>For more information, refer to <a class="xref" href="ch11.html" title="Chapter 11. Maintaining Database Integrity">Chapter 11: &#8220;<i>Maintaining Database Integrity</i>&#8221;</a>.</span> </p></li>
+<li class="listitem"><p>Integrity errors in an index block - these may cause accelerating damage when processes make updates to that area of the database region using the faulty index. <span>For more information, refer to <a class="xref" href="ch11.html" title="Chapter 11. Maintaining Database Integrity">Chapter 11: &#8220;<i>Maintaining Database Integrity</i>&#8221;</a>.</span> </p></li>
 </ul></div>
-<p>MUPIP INTEG -FAST and the "regular" INTEG both report these errors (These qualifiers are described later in this section). Other database errors do not pose the threat of rapidly spreading problems in GDS files. After the GT.M database repair, assess the type of damage, the risk of continued operations, and the disruption in normal operation caused by the time spent repairing the database. <span>For information on analyzing and correcting database errors, refer to <a class="xref" href="ch11.html" title="Chapter 11. Maintaining Database Integrity">Chapter 11: &#8220;<i>Maintaining Database Integrity</i>&#8221;</a>.</span> Contact your GT.M support channel for help assessing INTEG errors.</p>
+<p>MUPIP INTEG -FAST and the "regular" INTEG both report these errors (These qualifiers are described later in this section). Other database errors do not pose the threat of rapidly spreading problems in GDS files. After the GT.M database repair, assess the type of damage, the risk of continued operations, and the disruption in normal operation caused by the time spent repairing the database. <span>For information on analyzing and correcting database errors, refer to <a class="xref" href="ch11.html" title="Chapter 11. Maintaining Database Integrity">Chapter 11: &#8220;<i>Maintaining Database Integrity</i>&#8221;</a>.</span> Contact your GT.M support channel for help assessing INTEG errors.</p>
 <p>The following sections describe the qualifiers of the INTEG command.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
@@ -1170,7 +1168,7 @@ $ set -e</pre>
 <pre class="programlisting">-R[EGION]=region-list</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>The region-list identifies the target of INTEG. region-list may specify more than one region of the current global directory in a list. Regions are case-insensitive, separated by a comma, and wildcards can be used to specify them. Any region-name may include the wildcard characters * and ? (remember to escape them to protect them from inappropriate expansion by the shell). Any region name expansion occurs in M (ASCII) collation order.</p></li>
-<li class="listitem"><p>The region-list argument may specify more than one region of the current Global Directory in a list separated with commas. INTEG -REGION requires the environment variable gtmgbldir to specify a valid Global Directory. <span>For more information on defining gtmgbldir, refer to <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">Chapter 4: &#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p></li>
+<li class="listitem"><p>The region-list argument may specify more than one region of the current Global Directory in a list separated with commas. INTEG -REGION requires the environment variable gtmgbldir to specify a valid Global Directory. <span>For more information on defining gtmgbldir, refer to <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">Chapter 4: &#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p></li>
 <li class="listitem"><p>Because a KILL may briefly defer marking the blocks it releases "free" in the bit maps, INTEG -REGION may report spurious block incorrectly marked busy errors. These errors are benign. If these errors occur in conjunction with a "Kill in progress" error, resolve the errors after the "Kill in progress" error is no longer present.</p></li>
 <li class="listitem"><p>By default, INTEG operates -FILE.</p></li>
 <li class="listitem"><p>Incompatible with: -FILE, -TN_RESET </p></li>
@@ -1343,7 +1341,7 @@ INTRPT process-id</pre>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="mup_journal"></a>JOURNAL</h3></div></div></div>
-<p>Analyzes, extracts, reports, and recovers data using journal files. For a description of the JOURNAL command, refer to <a class="xref" href="journaling.html" title="Chapter 6. GT.M Journaling">Chapter 6: &#8220;<i><span>GT.M </span>Journaling</i>&#8221;</a>.</p>
+<p>Analyzes, extracts, reports, and recovers data using journal files. For a description of the JOURNAL command, refer to <a class="xref" href="journaling.html" title="Chapter 6. GT.M Journaling">Chapter 6: &#8220;<i><span>GT.M </span>Journaling</i>&#8221;</a>.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
@@ -1650,7 +1648,7 @@ Total            4000           13904              NA          1307</pre>
 </tr>
 <tr><td align="left" valign="top"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>FIS recommends rotating (changing) the encryption key of the database for better security. The frequency of encryption key rotation depends on your security requirements and policies. </p></li>
-<li class="listitem"><p>MUPIP REORG -ENCRYPT does not enable switching between encryption algorithms. To migrate databases from Blowfish CFB to AES CFB requires that the data be extracted and loaded into newly created database files. To minimize the time your application is unavailable, you can deploy your application in a Logical Multi-Site (LMS) configuration, and migrate using a rolling upgrade technique. <span>Refer to the <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a> for more complete documentation. </span></p></li>
+<li class="listitem"><p>MUPIP REORG -ENCRYPT does not enable switching between encryption algorithms. To migrate databases from Blowfish CFB to AES CFB requires that the data be extracted and loaded into newly created database files. To minimize the time your application is unavailable, you can deploy your application in a Logical Multi-Site (LMS) configuration, and migrate using a rolling upgrade technique. <span>Refer to the <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a> for more complete documentation. </span></p></li>
 </ul></div></td></tr>
 </table></div>
 </div>
@@ -1882,7 +1880,7 @@ Database file /home/gtc_twinata/staff/nitin/tr11/mumps.dat now has encryption ma
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="mup_replicate_cm"></a>REPLICATE</h3></div></div></div>
-<p>Control the logical multi-site operation of GT.M. For more information on the qualifiers of the MUPIP REPLICATE command, refer to <span><a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a></span> .</p>
+<p>Control the logical multi-site operation of GT.M. For more information on the qualifiers of the MUPIP REPLICATE command, refer to <span><a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a></span> .</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
@@ -2055,7 +2053,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 <pre class="programlisting">-REP[LICATION]={ON|OFF}</pre>
 <p>Incompatible with: -JNLFILE</p>
 </div>
-<p>The following sections describe the action qualifiers of the MUPIP SET command exclusive of the details related to journaling and replication, which are described in <a class="xref" href="journaling.html" title="Chapter 6. GT.M Journaling">Chapter 6: &#8220;<i><span>GT.M </span>Journaling</i>&#8221;</a> and <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>. All of these qualifiers are incompatible with the -JNLFILE and -REPLICATION qualifiers.</p>
+<p>The following sections describe the action qualifiers of the MUPIP SET command exclusive of the details related to journaling and replication, which are described in <a class="xref" href="journaling.html" title="Chapter 6. GT.M Journaling">Chapter 6: &#8220;<i><span>GT.M </span>Journaling</i>&#8221;</a> and <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>. All of these qualifiers are incompatible with the -JNLFILE and -REPLICATION qualifiers.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="set_access_method"></a>-ACcess_method<a class="indexterm" name="idp64965888"></a> </h4></div></div></div>
@@ -2695,19 +2693,17 @@ File trigger_mod.trg, Line 3: ^Acct trigger added with index 1
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="mup_intro.html">Prev</a> </td>
+<a accesskey="p" href="mup_intro.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="mupipchap.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="mup_summary.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="mup_summary.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Introduction </td>
+<td width="40%" align="left" valign="top">Introduction </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> <span>MUPIP Command </span>Summary</td>
+<td width="40%" align="right" valign="top"> <span>MUPIP Command </span>Summary</td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/gdm.html]] -->
 </html>

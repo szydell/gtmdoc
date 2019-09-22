@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-  
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/OpenVMS_manual/TP_Characteristics.html]] -->
-<head>
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>TP Characteristics</title>
     <link rel="stylesheet" href="ede.css" type="text/css" />
@@ -20,9 +18,9 @@
           <th colspan="3" align="center">TP Characteristics</th>
         </tr>
         <tr>
-          <td width="20%" align="left"><a accesskey="p" href="TP_Defnts.html">Prev</a>A </td>
+          <td width="20%" align="left"><a accesskey="p" href="TP_Defnts.html">Prev</a> </td>
           <th width="60%" align="center">Transaction Processing</th>
-          <td width="20%" align="right">A <a accesskey="n" href="TP_Performance.html">Next</a></td>
+          <td width="20%" align="right"> <a accesskey="n" href="TP_Performance.html">Next</a></td>
         </tr>
       </table>
     </div>
@@ -35,7 +33,7 @@
         </div>
       </div>
       <a id="id4169425" class="indexterm"></a>
-      <p>Most transaction processing systems try to have transactions meet the &quot;ACID&quot; testa??Atomic, Consistent, Isolated, and Durable. To conform with the M approach of providing maximum flexibility and, when possible, backwards compatibility with older versions of the standard, M transaction processing requires the use of programming conventions that meet the ACID test.</p>
+      <p>Most transaction processing systems try to have transactions meet the &quot;ACID&quot; test–Atomic, Consistent, Isolated, and Durable. To conform with the M approach of providing maximum flexibility and, when possible, backwards compatibility with older versions of the standard, M transaction processing requires the use of programming conventions that meet the ACID test.</p>
       <p>For example, some effects of the BREAK, CLOSE, JOB, OPEN, READ, USE WRITE, and ZSYSTEM commands may be observed by parties to the system. Because the effects of these commands might cause an observing process or person to conclude that a transaction executing them was in progress and perhapsfinished, they violate, in theory, the principle of Isolation.</p>
       <p>The LOCK command is another example. A program may attempt to use a LOCK to determine if another process has a transaction in progress. The answer would depend on the management of LOCKs within transactions, which is implementation-specific. This would therefore clearly violate the principle of Isolation. The LOCK command is discussed later in this section.</p>
       <p>The simplest way to construct a transaction that meets the ACID test is not to use any commands within a transaction whose affects may be immediately &quot;visible&quot; outside the transaction. Unfortunately, because M applications are highly interactive, this is not entirely straightforward. When a user interaction relies on database information, one solution is for the program to save the initial values of any global values that could affect the outcome, in local variables. Then, once the interaction is over and the transaction has been initiated, the program checks the saved values against the corresponding global variables. If they are the same, it proceeds. If they differ, some other update has changed the information, and the program must issue a TROLLBACK, and initiate another interaction as a replacement.</p>
@@ -48,22 +46,20 @@
       <hr />
       <table width="100%" summary="Navigation footer">
         <tr>
-          <td width="40%" align="left"><a accesskey="p" href="TP_Defnts.html">Prev</a>A </td>
+          <td width="40%" align="left"><a accesskey="p" href="TP_Defnts.html">Prev</a> </td>
           <td width="20%" align="center">
             <a accesskey="u" href="Transctn_Processing.html">Up</a>
           </td>
-          <td width="40%" align="right">A <a accesskey="n" href="TP_Performance.html">Next</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="TP_Performance.html">Next</a></td>
         </tr>
         <tr>
-          <td width="40%" align="left" valign="top">TP DefinitionsA </td>
+          <td width="40%" align="left" valign="top">TP Definitions </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Home</a>
           </td>
-          <td width="40%" align="right" valign="top">A TP Performance</td>
+          <td width="40%" align="right" valign="top"> TP Performance</td>
         </tr>
       </table>
     </div>
   </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/OpenVMS_manual/TP_Characteristics.html]] -->
 </html>

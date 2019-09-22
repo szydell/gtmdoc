@@ -1,13 +1,11 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s37.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ZLink</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s36.html" title="ZHelp">
 <link rel="next" href="ch06s38.html" title="ZKill">
 <link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
@@ -18,9 +16,9 @@
 <tr><th colspan="3" align="center">ZLink</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch06s36.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 6. Commands</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch06s38.html">Next</a>
+<a accesskey="p" href="ch06s36.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s38.html">Next</a>
 </td>
 </tr>
 </table>
@@ -52,7 +50,7 @@
 <li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more ZLINK arguments form a legal argument for a ZLINK.</p></li>
 <li class="listitem"><p>When ZLINK encounters a bad object file it produces an INVOBJFILE error that identifies the problem object file.</p></li>
 </ul></div>
-<p>When the ZLINK command specifies a file, GT.M sets $ZSOURCE to that filename. By default, ZLINK and ZEDIT use $ZSOURCE for a filename when they have a missing or null argument. A subsequent ZLINK without an argument is equivalent to ZLINK $ZSOURCE. <span>For more information on $ZSOURCE, see the appropriate section in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span></p>
+<p>When the ZLINK command specifies a file, GT.M sets $ZSOURCE to that filename. By default, ZLINK and ZEDIT use $ZSOURCE for a filename when they have a missing or null argument. A subsequent ZLINK without an argument is equivalent to ZLINK $ZSOURCE. <span>For more information on $ZSOURCE, see the appropriate section in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span></p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
@@ -60,7 +58,7 @@
 </tr>
 <tr><td align="left" valign="top"><p>In order to ensure compatibility with GT.M versions that do not permit the percent sign (%) in a file name, use an underscore (_) in place of the percent in the ZLINK file name for routines beginning with a percent sign.</p></td></tr>
 </table></div>
-<p>If the expression includes an explicit directory, ZLINK searches only that directory. Otherwise, if $ZROUTINES is not null, a ZLINK command uses $ZROUTINES to locate files. If $ZROUTINES is null, ZLINK uses the current directory. <span>For more information on $ZROUTINES, see the appropriate section in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span></p>
+<p>If the expression includes an explicit directory, ZLINK searches only that directory. Otherwise, if $ZROUTINES is not null, a ZLINK command uses $ZROUTINES to locate files. If $ZROUTINES is null, ZLINK uses the current directory. <span>For more information on $ZROUTINES, see the appropriate section in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span></p>
 <p>If the filename contains an explicit file extension, ZLINK processes the file according to the extension, object (.o) or source (usually .m). If the file name does not specify a file extension, ZLINK attempts to find and match both the object and source for a routine.</p>
 <p>The following table illustrates how ZLINK processes the three possibilities of file extension.</p>
 <div class="informaltable">
@@ -89,14 +87,14 @@
 </thead>
 <tbody>
 <tr>
-<td> </td>
+<td> </td>
 <td>
                 <p><span>.o</span></p>
               </td>
 <td>
                 <p><span>.m</span></p>
               </td>
-<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -111,7 +109,7 @@
               </td>
 </tr>
 <tr>
-<td> </td>
+<td> </td>
 <td>
                 <p>not found</p>
               </td>
@@ -135,7 +133,7 @@
               </td>
 </tr>
 <tr>
-<td> </td>
+<td> </td>
 <td>N/A</td>
 <td>
                 <p>not found</p>
@@ -157,19 +155,19 @@
               </td>
 </tr>
 <tr>
-<td> </td>
+<td> </td>
 <td>found</td>
 <td>not found</td>
 <td>link only</td>
 </tr>
 <tr>
-<td> </td>
+<td> </td>
 <td>not found</td>
 <td>not found</td>
 <td>error</td>
 </tr>
 <tr>
-<td> </td>
+<td> </td>
 <td>
                 <p>found <span>.o</span> file newer than <span>.m</span> and version okay</p>
               </td>
@@ -181,7 +179,7 @@
               </td>
 </tr>
 <tr>
-<td> </td>
+<td> </td>
 <td>
                 <p>found <span>.o</span> file older than <span>.m</span> or version mismatch</p>
               </td>
@@ -200,7 +198,7 @@
 <a name="zlink_compilation"></a>ZLINK Compilation<a class="indexterm" name="idp56257952"></a>
 </h3></div></div></div>
 <p>If ZLINK compiles a routine and the -OBJECT= qualifier does not redirect the output, it places the resulting object file in the directory indicated by the search criteria. ZLINK incorporates the new object file into the image, regardless of its directory placement.</p>
-<p>If the command does not specify compile qualifiers (with expr2) and $ZCOMPILE is null, GT.M uses the default M command qualifiers, -ignore, -labels=lower, -nolist, and -object. <span>For more information on $ZCOMPILE, refer to the appropriate section in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>. For detailed descriptions of the M command qualifiers, see <a class="xref" href="ch03.html" title="Chapter 3. Development Cycle">Chapter 3: &#8220;<i><span>Development</span> Cycle</i>&#8221;</a>.</span></p>
+<p>If the command does not specify compile qualifiers (with expr2) and $ZCOMPILE is null, GT.M uses the default M command qualifiers, -ignore, -labels=lower, -nolist, and -object. <span>For more information on $ZCOMPILE, refer to the appropriate section in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>. For detailed descriptions of the M command qualifiers, see <a class="xref" href="ch03.html" title="Chapter 3. Development Cycle">Chapter 3: &#8220;<i><span>Development</span> Cycle</i>&#8221;</a>.</span></p>
 <p>For information on producing object files, but not adding them to the current image, see <a class="xref" href="ch06s30.html" title="ZCOMpile">&#8220;ZCOMpile&#8221;</a>.</p>
 </div>
 <div class="sect2">
@@ -364,19 +362,17 @@ GTM&gt;</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch06s36.html">Prev</a> </td>
+<a accesskey="p" href="ch06s36.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch06s38.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s38.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">ZHelp </td>
+<td width="40%" align="left" valign="top">ZHelp </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> ZKill</td>
+<td width="40%" align="right" valign="top"> ZKill</td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s37.html]] -->
 </html>

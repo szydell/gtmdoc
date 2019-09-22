@@ -1,6 +1,4 @@
-<html>
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch06s03.html]] -->
-<head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Journal File Operations</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch06.html" title="Chapter 6. GT.M Journaling"><link rel="prev" href="ch06s02.html" title="Setting Up for Journaling"><link rel="next" href="ch06s04.html" title="GT.M Language Extensions for Journaling"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Journal File Operations</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06s02.html">Prev</a> </td><th width="60%" align="center">Chapter 6. GT.M Journaling</th><td width="20%" align="right"> <a accesskey="n" href="ch06s04.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Journal File Operations"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="jrnl_file_ops"></a>Journal File Operations<a class="indexterm" name="id3235007"></a></h2></div></div></div><p>This section discusses routine performed journal activities. Descriptions of the
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Journal File Operations</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch06.html" title="Chapter 6. GT.M Journaling"><link rel="prev" href="ch06s02.html" title="Setting Up for Journaling"><link rel="next" href="ch06s04.html" title="GT.M Language Extensions for Journaling"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Journal File Operations</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06s02.html">Prev</a> </td><th width="60%" align="center">Chapter 6. GT.M Journaling</th><td width="20%" align="right"> <a accesskey="n" href="ch06s04.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Journal File Operations"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="jrnl_file_ops"></a>Journal File Operations<a class="indexterm" name="id3235007"></a></h2></div></div></div><p>This section discusses routine performed journal activities. Descriptions of the
 available journaling qualifiers appear later in this chapter.</p><p>Note that journal maintenance activities usually occur at the same time as the
 database backups. </p><div class="sect2" title="Processing Journal Files"><div class="titlepage"><div><div><h3 class="title"><a name="processing_jrnl_files"></a>Processing Journal Files<a class="indexterm" name="id3237558"></a></h3></div></div></div><p>The MUPIP JOURNAL command initiates the processing of journal files. Use the
 following JOURNAL qualifiers to perform key processing activities.</p><p>
@@ -33,11 +31,11 @@ if the current database is destroyed, you must use Forward Recovery. If a
 journal file was created using NOBEFORE_IMAGES, that journal permits only
 Forward Recovery.</p><p>Example of Forward Recovery:</p><p>Example: MUPIP JOURNAL <span>/</span>RECOVER</p><p>
 
-<img src="ao_figures/ch6_1.html">
+<img src="ao_figures/ch6_1.png">
 </p><p>This shows a recovery after a system crash at 10:35 which processes the
 entire journal file forward. </p><p>
 
-<img src="ao_figures/ch6_2_b.html">
+<img src="ao_figures/ch6_2_b.png">
 
 
 </p><p>By adding <span>/</span>BEFORE="-
@@ -57,7 +55,7 @@ than M-level (or NOBEFORE) journaling.</p></td></tr></table></div><p>Do not dele
 only occur into an existing/used database.</p><p>Use <span>/</span>RECOVER <span>/</span>FORWARD for databases
 that have been recreated. </p><p>Example of Backward Recovery:</p><div class="informalexample"><p>
 
-<img src="ao_figures/ch6_3_b.html">
+<img src="ao_figures/ch6_3_b.png">
 
 
 </p></div><p>This shows a recovery after a system crash at 10:35. The recovery
@@ -90,6 +88,4 @@ continues once the <span>/</span>ERROR_LIMIT= limit has been exhausted.</p></div
 broken or lost transactions. If you are not using fences, repair any
 application-level integrity problems. In either case, MUPIP INTEG <span>/</span>FAST provides an excellent
 quick test of whether the database can support new updates with relative
-safety.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06s02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch06s04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Setting Up for Journaling </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> GT.M Language Extensions for Journaling</td></tr></table></div></body>
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch06s03.html]] -->
-</html>
+safety.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06s02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch06s04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Setting Up for Journaling </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> GT.M Language Extensions for Journaling</td></tr></table></div></body></html>

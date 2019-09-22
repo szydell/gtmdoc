@@ -1,15 +1,13 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/replication.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Commands and Qualifiers</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
-<link rel="up" href="ch07.html" title="Chapter 7. Database Replication">
+<link rel="up" href="ch07.html" title="Chapter 7. Database Replication">
 <link rel="prev" href="ch07s03.html" title="Procedures">
-<link rel="next" href="lkechap.html" title="Chapter 8. M Lock Utility (LKE)">
+<link rel="next" href="lkechap.html" title="Chapter 8. M Lock Utility (LKE)">
 <link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -18,9 +16,9 @@
 <tr><th colspan="3" align="center">Commands and Qualifiers</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch07s03.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 7. Database Replication</th>
-<td width="20%" align="right"> <a accesskey="n" href="lkechap.html">Next</a>
+<a accesskey="p" href="ch07s03.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Database Replication</th>
+<td width="20%" align="right"> <a accesskey="n" href="lkechap.html">Next</a>
 </td>
 </tr>
 </table>
@@ -49,7 +47,7 @@ environment.</p>
 
 </em></span>
 </p>
-<p>Use these qualifiers in the same manner that you would use them for a MUPIP SET. <span>For more information refer to <a class="xref" href="mupipchap.html" title="Chapter 5. General Database Management">Chapter 5: &#8220;<i>General Database Management</i>&#8221;</a>.</span></p>
+<p>Use these qualifiers in the same manner that you would use them for a MUPIP SET. <span>For more information refer to <a class="xref" href="mupipchap.html" title="Chapter 5. General Database Management">Chapter 5: &#8220;<i>General Database Management</i>&#8221;</a>.</span></p>
 <p><a class="indexterm" name="idp67382784"></a>
 <span class="emphasis"><em>
 <span>-replication=<em class="replaceable"><code>replication-state</code></em></span>
@@ -375,7 +373,7 @@ make CFLAGS="-q64"</pre>
 <pre class="programlisting">./configure --shared
 make CFLAGS="-m64"</pre>
 <p>z/OS:</p>
-<p>Download the zlib 1.1.4 from the libpng project's download page on <a class="ulink" href="sourceforge.html" target="_top">SourceForge.com</a>. Use a transfer mechanism that does not perform automatic conversion to download a source tarball. If pax cannot read the archive, it is a sign that the download mangled the archive. Use pax to unpack the tarball, converting files from ASCII to EBCDIC.</p>
+<p>Download the zlib 1.1.4 from the libpng project's download page on <a class="ulink" href="http://tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/sourceforge.com" target="_top">SourceForge.com</a>. Use a transfer mechanism that does not perform automatic conversion to download a source tarball. If pax cannot read the archive, it is a sign that the download mangled the archive. Use pax to unpack the tarball, converting files from ASCII to EBCDIC.</p>
 <pre class="programlisting">pax -r -o setfiletag -ofrom=ISO8859-1,to=IBM-1047 -f zlib-1.1.4.tar.gz</pre>
 <p>Apply the following patch to the zlib 1.1.4 sources:</p>
 <p><code class="code">---------------------------------- zlib_1.1.4_zos.patch --------------------------------------------------diff -purN downloads/zlib/src.orig/configure downloads/zlib/src/configure--- downloads/zlib/src.orig/configure Tue Dec 16 14:09:57 2008+++ downloads/zlib/src/configure Mon Feb 9 14:30:49 2009@@ -116,6 +116,11 @@ else SFLAGS=${CFLAGS-"-Kconform_pic -O"} CFLAGS=${CFLAGS-"-O"} LDSHARED=${LDSHARED-"cc -G"};;+ OS/390*)+ CC=xlc+ SFLAGS=${CFLAGS-"-qascii -q64 -Wc,DLL,LP64,XPLINK,EXPORTALL -D_ALL_SOURCE_NOTHREADS"}+ CFLAGS=${CFLAGS-"-qascii -q64 -Wc,DLL,LP64,XPLINK,EXPORTALL -D_ALL_SOURCE_NOTHREADS"}+ LDSHARED=${LDSHARED-"xlc -qascii -q64 -Wl,dll,LP64,XPLINK "};; # send working options for other systems to support@gzip.org *) SFLAGS=${CFLAGS-"-O"} CFLAGS=${CFLAGS-"-O"}
@@ -585,7 +583,7 @@ $ mupip replicate -source -start -buffsize=$jnlpool_size -secondary=localhost:12
 <p><span class="emphasis"><em><span>-</span>[NO]PLAINtextfallback
 <a class="indexterm" name="idp68296576"></a>
 <a class="indexterm" name="idp68428640"></a></em></span></p>
-<p>Specifies whether the replication server is permitted to fallback to plaintext communication. The default is -NOPLAINtextfallback. If NOPLAINTEXTFALLBACK is in effect, GT.M issues a REPLNOTLS error in the event it is unable to establish a TLS connection. [Note: GT.M versions prior to V6.1-000 did not support TLS for replication - if needed it could be implemented with an external application such as stunnel (<a class="ulink" href="http://stunnel.org/" target="_top">http://stunnel.org</a>).] If PLAINTEXTFALLBACK is in effect, in the event of a failure to establish a TLS connection, GT.M issues REPLNOTLS as a warning. Once a permitted plaintext replication connection is established for a connection session, GT.M never attempts to switch that connection session to TLS connection.</p>
+<p>Specifies whether the replication server is permitted to fallback to plaintext communication. The default is -NOPLAINtextfallback. If NOPLAINTEXTFALLBACK is in effect, GT.M issues a REPLNOTLS error in the event it is unable to establish a TLS connection. [Note: GT.M versions prior to V6.1-000 did not support TLS for replication - if needed it could be implemented with an external application such as stunnel (<a class="ulink" href="http://stunnel.org" target="_top">http://stunnel.org</a>).] If PLAINTEXTFALLBACK is in effect, in the event of a failure to establish a TLS connection, GT.M issues REPLNOTLS as a warning. Once a permitted plaintext replication connection is established for a connection session, GT.M never attempts to switch that connection session to TLS connection.</p>
 <p><span class="emphasis"><em><span>-</span>RENEGotiate_interval=&lt;minutes &gt;
 <a class="indexterm" name="idp68422448"></a>
 <a class="indexterm" name="idp68434080"></a></em></span></p>
@@ -1378,19 +1376,17 @@ would not need this qualifier.</p>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch07s03.html">Prev</a> </td>
+<a accesskey="p" href="ch07s03.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="lkechap.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="lkechap.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Procedures </td>
+<td width="40%" align="left" valign="top">Procedures </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Chapter 8. M Lock Utility (LKE)</td>
+<td width="40%" align="right" valign="top"> Chapter 8. M Lock Utility (LKE)</td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/replication.html]] -->
 </html>

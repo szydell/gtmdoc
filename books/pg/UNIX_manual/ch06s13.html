@@ -1,13 +1,11 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s13.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Using Locks within Transactions</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch06.html" title="Chapter 6. Commands">
+<link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s12.html" title="Lock">
 <link rel="next" href="ch06s14.html" title="Merge">
 <link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
@@ -18,9 +16,9 @@
 <tr><th colspan="3" align="center">Using Locks within Transactions</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch06s12.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 6. Commands</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch06s14.html">Next</a>
+<a accesskey="p" href="ch06s12.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. Commands</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch06s14.html">Next</a>
 </td>
 </tr>
 </table>
@@ -34,7 +32,7 @@
 <a name="locks_within_trans"></a>Using Locks within Transactions</h2></div></div></div>
 <p>Within transactions, LOCKs are used by GT.M to ensure the ability to serialize. There is no guarantee, however, that attempts by other processes to examine LOCKs held with a transaction will produce the same results as when LOCKs are outside of a transaction. In other words, LOCKs within transactions should never be used as simple semaphores.</p>
 <p>The LOCK command locks a specified resource name that controls a tree structured name space. Outside of transactions when one process in an environment acquires a LOCK or a ZALLOCATE on a named resource, no other GT.M process in that environment can LOCK a resource with an "overlapping" name until the first process releases the LOCK that it holds.</p>
-<p>For information on the use of LOCKs within transactions, refer to <a class="xref" href="ch05.html" title="Chapter 5. General Language Features of M">Chapter 5: &#8220;<i><span>General Language Features of M</span></i>&#8221;</a>.</p>
+<p>For information on the use of LOCKs within transactions, refer to <a class="xref" href="ch05.html" title="Chapter 5. General Language Features of M">Chapter 5: &#8220;<i><span>General Language Features of M</span></i>&#8221;</a>.</p>
 <div class="informaltable">
 <a name="tbllcksumm"></a><table border="1">
 <colgroup>
@@ -87,7 +85,7 @@
                 <p>L +A</p>
               </td>
 <td>
-                <p> </p>
+                <p> </p>
                 <p>A</p>
               </td>
 <td>
@@ -100,7 +98,7 @@
                 <p>L -A</p>
               </td>
 <td>
-                <p> </p>     
+                <p> </p>     
                 <p>none</p>
               </td>
 <td>
@@ -114,8 +112,8 @@
                 <p>L -A</p>
               </td>
 <td>
-                <p> </p>     
-                <p> </p>     
+                <p> </p>     
+                <p> </p>     
                 <p>A</p>
               </td>
 <td>
@@ -128,7 +126,7 @@
                 <p>L +B</p>
               </td>
 <td>
-                <p> </p>     
+                <p> </p>     
                 <p>A,B</p>
               </td>
 <td>
@@ -164,8 +162,8 @@
                 <p>L +C</p>
               </td>
 <td>
-                <p> </p>     
-                <p> </p>     
+                <p> </p>     
+                <p> </p>     
                 <p>A,B,C</p>
               </td>
 <td>
@@ -178,7 +176,7 @@
                 <p>L +(B,C)</p>
               </td>
 <td>
-                <p> </p>     
+                <p> </p>     
                 <p>A,B,C</p>
               </td>
 <td>
@@ -192,8 +190,8 @@
                 <p>L -C</p>
               </td>
 <td>
-                <p> </p>     
-                <p> </p>     
+                <p> </p>     
+                <p> </p>     
                 <p>A</p>
               </td>
 <td>
@@ -206,7 +204,7 @@
                 <p>L -(B,C)</p>
               </td>
 <td>
-                <p> </p>     
+                <p> </p>     
                 <p>A</p>
               </td>
 <td>
@@ -219,7 +217,7 @@
                 <p>L -B</p>
               </td>
 <td>
-                <p> </p>     
+                <p> </p>     
                 <p>A</p>
               </td>
 <td>
@@ -270,9 +268,9 @@ LOCK -(B)</pre>
 <li class="listitem"><p>
 <a class="xref" href="ch06s32.html" title="ZDeallocate">&#8220;ZDeallocate&#8221;</a></p></li>
 <li class="listitem"><p>
-<a class="ulink" href="../../ao/UNIX_manual/ao/UNIX_manual/ch04s04.html#locks" target="_top">GDE LOCKs (Administration and Operations Guide)</a></p></li>
+<a class="ulink" href="http://tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual//ao/UNIX_manual/ch04s04.html#locks" target="_top">GDE LOCKs (Administration and Operations Guide)</a></p></li>
 <li class="listitem"><p>
-<a class="ulink" href="../../ao/UNIX_manual/ch08.html" target="_top">LKE Chapter (Administration and Operations Guide)</a></p></li>
+<a class="ulink" href="http://tinco.pair.com/bhaskar/gtm/doc/books/ao/UNIX_manual/ch08.html" target="_top">LKE Chapter (Administration and Operations Guide)</a></p></li>
 </ul></div>
             </td>
 </tr></tbody>
@@ -284,19 +282,17 @@ LOCK -(B)</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch06s12.html">Prev</a> </td>
+<a accesskey="p" href="ch06s12.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch06s14.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch06s14.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Lock </td>
+<td width="40%" align="left" valign="top">Lock </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Merge</td>
+<td width="40%" align="right" valign="top"> Merge</td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch06s13.html]] -->
 </html>

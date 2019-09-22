@@ -1,13 +1,11 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch04s02.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Debugging a Routine in Direct Mode</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch04.html" title="Chapter 4. Operating and Debugging in Direct Mode">
+<link rel="up" href="ch04.html" title="Chapter 4. Operating and Debugging in Direct Mode">
 <link rel="prev" href="ch04s01.html" title="Operating in Direct Mode">
 <link rel="next" href="ch04s03.html" title="Summary of GT.M Debugging Tools">
 <link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
@@ -18,10 +16,10 @@
 <tr><th colspan="3" align="center"><span>Debugging a Routine in Direct Mode</span></th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch04s01.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 4. <span>Operating and Debugging in Direct Mode</span>
+<a accesskey="p" href="ch04s01.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 4. <span>Operating and Debugging in Direct Mode</span>
 </th>
-<td width="20%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a>
+<td width="20%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a>
 </td>
 </tr>
 </table>
@@ -38,7 +36,7 @@
 <pre class="programlisting">GTM&gt;DO ^routinename</pre>
 <p>You can also begin a debugging session by pressing &lt;CTRL-C&gt; after running an M application <span>at the shell</span>. To invoke Direct Mode by pressing &lt;CTRL-C&gt;, process must have the Principal Device in the CENABLE state and not have the device set to CTRAP=$C(3).</p>
 <p>When GT.M receives a &lt;CTRL-C&gt; command from the principal device, it invokes Direct Mode at the next opportunity, (usually at a point corresponding to the beginning of the next source line). GT.M can also interrupt at a FOR loop iteration or during a command of indeterminate duration such as LOCK, OPEN or READ. The GT.M USE command enables/disables the &lt;CTRL-C&gt; interrupt with the [NO]CENABLE deviceparameter. <span>By default, GT.M starts &lt;CTRL-C&gt; enabled.</span>  The default setting for &lt;CTRL-C&gt; is controlled by $gtm_nocenable which controls whether &lt;CTRL-C&gt; is enabled at process startup. If $gtm_nocenable has a value of 1, "TRUE" or "YES" (case-insensitive), and the process principal device is a terminal, $PRINCIPAL is initialized to a NOCENABLE state where the process does not recognize &lt;CTRL-C&gt; as a signal to enter direct mode. No value, or other values of $gtm_nocenable initialize $PRINCIPAL with the CENABLE state. The [NO]CENABLE deviceparameter on a USE command can still control this characteristic from within the process. </p>
-<p>GT.M displays the GTM&gt; prompt on the principal device. Direct Mode accepts commands from, and reports errors to, the principal device. GT.M uses the current device for all other I/O. If the current device does not match the principal device when GT.M enters Direct Mode, GT.M issues a warning message on the principal device. A USE command changes the current device. For more information on the USE command, see <a class="xref" href="ch09.html" title="Chapter 9. Input/Output Processing">Chapter 9: &#8220;<i><span>Input/Output</span> Processing</i>&#8221;</a>.</p>
+<p>GT.M displays the GTM&gt; prompt on the principal device. Direct Mode accepts commands from, and reports errors to, the principal device. GT.M uses the current device for all other I/O. If the current device does not match the principal device when GT.M enters Direct Mode, GT.M issues a warning message on the principal device. A USE command changes the current device. For more information on the USE command, see <a class="xref" href="ch09.html" title="Chapter 9. Input/Output Processing">Chapter 9: &#8220;<i><span>Input/Output</span> Processing</i>&#8221;</a>.</p>
 <p>The default "compile-as-written" mode of the GT.M compiler lets you run a program with errors as part of the debugging cycle. The object code produced includes all lines that are correct and all commands on a line with an error, up to the error. When GT.M encounters an error, it XECUTEs non empty values of $ETRAP or $ZTRAP. By default $ZTRAP contains a BREAK command, so GT.M enters Direct Mode.</p>
 <p>The rest of the chapter illustrates the debugging capabilities of GT.M by taking a sample routine, dmex, through the debugging process. dmex is intended to read and edit a name, print the last and first name, and terminate if the name is an upper-case or lower-case "Q".</p>
 <p>Each of the remaining sections of the chapter uses dmex to illustrate an aspect of the debugging process in GT.M.</p>
@@ -98,7 +96,7 @@ GTM&gt;</pre>
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>For more information on $ECODE and $STATUS see <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</p></td></tr>
+<tr><td align="left" valign="top"><p>For more information on $ECODE and $STATUS see <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</p></td></tr>
 </table></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;WRITE $ECODE
@@ -479,21 +477,19 @@ GTM&gt;</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch04s01.html">Prev</a> </td>
+<a accesskey="p" href="ch04s01.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch04.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a>
 </td>
 </tr>
 <tr>
 <td width="40%" align="left" valign="top">
-<span>Operating in</span> Direct Mode </td>
+<span>Operating in</span> Direct Mode </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Summary<span> of GT.M Debugging Tools</span>
+<td width="40%" align="right" valign="top"> Summary<span> of GT.M Debugging Tools</span>
 </td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch04s02.html]] -->
 </html>

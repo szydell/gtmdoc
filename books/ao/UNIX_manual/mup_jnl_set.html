@@ -1,13 +1,11 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/mup_jnl_set.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>SET</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
-<link rel="up" href="journaling.html" title="Chapter 6. GT.M Journaling">
+<link rel="up" href="journaling.html" title="Chapter 6. GT.M Journaling">
 <link rel="prev" href="ch06s01.html" title="Introduction">
 <link rel="next" href="mup_journal.html" title="JOURNAL">
 <link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
@@ -18,9 +16,9 @@
 <tr><th colspan="3" align="center">SET</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch06s01.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 6. <span>GT.M </span>Journaling</th>
-<td width="20%" align="right"> <a accesskey="n" href="mup_journal.html">Next</a>
+<a accesskey="p" href="ch06s01.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. <span>GT.M </span>Journaling</th>
+<td width="20%" align="right"> <a accesskey="n" href="mup_journal.html">Next</a>
 </td>
 </tr>
 </table>
@@ -44,7 +42,7 @@
 <tr><td align="left" valign="top"><p>GT.M applies journaling information in the Global Directory to a database file only when it is created. Thereafter use MUPIP, or under unusual circumstances DSE, to change journaling characteristics in database files. Be sure to use GDE to reflect current journaling needs so that the next time you use MUPIP CREATE you get the desired journaling characteristics.</p></td></tr>
 </table></div>
 <p>DSE DUMP -FILEHEADER displays the current values for all established journaling characteristics.</p>
-<p>This section provides a description of the MUPIP SET command with specific reference to the journaling related qualifiers. <span>For information on the other MUPIP SET qualifiers, refer to <a class="xref" href="mupipchap.html" title="Chapter 5. General Database Management">Chapter 5: &#8220;<i>General Database Management</i>&#8221;</a>.</span></p>
+<p>This section provides a description of the MUPIP SET command with specific reference to the journaling related qualifiers. <span>For information on the other MUPIP SET qualifiers, refer to <a class="xref" href="mupipchap.html" title="Chapter 5. General Database Management">Chapter 5: &#8220;<i>General Database Management</i>&#8221;</a>.</span></p>
 <p>MUPIP SET -JOURNAL can change some database characteristics when journaling is active for a specific file or region(s). The first run of MUPIP SET -JOURNAL on an older database automatically changes the maximum/minimum journal settings to match those required by the current GT.M version. MUPIP SET operates on database files, journal files, regions or replication state.</p>
 <p>The format for the MUPIP SET command is:</p>
 <pre class="programlisting">MUPIP SE[T] -qualifier... {-F[ILE] file-name|-JN[LFILE journal-file|-REG[ION] region-list}</pre>
@@ -91,7 +89,7 @@ The following qualifiers identify the journaling targets:</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="jnl_set_action"></a><span>SET </span>Action Qualifiers<a class="indexterm" name="idp65921232"></a> </h3></div></div></div>
-<p>The -JOURNAL and -REPLICATION qualifiers are the only SET qualifiers relevant for journaling. <span>For information on the other MUPIP SET qualifiers, refer to <a class="xref" href="mupipchap.html" title="Chapter 5. General Database Management">Chapter 5: &#8220;<i>General Database Management</i>&#8221;</a>.</span></p>
+<p>The -JOURNAL and -REPLICATION qualifiers are the only SET qualifiers relevant for journaling. <span>For information on the other MUPIP SET qualifiers, refer to <a class="xref" href="mupipchap.html" title="Chapter 5. General Database Management">Chapter 5: &#8220;<i>General Database Management</i>&#8221;</a>.</span></p>
 <p><code class="code">-[NO]J[OURNAL][=<em class="replaceable"><code>journal-option-list</code></em>]</code></p>
 <p>Enables or disables journaling for the specified database file or region(s). MUPIP SET commands with this qualifier also establish the characteristics for journal files. FIS believes the defaults and minimum for journal file characteristics are in line with current hardware capabilities and suitable for a production environment.</p>
 <p>The <em class="replaceable"><code>journal-option-list</code></em> contains keywords separated with commas (,) enclosed in double quotes "". These double quotes are optional when the list contains only one keyword. This option list is a super set of the journal-option-list available through GDE.</p>
@@ -232,7 +230,7 @@ SS       2-digit seconds                            such as 30</pre>
 <p>Stops recording subsequent database updates in the journal file. Specify OFF to establish journaling characteristics without creating a journal file or starting journaling.</p>
 <p>The default for SET -JOURNAL= is ON. </p>
 <p><code class="code">ON</code></p>
-<p>Records subsequent database updates in that journal file. MUPIP SET -JOURNAL=ON must include either BEFORE_IMAGES or NOBEFORE_IMAGES in the accompanying journal-option-list. By default GT.M sets journal operation to BEFORE_IMAGE if this command changes the database replication state <span>(refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a> for more information)</span> from OFF to ON and JOURNAL=NOBEFORE_IMAGE is not specified.</p>
+<p>Records subsequent database updates in that journal file. MUPIP SET -JOURNAL=ON must include either BEFORE_IMAGES or NOBEFORE_IMAGES in the accompanying journal-option-list. By default GT.M sets journal operation to BEFORE_IMAGE if this command changes the database replication state <span>(refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a> for more information)</span> from OFF to ON and JOURNAL=NOBEFORE_IMAGE is not specified.</p>
 <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
 <tr>
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
@@ -291,20 +289,18 @@ $ mupip set -journal="ON,BEFORE_IMAGES" -region "*"</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch06s01.html">Prev</a> </td>
+<a accesskey="p" href="ch06s01.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="journaling.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="mup_journal.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="mup_journal.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Introduction  </td>
+<td width="40%" align="left" valign="top">Introduction  </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> JOURNAL
+<td width="40%" align="right" valign="top"> JOURNAL
 </td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/mup_jnl_set.html]] -->
 </html>

@@ -1,13 +1,11 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch13s05.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Program Handling of Errors</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch13.html" title="Chapter 13. Error Processing">
+<link rel="up" href="ch13.html" title="Chapter 13. Error Processing">
 <link rel="prev" href="ch13s04.html" title="Processing Run-time Errors">
 <link rel="next" href="ch13s06.html" title="Error Actions">
 <link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
@@ -18,9 +16,9 @@
 <tr><th colspan="3" align="center">Program Handling of Errors</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch13s04.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 13. Err<span>or</span> Processing</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch13s06.html">Next</a>
+<a accesskey="p" href="ch13s04.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 13. Err<span>or</span> Processing</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch13s06.html">Next</a>
 </td>
 </tr>
 </table>
@@ -301,7 +299,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 <div class="titlepage"><div><div><h3 class="title">
 <a name="ztrap_behavior"></a><span>$ZTRAP </span>Behavior<a class="indexterm" name="idp75077952"></a>
 </h3></div></div></div>
-<p>If, at the time of any error, the value of $ZTRAP is non-empty, GT.M uses the $ZTRAP contents to direct execution of the next action.<span>Refer to the $ZTRAP section in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span> </p>
+<p>If, at the time of any error, the value of $ZTRAP is non-empty, GT.M uses the $ZTRAP contents to direct execution of the next action.<span>Refer to the $ZTRAP section in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span> </p>
 <p>By default, execution proceeds as if the next instruction to be executed were the first one on "the next line", and the code on that next line would be the same as the text in the value of $ZTRAP. Unless $ZTRAP or any code it invokes issues a GOTO or ZGOTO, after GT.M has executed the code in $ZTRAP, GT.M attempts to execute the line with the error again. When a value is assigned to $ZTRAP, the new value replaces the previous value. If the value of $ETRAP is a non-empty one, $ETRAP is implicitly NEWed, and the value of $ETRAP becomes equal to the empty string; this ensures that at most one of $ETRAP and $ZTRAP is not the empty string. If the <span>environment variable</span> gtm_ztrap_new evaluates to Boolean TRUE (case insensitive string "TRUE", or case insensitive string "YES", or a non-zero number), $ZTRAP is NEWed when $ZTRAP is SET; otherwise $ZTRAP is not stacked when it is SET.</p>
 <p>Other than the default behavior, $ZTRAP settings are controlled by the <span>environment variable</span> gtm_ztrap_form as described in the following table.</p>
 <div class="informaltable">
@@ -534,19 +532,17 @@ GTM&gt;</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch13s04.html">Prev</a> </td>
+<a accesskey="p" href="ch13s04.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch13.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch13s06.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch13s06.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">Processing Run-time<span> Errors</span> </td>
+<td width="40%" align="left" valign="top">Processing Run-time<span> Errors</span> </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Error Actions</td>
+<td width="40%" align="right" valign="top"> Error Actions</td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch13s05.html]] -->
 </html>

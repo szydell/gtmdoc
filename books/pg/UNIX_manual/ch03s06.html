@@ -1,13 +1,11 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch03s06.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Executing a Source Program</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
-<link rel="up" href="ch03.html" title="Chapter 3. Development Cycle">
+<link rel="up" href="ch03.html" title="Chapter 3. Development Cycle">
 <link rel="prev" href="ch03s05.html" title="Compiling a Source Program">
 <link rel="next" href="ch03s07.html" title="Executing from the Shell">
 <link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
@@ -19,9 +17,9 @@
 <span>Executing a </span>Source Program</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="ch03s05.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 3. <span>Development</span> Cycle</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch03s07.html">Next</a>
+<a accesskey="p" href="ch03s05.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 3. <span>Development</span> Cycle</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch03s07.html">Next</a>
 </td>
 </tr>
 </table>
@@ -56,7 +54,7 @@
 <p>$ZROUTINES is a read-write special variable that contains a directory search path used by ZLINK and auto-ZLINK to locate source and object files.</p>
 <p>When the argument to a ZLINK command includes a pathname, $ZSOURCE maintains that pathname as a default for ZEDIT and ZLINK. $ZSOURCE is a read-write special variable.</p>
 <p>Once you use the ZEDIT or ZLINK commands, $ZSOURCE can contain a partial file specification. The partial file specification can be a directory path (full or relative), a file name, and a file extension. You can set $ZSOURCE with an M SET command. A ZLINK without an argument is equivalent to ZLINK $ZSOURCE.</p>
-<p>For additional information on $ZSOURCE and $ZROUTINES, refer to <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</p>
+<p>For additional information on $ZSOURCE and $ZROUTINES, refer to <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</p>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;ZLINK "taxes"</pre>
 <p>If ZLINK finds taxes.m or taxes.o, the command adds the routine taxes to the current image. When ZLINK cannot locate taxes.o, or when it finds taxes.o is older than taxes.m, it compiles taxes.m, producing a new taxes.o. Then, it adds the contents of the new object file to the image.</p>
@@ -68,7 +66,7 @@
 <p>A ZLINK command that does not specify a directory uses $ZROUTINES to locate files. When $ZROUTINES is null, ZLINK uses the current directory. $ZROUTINES is initialized to the value of the gtmroutines environment variable.</p>
 <p>When the file being linked includes an explicit directory, ZLINK and auto-ZLINK searches only that directory for both the object and the source files. If compilation is required, ZLINK places the new object file in the named directory.</p>
 <p>A subsequent ZLINK searching for this object file will never find the object file in the specified directory unless the directory is added to the search path in $ZROUTINES, or the object file is moved to another directory already in the search path.</p>
-<p>ZLINK cannot change a currently active routine, (e.g., a routine displayed in a ZSHOW "S" of the stack). ZLINK a currently active routine by first removing it from the M stack, using ZGOTO, or one or more QUITs. <span>For additional information on the functionality of ZGOTO and ZSHOW, see their entries in <a class="xref" href="ch06.html" title="Chapter 6. Commands">Chapter 6: &#8220;<i>Commands</i>&#8221;</a>.</span></p>
+<p>ZLINK cannot change a currently active routine, (e.g., a routine displayed in a ZSHOW "S" of the stack). ZLINK a currently active routine by first removing it from the M stack, using ZGOTO, or one or more QUITs. <span>For additional information on the functionality of ZGOTO and ZSHOW, see their entries in <a class="xref" href="ch06.html" title="Chapter 6. Commands">Chapter 6: &#8220;<i>Commands</i>&#8221;</a>.</span></p>
 <p>To maintain compatibility with other editions of GT.M that do not permit the percent sign (%) in a file name, GT.M uses an underscore (_) in place of the percent in the file name.</p>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;zlink "_MGR"</pre>
@@ -80,20 +78,18 @@
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="ch03s05.html">Prev</a> </td>
+<a accesskey="p" href="ch03s05.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch03s07.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch03s07.html">Next</a>
 </td>
 </tr>
 <tr>
 <td width="40%" align="left" valign="top">
-<span>Compiling a</span> Source Program </td>
+<span>Compiling a</span> Source Program </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> <span>Executing</span> from <span>the</span> Shell</td>
+<td width="40%" align="right" valign="top"> <span>Executing</span> from <span>the</span> Shell</td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/pg/UNIX_manual/ch03s06.html]] -->
 </html>

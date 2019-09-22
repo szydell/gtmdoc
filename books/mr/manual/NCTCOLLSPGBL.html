@@ -1,37 +1,35 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/NCTCOLLSPGBL.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>NCTCOLLSPGBL </title>
+<title>NCTCOLLSPGBL </title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
-<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
-<link rel="prev" href="NCTCOLLDIFF.html" title="NCTCOLLDIFF ">
-<link rel="next" href="NEEDTRIGUPGRD.html" title="NEEDTRIGUPGRD ">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="NCTCOLLDIFF.html" title="NCTCOLLDIFF ">
+<link rel="next" href="NEEDTRIGUPGRD.html" title="NEEDTRIGUPGRD ">
 <link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">NCTCOLLSPGBL </th></tr>
+<tr><th colspan="3" align="center">NCTCOLLSPGBL </th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="NCTCOLLDIFF.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 1. Error Messages</th>
-<td width="20%" align="right"> <a accesskey="n" href="NEEDTRIGUPGRD.html">Next</a>
+<a accesskey="p" href="NCTCOLLDIFF.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="NEEDTRIGUPGRD.html">Next</a>
 </td>
 </tr>
 </table>
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">NCTCOLLSPGBL </span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">NCTCOLLSPGBL </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="NCTCOLLSPGBL"></a>NCTCOLLSPGBL </h2></div></div></div>
+<a name="NCTCOLLSPGBL"></a>NCTCOLLSPGBL </h2></div></div></div>
 <p><span class="bold"><strong>NCTCOLLSPGBL</strong></span>,  Database region rrrr contains portion of spanning global ^gggg and so cannot support non-zero numeric collation type</p>
 <p>Run Time Error: This indicates that region rrrr contains parts of a global gggg that spans multiple regions according to the current global directory but the directory tree in rrrr indicates gggg has a non-zero numeric collation type.</p>
 <p>Action: Spanning globals only support a value of zero for numeric collation (i.e. numbers collate as numbers, not as strings). Access region rrrr using a temporary global directory that maps all names (including gggg) to rrrr, extract the gggg global, KILL it, use $$set^%^GBLDEF to fix the numeric collation to 0, reload the global from the extract, switch back to the regular global directory. An alternative recovery action that does not require extract/load is to change the global directory so gggg is no longer a spanning global or has no mappings into any region that collates numbers using their string value.</p>
@@ -42,19 +40,17 @@
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="NCTCOLLDIFF.html">Prev</a> </td>
+<a accesskey="p" href="NCTCOLLDIFF.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="NEEDTRIGUPGRD.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="NEEDTRIGUPGRD.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">NCTCOLLDIFF  </td>
+<td width="40%" align="left" valign="top">NCTCOLLDIFF  </td>
 <td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
-<td width="40%" align="right" valign="top"> NEEDTRIGUPGRD </td>
+<td width="40%" align="right" valign="top"> NEEDTRIGUPGRD </td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/NCTCOLLSPGBL.html]] -->
 </html>

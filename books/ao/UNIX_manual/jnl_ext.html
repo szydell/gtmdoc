@@ -1,15 +1,13 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/jnl_ext.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Journal Extract Formats</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
-<link rel="up" href="journaling.html" title="Chapter 6. GT.M Journaling">
+<link rel="up" href="journaling.html" title="Chapter 6. GT.M Journaling">
 <link rel="prev" href="mup_journal.html" title="JOURNAL">
-<link rel="next" href="ch07.html" title="Chapter 7. Database Replication">
+<link rel="next" href="ch07.html" title="Chapter 7. Database Replication">
 <link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,9 +17,9 @@
 <span>Journal </span>Extract Formats</th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="mup_journal.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 6. <span>GT.M </span>Journaling</th>
-<td width="20%" align="right"> <a accesskey="n" href="ch07.html">Next</a>
+<a accesskey="p" href="mup_journal.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 6. <span>GT.M </span>Journaling</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07.html">Next</a>
 </td>
 </tr>
 </table>
@@ -38,7 +36,7 @@
 <p>If the environment variable gtm_chset is set of UTF-8, then file format label is followed by another label called "UTF-8" to indicate UTF-8 mode. </p>
 <p>After this label, the journal record extracts follow. These journal record extracts include fields or pieces delimited by a back slash (\). </p>
 <p>The first piece of an -EXTRACT output record contains a two-digit decimal transaction record type (for example, 01 for a process initialization record). The second piece contains the full date and time of the operation, represented in the $HOROLOG format. The third piece contains a GT.M assigned number (database transaction number) which uniquely identifies the transaction within the time covered by the journal file. The fourth piece contains the process ID (PID) of the process that performed the operation, represented as a decimal number. The remainder of the record depends on the record type. </p>
-<p>Records of type SET, KILL, ZKILL, TSTART, and TCOMMIT include the token_seq as part of the output. It is the sixth field in the output of the journal record extract. When replication is in use, token_seq is a journal sequence number (jsnum) that uniquely identifies each transaction<span>(for more information on journal sequence number refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>)</span>. When replication is not in use and the transaction is a TP transaction, token_seq is an 8-byte token that uniquely identifies the entire TP transaction. For non-replicated, non-TP journal records, token_seq has a zero (0) value. </p>
+<p>Records of type SET, KILL, ZKILL, TSTART, and TCOMMIT include the token_seq as part of the output. It is the sixth field in the output of the journal record extract. When replication is in use, token_seq is a journal sequence number (jsnum) that uniquely identifies each transaction<span>(for more information on journal sequence number refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>)</span>. When replication is not in use and the transaction is a TP transaction, token_seq is an 8-byte token that uniquely identifies the entire TP transaction. For non-replicated, non-TP journal records, token_seq has a zero (0) value. </p>
 <p>The format of the plain journal extract is as follows:</p>
 <pre class="programlisting">
 NULL    00\time\tnum\pid\clntpid\jsnum\strm_num\strm_seq
@@ -367,20 +365,18 @@ ALIGN    time\tnum\chksum\pid\clntpid</pre>
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="mup_journal.html">Prev</a> </td>
+<a accesskey="p" href="mup_journal.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="journaling.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch07.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch07.html">Next</a>
 </td>
 </tr>
 <tr>
 <td width="40%" align="left" valign="top">JOURNAL
- </td>
+ </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Chapter 7. Database Replication</td>
+<td width="40%" align="right" valign="top"> Chapter 7. Database Replication</td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/UNIX_manual/jnl_ext.html]] -->
 </html>

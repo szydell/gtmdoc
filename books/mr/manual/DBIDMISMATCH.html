@@ -1,37 +1,35 @@
 <html>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/DBIDMISMATCH.html]] -->
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>DBIDMISMATCH </title>
+<title>DBIDMISMATCH </title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
-<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
-<link rel="prev" href="DBHEADINV.html" title="DBHEADINV ">
-<link rel="next" href="DBINCLVL.html" title="DBINCLVL ">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="DBHEADINV.html" title="DBHEADINV ">
+<link rel="next" href="DBINCLVL.html" title="DBINCLVL ">
 <link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">DBIDMISMATCH </th></tr>
+<tr><th colspan="3" align="center">DBIDMISMATCH </th></tr>
 <tr>
 <td width="20%" align="left">
-<a accesskey="p" href="DBHEADINV.html">Prev</a> </td>
-<th width="60%" align="center">Chapter 1. Error Messages</th>
-<td width="20%" align="right"> <a accesskey="n" href="DBINCLVL.html">Next</a>
+<a accesskey="p" href="DBHEADINV.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="DBINCLVL.html">Next</a>
 </td>
 </tr>
 </table>
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">DBIDMISMATCH </span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">DBIDMISMATCH </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="DBIDMISMATCH"></a>DBIDMISMATCH </h2></div></div></div>
+<a name="DBIDMISMATCH"></a>DBIDMISMATCH </h2></div></div></div>
 <p><span class="bold"><strong>DBIDMISMATCH</strong></span>,    Database file xxxx ID (region yyyy) does not match file ID in shared memory (ID=zzzz). Ensure region is properly rundown.</p>
 <p>Run Time Error: When a GT.M process attaches to a database and finds the corresponding shared memory structures initialized already, it performs integrity checks on the shared memory contents to ensure that they correspond back to the database file. When the shared memory copy of the database file ID does not match with the actual file ID of the database, the above error is issued.</p>
 <p>Action: Perform a MUPIP RUNDOWN on that region. If it fails with the same DBIDMISMATCH error, then the shared memory contents are corrupt. Consult your GT.M support channel before proceeding further.</p>
@@ -42,19 +40,17 @@
 <table width="100%" summary="Navigation footer">
 <tr>
 <td width="40%" align="left">
-<a accesskey="p" href="DBHEADINV.html">Prev</a> </td>
+<a accesskey="p" href="DBHEADINV.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="DBINCLVL.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="DBINCLVL.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">DBHEADINV  </td>
+<td width="40%" align="left" valign="top">DBHEADINV  </td>
 <td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
-<td width="40%" align="right" valign="top"> DBINCLVL </td>
+<td width="40%" align="right" valign="top"> DBINCLVL </td>
 </tr>
 </table>
 </div>
 </body>
-
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/mr/manual/DBIDMISMATCH.html]] -->
 </html>

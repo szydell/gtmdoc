@@ -1,6 +1,4 @@
-<html>
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch05s02.html]] -->
-<head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>MUPIP Commands and Qualifiers</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch05.html" title="Chapter 5. MUPIP"><link rel="prev" href="ch05s01.html" title="Operating In MUPIP"><link rel="next" href="ch05s03.html" title="MUPIP Command Summary"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">MUPIP Commands and Qualifiers</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05s01.html">Prev</a> </td><th width="60%" align="center">Chapter 5. MUPIP</th><td width="20%" align="right"> <a accesskey="n" href="ch05s03.html">Next</a></td></tr></table><hr></div><div class="sect1" title="MUPIP Commands and Qualifiers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mupip_commands_and_qualifiers"></a>MUPIP Commands and Qualifiers<a class="indexterm" name="id3229710"></a></h2></div></div></div><p>The format for MUPIP commands is:</p><pre class="programlisting">MUPIP&gt; command [<span>/</span>qualifier[...]] [object[,...]] [destination]</pre><div class="sect2" title="Backup"><div class="titlepage"><div><div><h3 class="title"><a name="backup_cmmd"></a>Backup<a class="indexterm" name="id3229799"></a></h3></div></div></div><p>The BACKUP command allows you to save the contents of the database. Unless
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>MUPIP Commands and Qualifiers</title><link rel="stylesheet" href="gtm.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="titlepage.html" title="GT.M Administration and Operations Guide"><link rel="up" href="ch05.html" title="Chapter 5. MUPIP"><link rel="prev" href="ch05s01.html" title="Operating In MUPIP"><link rel="next" href="ch05s03.html" title="MUPIP Command Summary"><link rel="copyright" href="ln-id3218893.html" title="Legal Notice"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">MUPIP Commands and Qualifiers</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05s01.html">Prev</a> </td><th width="60%" align="center">Chapter 5. MUPIP</th><td width="20%" align="right"> <a accesskey="n" href="ch05s03.html">Next</a></td></tr></table><hr></div><div class="sect1" title="MUPIP Commands and Qualifiers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mupip_commands_and_qualifiers"></a>MUPIP Commands and Qualifiers<a class="indexterm" name="id3229710"></a></h2></div></div></div><p>The format for MUPIP commands is:</p><pre class="programlisting">MUPIP&gt; command [<span>/</span>qualifier[...]] [object[,...]] [destination]</pre><div class="sect2" title="Backup"><div class="titlepage"><div><div><h3 class="title"><a name="backup_cmmd"></a>Backup<a class="indexterm" name="id3229799"></a></h3></div></div></div><p>The BACKUP command allows you to save the contents of the database. Unless
 used with the <span>/</span>ONLINE qualifier, BACKUP suspends updates to all
 regions specified by the BACKUP command from the time it starts the first region
 until it finishes the last region. BACKUP ensures a consistent application state
@@ -318,7 +316,7 @@ of multiple volumes. When mounting a volume to tape for an EXTRACT,
 specify a blocksize that is eight (8) bytes larger than the size of the
 blocks in the database to accommodate RMS overhead.</span>
 </p></td></tr></table></div><p>For information on extracting globals with the %GO utility, refer to the "M
-Utility Routines" chapter of the <a class="ulink" href="../../pg/VMS_manual/index.html" target="_top">GT.M Programmer's Guide</a>. EXTRACT is typically
+Utility Routines" chapter of the <a class="ulink" href="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/VMS_manual/index.html" target="_top">GT.M Programmer's Guide</a>. EXTRACT is typically
 faster, but %GO can be customized.</p><p>&lt;CTRL-Y&gt; or &lt;CTRL-C&gt; produces a status message from
 EXTRACT. Entering &lt;CTRL-C&gt; twice in quick succession terminates EXTRACT.
 An EXTRACT terminated abnormally by operator action or error produces incomplete
@@ -787,7 +785,7 @@ Journaling" chapter.</p></div><div class="sect2" title="Load"><div class="titlep
 data values into a GT.M database from a sequential file.</p></li><li class="listitem"><p>Uses the Global Directory to determine which database files to
 use.</p></li><li class="listitem"><p>Supports user collation routines.</p></li><li class="listitem"><p>Operates concurrently with normal GT.M database access.</p></li></ul></div><p>From an application perspective, loading data while an application is running
 may result in an inconsistent database.</p><p>The format of the LOAD command is:</p><div class="literallayout"><p><br>
-L[OAD] [<span>/</span>qualifier...] file-<span>specification</span><br>
+L[OAD] [<span>/</span>qualifier...] file-<span>specification</span><br>
 <br>
 </p></div><p>The optional qualifiers are:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
 <span>/</span>FO[RMAT]=GO |
@@ -803,7 +801,7 @@ non-GT.M utility that produces GOQ format files only produces non-RMS magnetic
 tape files. When using an input file on a magnetic tape, use DCL to MOUNT the
 tape, and ensure the block size for the tape corresponds to the size that was
 used to make the tape.</p><p>For information on loading with an M "percent utility," refer to the %GI
-section of the "M Utility Routines" chapter in the <a class="ulink" href="../../pg/VMS_manual/index.html" target="_top">GT.M Programmer's Guide</a>. LOAD
+section of the "M Utility Routines" chapter in the <a class="ulink" href="http://tinco.pair.com/bhaskar/gtm/doc/books/pg/VMS_manual/index.html" target="_top">GT.M Programmer's Guide</a>. LOAD
 is typically faster, but the %GI utility can be customized.</p><p>&lt;CTRL-C&gt; produces a status message from LOAD. <span>&lt;CTRL-Y&gt;</span>
  stops LOAD. A LOAD that is manually stopped or
 stops because of an internal error is incomplete and may lack application level
@@ -890,7 +888,7 @@ fragmentation when database files have been extended more than a dozen
 times.</p><p>MUPIP REORG does not change the logical contents of the database, and can run
 on either the primary or secondary of a logical dual site application. In such
 cases, resuming REORGs in process should be part of the batch restart. For more
-information about running REORG on a dual site application, see <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</p><p>The format of the REORG command is:</p><pre class="programlisting">REO[RG] [<span>/</span>qualifier...] <span>specification</span>
+information about running REORG on a dual site application, see <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</p><p>The format of the REORG command is:</p><pre class="programlisting">REO[RG] [<span>/</span>qualifier...] <span>specification</span>
 </pre><p>The optional qualifiers are:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
 <span>/</span>E[XCLUDE]=global-name-list</p></li><li class="listitem"><p>
 <span>/</span>F[ILL_FACTOR]=integer</p></li><li class="listitem"><p>
@@ -977,7 +975,7 @@ The caret symbol (^) in the specification of the global is optional.</p><p>The g
 excludes all global names in the collating sequence A7 to B7. For the third
 <span>and fourth</span> case, REORG excludes A, B, and C. In
 the last case, REORG excludes all globals prefixed with TMP.</p><p>By default, REORG selects all globals.</p></div><div class="sect2" title="REPlicate"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_replicate_cmmd"></a>REPlicate<a class="indexterm" name="id3234318"></a></h3></div></div></div><p>The REPLICATE command controls the logical dual-site operation of GT.M. For a
-description of the REPLICATE command, see <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>. 
+description of the REPLICATE command, see <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>. 
 chapter.</p></div><div class="sect2" title="REstore"><div class="titlepage"><div><div><h3 class="title"><a name="mupip_restore_cmmd"></a>REstore<a class="indexterm" name="id3234269"></a></h3></div></div></div><p>RESTORE integrates one or more BACKUP <span>/</span>INCREMENTAL files into a corresponding database. The
 transaction number in the first incremental backup must be one more than the
 current transaction number of the database. Otherwise, MUPIP RESTORE will
@@ -1150,6 +1148,4 @@ format. Ensure that there is a backup copy of any file that is being upgraded,
 and that mupip integ with GT.M 3.x reports that the file is clean. Files must be
 upgraded one at a time. Pressing &lt;CTRL-C&gt; or experiencing a system crash
 while a file upgrade is in progress can leave the file damaged, and require that
-it be restored from the backup.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05s01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Operating In MUPIP </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> MUPIP Command Summary</td></tr></table></div></body>
-<!-- Mirrored [from host tinco.pair.com [file /bhaskar/gtm/doc/books/ao/OpenVMS_manual/ch05s02.html]] -->
-</html>
+it be restored from the backup.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05s01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch05.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Operating In MUPIP </td><td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td><td width="40%" align="right" valign="top"> MUPIP Command Summary</td></tr></table></div></body></html>
