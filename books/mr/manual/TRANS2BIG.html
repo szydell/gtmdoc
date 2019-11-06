@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="TRACINGON.html" title="TRACINGON ">
 <link rel="next" href="TRANSMINUS.html" title="TRANSMINUS ">
-<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp153234832.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>TRANS2BIG</strong></span>,  Transaction exceeded available buffer space for region rrrr</p>
 <p>Run Time Error: This indicates that a transaction updated more blocks than the global buffer could hold for a particular region rrrr or accessed more than the single transaction limit of 64K blocks.</p>
 <p>Action: Look for missing TCOMMIT commands; modify the code to reduce the total content or change content of the transaction. If the transaction is as intended and the issue is the number of updates, increase the GLOBAL_BUFFERS for the region using MUPIP SET, or modify the Global Directory to redistribute the relevant globals to more regions. If this occurs on a replicating instance it may indicate either a difference in configuration between the originating and replicating instances, which probably should be addressed, or a transaction that was borderline on the originating instance, but failed on the replicating instance because of difference in the database layout. In the later case, consider examining the application code to see if it's possible to reduce the size of the transaction, or alternatively increase the global buffers on both the instances.</p>
-<a class="indexterm" name="idp174666672"></a>
+<a class="indexterm" name="idp159321232"></a>
 </div>
 <div class="navfooter">
 <hr>

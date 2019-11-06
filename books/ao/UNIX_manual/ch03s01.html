@@ -8,7 +8,7 @@
 <link rel="up" href="ch03.html" title="Chapter 3. Basic Operations">
 <link rel="prev" href="ch03.html" title="Chapter 3. Basic Operations">
 <link rel="next" href="ch03s02.html" title="Environment Variables">
-<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp164337968.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="basic_operations"></a>GT.M Environment Setup <a class="indexterm" name="idp58050896"></a>
+<a name="basic_operations"></a>GT.M Environment Setup <a class="indexterm" name="idp164849392"></a>
 </h2></div></div></div>
 <p>Several environment variables control the operation of GT.M. Some of them must be set up for normal operation, where as for others GT.M assumes a default value if they are not set.</p>
 <p>Your GT.M distribution comes with many scripts that set up a default GT.M environment for the shell of your choice. These scripts are as follows: </p>
@@ -44,7 +44,7 @@
 <p>These scripts are designed to give you a friendly out-of-the-box GT.M experience. Even though you can set up an environment for normal GT.M operation without using these scripts, it is important to go through these scripts to understand the how to manage environment configuration. </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gtmprofile_script"></a>gtmprofile <a class="indexterm" name="idp60631968"></a>
+<a name="gtmprofile_script"></a>gtmprofile <a class="indexterm" name="idp164839584"></a>
 </h3></div></div></div>
 <p>On POSIX shells, gtmprofile helps you set an environment for single-user, non-replicated use of GT.M. </p>
 <p>gtmprofile sets reasonable defaults for the following environment variables for normal GT.M operation:</p>
@@ -125,7 +125,7 @@ alias dse '$gtm_dist/dse'</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gtmbase"></a>gtmbase <a class="indexterm" name="idp53647600"></a>
+<a name="gtmbase"></a>gtmbase <a class="indexterm" name="idp164897344"></a>
 </h3></div></div></div>
 <p>Adds the following line to .profile or .cshrc file depending on the shell.</p>
 <p>In the POSIX shell, gtmbase adds the following line to .profile:</p>
@@ -135,13 +135,13 @@ alias dse '$gtm_dist/dse'</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gdedefaults"></a>gdedefaults<a class="indexterm" name="idp53616912"></a>
+<a name="gdedefaults"></a>gdedefaults<a class="indexterm" name="idp164805360"></a>
 </h3></div></div></div>
 <p>Specifies default or template values for database characteristics defined by GDE.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gtm_script"></a>gtm <a class="indexterm" name="idp53048704"></a>
+<a name="gtm_script"></a>gtm <a class="indexterm" name="idp164780608"></a>
 </h3></div></div></div>
 <p>The gtm script starts with #!/bin/sh so it can run with any shell. Also, you can use it to both run a program and run in direct mode. It sources gtmprofile and sets up default GT.M database files with BEFORE_IMAGE journaling. It automatically recovers the database on startup.This script sets up everything you need to run GT.M for a simple out-of-box experience.</p>
 <p>For multi-user multi-environment systems, you should modify or replace the gtm script for your configuration.</p>

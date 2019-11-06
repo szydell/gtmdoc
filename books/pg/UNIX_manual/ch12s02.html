@@ -8,7 +8,7 @@
 <link rel="up" href="ch12.html" title="Chapter 12. Internationalization">
 <link rel="prev" href="ch12s01.html" title="Collation Sequence Definitions">
 <link rel="next" href="ch12s03.html" title="Implementing an Alternative Collation Sequence for Unicode(R) characters">
-<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp171908192.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -31,7 +31,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="creating_the_user_defined_coll_routines"></a><span>Creating the </span>Alternate Collation<span> Routines</span><a class="indexterm" name="idp74889120"></a>
+<a name="creating_the_user_defined_coll_routines"></a><span>Creating the </span>Alternate Collation<span> Routines</span><a class="indexterm" name="idp180922736"></a>
 </h2></div></div></div>
 <p>Each alternative collation sequence requires a set of four user-created routines<span>--gtm_ac_xform_1 (or gtm_ac_xform), gtm_ac_xback_1 (or gtm_ac_xback), gtm_ac_version, and gtm_ac_verify. The original and transformed strings are passed between GT.M and the user-created routines using parameters of type gtm_descriptor or gtm32_descriptor. An "include file" gtm_descript.h, located in the GT.M distribution directory, defines gtm_descriptor (used with gtm_ac_xform and gtm_ac_xback) as:</span></p>
 <pre class="programlisting">typedef struct
@@ -58,9 +58,12 @@
 <p>The interface to each routine is described below.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="transfrm_routine"></a>Transformation<span> Routine (gtm_ac_xform_1 or gtm_ac_xform)</span><a class="indexterm" name="idp74905008"></a>
+<a name="transfrm_routine"></a>Transformation<span> Routine (gtm_ac_xform_1 or gtm_ac_xform)</span><a class="indexterm" name="idp180977744"></a>
 </h3></div></div></div>
-<p>gtm_ac_xform_1 or gtm_ac_xform routines transforms subscripts to the alternative collation sequence.&gt;</p>
+<p>gtm_ac_xform_1 or gtm_ac_xform routines transforms subscripts to the alternative collation sequence.</p>
+<p>This routine returns altered keys to the original subscripts. The syntax of this routine is:</p>
+<pre class="programlisting">#include "gtm_descript.h"
+long gtm_ac_xback(gtm_descriptor *in, int level, gtm_descriptor *out, int *outlen)</pre>
 <p>If the application uses subscripted lvns longer than 32,767 bytes (but less than 1,048,576 bytes), the alternative collation library must contain the gtm_ac_xform_1 and gtm_ac_xback_1 routines. Otherwise, the alternative collation library can contain gtm_ac_xform and gtm_ac_xback. </p>
 <p>The syntax of this routine is:</p>
 <pre class="programlisting">#include "gtm_descript.h"
@@ -68,34 +71,36 @@ int gtm_ac_xform_1(gtm32_descriptor* in, int level, gtm32_descriptor* out, int* 
 </pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="input_arg"></a>Input Arguments<a class="indexterm" name="idp74919824"></a>
+<a name="input_arg"></a>Input Arguments for gtm_ac_xform1 <a class="indexterm" name="idp180994624"></a>
 </h4></div></div></div>
-<p>The input arguments for gtm_ac_xform are:</p>
+<p>The input arguments for gtm_ac_xform1 are:</p>
 <p>in:   a gtm32_descriptor containing the string to be transformed.</p>
 <p>level:  an integer; this is not used currently, but is reserved for future facilities.</p>
 <p>out:  a gtm32_descriptor to be filled with the transformed key.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="output_arg"></a>Output Arguments<a class="indexterm" name="idp74850944"></a>
+<a name="output_arg"></a>Output Arguments for gtm_ac_xform1<a class="indexterm" name="idp180955488"></a>
 </h4></div></div></div>
+<p>The output arguments for gtm_ac_xform1 are:</p>
 <p>return value: A long word status code.</p>
 <p>out: A transformed subscript in the string buffer, passed by gtm32_descriptor.</p>
 <p>outlen: A 32-bit signed integer, passed by reference, returning the actual length of the transformed key.</p>
 <p>The syntax of gtm_ac_xform routine is:</p>
 <pre class="programlisting">#include "gtm_descript.h"
 long gtm_ac_xform(gtm_descriptor *in, int level, gtm_descriptor *out, int *outlen)</pre>
-<div class="sect4">
-<div class="titlepage"><div><div><h5 class="title">
-<a name="inp_arg"></a>Input Arguments</h5></div></div></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="inp_arg"></a>Input Arguments for gtm_ac_xform</h4></div></div></div>
 <p>The input arguments for gtm_ac_xform are:</p>
 <p>in: a gtm_descriptor containing the string to be transformed.</p>
 <p>level: an integer; this is not used currently, but is reserved for future facilities.</p>
 <p>out: a gtm_descriptor to be filled with the transformed key.</p>
 </div>
-<div class="sect4">
-<div class="titlepage"><div><div><h5 class="title">
-<a name="out_arg"></a>Output Arguments</h5></div></div></div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="out_arg"></a>Output Arguments for gtm_ac_xform</h4></div></div></div>
 <p>The output arguments for gtm_ac_xform are:</p>
 <p>return value: a long result providing a status code; it indicates the success (zero) or failure (non-zero) of the transformation.</p>
 <p>out: a gtm_descriptor containing the transformed key.</p>
@@ -144,10 +149,9 @@ gtm_ac_xform (in, level, out, outlen)
   return 0;
 }</pre>
 </div>
-</div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="transfrm_rout_char"></a>Transformation Routine Characteristics<a class="indexterm" name="idp74912832"></a>
+<a name="transfrm_rout_char"></a>Transformation Routine Characteristics<a class="indexterm" name="idp181011648"></a>
 </h4></div></div></div>
 <p>The input and output values may contain &lt;NUL&gt; (hex code 00) characters.</p>
 <p>The collation transformation routine may concatenate a sentinel, such as &lt;NUL&gt;, followed by the original subscript on the end of the transformed key. If key length is not an issue, this permits the inverse transformation routine to simply retrieve the original subscript rather than calculating its value based on the transformed key. </p>
@@ -156,7 +160,7 @@ gtm_ac_xform (in, level, out, outlen)
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="inverse_trnsfrm_routine"></a>Inverse Transformation<span> Routine (gtm_ac_xback or gtm_ac_xback_1)</span><a class="indexterm" name="idp74880656"></a>
+<a name="inverse_trnsfrm_routine"></a>Inverse Transformation<span> Routine (gtm_ac_xback or gtm_ac_xback_1)</span><a class="indexterm" name="idp180984256"></a>
 </h3></div></div></div>
 <p>This routine returns altered keys to the original subscripts. The syntax of this routine is:</p>
 <pre class="programlisting">#include "gtm_descript.h"
@@ -164,7 +168,7 @@ long gtm_ac_xback(gtm_descriptor *in, int level, gtm_descriptor *out, int *outle
 <p>The arguments of gtm_ac_xback are identical to those of gtm_ac_xform.</p>
 <p>The syntax of gtm_ac_xback_1 is:</p>
 <pre class="programlisting">#include "gtm_descript.h"
-long gtm_ac_xback_1 ( gtm32_descriptor *src, int level, gtm32_descriptor *dst, int *dstlen)</pre>
+long gtm_ac_xback_1(gtm32_descriptor *src, int level, gtm32_descriptor *dst, int *dstlen)</pre>
 <p>The arguments of gtm_ac_xback_1 are identical to those of gtm_ac_xform_1.</p>
 <p>Example:</p>
 <pre class="programlisting">#include "gtm_descript.h"
@@ -190,9 +194,9 @@ static unsigned char inverse_table[256] =
 };
 long gtm_ac_xback (in, level, out, outlen)
      gtm_descriptor *in;    /* the input string */
-     int level;            /* the subscript level */
-     gtm_descriptor *out;    /* output buffer */
-     int *outlen;        /* the length of the output string */
+     int level;             /* the subscript level */
+     gtm_descriptor *out;   /* output buffer */
+     int *outlen;           /* the length of the output string */
 {
   int n;
   unsigned char *cp, *cout;
@@ -211,14 +215,56 @@ long gtm_ac_xback (in, level, out, outlen)
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="version_cntrl_routines"></a>Version Control<span> Routines (gtm_ac_version and gtm_ac_verify)</span><a class="indexterm" name="idp74912544"></a>
+<a name="transform_utility"></a>Transform Utility<span> Routine (gtm_ac_xutil)</span><a class="indexterm" name="idp180934896"></a>
+</h3></div></div></div>
+<p>This routine returns a next or previous character in the collation sequence. The syntax of this routine is:</p>
+<pre class="programlisting">#include "gtm_descript.h"
+long gtm_ac_xutil (gtm32_descriptor *in, int level, gtm32_descriptor *out, int *outlen, int op, int honor_numeric)</pre>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="inp_arg_gtm_ac_xutil"></a>Input Arguments</h4></div></div></div>
+<p>The input arguments of gtm_ac_xutil are: </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>in: Specifies the input string; gtm_ac_xutil considers the first character of the input string.</p></li>
+<li class="listitem"><p>level: Currently unused and should not be examined or changed.</p></li>
+<li class="listitem">
+<p>honor_numeric: Boolean variable to specify whether to use standard GT.M collation for digits.</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem"><p>TRUE: use standard GT.M collation for digits before any other character</p></li>
+<li class="listitem"><p>FALSE: treat digits the same as all other characters</p></li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="out_arg_gtm_ac_xutil"></a>Output Arguments</h4></div></div></div>
+<p>The output arguments of gtm_ac_xutil are: </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>out: Supplies the one (1) character result string produced by applying the collation operation if a result was possible.</p></li>
+<li class="listitem"><p>outlen: Supplies to the caller the length of the returned string- 0 or 1.</p></li>
+<li class="listitem">
+<p>op:  Supplies the collation operation as follows:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem"><p>0: collation value of the given character </p></li>
+<li class="listitem"><p>1: character collating before the given character if it exists </p></li>
+<li class="listitem"><p>2: character collating after the given character if it exists</p></li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<p>The gtm_ac_xutil function returns 0 on success and -1 on failure.</p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="version_cntrl_routines"></a>Version Control<span> Routines (gtm_ac_version and gtm_ac_verify)</span><a class="indexterm" name="idp180949024"></a>
 </h3></div></div></div>
 <p>Two user-defined version control routines provide a safety mechanism to guard against a collation routine being used on the wrong global, or an attempt being made to modify a collation routine for an existing global. Either of these situations could cause incorrect collation or damage to subscripts.</p>
 <p>When a global is assigned an alternative collation sequence, GT.M invokes a user-supplied routine that returns a numeric version identifier for the set of collation routines, which was stored with the global. The first time a process accesses the global, GT.M determines the assigned collation sequence, then invokes another user-supplied routine. The second routine matches the collation sequence and version identifier assigned to the global with those of the current set of collation routines.</p>
 <p>When you write the code that matches the type and version, you can decide whether to modify the version identifier and whether to allow support of globals created using a previous version of the routine.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="version_id_routine"></a>Version Identifier<span> Routine (gtm_ac_version)</span><a class="indexterm" name="idp74922096"></a>
+<a name="version_id_routine"></a>Version Identifier<span> Routine (gtm_ac_version)</span><a class="indexterm" name="idp181035904"></a>
 </h4></div></div></div>
 <p>This routine returns an integer identifier between 0 and 255. This integer provides a mechanism to enforce compatibility as a collation sequence potentially evolves. When GT.M first uses an alternate collation sequence for a database or global, it captures the version and if it finds the version has changed it at some later startup, it generates an error. The syntax is:</p>
 <pre class="programlisting">int gtm_ac_version()</pre>
@@ -230,7 +276,7 @@ long gtm_ac_xback (in, level, out, outlen)
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="verify_routine"></a>Verification<span> Routine (gtm_ac_verify)</span><a class="indexterm" name="idp74896816"></a>
+<a name="verify_routine"></a>Verification<span> Routine (gtm_ac_verify)</span><a class="indexterm" name="idp180998880"></a>
 </h4></div></div></div>
 <p>This routine verifies that the type and version associated with a global are compatible with the active set of routines. Both the type and version are unsigned characters passed by value. The syntax is:</p>
 <pre class="programlisting">#include "gtm_descript.h"
@@ -255,12 +301,12 @@ gtm_ac_verify (type, ver)
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="using_the_percent_gbldef_util"></a><span>Using the </span>%GBLDEF<span> Utility</span><a class="indexterm" name="idp74918864"></a>
+<a name="using_the_percent_gbldef_util"></a><span>Using the </span>%GBLDEF<span> Utility</span><a class="indexterm" name="idp181003088"></a>
 </h3></div></div></div>
 <p>Use the %GBLDEF utility to get, set, or kill the collation sequence of a global variable mapped by the current global directory. %GBLDEF cannot modify the collation sequence for either a global containing data or a global whose subscripts span multiple regions. To change the collation sequence for a global variable that contains data, extract the data, KILL the variable, change the collation sequence, and reload the data.  Use GDE to modify the collation sequence of a global variable that spans regions.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="assing_the_coll_seq"></a>Assigning<span> the Collation Sequence</span><a class="indexterm" name="idp74931136"></a>
+<a name="assing_the_coll_seq"></a>Assigning<span> the Collation Sequence</span><a class="indexterm" name="idp181042736"></a>
 </h4></div></div></div>
 <p>To assign a collation sequence to an individual global use the extrinsic entry point:</p>
 <pre class="programlisting">set^%GBLDEF(gname,nct,act)</pre>
@@ -282,7 +328,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examine_glbl_coll_char"></a>Examining<span> Global Collation Characteristics</span><a class="indexterm" name="idp74910976"></a>
+<a name="examine_glbl_coll_char"></a>Examining<span> Global Collation Characteristics</span><a class="indexterm" name="idp181052128"></a>
 </h4></div></div></div>
 <p>To examine the collation characteristics currently assigned to a global use the extrinsic entry point:</p>
 <pre class="programlisting">get^%GBLDEF(gname[,reg])</pre>
@@ -311,7 +357,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="deleting_glbl_coll_char"></a>Deleting<span> Global Collation Characteristics</span><a class="indexterm" name="idp74970704"></a>
+<a name="deleting_glbl_coll_char"></a>Deleting<span> Global Collation Characteristics</span><a class="indexterm" name="idp181058080"></a>
 </h4></div></div></div>
 <p>To delete the collation characteristics currently assigned to a global, use the extrinsic entry point:</p>
 <pre class="programlisting">kill^%GBLDEF(gname)</pre>

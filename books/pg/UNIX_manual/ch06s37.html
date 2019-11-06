@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s36.html" title="ZHelp">
 <link rel="next" href="ch06s38.html" title="ZKill">
-<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp171908192.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zlink_cmmd"></a>ZLink<a class="indexterm" name="idp53781824"></a>
+<a name="zlink_cmmd"></a>ZLink<a class="indexterm" name="idp174964912"></a>
 </h2></div></div></div>
 <p>The ZLINK command adds an executable GT.M routine to the current process if the current process does not contain a copy of a routine. If the current process contains a copy of a routine and the routine is not active, the ZLINK command replaces the current routine process with a "new" version. If necessary, the ZLINK command compiles the routine prior to integrating it with the process.</p>
 <p>With VIEW "LINK":"RECURSIVE" specified or by starting the process with the environment variable gtm_link set to "RECURSIVE", the ZLINK command adds an executable routine even when a routine with the same name is active and available in the current stack. When a process links a routine with the same name as an existing routine, future calls use the new routine. Prior versions of that routine referenced by the stack remain tied to the stack until they QUIT, at which point they become inaccessible. This provides a mechanism to patch long-running processes.</p>
@@ -103,7 +103,7 @@
 <td>
                 <p>found</p>
               </td>
-<td>N/A</td>
+<td><p>N/A</p></td>
 <td>
                 <p>link only</p>
               </td>
@@ -113,7 +113,7 @@
 <td>
                 <p>not found</p>
               </td>
-<td>N/A</td>
+<td><p>N/A</p></td>
 <td>
                 <p>error</p>
               </td>
@@ -134,7 +134,7 @@
 </tr>
 <tr>
 <td> </td>
-<td>N/A</td>
+<td><p>N/A</p></td>
 <td>
                 <p>not found</p>
               </td>
@@ -143,7 +143,7 @@
               </td>
 </tr>
 <tr>
-<td>None</td>
+<td><p>None</p></td>
 <td>
                 <p>not found</p>
               </td>
@@ -156,15 +156,15 @@
 </tr>
 <tr>
 <td> </td>
-<td>found</td>
-<td>not found</td>
-<td>link only</td>
+<td><p>found</p></td>
+<td><p>not found</p></td>
+<td><p>link only</p></td>
 </tr>
 <tr>
 <td> </td>
-<td>not found</td>
-<td>not found</td>
-<td>error</td>
+<td><p>not found</p></td>
+<td><p>not found</p></td>
+<td><p>error</p></td>
 </tr>
 <tr>
 <td> </td>
@@ -195,7 +195,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zlink_compilation"></a>ZLINK Compilation<a class="indexterm" name="idp56257952"></a>
+<a name="zlink_compilation"></a>ZLINK Compilation<a class="indexterm" name="idp175019760"></a>
 </h3></div></div></div>
 <p>If ZLINK compiles a routine and the -OBJECT= qualifier does not redirect the output, it places the resulting object file in the directory indicated by the search criteria. ZLINK incorporates the new object file into the image, regardless of its directory placement.</p>
 <p>If the command does not specify compile qualifiers (with expr2) and $ZCOMPILE is null, GT.M uses the default M command qualifiers, -ignore, -labels=lower, -nolist, and -object. <span>For more information on $ZCOMPILE, refer to the appropriate section in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>. For detailed descriptions of the M command qualifiers, see <a class="xref" href="ch03.html" title="Chapter 3. Development Cycle">Chapter 3: &#8220;<i><span>Development</span> Cycle</i>&#8221;</a>.</span></p>
@@ -203,7 +203,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zlink"></a>Examples<span> of ZLINK</span><a class="indexterm" name="idp52622336"></a>
+<a name="examples_of_zlink"></a>Examples<span> of ZLINK</span><a class="indexterm" name="idp175004992"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;ZLINK "test"</pre>
@@ -223,7 +223,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="auto_zlink"></a>Auto-ZLINK<a class="indexterm" name="idp52464736"></a>
+<a name="auto_zlink"></a>Auto-ZLINK<a class="indexterm" name="idp175025312"></a>
 </h3></div></div></div>
 <p>If a GT.M routine refers to a routine that is not linked in the process memory, GT.M automatically attempts to ZLINK that routine. An auto-ZLINK is functionally equivalent to an explicit ZLINK of a routine without a specified directory or file extension.</p>
 <p>The following GT.M commands and functions can initiate auto-ZLINKing:</p>
@@ -345,7 +345,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zlink_autozlink_and_rtn_name"></a>ZLINK, auto-ZLINK and Routine Names<a class="indexterm" name="idp66858192"></a>
+<a name="zlink_autozlink_and_rtn_name"></a>ZLINK, auto-ZLINK and Routine Names<a class="indexterm" name="idp175018512"></a>
 </h3></div></div></div>
 <p>In GT.M, the name of the source file determines the name of the GT.M routine. The file name of the object file is not required to match the name of the routine. Linking the object file makes the internal routine name (derived from the source file) known to GT.M. This can lead to potential confusion, however, since both ZLINK and auto-ZLINK use the name of the object file to find the routine. When the object file name differs from the name of the routine, auto-ZLINK generates a run-time error.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">

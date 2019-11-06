@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s30.html" title="$ZCOllate()">
 <link rel="next" href="ch07s32.html" title="$ZDATA()">
-<link rel="copyright" href="ln-idp64351152.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp171908192.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zconvert"></a>$ZCOnvert()<a class="indexterm" name="idp69972320"></a>
+<a name="zconvert"></a>$ZCOnvert()<a class="indexterm" name="idp176016560"></a>
 </h2></div></div></div>
 <p>Returns its first argument as a string converted to a different encoding. The two argument form changes the encoding for case within a character set. The three argument form changes the encoding scheme.</p>
 <p>The format for the $ZCONVERT() function is:</p>
@@ -43,7 +43,7 @@
 <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem"><p>U converts the string to UPPER-CASE. "UPPER-CASE" refers to words where all the characters are converted to their "capital letter" equivalents. $ZCONVERT() retains characters already in UPPER-CASE "capital letter" form unchanged.</p></li>
 <li class="listitem"><p>L converts the string to lower-case. "lower-case" refers to words where all the letters are converted to their "small letter" equivalents. $ZCONVERT() retains characters already in lower-case or having no lower-case equivalent unchanged.</p></li>
-<li class="listitem"><p>T converts the string to title case. "Title case" refers to a string with the first character of each word in  upper-case and the remaining characters in the lower-case. $ZCONVERT() retains characters already conforming to "Title case" unchanged. "T" (title case) is not supported in M mode.</p></li>
+<li class="listitem"><p>T converts the string to title case. "Title case" refers to a string with the first character of each word in  upper-case and the remaining characters in the lower-case. $ZCONVERT() retains characters already conforming to "Title case" unchanged.</p></li>
 </ul></div>
 </li>
 </ul></div>
@@ -65,16 +65,14 @@
 </table></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="idp69718864"></a>Examples<span> of $ZCONVERT()</span>
+<a name="idp176043344"></a>Examples<span> of $ZCONVERT()</span>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;write $zconvert("Happy New Year","U")
 HAPPY NEW YEAR</pre>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;write $ZCHSET
-M
-GTM&gt;Write $zconvert("HAPPY NEW YEAR","T")
-%GTM-E-BADCASECODE, T is not a valid case conversion code</pre>
+<pre class="programlisting">GTM&gt;Write $zconvert("HAPPY NEW YEAR","T")
+Happy New Year</pre>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;Set T8="<span class="symbol">&#20027;&#35201;&#38632;&#22312;&#35199;&#29677;&#29273;&#20572;&#30041;&#22312;&#24179;&#21407;</span>"
 GTM&gt;Write $Length(T8)

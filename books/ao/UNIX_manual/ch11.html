@@ -8,7 +8,7 @@
 <link rel="up" href="index.html" title="GT.M Administration and Operations Guide">
 <link rel="prev" href="dse_summary.html" title="DSE Command Summary">
 <link rel="next" href="ch11s01.html" title="Verifying Database Integrity">
-<link rel="copyright" href="ln-idp62968528.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp164337968.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,6 +33,33 @@
 <a name="chk_maint_db_integrity"></a>Chapter 11. Maintaining Database Integrity</h2></div>
 <div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
 <tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V6.3-010</td>
+<td align="left">31 October 2019</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#MUPIP_INTEG_Error_Classification_Table" title="MUPIP INTEG Error Classification Table">&#8220;MUPIP INTEG Error Classification Table&#8221;</a>, add more explanation</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#Run-Time_Database_Restart_Code_Table" title="Run-Time Database Restart Codes">&#8220;Run-Time Database Restart Codes&#8221;</a>, fix section title</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#c1_possible_cache_control_problems" title="C1&#8211;Possible Cache Control Problems">&#8220;C1&#8211;Possible Cache Control Problems&#8221;</a>, add a link to section R3</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#can_be_deferred" title="Can Be Deferred">&#8220;Can Be Deferred&#8221;</a>, update MUPIP INTEG error messages table and give it its own section</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html" title="Finding and Fixing Database Errors">&#8220;Finding and Fixing Database Errors&#8221;</a>, separate mupip integ error table and restart code table into a separate sections</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#h1_process_hangs" title="H1&#8211;Process Hangs">&#8220;H1&#8211;Process Hangs&#8221;</a>, improve the instructions</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#h3_db_access_problems" title="H3&#8211;Database Access Problems">&#8220;H3&#8211;Database Access Problems&#8221;</a>, modify some instructions</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#h7_disk_hardware_problems" title="H7&#8211;Disk Hardware Problems">&#8220;H7&#8211;Disk Hardware Problems&#8221;</a>, remove inappropriate text</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#i1_mupip_integ_errors" title="I1&#8211;MUPIP INTEG Errors">&#8220;I1&#8211;MUPIP INTEG Errors&#8221;</a>, put table in a separate section</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#i3_file_header_errors" title="I3&#8211;File Header Errors">&#8220;I3&#8211;File Header Errors&#8221;</a>, add mupip dumpfhead as a reporter of freecnt</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#i5_more_db_access_problems" title="I5&#8211;More Database Access Problems">&#8220;I5&#8211;More Database Access Problems&#8221;</a>, remove inappropriate text</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#i5_star_key_prblms" title="K5&#8211;Star Key Problems">&#8220;K5&#8211;Star Key Problems&#8221;</a>, more accurate wording</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#i6_transient_errors" title="I6&#8211;Transient Errors">&#8220;I6&#8211;Transient Errors&#8221;</a>, add discussion of the role of startup procedures.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#i7_db_rundown_prblm" title="I7&#8211;Database Rundown Problem">&#8220;I7&#8211;Database Rundown Problem&#8221;</a>, modify the description to reflect the use of appropriate startup.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#k3_block_doubly_allocated" title="K3&#8211;Block Doubly Allocated">&#8220;K3&#8211;Block Doubly Allocated&#8221;</a>, improve wording</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#m1_bitmap_errors" title="M1&#8211;Bitmap Errors">&#8220;M1&#8211;Bitmap Errors&#8221;</a>, enhance wording of MAP -MASTER</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#o3_data_block_errors" title="O3&#8211;Data Block Errors">&#8220;O3&#8211;Data Block Errors&#8221;</a>, additional recommendations</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#o4_salvage" title="O4&#8211;Salvage of Data Blocks with Lost Indices">&#8220;O4&#8211;Salvage of Data Blocks with Lost Indices&#8221;</a>, adjust wording</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#p1_process_damage" title="P1&#8211;Process Damage">&#8220;P1&#8211;Process Damage&#8221;</a>, enhance wording</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s04.html#r2_structure_db_integ" title="R2&#8211;Structural Database Integrity Errors">&#8220;R2&#8211;Structural Database Integrity Errors&#8221;</a>, additions and adjustments</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch11s03.html" title="Repairing the Database with DSE">&#8220;Repairing the Database with DSE&#8221;</a>, additional instructions</p></li>
+</ul></div></td>
+</tr>
 <tr>
 <td align="left">Revision V6.3-006</td>
 <td align="left">26 October 2018</td>
@@ -97,6 +124,7 @@
 <dt><span class="sect2"><a href="ch11s04.html#h7_disk_hardware_problems">H7&#8211;Disk Hardware Problems</a></span></dt>
 <dt><span class="sect2"><a href="ch11s04.html#h8_application_problems">H8&#8211;Application Problems</a></span></dt>
 <dt><span class="sect2"><a href="ch11s04.html#i1_mupip_integ_errors">I1&#8211;MUPIP INTEG Errors</a></span></dt>
+<dt><span class="sect2"><a href="ch11s04.html#MUPIP_INTEG_Error_Classification_Table">MUPIP INTEG Error Classification Table</a></span></dt>
 <dt><span class="sect2"><a href="ch11s04.html#gtm_version_mismatch_chi2">I2&#8211;GT.M Version Mismatch</a></span></dt>
 <dt><span class="sect2"><a href="ch11s04.html#i3_file_header_errors">I3&#8211;File Header Errors</a></span></dt>
 <dt><span class="sect2"><a href="ch11s04.html#i4_file_size_errors">I4&#8211;File Size Errors</a></span></dt>
@@ -122,6 +150,7 @@
 <dt><span class="sect2"><a href="ch11s04.html#q1_restict_db_access">Q1&#8211;Restricting Database Access</a></span></dt>
 <dt><span class="sect2"><a href="ch11s04.html#r1_gtm_run_time_errors">R1&#8211;GT.M Run-Time Errors</a></span></dt>
 <dt><span class="sect2"><a href="ch11s04.html#r2_structure_db_integ">R2&#8211;Structural Database Integrity Errors</a></span></dt>
+<dt><span class="sect2"><a href="ch11s04.html#Run-Time_Database_Restart_Code_Table">Run-Time Database Restart Codes</a></span></dt>
 <dt><span class="sect2"><a href="ch11s04.html#r2_run_time_db_cache">R3&#8211;Run-time Database Cache Problems</a></span></dt>
 <dt><span class="sect2"><a href="ch11s04.html#r4_stopped_processes">R4&#8211;Stopped Processes</a></span></dt>
 <dt><span class="sect2"><a href="ch11s04.html#r5_no_more_room">R5&#8211;No More Room in the File</a></span></dt>

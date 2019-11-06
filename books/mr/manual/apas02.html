@@ -8,7 +8,7 @@
 <link rel="up" href="quick_message_reference.html" title="Appendix A. Error Message Quick Reference">
 <link rel="prev" href="apas01.html" title="Standard Error Codes">
 <link rel="next" href="apb.html" title="Appendix B. Reference Implementation Error messages">
-<link rel="copyright" href="ln-idp168592992.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp153234832.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="idp175618752"></a>ZMESSAGE Codes</h2></div></div></div>
+<a name="idp160279808"></a>ZMESSAGE Codes</h2></div></div></div>
 <p>The following table lists ZMESSAGE numbers of all messages documented in this manual.</p>
 <div class="informaltable"><table border="1">
 <colgroup>
@@ -1454,6 +1454,10 @@
 <td><p><a class="link" href="DSEFAIL.html" title="DSEFAIL ">DSEFAIL</a>, DSE failed. Failure code: xxxx.</p></td>
 </tr>
 <tr>
+<td><p>150377138</p></td>
+<td><p><a class="link" href="DSEINVALBLKID.html" title="DSEINVALBLKID ">DSEINVALBLKID</a>, Trying to edit DB with 64-bit block IDs using pre-V7 DSE</p></td>
+</tr>
+<tr>
 <td><p>150375288</p></td>
 <td><p><a class="link" href="DSEINVLCLUSFN.html" title="DSEINVLCLUSFN ">DSEINVLCLUSFN</a>, Specified function is invalid for clustered databases</p></td>
 </tr>
@@ -1730,6 +1734,10 @@
 <td><p><a class="link" href="FILEPARSE.html" title="FILEPARSE ">FILEPARSE</a>, Error parsing file specification: xxxx</p></td>
 </tr>
 <tr>
+<td><p>150376186</p></td>
+<td><p><a class="link" href="FILEPATHTOOLONG.html" title="FILEPATHTOOLONG ">FILEPATHTOOLONG</a>, Filename including the path cannot be longer than 255 characters</p></td>
+</tr>
+<tr>
 <td><p>150378835</p></td>
 <td><p><a class="link" href="FILERENAME.html" title="FILERENAME ">FILERENAME</a>, File xxxx is renamed to yyyy</p></td>
 </tr>
@@ -1767,7 +1775,7 @@
 </tr>
 <tr>
 <td><p>150384066</p></td>
-<td><p><a class="link" href="FNTRANSERROR.html" title="FNTRANSERROR ">FNTRANSERROR</a>, Buffer too small error occurred trying to translate filename FFFF</p></td>
+<td><p><a class="link" href="FNTRANSERROR.html" title="FNTRANSERROR ">FNTRANSERROR</a>, Filename including path exceeded 255 chars while trying to resolve filename FFFF</p></td>
 </tr>
 <tr>
 <td><p>150372842</p></td>
@@ -3038,10 +3046,6 @@
 <td><p><a class="link" href="LOADBGSZ.html" title="LOADBGSZ ">LOADBGSZ</a>, Load error: BEGIN too small. No records loaded.</p></td>
 </tr>
 <tr>
-<td><p>150380850</p></td>
-<td><p><a class="link" href="LOADBGSZ2.html" title="LOADBGSZ2 ">LOADBGSZ2</a>, Load error: BEGIN too large. No records loaded</p></td>
-</tr>
-<tr>
 <td><p>150375123</p></td>
 <td><p><a class="link" href="LOADCTRLY.html" title="LOADCTRLY ">LOADCTRLY</a>, Control Y encountered during load. Load halting.</p></td>
 </tr>
@@ -3052,10 +3056,6 @@
 <tr>
 <td><p>150374538</p></td>
 <td><p><a class="link" href="LOADEDSZ.html" title="LOADEDSZ ">LOADEDSZ</a>, Load error: END too small. No records loaded.</p></td>
-</tr>
-<tr>
-<td><p>150380858</p></td>
-<td><p><a class="link" href="LOADEDSZ2.html" title="LOADEDSZ2 ">LOADEDSZ2</a>, Load error: END too large. No records loaded.</p></td>
 </tr>
 <tr>
 <td><p>150374370</p></td>
@@ -4176,10 +4176,6 @@
 <tr>
 <td><p>150381154</p></td>
 <td><p><a class="link" href="PADCHARINVALID.html" title="PADCHARINVALID ">PADCHARINVALID</a>, PAD deviceparameter cannot be greater than 127.</p></td>
-</tr>
-<tr>
-<td><p>150376186</p></td>
-<td><p><a class="link" href="PARBUFSM.html" title="PARBUFSM ">PARBUFSM</a>, Parse buffer too small</p></td>
 </tr>
 <tr>
 <td><p>150373514</p></td>
@@ -5816,6 +5812,10 @@
 <tr>
 <td><p>150379466</p></td>
 <td><p><a class="link" href="XTRNTRANSERR.html" title="XTRNTRANSERR ">XTRNTRANSERR</a>, Error attempting to generate an environment using an external algorithm.</p></td>
+</tr>
+<tr>
+<td><p>150373354</p></td>
+<td><p><a class="link" href="ZATRANSCOL.html" title="ZATRANSCOL ">ZATRANSCOL</a>, The collation requested has no implementation for the requested operation</p></td>
 </tr>
 <tr>
 <td><p>150383234</p></td>
