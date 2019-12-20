@@ -10,7 +10,7 @@ Visit the site with documents mirror at https://mumps.pl
 	
  
 	
-* [Adminstration Guide PDF](https://github.com/szydell/gtmdoc/blob/master/books/ao/UNIX_manual/ao_UNIX_screen.pdf) Revision V6.3-010 31 October 2019
+* [Adminstration Guide PDF](https://github.com/szydell/gtmdoc/blob/master/books/ao/UNIX_manual/ao_UNIX_screen.pdf) Revision V6.3-011 20 December 2019
 	
 * [Programmers Guide PDF](https://github.com/szydell/gtmdoc/blob/master/books/pg/UNIX_manual/pg_UNIX_screen.pdf) Revision V6.3-010 31 October 2019
 	
