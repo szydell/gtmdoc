@@ -8,7 +8,7 @@
 <link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
 <link rel="prev" href="ch09s03.html" title="Using Terminals">
 <link rel="next" href="ch09s05.html" title="FIFO Characteristics">
-<link rel="copyright" href="ln-idp171908192.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp190465440.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,12 +30,12 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="using_seq_files"></a><span>Using </span>Sequential  Files<a class="indexterm" name="idp177563856"></a>
+<a name="using_seq_files"></a><span>Using </span>Sequential  Files<a class="indexterm" name="idp196143104"></a>
 </h2></div></div></div>
 <p>GT.M provides access to sequential files. These files <span>allow</span> linear access to records. Sequential files are used to create programs, store reports, and to communicate with facilities outside of GT.M.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="setting_seq_file_char"></a>Setting Sequential File Characteristics<a class="indexterm" name="idp177638160"></a>
+<a name="setting_seq_file_char"></a>Setting Sequential File Characteristics<a class="indexterm" name="idp196186864"></a>
 </h3></div></div></div>
 <p>The ANSI standard specifies that when a process CLOSEs and then reOPENs a device, GT.M restores any characteristics not explicitly specified with deviceparameters to the values they had prior to the last CLOSE. However, because it is difficult for a large menu-driven application to ensure the previous OPEN state, GT.M always sets unspecified sequential file characteristics to their default value on OPEN. This approach also reduces potential memory overhead imposed by OPENing and CLOSEing a large number of sequential files during the life of a process.</p>
 <p>GT.M does not restrict multiple OPEN commands. However, if a file is already open, GT.M ignores attempts to modify sequential file OPEN characteristics, except for RECORDSIZE and for deviceparameters that also exist for USE.</p>
@@ -141,7 +141,7 @@
 <p>either</p>
 </td>
 <td colspan="2">
-<p>Write &lt;FF&gt;,&lt;LF&gt;, set $X to 0, increment $Y</p>
+<p>Write &lt;FF&gt;,&lt;LF&gt; or &lt;FF&gt;, set $X and $Y to 0.  See the documentation for the USE and OPEN commands to understand how the [NO]FFLF device parameter and the gtm_nofflf environment variable affects the operation of "WRITE #".  If the device parameter is unused, and the environment variable is unset, the default behavior of "WRITE #" is to write &lt;FF&gt;,&lt;LF&gt;.</p>
 </td>
 <td>
 <p>Write PAD bytes to bring the current record to WIDTH, then a &lt;FF&gt; followed by WIDTH-1 PAD bytes</p>
@@ -226,7 +226,8 @@
 <li class="listitem"><p>WRITE for a Sequential Disk (SD) device works at the current file position, whether attained with APPEND, REWIND or SEEK.</p></li>
 <li class="listitem"><p>GT.M manages any BOM for UTF mode files by ensuring they are at the beginning of the file and produces a BOMMISMATCH error for an attempt to change the byte-ordering on OPEN for an existing file.</p></li>
 <li class="listitem"><p>An attempt to OPEN a non-zero length file WRITEONLY without either NEWVERSION or TRUNCATE in UTF mode produces an OPENDEVFAIL due to the fact that any existing BOM information cannot be verified.</p></li>
-<li class="listitem"><p>Note that with GT.M SD encryption, because of the state information associated with encryption processing, encrypted files require the file to be WRITEn or READ from the beginning rather than from an arbitrary position. </p></li>
+<li class="listitem"><p>GT.M SD encryption, because of the state information associated with encryption processing, requires encrypted files to be WRITEn or READ from the beginning rather than from an arbitrary position. </p></li>
+<li class="listitem"><p>HEREDOCs in shell scripts that drive input to GT.M present to GT.M as SD files, and by default terminate with a success - zero (0) status unless GT.M terminates with a ZHALT that supplies an alternative status.</p></li>
 </ul></div></td></tr>
 </table></div>
 </div>

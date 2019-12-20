@@ -8,13 +8,13 @@
 <link rel="up" href="ch10.html" title="Chapter 10. Utility Routines">
 <link rel="prev" href="ch10s07.html" title="Routine Utilities">
 <link rel="next" href="ch10s09.html" title="System Management Utilities">
-<link rel="copyright" href="ln-idp171908192.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp190465440.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">
-      Internationalization Utilities</th></tr>
+<tr><th colspan="3" align="center">Internationalization Utilities
+  </th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch10s07.html">Prev</a> </td>
@@ -26,19 +26,139 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch10.html">Utility Routines</a></span> &gt; <span class="breadcrumb-node">
-      Internationalization Utilities</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch10.html">Utility Routines</a></span> &gt; <span class="breadcrumb-node">Internationalization Utilities
+  </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="international_utils"></a>
-      Internationalization Utilities<a class="indexterm" name="idp179998256"></a>
+<a name="international_utils"></a>Internationalization Utilities
+  <a class="indexterm" name="idp198655968"></a>
 </h2></div></div></div>
-<p>The internationalization utilities are:</p>
-<p>%GBLDEF: Manipulates the collation sequence assigned to a global. <span>For more information and usage examples, refer to <a class="xref" href="ch12s02.html#using_the_percent_gbldef_util" title="Using the %GBLDEF Utility">&#8220;<span>Using the </span>%GBLDEF<span> Utility</span>&#8221;</a>. </span></p>
-<p>%LCLCOL: Manipulates the collation sequence assigned to local variables in an active process. <span>For more information and usage examples, refer to <a class="xref" href="ch12s01.html#establish_a_local_coll_seq" title="Establishing A Local Collation Sequence">&#8220;Establishing A Local Collation Sequence&#8221;</a>. </span></p>
-<p>%PATCODE: Loads pattern definition files for use within an active database.</p>
 <p>These utilities are an integral part of the GT.M functionality that permits you to customize your applications for use with other languages. <span>For a description of these utilities, refer to <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a>.</span></p>
+<p>The internationalization utilities are:</p>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gbldef_percent_d"></a>%GBLDEF
+<a class="indexterm" name="idp198810160"></a>
+</h3></div></div></div>
+<p>The %GBLDEF utility manipulates the collation sequence assigned to a global other than the default M collation that is based on code value (ASCII for the codes 0 to 127) ordering except for numeric values, which order most negative to most positive before string values. As described in the Internationalization Chapter, alternative collation definition requires supplying routines that transform codes into desired collation order. All subscripted variables for a global must use the same collation sequence. A global collation sequence can only be changed when a global has no subscripted  variables defined.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="util_labels_gbldef_d"></a>
+      Utility Labels<a class="indexterm" name="idp198833344"></a>
+</h4></div></div></div>
+<pre class="programlisting">get^%GBLDEF(gname[,reg])</pre>
+<p>get: returns a value associated with the current global variable collation in the form nct,act,ver, where:
+</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">if nct is FALSE (0), it indicates the current global variable collation follows the M standard of collating numeric values before all non-empty strings, and if TRUE (1), the global uses only code order with no special treatment of numeric values</li>
+<li class="listitem">act is an integer from zero (0) to 255, where zero indicates M standard collation, and other integers indicate alternative collation definitions that tie to environment variables of the form gtm_collate_act</li>
+<li class="listitem">ver is an integer indicating the version of the act collation sequence definition</li>
+</ul></div>
+<p>
+  </p>
+<p>A "0" return from $$get^%GBLDEF(gname[,reg]) indicates that the global has no special characteristics and uses the region default collation, while a "0,0,0" return indicates that the global is explicitly defined to M collation.</p>
+<p>
+  </p>
+<pre class="programlisting">kill^%GBLDEF(gname)</pre>
+<p>kill: returns a TRUE (1) if the current global variable collation now uses M standard collation that is based on code value (ASCII for the codes 0 to 127) ordering except for numeric values, which order most negative to most positive before string values;It returns FALSE (0) if:
+</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">The global has an access method other than BG or MM - typically this means the global is remote and accessed using GT.CM - if so, maintain it on the system that holds it</li>
+<li class="listitem">The global contains data with collation other than M; use this to function after removing all content</li>
+<li class="listitem">The global's subscripts span multiple regions; use the global directory (GBLNAME object in GDE) to set collation characteristics for a global whose subscripts span multiple regions</li>
+<li class="listitem">$TLEVEL is non-zero; always execute this function outside of a TSTART/TCOMMIT fence</li>
+</ul></div>
+<p> 
+  </p>
+<pre class="programlisting">set^%GBLDEF(gname[,nct][,act])</pre>
+<p>set: if possible, esablishes a global variable collation; returns a TRUE (1) if the current successful in establishing or matching global variable collation characteristics;returns FALSE (0) if:
+</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">The global has an access method other than BG or MM - typically this means the global is remote and accessed using GT.CM - if so, maintain it on the system that holds it</li>
+<li class="listitem">The global contains data with collation other than that specified; use this to function after removing all content</li>
+<li class="listitem">The global's subscripts span multiple regions; use the global directory (GBLNAME object in GDE) to set collation characteristics for a global whose subscripts span multiple regions</li>
+<li class="listitem">$TLEVEL is non-zero; always execute this function outside of a TSTART/TCOMMIT fence</li>
+</ul></div>
+<p>
+  </p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="input_var_gbldef_d"></a>
+      Input Variables<a class="indexterm" name="idp198730000"></a>
+</h4></div></div></div>
+<p>Of the following input arguments only the second and third are valid for set, while the first is required for all three functions:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">first argument: name of the global; must be a legal M variable name, including the leading caret (^); if the global name appears as a literal, it must be enclosed in quotation marks (" ")</li>
+<li class="listitem">Optional second argument: truth value where a FALSE (0) indicates numeric values collate before non-numeric values and a TRUE (1) value indicates all keys collate in code order.</li>
+<li class="listitem">Optional third argument: integer value of a collation definition, where zero (0) selects the standard collation, which requires no special definition and other numbers n up to 255 select collations that tie to environment variables of the form gtm_collate_n</li>
+<li class="listitem">Optional second argument for get: region name; the funtion determines the region name if you don't supply it</li>
+</ul></div>
+</div>
+<p><span>For more information and usage examples, refer to <a class="xref" href="ch12s02.html#using_the_percent_gbldef_util" title="Using the %GBLDEF Utility">&#8220;<span>Using the </span>%GBLDEF<span> Utility</span>&#8221;</a> in the Internationalization Chapter of this manual. </span></p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="lclcol_percent_d"></a>%LCLCOL
+<a class="indexterm" name="idp198837280"></a>
+</h3></div></div></div>
+<p>The %LCLCOL utility deals with the adoption and reporting of a local variable collation other than the default M collation that is based on code value (ASCII for the codes 0 to 127) ordering except for numeric values, which order most negative to most positive before string values. As described in the Internationalization Chapter, alternative collation definition requires supplying routines that transform codes into desired collation order. All subscripted local variables for a process must use the same collation sequence. The collation sequence used by local variables can be established as a default or by this utility within the current process. The local collation sequence can only be changed when a process has no subscripted local variables defined.</p>
+<p>To establish a default local collation sequence prior to invoking a GT.M process, provide a numeric value to the environment variable gtm_local_collate to select one of the collation tables.</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="util_labels_lclcol_d"></a>
+      Utility Labels<a class="indexterm" name="idp198833104"></a>
+</h4></div></div></div>
+<pre class="programlisting">get^%LCLCOL[()]</pre>
+<p>get: returns an integer value associated with the current local variable collation.</p>
+<pre class="programlisting">getncol^%LCLCOL[()]</pre>
+<p>getncol: returns a FALSE (0) if the current local variable collation uses the original GT.M collation of an empty string ("NULL) value between numeric values and strings, and a TRUE (1) value indicates the proces is using the M standard collation where the empty string collates before all other values.</p>
+<pre class="programlisting">getnct^%LCLCOL[()]</pre>
+<p>getnct: returns a FALSE (0) if the current local variable collation follows the M standard of collating numeric values before all non-empty strings and a TRUE (1) if it uses only code order with no special treatment of numeric values.</p>
+<pre class="programlisting">set^%LCLCOL([colid][,ncol][,nct])</pre>
+<p>set: if possible, esablishes a local variable collation.</p>
+<p>If the set invocation supplies no argument, there is no environment variable defined corresponding to the first argument, or the specification requests a change when subscripted local variables already exist, the extrinsic function returns a FALSE (0). If the function successly modifies the local variable collation, or the specification matches the current settings, the function returns a TRUE (1).</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="input_var_lclcol_d"></a>
+      Input Variables<a class="indexterm" name="idp198654752"></a>
+</h4></div></div></div>
+<p>The following input arguments are valid only for set:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">Optional first argument: integer value of a collation definition, where zero (0) selects the standard collation, which requires no special definition and other numbers n up to 255 select collations that tie to environment variables of the form gtm_collate_n</li>
+<li class="listitem">Optional second argument: truth value where a FALSE (0) indicates numeric values collate before non-numeric values and a TRUE (1) value indicates all keys collate in code order.</li>
+<li class="listitem">Optional third argument: truth value where a FALSE (0) indicates original GT.M collation of an empty string ("NULL) value between numeric values and strings and a TRUE (1) value indicates M standard collation where the empty string collates before all other values. Empty string use as a subscript in local variables is also subject to the VIEW and $VIEW() "LVNULLSUBS" keyword and its "NO" and "NEVER" variations.</li>
+</ul></div>
+</div>
+<p><span>For more information and usage examples, refer to <a class="xref" href="ch12s01.html#establish_a_local_coll_seq" title="Establishing A Local Collation Sequence">&#8220;Establishing A Local Collation Sequence&#8221;</a>in the Internationalization Chapter of this manual.</span> </p>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="patcode_percent_d"></a>%PATCODE
+<a class="indexterm" name="idp198816496"></a>
+</h3></div></div></div>
+<p>The %PATCODE utility is a wrapper for pattern code related VIEW "PATCODE":code" and $VIEW("PATCODE"), and has the following extrinsic entry points:</p>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="util_labels_patcode_d"></a>Utility Labels<a class="indexterm" name="idp198841344"></a>
+</h4></div></div></div>
+<pre class="programlisting">get^%PATCODE[()]</pre>
+<p>get: returns the name of the process current pattern table; for example the default table is "M"  </p>
+<pre class="programlisting">set^%PATCODE(tablename)</pre>
+<p>set: updates the current process pattern table to the named table</p>
+<p>If the set invocation finds the character set is UTF-8, it returns FALSE (0) if the argument is missing or does not correspond to an existing file, the function returns the empty string; it successfuly changes the pattern table or matches the current table, the function returns TRUE (1).</p>
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="input_var_patcode_d"></a>
+      Input Variables<a class="indexterm" name="idp198865216"></a>
+</h4></div></div></div>
+<p>The following input argument is valid only for set:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">First argument: name of a pattern table; except for "M", this can be either a file specification or the name of an evironment variable that contains the file specification</li></ul></div>
+</div>
+</div>
 </div>
 <div class="navfooter">
 <hr>

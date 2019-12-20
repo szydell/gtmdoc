@@ -8,7 +8,7 @@
 <link rel="up" href="mupipchap.html" title="Chapter 5. General Database Management">
 <link rel="prev" href="mupipchap.html" title="Chapter 5. General Database Management">
 <link rel="next" href="gdm.html" title="Commands and Qualifiers">
-<link rel="copyright" href="ln-idp164337968.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp175137760.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -75,7 +75,7 @@ MUPIP&gt;</pre>
 </table></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_operations"></a>Operations <span>- Standalone and Concurrent Access</span><a class="indexterm" name="idp166333376"></a>
+<a name="mup_operations"></a>Operations <span>- Standalone and Concurrent Access</span><a class="indexterm" name="idp177152016"></a>
 </h3></div></div></div>
 <p>While most MUPIP operations can be performed when GT.M processes are actively accessing database files, some operations require stand-alone access. When using standalone access, no other process can access the database file(s). When using concurrent access, other processes can read or update the database file(s) while MUPIP accesses them. A few operations permit concurrent access to read database files, but not to update them. All MUPIP operations can be performed with stand-alone access - there is never a requirement for another process to be accessing database files when MUPIP operates on them.</p>
 <p>Most MUPIP operations require write access to the database files with which they interact. The exceptions are INTRPT and STOP, which do not require database access, but may require other privileges; EXTRACT, which requires read access; and INTEG, which may require write access, depending on the circumstances it encounters and the qualifiers with which it is invoked. <span>The following table displays some of the MUPIP operations and their database access requirements.</span></p>

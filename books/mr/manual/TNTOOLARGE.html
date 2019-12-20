@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="TMPSTOREMAX.html" title="TMPSTOREMAX ">
 <link rel="next" href="TNWARN.html" title="TNWARN ">
-<link rel="copyright" href="ln-idp153234832.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp78652752.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>TNTOOLARGE</strong></span>,    Database file xxx has reached the transaction number limit (0xaaa). Renew database with MUPIP INTEG TN_RESET</p>
 <p>Run Time Information: This indicates that GT.M detected that the transaction numbers in the named database have reached the maximum number. There are 0xFFFFFFFF ([2**32 - 1] or 4,294,967,295 decimal) possible transaction numbers for V4 or 0xFFFFFFFFFFFFFFFF ([2**64 - 1] or 18,446,744,073,709,551,615 decimal) possible transaction numbers for V5 version databases. Note that the actual maximum TN is less than this theoretical limit. DSE DUMP FILEHEADER shows what the limit is. The actual limit reflects some overhead used, for example, during a TN_RESET operation.</p>
 <p>Action: Use MUPIP INTEG with the qualifier TN_RESET to reset the transaction numbers in the database. If the database is in the V4 format, consider converting it to the V5 format. The database cannot otherwise be used until the condition is removed by either a TN_RESET or, if a V4 database, changing the output mode to V5 with MUPIP SET VERSION.</p>
-<a class="indexterm" name="idp159219440"></a>
+<a class="indexterm" name="idp85228096"></a>
 </div>
 <div class="navfooter">
 <hr>

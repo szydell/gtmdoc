@@ -8,7 +8,7 @@
 <link rel="up" href="Package_GTM_Apps.html" title="Appendix F. Packaging GT.M Applications">
 <link rel="prev" href="Package_GTM_Apps.html" title="Appendix F. Packaging GT.M Applications">
 <link rel="next" href="apfs02.html" title="Invoking GT.M through a C main() program">
-<link rel="copyright" href="ln-idp164337968.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp175137760.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -35,7 +35,7 @@
 <p>At a high level, preventing a captive user from getting to a shell or GT.M prompt involves:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>trapping signals that may cause the login shell to give the user interactive access, for example, by pressing &lt;CTRL-Z&gt; to suspend the mumps application;</p></li>
-<li class="listitem"><p>preventing a mumps process from responding to a &lt;CTRL-C&gt; until the application code sets up a handler; and</p></li>
+<li class="listitem"><p>preventing a GT.M process from responding to a &lt;CTRL-C&gt; until the application code sets up a handler; and</p></li>
 <li class="listitem"><p>preventing an error in the application, or a bug in an error handler, from putting a captive user into direct mode.</p></li>
 </ul></div>
 <p>Note that other users on the system who have appropriate privileges as managed by the operating system can still interfere with captive users. In order to secure a system for captive applications, you must protect it from untrusted other users. Users should only have credentials that permit them the level of access appropriate to their level of trustworthiness, thus: untrusted users should not have credentials to access a system with captive applications.</p>

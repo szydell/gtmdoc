@@ -8,7 +8,7 @@
 <link rel="up" href="ch12.html" title="Chapter 12. Database Encryption">
 <link rel="prev" href="ch12s06.html" title="Installation">
 <link rel="next" href="ch12s08.html" title="Plugin Architecture &amp; Interface">
-<link rel="copyright" href="ln-idp164337968.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp175137760.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,10 +33,10 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="admin_encrypt"></a>
       <a name="Administration_and_Operation_o"></a>Administration and Operation of Encrypted Databases </h2></div></div></div>
-<p>Utility programs written in M (such as %GO) run within mumps processes and behave like any other code written in M. Encryption keys are required if the mumps process accesses encrypted databases. A process running a utility program written in M that does not access encrypted databases (such as %RSEL) does not need encryption keys just to run the utility program. </p>
+<p>Utility programs written in M (such as %GO) run within GT.M processes and behave like any other code written in M. Encryption keys are required if the GT.M process accesses encrypted databases. A process running a utility program written in M that does not access encrypted databases (such as %RSEL) does not need encryption keys just to run the utility program. </p>
 <p>Utility programs not written in M (e.g., MUPIP) that need access to encryption keys do not prompt for the password to the key ring on disk. They require the obfuscated password to be available in the environment. You can use the maskpass program to set the password in the environment or a mumps wrapper process as discussed earlier to set the obfuscated password in the environment. In some cases, if a required key is not supplied, or if an incorrect key is specified, the utility program defers reporting the error at process start up in case subsequent actions don't require access to encrypted data, and instead reports it when first attempting an encryption or decryption operation. </p>
 <p>Since they do not access application data at rest, the GDE and LKE uitlities do not need access to encryption keys to operate with encrypted databases. </p>
-<p>MUPIP and DSE use the same plug-in architecture as mumps processes - gtmcrypt_init() to acquire keys, gtmcrypt_encrypt() to encrypt, etc. </p>
+<p>MUPIP and DSE use the same plug-in architecture as GT.M MUMPS processes - gtmcrypt_init() to acquire keys, gtmcrypt_encrypt() to encrypt, etc. </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="util_programs"></a> Utility Programs </h3></div></div></div>
@@ -83,7 +83,7 @@
 </table></div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="encr_mupip_Cre"></a>MUPIP CREATE<a class="indexterm" name="idp174527120"></a> </h5></div></div></div>
+<a name="encr_mupip_Cre"></a>MUPIP CREATE<a class="indexterm" name="idp185343536"></a> </h5></div></div></div>
 <p>MUPIP CREATE is the only command that uses the database_filename in the master key file to obtain the key from the corresponding key_filename. As discussed elsewhere, all other commands use the key from the key ring in memory that matches the cryptographic hash for the encrypted data. If there are multiple files with the same file name, MUPIP CREATE uses the key specified in the last database_filename entry with that name in the master key file. </p>
 </div>
 <div class="sect4">
@@ -112,7 +112,7 @@ Database file encryption hash F226703EC502E9757848EEC733E1C3CABE5AC...
 $</pre>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="changing_hash"></a>Changing the hash in the database file header<a class="indexterm" name="idp174539584"></a> </h5></div></div></div>
+<a name="changing_hash"></a>Changing the hash in the database file header<a class="indexterm" name="idp185356000"></a> </h5></div></div></div>
 <p>Under normal operating conditions, you should not need to change the cryptographic hash of the symmetric key. However, since there are theoretical attacks against hashes, and because a new cryptographic hash standard (SHA-3) is under development as of this date, DSE provides the ability to change the hash of the password stored in the database file header if and when you change the hash library. </p>
 <p>The DSE CHANGE -FILEHEADER -ENCRYPTION_HASH function hashes the symmetric key in the key file and replaces the hash in the database file header with this new value. The procedure to change the hash is: </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -128,7 +128,7 @@ $</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="changing_encr_keys"></a>Changing the Encryption Keys <a class="indexterm" name="idp174474704"></a>
+<a name="changing_encr_keys"></a>Changing the Encryption Keys <a class="indexterm" name="idp185220128"></a>
 </h3></div></div></div>
 <p>FIS recommends rotating (changing) the encryption key of the database for better security. The frequency of encryption key rotation depends on your security requirements and policies. MUPIP REORG -ENCRYPT provides the option to encrypt a database or rotate the keys of an already encrypted database. If you are using replication, you can encrypt the replicating secondary instance first to prevent your originating primary instance from any additional IO load that MUPIP REORG -ENCRYPT may add. FIS suggests using different encryption keys for different instances, so that if the keys for one instance are compromised, the application can be kept available from another instance whose keys are not compromised, while changing the encryption keys on the instance with compromised keys. For more information, refer to <a class="xref" href="gdm.html#reorg_encrypt" title="-Encrypt">&#8220;-Encrypt&#8221;</a>. </p>
 </div>

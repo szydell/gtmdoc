@@ -8,7 +8,7 @@
 <link rel="up" href="journaling.html" title="Chapter 6. GT.M Journaling">
 <link rel="prev" href="ch06s01.html" title="Introduction">
 <link rel="next" href="mup_journal.html" title="JOURNAL">
-<link rel="copyright" href="ln-idp164337968.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp175137760.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="mup_jnl_Set"></a>SET<a class="indexterm" name="idp168176352"></a><a class="indexterm" name="idp168274624"></a><a class="indexterm" name="idp168317952"></a>
+<a name="mup_jnl_Set"></a>SET<a class="indexterm" name="idp178996224"></a><a class="indexterm" name="idp179139680"></a><a class="indexterm" name="idp179112448"></a>
 </h2></div></div></div>
 <p>MUPIP SET is the primary utility used to establish and activate journaling (using the -JOURNAL) and replication (using the -REPLICATION).</p>
 <p>When GDE creates a Global Directory, it stores either the explicitly specified journaling information, or the GDE default value <span>(refer to <a class="xref" href="mup_jnl_set.html#set_jnl_options" title="SET -JOURNAL Options">&#8220;<span>SET -</span>JOURNAL Options &#8221;</a>)</span> for any unspecified characteristics.</p>
@@ -55,20 +55,20 @@
 <pre class="programlisting">-[NO]JOURNAL[=journal-option-list] -REPLICATION=&lt;replication-option&gt;'</pre>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="jnl_set_obj"></a><span>SET </span>Object Identifying Qualifiers<a class="indexterm" name="idp168324528"></a> </h3></div></div></div>
+<a name="jnl_set_obj"></a><span>SET </span>Object Identifying Qualifiers<a class="indexterm" name="idp179151920"></a> </h3></div></div></div>
 <p>
 The following qualifiers identify the journaling targets:</p>
-<pre class="programlisting">-F[ILE]<a class="indexterm" name="idp168290016"></a> </pre>
+<pre class="programlisting">-F[ILE]<a class="indexterm" name="idp179113792"></a> </pre>
 <p>Specifies that the argument to the SET is a file-specification for a single database file. A Journal file's name can include UTF-8 characters.</p>
 <p>Old journal files stay open for about 10 seconds after a switch to a new journal file.</p>
-<pre class="programlisting">-R[EGION] <a class="indexterm" name="idp168333728"></a></pre>
+<pre class="programlisting">-R[EGION] <a class="indexterm" name="idp179160992"></a></pre>
 <p>Specifies that the argument to the SET is a list of one or more region-names, possibly including wildcards, which, through the mapping of the current Global Directory, identifies a set of database files. SET -REGION modifies multiple files when the parameter contains more than one name.</p>
 <p>The -REGION qualifier is incompatible with the -FILE and -JNLFILE qualifiers.</p>
-<pre class="programlisting">-JN[LFILE] <a class="indexterm" name="idp168336368"></a></pre>
+<pre class="programlisting">-JN[LFILE] <a class="indexterm" name="idp179163632"></a></pre>
 <p>Specifies that the target for SET is a journal file. The format of the JNLFILE qualifier is:</p>
 <p><code class="code">-jnlfile jnl_file [-[no]prevjnlfile[=<em class="replaceable"><code>jnlfilename</code></em>]] [-bypass] [-repl_state={on|off}] [-dbfilename=<em class="replaceable"><code>file_name</code></em>]</code></p>
 <p><em class="replaceable"><code>jnl_file</code></em> specifies the name of the target journal file.</p>
-<p><code class="code"><a class="indexterm" name="idp168341248"></a>-bypass</code></p>
+<p><code class="code"><a class="indexterm" name="idp179168272"></a>-bypass</code></p>
 <p>Override the requirement that database files (or their corresponding journal files) affected by the set command be available standalone.</p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
 <tr>
@@ -77,18 +77,18 @@ The following qualifiers identify the journaling targets:</p>
 </tr>
 <tr><td align="left" valign="top"><p>Changing the previous generation file link when a rollback operation is in progress or when the Source Server is actively replicating, can damage the journal file and hamper recoverability.</p></td></tr>
 </table></div>
-<p><code class="code"><a class="indexterm" name="idp168323728"></a>-dbfilename=<em class="replaceable"><code>file_name</code></em></code></p>
+<p><code class="code"><a class="indexterm" name="idp179151120"></a>-dbfilename=<em class="replaceable"><code>file_name</code></em></code></p>
 <p>Associates a journal file with a different database file; this command may be useful in arranging unusual RECOVER or ROLLBACK scenarios.</p>
-<p><a class="indexterm" name="idp168336752"></a><code class="code">-prevjnlfile=<em class="replaceable"><code>jnlfilename</code></em></code></p>
+<p><a class="indexterm" name="idp179164016"></a><code class="code">-prevjnlfile=<em class="replaceable"><code>jnlfilename</code></em></code></p>
 <p>Changes the name of the previous generation of the journal file in the header of <em class="replaceable"><code>jnl_file</code></em> to <em class="replaceable"><code>jnlfilename</code></em> (for example, when moving the previous generation journal file to a different location). The file name can be a full path-name or a relative path name; however, before the file-name is stored in the header, it is expanded to its full path-name.</p>
 <p><code class="code">-noprevjnlfile</code></p>
 <p>Cuts the generation link of the journal file <em class="replaceable"><code>jnl_file</code></em>.The name of the previous generation journal file is nullified in the header of <em class="replaceable"><code>jnl_file</code></em>. Such an operation is appropriate when it is assured that there will never be a reason for a rollback to the previous generation journal file.</p>
-<p><code class="code"><a class="indexterm" name="idp168354416"></a>-repl_state={on|off}</code></p>
+<p><code class="code"><a class="indexterm" name="idp179181424"></a>-repl_state={on|off}</code></p>
 <p>Change the replication state of a journal file; this command is intended for use only under instructions from your GT.M support provider.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="jnl_set_action"></a><span>SET </span>Action Qualifiers<a class="indexterm" name="idp168339216"></a> </h3></div></div></div>
+<a name="jnl_set_action"></a><span>SET </span>Action Qualifiers<a class="indexterm" name="idp179156688"></a> </h3></div></div></div>
 <p>The -JOURNAL and -REPLICATION qualifiers are the only SET qualifiers relevant for journaling. <span>For information on the other MUPIP SET qualifiers, refer to <a class="xref" href="mupipchap.html" title="Chapter 5. General Database Management">Chapter 5: &#8220;<i>General Database Management</i>&#8221;</a>.</span></p>
 <p><code class="code">-[NO]J[OURNAL][=<em class="replaceable"><code>journal-option-list</code></em>]</code></p>
 <p>Enables or disables journaling for the specified database file or region(s). MUPIP SET commands with this qualifier also establish the characteristics for journal files. FIS believes the defaults and minimum for journal file characteristics are in line with current hardware capabilities and suitable for a production environment.</p>
@@ -108,12 +108,12 @@ The following qualifiers identify the journaling targets:</p>
 <li class="listitem"><p>-NOJOURNAL does not accept an argument assignment. It does not create new journal files. When a database has been SET -NOJOURNAL, it appears to have no journaling file name or other characteristics.</p></li>
 </ul></div>
 <p>For details on the <em class="replaceable"><code>journal-option-list</code></em> refer to <a class="xref" href="mup_jnl_set.html#set_jnl_options" title="SET -JOURNAL Options">&#8220;<span>SET -</span>JOURNAL Options &#8221;</a>.</p>
-<p><a class="indexterm" name="idp168291136"></a> <code class="code">-REPLI[CATION]=<em class="replaceable"><code>replication-option</code></em></code></p>
+<p><a class="indexterm" name="idp179182672"></a> <code class="code">-REPLI[CATION]=<em class="replaceable"><code>replication-option</code></em></code></p>
 <p>-REPLICATION sets journal characteristics and changes the replication state simultaneously. It can also be used with the -JOURNAL qualifier. If journaling is ENABLED and turned ON, SET -REPLICATION=ON creates new set of journal files, cuts the back-link to the prior generation journal files, and turns replication ON. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_jnl_options"></a><span>SET -</span>JOURNAL Options<a class="indexterm" name="idp168372768"></a> </h4></div></div></div>
-<p><a class="indexterm" name="idp168342096"></a> <code class="code">ALI[GNSIZE]=<em class="replaceable"><code>blocks</code></em></code></p>
+<a name="set_jnl_options"></a><span>SET -</span>JOURNAL Options<a class="indexterm" name="idp179199744"></a> </h4></div></div></div>
+<p><a class="indexterm" name="idp179169120"></a> <code class="code">ALI[GNSIZE]=<em class="replaceable"><code>blocks</code></em></code></p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>Specifies the number of 512-byte-blocks in the ALIGNSIZE of the journal file.</p></li>
 <li class="listitem"><p>If the ALIGNSIZE is not a perfect power of 2, GT.M rounds it up to the nearest power of 2.</p></li>
@@ -123,12 +123,12 @@ The following qualifiers identify the journaling targets:</p>
 <li class="listitem"><p>The minimum ALIGNSIZE supported is always be greater than or equal to the maximum journal record size, which in turn depends on the maximum database block size.</p></li>
 <li class="listitem"><p>Note that a large value of ALIGNSIZE implies infrequent boundaries for recovery to use, and hence slows backward recovery down so drastically that, for example, the maximum value of 4194304 causes backward recovery (in case of a crash) to take as much time as forward recovery using the same journal file(s). </p></li>
 </ul></div>
-<p><a class="indexterm" name="idp168345264"></a><code class="code">ALL[OCATION]=<em class="replaceable"><code>blocks</code></em></code></p>
+<p><a class="indexterm" name="idp179180592"></a><code class="code">ALL[OCATION]=<em class="replaceable"><code>blocks</code></em></code></p>
 <p>ALLOCATION is the size at which GT.M should start checking for free space.</p>
 <p>The size of the journal file at creation time is a constant (depending on the GT.M version) but once the journal file reaches the size specified by ALLOCATION, every EXTENSION produces a check of free space available on the device used for the journal file. </p>
 <p>When there is no more free space available on the file system holding a journal file, GT.M shuts off journaling for the corresponding database file.</p>
 <p>The default ALLOCATION value is 2048 blocks. The minimum value allowed is 2048. The maximum value is 8,388,607 (4GB-512 bytes, the maximum journal file size). </p>
-<p><a class="indexterm" name="idp168388224"></a><code class="code">AU[TOSWITCHLIMIT]=<em class="replaceable"><code>blocks</code></em></code></p>
+<p><a class="indexterm" name="idp179214944"></a><code class="code">AU[TOSWITCHLIMIT]=<em class="replaceable"><code>blocks</code></em></code></p>
 <p>Specifies the limit on the size of a journal file. When the journal file size reaches the limit, GT.M automatically performs an implicit online switch to a new journal file.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
@@ -147,24 +147,24 @@ The following qualifiers identify the journaling targets:</p>
 </tr>
 <tr><td align="left" valign="top"><p>AUTOSWITCHLIMIT is always the sum of ALLOCATION and a multiple of EXTENSION value. GT.M automatically attempts to adjust ALLOCATION/AUTOSWITCHLIMIT values whenever AUTOSWITCHLIMIT is not the sum of ALLOCATION and a multiple of the EXTENSION value. When a MUPIP SET -JOURNAL command results in an inappropriate automatic adjustment (upward or downward), GT.M rejects the command and reports a non-zero exit status.</p></td></tr>
 </table></div>
-<p><a class="indexterm" name="idp168394112"></a><code class="code">[NO]BEFORE_IMAGES</code></p>
+<p><a class="indexterm" name="idp179220720"></a><code class="code">[NO]BEFORE_IMAGES</code></p>
 <p>Controls whether the journal should capture BEFORE_IMAGES of GDS blocks that an update is about to modify. A SET -JOURNAL=ON must include either BEFORE_IMAGES or NOBEFORE_IMAGES in the accompanying <em class="replaceable"><code>journal-option-list</code></em>.</p>
 <p>If you specify both NOBEFORE_IMAGES and BEFORE_IMAGES in the same journal-option-list, the last specification overrides any previous one(s).</p>
 <p>As GT.M creates new journal files only with the ON option and every ON specification must include either BEFORE_IMAGES or NOBEFORE_IMAGES. If the user specifies [NO]BEFORE_IMAGES along with the OFF option serve no purpose.</p>
 <p>Although it is possible to perform an online switch of a database from (or to) NOBEFORE-IMAGE journaling to (or from) BEFORE-IMAGE journaling, it is important to understand that backward recovery can never succeed if it encounters even one in a set of journal files for a database without BEFORE-IMAGES. </p>
-<p><a class="indexterm" name="idp168397568"></a><code class="code">BU[FFER_SIZE]=<em class="replaceable"><code>blocks</code></em></code></p>
+<p><a class="indexterm" name="idp179224176"></a><code class="code">BU[FFER_SIZE]=<em class="replaceable"><code>blocks</code></em></code></p>
 <p>Specifies the amount of memory used to buffer journal file output.</p>
 <p>MUPIP requires standalone access to the database to modify BUFFER_SIZE. Therefore, GT.M restricts the use of the BUFFER_SIZE option to change the current journal-buffer-size as part of an online switch of the journal files.</p>
 <p>The default value is 2312 blocks. The minimum BUFFER_SIZE is 2307 blocks. The maximum BUFFER_SIZE is 32K blocks which means that the maximum buffer you can set for your journal file output is 16MB. </p>
-<p><a class="indexterm" name="idp168400672"></a><code class="code">DISABLE</code></p>
+<p><a class="indexterm" name="idp179227168"></a><code class="code">DISABLE</code></p>
 <p>Equivalent to the -NOJOURNAL qualifier of MUPIP SET. It specifies that journaling is not an option for the region or file named. If the user specifies DISABLE, then MUPIP SET ignores all other options in the <em class="replaceable"><code>journal-option-list</code></em>. </p>
-<p><a class="indexterm" name="idp168402864"></a><code class="code">ENABLE</code></p>
+<p><a class="indexterm" name="idp179229360"></a><code class="code">ENABLE</code></p>
 <p>Makes the database file or region available for journaling. By default, ENABLE turns journaling ON unless OFF is specified in the same option list. A command that includes ENABLE must also specify BEFORE_IMAGES or NOBEFORE_IMAGES. </p>
-<p><a class="indexterm" name="idp168377824"></a><code class="code">EP[OCH_INTERVAL]=<em class="replaceable"><code>seconds</code></em></code></p>
+<p><a class="indexterm" name="idp179204800"></a><code class="code">EP[OCH_INTERVAL]=<em class="replaceable"><code>seconds</code></em></code></p>
 <p><em class="replaceable"><code>seconds</code></em> specifies the elapsed time interval between two successive EPOCHs. An EPOCH is a checkpoint, at which all updates to a database file are committed to disk. All journal files contain epoch records.</p>
 <p>A smaller EPOCH_INTERVAL reduces the time to recover after a crash at the cost of increased I/O load on the run-time system (due to more frequent checkpoints). A larger EPOCH_INTERVAL has the opposite effect. Therefore, set EPOCH=interval for a more efficient run-time with larger values of interval and more efficient -ROLLBACK processing with smaller values of interval. </p>
 <p>The default EPOCH_INTERVAL value is 300 seconds (5 minutes). The minimum value is 1 second. The maximum value is 32,767 (one less than 32K) seconds, or approximately 9.1 hours. If you enable journaling and do not specify a value for EPOCH_INTERVAL, GT.M inherits the value of EPOCH_INTERVAL of the last journal file in that region. EPOCH_INTERVAL only makes takes effect when the user turns journaling ON and there is no earlier journal file. </p>
-<p><a class="indexterm" name="idp168408144"></a><code class="code">EX[TENSION]=<em class="replaceable"><code>blocks</code></em></code></p>
+<p><a class="indexterm" name="idp179234512"></a><code class="code">EX[TENSION]=<em class="replaceable"><code>blocks</code></em></code></p>
 <p><code class="code">EXTENSION=<em class="replaceable"><code>blocks</code></em></code> specifies when GT.M should review disk space available for the journal file after the ALLOCATION has been used up. It also specifies how much space should be available at each review.</p>
 <p>When a journal file reaches the size of ALLOCATION and any multiple of EXTENSION, GT.M checks for free space on the file system.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -182,7 +182,7 @@ The following qualifiers identify the journaling targets:</p>
 <p>With EXTENSION=0, GT.M checks for free space on the file system two times - The first check happens when the journal file reaches the ALLOCATION size and second happens when the journal file reaches the maximum size (AUTOSWITCHLIMIT). If EXTENSION=AUTOSWITCHLIMIT, the check for free space happens only once. With EXTENSION=0, GT.M writes the JNLSPACELOW message to the operator log only once when the journal file reaches its maximum size. This bypasses the operational aid that JNLSPACELOW messages may provide to help ensure that adequate disk space is available for the next generations of the journal file.</p>
 <p>As UNIX file systems use lazy allocation schemes, allocation and extension values do not result in physical disk block allocation for the journal file.</p>
 <p>The default EXTENSION value is 2048 blocks. The minimum EXTENSION is zero (0) blocks and the maximum is 1073741823 (one less than 1 giga) blocks.</p>
-<p><code class="code"><a class="indexterm" name="idp168417280"></a>F[ILENAME]=<em class="replaceable"><code>journal_filename</code></em></code></p>
+<p><code class="code"><a class="indexterm" name="idp179243456"></a>F[ILENAME]=<em class="replaceable"><code>journal_filename</code></em></code></p>
 <p><em class="replaceable"><code>journal_filename</code></em> specifies the name of the journal file. FILENAME is incompatible with SET -REGION, if you specify more than one region.</p>
 <p>GT.M treats the filename as having two components - basename and extension. The format of the journal filename is basename.extension, where extension does not contain any periods (.), but if the filename contains more than one period (.), basename contains all but the last period (.). Also note that "extension" is the empty string ("") if the filename does not contain any periods (.).</p>
 <p>The convention of the default value for the FILENAME is as follows:</p>
@@ -222,11 +222,11 @@ SS       2-digit seconds                            such as 30</pre>
 </table></div>
 <p>The previous generation journal filename is a back link from the current generation journal.</p>
 <p>GT.M produces an error and makes no change to the journaling state of the database when the FILENAME is an existing file and is not the active journal file for that database. In this way, GT.M prevents possible cycles in the back-links (such as, a3.mjl has a back-link to a2.mjl which in turn has a back-link to a1.mjl which in turn has a back-link to a3.mjl thereby creating a cycle). Cycles could prevent journal recovery. Also, note that cycles in back-links are possible only due to explicit FILENAME specifications and never due to an existing FILENAME characteristics from the database or by using the default FILENAME.</p>
-<p><a class="indexterm" name="idp168432416"></a><code class="code">[NO]S[YNC_IO]</code></p>
+<p><a class="indexterm" name="idp179258592"></a><code class="code">[NO]S[YNC_IO]</code></p>
 <p>Directs GT.M to open the journal file with certain additional IO flags (the exact set of flags varies by the platform where SYNC_IO is supported, for example on Linux you might utilize the O_DIRECT flag). Under normal operation, data is written to but not read from the journal files. Therefore, depending on your actual workload and your computer system, you may see better throughput by using the SYNC_IO journal option.</p>
 <p>You should empirically determine the effect of this option, because there is no way to predict the performance gain or impact in advance. There is no functional difference in GT.M behavior with the use of SYNC_IO. If you determine that different workloads perform best with a different setting of SYNC_IO, you can change it with MUPIP SET at any time.</p>
 <p>The default is NOSYNC_IO. If you specify both NOSYNC_IO and SYNC_IO in the same journal-option-list, GT.M uses the last occurrence. </p>
-<p><code class="code"><a class="indexterm" name="idp168436128"></a>OFF</code></p>
+<p><code class="code"><a class="indexterm" name="idp179262304"></a>OFF</code></p>
 <p>Stops recording subsequent database updates in the journal file. Specify OFF to establish journaling characteristics without creating a journal file or starting journaling.</p>
 <p>The default for SET -JOURNAL= is ON. </p>
 <p><code class="code">ON</code></p>
@@ -240,7 +240,7 @@ SS       2-digit seconds                            such as 30</pre>
 </table></div>
 <p>If the current generation journal file is damaged/missing, MUPIP SET -JOURNAL=ON implicitly turns off journaling for the specified region, creates a new journal file with no back pointers to the prior generation journal file, and turns journaling back on. Further, if replication is enabled, MUPIP SET -JOURNAL=ON temporarily switches the replication WAS_ON state in the time window when MUPIP SET command turns off journaling and returns normal as long as it operates out of the journal pool buffer and doesn't need to reference the damaged journal file(s). During this operation, MUPIP SET -JOURNAL=ON also sends the PREJNLLINKCUT message for the region to the application and the operator log. While this operation ensures that journaling continues even if the current generation journal file is damaged/missing, creating a new journal file with no back pointers creates a discontinuity with the previous journal files. Therefore, FIS recommends taking a database backup at the earliest convenience because a MUPIP RECOVER/ROLLBACK will not be able to go back past this discontinuity. Also, consider switching the journal files on all regions in the instance (with REGION "*") to ensure the RECOVER/ROLLBACK for other regions remains unaffected.</p>
 <p>The default for SET -JOURNAL= is ON. </p>
-<p><a class="indexterm" name="idp168389376"></a><code class="code">Y[IELD_LIMIT]=<em class="replaceable"><code>yieldcount</code></em></code></p>
+<p><a class="indexterm" name="idp179183376"></a><code class="code">Y[IELD_LIMIT]=<em class="replaceable"><code>yieldcount</code></em></code></p>
 <p>
 <em class="replaceable"><code>yieldcount</code></em> specifies the number of times a process that tries to flush journal buffer contents to disk yields its timeslice and waits for additional journal buffer content to be filled-in by concurrently active processes, before initiating a less than optimal I/O operation.</p>
 <p>A smaller YIELD_LIMIT is appropriate for light load conditions while larger values are appropriate as the load increases.</p>
@@ -257,7 +257,7 @@ SS       2-digit seconds                            such as 30</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="jnl_examples_mup_set"></a>Examples <span>for MUPIP SET</span><a class="indexterm" name="idp168332816"></a>
+<a name="jnl_examples_mup_set"></a>Examples <span>for MUPIP SET</span><a class="indexterm" name="idp179153904"></a>
 </h3></div></div></div>
 <pre class="programlisting">$ mupip set -journal="enable,nobefore" -file mumps.dat</pre>
 <p>This example enables NOBEFORE_IMAGE journaling on mumps.dat. If journaling is already enabled, this command switches the current journal file. </p>
