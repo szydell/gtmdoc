@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s07.html" title="$Get()">
 <link rel="next" href="ch07s09.html" title="$Justify()">
-<link rel="copyright" href="ln-idp190465440.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp184982096.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="increment"></a>$Increment()<a class="indexterm" name="idp194147952"></a>
+<a name="increment"></a>$Increment()<a class="indexterm" name="idp188630336"></a>
 </h2></div></div></div>
 <p>Atomically adds (increments) a global variable by a numeric value. Note that increment is atomic, but the evaluation of the expression is not, unless inside a transaction (TStart/TCommit). The function also works on local variables, but has less benefit for locals as it does not (need to) provide ACID behavior.</p>
 <p>The format of the $INCREMENT function is:</p>
@@ -54,7 +54,7 @@
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_increment"></a>Examples<span> of $INCREMENT()</span><a class="indexterm" name="idp193992784"></a>
+<a name="examples_of_increment"></a>Examples<span> of $INCREMENT()</span><a class="indexterm" name="idp188634624"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;set i=1
@@ -70,7 +70,7 @@ GTM&gt;write i
 5
 GTM&gt;write $increment(i,-2)
 3
-GTM&gt;write I
+GTM&gt;write i
 3
 GTM&gt;</pre>
 <p>This example increments the value of i by 1 and at the end decrements it by 2. Note that the default value for incrementing a variable is 1.</p>

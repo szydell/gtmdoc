@@ -8,13 +8,12 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="TRACINGON.html" title="TRACINGON ">
 <link rel="next" href="TRANSMINUS.html" title="TRANSMINUS ">
-<link rel="copyright" href="ln-idp78652752.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp160400432.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">TRANS2BIG <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
-</th></tr>
+<tr><th colspan="3" align="center">TRANS2BIG </th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="TRACINGON.html">Prev</a> </td>
@@ -26,16 +25,15 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">TRANS2BIG <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span></span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">TRANS2BIG </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="TRANS2BIG"></a>TRANS2BIG <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
-</h2></div></div></div>
+<a name="TRANS2BIG"></a>TRANS2BIG </h2></div></div></div>
 <p><span class="bold"><strong>TRANS2BIG</strong></span>,  Transaction exceeded available buffer space for region rrrr</p>
 <p>Run Time Error: This indicates that a transaction updated more blocks than the global buffers could hold (half - 2) for a particular region rrrr or accessed more than the single transaction limit of 64Ki blocks.</p>
 <p>Action: Look for missing TCOMMIT commands; modify the code to reduce the total content or change content of the transaction. If the transaction is as intended and the issue is the number of updates, increase the GLOBAL_BUFFERS for the region using MUPIP SET, or modify the Global Directory to redistribute the relevant globals to more regions. If this occurs on a replicating instance it may indicate either a difference in configuration between the originating and replicating instances, which probably should be addressed, or a transaction that was borderline on the originating instance, but failed on the replicating instance because of difference in the database layout. In the later case, consider examining the application code to see if it's possible to reduce the size of the transaction, or alternatively increase the global buffers on both the instances.</p>
-<a class="indexterm" name="idp85320416"></a>
+<a class="indexterm" name="idp166379504"></a>
 </div>
 <div class="navfooter">
 <hr>

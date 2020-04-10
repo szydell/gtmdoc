@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZINTerrupt</title>
+<title>$ZINInterrupt</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s35.html" title="$ZHorolog">
-<link rel="next" href="ch08s37.html" title="$ZINInterrupt">
-<link rel="copyright" href="ln-idp190465440.html" title="Legal Notice">
+<link rel="next" href="ch08s37.html" title="$ZINTerrupt">
+<link rel="copyright" href="ln-idp184982096.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZINTerrupt</th></tr>
+<tr><th colspan="3" align="center">$ZINInterrupt</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s35.html">Prev</a> </td>
@@ -26,68 +26,14 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZINTerrupt</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZINInterrupt</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zinterrupt"></a>$ZINTerrupt<a class="indexterm" name="idp195387264"></a>
+<a name="zininterrupt"></a>$ZINInterrupt<a class="indexterm" name="idp189836608"></a>
 </h2></div></div></div>
-<p>$ZINT[ERRUPT] specifies the code to be XECUTE'd when an interrupt (for example, through a MUPIP INTRPT) is processed. While a $ZINTERRUPT action is in process, any additional interrupt signals are discarded. When an interrupt handler is invoked, the current values of $REFERENCE is saved and restored when the interrupt handler returns. The current device ($IO) is neither saved nor restored.</p>
-<p>GT.M permits the SET command to modify the value of $ZINTERRUPT.</p>
-<p>If an interrupt handler changes the current IO device (via USE), it is the responsibility of the interrupt handler to restore the current IO device before returning. There are sufficient legitimate possibilities why an interrupt routine would want to change the current IO device (for example; daily log switching), that this part of the process context is not saved and restored automatically.</p>
-<p>The initial value for $ZINTERRUPT is taken from the <span>UNIX environment variable gtm_zinterrupt</span> if it is specified, otherwise it defaults to the following string:</p>
-<pre class="programlisting">IF $ZJOBEXAM()</pre>
-<p>The IF statement executes the $ZJOBEXAM function but effectively discards the return value. </p>
-<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>If the default value for $ZINTERRUPT is modified, no $ZJOBEXAM() will occur unless the replacement value directly or indirectly invokes that function. In other words, while $ZJOBEXAM() is part of the interrupt handling by default, it is not an implicit part of the interrupt handling.</p></td></tr>
-</table></div>
-<p></p>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="interrupt_handling"></a>Interrupt Handling</h3></div></div></div>
-<p>GT.M process execution is interruptible with the following events:</p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>Typing &lt;CTRL-C&gt; or getting SIGINT on a principal device terminal; GT.M ignores SIGINT (&lt;CTRL-C&gt;) if $PRINCIPAL is not a terminal. </p></li>
-<li class="listitem"><p>READing one of the CTRAP characters</p></li>
-<li class="listitem"><p>Exceeding $ZMAXTPTIME in a transaction</p></li>
-<li class="listitem"><p>Getting a MUPIP INTRPT (SIGUSR1)</p></li>
-<li class="listitem"><p>+$ZTEXit evaluates to a truth value at the outermost TCOMMIT or TROLLBACK</p></li>
-</ul></div>
-<p>When GT.M detects any of these events, it transfers control to a vector that depends on the event. For CTRAP characters and ZMAXTPTIME, GT.M uses the $ETRAP or $ZTRAP vectors described in more detail in the Error Processing chapter. For INTRPT and $ZTEXit, it XECUTEs the interrupt handler code placed in $ZINTERRUPT. If $ZINTERRUPT is an empty string, the process ignores any MUPIP INTRPT directed at it. The default value of $ZINTERRUPT is "IF $ZJOBEXAM()" which redirects a dump of ZSHOW "*" to a file and reports each such occasion to the operator log. For &lt;CTRL-C&gt; with CENABLE, it enters Direct Mode to give the programmer control. Without CENABLE or CTRAP, GT.M ignores &lt;CTRL-C&gt; on a $PRINCIPAL terminal.</p>
-<p>GT.M recognizes most of these events when they occur but transfers control to the interrupt vector at the start of each M line, at each iteration of a FOR LOOP, at certain points  during the execution of commands which may take a "long" time. For example, ZWRITE, HANG, LOCK, MERGE, ZSHOW "V", OPENs of disk files and FIFOs, OPENs of SOCKETs with the CONNECT parameter (unless zero timeout,) WRITE /WAIT for SOCKETs, and READ for terminals, SOCKETs, FIFOs, and PIPEs. If +$ZTEXIT evaluates to a truth value at the outermost TCOMMIT or TROLLBACK, GT.M XECUTEs $ZINTERRUPT after completing the commit or rollback.  Except for &lt;CTRL-C&gt; GT.M recognizes CTRAP characters when READ. CTRAP characters other than &lt;CTRL-C&gt; tend to be limited by terminal configuration.</p>
-<p>The interrupt handler is executed by GT.M when on a statement boundary or on an appropriate boundary in a potentially long running COMMAND (in the same place as GT.M recognizes &lt;CTRL-C&gt;). If a GT.M process is in a long running external call (for example; waiting in a message queue) GT.M does not have sufficient control of the process state to immediately drive the interrupt handler. GT.M recognizes the interrupt request and drives the handler after the external call returns to GT.M and the process reaches an appropriate execution boundary.</p>
-<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>The interrupt handler does not operate "outside" the current M environment but rather within the environment of the process.</p></td></tr>
-</table></div>
-<p>It is possible for the interrupt handler to be executed while the process executing a TP transaction holds the critical section for one or more regions. Use of this feature may create temporary hangs or pauses while the interrupt handler executes. For the default case where the interrupt handler uses $ZJOBEXAM() to create a dump, the pause duration depends on the number of local variables in the process at the time of the dump and on the speed of the disk being written to. The dumps are slower on a network-mounted disk than on a disk directly connected to the local system. Any interrupt driven code should be designed to account for this issue.</p>
-<p>When GT.M uses an interrupt handler, it saves and restores the current values of $REFERENCE. However, GT.M does not implicitly save or restore the current device ($IO). If an interrupt handler changes $IO (via USE), ensure that the interrupt handler restores the current device before returning. To restore the device which was current when the interrupt handler began, specify USE without any deviceparameters. Any attempt to do IO on a device which was actively doing IO when the interrupt was recognized may cause a ZINTERCURSEIO error.</p>
-<p>Code in $ZINTERRUPT must use routine names in any entryref argument to a DO, GOTO, JOB, ZGOTO or any extrinsic as the arrival of the interrupt can activate the code while executing an arbitrary routine in the application.</p>
-<p>During the execution of the interrupt handling code, $ZINITERRUPT evaluates to 1 (TRUE).</p>
-<p>If an error occurs while compiling the $ZINTERRUPT code, the error handler is not invoked, GT.M sends the ERRWZINTR message and the compiler error message to the operator log facility.  If the GT.M process is at a direct mode prompt or is executing a direct mode command (for example, a FOR loop), GT.M sends also sends the ERRWZINTR error message to the user console along with the compilation error. In both cases, the interrupted process resumes execution without performing any action specified by the defective $ZINTERRUPT vector. </p>
-<p>The error handler is invoked if an error occurs while executing the $ZINTERRUPT code. If an error occurs during execution of the interrupt handler's stack frame (before it calls anything), that error is prefixed with the ERRWZINTR error. The error handler then executes normal error processing associated with the module that was interrupted. Any other errors that occur in code called by the interrupt handler are handled by normal error handling. <span>See <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a>.</span></p>
-<p> TP transaction is in progress (0&lt;$TLEVEL), updates to globals are not safe since a TP restart can be signaled at any time prior to the transaction being committed - even after the interrupt handler returns. A TP restart reverses all global updates and unwinds the M stack so it is as if the interrupt never occurred. The interrupt handler is not redriven as part of a transaction restart. Referencing (reading) globals inside an interrupt handler can trigger a TP restart if a transaction is active. When programming interrupt handling, either discard interrupts when 0&lt;$TLEVEL (forcing the interrupting party to try again), or use local variables that are not restored by a TRESTART to defer the interrupt action until after the final TCOMMIT.</p>
-<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
-<th align="left">Important</th>
-</tr>
-<tr><td align="left" valign="top"><p>Because sending an interrupt signal requires the sender to have appropriate permissions, the use of the job interrupt facility itself does not present any inherent security exposures. Nonetheless, because the dump files created by the default action contain the values of every local variable in the context at the time they are made, inappropriate access to the dump files would constitute a security exposure. Make sure the design and implementation of any interrupt logic includes careful  consideration to security issues.</p></td></tr>
-</table></div>
-<p>Example:</p>
-<pre class="programlisting">set $zinterrupt="do ^interrupthandler($io)"
-interrupthandler(currentdev)
-       do ^handleinterrupt ; handle the interrupt
-       use currentdev      ; restore the device which was current when the interrupt was recognized
-       quit</pre>
-</div>
+<p>$ZINI[NTERRUPT] evaluates to 1 (TRUE) when a process is executing code initiated by the interrupt mechanism, and otherwise 0 (FALSE).</p>
+<p>GT.M does not permit the SET or NEW commands to modify $ZININTERRUPT.</p>
 </div>
 <div class="navfooter">
 <hr>
@@ -102,7 +48,7 @@ interrupthandler(currentdev)
 <tr>
 <td width="40%" align="left" valign="top">$ZHorolog </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZINInterrupt</td>
+<td width="40%" align="right" valign="top"> $ZINTerrupt</td>
 </tr>
 </table>
 </div>

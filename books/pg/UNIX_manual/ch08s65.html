@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s64.html" title="$ZVersion">
 <link rel="next" href="ch08s66.html" title="Triggers ISVs">
-<link rel="copyright" href="ln-idp190465440.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp184982096.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,7 +30,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zyerror"></a>$ZYERror<a class="indexterm" name="idp195740176"></a>
+<a name="zyerror"></a>$ZYERror<a class="indexterm" name="idp190208368"></a>
 </h2></div></div></div>
 <p>$ZYER[ROR] is a read/write ISV that contains a string value pointing to an entryref. After GT.M encounters an error, if $ZYERROR is set a non-null value, GT.M invokes the routine at the entryref specified by $ZYERROR with an implicit DO. It is intended that the code invoked by $ZYERROR use the value of $ZSTATUS to select or construct a value to which it SETs $ZERROR. If $ZYERROR is not a valid entryref or if an error occurs while executing the entryref specified by $ZYERROR, GT.M SETs $ZERROR to the error status encountered. GT.M then returns control to the M code specified by $ETRAP/$ZTRAP or device EXCEPTION.</p>
 <p>$ZYERROR is implicitly NEWed on entry to the routine specified by $ZYERROR. However, if GT.M fails to compile, GT.M does not transfer control to the entryref specified by $ZYERROR.</p>

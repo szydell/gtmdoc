@@ -8,7 +8,7 @@
 <link rel="up" href="ch03.html" title="Chapter 3. Development Cycle">
 <link rel="prev" href="ch03s04.html" title="Creating and Editing a Source Program">
 <link rel="next" href="ch03s06.html" title="Executing a Source Program">
-<link rel="copyright" href="ln-idp190465440.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp184982096.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -91,7 +91,7 @@ $ mumps taxes.m</pre>
 <li class="listitem" style="list-style-type: circle"><p>Ensure that all object code is up to date before linking.</p></li>
 </ul></div>
 <p>The mumps command invokes the compiler to translate an M source file into object code.</p>
-<a class="indexterm" name="idp191511280"></a><p>The format for the MUMPS command is:</p>
+<a class="indexterm" name="idp185969648"></a><p>The format for the MUMPS command is:</p>
 <pre class="programlisting">MUMPS [-qualifier[...]] pathname</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>Source programs must have an extension of .m.</p></li>
@@ -119,7 +119,7 @@ $ mumps taxes.m</pre>
 <p>The mumps command allows qualifiers that customize the type and form of the compiler output to meet specific programming needs. MUMPS command qualifiers may also appear as a modifier to the argument to the GT.M ZLINK and ZCOMPILE commands. The following section describes the mumps command qualifiers. Make sure the arguments are specified ahead of file name and after the command itself.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="direct_mode_unix"></a>-di[rect_mode]<a class="indexterm" name="idp191565824"></a>
+<a name="direct_mode_unix"></a>-di[rect_mode]<a class="indexterm" name="idp186045360"></a>
 </h4></div></div></div>
 <p>Invokes a small GT.M image that immediately initiates Direct Mode.</p>
 <p>-direct_mode does not invoke the M compiler.</p>
@@ -144,7 +144,7 @@ $ mumps taxes.m</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="no_ignore_unix"></a>-[no]i[gnore]<a class="indexterm" name="idp191570480"></a>
+<a name="no_ignore_unix"></a>-[no]i[gnore]<a class="indexterm" name="idp186011536"></a>
 </h4></div></div></div>
 <p>Instructs the compiler to produce an object file even when the compiler detects errors in the source code (-ignore), or not to produce an object file when the compiler encounters an error (-noignore).</p>
 <p>When used with the -noobject qualifier, the -ignore qualifier has no effect.</p>
@@ -154,7 +154,7 @@ $ mumps taxes.m</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="length_lines_unix"></a>-le[ngth]=lines<a class="indexterm" name="idp191455360"></a>
+<a name="length_lines_unix"></a>-le[ngth]=lines<a class="indexterm" name="idp186047760"></a>
 </h4></div></div></div>
 <p>Controls the page length of the listing file.</p>
 <p>The M compiler ignores the -length qualifier unless it appears with the -list qualifier.</p>
@@ -162,7 +162,7 @@ $ mumps taxes.m</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="no_list_filename_unix"></a>-[no]li[st][=filename]<a class="indexterm" name="idp191579872"></a>
+<a name="no_list_filename_unix"></a>-[no]li[st][=filename]<a class="indexterm" name="idp186060720"></a>
 </h4></div></div></div>
 <p>Instructs the compiler to produce a source program listing file, and optionally specifies a name for the listing file. The listing file contains numbered source program text lines. When the routine has errors, the listing file also includes an error count, information about the location, and the cause of the errors.</p>
 <p>When you do not specify a file name for the listing file, the compiler produces a listing file with the same name as the source file with a .lis file extension.</p>
@@ -183,7 +183,7 @@ $ mumps taxes.m</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="no_object_filename_unix"></a>-[no]o[bject][=filename]<a class="indexterm" name="idp191562720"></a>
+<a name="no_object_filename_unix"></a>-[no]o[bject][=filename]<a class="indexterm" name="idp186066096"></a>
 </h4></div></div></div>
 <p>Instructs the compiler to produce an output object file and optionally specifies a name for the object file using the optional filename argument.</p>
 <p>When you do not specify a file name, the compiler produces an object file with the same file name as the source file and an .o file extension.</p>
@@ -199,7 +199,7 @@ $ mumps taxes.m</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="nowarning"></a>-[no]w[arning]<a class="indexterm" name="idp191586576"></a>
+<a name="nowarning"></a>-[no]w[arning]<a class="indexterm" name="idp186036400"></a>
 </h4></div></div></div>
 <p>Instructs the compiler to suppress error output; the default is -warning.</p>
 <p>When used with the -list qualifier, the -nowarning qualifier does not affect errors in the listing.</p>
@@ -213,14 +213,14 @@ $ mumps taxes.m</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="run_unix"></a>-r[un]<a class="indexterm" name="idp191557136"></a>
+<a name="run_unix"></a>-r[un]<a class="indexterm" name="idp186070048"></a>
 </h4></div></div></div>
 <p>Invokes GT.M in Autostart Mode.</p>
 <p>The next argument is taken to be an M entryref. That routine is immediately executed, bypassing Direct Mode. Depending on the shell, you may need to put the entryref in quotation marks (""). This qualifier does not invoke the M compiler and is not compatible with any other qualifier.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="space_lines_unix"></a>-s[pace]=lines<a class="indexterm" name="idp191597248"></a>
+<a name="space_lines_unix"></a>-s[pace]=lines<a class="indexterm" name="idp186081616"></a>
 </h4></div></div></div>
 <p>Controls the spacing of the output in the listing file. -space=n specifies n-1 blank lines separating every source line in the listing file. If n&lt;1, the M command uses single spacing in the listing.</p>
 <p>If this qualifier appears without the -list qualifier, the M compiler ignores the -space qualifier.</p>

@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s41.html" title="ZRUPDATE">
 <link rel="next" href="ch06s43.html" title="ZSTep">
-<link rel="copyright" href="ln-idp190465440.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp184982096.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zshow_cmmd"></a>ZSHow<a class="indexterm" name="idp193521264"></a>
+<a name="zshow_cmmd"></a>ZSHow<a class="indexterm" name="idp188208736"></a>
 </h2></div></div></div>
 <p>The ZSHOW command displays information about the current GT.M environment.</p>
 <p>The format of the ZSHOW command is:</p>
@@ -48,7 +48,7 @@
 <p></p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zshow_info_codes"></a>ZSHOW Information Codes<a class="indexterm" name="idp193730176"></a>
+<a name="zshow_info_codes"></a>ZSHOW Information Codes<a class="indexterm" name="idp188135728"></a>
 </h3></div></div></div>
 <p>A ZSHOW argument is an expression containing codes selecting one or more types of information.</p>
 <p>A: A stands for Autorelink and provides output in the same format as MUPIP RCTLDUMP, but restricted to the routines contained in the relinkctl areas in use by the process issuing the command. ZSHOW "*" does not include ZSHOW "A" because of an expectation that the typical volume of the information does not provide a good return for its value. If you wish your error handling or INTRPT routines to dump this information, ask for it explicitly, possibly by doing a ZSHOW "A" into a local variable before doing a ZSHOW "*".</p>
@@ -167,7 +167,7 @@ GT.M maintains the counters of the mnemonics marked with a * on AIX. On Linux, G
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zshow"></a>Examples<span> of ZSHow</span><a class="indexterm" name="idp193708416"></a>
+<a name="examples_of_zshow"></a>Examples<span> of ZSHow</span><a class="indexterm" name="idp188274752"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;ZSHOW "db"</pre>
@@ -338,7 +338,7 @@ $ZYERROR=""</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zsh_destination_vars"></a>ZSHOW Destination Variables<a class="indexterm" name="idp193719008"></a>
+<a name="zsh_destination_vars"></a>ZSHOW Destination Variables<a class="indexterm" name="idp188193632"></a>
 </h3></div></div></div>
 <p>ZSHOW may specify an unsubscripted or subscripted global or local variable name (glvn) into which ZSHOW places its output. If the argument does not include a global or local variable name, ZSHOW directs its output to the current device. </p>
 <p>When ZSHOW directs its output to a variable, it adds two levels of descendants to that variable. The first level subscript contains a one-character string from the set of upper-case ZSHOW action codes, identifying the type of information. ZSHOW implicitly KILLs all descendants of the first level nodes. ZSHOW stores information elements at the second level using ascending integers, starting at 1. </p>
@@ -370,7 +370,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="use_of_zshow"></a>Use of ZSHOW<a class="indexterm" name="idp193831952"></a>
+<a name="use_of_zshow"></a>Use of ZSHOW<a class="indexterm" name="idp188246976"></a>
 </h3></div></div></div>
 <p>Use ZSHOW as</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
