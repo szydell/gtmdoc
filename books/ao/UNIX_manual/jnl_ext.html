@@ -8,7 +8,7 @@
 <link rel="up" href="journaling.html" title="Chapter 6. GT.M Journaling">
 <link rel="prev" href="mup_journal.html" title="JOURNAL">
 <link rel="next" href="ch07.html" title="Chapter 7. Database Replication">
-<link rel="copyright" href="ln-idp67334320.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp57543056.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,9 +30,10 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="journal_extract"></a><span>Journal </span>Extract Formats<a class="indexterm" name="idp70337280"></a>
+<a name="journal_extract"></a><span>Journal </span>Extract Formats<a class="indexterm" name="idp61235072"></a>
 </h2></div></div></div>
-<p>Journal EXTRACT files always start with a label. For the current release of GT.M, the label is GDSJEX07 for a simple journal extract file. This label is necessary to identify the format of the file.</p>
+<p>Journal EXTRACT files always start with a label to identify the format of the file.  Simple and detail EXTRACT files have different labels, and the labels are specific to a GT.M release.
+  </p>
 <p>If the environment variable gtm_chset is set of UTF-8, then file format label is followed by another label called "UTF-8" to indicate UTF-8 mode. </p>
 <p>After this label, the journal record extracts follow. These journal record extracts include fields or pieces delimited by a back slash (\). </p>
 <p>The first piece of an -EXTRACT output record contains a two-digit decimal transaction record type (for example, 01 for a process initialization record). The second piece contains the full date and time of the operation, represented in the $HOROLOG format. The third piece contains a GT.M assigned number (database transaction number) which uniquely identifies the transaction within the time covered by the journal file. The fourth piece contains the process ID (PID) of the process that performed the operation, represented as a decimal number. The remainder of the record depends on the record type. </p>
@@ -68,6 +69,11 @@ LGTRIG  13\time\tnum\pid\clntpid\token_seq\strm_num\strm_seq\updnum\trigdefiniti
 <p>11 records indicates a value for/from $ZTWORMHOLE (when replication is turned on).</p>
 <p>12 record indicates a ZTRIGGER command.</p>
 <p>13 record indicates a trigger definition as a logical action from an originating/primary instance to a replicating/secondary instance</p>
+<p>The listing below shows an example of a simple journal extract:</p>
+<pre class="programlisting">GDSJEX07
+01\65457,9380\1099511627777\3664\zappa\scheese\\0\\\
+02\65457,9380\1099511627777\3664\0
+03\65457,9380\1099511627777\3664\0\1</pre>
 <p>Journal extracts contain NULL records only in a multisite replication configuration where triggers or external M-filters are active. Here are two examples when NULL records are sent to the journal files:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>An external filter on an instance transforms a SET record to a NULL record that has a different schema.</p></li>
@@ -359,6 +365,12 @@ ALIGN    time\tnum\chksum\pid\clntpid</pre>
 </tbody>
 </table>
 </div>
+<p>After the header(s), each line of a detail journal extract file begins with two hexadecimal numbers.  The first of these is the offset in the journal file of the record being printed, and the second (enclosed in square brackets) is the length of that record.  The listing below shows an example of a detail extract:</p>
+<pre class="programlisting">GDSJDX08
+0x00010000 [0x00d0] :: PINI   \65457,9380\1099511627777\2480956899\3664\zappa\scheese\\0\\\
+0x000100d0 [0x00b8] :: EPOCH  \65457,9380\1099511627777\973009291\3664\0\1\0\96\101\1
+0x00010188 [0x0020] :: PFIN   \65457,9380\1099511627777\3421761717\3664\0 
+0x000101a8 [0x0028] :: EOF    \65457,9380\1099511627777\884316091\3664\0\1</pre>
 </div>
 <div class="navfooter">
 <hr>

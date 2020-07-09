@@ -8,7 +8,7 @@
 <link rel="up" href="ch13.html" title="Chapter 13. Error Processing">
 <link rel="prev" href="ch13s05.html" title="Program Handling of Errors">
 <link rel="next" href="ch14.html" title="Chapter 14. Triggers">
-<link rel="copyright" href="ln-idp184982096.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp169799616.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,12 +29,12 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="err_actions"></a>Error Actions<a class="indexterm" name="idp194582912"></a>
+<a name="err_actions"></a>Error Actions<a class="indexterm" name="idp179508992"></a>
 </h2></div></div></div>
 <p>In the following examples (and the previous one as well), $ETRAP and $ZTRAP in most cases have similar behavior. The most prominent difference is that, when $ETRAP is active, $ECODE determines whether or not a second error in an M stack level triggers an immediate implicit QUIT from that level.<span> For additional information, see the sections on $ECODE and $ETRAP in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a></span>. Because of the effect of $ECODE on the processing flow when $ETRAP is active, there is a benefit to including appropriate $ECODE maintenance in $ZTRAP related code, so that things stay well behaved when the two mechanisms are intemixed. Other differences are discussed in some of the examples.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="break_on_an_err"></a>Break<span> on an Error</span><a class="indexterm" name="idp194639168"></a>
+<a name="break_on_an_err"></a>Break<span> on an Error</span><a class="indexterm" name="idp179488528"></a>
 </h3></div></div></div>
 <p>When $ZTRAP is set to a BREAK command and an error occurs, GT.M puts the process into Direct Mode. The default for $ZTRAP is a BREAK command. When developing a program, $ZTRAP="BREAK" allows you to investigate the cause of the error from Direct Mode. <span>For information on GT.M debugging tools, see <a class="xref" href="ch04.html" title="Chapter 4. Operating and Debugging in Direct Mode">Chapter 4: &#8220;<i><span>Operating and Debugging in Direct Mode</span></i>&#8221;</a>.</span></p>
 <p>Example:</p>
@@ -63,7 +63,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="uncondition_trnsfr_on_an_err"></a>Unconditional Transfer<span> on an Error</span><a class="indexterm" name="idp194634720"></a>
+<a name="uncondition_trnsfr_on_an_err"></a>Unconditional Transfer<span> on an Error</span><a class="indexterm" name="idp179477968"></a>
 </h3></div></div></div>
 <p>The GOTO command instructs GT.M to transfer execution permanently to another line within the routine or to another routine. When stopping to investigate an error is undesirable, use the GOTO command in $ETRAP or $ZTRAP to continue execution at some other point.</p>
 <p>Example:</p>
@@ -217,7 +217,7 @@ GTM&gt;        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="setting_ztrap_for_each_lvl"></a>Setting $ZTRAP<span> for Each Level</span><a class="indexterm" name="idp194494816"></a>
+<a name="setting_ztrap_for_each_lvl"></a>Setting $ZTRAP<span> for Each Level</span><a class="indexterm" name="idp179378192"></a>
 </h3></div></div></div>
 <p>The command NEW $ETRAP or NEW $ZTRAP stacks the current value of $ETRAP or $ZTRAP respectively and, in the case of $ZTRAP, sets the value equal to the empty string. Normally, a SET $ETRAP or $ZTRAP immediately follows a NEW $ETRAP or $ZTRAP. When GT.M encounters a QUIT command that leaves a level where $ETRAP or $ZTRAP had been NEWed, GT.M deletes any value set to the ISV after the NEW command and restores the value that the ISV held previous to the NEW. NEW $ETRAP or $ZTRAP enables the construction of error handlers corresponding to the nesting of routines. A SET $ETRAP or $ZTRAP implicitly NEWs the other variable if it does not already have the value of the empty string. This enables the interleaving of $ETRAP and $ZTRAP at different levels, although (as mentioned above) such interleaving requires that $ZTRAP handlers deal appropriately with $ECODE.</p>
 <p>Example:</p>
@@ -271,7 +271,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="nested_err_handling"></a>Nested Error Handling<a class="indexterm" name="idp194654432"></a>
+<a name="nested_err_handling"></a>Nested Error Handling<a class="indexterm" name="idp179534480"></a>
 </h3></div></div></div>
 <p>$ETRAP or $ZTRAP set to a DO command instructs GT.M to transfer execution temporarily to another line within this or another routine when it encounters an error. A QUIT command within the scope of the DO transfers control back to the code specified by the $ETRAP or $ZTRAP. When the code in the ISV terminates due to an explicit or implicit QUIT, the behavior of $ETRAP and $ZTRAP is different. When $ETRAP is in control, the level at which the error occurred is removed, and control returns to the invoking level. When $ZTRAP contains code, execution picks up at the beginning of the line with the error. A DO command within $ZTRAP is normally used for I/O errors that an operator may resolve, because a DO command permits re-execution of the line containing the error.</p>
 <p>Example:</p>
@@ -333,7 +333,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="terminate_exec_on_an_err"></a>Terminating Execution<span> on an Error</span><a class="indexterm" name="idp194664304"></a>
+<a name="terminate_exec_on_an_err"></a>Terminating Execution<span> on an Error</span><a class="indexterm" name="idp179519888"></a>
 </h3></div></div></div>
 <p>If both $ETRAP and $ZTRAP are set to the empty string upon encountering an error, the current level is discarded and the error is reissued at the invoking level. When already at the lowest M stack level, GT.M terminates routine execution and returns control to the <span>shell</span> level. If $ZTRAP is used exclusively, $ZTRAP="" suppresses the unstacking of NEWed values of $ZTRAP associated with lower levels. $ETRAP values are always unstacked, however if the lowest level $ETRAP is the empty string (which it is by default when GT.M starts), GT.M performs the same termination as it does with $ZTRAP. These terminations with both ISVs empty provides a mechanism for returning to <span>the shell</span> with a status message when GT.M encounters an error.</p>
 <p>Example:</p>
@@ -419,7 +419,7 @@ $</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="setting_ztrap_and_other_actions"></a><span>Setting $ZTRAP to </span>Other Actions <a class="indexterm" name="idp194701664"></a>
+<a name="setting_ztrap_and_other_actions"></a><span>Setting $ZTRAP to </span>Other Actions <a class="indexterm" name="idp179581664"></a>
 </h3></div></div></div>
 <p>The QUIT, HALT and ZHALT commands also serve as useful $ETRAP or $ZTRAP actions. </p>
 <p>The QUIT command terminates execution at that invocation level. </p>
@@ -467,7 +467,7 @@ $ </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="summ_of_ztrap_etrap"></a>Summary<span> of $ETRAP &amp; $ZTRAP Error-Handling Options</span><a class="indexterm" name="idp194657184"></a>
+<a name="summ_of_ztrap_etrap"></a>Summary<span> of $ETRAP &amp; $ZTRAP Error-Handling Options</span><a class="indexterm" name="idp179543200"></a>
 </h3></div></div></div>
 <div class="informaltable"><table border="1">
 <colgroup>
@@ -570,7 +570,7 @@ $ </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="errors_in_ztrap"></a>Errors<span> in</span> $ZTRAP<a class="indexterm" name="idp194656192"></a>
+<a name="errors_in_ztrap"></a>Errors<span> in</span> $ZTRAP<a class="indexterm" name="idp179561712"></a>
 </h3></div></div></div>
 <p>If $ZTRAP contains invalid source code, GT.M displays an error message and puts the process into Direct Mode.</p>
 <p>If the action specified by $ZTRAP results in another run-time error before changing the value of $ZTRAP, it may result in a loop that iteratively invokes $ZTRAP until a stack overflow terminates the GT.M image. Keep $ZTRAP simple and take special care to debug exception handling. </p>
@@ -584,7 +584,7 @@ $ </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="record_info_abt_err"></a>Recording Information about Errors<a class="indexterm" name="idp194761488"></a>
+<a name="record_info_abt_err"></a>Recording Information about Errors<a class="indexterm" name="idp179641232"></a>
 </h3></div></div></div>
 <p>GT.M provides a number of standard features and extensions to examine and record information about an error condition.</p>
 <p>The extensions are: </p>
@@ -622,7 +622,7 @@ $ </pre>
 <p>To simplify record keeping, an application may set $ZTRAP to an error-handling routine that records information about an error. The next section provides an example of a routine <span>ERR.m</span> that does this. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="prgrm_to_rec_info"></a>Program to Record Information on an Error using $ZTRAP<a class="indexterm" name="idp194703888"></a>
+<a name="prgrm_to_rec_info"></a>Program to Record Information on an Error using $ZTRAP<a class="indexterm" name="idp179583424"></a>
 </h4></div></div></div>
 <pre class="programlisting">GTM&gt;ZPRINT ^ERR
 ERR0;;RECORD CONTENT OF AN ERROR

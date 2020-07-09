@@ -8,7 +8,7 @@
 <link rel="up" href="mupipchap.html" title="Chapter 5. General Database Management">
 <link rel="prev" href="gdm.html" title="Commands and Qualifiers">
 <link rel="next" href="journaling.html" title="Chapter 6. GT.M Journaling">
-<link rel="copyright" href="ln-idp67334320.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp57543056.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,11 +30,12 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="mupip_cmmd_summ"></a><span>MUPIP Command </span>Summary<a class="indexterm" name="idp69652720"></a>
+<a name="mupip_cmmd_summ"></a><span>MUPIP Command </span>Summary<a class="indexterm" name="idp60374432"></a>
 </h2></div></div></div>
 <div class="informaltable">
 <a name="tblmupcmdsumm"></a><table border="1">
 <colgroup>
+<col>
 <col>
 <col>
 <col>
@@ -53,24 +54,23 @@
 <th>
 <p>GT.M version*</p>
 </th>
+<th>
+<p>Standalone Access#</p>
+</th>
 </tr></thead>
 <tbody>
 <tr>
-<td>
-<p>B[ACKUP]</p>
-</td>
-<td>
-<p>region-name file-name</p>
-</td>
-<td>
-<p>-BK[UPDBJNL]=DISABLE | OFF</p>
-</td>
+<td><p>B[ACKUP]</p></td>
+<td><p>region-name file-name</p></td>
+<td><p>-BK[UPDBJNL]=DISABLE | OFF</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
-<td><p>-B[YTESTREAM] -NET[TIMEOUT]=seconds</p></td>
+<td><p>-BY[TESTREAM] -NET[TIMEOUT]=seconds</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -78,11 +78,13 @@
 <td> </td>
 <td><p>-C[OMPREHENSIVE]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-DA[TABASE] -REPLA[CE]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -90,11 +92,13 @@
 <td> </td>
 <td><p>-DBG</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-I[NCREMENTAL]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -102,11 +106,13 @@
 <td> </td>
 <td><p>-[NO]J[OURNAL][=journal-options-list]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-NETTIMEOUT</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -114,11 +120,13 @@
 <td> </td>
 <td><p>-[NO]NEWJNLFILES[=[NO]PREVLINK],[NO]S[YNC_IO]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-O[NLINE]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -126,11 +134,13 @@
 <td> </td>
 <td><p>-RECORD</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-REPLI[NSTANCE]=OFF | ON</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -138,11 +148,13 @@
 <td> </td>
 <td><p>-S[INCE]={DATABASE|BYTESTREAM|RECORD}</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-T[RANSACTION=hexa;transaction_number]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -157,18 +169,16 @@
 </td>
 <td>
 </td>
+<td>
+  <p>Y</p>
+</td>
 </tr>
 <tr>
-<td>
-<p>DO[WNGRADE]</p>
-</td>
-<td>
-<p>file-name</p>
-</td>
-<td>
-<p>-V[ERION]={V4|V5}</p>
-</td>
+<td><p>DO[WNGRADE]</p></td>
+<td><p>file-name</p></td>
+<td><p>-V[ERION]={V4|V5}</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td>
@@ -181,6 +191,7 @@
 <p>-</p>
 </td>
 <td><p>V6.3-001</p></td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -193,35 +204,27 @@
 <p>-OUTDB=&lt;outdb-file&gt;</p>
   </td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-OV[ERRIDE]</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
-<td>
-<p>EXI[T]</p>
-</td>
-<td>
-<p>-</p>
-</td>
-<td>
-<p>-</p>
-</td>
+<td><p>EXI[T]</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
 <td> </td>
+<td><p>N/A</p></td>
 </tr>
 <tr>
-<td>
-<p>EXTE[ND]</p>
-</td>
-<td>
-<p>region-name</p>
-</td>
-<td>
-<p>-B[LOCKS]=blocks</p>
-</td>
+<td><p>EXTE[ND]</p></td>
+<td><p>region-name</p></td>
+<td><p>-B[LOCKS]=blocks</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -235,11 +238,13 @@
 <p>-FO[RMAT]=GO|B[INARY]|Z[WR]</p>
   </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-FR[EEZE]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -247,11 +252,13 @@
 <td> </td>
 <td><p>-NU[LL_IV]</p></td>
 <td><p>V6.3-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-LA[BEL]=text</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -259,11 +266,13 @@
 <td> </td>
 <td><p>-[NO]L[OG]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-S[ELECT]=global-name-list</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -271,11 +280,13 @@
 <td> </td>
 <td><p>-O[CHSET]=character-set</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-R[EGION=region-list</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -289,17 +300,21 @@
   <p>-DBG</p>
 </td>
 <td> </td>
+<td>
+<p></p> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-OF[F] [-OV[ERRIDE]]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-ON [-[NO]ONL[INE] [-[NO]A[UTORELEASE]] [-R[ECORD]]]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -313,17 +328,20 @@
 <p>-D[B]</p>
   </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-J[NLPOOL]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-R[ECVPOOL]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -338,6 +356,7 @@
 </td>
 <td>
 </td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -350,11 +369,13 @@
   <p>-A[DJACENCY]=integer]</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-BL[OCK]=hexa;block-number]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -362,11 +383,13 @@
 <td> </td>
 <td><p>-BR[IEF]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-FA[ST]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -374,11 +397,13 @@
 <td> </td>
 <td><p>-FI[LE]</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-FU[LL]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -386,11 +411,13 @@
 <td> </td>
 <td><p>-NO]K[EYRANGES</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO][MAP]=integer</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -398,11 +425,13 @@
 <td> </td>
 <td><p>-[NO]MAXK[EYSIZE]=integer</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-R[EGION]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -410,11 +439,13 @@
 <td> </td>
 <td><p>-[NO]ST[ATS]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-SU[BSCRIPT]=subscript</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -422,12 +453,27 @@
 <td> </td>
 <td><p>-TN[_RESET]</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]TR[ANSACTION][=integer]</p></td>
 <td> </td>
+<td> </td>
+</tr>
+<tr>
+<td>
+<p>IN[TRPT]</p>
+</td>
+<td>
+<p>process id</p>
+</td>
+<td>
+  <p></p>
+</td>
+<td> </td>
+<td><p>N/A</p></td>
 </tr>
 <tr>
 <td>
@@ -440,23 +486,27 @@
   <p>-EX[TRACT][=file-specification|</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-stdout]</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-REG[ION]</p></td>
 <td><p>V6.2-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-REC[OVER] | -RO[LLBACK]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -464,11 +514,13 @@
 <td> </td>
 <td><p>-SH[OW][=show-option-list]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]V[ERIFY] </p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -476,12 +528,14 @@
 <td> </td>
 <td><p>-BA[CKWARD] | -FO[RWARD]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-CO[RRUPTDB]</p></td>
 <td><p>V6.3-010</p></td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -494,11 +548,13 @@
   <p>-BE[GIN]=integer</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-BLOCK_DENSITY</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -506,11 +562,13 @@
 <td> </td>
 <td><p>-E[ND]=integer</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-FI[LLFACTOR]=integer</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -518,17 +576,20 @@
 <td> </td>
 <td><p>-FO[RMAT]=GO|B[INARY]|Z[WR]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-S[TDIN]</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-O[NERROR]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -541,17 +602,20 @@
   <p>-D[OWNGRADE]</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-ENCR[YPT]=key</p></td>
 <td><p>V6.3-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-E[XCLUDE]=global-name-list</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -559,11 +623,13 @@
 <td> </td>
 <td><p>-FI[LL_FACTOR]=integer</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-I[NDEX_FILL_FACTOR]=integer</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -571,29 +637,34 @@
 <td> </td>
 <td><p>-K[EEP]={pct%|blocks}</p></td>
 <td><p>V6.3-009</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-NOCO[ALESCE]</p></td>
 <td><p>V6.3-009</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-NOSP[LIT]</p></td>
 <td><p>V6.3-009</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-NOSW[AP]</p></td>
 <td><p>V6.3-009</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-R[ESUME]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -601,23 +672,27 @@
 <td> </td>
 <td><p>-S[ELECT]=global-name-list</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-T[RUNCATE][=percentage]</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-UP[GRADE]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-REG[ION] region-list</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -632,17 +707,20 @@
 <p>-E[DITINSTANCE] </p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-N[AME]</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-I[NSTANCE_CREATE]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -650,17 +728,20 @@
 <td> </td>
 <td><p>-R[ECEIVER</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-S[OURCE]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-UPDA[TEPROC]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -674,6 +755,7 @@
 <p>-[NO]E[XTEND]</p>
 </td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td>
@@ -686,11 +768,13 @@
   <p>-F[ILE]</p>
 </td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-R[EGION]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -698,11 +782,13 @@
 <td> </td>
 <td><p>-RELINKCTL [dir]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-OVERRIDE</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -716,24 +802,28 @@
  <p>SE[T] {-FI[LE] file-name|-JN[LFILE] journal-file-name|-REG[ION] region-list|-REP[LICATION]={ON|OFF}}  </p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-AC[CESS_METHOD]={BG|MM}</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]AS[YNCIO]</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]DE[FER_TIME][=seconds]</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
@@ -741,23 +831,27 @@
 <td>
 <p>-[NO]DEFER_ALLOCATE</p> </td>
 <td><p>V6.2-002</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]EP[OCHTAPER]</p></td>
 <td><p>V6.2-001</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]ENCRYPTABLE</p></td>
 <td><p>V6.3-000</p></td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-E[XTENSION_COUNT]=integer(no of blocks)</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -765,95 +859,111 @@
 <td> </td>
 <td><p>-F[LUSH_TIME]=integer</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-FU[LLBLKWRT]={0|1|2}</p></td>
 <td><p>V6.3-012</p></td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-G[LOBAL_BUFFERS]=integer</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-H[ARD_SPIN_COUNT]=integer</p></td>
 <td><p>V6.3-003</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]INST[_FREEZE_ON_ERROR]</p></td>
 <td><p>V6.0-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
-<td><p>-JN[LFILE]journal-file-name</p></td>
+<td><p>-JN[LFILE] journal-file-name</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-K[EY_SIZE]=bytes</p></td>
 <td> </td>
-</tr>
-<tr>
-<td> </td>
-<td> </td>
-<td><p>-L[OCK_SPACE]=integer</p></td>
-<td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]LCK_SHARES_DB_CRIT</p></td>
 <td> </td>
+<td><p>Y</p></td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td><p>-L[OCK_SPACE]=integer</p></td>
+<td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-M[UTEX_SLOTS]=integer</p></td>
 <td><p>V6.0-002</p></td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-N[ULL_SUBSCRIPTS]=value</p></td>
 <td><p>V6.3-003</p></td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-PA[RTIAL_RECOV_BYPASS]</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]Q[DBRUNDOWN]</p></td>
 <td><p>V6.0-000</p></td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]REA[D_ONLY]</p></td>
 <td><p>V6.3-003</p></td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-REC[ORD_SIZE]=bytes</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-REG[ION] region-list</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -861,17 +971,20 @@
 <td> </td>
 <td><p>-REP[LICATION]={ON|OFF}</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-RES[ERVED_BYTES]=integer]</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-SLEE[P_SPIN_COUNT]=integer</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -879,35 +992,34 @@
 <td> </td>
 <td><p>-SPIN[_SLEEP_MASK]=hexa_mask</p></td>
 <td><p>V6.3-003</p></td>
-</tr>
-<tr>
 <td> </td>
-<td> </td>
-<td><p>-SPIN[_SLEEP_LIMIT]=nanoseconds</p></td>
-<td><p>V6.3-000</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-STAN[DALONENOT]</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
-<td><p>-[NO]STD[NULLSUBS]</p></td>
+<td><p>-[NO]STD[NULLCOLL]</p></td>
 <td><p>V6.3-003</p></td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]STAT[S]</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-V[ERSION]={V4|V6}</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -915,6 +1027,7 @@
 <td> </td>
 <td><p>-W[AIT_DISK]=integer </p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td>
@@ -927,18 +1040,21 @@
 <p>-H[EURISTIC]=estimation_technique </p>
 </td>
 <td><p>V6.0-001</p></td>
+<td> </td>
 </tr>
 <tr>
 <td><p></p></td>
 <td><p></p></td>
 <td><p>-S[ELECT]=global-name-list </p></td>
 <td><p>V6.0-001</p></td>
+<td> </td>
 </tr>
 <tr>
 <td><p></p></td>
 <td><p></p></td>
 <td><p>-R[EGION]=region-list </p></td>
 <td><p>V6.0-001</p></td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -951,6 +1067,7 @@
 <p>process-id</p>
 </td>
 <td> </td>
+<td><p>N/A</p></td>
 </tr>
 <tr>
 <td>
@@ -963,36 +1080,35 @@
   <p>-TRIG[GERFILE]=&lt;trigger_definitions_file&gt;</p>
 </td>
 <td><p>V5.4-002</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-NOPR[OMPT]</p></td>
 <td><p>V5.4-002</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-SELE[CT][=name-list|*][&lt;select-output-file&gt;]</p></td>
 <td><p>V5.4-002</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-UPGRADE</p></td>
 <td><p>V5.4-002</p></td>
+<td> </td>
 </tr>
 <tr>
-<td>
-<p>UP[GRADE]</p>
-</td>
-<td>
-<p>file-name</p>
-</td>
-<td>
-<p>-</p>
-</td>
+<td><p>UP[GRADE]</p></td>
+<td><p>file-name</p></td>
+<td><p>-</p></td>
 <td> </td>
+<td><p>Y</p></td>
 </tr>
 </tbody>
 </table>
@@ -1001,6 +1117,7 @@
 <div class="informaltable">
 <a name="tblmupqualsumm"></a><table border="1">
 <colgroup>
+<col>
 <col>
 <col>
 <col>
@@ -1019,18 +1136,16 @@
 <th>
 <p>GT.M Version*</p>
 </th>
+<th>
+<p>Standalone Access#</p>
+</th>
 </tr></thead>
 <tbody>
 <tr>
-<td>
-<p>-EDITINSTANCE </p>
-</td>
-<td>
-<p>REPLICATE</p>
-</td>
-<td>
-  <p>-CHANGE</p>
-</td>
+<td><p>-EDITINSTANCE </p></td>
+<td><p>REPLICATE</p></td>
+<td><p>-CHANGE</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1038,17 +1153,20 @@
 <td> </td>
 <td><p>-DETAIL</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-OFFSET=hexa</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-VALUE=hexa</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1056,11 +1174,13 @@
 <td> </td>
 <td><p>-SIZE=hexa</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-VALUE=hexa</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1068,6 +1188,7 @@
 <td> </td>
 <td><p>-[NO]QDBRUNDOWN</p></td>
 <td><p>V6.3-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -1080,17 +1201,20 @@
   <p>ALWAYS</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>NONE</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>PROCESS</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1104,11 +1228,13 @@
   <p>-OVERRIDE</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-RECORD</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1122,11 +1248,13 @@
   <p>-[NO]ONLINE</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]AUTORELEASE</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1140,11 +1268,13 @@
   <p>-NAME</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-NOREPLACE</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1152,12 +1282,14 @@
 <td> </td>
 <td><p>-SUPPLEMENTARY</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]QDBRUNDOWN</p></td>
 <td><p>V6.3-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -1171,11 +1303,13 @@
   <p>ALIGNSIZE=integer</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>ALLOCATION=integer</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1183,11 +1317,13 @@
 <td> </td>
 <td><p>AUTOSWITCHLIMIT=integer</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>BEFORE_IMAGES</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1195,11 +1331,13 @@
 <td> </td>
 <td><p>BUFFER_SIZE=integer</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>DISABLE</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1207,11 +1345,13 @@
 <td> </td>
 <td><p>ENABLE</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>EPOCH_INTERVAL=integer</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1219,11 +1359,13 @@
 <td> </td>
 <td><p>EXTENSION=integer</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>FILENAME=file_name</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1231,11 +1373,13 @@
 <td> </td>
 <td><p>OFF</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>ON</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1243,11 +1387,13 @@
 <td> </td>
 <td><p>SYNC_IO</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>YIELD_LIMIT=integer</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1262,11 +1408,13 @@
   <p>TIME="time"</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>OPERATIONS=integer</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1280,11 +1428,13 @@
   <p>-AUTOROLLBACK</p>
 </td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-BUFFSIZE=integer</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1292,11 +1442,13 @@
 <td> </td>
 <td><p>-CHANGELOG</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-CHECKHEALTH</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1304,11 +1456,13 @@
 <td> </td>
 <td><p>-CMPLVL=integer</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-FILTER=filter_name</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1316,17 +1470,20 @@
 <td> </td>
 <td><p>-he[lpers]=[m[,n]]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-INITIALIZE</p></td>
 <td><p>V6.0-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-CMPLVL=n</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1334,17 +1491,20 @@
 <td> </td>
 <td><p>-LISTENPORT=integer [</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-AUTOROLLBACK[=VERBOSE]]</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-LOG=logfile</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1352,35 +1512,41 @@
 <td> </td>
 <td><p>-LOG_INTERVAL=integer</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-NORESYNC</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-RESUME=strm_num</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-REUSE=instname</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-RSYNC_STRM=strm_num</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-SHOWBACKLOG</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1388,11 +1554,13 @@
 <td> </td>
 <td><p>-SHUTDOWN</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-START</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1400,17 +1568,20 @@
 <td> </td>
 <td><p>-STATSLOG=[ON|OFF]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-STOPRECEIVERFILTER</p></td>
 <td><p>V6.3-009</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-STOPSOURCEFILTER</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1418,17 +1589,20 @@
 <td> </td>
 <td><p>-TIMEOUT=seconds</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
-<td><p>TLSID=label</p></td>
+<td><p>-TLSID=label</p></td>
 <td><p>V6.1-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-UPDATEONLY</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1436,18 +1610,21 @@
 <td> </td>
 <td><p>-UPDOK</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-UPDNOTOK</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-UPDATERESYNC=/path/to/bkup-orig-inst</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -1460,11 +1637,13 @@
   <p>-AFTER=time</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-APPLY_AFTER_IMAGE</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1472,11 +1651,13 @@
 <td> </td>
 <td><p>-BACKWARD</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-BEFORE=time</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1484,11 +1665,13 @@
 <td> </td>
 <td><p>-[NO]BROKENTRANS[=file]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-CHAIN</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1496,11 +1679,13 @@
 <td> </td>
 <td><p>-CHECKTN</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]ER[ROR_LIMIT][=integer]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1508,11 +1693,13 @@
 <td> </td>
 <td><p>-FENCES=fence-option-list</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-FORWARD</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1520,11 +1707,13 @@
 <td> </td>
 <td><p>-FULL</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-GLOBAL=&lt;global_list&gt;</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1532,11 +1721,13 @@
 <td> </td>
 <td><p>-ID=&lt;pid_list&gt;</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-INTERACTIVE</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1544,11 +1735,13 @@
 <td> </td>
 <td><p>-LOOKBACK_LIMIT=&lt;lookback_limit_options&gt;</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]LOSTTRANS[=file]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1556,11 +1749,13 @@
 <td> </td>
 <td><p>-PARA[LLEL][=n]</p></td>
 <td><p>V6.3-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-RED[IRECT]=file-pair-list</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1568,17 +1763,20 @@
 <td> </td>
 <td><p>-SINCE=time</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-VERBOSE</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-VERIFY</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1592,11 +1790,13 @@
 <p>-AFTER=time</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-BEFORE=time</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1604,11 +1804,13 @@
 <td> </td>
 <td><p>-[NO]BROKENTRANS[=file]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-CHAIN</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1616,11 +1818,13 @@
 <td> </td>
 <td><p>-CHECKTN</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]ER[ROR_LIMIT]=integer]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1628,11 +1832,13 @@
 <td> </td>
 <td><p>-FENCES=fence-option-list</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-FULL</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1640,17 +1846,20 @@
 <td> </td>
 <td><p>-GLOBAL=&lt;global_list&gt;</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-GV[PATFILE]=/path/to/pattern-file</p></td>
 <td><p>V6.3-009</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-ID=&lt;pid_list&gt;</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1658,11 +1867,13 @@
 <td> </td>
 <td><p>-INTERACTIVE</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-LOOKBACK_LIMIT=&lt;lookback_limit_options&gt;</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1670,11 +1881,13 @@
 <td> </td>
 <td><p>-[NO]LOSTTRANS[=file]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-REGION</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1682,17 +1895,20 @@
 <td> </td>
 <td><p>-SINCE=time</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-VERBOSE</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-VERIFY</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1706,11 +1922,13 @@
 <p>-APPLY_AFTER_IMAGE</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-BACKWARD</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1718,11 +1936,13 @@
 <td> </td>
 <td><p>-BEFORE=time</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]BROKENTRANS[=file]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1730,11 +1950,13 @@
 <td> </td>
 <td><p>-[NO]ER[ROR_LIMIT][=integer]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-FENCES=fence-option-list</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1742,11 +1964,13 @@
 <td> </td>
 <td><p>-FETCHRESYNC</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-LOOKBACK_LIMIT=&lt;lookback_limit_options&gt;</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1754,23 +1978,27 @@
 <td> </td>
 <td><p>-[NO]LOSTTRANS[=file]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-ONLINE</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-PARA[LLEL][=n]</p></td>
 <td><p>V6.3-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-RES[YNC]=hexa;journal_sequence_number</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1778,11 +2006,13 @@
 <td> </td>
 <td><p>-VERBOSE</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-VERIFY</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1796,11 +2026,13 @@
 <p>-ACTIVE_PROCESSES</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-ALL</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1808,11 +2040,13 @@
 <td> </td>
 <td><p>-BROKEN_TRANSACTIONS</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-HEADER</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1820,11 +2054,13 @@
 <td> </td>
 <td><p>-PROCESSES</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-STATISTICS</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1832,11 +2068,13 @@
 <td> </td>
 <td><p>-AFTER=time</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-USER=user-list</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1844,11 +2082,13 @@
 <td> </td>
 <td><p>-TRANSACTION=[KILL|SET]</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-INTERACTIVE</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1856,11 +2096,13 @@
 <td> </td>
 <td><p>-GLOBAL=&lt;global_list&gt;</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-ID=&lt;pid_list&gt;</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1868,12 +2110,14 @@
 <td> </td>
 <td><p>-INTERACTIVE</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-PARA[LLEL][=n]</p></td>
 <td><p>V6.3-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td>
@@ -1886,11 +2130,13 @@
 <p>-BYTESTREAM</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-COMPREHENSIVE</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1898,17 +2144,20 @@
 <td> </td>
 <td><p>-DATABASE</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-INCREMENTAL</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-RECORD</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1922,11 +2171,13 @@
 <p>-ACTIVATE</p>
 </td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-BUFFSIZE=Buffer_size</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1934,11 +2185,13 @@
 <td> </td>
 <td><p>-CHANGELOG</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-CHECKHEALTH</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1946,11 +2199,13 @@
 <td> </td>
 <td><p>-CMPLVL=integer</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-CONNECTPARAMS=connection_options</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1958,11 +2213,13 @@
 <td> </td>
 <td><p>-DEACTIVATE</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-DETAIL</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1970,17 +2227,20 @@
 <td> </td>
 <td><p>-FILTER=filter_name</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-FREEZE=on|off</p></td>
 <td><p>V6.0-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-[NO]COMMENT=string</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -1988,17 +2248,20 @@
 <td> </td>
 <td><p>-INSTSECONDARY=secondary_instance name</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-NOJNLFILEONLY</p></td>
 <td><p>V6.2-001</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-JNLPOOL-LOG=log_file</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -2006,11 +2269,13 @@
 <td> </td>
 <td><p>-LOG_INTERVAL=integer</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-LOSTTNCOMPLETE</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -2018,11 +2283,13 @@
 <td> </td>
 <td><p>-NEEDRESTART</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-PASSIVE</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -2030,11 +2297,13 @@
 <td> </td>
 <td><p>-[NO]PLAINTEXTFALLBACK</p></td>
 <td><p>V6.1-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-PROPAGATEPRIMARY</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -2042,11 +2311,13 @@
 <td> </td>
 <td><p>-RENEGOTIATE_INTERVAL=minutes</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-ROOTPRIMARY</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -2054,11 +2325,13 @@
 <td> </td>
 <td><p>-SECONDARY=secondary_instance_name</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-SHOWBACKLOG</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -2066,11 +2339,13 @@
 <td> </td>
 <td><p>-SHUTDOWN</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-START</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -2078,11 +2353,13 @@
 <td> </td>
 <td><p>-STATSLOG</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-STOPSOURCEFILTER</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -2090,17 +2367,20 @@
 <td> </td>
 <td><p>-TIMEOUT=seconds </p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-TLSID=label</p></td>
 <td><p>V6.1-000</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-UPDOK</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -2108,11 +2388,13 @@
 <td> </td>
 <td><p>-UPDNOTOK</p></td>
 <td> </td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
 <td> </td>
 <td><p>-ZEROBACKLOG </p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -2127,11 +2409,18 @@
 <p>file-name</p>
   </td>
 <td> </td>
+<td> </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>* Denotes the GT.M version in which the qualifier or command was first introduced. This column is maintained for qualifiers and command introduced in GT.M versions starting with GT.M V5.4-002.   </p>
+<p>* denotes the GT.M version in which the qualifier or command was first introduced. This column is maintained for qualifiers and command introduced in GT.M versions starting with GT.M V5.4-002.   </p>
+<p># Additional information about Standalone Access:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>Although MUPIP EXTRACT does not require standalone access, without the -FREEZE qualifier to prevent the database to prevent updates, it does not guarantee a consistent state. Therefore, from an application standpoint, you might plan for a standalone access during a MUPIP EXTRACT operation.</p></li>
+<li class="listitem"><p>Although MUPIP LOAD does not require standalone access, you should always assess the significance of performing a MUPIP LOAD operation when an application is running because it may result in an inconsistent application state for the database.</p></li>
+<li class="listitem"><p>MUPIP commands that need standalone access issue a MUUSERLBK error on a crashed replication-enabled database and MUUSERECOV error in case of a non-replicated-but-journaled database.</p></li>
+</ul></div>
 </div>
 <div class="navfooter">
 <hr>

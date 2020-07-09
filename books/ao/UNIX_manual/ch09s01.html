@@ -8,7 +8,7 @@
 <link rel="up" href="ch09.html" title="Chapter 9. GT.M Database Structure(GDS)">
 <link rel="prev" href="ch09.html" title="Chapter 9. GT.M Database Structure(GDS)">
 <link rel="next" href="ch09s02.html" title="Local Bitmaps">
-<link rel="copyright" href="ln-idp67334320.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp57543056.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="DFO_GDS"></a>Database File Organization with GDS <a class="indexterm" name="idp73469424"></a> </h2></div></div></div>
+<a name="DFO_GDS"></a>Database File Organization with GDS <a class="indexterm" name="idp64254624"></a> </h2></div></div></div>
 <p>GT.M processes a GDS file using predominantly low-level system services. The GDS file consists of two parts: </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>The database file header </p></li>
@@ -46,7 +46,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="FHDE"></a>File Header Data Elements<a class="indexterm" name="idp73449168"></a> </h3></div></div></div>
+<a name="FHDE"></a>File Header Data Elements<a class="indexterm" name="idp64177744"></a> </h3></div></div></div>
 <p>All GT.M components, except GDE, (the run-time system, DSE, LKE, MUPIP) use the data elements of the file header for 
 accounting, control, and logging purposes.</p>
 <p>The current state of the file header always determines the characteristics of the database. The MUPIP CREATE command 
@@ -303,7 +303,7 @@ is ENABLED or ON. </p>
        <p>Journal Buffer Size </p>
      </td>
 <td>
-       <p>The amount of memory allotted to buffer journal file updates. The default value is 2308. The minimum is 2307 and the maximum is 32K blocks which means that the maximum buffer you can set for your journal file output is 16MB. Larger journal buffers can improve run-time performance, but they also increase the amount of information at risk in 
+       <p>The amount of memory allotted to buffer journal file updates. The default value is 2312. The minimum is 2307 and the maximum is 1Mi blocks which means that the maximum buffer you can set for your journal file output is 512MB. Larger journal buffers can improve run-time performance, but they also increase the amount of information at risk in 
 failure. Journal Buffer size must be large enough to hold the largest transaction.</p>
      </td>
 </tr>

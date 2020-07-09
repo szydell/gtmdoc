@@ -8,7 +8,7 @@
 <link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
 <link rel="prev" href="ch05s10.html" title="Intrinsic Special Variables">
 <link rel="next" href="ch05s12.html" title="Indirection">
-<link rel="copyright" href="ln-idp184982096.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp169799616.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,14 +30,14 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="Routines"></a>Routines<a class="indexterm" name="idp186611776"></a>
+<a name="Routines"></a>Routines<a class="indexterm" name="idp171521712"></a>
 </h2></div></div></div>
 <p>M routines have a name and consist of lines of code followed by a formfeed. M separates the name of a routine from the body of the routine with an end-of-line which is a line-feed.  This form is mostly used for interchange with other M implementations and can be read and written by the %RI and %RO utility routines.</p>
 <p>GT.M stores routine sources in UNIX text files.</p>
 <p>In M, a routine has no particular impact on variable management and may include code that is invoked at different times and has no logical intersection.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Lines"></a>Lines<a class="indexterm" name="idp186667392"></a>
+<a name="Lines"></a>Lines<a class="indexterm" name="idp171516864"></a>
 </h3></div></div></div>
 <p>A line of M code consists of the following elements in the following order:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
@@ -52,21 +52,21 @@
 </ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="Labels"></a>Labels<a class="indexterm" name="idp186634544"></a>
+<a name="Labels"></a>Labels<a class="indexterm" name="idp171524960"></a>
 </h4></div></div></div>
 <p>In addition to labels that follow the rules for M names, M accepts labels consisting only of digits. In a label consisting only of digits, leading zeros are considered significant. For example, labels 1 and 01 are different. Formalists may immediately follow a label. A Formalists consists of one or more names enclosed in parentheses (). Formalists identify local variables that "receive" passed values in M parameter passing. <span>For more information, see <a class="xref" href="ch05s13.html" title="Parameter Passing">&#8220;Parameter Passing&#8221;</a>.</span></p>
 <p>In GT.M, a colon (:) delimiter may be appended to the label, which causes the label to be treated as "local." Within the routine in which they appear, they perform exactly as they would without the trailing colon but they are available only during compilation and inaccessible to other routines and to indirection or XECUTE.  Because references to local labels preceding their position in a routine produce a LABELUNKNOWN error at run-time, FIS recommends omitting the routinename from labelrefs to a local label. Using local labels reduces object size and linking overhead for both all types for dynamic linking except indirection and XECUTE. Use of local labels may either improve or impair performance; typically any difference is modest. The more likely they are to all be used within the code block at run-time, the more likely an improvement. In other words, conditional code paths which prevent all references to local variables appearing in the block may actually impair performance.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="Comments"></a>Comments<a class="indexterm" name="idp186373680"></a>
+<a name="Comments"></a>Comments<a class="indexterm" name="idp171516560"></a>
 </h4></div></div></div>
 <p>In addition to commands, a line may also contain a comment that starts with a leading semi-colon (;) delimiter. The scope of a comment is the remainder of the line. In other words, M ignores anything to the right of the comment delimiter. The standard defines the comment delimiter (;) as it would a command, and therefore requires that it always appear after a linestart. GT.M extends the standard to permit comments to start at the first character of a line or in an argument position.</p>
 </div>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Entry_Ref"></a>Entry References<a class="indexterm" name="idp186653120"></a>
+<a name="Entry_Ref"></a>Entry References<a class="indexterm" name="idp171530288"></a>
 </h3></div></div></div>
 <p>M entryrefs provide a generalized target for referring to a line within a routine. An entryref may contain some combination of a label, an offset, and a routine name (in that order). The offset is delimited by a plus sign (+) and the routinename is delimited by a caret symbol(^). When an entryref does not contain a label, M assumes the offset is from the beginning of the routine. When an entryref does not contain an offset, M uses an offset of zero (0). When an entryref does not contain a routine name, M assumes the routine that is currently executing.</p>
 <p>M permits every element in an entryref to have the form of an indirection operator, followed by an element that evaluates to a legitimate occurrence of that portion of the entryref.</p>
@@ -81,7 +81,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Label_Ref"></a>Label References<a class="indexterm" name="idp186624128"></a>
+<a name="Label_Ref"></a>Label References<a class="indexterm" name="idp171522224"></a>
 </h3></div></div></div>
 <p>M labelrefs are a subset of entryrefs that exclude offsets and separate indirection. Labelrefs are used with parameter passing.</p>
 </div>

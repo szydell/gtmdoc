@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s27.html" title="$ZATRansform">
 <link rel="next" href="ch07s29.html" title="$ZCHar()">
-<link rel="copyright" href="ln-idp184982096.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp169799616.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,14 +29,14 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zbit_functions"></a>$ZBIT Functions<a class="indexterm" name="idp188880976"></a>
+<a name="zbit_functions"></a>$ZBIT Functions<a class="indexterm" name="idp173881920"></a>
 </h2></div></div></div>
 <p>A series of functions beginning with $ZBIT lets you manipulate a bit stream. Internally, GT.M stores a bit stream in the form of a bit string. A bit string embeds a bit stream in such a way that the first byte specifies the number of trailing bits in the last byte that are not part of the bit-stream. In this way, GT.M is able to store bit-streams of lengths other than multiples of 8 bits in byte format. So for example, a first byte of value of zero (0) indicates that all of the bits in the last byte belong to the bit-stream, while a one (1) indicates the last bit is excluded and a seven (7) indicates that only the first bit in the last byte belongs to the bit-stream.</p>
 <p>If you have to convert a character string into a bit string then add a leading byte to that character string so that all $ZBIT functions can recognize it. The most common and straightforward way of doing this is to concatenate a $CHAR(n) on the front of the character string, where the value of n is zero through seven (0-7) &#8211; most commonly zero (0). If you pass a bit string as an argument to a routine that is expecting a character string, then that caller routine must strip off the first (and possibly the last) byte so that it can recognize the character string.  </p>
 <p>This section contains the description of all $ZBIT function and an example of using $ZBIT functions to turn a character into a bit stream and return a coded value. However, the most appropriate use of these functions may include the formation of checksums, handling of bit-data (say pixels from a scan), or interfacing with a routine that requires bit-oriented arguments. </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zbit_and"></a>$ZBITAND()<a class="indexterm" name="idp189035856"></a>
+<a name="zbit_and"></a>$ZBITAND()<a class="indexterm" name="idp173766176"></a>
 </h3></div></div></div>
 <p>Performs a logical AND function on two bit strings and returns a bit string equal in length to the shorter of the two arguments (containing set bits in those positions where both of the input strings have set bits). Positions corresponding to positions where either of the input strings have a cleared bit, also have cleared bits in the resulting string.</p>
 <p>The format for the $ZBITAND() function is:</p>
@@ -63,7 +63,7 @@ A bitwise AND B=0100000</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zbit_count"></a>$ZBITCOUNT()<a class="indexterm" name="idp189046624"></a>
+<a name="zbit_count"></a>$ZBITCOUNT()<a class="indexterm" name="idp173929744"></a>
 </h3></div></div></div>
 <p>Returns the number of ON bits in a bit string.</p>
 <p>The format for the $ZBITCOUNT function is:</p>
@@ -71,7 +71,7 @@ A bitwise AND B=0100000</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The expression specifies the bit string to examine.</p></li></ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="idp189043744"></a>Example of $ZBITCOUNT()</h4></div></div></div>
+<a name="idp173890000"></a>Example of $ZBITCOUNT()</h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;set BITSTRINGA=$ZBITSET($ZBITSET($ZBITSTR(8,0),2,1),8,1) 
 ; The binary representation of A is 01000001
@@ -91,7 +91,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zbit_find"></a>$ZBITFIND()<a class="indexterm" name="idp189004576"></a>
+<a name="zbit_find"></a>$ZBITFIND()<a class="indexterm" name="idp173745536"></a>
 </h3></div></div></div>
 <p>Performs the analog of $FIND() on a bit string. It returns an integer that identifies the position after the first position equal to a truth-valued expression that occurs at, or after, the specified starting position.</p>
 <p>The format for the $ZBITFIND function is:</p>
@@ -104,7 +104,7 @@ GTM&gt;</pre>
 <p>If the optional integer argument exceeds the length of the string, or if the function finds no further bits, $ZBITFIND() returns a zero value. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="idp189047520"></a>Examples<span> of $ZBITFIND()</span>
+<a name="idp173926992"></a>Examples<span> of $ZBITFIND()</span>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;Set BITSTRINGA=$ZBITSET($ZBITSET($ZBITSTR(8,0),2,1),8,1) 
@@ -117,7 +117,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zbitget"></a>$ZBITGET()<a class="indexterm" name="idp189057712"></a>
+<a name="zbitget"></a>$ZBITGET()<a class="indexterm" name="idp173937520"></a>
 </h3></div></div></div>
 <p>Returns the value of a specified position in the bit string.</p>
 <p>The format for the $ZBITGET function is:</p>
@@ -128,7 +128,7 @@ GTM&gt;</pre>
 </ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="idp189001952"></a>Examples<span> of $ZBITGET()</span>
+<a name="idp173846736"></a>Examples<span> of $ZBITGET()</span>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">        
@@ -142,7 +142,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zbitlen"></a>$ZBITLEN()<a class="indexterm" name="idp188884464"></a>
+<a name="zbitlen"></a>$ZBITLEN()<a class="indexterm" name="idp173744288"></a>
 </h3></div></div></div>
 <p>Returns the length of a bit string, in bits.</p>
 <p>The format for the $ZBITLEN function is:</p>
@@ -150,7 +150,7 @@ GTM&gt;</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The expression specifies the bit string to examine.</p></li></ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="idp189082720"></a>Examples<span> of $ZBITLEN()</span>
+<a name="idp173927792"></a>Examples<span> of $ZBITLEN()</span>
 </h4></div></div></div>
 <pre class="programlisting">GTM&gt;set BITSTR=$zbitstr(6,1)
         
@@ -162,7 +162,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zbitnot"></a>$ZBITNOT()<a class="indexterm" name="idp189073248"></a>
+<a name="zbitnot"></a>$ZBITNOT()<a class="indexterm" name="idp173927968"></a>
 </h3></div></div></div>
 <p>Returns a copy of the bit string with each input bit position inverted.</p>
 <p>The format for the $ZBITNOT function is:</p>
@@ -170,7 +170,7 @@ GTM&gt;</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The expression specifies the bit string whose inverted bit pattern becomes the result of the function.</p></li></ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="idp189073856"></a>Examples<span> of $ZBITNOT()</span>
+<a name="idp173945424"></a>Examples<span> of $ZBITNOT()</span>
 </h4></div></div></div>
 <pre class="programlisting">GTM&gt;set BITSTRINGA=$zbitset($zbitset($zbitstr(8,0),2,1),8,1) 
 ; The binary representation of A is 01000001
@@ -182,7 +182,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zbitor"></a>$ZBITOR()<a class="indexterm" name="idp189081040"></a>
+<a name="zbitor"></a>$ZBITOR()<a class="indexterm" name="idp173914528"></a>
 </h3></div></div></div>
 <p>Performs a bitwise logical OR on two bit strings, and returns a bit string equal in length to the longer of the two arguments (containing set bits in those positions where either or both of the input strings have set bits). Positions that correspond to positions where neither input string has a set bit have cleared bits in the resulting string.</p>
 <p>The format for the $ZBITOR function is:</p>
@@ -193,7 +193,7 @@ GTM&gt;</pre>
 </ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="idp188882928"></a>Examples<span> of $ZBITOR()</span>
+<a name="idp173952064"></a>Examples<span> of $ZBITOR()</span>
 </h4></div></div></div>
 <pre class="programlisting">GTM&gt;set BITSTRINGA=$zbitset($zbitset($zbitstr(8,0),2,1),8,1) 
 ; The binary representation of A is 01000001
@@ -209,7 +209,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zbitset"></a>$ZBITSET()<a class="indexterm" name="idp189073984"></a>
+<a name="zbitset"></a>$ZBITSET()<a class="indexterm" name="idp173953776"></a>
 </h3></div></div></div>
 <p>Returns an edited copy of the input bit string with a specified bit set to the value of the truth-valued expression.</p>
 <p>The format for the $ZBITSET function is:</p>
@@ -221,7 +221,7 @@ GTM&gt;</pre>
 </ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="idp188896704"></a>Examples<span> of $ZBITSET()</span>
+<a name="idp173744832"></a>Examples<span> of $ZBITSET()</span>
 </h4></div></div></div>
 <pre class="programlisting">GTM&gt;set X="A",Y=$extract($zbitset($char(0)_X,3,1),2) zwrite
 X="A"
@@ -232,7 +232,7 @@ Y="a"
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zbitstr"></a>$ZBITSTR()<a class="indexterm" name="idp189093424"></a>
+<a name="zbitstr"></a>$ZBITSTR()<a class="indexterm" name="idp173972080"></a>
 </h3></div></div></div>
 <p>Returns a bit string of a specified length with all bit positions initially set to either zero or one.</p>
 <p>The format for the $ZBITSTR function is:</p>
@@ -243,7 +243,7 @@ Y="a"
 </ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="idp188878496"></a>Examples<span> of $ZBITSTR()</span>
+<a name="idp173954416"></a>Examples<span> of $ZBITSTR()</span>
 </h4></div></div></div>
 <pre class="programlisting">GTM&gt;set BITSTR=$zbitstr(6,1)</pre>
 <p>This example sets the value of expression BITSTR to 6 bit with all bits set to 1.</p>
@@ -251,7 +251,7 @@ Y="a"
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zbitxor"></a>$ZBITXOR()<a class="indexterm" name="idp189098784"></a>
+<a name="zbitxor"></a>$ZBITXOR()<a class="indexterm" name="idp173979024"></a>
 </h3></div></div></div>
 <p>Performs a bitwise exclusive OR on two bit strings, and returns a bit string equal in length to the shorter of the two arguments (containing set bits in those position where either but not both of the input strings have set bits). Positions that correspond to positions where neither or both input string has a set bit have cleared bits in the resulting string.</p>
 <p>The format for the $ZBITXOR function is:</p>
@@ -262,7 +262,7 @@ Y="a"
 </ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="idp189104208"></a>Examples<span> of $ZBITXOR()</span>
+<a name="idp173938592"></a>Examples<span> of $ZBITXOR()</span>
 </h4></div></div></div>
 <pre class="programlisting">GTM&gt;set BITSTRINGA=$zbitset($zbitset($zbitstr(8,0),2,1),8,1) ; The binary representation of A is 01000001
 GTM&gt;set BITSTRINGB=$zbitset($zbitset($zbitstr(8,0),2,1),7,1); The binary representation of B is 01000010
@@ -275,7 +275,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zbit_funtions"></a>Examples<span> of $ZBIT Functions</span><a class="indexterm" name="idp189101584"></a>
+<a name="examples_of_zbit_funtions"></a>Examples<span> of $ZBIT Functions</span><a class="indexterm" name="idp173973456"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">ZCRC(X) 
