@@ -8,7 +8,7 @@
 <link rel="up" href="index.html" title="GT.M Administration and Operations Guide">
 <link rel="prev" href="jnl_ext.html" title="Journal Extract Formats">
 <link rel="next" href="ch07s01.html" title="Introduction">
-<link rel="copyright" href="ln-idp57543056.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp65672272.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,6 +33,16 @@
 <a name="chg_db_replication"></a>Chapter 7. Database Replication</h2></div>
 <div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
 <tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V6.3-014</td>
+<td align="left">06 October 2020</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="replication.html#create_repl_inst" title="Creating the Replication Instance File">&#8220;<span>Creating the Replication Instance File</span>&#8221;</a>, add reference to gtm_repl_instname and gtm_repl_instance.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch07s03.html#nrml_cutov" title="Switchover possibilities in an A&#8594;B replication configuration">&#8220;Switchover possibilities in an A&#8594;B replication configuration&#8221;</a>, fixed default wait period to 30 seconds</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#sour_srvr_shutdown" title="Shutting down the Source Server">&#8220;<span>Shutting down the</span> Source Server&#8221;</a>, added the default and max value of -timeout and information about the internal max wait time.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, add -CONNECTPARAMS information and adjust the maximum -BUFFSIZE</p></li>
+</ul></div></td>
+</tr>
 <tr>
 <td align="left">Revision V6.3-013</td>
 <td align="left">30 June 2020</td>
@@ -156,7 +166,7 @@
 <li class="listitem"><p>In <a class="xref" href="replication.html#sour_srvr_shutdown" title="Shutting down the Source Server">&#8220;<span>Shutting down the</span> Source Server&#8221;</a>, added the description of the -zerobacklog qualifier.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s01.html#sppl_exampls" title="Examples">&#8220;Examples&#8221;</a>, used capitals for keywords outside of examples</p></li>
 <li class="listitem"><p>In <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>, removed references to Solaris, HP-UX, and OpenVMS; specified that pool limit is  4GiB - 8; specified that GT.M supports the use of IBM provided zlib library for AIX.</p></li>
-<li class="listitem"><p>In <a class="xref" href="replication.html#stop_upd_proc" title="Stopping the Update Process and/or the Receiver Server">&#8220;Stop<span>ping the</span> Update Process and/or the Receiver Server&#8221;</a>, added information about the -shutdown qualifier; alphabetized the qualifiers after -shutdown.</p></li>
+<li class="listitem"><p>In <a class="xref" href="replication.html#stop_upd_proc" title="Stopping the the Receiver Server and/or the Update Process">&#8220;Stop<span>ping the</span> the Receiver Server and/or the Update Process&#8221;</a>, added information about the -shutdown qualifier; alphabetized the qualifiers after -shutdown.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s01.html" title="Introduction">&#8220;Introduction&#8221;</a>, language cleanup - intermediate save</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html#tls_repl_proc" title="Setting up a secured TLS replication connection">&#8220;Setting up a secured TLS replication connection&#8221;</a>, Changed Helen and Phil to Alice and Bob.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch07s03.html#up_re_in_fi" title="Creating a new Replication Instance File">&#8220;Creating a new Replication Instance File&#8221;</a>, changed 4.5-000 to 5.4-000</p></li>
@@ -329,14 +339,13 @@ its own set of updates) </a></span></dt>
 <dt><span class="sect2"><a href="replication.html#chck_srvr_hlth">Check<span>ing</span> Server Health</a></span></dt>
 <dt><span class="sect2"><a href="replication.html#chng_log_file"><span>Changing the Log File</span></a></span></dt>
 <dt><span class="sect2"><a href="replication.html#enable_disable_dtld_log"><span>Enabling/Disabling Detailed</span> Logging</a></span></dt>
-<dt><span class="sect2"><a href="replication.html#stp_src_srv">Stop<span>ping a</span> Source Server</a></span></dt>
 <dt><span class="sect2"><a href="replication.html#rprt_current_backlog"><span>Reporting the Current Backlog of Journal Records</span></a></span></dt>
 <dt><span class="sect2"><a href="replication.html#process_lost">Process<span>ing</span> Lost Transactions<span> File</span></a></span></dt>
 <dt><span class="sect2"><a href="replication.html#strt_rcvr_srvr">Start<span>ing the</span> Receiver Server
 
 </a></span></dt>
 <dt><span class="sect2"><a href="replication.html#strt_upd_proc">Start<span>ing the</span> Update Process</a></span></dt>
-<dt><span class="sect2"><a href="replication.html#stop_upd_proc">Stop<span>ping the</span> Update Process and/or the Receiver Server</a></span></dt>
+<dt><span class="sect2"><a href="replication.html#stop_upd_proc">Stop<span>ping the</span> the Receiver Server and/or the Update Process</a></span></dt>
 <dt><span class="sect2"><a href="replication.html#chk_srvr_hlth">Check<span>ing Server</span>  Health</a></span></dt>
 <dt><span class="sect2"><a href="replication.html#chng_log"><span>Changing the Log File</span></a></span></dt>
 <dt><span class="sect2"><a href="replication.html#enable_disable_login"><span>Enabling/Disabling Detailed Logging</span></a></span></dt>

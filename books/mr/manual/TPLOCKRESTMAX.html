@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="TPLOCK.html" title="TPLOCK ">
 <link rel="next" href="TPMIXUP.html" title="TPMIXUP ">
-<link rel="copyright" href="ln-idp165192320.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp155076400.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -34,7 +34,7 @@
 <p><span class="bold"><strong>TPLOCKRESTMAX</strong></span>,  Transaction restarts due to unavailability of locks not allowed in a final TP retry more than nnnn times</p>
 <p>Run Time Error: This indicated a timed LOCK within a transaction was consistently unavailable. In order to prevent the process from waiting for the LOCK while holding a database resource (critical section) the transaction has restarted nnnn times without success. This error limits the possibilities for this issue cascading into a live-lock (consuming resources trying to do something that is "not happening").</p>
 <p>Action: Analyze the locking protocol for issues of dead lock or unexpected LOCK durations and rework appropriately. Note that FIS recommends against using LOCKs within transactions, as GT.M protects the transaction integrity independent of LOCK protocols. If you wish to impose a conventional locking strategy for a transaction, place the LOCK and unlock around (outside) the transaction. While it is possible to use a LOCK within a transaction for signaling, that technique is typically problematic as it violates transactional Isolation and should likely be restricted to testing.</p>
-<a class="indexterm" name="idp171146496"></a>
+<a class="indexterm" name="idp161039360"></a>
 </div>
 <div class="navfooter">
 <hr>

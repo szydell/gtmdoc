@@ -8,7 +8,7 @@
 <link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
 <link rel="prev" href="ch09s06.html" title="Using Null Devices">
 <link rel="next" href="ch09s08.html" title="Using Socket Devices">
-<link rel="copyright" href="ln-idp169799616.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp174085520.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="using_pipe_device"></a>Using PIPE Devices<a class="indexterm" name="idp175923216"></a>
+<a name="using_pipe_device"></a>Using PIPE Devices<a class="indexterm" name="idp180202656"></a>
 </h2></div></div></div>
 <p>A PIPE device is used to access and manipulate the input and/or output of a shell command as a GT.M I/O device. GT.M maintains I/O status variables for a PIPE device just as it does for other devices. An OPEN of the device starts a sub-process. Data written to the device by the M program is available to the process on its STDIN. The M program can read the STDOUT and STDERR of the sub-process. This facilitates output only applications, such as printing directly from a GT.M program to an lp command; input only applications, such as reading the output of a command such as ps; and co-processing applications, such as using iconv to convert data from one encoding to another. </p>
 <p>A PIPE is akin to a FIFO device. Both FIFO and PIPE map GT.M devices to UNIX pipes, the conceptual difference being that whereas a FIFO device specifies a named pipe, but does not specify the process on the other end of the pipe, a PIPE device specifies a process to communicate with, but the pipes are unnamed. Specifically, an OPEN of a PIPE creates a subprocess with which the GT.M process communicates. </p>
@@ -43,7 +43,7 @@
 </table></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="idp175697088"></a>Modes of PIPE Operation </h3></div></div></div>
+<a name="idp179999568"></a>Modes of PIPE Operation </h3></div></div></div>
 <p>The OPEN command for a PIPE provides a number of variations in the use of UNIX pipes shown below as Examples 1-4. </p>
 <p>Example:</p>
 <pre class="programlisting">set p="Printer"

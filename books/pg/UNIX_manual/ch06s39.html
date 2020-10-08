@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s38.html" title="ZKill">
 <link rel="next" href="ch06s40.html" title="ZPrint">
-<link rel="copyright" href="ln-idp169799616.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp174085520.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zmessage"></a>ZMessage<a class="indexterm" name="idp173029280"></a>
+<a name="zmessage"></a>ZMessage<a class="indexterm" name="idp177306592"></a>
 </h2></div></div></div>
 <p>The ZMESSAGE command raises an exception condition based on the specified message code. </p>
 <p>The format of the ZMESSAGE command is:</p>
@@ -63,24 +63,24 @@
 <tr>
 <td><p>1</p></td>
 <td><p>Success</p></td>
-<td><p>Displays the associated message and continues execution</p></td>
+<td><p>Displays the associated message on STDERR* and continues execution. It does not invoke $ETRAP or $ZTRAP.</p></td>
 </tr>
 <tr>
 <td><p>2</p></td>
 <td><p>Error</p></td>
-<td><p>XECUTEs $ETRAP or $ZTRAP and terminates the process</p></td>
+<td><p>XECUTEs $ETRAP or $ZTRAP</p></td>
 </tr>
 <tr>
 <td><p>3</p></td>
-<td><p>Information (Success&amp;Error)</p></td>
-<td><p>Displays the associated message and continues execution. It does not invoke $ETRAP or $ZTRAP.</p></td>
+<td><p>Information </p></td>
+<td><p>Displays the associated message on STDERR* and continues execution. It does not invoke $ETRAP or $ZTRAP.</p></td>
 </tr>
 <tr>
 <td><p>4</p></td>
 <td>
 <p>Severe/Fatal</p>
 </td>
-<td><p>Displays the associated message and terminates the process.</p></td>
+<td><p>Displays the associated message on STDERR and terminates the process.</p></td>
 </tr>
 <tr>
 <td><p>5,6,7</p></td>
@@ -92,6 +92,7 @@
 </tbody>
 </table>
 </div>
+<p>*: STDERR of the mumps process</p>
 </li>
 <li class="listitem"><p>Message codes between 1 and 132 come from OS services. ZMESSAGE treats all such codes as a either a trappable error or a fatal event.</p></li>
 </ul></div>
@@ -108,7 +109,7 @@
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zmessage"></a>Examples<span> of ZMESSAGE</span><a class="indexterm" name="idp173077152"></a>
+<a name="examples_of_zmessage"></a>Examples<span> of ZMESSAGE</span><a class="indexterm" name="idp177339440"></a>
 </h3></div></div></div>
 <p>All of the following examples issue ZMESSAGE from Direct Mode where exception conditions do not invoke $ZTRAP. </p>
 <p>Example:</p>

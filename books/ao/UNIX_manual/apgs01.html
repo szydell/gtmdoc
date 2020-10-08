@@ -8,7 +8,7 @@
 <link rel="up" href="TLS_Configuration_File.html" title="Appendix G. Creating a $gtmcrypt_config file">
 <link rel="prev" href="TLS_Configuration_File.html" title="Appendix G. Creating a $gtmcrypt_config file">
 <link rel="next" href="apgs02.html" title="OpenSSL Options">
-<link rel="copyright" href="ln-idp57543056.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp65672272.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -90,7 +90,9 @@ tls: {
       /* ssl-options: specifies OpenSSL options to be set or cleared. */
       ssl-options: "SSL_OP_NO_SSLv2:SSL_OP_NO_SSLv3";
   
-      /* List of certificate/key pairs specified by identifiers. */
+      /* List of alphanumeric TLS configuration identifiers (the "tlsid" used by GT.M processes) which must begin with a letter.
+       * Each configuration consists of name/value pairs for specific options like certificate, key and format.
+       */
       PRODUCTION: {
             /* Format of the certificate and private key pair. Currently, the GT.M TLS plug-in only supports PEM format. */
             format: "PEM";
@@ -102,6 +104,7 @@ tls: {
              * Currently, the GT.M TLS plug-in only supports RSA private keys.
              */
             key: "/home/jdoe/current/tls/certs/Malvern.key";
+            /* Global options can be overridden here */
       };
  
       DEVELOPMENT: {

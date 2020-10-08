@@ -8,7 +8,7 @@
 <link rel="up" href="app_security_phil.html" title="Appendix D. GT.M Security Philosophy">
 <link rel="prev" href="app_security_phil.html" title="Appendix D. GT.M Security Philosophy">
 <link rel="next" href="apds02.html" title="gtmsecshr commands">
-<link rel="copyright" href="ln-idp57543056.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp65672272.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -41,7 +41,7 @@
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="nrml_usrgir"></a>Normal User and Group Id Rule</h3></div></div></div>
-<p>GT.M processes run with normal UNIX user and group ids. GT.M has no database daemon that needs to run with elevated privileges. Process code written in M will be able to read a database file if and only if the process has read permission for that database file, and to update that database file if and only if the process has read/write permission for that database file.<sup>[<a name="idp67544944" href="apds01.html#ftn.idp67544944" class="footnote">10</a>]</sup></p>
+<p>GT.M processes run with normal UNIX user and group ids. GT.M has no database daemon that needs to run with elevated privileges. Process code written in M will be able to read a database file if and only if the process has read permission for that database file, and to update that database file if and only if the process has read/write permission for that database file.<sup>[<a name="idp75202432" href="apds01.html#ftn.idp75202432" class="footnote">10</a>]</sup></p>
 <p>There are two exceptions to this rule. Also, special mention is made of GT.M triggers, which require awareness of their behavior even though they comply with the Normal User and Group Id Rule.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
@@ -96,7 +96,7 @@
 <li class="listitem"><p>Secure the machine on which GT.M operates behind layers of defenses that permit only legitimate accesses.</p></li>
 <li class="listitem"><p>Restrict access to a system on which GT.M runs to those who legitimately need it.</p></li>
 <li class="listitem"><p>Post installation, a system administrator can optionally add a restrict.txt file in $gtm_dist to restrict the use of certain GT.M facilities to a group-name. The owner and group for $gtm_dist/restrict.txt can be different from those used to install GT.M. For more information, refer to <a class="xref" href="ch03s06.html" title="Configuring the Restriction facility">&#8220;Configuring the Restriction facility&#8221;</a></p></li>
-<li class="listitem"><p>If not all users who have access to a system require the ability to run GT.M, limit access to GT.M to a group to which all users who need access belong, and remove world access to GT.M.<sup>[<a name="idp67608304" href="apds01.html#ftn.idp67608304" class="footnote">11</a>]</sup>.  If such a group is called <code class="code">gtmusers</code>, the following command executed as root will accomplish this, if access was not restricted when GT.M was installed: <code class="code">chgrp -R gtmusers $gtm_dist ; chmod -R o-rwx $gtm_dist</code></p></li>
+<li class="listitem"><p>If not all users who have access to a system require the ability to run GT.M, limit access to GT.M to a group to which all users who need access belong, and remove world access to GT.M.<sup>[<a name="idp75264144" href="apds01.html#ftn.idp75264144" class="footnote">11</a>]</sup>.  If such a group is called <code class="code">gtmusers</code>, the following command executed as root will accomplish this, if access was not restricted when GT.M was installed: <code class="code">chgrp -R gtmusers $gtm_dist ; chmod -R o-rwx $gtm_dist</code></p></li>
 <li class="listitem"><p>Ensure that database file ownership (user and group), UNIX user and group ids, and permissions at the UNIX level match the intended access.  If finer grained access controls than those provided by user and group ids and permissions are needed, consider using, where appropriate and available, security products layered on top of the operating system.</p></li>
 <li class="listitem">
 <p>Under typical conditions, GT.M shared resources - journal files, shared memory, and semaphores - have the same group ids and access permissions as their database files, but may not be owned by the same userid, since the process creating the shared resource may have a different <code class="code">userid </code> from the one that created the database.  There are two edge cases to consider:</p>
@@ -105,7 +105,7 @@
 <li class="listitem"><p>Where the owner of the database file is neither a member of the group nor a member of the group of <code class="code">libgtmshr.so</code>.  In this case, GT.M uses world read-write permissions for the shared resources.  FIS advises against the use of a database file whose owner is neither a member of the group of the file nor a member of the group of <code class="code">libgtmshr.so.</code></p></li>
 </ul></div>
 </li>
-<li class="listitem"><p>The Mapped Memory (MM) access method does not use a shared memory segment for a buffer pool for database blocks - shared memory is used only for control structures.  Therefore, consider using MM if there are processes that are are not considered trustworthy but which need read-only access to database files.<sup>[<a name="idp67539744" href="apds01.html#ftn.idp67539744" class="footnote">12</a>]</sup></p></li>
+<li class="listitem"><p>The Mapped Memory (MM) access method does not use a shared memory segment for a buffer pool for database blocks - shared memory is used only for control structures.  Therefore, consider using MM if there are processes that are are not considered trustworthy but which need read-only access to database files.<sup>[<a name="idp75128032" href="apds01.html#ftn.idp75128032" class="footnote">12</a>]</sup></p></li>
 <li class="listitem"><p>If MM cannot be used, and processes that are not considered trustworthy need read-only access to database files, run those processes on a replicating instance specifically set up for that purpose.</p></li>
 <li class="listitem"><p>If a database file does not change during normal operation (for example, it contains configuration parameters), make its permissions read only for everyone.  On rare occasions when they need to be changed, shut down the application to get stand-alone access, temporarily make it read-write, make the changes, and then make it read-only once more.</p></li>
 <li class="listitem"><p>GT.M by default uses a wrapper for <code class="code">gtmsecshr</code>.  Source code for the wrapper is published.  If processes that startup <code class="code">gtmsecshr</code> cannot be trusted or coerced to have the correct values of <code class="code">$gtm_log and $gtm_tmp</code>, modify the source code to set <code class="code">$gtm_log</code> and <code class="code">$gtm_tmp</code> to required values, recompile and reinstall your modified wrapper.</p></li>
@@ -123,9 +123,9 @@
 </div>
 <div class="footnotes">
 <br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a name="ftn.idp67544944" href="apds01.html#idp67544944" class="para">10</a>] </sup>The concept of write-only access to a database file is not meaningful for GT.M</p></div>
-<div class="footnote"><p><sup>[<a name="ftn.idp67608304" href="apds01.html#idp67608304" class="para">11</a>] </sup>The GT.M installation script presents an option to restrict access to GT.M to members of a group.</p></div>
-<div class="footnote"><p><sup>[<a name="ftn.idp67539744" href="apds01.html#idp67539744" class="para">12</a>] </sup>Even with MM, processes that have read-only access to the database file still have read-write access to the control structures (for example, for M locks).  It is conceivable that a rogue process with read-only access may somehow place information in the control structures (for example, bad M lock information) to induce a normal process with read-write access to record inconsistent information in the database.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idp75202432" href="apds01.html#idp75202432" class="para">10</a>] </sup>The concept of write-only access to a database file is not meaningful for GT.M</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idp75264144" href="apds01.html#idp75264144" class="para">11</a>] </sup>The GT.M installation script presents an option to restrict access to GT.M to members of a group.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idp75128032" href="apds01.html#idp75128032" class="para">12</a>] </sup>Even with MM, processes that have read-only access to the database file still have read-write access to the control structures (for example, for M locks).  It is conceivable that a rogue process with read-only access may somehow place information in the control structures (for example, bad M lock information) to induce a normal process with read-write access to record inconsistent information in the database.</p></div>
 </div>
 </div>
 <div class="navfooter">

@@ -8,7 +8,7 @@
 <link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
 <link rel="prev" href="ch09s03.html" title="Using Terminals">
 <link rel="next" href="ch09s05.html" title="FIFO Characteristics">
-<link rel="copyright" href="ln-idp169799616.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp174085520.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,12 +30,12 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="using_seq_files"></a><span>Using </span>Sequential  Files<a class="indexterm" name="idp175513472"></a>
+<a name="using_seq_files"></a><span>Using </span>Sequential  Files<a class="indexterm" name="idp179733152"></a>
 </h2></div></div></div>
 <p>GT.M provides access to sequential files. These files <span>allow</span> linear access to records. Sequential files are used to create programs, store reports, and to communicate with facilities outside of GT.M.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="setting_seq_file_char"></a>Setting Sequential File Characteristics<a class="indexterm" name="idp175586976"></a>
+<a name="setting_seq_file_char"></a>Setting Sequential File Characteristics<a class="indexterm" name="idp179865056"></a>
 </h3></div></div></div>
 <p>The ANSI standard specifies that when a process CLOSEs and then reOPENs a device, GT.M restores any characteristics not explicitly specified with deviceparameters to the values they had prior to the last CLOSE. However, because it is difficult for a large menu-driven application to ensure the previous OPEN state, GT.M always sets unspecified sequential file characteristics to their default value on OPEN. This approach also reduces potential memory overhead imposed by OPENing and CLOSEing a large number of sequential files during the life of a process.</p>
 <p>GT.M does not restrict multiple OPEN commands. However, if a file is already open, GT.M ignores attempts to modify sequential file OPEN characteristics, except for RECORDSIZE and for deviceparameters that also exist for USE.</p>

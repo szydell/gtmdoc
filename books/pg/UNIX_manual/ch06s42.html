@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s41.html" title="ZRUPDATE">
 <link rel="next" href="ch06s43.html" title="ZSTep">
-<link rel="copyright" href="ln-idp169799616.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp174085520.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zshow_cmmd"></a>ZSHow<a class="indexterm" name="idp172894640"></a>
+<a name="zshow_cmmd"></a>ZSHow<a class="indexterm" name="idp177248976"></a>
 </h2></div></div></div>
 <p>The ZSHOW command displays information about the current GT.M environment.</p>
 <p>The format of the ZSHOW command is:</p>
@@ -48,7 +48,7 @@
 <p></p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zshow_info_codes"></a>ZSHOW Information Codes<a class="indexterm" name="idp173069168"></a>
+<a name="zshow_info_codes"></a>ZSHOW Information Codes<a class="indexterm" name="idp177358576"></a>
 </h3></div></div></div>
 <p>A ZSHOW argument is an expression containing codes selecting one or more types of information.</p>
 <p>A: A stands for Autorelink and provides output in the same format as MUPIP RCTLDUMP, but restricted to the routines contained in the relinkctl areas in use by the process issuing the command. ZSHOW "*" does not include ZSHOW "A" because of an expectation that the typical volume of the information does not provide a good return for its value. If you wish your error handling or INTRPT routines to dump this information, ask for it explicitly, possibly by doing a ZSHOW "A" into a local variable before doing a ZSHOW "*".</p>
@@ -78,12 +78,14 @@
 </ul></div>
 <p>If G occurs in the list, the following statistics are displayed.  The table is in alphabetical order, but ZSHOW will display the statistics according to historical practice with the most recently added statistics displayed last. The statistics are displayed in a comma-separated list where each item has its mnemonic followed by a colon and a counter. GT.M maintains the counter in DECIMAL. Each counter has 8-byte (can get as high as 2**64). If these counters exceed 18 decimal digits (somewhere between 2**59 and 2**60), which is the current GT.M numeric representation precision threshold, their use in arithmetic expressions in GT.M results in loss of precision. The mnemonics are:</p>
 <pre class="programlisting">
+AFRA : 1 waiting for instance freeze to release critical sections, 0 otherwise
+BREA : 1 waiting for block read &amp; decryption, 0 otherwise
 BTD : # of database Block Transitions to Dirty
 BTS : # times dirty cache record flushed
 BUS : # times db_csh_get too many retries
 CAT : Critical section Total Acquisitions successes
 CFE : Critical section Failed (blocked) acquisition total caused by Epochs
-CFS : Duplicate of CFE
+CFS : Square of CFT
 CFT : Critical section Failed (blocked) acquisition Total
 CQS* : Critical section acquisition Queued sleeps sum of Squares
 CQT* : Critical section acquisition Queued sleeps Total
@@ -91,18 +93,22 @@ CTN : Current Transaction Number of the database for the last committed read-wri
 CYS* : Critical section acquisition processor Yields sum of Squares
 CYT* : Critical section acquisition processor Yields Total
 DEX : # of Database file EXtentions
+DEXA : 1 waiting for db extension, 0 otherwise
 DFL : # of Database FLushes of the entire set of dirty global buffers in shared memory to disk
 DFS : # of times a process does an fsync of the database file. For example: a) after writing an epoch journal record, b) as part of database file extension c) during database rundown d) as part of mupip reorg -truncate etc.
-DRD : # of Disk ReaDs from the database file (TP and non-TP, committed and rolled-back).This does not include reads that are satisfied by buffered globals for databases that use the BG (Buffered Global) access method. GT.M always reports 0 for databases that use the MM (memory-mapped) access method as this has no real meaning in that mode. 
+DRD : # of Disk ReaDs from the database file (TP and non-TP, committed and rolled-back).This does not include reads that are satisfied by buffered globals for databases that use the BG (Buffered Global) access method. 
 DTA : # of DaTA operations (TP and non-TP) 
 DWT : # of Disk WriTes to the database file (TP and non-TP, committed and rolled-back). This does not include writes that are satisfied by buffered globals for databases that use the BG (Buffered Global) access method. GT.M always reports 0 for databases that use the MM (memory-mapped) access method as this has no real meaning in that mode.
 GET : # of GET operations (TP and non-TP)
+GLB : 1 waiting for bg access critical section, 0 otherwise
 JBB : # of Journal Buffer Bytes updated in shared memory
 JEX : # of Journal file EXtentions
 JFB : # of Journal File Bytes written to the journal file on disk. For performance reasons, GT.M always aligns the beginning of these writes to file system block size boundaries. JFB counts all bytes including those needed for alignment in order to reflect the actual IO load on the journal file. Since the bytes required to achieve alignment may have already been counted as part of the previous JFB, processes may write the same bytes more than once, causing the JFB counter to typically be higher than JBB.
 JFL : # of Journal FLushes of all dirty journal buffers in shared memory to disk. For example: when switching journal files etc.
 JFS : # of Journal FSync operations on the journal file. For example: when writing an epoch record, switching a journal file etc.
 JFW : # of Journal File Write system calls
+JNL : 1 waiting for journal access critical section, 0 otherwise
+JOPA : 1 waiting for journal open critical section, 0 otherwise
 JRE : # of Journal Regular Epoch records written to the journal file (only seen in a -detail journal extract); these are written every time an epoch-interval boundary is crossed while processing updates
 JRI : # of JouRnal Idle epoch journal records written to the journal file (only seen in a -detail journal extract); these are written when a burst of updates is followed by an idle period, around 5 seconds of no updates after the database flush timer has flushed all dirty global buffers to the database file on disk
 JRL : # of Journal Records with a Logical record type (e.g. SET, KILL etc.) written to the journal file 
@@ -111,6 +117,8 @@ JRP : # of Journal Records with a Physical record type (i.e. PBLK, AIMG) written
 KIL : # of KILl operations (kill as well as zwithdraw, TP and non-TP) 
 LKF : # of LocK calls (mapped to this db) that Failed 
 LKS : # of LocK calls (mapped to this db) that Succeeded 
+MLBA : 1 waiting for blocked LOCK, 0 otherwise
+MLK : 1 waiting for LOCK access, 0 otherwise
 NBR : # of Non-tp committed transaction induced Block Reads on this database 
 NBW : # of Non-tp committed transaction induced Block Writes on this database 
 NR0 : # of Non-tp transaction Restarts at try 0 
@@ -120,6 +128,7 @@ NR3 : # of Non-tp transaction Restarts at try 3
 NTR : # of Non-tp committed Transactions that were Read-only on this database 
 NTW : # of Non-tp committed Transactions that were read-Write on this database 
 ORD : # of $ORDer(,1) (forward) operations (TP and non-TP); the count of $Order(,-1) operations are reported under ZPR. 
+PRC : 1 waiting on exit, 0 otherwise
 QRY : # of $QueRY() operations (TP and non-TP) 
 SET : # of SET operations (TP and non-TP) 
 TBR : # of Tp transaction induced Block Reads on this database 
@@ -134,10 +143,13 @@ TR1 : # of Tp transaction Restarts at try 1 (counted for all regions participati
 TR2 : # of Tp transaction Restarts at try 2 (counted for all regions participating in restarting TP transaction)
 TR3 : # of Tp transaction Restarts at try 3 (counted for all regions participating in restarting TP transaction)
 TR4 : # of Tp transaction Restarts at try 4 and above (restart counted for all regions participating in restarting TP transaction) 
-TRB : # of Tp read-only or read-write transactions Rolled Back (excluding incremental rollbacks) 
+TRB : # of Tp read-only or read-write transactions Rolled Back (excluding incremental rollbacks)
+TRGA : 1 waiting for mini-transaction completion, 0 otherwise
+TRX : 1 waiting for transaction in progress, 0 otherwise
 TTR : # of Tp committed Transactions that were Read-only on this database 
 TTW : # of Tp committed Transactions that were read-Write on this database
 WFR : # of Blocks needing sleep on the read
+ZAD : 1 waiting for region freeze off, 0 otherwise
 ZPR : # of $order(,-1) or $ZPRevious() (reverse order) operations (TP and non-TP). The count of $Order(,1) operations are reported under ORD. 
 ZTR : # of ZTRigger command operations
 [NT]B[WR] mnemonics are satisfied by either disk access or, for databases that use the BG (buffered global) access method, global buffers in shared memory.
@@ -170,7 +182,7 @@ GT.M maintains the counters of the mnemonics marked with a * on AIX. On Linux, G
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zshow"></a>Examples<span> of ZSHow</span><a class="indexterm" name="idp173149408"></a>
+<a name="examples_of_zshow"></a>Examples<span> of ZSHow</span><a class="indexterm" name="idp177428400"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;ZSHOW "db"</pre>
@@ -341,7 +353,7 @@ $ZYERROR=""</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zsh_destination_vars"></a>ZSHOW Destination Variables<a class="indexterm" name="idp173176240"></a>
+<a name="zsh_destination_vars"></a>ZSHOW Destination Variables<a class="indexterm" name="idp177346320"></a>
 </h3></div></div></div>
 <p>ZSHOW may specify an unsubscripted or subscripted global or local variable name (glvn) into which ZSHOW places its output. If the argument does not include a global or local variable name, ZSHOW directs its output to the current device. </p>
 <p>When ZSHOW directs its output to a variable, it adds two levels of descendants to that variable. The first level subscript contains a one-character string from the set of upper-case ZSHOW action codes, identifying the type of information. ZSHOW implicitly KILLs all descendants of the first level nodes. ZSHOW stores information elements at the second level using ascending integers, starting at 1. </p>
@@ -373,7 +385,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="use_of_zshow"></a>Use of ZSHOW<a class="indexterm" name="idp173185440"></a>
+<a name="use_of_zshow"></a>Use of ZSHOW<a class="indexterm" name="idp177462752"></a>
 </h3></div></div></div>
 <p>Use ZSHOW as</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">

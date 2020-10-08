@@ -8,7 +8,7 @@
 <link rel="up" href="gdechap.html" title="Chapter 4. Global Directory Editor">
 <link rel="prev" href="using_gde.html" title="Using GDE">
 <link rel="next" href="nameregseg.html" title="Name, Region, and Segment Qualifiers">
-<link rel="copyright" href="ln-idp57543056.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp65672272.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -36,7 +36,7 @@ section describing each command provides the minimum abbreviation for that comma
 and a description of any qualifiers that are not object-related. The section
 discussing the object-type describes all the associated object-related
 qualifiers.</p>
-<p>Command Syntax:<a class="indexterm" name="idp53398608"></a></p>
+<p>Command Syntax:<a class="indexterm" name="idp65066208"></a></p>
 <p>The general format of GDE commands is:</p>
 <pre class="programlisting">command [-object-type] [object-name] [-qualifier]</pre>
 <p>where:</p>
@@ -111,7 +111,7 @@ appears in bold typewriter font. </p></li>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="at_sign"></a><span>@</span><a class="indexterm" name="idp45899568"></a>
+<a name="at_sign"></a><span>@</span><a class="indexterm" name="idp56393408"></a>
 </h3></div></div></div>
 <p>The @ command executes a GDE command file. Use the @ command to execute GDE
 commands stored in a text file.</p>
@@ -130,7 +130,7 @@ should start with an exclamation mark (!). </p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_add"></a>Add<a class="indexterm" name="idp43657808"></a>
+<a name="gde_add"></a>Add<a class="indexterm" name="idp56677088"></a>
 </h3></div></div></div>
 <p>The ADD command inserts a new name, region, or segment into the Global
 Directory.</p>
@@ -207,7 +207,7 @@ GDE&gt; add    -name x(20:)                          -region=REG3</pre>
 <p>Maps a segment to a database file. The syntax of the ADD -SEGMENT command is:</p>
 <pre class="programlisting">A[DD]-S[EGMENT] segment-name [<a class="link" href="nameregseg.html#segment_quals" title="Segment Qualifiers">-SEGMENT-qualifier</a>...] -F[ILE_NAME]=file-name</pre>
 <p>Example:</p>
-<a class="indexterm" name="idp54703792"></a><pre class="programlisting">GDE&gt; add -segment temp -file_name=scratch</pre>
+<a class="indexterm" name="idp59583616"></a><pre class="programlisting">GDE&gt; add -segment temp -file_name=scratch</pre>
 <p>This command creates a segment-name TEMP and maps it to the file
 scratch.dat in the current working directory. However, if you were to specify scratch as the file-name, in other words, an
 environment variable, each process uses the file using the translation of that
@@ -239,7 +239,7 @@ GDE&gt; show   -gblname
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_change"></a>Change<a class="indexterm" name="idp45737728"></a>
+<a name="gde_change"></a>Change<a class="indexterm" name="idp64589152"></a>
 </h3></div></div></div>
 <p>The CHANGE command alters the name-to-region or region-to-segment mapping and /or the environment for a region or segment. It may also alter the association of a global directory with a replication instance file.</p>
 <p>The format of the CHANGE command is: </p>
@@ -252,7 +252,7 @@ C[HANGE] -S[EGMENT] segment-name [-SEGMENT-qualifier...]
 <p>The CHANGE command requires specification of an object-type and object-name.</p>
 <p>Once you exit GDE, mapping changes, including Instance mapping, take effect for any subsequent image activation (for example, the next RUN or the <span> mumps -direct</span>  command). Changes to database parameters only take effect for new database files created with subsequent MUPIP CREATE commands that use the modified Global Directory. Use the MUPIP SET command (or in some cases DSE) to change characteristics of existing database files. </p>
 <p>Example:</p>
-<a class="indexterm" name="idp45801232"></a><pre class="programlisting">GDE&gt; change -region master -dynamic=temp -key=100</pre>
+<a class="indexterm" name="idp61465872"></a><pre class="programlisting">GDE&gt; change -region master -dynamic=temp -key=100</pre>
 <p>This command changes the region master to use the segment temp and
 establishes a maximum KEY_SIZE of 100 characters for the next creation of a file
 for this region. The segment change takes effect the first time the system uses
@@ -262,7 +262,7 @@ segment temp.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_delete"></a>Delete<a class="indexterm" name="idp55024176"></a>
+<a name="gde_delete"></a>Delete<a class="indexterm" name="idp58640768"></a>
 </h3></div></div></div>
 <p>The DELETE command removes a name, region, or segment from the Global
 Directory. The DELETE command does not delete any actual data. However, GT.M does not access database files that do not have mapped global variables except through extended references using an alternative global directory that does not map to them. Note that GT.M replication does not support global updates made with extended references, unless they actually map to a database file that is a part of the replicated instance.  </p>
@@ -281,13 +281,13 @@ the segment.</p>
 another segment using the CHANGE command. </p>
 <p>The default namespace (*) cannot be deleted.</p>
 <p>Example:</p>
-<a class="indexterm" name="idp57933600"></a><pre class="programlisting">GDE&gt; del -name T*</pre>
+<a class="indexterm" name="idp61659744"></a><pre class="programlisting">GDE&gt; del -name T*</pre>
 <p>This command deletes the explicit mapping of all global names starting with
 the letter "T." This command does not delete any global variables. However, it may make preexisting globals starting with the letter "T" invisible, at least while using this global directory, because the T* global names map to the default namespace going forward. </p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_exit"></a>Exit<a class="indexterm" name="idp46234352"></a>
+<a name="gde_exit"></a>Exit<a class="indexterm" name="idp61516320"></a>
 </h3></div></div></div>
 <p>The EXIT command writes all changes made in the current GDE editing session to
 the Global Directory and terminates the current editing session.</p>
@@ -304,7 +304,7 @@ new Global Directory unless the original global directory had an older format wh
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_help"></a>Help<a class="indexterm" name="idp55716464"></a>
+<a name="gde_help"></a>Help<a class="indexterm" name="idp58676240"></a>
 </h3></div></div></div>
 <p>The HELP command displays online information about GDE commands and
 qualifiers.</p>
@@ -315,7 +315,7 @@ qualifiers.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_locks"></a>LOCks<a class="indexterm" name="idp57588240"></a>
+<a name="gde_locks"></a>LOCks<a class="indexterm" name="idp62819072"></a>
 </h3></div></div></div>
 <p>The LOCKS command specifies the region into which GT.M maps "local" locks(those with resource
 names not starting with a caret symbol ^). GDE maps locks on resource names,
@@ -326,7 +326,7 @@ starting with a caret symbol, to the database region mapped for the global varia
 qualifier allows specification of a region for local locks. By default, GDE maps
 local locks to the <span>DEFAULT</span> region .</p>
 <p>Example:</p>
-<a class="indexterm" name="idp47440704"></a><pre class="programlisting">GDE&gt; lock -region=main</pre>
+<a class="indexterm" name="idp53211360"></a><pre class="programlisting">GDE&gt; lock -region=main</pre>
 <p>This command maps all locks on resource names that don't start with
 the caret symbol, "^" to the region main.</p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
@@ -339,7 +339,7 @@ the caret symbol, "^" to the region main.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_log"></a>LOG<a class="indexterm" name="idp46853696"></a>
+<a name="gde_log"></a>LOG<a class="indexterm" name="idp60505120"></a>
 </h3></div></div></div>
 <p>The LOG command creates a log file of all GDE commands and displays for the
 current editing session. Because the system places an exclamation point (!)
@@ -363,13 +363,13 @@ previous log file for the editing session. If no log file has previously been
 specified during this editing session, GDE uses the default log file
 GDELOG.LOG.</p>
 <p>Example:</p>
-<a class="indexterm" name="idp49768224"></a><pre class="programlisting">GDE&gt; log -on="standard.log"</pre>
+<a class="indexterm" name="idp53911248"></a><pre class="programlisting">GDE&gt; log -on="standard.log"</pre>
 <p>This command turns on logging of the session and directs the output to
 standard.log.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_quit"></a>Quit<a class="indexterm" name="idp48024432"></a>
+<a name="gde_quit"></a>Quit<a class="indexterm" name="idp53348304"></a>
 </h3></div></div></div>
 <p>The QUIT command ends the current editing session without saving any changes
 to the Global Directory. GDE does not update the Global Directory file.</p>
@@ -380,7 +380,7 @@ warning that the Global Directory has not been updated.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_rename"></a>Rename<a class="indexterm" name="idp45215776"></a>
+<a name="gde_rename"></a>Rename<a class="indexterm" name="idp52600272"></a>
 </h3></div></div></div>
 <p>The RENAME command allows you to change a namespace, the name of a region, or
 the name of a segment.</p>
@@ -396,13 +396,13 @@ object-names.</p>
 When renaming a segment, GDE transfers the region mapping to the new
 segment.</p>
 <p>Example:</p>
-<a class="indexterm" name="idp50618896"></a><pre class="programlisting">GDE&gt; rename -segment stable table</pre>
+<a class="indexterm" name="idp63110688"></a><pre class="programlisting">GDE&gt; rename -segment stable table</pre>
 <p>This command renames segment stable to table and shifts any region
 mapped to stable so it is mapped to table.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="setgd"></a>SEtgd<a class="indexterm" name="idp53401744"></a>
+<a name="setgd"></a>SEtgd<a class="indexterm" name="idp53604992"></a>
 </h3></div></div></div>
 <p>The SETGD command closes out edits on one Global Directory and opens edits on
 another.</p>
@@ -421,7 +421,7 @@ occurs. However, if the current Global Directory has been modified, GDE verifies
 the Global Directory, and if the verification is successful, writes that Global
 Directory. If the verification is not successful, the SETGD fails.</p>
 <p>Example:</p>
-<a class="indexterm" name="idp53306752"></a><pre class="programlisting">GDE&gt; SETGD -f="temp"</pre>
+<a class="indexterm" name="idp63521552"></a><pre class="programlisting">GDE&gt; SETGD -f="temp"</pre>
 <p>This changes the Global Directory being edited to temp. The
 quotation marks around the file name identifies the name of the file
 unequivocally to UNIX. If the -f is the final qualifier on the line, then the
@@ -429,7 +429,7 @@ quotation marks are unnecessary.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_show"></a>SHow<a class="indexterm" name="idp50473824"></a>
+<a name="gde_show"></a>SHow<a class="indexterm" name="idp65634384"></a>
 </h3></div></div></div>
 <p>The SHOW command displays information contained in the Global Directory about names, regions, and segments.</p>
 <p>The format of the SHOW command is:</p>
@@ -444,8 +444,8 @@ SH[OW] -R[EGION] [region-name]
 SH[OW] -S[EGMENT] [segment-name]
 SH[OW] -T[EMPLATE] 
 </pre>
-<a class="indexterm" name="idp48974480"></a><p>-COMMAND: Displays GDE commands that recreate the current Global Directory state.</p>
-<a class="indexterm" name="idp56936496"></a><p>-F[ILE]=gde-command-file: Optionally specifies a file to hold the GDE commands produced by -COMMAND. -FILE must must always appear after -COMMAND.</p>
+<a class="indexterm" name="idp65473760"></a><p>-COMMAND: Displays GDE commands that recreate the current Global Directory state.</p>
+<a class="indexterm" name="idp64662896"></a><p>-F[ILE]=gde-command-file: Optionally specifies a file to hold the GDE commands produced by -COMMAND. -FILE must must always appear after -COMMAND.</p>
 <p>Please consider using command files produced with the SHOW -COMMAND -FILE for creating new regions and segments in a global directory as the defaults come from the templates. If you inadvertently upgrade a global directory, you can use SHOW -COMMAND to create a file of commands that you can input to GDE with the prior GT.M release to recreate the prior global directory file.</p>
 <p>SHOW -COMMAND displays the GDE commands for creating names, regions, and segments of the current global directory state in a target environment. However, it does not always include the same template settings (SHOW -TEMPLATE) of the current global directory.  SHOW -COMMAND creates an appropriate set of templates that minimize other adjustments to recreate the current global directory. If the current GDE template settings (SHOW -TEMPLATE) are important for your application, you need set them again after applying the commands from GDE SHOW -COMMAND in the target environment.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
@@ -479,7 +479,7 @@ of the SHOW report titled: </p>
 <span>-</span>ON= before executing the SHOW command. The <span>-</span>LOG command captures all the commands entered and output. You can print the log file if you want a hard copy record.</p>
 <p>If you want to export the current Global Directory state, create a GDE command file with the SHOW -COMMAND -FILE=gde-command-file and run it in the target environment. </p>
 <p>Example:</p>
-<a class="indexterm" name="idp52903248"></a><pre class="programlisting">GDE&gt;show <span>-</span>template
+<a class="indexterm" name="idp51199680"></a><pre class="programlisting">GDE&gt;show <span>-</span>template
  *** TEMPLATES ***
                                                                           Std      Inst
                                              Def      Rec   Key Null      Null     Freeze Qdb   Epoch              LOCK
@@ -502,7 +502,7 @@ of the SHOW report titled: </p>
                                                                         DALL = YES
                                                                         FBWR =   0</pre>
 <p>This displays only the TEMPLATES section of the Global Directory.</p>
-<a class="indexterm" name="idp43497040"></a><pre class="programlisting">GDE&gt;SHOW -command 
+<a class="indexterm" name="idp51269760"></a><pre class="programlisting">GDE&gt;SHOW -command 
 TEMPLATE -REGION -NOAUTODB
 TEMPLATE -REGION -COLLATION_DEFAULT=0
 TEMPLATE -REGION -EPOCHTAPER
@@ -579,7 +579,7 @@ ADD -NAME US("South","m":"{") -REGION=USSMZREG
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_template"></a>Template <a class="indexterm" name="idp43150256"></a>
+<a name="gde_template"></a>Template <a class="indexterm" name="idp62959168"></a>
 </h3></div></div></div>
 <p>The TEMPLATE command maintains a set of -REGION and -SEGMENT qualifier values for use as templates when ADDing regions and segments. When an ADD command omits qualifiers, GDE uses the template values as defaults.</p>
 <p>GDE maintains a separate set of -SEGMENT qualifier values for each ACCESS_METHOD. When GDE modifies the ACCESS_METHOD, it activates the appropriate set of TEMPLATEs and sets all unspecified qualifiers to the template defaults for the new ACCESS_METHOD. Use the GDE SHOW command to display qualifier values for all ACCESS_METHODs.</p>
@@ -588,13 +588,13 @@ ADD -NAME US("South","m":"{") -REGION=USSMZREG
 T[EMPLATE] -S[EGMENT] [-SEGMENT-qualifier...]</pre>
 <p>The TEMPLATE command requires specification of an object-type.</p>
 <p>Example:</p>
-<a class="indexterm" name="idp46193472"></a><a class="indexterm" name="idp43610704"></a><pre class="programlisting">GDE&gt; template -segment -allocation=200000</pre>
+<a class="indexterm" name="idp65142464"></a><a class="indexterm" name="idp63324448"></a><pre class="programlisting">GDE&gt; template -segment -allocation=200000</pre>
 <p>This command modifies the segment template so that any segments
 ADDed after this time produce database files with an ALLOCATION of 200,000 GDS blocks. </p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gde_verify"></a>Verify<a class="indexterm" name="idp55171392"></a>
+<a name="gde_verify"></a>Verify<a class="indexterm" name="idp51280464"></a>
 </h3></div></div></div>
 <p>The VERIFY command validates information entered into the current Global
 Directory. It checks the name-to-region mappings to ensure all names map to a
