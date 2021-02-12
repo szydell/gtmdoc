@@ -8,7 +8,7 @@
 <link rel="up" href="index.html" title="GT.M Programmer's Guide">
 <link rel="prev" href="ch09s09.html" title="I/O Commands">
 <link rel="next" href="ch10s01.html" title="Using the Utilities">
-<link rel="copyright" href="ln-idp174085520.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp188806400.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,10 +30,18 @@
 <div class="chapter">
 <div class="titlepage"><div>
 <div><h2 class="title">
-<a name="chj_utility_routines"></a>Chapter 10. Utility Routines<a class="indexterm" name="idp179449376"></a>
+<a name="chj_utility_routines"></a>Chapter 10. Utility Routines<a class="indexterm" name="idp195159552"></a>
 </h2></div>
 <div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
 <tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V7.0-000</td>
+<td align="left">12 February 2021</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch10s09.html#PEEKBYNAME" title="%PEEKBYNAME()">&#8220;%PEEKBYNAME()&#8221;</a>, Add n_wrt_per_flu to the ^%PEEKBYNAME table</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch10s09.html" title="System Management Utilities">&#8220;System Management Utilities&#8221;</a>, removed the %DSEWRAP section</p></li>
+</ul></div></td>
+</tr>
 <tr>
 <td align="left">Revision V6.3-012</td>
 <td align="left">08 April 2020</td>
@@ -113,8 +121,6 @@
 <li class="listitem"><p>In <a class="xref" href="ch10s09.html#XCMD" title="%XCMD">&#8220;   
       %XCMD&#8221;</a>, made general improvements for clarity. Added examples that did not use xec</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch10s09.html#YGBLSTAT" title="%YGBLSTAT()">&#8220;%YGBLSTAT()&#8221;</a>, added the description of  %YGBLSTATS.</p></li>
-<li class="listitem"><p>In <a class="xref" href="ch10s09.html#dsewrap" title="%DSEWRAP">&#8220;%DSEWRAP&#8221;</a>, deprecated %DSEWRAP and added a reference to the MUPIP DUMPFHEAD and %DUMPFHEAD utility as alternatives.</p></li>
-<li class="listitem"><p>In <a class="xref" href="ch10s09.html#dumpfhead" title="%DUMPFHEAD">&#8220;%DUMPFHEAD&#8221;</a>, add the description of %DUMPFHEAD.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch10s06.html" title="Global Utilities">&#8220;
       Global Utilities&#8221;</a>, added the description of the %ZSHOWVTOLCL utility.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch10s06.html#percent_gi" title="%GI">&#8220;%GI&#8221;</a>, specified that ^%GI accepts records having up to 1MiB string length. </p></li>
@@ -125,10 +131,7 @@
 <td align="left">21 March 2013</td>
 <td align="left">
 <p>Added the following sections:</p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p><a class="xref" href="ch10s05.html" title="String Utilities">&#8220;String Utilities&#8221;</a></p></li>
-<li class="listitem"><p><a class="xref" href="ch10s09.html#dsewrap" title="%DSEWRAP">&#8220;%DSEWRAP&#8221;</a></p></li>
-</ul></div>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><a class="xref" href="ch10s05.html" title="String Utilities">&#8220;String Utilities&#8221;</a></p></li></ul></div>
 <p>In <a class="xref" href="ch10s09.html#XCMD" title="%XCMD">&#8220;   
       %XCMD&#8221;</a>, added the description of the LOOP^%XCMD utility label.</p>
 </td>
@@ -243,7 +246,6 @@
 </dl></dd>
 <dt><span class="sect1"><a href="ch10s09.html">System Management Utilities</a></span></dt>
 <dd><dl>
-<dt><span class="sect2"><a href="ch10s09.html#dsewrap">%DSEWRAP</a></span></dt>
 <dt><span class="sect2"><a href="ch10s09.html#dumpfhead">%DUMPFHEAD</a></span></dt>
 <dt><span class="sect2"><a href="ch10s09.html#freecnt_percent">
       %FREECNT</a></span></dt>

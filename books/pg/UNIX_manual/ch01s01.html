@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. About GT.M">
 <link rel="prev" href="ch01.html" title="Chapter 1. About GT.M">
 <link rel="next" href="ch02.html" title="Chapter 2. GT.M Language Extensions">
-<link rel="copyright" href="ln-idp174085520.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp188806400.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,12 +29,12 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="progr_environ"></a>Programming Environment<a class="indexterm" name="idp174243072"></a>
+<a name="progr_environ"></a>Programming Environment<a class="indexterm" name="idp188933888"></a>
 </h2></div></div></div>
 <p>The GT.M Programming Environment is described in the following sections.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="manage_data"></a>Managing Data<a class="indexterm" name="idp174237776"></a>
+<a name="manage_data"></a>Managing Data<a class="indexterm" name="idp189041904"></a>
 </h3></div></div></div>
 <p>The scope of M data is either process local or global.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -44,7 +44,7 @@
 <p>For more information about the GT.M data management system, refer to the "Global Directory Editor", "MUPIP" and "GT.M Journaling" chapters in the <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="db_manage_utils"></a>Database Management<span> Utilities</span><a class="indexterm" name="idp174296784"></a>
+<a name="db_manage_utils"></a>Database Management<span> Utilities</span><a class="indexterm" name="idp189039952"></a>
 </h4></div></div></div>
 <p>The Global Directory Editor (GDE) creates, modifies, maintains, and displays the characteristics of Global Directories. GDE also maps LOCKs on resource names to the region of the database specified for the corresponding global variables.</p>
 <p>The M Peripheral Interchange Program (MUPIP) creates database files and provides tools for GT.M database management and database journaling.</p>
@@ -53,20 +53,20 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="manage_source_code"></a>Managing Source Code<a class="indexterm" name="idp174095360"></a>
+<a name="manage_source_code"></a>Managing Source Code<a class="indexterm" name="idp188993760"></a>
 </h3></div></div></div>
 <p>In the GT.M programming environment, source routines are generated and stored as standard <span>UNIX files</span>. They are created and edited with standard <span>UNIX</span> text editors. GT.M accepts source lines of up to 8192 bytes. When GT.M encounters a line with a length greater than 8192 bytes in a source file, it emits an LSEXPECTED warning. This warning identifies cases where a line greater than 8192 bytes is split into multiple lines, which causes statements beyond the character prior to the limit to execute irrespective of any starting IF, ELSE or FOR commands. The 8192 byte limit applies to XECUTE command arguments and Direct Mode input as well.</p>
 <p>GT.M is designed to work with the operating system utilities and enhances them when beneficial. The following sections describe the process of programming and debugging with GT.M and from the operating system.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="src_file_mang"></a>Source File Management<a class="indexterm" name="idp174073808"></a>
+<a name="src_file_mang"></a>Source File Management<a class="indexterm" name="idp189020096"></a>
 </h4></div></div></div>
 <p>In addition to standard M "percent" utilities, GT.M permits the use of the standard UNIX file manipulation tools, for example, the diff, grep, cp, and mv commands. The GT.M programmer can also use the powerful facilities provided by the UNIX directory structure, such as time and date information, tree-structured directories, and file protection codes.</p>
 <p>GT.M programs are compatible with most source management software, for example, RCS and SCCS.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="prog_and_debug_faci"></a>Program<span>ming and</span> Debug<span>ging Facilities</span><a class="indexterm" name="idp174315968"></a>
+<a name="prog_and_debug_faci"></a>Program<span>ming and</span> Debug<span>ging Facilities</span><a class="indexterm" name="idp188950336"></a>
 </h4></div></div></div>
 <p>The GT.M programmer can use any UNIX text editor to create M source files. If you generate a program from within the Direct Mode, it also accesses the UNIX text editor specified by the environment variable EDITOR and provides additional capabilities to automate and enhance the process.</p>
 <p>The GT.M programmer also uses the Direct Mode facility to interactively debug, modify, and execute M routines. In Direct Mode, GT.M executes each M command immediately, as if it had been in-line at the point where GT.M initiated Direct Mode.</p>
@@ -79,13 +79,13 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="gtm_compiler"></a><span>The </span>GT.M Compiler<a class="indexterm" name="idp174282320"></a>
+<a name="gtm_compiler"></a><span>The </span>GT.M Compiler<a class="indexterm" name="idp189064256"></a>
 </h4></div></div></div>
 <p>The GT.M compiler operates on source files to produce object files consisting of position-independent,  native object code, which on some platforms can be linked into shared object libraries. GT.M provides syntax error checking at compile-time and allows you to enable or disable the compile-as-written mode. By default, GT.M produces an object file even if the compiler detects errors in the source code. This compile-as-written mode facilitates a flexible approach to debugging.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="run_time_sys"></a>The Run-Time System<a class="indexterm" name="idp174304240"></a>
+<a name="run_time_sys"></a>The Run-Time System<a class="indexterm" name="idp189046816"></a>
 </h4></div></div></div>
 <p>A GT.M programmer can execute an M routine from  <span>the shell</span> or interactively, using the M commands from Direct Mode.</p>
 <p>The run-time system executes compile-as-written code as long as it does not encounter the compile-time errors. If it detects an error, the run-time system suspends execution of a routine immediately and transfers control to Direct Mode or to a user-written error routine.</p>
@@ -98,7 +98,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="err_proc"></a>Error Processing<a class="indexterm" name="idp174326144"></a>
+<a name="err_proc"></a>Error Processing<a class="indexterm" name="idp188982096"></a>
 </h4></div></div></div>
 <p>The GT.M compiler detects and reports syntax errors at the following times:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
@@ -114,7 +114,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="input_output_proc"></a>Input-Output Processing<a class="indexterm" name="idp174308048"></a>
+<a name="input_output_proc"></a>Input-Output Processing<a class="indexterm" name="idp189068000"></a>
 </h4></div></div></div>
 <p>GT.M supports input and output processing with the following system components:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -136,19 +136,19 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="integrate_with_other_lang"></a>Integrating GT.M with Other Languages<a class="indexterm" name="idp174257152"></a>
+<a name="integrate_with_other_lang"></a>Integrating GT.M with Other Languages<a class="indexterm" name="idp189022224"></a>
 </h3></div></div></div>
 <p>GT.M offers capabilities that allow you to optimize your programming environment. These include allowing you to call into M routines from programs written in other programming languages, access your M databases with interfaces that provide functionality equivalent to M intrinsic database functions, and to alter your programming environment when working with languages other than American English. These include allowing you to call programs written in other programming languages that support C-like interfaces and to alter your programming environment when working with languages other than American English. This capability is described in more detail in chapters throughout this manual.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="acc_to_non_m_routine"></a>Access to <span>Non-M</span> Routines<a class="indexterm" name="idp174261936"></a>
+<a name="acc_to_non_m_routine"></a>Access to <span>Non-M</span> Routines<a class="indexterm" name="idp188997184"></a>
 </h3></div></div></div>
 <p>GT.M routines can call external (non-M) routines using the external call function. This permits access to functions implemented in other programming languages. For more information, see <span><a class="xref" href="ch11.html" title="Chapter 11. Integrating External Routines">Chapter 11: &#8220;<i><span>Integrating</span> External<span> Routines</span></i>&#8221;</a></span>.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="internationalization"></a>Internationalization<a class="indexterm" name="idp174094368"></a>
+<a name="internationalization"></a>Internationalization<a class="indexterm" name="idp188821264"></a>
 </h3></div></div></div>
 <p>GT.M allows the definition of alternative collation sequences and pattern matching codes for use with languages other than English. <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a> describes the details and requirements of this functionality.</p>
 </div>

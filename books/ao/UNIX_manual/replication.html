@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Database Replication">
 <link rel="prev" href="ch07s03.html" title="Procedures">
 <link rel="next" href="lkechap.html" title="Chapter 8. M Lock Utility (LKE)">
-<link rel="copyright" href="ln-idp65672272.html" title="Legal Notice">
+<link rel="copyright" href="ln-idp160089856.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,33 +29,33 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="repl_commands_qualifiers"></a><span>Commands and Qualifiers<a class="indexterm" name="idp70664384"></a></span>
+<a name="repl_commands_qualifiers"></a><span>Commands and Qualifiers<a class="indexterm" name="idp166487136"></a></span>
 </h2></div></div></div>
 <p>The following MUPIP commands and qualifiers control database replication in a GT.M
 environment.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="trng_repl_on_off"></a><span>Turning Replication On/Off</span><a class="indexterm" name="idp70125296"></a>
+<a name="trng_repl_on_off"></a><span>Turning Replication On/Off</span><a class="indexterm" name="idp165697664"></a>
 </h3></div></div></div>
 <p>Command Syntax:</p>
-<a class="indexterm" name="idp70851008"></a><pre class="programlisting">mupip set {<span>-</span>file db-file|<span>-</span>region reg-list} <span>-</span>replication={ON|OFF}</pre>
+<a class="indexterm" name="idp166425024"></a><pre class="programlisting">mupip set {<span>-</span>file db-file|<span>-</span>region reg-list} <span>-</span>replication={ON|OFF}</pre>
 <p>Qualifiers:</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idp70936688"></a>
-<a class="indexterm" name="idp70943936"></a>
+<span class="emphasis"><em><a class="indexterm" name="idp166511344"></a>
+<a class="indexterm" name="idp166518592"></a>
 <span>-file and -region</span>
 
 </em></span>
 </p>
 <p>Use these qualifiers in the same manner that you would use them for a MUPIP SET. <span>For more information refer to <a class="xref" href="mupipchap.html" title="Chapter 5. General Database Management">Chapter 5: &#8220;<i>General Database Management</i>&#8221;</a>.</span></p>
-<p><a class="indexterm" name="idp70126544"></a>
+<p><a class="indexterm" name="idp166501536"></a>
 <span class="emphasis"><em>
 <span>-replication=<em class="replaceable"><code>replication-state</code></em></span>
 
 </em></span>
 </p>
 <p>Switches the GT.M replication subsystem ON/OFF and possibly modify the current journaling [no-]before image field (which is stored in the database file header).</p>
-<a class="indexterm" name="idp70934720"></a><p><em class="replaceable"><code>replication-state</code></em> is either of the following keywords:</p>
+<a class="indexterm" name="idp166509376"></a><p><em class="replaceable"><code>replication-state</code></em> is either of the following keywords:</p>
 <p>
 <span class="emphasis"><em>OFF</em></span>
 </p>
@@ -68,14 +68,14 @@ environment.</p>
 <tr><td align="left" valign="top"><p>GT.M creates a new set of journal files and cuts the back link to the previous journal files if the replication-state is OFF and then turned ON again. The database cannot rollback to a state prior to ON. Therefore, ensure that replication-state remains ON throughout the span of database replication. Turn replication-state OFF only if database replication is no longer needed or the instance is about to be refreshed from the backup of the originating instance.</p></td></tr>
 </table></div>
 <p>
-<a class="indexterm" name="idp70951184"></a>
+<a class="indexterm" name="idp166525968"></a>
 <span class="emphasis"><em>ON</em></span>
 </p>
 <p>Enables replication for the selected database file(s) or region(s). When the JOURNAL qualifier is not specified, this action turns BEFORE_IMAGE journaling on. Specify -JOURNAL=NOBEFORE_IMAGE to enable replication with no-before-image journaling. In both cases, GT.M creates a new journal file for each database file or region, and switches the current journal file. FIS recommends you to specify the desired journaling characteristics (MUPIP SET -JOURNAL=BEFORE_IMAGE or MUPIP SET -JOURNAL=NOBEFORE_IMAGE).</p>
 <p>When replication is ON, a MUPIP SET REPLICATION=ON command with no JOURNAL qualifier assumes the current journaling characteristics (which are stored in the database file header). By default GT.M sets journal operation to BEFORE_IMAGE if this command changes the replication state from OFF to ON and JOURNAL=NOBEFORE_IMAGE is not specified. Therefore, conservative scripting should always specify the desired journaling characteristics using the JOURNAL qualifier of the MUPIP SET command.</p>
 <p>The replication state ON in the file header denotes normal replication operation.</p>
 <p>
-<a class="indexterm" name="idp70954976"></a>
+<a class="indexterm" name="idp166529760"></a>
 <span class="emphasis"><em>[WAS_ON] OFF</em></span>
 </p>
 <p>Denotes an implicit replication state when GT.M attempts to keep replication working even if run-time conditions such as no available disk space or no authorization for a process attempting to auto-switch a journal file cause GT.M to turn journaling off. Even with journaling turned off, the Source Server attempts to continue replication using the records available in the replication journal pool. In this state, replication can only continue as long as all the information it needs is in the replication journal pool. Events such as an operationally significant change on the replicating instance(s) or communication problems are likely to cause the Source Server to need information older than that in the replication journal pool and because it cannot look for that information in journal files, at that point the Source Server shuts down.</p>
@@ -100,8 +100,8 @@ environment.</p>
 <div class="titlepage"><div><div><h3 class="title">
 <a name="create_repl_inst"></a><span>Creating the Replication Instance File</span>
 </h3></div></div></div>
-<p>Command Syntax:<a class="indexterm" name="idp70959296"></a>
-<a class="indexterm" name="idp70966544"></a></p>
+<p>Command Syntax:<a class="indexterm" name="idp166534512"></a>
+<a class="indexterm" name="idp166541760"></a></p>
 <pre class="programlisting">mupip replicate -instance_create -name=&lt;instance name&gt; [-noreplace] [-supplementary] [-noqdbrundown] </pre>
 <p>Qualifiers:</p>
 <p>
@@ -109,22 +109,22 @@ environment.</p>
 </p>
 <p>Creates a replication instance file. mupip replicate -instance_create takes the file name of the replication instance file from the environment variable gtm_repl_instance.</p>
 <p>If an instance file already exists, GT.M renames it with a timestamp suffix, and creates a new replication instance file. This behavior is similar to the manner in which GT.M renames existing journal files while creating new journal files. Creating an instance file requires standalone access.</p>
-<a class="indexterm" name="idp70968816"></a><p>
+<a class="indexterm" name="idp166544160"></a><p>
 <span class="emphasis"><em>-name</em></span>
 </p>
 <p>Specifies the instance name that uniquely identifies the instance and is immutable. The instance name can be from 1 to 16 characters. GT.M takes the instance name (not the same as instance file name) from the environment variable gtm_repl_instname. If either gtm_repl_instname is not set or -name is not specified, GT.M produces an error. <span>For more information, refer to the entries for gtm_repl_instname and gtm_repl_instance in <a class="xref" href="ch03s02.html" title="Environment Variables">&#8220;Environment Variables&#8221;</a>.</span></p>
 <p>
-<a class="indexterm" name="idp70947168"></a>
-<a class="indexterm" name="idp70975424"></a>
+<a class="indexterm" name="idp166521824"></a>
+<a class="indexterm" name="idp166550656"></a>
 <span class="emphasis"><em>-noreplace</em></span>
 </p>
 <p>Prevents the renaming of an existing replication instance file. </p>
 <p>
-<a class="indexterm" name="idp70976816"></a>
+<a class="indexterm" name="idp166552048"></a>
  <span class="emphasis"><em>-supplementary</em></span></p>
 <p>Specifies that the replication instance file is suitable for use in a supplementary instance.</p>
 <p>
-<a class="indexterm" name="idp70952080"></a>
+<a class="indexterm" name="idp166526864"></a>
  <span class="emphasis"><em>-noqdbrundown</em></span></p>
 <p>Permits more than 32,767 udpating processes to concurrently the replication instance file and database file(s). The default (-noqdbrundown) permits up to 32,767 concurrent updating processes to access a database file or a replication instance file. </p>
 <p>This permission is effected by the QDBRUNDOWN flags in database file headers and in replication instance files. When an open database file or replication instance file with QDBRUNDOWN set is first concurrently accessed by more than 32,767 processes, GT.M:</p>
@@ -155,14 +155,14 @@ $ mupip replicate -instance_create</pre>
  [-name=&lt;new-name&gt;]
  [-[no]qdbrundown]</pre>
 <p>
-<a class="indexterm" name="idp70934224"></a>
-<a class="indexterm" name="idp70992080"></a>
+<a class="indexterm" name="idp166546496"></a>
+<a class="indexterm" name="idp166567808"></a>
 <span class="emphasis"><em>-editinstance</em></span>
 </p>
 <p>Displays or changes the attributes of the specified <em class="replaceable"><code>instance-file</code></em>. Use -editinstance in combination with the SHOW, CHANGE, or CLEANSLOTS qualifiers.</p>
 <p>
-<a class="indexterm" name="idp70974416"></a>
-<a class="indexterm" name="idp70995296"></a>
+<a class="indexterm" name="idp166549776"></a>
+<a class="indexterm" name="idp166571040"></a>
 <span class="emphasis"><em>-cleanslots</em></span>
 </p>
 <p>Goes through all 16 slots in the replication instance file, identifies the slots that are inactive, and clears them to make them available for reuse. </p>
@@ -174,43 +174,43 @@ $ mupip replicate -instance_create</pre>
 <tr><td align="left" valign="top"><p>Initially, all the slots are unused. A Source Server replicating to a secondary instance for the first time utilizes an unused slot to store the information related to that secondary. Any Source Server process replicating to the same secondary instance updates information using the same slot until -CLEANSLOT clears the slot to make it reusable. Use -CLEANSLOT to clear inactive slots when the originating instance connects to more than 16 different secondary instances throughout its lifetime.</p></td></tr>
 </table></div>
 <p>
-<a class="indexterm" name="idp70997712"></a>
-<a class="indexterm" name="idp70999680"></a>
+<a class="indexterm" name="idp166573456"></a>
+<a class="indexterm" name="idp166575424"></a>
 <span class="emphasis"><em>-jnlpool</em></span>
 </p>
 <p>Displays or changes the attributes of Journal Pool. Always specify -source with -jnlpool. Use -jnlpool in combination with SHOW or CHANGE qualifiers.</p>
 <p>
-<a class="indexterm" name="idp70979584"></a>
+<a class="indexterm" name="idp166554816"></a>
 <span class="emphasis"><em>-change</em></span>
  </p>
 <p>The CHANGE qualifier is intended only for use under the guidance of FIS and serves two purposes. When used with -editinstance -offset -size, it changes the contents of the replication instance file. When used with -jnlpool, it changes the contents of journal pool header. Although MUPIP does not enforce standalone access when using this feature on the instance file or the journal pool, doing so when replication is actively occurring can lead to catastrophic failures.</p>
 <p>
-<a class="indexterm" name="idp71003552"></a>
+<a class="indexterm" name="idp166579296"></a>
 <span class="emphasis"><em>-name=&lt;new-name&gt;</em></span>
 </p>
 <p>Changes the instance name in the replication instance file header to the new-name. Note that changing an instance name preserves the instance history.</p>
 <p>
-<a class="indexterm" name="idp70984624"></a>
+<a class="indexterm" name="idp166560016"></a>
 <span class="emphasis"><em>-show</em></span>
 </p>
 <p>Displays File Header, Source Server slots, and History Records from the Replication Instance file.</p>
 <p>
-<a class="indexterm" name="idp70927856"></a>
+<a class="indexterm" name="idp166500512"></a>
 <span class="emphasis"><em>-detail</em></span>
 </p>
 <p>When specified, all fields within each section are displayed along with their offset from the beginning of the file and the size of each field. Use this qualifier to find the -offset and -size of the displayed field. To edit any displayed field, use the -change qualifier.  </p>
 <p>
-<a class="indexterm" name="idp71010752"></a>
+<a class="indexterm" name="idp166586496"></a>
 <span class="emphasis"><em>-size</em></span>
 </p>
 <p>Indicates the new size of the new value in bytes. The value of size can be either 1, 2, 4, or 8.</p>
 <p>
-<a class="indexterm" name="idp70943136"></a>
+<a class="indexterm" name="idp166588848"></a>
 <span class="emphasis"><em>-offset</em></span>
 </p>
 <p>Takes a hexadecimal value that is a multiple of -size. With no -offset specified, GT.M produces an error. GT.M also produces an error if the offset is greater than the size of the instance file or the journal pool header.</p>
 <p>
-<a class="indexterm" name="idp71015680"></a>
+<a class="indexterm" name="idp166591552"></a>
 <span class="emphasis"><em>-value</em></span>
 </p>
 <p>Specifies the new hexadecimal value of the field having the specified -offset and -size. With no value specified, GT.M displays the current value at the specified offset and does not perform any change. Specifying -value=&lt;new_value&gt; makes the change and displays both the old and new values.</p>
@@ -222,12 +222,12 @@ $ mupip replicate -instance_create</pre>
 <tr><td align="left" valign="top"><p>Change the instance file or the journal pool only on explicit instructions from FIS.</p></td></tr>
 </table></div>
 <p>
-<a class="indexterm" name="idp71018800"></a>
+<a class="indexterm" name="idp166594544"></a>
 <span class="emphasis"><em>-show</em></span>
 </p>
 <p>The SHOW qualifier serves two purposes. When used with -editinstance, it displays the content of the replication instance file. When used with -jnlpool, it displays the content of the journal pool.</p>
 <p>
-<a class="indexterm" name="idp71021152"></a>
+<a class="indexterm" name="idp166596896"></a>
 <span class="emphasis"><em>-[no]qdbrundown</em></span>
 </p>
 <p>Controls the setting of the "HDR Quick database rundown is active" field in a replication instance file. For more information about this setting, refer to <a class="xref" href="replication.html#create_repl_inst" title="Creating the Replication Instance File">&#8220;<span>Creating the Replication Instance File</span>&#8221;</a>.  </p>
@@ -240,7 +240,7 @@ $ mupip replicate -instance_create</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="start_src_srvr"></a><span>Starting the </span> Source Server<a class="indexterm" name="idp70989248"></a>
+<a name="start_src_srvr"></a><span>Starting the </span> Source Server<a class="indexterm" name="idp166564976"></a>
 </h3></div></div></div>
 <p>The MUPIP REPLICATE -SOURCE -START command starts a Source Server process. The general syntax for starting a Source Server in active mode is:</p>
 <pre class="programlisting">mupip replicate -source -start 
@@ -347,10 +347,10 @@ secondary_identification_qualifiers
 <p>You can start the Source Server in passive mode with mupip replicate -source -start -passive. The general syntax for starting a Source Server in passive mode is the same as that of starting a Source Server in active mode except that -passive is not compatible with -secondary=&lt;hostname:port&gt;. </p>
 <p><span class="bold"><strong><a name="connection_qualifiers"></a>Connection Qualifiers:</strong></span></p>
 <p>
-<a class="indexterm" name="idp71078432"></a>
-<a class="indexterm" name="idp71090800"></a>
-<a class="indexterm" name="idp70942752"></a>
-<a class="indexterm" name="idp71033712"></a>
+<a class="indexterm" name="idp166652032"></a>
+<a class="indexterm" name="idp166649232"></a>
+<a class="indexterm" name="idp166548608"></a>
+<a class="indexterm" name="idp166524192"></a>
 <span class="emphasis"><em>-cmplvl=n</em></span>
 </p>
 <p>Specifies the desired compression level for the replication stream. n is a positive integer value indicating the level of compression desired. Level 0 offers no compression. Level 1 offers the least compression while Level 9 (as of version 1.2.3.3 of the zlib library) offers the most compression (at the cost of the most CPU usage). Specifying -cmplvl without an accompanying -start produces an error. In the case of the source server, if N specifies any value outside of the range accepted by the compression library or if -cmplvl is not specified, the compression level defaults to zero (0). In the case of the receiver server, as long as N is non-zero the decompression feature is enabled; since the source server setting determines the actual level, any legal non-zero value enables compressed operation at the receiver.</p>
@@ -397,8 +397,8 @@ make CFLAGS="-m64"</pre>
 <p> You can specify up to six parameters with -CONNECTPARAMS. MUPIP uses the defaults for the parameters not specified.</p>
 <p><span class="bold"><strong><a name="jnlpool_setup_qualifiers"></a>Journal Pool Setup Qualifiers:</strong></span></p>
 <p>
-<a class="indexterm" name="idp71107264"></a>
-<a class="indexterm" name="idp71021408"></a>
+<a class="indexterm" name="idp166683872"></a>
+<a class="indexterm" name="idp166673616"></a>
 <span class="emphasis"><em>
 <span>-buffsize=&lt;Journal Pool size in bytes&gt;</span>
 
@@ -411,8 +411,8 @@ make CFLAGS="-m64"</pre>
 <p>Forces the Source Server to read transactions from journal files instead of journal pool shared memory. When combined with the SYNC_IO journal option, this feature delays replication of transactions until their journal records are hardened to disk. This may be useful when replicating to a supplementary instance, as a crash and rollback on the primary could otherwise necessitate a rollback of local updates on the receiving instance. The default is -NOJNLFILEONLY. </p>
 <p><span class="bold"><strong><a name="logfile_management_qualifiers"></a>Log File Management Qualifiers:</strong></span></p>
 <p>
-<a class="indexterm" name="idp71014160"></a>
-<a class="indexterm" name="idp71100320"></a>
+<a class="indexterm" name="idp166685152"></a>
+<a class="indexterm" name="idp166647568"></a>
 <span class="emphasis"><em>
 <span>-log=&lt;log file name&gt;</span>
 
@@ -420,8 +420,8 @@ make CFLAGS="-m64"</pre>
 </p>
 <p>Specifies the location of the log file. The Source Server logs its unsuccessful connection attempts starting frequently and slowing to approximately once every five minutes. This interval does not affect the rate of connection attempts. The Source Server also directs errors to the log file. Operators should check the Source Server log file for errors.   </p>
 <p>
-<a class="indexterm" name="idp71095264"></a>
-<a class="indexterm" name="idp71057920"></a>
+<a class="indexterm" name="idp166637680"></a>
+<a class="indexterm" name="idp166681696"></a>
 <span class="emphasis"><em>
 -log_interval=&lt;integer&gt;</em></span>
 </p>
@@ -430,8 +430,8 @@ make CFLAGS="-m64"</pre>
 <p><span class="bold"><strong><a name="replication_filter_qualifiers"></a>Replication Filter Qualifiers:</strong></span></p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71059968"></a>
-<a class="indexterm" name="idp71115248"></a>
+<a class="indexterm" name="idp166635904"></a>
+<a class="indexterm" name="idp166690528"></a>
 <span>-filter=&lt;filter command&gt;</span>
 
 </em></span>
@@ -445,7 +445,7 @@ make CFLAGS="-m64"</pre>
 <pre class="programlisting">$gtm_dist/mupip replic -receiver -start -listenport=$portno -filter=$gtmfilter -log=$REC_LOG_FILE </pre>
 <p>The format of the input and output data is the MUPIP journal file extract format. The filter must maintain a strict 1:1 relationship between transactions on the input stream and transactions on the output stream. If a transaction on the input results in no sets and kills in the output, the filter must still write an empty transaction to the output stream.</p>
 <p>Example:</p>
-<a class="indexterm" name="idp71038928"></a><pre class="programlisting">extfilter
+<a class="indexterm" name="idp166608800"></a><pre class="programlisting">extfilter
   ; A command like the following deploys this filter on the Receiver Server:
   ; export gtmfilter=""$gtm_dist/mumps -run ^extfilter""
   ; $gtm_dist/mupip replic -receiver -start -buffsize=$gtm_buffsize 
@@ -514,15 +514,15 @@ err
 <p>to wrap mini-transactions in 08 09.</p>
 <p><span class="bold"><strong><a name="primary_role_qualifiers"></a>Primary Role Qualifiers:</strong></span></p>
 <p>
-<a class="indexterm" name="idp71019616"></a>
-<a class="indexterm" name="idp71125936"></a>
+<a class="indexterm" name="idp166608016"></a>
+<a class="indexterm" name="idp166701008"></a>
 <span class="emphasis"><em>-propagate[primary]</em></span>
 </p>
 <p>Use this optional qualifier to assign the current instance as a propagating instance. Specifying -propagateprimary disables updates on the current instance.</p>
 <p>Note that it is not possible to transition an originating instance to a propagating instance without bringing down the Journal Pool. However, it is possible to transition a propagating instance to an originating instance without bringing down the Journal Pool for an already running passive Source Server (start one with -propagateprimary if none is running).</p>
 <p>Both -rootprimary and -propagateprimary are optional and mutually exclusive. However, FIS recommends you to specify both -rootprimary and -propagateprimary explicitly in the script for clarity.</p>
 <p>Example:</p>
-<a class="indexterm" name="idp71128288"></a><a class="indexterm" name="idp71129056"></a><pre class="programlisting">$ mupip replicate -source -activate -rootprimary</pre>
+<a class="indexterm" name="idp166703360"></a><a class="indexterm" name="idp166704128"></a><pre class="programlisting">$ mupip replicate -source -activate -rootprimary</pre>
 <p>This command transitions a propagating originating instance to an originating instance without bringing down the Journal Pool.</p>
 <p>With neither -rootprimary nor -propagateprimary specified, GT.M uses a default value of -propagateprimary for the passive Source Server startup command (mupip replic -source -start -passive) and the deactivate qualifier (mupip replicate -source -deactivate). GT.M uses a default value of -rootprimary for the mupip replicate -source -start -secondary=... and the mupip replic -source -activate commands. These default values make the replication script simpler for users who are planning to limit themselves to one originating instance and multiple replicating instance (without any further replicating instances downstream).</p>
 <pre class="programlisting">$ export gtm_repl_instance=multisite.repl
@@ -542,27 +542,27 @@ $ mupip replicate -source -start -buffsize=$jnlpool_size -secondary=localhost:12
 </table></div>
 <p>The Source Server records actions and errors in A2B.log. It also periodically record statistics such as the current backlog, the number of journal records sent since the last log, the rate of transmission, the starting and current JNL_SEQNO, and the path of the filter program, if any. </p>
 <p>
-<a class="indexterm" name="idp71110736"></a>
-<a class="indexterm" name="idp71059456"></a>
+<a class="indexterm" name="idp166589232"></a>
+<a class="indexterm" name="idp166635392"></a>
 <span class="emphasis"><em>-rootprimary</em></span>
 </p>
 <p>Assign the current instance as the originating instance. You can specify -rootprimary either explicitly or implicitly to start an instance as an originating instance.</p>
 <p>
-<a class="indexterm" name="idp71142992"></a>
-<a class="indexterm" name="idp71144848"></a>
+<a class="indexterm" name="idp166718064"></a>
+<a class="indexterm" name="idp166719920"></a>
 <span class="emphasis"><em>-updnotok</em></span>
 </p>
 <p>Instructs the Source Server to not allow local updates on this instance. This is a synonym for -propagateprimary but is named so it better conveys its purpose.</p>
 <p>
-<a class="indexterm" name="idp71146256"></a>
-<a class="indexterm" name="idp71148112"></a>
+<a class="indexterm" name="idp166721328"></a>
+<a class="indexterm" name="idp166723184"></a>
 <span class="emphasis"><em>-updok</em></span>
 </p>
 <p>Instructs the Source Server to allow local updates on this instance. This is a synonym for -rootprimary but is named so it better conveys its purpose.</p>
 <p><span class="bold"><strong><a name="secondary_identification_qualifiers"></a>Secondary Identification Qualifiers:</strong></span></p>
 <p>
-<a class="indexterm" name="idp71120048"></a>
-<a class="indexterm" name="idp71150096"></a>
+<a class="indexterm" name="idp166695232"></a>
+<a class="indexterm" name="idp166725168"></a>
 <span class="emphasis"><em>-instsecondary</em></span>
 </p>
 <p>Specifies the replicating instance to which the Source Server replicates data. -instsecondary also identifies a Source Server process target for actions like changing to active mode or passive mode, checking Source Server health, or shutting down a Source Server.  </p>
@@ -574,8 +574,8 @@ $ mupip replicate -source -start -buffsize=$jnlpool_size -secondary=localhost:12
 <pre class="programlisting">$ mupip replicate -source -start -buffsize=$gtm_buffsize -secondary=localhost:1234 -log=A2B.log -instsecondary=B</pre>
 <p>This command starts the Source Server for the originating instance with instance B as its replicating instance.</p>
 <p>
-<a class="indexterm" name="idp71155264"></a>
-<a class="indexterm" name="idp71157344"></a>
+<a class="indexterm" name="idp166730336"></a>
+<a class="indexterm" name="idp166732416"></a>
 <span class="emphasis"><em>
 <span>-secondary=&lt;hostname:port&gt;</span>
 
@@ -585,16 +585,16 @@ $ mupip replicate -source -start -buffsize=$jnlpool_size -secondary=localhost:12
 <p>If, in your environment, the same hostname is used for both IPv4 and IPv6, GT.M defaults to IPv6. If you wish to use IPv4, perhaps because you have a Receiver Server running a pre-V6.0-003 version of GT.M that does not support IPv6, set the environment variable gtm_ipv4_only to "TRUE", "YES", or a non-zero integer in order to force GT.M to use IPv4.</p>
 <p><span class="bold"><strong><a name="tls_replication_qualifiers"></a>TLS Replication Qualifiers:</strong></span></p>
 <p><span class="emphasis"><em><span>-</span>tlsid=&lt;label&gt;
-<a class="indexterm" name="idp71163360"></a>
-<a class="indexterm" name="idp71170608"></a></em></span></p>
+<a class="indexterm" name="idp166738544"></a>
+<a class="indexterm" name="idp166745792"></a></em></span></p>
 <p>Instructs the Source or Receiver Server to use the TLS certificate and private key pairs having &lt;label&gt; as the TLSID in the configuration file pointed to by the gtmcrypt_config environment variable. TLSID is a required parameter if TLS/SSL is to be used to secure replication connection between instances. If private keys are encrypted, an environment variable of the form gtmtls_passwd_&lt;label&gt; specifies their obfuscated password. You can obfuscate passwords using the 'maskpass' utility provided along with the encryption plugin. If you use unencrypted private keys, set the gtmtls_passwd_&lt;label&gt; environment variable to a non-null dummy value; this prevents inappropriate prompting for a password.</p>
 <p><span class="emphasis"><em><span>-</span>[NO]PLAINtextfallback
-<a class="indexterm" name="idp71134672"></a>
-<a class="indexterm" name="idp71174880"></a></em></span></p>
+<a class="indexterm" name="idp166716080"></a>
+<a class="indexterm" name="idp166750064"></a></em></span></p>
 <p>Specifies whether the replication server is permitted to fallback to plaintext communication. The default is -NOPLAINtextfallback. If NOPLAINTEXTFALLBACK is in effect, GT.M issues a REPLNOTLS error in the event it is unable to establish a TLS connection. [Note: GT.M versions prior to V6.1-000 did not support TLS for replication - if needed it could be implemented with an external application such as stunnel (<a class="ulink" href="http://stunnel.org" target="_top">http://stunnel.org</a>).] If PLAINTEXTFALLBACK is in effect, in the event of a failure to establish a TLS connection, GT.M issues REPLNOTLS as a warning. Once a permitted plaintext replication connection is established for a connection session, GT.M never attempts to switch that connection session to TLS connection.</p>
 <p><span class="emphasis"><em><span>-</span>RENEGotiate_interval=&lt;minutes &gt;
-<a class="indexterm" name="idp71169024"></a>
-<a class="indexterm" name="idp71180512"></a></em></span></p>
+<a class="indexterm" name="idp166744208"></a>
+<a class="indexterm" name="idp166755584"></a></em></span></p>
 <p>Specifies the time in mintues to wait before attempting to perform a TLS renegotiation. The default -RENEGOTIATE_INTERVAL is a little over 120 minutes. A value of zero causes GT.M never to attempt a renegotiation. The MUPIP REPLIC -SOURCE -JNLPOOL -SHOW [-DETAIL] command shows the time at which the next TLS renegotiation is scheduled, and how many such renegotiations have occurred thus far for a given secondary instance connection. As renegotiation requires the replication pipeline to be temporarily flushed, followed by the actual renegotiation, TLS renegotiation can cause momentary spikes in replication backlog.</p>
 </div>
 <div class="sect2">
@@ -605,8 +605,8 @@ $ mupip replicate -source -start -buffsize=$jnlpool_size -secondary=localhost:12
  [-timeout=&lt;timeout in seconds&gt;]
  [-zerobacklog]</pre>
 <p>Qualifiers:</p>
-<p><a class="indexterm" name="idp71166528"></a>
-<a class="indexterm" name="idp71026224"></a>
+<p><a class="indexterm" name="idp166748896"></a>
+<a class="indexterm" name="idp166601712"></a>
 <span class="emphasis"><em>
 <span>-shutdown</span>
 
@@ -614,23 +614,28 @@ $ mupip replicate -source -start -buffsize=$jnlpool_size -secondary=localhost:12
 </p>
 <p>Shuts down the Source Server.</p>
 <p>
-<a class="indexterm" name="idp71173008"></a>
-<a class="indexterm" name="idp71184528"></a>
+<a class="indexterm" name="idp166748192"></a>
+<a class="indexterm" name="idp166759248"></a>
 <span class="emphasis"><em>
 <span>-timeout=&lt;timeout in seconds&gt;</span>
 
 </em></span>
 </p>
-<p>Specifies the time (in seconds) the shutdown command should wait before signaling the Source Server to shut down. If you specify -timeout=0 MUPIP initiates the shutdown immediately. The default and the maximum is 30 seconds. Any value over 30 is rounded down to 30 seconds with a corresponding message.</p>
-<p>After initiating shutdown of the source server, GT.M waits up to 90 * number_of_regions seconds (with a minimum of 120 seconds) for the Source Server process to exit normally. </p>
+<p>Specifies the time (in seconds) the shutdown command should wait before signaling the Source Server to shut down. If you specify -timeout=0, MUPIP initiates the shutdown immediately. The default is 120 seconds and the maximum timeout is 3600 seconds. Any value higher than 3600 produces the INVSHUTDOWN error.</p>
+<p>After initiating shutdown of the Source Server, GT.M waits up to 90 * number_of_regions seconds (with a minimum of 120 seconds) for the Source Server process to exit normally. </p>
 <p>
-   <a class="indexterm" name="idp71187152"></a>
-   <a class="indexterm" name="idp71189120"></a>
+   <a class="indexterm" name="idp166761744"></a>
+   <a class="indexterm" name="idp166763824"></a>
    <span class="emphasis"><em>
    <span>-zerobacklog</span>
    </em></span>
  </p>
-<p>Shuts down the Source Server either when the backlog goes to zero or the timeout expires, whichever occurs first.</p>
+<p>Restricts Journal Pool in a way that only existing processes can complete their updates and shuts down the Source Server:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>with the REPL0BACKLOG message as soon as there is no backlog and the Source Server has received acknowledgement of all its updates from the Receiver Server.  </p></li>
+<li class="listitem"><p>with the REPLBACKLOG message when the timeout expires while there was a backlog and/or unacknowledged updates from the Receiver Server.</p></li>
+</ul></div>
+<p>The REPL0BACKLOG message helps confirm that two instances are in sync (seqno-wise) because all Source Server updates have reached the Receive Pool at the time of shutdown and there are no-inflight updates. The REPL0BACKLOG message also causes the timeout to expire prematurely. In planned switchover scenarios, the REPL0BACKLOG message assists in operationally preventing lost transaction file generation. </p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
@@ -648,8 +653,8 @@ $ mupip replicate -source -start -buffsize=$jnlpool_size -secondary=localhost:12
 <p>Qualifiers:</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71195968"></a>
-<a class="indexterm" name="idp71203216"></a>
+<a class="indexterm" name="idp166773056"></a>
+<a class="indexterm" name="idp166780304"></a>
 <span>-activate</span>
 
 </em></span>
@@ -659,26 +664,26 @@ $ mupip replicate -source -start -buffsize=$jnlpool_size -secondary=localhost:12
 <span>-secondary</span></em></span>.</p>
 <p>Before activation, -activate sets the Source Server to ACTIVE_REQUESTED mode. On successful activation, GT.M sets the Source Server mode to ACTIVE. GT.M produces an error when there is an attempt to activate a Source Server in ACTIVE_REQUESTED mode.</p>
 <p><span class="emphasis"><em>
-<a class="indexterm" name="idp71183744"></a>
-<a class="indexterm" name="idp71209728"></a>
+<a class="indexterm" name="idp166766240"></a>
+<a class="indexterm" name="idp166786736"></a>
 <span>-instsecondary=&lt;instance_name&gt;</span></em></span></p>
 <p>Identifies the replicating instance to which the passive Source Server connects after activation.</p>
 <p>With no -instsecondary specified, the passive Source Server uses the environment variable gtm_repl_instsecondary
 as the value of -instsecondary.</p>
 <p><span class="emphasis"><em>
-<a class="indexterm" name="idp71193072"></a>
-<a class="indexterm" name="idp71214656"></a>
+<a class="indexterm" name="idp166696016"></a>
+<a class="indexterm" name="idp166791664"></a>
 <span>-rootprimary</span></em></span></p>
 <p>Specifies that the passive Source Server activation occurs on an originating instance.</p>
 <p><span class="emphasis"><em>
-<a class="indexterm" name="idp71200192"></a>
-<a class="indexterm" name="idp71218560"></a>
+<a class="indexterm" name="idp166775616"></a>
+<a class="indexterm" name="idp166795712"></a>
 <span>-propagateprimary</span></em></span></p>
 <p>Specifies that the passive Source Server activation occurs on a propagating instance.</p>
 <p>If neither -rootprimary nor -propagateprimary are specified, this command assumes -propagateprimary. </p>
 <p><span class="emphasis"><em>
-<a class="indexterm" name="idp71205248"></a>
-<a class="indexterm" name="idp71223216"></a>
+<a class="indexterm" name="idp166782368"></a>
+<a class="indexterm" name="idp166800368"></a>
 <span>-log_interval</span></em></span></p>
 <p>Specifies the number of transactions for which the Source Server should wait before writing to the log file. The default logging interval is 1000 transactions.</p>
 <p>-log_interval=0 reverts the logging interval to the default value.</p>
@@ -689,12 +694,12 @@ as the value of -instsecondary.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="deavtivate_act_src_srvr"></a><span>Deactivating an</span> Active Source Server</h3></div></div></div>
-<a class="indexterm" name="idp71164672"></a><p>Command syntax:</p>
+<a class="indexterm" name="idp166739024"></a><p>Command syntax:</p>
 <pre class="programlisting">mupip replicate -source -deactivate -instsecondary=&lt;instance_name&gt;</pre>
 <p>Qualifiers:</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71155712"></a>
+<a class="indexterm" name="idp166803488"></a>
 <span>-deactivate</span>
 
 </em></span>
@@ -703,7 +708,7 @@ as the value of -instsecondary.</p>
 <p>Before deactivation, -deactivate sets the Source Server to PASSIVE_REQUESTED mode. On successful deactivation, GT.M sets the Source Server mode to PASSIVE. GT.M produces an error when there is an attempt to deactivate a Source Server in PASSIVE_REQUESTED mode.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71208112"></a>
+<a class="indexterm" name="idp166785248"></a>
 <span>-instsecondary=&lt;instance_name&gt;</span>
 </em></span>
 </p>
@@ -711,14 +716,14 @@ as the value of -instsecondary.</p>
 <p>With no -instsecondary specified, $gtm_repl_instsecondary determines the active Source Server.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71210992"></a>
+<a class="indexterm" name="idp166754128"></a>
 <span>-rootprimary</span>
 </em></span>
 </p>
 <p>Specifies that the active Source Server is on originating instance.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71226592"></a>
+<a class="indexterm" name="idp166804384"></a>
 <span>-propagateprimary</span>
 </em></span>
 </p>
@@ -728,7 +733,7 @@ as the value of -instsecondary.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="stop_src_filtr"></a><span>Stopping the</span> Source Filter</h3></div></div></div>
-<a class="indexterm" name="idp71200320"></a><a class="indexterm" name="idp71165280"></a><a class="indexterm" name="idp71207696"></a><p>There are two ways to stop an active filter on the Source Server. </p>
+<a class="indexterm" name="idp166797168"></a><a class="indexterm" name="idp166803360"></a><a class="indexterm" name="idp166774400"></a><p>There are two ways to stop an active filter on the Source Server. </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>Execute mupip replicate <span>-</span>source <span>-</span>stopsourcefilter -instsecondary on the originating Source Server.  </p></li>
 <li class="listitem"><p>Specify <span>-</span>stopsourcefilter as an option for starting the Receiver Server. </p></li>
@@ -744,7 +749,7 @@ as the value of -instsecondary.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="stop_rec_filtr"></a><span>Stopping the</span> Receiver Filter</h3></div></div></div>
-<a class="indexterm" name="idp71235440"></a><a class="indexterm" name="idp71251296"></a><a class="indexterm" name="idp71246304"></a><p>Command Syntax:</p>
+<a class="indexterm" name="idp166803984"></a><a class="indexterm" name="idp166814592"></a><a class="indexterm" name="idp166793696"></a><p>Command Syntax:</p>
 <pre class="programlisting">mupip replicate -receiver -stopreceiverfilter</pre>
 <p>Qualifiers:</p>
 <p><span class="emphasis"><em>-stopreceiverfilter</em></span></p>
@@ -752,7 +757,7 @@ as the value of -instsecondary.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="freeze_src_srv_inst"></a><span>Freezing an </span> Instance<a class="indexterm" name="idp71238016"></a>
+<a name="freeze_src_srv_inst"></a><span>Freezing an </span> Instance<a class="indexterm" name="idp166825456"></a>
 </h3></div></div></div>
 <p>The MUPIP REPLICATE -SOURCE command with instance freeze qualifiers manage the Instance Freeze facility of an instance. The syntax is:</p>
 <pre class="programlisting">mupip replicate -source 
@@ -776,15 +781,15 @@ Server is running.</p>
 <p>Qualifiers:</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71270080"></a>
+<a class="indexterm" name="idp166846624"></a>
 <span>-checkhealth</span>
 
 </em></span>
 </p>
 <p>Determine whether the Source Server is running. If the Source Server is running, the exit code is 0 (zero). If the Source Server is not running or an error exists, the exit code is not 0.</p>
 <p><span class="emphasis"><em>
-<a class="indexterm" name="idp71240304"></a>
-<a class="indexterm" name="idp71281088"></a>
+<a class="indexterm" name="idp166754384"></a>
+<a class="indexterm" name="idp166857664"></a>
 <span>-instsecondary=&lt;instance_name&gt;</span></em></span></p>
 <p>Identifies a Source Server process. </p>
 <p>If -instsecondary is not specified, -checkhealth checks all Source Server processes. </p>
@@ -803,7 +808,7 @@ PID 0 Source server is NOT alive
 <div class="titlepage"><div><div><h3 class="title">
 <a name="chng_log_file"></a><span>Changing the Log File</span>
 </h3></div></div></div>
-<a class="indexterm" name="idp71119904"></a><a class="indexterm" name="idp71272832"></a><p>Command syntax:</p>
+<a class="indexterm" name="idp166826512"></a><a class="indexterm" name="idp166851040"></a><p>Command syntax:</p>
 <pre class="programlisting">mupip replicate -source -changelog -log=&lt;log file name&gt; [-log_interval=&lt;integer&gt;] -instsecondary=&lt;instance_name&gt;</pre>
 <p>Qualfiers:</p>
 <p>
@@ -814,8 +819,8 @@ PID 0 Source server is NOT alive
 </p>
 <p>Instructs the Source Server to change its log file.</p>
 <p><span class="emphasis"><em>
-<a class="indexterm" name="idp71287424"></a>
-<a class="indexterm" name="idp71294672"></a>
+<a class="indexterm" name="idp166863776"></a>
+<a class="indexterm" name="idp166871024"></a>
 <span>-instsecondary=&lt;instance_name&gt;</span></em></span></p>
 <p>Identifies a Source Server process. </p>
 <p>
@@ -828,8 +833,8 @@ PID 0 Source server is NOT alive
 <p>Example:</p>
 <pre class="programlisting">$ mupip replicate -source -changelog -log=/more_disk_space/newA2B.log -instsecondary=Brazil</pre>
 <p>
-<a class="indexterm" name="idp71238944"></a>
-<a class="indexterm" name="idp71278208"></a>
+<a class="indexterm" name="idp166842704"></a>
+<a class="indexterm" name="idp166854000"></a>
 <span class="emphasis"><em>
 -log_interval=&lt;integer&gt;</em></span>
 </p>
@@ -839,21 +844,21 @@ PID 0 Source server is NOT alive
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="enable_disable_dtld_log"></a><span>Enabling/Disabling Detailed</span> Logging</h3></div></div></div>
-<a class="indexterm" name="idp71273056"></a><p>Command syntax:</p>
+<a class="indexterm" name="idp166846320"></a><p>Command syntax:</p>
 <pre class="programlisting">mupip replicate -source -statslog={ON|OFF} 
  [-log_interval=&lt;integer&gt;</pre>
 <p>Qualifiers:</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71302400"></a>
+<a class="indexterm" name="idp166878288"></a>
 <span>-statslog={ON | OFF}</span>
 
 </em></span>
 </p>
 <p>Enables or disables detailed logging. When ON, the system logs current-state information of the Source Server and messages exchanged between the Source and Receiver Servers. By default, detailed logging is OFF. Once you enable it (ON), changing <span class="emphasis"><em><span>-</span></em></span>statslog to OFF can stop detailed logging.</p>
 <p>
-<a class="indexterm" name="idp71289152"></a>
-<a class="indexterm" name="idp71258528"></a>
+<a class="indexterm" name="idp166865504"></a>
+<a class="indexterm" name="idp166869280"></a>
 <span class="emphasis"><em>
 -log_interval=&lt;integer&gt;</em></span>
 </p>
@@ -864,29 +869,113 @@ PID 0 Source server is NOT alive
 <div class="titlepage"><div><div><h3 class="title">
 <a name="rprt_current_backlog"></a><span>Reporting the Current Backlog of Journal Records</span>
 </h3></div></div></div>
-<a class="indexterm" name="idp71245184"></a><p>Command syntax:</p>
+<a class="indexterm" name="idp166817744"></a><p>Command syntax:</p>
 <pre class="programlisting">mupip replicate -source -showbacklog</pre>
 <p>Qualifiers:</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71314256"></a>
+<a class="indexterm" name="idp166890000"></a>
 <span>-showbacklog</span>
 
 </em></span>
 </p>
-<p>Reports the current backlog of journal records (in terms of JNL_SEQNO) on the output device (normally the standard output device). This qualifier does not affect the statistics logged in the log file. The backlog is the difference between the last JNL_SEQNO written to the Journal Pool and the last JNL_SEQNO sent by the Source Server to the Receiver Server. <span>In the WAS_ON state, -showbacklog reports the backlog information even if the Source Server is shut down.</span></p>
+<p>Reports four fields that help determine the backlog of updates on the Source Server. These fields are:</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>Current backlog of journal records (in terms of the number of JNL_SEQNOs) </p></li>
+<li class="listitem"><p>Last JNL_SEQNO written to the Journal Pool</p></li>
+<li class="listitem"><p>Last JNL_SEQNO sent by the Source Server to the Receiver Server </p></li>
+<li class="listitem"><p>Last JNL_SEQNO acknowledged by the Receiver Server</p></li>
+</ol></div>
+<p>The backlog is the difference between the second and third fields. When backlog is 0 and the remaining three fields have the same value, it means that all Source Server updates have reached the Receiver Pool and there are no in-flight updates.</p>
+<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<th align="left">Important</th>
+</tr>
+<tr><td align="left" valign="top"><p>A -SHOWBACKLOG operation momentarily restricts access to the Journal Pool to determine the backlog. If your operations demand frequent checking for replication backlogs, FIS recommends using the ^%PEEKBYNAME function instead of performing a -SHOWBACKLOG in a continuous loop. Please refer to the examples for more information on using ^%PEEKBYNAME for monitoring replication speed and backlog. </p></td></tr>
+</table></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip replic -source -showbacklog -inst=INSTB
-Wed May 19 18:58:29 2010 : Initiating SHOWBACKLOG operation on source server pid [0] for secondary 
-instance [INSTB]
-101 : backlog number of transactions written to journal pool and yet to be sent by the source server
+Tue Jan  5 10:36:46 2021 : Initiating SHOWBACKLOG operation on source server pid [0] for secondary instance [INSTB]
+52 : backlog number of transactions written to journal pool and yet to be sent by the source server
 102 : sequence number of last transaction written to journal pool
-1 : sequence number of last transaction sent by source server
-%GTM-E-SRCSRVNOTEXIST, Source server for secondary instance INSTB is not alive</pre>
+50 : sequence number of last transaction sent by source server
+25 : sequence number acknowledged by the secondary instance [INSTB]</pre>
+<p>Example: </p>
+<pre class="programlisting">replspeed
+  ; This routine returns the replication speed, that is the number of seqno updates per second acknowledged by the replicating instance during heartbeat intervals
+  ; Usage: $gtm_exe/mumps -r ^replspeed INSTANCE3 20
+  ; The second parameter is the sampling size
+  set $etrap="write ""REPLSPEED-E-ACKSMPL : unable to fetch sampling data due to "",$zstatus  halt  "
+  set $ztimeout="300:write ""Timeout occurred out after 5 minutes"",! zwrite  halt"
+  new hrtbtperiod,instance,samplingsize,hrtbts,slot,i,hrtbtdiffs,diff,dump
+  set instance=$piece($zcmdline," ",1),slot=0
+  set samplingsize=$piece($zcmdline," ",2),hrtbtdiffs=0
+  set:$length(samplingsize)=0 samplingsize=10
+  if '($length(instance)) write "REPLSPEED-E-ARGS : ",$zcmdline," was specified. This routine requires specifying an instance name.",! halt
+  for i=0:1:15 set instname=$$^%PEEKBYNAME("gtmsource_local_struct.secondary_instname",i),instname=$piece(instname,$char(0),1) set:(instname=instance) slot=i
+  ; capture heartbeat_jnl_seqno samplingsize times. Wait for hrtbtperiod after every capture of heartbeat_jnl_seqno
+  set hrtbtperiod=$piece($$^%PEEKBYNAME("gtmsource_local_struct.connect_parms",slot),",",5)
+  for j=1:1:samplingsize do
+  . set hrtbts(j)=$$^%PEEKBYNAME("gtmsource_local_struct.heartbeat_jnl_seqno",slot,"I")
+  . do:(j&gt;1)
+  . . set diff=hrtbts(j)-hrtbts(j-1)
+  . . do:(diff&lt;0)
+  . . . write "REPLSPEED-E-ACKSEQNO : acknowledgement sequence number received is lower than previous acknowledgement seqno."
+  . . . set dump="replspeed.dump" open dump use dump zwrite hrtbts  close dump
+  . . . halt
+  . . set hrtbtdiffs=hrtbtdiffs+diff
+  . hang hrtbtperiod
+  set hrtbtdiffs=hrtbtdiffs/samplingsize
+  write $justify(hrtbtdiffs/hrtbtperiod,0,0)
+  quit</pre>
+<p>Example: </p>
+<pre class="programlisting">waitforhrtbt
+  ; This routine returns 0 when the acknowledged seqno from the specified instance matches or exceeds the specified seqno
+  ; If there is no confirmation (network issues etc) from the Receiver Server for 300 seconds, this routines returns 1.
+  ; Usage: $gtm_exe/mumps -r ^waitforhrtbt &lt;instname&gt; &lt;seqnocheckpoint&gt;
+  set $etrap="write ""WAITFORHRTBT-E-ERROR, Error occurred while waiting for ackseqno confirmation due to "",$zstatus  halt  "
+  new heartbeatseqno,hangduration,instance,checkseqno,i,instname,slot
+  ; set $ztimeout to align with the REPLALERT threshold for the test system
+  set $ztimeout="900:write 1 halt"
+  set hangduration=1,slot=""
+  set instance=$piece($zcmdline," ",1)
+  set checkseqno=$piece($zcmdline," ",2)
+  if '($length(instance)&amp;$length(checkseqno)) write "WAITFORHRTBT-E-ARGS : ",$zcmdline," was specified. This routine requires specifying instance name and seqno.",! halt
+  for i=0:1:15 set instname=$$^%PEEKBYNAME("gtmsource_local_struct.secondary_instname",i),instname=$piece(instname,$char(0),1) set:(instname=instance) slot=i
+  if '($length(slot)) write "WAITFORHRTBT-E-INSTNOMATCH : No matching instance name for ",instance,! halt
+  for  do
+  . set heartbeatseqno=$$^%PEEKBYNAME("gtmsource_local_struct.heartbeat_jnl_seqno",slot,"I")-1
+  . if (heartbeatseqno&gt;=checkseqno) write 0 halt
+  . hang hangduration
+  quit</pre>
+<p>Example:</p>
+<pre class="programlisting">waitforseqnosync
+  ; This routine returns 0 when there the sequence numbers of the Source Server and the acknowledged sequence number from the Receiver Server is the same.
+  ; It returns a non-zero value when there is no confirmation of the receipt of the latest seqno from the secondary even when there is no backlog.
+  ; If there is no confirmation (network issues etc) from the Receiver Server for 150 seconds, this routines returns 1.
+  ; Usage: $gtm_exe/mumps -r ^waitforseqnosync &lt;instname&gt;
+  set $etrap="write ""WAITFORSEQNOSYNC-E-SRCBACKLOG : unable to get current Source Server backlog and seqno updates status due to "",$zstatus  halt  "
+  new readseqno,heartbeatseqno,instance,i,instname,slot,hrtbtperiod
+  set $ztimeout="150:write 1 halt"
+  set slot=""
+  ; hrtbtperiod: the heartbeat period (the fifth parameter of -CONNECTPARAMS)
+  set instance=$zcmdline
+  if '$length(instance) write "WAITFORSEQNOSYNC-E-ARGS : This routine requires specifying an instance name.",! halt
+  for i=0:1:15 set instname=$$^%PEEKBYNAME("gtmsource_local_struct.secondary_instname",i),instname=$piece(instname,$char(0),1) set:(instname=instance) slot=i
+  if '($length(slot)) write "WAITFORSEQNOSYNC-E-INSTNOMATCH : No matching instance name for ",instance halt
+  set hrtbtperiod=$piece($$^%PEEKBYNAME("gtmsource_local_struct.connect_parms",slot),",",5)
+  for  do
+  . set seqno=$$^%PEEKBYNAME("jnlpool_ctl_struct.jnl_seqno","","I")
+  . set readseqno=$$^%PEEKBYNAME("gtmsource_local_struct.read_jnl_seqno",i,"I")
+  . set heartbeatseqno=$$^%PEEKBYNAME("gtmsource_local_struct.heartbeat_jnl_seqno",i,"I")
+  . if (seqno=readseqno=heartbeatseqno) write 0 halt
+  . hang hrtbtperiod
+  quit</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="process_lost"></a>Process<span>ing</span> Lost Transactions<span> File</span><a class="indexterm" name="idp71302896"></a>
+<a name="process_lost"></a>Process<span>ing</span> Lost Transactions<span> File</span><a class="indexterm" name="idp166874672"></a>
 </h3></div></div></div>
 <p>Except following a failover when the backlog is zero, whenever a former originating instance comes up as a new replicating instance, there is always a lost transaction file. Apply this lost transaction file at the new originating instance as soon as practicable because there could be additional lost transaction files in the event of other failovers. For example, failure of the new originating instance before the lost transaction file is processed. These additional lost transactions files can complicate the logic needed for lost transaction processing.</p>
 <p>Apply the lost transactions on the new originating instance either manually or in a semi-automated fashion using the M-intrinsic function $ZQGBLMOD(). If you use $ZQGBLMOD() , two perform 2 additional steps ( mupip replicate -source -needrestart and mupip replicate -source -losttncomplete ) as part of lost transaction processing. Failure to run these steps can cause $ZQGBLMOD() to return false negatives that in turn can result in application data consistency issues.</p>
@@ -895,8 +984,8 @@ instance [INSTB]
 {-losttncomplete | -needrestart}
 -instsecondary=&lt;replicating instance name&gt;</pre>
 <p>
-<a class="indexterm" name="idp71326016"></a>
-<a class="indexterm" name="idp71328208"></a>
+<a class="indexterm" name="idp166913200"></a>
+<a class="indexterm" name="idp166915392"></a>
 <span class="emphasis"><em>-losttncomplete</em></span>
 </p>
 <p>Indicate to GT.M that all lost transaction processing using $ZQGBLMOD() is complete. Use this qualifier either explicitly or implicitly to prevent a future $ZQGBLMOD() on an instance from returning false positives when applying future lost transactions. This ensures accuracy of future $ZQGBLMOD() results.</p>
@@ -907,8 +996,8 @@ instance [INSTB]
 <li class="listitem"><p>The replicating instance is not connected at the time the command is run on the originating instance but connects to the originating instance, before the originating instance is brought down.</p></li>
 </ul></div>
 <p>
-<a class="indexterm" name="idp71315152"></a>
-<a class="indexterm" name="idp71333984"></a>
+<a class="indexterm" name="idp166892976"></a>
+<a class="indexterm" name="idp166920640"></a>
 <span class="emphasis"><em>-needrestart</em></span>
 </p>
 <p>Checks whether the originating instance ever communicated with the specified replicating instance (if the receiver server or a fetchresync rollback on the replicating instance communicated with the Source Server) since the originating instance was brought up. If so, this command displays the message SECONDARY INSTANCE xxxx DOES NOT NEED TO BE RESTARTED indicating that the replicating instance communicated with the originating instnace and hence does not need to be restarted. If not, this command displays the message SECONDARY INSTANCE xxxx NEEDS TO BE RESTARTED FIRST. In this case, bring up the specified instance as a replicating instance before the lost transactions from this instance are applied. Failure to do so before applying the corresponding lost transactions causes $ZQGBLMOD() to return false negatives which can result in application data inconsistencies.</p>
@@ -924,7 +1013,7 @@ instance [INSTB]
 <p>This command updates the Zqgblmod Seqno and Zqgblmod Trans fields (displayed by a dse dump -fileheader command) in the database file headers of all regions in the global directory to the value 0. Doing so causes a subsequent $ZQGBLMOD() to return the safe value of one unconditionally until the next lost transaction file is created.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="lost_tn_fmt"></a>Lost Transaction File format<a class="indexterm" name="idp71343904"></a>
+<a name="lost_tn_fmt"></a>Lost Transaction File format<a class="indexterm" name="idp166930672"></a>
 </h4></div></div></div>
 <p>The first line of the lost transaction file include up to four fields. The first field displays GDSJEX04 signifying the file format version.The second field indicates whether the lost transaction file is a result of a rollback  or recover.   If the second field is ROLLBACK, a third field indicates whether the instance was a PRIMARY or SECONDARY immediately prior to the lost transaction file being generated. If it was a PRIMARY, the lost transaction file is termed a primary lost transaction file and it needs to be applied on the new originating instance. A fourth field holds the name of the replicating instance on which the lost transactions were generated. This instance name should be used as the -instsecondary qualifier in the mupip replic -source -needrestart command when the lost transactions are applied at the new originating instance.</p>
 <p>The first line of a lost transaction file looks like the following:</p>
@@ -933,8 +1022,8 @@ instance [INSTB]
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="strt_rcvr_srvr"></a>Start<span>ing the</span> Receiver Server<a class="indexterm" name="idp71291424"></a>
-<a class="indexterm" name="idp71298816"></a>
+<a name="strt_rcvr_srvr"></a>Start<span>ing the</span> Receiver Server<a class="indexterm" name="idp166826032"></a>
+<a class="indexterm" name="idp166906944"></a>
 </h3></div></div></div>
 <p>The MUPIP REPLICATE -RECEIVER -START command starts a Receiver Server and the Update Process. The general syntax for starting a Receiver Server and the Update Process is:</p>
 <pre class="programlisting">mupip replicate -receiver -start 
@@ -1037,8 +1126,8 @@ logfile_management_qualifiers
 </table></div>
 <p><span class="bold"><strong><a name="autorollback_qualifier_recv"></a>Autorollback Qualifier:</strong></span></p>
 <p>
-<a class="indexterm" name="idp71399392"></a>
-<a class="indexterm" name="idp71304256"></a>
+<a class="indexterm" name="idp166993984"></a>
+<a class="indexterm" name="idp166981184"></a>
 <span class="emphasis"><em>-autorollback[=verbose]</em></span></p>
 <p>-AUTOROLLBACK in a Receiver Server startup command of a BC/SI replication instance performs an automatic MUPIP JOURNAL -ROLLBACK -BACKWARD -FETCHRESYNC=&lt;portno&gt;. Choosing between -AUTOROLLBACK and -FETCHRESYNC (with -[NO]LOSTTRANS and -[NO]BROKENTRANS) depends on your replicating configuration and how your application processes lost transaction files. Use a MUPIP JOURNAL -ROLLBACK command with -FETCHRESYNC when you need:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -1057,8 +1146,8 @@ logfile_management_qualifiers
 </ul></div>
 <p><span class="bold"><strong><a name="connection_qualifiers_recv"></a>Connection Qualifiers:</strong></span></p>
 <p>
-<a class="indexterm" name="idp71370480"></a>
-<a class="indexterm" name="idp71389392"></a>
+<a class="indexterm" name="idp166894896"></a>
+<a class="indexterm" name="idp167011712"></a>
 <span class="emphasis"><em>
 <span>-listenport=&lt;port
 number&gt;</span>
@@ -1078,16 +1167,16 @@ number&gt;</span>
 </p>
 <p>
 <span class="emphasis"><em><span>-</span>log_interval="[integer1],[integer2]"
-<a class="indexterm" name="idp71375776"></a>
-<a class="indexterm" name="idp71377520"></a>
+<a class="indexterm" name="idp167014336"></a>
+<a class="indexterm" name="idp166988064"></a>
 </em></span>
 </p>
 <p><span class="emphasis"><em>integer1</em></span> specifies the number of transactions the Receiver Server should process between updates to its log file. <span class="emphasis"><em>integer2</em></span> specifies the number of transactions the Update Process should process between updates to its log file. The default logging interval is 1000 transactions.</p>
 <p>If <span class="emphasis"><em>integer1</em></span> or <span class="emphasis"><em>integer2</em></span> is 0, the logging interval is set to the default value.</p>
 <p><span class="bold"><strong><a name="operator_override_qualifiers_recv"></a>Operator Override Qualifiers:</strong></span></p>
 <p>
-<a class="indexterm" name="idp71344384"></a>
-<a class="indexterm" name="idp71382512"></a>
+<a class="indexterm" name="idp166931984"></a>
+<a class="indexterm" name="idp166965728"></a>
 
 <span class="emphasis"><em>-updateresync=&lt;/path/to/bkup-orig-repl-inst-file&gt;</em></span></p>
 <p>-updateresync guarantees GT.M that the replicating instance was, or is, in sync with the originating instance and it is now safe to resume replication. Use -updateresync only in the following situations:</p>
@@ -1113,39 +1202,39 @@ P&#8594;Q, or A&#8594;P)&#8221;</a>,
 and P&#8594;Q)&#8221;</a>, <a class="xref" href="ch07s03.html#updateresyncproc3" title="Replacing the replication instance file of a replicating instance (A&#8594;P)">&#8220;Replacing the replication instance file of a replicating instance (A&#8594;P)&#8221;</a>, and <a class="xref" href="ch07s03.html#updateresyncproc4" title="Setting up a new replicating instance from a backup of the originating instance (A&#8594;P)">&#8220;Setting up a new replicating instance from a backup of the originating instance
 (A&#8594;P)&#8221;</a>. </p>
 <p>
-<a class="indexterm" name="idp71365328"></a>
-<a class="indexterm" name="idp71363008"></a>
+<a class="indexterm" name="idp167005824"></a>
+<a class="indexterm" name="idp166944784"></a>
 <span class="emphasis"><em>-noresync</em></span>
 </p>
 <p>Instructs the Receiver Server to accept a SI replication stream even when the receiver is ahead of the source. In this case, the source and receiver servers exchange history records from the replication instance file to determine the common journal stream sequence number and replication resumes from that point onwards. Specifying -noresync on a BC replication stream produces a NORESYNCSUPPLONLY error. Specifying -noresync on a SI replication stream receiver server where the receiving instance was started with -UPDNOTOK (updates are disabled)  produces a NORESYNCUPDATERONLY error. Note also that the noresync qualifier is not the opposite of the resync qualifier of rollback (mupip journal -rollback -resync), which is intended for use under the direction of FIS GT.M support.</p>
 <p><span class="bold"><strong><a name="si_replication_qualifiers_recv"></a>SI Replication Qualifiers:</strong></span></p>
 <p>
-<a class="indexterm" name="idp71301232"></a>
-<a class="indexterm" name="idp71347904"></a>
+<a class="indexterm" name="idp166949872"></a>
+<a class="indexterm" name="idp166953920"></a>
 <span class="emphasis"><em>-initialize</em></span>
 </p>
 <p>Used when starting a Receiver Server of an SI replication stream with -updateresync to specify that this is the first connection between the instances. MUPIP ignores these qualifiers when starting BC replication (that is, no updates permitted on the instance with the Receiver Server). This qualifier provides additional protection against inadvertent errors.</p>
 <p>
-<a class="indexterm" name="idp71349792"></a>
-<a class="indexterm" name="idp71438736"></a>
+<a class="indexterm" name="idp167023088"></a>
+<a class="indexterm" name="idp167025840"></a>
 <span class="emphasis"><em>-resume=&lt;strm_num&gt;</em></span>
 </p>
 <p>Used when starting a Receiver Server of an SI replication stream with -updateresync in case the receiver instance has previously received from the same source but had only its instance file (not database files) recreated in between (thereby erasing all information about the source instance and the stream number it corresponds to recorded in the receiver instance file). In this case, the command mupip replic -receiv -start -updateresync=&lt;instfile&gt; -resume=&lt;strm_num&gt;, where <span class="emphasis"><em>strm_num</em></span> is a number from 1 to 15, instructs the receiver server to use the database file headers to find out the current stream sequence number of the receiver instance for the stream number specified as &lt;strm_num&gt;, but uses the input instance file (specified with -updateresync) to locate the history record corresponding to this stream sequence number and then exchange history with the source to verify the two instances are in sync before resuming replication. Note that in case -resume is not specified and only -updateresync is specified for a SI replication stream, it uses the input instance file name specified with -updateresync to determine the stream sequence number as well as provide history records to exchange with the source instance (and verify the two are in sync). Assuming that instance files are never recreated (unless they are also accompanied by a database recreate), this qualifier should not be required in normal usage situations.</p>
 <p>
-<a class="indexterm" name="idp71441776"></a>
-<a class="indexterm" name="idp71444416"></a>
+<a class="indexterm" name="idp167028880"></a>
+<a class="indexterm" name="idp167031296"></a>
 <span class="emphasis"><em>-reuse=&lt;instname&gt;</em></span>
 </p>
 <p>Used when starting a Receiver Server of an SI replication stream with -updateresync in case the receiver instance has previously received from fifteen (all architecturally allowed) different externally sourced streams and is now starting to receive from yet another source stream. The command mupip replic -receiv -start -updateresync=&lt;instfile&gt; -reuse=&lt;instname&gt;, where <span class="emphasis"><em>instname</em></span> is the name of a replication instance, instructs the receiver server to look for an existing stream in the replication instance file header whose <span class="emphasis"><em>Group Instance Name</em></span> (displayed by a mupip replic -editinstance -show command on the receiver replication instance file) matches the instance name specified and if one does, reuse that stream number for the current source connection (erasing any record of the older Group using the same stream number).</p>
 <p><span class="bold"><strong><a name="tls_replication_qualifiers_recv"></a>TLS Replication Qualifiers:</strong></span></p>
 <p><span class="emphasis"><em><span>-</span>tlsid=&lt;label&gt;
-<a class="indexterm" name="idp71451120"></a>
-<a class="indexterm" name="idp71458368"></a></em></span></p>
+<a class="indexterm" name="idp167037616"></a>
+<a class="indexterm" name="idp167044864"></a></em></span></p>
 <p>Instructs the Source or Receiver Server to use the TLS certificate and private key pairs having &lt;label&gt; as the TLSID in the configuration file pointed to by the gtmcrypt_config environment variable. TLSID is a required parameter if TLS/SSL is to be used to secure replication connection between instances. If private keys are encrypted, an environment variable of the form gtmtls_passwd_&lt;label&gt; specifies their obfuscated password. You can obfuscate passwords using the 'maskpass' utility provided along with the encryption plugin. If you use unencrypted private keys, set the gtmtls_passwd_&lt;label&gt; environment variable to a non-null dummy value; this prevents inappropriate prompting for a password.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="strt_upd_proc"></a>Start<span>ing the</span> Update Process<a class="indexterm" name="idp71426192"></a>
+<a name="strt_upd_proc"></a>Start<span>ing the</span> Update Process<a class="indexterm" name="idp166932944"></a>
 </h3></div></div></div>
 <p>The following command starts the Update Process only, if it has been
 shutdown independent of the Receiver Server.</p>
@@ -1154,8 +1243,8 @@ shutdown independent of the Receiver Server.</p>
 <p>Qualifiers:</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71326912"></a>
-<a class="indexterm" name="idp71465632"></a>
+<a class="indexterm" name="idp166918064"></a>
+<a class="indexterm" name="idp167052784"></a>
 <span>-updateonly</span>
 
 </em></span>
@@ -1163,8 +1252,8 @@ shutdown independent of the Receiver Server.</p>
 <p>If the Update Process has been shutdown independent of the Receiver
 Server, use this qualifier to restart the Update Process.</p>
 <p>
-<a class="indexterm" name="idp71452848"></a>
-<a class="indexterm" name="idp71456912"></a>
+<a class="indexterm" name="idp167039344"></a>
+<a class="indexterm" name="idp167043536"></a>
 <span class="emphasis"><em>-helpers[=m[,n]]</em></span>
 </p>
 <p>Starts additional processes to help improve the rate at which updates from an incoming replication stream are applied on a replicating instance.</p>
@@ -1201,15 +1290,15 @@ gtmuser1 11952 11943 0 06:42 ? 00:00:00 /usr/library/GTM/mupip replicate -updhel
 <p>Qualifiers:</p>
 <p>
     <span class="emphasis"><em>
-      <a class="indexterm" name="idp71479664"></a>
-      <a class="indexterm" name="idp71486912"></a>
+      <a class="indexterm" name="idp167066576"></a>
+      <a class="indexterm" name="idp167073824"></a>
       <span>-shutdown</span>
       
     </em></span>
   </p>
 <p>Initiates the shutdown procedures of the Receiver Server, Update Process, and/or helper processes. If the Receiver Server previously shut down abnormally, -shutdown can shut down helper processes left running. </p>
 <p>
-<a class="indexterm" name="idp71323536"></a>
+<a class="indexterm" name="idp167016336"></a>
 <span class="emphasis"><em>-helper</em></span></p>
 <p>Shuts down only the Helper Processes and leaves the Receiver Server and Update Process to continue operating as before. All helpers processes shut down even if -helper values are specified.</p>
 <p>
@@ -1217,8 +1306,8 @@ gtmuser1 11952 11943 0 06:42 ? 00:00:00 /usr/library/GTM/mupip replicate -updhel
 <p>Specifies the period of time (in seconds) the shutdown command should wait before signaling the Receiver Server, Update Process, and/or helper processes to shut down.If you do not specify -timeout, the default timeout period is 30 seconds. If you specify -timeout=0, shutdown occurs immediately.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71489680"></a>
-<a class="indexterm" name="idp71496928"></a>
+<a class="indexterm" name="idp167076960"></a>
+<a class="indexterm" name="idp167084208"></a>
 <span>-updateonly</span>
 
 </em></span>
@@ -1241,10 +1330,10 @@ gtmuser1 11952 11943 0 06:42 ? 00:00:00 /usr/library/GTM/mupip replicate -updhel
 <a name="chng_log"></a><span>Changing the Log File</span>
 </h3></div></div></div>
 <p>Command syntax:</p>
-<a class="indexterm" name="idp71330480"></a><a class="indexterm" name="idp71463920"></a><pre class="programlisting">mupip replicate -receiver -changelog -log=&lt;log file name&gt; [-log_interval="[integer1],[integer2]"]</pre>
+<a class="indexterm" name="idp167051808"></a><a class="indexterm" name="idp167064848"></a><pre class="programlisting">mupip replicate -receiver -changelog -log=&lt;log file name&gt; [-log_interval="[integer1],[integer2]"]</pre>
 <p>
-<a class="indexterm" name="idp71478784"></a>
-<a class="indexterm" name="idp71504400"></a>
+<a class="indexterm" name="idp167050544"></a>
+<a class="indexterm" name="idp167091376"></a>
 <span class="emphasis"><em>-log_interval="[integer1],[integer2]"</em></span>
 </p>
 <p><span class="emphasis"><em>integer1</em></span> specifies the number of transactions for which the Receiver Server should wait before writing to the log file. <span class="emphasis"><em>integer2</em></span> specifies the number of transactions for which the Update Process should wait before writing to the log file. The default logging interval is 1000 transactions.</p>
@@ -1254,12 +1343,12 @@ gtmuser1 11952 11943 0 06:42 ? 00:00:00 /usr/library/GTM/mupip replicate -updhel
 <div class="titlepage"><div><div><h3 class="title">
 <a name="enable_disable_login"></a><span>Enabling/Disabling Detailed Logging</span>
 </h3></div></div></div>
-<a class="indexterm" name="idp71331408"></a><p>Command syntax:</p>
+<a class="indexterm" name="idp166953104"></a><p>Command syntax:</p>
 <pre class="programlisting">mupip replicate -receiver -statslog={ON|OFF} 
  [-log_interval="[integer1],[integer2]"]</pre>
 <p>
-<a class="indexterm" name="idp71437200"></a>
-<a class="indexterm" name="idp71512384"></a>
+<a class="indexterm" name="idp167071648"></a>
+<a class="indexterm" name="idp167099424"></a>
 <span class="emphasis"><em>-log_interval="[integer1],[integer2]"</em></span>
 </p>
 <p><span class="emphasis"><em>integer1</em></span> specifies the number of transactions for which the Receiver Server should wait before writing to the log file. <span class="emphasis"><em>integer2</em></span> specifies the number of transactions for which the Update Process should wait before writing to the log file. The default logging interval is 1000 transactions.</p>
@@ -1270,7 +1359,7 @@ gtmuser1 11952 11943 0 06:42 ? 00:00:00 /usr/library/GTM/mupip replicate -updhel
 <a name="rep_curr_backlog"></a><span>Reporting the Current Backlog of Journal Records</span>
 </h3></div></div></div>
 <p>Command syntax:</p>
-<a class="indexterm" name="idp71494640"></a><pre class="programlisting">mupip replicate -receiver -showbacklog</pre>
+<a class="indexterm" name="idp167082752"></a><pre class="programlisting">mupip replicate -receiver -showbacklog</pre>
 <p>Qualifiers:</p>
 <p>
 <span class="emphasis"><em>
@@ -1285,7 +1374,7 @@ Server.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="rollback_db_after_sys_fail"></a><span>Rolling Back a Replicated Database </span><a class="indexterm" name="idp71385840"></a>
+<a name="rollback_db_after_sys_fail"></a><span>Rolling Back a Replicated Database </span><a class="indexterm" name="idp166928576"></a>
 </h3></div></div></div>
 <p>Command syntax:</p>
 <pre class="programlisting">mupip journal -rollback 
@@ -1298,12 +1387,12 @@ Server.</p>
 <p>Qualifiers:</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71527712"></a>
+<a class="indexterm" name="idp167114016"></a>
 <span>-rollback</span>
 
 </em></span>
 </p>
-<a class="indexterm" name="idp71510288"></a><p>Use -FETCHRESYNC or -RESYNC to rollback the database as a recovery step after a system failure or to make a change in the LMS replication configuration. If you do not use -FETCHRESYNC or -RESYNC, 
+<a class="indexterm" name="idp167107200"></a><p>Use -FETCHRESYNC or -RESYNC to rollback the database as a recovery step after a system failure or to make a change in the LMS replication configuration. If you do not use -FETCHRESYNC or -RESYNC, 
   the database rolls back to the last consistent state.</p>
 <p>
 <span class="emphasis"><em><span>-online</span>
@@ -1332,13 +1421,13 @@ Server.</p>
 <li class="listitem"><p>In your Receiver Server startup scripts, FIS recommends placing MUPIP JOURNAL -ROLLBACK -BACKWARD -ONLINE -FETCHRESYNC after starting the passive Source Server but before starting the Receiver Server. </p></li>
 <li class="listitem"><p>Stopping a ROLLBACK operation before it completes or losing the TCP connection over which replication operates may corrupt the database file header. To recover, wait  up to 60 seconds for the operation to timeout and then reissue the command.</p></li>
 </ul></div>
-<p>Example:<a class="indexterm" name="idp71522976"></a>
+<p>Example:<a class="indexterm" name="idp167109200"></a>
 </p>
 <p><code class="code">$ mupip journal -rollback -fetchresync=2299 -losttrans="glo.lost" -backward </code></p>
 <p>This command performs a ROLLBACK -FETCHRESYNC operation on a replicating instance to bring it to a common synchronization point from where the originating instance can begin to transmit updates to allow it to catch up. It also generates a lost transaction file glo.lost of all those transactions that are present on the replicating instance but not on the originating instance at port 2299.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71547872"></a>
+<a class="indexterm" name="idp167134064"></a>
 <span>-resync=&lt;JNL_SEQNO&gt;</span>
 
 </em></span>
@@ -1351,8 +1440,8 @@ back to the last consistent state. Under normal operating conditions, you
 would not need this qualifier.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idp71522272"></a>
-<a class="indexterm" name="idp71558928"></a>
+<a class="indexterm" name="idp167087648"></a>
+<a class="indexterm" name="idp167145008"></a>
 -rsync_strm=&lt;strm_num&gt;
 </em></span>
 </p>
