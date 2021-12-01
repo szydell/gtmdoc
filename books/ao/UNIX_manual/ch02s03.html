@@ -8,7 +8,7 @@
 <link rel="up" href="ch02.html" title="Chapter 2. Installing GT.M">
 <link rel="prev" href="ch02s02.html" title="Before you begin">
 <link rel="next" href="ch02s04.html" title="gtminstall script">
-<link rel="copyright" href="ln-idp160089856.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45761573975392.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -57,7 +57,7 @@
 </ul></div>
 </td></tr>
 </table></div>
-<p>Unpack the distribution to the temporary directory with a command such as the following (your UNIX version may require you to first use gzip to decompress the archive and then tar to unpack it; the tar options may also vary):</p>
+<p>Unpack the distribution to the temporary directory with a command such as the following (your UNIX version may require you to first use gzip to decompress the archive and then tar to unpack it; the tar options may also vary; On AIX, if you use the default tar you have to unpack as root, or use GNU tar):</p>
 <pre class="programlisting">$ tar zxvf /Distrib/GT.M/gtm_V63002_linux_i586_pro.tar.gz -C /temporary/directory</pre>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
@@ -113,16 +113,9 @@ Do you wish to create it as part of this installation? (y or n)
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>GT.M requires at least ICU Version 3.6 and icu-config to install the functionality related to UTF-8.</p></td></tr>
+<tr><td align="left" valign="top"><p>GT.M requires at least ICU Version 3.6 to be installed. The installation script uses pkg-config (icu-config, if pkg-config is not available) to find system default ICU version.</p></td></tr>
 </table></div>
-<p>If you choose y, the configure script displays a message like the following:</p>
-<pre class="programlisting">Should an ICU version other than the default be used?</pre>
-<p>Ifyou choose <em class="replaceable"><code>n</code></em>, the configure script looks for the symboliclink of <code class="code">libicuuc.so</code> to determine the default ICU version.</p>
-<p>If you choose <em class="replaceable"><code>y</code></em>, the configurescript displays a message like thefollowing:</p>
-<pre class="programlisting">Enter ICU version (at least ICU version 3.6 is required. 
-Enter as &lt;major&gt;&lt;minor&gt;.&lt;milli&gt;.&lt;micro&gt; for recent versions of ICU or &lt;major-ver&gt;.&lt;minor-ver&gt; for older versions):</pre>
-<p>Enter the ICU version number in the <em class="replaceable"><code>major-ver.minor-ver</code></em> format.
-The configure script displays the following message:</p>
+<p>The configure script displays the following message:</p>
 <pre class="programlisting">All of the GT.M MUMPS routines are distributed with uppercase 
 names. You can create lowercase copies of these routines 
 if you wish, but to avoid problems with compatibility in 
@@ -132,7 +125,7 @@ Do you want uppercase and lowercase versions of the MUMPS routines? (y or n).</p
 <p>Choose <em class="replaceable"><code>y</code></em> to confirm. The configure script then displays the list of MUMPS routines while creating their lowercase versions. Then the script compiles those MUMPS routines. On platforms where GT.M supports placing object code in shared library, it creates a library libgtmutil.so with the object files of the utility programs and GDE distributed with GT.M. On these platforms, it asks the question:</p>
 <pre class="programlisting">Object files of M routines placed in shared library /usr/lib/fis-gtm/V6.3-002_x86_64/libgtmutil.so. 
 Keep original .o object files (y or n)? </pre>
-<p><a class="indexterm" name="idp160525824"></a>Unless your scripts require separate object files for these routines, you can safely delete the .o object files, and place $gtm_dist/libgtmutil.so as the last element of gtmroutines in lieu of $gtm_dist.</p>
+<p><a class="indexterm" name="idm45761573549216"></a>Unless your scripts require separate object files for these routines, you can safely delete the .o object files, and place $gtm_dist/libgtmutil.so as the last element of gtmroutines in lieu of $gtm_dist.</p>
 <p>The configure script then asks you:</p>
 <pre class="programlisting">Installation completed. Would you like all the temporary files removed from this directory? (y or n)</pre>
 <p>Choose

@@ -8,7 +8,7 @@
 <link rel="up" href="ch11.html" title="Chapter 11. Integrating External Routines">
 <link rel="prev" href="ch11s03.html" title="Creating a Shareable Library">
 <link rel="next" href="ch11s05.html" title="Calls from External Routines: Call-Ins">
-<link rel="copyright" href="ln-idp188806400.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -31,7 +31,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="external_routines_using_external_calls"></a><span>Using </span>External Calls<a class="indexterm" name="idp197397536"></a>
+<a name="external_routines_using_external_calls"></a><span>Using </span>External Calls<a class="indexterm" name="idm45867983188208"></a>
 </h2></div></div></div>
 <p>The functions in programs increment and decrement are now available to GT.M through the shareable library libcrement.sl or libcrement.so, or though the DLL as libcrement.dll, depending on the specific platform. The suffix .sl is used throughout the following examples to represent .sl, .so, or .dll. Be sure to use the appropriate suffix for your platform.</p>
 <p>GT.M uses an "external call table" to map the typeless data of M into the typed data of C, and vice versa. The external call table has a first line containing the pathname of the shareable library file followed by one or more specification lines in the following format:</p>
@@ -103,7 +103,7 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 <p>There may be only a single occurrence of the type gtm_status_t for each entryref.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="idp197631792"></a><span>Database </span>Encryption Extensions<span> to the GT.M External Interface</span>
+<a name="idm45867983120976"></a><span>Database </span>Encryption Extensions<span> to the GT.M External Interface</span>
 </h3></div></div></div>
 <p>To support Database Encryption, GT.M provides a reference implementation which resides in $gtm_dist/plugin/gtmcrypt.</p>
 <p>The reference implementation includes:</p>
@@ -158,7 +158,7 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="pre_allocation_of_output_params"></a>Pre-allocation<span> of Output Parameters</span><a class="indexterm" name="idp197719792"></a>
+<a name="pre_allocation_of_output_params"></a>Pre-allocation<span> of Output Parameters</span><a class="indexterm" name="idm45867983157792"></a>
 </h3></div></div></div>
 <p>The definition of parameters passed by reference with direction output can include specification of a pre-allocation value. This is the number of units of memory that the user wants GT.M to allocate before passing the parameter to the external routine. For example, in the case of type gtm_char_t *, the pre-allocation value would be the number of bytes to be allocated before the call to the external routine.</p>
 <p>Specification of a pre-allocation value should follow these rules:</p>
@@ -179,7 +179,7 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="callback_mechanism"></a>Callback Mechanism<a class="indexterm" name="idp197744240"></a>
+<a name="callback_mechanism"></a>Callback Mechanism<a class="indexterm" name="idm45867983115360"></a>
 </h3></div></div></div>
 <p>GT.M exposes certain functions that are internal to the GT.M runtime library for the external calls via a callback mechanism. While making an external call, GT.M populates and exposes a table of function pointers containing addresses to call-back functions.</p>
 <div class="informaltable">
@@ -450,7 +450,7 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="limitations_on_the_external_program"></a>Limitations<span> on the External Program</span><a class="indexterm" name="idp197778448"></a>
+<a name="limitations_on_the_external_program"></a>Limitations<span> on the External Program</span><a class="indexterm" name="idm45867983070000"></a>
 </h3></div></div></div>
 <p>Since both GT.M runtime environment and the external C functions execute in the same process space, the following restrictions apply to the external functions:</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
@@ -464,7 +464,7 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_fo_using_ext_calls"></a>Examples<span> of Using External Calls</span><a class="indexterm" name="idp197810896"></a>
+<a name="examples_fo_using_ext_calls"></a>Examples<span> of Using External Calls</span><a class="indexterm" name="idm45867983055456"></a>
 </h3></div></div></div>
 <pre class="programlisting">foo: void bar (I:gtm_float_t*, O:gtm_float_t*)</pre>
 <p>There is one external call table for each package. The environment variable "GTMXC" must name the external call table file for the default package. External call table files for packages other than the default must be identified by environment variables of the form "GTMXC_name".</p>

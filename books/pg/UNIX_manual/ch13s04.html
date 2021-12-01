@@ -8,7 +8,7 @@
 <link rel="up" href="ch13.html" title="Chapter 13. Error Processing">
 <link rel="prev" href="ch13s03.html" title="Run-time Error Message Format">
 <link rel="next" href="ch13s05.html" title="Program Handling of Errors">
-<link rel="copyright" href="ln-idp188806400.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,7 +30,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="processing_run_time_info"></a>Processing Run-time<span> Errors</span><a class="indexterm" name="idp198356768"></a>
+<a name="processing_run_time_info"></a>Processing Run-time<span> Errors</span><a class="indexterm" name="idm45867982494672"></a>
 </h2></div></div></div>
 <p>GT.M does not detect certain types of errors associated with indirection, the functioning of I/O devices, and program logic until run-time. Also, the compile-as-written feature may leave errors which GT.M reports at run-time when it encounters them in the execution path. At run-time, GT.M reports any error encountered to <span>stderr</span>. The run-time system suspends normal execution of the routine as soon as it detects an error.</p>
 <p>GT.M responds to errors differently depending on whether it encounters them in Direct Mode (at the command line) or during normal program execution.</p>
@@ -53,7 +53,7 @@
 <p>GT.M checks the syntax of code assigned to $ETRAP, $ZSTEP, $ZTRAP, and EXCEPTION at the time they are specified. Note that $ZTRAP and EXCEPTION are subject to gtm_ztrap_form, and, if that specifies entryref or adaptive, GT.M does not check the syntax. Also, the environment variables $gtm_etrap, $gtm_trigger_etrap, and $gtm_zstep provide ways of setting some of the ISVs, so their values are verified at process initiation. Further, a SET $ETRAP uses a temporary default value of "IF $ZJOBEXAM" when shifting from $ZTRAP to $ETRAP in case the specified value has compilation errors. </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="run_time_err_in_drct_mode"></a><span>Run-time Errors in </span>Direct Mode<a class="indexterm" name="idp198376512"></a>
+<a name="run_time_err_in_drct_mode"></a><span>Run-time Errors in </span>Direct Mode<a class="indexterm" name="idm45867982480544"></a>
 </h3></div></div></div>
 <p>When GT.M detects an error in Direct Mode, it reports the error with a message and leaves the process at the GTM&gt; prompt.</p>
 <p>Example:</p>
@@ -66,7 +66,7 @@ GTM&gt;        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="run_time_err_out_of_drct_mode"></a>Run-time Errors Outside of Direct Mode<a class="indexterm" name="idp198359200"></a>
+<a name="run_time_err_out_of_drct_mode"></a>Run-time Errors Outside of Direct Mode<a class="indexterm" name="idm45867982522528"></a>
 </h3></div></div></div>
 <p>If GT.M encounters an error outside of code entered in Direct Mode, GT.M executes the $ETRAP or $ZTRAP special variable, if either of them have a length greater than zero, which only one can have at a given point in time. </p>
 <p>The $ETRAP and $ZTRAP special variables specifiy an action that GT.M should perform when an error occurs during routine execution. $ETRAP and $ZTRAP can establish one or more error handling "actions". </p>

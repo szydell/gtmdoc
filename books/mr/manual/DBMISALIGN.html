@@ -8,12 +8,13 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="DBMINRESBYTES.html" title="DBMINRESBYTES ">
 <link rel="next" href="DBMRKBUSY.html" title="DBMRKBUSY ">
-<link rel="copyright" href="ln-idp54316288.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45961212338768.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">DBMISALIGN </th></tr>
+<tr><th colspan="3" align="center">DBMISALIGN <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="DBMINRESBYTES.html">Prev</a> </td>
@@ -25,15 +26,16 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">DBMISALIGN </span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">DBMISALIGN <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span></span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="DBMISALIGN"></a>DBMISALIGN </h2></div></div></div>
-<p><span class="bold"><strong>DBMISALIGN</strong></span>,  Database file xxxx has yyyy blocks which does not match alignment rules. Reconstruct the database from a backup or extend it by at least zzzz blocks.</p>
-<p>MUPIP Error: This is an auxiliary message, and is preceded by a primary message.</p>
-<p>Action: Follow the primary message description and action as specified in this manual.</p>
-<a class="indexterm" name="idp49824064"></a>
+<a name="DBMISALIGN"></a>DBMISALIGN <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</h2></div></div></div>
+<p><span class="bold"><strong>DBMISALIGN</strong></span>, Database file xxxx has yyyy blocks which does not match alignment rules. Reconstruct the database from a backup or extend it by at least zzzz blocks.</p>
+<p>MUPIP Error: This error appears when GT.M detects a mismatch between the total block count in the file header and the expected block count based on the database file size reported by the file system. This error may appear when you perform a MUPIP INTEG -FILE after a GT.M upgrade on a database file which has not yet been opened by a process using a normal database access which performs an automatic database file header upgrade.</p>
+<p>Action: If there are prior messages, adress them first. Extend the database by at least one block, perform at least one $GET() operation or run MUPIP INTEG -REGION. If the error persists, reconstruct the database from a backup.</p>
+<a class="indexterm" name="idm45961211577760"></a>
 </div>
 <div class="navfooter">
 <hr>

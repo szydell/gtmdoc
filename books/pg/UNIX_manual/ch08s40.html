@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s39.html" title="$ZJob">
 <link rel="next" href="ch08s41.html" title="$ZLevel">
-<link rel="copyright" href="ln-idp188806400.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -36,17 +36,15 @@
 <p>$ZKEY contains any one of the following values:</p>
 <pre class="programlisting">"LISTENING|&lt;listening_socket_handle&gt;|{&lt;portnumber&gt;|&lt;/path/to/LOCAL_socket&gt;}"</pre>
 <pre class="programlisting">"READ|&lt;socket_handle&gt;|&lt;address&gt;"</pre>
+<pre class="programlisting">"WRITE|&lt;socket_handle&gt;|&lt;address&gt;"</pre>
 <p>If $ZKEY contains one or more "READ|&lt;socket_handle&gt;|&lt;address&gt;" entries, it means there are ready to READ sockets that were selected by WRITE /WAIT or were partially read and there is data left in their buffer. Each entry is delimited by a ";".</p>
-<p>If $ZKEY contains one or more "LISTENING|&lt;listening_socket_handle&gt;|{&lt;portnumber|/path/to/LOCAL_socket&gt;}" entries, it means that there are pending connections and a USE
- s:socket=listening_socket_handle will accept a pending connection and remove the LISTENING|&lt;listening_socket_handle&gt; entry from $ZKEY.</p>
+<p>If $ZKEY contains one or more "LISTENING|&lt;listening_socket_handle&gt;|{&lt;portnumber|/path/to/LOCAL_socket&gt;}" entries, it means that there are pending connections and a USE s:socket=listening_socket_handle will accept a pending connection and remove the LISTENING|&lt;listening_socket_handle&gt; entry from $ZKEY.</p>
+<p>If $ZKEY contains one or more "WRITE|&lt;socket_handle&gt;|&lt;address&gt;" entries, it means
+that the prior WRITE /WAIT considered the non-blocking sockets writeable. This is likely to be the case most of the time. If $ZKEY contains one WRITE and one READ entry, it means that the non-blocking socket is both readable and writeable.</p>
 <p>$ZKEY is empty if no sockets have data in the buffer and there are no unaccepted incoming sockets from previous WRITE /WAITs.</p>
 <p>For Sequential File Device:</p>
-<p>$ZKEY contains the current position in the file based on the last READ. This is in bytes for STREAM and VARIABLE
-formats, and in a record,byte pair for FIXED format. For FIXED format, SEEKs and normal READs always produce a zero byte
-position; a non-zero byte position in $ZKEY for FIXED format operation indicates a partially read record, caused by a
-READ # or READ *. In FIXED mode, the information returned for $ZKEY is a function of record size, and, if a USE command
-changes record size by specifying the WIDTH deviceparameter while the file is open, $ZKEY offsets change accordingly; if
-record size changes, previously saved values of $ZKEY are likely inappropriate for use with SEEK. </p>
+<p>$ZKEY contains the current position in the file based on the last READ. This is in bytes for STREAM and VARIABLE formats, and in a record,byte pair for FIXED format. For FIXED format, SEEKs and normal READs always produce a zero byte position; a non-zero byte position in $ZKEY for FIXED format operation indicates a partially read record, caused by a
+READ # or READ *. In FIXED mode, the information returned for $ZKEY is a function of record size, and, if a USE command changes record size by specifying the WIDTH deviceparameter while the file is open, $ZKEY offsets change accordingly; if record size changes, previously saved values of $ZKEY are likely inappropriate for use with SEEK. </p>
 </div>
 <div class="navfooter">
 <hr>

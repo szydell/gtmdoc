@@ -8,7 +8,7 @@
 <link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
 <link rel="prev" href="ch09.html" title="Chapter 9. Input/Output Processing">
 <link rel="next" href="ch09s02.html" title="I/O Devices">
-<link rel="copyright" href="ln-idp188806400.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,18 +33,18 @@
 <p>GT.M intrinsic special variables provide a mean for application code to communicate and manage the state of a device. </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="device_name_variable"></a>Device Name Variables<a class="indexterm" name="idp194332528"></a>
+<a name="device_name_variable"></a>Device Name Variables<a class="indexterm" name="idm45867986568816"></a>
 </h3></div></div></div>
 <p>GT.M provides three intrinsic special variables that identify devices. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="io_h"></a>$Io<a class="indexterm" name="idp194207328"></a>
+<a name="io_h"></a>$Io<a class="indexterm" name="idm45867986558016"></a>
 </h4></div></div></div>
 <p>$I[O] contains the name of the current device specified by the last USE command. A SET command cannot modify $IO. USE produces the same $IO as USE $PRINCIPAL, but $P is the preferred construct.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="principal_g"></a>$Principal<a class="indexterm" name="idp194310160"></a>
+<a name="principal_g"></a>$Principal<a class="indexterm" name="idm45867986763152"></a>
 </h4></div></div></div>
 <p>A process inherits three open file descriptors from its parent - STDIN, STDOUT and STDERR - which can all map to different files or devices.  GT.M provides no way for M application to access STDERR.  Although STDIN and STDOUT may map to different devices, files, sockets, pipes, etc. in the operating system, M provides for only device $PRINCIPAL, to refers to both.  At process startup, and when $PRINCIPAL is selected with a USE command, READ commands apply to STDIN and WRITE commands apply to STDOUT.  The device type of the standard input determines which USE deviceparameters apply to $PRINCIPAL.</p>
 <p>For an interactive process, $PRINCIPAL is the user's terminal.  GT.M ignores a CLOSE of the principal device. GT.M does not permit a SET command to modify $PRINCIPAL.</p>
@@ -52,19 +52,19 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="zio_h"></a>$ZIO<a class="indexterm" name="idp194202096"></a>
+<a name="zio_h"></a>$ZIO<a class="indexterm" name="idm45867986623568"></a>
 </h4></div></div></div>
 <p>$ZIO contains the translated name of the current device, in contrast to $IO, which contains the name as specified by the USE command.</p>
 </div>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="cursor_position_variable"></a>Cursor Position Variables<a class="indexterm" name="idp194274304"></a>
+<a name="cursor_position_variable"></a>Cursor Position Variables<a class="indexterm" name="idm45867986753456"></a>
 </h3></div></div></div>
 <p>GT.M provides two intrinsic special variables for determining the virtual cursor position. $X refers to the current column, while $Y refers to the current row. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="x_cpv"></a>$X<a class="indexterm" name="idp194357856"></a>
+<a name="x_cpv"></a>$X<a class="indexterm" name="idm45867986550064"></a>
 </h4></div></div></div>
 <p>$X contains an integer value ranging from 0 to 65,535, specifying the horizontal position of a virtual cursor in the current output record. $X=0 represents the initial position on a new record or row.</p>
 <p>Every OPENed device has a $X. However, GT.M only has access to $X of the current device.</p>
@@ -73,7 +73,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="y_cpv"></a>$Y<a class="indexterm" name="idp194166576"></a>
+<a name="y_cpv"></a>$Y<a class="indexterm" name="idm45867986754432"></a>
 </h4></div></div></div>
 <p>$Y contains an integer value ranging from 0 to 65,535, specifying the vertical position of a virtual cursor in the current output record. $Y=0 represents the top row or line.</p>
 <p>Every OPEN device has a $Y. However, GT.M only accesses $Y of the current device.</p>
@@ -82,7 +82,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mainetance_of_z_and_y"></a>Maintenance of $X and $Y<a class="indexterm" name="idp194348320"></a>
+<a name="mainetance_of_z_and_y"></a>Maintenance of $X and $Y<a class="indexterm" name="idm45867986763760"></a>
 </h4></div></div></div>
 <p>The following factors affect the maintenance of the virtual cursor position ($X and $Y):</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
@@ -180,12 +180,12 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="status_variables"></a>Status Variables<a class="indexterm" name="idp194150160"></a>
+<a name="status_variables"></a>Status Variables<a class="indexterm" name="idm45867986768528"></a>
 </h3></div></div></div>
 <p>GT.M provides several I/O status variables that convey information about the commands operating on the device.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="za_de"></a>$Device <a class="indexterm" name="idp194244272"></a>
+<a name="za_de"></a>$Device <a class="indexterm" name="idm45867986534032"></a>
 </h4></div></div></div>
 <p>If the last commanded resulted in no error-condition, the value of $DEVICE, when interpreted as a truth-value is 0 (FALSE). If the status of the device reflect any error-condition, the value of $DEVICE, when interpreted as a truth-value is 1 (TRUE). When $DEVICE starts with 1, it's followed by a comma (,) and then by the text that would be in $ZSTATUS at the time of the error. </p>
 <p>Examples: </p>
@@ -194,7 +194,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="za_ke"></a>$Key <a class="indexterm" name="idp194413184"></a>
+<a name="za_ke"></a>$Key <a class="indexterm" name="idm45867986500784"></a>
 </h4></div></div></div>
 <p>$K[EY] contains the string that terminated the most recent READ command from the current device (including any introducing and terminating characters). If no READ command is issued to the current device or if no terminator is used, the value of $KEY is an empty string. </p>
 <p>For PIPE: </p>
@@ -203,7 +203,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="za_sv"></a>$ZA<a class="indexterm" name="idp194357664"></a>
+<a name="za_sv"></a>$ZA<a class="indexterm" name="idm45867986754624"></a>
 </h4></div></div></div>
 <p>$ZA contains the status of the last read on the device. The value is a decimal integer with a meaning as follows:</p>
 <p>For Terminal I/O: </p>
@@ -239,7 +239,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="zb_sv"></a>$ZB<a class="indexterm" name="idp194279040"></a>
+<a name="zb_sv"></a>$ZB<a class="indexterm" name="idm45867986505584"></a>
 </h4></div></div></div>
 <p>$ZB contains a string specifying the input terminator for the last terminal READ. $ZB is null, and it is not maintained for devices other than terminals. $ZB may contain any legal input terminator, such as &lt;CR&gt; (ASCII 13) or an escape sequence starting with &lt;ESC&gt; (ASCII 27), from zero (0) to 15 bytes in length. $ZB is null for any READ terminated by a timeout or any fixed-length READ terminated by input reaching the maximum length. </p>
 <p>$ZB contains the actual character string, not a sequence of numeric ASCII codes.</p>
@@ -251,7 +251,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="zeof_sv"></a>$ZEOF<a class="indexterm" name="idp194394576"></a>
+<a name="zeof_sv"></a>$ZEOF<a class="indexterm" name="idm45867986498672"></a>
 </h4></div></div></div>
 <p>$ZEOF contains a truth-valued expression indicating whether the last READ operation reached the end-of-file. $ZEOF is TRUE(1) at EOF and FALSE (0) at other positions. GT.M does not maintain $ZEOF for terminal devices.</p>
 <p>$ZEOF refers to the end-of-file status of the current device. Therefore, be careful when sequencing USE commands and references to $ZEOF.</p>

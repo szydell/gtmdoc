@@ -8,7 +8,7 @@
 <link rel="up" href="index.html" title="GT.M Programmer's Guide">
 <link rel="prev" href="ch07s55.html" title="$ZWRite()">
 <link rel="next" href="ch08s01.html" title="$Device">
-<link rel="copyright" href="ln-idp188806400.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -36,6 +36,18 @@
 <div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
 <tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
 <tr>
+<td align="left">Revision V7.0-001</td>
+<td align="left">24 November 2021</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="ch08s08.html" title="$Key">&#8220;$Key&#8221;</a>, add $KEY information for non-blocking WRITEs</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch08s14.html" title="$SYstem">&#8220;$SYstem&#8221;</a>, add that SET can modify the tail of the value</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch08s27.html" title="$ZCstatus">&#8220;$ZCstatus&#8221;</a>, correct typo in ISV name</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch08s37.html" title="$ZINTerrupt">&#8220;$ZINTerrupt&#8221;</a>, add more information on $ZINTERRUPT </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch08s40.html" title="$ZKey">&#8220;$ZKey&#8221;</a>, add information about the WRITE values</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch08s60.html" title="$ZTIMeout">&#8220;$ZTIMeout&#8221;</a>, Add clarifications on behavior with different trap modes and vector contents.</p></li>
+</ul></div></td>
+</tr>
+<tr>
 <td align="left">Revision V6.3-012</td>
 <td align="left">08 April 2020</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -46,7 +58,7 @@
 <tr>
 <td align="left">Revision V6.3-009</td>
 <td align="left">27 June 2019</td>
-<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch08s37.html#interrupt_handling" title="Interrupt Handling">&#8220;Interrupt Handling&#8221;</a>, clean up and consolidate redundant text and insert an additional caution.</p></li></ul></div></td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch05s07.html#interrupt_handling" title="Interrupt Handling">&#8220;Interrupt Handling&#8221;</a>, clean up and consolidate redundant text and insert an additional caution.</p></li></ul></div></td>
 </tr>
 <tr>
 <td align="left">Revision V6.3-008</td>
@@ -57,7 +69,7 @@
 <td align="left">Revision V6.3-007</td>
 <td align="left">04 February 2019</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>In <a class="xref" href="ch08s37.html#interrupt_handling" title="Interrupt Handling">&#8220;Interrupt Handling&#8221;</a>, change Typing to READing; modifications in the service of clarity and reduce passive voice.</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch05s07.html#interrupt_handling" title="Interrupt Handling">&#8220;Interrupt Handling&#8221;</a>, change Typing to READing; modifications in the service of clarity and reduce passive voice.</p></li>
 <li class="listitem"><p>In <a class="xref" href="ch08s22.html" title="$ZAUDit">&#8220;$ZAUDit&#8221;</a>, add new section. </p></li>
 <li class="listitem"><p>In <a class="xref" href="ch08s27.html" title="$ZCstatus">&#8220;$ZCstatus&#8221;</a>, update the description for V6.3-007</p></li>
 </ul></div></td>
@@ -186,7 +198,6 @@
 <dt><span class="sect1"><a href="ch08s35.html">$ZHorolog</a></span></dt>
 <dt><span class="sect1"><a href="ch08s36.html">$ZINInterrupt</a></span></dt>
 <dt><span class="sect1"><a href="ch08s37.html">$ZINTerrupt</a></span></dt>
-<dd><dl><dt><span class="sect2"><a href="ch08s37.html#interrupt_handling">Interrupt Handling</a></span></dt></dl></dd>
 <dt><span class="sect1"><a href="ch08s38.html">$ZIO</a></span></dt>
 <dt><span class="sect1"><a href="ch08s39.html">$ZJob</a></span></dt>
 <dt><span class="sect1"><a href="ch08s40.html">$ZKey</a></span></dt>
@@ -229,12 +240,12 @@
 <dt><span class="sect2"><a href="ch08s66.html#ztdelim">$ZTDElim</a></span></dt>
 <dt><span class="sect2"><a href="ch08s66.html#ztlevel">$ZTLevel</a></span></dt>
 <dt><span class="sect2"><a href="ch08s66.html#ztname">$ZTNAME</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp194079856">$ZTOLdval</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp194099008">$ZTRIggerop</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp194117888">$ZTSlate</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp194120592">$ZTUPdate</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp194124480">$ZTVAlue</a></span></dt>
-<dt><span class="sect2"><a href="ch08s66.html#idp194126032">$ZTWOrmhole</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idm45867986853168">$ZTOLdval</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idm45867986815456">$ZTRIggerop</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idm45867986814816">$ZTSlate</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idm45867986812448">$ZTUPdate</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idm45867986809040">$ZTVAlue</a></span></dt>
+<dt><span class="sect2"><a href="ch08s66.html#idm45867986807488">$ZTWOrmhole</a></span></dt>
 </dl></dd>
 </dl>
 </div>

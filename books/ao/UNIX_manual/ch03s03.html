@@ -8,7 +8,7 @@
 <link rel="up" href="ch03.html" title="Chapter 3. Basic Operations">
 <link rel="prev" href="ch03s02.html" title="Environment Variables">
 <link rel="next" href="ch03s04.html" title="Starting GT.M">
-<link rel="copyright" href="ln-idp160089856.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45761573975392.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="conf_opr_unic"></a>Configuring and operating GT.M with <span class="trademark">Unicode</span>(R) support (optional) <a class="indexterm" name="idp161011984"></a><a class="indexterm" name="idp160951312"></a>
+<a name="conf_opr_unic"></a>Configuring and operating GT.M with <span class="trademark">Unicode</span>(R) support (optional) <a class="indexterm" name="idm45761573587056"></a><a class="indexterm" name="idm45761573067456"></a>
 </h2></div></div></div>
 <p>The configure script provides the option to install GT.M with or without <span class="trademark">Unicode</span>(R) support for encoding international character sets. This section describes the system environment required to install and operate GT.M with Unicode support. Users who handle data in ASCII or other single-byte character sets such as one of the ISO-8859 representations and do not foresee any use of character sets beyond single byte character sets, may proceed to the next section.</p>
 <div class="sect2">
@@ -38,7 +38,7 @@
 <p>A GT.M process can operate in either M mode or UTF-8 mode. In certain circumstances, both M mode and UTF-8 mode may concurrently access the same database.</p>
 <p>$gtm_chset determines the mode in which a process operates. If it has a value of M, GT.M treats all 256 combinations of the 8 bits in a byte as a character, which is suitable for many single-language applications.</p>
 <p>If $gtm_chset has a value of UTF-8, GT.M (at process startup) interprets strings as being encoded in UTF-8. In this mode, all functionality related to <span class="trademark">Unicode</span>(R) support becomes available and standard string-oriented operations operate with UTF-8 encoding. In this mode, GT.M detects character boundaries (since the size of a character is variable length), calculates glyph display width, and performs string conversion between UTF-8 and UTF-16.</p>
-<p><a class="indexterm" name="idp161028144"></a><a class="indexterm" name="idp161031536"></a>If you install GT.M with Unicode support, all GT.M components related to M mode reside in your GT.M distribution directory and Unicode support related components reside in the utf8 subdirectory of your GT.M distribution. For processes in UTF-8 mode, in addition to gtm_chset, ensure that $gtm_dist points to the utf8 subdirectory, that $gtmroutines includes the utf8 subdirectory (or the libgtmutil.so therein) rather than its parent directory.</p>
+<p><a class="indexterm" name="idm45761573064496"></a><a class="indexterm" name="idm45761573061488"></a>If you install GT.M with Unicode support, all GT.M components related to M mode reside in your GT.M distribution directory and Unicode support related components reside in the utf8 subdirectory of your GT.M distribution. For processes in UTF-8 mode, in addition to gtm_chset, ensure that $gtm_dist points to the utf8 subdirectory, that $gtmroutines includes the utf8 subdirectory (or the libgtmutil.so therein) rather than its parent directory.</p>
 <p>In addition to $gtm_chset, GT.M V5.3-004 and up use $gtm_icu_version to choose an ICU library library version other than the default. For ICU libraries built with <code class="code">symbol renaming enabled</code>, $gtm_icu_version becomes a required setting.</p>
 <p><code class="code">$gtm_icu_version</code> specifies the ICU version that GT.M should use for UTF-8 operations. It is in the form of <code class="code">MajorVersion.MinorVersion</code> where MajorVersion and MinorVersion specify the desired Major verion and Minor version of ICU. For example, 3.6 refers to ICU version 3.6. If $gtm_icu_version is defined, GT.M works regardless of whether or not symbols are renamed in ICU. If $gtm_icu_version is not defined or does not evaluate to an installed ICU version, GT.M look for non-renamed symbols in the default ICU version. Note that display widths for a few characters are different starting in ICU 4.0. </p>
 <p>GT.M versions V5.2-000 to V5.3-003 required ICU 3.6 libraries. These versions did not use $gtm_icu_version. The following table lists GT.M versions and their compatibility with the operating system provided ICU libraries.</p>
