@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s36.html" title="$ZINInterrupt">
 <link rel="next" href="ch08s38.html" title="$ZIO">
-<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45098218006624.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,9 +30,9 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zinterrupt"></a>$ZINTerrupt<a class="indexterm" name="idm45867987204688"></a>
+<a name="zinterrupt"></a>$ZINTerrupt<a class="indexterm" name="idm45098213052784"></a>
 </h2></div></div></div>
-<p>$ZINT[ERRUPT] specifies the code to be XECUTE'd when an interrupt (for example, through a MUPIP INTRPT) is processed. While a $ZINTERRUPT action is in process, any additional interrupt signals are discarded. When an interrupt handler is invoked, the current value of $REFERENCE is saved and restored when the interrupt handler returns. The current device ($IO) is neither saved nor restored.</p>
+<p>$ZINT[ERRUPT] specifies the code that GT.M XECUTEs at the time of processing an interrupt (for example, through a MUPIP INTRPT). While a $ZINTERRUPT action is in process, GT.M defers any additional interrupt signals. At the time of invoking an interrupt handler, GT.M saves the current values of $ECODE and $REFERENCE and restores them when the interrupt handler returns. GT.M neither saves nor restores the current device ($IO). </p>
 <p>GT.M permits the SET command to modify the value of $ZINTERRUPT.</p>
 <p>If an interrupt handler changes the current IO device (via USE), it is the responsibility of the interrupt handler to restore the current IO device before returning. There are sufficient legitimate possibilities why an interrupt routine would want to change the current IO device (for example; daily log switching), that this part of the process context is not saved and restored automatically.</p>
 <p>The initial value for $ZINTERRUPT is taken from the <span>UNIX environment variable gtm_zinterrupt</span> if it is specified, otherwise it defaults to the following string:</p>
@@ -43,7 +43,7 @@
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>If the default value for $ZINTERRUPT is modified, no $ZJOBEXAM() will occur unless the replacement value directly or indirectly invokes that function. In other words, while $ZJOBEXAM() is part of the interrupt handling by default, it is not an implicit part of the interrupt handling.</p></td></tr>
+<tr><td align="left" valign="top"><p>If the default value for $ZINTERRUPT is modified, no $ZJOBEXAM() occurs unless the replacement value directly or indirectly invokes that function. In other words, while $ZJOBEXAM() is part of the interrupt handling by default, it is not an implicit part of the interrupt handling.</p></td></tr>
 </table></div>
 <p>The interrupt handler is executed by GT.M when on a statement boundary or on an appropriate boundary in a potentially long running COMMAND (in the same place as GT.M recognizes &lt;CTRL-C&gt;). If a GT.M process is in a long running external call (for example; waiting in a message queue) GT.M does not have sufficient control of the process state to immediately drive the interrupt handler. GT.M recognizes the interrupt request and drives the handler after the external call returns to GT.M and the process reaches an appropriate execution boundary.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">

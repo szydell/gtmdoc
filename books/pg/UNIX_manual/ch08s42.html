@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZMAXTPTIme</title>
+<title>$ZMALLoclim</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s41.html" title="$ZLevel">
-<link rel="next" href="ch08s43.html" title="$ZMOde">
-<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
+<link rel="next" href="ch08s43.html" title="$ZMAXTPTIme">
+<link rel="copyright" href="ln-idm45098218006624.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZMAXTPTIme</th></tr>
+<tr><th colspan="3" align="center">$ZMALLoclim</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s41.html">Prev</a> </td>
@@ -26,67 +26,16 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZMAXTPTIme</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZMALLoclim</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zmaxtptime"></a>$ZMAXTPTIme<a class="indexterm" name="idm45867987215728"></a>
+<a name="zmalloclim"></a>$ZMALLoclim<a class="indexterm" name="idm45098213003904"></a>
 </h2></div></div></div>
-<p>$ZMAXTPTI[ME] contains an integer value indicating the time duration GT.M should wait for the completion of all activities fenced by the current transaction's outermost TSTART/TCOMMIT pair.</p>
-<p>$ZMAXTPTIME can be SET but cannot be NEWed.</p>
-<p>$ZMAXTPTIME takes its value from the environment variable gtm_zmaxtptime. If gtm_zmaxtptime is not defined, the initial value of $ZMAXTPTIME is zero (0) seconds which indicates "no timeout" (unlimited time). The value of $ZMAXTPTIME when a transaction's outermost TSTART operation executes determines the timeout setting for that transaction.</p>
-<p>When a $ZMAXTPTIME expires, GT.M executes the $ETRAP/$ZTRAP exception handler currently in effect.</p>
-<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>Negative values of $ZMAXTPTIME are also treated as "no timeout". Timeouts apply only to the outermost transaction, that is, $ZMAXTPTIME has no effect when TSTART is nested within another transaction.</p></td></tr>
-</table></div>
-<p>Example:</p>
-<pre class="programlisting">Test;testing TP timeouts
-  set $ZMAXTPTIME=6,^X=0,^Y=0,^Z=0
-  write "Start with $ZMAXTPTIME=",$ZMAXTPTIME,":",!
-  for sleep=3:2:9 do
-  . set retlvl=$zlevel
-  . do longtran;ztrap on longtran 
-  ;continues execution
-  ;on next line
-  . write "(^X,^Y)=(",^X,",",^Y,")",!
-  write !,"Done TP Timeout test.",!
- quit
-longtran ;I/O in TP doesn't get rolled back
-  set $etrap=" goto err"
-  tstart ():serial
-  set ^X=1+^X
-  write !,"^X=",^X,",will set ^Y to ",sleep
-  write " in ",sleep," seconds..."
-  hang sleep
-  set ^Y=sleep
-  write "^Y=",^Y
-  tcommit
-  write "...committed.",!
-  quit
-err;
-  write !,"In $ETRAP handler. Error was: "
-  write !," ",$zstatus
-  if $TLEVEL do ;test allows handler use outside of TP
-  . trollback
-  . write "Rolled back transaction."
-  write !
-  set $ecode=""
-  zgoto retlvl</pre>
-<p>Results:</p>
-<pre class="programlisting">Start with $ZMAXTPTIME=6:
-^X=1,will set ^Y to 3 in 3 seconds...^Y=3...committed.
-^X=2,will set ^Y to 5 in 5 seconds...^Y=5...committed.
-^X=3,will set ^Y to 7 in 7 seconds...
-In $ETRAP handler. Error was:
-150377322,longtran+7^tptime,%GTM-E-TPTIMEOUT, Transaction timeoutRolled back transaction.
-^X=3,will set ^Y to 9 in 9 seconds...
-In $ETRAP handler. Error was:
-150377322,longtran+7^tptime,%GTM-E-TPTIMEOUT, Transaction timeoutRolled back transaction.
-Done TP Timeout test.</pre>
+<p>$ZMALL[OCLIM] contains an integer value specifying a number of bytes of process memory, which, if exceeded, cause GT.M to issue a MALLOCCRIT error. When the value is zero (0), GT.M imposes no limit, although the OS still does. A positive value specifies a byte limit with a minimum of 2.5MB. A value of minus one (-1) provides a value of half the system imposed limit if any. </p>
+<p>When a request for additional memory exceeds the limit, GT.M does the expansion and then produces trappable MALLOCCRIT warning. By default, some later request for memory is likely to produce a fatal MEMORY error, unless subsequent to MALLOCCRIT, a limit has been reestablished by SET ZMALLOCLIM to the same or higher limit, but one not exceeding any system limit.</p>
+<p>Note that GT.M allocates memory from the OS in large blocks so the interaction of $ZMALLOCLIM with memory growth is not exact. MEMORY errors are fatal and terminate the process. In the case of a MEMORY error, GT.M makes an attempt to marshal available memory to enable as graceful a termination as possible. Note that independent of this mechanism, the OS may kill the process without recourse if it determines the greed of the process for memory jeopardizes the viability of the system. </p>
+<p>When the integer byte value specified in a SET $ZMALLOCLIN=intexpr or, at process startup, by the $gtm_malloc_limit environment variable specifies a positive value, GT.M uses the smaller of that value and any OS defined amount for the value of $ZMALLOCLIM. GT.M does not give errors or messages about its choice for $ZMALLOCLIM between a specified value and some other more appropriate value, so if the application needs to verify the result, it should examine the resulting ISV value. </p>
 </div>
 <div class="navfooter">
 <hr>
@@ -101,7 +50,7 @@ Done TP Timeout test.</pre>
 <tr>
 <td width="40%" align="left" valign="top">$ZLevel </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZMOde</td>
+<td width="40%" align="right" valign="top"> $ZMAXTPTIme</td>
 </tr>
 </table>
 </div>

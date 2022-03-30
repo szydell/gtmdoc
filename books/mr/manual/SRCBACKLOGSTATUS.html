@@ -8,13 +8,12 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="SPOREOL.html" title="SPOREOL ">
 <link rel="next" href="SRCFILERR.html" title="SRCFILERR ">
-<link rel="copyright" href="ln-idm45961212338768.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46394415291856.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">SRCBACKLOGSTATUS <span class="inlinemediaobject"><img src="images/new.png" alt="New"></span>
-</th></tr>
+<tr><th colspan="3" align="center">SRCBACKLOGSTATUS </th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="SPOREOL.html">Prev</a> </td>
@@ -26,16 +25,15 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">SRCBACKLOGSTATUS <span class="inlinemediaobject"><img src="images/new.png" alt="New"></span></span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">SRCBACKLOGSTATUS </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="SRCBACKLOGSTATUS"></a>SRCBACKLOGSTATUS <span class="inlinemediaobject"><img src="images/new.png" alt="New"></span>
-</h2></div></div></div>
+<a name="SRCBACKLOGSTATUS"></a>SRCBACKLOGSTATUS </h2></div></div></div>
 <p><span class="bold"><strong>SRCBACKLOGSTATUS</strong></span>, Instance RRRR SSSS NNNN transaction(s)</p>
 <p>MUPIP Information: This message appears with the output of MUPIP REPLICATE -SOURCE -SHOWBACKLOG. RRRR specifies the name of the replicating instance. SSSS denotes three possible stages of the replicating instance in relation to the originating instance - "is behind by", "has not acknowledged" and "is ahead by". A replicating instance is behind by the originating instance when there is a backlog of unacknowledged transactions. A replicating instance is ahead by the originating instance when the Receiver Server is performing an online rollback. An instance has not yet acknowledged transaction when the originating instance has not received a response from the replicating instance. NNNN is the number of transactions. There are no in-flight updates when SRCBACKLOGSTAUS reports that the replicating instance is behind by 0 transactions and the LASTTRANS messages for "posted", "sent", and "acknowledged" have the same number of transaction count.</p>
 <p>Action: Use this message as an operational aid to determine the status of the replicating instance in relation to the originating instance.</p>
-<a class="indexterm" name="idm45961206647824"></a>
+<a class="indexterm" name="idm46394409549248"></a>
 </div>
 <div class="navfooter">
 <hr>

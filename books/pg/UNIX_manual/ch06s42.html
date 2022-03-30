@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s41.html" title="ZRUPDATE">
 <link rel="next" href="ch06s43.html" title="ZSTep">
-<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45098218006624.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zshow_cmmd"></a>ZSHow<a class="indexterm" name="idm45867988981392"></a>
+<a name="zshow_cmmd"></a>ZSHow<a class="indexterm" name="idm45098214839920"></a>
 </h2></div></div></div>
 <p>The ZSHOW command displays information about the current GT.M environment.</p>
 <p>The format of the ZSHOW command is:</p>
@@ -48,35 +48,117 @@
 <p></p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zshow_info_codes"></a>ZSHOW Information Codes<a class="indexterm" name="idm45867988844256"></a>
+<a name="zshow_info_codes"></a>ZSHOW Information Codes<a class="indexterm" name="idm45098214712048"></a>
 </h3></div></div></div>
-<p>A ZSHOW argument is an expression containing codes selecting one or more types of information.</p>
-<p>A: A stands for Autorelink and provides output in the same format as MUPIP RCTLDUMP, but restricted to the routines contained in the relinkctl areas in use by the process issuing the command. ZSHOW "*" does not include ZSHOW "A" because of an expectation that the typical volume of the information does not provide a good return for its value. If you wish your error handling or INTRPT routines to dump this information, ask for it explicitly, possibly by doing a ZSHOW "A" into a local variable before doing a ZSHOW "*".</p>
-<p>B: displays active ZBREAK breakpoints and their associated actions</p>
-<p>C: provides the list of loaded external call packages and their routines. ZSHOW "C" does not report packages that are accessible but have not been accessed by the process. </p>
-<p>D: displays device information</p>
-<p>G: displays the access statistics for global variables and access to database file since process startup. When the process does not have access to the current shared statistics, ZSHOW "G" return a question-mark (?) at the end of the output strings. </p>
-<p>I: displays the current values of all intrinsic special variables</p>
-<p>L: displays GT.M LOCKs and ZALLOCATEs held by the process</p>
-<p>R: displays the GT.M invocation stack and a hash based on the MurmurHash3 algorithm of M source code for each routine on the stack.</p>
-<p>S: displays the GT.M invocation stack</p>
-<p>T: displays the cross-region summary (total) lines associated with G and L codes. Lines associated with G end with a question-mark (?) when the process does not have access to the current shared statistics. </p>
-<p>V: displays local <span>and alias </span>variables</p>
-<p>* displays all possible types of ZSHOW information</p>
+<p>A ZSHOW argument is an expression containing a list of codes that select one or more types of information. The ZSHOW information codes are: </p>
+<div class="informaltable">
+<a name="tblzshowcodes"></a><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th><p>Code</p></th>
+<th><p>Description</p></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p>*</p></td>
+<td>
+<p>is the wildcard code which is same as ZSHOW "IVBDLGRC"; all excluding codes "A", "S", and "T".</p>
+</td>
+</tr>
+<tr>
+<td><p>A</p></td>
+<td>
+<p>the code "A" stands for Autorelink and provides output in the same format as MUPIP RCTLDUMP, but restricted to the routines contained in the relinkctl areas in use by the process issuing the command. ZSHOW "*" does not include ZSHOW "A" because of an expectation that the typical volume of the information does not provide a good return for its value. If you wish your error handling or INTRPT routines to dump this information, ask for it explicitly, possibly by doing a ZSHOW "A" into a local variable before doing a ZSHOW "*".</p>
+</td>
+</tr>
+<tr>
+<td><p>B</p></td>
+<td>
+<p>displays active ZBREAK breakpoints and their associated actions</p>
+</td>
+</tr>
+<tr>
+<td><p>C</p></td>
+<td>
+<p>provides the list of loaded external call packages and their routines. ZSHOW "C" does not report packages that are accessible but have not been accessed by the process. </p>
+</td>
+</tr>
+<tr>
+<td><p>D</p></td>
+<td>
+<p>displays information on currently OPEN devices; it tends to display information on device states that differ from the default</p>
+</td>
+</tr>
+<tr>
+<td><p>G</p></td>
+<td>
+<p>displays the access statistics for global variables and access to database file since process startup. When the process does not have access to the current shared statistics, ZSHOW "G" returns a question-mark (?) at the end of the output strings. </p>
+</td>
+</tr>
+<tr>
+<td><p>I</p></td>
+<td>
+<p>displays the current values of all intrinsic special variables</p>
+</td>
+</tr>
+<tr>
+<td><p>L</p></td>
+<td>
+<p>displays GT.M LOCKs and ZALLOCATEs held by the process</p>
+</td>
+</tr>
+<tr>
+<td><p>R</p></td>
+<td>
+<p>displays the GT.M invocation stack and a hash based on the MurmurHash3 algorithm of M source code for each routine on the stack.</p>
+</td>
+</tr>
+<tr>
+<td><p>S</p></td>
+<td>
+<p>displays the GT.M invocation stack - like R, but without the hash</p>
+</td>
+</tr>
+<tr>
+<td><p>T</p></td>
+<td>
+<p>displays the cross-region summary (total) lines associated with G and L codes. Lines associated with G end with a question-mark (?) when the process does not have access to the current shared statistics. </p>
+</td>
+</tr>
+<tr>
+<td><p>V</p></td>
+<td>
+<p>displays local and alias variables that are active in the current context</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>Codes may be upper- or lower-case. Invalid codes produce a run-time error. Multiple occurrences of the same code in one ZSHOW argument only produce one output instance of the corresponding information. The order of the first appearance of the codes in the argument determines the order of the corresponding output instances.</p>
 <p>If you are using a local variable destination and place another code ahead of "V", the effect is to have the results of the earlier code also appear in the results of the "V" code.</p>
-<p>If the wildcard (*) occurs in the list, ZSHOW uses the default order (ZSHOW "IVBDLGR" ):</p>
+<p>When the wildcard (*) occurs in the list, it overrides all other codes and displays codes in the order of "IVBDLGRC" which produces the following information:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>intrinsic special variables</p></li>
-<li class="listitem"><p>local variables</p></li>
-<li class="listitem"><p>ZBREAK information</p></li>
-<li class="listitem"><p>device information</p></li>
-<li class="listitem"><p>LOCK and ZALLOCATE information</p></li>
-<li class="listitem"><p>Access statistics for global variables and database files(s).</p></li>
-<li class="listitem"><p>GT.M invocation stack and an MD5 checksum of M source code for each routine on the stack.</p></li>
-<li class="listitem"><p>the GT.M stack</p></li>
+<li class="listitem">intrinsic special variables
+ </li>
+<li class="listitem">local variables
+ </li>
+<li class="listitem">ZBREAK information
+ </li>
+<li class="listitem">device information
+ </li>
+<li class="listitem">LOCK and ZALLOCATE information
+ </li>
+<li class="listitem">Access statistics for global variables and database files(s)
+ </li>
+<li class="listitem">GT.M invocation stack and an MD5 checksum of M source code for each routine on the stack
+</li>
+<li class="listitem">External call table entry name
+</li>
 </ul></div>
-<p>If G occurs in the list, the following statistics are displayed.  The table is in alphabetical order, but ZSHOW will display the statistics according to historical practice with the most recently added statistics displayed last. The statistics are displayed in a comma-separated list where each item has its mnemonic followed by a colon and a counter. GT.M maintains the counter in DECIMAL. Each counter has 8-byte (can get as high as 2**64). If these counters exceed 18 decimal digits (somewhere between 2**59 and 2**60), which is the current GT.M numeric representation precision threshold, their use in arithmetic expressions in GT.M results in loss of precision. The mnemonics are:</p>
+<p>If G occurs in the list, the following statistics are displayed. The table is in alphabetical order, but ZSHOW will display the statistics according to historical practice with the most recently added statistics displayed last. The statistics are displayed in a comma-separated list where each item has its mnemonic followed by a colon and a counter. GT.M reports counters in DECIMAL. Each counter has 8-byte (can get as high as 2**64). If these counters exceed 18 decimal digits (somewhere between 2**59 and 2**60), which is the current GT.M numeric representation precision threshold, their use in arithmetic expressions in GT.M results in loss of precision. The mnemonics are:</p>
 <pre class="programlisting">
 AFRA: # of waits for instance freeze to release critical sections
 BREA: # of waits for block read &amp; decryption
@@ -129,6 +211,7 @@ NTR : # of Non-tp committed Transactions that were Read-only on this database
 NTW : # of Non-tp committed Transactions that were read-Write on this database 
 ORD : # of $ORDer(,1) (forward) operations (TP and non-TP); the count of $Order(,-1) operations are reported under ZPR. 
 PRC : # of waits on exit
+PRG : # of pre-read globals that were performed by the reader helper
 QRY : # of $QueRY() operations (TP and non-TP) 
 SET : # of SET operations (TP and non-TP) 
 TBR : # of Tp transaction induced Block Reads on this database 
@@ -148,7 +231,10 @@ TRGA: # of mini-transaction completion
 TRX : # of waits for transaction in progress
 TTR : # of Tp committed Transactions that were Read-only on this database 
 TTW : # of Tp committed Transactions that were read-Write on this database
+WFL : # of database flushes that were performed by the writer helpers
 WFR : # of times a process slept while waiting for another process to read in a database block
+WHE : # of writer helper epochs
+WRL : # of times a process consistently slept(longer than WFR) while waiting for another process to read in a database block
 ZAD : # of waits for region freeze off
 ZPR : # of $order(,-1) or $ZPRevious() (reverse order) operations (TP and non-TP). The count of $Order(,1) operations are reported under ORD. 
 ZTR : # of ZTRigger command operations
@@ -167,7 +253,7 @@ GT.M maintains the counters of the mnemonics marked with a * on AIX. On Linux, G
 <p>In addition, "G" also displays a line containing aggregated statistics (GLD:*,REG:* line) for all database files for the global directory and region name. If two or more regions (in the same or different global directories) map to the same physical database file, the ZSHOW "G" reports identical statistics for those two regions, but counts them only once across all database files in this line. It always reports the value for CTN as 0 because this statistic makes sense only for individual database files.</p>
 <p>ZSHOW "G" can be used for a benchmark exercise. A process can make periodic commands to ZSHOW "G" and store the returned strings in a local variable - a fast storage mechanism in GT.M - for subsequent analysis.</p>
 <p>Alternatively, since the $ZJOBEXAM() function by default performs a ZSHOW "*" which in turn automatically includes the "G" information code, invoking MUPIP INTRPT commands periodically on a particular process causes it to additionally record all global access statistics in the $ZJOBEXAM dump file.</p>
-<p>ZSHOW "G" reports process private global access statistics only for regions whose corresponding segments have an access method of BG or MM in the global directory. For regions with other access methods, for example GT.CM GNP, which maps a region/segment to a remote database file, ZSHOW "G" does not report any process private statistics even though aggregated statistics (across all processes) will continue to be gathered in the remote database file header.</p>
+<p>ZSHOW "G" reports process private global access statistics only for regions whose corresponding segments have an access method of BG or MM in the global directory. For regions with other access methods, for example GT.CM GNP, which maps a region/segment to a remote database file, ZSHOW "G" does not report any process private statistics even though GT.M continuess to maintain aggregated statistics (across all processes) in the remote database file header.</p>
 <p>If "L" occurs in the list, ZSHOW displays the current active M LOCKs and their corresponding LEVEL. On a active M lock, a LOCK+ increases LEVEL by 1 and LOCK- decreases the LEVEL by 1. GT.M increments MLG (M Locks Granted) by 1 for every LOCK successful LOCK acquiring action. GT.M treats LOCKs grouped into a single action by specifying them within parentheses as a single lock action. For example, LOCK (^SUCCESS1,^SUCCESS2) increments MLG by 1.</p>
 <p>GT.M increment MLT (M Locks Timeout) by 1 for every failed (timeout) attempt to LOCK a resource.</p>
 <p>Every user level lock request in turn translates to one or more calls to the database lock code (depending on the timeout and the number of lock names specified in the same lock command) which increments the LKS and/or LKF statistics of the ZSHOW "G" output appropriately.</p>
@@ -177,12 +263,12 @@ GT.M maintains the counters of the mnemonics marked with a * on AIX. On Linux, G
 <li class="listitem"><p>ZSHOW targeted to a device (ZSHOW "*") aligns the output according to the numbers of display columns specified by the WIDTH deviceparameter.</p></li>
 <li class="listitem"><p>ZSHOW targeted to a local (ZSHOW "*":lcl) truncates data exceeding 2048KB at the last character that fully fits within the 2048KB limit.</p></li>
 <li class="listitem"><p>ZSHOW targeted to a global (ZSHOW "*":^CC) truncates data exceeding the maximum record size for the target global at the last character that fully fits within that record size. </p></li>
-<li class="listitem"><p>ZSHOW "L" displays the following M-lock statistics in one line just before displaying the LOCKs held by the process.</p></li>
+<li class="listitem"><p>ZSHOW "L" displays the MLG and MLT M-lock statistics in one line just before displaying the LOCKs currently held by the process.</p></li>
 </ul></div>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zshow"></a>Examples<span> of ZSHow</span><a class="indexterm" name="idm45867988779296"></a>
+<a name="examples_of_zshow"></a>Examples<span> of ZSHow</span><a class="indexterm" name="idm45098214639728"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;ZSHOW "db"</pre>
@@ -353,7 +439,7 @@ $ZYERROR=""</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zsh_destination_vars"></a>ZSHOW Destination Variables<a class="indexterm" name="idm45867988811552"></a>
+<a name="zsh_destination_vars"></a>ZSHOW Destination Variables<a class="indexterm" name="idm45098214663216"></a>
 </h3></div></div></div>
 <p>ZSHOW may specify an unsubscripted or subscripted global or local variable name (glvn) into which ZSHOW places its output. If the argument does not include a global or local variable name, ZSHOW directs its output to the current device. </p>
 <p>When ZSHOW directs its output to a variable, it adds two levels of descendants to that variable. The first level subscript contains a one-character string from the set of upper-case ZSHOW action codes, identifying the type of information. ZSHOW implicitly KILLs all descendants of the first level nodes. ZSHOW stores information elements at the second level using ascending integers, starting at 1. </p>
@@ -385,7 +471,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="use_of_zshow"></a>Use of ZSHOW<a class="indexterm" name="idm45867988834656"></a>
+<a name="use_of_zshow"></a>Use of ZSHOW<a class="indexterm" name="idm45098214672592"></a>
 </h3></div></div></div>
 <p>Use ZSHOW as</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">

@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s36.html" title="$ZGetjpi()">
 <link rel="next" href="ch07s38.html" title="$ZJustify()">
-<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45098218006624.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,27 +29,41 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="Zjobexam"></a>$ZJOBEXAM()<a class="indexterm" name="idm45867987819056"></a>
+<a name="Zjobexam1"></a>$ZJOBEXAM()<a class="indexterm" name="idm45098213674816"></a>
 </h2></div></div></div>
-<p>Returns the full specification of the file into which the function places a ZSHOW "*". The return value serves as a way to save, to notify others of the exact location of the output, or to open the file for further processing. GT.M reports each $ZJOBEXAM() to the operator log facility with its file specification.</p>
-<p>The optional expression argument is a template output device specification. It can be a device, a file directory, or a file name. The template is an expression that is pre-processed to create a file specification as the target for the ZSHOW. The preprocessing is equivalent to $ZPARSE(), as illustrated by the following M code:</p>
-<pre class="programlisting">set deffn="GTM_JOBEXAMINE.ZSHOW_DMP_"_$JOB_"_"_&lt;cntr&gt;
-set filespec=$zparse(expr1,"",deffn)</pre>
+<p>Places ZSHOW &lt;code&gt; output into a file and returns the absolute file name. The format for the $ZJOBEXAM function is:</p>
+<pre class="programlisting">$ZJOBEXAM([expr1][,expr2])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>The optional first expression is the output specification. It can be a file directory or a file name. $ZJOBEXAM() pre-processes the first expression to create a file specification as the target for the ZSHOW command output. The preprocessing is equivalent to $ZPARSE(), as illustrated by the following M code:</p>
+<pre class="programlisting">GTM&gt;set cntr=1,deffn="GTM_JOBEXAM.ZSHOW_DMP_"_$JOB_"_"_cntr
+GTM&gt;w $zparse(deffn)
+/path/to/GTM_JOBEXAM.ZSHOW_DMP_49878_1
+GTM&gt;w $zjobexam()
+/path/to/GTM_JOBEXAM.ZSHOW_DMP_49878_1
+GTM&gt;</pre>
+</li>
+<li class="listitem"><p>The optional second expression evaluates to a string containing a list of one or more ZSHOW information codes that determine the type of information. If the second expression is missing or empty, GT.M operates as it was a "*" and produces all context. Note that using an explicit list may be useful in limiting the exposure of sensitive information. <span>For more information, refer to  to <a class="xref" href="ch06s42.html#zshow_info_codes" title="ZSHOW Information Codes">&#8220;ZSHOW Information Codes&#8221;</a>.</span></p></li>
+</ul></div>
+<p>The return value serves as a way to save, to notify others of the exact location of the output or to open the file for further processing. GT.M logs the JOBEXAMDONE message to the operator log for each $ZJOBEXAM() which includes the full file specification.</p>
 <p>The $ZJOBEXAM()does not trigger error processing except when there is a problem storing its return value, so no error is reported to the process until after any dump is complete. In the event of any error encountered during the $ZJOBEXAM(), GT.M sends an appropriate message to operator log facility and returns control to the caller. Note that this special error handling applies only to the $ZJOBEXAM(), and is not a property of the $ZINTERRUPT interrupt handler, which uses $ZJOBEXAM() by default.</p>
 <p>$ZJOBEXAM() dump files contain the context of a process at the time the function executes. Placement and management of these files should consider their potential size and security implications.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zjobexam"></a>Examples<span> of $ZJOBEXAM()</span><a class="indexterm" name="idm45867987836896"></a>
+<a name="examples_of_zjobexam"></a>Examples<span> of $ZJOBEXAM()</span><a class="indexterm" name="idm45098213725472"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;set x=$zjobexam()
 GTM&gt;write x
-/home/gtmuser1/.fis-gtm/V5.4-002B_x86/r/GTM_JOBEXAM.ZSHOW_DMP_28760_1
-GTM&gt;set x=$zjobexam("test.file")
+/tmp/GTM_JOBEXAM.ZSHOW_DMP_383974_1
+GTM&gt;set x=$zjobexam("jobexam.out")
 GTM&gt;write x
-/home/gtmuser1/.fis-gtm/V5.4-002B_x86/r/test.file
+/tmp/jobexam.out
+GTM&gt;set x=$zjobexam("jobexam_ISV.out","I")
+GTM&gt;write x
+/tmp/jobexam_ISV.out
 GTM&gt;</pre>
-<p>Shows default file name and type of the files created containing the zshow dump information and the difference when the name and type are specified.</p>
+<p>In the first two examples, the output file contains zshow "*" information. The 3rd example saves zshow "I" (ISVs only) information in the output file.</p>
 </div>
 </div>
 <div class="navfooter">

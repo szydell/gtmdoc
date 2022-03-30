@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZTrap</title>
+<title>$ZTIMeout</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s60.html" title="$ZTIMeout">
-<link rel="next" href="ch08s62.html" title="$ZUSedstor">
-<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
+<link rel="prev" href="ch08s60.html" title="$ZTExit">
+<link rel="next" href="ch08s62.html" title="$ZTrap">
+<link rel="copyright" href="ln-idm45098218006624.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZTrap</th></tr>
+<tr><th colspan="3" align="center">$ZTIMeout</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s60.html">Prev</a> </td>
@@ -26,59 +26,52 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZTrap</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZTIMeout</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="ztrap"></a>$ZTrap<a class="indexterm" name="idm45867987029168"></a>
-</h2></div></div></div>
-<p>$ZT[RAP] contains a string value that GT.M XECUTEs when an error occurs during routine execution. </p>
-<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>The following discussion assumes that $ETRAP error handling is simultaneously not in effect (that is, $ETRAP="").  <span>See <a class="xref" href="ch13.html" title="Chapter 13. Error Processing">Chapter 13: &#8220;<i>Err<span>or</span> Processing</i>&#8221;</a> for more information on the interaction between $ETRAP and $ZTRAP.</span></p></td></tr>
-</table></div>
-<p>When the $ZTRAP variable is not null, GT.M executes $ZTRAP at the current level. The $ZTRAP variable has the initial value of "B," and puts the process in Direct Mode when an error condition occurs. If the value of $ZTRAP is null (""), an exception causes the image to run-down with the condition code associated with the exception. If $ZTRAP contains invalid source code, GT.M displays an error message and puts the process into Direct Mode.</p>
-<p>$ZTRAP is a read-write Intrinsic Special Variable, (that is, it can appear on the left side of the equal sign (=) in the argument to the SET command).</p>
-<p>$ZTRAP may also appear as an argument to an inclusive NEW command. NEW $ZTRAP causes GT.M to stack the current $ZTRAP value, and set its value to the empty string ($ZTRAP=""). The NEW command puts the $ZTRAP in control for error handling. When the program QUITs from the invocation level where the NEW occurred, GT.M restores the value previously stacked by the NEW. NEW $ZTRAP provides nesting of $ZTRAP. Because $ZTRAP="" terminates the image when an error occurs, SET $ZTRAP= generally follows immediately after NEW $ZTRAP. You may use this technique to construct error handling strategies corresponding to the nesting of your programs. If the <span>environment variable</span> gtm_ztrap_new evaluates to boolean TRUE (case insensitive string "TRUE", or case insensitive string "YES", or a non-zero number), $ZTRAP is NEWed when $ZTRAP is SET; otherwise $ZTRAP is not stacked when it is SET.</p>
-<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>QUIT from a $ZTRAP terminates the level at which the $ZTRAP was activated.</p></td></tr>
-</table></div>
-<p>Keep $ZTRAP simple and put complicated logic in another routine. If the action specified by $ZTRAP results in another run-time error before changing the value of $ZTRAP, GT.M invokes $ZTRAP until it exhausts the process stack space, terminating the image. Carefully debug exception handling. </p>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;S $ZTRAP="ZP @$ZPOS B"</pre>
-<p>This example modifies $ZTRAP to display source code for the line where GT.M encounters an error before entering Direct Mode.</p>
-<p>There are four settings of $ZTRAP controlled by the <span>UNIX environment variable</span> gtm_ztrap_form. </p>
-<p>The four settings of gtm_ztrap_form are:</p>
+<a name="ztimeout"></a>$ZTIMeout</h2></div></div></div>
+<p>$ZTIMEOUT controls a single process wide timer. The format of the $ZTIMEOUT ISV is:</p>
+<pre class="programlisting">$ZTIMeout=([timeout][:labelref]) </pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p> code - If gtm_ztrap_form evaluates to "code" (or a value that is not one of the subsequently described values), then GT.M treats $ZTRAP as code and handles it as previously described in the documentation.
-</p></li>
-<li class="listitem"><p>entryref - If gtm_ztrap_form evaluates to "entryref" then GT.M treats it as an entryref argument to an implicit GOTO command. </p></li>
-<li class="listitem">
-<p>adaptive - If gtm_ztrap_form evaluates to "adaptive" then if $ZTRAP does not compile to valid M code, then $ZTRAP is treated as just described for "entryref." Since there is little ambiguity, code and entryref forms of $ZTRAP can be intermixed in the same application. </p>
-<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
-<th align="left">Important</th>
-</tr>
-<tr><td align="left" valign="top"><p>GT.M attempts to compile $ZTRAP before evaluating $ZTRAP as an entryref. Because GT.M allows commands without arguments such as QUIT, ZGOTO, or HANG as valid labels, be careful not to use such keywords as labels for error handling code in "adaptive" mode.</p></td></tr>
-</table></div>
-</li>
-<li class="listitem"><p>pope[ntryref] / popa[daptive] - If gtm_ztrap_form evaluates to "POPE[NTRYREF]" or "POPA[DAPTIVE]" (case insensitive) and $ZTRAP value is in the form of entryref, GT.M unwinds the M stack from the level at which an error occurred to (but not including) the level at which $ZTRAP was last SET. Then, GT.M transfers control to the entryref in $ZTRAP at the level where the $ZTRAP value was SET. If the <span>UNIX environment variable</span> gtm_zyerror is defined to a valid entryref, GT.M transfers control to the entryref specified by GTM_ZYERROR (with an implicit DO) after unwinding the stack and before transferring control to the entyref specified in $ZTRAP.</p></li>
+<li class="listitem"><p>The optional timeout in seconds specifies with millisecond accuracy how long from the current time the timer interrupts the process. If the specified timeout is negative, GT.M cancels the timer. If the timeout is zero, GT.M treats it as it would a DO of the vector. </p></li>
+<li class="listitem"><p>The optional labelref specifies a code vector defining a fragment of M code to which GT.M transfers control as if with a DO when the timeout expires. If the timeout is missing, the assignment must start with a colon and only changes the vector, and in this case, if the timeout is the empty string, GT.M removes any current vector.</p></li>
 </ul></div>
-<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<p>Note that GT.M only recognizes interrupts such as from $ZTIMEOUT at points where it can properly resume operation, such as the beginning of a line, when waiting on a command with a timeout, or when starting a FOR iteration. When a timeout occurs, if the last assignment specified no vector, GT.M uses the current $ETRAP or $ZTRAP. When a $ZTIMEOUT expires, it invokes one of three possible vectors:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">Its own labelref, which creates a new stack frame, from which it returns to the point at which it was recognized - similar to what happens for $ZINTERUPT when it recognizes a MUPIP INTRPT; see WARNING below</li>
+<li class="listitem">If labelref is not specified and $ETRAP is specified, it envokes the $ETRAP code, which it acts like an error and operates as if in the current frame, implicitly dropping the current frame when the $ETRAP vector processing completes</li>
+<li class="listitem">If labelref is not specified and $ZTRAP is specified, it invokes the $ZTRAP code, acting like an error whose behavior is subject to $gtm_ztrap_form; for additional information, refer to the $ZTRAP documentation</li>
+</ul></div>
+<p>In all cases the invoked code can alter the behavior using the tools at its disposal - e.g. GOTO, ZGOTO, $ECODE, etc.</p>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Warning">
 <tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
-<th align="left">Note</th>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Warning</th>
 </tr>
-<tr><td align="left" valign="top"><p>Like $ZTRAP values, invocation of device EXCEPTION values follow the pattern specified by the current gtm_ztrap_form setting except that there is never any implicit popping with EXCEPTION action.</p></td></tr>
+<tr><td align="left" valign="top">
+<p>When none of the vectors are specified, a $ZTIMEOUT expiration results in the termination of the process</p>
+<p>Using a [Z}GOTO that stays within a $ZTIMEOUT labelref vector frame may cause undefined and undesirable behavior</p>
+</td></tr>
 </table></div>
+<p>GT.M rejects an attempted KILL of $ZTIMeout with the VAREXPECTED error and an attempted NEW of $ZTIMeout with the SVNONEW error.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zprint ^ztimeout
+ztimeout
+  ; Display $ztimeout
+    write !,$ztimeout               ; display $ZTIMeout - in this case the initial value -1
+                                    ; set with a vector (do ^TIMEOUT)
+    set $ztimeout="60:do ^TIMEOUT"  ; timeout of 1 minute. After timeout expires, XECUTEs do ^TIMEOUT
+    write !,$ztimeout               ; displays the remaining time:vector until timeout
+  ; set without a vector
+    set $ztimeout=120               ; set the timeout to 2 minutes without changing the vector
+    set $ztimeout="1234do ^TIMEOUT" ; missing colon creates a timeout for 1234 seconds
+    set $ztimeout="10:"             ; set the timeout to 10 seconds and vector to current etrap or ztrap
+    set $ztimeout=-1                ; set cancels the timeout
+  ; Note that set to 0 triggers an immediate timeout
+    set $ztimeout=0                 ; triggers the current vector
+    set $ztimeout="0:DO FOO"        ; this has the same effect as DO FOO
+GTM&gt;</pre>
 </div>
 <div class="navfooter">
 <hr>
@@ -91,9 +84,9 @@
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZTIMeout </td>
+<td width="40%" align="left" valign="top">$ZTExit </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZUSedstor</td>
+<td width="40%" align="right" valign="top"> $ZTrap</td>
 </tr>
 </table>
 </div>

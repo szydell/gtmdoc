@@ -8,7 +8,7 @@
 <link rel="up" href="ch12.html" title="Chapter 12. Database Encryption">
 <link rel="prev" href="ch12s04.html" title="Tested Reference Implementations">
 <link rel="next" href="ch12s06.html" title="Installation">
-<link rel="copyright" href="ln-idm45761573975392.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45451844941952.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -45,7 +45,7 @@ When invoking GPG via GPGME, there is no convenient way to avoid invoking an age
 <p>A defect that affects GnuPG 2.0+ versions causes the gpg-agent to fail decrypting the GnuPG private key that secures the database encryption key. This decryption failure results in spurious CRYPTKEYFETCHFAILED errors during process startup or re-encryption. This defect appears more frequently with GnuPG releases starting at 2.1.15. At the time of this writing, Ubuntu 17.04 - 17.10, Debian 9 and Fedora 26 - 27 all have the affected GnuPG versions. However Fedora 26 - 27 are slated to receive fixed versions.
 </p>
 <p>
-GPG versions 2.1.15 and up suffer from persistent CRYPTKEYFETCHFAILED errors. The only recommended course of action is to upgrade to GnuPG 2.2.4 and libgcrypt 1.8.2 which contain the fixes for the defects https://dev.gnupg.org/T3473 and https://dev.gnupg.org/T3530. The GPG fixes that address the CRYPTKEYFETCHFAILED errors require additional gpg-agent configuration options listed below.
+GPG versions 2.1.15 and up suffer from persistent CRYPTKEYFETCHFAILED errors. The only recommended course of action is to upgrade to GnuPG 2.2.4 and libgcrypt 1.8.2 which contain the fixes for the defects https://dev.gnupg.org/T3473 and https://dev.gnupg.org/T3530. The GPG fixes that address the CRYPTKEYFETCHFAILED errors require additional gpg-agent configuration options listed below. Please kill and restart any existing GPG agent processes for the agent to pick up the changes.
 </p>
 </td></tr>
 </table></div>
@@ -92,11 +92,11 @@ GPG versions 2.1.15 and up suffer from persistent CRYPTKEYFETCHFAILED errors. Th
 <pre class="programlisting">echo "pinentry-mode=loopback" &gt;&gt; $GNUPGHOME/gpg.conf</pre>
 </li>
 <li class="listitem">
-<p>When using GPG 2.2.24 and up use the option to auto-increase secmem in gpg-agent (https://dev.gnupg.org/T3530)</p>
+<p>When using GPG 2.2.4 and up use the option to auto-increase secmem in gpg-agent (https://dev.gnupg.org/T3530)</p>
 <pre class="programlisting">echo "auto-expand-secmem" &gt;&gt; $GNUPGHOME/gpg-agent.conf</pre>
 </li>
 <li class="listitem">
-<p>When using GPG 2.2.24 and up use the option to increase the configurable backlog for sockets (https://dev.gnupg.org/T3473)</p>
+<p>When using GPG 2.2.4 and up use the option to increase the configurable backlog for sockets (https://dev.gnupg.org/T3473)</p>
 <pre class="programlisting">echo "listen-backlog 128" &gt;&gt; $GNUPGHOME/gpg-agent.conf</pre>
 </li>
 </ol></div>

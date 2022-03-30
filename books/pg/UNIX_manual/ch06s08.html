@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s07.html" title="Halt">
 <link rel="next" href="ch06s09.html" title="If">
-<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45098218006624.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,21 +29,21 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="Hang"></a>Hang<a class="indexterm" name="idm45867989889600"></a>
+<a name="Hang"></a>Hang<a class="indexterm" name="idm45098215975520"></a>
 </h2></div></div></div>
 <p>The HANG command suspends GT.M program execution for a period of time specified by the command argument.</p>
 <p>The format of the HANG command is:</p>
 <pre class="programlisting">H[ANG][:tvexpr] numexpr[,...]</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
-<li class="listitem"><p>The numeric expression specifies the time in seconds to elapse before resuming execution; actual elapsed time may vary slightly from the specified time. If the numeric expression is negative, HANG has no effect. Portability requirements for GT.M only guarantee accuracy to the nearest second. <span>However, more accuracy can be found on different UNIX systems.</span></p></li>
+<li class="listitem"><p>The numeric expression specifies the time in seconds to elapse before resuming execution; depending on the CPU scheduling algorithm of the operating system, the actual elapsed time may sometimes fractionally differ from the specified time. If the numeric expression is negative, HANG has no effect. </p></li>
 <li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more HANG arguments form a legal argument to a HANG.</p></li>
 </ul></div>
 <p>A process that repeatedly tests for some event, such as a device becoming available or another process modifying a global variable, may use a HANG to limit its consumption of computing resources.</p>
 <p>Because HALT and HANG share the same abbreviation (H), GT.M differentiates them based on whether an argument follows the command.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Examples_of_Hang"></a>Examples<span> of HANG</span><a class="indexterm" name="idm45867989907024"></a>
+<a name="Examples_of_Hang"></a>Examples<span> of HANG</span><a class="indexterm" name="idm45098215763232"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">For  Quit:$Data(^CTRL(1))  Hang 30</pre>

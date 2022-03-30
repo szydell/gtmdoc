@@ -8,7 +8,7 @@
 <link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
 <link rel="prev" href="ch05s11.html" title="Routines">
 <link rel="next" href="ch05s13.html" title="Parameter Passing">
-<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45098218006624.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,12 +30,12 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="Indirection"></a>Indirection<a class="indexterm" name="idm45867990390304"></a>
+<a name="Indirection"></a>Indirection<a class="indexterm" name="idm45098216271632"></a>
 </h2></div></div></div>
 <p>M provides indirection as a means to defer definition of elements of the code until run-time. Indirection names a variable that holds or "points" to the element. The indirection operator is the "at" symbol (@).</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Arg_Indirection"></a>Argument Indirection<a class="indexterm" name="idm45867990408848"></a>
+<a name="Arg_Indirection"></a>Argument Indirection<a class="indexterm" name="idm45098216289536"></a>
 </h3></div></div></div>
 <p>Most commands accept indirection of their entire argument.</p>
 <p>Example:</p>
@@ -45,7 +45,7 @@ GTM&gt;do @x</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Atomic_Indirection"></a>Atomic Indirection<a class="indexterm" name="idm45867990369136"></a>
+<a name="Atomic_Indirection"></a>Atomic Indirection<a class="indexterm" name="idm45098216333120"></a>
 </h3></div></div></div>
 <p>Any expratom or any local or global variable name may be replaced by indirection.</p>
 <p>Example:</p>
@@ -58,7 +58,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Entryref_Indirection"></a>Entryref Indirection<a class="indexterm" name="idm45867990376032"></a>
+<a name="Entryref_Indirection"></a>Entryref Indirection<a class="indexterm" name="idm45098216275184"></a>
 </h3></div></div></div>
 <p>Any element of an entryref may be replaced by indirection.</p>
 <p>Example:</p>
@@ -68,7 +68,7 @@ GTM&gt;do @lab^@routine</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Pattrn_Code_Indirection"></a>Pattern Code Indirection<a class="indexterm" name="idm45867990552816"></a>
+<a name="Pattrn_Code_Indirection"></a>Pattern Code Indirection<a class="indexterm" name="idm45098216330640"></a>
 </h3></div></div></div>
 <p>A pattern code may be replaced by indirection.</p>
 <p>Example:</p>
@@ -78,7 +78,7 @@ GTM&gt;ELSE WRITE !,"Incorrect format" QUIT</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Name_Indirection"></a>Name Indirection<a class="indexterm" name="idm45867990362976"></a>
+<a name="Name_Indirection"></a>Name Indirection<a class="indexterm" name="idm45098216598224"></a>
 </h3></div></div></div>
 <p>Indirection may replace the prefix of a subscripted global or local variable name. This "name" indirection requires two indirection operators, a leading operator similar to the other forms of indirection, and a trailing operator marking the transition to those subscripts that are not specified by indirection.</p>
 <p>Example:</p>
@@ -88,7 +88,7 @@ GTM&gt;FOR SET x=$O(@from@(x)) Q:x="" S @to@(x)=@from@(x)</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Indirection_Concerns"></a>Indirection Concerns<a class="indexterm" name="idm45867990415072"></a>
+<a name="Indirection_Concerns"></a>Indirection Concerns<a class="indexterm" name="idm45098216288976"></a>
 </h3></div></div></div>
 <p>M indirection provides a very powerful tool for allowing program abstraction. However, because indirection is frequently unnecessary and has some disadvantages, use it carefully.</p>
 <p>Because routines that use indirection in some ways do not contain adequate information for easy reading, such routines tend to be more difficult to debug and maintain.</p>

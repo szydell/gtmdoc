@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZONLNrlbk</title>
+<title>$ZMOde</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s43.html" title="$ZMOde">
-<link rel="next" href="ch08s45.html" title="$ZPATNumeric">
-<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
+<link rel="prev" href="ch08s43.html" title="$ZMAXTPTIme">
+<link rel="next" href="ch08s45.html" title="$ZONLNrlbk">
+<link rel="copyright" href="ln-idm45098218006624.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZONLNrlbk</th></tr>
+<tr><th colspan="3" align="center">$ZMOde</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s43.html">Prev</a> </td>
@@ -26,15 +26,23 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZONLNrlbk</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZMOde</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zonlnrlbk"></a>$ZONLNrlbk<a class="indexterm" name="idm45867987182416"></a>
+<a name="zmode"></a>$ZMOde<a class="indexterm" name="idm45098213016608"></a>
 </h2></div></div></div>
-<p>$ZONLNRLBK increments every time a process detects a concurrent MUPIP JOURNAL -ONLINE -ROLLBACK.</p>
-<p>GT.M initializes $ZONLNRLBK to zero (0) at process startup. GT.M does not permit the SET or NEW commands to modify $ZONLNRLBK.</p>
-<p>For more information on online rollback, refer to the -ONLINE qualifier of -ROLLBACK in <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p>
+<p>$ZMO[DE] contains a string value indicating the process execution mode.</p>
+<p>The mode can be:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>INTERACTIVE</p></li>
+<li class="listitem" style="list-style-type: circle"><p>OTHER</p></li>
+</ul></div>
+<p>M routines cannot modify $ZMODE.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $ZMODE
+INTERACTIVE</pre>
+<p>This displays the process mode.</p>
 </div>
 <div class="navfooter">
 <hr>
@@ -47,9 +55,9 @@
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZMOde </td>
+<td width="40%" align="left" valign="top">$ZMAXTPTIme </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZPATNumeric</td>
+<td width="40%" align="right" valign="top"> $ZONLNrlbk</td>
 </tr>
 </table>
 </div>

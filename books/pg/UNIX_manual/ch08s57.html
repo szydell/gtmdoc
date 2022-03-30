@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZSTRPllim</title>
+<title>$ZSTep</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s56.html" title="$ZSTep">
-<link rel="next" href="ch08s58.html" title="$ZSYstem">
-<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
+<link rel="prev" href="ch08s56.html" title="$ZStatus">
+<link rel="next" href="ch08s58.html" title="$ZSTRPllim">
+<link rel="copyright" href="ln-idm45098218006624.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZSTRPllim</th></tr>
+<tr><th colspan="3" align="center">$ZSTep</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s56.html">Prev</a> </td>
@@ -26,13 +26,22 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZSTRPllim</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZSTep</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zstrpllim"></a>$ZSTRPllim<a class="indexterm" name="idm45867986875008"></a>
+<a name="zstep"></a>$ZSTep<a class="indexterm" name="idm45098212931008"></a>
 </h2></div></div></div>
-<p>$ZSTRP[LLIM] provides a way for a process to limit its process private memory used for local variable and scratch storage. When the value is 0 or negative, the default, there is no limit. A positive value specifies a byte limit. When a request for additional memory exceeds the limit, GT.M does the expansion and then produces an STPCRIT error. By default, a later request for memory produces an STPOFLOW, unless subsequent to STPCRIT , $ZSTRPLLIM has been set to the same or higher limit. Note that GT.M allocates memory in large blocks so the interaction of $ZSTRPLLIM with memory growth is not exact. When the gtm_string_pool_limit environment variable specifies a positive value, GT.M uses it for the initial value of $ZSTRPLLIM. </p>
+<p>$ZST[EP] contains a string value specifying the default action for the ZSTEP command. $ZSTEP provides the ZSTEP action only when the ZSTEP command does not specify an action.</p>
+<p>$ZSTEP initially contains the the value of the $gtm_zstep environment variable or string "B" if $gtm_zstep is not defined; note that the default "B" causes the process to enter direct mode. $ZSTEP is a read-write Intrinsic Special Variable, (that is, it can appear on the left side of the equal sign (=) in the argument to the SET command).</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;WRITE $ZSTEP
+B
+GTM&gt;</pre>
+<p>This example displays the current value of $ZSTEP, which is the default.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;SET $ZSTEP="ZP @$ZPOS B"</pre>
+<p>This example sets $ZSTEP to code that displays the contents of the next line to execute, and then enters Direct Mode.</p>
 </div>
 <div class="navfooter">
 <hr>
@@ -45,9 +54,9 @@
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZSTep </td>
+<td width="40%" align="left" valign="top">$ZStatus </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZSYstem</td>
+<td width="40%" align="right" valign="top"> $ZSTRPllim</td>
 </tr>
 </table>
 </div>

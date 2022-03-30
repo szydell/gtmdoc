@@ -8,7 +8,7 @@
 <link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
 <link rel="prev" href="ch09s07.html" title="Using PIPE Devices">
 <link rel="next" href="ch09s09.html" title="I/O Commands">
-<link rel="copyright" href="ln-idm45867992106032.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45098218006624.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="using_socket_device"></a>Using Socket Devices<a class="indexterm" name="idm45867985824704"></a>
+<a name="using_socket_device"></a>Using Socket Devices<a class="indexterm" name="idm45098211644960"></a>
 </h2></div></div></div>
 <p>SOCKET devices are used to access and manipulate sockets. A SOCKET device can have unlimited associated sockets. The default limit is 64. Set the environment 
 variable gtm_max_sockets to the number of maximum associated sockets sockets that you wish to set for a GT.M process. $VIEW("MAX_SOCKETS")returns the 
@@ -56,7 +56,7 @@ sockets of a SOCKET device and IOEROR can be individually turned on or off for e
 </table></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="msg_mngmt"></a>Message Management<a class="indexterm" name="idm45867985910864"></a>
+<a name="msg_mngmt"></a>Message Management<a class="indexterm" name="idm45098211733264"></a>
 </h3></div></div></div>
 <p>From an application perspective, the transport layers used by a socket device are stream-oriented, with no provisions for implicit application messages. 
 Therefore, the following are two common protocols used to segment application messages.</p>
@@ -249,7 +249,7 @@ commands to retrieve the entire stream.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="msg_delimiters"></a>Message Delimiters<a class="indexterm" name="idm45867985915504"></a>
+<a name="msg_delimiters"></a>Message Delimiters<a class="indexterm" name="idm45098211737296"></a>
 </h3></div></div></div>
 <p>Each device can have from zero (0) to 64 delimiters associated with it. Each delimiter can be from one (1) to 64 characters. All the delimiters declared for a 
 device are valid for any READ from any associated socket, which means, any of the defined delimiters terminate the READ. The actual terminating delimiter is 
@@ -257,7 +257,7 @@ available in $KEY. A WRITE to a socket associated with a device with one or more
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="read_cmmd_g"></a>Read Command<a class="indexterm" name="idm45867985768352"></a>
+<a name="read_cmmd_g"></a>Read Command<a class="indexterm" name="idm45098211594784"></a>
 </h3></div></div></div>
 <p>The READ command may be used to obtain data from a socket. <span>A READ operation terminates if any of the following are detected, in the order specified 
 below:</span></p>
@@ -366,7 +366,7 @@ following</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="write_cmmd_g"></a>WRITE Command<a class="indexterm" name="idm45867985775456"></a>
+<a name="write_cmmd_g"></a>WRITE Command<a class="indexterm" name="idm45098211555728"></a>
 </h3></div></div></div>
 <p>The WRITE command sends data to a socket.</p>
 <p>WRITE ! inserts the character(s) of the first I/O delimiter (if any) to the sending buffer. When the "ZFF=expr" characteristic is specified, WRITE # inserts the characters 
@@ -411,15 +411,25 @@ sockets.</p></li>
 <p>Both WRITE /PASS and WRITE /ACCEPT require the current $IO to be a SOCKET device with a CONNECTed (not LISTENing) and LOCAL domain (not TCP) current socket. GT.M issues CONNSOCKREQ or LOCALSOCKREQ errors, respectively, when those conditions are not met.</p>
 <p>SOCKET devices do not support mixing other READs and WRITEs with socket passing on the same CONNECTED LOCAL socket and produce SOCKPASSDATAMIX errors. The application may perform multiple WRITE /PASS and WRITE /ACCEPT operations in either direction on the socket before issuing a CLOSE.</p>
 <p>Note that the receiving process must establish desired deviceparameters (e.g., DELIMITER) for a socket either by ATTACHing it to a SOCKET device that provides the characteristic for all its sockets, or by a subsequent USE that specifies the appropriate deviceparameter(s). GT.M transfers only the socket connection itself, the socket handle, and buffered socket data (if any), but no characteristics established by the sender.</p>
-<pre class="programlisting">WRITE /TLS(option[,[timeout][,tlsid[,cfg-file-options]])</pre>
+<pre class="programlisting">WRITE /TLS(option[,[timeout][,tlsid[,[obfuscatedpassword][,cfg-file-options]]]])</pre>
 <p>SOCKET devices support encrypted connections with TLS using an encryption plugin. GT.M ships with a reference implementation of the plugin which uses OpenSSL; the reference implementation also supports TLS for GT.M replication streams. OpenSSL options are controlled by a configuration file. The WRITE /TLS command activates this feature for connected sockets.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>option is "server", "client", or "renegotiate". "server" or "client" indicates which TLS role to assume. The server role requires a certificate specified in the configuration file section with the label matching tlsid. The client role may require a certificate depending on the OpenSSL options. If the argument specifies a timeout with options "client" or "server", GT.M sets $TEST to 1 if the command successfully completes or to 0 if it times out. $DEVICE provides status information in case of an error. ZSHOW "D" includes "TLS" in the second line of the output for an encrypted socket.</p></li>
 <li class="listitem"><p>"renegotiate" applies only to a server socket. It allows applications to request a TLS renegotiation. Renegotiation requires the suspension of application communication and the application must read all pending data before initiating a renegotiation. This means that in the communication protocol used, both parties must be at a known state when renegotiating keys. For example, in GT.M replication, one party sends a renegotiation request and waits for an acknowledgement before initiating the renegotiation.</p></li>
 <li class="listitem"><p>tlsid refers to the name of a section in the configuration file specified by the gtmcrypt_config environment variable. If tlsid is not specified with the "renegotiate" option and cfg-file-options are specified, GT.M creates a virtual section by appending "-RENEGOTIATE" to the tlsid used to enable TLS on the socket. For the renegotiate option, if no section named tlsid is present in the configuration file, GT.M creates a virtual section with that name for the life of the process.</p></li>
-<li class="listitem"><p>cfg-file-options specifies configuration file options. Note configuration file (cfg-file) specified options limit/override command specified options except for ssl-options and verify-level which the command combines/merges its options with those specified in the cfg-flle.</p></li>
+<li class="listitem"><p>obfuscatedpassword can represent a private key in the tlsid section of the configuration file which overrides any existing password such as the
+environment variable gtmtls_passwd_&lt;tlsid&gt;.  If a password is supplied on the command, it must supply the tlsid as well unless the option is "renegotiate".</p></li>
+<li class="listitem"><p>cfg-file-options specifies configuration file options for the section labeled tlsid.  If there is no section with the label tlsid, GT.M creates a new virtual
+section, which persists for the life of the process.  The specified options override those in the configuration file except for ssl-options and
+verify-level GT.M combines/merges with those specified in the configuration file.  The options, which are case-sensitive, must be specified in the same format
+as the configuration file including the terminating semi-colon (";").</p></li>
 <li class="listitem"><p>Supported cfg-file-options for the "renegotiate" command are (case-sensitive): verify-depth, verify-level, verify-mode, session-id-hex, and CAfile. WRITE /TLS ignores all other configuration file options whether given with the command or in the configuration file. For more information on the supported configuration options, refer to the Creating a Configuration File section of the Administration and Operations Guide. </p></li>
 </ul></div>
+Example:
+<pre class="programlisting">set obspass="CD86FF2BFD1F06EE"\\t; maskpass output of password for private key
+set cfgoptions="cert:""/path/to/certificate"";key:""/path/to/key.pem"";"
+write /tls("server",,"tlsone",obspass,cfgoptions)
+</pre>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
@@ -477,7 +487,7 @@ sockets.</p></li>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="socket_device_operation"></a>Socket Device Operation<a class="indexterm" name="idm45867985736304"></a>
+<a name="socket_device_operation"></a>Socket Device Operation<a class="indexterm" name="idm45098211580432"></a>
 </h3></div></div></div>
 <p>Each socket may be in one of the following states (observable through $KEY):</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -826,7 +836,7 @@ enabled; otherwise the application must check $DEVICE for errors.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="socket_device_examples"></a>Socket Device Examples<a class="indexterm" name="idm45867985658480"></a>
+<a name="socket_device_examples"></a>Socket Device Examples<a class="indexterm" name="idm45098211401552"></a>
 </h3></div></div></div>
 <p><code class="code">The sockexamplemulti32.m</code> routine shows the use of $KEY and $ZKEY in a basic 
 socket I/O setup. It's functionality is atypical in order to demonstrate a number of features. It launches two jobs: a server process which opens a listening socket 

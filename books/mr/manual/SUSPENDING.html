@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="SUPRCVRNEEDSSUPSRC.html" title="SUPRCVRNEEDSSUPSRC ">
 <link rel="next" href="SVNEXPECTED.html" title="SVNEXPECTED ">
-<link rel="copyright" href="ln-idm45961212338768.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46394415291856.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>SUSPENDING</strong></span>, Suspending processing on user request or attempt to do terminal I/O while running in the background</p>
 <p>Run Time Information: The message signifies that a GT.M process is suspended on user initiated ^Z (or key stroke that is set to shell "susp"). It is also displayed if the process attempts to do terminal I/O while running in the background. Before suspending itself, the process logs the SUSPENDING message to the operator facility. Suspended processes may be automatically released from that state if they hold a shared resource that blocks other processes.</p>
 <p>Action: Because GT.M uses shared resources, suspending a GT.M process can lock those resources and prevent other processes from working. Disable process suspension from &lt;CTRL-Z&gt; by appropriately configuring the shell. If you find a GTM-I-SUSPENDING in the syslog, match it with a GTM-I-REQ2RESUME to ensure that the process went back to work and released any resources it had. Identify the cause of the suspension and take action to prevent a recurrence. If there no resume, check the process listing to confirm that there is a shell associated with the process and request the user to unsuspend the process. If there is no shell associated with process, it is likely that the process was backgrounded before the shell was terminated. Kill this process with MUPIP STOP.</p>
-<a class="indexterm" name="idm45961206435680"></a>
+<a class="indexterm" name="idm46394409388848"></a>
 </div>
 <div class="navfooter">
 <hr>
