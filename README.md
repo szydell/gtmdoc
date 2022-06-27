@@ -14,4 +14,4 @@ Visit the site with documents mirror at https://mumps.pl
 	
 * [Programmers Guide PDF](https://github.com/szydell/gtmdoc/blob/master/books/pg/UNIX_manual/pg_UNIX_screen.pdf) Revision V7.0-003 24 June 2022
 	
-* [Messages and recovery procedures manual PDF](https://github.com/szydell/gtmdoc/blob/master/books/mr/manual/mr_screen.pdf) Revision V7.0-002 22 March 2022
+* [Messages and recovery procedures manual PDF](https://github.com/szydell/gtmdoc/blob/master/books/mr/manual/mr_screen.pdf) Revision V7.0-003 24 June 2022
