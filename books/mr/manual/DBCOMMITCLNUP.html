@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="DBCOLLREQ.html" title="DBCOLLREQ ">
 <link rel="next" href="DBCOMPTOOLRG.html" title="DBCOMPTOOLRG ">
-<link rel="copyright" href="ln-idm46394415291856.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46032537439264.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>DBCOMMITCLNUP</strong></span>,   Pid dddd [hhhh] handled error (code = eeee) during commit of xxxx transaction in database file yyyy</p>
 <p>Success Information: This message is output to the operator log and indicates that there was an error in the midst of committing a xxxx (TP or non-TP) transaction that involved the database file yyyy, but the process (pid = dddd in decimal and hhhh in hexadecimal) handled the error and completed the commit. If non-zero, the error code eeee is what triggered the error in the first place. If zero, accompanying syslog messages will contain information on the cause.</p>
 <p>Action: In most cases the commit will be successfully completed. But in very rare cases, there might be errors that prevent the transaction from being successfully completed. To determine if there was any error, examine the following operator log messages. If there are more then 3 (three) DBCLNUPINFO messages for the same database file from the same process-id, then that particular database is suspect and an integrity check of that database needs to be done at the earliest. In addition, contact your GT.M support channel with the operator log messages.</p>
-<a class="indexterm" name="idm46394413959952"></a>
+<a class="indexterm" name="idm46032543576320"></a>
 </div>
 <div class="navfooter">
 <hr>

@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="CRYPTBADCONFIG.html" title="CRYPTBADCONFIG ">
 <link rel="next" href="CRYPTDLNOOPEN.html" title="CRYPTDLNOOPEN ">
-<link rel="copyright" href="ln-idm46394415291856.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46032537439264.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>CRYPTBADWRTPOS</strong></span>, CRYPTBADWRTPOS, Encrypted WRITE disallowed from a position different than where the last WRITE completed</p>
 <p>Run Time Error: A WRITE attempt to an encrypted device violates the integrity of the produced ciphertext. This is the case, for example, when trying to WRITE to a previously encrypted and CLOSEd file. Because encryption ciphers rely on state machine algorithms, GT.M prohibits WRITEs performed in non-sequential fashion or when they threaten to overlay already encrypted data.</p>
 <p>Action: Revise your M code to avoid illegal I/O operations with encryption. Note, in particular, that when using encryption non-empty files cannot be opened in APPEND mode; the SEEK deviceparameter is prohibited; and the TRUNCATE is only permitted at the beginning or end of a file.</p>
-<a class="indexterm" name="idm46394414233728"></a>
+<a class="indexterm" name="idm46032545385648"></a>
 </div>
 <div class="navfooter">
 <hr>

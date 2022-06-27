@@ -8,7 +8,7 @@
 <link rel="up" href="ch03.html" title="Chapter 3. Basic Operations">
 <link rel="prev" href="ch03s04.html" title="Starting GT.M">
 <link rel="next" href="ch03s06.html" title="Configuring the Restriction facility">
-<link rel="copyright" href="ln-idm45451844941952.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46171623595264.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="conf_huge_pgs"></a>Configuring huge pages for GT.M x86[-64] on Linux<a class="indexterm" name="idm45451843998160"></a><a class="indexterm" name="idm45451844024944"></a>
+<a name="conf_huge_pgs"></a>Configuring huge pages for GT.M x86[-64] on Linux<a class="indexterm" name="idm46171634671040"></a><a class="indexterm" name="idm46171634476592"></a>
 </h2></div></div></div>
 <p>Huge pages are a Linux feature that may improve the performance of GT.M applications in production. Huge pages create a single page table entry for a large block (typically 2MiB) of memory in place of hundreds entries for many smaller (typically 4KiB) blocks. This reduction of memory used for page tables frees memory for other uses, such as file system caches, and increases the probability of TLB (translation lookaside buffer) matches, both of which can improve performance. The performance improvement related to reducing the page table size becomes evident when many processes share memory as they do for global buffers, journal buffers, and replication journal pools. Configuring huge pages on Linux for x86 or x86_64 CPU architectures help improve:</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
@@ -125,7 +125,7 @@ $</pre>
 <a name="using_huge_pages_for_ppm"></a>Using huge pages for GT.M process private memory</h4></div></div></div>
 <p><span class="bold"><strong>To use huge pages for process working space and dynamically linked code: </strong></span></p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Set the environment variable HUGETLB_MORECORE for each process to "yes". </p></li></ul></div>
-<p>Although not required to use huge pages, your application is also likely to benefit from including the path to libhugetlbfs.so in the LD_PRELOAD environment variable. </p>
+<p>Although not required to use huge pages, your application is also likely to benefit from including the fully qualified path to libhugetlbfs.so in the LD_PRELOAD environment variable. </p>
 <p>If you enable huge pages for all applications (by setting HUGETLB_MORECORE, HUGETLB_SHM, and LD_PRELOAD as discussed above in /etc/profile and/or /etc/csh.login), you may find it convenient to suppress warning messages from common applications that are not configured to take advantage of huge pages by also setting the environment variable HUGETLB_VERBOSE to zero (0). </p>
 </div>
 <p>Refer to the documentation of your Linux distribution for details. Other sources of information are: </p>
@@ -133,7 +133,7 @@ $</pre>
 <li class="listitem"><p><a class="ulink" href="http://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt" target="_top">http://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt</a></p></li>
 <li class="listitem"><p> <a class="ulink" href="http://lwn.net/Articles/374424/" target="_top">http://lwn.net/Articles/374424/</a></p></li>
 <li class="listitem"><p> <a class="ulink" href="http://www.ibm.com/developerworks/wikis/display/LinuxP/libhuge+short+and+simple" target="_top">http://www.ibm.com/developerworks/wikis/display/LinuxP/libhuge+short+and+simple</a></p></li>
-<li class="listitem"><p>the HOWTO guide that comes with libhugetlbfs (<a class="ulink" href="http://sourceforge.net/projects/libhugetlbfs/files/" target="_top">http://sourceforge.net/projects/libhugetlbfs/files/</a>)</p></li>
+<li class="listitem"><p>the HOWTO guide that comes with libhugetlbfs (<a class="ulink" href="https://github.com/libhugetlbfs/libhugetlbfs" target="_top">https://github.com/libhugetlbfs/libhugetlbfs</a>) explains how and when to set LD_PRELOAD.</p></li>
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>

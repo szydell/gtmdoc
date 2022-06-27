@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s44.html" title="$ZPrevious()">
 <link rel="next" href="ch07s46.html" title="$ZSYSLOG()">
-<link rel="copyright" href="ln-idm45098218006624.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46578566834096.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -143,6 +143,26 @@
 </td>
 </tr>
 <tr>
+<td><p>KEEPALIVE</p></td>
+<td><p>index</p></td>
+<td><p>A non zero value if SO_KEEPALIVE is enabled.</p></td>
+</tr>
+<tr>
+<td><p>KEEPCNT</p></td>
+<td><p>index</p></td>
+<td><p>The value of TCP_KEEPCNT.</p></td>
+</tr>
+<tr>
+<td><p>KEEPIDLE</p></td>
+<td><p>index</p></td>
+<td><p>The value of TCP_KEEPIDLE in seconds.</p></td>
+</tr>
+<tr>
+<td><p>KEEPINTVL</p></td>
+<td><p>index</p></td>
+<td><p>The value of TCP_KEEPINTVL in seconds.</p></td>
+</tr>
+<tr>
 <td>
 <p>LOCALADDRESS</p>
 </td>
@@ -188,6 +208,15 @@
 </tr>
 <tr>
 <td>
+  <p>OPTIONS</p>
+  </td>
+<td><p>index</p></td>
+<td><p>a string of the <a class="xref" href="ch09s09.html#options_open" title="OPTIONS">&#8220;OPTIONS&#8221;</a> previously specified for the
+selected socket. The string may not exactly match the string originally
+specified but has the same meaning.</p></td>
+</tr>
+<tr>
+<td>
 <p>PARENT</p>
 </td>
 <td>
@@ -228,6 +257,17 @@
 </td>
 <td>
 <p>The numeric port of the remote side of a TCP socket.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>SNDBUF</p>
+</td>
+<td>
+<p>index</p>
+</td>
+<td>
+<p>Size of the OS send buffer in bytes (SO_SNDBUF).</p>
 </td>
 </tr>
 <tr>
@@ -309,6 +349,17 @@
 </tr>
 </tbody>
 </table></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>The getsockopt() keywords (KEEPALIVE, KEEPCNT, KEEPIDLE, KEEPINTVL, SNDBUF,
+and ZIBFSIZE return two values if the value previously specified with the <a class="xref" href="ch09s09.html#options_open" title="OPTIONS">&#8220;OPTIONS&#8221;</a>
+or "ZIBFSIZE" device parameter does't match the system's current value.  The two values are separated by a semicolon (";"):
+"uservalue;systemvalue".
+ </p></td></tr>
+</table></div>
 <p>The following table describes the values for the fourth expression for the TLS keyword.</p>
 <div class="informaltable"><table border="1">
 <colgroup>
@@ -341,7 +392,7 @@
 <p>the hexadecimal representation of the ssl-options selected by the combination of the OpenSSL defaults, options set by the GT.M TLS plugin, and options specified in the gtmcrypt_config configuration file prefixed by "O:", a comma, and the verify mode as two hexadecimal digits. Here is an example: </p>
   <p><code class="code">|O:0000000001520004,01</code></p>  
 <p> The values for the SSL_OP options and verify modes are defined in the include/openssl/ssl.h file provided by the OpenSSL development package. </p>
-<p>Note: the TLS reference implementation plug-in disables SSLv3 by default.</p>
+<p>Note: the TLS reference implementation plug-in disables protocols prior to TLSv1.2.</p>
 </td>
 </tr>
 <tr>

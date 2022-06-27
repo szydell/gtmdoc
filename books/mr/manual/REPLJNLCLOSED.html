@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="REPLINSTWRITE.html" title="REPLINSTWRITE ">
 <link rel="next" href="REPLJNLCNFLCT.html" title="REPLJNLCNFLCT ">
-<link rel="copyright" href="ln-idm46394415291856.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46032537439264.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -39,7 +39,7 @@
 <p>If the "sequence number of last transaction sent by source server" is greater than "sequence number of last transaction written to journal pool", it means that the source server successfully sent all journal records during the time interval when journaling was turned OFF. In this case, no further action is required.</p>
 <p>On the other hand, if the "sequence number of last transaction sent by source server" is less than "sequence number of last transaction written to journal pool" and reports the same value across repeated SHOWBACKLOG commands, then check the source server log file for any error messages - most likely a NOPREVLINK error from the source server. This means the source server could not locate the corresponding journal records required from the journal files to replicate a particular sequence number and therefore, it failed to synchronize the primary and secondary. In this case, take an online backup of the primary, restore it on the secondary and start the secondary with the UPDATERESYNC qualifier to synchronize the secondary with the primary. </p>
 <p></p>
-<a class="indexterm" name="idm46394410162640"></a>
+<a class="indexterm" name="idm46032531638192"></a>
 </div>
 <div class="navfooter">
 <hr>
