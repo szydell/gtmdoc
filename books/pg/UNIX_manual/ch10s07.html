@@ -8,7 +8,7 @@
 <link rel="up" href="ch10.html" title="Chapter 10. Utility Routines">
 <link rel="prev" href="ch10s06.html" title="Global Utilities">
 <link rel="next" href="ch10s08.html" title="Internationalization Utilities">
-<link rel="copyright" href="ln-idm46578566834096.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -32,7 +32,7 @@
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="routine_utils"></a>
-      Routine Utilities<a class="indexterm" name="idm46578558412352"></a>
+      Routine Utilities<a class="indexterm" name="idm46082186875088"></a>
 </h2></div></div></div>
 <p>The routine utilities are:</p>
 <p>%FL: Lists the comment lines at the beginning of source programs.</p>
@@ -47,7 +47,7 @@
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="fl_percent"></a>
-      %FL<a class="indexterm" name="idm46578558342192"></a>
+      %FL<a class="indexterm" name="idm46082186834304"></a>
 </h3></div></div></div>
 <p>The %FL utility lists the comment lines at the beginning of source programs. %FL writes the routines in alphabetical order to the specified device. If the output device is not the principal device, %FL displays the name of each routine on the principal device as it writes the routine to the output device.</p>
 <p>%FL uses %RSEL to select routines. For more information, see <a class="xref" href="ch10s07.html#rsel_percent_d" title="%RSEL">&#8220;
@@ -55,7 +55,7 @@
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="prompts_fl"></a>
-      Prompts<a class="indexterm" name="idm46578558304064"></a>
+      Prompts<a class="indexterm" name="idm46082186815328"></a>
 </h4></div></div></div>
 <p>Routine: Requests the name(s) of the routines (using %RSEL); &lt;RETURN&gt; ends the selection.</p>
 <p>Output Device: &lt;terminal&gt;:</p>
@@ -64,7 +64,7 @@
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_fl"></a>
-      Examples of %FL<a class="indexterm" name="idm46578558566688"></a>
+      Examples of %FL<a class="indexterm" name="idm46082187132464"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;DO ^%FL
@@ -100,7 +100,7 @@ GTM&gt;</pre>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="randstr"></a>%RANDSTR
-  <a class="indexterm" name="idm46578558348320"></a>
+  <a class="indexterm" name="idm46082186844256"></a>
 </h3></div></div></div>
 <p>%RANDSTR generates a random string. The format %RANDSTR is:</p>
 <pre class="programlisting">%RANDSTR (strlen,charranges,patcodes,charset)</pre>
@@ -113,7 +113,7 @@ GTM&gt;</pre>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="rce_percent"></a>
-      %RCE<a class="indexterm" name="idm46578558306240"></a>
+      %RCE<a class="indexterm" name="idm46082186813600"></a>
 </h3></div></div></div>
 <p>The %RCE utility replaces every occurrence of a text string with another text string in a routine or a list of routines.</p>
 <p>%RCE uses %RSEL to select routines. For more information, see <a class="xref" href="ch10s07.html#rsel_percent_d" title="%RSEL">&#8220;
@@ -123,7 +123,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="prompts_rce"></a>
-      Prompts<a class="indexterm" name="idm46578558301312"></a>
+      Prompts<a class="indexterm" name="idm46082186812224"></a>
 </h4></div></div></div>
 <p>Routine: Requests (using %RSEL) the name(s) of the routines to change; &lt;RETURN&gt; ends the selection.</p>
 <p>Old string: Requests string to be replaced.</p>
@@ -136,7 +136,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="util_labels_rce"></a>
-      Utility Labels<a class="indexterm" name="idm46578558327584"></a>
+      Utility Labels<a class="indexterm" name="idm46082186837168"></a>
 </h4></div></div></div>
 <p>QUIET: Only displays the names of routines in which changes are made.</p>
 <p>CALL: Works without user interaction unless %ZR is not defined.</p>
@@ -145,7 +145,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="input_vari_rce"></a>
-      Input Variables<a class="indexterm" name="idm46578558303584"></a>
+      Input Variables<a class="indexterm" name="idm46082186809856"></a>
 </h4></div></div></div>
 <p>The following input variables are only applicable when invoking CALL^%RCE.</p>
 <p>%ZR: Contains an array of routines provided or generated with %RSEL.</p>
@@ -157,7 +157,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_rce"></a>
-      Examples of %RCE<a class="indexterm" name="idm46578558286784"></a>
+      Examples of %RCE<a class="indexterm" name="idm46082186844608"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;DO ^%RCE 
@@ -215,7 +215,7 @@ GTM&gt; </pre>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="percent_rd_d"></a>
-      %RD<a class="indexterm" name="idm46578558295792"></a>
+      %RD<a class="indexterm" name="idm46082187129040"></a>
 </h3></div></div></div>
 <p>The %RD utility lists routine names accessible through the current $ZROUTINES. %RD calls %RSEL and displays any routines accessible through %RSEL. Use %RD to locate routines.</p>
 <p>%RD accepts the wildcard characters asterisk (*) and question mark (?). The wildcards carry their usual meanings, an asterisk (*) denotes a field or a portion of a field, and a question mark (?) denotes a single character in positions other than the first.</p>
@@ -225,14 +225,14 @@ GTM&gt; </pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="prompts_rd_d"></a>
-      Prompts<a class="indexterm" name="idm46578558266448"></a>
+      Prompts<a class="indexterm" name="idm46082186778000"></a>
 </h4></div></div></div>
 <p>Routine: Requests (using %RSEL) the name(s) of the routines to list; &lt;RETURN&gt; ends the selection.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="util_labels_rd_d"></a>
-      Utility Labels<a class="indexterm" name="idm46578558283152"></a>
+      Utility Labels<a class="indexterm" name="idm46082186794144"></a>
 </h4></div></div></div>
 <p>OBJ: Lists object modules accessible through the current $ZROUTINES.</p>
 <p>LIB: Lists percent (%) routines accessible through the current $ZROUTINES.</p>
@@ -241,7 +241,7 @@ GTM&gt; </pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_rd_d"></a>
-      Examples of %RD<a class="indexterm" name="idm46578558278160"></a>
+      Examples of %RD<a class="indexterm" name="idm46082186849984"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;DO ^%RD 
@@ -284,13 +284,13 @@ GTM&gt; </pre>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="percent_ri_d"></a>
-      %RI<a class="indexterm" name="idm46578558275104"></a>
+      %RI<a class="indexterm" name="idm46082186778192"></a>
 </h3></div></div></div>
 <p>%RI transforms M routines in the sequential format described in the ANSI standard into individual <span>.m</span> files in GT.M format. ^%RI handles code lines up to 1 MiB. Note that when a code line exceeds 8 KiB, the GT.M compiler automatically inserts a line separator and issues a warning. Use %RI to make M RO format accessible as GT.M routines.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="prompts_ri_d"></a>
-      Prompts<a class="indexterm" name="idm46578558265424"></a>
+      Prompts<a class="indexterm" name="idm46082186800896"></a>
 </h4></div></div></div>
 <p>Formfeed delimited &lt;No&gt;?</p>
 <p>Requests whether lines should be delimited by formfeed characters rather than carriage returns.</p>
@@ -302,7 +302,7 @@ GTM&gt; </pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_ri_d"></a>
-      Examples of %RI<a class="indexterm" name="idm46578558315440"></a>
+      Examples of %RI<a class="indexterm" name="idm46082186850432"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;DO ^%RI
@@ -320,7 +320,7 @@ GTM&gt;</pre>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="percent_ro_d"></a>
-      %RO<a class="indexterm" name="idm46578558261904"></a>
+      %RO<a class="indexterm" name="idm46082186787584"></a>
 </h3></div></div></div>
 <p>The %RO utility writes M source code for one or more routines to a sequential device such as, a disk file or a printer. .</p>
 <p>^%RO handles code lines up to 1 MiB. Note that when a code line exceeds 8 KiB, the GT.M compiler automatically inserts a line separator and issues a warning. </p>
@@ -330,7 +330,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="prompts_ro_d"></a>
-      Prompts<a class="indexterm" name="idm46578558271648"></a>
+      Prompts<a class="indexterm" name="idm46082186782976"></a>
 </h4></div></div></div>
 <p>Routine: Requests (using %RSEL) the name(s) of the routines to output; &lt;RETURN&gt; ends selection.</p>
 <p>Output device: &lt;terminal&gt;:</p>
@@ -342,14 +342,14 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="util_labels_ro_d"></a>
-      Utility Labels<a class="indexterm" name="idm46578558279200"></a>
+      Utility Labels<a class="indexterm" name="idm46082186849472"></a>
 </h4></div></div></div>
 <p>CALL: Works without user interaction unless %ZR is not defined.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="input_var_ro_d"></a>
-      Input Variables<a class="indexterm" name="idm46578558284816"></a>
+      Input Variables<a class="indexterm" name="idm46082186795808"></a>
 </h4></div></div></div>
 <p>The following input variables are only applicable when invoking CALL^%RO.</p>
 <p>%ZR: Contains an array of routines provided or generated with %RSEL.</p>
@@ -358,7 +358,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_ro"></a>
-      Examples of %RO<a class="indexterm" name="idm46578558238464"></a>
+      Examples of %RO<a class="indexterm" name="idm46082186750592"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;DO ^%RO
@@ -387,7 +387,7 @@ GTM&gt;</pre>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="rse_percent_d"></a>
-      %RSE<a class="indexterm" name="idm46578558247792"></a>
+      %RSE<a class="indexterm" name="idm46082186774224"></a>
 </h3></div></div></div>
 <p>The %RSE utility searches for every occurrence of a text string in a routine or a list of routines.</p>
 <p>%RSE uses %RSEL to select routines. For more information, see <a class="xref" href="ch10s07.html#rsel_percent_d" title="%RSEL">&#8220;
@@ -398,7 +398,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="prompts_rse_d"></a>
-      Prompts<a class="indexterm" name="idm46578558286320"></a>
+      Prompts<a class="indexterm" name="idm46082186797600"></a>
 </h4></div></div></div>
 <p>Routine: Requests (using %RSEL) the name(s) of the routines to search; &lt;RETURN&gt; ends selection.</p>
 <p>Find string: Requests string for which to search.</p>
@@ -408,7 +408,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="util_labels_rse_d"></a>
-      Utility Labels<a class="indexterm" name="idm46578558239296"></a>
+      Utility Labels<a class="indexterm" name="idm46082186758608"></a>
 </h4></div></div></div>
 <p>QUIET: Only displays the names of routines in which the search string is found.</p>
 <p>CALL: Works without user interaction unless %ZR is not defined.</p>
@@ -417,7 +417,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="input_var_rse_d"></a>
-      Input Variables<a class="indexterm" name="idm46578558365424"></a>
+      Input Variables<a class="indexterm" name="idm46082186759952"></a>
 </h4></div></div></div>
 <p>The following input variables are only applicable when invoking CALL^%RSE.</p>
 <p>%ZR: Contains an array of routines provided or generated with %RSEL.</p>
@@ -427,7 +427,7 @@ GTM&gt;</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_rse"></a>
-      Examples of %RSE<a class="indexterm" name="idm46578558228640"></a>
+      Examples of %RSE<a class="indexterm" name="idm46082186740080"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;DO ^%RSE
@@ -471,7 +471,7 @@ GTM&gt; </pre>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="rsel_percent_d"></a>
-      %RSEL<a class="indexterm" name="idm46578558301504"></a>
+      %RSEL<a class="indexterm" name="idm46082186786816"></a>
 </h3></div></div></div>
 <p>The %RSEL utility selects M routines. %RSEL selects routines using directories specified by the GT.M special variable $ZROUTINES. $ZROUTINES contains an ordered list of directories that certain GT.M functions use to locate source and object files. If $ZROUTINES is not defined, %RSEL searches only the current default directory. Other GT.M utilities call %RSEL.</p>
 <p>%RSEL prompts for the name of a routine(s).</p>
@@ -488,14 +488,14 @@ GTM&gt; </pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="prompts_rsel_d"></a>
-      Prompts<a class="indexterm" name="idm46578558200192"></a>
+      Prompts<a class="indexterm" name="idm46082186713120"></a>
 </h4></div></div></div>
 <p>Routine: Requests the name(s) of the routines; &lt;RETURN&gt; ends selection.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="util_labels_rsel_d"></a>
-      Utility Labels<a class="indexterm" name="idm46578558217376"></a>
+      Utility Labels<a class="indexterm" name="idm46082186730112"></a>
 </h4></div></div></div>
 <p>CALL: Performs %RSEL without reinitializing %ZR.</p>
 <p>OBJ: Searches only object files.</p>
@@ -505,7 +505,7 @@ GTM&gt; </pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="input_var_rsel_d"></a>
-      Input Variables<a class="indexterm" name="idm46578558299008"></a>
+      Input Variables<a class="indexterm" name="idm46082186795392"></a>
 </h4></div></div></div>
 <p>The following input variables are only valid when invoking CALL^%RSEL:</p>
 <p>%ZE: Contains the file extension, usually either <span>.m</span> for source files or <span>.o</span> for object files.</p>
@@ -515,7 +515,7 @@ GTM&gt; </pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="output_var_rsel_d"></a>
-      Output Variables<a class="indexterm" name="idm46578558197344"></a>
+      Output Variables<a class="indexterm" name="idm46082186790288"></a>
 </h4></div></div></div>
 <p>%ZR: As output, contains list of directories indexed by selected routine names.</p>
 <p>^%RSET($JOB): The output global variable ^%RSET is used instead of the local variable %RD if the input variable %ZRSET is set. It is indexed by job number $JOB and the selected routine names.</p>
@@ -523,7 +523,7 @@ GTM&gt; </pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="examples_of_rsel_d"></a>
-      Examples of %RSEL<a class="indexterm" name="idm46578558220512"></a>
+      Examples of %RSEL<a class="indexterm" name="idm46082186740832"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;DO ^%RSEL

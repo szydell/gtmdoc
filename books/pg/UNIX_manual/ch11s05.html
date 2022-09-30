@@ -8,7 +8,7 @@
 <link rel="up" href="ch11.html" title="Chapter 11. Integrating External Routines">
 <link rel="prev" href="ch11s04.html" title="Using External Calls">
 <link rel="next" href="ch11s06.html" title="Type Limits for Call-ins and Call-outs">
-<link rel="copyright" href="ln-idm46578566834096.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -31,12 +31,12 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="calls_from_ext_rutns_call_ins"></a><span>Calls from External Routines: </span>Call-Ins<a class="indexterm" name="idm46578557818160"></a>
+<a name="calls_from_ext_rutns_call_ins"></a><span>Calls from External Routines: </span>Call-Ins<a class="indexterm" name="idm46082186417264"></a>
 </h2></div></div></div>
 <p>Call-In is a framework supported by GT.M that allows a C/C++ program to invoke an M routine within the same process context. GT.M provides a well-defined Call-In interface packaged as a run-time shared library that can be linked into an external C/C++ program.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="relevant_files_for_call_ins"></a>Relevant files<span> for Call-Ins</span><a class="indexterm" name="idm46578557686960"></a>
+<a name="relevant_files_for_call_ins"></a>Relevant files<span> for Call-Ins</span><a class="indexterm" name="idm46082186197984"></a>
 </h3></div></div></div>
 <p>To facilitate Call-Ins to M routines, the GT.M distribution directory ($gtm_dist) contains the following files:</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
@@ -56,7 +56,7 @@
 <p>The following sections describe the files relevant to using Call-Ins.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="gtmxc_types_h"></a>gtmxc_types.h<a class="indexterm" name="idm46578557748640"></a>
+<a name="gtmxc_types_h"></a>gtmxc_types.h<a class="indexterm" name="idm46082186470720"></a>
 </h4></div></div></div>
 <p>The header file provides signatures of all Call-In interface functions and definitions of those valid data types that can be passed from C to M. FIS strongly recommends that these types be used instead of native types (int, char, float, and so on), to avoid possible mismatch problems during parameter passing.</p>
 <p>gtmxc_types.h defines the following types that can be used in Call-Ins.</p>
@@ -164,7 +164,7 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="call_in_table"></a>Call-In Table<a class="indexterm" name="idm46578557706320"></a>
+<a name="call_in_table"></a>Call-In Table<a class="indexterm" name="idm46082186223376"></a>
 </h4></div></div></div>
 <p>The Call-In table file is a text file that contains the signatures of all M label references that get called from C. In order to pass the typed C arguments to the type-less M formallist, the enviroment variable GTMCI must be defined to point to the Call-In table file path. Each signature must be specified separately in a single line. GT.M reads this file and interprets each line according to the following convention (specifications withint box brackets "[]", are optional):</p>
 <pre class="programlisting">&lt;c-call-name&gt; : &lt;ret-type&gt; &lt;label-ref&gt; ([&lt;direction&gt;:&lt;param-type&gt;,...])</pre>
@@ -234,12 +234,12 @@ piece     :gtm_double_t*   pow^piece(I:gtm_double_t, I:gtm_long_t)</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="call_in_interface"></a><span>Call-In </span>Interface<a class="indexterm" name="idm46578558134848"></a>
+<a name="call_in_interface"></a><span>Call-In </span>Interface<a class="indexterm" name="idm46082186140400"></a>
 </h3></div></div></div>
 <p>This section is further broken down into 6 subsections for an easy understanding of the Call-In interface. The section is concluded with an elaborate example.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="initialize_gtm"></a>Initialize GT.M<a class="indexterm" name="idm46578557552624"></a>
+<a name="initialize_gtm"></a>Initialize GT.M<a class="indexterm" name="idm46082186265040"></a>
 </h4></div></div></div>
 <pre class="programlisting">gtm_status_t gtm_init(void);</pre>
 <p>If the base program is not an M routine but a standalone C program, gtm_init() must be called (before calling any GT.M functions), to initialize the GT.M run-time system.</p>
@@ -248,7 +248,7 @@ piece     :gtm_double_t*   pow^piece(I:gtm_double_t, I:gtm_long_t)</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="call_in_m_routines_from_c"></a>Call <span>an M Routine </span>from C<a class="indexterm" name="idm46578557607344"></a>
+<a name="call_in_m_routines_from_c"></a>Call <span>an M Routine </span>from C<a class="indexterm" name="idm46082186121376"></a>
 </h4></div></div></div>
 <p>GT.M provides 2 interfaces for calling a M routine from C. These are:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
@@ -258,7 +258,7 @@ piece     :gtm_double_t*   pow^piece(I:gtm_double_t, I:gtm_long_t)</pre>
 <p>gtm_cip offers better performance on calls after the first one. </p>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="idm46578557597776"></a>gtm_cip</h5></div></div></div>
+<a name="idm46082186103968"></a>gtm_cip</h5></div></div></div>
 <pre class="programlisting">gtm_status_t gtm_cip(ci_name_descriptor *ci_info, ...);</pre>
 <p>The variable argument function gtm_cip() is the interface that invokes the specified M routine and returns the results via parameters. </p>
 <p>ci_name_descriptor has the following structure:</p>
@@ -278,7 +278,7 @@ piece     :gtm_double_t*   pow^piece(I:gtm_double_t, I:gtm_long_t)</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="idm46578557558400"></a>gtm_ci</h5></div></div></div>
+<a name="idm46082186071120"></a>gtm_ci</h5></div></div></div>
 <pre class="programlisting">gtm_status_t gtm_ci(const gtm_char_t* c_call_name, ...);</pre>
 <p>The variable argument function gtm_ci() is the interface that actually invokes the specified M routine and returns the results via parameters. The gtm_ci() call must be in the following format:</p>
 <pre class="programlisting">status = gtm_ci(&lt;c_call_name&gt; [, ret_val] [, arg1] ...);</pre>
@@ -331,14 +331,14 @@ piece     :gtm_double_t*   pow^piece(I:gtm_double_t, I:gtm_long_t)</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="print_error_messages"></a><span>Print </span>Error Messages<a class="indexterm" name="idm46578557490208"></a>
+<a name="print_error_messages"></a><span>Print </span>Error Messages<a class="indexterm" name="idm46082186007136"></a>
 </h4></div></div></div>
 <pre class="programlisting">void gtm_zstatus (gtm_char_t* msg_buffer, gtm_long_t buf_len);</pre>
 <p>This function returns the null-terminated $ZSTATUS message of the last failure via the buffer pointed by msg_buffer of size buf_len. The message is truncated to size buf_len if it does not fit into the buffer. gtm_zstatus() is useful if the external application needs the text message corresponding to the last GT.M failure. A buffer of 2048 is sufficient to fit in any GT.M message.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="exit_frm_gtm"></a>Exit<span> from GT.M</span><a class="indexterm" name="idm46578557486016"></a>
+<a name="exit_frm_gtm"></a>Exit<span> from GT.M</span><a class="indexterm" name="idm46082185999984"></a>
 </h4></div></div></div>
 <pre class="programlisting">gtm_status_t  gtm_exit (void);</pre>
 <p>gtm_exit() can be used to shut down all databases and exit from the GT.M environment that was created by a previous gtm_init(). </p>
@@ -348,14 +348,14 @@ piece     :gtm_double_t*   pow^piece(I:gtm_double_t, I:gtm_long_t)</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="building_stand_alone_programs"></a><span>Building </span>Standalone Programs<a class="indexterm" name="idm46578557611280"></a>
+<a name="building_stand_alone_programs"></a><span>Building </span>Standalone Programs<a class="indexterm" name="idm46082186066336"></a>
 </h3></div></div></div>
 <p>All external C functions that use call-ins should include the header file gtmxc_types.h that defines various types and provides signatures of call-in functions. To avoid potential size mismatches with the parameter types, FIS strongly recommends that gtm *t types defined in gtmxc_types.h be used instead of the native types (int, float, char, etc).</p>
 <p>To use call-ins from a standalone C program, it is necessary that the GT.M runtime library (libgtmshr.so) is explicitly linked into the program. If call-ins are used from an External Call function (which in turn was called from GT.M through the existing external call mechanism), the External Call library does not need to be linked explicitly with libgtmshr.so since GT.M would have already loaded it. </p>
 <p>The following sections describe compiler and linker options that must be used on each platform for call-ins to work from a standalone C/C++ program. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="ibm_p_series_"></a>IBM pSeries (RS/6000) AIX<a class="indexterm" name="idm46578557543904"></a>
+<a name="ibm_p_series_"></a>IBM pSeries (RS/6000) AIX<a class="indexterm" name="idm46082186002112"></a>
 </h4></div></div></div>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
 <li class="listitem" style="list-style-type: circle"><p>Compiler: -I$gtm_dist</p></li>
@@ -364,7 +364,7 @@ piece     :gtm_double_t*   pow^piece(I:gtm_double_t, I:gtm_long_t)</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="x86_gnu_linux"></a>X86 GNU/Linux<a class="indexterm" name="idm46578557629792"></a>
+<a name="x86_gnu_linux"></a>X86 GNU/Linux<a class="indexterm" name="idm46082186117136"></a>
 </h4></div></div></div>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
 <li class="listitem" style="list-style-type: circle"><p>Compiler: -I$gtm_dist </p></li>
@@ -375,7 +375,7 @@ piece     :gtm_double_t*   pow^piece(I:gtm_double_t, I:gtm_long_t)</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="nested_call_ins"></a>Nested Call-Ins<a class="indexterm" name="idm46578557606512"></a>
+<a name="nested_call_ins"></a>Nested Call-Ins<a class="indexterm" name="idm46082186224208"></a>
 </h3></div></div></div>
 <p>Call-ins can be nested by making an external call function in-turn call back into GT.M. Each gtm_ci() called from an External Call library creates a call-in base frame at $ZLEVEL 1 and executes the M routine at $ZLEVEL 2. The nested call-in stack unwinds automatically when the External Call function returns to GT.M.</p>
 <p>GT.M currently allows up to 10 levels of nesting, if TP is not used, and less than 10 if GT.M supports call-ins from a transaction<span> (see <a class="xref" href="ch11s05.html#rules_to_follow_in_call_ins" title="Rules to Follow in Call-Ins">&#8220;Rules to Follow in Call-Ins&#8221;</a>)</span>. GT.M reports the CIMAXLEVELS error when the nesting reaches its limit.</p>
@@ -396,7 +396,7 @@ piece     :gtm_double_t*   pow^piece(I:gtm_double_t, I:gtm_long_t)</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="rules_to_follow_in_call_ins"></a>Rules to Follow in Call-Ins<a class="indexterm" name="idm46578557478832"></a>
+<a name="rules_to_follow_in_call_ins"></a>Rules to Follow in Call-Ins<a class="indexterm" name="idm46082185969152"></a>
 </h3></div></div></div>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><p>External calls must not be fenced with TSTART/TCOMMIT if the external routine calls back into mumps using call-in mechanism. GT.M reports the CITPNESTED error if nested call-ins are invoked within a TP fence since GT.M currently does not handle TP support across multiple call-in invocations.</p></li>

@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s42.html" title="ZSHow">
 <link rel="next" href="ch06s44.html" title="ZSYstem">
-<link rel="copyright" href="ln-idm46578566834096.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zstep_cmmd"></a>ZSTep<a class="indexterm" name="idm46578563546592"></a>
+<a name="zstep_cmmd"></a>ZSTep<a class="indexterm" name="idm46082207982048"></a>
 </h2></div></div></div>
 <p>The ZSTEP command provides the ability to control GT.M execution. When a ZSTEP is issued from Direct Mode, execution continues to the beginning of the next target line and then GT.M XECUTEs the ZSTEP action. The keyword in the optional ZSTEP argument determines the class of eligible target lines. </p>
 <p>The format of the ZSTEP command is:</p>
@@ -52,31 +52,31 @@
 <p>The keyword arguments define the class of lines where ZSTEP next pauses execution to XECUTE the ZSTEP action. When a ZSTEP command has multiple arguments, it ignores all arguments except the last.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zstep_into"></a>ZSTEP Into<a class="indexterm" name="idm46578563476560"></a>
+<a name="zstep_into"></a>ZSTEP Into<a class="indexterm" name="idm46082208711504"></a>
 </h3></div></div></div>
 <p>ZSTEP INTO pauses at the beginning of the next line, regardless of transfers of control. When the ZSTEPed line invokes another routine or a subroutine in the current routine, ZSTEP INTO pauses at the first line of code associated with the new GT.M stack level.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zstep_outof"></a>ZSTep OUtof<a class="indexterm" name="idm46578563483264"></a>
+<a name="zstep_outof"></a>ZSTep OUtof<a class="indexterm" name="idm46082208789456"></a>
 </h3></div></div></div>
 <p>ZSTEP OUTOF pauses at the beginning of the next line executed after an explicit or implicit QUIT from the current GT.M invocation stack level. A ZSTEP OUTOF does not pause at lines associated with the current GT.M stack level or with levels invoked from the current level.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zstep_over"></a>ZSTep OVer<a class="indexterm" name="idm46578563598336"></a>
+<a name="zstep_over"></a>ZSTep OVer<a class="indexterm" name="idm46082202995824"></a>
 </h3></div></div></div>
 <p>ZSTEP OVER pauses at the beginning of the next line in the code associated with either the current GT.M stack level or a previous GT.M stack level if the ZSTEPed line contains an explicit or implicit QUIT from the current level. A ZSTEP OVER does not pause at lines invoked from the current line by DOs, XECUTEs or extrinsics.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zstep_actions"></a>ZSTEP Actions<a class="indexterm" name="idm46578563474832"></a>
+<a name="zstep_actions"></a>ZSTEP Actions<a class="indexterm" name="idm46082197384944"></a>
 </h3></div></div></div>
 <p>The optional action parameter of a ZSTEP must contain an expression evaluating to valid GT.M code. By default, ZSTEP uses the value of $ZSTEP, which defaults to "B" ("BREAK"), and enters Direct Mode. When a ZSTEP command specifies an action, the process does not enter Direct Mode unless the action explicitly includes a BREAK command.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zstep_interactions"></a>ZSTEP Interactions<a class="indexterm" name="idm46578563611568"></a>
+<a name="zstep_interactions"></a>ZSTEP Interactions<a class="indexterm" name="idm46082197217280"></a>
 </h3></div></div></div>
 <p>ZSTEP currently interacts with certain other elements in the GT.M environment.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -86,7 +86,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="use_of_zstep"></a>Use of ZSTEP<a class="indexterm" name="idm46578563547424"></a>
+<a name="use_of_zstep"></a>Use of ZSTEP<a class="indexterm" name="idm46082198391488"></a>
 </h3></div></div></div>
 <p>Use ZSTEP to incrementally execute a routine or series of routines. Execute any GT.M command from Direct Mode at any ZSTEP pause. To resume normal execution, use ZCONTINUE. </p>
 <p>Note that ZSTEP arguments are keywords rather than expressions. They do not allow indirection, and argument lists have no utility. </p>
@@ -94,7 +94,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zstep"></a>Examples<span> of ZSTEP</span><a class="indexterm" name="idm46578563484064"></a>
+<a name="examples_of_zstep"></a>Examples<span> of ZSTEP</span><a class="indexterm" name="idm46082196841952"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;ZSTEP INTO:"W ! ZP @$ZPOS W !"</pre>

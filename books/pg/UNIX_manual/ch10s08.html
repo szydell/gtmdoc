@@ -8,7 +8,7 @@
 <link rel="up" href="ch10.html" title="Chapter 10. Utility Routines">
 <link rel="prev" href="ch10s07.html" title="Routine Utilities">
 <link rel="next" href="ch10s09.html" title="System Management Utilities">
-<link rel="copyright" href="ln-idm46578566834096.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -32,20 +32,20 @@
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="international_utils"></a>Internationalization Utilities
-  <a class="indexterm" name="idm46578558342576"></a>
+  <a class="indexterm" name="idm46082186795648"></a>
 </h2></div></div></div>
 <p>These utilities are an integral part of the GT.M functionality that permits you to customize your applications for use with other languages. <span>For a description of these utilities, refer to <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a>.</span></p>
 <p>The internationalization utilities are:</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="gbldef_percent_d"></a>%GBLDEF
-<a class="indexterm" name="idm46578558242752"></a>
+<a class="indexterm" name="idm46082186893888"></a>
 </h3></div></div></div>
 <p>The %GBLDEF utility manipulates the collation sequence assigned to a global other than the default M collation that is based on code value (ASCII for the codes 0 to 127) ordering except for numeric values, which order most negative to most positive before string values. As described in the Internationalization Chapter, alternative collation definition requires supplying routines that transform codes into desired collation order. All subscripted variables for a global must use the same collation sequence. A global collation sequence can only be changed when a global has no subscripted  variables defined.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="util_labels_gbldef_d"></a>
-      Utility Labels<a class="indexterm" name="idm46578558168336"></a>
+      Utility Labels<a class="indexterm" name="idm46082186681488"></a>
 </h4></div></div></div>
 <pre class="programlisting">get^%GBLDEF(gname[,reg])</pre>
 <p>get: returns a value associated with the current global variable collation in the form nct,act,ver, where:
@@ -86,7 +86,7 @@
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="input_var_gbldef_d"></a>
-      Input Variables<a class="indexterm" name="idm46578558212528"></a>
+      Input Variables<a class="indexterm" name="idm46082186879568"></a>
 </h4></div></div></div>
 <p>Of the following input arguments only the second and third are valid for set, while the first is required for all three functions:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -101,14 +101,14 @@
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="lclcol_percent_d"></a>%LCLCOL
-<a class="indexterm" name="idm46578558192240"></a>
+<a class="indexterm" name="idm46082186671408"></a>
 </h3></div></div></div>
 <p>The %LCLCOL utility deals with the adoption and reporting of a local variable collation other than the default M collation that is based on code value (ASCII for the codes 0 to 127) ordering except for numeric values, which order most negative to most positive before string values. As described in the Internationalization Chapter, alternative collation definition requires supplying routines that transform codes into desired collation order. All subscripted local variables for a process must use the same collation sequence. The collation sequence used by local variables can be established as a default or by this utility within the current process. The local collation sequence can only be changed when a process has no subscripted local variables defined.</p>
 <p>To establish a default local collation sequence prior to invoking a GT.M process, provide a numeric value to the environment variable gtm_local_collate to select one of the collation tables.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="util_labels_lclcol_d"></a>
-      Utility Labels<a class="indexterm" name="idm46578558206688"></a>
+      Utility Labels<a class="indexterm" name="idm46082186685568"></a>
 </h4></div></div></div>
 <pre class="programlisting">get^%LCLCOL[()]</pre>
 <p>get: returns an integer value associated with the current local variable collation.</p>
@@ -123,7 +123,7 @@
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="input_var_lclcol_d"></a>
-      Input Variables<a class="indexterm" name="idm46578558186816"></a>
+      Input Variables<a class="indexterm" name="idm46082186748096"></a>
 </h4></div></div></div>
 <p>The following input arguments are valid only for set:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -137,12 +137,12 @@
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="patcode_percent_d"></a>%PATCODE
-<a class="indexterm" name="idm46578558183440"></a>
+<a class="indexterm" name="idm46082186695744"></a>
 </h3></div></div></div>
 <p>The %PATCODE utility is a wrapper for pattern code related VIEW "PATCODE":code" and $VIEW("PATCODE"), and has the following extrinsic entry points:</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="util_labels_patcode_d"></a>Utility Labels<a class="indexterm" name="idm46578558354224"></a>
+<a name="util_labels_patcode_d"></a>Utility Labels<a class="indexterm" name="idm46082186768336"></a>
 </h4></div></div></div>
 <pre class="programlisting">get^%PATCODE[()]</pre>
 <p>get: returns the name of the process current pattern table; for example the default table is "M"  </p>
@@ -153,7 +153,7 @@
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="input_var_patcode_d"></a>
-      Input Variables<a class="indexterm" name="idm46578558164464"></a>
+      Input Variables<a class="indexterm" name="idm46082186678608"></a>
 </h4></div></div></div>
 <p>The following input argument is valid only for set:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">First argument: name of a pattern table; except for "M", this can be either a file specification or the name of an evironment variable that contains the file specification</li></ul></div>
