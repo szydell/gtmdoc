@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZGetjpi()</title>
+<title>$ZFind()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s35.html" title="$ZFind()">
-<link rel="next" href="ch07s37.html" title="$ZJOBEXAM()">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="prev" href="ch07s35.html" title="$ZExtract()">
+<link rel="next" href="ch07s37.html" title="$ZGetjpi()">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZGetjpi()</th></tr>
+<tr><th colspan="3" align="center">$ZFind()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s35.html">Prev</a> </td>
@@ -25,80 +25,41 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZGetjpi()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZFind()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zgetjpi_unix"></a>$ZGetjpi()</h2></div></div></div>
-<p>Returns job or process information of the specified process. The format for the $ZGETJPI function is:</p>
-<pre class="programlisting">$ZGETJPI(expr1,expr2)</pre>
+<a name="zfind"></a>$ZFind()</h2></div></div></div>
+<a class="indexterm" name="idm46082181696496"></a><p>Returns an integer byte position that locates the occurrence of a byte sequence within a sequence of octets(8-bit bytes).</p>
+<p>The format of the $ZFIND function is:</p>
+<pre class="programlisting">$ZF[IND](expr1,expr2[,intexpr])</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>expr1 identifies the PID of the target job. If expr1 is an empty string (""), $ZGETJPI() returns information about the current process.</p></li>
-<li class="listitem">
-<p>expr2 specifies the item keyword identifying the type of information returned; keywords may be upper, lower, or mixed-case. The keywords are as follows:</p>
-<div class="informaltable"><table width="100%" border="1">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead>
-<tr><th colspan="2">
-<p>ZGETJPI()</p>
-</th></tr>
-<tr>
-<th>
-<p>Keywords</p>
-</th>
-<th>
-<p>Data returned</p>
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><p>ISPROCALIVE</p></td>
-<td><p>Determines whether the specified process is alive.</p></td>
-</tr>
-<tr>
-<td><p>CPUTIM </p></td>
-<td><p>Total process and child CPU time used in hundredths of a second.</p></td>
-</tr>
-<tr>
-<td><p>CSTIME</p></td>
-<td><p>System time of child processes</p></td>
-</tr>
-<tr>
-<td><p>CUTIME</p></td>
-<td><p>User time of child processes</p></td>
-</tr>
-<tr>
-<td><p>STIME</p></td>
-<td><p>Process system time</p></td>
-</tr>
-<tr>
-<td><p>UTIME</p></td>
-<td><p>Process user time</p></td>
-</tr>
-</tbody>
-</table></div>
-</li>
-<li class="listitem"><p>Note that the $ZGETJPI() retrieves process time measurements (CPUTIM, CSTIME, CUTIME, STIME, and UTIME) only of the current process ($JOB). The "child" process time includes ZSYSTEM and PIPE device sub-processes (only after the PIPE CLOSEs), but excludes processes created by the JOB command.</p></li>
-<li class="listitem"><p>$ZGETJPI() provides a tool for examining the characteristics of a UNIX process. Accessing information about processes belonging to other users requires certain UNIX privileges. Consult your system manager if you require additional privileges.</p></li>
+<li class="listitem"><p>The first expression specifies the sequence of octets (8-bit bytes) in which $ZFIND() searches for the byte sequence.</p></li>
+<li class="listitem"><p>The second expression specifies the byte sequence for which $ZFIND() searches.</p></li>
+<li class="listitem"><p>The optional integer expression identifies the starting byte position for the $ZFIND() search. If this argument is missing, zero (0), or negative, $ZFIND() begins to search from the first position of the sequence of octets (8-bite bytes).</p></li>
+<li class="listitem"><p>If $ZFIND() locates the byte sequence, it returns the position after its last byte. If the end of the byte sequence coincides with the end of the the sequence of octets (expr1), it returns an integer equal to the byte length of the expr1 plus one ($L(expr1)+1).</p></li>
+<li class="listitem"><p>If $ZFIND() does not locate the byte sequence, it returns zero (0).</p></li>
+<li class="listitem"><p>$ZFIND() provides a tool to locate byte sequences. The ( [ ) operator and the two-argument $ZLENGTH() are other tools that provide related functionality.</p></li>
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zgetjpi_unix"></a>Examples</h3></div></div></div>
+<a name="examples_of_zfind"></a>Examples<a class="indexterm" name="idm46082181633744"></a>
+</h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;write $zgetjpi(1975,"isprocalive")
-1
+<pre class="programlisting">GTM&gt;write $zfind("<span class="symbol">&#20027;&#35201;&#38632;</span>",$zchar(187))
+4
 GTM&gt;</pre>
-<p>This uses $ZGETJPI() to determine whether process 1975 is alive. </p>
+<p>This example uses $ZFIND() to WRITE the position of the first occurrence of the numeric byte code 150. The return of 3 gives the position after the "found" byte.</p>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;set t=$zgetjpi("","cputim")
-GTM&gt;do ^bench write $zgetjpi("","cputim")-t
-1738
+<pre class="programlisting">GTM&gt;write $zfind("<span class="symbol">&#26032;&#24180;&#22909;</span>",$zchar(229),5)
+8
 GTM&gt;</pre>
-<p>This uses $ZGETJPI() to measure the actual CPU time, measured in hundredths of a second, consumed by running the ^bench routine.</p>
+<p>This example uses $ZFIND() to WRITE the position of the next occurrence of the byte code 229 starting in byte position five.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;set t=1 for  set t=$zfind("<span class="symbol">&#26032;&#24180;&#22909;</span>",$zchar(230,150,176),t) quit:'t  write !,t
+4
+GTM&gt;</pre>
+<p>This example uses a loop with $ZFIND() to locate all the occurrences of the byte sequence $ZCHAR(230,150,176) in the sequence of octets ("<span class="symbol">&#26032;&#24180;&#22909;</span>"). The $ZFIND() returns 4 giving the position after the occurrence of byte sequence $ZCHAR(230,150,176).</p>
 </div>
 </div>
 <div class="navfooter">
@@ -112,9 +73,9 @@ GTM&gt;</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZFind() </td>
+<td width="40%" align="left" valign="top">$ZExtract() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZJOBEXAM()</td>
+<td width="40%" align="right" valign="top"> $ZGetjpi()</td>
 </tr>
 </table>
 </div>

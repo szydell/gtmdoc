@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s24.html" title="Use">
 <link rel="next" href="ch06s26.html" title="Write">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="commands_view"></a>View<a class="indexterm" name="idm46082203742016"></a>
+<a name="commands_view"></a>View<a class="indexterm" name="idm46082191818176"></a>
 </h2></div></div></div>
 <p>The VIEW command adjusts an environmental factor selected by a keyword argument. For example, VIEW controls journal buffer flushing, determines whether GT.M reports undefined variables as errors or treats them as null, and determines which BREAK commands should display messages.</p>
 <p>The format of the VIEW command is:</p>
@@ -42,12 +42,12 @@
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="key_words_view"></a>Key Words<span> in VIEW Command</span><a class="indexterm" name="idm46082192621888"></a>
+<a name="key_words_view"></a>Key Words<span> in VIEW Command</span><a class="indexterm" name="idm46082193981648"></a>
 </h3></div></div></div>
 <p>The following sections describe the keywords available for the VIEW command in GT.M.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="breakmsg"></a><span>"BREAKMSG":value</span><a class="indexterm" name="idm46082204168416"></a>
+<a name="breakmsg"></a><span>"BREAKMSG":value</span><a class="indexterm" name="idm46082196603744"></a>
 </h4></div></div></div>
 <p>Sets the value of the BREAK message mask. When GT.M processes a BREAK command, the BREAK message mask controls whether to display a message describing the source of the BREAK.</p>
 <p>The mask uses the following four values that are added together to provide the BREAKMSG value.</p>
@@ -63,7 +63,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="no_badchar"></a><span>[NO]</span>BADCHAR<a class="indexterm" name="idm46082204468448"></a>
+<a name="no_badchar"></a><span>[NO]</span>BADCHAR<a class="indexterm" name="idm46082193065184"></a>
 </h4></div></div></div>
 <p>Enables or disable the gneration of an error when character-oriented functions encounter malformed byte sequences (illegal characters).</p>
 <p>At process startup, GT.M initializes BADCHAR from the environment variable gtm_badchar. Set the environment variable $gtm_badchar to a non-zero number or "YES" (or "Y") to enable VIEW "BADCHAR". Set the environment variable $gtm_badchar to 0 or "NO" or "FALSE" (or "N" or "F") to enable VIEW "NOBADCHAR". By default, GT.M enables VIEW "BADCHAR".</p>
@@ -119,49 +119,49 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="gdscert"></a><span>"GDSCERT":value</span><a class="indexterm" name="idm46082204346320"></a>
+<a name="gdscert"></a><span>"GDSCERT":value</span><a class="indexterm" name="idm46082195546448"></a>
 </h4></div></div></div>
 <p>Enables (value=1) or disables (value=0) database block certification.</p>
 <p>Database block certification causes GT.M to check the internal integrity of every block as it writes the block. Block certification degrades performance and exists primarily as a tool for use by FIS. The default is GDSCERT:0.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="gvsreset"></a><span>"GVSRESET":"&lt;region&gt;"</span><a class="indexterm" name="idm46082204259440"></a>
+<a name="gvsreset"></a><span>"GVSRESET":"&lt;region&gt;"</span><a class="indexterm" name="idm46082195310032"></a>
 </h4></div></div></div>
 <p>Resets the process-specific fields that are part of the ZSHOW "G" result and database file header fields holding records reported by: GVSTAT, BG trace, buffer pool accounting and the TP block modification details. Note a VIEW "GVSRESET" performed by a process with read-only database access changes only the process-specific information and has no effect on the database file header. DSE CHANGE -FILEHEADER -GVSTATSRESET clears the same database file header fields as VIEW "GVRESET"; 
 </p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="gvdupsetnoop"></a><span>"GVDUPSETNOOP":value</span><a class="indexterm" name="idm46082205001520"></a>
+<a name="gvdupsetnoop"></a><span>"GVDUPSETNOOP":value</span><a class="indexterm" name="idm46082195313376"></a>
 </h4></div></div></div>
 <p>Enables (VIEW "GVDUPSETNOOP":1) or disables (VIEW "GVDUPSETNOOP":0) duplication set optimization.</p>
 <p>Duplicate set optimization prevents a SET that does not change the value of an existing node from performing the update or executing any trigger code specified for the node. By default, duplicate set optimization is enabled.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="jnlflush"></a><span>"JNLFLUSH"[:&lt;region_list&gt;]</span><a class="indexterm" name="idm46082205107968"></a>
+<a name="jnlflush"></a><span>"JNLFLUSH"[:&lt;region_list&gt;]</span><a class="indexterm" name="idm46082195212688"></a>
 </h4></div></div></div>
 <p>Writes or flushes journaling buffers associated with the given region to permanent storage, for example, to disk. If the VIEW "JNLFLUSH" does not specify the optional region, GT.M flushes all journaled regions of the current Global Directory.</p>
 <p>Normally GT.M writes journal buffers when it completes a transaction (unless TRANSACTIONID="BATCH"), fills the journal buffer or when some period of time passes with no journal activity.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="jnlwait"></a>JNLWAIT<a class="indexterm" name="idm46082200907376"></a>
+<a name="jnlwait"></a>JNLWAIT<a class="indexterm" name="idm46082193043792"></a>
 </h4></div></div></div>
 <p>Causes a process to pause until its journaling buffers have been written. JNLWAIT ensures that GT.M successfully transfers all database updates issued by the process to the journal file before the process continues. Normally, GT.M performs journal buffer writes synchronously for TP updates, and asynchronously, while the process continues execution, for non-TP updates or TP updates with TRANSACTIONID=BATCH.</p>
 <p>JNLWAIT operates only on those regions for which the current process has opened journal files. As all the journal activity for a TP transaction occurs at commit time, GT.M ignores JNLWAIT when inside a TP TRANSACTION ($TLEVEL &gt; 0). For more information on journaling, refer to the "GT.M Journaling" chapter in the <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="jobpid"></a><span>"JOBPID":"value"</span><a class="indexterm" name="idm46082204852560"></a>
+<a name="jobpid"></a><span>"JOBPID":"value"</span><a class="indexterm" name="idm46082189886912"></a>
 </h4></div></div></div>
 <p>Enables (value=1) or disables (value=0) the addition of the child process ID to the output and error file names used (either implicitly generated or explicitly defined) by the JOB command. The default is 0.</p>
 <p>Using the value=1 option prevents the JOB command from overwriting output files each time the same JOB command executes.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="labels_ch6"></a><span>"LABELS":"value"</span><a class="indexterm" name="idm46082205113168"></a>
+<a name="labels_ch6"></a><span>"LABELS":"value"</span><a class="indexterm" name="idm46082195717504"></a>
 </h4></div></div></div>
 <p>Enables (value="LOWER") or disables (value="UPPER") case sensitivity for labels within routines.</p>
 <p>It is important to have the same case handling at compile-time and run-time.</p>
@@ -194,7 +194,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="view_lvgcol"></a>LV_GCOL<a class="indexterm" name="idm46082205604416"></a>
+<a name="view_lvgcol"></a>LV_GCOL<a class="indexterm" name="idm46082196323152"></a>
 </h4></div></div></div>
 <p>Starts a data-space garbage collection, which normally happens automatically at appropriate times.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
@@ -207,7 +207,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="idm46082202266752"></a>LV_REHASH<a class="indexterm" name="idm46082205745392"></a>
+<a name="idm46082196450016"></a>LV_REHASH<a class="indexterm" name="idm46082196451088"></a>
 </h4></div></div></div>
 <p>Starts a reorganization of the local variable look-up table, which normally happens automatically at appropriate times.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
@@ -220,7 +220,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="ch6_lvnullsubs"></a><span>[NEVER]|[NO]LVNULLSUBS</span><a class="indexterm" name="idm46082205437360"></a>
+<a name="ch6_lvnullsubs"></a><span>[NEVER]|[NO]LVNULLSUBS</span><a class="indexterm" name="idm46082196546624"></a>
 </h4></div></div></div>
 <p>Disallows, partially disallows, or allows local arrays to have empty string subscripts. The default is LVNULLSUBS. </p>
 <p>NOLVNULLSUBS disallows any variant of SET to operate on a local array having an empty string subscript.</p>
@@ -242,7 +242,7 @@
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="noisolation"></a><span>"NOISOLATION":&lt;expr&gt;</span><a class="indexterm" name="idm46082206009024"></a>
+<a name="noisolation"></a><span>"NOISOLATION":&lt;expr&gt;</span><a class="indexterm" name="idm46082196087696"></a>
 </h4></div></div></div>
 <p>where expr must evaluate to one of the following forms:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -260,19 +260,19 @@ the "ACID" properties of TP. This shifts the responsibility for Isolation from G
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="patcode"></a><span>"PATCODE":"tablename"</span><a class="indexterm" name="idm46082206184960"></a>
+<a name="patcode"></a><span>"PATCODE":"tablename"</span><a class="indexterm" name="idm46082196445776"></a>
 </h4></div></div></div>
 <p>Identifies the alternative table of unique patterns for use with the "?" operator to be loaded from the pattern definition file. For additional information, <span>refer to <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a></span>.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="patload"></a><span>"PATLOAD":"file-specification"</span><a class="indexterm" name="idm46082206308608"></a>
+<a name="patload"></a><span>"PATLOAD":"file-specification"</span><a class="indexterm" name="idm46082182480336"></a>
 </h4></div></div></div>
 <p>Identifies the file containing definitions of unique patterns for use with the "?" operator. These pattern definitions can be used in place of, or in addition to, the standard C, N, U, L, and P. <span>For more information on creating the file-specification, refer to <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a>.</span></p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="poollimit"></a><span>"POOLLIMIT":&lt;region&gt;:expr</span><a class="indexterm" name="idm46082206345280"></a>
+<a name="poollimit"></a><span>"POOLLIMIT":&lt;region&gt;:expr</span><a class="indexterm" name="idm46082197114912"></a>
 </h4></div></div></div>
 <p>VIEW "POOLLIMIT":&lt;region&gt;:expr, where expr is of the form n[%] provides a mechanism for a process that has the potential to "churn" global buffers to limit the potential impact on other processes by restricting the number of global buffers it uses. If the expression ends with a per-cent sign (%), the number is taken as an as a percentage of the configured global buffers and otherwise as an ordinal number of preferred buffers; standard M parsing and integer conversions apply. Preferred buffer values are limited to between 32 and one less than half the buffer pool inclusive; with the exception of zero (0) or 100 per cent, which turn off the limitation; specifications exceeding those limits provide the value of the nearer limit. If the argument specifies "*" for the region, the command applies to all regions. $VIEW("POOLLIMIT",&lt;region&gt;) returns the current value for the region as an ordinal number - zero (0) when there is no limit in place. Note that this facility is designed for use by a relatively small subset of processes. In addition, MUPIP REORG uses this facility to limit its buffers to a value established by the UNIX environment variable (or OpenVMS logical name) gtm_poollimit using the syntax described for VIEW "POOLLIMIT" with a default of 64 if gtm_poollimit is not specified. Note that this may slightly slow a standalone REORG but can be overridden by defining gtm_poollimit as 0 or "100%". </p>
 </div>
@@ -322,7 +322,7 @@ the "ACID" properties of TP. This shifts the responsibility for Isolation from G
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="undef"></a><span>[NO]</span>UNDEF<a class="indexterm" name="idm46082206550672"></a>
+<a name="undef"></a><span>[NO]</span>UNDEF<a class="indexterm" name="idm46082197257712"></a>
 </h4></div></div></div>
 <p>Enables or disables handling of undefined variables as errors. With UNDEF, GT.M handles all references to undefined local or global variables as errors. With NOUNDEF, GT.M handles all references to undefined local or global variables as if the variable had a value of the empty string. In other words, GT.M treats all variables appearing in expressions as if they were the argument of an implicit $GET(). UNDEF is the default.</p>
 <p>The environment variable $gtm_noundef specifies the initial value value of [NO]UNDEF at process startup. If it is defined, and evaluates to a non-zero integer or any case-independent string or leading substring of "TRUE" or "YES", then GT.M treats undefined variables as having an implicit value of an empty string. </p>
@@ -336,7 +336,7 @@ the "ACID" properties of TP. This shifts the responsibility for Isolation from G
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="trace"></a><span>"TRACE":value:&lt;expr&gt;</span><a class="indexterm" name="idm46082206441520"></a>
+<a name="trace"></a><span>"TRACE":value:&lt;expr&gt;</span><a class="indexterm" name="idm46082196333008"></a>
 </h4></div></div></div>
 <p>Traces GT.M program execution and generates profiling information about the lines and functions executed; with low impact on the run-time performance.</p>
 <p>The feature turns on (value=1) or turns off (value=0) M-profiling. This expression must evaluate to a string containing the name of a GT.M global variable. The global may also have subscripts; however the subscripts must be literals or the special variable $JOB. <span>For the $JOB process identifier description, refer to <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span></p>
@@ -704,15 +704,15 @@ updatemax
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="zdate"></a><span>"ZDATE_FORM":"value"</span><a class="indexterm" name="idm46082206441392"></a>
+<a name="zdate"></a><span>"ZDATE_FORM":"value"</span><a class="indexterm" name="idm46082195089408"></a>
 </h4></div></div></div>
-<p>Determines whether four digit year code is active for $ZDATE() function. GT.M defaults to zero (0), that is, two digit output. <span>For more usage information, refer to <a class="xref" href="ch07s33.html" title="$ZDate()">&#8220;$ZDate()&#8221;</a>.</span> </p>
+<p>Determines whether four digit year code is active for $ZDATE() function. GT.M defaults to zero (0), that is, two digit output. <span>For more usage information, refer to <a class="xref" href="ch07s34.html" title="$ZDate()">&#8220;$ZDate()&#8221;</a>.</span> </p>
 <p>If no value is given with the VIEW command, it turns four digit code on. It is equivalent to the intrinsic special variable $ZDATEFORM. Use $ZDATEFORM to set this VIEW keyword. Also, logical name environment variable gtm_zdate_form may be used to set the initial value to this factor.</p>
 </div>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_view"></a>Examples<span> of VIEW</span><a class="indexterm" name="idm46082207127088"></a>
+<a name="examples_of_view"></a>Examples<span> of VIEW</span><a class="indexterm" name="idm46082197875424"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;Kill A

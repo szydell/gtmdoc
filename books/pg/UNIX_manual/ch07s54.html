@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZWidth()</title>
+<title>$ZTRNLNM()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s53.html" title="$ZTRNLNM()">
-<link rel="next" href="ch07s55.html" title="$ZWRite()">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="prev" href="ch07s53.html" title="$ZTRIgger()">
+<link rel="next" href="ch07s55.html" title="$ZWidth()">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZWidth()</th></tr>
+<tr><th colspan="3" align="center">$ZTRNLNM()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s53.html">Prev</a> </td>
@@ -25,47 +25,61 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZWidth()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZTRNLNM()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zwidth"></a>$ZWidth()<a class="indexterm" name="idm46082190690368"></a>
+<a name="ztrnlnm"></a>$ZTRNLNM()<a class="indexterm" name="idm46082181320160"></a>
 </h2></div></div></div>
-<p>Returns the numbers of columns required to display a given string on the screen or printer. The format of the $ZWIDTH() function is:</p>
-<pre class="programlisting">$ZW[IDTH] (expr)</pre>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The expression is the string which $ZWIDTH() evaluates for display length. If the expression contains a code-point value that is not a valid UTF-8 character, $ZWIDTH() generates a run-time error.</p></li>
-<li class="listitem"><p>If the expression contains any non-graphic characters, the $ZWIDTH() function does count not those characters.</p></li>
-<li class="listitem"><p>If the string contains any escape sequences containing graphical characters (which they typically do), $ZWIDTH() includes those characters in calculating its result, as it does not do escape processing. In such a case, the result many be larger than the actual display width.</p></li>
-</ul></div>
-<p>With character set UTF-8 specified, the $ZWIDTH() function uses the ICU's glyph-related conventions to calculate the number of columns required to represent the expression.</p>
+<p>The $ZTRNLNM function returns the value of an environment variable.The $ZTRNLNM function is analogous to the DCL Lexical function F$TRNLNM on OpenVMS. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>When in "NOBADCHAR" mode, $ZWIDTH() returns give any bad characters a length of zero (0), which may or may not match the behavior of any device used to display the string.</p></td></tr>
+<tr><td align="left" valign="top"><p>$ZTRNLNM() <span>does not perform</span> iterative translation.</p></td></tr>
 </table></div>
+<p>The format for the $ZTRNLNM function is:</p>
+<pre class="programlisting">$ZTRNLNM(expr1[,expr2[,expr3[,expr4[,expr5[,expr6]]]]])</pre>
+<p>expr1 specifies the environment variable whose value needs to be returned.</p>
+<p>expr2 to expr5 are OpenVMS-related expressions that specify logical name table(s), index (numbered from 0), initial mode of the look-up, and a value indicating whether the look-up is case sensitive. To ensure interoperability between UNIX and OpenVMS versions, $ZTRNLNM() on UNIX accepts these expressions and ignores them.</p>
+<p>The optional expr6 specifies any one of the following keywords:</p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th><p>ITEM KEYWORD</p></th>
+<th><p>DATA RETURNED</p></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p>FULL</p></td>
+<td><p>Returns the translation.</p></td>
+</tr>
+<tr>
+<td><p>LENGTH</p></td>
+<td><p>Length of the return value in bytes.</p></td>
+</tr>
+<tr>
+<td><p>VALUE</p></td>
+<td><p>Returns the translation.  </p></td>
+</tr>
+</tbody>
+</table></div>
+<p></p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zwidth"></a>Examples<span> of $ZWIDTH()</span>
+<a name="examples_of_ztrnlnm"></a>Examples<span> of $ZTRNLNM()</span><a class="indexterm" name="idm46082181247680"></a>
 </h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;set NG=$char($$FUNC^%HD("200B"))
-GTM&gt;set S=$char(26032)_NG_$CHAR(26033)
-GTM&gt;W $ZWidth(S)
-4
+<pre class="programlisting">GTM&gt;write $ztrnlnm("gtm_dist","","","","","VALUE")
+/usr/lib/fis-gtm/V6.3-004_x86_64/utf8
+GTM&gt;write $ztrnlnm("gtm_dist")
+/usr/lib/fis-gtm/V6.3-004_x86_64/utf8
 GTM&gt;</pre>
-<p>In the above example, the local variable NG contains a non-graphic character which does not display between two double-width UTF-8 characters.</p>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;write $zwidth("The rain in Spain stays mainly in the plain.")
-44    
-GTM&gt;set A="<span class="symbol">&#20027;&#35201;&#38632;&#22312;&#35199;&#29677;&#29273;&#20572;&#30041;&#22312;&#24179;&#21407;</span>"
-GTM&gt;write $length(A)
-12
-GTM&gt;write $zwidth(A)
-24</pre>
-<p>In the above example, the $ZWIDTH() function returns 24 because each character in local variable A occupies 2 columns when they are displayed on the screen or printer.</p>
+<p>These example use $ZTRNLNM() to display the translation value for gtm_dist.</p>
 </div>
 </div>
 <div class="navfooter">
@@ -79,9 +93,9 @@ GTM&gt;write $zwidth(A)
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZTRNLNM() </td>
+<td width="40%" align="left" valign="top">$ZTRIgger() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZWRite()</td>
+<td width="40%" align="right" valign="top"> $ZWidth()</td>
 </tr>
 </table>
 </div>

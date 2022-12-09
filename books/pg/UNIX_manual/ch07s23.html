@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s22.html" title="$Text()">
 <link rel="next" href="ch07s24.html" title="$View()">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="translate"></a>$TRanslate()<a class="indexterm" name="idm46082191522960"></a>
+<a name="translate"></a>$TRanslate()<a class="indexterm" name="idm46082182110656"></a>
 </h2></div></div></div>
 <p>Returns a string that results from replacing or dropping characters in the first of its arguments as specified by the patterns of its other arguments.</p>
 <p>The format for the $TRANSLATE function is:</p>
@@ -39,7 +39,7 @@
 <li class="listitem"><p>The optional second expression specifies the characters for $TRANSLATE() to replace. If a character occurs more than once in the second expression, the first occurrence controls the translation, and $TRANSLATE() ignores subsequent occurrences. If this argument is omitted, $TRANSLATE() returns the first expression without modification.</p></li>
 <li class="listitem"><p>The optional third expression specifies the replacement characters for positionally corresponding characters in the second expression. If this argument is omitted or shorter than the second expression, $TRANSLATE() drops all occurrences of characters in the second expression that have no replacement in the corresponding position of the third expression.</p></li>
 <li class="listitem"><p>For a process started in UTF-8 mode, the algorithm of $TRANSLATE() treats the string arguments as UTF-8 encoded. With VIEW "BADCHAR" enabled, $TRANSLATE() produces a run-time error when it encounters a malformed character.</p></li>
-<li class="listitem"><p>Irrespective of the settings of VIEW "BADCHAR" and $ZCHSET, $ZTRANSLATE() interprets argument as a sequence of bytes (rather than a sequence of characters) and performs all byte-oriented $TRANSLATE() operations. <span>For more information, refer to <a class="xref" href="ch07s51.html" title="$ZTRanslate()">&#8220;$ZTRanslate()&#8221;</a>.</span></p></li>
+<li class="listitem"><p>Irrespective of the settings of VIEW "BADCHAR" and $ZCHSET, $ZTRANSLATE() interprets argument as a sequence of bytes (rather than a sequence of characters) and performs all byte-oriented $TRANSLATE() operations. <span>For more information, refer to <a class="xref" href="ch07s52.html" title="$ZTRanslate()">&#8220;$ZTRanslate()&#8221;</a>.</span></p></li>
 <li class="listitem"><p>$TRANSLATE() provides a tool for tasks such as changing case and doing encryption. For examples of case translation, refer to the ^%LCASE and ^%UCASE utility routines.</p></li>
 </ul></div>
 <p>The $TRANSLATE() algorithm can be understood as follows:</p>
@@ -49,7 +49,7 @@
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_translate"></a>Examples<span> of $TRANSLATE()</span><a class="indexterm" name="idm46082191399392"></a>
+<a name="examples_of_translate"></a>Examples<span> of $TRANSLATE()</span><a class="indexterm" name="idm46082182017680"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;write $translate("ABC","CB","1")

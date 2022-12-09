@@ -8,7 +8,7 @@
 <link rel="up" href="ch12.html" title="Chapter 12. Internationalization">
 <link rel="prev" href="ch12.html" title="Chapter 12. Internationalization">
 <link rel="next" href="ch12s02.html" title="Creating the Alternate Collation Routines">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="collation_seq"></a>Collation Sequence Definitions<a class="indexterm" name="idm46082185905888"></a>
+<a name="collation_seq"></a>Collation Sequence Definitions<a class="indexterm" name="idm46082176468784"></a>
 </h2></div></div></div>
 <p>Normally, GT.M orders data with numeric values first, followed by strings sequenced by ASCII values. To use an alternative collating sequence the following items must be provided at GT.M process intialization. </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
@@ -60,7 +60,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="defining_env_variables"></a><span>Defining the </span>Environment Variable<a class="indexterm" name="idm46082185902672"></a>
+<a name="defining_env_variables"></a><span>Defining the </span>Environment Variable<a class="indexterm" name="idm46082177302224"></a>
 </h3></div></div></div>
 <p>GT.M locates the alternative collation sequences through the environment variable gtm_collate_n where n is an integer from 1 to 255 that identifies the collation sequence, and pathname identifies the shared library containing the routines for that collation sequence, for example:</p>
 <pre class="programlisting">$ gtm_collate_1=/opt/fis-gtm/collation
@@ -68,7 +68,7 @@ $ export gtm_collate_1</pre>
 <p>Multiple alternative collation sequence definitions can co-exist.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="considerations_in_establish_alt_collations"></a><span>Considerations in </span>Establish<span>ing</span> Alternative Collations<a class="indexterm" name="idm46082185872608"></a>
+<a name="considerations_in_establish_alt_collations"></a><span>Considerations in </span>Establish<span>ing</span> Alternative Collations<a class="indexterm" name="idm46082176451760"></a>
 </h4></div></div></div>
 <p>Alternative collation sequences for a global must be set when the global contains no data. When the global is defined the collation sequence is stored in the global. This ensures the future integrity of the global's collation. If it becomes necessary to change the collation sequence of a global containing data, you must copy the data to a temporary repository, delete the global, modify the variable's collation sequence by reinitializing the global either in a region that has the desired collation or with %GBLDEF, and restore the data from the temporary repository.</p>
 <p>Be careful when creating the transformation and inverse transformation routines. The transformation routine must unambiguously and reliably encode every possible input value. The inverse routine must faithfully return the original value in every case. Errors in these routines can produce delayed symptoms that could be hard to debug. These routines may not be written in M.</p>
@@ -76,7 +76,7 @@ $ export gtm_collate_1</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="defin_a_default_database_collation_method"></a><span>Defining a Default Database </span>Collation Method<a class="indexterm" name="idm46082186053648"></a>
+<a name="defin_a_default_database_collation_method"></a><span>Defining a Default Database </span>Collation Method<a class="indexterm" name="idm46082176484944"></a>
 </h3></div></div></div>
 <p>GT.M lets you define an alternative collation sequence as the default when creating a new database. Subsequently, this default is applied when each new global is created. </p>
 <p>This default collation sequence is set as a GDE qualifier for the ADD, CHANGE, and TEMPLATE commands using the following example with CHANGE:</p>
@@ -87,7 +87,7 @@ $ export gtm_collate_1</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="establish_a_local_coll_seq"></a>Establishing A Local Collation Sequence<a class="indexterm" name="idm46082186024176"></a>
+<a name="establish_a_local_coll_seq"></a>Establishing A Local Collation Sequence<a class="indexterm" name="idm46082176619264"></a>
 </h3></div></div></div>
 <p>All subscripted local variables for a process must use the same collation sequence. The collation sequence used by local variables can be established as a default or in the current process. The local collation sequence can only be changed when a process has no subscripted local variables defined.</p>
 <p>To establish a default local collation sequence provide a numeric value to the environment variable gtm_local_collate to select one of the collation tables, for example:</p>

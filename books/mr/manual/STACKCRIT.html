@@ -8,12 +8,13 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="SSV4NOALLOW.html" title="SSV4NOALLOW ">
 <link rel="next" href="STACKOFLOW.html" title="STACKOFLOW ">
-<link rel="copyright" href="ln-idm45837882443712.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45871334568112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">STACKCRIT </th></tr>
+<tr><th colspan="3" align="center">STACKCRIT <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="SSV4NOALLOW.html">Prev</a> </td>
@@ -25,15 +26,16 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">STACKCRIT </span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">STACKCRIT <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span></span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="STACKCRIT"></a>STACKCRIT </h2></div></div></div>
+<a name="STACKCRIT"></a>STACKCRIT <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</h2></div></div></div>
 <p><span class="bold"><strong>STACKCRIT</strong></span>, Stack space critical</p>
 <p>Run Time Error: This indicates that the process has consumed almost all of the available stack space.</p>
-<p>Action: Look for infinite recursion. If you do not take immediate action to reduce your stack, GT.M is likely to produce a STACKOFLOW error, which terminates the process. Examine the stack with ZSHOW. Trim the stack using QUIT, ZGOTO, HALT or ZHALT.</p>
-<a class="indexterm" name="idm45837876596560"></a>
+<p>Action: Look for infinite recursion. If you do not take immediate action to reduce your stack, GT.M is likely to produce a STACKOFLOW error, which terminates the process. Examine the stack with ZSHOW. Trim the stack using QUIT, ZGOTO, HALT or ZHALT. Note that if a single application call generates a stack frame larger than the stack space between the STACKCRIT and STACKOFLOW boundaries, the process puts a STACKCRIT message in the operator log, but processes the STACKOFLOW and terminates, so the application gets no chance to intervene and handle the error. Look into the gtm_mstack_crit_threshold and gtm_mstack_size environment variables.</p>
+<a class="indexterm" name="idm45871328886880"></a>
 </div>
 <div class="navfooter">
 <hr>
@@ -48,7 +50,8 @@
 <tr>
 <td width="40%" align="left" valign="top">SSV4NOALLOW  </td>
 <td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
-<td width="40%" align="right" valign="top"> STACKOFLOW </td>
+<td width="40%" align="right" valign="top"> STACKOFLOW <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</td>
 </tr>
 </table>
 </div>

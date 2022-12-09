@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s59.html" title="$ZSYstem">
 <link rel="next" href="ch08s61.html" title="$ZTIMeout">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,7 +30,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="ztexit"></a>$ZTExit<a class="indexterm" name="idm46082190076720"></a>
+<a name="ztexit"></a>$ZTExit<a class="indexterm" name="idm46082180696976"></a>
 </h2></div></div></div>
 <p>$ZTE[XIT] contains an expression that controls the GT.M interrupt facility at the transaction commit or rollback. At each outermost TCOMMIT or TROLLBACK, If +$ZTEXIT evaluates to non-zero (TRUE), then $ZINTERRUPT is XECUTEd after completing the commit or rollback.</p>
 <p>$ZTEXIT is a read-write ISV, that is, it can appear on the left side of the equal sign (=) in the argument to the SET command. M routines cannot NEW $ZTEXIT. GT.M initializes $ZTEXIT to null at the process startup. Note that the changes to the value of $ZTEXIT during a GT.M invocation last for the entire duration of the process, so it is the application's responsibility to reset $ZTEXIT after $ZINTERRUPT is delivered in order to turn off redelivering the interrupt every subsequent transaction commit or rollback.</p>

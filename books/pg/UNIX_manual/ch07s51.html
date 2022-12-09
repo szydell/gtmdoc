@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZTRanslate()</title>
+<title>$ZSUBstr()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s50.html" title="$ZSUBstr()">
-<link rel="next" href="ch07s52.html" title="$ZTRIgger()">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="prev" href="ch07s50.html" title="$ZSIGPROC()">
+<link rel="next" href="ch07s52.html" title="$ZTRanslate()">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZTRanslate()</th></tr>
+<tr><th colspan="3" align="center">$ZSUBstr()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s50.html">Prev</a> </td>
@@ -25,39 +25,53 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZTRanslate()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZSUBstr()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="ztranslate"></a>$ZTRanslate()<a class="indexterm" name="idm46082190843184"></a>
+<a name="zsubstr"></a>$ZSUBstr()<a class="indexterm" name="idm46082181314224"></a>
 </h2></div></div></div>
-<p>Returns a byte sequence that results from replacing or dropping bytes in the first of its arguments as specified by the patterns of its other arguments.</p>
-<p>The format for the $ZTRANSLATE() function is:</p>
-<pre class="programlisting">$ZTR[ANSLATE](expr1[,expr2[,expr3]])</pre>
+<p>Returns a properly encoded string from a sequence of bytes.</p>
+<pre class="programlisting">$ZSUB[STR] (expr ,intexpr1 [,intexpr2])</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The first expression specifies the sequence of octets on which $ZTRANSLATE() operates. If the other arguments are omitted, $ZTRANSLATE() returns this expression.</p></li>
-<li class="listitem"><p>The optional second expression specifies the byte for $TRANSLATE() to replace. If a byte occurs more than once in the second expression, the first occurrence controls the translation, and $ZTRANSLATE() ignores subsequent occurrences. If this argument is omitted, $ZTRANSLATE() returns the first expression without modification.</p></li>
-<li class="listitem"><p>The optional third expression specifies the replacement bytes for the positionally corresponding bytes in the second expression. If this argument is omitted or shorter than the second expression, $ZTRANSLATE() drops all occurrences of the bytes in the second expression that have no replacement in the corresponding position of the third expression.</p></li>
-<li class="listitem"><p>$ZTRANSLATE() provides a tool for tasks such as encryption.</p></li>
-</ul></div>
-<p>The $ZTRANSLATE() algorithm can be understood as follows:</p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>$ZTRANSLATE() evaluates each byte in the first expression, comparing it byte by byte to the second expression looking for a match. If there is no match in the second expression, the resulting expression contains the byte without modification.</p></li>
-<li class="listitem"><p>When it locates a byte match, $ZTRANSLATE() uses the position of the match in the second expression to identify the appropriate replacement for the original expression. If the second expression has more bytes than the third expression, $ZTRANSLATE() replaces the original byte with a null, thereby deleting it from the result. By extension of this principle, if the third expression is missing, $ZTRANSLATE() deletes all bytes from the first expression that occur in the second expression.</p></li>
+<li class="listitem"><p>The first expression is an expression of the byte string from which $ZSUBSTR() derives the character sequence.</p></li>
+<li class="listitem"><p>The second expression is the starting byte position (counting from 1 for the first position) in the first expression from where $ZSUBSTR() begins to derive the character sequence.</p></li>
+<li class="listitem"><p>The optional third expression specifies the number of bytes from the starting byte position specified by the second expression that contribute to the result. If the third expression is not specified, the $ZSUBSTR() function returns the sequence of characters starting from the byte position specified by the second expression up to the end of the byte string.</p></li>
+<li class="listitem"><p>The $ZSUBSTR() function never returns a string with illegal or invalid characters. With VIEW "NOBADCHAR", the $ZSUBSTR() function ignores all byte sequences within the specified range that do not correspond to valid UTF-8 code-points. With VIEW "BADCHAR", the $ZSUBSTR() function triggers a run-time error if the specified byte sequence contains a code-point value that is not in the character set.</p></li>
+<li class="listitem"><p>The $ZSUBSTR() is similar to the $ZEXTRACT() byte equivalent function but differs from that function in restricting its result to conform to the valid characters in the current encoding.</p></li>
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="idm46082190707680"></a>Examples<span> of $ZTRANSLATE()</span>
+<a name="idm46082181386560"></a>Examples<span> of $ZSUBSTR()</span>
 </h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;set hiraganaA=$char(12354) ; $zchar(227,129,130) 
-GTM&gt;set temp1=$zchar(130)
-GTM&gt;set temp2=$zchar(140)
-GTM&gt;set tr=$ztranslate(hiraganaA,temp1,temp2)
-GTM&gt;w $ascii(tr)
-12364 
-GTM&gt;</pre>
-<p>In the above example, $ZTRANSLATE() replaces byte $ZCHAR(130) in first expression and matching the first (and only) byte in the second expression with byte $ZCHAR(140) - the corresponding byte in the third expression. </p>
+<pre class="programlisting">GTM&gt;write $ZCHSET
+M
+GTM&gt;set char1="a" ; one byte character
+GTM&gt;set char2="<span class="symbol">c</span>"; two-byte character
+GTM&gt;set char3="<span class="symbol">&#26032;</span>"; three-byte character
+GTM&gt;set y=char1_char2_char3
+GTM&gt;write $zsubstr(y,1,3)=$zsubstr(y,1,5)
+0</pre>
+<p>With character set M specified, the expression $ZSUBSTR(y,1,3)=$ZSUBSTR(y,1,5) evaluates to 0 or "false" because the expression $ZSUBSTR(y,1,5) returns more characters than $ZSUBSTR(y,1,3).</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zchset
+UTF-8
+GTM&gt;set char1="a" ; one byte character
+GTM&gt;set char2="<span class="symbol">c</span>"; two-byte character
+GTM&gt;set char3="<span class="symbol">&#26032;</span>"; three-byte character
+GTM&gt;set y=char1_char2_char3
+GTM&gt;write $zsubstr(y,1,3)=$zsubstr(y,1,5)
+1</pre>
+<p>For a process started in UTF-8 mode, the expression $ZSUBSTR(y,1,3)=$ZSUBSTR(y,1,5) evaluates to 1 or "true" because the expression $ZSUBSTR(y,1,5) returns a string made up of char1 and char2 excluding the three-byte char3 because it was not completely included in the specified byte-length.</p>
+<p>In many ways, the $ZSUBSTR() function is similar to the $ZEXTRACT() function. For example, $ZSUBSTR(expr,intexpr1) is equivalent to $ZEXTRACT(expr,intexpr1,$L(expr)). Note that this means when using the M character set, $ZSUBSTR() behaves identically to $EXTRACT() and $ZEXTRACT(). The differences are as follows:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
+<li class="listitem" style="list-style-type: circle"><p>$ZSUBSTR() cannot appear on the left of the equal sign in the SET command where as $ZEXTRACT() can.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>In both the modes, the third expression of $ZSUBSTR() is a byte, rather than character, position within the first expression.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>$EXTRACT() operates on characters, irrespective of byte length.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>$ZEXTRACT() operates on bytes, irrespective of multi-byte character boundaries.</p></li>
+<li class="listitem" style="list-style-type: circle"><p>$ZSUBSTR() is the only way to extract as valid UTF-8 encoded characters from a byte string containing mixed UTF-8 and non UTF-8 data. It operates on <span class="trademark">Unicode</span>(R) characters so that its result does not exceed the given byte length.</p></li>
+</ul></div>
 </div>
 </div>
 <div class="navfooter">
@@ -71,9 +85,9 @@ GTM&gt;</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZSUBstr() </td>
+<td width="40%" align="left" valign="top">$ZSIGPROC() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZTRIgger()</td>
+<td width="40%" align="right" valign="top"> $ZTRanslate()</td>
 </tr>
 </table>
 </div>

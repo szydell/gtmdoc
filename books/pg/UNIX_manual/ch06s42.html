@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s41.html" title="ZRUPDATE">
 <link rel="next" href="ch06s43.html" title="ZSTep">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zshow_cmmd"></a>ZSHow<a class="indexterm" name="idm46082202229024"></a>
+<a name="zshow_cmmd"></a>ZSHow<a class="indexterm" name="idm46082190881552"></a>
 </h2></div></div></div>
 <p>The ZSHOW command displays information about the current GT.M environment.</p>
 <p>The format of the ZSHOW command is:</p>
@@ -48,7 +48,7 @@
 <p></p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zshow_info_codes"></a>ZSHOW Information Codes<a class="indexterm" name="idm46082207968864"></a>
+<a name="zshow_info_codes"></a>ZSHOW Information Codes<a class="indexterm" name="idm46082198719712"></a>
 </h3></div></div></div>
 <p>A ZSHOW argument is an expression containing a list of codes that select one or more types of information. The ZSHOW information codes are: </p>
 <div class="informaltable">
@@ -197,6 +197,7 @@ JRL : # of Journal Records with a Logical record type (e.g. SET, KILL etc.) writ
 JRO : # of Journal Records with a type Other than logical written to the journal file (e.g. AIMG, EPOCH, PBLK, PFIN, PINI, and so on)
 JRP : # of Journal Records with a Physical record type (i.e. PBLK, AIMG) written to the journal file (these records are seen only in a -detail journal extract)
 KIL : # of KILl operations (kill as well as zwithdraw, TP and non-TP) 
+KTG : # of of invoked KILL triggers 
 LKF : # of LocK calls (mapped to this db) that Failed 
 LKS : # of LocK calls (mapped to this db) that Succeeded 
 MLBA: # of waits for blocked LOCK
@@ -214,6 +215,7 @@ PRC : # of waits on exit
 PRG : # of pre-read globals that were performed by the reader helper
 QRY : # of $QueRY() operations (TP and non-TP) 
 SET : # of SET operations (TP and non-TP) 
+STG : # of invoked SET triggers 
 TBR : # of Tp transaction induced Block Reads on this database 
 TBW : # of Tp transaction induced Block Writes on this database 
 TC0 : # of Tp transaction Conflicts at try 0 (counted only for that region which caused the TP transaction restart)
@@ -237,6 +239,7 @@ WHE : # of writer helper epochs
 WRL : # of times a process consistently slept(longer than WFR) while waiting for another process to read in a database block
 ZAD : # of waits for region freeze off
 ZPR : # of $order(,-1) or $ZPRevious() (reverse order) operations (TP and non-TP). The count of $Order(,1) operations are reported under ORD. 
+ZTG : # of of invoked ZTRIGGERs
 ZTR : # of ZTRigger command operations
 [NT]B[WR] mnemonics are satisfied by either disk access or, for databases that use the BG (buffered global) access method, global buffers in shared memory.
 GT.M maintains the counters of the mnemonics marked with a * on AIX. On Linux, GT.M does not currently increment the counters of these mnemonics but retains them in the ZSHOW output for backward compatibility.</pre>
@@ -268,7 +271,7 @@ GT.M maintains the counters of the mnemonics marked with a * on AIX. On Linux, G
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zshow"></a>Examples<span> of ZSHow</span><a class="indexterm" name="idm46082193467920"></a>
+<a name="examples_of_zshow"></a>Examples<span> of ZSHow</span><a class="indexterm" name="idm46082188007568"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;ZSHOW "db"</pre>
@@ -439,7 +442,7 @@ $ZYERROR=""</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zsh_destination_vars"></a>ZSHOW Destination Variables<a class="indexterm" name="idm46082206607504"></a>
+<a name="zsh_destination_vars"></a>ZSHOW Destination Variables<a class="indexterm" name="idm46082199039872"></a>
 </h3></div></div></div>
 <p>ZSHOW may specify an unsubscripted or subscripted global or local variable name (glvn) into which ZSHOW places its output. If the argument does not include a global or local variable name, ZSHOW directs its output to the current device. </p>
 <p>When ZSHOW directs its output to a variable, it adds two levels of descendants to that variable. The first level subscript contains a one-character string from the set of upper-case ZSHOW action codes, identifying the type of information. ZSHOW implicitly KILLs all descendants of the first level nodes. ZSHOW stores information elements at the second level using ascending integers, starting at 1. </p>
@@ -471,7 +474,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="use_of_zshow"></a>Use of ZSHOW<a class="indexterm" name="idm46082193641120"></a>
+<a name="use_of_zshow"></a>Use of ZSHOW<a class="indexterm" name="idm46082189579264"></a>
 </h3></div></div></div>
 <p>Use ZSHOW as</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">

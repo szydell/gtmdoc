@@ -8,7 +8,7 @@
 <link rel="up" href="ch03.html" title="Chapter 3. Basic Operations">
 <link rel="prev" href="ch03s04.html" title="Starting GT.M">
 <link rel="next" href="ch03s06.html" title="Configuring the Restriction facility">
-<link rel="copyright" href="ln-idm45945641676384.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45731735893296.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="conf_huge_pgs"></a>Configuring huge pages for GT.M x86[-64] on Linux<a class="indexterm" name="idm45945640706400"></a><a class="indexterm" name="idm45945640685936"></a>
+<a name="conf_huge_pgs"></a>Configuring huge pages for GT.M x86[-64] on Linux<a class="indexterm" name="idm45731734902336"></a><a class="indexterm" name="idm45731734929664"></a>
 </h2></div></div></div>
 <p>Huge pages are a Linux feature that may improve the performance of GT.M applications in production. Huge pages create a single page table entry for a large block (typically 2MiB) of memory in place of hundreds entries for many smaller (typically 4KiB) blocks. This reduction of memory used for page tables frees memory for other uses, such as file system caches, and increases the probability of TLB (translation lookaside buffer) matches, both of which can improve performance. The performance improvement related to reducing the page table size becomes evident when many processes share memory as they do for global buffers, journal buffers, and replication journal pools. Configuring huge pages on Linux for x86 or x86_64 CPU architectures help improve:</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
@@ -43,7 +43,7 @@
 </tr>
 <tr><td align="left" valign="top"><p>At this time, huge pages have no effect for MM databases; the text, data, or bss segments for each process; or for process stack.</p></td></tr>
 </table></div>
-<p>While FIS recommends you configure huge page for shared memory, you need to evaluate whether or not configuring huge page for process-private memory is appropriate for your application. Having insufficient huge pages available during certain commands (for example, a JOB command - see complete list below) can result in a process terminating with a SIGBUS error. This is a current limitation of Linux. Before you use huge pages for process private memory on production systems, FIS recommends that you perform appropriate peak load tests on your application and ensure that you have an adequate number of huge pages configured for your peak workloads or that your application is configured to perform robustly when processes terminate with SIGBUS errors. The following GT.M features fork processes and may generate SIGBUS errors when huge pages are not available-JOB, OPEN of a PIPE device, ZSYSTEM, interprocess signaling that requires the services of gtmsecshr when gtmsecshr is not already running, SPAWN commands in DSE, GDE, and LKE, argumentless MUPIP RUNDOWN, and replication-related MUPIP commands that start server processes and/or helper processes. As increasing the available huge pages may require a reboot, an interim workaround is to unset the environment variable HUGETLB_MORECORE for GT.M processes until you are able to reboot or otherwise make available an adequate supply of huge pages.</p>
+<p>While FIS recommends you configure huge page for shared memory, you need to evaluate whether or not configuring huge page for process-private memory is appropriate for your application. Having insufficient huge pages available during certain commands (for example, a JOB command - see complete list below) can result in a process terminating with a SIGBUS error. This is a current limitation of Linux. Before you use huge pages for process private memory on production systems, FIS recommends that you perform appropriate peak load tests on your application and ensure that you have an adequate number of huge pages configured for your peak workloads or that your application is configured to perform robustly when processes terminate with SIGBUS errors. The following GT.M features fork processes and may generate SIGBUS errors when huge pages are not available-JOB, OPEN of a PIPE device, ZSYSTEM, interprocess signaling that requires the services of gtmsecshr when gtmsecshr is not already running, SPAWN commands in DSE, GDE, and LKE, argumentless MUPIP RUNDOWN, and replication-related MUPIP commands that start server processes and/or helper processes.</p>
 <p>Consider the following example of a memory map report of a Source Server process running at peak load:</p>
 <pre class="programlisting">$ pmap -d 18839
 18839: /usr/lib/fis-gtm/V6.2-000_x86_64/mupip replicate -source -start -buffsize=1048576 -secondary=melbourne:1235 -log=/var/log/.fis-gtm/mal2mel.log -instsecondary=melbourne
@@ -80,14 +80,6 @@ $</pre>
 </tr>
 <tr>
 <td>
-<p>libhugetlbfs.so </p>
-</td>
-<td>
-<p>Use your Linux system's package manager to install the libhugetlbfs.so library in a standard location. Note that libhugetlbfs is not in Debian repositories and must be manually installed; GT.M on Debian releases is Supportable, not Supported.</p>
-</td>
-</tr>
-<tr>
-<td>
 <p>Have sufficient number of huge pages available. </p>
 </td>
 <td>
@@ -112,28 +104,21 @@ $</pre>
 <p>or </p>
 </li>
 <li class="listitem">
-<p>Permit the group used by GT.M processes needs to use huge pages with the following command, which requires root privilges:</p>
+<p>Permit the group used by GT.M processes needs to use huge pages with the following command, which requires root priviliges:</p>
 <pre class="programlisting">echo gid &gt;/proc/sys/vm/hugetlb_shm_group</pre>
 </li>
 </ol></div>
 </li>
-<li class="listitem"><p>Set the environment variable HUGETLB_SHM for each process to "yes". </p></li>
+<li class="listitem"><p>Set the environment variable gtm_hugetlb_shm for each process to "yes". </p></li>
 </ul></div>
 </div>
-<div class="sect3">
-<div class="titlepage"><div><div><h4 class="title">
-<a name="using_huge_pages_for_ppm"></a>Using huge pages for GT.M process private memory</h4></div></div></div>
-<p><span class="bold"><strong>To use huge pages for process working space and dynamically linked code: </strong></span></p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Set the environment variable HUGETLB_MORECORE for each process to "yes". </p></li></ul></div>
-<p>Although not required to use huge pages, your application is also likely to benefit from including the fully qualified path to libhugetlbfs.so in the LD_PRELOAD environment variable. </p>
-<p>If you enable huge pages for all applications (by setting HUGETLB_MORECORE, HUGETLB_SHM, and LD_PRELOAD as discussed above in /etc/profile and/or /etc/csh.login), you may find it convenient to suppress warning messages from common applications that are not configured to take advantage of huge pages by also setting the environment variable HUGETLB_VERBOSE to zero (0). </p>
-</div>
+<div class="sect3"><div class="titlepage"><div><div><h4 class="title">
+<a name="using_huge_pages_for_ppm"></a>Using huge pages for GT.M process private memory</h4></div></div></div></div>
 <p>Refer to the documentation of your Linux distribution for details. Other sources of information are: </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p><a class="ulink" href="http://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt" target="_top">http://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt</a></p></li>
 <li class="listitem"><p> <a class="ulink" href="http://lwn.net/Articles/374424/" target="_top">http://lwn.net/Articles/374424/</a></p></li>
 <li class="listitem"><p> <a class="ulink" href="http://www.ibm.com/developerworks/wikis/display/LinuxP/libhuge+short+and+simple" target="_top">http://www.ibm.com/developerworks/wikis/display/LinuxP/libhuge+short+and+simple</a></p></li>
-<li class="listitem"><p>the HOWTO guide that comes with libhugetlbfs (<a class="ulink" href="https://github.com/libhugetlbfs/libhugetlbfs" target="_top">https://github.com/libhugetlbfs/libhugetlbfs</a>) explains how and when to set LD_PRELOAD.</p></li>
 </ul></div>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>

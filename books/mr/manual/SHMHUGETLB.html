@@ -1,0 +1,57 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>SHMHUGETLB </title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="titlepage.html" title="GT.M Message and Recovery Procedures Manual">
+<link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
+<link rel="prev" href="SETZDIR.html" title="SETZDIR ">
+<link rel="next" href="SHMLOCK.html" title="SHMLOCK ">
+<link rel="copyright" href="ln-idm45871334568112.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">SHMHUGETLB </th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="SETZDIR.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 1. Error Messages</th>
+<td width="20%" align="right"> <a accesskey="n" href="SHMLOCK.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">SHMHUGETLB </span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="SHMHUGETLB"></a>SHMHUGETLB </h2></div></div></div>
+<p>No longer in GT.M since: undefined</p>
+<p><span class="bold"><strong>SHMHUGETLB</strong></span>, Could not back shared memory with huge pages, using base pages instead</p>
+<p>All GT.M Components Warning: When the gtm_hugetlb_shm environment variable is defined and evaluates to a non-zero integer or any case-independent string or leading substring of "TRUE" or "YES" in a process creating shared memory, GT.M attempts to back all such shared memory segments with huge pages, using the default huge pages size. If huge pages cannot be used, GT.M outputs the SHMHUGETLB warning and tries to back the shared memory with base pages instead. The warning message will include either an ENOMEM or an EPERM error, depending on why the request for huge pages failed.</p>
+<p>Action: If the warning includes an ENOMEM error, consider allocating more huge pages. If the EPERM error is specified, make sure the caller is privileged (i.e. has the CAP_IPC_LOCK capability) and is a member of the sysctl_hugetlb_shm_group group.</p>
+<a class="indexterm" name="idm45871329066064"></a>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="SETZDIR.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="SHMLOCK.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">SETZDIR  </td>
+<td width="20%" align="center"><a accesskey="h" href="titlepage.html">Home</a></td>
+<td width="40%" align="right" valign="top"> SHMLOCK </td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s01.html" title="$ASCII()">
 <link rel="next" href="ch07s03.html" title="$Data()">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,18 +30,18 @@
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="char"></a>$Char()</h2></div></div></div>
-<a class="indexterm" name="idm46082191737248"></a><p>Returns a string of one or more characters corresponding to integer ASCII codes specified in its argument(s). <span>For a process started in UTF-8 mode, $CHAR() returns a string composed of characters represented by the integer equivalents of the <span class="trademark">Unicode</span>(R) code-points specified in its argument(s).</span></p>
+<a class="indexterm" name="idm46082182357344"></a><p>Returns a string of one or more characters corresponding to integer ASCII codes specified in its argument(s). <span>For a process started in UTF-8 mode, $CHAR() returns a string composed of characters represented by the integer equivalents of the <span class="trademark">Unicode</span>(R) code-points specified in its argument(s).</span></p>
 <p>The format for the $CHAR function is:</p>
 <pre class="programlisting">$C[HAR](intexpr[,...])</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>The integer expression(s) specify the codes of the character(s) $CHAR() returns.</p></li>
 <li class="listitem"><p>The M standard does not restrict the number of arguments to $CHAR(). However, GT.M does limit the number of arguments to a maximum of 254. $CHAR() provides a means of producing non-graphic characters, as such characters cannot appear directly within an M string literal. When used with $ASCII(), $CHAR() can also perform arithmetic operations on the codes associated with characters.</p></li>
 <li class="listitem"><p>With VIEW "BADCHAR" enabled, $CHAR() produces a run-time error if any expression evaluates to a code-point value that is not a UTF-8 character. GT.M determines from ICU which characters are illegal. </p></li>
-<li class="listitem"><p>$ZCHAR() is the parallel function of $CHAR(). $ZCHAR() returns a sequence of bytes (rather than a sequence of characters) and can perform all byte-oriented $CHAR() operations. <span>For more information, refer to <a class="xref" href="ch07s29.html" title="$ZCHar()">&#8220;$ZCHar()&#8221;</a>.</span></p></li>
+<li class="listitem"><p>$ZCHAR() is the parallel function of $CHAR(). $ZCHAR() returns a sequence of bytes (rather than a sequence of characters) and can perform all byte-oriented $CHAR() operations. <span>For more information, refer to <a class="xref" href="ch07s30.html" title="$ZCHar()">&#8220;$ZCHar()&#8221;</a>.</span></p></li>
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_char"></a>Examples<span> of $CHAR()</span><a class="indexterm" name="idm46082204912960"></a>
+<a name="examples_of_char"></a>Examples<span> of $CHAR()</span><a class="indexterm" name="idm46082196567664"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;write $char(77,85,77,80,83,7)

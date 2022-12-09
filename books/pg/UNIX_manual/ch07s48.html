@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZSEARCH()</title>
+<title>$ZQGBLMOD()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s47.html" title="$ZQGBLMOD()">
-<link rel="next" href="ch07s49.html" title="$ZSIGPROC()">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="prev" href="ch07s47.html" title="$ZSYSLOG()">
+<link rel="next" href="ch07s49.html" title="$ZSEARCH()">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZSEARCH()</th></tr>
+<tr><th colspan="3" align="center">$ZQGBLMOD()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s47.html">Prev</a> </td>
@@ -25,43 +25,45 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZSEARCH()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZQGBLMOD()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zsearch"></a>$ZSEARCH()<a class="indexterm" name="idm46082190989808"></a>
+<a name="zqgblmod"></a>$ZQGBLMOD()<a class="indexterm" name="idm46082181458304"></a>
 </h2></div></div></div>
-<p>The $ZSEARCH function attempts to locate a file matching the specified file name. If the file exists, it returns the file name; if the file does not exist, it returns the null string.</p>
-<p>The format for the $ZSEARCH function is:</p>
-<pre class="programlisting">$ZSEARCH(expr[,intexpr])</pre>
+<p>The $ZQGBLMOD function enables an application to determine whether it can safely apply a lost transaction to the database. A lost transaction is a transaction that must be rolled off a database to maintain logical multisite consistency. $ZQGBLMOD() always applies to data-level (level-0) nodes.</p>
+<p>The format for the $ZQGBLMOD function is:</p>
+<pre class="programlisting">$ZQGBLMOD(gvn)</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The expression contains a <span>file name</span>, with or without  wildcards, for which $ZSEARCH() attempts to locate a matching file. Repeating $ZSEARCH with the same filename uses the same context and return a sequence of matching files when they exist; when the sequence is exhausted, $ZSEARCH() returns an empty string (""). Any change to the file name starts a new context.</p></li>
-<li class="listitem"><p>$ZSEARCH() uses the process current working directory, if the expression does not specify a directory.</p></li>
-<li class="listitem"><p>The optional integer expression specifies a "stream" number from 0 to 255 for each search; streams provide a means of having up to 256 $ZSEARCH() contexts simultaneously in progress. </p></li>
-<li class="listitem"><p>If a $ZSEARCH() stream has never been used or if the expression differs from the argument to the last $ZSEARCH() of the stream, the function resets the context and returns the first <span>pathname</span> matching the expression; otherwise, it returns the next matching file in collating sequence; if the last prior <span>pathname</span> returned for the same expression and same stream was the last one matching the argument, $ZSEARCH() returns a null string.</p></li>
+<li class="listitem"><p>The subscripted or non-subscripted global variable name (gvn) specifies the target node. </p></li>
+<li class="listitem"><p>A return value of zero (0) means the value of the global variable has not changed since the last synchronization of the originating and replicating instances. </p></li>
+<li class="listitem"><p>A return value of one (1) means the value of the global variable may have changed since the last synchronization of the originating and replicating instance.</p></li>
 </ul></div>
-<p>$ZSEARCH() provides a tool for verifying that a file exists. <span>For information to help determine the validity of a file name, see <a class="xref" href="ch07s41.html" title="$ZPARSE()">&#8220;$ZPARSE()&#8221;</a>.</span></p>
+<p>$ZQGBLMOD function produces an error if you submit an argument that is not a global variable name. </p>
+<p>Internally, $ZQGBLMOD (gvn) compares the GT.M transaction number in the database block in which the global variable name is (or would be) stored with the value in the Zqgblmod_Trans field stored in the database file header.</p>
+<p>For example, if x is the transaction number of the level-0 database block in which gvn resides, and y is the value of Zqgblmod_Trans of region reg containing gvn, then the following is true:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>If x &lt;= y, no transaction modified the level-0 database block z in which gvn resides since the originating and replicating instances synchronized with each other. $ZQGBLMOD() returns a zero (0).</p></li>
+<li class="listitem"><p>If x &gt; y, some transaction modified z, but not necessarily gvn, after the originating and replicating instances synchronized with each other. $ZQGBLMOD() returns a one (1). </p></li>
+</ul></div>
+<p>If a transaction is a lost transaction that has been rolled back and it is determined that for all the M globals set and killed in the transaction $ZQGBLMOD() is zero (0), it is probably safe to apply the updates automatically. However, this determination of safety can only be made by the application designer and not by GT.M. If the $ZQGBLMOD() is one (1) for any set or kill in the transaction, it is not safe to apply the update.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
 <th align="left">Note</th>
 </tr>
-<tr><td align="left" valign="top"><p>You can call the POSIX stat() function to access metadata. The optional GT.M POSIX plug-in packages the stat() function for easy access from M application code. </p></td></tr>
+<tr><td align="left" valign="top"><p>The test of $ZQGBLMOD() and applying the updates must be encapsulated inside a GT.M transaction.</p></td></tr>
 </table></div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zsearch"></a>Examples<span> of $ZSEARCH()</span><a class="indexterm" name="idm46082190803344"></a>
-</h3></div></div></div>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;write $zsearch("data.dat")
-/usr/staff/ccc/data.dat
-GTM&gt;</pre>
-<p>This uses $ZSEARCH() to display the full <span>file path name of "data.dat"</span> in the process current default directory.</p>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;set x=$zsearch("*.c")
-GTM&gt;for  set x=$zsearch("*.m") quit:x=""  write !,$zparse(x,"NAME")</pre>
-<p>This FOR loop uses $ZSEARCH() and $ZPARSE() to display M source file names in the process current <span>working</span> directory. To ensure that the search starts at the beginning, the example resets the context by first searching with a different argument.</p>
-</div>
+<p>
+</p>
+<p>Another approach to handling lost transactions would be to store in the database the initial message sent by a client, as well as the outcome and the response, and to reprocess the message with normal business logic. If the outcome is the same, the transaction can be safely applied. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>If restartable batch operations are implemented, lost batch transactions can be ignored since a subsequent batch restart will process them correctly.</p></td></tr>
+</table></div>
 </div>
 <div class="navfooter">
 <hr>
@@ -74,9 +76,9 @@ GTM&gt;for  set x=$zsearch("*.m") quit:x=""  write !,$zparse(x,"NAME")</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZQGBLMOD() </td>
+<td width="40%" align="left" valign="top">$ZSYSLOG() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZSIGPROC()</td>
+<td width="40%" align="right" valign="top"> $ZSEARCH()</td>
 </tr>
 </table>
 </div>

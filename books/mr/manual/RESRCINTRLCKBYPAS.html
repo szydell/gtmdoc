@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="RESOLVESEQSTRM.html" title="RESOLVESEQSTRM ">
 <link rel="next" href="RESRCWAIT.html" title="RESRCWAIT ">
-<link rel="copyright" href="ln-idm45837882443712.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45871334568112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>RESRCINTRLCKBYPAS</strong></span>,  tttt with PID qqqq bypassing the ssss semaphore for region rrrr (ffff) currently held by PID pppp.</p>
 <p>All GT.M Components Information: GT.M issues the RESRCINTRLCKBYPAS message to the system log as an indication it may not detect when the last process detaches from the shared resource and therefore may not rundown the database shared resources as it normally would. GT.M protects the actions of setting up and tearing down the shared resources associated with a database with a pair of semaphores. Because DSE, and LKE are tools for diagnosing issues, when they start and find they cannot acquire the semaphores after a reasonable number of tries, they proceed to open the database anyway because it is highly probable the database is already set up. When DSE and LKE bypass the semaphore acquisition, they leave the count of attached processes incorrect. When many processes terminate at the same time, typically because of a system shutdown, there can be significant contention for the semaphores that can cause their terminations to take an unusually long time. When this happens, and the count of remaining attached processes is significant, a process may skip the semaphore acquisition, again leaving the count of attached process incorrect. If either of these events occurs, GT.M issues the RESRCINTRLCKBYPAS message where tttt identifies the process type: "LKE", "DSE" or "GT.M"; qqqq is the bypassing process's PID; ssss identifies the semaphore type: "FTOK" or "access control"; rrrr is the region bypassed; ffff is the file corresponding to region rrrr; pppp is the PID of the process holding the semaphore.</p>
 <p>Action: These messages when shutting down GT.M activity may indicate a need to complete the process by invoking a MUPIP JOURNAL -ROLLBACK -BACKWARD for replicated databases, a MUPIP JOURNAL -RECOVER -BACKWARD for unreplicated journaled databases and a MUPIP RUNDOWN for journal-free databases to get the database to a safe state; doing so as part of every shutdown is good practice.</p>
-<a class="indexterm" name="idm45837877142944"></a>
+<a class="indexterm" name="idm45871329361408"></a>
 </div>
 <div class="navfooter">
 <hr>

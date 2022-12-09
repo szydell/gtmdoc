@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZLength()</title>
+<title>$ZJustify()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s38.html" title="$ZJustify()">
-<link rel="next" href="ch07s40.html" title="$ZMessage()">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="prev" href="ch07s38.html" title="$ZJOBEXAM()">
+<link rel="next" href="ch07s40.html" title="$ZLength()">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZLength()</th></tr>
+<tr><th colspan="3" align="center">$ZJustify()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s38.html">Prev</a> </td>
@@ -25,42 +25,42 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZLength()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZJustify()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zlength"></a>$ZLength()<a class="indexterm" name="idm46082191005200"></a>
+<a name="zjustify"></a>$ZJustify()<a class="indexterm" name="idm46082181719744"></a>
 </h2></div></div></div>
-<p>Returns the length of a sequence of octets measured in bytes, or in "pieces" separated by a delimiter specified by one of its arguments.</p>
-<p>The format for the $ZLENGTH() function is:</p>
-<pre class="programlisting">$ZL[ENGTH](expr1[,expr2])</pre>
+<p>Returns a formatted and fixed length byte sequence.</p>
+<p>The format for the $ZJUSTIFY() function is:</p>
+<pre class="programlisting">$ZJ[USTIFY](expr,intexpr1[,intexpr2])</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The first expression specifies the sequence of octets that $ZLENGTH() "measures".</p></li>
-<li class="listitem"><p>The optional second expression specifies the delimiter that defines the measure; if this argument is missing, $ZLENGTH() returns the number of bytes in the sequence of octets.</p></li>
-<li class="listitem"><p>If the second argument is present and not null, $ZLENGTH() returns one more than the count of the number of occurrences of the second byte sequence in the first byte sequence; if the second argument is null , the M standard for the analogous $LENGTH() dictates that $ZLENGTH() returns a zero (0).</p></li>
-<li class="listitem"><p>$ZLENGTH() provides a tool for determining the lengths of a sequence of octets in two ways--bytes and pieces. The two argument $ZLENGTH() returns the number of existing pieces, while the one argument returns the number of bytes.</p></li>
+<li class="listitem"><p>The expression specifies the sequence of octets formatted by $ZJUSTIFY().</p></li>
+<li class="listitem"><p>The first integer expression (second argument) specifies the minimum size of the resulting byte sequence.</p></li>
+<li class="listitem"><p>If the first integer expression is larger than the length of the expression, $ZJUSTIFY() right justifies the expression to a byte sequence of the specified length by adding leading spaces. Otherwise, $ZJUSTIFY() returns the expression unmodified unless specified by the second integer argument.</p></li>
+<li class="listitem"><p>The behavior of the optional second expression (third argument) for $ZJUSTIFY() is the same at $JUSTIFY(). <span>For more information, refer to <a class="xref" href="ch07s09.html" title="$Justify()">&#8220;$Justify()&#8221;</a>.</span></p></li>
+<li class="listitem"><p>When the second argument is specified and the first argument evaluates to a fraction between -1 and 1, $ZJUSTIFY() returns a number with a leading zero (0) before the decimal point (.).</p></li>
+<li class="listitem"><p>$ZJUSTIFY() fills a sequence of octets to create a fixed length byte sequence. However, if the length of the specified expression exceeds the specified byte size, $ZJUSTIFY() does not truncate the result (although it may still round based on the third argument). When required, $ZEXTRACT() performs truncation.</p></li>
+<li class="listitem">
+<p>$ZJUSTIFY() optionally rounds the portion of the result after the decimal point. In the absence of the third argument, $ZJUSTIFY() does not restrict the evaluation of the expression. In the presence of the third (rounding) argument, $JUSTIFY() evaluates the expression as a numeric value. The rounding algorithm can be understood as follows:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem"><p>If necessary, the rounding algorithm extends the expression to the right with 0s (zeros) to have at least one more digit than specified by the rounding argument.</p></li>
+<li class="listitem"><p>Then, it adds 5 (five) to the digit position after the digit specified by the rounding argument.</p></li>
+<li class="listitem"><p>Finally, it truncates the result to the specified number of digits. The algorithm rounds up when excess digits specify a half or more of the last retained digit and rounds down when they specify less than a half.</p></li>
+</ul></div>
+</li>
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="idm46082190999760"></a>Examples<span> of $ZLength()</span>
+<a name="idm46082181664032"></a>Examples<span> of $ZJUSTIFY()</span><a class="indexterm" name="idm46082181603056"></a>
 </h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;write $zlength("<span class="symbol">&#20027;&#35201;&#38632;&#22312;&#35199;&#29677;&#29273;&#20572;&#30041;&#22312;&#24179;&#21407;</span>")
-36
+<pre class="programlisting">GTM&gt;write "123456789012345",! write $zjustify("<span class="symbol">&#26032;&#24180;&#22909;</span>",15),!,$zjustify("<span class="symbol">&#26032;&#24180;&#22909;</span>",5)
+123456789012345
+     <span class="symbol">&#26032;&#24180;&#22909;
+&#26032;&#24180;&#22909;</span>
 GTM&gt;</pre>
-<p>This uses $ZLENGTH() to WRITE the length in bytes of the sequence of octets "<span class="symbol">&#20027;&#35201;&#38632;&#22312;&#35199;&#29677;&#29273;&#20572;&#30041;&#22312;&#24179;&#21407;</span>".</p>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;set x="<span class="symbol">&#20027;</span>"_$zchar(63)_"<span class="symbol">&#35201;</span>"_$zchar(63)_"<span class="symbol">&#38632;</span>"
-GTM&gt;write $zlength(x,$zchar(63))
-3
-GTM&gt;</pre>
-<p>This uses $ZLENGTH() to WRITE the number of pieces in a sequence of octets, as delimited by the byte code $ZCHAR(63).</p>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;set x=$zchar(63)_"<span class="symbol">&#20027;</span>"_$zchar(63)_"<span class="symbol">&#35201;</span>"_$zchar(63)_"<span class="symbol">&#38632;</span>"_$zchar(63)"
-GTM&gt;write $zlength(x,$zchar(63))
-5
-GTM&gt;</pre>
-<p>This also uses $ZLENGTH() to WRITE the number of pieces in a sequence of octets, as delimited by byte code $ZCHAR(63). Notice that GT.M counts both the empty beginning and ending pieces in the string because they are both delimited.</p>
+<p>This example uses $ZJUSTIFY() to display the sequence of octets represented by "<span class="symbol">&#26032;&#24180;&#22909;</span>" in fields of 15 space octets and 5 space octets. Because the byte length of "<span class="symbol">&#26032;&#24180;&#22909;</span>" is 9, it exceeds 5 spaces, the result overflows the specification.</p>
 </div>
 </div>
 <div class="navfooter">
@@ -74,9 +74,9 @@ GTM&gt;</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZJustify() </td>
+<td width="40%" align="left" valign="top">$ZJOBEXAM() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZMessage()</td>
+<td width="40%" align="right" valign="top"> $ZLength()</td>
 </tr>
 </table>
 </div>

@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZPrevious()</title>
+<title>$ZPEEK()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s43.html" title="$ZPEEK()">
-<link rel="next" href="ch07s45.html" title="$ZSOCKET()">
-<link rel="copyright" href="ln-idm46082198684704.html" title="Legal Notice">
+<link rel="prev" href="ch07s43.html" title="$ZPIece()">
+<link rel="next" href="ch07s45.html" title="$ZPrevious()">
+<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZPrevious()</th></tr>
+<tr><th colspan="3" align="center">$ZPEEK()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s43.html">Prev</a> </td>
@@ -25,22 +25,69 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZPrevious()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZPEEK()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zprevious"></a>$ZPrevious()<a class="indexterm" name="idm46082190938432"></a>
-</h2></div></div></div>
-<p>The $ZPREVIOUS function returns the subscript of the previous local or global variable name in collation sequence within the array level specified by its argument. When $ZPREVIOUS() has an unsubscripted argument, it returns the previous unsubscripted local or global variable name in collating sequence. </p>
-<p>The $ZPREVIOUS function provides compatibility with some other M implementations. The M Development Committee chose to implement this functionality with the optional second -1 argument of $ORDER(). Therefore, when a design requires this functionality $ORDER() has the advantage over $ZPREVIOUS of being part of the M standard. </p>
-<p>The format for the $ZPREVIOUS function is:</p>
-<pre class="programlisting">$ZP[REVIOUS](glvn)</pre>
+<a name="zpeek"></a>$ZPEEK()</h2></div></div></div>
+<p>Provides a way to examine memory in the current process address space. Use of this function requires information about GT.M internals, which may change from release to release. Contact FIS support for information on techniques for using $ZPEEK() in largely release independent ways. </p>
+<p>The $ZPEEK() function returns the contents of the memory requested as a string depending on the requested (or defaulted) formatting.</p>
+<p>The format of the $ZPEEK() function is:</p>
+<pre class="programlisting">$ZPEEK("mnemonic[:argument]",offset,length[,format])</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The subscripted or unsubscripted global or local variable name specifies the node prior to which $ZPREVIOUS() searches backwards for a defined node with data and/or descendants. The number of subscripts contained in the argument implicitly defines the array level.</p></li>
-<li class="listitem"><p>If $ZPREVIOUS() finds no node at the specified level before the specified global or local variable, it returns a null string. </p></li>
-<li class="listitem"><p>If the last subscript in the subscripted global or local variable name is null, $ZPREVIOUS() returns the last node at the specified level.</p></li>
+<li class="listitem">
+<p><code class="code">mnemonic</code> specifies the memory area $ZPEEK() is to access. Some mnemonics have arguments separated from the mnemonic by a colon (":"). The mnemonics are case independent. Possible mnemonics, their possible abbreviations and their arguments are:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem"><p><span class="emphasis"><em>CSA[REG] </em></span>- returns a value from the sgmnt_addrs (process private) control block. Takes a case independent region name as an argument.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>FH[REG] </em></span>- returns a value from the sgmnt_data (shared file header) control block. Takes a case independent region name as an argument..</p></li>
+<li class="listitem"><p><span class="emphasis"><em>GDR[REG] </em></span>- returns a value from the gd_region (process private) control block. Takes a case independent region name as an argument.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>GLF[REPL] </em></span>- returns a value from the jnlpool.gtmsrc_lcl_array[n] control block. Takes a numeric index (n) as an argument.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>GRL[REPL] </em></span>- returns a value from the recvpool.gtmrecv_local control block. No argument allowed. Only available when run on a non-primary instance.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>GSL[REPL] </em></span>- returns a value from the jnlpool.gtmsource_local_array[n] control block. Takes a numeric index (n) as an argument.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>JBF[REG]:region[</em></span> -obtains fields in shared jnl_buffer structure.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>JNL[REG]:region[</em></span> - obtains fields in the jnl_private_control structure.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>JPC[REPL] </em></span>- returns a value from the jnlpool.jnlpool_ctl control block. No argument allowed.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>NL[REG] </em></span>- returns a value from the node_local (shared) control block. Takes a case independent region name as an argument.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>NLREPL </em></span>- returns a value from the node_local (shared) control block associated with replication. No argument allowed.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>PEEK </em></span>- returns a value based on the supplied argument. Argument is the base address of the value to obtain in 0xhhhhhhh format where the h's are hex digits.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>RIH[REPL] </em></span>- returns a value from the jnlpool.repl_inst_filehdr control block. No argument allowed.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>RPC[REPL] </em></span>- returns a value from the recvpool.recvpool_ctl control block. No argument allowed. Only available when run on a non-primary instance.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>UHC[REPL] </em></span>- returns a value from the recvpool.upd_helper_ctl control block. No argument allowed. Only available when run on a non-primary instance.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>UPL[REPL] </em></span>- returns a value from the recvpool.upd_proc_local control block. No argument allowed. Only available when run on a non-primary instance.</p></li>
 </ul></div>
-<p>$ZPREVIOUS() is equivalent to $ORDER() with a second argument of -1.</p>
+</li>
+<li class="listitem"><p><code class="code">offset </code>(first integer expression) is a numeric value that specifies the offset from the address supplied or implied by the the mnemonic and argument. Specifying a negative offset results in a BADZPEEKARG error. Specifying too large an offset such that unavailable memory is specified results in a BADZPEEKRANGE error.</p></li>
+<li class="listitem"><p><code class="code">length </code>(second integer expression) is a numeric value that specifies the length of the field to obtain. Specifying a negative legnth results in a BADZPEEKARG error. Specifying a length that exceeds the maximum string length results in a MAXSTRLEN error. Specifying too large a length such that unavailable memory is specified results in a BADZPEEKRANGE error.</p></li>
+<li class="listitem">
+<p><code class="code">format </code>is an optional single case independent character formatting code for the retrieved data. The formatting codes are:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem"><p><span class="emphasis"><em>C </em></span>: returns a character representations of the memory locations; this is the DEFAULT if the fourth argument is not specified.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>I </em></span>: returns a signed integer value - negative values have a preceding minus sign (-); the length can be 1, 2, 4, or 8 bytes.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>U </em></span>: returns an unsigned integer value - all bits are part of the numeric value; the length can be 1, 2, 4, or 8 bytes.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>S </em></span>: returns a character representation of the memory locations and the first NULL character found terminates the returned string; that is: the specified length is a maximum.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>T</em></span>: Selects a $HOROLOG format for a field of 4 or 8 bytes which is intended for use on fields in UNIX time format (seconds since 01/01/1970)</p></li>
+<li class="listitem"><p><span class="emphasis"><em>X </em></span>: returns a hexadecimal value as 0xXXXXXX where XXXXXX is twice the specified length in bytes, so requested length 1 returns 0xXX and length 4 returns 0xXXXXXXXX; the length can be 1, 2, 4, or 8 bytes.</p></li>
+<li class="listitem"><p><span class="emphasis"><em>Z </em></span>: returns a hexadecimal representation of the memory locations as 'X' does, without regard to endianness, and with no length restriction other than max string length.</p></li>
+<li class="listitem"><p>$ZPEEK() function generates an UNDEF error when VIEW UNDEF is not set and a format parameter is specified but is undefined. </p></li>
+</ul></div>
+</li>
+</ul></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Notes">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Notes</th>
+</tr>
+<tr><td align="left" valign="top"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>$ZPEEK() has no UTF-8 checking. It is possible for values returned by the 'C' and 'S' codes to have invalid UTF-8 values in them. Take care when processing values obtained by these codes to either use "VIEW NOBADCHAR" when dealing with such values and/or use the $Zxxx() flavors of functions like $ZPIECE(), $ZEXTRACT(),etc which also do not raise BADCHAR errors when encountering invalid UTF-8 encoded strings.</p></li>
+<li class="listitem"><p>Note that $ZPEEK() with 8 byte numeric formatting can return numeric string values that exceed GT.M's current limit of 18 digits of precision. If the values are used as strings, the extra digits are preserved, but if used arithmetically, the lower precision digits can be lost.</p></li>
+<li class="listitem"><p>When values from replication structures are requested and the structures are not available due to replication not running or, in the case of the gtmrecv.* control block base options, if not running on a non-primary instance where the gtmrecv.* control are available, a ZPEEKNOREPLINFO error is raised.</p></li>
+<li class="listitem">
+<p>The JNL[REG] and JBL[REG] mnemonics and characteristics are defined by the running the GTMDefinedTypesInit.m utility, which produces a cross-index in the form:</p>
+<pre class="programlisting">gtmtypfldindx(&lt;structure-name&gt;.&lt;field-mnemonic&gt;)=&lt;n&gt;</pre>
+<p>where gtmtypes(&lt;structure-name&gt;,&lt;n&gt;,*) nodes contain the field characteristics</p>
+</li>
+</ul></div></td></tr>
+</table></div>
 </div>
 <div class="navfooter">
 <hr>
@@ -53,9 +100,9 @@
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZPEEK() </td>
+<td width="40%" align="left" valign="top">$ZPIece() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZSOCKET()</td>
+<td width="40%" align="right" valign="top"> $ZPrevious()</td>
 </tr>
 </table>
 </div>
