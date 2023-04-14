@@ -104,3 +104,5 @@ fil["101"]= "apgs01.html@@@Why do we need a $gtmcrypt_config file?@@@null";
 fil["102"]= "apgs02.html@@@OpenSSL Options@@@null";
 fil["103"]= "apgs03.html@@@Generating demo TLS certificates@@@null";
 fil["104"]= "TLS_Configuration_File.html@@@Appendix G. Creating a $gtmcrypt_config file@@@null";
+fil["105"]= "aphs01.html@@@Database Upgrade Matrix@@@null";
+fil["106"]= "dbupgrade_matrix.html@@@Appendix H. V6 to V7 DB Upgrade@@@null";

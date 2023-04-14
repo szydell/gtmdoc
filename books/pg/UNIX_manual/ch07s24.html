@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s23.html" title="$TRanslate()">
 <link rel="next" href="ch07s25.html" title="$ZAHandle()">
-<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45629874125488.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="functions_view"></a>$View()<a class="indexterm" name="idm46082182043728"></a>
+<a name="functions_view"></a>$View()<a class="indexterm" name="idm45629870146064"></a>
 </h2></div></div></div>
 <p>Returns information about an environmental factor selected by the arguments. In GT.M, the first argument contains a keyword identifying the environmental factor and, where appropriate, subsequent arguments select among multiple possible occurrences of that factor.</p>
 <p>The format for the $VIEW() function is:</p>
@@ -40,7 +40,7 @@
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="argument__keys_of_view"></a>Argument Keywords of $VIEW()<a class="indexterm" name="idm46082182032464"></a>
+<a name="argument__keys_of_view"></a>Argument Keywords of $VIEW()<a class="indexterm" name="idm45629870137040"></a>
 </h3></div></div></div>
 <p>$VIEW() provides a means to access GT.M environmental information. When GT.M permits modification of the factors accessible with $VIEW(), the VIEW command generally provides the means for effecting the change.</p>
 <div class="informaltable">
@@ -131,7 +131,7 @@
 <p>none</p>
 </td>
 <td>
-<p>Returns a string describing the current compiler setting. The default is "GT.M Boolean short-circuit". $VIEW("FULL_BOOLEAN") reports "Standard Boolean evaluation side effects" when it is not explicitly set, but that mode of operation is required by the setting of gtm_side_effects, and "Standard Boolean side-effect warning" when warnings have been specified.</p>
+<p>Returns a string describing the current compiler setting. The default is "GT.M Boolean short-circuit". $VIEW("FULL_BOOLEAN") reports "Standard Boolean evaluation side effects" when it is not explicitly set, but that mode of operation is required by the setting of gtm_side_effects, and "Standard Boolean side-effect warning" when warnings have been specified. The function reports "Extended Boolean evaluation without short-circuiting" when "EXTENDED_BOOLEAN" behavior is enabled.</p>
 </td>
 </tr>
 <tr>
@@ -250,6 +250,20 @@
 </td>
 <td>
 <p>Journal file name associated with the region.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>""JNLPOOL"</p>
+</td>
+<td>
+<p>none</p>
+</td>
+<td>
+<p>
+Returns the replication instance file name for the current Journal Pool and an empty string when there is no Journal Pool. Note that the
+current Journal Pool may not be associated with the last global accessed by an extended reference.
+</p>
 </td>
 </tr>
 <tr>
@@ -522,7 +536,7 @@ Integer value showing whether four digit year code is active for $ZDATE(); GT.M 
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_view_g"></a>Examples<span> of $VIEW()</span><a class="indexterm" name="idm46082182026272"></a>
+<a name="examples_of_view_g"></a>Examples<span> of $VIEW()</span><a class="indexterm" name="idm45629869970848"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;Set a=1,*b(1)=a

@@ -8,7 +8,7 @@
 <link rel="up" href="mupipchap.html" title="Chapter 5. General Database Management">
 <link rel="prev" href="gdm.html" title="Commands and Qualifiers">
 <link rel="next" href="journaling.html" title="Chapter 6. GT.M Journaling">
-<link rel="copyright" href="ln-idm45731735893296.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45897460092640.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,7 +30,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="mupip_cmmd_summ"></a><span>MUPIP Command </span>Summary<a class="indexterm" name="idm45731732325056"></a>
+<a name="mupip_cmmd_summ"></a><span>MUPIP Command </span>Summary<a class="indexterm" name="idm45897456522048"></a>
 </h2></div></div></div>
 <div class="informaltable">
 <a name="tblmupcmdsumm"></a><table border="1">
@@ -169,8 +169,8 @@
 <tr>
 <td><p>DO[WNGRADE]</p></td>
 <td><p>file-name</p></td>
-<td><p>-V[ERION]={V4|V5}</p></td>
-<td> </td>
+<td><p>-V[ERSION]={V4|V5}</p></td>
+<td><p>-V7.0-000</p></td>
 <td><p>Y</p></td>
 </tr>
 <tr>
@@ -178,12 +178,25 @@
 <p>DU[MPFHEAD]</p>
 </td>
 <td>
-<p>file-name or region-list</p>
+<p>File-name or region-list</p>
 </td>
 <td>
-<p>-</p>
+<p>-FI[LE]</p>
 </td>
 <td><p>V6.3-001</p></td>
+<td> </td>
+</tr>
+<tr>
+<td>
+<p></p>
+</td>
+<td>
+<p></p>
+</td>
+<td>
+<p>-R[EGION]</p>
+</td>
+<td><p>V7.0-003</p></td>
 <td> </td>
 </tr>
 <tr>
@@ -584,7 +597,7 @@
 <td>
   <p>-D[OWNGRADE]</p>
 </td>
-<td> </td>
+<td><p>-V7.0-000</p></td>
 <td> </td>
 </tr>
 <tr>
@@ -669,7 +682,7 @@
 <td> </td>
 <td><p>-UP[GRADE]</p></td>
 <td> </td>
-<td> </td>
+<td><p>Y</p></td>
 </tr>
 <tr>
 <td> </td>
@@ -1009,7 +1022,7 @@
 <td> </td>
 <td> </td>
 <td><p>-V[ERSION]={V4|V6}</p></td>
-<td> </td>
+<td><p>-V7.0-000</p></td>
 <td> </td>
 </tr>
 <tr>
@@ -1094,9 +1107,20 @@
 <td> </td>
 </tr>
 <tr>
-<td><p>UP[GRADE]</p></td>
-<td><p>file-name</p></td>
-<td><p>-</p></td>
+<td>
+<p>UP[GRADE]</p>
+  </td>
+<td><p>File-name or region-list</p></td>
+<td><p>-F[ILE]</p></td>
+<td><p>V7.1-000</p></td>
+<td><p>Y</p></td>
+</tr>
+<tr>
+<td>
+<p></p>
+  </td>
+<td><p></p></td>
+<td><p>-R[EGION]</p></td>
 <td> </td>
 <td><p>Y</p></td>
 </tr>
@@ -2398,13 +2422,13 @@
 <td>
 <p>file-name</p>
   </td>
-<td> </td>
+<td><p>-V7.0-000</p></td>
 <td> </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>* denotes the GT.M version in which the qualifier or command was first introduced. This column is maintained for qualifiers and command introduced in GT.M versions starting with GT.M V5.4-002.   </p>
+<p>* denotes the GT.M version in which the qualifier or command was first introduced. Versions that start with a minus sign, -, denote versions where the qualifier or command was removed. This column is maintained for qualifiers and command introduced in GT.M versions starting with GT.M V5.4-002.   </p>
 <p># Additional information about Standalone Access:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>Although MUPIP EXTRACT does not require standalone access, without the -FREEZE qualifier to prevent the database to prevent updates, it does not guarantee a consistent state. Therefore, from an application standpoint, you might plan for a standalone access during a MUPIP EXTRACT operation.</p></li>

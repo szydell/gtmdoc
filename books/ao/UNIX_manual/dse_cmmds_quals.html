@@ -8,7 +8,7 @@
 <link rel="up" href="ch10.html" title="Chapter 10. Database Structure Editor">
 <link rel="prev" href="operate_dse.html" title="Operating in DSE">
 <link rel="next" href="dse_summary.html" title="DSE Command Summary">
-<link rel="copyright" href="ln-idm45731735893296.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45897460092640.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,14 +29,14 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="dse_cmmds_qualifiers"></a><span>DSE Commands and Qualifiers</span><a class="indexterm" name="idm45731728033456"></a>
+<a name="dse_cmmds_qualifiers"></a><span>DSE Commands and Qualifiers</span><a class="indexterm" name="idm45897452329648"></a>
 </h2></div></div></div>
 <p>The general format of DSE commands is:</p>
 <pre class="programlisting">command [<span>-</span>qualifier[...]] [object[,...]]</pre>
 <p>DSE interprets all numeric input as hexadecimal, except for time values, the values for the following qualifiers when used with CHANGE <span>-</span>FILEHEADER: <span>-</span>BLK_SIZE=, DECLOCATION=, <span>-</span>KEY_MAX_SIZE=, <span>-</span>RECORD_MAX_SIZE, <span>-</span>REFERENCE_COUNT=, <span>-</span>TIMERS_PENDING and <span>-</span>WRITES_PER_FLUSH, and the value for <span>-</span>VERSION= when used with the REMOVE and RESTORE commands. These conventions correspond to the displays provided by DSE and by MUPIP INTEG. </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="add_dse"></a>ADD<a class="indexterm" name="idm45731728020336"></a>
+<a name="add_dse"></a>ADD<a class="indexterm" name="idm45897452182576"></a>
 </h3></div></div></div>
 <p>Adds a record to a block. The format of the ADD command for blocks with a level greater than zero (0) is:</p>
 <pre class="programlisting">ADD [<span>-</span>B[LOCK]=[block] {<span>-</span>OFFSET=offset|<span>-</span>RECORD=record} <span>-</span>STAR <span>-</span>POINTER=block</pre>
@@ -48,7 +48,7 @@
 <p>The <span>-</span>STAR qualifier is invalid at level 0 (a data block). The ADD command requires the <span>-</span>DATA qualifier at level 0 or the <span>-</span>POINTER qualifier at any other level to provide record content. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="add_qualifiers_dse"></a>Qualifiers<span> of ADD</span><a class="indexterm" name="idm45731727995120"></a>
+<a name="add_qualifiers_dse"></a>Qualifiers<span> of ADD</span><a class="indexterm" name="idm45897452158016"></a>
 </h4></div></div></div>
 <p>
 <span class="emphasis"><em>
@@ -59,44 +59,44 @@
 block-oriented command, DSE uses block one (1).</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>D[ATA]=string<a class="indexterm" name="idm45731727979664"></a></em></span>
+<span>-</span>D[ATA]=string<a class="indexterm" name="idm45897452140432"></a></em></span>
 </p>
 <p>Specifies the data field for records added to a data block. Use quotation marks around the string and escape codes of the form \a\b, where "a" and "b" are hexadecimal digits representing non-printing characters. \\ translates to a single backslash. \'\' translates to a NULL value.</p>
 <p>Incompatible with: <span>-</span>STAR,<span>-</span>POINTER</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>K[EY]=key<a class="indexterm" name="idm45731727970912"></a></em></span>
+<span>-</span>K[EY]=key<a class="indexterm" name="idm45897452180480"></a></em></span>
 </p>
 <p>Specifies the key of the new record. Enclose M-style global references, including the leading caret symbol (^), in quotation marks (" "). </p>
 <p>Incompatible with: <span>-</span>STAR</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>O[FFSET]=offset<a class="indexterm" name="idm45731727987840"></a></em></span>
+<span>-</span>O[FFSET]=offset<a class="indexterm" name="idm45897452147088"></a></em></span>
 </p>
 <p>Adds the new record at the next record boundary after the specified offset. </p>
 <p>Incompatible with: <span>-</span>RECORD, <span>-</span>STAR </p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>P[OINTER]=pointer<a class="indexterm" name="idm45731727979296"></a></em></span>
+<span>-</span>P[OINTER]=pointer<a class="indexterm" name="idm45897452122896"></a></em></span>
 </p>
 <p>Specifies the block pointer field for records added to an index block. The <span>-</span>POINTER qualifier cannot be used at level 0. Note this means that to add pointers at level 0 of the Directory Tree you must specify a string of bytes or temporarily change the block level.</p>
 <p>Incompatible with: <span>-</span>DATA</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>R[ECORD]=record-number<a class="indexterm" name="idm45731727987008"></a></em></span>
+<span>-</span>R[ECORD]=record-number<a class="indexterm" name="idm45897452177760"></a></em></span>
 </p>
 <p>Specifies a record number of the new record.</p>
 <p>Incompatible with: <span>-</span>OFFSET,<span>-</span>STAR </p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>S[TAR]<a class="indexterm" name="idm45731727986176"></a></em></span>
+<span>-</span>S[TAR]<a class="indexterm" name="idm45897452142608"></a></em></span>
 </p>
 <p>Adds a star record (that is, a record that identifies the last record in an indexed block) at the end of the specified block. The <span>-</span>STAR qualifier cannot be used at level 0.</p>
 <p>Incompatible with: <span>-</span>DATA,<span>-</span>KEY,<span>-</span>OFFSET,<span>-</span>RECORD </p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="dse_exam_add"></a>Examples<span> for ADD</span><a class="indexterm" name="idm45731727969120"></a>
+<a name="dse_exam_add"></a>Examples<span> for ADD</span><a class="indexterm" name="idm45897452180768"></a>
 </h4></div></div></div>
 <pre class="programlisting">DSE&gt;add <span>-</span>block=6F <span>-</span>record=57 <span>-</span>key="^Capital(""Mongolia"")" <span>-</span>data="Ulan Bator"</pre>
 <p>This command adds a new record with key ^Capital("Mongolia") at the specified location. Note that this command is applicable to level 0 blocks only.</p>
@@ -132,7 +132,7 @@ Rec:4  Blk 3  Off 3E  Size D  Cmpc 8  Key ^Fruits(4)
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="all_dse_cmmd"></a>ALL<a class="indexterm" name="idm45731727968416"></a>
+<a name="all_dse_cmmd"></a>ALL<a class="indexterm" name="idm45897452129312"></a>
 </h3></div></div></div>
 <p>Applies action(s) specified by a qualifier to all GDS regions defined by the current global directory. </p>
 <p>The format of the ALL command is:</p>
@@ -158,20 +158,20 @@ Rec:4  Blk 3  Off 3E  Size D  Cmpc 8  Key ^Fruits(4)
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="all_qualifiers_dse"></a>Qualifiers</h4></div></div></div>
-<p><a class="indexterm" name="idm45731727912112"></a>
+<p><a class="indexterm" name="idm45897452076160"></a>
 <span class="emphasis"><em>
 <span>-</span>ALL</em></span>
 </p>
 <p>Displays additional information on the database most of which is useful for FIS in diagnosing issues.</p>
 <p>Meaningful only with: <span>-</span>D[UMP]</p>
-<p><a class="indexterm" name="idm45731727903280"></a>
+<p><a class="indexterm" name="idm45897452066944"></a>
 <span class="emphasis"><em>
 <span>-</span>BUFFER_FLUSH</em></span>
 </p>
 <p>Flushes to disk the file header and all pooled buffers for all regions of the current global directory.</p>
 <p>Incompatible with: <span>-</span>RENEW</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727897616"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897452061520"></a>
 <span>-</span>C[RITINIT]</em></span>
 </p>
 <p>Initializes critical sections for all regions of the current directory.</p>
@@ -185,13 +185,13 @@ Rec:4  Blk 3  Off 3E  Size D  Cmpc 8  Key ^Fruits(4)
 </table></div>
 <p>
 <span class="emphasis"><em>
-<span>-</span>[D]UMP <a class="indexterm" name="idm45731727888752"></a></em></span>
+<span>-</span>[D]UMP <a class="indexterm" name="idm45897452066688"></a></em></span>
 </p>
 <p>Displays fileheader information. </p>
 <p>Compatible with: -A[LL]</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>[NO]F[REEZE]<a class="indexterm" name="idm45731727911440"></a></em></span>
+<span>-</span>[NO]F[REEZE]<a class="indexterm" name="idm45897452622960"></a></em></span>
 </p>
 <p>Freezes or prevents updates all regions of the current global directory.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -203,7 +203,7 @@ Rec:4  Blk 3  Off 3E  Size D  Cmpc 8  Key ^Fruits(4)
 </ul></div>
 <p>Incompatible with: <span>-</span>RENEW</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727864320"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897452055440"></a>
 <span>-</span>O[VERRIDE]</em></span>
 </p>
 <p>Overrides the ALL <span>-</span>FREEZE or ALL <span>-</span>NOFREEZE operation.</p>
@@ -211,7 +211,7 @@ Rec:4  Blk 3  Off 3E  Size D  Cmpc 8  Key ^Fruits(4)
 <p>When used with <span>-</span>FREEZE, <span>-</span>OVERRIDE freezes all GDS regions, including those frozen by other <span>processes</span> associating all such freezes with the current <span>process</span>. The current <span>process</span> must then use -NOFREEZE to unfreeze the database; any other <span>process</span> attempting a -NOFREEZE should also have to include the -OVERRIDE qualifier. </p>
 <p>Meaningful only with: [NO]FREEZE </p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727857072"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897452019200"></a>
 <span>-</span>REF[ERENCE]</em></span>
 </p>
 <p>Resets the reference count field to 1 for all regions of the current global directory.</p>
@@ -221,13 +221,13 @@ Rec:4  Blk 3  Off 3E  Size D  Cmpc 8  Key ^Fruits(4)
 </ul></div>
 <p>Incompatible with: <span>-</span>RENEW </p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727867104"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897452020912"></a>
 <span>-</span>REL[EASE]</em></span>
 </p>
 <p>Releases critical sections for all regions of the current global directory.</p>
 <p>Incompatible with: <span>-</span>CRITINIT, <span>-</span>RENEW, <span>-</span>SEIZE </p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727898448"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897452050576"></a>
 <span>-</span>REN[EW]</em></span>
 </p>
 <p>Reinitializes the critical sections (<span>-</span>CRITICAL) and buffers (<span>-</span>WCINIT), resets reference counts (<span>-</span>REFERENCE_COUNT) to 1, and clears freeze (<span>-</span>NOFREEZE) for all regions of the current global directory .</p>
@@ -237,13 +237,13 @@ Rec:4  Blk 3  Off 3E  Size D  Cmpc 8  Key ^Fruits(4)
 <li class="listitem"><p>This operation is dangerous, drastic, and a last resort if multiple database have hangs that have not yielded to other resolution attempts; there is almost never a good reason to use this option. </p></li>
 </ul></div>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727858176"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897452062320"></a>
 <span>-</span>S[EIZE]</em></span>
 </p>
 <p>Seizes the critical section for all regions of the current global directory. The <span>-</span>SEIZE qualifier is useful when you encounter a DSEBLKRDFAIL error, generated when DSE is unable to read a block from the database.</p>
 <p>Incompatible with: <span>-</span>RENEW, <span>-</span>RELEASE, <span>-</span>CRITINIT</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727844720"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451990160"></a>
 <span>-</span>W[CINIT]</em></span>
 </p>
 <p>Reinitializes the buffers for all regions of the current global directory.</p>
@@ -259,7 +259,7 @@ Rec:4  Blk 3  Off 3E  Size D  Cmpc 8  Key ^Fruits(4)
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="dse_example_add2"></a>Examples<span> of ALL</span><a class="indexterm" name="idm45731728019056"></a>
+<a name="dse_example_add2"></a>Examples<span> of ALL</span><a class="indexterm" name="idm45897452000080"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">DSE&gt; all flush <span>-</span>buffer_flush</pre>
@@ -294,7 +294,7 @@ This command reinitializes the buffers for all regions of the current global dir
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="buffer_flush_cmmd_dse"></a>Buffer_flush<a class="indexterm" name="idm45731727846608"></a>
+<a name="buffer_flush_cmmd_dse"></a>Buffer_flush<a class="indexterm" name="idm45897452008144"></a>
 </h3></div></div></div>
 <p>Flushes the file header and the current region's
 buffers to disk. </p>
@@ -304,8 +304,8 @@ buffers to disk. </p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="change_dse_cmmd"></a>CHange<a class="indexterm" name="idm45731727840560"></a>
-<a class="indexterm" name="idm45731727807392"></a>
+<a name="change_dse_cmmd"></a>CHange<a class="indexterm" name="idm45897452003424"></a>
+<a class="indexterm" name="idm45897451968016"></a>
 </h3></div></div></div>
 <p>The CHANGE command changes fields of a block, file, or record header.</p>
 <p>The format of the CHANGE command is:</p>
@@ -375,7 +375,7 @@ and one or more of the following qualifiers:</p>
 <div class="titlepage"><div><div><h4 class="title">
 <a name="change_qualifiers_block"></a><span>CHANGE -</span>BLock Qualifiers</h4></div></div></div>
 <p>This section describes <span>-</span>BLOCK and all of its qualifiers.</p>
-<p><a class="indexterm" name="idm45731727759888"></a>
+<p><a class="indexterm" name="idm45897451919936"></a>
 <span class="emphasis"><em>
 <span>-</span>BL[OCK]=block_number</em></span>
 </p>
@@ -389,7 +389,7 @@ that is, on the first block-oriented command, DSE uses block one (1).</p>
 <p>Incompatible with: <span>-</span>FILEHEADER and qualifiers used with <span>-</span>FILEHEADER </p>
 <p>The following qualifiers operate on a block header.</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727743824"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451903856"></a>
 <span>-</span>BS[IZ]=block_size</em></span>
 </p>
 <p>Changes the block size field of the specified block.</p>
@@ -405,7 +405,7 @@ that is, on the first block-oriented command, DSE uses block one (1).</p>
 <tr><td align="left" valign="top"><p>The block size must always be less than or equal to the block size in the file header.</p></td></tr>
 </table></div>
 <p>Use only with: <span>-</span>BLOCK, <span>-</span>LEVEL, <span>-</span>TN </p>
-<p><a class="indexterm" name="idm45731727757552"></a>
+<p><a class="indexterm" name="idm45897451916352"></a>
 <span class="emphasis"><em><span>-</span>L[EVEL]=level</em></span></p>
 <p>Changes the level field for the specified block.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
@@ -418,7 +418,7 @@ that is, on the first block-oriented command, DSE uses block one (1).</p>
 <p>Use only with: <span>-</span>BLOCK, <span>-</span>BSIZ, <span>-</span>TN </p>
 <p>Example:</p>
 <pre class="programlisting">DSE &gt;change <span>-</span>level=FF</pre>
-<p><a class="indexterm" name="idm45731727744448"></a>
+<p><a class="indexterm" name="idm45897451896496"></a>
 <span class="emphasis"><em><span>-</span>TN[=transaction_number]</em></span></p>
 <p>Changes the transaction number for the current block.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -426,17 +426,17 @@ that is, on the first block-oriented command, DSE uses block one (1).</p>
 <li class="listitem"><p>Manipulation of the block transaction number affects MUPIP BACKUP <span>-</span>BYTESTREAM, and <span>-</span>ONLINE. </p></li>
 </ul></div>
 <p>Use only with: <span>-</span>BLOCK, <span>-</span>BSIZ, <span>-</span>LEVEL </p>
-<p><a class="indexterm" name="idm45731727754912"></a>
+<p><a class="indexterm" name="idm45897451883456"></a>
 <span class="emphasis"><em><span>-</span>OF[FSET]=offset</em></span>
 </p>
 <p>Specifies the offset, in bytes, of the target record within the block. If the offset does not point to the beginning of a record, DSE rounds down to the last valid record start (for example, CHANGE <span>-</span>OFFSET=10 starts at <span>-</span>OFFSET=A, if that was the
 last record).</p>
 <p>Use only with: <span>-</span>BLOCK, <span>-</span>CMPC, and <span>-</span>RSIZ.</p>
-<a class="indexterm" name="idm45731727713808"></a><p><span class="emphasis"><em><span>-</span>RE[CORD]=record_number</em></span> 
+<a class="indexterm" name="idm45897451874384"></a><p><span class="emphasis"><em><span>-</span>RE[CORD]=record_number</em></span> 
 </p>
 <p>Specifies the record number of the target record. </p>
 <p>Use only with: <span>-</span>BLOCK, <span>-</span>CMPC, and <span>-</span>RSIZ.</p>
-<a class="indexterm" name="idm45731727723792"></a><p><span class="emphasis"><em><span>-</span>CM[PC]=compression_count</em></span></p>
+<a class="indexterm" name="idm45897451868288"></a><p><span class="emphasis"><em><span>-</span>CM[PC]=compression_count</em></span></p>
 <p>Change the compression count field of the specified record.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>The compression count specifies the number of bytes at the beginning of a key that are common to the previous key in the same block.</p></li>
@@ -460,22 +460,22 @@ last record).</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="change_qualifiers_file"></a><span>CHANGE <span>-</span></span>FIleheader Qualifiers<a class="indexterm" name="idm45731727687344"></a>
+<a name="change_qualifiers_file"></a><span>CHANGE <span>-</span></span>FIleheader Qualifiers<a class="indexterm" name="idm45897451847584"></a>
 </h4></div></div></div>
 <p>This section describes the <span>-</span>FILEHEADER qualifier and the other qualifiers that operate on a file header.</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727684240"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451844208"></a>
 <span>-</span>FI[LEHEADER]</em></span>
 </p>
 <p>Modifies a file header element that you specify with an associated qualifier. </p>
 <p>Incompatible with: <span>-</span>BSIZ, <span>-</span>CMPC, <span>-</span>TN, <span>-</span>LEVEL, <span>-</span>OFFSET, <span>-</span>RECORD, <span>-</span>RSIZ </p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727675680"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451835520"></a>
 <span>-</span>AB[ANDONED_KILLS]=value</em></span></p>
 <p>
 Changes the value of the Abandoned Kills field. The value can be "NONE" or a  decimal positive integer.</p>
 <p>Use only with: -FILEHEADER</p>
-<p><span class="emphasis"><em><a class="indexterm" name="idm45731727679408"></a>
+<p><span class="emphasis"><em><a class="indexterm" name="idm45897451840624"></a>
 <span>-</span>BLK[_SIZE]=block_size</em></span>
 </p>
 <p>Changes the decimal block size field of the current file.</p>
@@ -485,21 +485,21 @@ Changes the value of the Abandoned Kills field. The value can be "NONE" or a  de
 </ul></div>
 <p>Use only with: -FILEHEADER</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727663584"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451823536"></a>
 <span>-</span>BLO[CKS_FREE]=free blocks</em></span>
 </p>
 <p>Changes the hexidecimal free blocks field of the current file.</p>
 <p>Use this to correct a value that MUPIP INTEG reports as needing a correction, but note that the "correct" value reported by INTEG may go out-of-date with the next update. It may be necessary to calculate a delta value from the INTEG report, FREEZE the region with DSE, DUMP the current -FILEHEADER value, then apply the delta and CHANGE the -BLOCKS_FREE, and finally turn -OFF the FREEZE.</p>
 <p>Use only with: <span>-</span>FILEHEADER </p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727722912"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451831968"></a>
 <span>-</span>B[YTESTREAM]=transaction_number</em></span>
 </p>
 <p>Changes the transaction number in the file header of the last
 incremental backup to the value specified. Use this qualifier only in
 conjunction with the -FILEHEADER qualifier. For compatibility issues with
 priot versions, this can still be specified as -B_COMPREHENSIVE.</p>
-<p><a class="indexterm" name="idm45731727765856"></a>
+<p><a class="indexterm" name="idm45897451925792"></a>
 <span class="emphasis"><em>-D[ATABASE]=transaction_number</em></span>
 </p>
 <p>Changes the hexidecimal transaction number in the file header of the last comprehensive backup to the value specified. Use this qualifier only in conjunction with the -FILEHEADER qualifier. For compatibility issues with
@@ -508,7 +508,7 @@ prior versions, this can still be specified as -B_COMPREHENSIVE.</p>
 <span>-</span>B_R[ECORD]=transaction_number</em></span>
 </p>
 <p>Changes the hexidecimal transaction number in the file header field that maintains this information about the last <span>-</span>RECORD backup.</p>
-<p><a class="indexterm" name="idm45731727667216"></a>
+<p><a class="indexterm" name="idm45897451826752"></a>
 <span class="emphasis"><em>-CO[RRUPT_FILE]=boolean</em></span>
 </p>
 <p>Indicates whether or not a region completed a successful recovery with the MUPIP JOURNAL -RECOVER command. Possible values are: T[RUE] or F[ALSE].</p>
@@ -522,14 +522,14 @@ prior versions, this can still be specified as -B_COMPREHENSIVE.</p>
 <tr><td align="left" valign="top">After a CHANGE -FILEHEADER -CORRUPT=TRUE, the file is unavailable to future GT.M access other than DSE.  Under normal conditions, there should never be a need to change this flag manually. A MUPIP SET -PARTIAL_BYPASS_RECOV sets this flag to false.</td></tr>
 </table></div>
 <p>Use only with: -FILEHEADER</p>
-<p><a class="indexterm" name="idm45731727650256"></a>
+<p><a class="indexterm" name="idm45897451808752"></a>
 <span class="emphasis"><em>-COM[MITWAIT_SPIN_COUNT]=value</em></span>
 </p>
 <p>Specifies the decimal number of times a GT.M process waiting for control of a block to complete a block update should spin before yielding the CPU when GT.M runs on SMP machines. When run on a uniprocessor system, GT.M ignores this parameter. On SMP systems, when a process needs a critical section that another process has, if critical sections are short (as they are by design in GT.M), spinning a little with the expectation that the process with the critical section will release it shortly provides a way to enhance performance at the cost of increased CPU usage. Eventually, a process awaiting a critical section yields the CPU if spinning for a little does not get it the needed critical section. Note that on heavily loaded systems, increasing COMMITWAIT_SPIN_COUNT may not trade off CPU for throughput, but may instead degrade both. If you set the COMMITWAIT_SPIN_COUNT to 0, the waiting process performs a sequence of small sleeps instead of the spins or yields.</p>
 <p>The default value is 16.  </p>
 <p>Use only with: -FILEHEADER</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727644720"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451802624"></a>
 <span>-</span>CU[RRENT_TN]=transaction_number</em></span>
 </p>
 <p>Changes the hexidecimal current transaction number for the current region.</p>
@@ -539,12 +539,12 @@ prior versions, this can still be specified as -B_COMPREHENSIVE.</p>
 <li class="listitem"><p>Used with the -BLOCK qualifier, CURRENT_TN places a transaction number in a block header. </p></li>
 </ul></div>
 <p>Use only with: -FILEHEADER </p>
-<p><a class="indexterm" name="idm45731727637152"></a>
+<p><a class="indexterm" name="idm45897451795056"></a>
 <span class="emphasis"><em>-DECLOCATION</em></span>
 </p>
 <p>Specifies an offset with the file header. If -VALUE is specified (in decimal), GT.M puts it at that location.</p>
 <p>Use only with: -FILEHEADER</p>
-<p><a class="indexterm" name="idm45731727634976"></a>
+<p><a class="indexterm" name="idm45897451792880"></a>
 <span class="emphasis"><em>-E[NCRYPTION_HASH]</em></span>
 </p>
 <p>Changes the hash of the password stored in the database file header if and when you change the hash library. <span>For more information on key management and reference implementation, refer to <a class="xref" href="ch12.html" title="Chapter 12. Database Encryption">Chapter 12: &#8220;<i>Database Encryption</i>&#8221;</a>.</span></p>
@@ -558,8 +558,8 @@ prior versions, this can still be specified as -B_COMPREHENSIVE.</p>
 <p>Use only with: -FILEHEADER </p>
 <p>
 </p>
-<p><a class="indexterm" name="idm45731727632272"></a>
-<a class="indexterm" name="idm45731727625408"></a>
+<p><a class="indexterm" name="idm45897451790736"></a>
+<a class="indexterm" name="idm45897451783872"></a>
 <span class="emphasis"><em>-[NO]EPOCHTAPER </em></span></p>
 <p>
 </p>
@@ -568,7 +568,7 @@ prior versions, this can still be specified as -B_COMPREHENSIVE.</p>
 </p>
 <p>For more information, refer to <a class="xref" href="nameregseg.html#region_qual" title="Region Qualifiers">&#8220;Region Qualifiers&#8221;</a>. </p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727643184"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451781904"></a>
 <span>-</span>FL[USH_TIME][=delta_time]</em></span>
 </p>
 <p>Changes the flush_time default interval (in delta_time).</p>
@@ -578,7 +578,7 @@ prior versions, this can still be specified as -B_COMPREHENSIVE.</p>
 <li class="listitem"><p>The units of delta_time are hours:minutes:seconds:centi-seconds (hundredths of a second). For example, to change the flush time interval to a second, delta_time would be 00:00:01:00. To change it to 30 minutes, delta_time would be 00:30:00:00. Valid values for the qualifier are one centi-second to one hour. </p></li>
 </ul></div>
 <p>Use only with: -FILEHEADER </p>
-<p><a class="indexterm" name="idm45731727618832"></a>
+<p><a class="indexterm" name="idm45897451777232"></a>
 <span class="emphasis"><em><span>-</span>FR[EEZE]=value</em></span>
 </p>
 <p>Sets availability of the region for update. Possible values are: T[RUE] or F[ALSE]. Use to "freeze" (disable database writes) or "unfreeze" the database. </p>
@@ -587,22 +587,22 @@ prior versions, this can still be specified as -B_COMPREHENSIVE.</p>
 <a class="xref" href="gdm.html#mup_freeze" title="FREEZE">&#8220;FREEZE
 &#8221;</a> of the General Database Management chapter.</p>
 <p>DSE releases <span>-</span>FREEZE when it EXITs. To hold the database(s), CHANGE <span>-</span>FILEHEADER <span>-</span>FREEZE=TRUE and then SPAWN to perform other operations.</p>
-<p><a class="indexterm" name="idm45731727617552"></a>
+<p><a class="indexterm" name="idm45897451775952"></a>
 <span class="emphasis"><em>-FU[LLY_UPGRADED]=boolean</em></span>
 </p>
-<p>Sets a flag that indicates whether or not the database was fully upgraded from V4 to V5 database format.. The value is either T[RUE] or F[ALSE].</p>
+<p>Sets a flag that indicates whether or not the database was fully upgraded from a prior version to the current database format. The value is either T[RUE] or F[ALSE].</p>
 <p>Use only with: -FILEHEADER</p>
-<a class="indexterm" name="idm45731727612464"></a><p><span class="emphasis"><em>-GV[STATSRESET]</em></span></p>
+<a class="indexterm" name="idm45897451771024"></a><p><span class="emphasis"><em>-GV[STATSRESET]</em></span></p>
 <p>Resets all the database file header global access statistics to 0. Note that this erases all statistics previously accumulated in the database file header.</p>
 <p>Use only with: -FILEHEADER</p>
-<a class="indexterm" name="idm45731727610672"></a><p>
+<a class="indexterm" name="idm45897451769232"></a><p>
 <span class="emphasis"><em>-HEXLOCATION</em></span></p>
 <p>Specifies a hexadecimal offset with the file header. If -VALUE is specified, GT.M puts it at that location.</p>
 <p>Use only with: -FILEHEADER</p>
-<a class="indexterm" name="idm45731727608624"></a><p><span class="emphasis"><em>-INT[ERRUPTED_RECOV]=boolean</em></span></p>
+<a class="indexterm" name="idm45897451767184"></a><p><span class="emphasis"><em>-INT[ERRUPTED_RECOV]=boolean</em></span></p>
 <p>Sets a flag that indicates whether or not a recovery with the MUPIP JOURNAL -RECOVER command was interrupted. The value is either T[RUE] or F[ALSE].</p>
 <p>Use only with: -FILEHEADER </p>
-<a class="indexterm" name="idm45731727606672"></a><p>
+<a class="indexterm" name="idm45897451765232"></a><p>
 <span class="emphasis"><em><span>-</span>K[EY_MAX_SIZE]=key_max_size</em></span>
 </p>
 <p>Changes the decimal value for the maximum allowable key size. Reducing KEY_MAX_SIZE can restrict access to existing data and cause GT.M to report errors. Do not create incompatible key and record sizes. </p>
@@ -610,13 +610,13 @@ prior versions, this can still be specified as -B_COMPREHENSIVE.</p>
 the key and record size values. <span>For more information on key and record sizes, refer to <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">Chapter 4: &#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p>
 <p>Use only with: -FILEHEADER</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727600512"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451758736"></a>
 <span>-</span>KI[LL_IN_PROG]=value</em></span>
 </p>
 <p>Changes the value of the KILLs in progress field. The value can be "NONE" or a positive decimal integer.</p>
 <p>Use only with: -FILEHEADER</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727621888"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451787824"></a>
 <span>-</span>N[ULL_SUBSCRIPTS]=value</em></span>
 </p>
 <p>Controls whether GT.M accepts null subscripts in database keys.</p>
@@ -627,18 +627,18 @@ the key and record size values. <span>For more information on key and record siz
 <li class="listitem"><p>DSE cannot change the null subscript collation order. Instead, use GDE to change the null subscript collation order, MUPIP EXTRACT the current content, MUPIP CREATE the database file(s) with the updated collation and MUPIP LOAD the content.</p></li>
 </ul></div>
 <p>Use only with: -FILEHEADER </p>
-<p><a class="indexterm" name="idm45731727587424"></a>
+<p><a class="indexterm" name="idm45897451746032"></a>
 <span class="emphasis"><em>-OV[ERRIDE]</em></span>
 </p>
 <p>Releases or "steals" a FREEZE owned by another process.</p>
 <p>Use only with: -FREEZE </p>
-<p><a class="indexterm" name="idm45731727604992"></a>
-<a class="indexterm" name="idm45731727595232"></a>
+<p><a class="indexterm" name="idm45897451757200"></a>
+<a class="indexterm" name="idm45897451759184"></a>
 <span class="emphasis"><em>-[NO]Q[DBRUNDOWN] </em></span></p>
 <p>Sets a flag that indicates whether or not the database is enabled for quick rundown. The default value is -NOQDBRUNDOWN. </p>
 <p>For more information, refer to <a class="xref" href="nameregseg.html#region_qual" title="Region Qualifiers">&#8220;Region Qualifiers&#8221;</a>. </p>
-<p><a class="indexterm" name="idm45731727630192"></a>
-<a class="indexterm" name="idm45731727581744"></a>
+<p><a class="indexterm" name="idm45897451743408"></a>
+<a class="indexterm" name="idm45897451739760"></a>
 <span class="emphasis"><em>-REC[ORD_MAX_SIZE]=record_max_size</em></span>
 </p>
 <p>Changes the decimal value for the maximum allowable record size. Use the -RECORD_MAX_SIZE qualifier only in conjunction with the -FILEHEADER
@@ -646,43 +646,43 @@ qualifier. Reducing RECORD_MAX_SIZE can restrict access to existing data and cau
 <p>Before making a permanent change to the records size using DSE, use GDE to check that the appropriate Global Directory contains the same record size for the region. This prepares for future MUPIP CREATEs and
 performs a consistency check on the key and record size values. <span>For more information on key and record sizes, refer to <a class="xref" href="gdechap.html" title="Chapter 4. Global Directory Editor">Chapter 4: &#8220;<i>Global Directory Editor</i>&#8221;</a>.</span></p>
 <p>
-<a class="indexterm" name="idm45731727576976"></a>
+<a class="indexterm" name="idm45897451734848"></a>
 <span class="emphasis"><em><span>-</span>REF[ERENCE_COUNT]=reference_count</em></span>
 </p>
 <p>Sets a field that tracks how many processes are accessing the database with read/write permissions. MUPIP INTEG and DSE use decimal numbers for <span>-</span>REFERENCE_COUNT.
 To accurately determine the proper reference count, restrict CHANGE <span>-</span>FILEHEADER <span>-</span>REFERENCE_COUNT to the case where the process running DSE has exclusive (standalone) access to the
 database file. When DSE has sole access to a database file the <span>-</span>REFERENCE_COUNT should be one (1). This is an informational field and does not have any effect on processing.</p>
-<a class="indexterm" name="idm45731727572576"></a><p><span class="emphasis"><em><span>-</span>REG[_SEQNO]=sequence-number</em></span></p>
+<a class="indexterm" name="idm45897451730448"></a><p><span class="emphasis"><em><span>-</span>REG[_SEQNO]=sequence-number</em></span></p>
 <p>In <span>an LMS</span> environment, this sets the "Region Seqno" field. <span>For more information, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</span> </p>
 <p>
-<a class="indexterm" name="idm45731727566240"></a>
+<a class="indexterm" name="idm45897451724560"></a>
 <span class="emphasis"><em><span>-</span>RESYNC_S[EQNO]=sequence-number</em></span>
 </p>
 <p>In <span>an LMS</span> environment, this sets the hexidecimal value of the "Resync Seqno" field. <span>For more information, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</span></p>
 <p>
-<a class="indexterm" name="idm45731727561472"></a>
+<a class="indexterm" name="idm45897451719680"></a>
 <span class="emphasis"><em><span>-</span>RESYNC_T[N]=sequence-number</em></span>
 </p>
 <p>In <span>an LMS</span> environment, this sets the hexidecimal value ofthe "Resync transaction" field. <span>For more information, refer to <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>.</span></p>
 <p>
-<a class="indexterm" name="idm45731727591856"></a>
+<a class="indexterm" name="idm45897451741024"></a>
 <span class="emphasis"><em>-SPIN_SLEEP_MASK]=hexadecimal-mask</em></span>
 </p>
 <p>Changes the hexadecimal Spin sleep time mask that controls the maximum time in nanoseconds the process sleeps on a sleep spin; zero (0), the default causes the process to just yield to the OS scheduler.</p>
 <p>Use only with: -FILEHEADER</p>
 <p>
-<a class="indexterm" name="idm45731727571040"></a>
+<a class="indexterm" name="idm45897451726416"></a>
 <span class="emphasis"><em>-SLEE[P_SPIN_COUNT]=integer</em></span>
 </p>
 <p>Changes the hexadecimal Mutex Sleep Spin Count that controls the number of times a process waiting on a shared resource (usually a database) suspends its activity after exhausting its Mutex Hard Spin Count and before enquing itself to be awakened by a process releasing the resource </p>
 <p>Use only with: -FILEHEADER</p>
 <p>
 <span class="emphasis"><em><span>-</span>[NO]STD[NULLCOL]</em></span></p>
-<a class="indexterm" name="idm45731727570784"></a><p>Changes the collation of empty string ("NULL") subscripts for the database file. Although it is not the default, STDNULLCOLL is required with certain other characteristics, and highly recommended in any case. If you change this when there are existing "NULL" subscripts the results may be problematic. FIS recommends you establish this characteristic with GDE and load data with a consistent setting.</p>
+<a class="indexterm" name="idm45897451727936"></a><p>Changes the collation of empty string ("NULL") subscripts for the database file. Although it is not the default, STDNULLCOLL is required with certain other characteristics, and highly recommended in any case. If you change this when there are existing "NULL" subscripts the results may be problematic. FIS recommends you establish this characteristic with GDE and load data with a consistent setting.</p>
 <p>Use only with: -FILEHEADER</p>
 <p>
-<a class="indexterm" name="idm45731727568096"></a>
-<a class="indexterm" name="idm45731727544768"></a>
+<a class="indexterm" name="idm45897451717344"></a>
+<a class="indexterm" name="idm45897451703632"></a>
 <span class="emphasis"><em>-STRM_NUM=stream-number -STRM_R[EG_SEQNO]=str_num's_region_sequence_number</em></span>
 </p>
 <p>Changes the hexadecimal values of Stream and its Reg Seqno. Use -STRM_NUM and -STRM_REG_SEQNO together as part of the same CHANGE -FILEHEADER command.</p>
@@ -690,12 +690,12 @@ database file. When DSE has sole access to a database file the <span>-</span>REF
 <p>
 <span class="emphasis"><em><span>-</span>TI[MERS_PENDING]=timers_pending</em></span></p>
 <p>
-<a class="indexterm" name="idm45731727541456"></a>
+<a class="indexterm" name="idm45897451699856"></a>
 </p>
 <p>Sets a field that tracks the decimal number of processes considering a timed flush. Proper values are 0, 1, and 2.</p>
 <p>Use the CHANGE -TIMERS_PENDING qualifier only upon receiving instructions from FIS. </p>
 <p>Use only with: -FILEHEADER</p>
-<a class="indexterm" name="idm45731727555920"></a><p><span class="emphasis"><em><span>-</span>TO[TAL_BLKS]=total_blocks</em></span></p>
+<a class="indexterm" name="idm45897451708256"></a><p><span class="emphasis"><em><span>-</span>TO[TAL_BLKS]=total_blocks</em></span></p>
 <p>Changes the hexidecimal total blocks field of the current file. <span>Use only with: -FILEHEADER</span></p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
 <tr>
@@ -704,16 +704,16 @@ database file. When DSE has sole access to a database file the <span>-</span>REF
 </tr>
 <tr><td align="left" valign="top"><p>The total blocks field should always reflect the actual size of the  database. Change this field only if it no longer reflects the database size.</p></td></tr>
 </table></div>
-<a class="indexterm" name="idm45731727549584"></a><p><span class="emphasis"><em><span>-</span>TR[IGGER_FLUSH]=trigger_flush</em></span></p>
+<a class="indexterm" name="idm45897451711808"></a><p><span class="emphasis"><em><span>-</span>TR[IGGER_FLUSH]=trigger_flush</em></span></p>
 <p>Sets the decimal value for the triggering threshold, in buffers, for flushing the cache-modified queue.</p>
 <p>Use the CHANGE -TRIGGER_FLUSH qualifier only upon receiving instructions from FIS, and only in conjunction with the -FILEHEADER qualifier.</p>
-<a class="indexterm" name="idm45731727558928"></a><p><span class="emphasis"><em><span>-</span>WR[ITES_PER_FLUSH]=writes_per_flush</em></span></p>
+<a class="indexterm" name="idm45897451705264"></a><p><span class="emphasis"><em><span>-</span>WR[ITES_PER_FLUSH]=writes_per_flush</em></span></p>
 <p>Set the decimal number of block to write in each flush. The default value is 7. </p>
 <p>Use only with -FILEHEADER</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="change_example_Dse"></a>Examples<span> for CHANGE</span><a class="indexterm" name="idm45731727740016"></a>
+<a name="change_example_Dse"></a>Examples<span> for CHANGE</span><a class="indexterm" name="idm45897451704416"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">DSE&gt; change -block=3 -bsiz=400</pre>
@@ -815,8 +815,8 @@ database file. When DSE has sole access to a database file the <span>-</span>REF
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="dse_cache"></a>CAche<a class="indexterm" name="idm45731727658544"></a>
-<a class="indexterm" name="idm45731727835328"></a>
+<a name="dse_cache"></a>CAche<a class="indexterm" name="idm45897451818000"></a>
+<a class="indexterm" name="idm45897451997664"></a>
 </h3></div></div></div>
 <p>Operates on the cache of a database having BG access method. The format of the CACHE command is:</p>
 <pre class="programlisting">CA[CHE] 
@@ -830,7 +830,7 @@ database file. When DSE has sole access to a database file the <span>-</span>REF
 <div class="titlepage"><div><div><h4 class="title">
 <a name="Dse_cache_quals"></a>Qualifiers<span> of CACHE</span>
 </h4></div></div></div>
-<p><a class="indexterm" name="idm45731727502176"></a>
+<p><a class="indexterm" name="idm45897451991120"></a>
 <span class="emphasis"><em>-RE[COVER] [-ALL]</em></span>
 </p>
 <p>Resets the cache of a database having BG access method to a "clean" state.</p>
@@ -839,12 +839,12 @@ database file. When DSE has sole access to a database file the <span>-</span>REF
 <li class="listitem"><p>Attempt DSE CACHE -RECOVER only if a DSE CACHE -VERIFY commands reports the cache is "NOT clean".</p></li>
 </ul></div>
 <p>
-<a class="indexterm" name="idm45731727537392"></a>
+<a class="indexterm" name="idm45897451662352"></a>
 <span class="emphasis"><em>-SH[OW] </em></span>
 </p>
 <p>Displays the cache data structure information. All values are in 8-byte hexadecimal form. If the database has encryption turned on, SHOW additionally displays an element that gives information about the encrypted global buffer section in shared memory. </p>
 <p>
-<a class="indexterm" name="idm45731727492720"></a>
+<a class="indexterm" name="idm45897451655776"></a>
 <span class="emphasis"><em>-VE[RIFY] [-ALL]</em></span>
 </p>
 <p>Verifies the integrity of the cache data structures as well as the internal consistency of any GDS blocks in the global buffers of the current region.</p>
@@ -855,7 +855,7 @@ database file. When DSE has sole access to a database file the <span>-</span>REF
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="dse_cache_Exampl"></a>Examples <span>for CACHE</span><a class="indexterm" name="idm45731727570048"></a>
+<a name="dse_cache_Exampl"></a>Examples <span>for CACHE</span><a class="indexterm" name="idm45897451670704"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">DSE&gt; CACHE -VERIFY</pre>
@@ -891,7 +891,7 @@ DSE&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="close_dse_cmmd"></a>CLose<a class="indexterm" name="idm45731727828048"></a>
+<a name="close_dse_cmmd"></a>CLose<a class="indexterm" name="idm45897452011728"></a>
 </h3></div></div></div>
 <p>The CLOSE command closes the currently open output file.</p>
 <p>The format of the CLOSE command is:</p>
@@ -900,8 +900,8 @@ DSE&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="critical_dse_cmmd"></a>CRitical<a class="indexterm" name="idm45731727513584"></a><a class="indexterm" name="idm45731727500528"></a>
-<a class="indexterm" name="idm45731727467296"></a>
+<a name="critical_dse_cmmd"></a>CRitical<a class="indexterm" name="idm45897451671536"></a><a class="indexterm" name="idm45897451626192"></a>
+<a class="indexterm" name="idm45897451625296"></a>
 </h3></div></div></div>
 <p>Displays and/or modifies the status and contents of the critical section for the current region. The format of the CRITICAL command is:</p>
 <pre class="programlisting">CR[ITICAL] 
@@ -925,13 +925,13 @@ DSE&gt;</pre>
 </h4></div></div></div>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727450832"></a>
+<a class="indexterm" name="idm45897451608960"></a>
 <span>-</span>A[LL]</em></span>
 </p>
 <p>Display all ids of processes owning critical section from all regions. If there are no processes owning critical section in a region, ALL displays "the CRIT is currently unowned" message for each region.</p>
 <p></p>
 <p><span class="emphasis"><em>
-<a class="indexterm" name="idm45731727594592"></a>
+<a class="indexterm" name="idm45897451753232"></a>
 <span>-</span>I[NIT]</em></span>
 </p>
 <p>Reinitializes the critical section.</p>
@@ -941,7 +941,7 @@ DSE&gt;</pre>
 </ul></div>
 <p>Use only with: -RESET </p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727439040"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451597088"></a>
 <span>-</span>O[WNER]</em></span>
 </p>
 <p>Displays the ID of the process at the head of the critical section. DSE displays a warning message when the current process owns the critical section.</p>
@@ -951,13 +951,13 @@ DSE&gt;</pre>
 Write critical section is currently unowned
 </pre>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727473744"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451632768"></a>
 <span>-</span>REL[EASE]</em></span>
 </p>
 <p>Releases the critical section if the process running DSE owns the section.</p>
 <p>Use alone.</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727428064"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451601136"></a>
 <span>-</span>REM[OVE]</em></span>
 </p>
 <p>Terminates any write ownership of the critical section. Use this when the
@@ -972,7 +972,7 @@ longer be running a GT.M image. </p>
 <tr><td align="left" valign="top"><p>Using CRITICAL -REMOVE when the write owner of a critical section is an active GT.M process may cause structural database damage.</p></td></tr>
 </table></div>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727447312"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451596832"></a>
 <span>-</span>RES[ET]</em></span>
 </p>
 <p>Displays the number of times the critical section has been
@@ -984,7 +984,7 @@ region. Under the guidance of FIS, use <span>-</span>RESET <span>-</span>INIT as
 types of hangs. </p>
 <p>Use only with: <span>-</span>INIT </p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727419072"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451577712"></a>
 <span>-</span>S[EIZE]</em></span>
 </p>
 <p>Seizes the critical section (if available). </p>
@@ -1004,8 +1004,8 @@ types of hangs. </p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="dump_dse_cmmd"></a>Dump<a class="indexterm" name="idm45731727517264"></a>
-<a class="indexterm" name="idm45731727844176"></a>
+<a name="dump_dse_cmmd"></a>Dump<a class="indexterm" name="idm45897451676880"></a>
+<a class="indexterm" name="idm45897451577968"></a>
 </h3></div></div></div>
 <p>Displays blocks, records, or file headers. DUMP is one of the primary DSE examination commands. </p>
 <p>The format of the DUMP command is: </p>
@@ -1032,7 +1032,7 @@ The DUMP command requires specification of an object using either -BLOCK, -HEADE
 <a name="dump_dse_qualifiers"></a>Qualifiers<span> of DUMP</span>
 </h4></div></div></div>
 <p>
-<a class="indexterm" name="idm45731727404096"></a>
+<a class="indexterm" name="idm45897451562288"></a>
 <span class="emphasis"><em>
 <span>-</span>A[LL]</em></span>
 </p>
@@ -1040,24 +1040,24 @@ The DUMP command requires specification of an object using either -BLOCK, -HEADE
 <p>Meaningful only with: -FILEHEADER</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727392848"></a>
+<a class="indexterm" name="idm45897451550928"></a>
 <span>-</span>B[LOCK]=block-number</em></span>
 </p>
 <p>Specifies the starting block of the dump. For commands without an object qualifier, DSE uses the last block handled by a DSE operation. When no block has been accessed, (that is, on the first block-oriented command), DSE uses block one (1). </p>
 <p>Incompatible with: -ALL, -FILEHEADER and -UPDPROC. </p>
-<p><a class="indexterm" name="idm45731727425392"></a>
+<p><a class="indexterm" name="idm45897452051008"></a>
 <span class="emphasis"><em>
 <span>-</span>C[OUNT]=count</em></span>
 </p>
 <p>Specifies the number of blocks, block headers, or records to DUMP. </p>
 <p>Incompatible with: -ALL, -FILEHEADER and -UPDPROC. </p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727384288"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451542496"></a>
 <span>-</span>F[ILEHEADER]</em></span>
 </p>
 <p>Dumps file header information. A DSE dump of a database file header prints a 0x prefix for all fields printed in hexadecimal format. Refer to the "Introduction" section for a description of the file header fields.</p>
 <p>Use only with -ALL or -UPDPROC</p>
-<a class="indexterm" name="idm45731727400288"></a><a class="indexterm" name="idm45731727402784"></a><p>
+<a class="indexterm" name="idm45897451558480"></a><a class="indexterm" name="idm45897451560976"></a><p>
 <span class="emphasis"><em>
 <span>-</span>G[LO]</em></span>
 </p>
@@ -1068,15 +1068,15 @@ The DUMP command requires specification of an object using either -BLOCK, -HEADE
 <span>-</span>G[VSTATS]</em></span>
 </p>
 <p>Displays the access statistics for global variables and database file(s).</p>
-<a class="indexterm" name="idm45731727374608"></a><a class="indexterm" name="idm45731727373840"></a><p>
+<a class="indexterm" name="idm45897451533232"></a><a class="indexterm" name="idm45897451532464"></a><p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727372208"></a>
+<a class="indexterm" name="idm45897451530832"></a>
 <span>-</span>NO[CRIT]</em></span>
 </p>
 <p>Allows DSE DUMP to work even if another process is holding a critical section. Since results in this mode may be inconsistent, it should only be used if the critical section mechanism is not operating normally. </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727387792"></a>
+<a class="indexterm" name="idm45897451546288"></a>
 <span>-</span>[NO]H[EADER]</em></span>
 </p>
 <p>Specifies whether the dump of the specified blocks or records is restricted to, or excludes, headers. -HEADER displays only the header, -NOHEADER displays the block or record with the header suppressed. DUMP without the -[NO]HEADER qualifier dumps both the block/record and the header. </p>
@@ -1084,24 +1084,24 @@ The DUMP command requires specification of an object using either -BLOCK, -HEADE
 <p>Incompatible with: -ALL, -FILEHEADER, -GLO, -UPDPROC and -ZWR.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727397888"></a>
+<a class="indexterm" name="idm45897451540784"></a>
 <span>-</span>O[FFSET]=offset</em></span>
 </p>
 <p>Specifies the offset, in bytes, of the starting record for the dump. If the offset does not point to the beginning of a record, DSE rounds down to the last valid record start (e.g., DUMP -OFF=10 starts at -OFF=A if that was the beginning of the record containing offset 10). </p>
 <p>Incompatible with: -ALL, -FILEHEADER, and -RECORD. </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727389136"></a>
+<a class="indexterm" name="idm45897451516528"></a>
 <span>-</span>R[ECORD]=record_number</em></span>
 </p>
 <p>Specifies the record number of the starting record of the dump. If you try to dump a record number that is larger than the last actual record in the block, a DSE error message provides the number of the last record in the block. </p>
 <p>Incompatible with: -ALL, -FILEHEADER, and -OFFSET.</p>
-<a class="indexterm" name="idm45731727414208"></a><a class="indexterm" name="idm45731727364768"></a><p>
+<a class="indexterm" name="idm45897451542240"></a><a class="indexterm" name="idm45897451523392"></a><p>
 <span class="emphasis"><em>-U[PDPROC]</em></span>
 </p>
 <p>Displays the helper process parameters with the fileheader elements.</p>
 <p>Use only with -FILEHEADER.</p>
-<a class="indexterm" name="idm45731727371024"></a><a class="indexterm" name="idm45731727369360"></a><p>
+<a class="indexterm" name="idm45897451528944"></a><a class="indexterm" name="idm45897451528528"></a><p>
 <span class="emphasis"><em>-Z[WR] </em></span>
 </p>
 <p>Dumps the specified record or blocks into the current output file in ZWRITE (ZWR) format.</p>
@@ -1167,10 +1167,10 @@ Pre read trigger factor [% upd rsrvd]    50  Upd writer trigger [%flshTrgr]     
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="evaluate_dse_cmmd"></a>EValuate<a class="indexterm" name="idm45731727422416"></a>
-<a class="indexterm" name="idm45731727345840"></a>
-<a class="indexterm" name="idm45731727344832"></a>
-<a class="indexterm" name="idm45731727343824"></a>
+<a name="evaluate_dse_cmmd"></a>EValuate<a class="indexterm" name="idm45897451580064"></a>
+<a class="indexterm" name="idm45897451503760"></a>
+<a class="indexterm" name="idm45897451502752"></a>
+<a class="indexterm" name="idm45897451501744"></a>
 </h3></div></div></div>
 <p>Translates a hexadecimal number to decimal, and vice versa. </p>
 <p>The format of the EVALUATE command is:</p>
@@ -1186,14 +1186,14 @@ Pre read trigger factor [% upd rsrvd]    50  Upd writer trigger [%flshTrgr]     
 <a name="evaluate_dse_qualifiers"></a>Qualifiers<span> of Evaluate</span>
 </h4></div></div></div>
 <p>
-<a class="indexterm" name="idm45731727339872"></a>
+<a class="indexterm" name="idm45897451497792"></a>
 <span class="emphasis"><em>
 <span>-</span>D[ECIMAL]</em></span>
 </p>
 <p>Specifies that the input number has a decimal base.</p>
 <p>Incompatible with: -HEXADECIMAL .</p>
 <p>
-<a class="indexterm" name="idm45731727330592"></a>
+<a class="indexterm" name="idm45897451488512"></a>
 <span class="emphasis"><em>
 <span>-</span>H[EXADECIMAL]</em></span>
 </p>
@@ -1201,14 +1201,14 @@ Pre read trigger factor [% upd rsrvd]    50  Upd writer trigger [%flshTrgr]     
 <p>Incompatible with: -DECIMAL </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727327296"></a>
+<a class="indexterm" name="idm45897451485328"></a>
 <span>-</span>N[UMBER]=number</em></span>
 </p>
 <p>Specifies the number to evaluate. Required.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examp_eval"></a>Examples<span> for EVALUATE</span><a class="indexterm" name="idm45731727412016"></a>
+<a name="examp_eval"></a>Examples<span> for EVALUATE</span><a class="indexterm" name="idm45897451589504"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">DSE&gt; evaluate -number=10 -decimal
@@ -1226,8 +1226,8 @@ Hex:  10   Dec:  16</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="exit_dse_cmmd"></a>EXit<a class="indexterm" name="idm45731727336896"></a>
-<a class="indexterm" name="idm45731727360000"></a>
+<a name="exit_dse_cmmd"></a>EXit<a class="indexterm" name="idm45897451494400"></a>
+<a class="indexterm" name="idm45897451519248"></a>
 </h3></div></div></div>
 <p>The EXIT command ends a DSE session.</p>
 <p>The format of the EXIT command is:</p>
@@ -1237,8 +1237,8 @@ Hex:  10   Dec:  16</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="find_cmmd_dse"></a>Find<a class="indexterm" name="idm45731727325984"></a>
-<a class="indexterm" name="idm45731727316272"></a>
+<a name="find_cmmd_dse"></a>Find<a class="indexterm" name="idm45897451484016"></a>
+<a class="indexterm" name="idm45897451474304"></a>
 </h3></div></div></div>
 <p>Locates a given block or region. The format of the FIND command is:</p>
 <pre class="programlisting">F[IND]  
@@ -1262,7 +1262,7 @@ Hex:  10   Dec:  16</pre>
 </h4></div></div></div>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727307472"></a>
+<a class="indexterm" name="idm45897451465472"></a>
 <span>-</span>B[LOCK]=block_number</em></span>
 </p>
 <p>Specifies the block to find.</p>
@@ -1270,7 +1270,7 @@ Hex:  10   Dec:  16</pre>
 <p>Incompatible with: -KEY, -REGION </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727321376"></a>
+<a class="indexterm" name="idm45897451479408"></a>
 <span>-</span>E[XHAUSTIVE]</em></span>
 </p>
 <p>Searches the entire index structure for the desired path or siblings.</p>
@@ -1288,7 +1288,7 @@ Hex:  10   Dec:  16</pre>
 <p>Incompatible with: -KEY, -REGION, -FREEBLOCK </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727294672"></a>
+<a class="indexterm" name="idm45897451452544"></a>
 <span>-</span>F[REEBLOCK]</em></span>
 </p>
 <p>Finds the nearest free block to the block specified by -HINT. FREEBLOCK accepts bit maps as starting or ending points. </p>
@@ -1300,7 +1300,7 @@ Hex:  10   Dec:  16</pre>
 <p>Required with -HINT; compatible with -BLOCK and [NO]CRIT.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727289216"></a>
+<a class="indexterm" name="idm45897451447088"></a>
 <span>-</span>H[INT]=block_number</em></span>
 </p>
 <p>Designates the starting point of a -FREEBLOCK search.</p>
@@ -1308,7 +1308,7 @@ Hex:  10   Dec:  16</pre>
 <p>Required with: -FREEBLOCK; compatible with -BLOCK and [NO]CRIT. </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727297872"></a>
+<a class="indexterm" name="idm45897451455872"></a>
 <span>-</span>K[EY]=key</em></span>
 </p>
 <p>Searches the database for the block containing the specified key or if the key does not exist, the block that would contain it, if it existed.</p>
@@ -1320,15 +1320,15 @@ Hex:  10   Dec:  16</pre>
 <p>Compatible only with [NO]CRIT. </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727280144"></a>
+<a class="indexterm" name="idm45897451438016"></a>
 <span>-</span>[NO]C[RIT]</em></span>
 </p>
 <p>Allows FIND to work even if another process is holding a critical section.</p>
 <p>As results in this mode may be inconsistent, it should only be used if the critical section mechanism is not operating normally </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727288192"></a>
-<a class="indexterm" name="idm45731727273312"></a>
+<a class="indexterm" name="idm45897451446064"></a>
+<a class="indexterm" name="idm45897451431184"></a>
 <span>-</span>R[EGION][=region]</em></span>
 </p>
 <p>Switches to the named Global Directory region. </p>
@@ -1336,7 +1336,7 @@ Hex:  10   Dec:  16</pre>
 <p>Use Alone. </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727283632"></a>
+<a class="indexterm" name="idm45897451441504"></a>
 <span>-</span>SI[BLINGS]</em></span>
 </p>
 <p>Displays the block number of the specified block and its logical siblings in hexadecimal format.</p>
@@ -1344,7 +1344,7 @@ Hex:  10   Dec:  16</pre>
 <p>Incompatible with: -FREEBLOCK, -HINT, -KEY, -REGION </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727279504"></a>
+<a class="indexterm" name="idm45897451437376"></a>
 <span>-</span>ST[ATS]</em></span>
 </p>
 <p>Switches to the named Global Directory shadow for the region's shared gvstats.</p>
@@ -1352,7 +1352,7 @@ Hex:  10   Dec:  16</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="find_Examp"></a>Examples<span> for FIND</span><a class="indexterm" name="idm45731727392208"></a>
+<a name="find_Examp"></a>Examples<span> for FIND</span><a class="indexterm" name="idm45897451549552"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">DSE&gt; find -exhaustive -block=180
@@ -1394,8 +1394,8 @@ HELP command is:</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="integrit_dse_cmmd"></a>Integrit<a class="indexterm" name="idm45731727372432"></a>
-<a class="indexterm" name="idm45731727346832"></a>
+<a name="integrit_dse_cmmd"></a>Integrit<a class="indexterm" name="idm45897451527408"></a>
+<a class="indexterm" name="idm45897451417424"></a>
 </h3></div></div></div>
 <p>Checks the internal consistency of a single non-bitmap block. INTEGRIT reports errors in hexadecimal notation.</p>
 <p>The format of the INTEGRIT command is:</p>
@@ -1414,7 +1414,7 @@ HELP command is:</p>
 </h4></div></div></div>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727246976"></a>
+<a class="indexterm" name="idm45897451404384"></a>
 <span>-</span>B[LOCK]=block_number</em></span>
 </p>
 <p>Specifies the block for DSE to check. On commands with no <span>-</span>BLOCK qualifier, DSE uses the last block handled by a DSE operation. When no block has been accessed, that is, on the first block-oriented command, DSE uses block one (1).</p>
@@ -1429,8 +1429,8 @@ used if the critical section mechanism is not operating normally.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="maps_dse_cmmd"></a>Maps<a class="indexterm" name="idm45731727435088"></a>
-<a class="indexterm" name="idm45731727277904"></a>
+<a name="maps_dse_cmmd"></a>Maps<a class="indexterm" name="idm45897451484656"></a>
+<a class="indexterm" name="idm45897451425792"></a>
 </h3></div></div></div>
 <p>Examines or updates bitmaps. The format of the MAPS command is:</p>
 <pre class="programlisting">M[APS] 
@@ -1448,7 +1448,7 @@ used if the critical section mechanism is not operating normally.</p>
 <a name="map_qualifiers_dse"></a>Qualifiers for MAP</h4></div></div></div>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727234432"></a>
+<a class="indexterm" name="idm45897451391840"></a>
 <span>-</span>BL[OCK]=block_number</em></span>
 </p>
 <p>Specifies the target block for MAPS. The -BLOCK qualifier is incompatible with the -RESTORE_ALL qualifier.</p>
@@ -1456,21 +1456,21 @@ used if the critical section mechanism is not operating normally.</p>
 <p>Incompatible with: -RESTORE_ALL </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727252032"></a>
+<a class="indexterm" name="idm45897451409328"></a>
 <span>-</span>BU[SY]</em></span>
 </p>
 <p>Marks the current block as busy in the block's local map and appropriately updates the master bitmap. BUSY accepts bit map blocks.</p>
 <p>Compatible only with: -BLOCK </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727275216"></a>
+<a class="indexterm" name="idm45897451394720"></a>
 <span>-</span>F[REE]</em></span>
 </p>
 <p>Marks the current block as free in the block's local map and appropriately updates the master bitmap.</p>
 <p>Compatible only with: -BLOCK </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727235392"></a>
+<a class="indexterm" name="idm45897451392800"></a>
 <span>-</span>M[ASTER]</em></span>
 </p>
 <p>Sets the bit in the master bitmap associated with the current block's
@@ -1478,7 +1478,7 @@ local map according to whether or not that local map is full. MASTER accepts bit
 <p>Use only with: <span>-</span>BLOCK.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727241312"></a>
+<a class="indexterm" name="idm45897451398720"></a>
 <span>-</span>R[ESTORE_ALL]</em></span>
 </p>
 <p>Sets all local bitmaps and the master bitmap to reflect the blocks used in the database file.</p>
@@ -1545,8 +1545,8 @@ Block      1E0: |  ........  ........  ........  ........  |
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="open_cmmd_dse"></a>OPen<a class="indexterm" name="idm45731727358800"></a>
-<a class="indexterm" name="idm45731727235520"></a>
+<a name="open_cmmd_dse"></a>OPen<a class="indexterm" name="idm45897451505008"></a>
+<a class="indexterm" name="idm45897451428448"></a>
 </h3></div></div></div>
 <p>Use the OPEN command to open a file for sequential output of global variable data. The format of the OPEN command is: </p>
 <pre class="programlisting">OP[EN] F[ILE]=file</pre>
@@ -1559,7 +1559,7 @@ Block      1E0: |  ........  ........  ........  ........  |
 <a name="Open_qaulifier_dse"></a>Qualifiers for OPEN</h4></div></div></div>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727200560"></a>
+<a class="indexterm" name="idm45897451357632"></a>
 <span>-</span>F[ILE]=<span>file-name</span>
 
 </em></span>
@@ -1581,8 +1581,8 @@ Current output file:  var.out</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="overwrite_dse_cmmd"></a>OVerwrite<a class="indexterm" name="idm45731727229712"></a>
-<a class="indexterm" name="idm45731727222752"></a>
+<a name="overwrite_dse_cmmd"></a>OVerwrite<a class="indexterm" name="idm45897451370640"></a>
+<a class="indexterm" name="idm45897451379488"></a>
 </h3></div></div></div>
 <p>Overwrites the specified string on the given offset in the current block. Use extreme caution when using this command. </p>
 <p>The format of the OVERWRITE command is:</p>
@@ -1596,20 +1596,20 @@ Current output file:  var.out</pre>
 <a name="overwrite_dse_qualifier"></a>Qualifiers for OVERWRITE</h4></div></div></div>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727186112"></a>
+<a class="indexterm" name="idm45897451343728"></a>
 <span>-</span>B[LOCK]=block number</em></span>
 </p>
 <p>Directs DSE to OVERWRITE a specific block. If no block number is
 specified, the default is the current block.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727226304"></a>
+<a class="indexterm" name="idm45897451401920"></a>
 <span>-</span>D[ATA]=string</em></span>
 </p>
 <p>Specifies the data to be written. Use quotation marks around the string and escape codes of the form \a or \ab, where "a" and "b" are hexadecimal digits representing non-printing characters. \\ translates to a single backslash. </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727215952"></a>
+<a class="indexterm" name="idm45897451380320"></a>
 <span>-</span>O[FFSET]=offset</em></span>
 </p>
 <p>Specifies the offset in the current block where the overwrite should begin. </p>
@@ -1625,8 +1625,8 @@ specified, the default is the current block.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="page_cmmd_dse"></a>Page<a class="indexterm" name="idm45731727203360"></a>
-<a class="indexterm" name="idm45731727199552"></a>
+<a name="page_cmmd_dse"></a>Page<a class="indexterm" name="idm45897451356320"></a>
+<a class="indexterm" name="idm45897451362000"></a>
 </h3></div></div></div>
 <p>Sends one form feed to the output device. Use PAGE to add
 form feeds to a dump file, making the hard copy file easier to read. If you plan
@@ -1638,8 +1638,8 @@ to use the dump file with MUPIP LOAD, do not use PAGE.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="range_dse_cmmd"></a>RAnge<a class="indexterm" name="idm45731727178160"></a>
-<a class="indexterm" name="idm45731727169552"></a>
+<a name="range_dse_cmmd"></a>RAnge<a class="indexterm" name="idm45897451401536"></a>
+<a class="indexterm" name="idm45897451328128"></a>
 </h3></div></div></div>
 <p>The RANGE command finds all blocks in the database whose first key falls in
 the specified range of keys. The RANGE command may take a very long time unless
@@ -1666,20 +1666,20 @@ determine whether the key appears in the index tree.</p>
 </h4></div></div></div>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727152736"></a>
+<a class="indexterm" name="idm45897451310512"></a>
 <span>-</span>F[ROM]=block_number</em></span>
 </p>
 <p>Specifies a starting block number for the range search. DSE RANGE accept bit maps as starting or ending points. </p>
 <p>By default, RANGE starts processing at the beginning of the file.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727205904"></a>
+<a class="indexterm" name="idm45897451357264"></a>
 <span>-</span>T[O]=block-number</em></span>
 </p>
 <p>Specifies an ending block number for the range search. DSE RANGE accept bit maps as starting or ending points. By default, RANGE
 stops processing at the end of the file.</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45731727181472"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45897451339088"></a>
 
 <span>-I[NDEX]</span>
 </em></span>
@@ -1687,25 +1687,25 @@ stops processing at the end of the file.</p>
 <p>Restricts a search to index blocks.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727152256"></a>
+<a class="indexterm" name="idm45897451310032"></a>
 <span>-</span>LOS[T]=block_number</em></span>
 </p>
 <p>Restricts a search to blocks not found by a FIND <span>-</span>BLOCK.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727150880"></a>
+<a class="indexterm" name="idm45897451309488"></a>
 <span>-</span>LOW[ER]=key</em></span>
 </p>
 <p>Specifies the lower bound for the key range.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727156784"></a>
+<a class="indexterm" name="idm45897451314144"></a>
 <span>-</span>[NO]BU[SY]=busy/free</em></span>
 </p>
 <p>Restricts a search to either BUSY or FREE blocks.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727148096"></a>
+<a class="indexterm" name="idm45897451305872"></a>
 <span>-</span>[NO]C[RIT]</em></span>
 </p>
 <p>Allows DSE RANGE to work even if another process is holding a critical
@@ -1713,7 +1713,7 @@ section. Since results in this mode may be inconsistent, it should only be
 used if the critical section mechanism is not operating normally.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727143760"></a>
+<a class="indexterm" name="idm45897451300656"></a>
 
 <span>-S[TAR]</span>
 </em></span>
@@ -1721,7 +1721,7 @@ used if the critical section mechanism is not operating normally.</p>
 <p>Includes index blocks that contain a single star key.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727139760"></a>
+<a class="indexterm" name="idm45897451296704"></a>
 <span>-</span>U[PPER]=key</em></span>
 </p>
 <p>Specifies the upper bound for the key range.</p>
@@ -1757,8 +1757,8 @@ Found 6 blocks</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="remove_dse_cmmd"></a>REMove<a class="indexterm" name="idm45731727125040"></a>
-<a class="indexterm" name="idm45731727172432"></a>
+<a name="remove_dse_cmmd"></a>REMove<a class="indexterm" name="idm45897451293344"></a>
+<a class="indexterm" name="idm45897451271856"></a>
 </h3></div></div></div>
 <p>Removes one or more records or a save buffer.</p>
 <p>The format of the REMOVE command is:</p>
@@ -1777,7 +1777,7 @@ Found 6 blocks</pre>
 </h4></div></div></div>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727103664"></a>
+<a class="indexterm" name="idm45897451260912"></a>
 <span>-</span>B[LOCK]=block_number</em></span>
 </p>
 <p>Specifies the block associated with the record or buffer being
@@ -1788,7 +1788,7 @@ block-oriented command, DSE uses block one (1).</p>
 <p>BLOCK accepts blocks higher than the current database size because they deal with set of saved block copies rather than the database and there are situations where a saved block may be outside the current database size (for example, due to a concurrent MUPIP REORG -TRUNCATE).</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727131728"></a>
+<a class="indexterm" name="idm45897451282352"></a>
 <span>-</span>C[OUNT]=count</em></span>
 </p>
 <p>Specifies the number of records to remove.</p>
@@ -1796,21 +1796,21 @@ block-oriented command, DSE uses block one (1).</p>
 <p>Incompatible with: -VERSION </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727174032"></a>
+<a class="indexterm" name="idm45897451285568"></a>
 <span>-</span>O[FFSET]=offset</em></span>
 </p>
 <p>Specifies the offset (in bytes) of the record to be removed. If the offset does not point to the beginning of a record, DSE rounds down to the beginning of the record containing the offset (for example, REMOVE -OFF=10 starts at OFF=A if that was the last prior record boundry).</p>
 <p>Incompatible with: -VERSION, -RECORD </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727104384"></a>
+<a class="indexterm" name="idm45897451261632"></a>
 <span>-</span>R[ECORD]=record_number</em></span>
 </p>
 <p>Specifies the number that identifies the record to remove. The -RECORD qualifier is incompatible with the -OFFSET and -VERSION qualifiers.</p>
 <p>Incompatible with: -VERSION, -OFFSET </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727136192"></a>
+<a class="indexterm" name="idm45897451239600"></a>
 <span>-</span>V[ERSION]=version_number</em></span>
 </p>
 <p>Specifies the version number, in decimal, of the save buffer to remove. If there are more than one version of a block, -VERSION is required; otherwise REMOVE works on that sole version. -VERSION is incompatible with all qualifiers except -BLOCK.</p>
@@ -1820,8 +1820,8 @@ block-oriented command, DSE uses block one (1).</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="restore_dse_cmmd"></a>REStore<a class="indexterm" name="idm45731727119872"></a>
-<a class="indexterm" name="idm45731727120496"></a>
+<a name="restore_dse_cmmd"></a>REStore<a class="indexterm" name="idm45897451296016"></a>
+<a class="indexterm" name="idm45897451274640"></a>
 </h3></div></div></div>
 <p>The RESTORE command restores saved versions of blocks.</p>
 <pre class="programlisting">RES[TORE]   
@@ -1838,7 +1838,7 @@ block-oriented command, DSE uses block one (1).</p>
 </h4></div></div></div>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727074272"></a>
+<a class="indexterm" name="idm45897451230624"></a>
 <span>-</span>B[LOCK]=block_number</em></span>
 </p>
 <p>Specifies the block to restore.</p>
@@ -1846,7 +1846,7 @@ block-oriented command, DSE uses block one (1).</p>
 <p>BLOCK accepts blocks higher than the current database size because it deal with set of saved block copies rather than the database and there are situations where a saved block may be outside the current database size (for example, due to a concurrent MUPIP REORG -TRUNCATE).</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727066320"></a>
+<a class="indexterm" name="idm45897451222672"></a>
 <span>-</span>F[ROM]=block_number</em></span>
 </p>
 <p>Specifies the block number of the SAVE buffer to restore.</p>
@@ -1854,7 +1854,7 @@ block-oriented command, DSE uses block one (1).</p>
 <p>By default, RESTORE uses the target block number as the -FROM block number.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727073600"></a>
+<a class="indexterm" name="idm45897451229120"></a>
 
 <span>-R[EGION]=region</span>
 </em></span>
@@ -1863,7 +1863,7 @@ block-oriented command, DSE uses block one (1).</p>
 <p>By default, RESTORE uses SAVE buffers from the current region.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727076240"></a>
+<a class="indexterm" name="idm45897451232176"></a>
 <span>-</span>V[ERSION]=version_number</em></span>
 </p>
 <p>Specifies the decimal version number of the block to restore. The version
@@ -1872,8 +1872,8 @@ number is required.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="save_dse_cmmd"></a>SAve<a class="indexterm" name="idm45731727094288"></a>
-<a class="indexterm" name="idm45731727065424"></a>
+<a name="save_dse_cmmd"></a>SAve<a class="indexterm" name="idm45897451251072"></a>
+<a class="indexterm" name="idm45897451221776"></a>
 </h3></div></div></div>
 <p>The SAVE command preserves versions of blocks, or displays a listing of saved
 versions for the current DSE session. SAVE can preserve 128 versions. Saved information is lost when DSE
@@ -1895,7 +1895,7 @@ them.</p>
 </h4></div></div></div>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727050064"></a>
+<a class="indexterm" name="idm45897451206368"></a>
 <span>-</span>B[LOCK]=block_number</em></span>
 </p>
 <p>Specifies the block to restore.</p>
@@ -1904,13 +1904,13 @@ operation. When no block has been accessed, that is, on the first
 block-oriented command, DSE uses block one (1).</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727077296"></a>
+<a class="indexterm" name="idm45897451213760"></a>
 <span>-</span>C[OMMENT]=string</em></span>
 </p>
 <p>Specifies a comment to save with the block. Enclose the comment in quotation marks (" "). </p>
 <p>Incompatible with: -LIST </p>
 <p>
-<a class="indexterm" name="idm45731727060480"></a>
+<a class="indexterm" name="idm45897451251456"></a>
 <span class="emphasis"><em><span>-</span>L[IST]</em></span></p>
 <p>Lists saved versions of specified blocks. The <span>-</span>LIST qualifier is incompatible with the <span>-</span>COMMENT qualifier.</p>
 <p>By default, SAVE <span>-</span>LIST provides a directory of all SAVEd blocks.</p>
@@ -1918,7 +1918,7 @@ block-oriented command, DSE uses block one (1).</p>
 <p>Incompatible with: -COMMENT</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727035488"></a>
+<a class="indexterm" name="idm45897451191344"></a>
 
 <span>-[NO]C[RIT]</span>
 </em></span>
@@ -1928,8 +1928,8 @@ block-oriented command, DSE uses block one (1).</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="shift"></a>SHift<a class="indexterm" name="idm45731727047504"></a>
-<a class="indexterm" name="idm45731727068256"></a>
+<a name="shift"></a>SHift<a class="indexterm" name="idm45897451203808"></a>
+<a class="indexterm" name="idm45897451224576"></a>
 </h3></div></div></div>
 <p>Use the SHIFT command to shift data in a block, filling the block with zeros, or shortening the block. The format of the SHIFT command is:</p>
 <pre class="programlisting">SH[IFT]  
@@ -1946,27 +1946,27 @@ block-oriented command, DSE uses block one (1).</p>
 </h4></div></div></div>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727025664"></a>
+<a class="indexterm" name="idm45897451182080"></a>
 <span>-</span>B[ACKWARD]=shift</em></span>
 </p>
 <p>Specifies the number of bytes to shift data in the direction of the block header.</p>
 <p>Incompatible with: -FORWARD </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727097872"></a>
+<a class="indexterm" name="idm45897451255536"></a>
 <span>-</span>BL[OCK]=block_number</em></span>
 </p>
 <p>Specifies the block number to perform the DSE SHIFT.</p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727070688"></a>
+<a class="indexterm" name="idm45897451242352"></a>
 <span>-</span>F[ORWARD]=shift</em></span>
 </p>
 <p>Specifies the number of bytes to shift data toward the end of the block.</p>
 <p>Incompatible with: -BACKWARD </p>
 <p>
 <span class="emphasis"><em>
-<a class="indexterm" name="idm45731727026384"></a>
+<a class="indexterm" name="idm45897451167440"></a>
 <span>-</span>O[FFSET]=offset</em></span>
 </p>
 <p>Specifies the starting offset, in bytes, of the portion of the block to shift.</p>
@@ -1974,8 +1974,8 @@ block-oriented command, DSE uses block one (1).</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="dse_spawnl"></a>SPawn<a class="indexterm" name="idm45731727073472"></a>
-<a class="indexterm" name="idm45731727056896"></a>
+<a name="dse_spawnl"></a>SPawn<a class="indexterm" name="idm45897451188896"></a>
+<a class="indexterm" name="idm45897451249504"></a>
 </h3></div></div></div>
 <p>Use the SPAWN command to fork a child process for access to the shell without terminating the current DSE environment. </p>
 <p>The format of the SPAWN command is:</p>
@@ -1998,8 +1998,8 @@ block-oriented command, DSE uses block one (1).</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="wcinit_dse_cmmd"></a>Wcinit<a class="indexterm" name="idm45731727044464"></a>
-<a class="indexterm" name="idm45731727006080"></a>
+<a name="wcinit_dse_cmmd"></a>Wcinit<a class="indexterm" name="idm45897451233104"></a>
+<a class="indexterm" name="idm45897451183440"></a>
 </h3></div></div></div>
 <p>Use the WCINIT command to reinitialize the global buffers of the current region. Because it cleans out the cache, the WCINIT command should not be used except under the guidance of FIS.</p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">

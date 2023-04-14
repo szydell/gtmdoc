@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s27.html" title="Xecute">
 <link rel="next" href="ch06s29.html" title="ZBreak">
-<link rel="copyright" href="ln-idm46082189555600.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45629874125488.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zallocate"></a>ZAllocate<a class="indexterm" name="idm46082199274800"></a>
+<a name="zallocate"></a>ZAllocate<a class="indexterm" name="idm45629871176144"></a>
 </h2></div></div></div>
 <p>The ZALLOCATE command reserves the specified name without releasing previously reserved names. Other GT.M processes cannot reserve the ZALLOCATEd name with a ZALLOCATE or LOCK command.</p>
 <p>The ZALLOCATE command provides compatibility with some other GT.M implementations. The M Development Committee chose to add the + and - delimiters to the LOCK command (incremental locking) rather than adopt the ZALLOCATE and ZDEALLOCATE approach. Therefore, when a design requires an incremental lock mechanism, LOCK +/- has the advantage over ZALLOCATE / ZDEALLOCATE of being part of the M standard. LOCK +/- also has the advantage of working symmetrically when routines using LOCKs are nested. That is, a ZALLOCATE command issued by a process for a named resource already ZALLOCATEd by that process results in no change of state. This means that routines that do ZALLOCATE followed by a ZDEALLOCATE on a named resource that is already ZALLOCATEd by the same process (at routine entry time), will end up ZDEALLOCATEing the named resource (which might not be desired). On the other hand, a LOCK + command issued by a process for a named resource already LOCKed by that process causes the LEVEL of the LOCK to be incremented (as seen in a ZSHOW "L" output). Every LOCK - command on that named resource causes the LEVEL to be decremented. When the LEVEL becomes 0, the named resource is no longer LOCKed.</p>
@@ -50,7 +50,7 @@
 <p>When given a list of nrefs, ZALLOCATE tries to reserve each nref from left to right in the order specified taking into account the timeout specified for each. If the timeout elapses before reserving an nref, GT.M terminates the ZALLOCATE command. Any nrefs already acquired as part of the current ZALLOCATE command stay acquired.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zallocate"></a>Examples<span> of ZALLOCATE</span><a class="indexterm" name="idm46082183530544"></a>
+<a name="examples_of_zallocate"></a>Examples<span> of ZALLOCATE</span><a class="indexterm" name="idm45629871192720"></a>
 </h3></div></div></div>
 <p>Examples:</p>
 <pre class="programlisting">ZAllocate A

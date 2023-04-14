@@ -105,3 +105,5 @@ fl["101"]= "apgs01.html";
 fl["102"]= "apgs02.html";
 fl["103"]= "apgs03.html";
 fl["104"]= "TLS_Configuration_File.html";
+fl["105"]= "aphs01.html";
+fl["106"]= "dbupgrade_matrix.html";

@@ -8,7 +8,7 @@
 <link rel="up" href="quick_message_reference.html" title="Appendix A. Error Message Quick Reference">
 <link rel="prev" href="apas01.html" title="Standard Error Codes">
 <link rel="next" href="apb.html" title="Appendix B. Reference Implementation Error messages">
-<link rel="copyright" href="ln-idm45871334568112.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46147473836112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="idm45871327545760"></a>ZMESSAGE Codes</h2></div></div></div>
+<a name="idm46147466750768"></a>ZMESSAGE Codes</h2></div></div></div>
 <p>The following table lists ZMESSAGE numbers of all messages documented in this manual.</p>
 <div class="informaltable"><table border="1">
 <colgroup>
@@ -122,6 +122,10 @@
 <td><p><a class="link" href="ARCTLMAXLOW.html" title="ARCTLMAXLOW ">ARCTLMAXLOW</a>, The environment variable XXXX = YYYY is too low. Assuming the minimum acceptable value of ZZZZ</p></td>
 </tr>
 <tr>
+<td><p>150384768</p></td>
+<td><p><a class="link" href="ARGTRUNC.html" title="ARGTRUNC ">ARGTRUNC</a>, UUUU argument number CCCC truncated. Keep the size of total command line within NNNN bytes</p></td>
+</tr>
+<tr>
 <td><p>150381803</p></td>
 <td><p><a class="link" href="ARROWNTDSP.html" title="ARROWNTDSP ">ARROWNTDSP</a>, Unable to display ^----- due to length of source line</p></td>
 </tr>
@@ -132,10 +136,6 @@
 <tr>
 <td><p>150383930</p></td>
 <td><p><a class="link" href="ASYNCIONOMM.html" title="ASYNCIONOMM ">ASYNCIONOMM</a>, Database file ffffssss cannot cccc</p></td>
-</tr>
-<tr>
-<td><p>150383898</p></td>
-<td><p><a class="link" href="ASYNCIONOV4.html" title="ASYNCIONOV4 ">ASYNCIONOV4</a>, rrrr database has ssss; cannot cccc</p></td>
 </tr>
 <tr>
 <td><p>150384738</p></td>
@@ -696,10 +696,6 @@
 <tr>
 <td><p>150383466</p></td>
 <td><p><a class="link" href="CRYPTNOTRUNC.html" title="CRYPTNOTRUNC ">CRYPTNOTRUNC</a>, Not positioned at file start or EOF. TRUNCATE disallowed on the encrypted file ffff</p></td>
-</tr>
-<tr>
-<td><p>150381442</p></td>
-<td><p><a class="link" href="CRYPTNOV4.html" title="CRYPTNOV4 ">CRYPTNOV4</a>, ffff is an encrypted database. Cannot downgrade(to V4) with Encryption option enabled</p></td>
 </tr>
 <tr>
 <td><p>150381426</p></td>
@@ -1322,6 +1318,10 @@
 <td><p><a class="link" href="DBUNDACCMT.html" title="DBUNDACCMT ">DBUNDACCMT</a>, xxxx Cannot determine access method; trying with BG</p></td>
 </tr>
 <tr>
+<td><p>150381570</p></td>
+<td><p><a class="link" href="DBUPGRDREQ.html" title="DBUPGRDREQ ">DBUPGRDREQ</a>, Database file DDDD is not fully upgraded (format FFFF) and cannot be used by this version of GT.M. Please upgrade the database.</p></td>
+</tr>
+<tr>
 <td><p>150377624</p></td>
 <td><p><a class="link" href="DBVERPERFWARN1.html" title="DBVERPERFWARN1 ">DBVERPERFWARN1</a>, Performance warning: Database aaaa is running in compatibility mode which degrades performance. Run MUPIP REORG UPGRADE for best overall performance.</p></td>
 </tr>
@@ -1702,6 +1702,10 @@
 <td><p><a class="link" href="FCNSVNEXPECTED.html" title="FCNSVNEXPECTED ">FCNSVNEXPECTED</a>, Function or special variable expected in this context</p></td>
 </tr>
 <tr>
+<td><p>150383090</p></td>
+<td><p><a class="link" href="FDSIZELMT.html" title="FDSIZELMT ">FDSIZELMT</a>, Too many nnnn descriptors needed by GT.CM server</p></td>
+</tr>
+<tr>
 <td><p>150375715</p></td>
 <td><p><a class="link" href="FILECREATE.html" title="FILECREATE ">FILECREATE</a>, AAAA file xxxx created</p></td>
 </tr>
@@ -1800,6 +1804,10 @@
 <tr>
 <td><p>150374364</p></td>
 <td><p><a class="link" href="FORCEDHALT.html" title="FORCEDHALT ">FORCEDHALT</a>, Image HALTed by MUPIP STOP</p></td>
+</tr>
+<tr>
+<td><p>150377132</p></td>
+<td><p><a class="link" href="FORCEDHALT2.html" title="FORCEDHALT2 ">FORCEDHALT2</a>, Receipt of 3 MUPIP STOP signals within xxxx seconds, process: yyyy shutting down with no exit handling like a kill -9</p></td>
 </tr>
 <tr>
 <td><p>150372850</p></td>
@@ -3046,6 +3054,10 @@
 <td><p><a class="link" href="LDSPANGLOINCMP.html" title="LDSPANGLOINCMP ">LDSPANGLOINCMP</a>, Incomplete spanning node found during load!/!_!_at File offset : oooo</p></td>
 </tr>
 <tr>
+<td><p>150384762</p></td>
+<td><p><a class="link" href="LINETOOLONG.html" title="LINETOOLONG ">LINETOOLONG</a>, UUUU prompt input exceeds NNNN bytes</p></td>
+</tr>
+<tr>
 <td><p>150375108</p></td>
 <td><p><a class="link" href="LINKVERSION.html" title="LINKVERSION ">LINKVERSION</a>, This image must be relinked with the current version of GT.M</p></td>
 </tr>
@@ -3322,14 +3334,6 @@
 <td><p><a class="link" href="MMNOBFORRPL.html" title="MMNOBFORRPL ">MMNOBFORRPL</a>, Replication cannot be used in database file ffff which uses MM access method and NOBEFORE image journaling</p></td>
 </tr>
 <tr>
-<td><p>150380706</p></td>
-<td><p><a class="link" href="MMNODYNDWNGRD.html" title="MMNODYNDWNGRD ">MMNODYNDWNGRD</a>, Unable to use dynamic downgrade with MM access method for region xxx. Use BG access method for downgrade</p></td>
-</tr>
-<tr>
-<td><p>150380714</p></td>
-<td><p><a class="link" href="MMNODYNUPGRD.html" title="MMNODYNUPGRD ">MMNODYNUPGRD</a>, Unable to use MM access method for region yyy until all database blocks are upgraded</p></td>
-</tr>
-<tr>
 <td><p>150383082</p></td>
 <td><p><a class="link" href="MMREGNOACCESS.html" title="MMREGNOACCESS ">MMREGNOACCESS</a>, Region rrrr (ffff) is no longer accessible. See prior error messages in the operator and application error logs</p></td>
 </tr>
@@ -3364,14 +3368,6 @@
 <tr>
 <td><p>150380738</p></td>
 <td><p><a class="link" href="MUDWNGRDNOTPOS.html" title="MUDWNGRDNOTPOS ">MUDWNGRDNOTPOS</a>, Start VBN value is [xxx] while downgraded GT.M version can support only [yyy]. Downgrade not possible</p></td>
-</tr>
-<tr>
-<td><p>150380722</p></td>
-<td><p><a class="link" href="MUDWNGRDNRDY.html" title="MUDWNGRDNRDY ">MUDWNGRDNRDY</a>, Database xxx is not ready to downgrade - still yyy database blocks to downgrade</p></td>
-</tr>
-<tr>
-<td><p>150380730</p></td>
-<td><p><a class="link" href="MUDWNGRDTN.html" title="MUDWNGRDTN ">MUDWNGRDTN</a>, Transaction number 0xaaa in database xxx is too big for MUPIP [REORG] DOWNGRADE. Renew database with MUPIP INTEG TN_RESET</p></td>
 </tr>
 <tr>
 <td><p>150374346</p></td>
@@ -3542,10 +3538,6 @@
 <td><p><a class="link" href="MUREENCRYPTSTART.html" title="MUREENCRYPTSTART ">MUREENCRYPTSTART</a>, Database ffff : MUPIP REORG ENCRYPT started by pid pppp at transaction number 0xtttt</p></td>
 </tr>
 <tr>
-<td><p>150383850</p></td>
-<td><p><a class="link" href="MUREENCRYPTV4NOALLOW.html" title="MUREENCRYPTV4NOALLOW ">MUREENCRYPTV4NOALLOW</a>, Database (re)encryption supported only on fully upgraded V5 databases. ffff has V4 format blocks</p></td>
-</tr>
-<tr>
 <td><p>150374402</p></td>
 <td><p><a class="link" href="MUREORGFAIL.html" title="MUREORGFAIL ">MUREORGFAIL</a>, MUPIP REORG failed. Failure code: xxxx.</p></td>
 </tr>
@@ -3656,10 +3648,6 @@
 <tr>
 <td><p>150382522</p></td>
 <td><p><a class="link" href="MUTRUNCNOTBG.html" title="MUTRUNCNOTBG ">MUTRUNCNOTBG</a>, Region rrrr does not have access method BG</p></td>
-</tr>
-<tr>
-<td><p>150382532</p></td>
-<td><p><a class="link" href="MUTRUNCNOV4.html" title="MUTRUNCNOV4 ">MUTRUNCNOV4</a>, Region rrrr is not fully upgraded from V4 format.</p></td>
 </tr>
 <tr>
 <td><p>150382538</p></td>
@@ -4174,6 +4162,10 @@
 <td><p><a class="link" href="ORLBKCMPLT.html" title="ORLBKCMPLT ">ORLBKCMPLT</a>, ONLINE ROLLBACK completed successfully on instance iiii corresponding to dddd</p></td>
 </tr>
 <tr>
+<td><p>150382410</p></td>
+<td><p><a class="link" href="ORLBKDBUPGRDREQ.html" title="ORLBKDBUPGRDREQ ">ORLBKDBUPGRDREQ</a>, Region RRR (DDDD) is not fully upgraded. ONLINE ROLLBACK cannot continue</p></td>
+</tr>
+<tr>
 <td><p>150382403</p></td>
 <td><p><a class="link" href="ORLBKFRZOVER.html" title="ORLBKFRZOVER ">ORLBKFRZOVER</a>, tttt : FREEZE on region rrrr (ddd) cleared</p></td>
 </tr>
@@ -4188,10 +4180,6 @@
 <tr>
 <td><p>150382387</p></td>
 <td><p><a class="link" href="ORLBKNOSTP.html" title="ORLBKNOSTP ">ORLBKNOSTP</a>, ONLINE ROLLBACK proceeding with database updates. MUPIP STOP will no longer be allowed</p></td>
-</tr>
-<tr>
-<td><p>150382410</p></td>
-<td><p><a class="link" href="ORLBKNOV4BLK.html" title="ORLBKNOV4BLK ">ORLBKNOV4BLK</a>, Region rrrr (dddd) has V4 format blocks. Database upgrade required. ONLINE ROLLBACK cannot continue</p></td>
 </tr>
 <tr>
 <td><p>150384467</p></td>
@@ -4496,6 +4484,10 @@
 <tr>
 <td><p>150377600</p></td>
 <td><p><a class="link" href="REORGINC.html" title="REORGINC ">REORGINC</a>, Reorg was incomplete. Not all globals were reorged.</p></td>
+</tr>
+<tr>
+<td><p>150380730</p></td>
+<td><p><a class="link" href="REORGUPCNFLCT.html" title="REORGUPCNFLCT ">REORGUPCNFLCT</a>, MUPIP AAAA encountered a conflict due to OOOO (PID:PPPP)</p></td>
 </tr>
 <tr>
 <td><p>150384649</p></td>
@@ -5134,10 +5126,6 @@
 <td><p><a class="link" href="SIZENOTVALID8.html" title="SIZENOTVALID8 ">SIZENOTVALID8</a>, Size (in bytes) must be either 1, 2, 4, or 8</p></td>
 </tr>
 <tr>
-<td><p>150381562</p></td>
-<td><p><a class="link" href="SNAPSHOTNOV4.html" title="SNAPSHOTNOV4 ">SNAPSHOTNOV4</a>, Cannot downgrade (to V4) while snapshots are in progress. Currently ssss snapshots are in progress for region rrrr.</p></td>
-</tr>
-<tr>
 <td><p>150383330</p></td>
 <td><p><a class="link" href="SOCKACCEPT.html" title="SOCKACCEPT ">SOCKACCEPT</a>, Socket accept failed</p></td>
 </tr>
@@ -5280,10 +5268,6 @@
 <tr>
 <td><p>418817034</p></td>
 <td><p><a class="link" href="SSTMPDIRSTAT.html" title="SSTMPDIRSTAT ">SSTMPDIRSTAT</a>, Cannot access temporary directory dddd</p></td>
-</tr>
-<tr>
-<td><p>150381570</p></td>
-<td><p><a class="link" href="SSV4NOALLOW.html" title="SSV4NOALLOW ">SSV4NOALLOW</a>, Database snapshots are supported only on fully upgraded V5 databases. nnnn has V4 format blocks.</p></td>
 </tr>
 <tr>
 <td><p>150373738</p></td>

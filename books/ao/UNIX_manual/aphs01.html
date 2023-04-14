@@ -1,0 +1,345 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Database Upgrade Matrix</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Administration and Operations Guide">
+<link rel="up" href="dbupgrade_matrix.html" title="Appendix H. V6 to V7 DB Upgrade">
+<link rel="prev" href="dbupgrade_matrix.html" title="Appendix H. V6 to V7 DB Upgrade">
+<link rel="copyright" href="ln-idm45897460092640.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">Database Upgrade Matrix</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="dbupgrade_matrix.html">Prev</a> </td>
+<th width="60%" align="center">Appendix H. V6 to V7 DB Upgrade</th>
+<td width="20%" align="right"> </td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Administration and Operations Guide</a></span> &gt; <span class="breadcrumb-link"><a href="dbupgrade_matrix.html">V6 to V7 DB Upgrade</a></span> &gt; <span class="breadcrumb-node">Database Upgrade Matrix</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="GTMupdsumm"></a>Database Upgrade Matrix</h2></div></div></div>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                                                               </th>
+<th colspan="2">                                </th>
+<th colspan="3">
+              <p>NEW FUNCTIONALITY</p>
+            </th>
+<th>
+                                </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+              <p>
+                <span class="bold"><strong>GT.M Version</strong></span>
+              </p>
+            </td>
+<td>
+              <p>up to V6.3-014</p>
+            </td>
+<td>
+              <p>V6.0-000 and up</p>
+            </td>
+<td colspan="3">
+              <p>V7.1-000 and up</p>
+            </td>
+<td>
+              <p>V7.0-000 and up</p>
+            </td>
+</tr>
+<tr>
+<td>
+                                                                        </td>
+<td>
+              <p>MUPIP SET -VERSION</p>
+              <p>MUPIP REORG -UPGRADE or -DOWNGRADE</p>
+            </td>
+<td>
+                                                                        </td>
+<td colspan="2">
+              <p>MUPIP UPGRADE</p>
+            </td>
+<td>
+              <p>MUPIP REORG -UPGRADE</p>
+            </td>
+<td>
+                                                                        </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <span class="bold"><strong>Block version</strong></span>
+              </p>
+            </td>
+<td colspan="2">
+              <p>V6</p>
+            </td>
+<td>
+              <p>V6p</p>
+            </td>
+<td>
+              <p>V7m</p>
+            </td>
+<td>
+              <p>V7m</p>
+            </td>
+<td>
+              <p>V7</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <span class="bold"><strong>Upgrade State</strong></span>
+              </p>
+            </td>
+<td>
+              <p>"Fully Upgraded" to V6 is FALSE indicating the presence of V4 blocks.</p>
+              <p>This database is ineligible to upgrade to V7.</p>
+            </td>
+<td>
+              <p>"Fully Upgraded" to V6 is TRUE indicating that all blocks in the database are V6</p>
+            </td>
+<td>
+              <p>Phase 1 starting transitional state. Blocks in this format have the offset applied to 4 byte block pointers</p>
+            </td>
+<td>
+              <p>Phase 1 complete. Directory tree blocks upgraded to 8 byte block pointers</p>
+            </td>
+<td>
+              <p>Phase 2 complete:index blocks upgraded with 8 byte block pointers with an unknown mix of V6 data and local bit map blocks</p>
+            </td>
+<td>
+              <p>Fully Upgraded to V7 indicating that all blocks in the database are V7</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <span class="bold"><strong>Desired DB Format</strong></span>
+              </p>
+            </td>
+<td colspan="2">
+              <p>V6</p>
+            </td>
+<td>
+              <p>V6p</p>
+            </td>
+<td>
+              <p>V7m</p>
+            </td>
+<td>
+              <p>V7m</p>
+            </td>
+<td>
+              <p>V7</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <span class="bold"><strong>Starting VBN</strong></span>
+              </p>
+            </td>
+<td>
+              <p>V4 - 49V5 - 129V6 - 513</p>
+            </td>
+<td>
+              <p>V4 - 49V5 - 129V6 - 513</p>
+            </td>
+<td>
+              <p>Variable</p>
+            </td>
+<td>
+              <p>Variable</p>
+            </td>
+<td>
+              <p>Variable</p>
+            </td>
+<td>
+              <p>V7 - 8193</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <span class="bold"><strong>DB Block Mix</strong></span>
+              </p>
+            </td>
+<td>
+              <p>Mix of V4 and V6 blocks - not eligible for upgrade</p>
+            </td>
+<td>
+              <p>V6 only</p>
+            </td>
+<td>
+              <p>V7m (directory tree)V6p (some GVT index blocks)V6 index and data blocks</p>
+            </td>
+<td>
+              <p>V7m index blocks Tracked quantity of V6 data blocks Unknown quantity of local bit map blocks</p>
+            </td>
+<td>
+              <p>V7m index blocks Tracked quantity of V6 data blocks Unknown quantity of local bit map blocks</p>
+            </td>
+<td>
+              <p>V7 only</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <span class="bold"><strong>Index Block "pointer"</strong></span>
+              </p>
+            </td>
+<td colspan="3">
+              <p>(block_id_32) 4 bytes - 30 bits usable</p>
+            </td>
+<td>
+              <p>(block_id_32) and (block_id_64)</p>
+            </td>
+<td colspan="2">
+              <p>(block_id_64)8 bytes - 62 bits usable</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <span class="bold"><strong>Block header</strong></span>
+              </p>
+            </td>
+<td>
+              <p>V4 is different from V6</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <span class="bold"><strong>Record header</strong></span>
+              </p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <span class="bold"><strong>Data Block</strong></span>
+              </p>
+            </td>
+<td>
+              <p>V4 is different from V6</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <span class="bold"><strong>Local bit map</strong></span>
+              </p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+<td>
+              <p>No change</p>
+            </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="dbupgrade_matrix.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="dbupgrade_matrix.html">Up</a></td>
+<td width="40%" align="right"> </td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Appendix H. V6 to V7 DB Upgrade </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> </td>
+</tr>
+</table>
+</div>
+</body>
+</html>
