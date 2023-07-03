@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s25.html" title="$ZCMdline">
 <link rel="next" href="ch08s27.html" title="$ZCstatus">
-<link rel="copyright" href="ln-idm45629874125488.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,12 +30,11 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zcompile_unix"></a>$ZCOmpile<a class="indexterm" name="idm45629869165280"></a>
+<a name="zcompile_unix"></a>$ZCOmpile<a class="indexterm" name="idm46057739021296"></a>
 </h2></div></div></div>
-<p>$ZCO[MPILE] contains a string value composed of one or more qualifiers that control the GT.M compiler. Explicit ZLINKs and auto-ZLINKs use these qualifiers as defaults for any compilations that they perform.</p>
+<p>$ZCO[MPILE] contains a string value composed of one or more qualifiers that control the GT.M run-time compiler. ZCOMPILE, explicit ZLINKs and auto-ZLINKs use these qualifiers as defaults for any compilations they perform.</p>
 <p>$ZCOMPILE is a read-write ISV, that is, it can appear on the left side of the equal sign (=) in the argument to the SET command. A $ZCOMPILE value has the form of a list of M command qualifiers each separated by a space ( ).</p>
-<p>When the environment variable gtmcompile is defined, GT.M initializes $ZCOMPILE to the translation of gtmcompile. Otherwise GT.M initializes $ZCOMPILE to null. Changes to the value of $ZCOMPILE during a GT.M invocation only last for the current invocation and do not change the value of the environment variable gtmcompile.</p>
-<p>ZCOMPILE returns a status of 1 after any error in compilation.</p>
+<p>When the gtmcompile environment variable is defined, GT.M initializes $ZCOMPILE to the translation of $gtmcompile. Otherwise GT.M initializes $ZCOMPILE to null. Changes to the value of $ZCOMPILE during a GT.M invocation only last for the current invocation and do not change the value of the $gtmcompile environment variable.</p>
 <p>When $ZCOMPILE is null, GT.M uses the default M command qualifiers -IGNORE, -LABEL=LOWER, -NOLIST, and -OBJECT. <span>See <a class="xref" href="ch03.html" title="Chapter 3. Development Cycle">Chapter 3: &#8220;<i><span>Development</span> Cycle</i>&#8221;</a> for detailed descriptions of the M command qualifiers.</span></p>
 <p>Example:</p>
 <pre class="programlisting">$ export gtmcompile="-LIST -LENGTH=56 -SPACE=2"

@@ -8,7 +8,7 @@
 <link rel="up" href="ch10.html" title="Chapter 10. Database Structure Editor">
 <link rel="prev" href="ch10.html" title="Chapter 10. Database Structure Editor">
 <link rel="next" href="dse_cmmds_quals.html" title="DSE Commands and Qualifiers">
-<link rel="copyright" href="ln-idm45897460092640.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45367108088576.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,10 +29,10 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="operate_in_dse"></a><span>Operating in DSE</span><a class="indexterm" name="idm45897452212016"></a>
+<a name="operate_in_dse"></a><span>Operating in DSE</span><a class="indexterm" name="idm45367100213408"></a>
 </h2></div></div></div>
 <p>The GT.M Database Structure Editor, DSE, is primarily a tool for authorized GT.M consultants to examine and, under unusual circumstances, repair GT.M Database Structure (GDS) databases. With DSE, it is possible to see and change most of the attributes of a GT.M database.</p>
-<p>DSE gives all possible control over a database and therefore, it may cause irreparable damage when used without knowing the consequences. Therefore, you unless you have extensive experience, you should always get guidance from FIS or an equivalently knowledgeable support  resource before running any DSE command that changes any attribute of any production database or other database you value. However, you can use those DSE commands that let you see the attributes of your database for collecting database metrics and monitoring status.</p>
+<p>DSE gives all possible control over a database and therefore, it may cause irreparable damage when used without knowing the consequences. Therefore, you unless you have extensive experience, you should always get guidance from FIS or an equivalently knowledgeable support resource before running any DSE command that changes any attribute of any production database or other database you value. Use utilities and commands like %PEEKBYNAME, MUPIP DUMPFHEAD, GVSTATS, %YGBLSTAT, etc. Only use DSE for collecting database metrics and monitoring status in an unusual situation where safer tools are unavailable. </p>
 <p>GT.M installation procedure places the DSE utility program in a directory specified by the <span>environment variable gtm_dist</span>.</p>
 <p>Invoke DSE using the <span>"dse" command at the shell prompt</span>. If this does not work, consult your system manager to investigate setup and file access issues.</p>
 <p>Example:</p>
@@ -48,8 +48,7 @@ DSE&gt;</pre>
 <pre class="programlisting">$gtm_dist/dse dump <span>-</span>fileheader     </pre>
 <p>This command displays the fileheader of the region that stands first in the list of regions arranged in alphabetical order and then returns to the shell prompt. To look at other regions, at the DSE prompt you must first issue a FIND <span>-</span>REGION=&lt;desired-region&gt; command.</p>
 <p>As previously mentioned, DSE provides control over most of the attributes of your database. With DSE, it is possible to examine them and,with a few exceptions, change them.</p>
-<p>All DSE commands are divided into two categories-Change commands and Inquiry commands. Change commands allow you to modify the attribute of your database, in most cases without any warning or error. As the low level tool of last resort, Change commands allow you to take certain actions that can cause extensive damage when undertaken without an extensive understanding of the underlying data structures on disk and in memory and with an imperfect understanding of the commands issued.  Do not use the Change commands unless you know exactly what you are doing and have taken steps to protect yourself against mistakes, both inadvertent and resulting from an incomplete understanding of the commands you issue. Change commands are not required for normal operation, and are usually only used under the direction of FIS support to recover from the unanticipated consequences of failures not adequately planned for (for example, you should configure GT.M applications such that you never need a Change command to recover from a system crash).</p>
-<p>Inquiry commands let you see the attributes of your database. You may frequently use the inquiry commands for collecting your database metrics and status reporting.</p>
+<p>All DSE commands are divided into two categories-Change commands and Inquiry commands. Change commands allow you to modify the attribute of your database, in most cases without any warning or error. As the low level tool of last resort, Change commands allow you to take certain actions that can cause extensive damage when undertaken without an extensive understanding of the underlying data structures on disk and in memory and with an imperfect understanding of the commands issued.  Do not use the Change commands unless you know exactly what you are doing and have taken steps to protect yourself against mistakes, both inadvertent and resulting from an incomplete understanding of the commands you issue. Change commands are not required for normal operation, and are usually only used under the direction of FIS support to recover from the unanticipated consequences of failures not adequately planned for (for example, you should configure GT.M applications such that you never need a Change command to recover from a system crash). Use Inquiry commands sparingly and only when there is no alternate available. </p>
 <p>The list of Change commands is as follows:</p>
 <pre class="programlisting">AD[D]
 AL[L]

@@ -8,7 +8,7 @@
 <link rel="up" href="ch03.html" title="Chapter 3. Basic Operations">
 <link rel="prev" href="ch03s04.html" title="Starting GT.M">
 <link rel="next" href="ch03s06.html" title="Configuring the Restriction facility">
-<link rel="copyright" href="ln-idm45897460092640.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45367108088576.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="conf_huge_pgs"></a>Configuring huge pages for GT.M x86[-64] on Linux<a class="indexterm" name="idm45897459105248"></a><a class="indexterm" name="idm45897459132032"></a>
+<a name="conf_huge_pgs"></a>Configuring huge pages for GT.M x86[-64] on Linux<a class="indexterm" name="idm45367107096064"></a><a class="indexterm" name="idm45367107122176"></a>
 </h2></div></div></div>
 <p>Huge pages are a Linux feature that may improve the performance of GT.M applications in production. Huge pages create a single page table entry for a large block (typically 2MiB) of memory in place of hundreds entries for many smaller (typically 4KiB) blocks. This reduction of memory used for page tables frees memory for other uses, such as file system caches, and increases the probability of TLB (translation lookaside buffer) matches, both of which can improve performance. The performance improvement related to reducing the page table size becomes evident when many processes share memory as they do for global buffers, journal buffers, and replication journal pools. Configuring huge pages on Linux for x86 or x86_64 CPU architectures help improve:</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">

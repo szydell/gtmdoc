@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s15.html" title="New">
 <link rel="next" href="ch06s17.html" title="Quit">
-<link rel="copyright" href="ln-idm45629874125488.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,7 +30,7 @@
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="open_cmmd"></a>Open</h2></div></div></div>
-<a class="indexterm" name="idm45629871564496"></a><p>The OPEN command creates a connection between a GT.M process and a device.</p>
+<a class="indexterm" name="idm46057741340624"></a><p>The OPEN command creates a connection between a GT.M process and a device.</p>
 <p>The format of the OPEN command is:</p>
 <pre class="programlisting">O[PEN][:tvexpr] expr[:[(keyword[=expr][:...])] [:numexpr]][,...]</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -40,7 +40,7 @@
 <li class="listitem"><p>The optional numeric expression specifies a time in seconds after which the command should timeout if unsuccessful; choosing 0 results in a single attempt to open the device.</p></li>
 <li class="listitem"><p>When an OPEN command specifying a timeout contains no deviceparameters, double colons (::) separate the timeout numeric expression from the device expression.</p></li>
 <li class="listitem"><p>An indirection operator and an expression atom evaluating to a list of one or more OPEN arguments form a legal argument for an OPEN.</p></li>
-<li class="listitem"><p>In UTF-8 mode, the OPEN command recognizes the ICHSET, OCHSET, and CHSET deviceparameters to determine the encoding of the the input / output devices. </p></li>
+<li class="listitem"><p>In UTF-8 mode, the OPEN command recognizes the ICHSET, OCHSET, and CHSET deviceparameters to determine the encoding of the input / output devices. </p></li>
 <li class="listitem"><p>OPEN on a directory produces a GTMEISDIR error in both READONLY and NOREADONLY modes along with the directory name which failed to open. UNIX directories contain metadata that is only available to the file system. Note that you can use the ZSEARCH() function to identify files in a directory, and you can call the POSIX stat() function to access metadata. The optional GT.M POSIX plug-in packages the stat() function for easy access from M application code.</p></li>
 </ul></div>
 <div class="informaltable"><table border="0">

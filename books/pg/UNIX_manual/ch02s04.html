@@ -8,7 +8,7 @@
 <link rel="up" href="ch02.html" title="Chapter 2. GT.M Language Extensions">
 <link rel="prev" href="ch02s03.html" title="Exception Handling Facilities">
 <link rel="next" href="ch02s05.html" title="Extensions For Additional Capability">
-<link rel="copyright" href="ln-idm45629874125488.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="jrnl_ext"></a>Journaling Extensions<a class="indexterm" name="idm45629873944672"></a>
+<a name="jrnl_ext"></a>Journaling Extensions<a class="indexterm" name="idm46057743696704"></a>
 </h2></div></div></div>
 <p>Journaling records redundant copies of database update information to increase protection against loss of information due to hardware and software failure. In GT.M, TSTART and TCOMMIT mark the beginning and end of an application (logical) transaction, which may consist of multiple global variable updates. When a TCOMMIT takes $TLEVEL from one (1) to zero (0), it transfer all of the transaction updates to the journal file, and, except if TRANSACTIONID="BATCH", returns control to the application only after the associated records reach the secondary storage holding the journal file.</p>
 <p>The following table summarizes the GT.M language extensions for journaling.</p>

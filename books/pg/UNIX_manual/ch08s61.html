@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s60.html" title="$ZTExit">
 <link rel="next" href="ch08s62.html" title="$ZTrap">
-<link rel="copyright" href="ln-idm45629874125488.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -37,13 +37,13 @@
 <li class="listitem"><p>The optional timeout in seconds specifies with millisecond accuracy how long from the current time the timer interrupts the process. If the specified timeout is negative, GT.M cancels the timer. If the timeout is zero, GT.M treats it as it would a DO of the vector. </p></li>
 <li class="listitem"><p>The optional labelref specifies a code vector defining a fragment of M code to which GT.M transfers control as if with a DO when the timeout expires. If the timeout is missing, the assignment must start with a colon and only changes the vector, and in this case, if the timeout is the empty string, GT.M removes any current vector.</p></li>
 </ul></div>
-<p>Note that GT.M only recognizes interrupts such as from $ZTIMEOUT at points where it can properly resume operation, such as the beginning of a line, when waiting on a command with a timeout, or when starting a FOR iteration. When a timeout occurs, if the last assignment specified no vector, GT.M uses the current $ETRAP or $ZTRAP. When a $ZTIMEOUT expires, it invokes one of three possible vectors:</p>
+<p>Note that GT.M only recognizes interrupts such as from $ZTIMEOUT at points where it can properly resume operation, such as the beginning of a line, when waiting on a command with a timeout, or when starting a FOR iteration. GT.M defers recognition of a $ZTIMEOUT arriving while executing a TP transaction until after a TROLLBACK or the "master" TCOMMIT. When a timeout occurs, if the last assignment specified no vector, GT.M uses the current $ETRAP or $ZTRAP. When a $ZTIMEOUT expires, it invokes one of three possible vectors:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">Its own labelref, which creates a new stack frame, from which it returns to the point at which it was recognized - similar to what happens for $ZINTERUPT when it recognizes a MUPIP INTRPT; see WARNING below</li>
-<li class="listitem">If labelref is not specified and $ETRAP is specified, it envokes the $ETRAP code, which it acts like an error and operates as if in the current frame, implicitly dropping the current frame when the $ETRAP vector processing completes</li>
-<li class="listitem">If labelref is not specified and $ZTRAP is specified, it invokes the $ZTRAP code, acting like an error whose behavior is subject to $gtm_ztrap_form; for additional information, refer to the $ZTRAP documentation</li>
+<li class="listitem"><p>Its own labelref, which creates a new stack frame, from which it returns to the point at which it was recognized - similar to what happens for $ZINTERUPT when it recognizes a MUPIP INTRPT; see WARNING below</p></li>
+<li class="listitem"><p>If labelref is not specified and $ETRAP is specified, it envokes the $ETRAP code, which it acts like an error and operates as if in the current frame, implicitly dropping the current frame when the $ETRAP vector processing completes</p></li>
+<li class="listitem"><p>If labelref is not specified and $ZTRAP is specified, it invokes the $ZTRAP code, acting like an error whose behavior is subject to $gtm_ztrap_form; for additional information, refer to the $ZTRAP documentation</p></li>
 </ul></div>
-<p>In all cases the invoked code can alter the behavior using the tools at its disposal - e.g. GOTO, ZGOTO, $ECODE, etc.</p>
+<p>In all cases the invoked code can alter the behavior using the tools at its disposal - for example, GOTO, ZGOTO, $ECODE, etc.</p>
 <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Warning">
 <tr>
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>

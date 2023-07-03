@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s34.html" title="ZGoto">
 <link rel="next" href="ch06s36.html" title="ZHelp">
-<link rel="copyright" href="ln-idm45629874125488.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -37,11 +37,11 @@
 <li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether GT.M executes the command.</p></li>
 <li class="listitem"><p>The optional integer expression specifies the return code. If an integer expression is not specified, ZHALT returns 0. Because UNIX limits return codes to zero through 255, ZHALT returns intexpr modulo 256, unless the intexpr is non-zero but the intexpr modulo 256 is zero, in which case ZHALT returns a (non-success) value of 255 so that the return code is non-zero.</p></li>
 <li class="listitem"><p>If no arguments are specified, at least two (2) spaces must follow the command to separate it from the next command on the line. Note that additional commands do not serve any purpose unless the ZHALT has a postconditional.</p></li>
-<li class="listitem"><p>A ZHALT releases all shared resources held by the process, such as devices OPENed in GT.M, databases, and GT.M LOCKs. If the the process has an active M transaction (the value of $TLEVEL is greater than zero (0)), GT.M performs a ROLLBACK prior to terminating.</p></li>
+<li class="listitem"><p>A ZHALT releases all shared resources held by the process, such as devices OPENed in GT.M, databases, and GT.M LOCKs. If the process has an active M transaction (the value of $TLEVEL is greater than zero (0)), GT.M performs a ROLLBACK prior to terminating.</p></li>
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="idm45629871134528"></a>Examples<span> of ZHALT</span>
+<a name="idm46057740820480"></a>Examples<span> of ZHALT</span>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;zhalt 230

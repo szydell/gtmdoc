@@ -8,13 +8,12 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="NOPREVLINK.html" title="NOPREVLINK ">
 <link rel="next" href="NORECVPOOL.html" title="NORECVPOOL ">
-<link rel="copyright" href="ln-idm46147473836112.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45455676894224.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">NOPRINCIO <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
-</th></tr>
+<tr><th colspan="3" align="center">NOPRINCIO </th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="NOPREVLINK.html">Prev</a> </td>
@@ -26,16 +25,15 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">NOPRINCIO <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span></span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">NOPRINCIO </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="NOPRINCIO"></a>NOPRINCIO <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
-</h2></div></div></div>
+<a name="NOPRINCIO"></a>NOPRINCIO </h2></div></div></div>
 <p><span class="bold"><strong>NOPRINCIO</strong></span>, Unable to dddd principal device: DDDD at LLLL due to: SSSS</p>
 <p>Run Time Fatal: This indicates that GT.M attempted to, but could not, READ from, or WRITE to (direction indicated by dddd), the PRINCIPAL device, and therefore attempted to issue an appropriate error, for example, an IOEOF, TERMHANGUP, or TERMWRITE at location LLLL, with a status of SSSS. However, if the error handling does not prevent any and all subsequent READs and WRITEs to the no longer available PRINCIPAL device, the next subsequent I/O error shuts down the process immediately to prevent mysteriously lost output, or, worse, an indefinite loop. The NOPRINCIO message appears in the operator log</p>
 <p>Action: The NOPRINCIO error message is FATAL which does not drive device or trap handlers and terminates the process. This termination does not allow any application level orderly shutdown and, depending on the application, may lead to out-of-design application state. Therefore FIS recommends appropriate application level error handling that recognizes the preceding error and performs an orderly shutdown without issuing any additional READ or WRITE to the principal device. The most common causes for the principal device to cease to exist involve terminal sessions or socket connections (including those from processes started by inetd/xinetd). When the remote client terminates the connection, the underlying PRINCIPAL device becomes inaccessible making any subsequent attempt to READ from, or WRITE to, it hopeless. In the case of terminals, a user closing the window of a session without cleanly exiting from the GT.M process sets up the case that can drive this error. GT.M does not issue NOPRINCIO errors from Direct Mode, because it is a developer tool, or at the completion of a HEREDOC in a shell script. However, this means a HEREDOC must use ZHALT to return a specific status to the shell, and that a $ETRAP that bounces a process into Direct Mode terminates without evidence.</p>
-<a class="indexterm" name="idm46147469497536"></a>
+<a class="indexterm" name="idm45455672595280"></a>
 </div>
 <div class="navfooter">
 <hr>
