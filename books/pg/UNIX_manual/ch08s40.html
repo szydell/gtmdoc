@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZKey</title>
+<title>$ZJob</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s39.html" title="$ZJob">
-<link rel="next" href="ch08s41.html" title="$ZLevel">
-<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
+<link rel="prev" href="ch08s39.html" title="$ZIO">
+<link rel="next" href="ch08s41.html" title="$ZKey">
+<link rel="copyright" href="ln-idm45819035664320.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZKey</th></tr>
+<tr><th colspan="3" align="center">$ZJob</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s39.html">Prev</a> </td>
@@ -26,25 +26,15 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZKey</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZJob</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zkey"></a>$ZKey</h2></div></div></div>
-<p>For Socket devices:</p>
-<p>$ZKEY contains a list of sockets in the current SOCKET device which are ready for use. Its contents include both non selected but ready sockets from the prior WRITE /WAITs and any sockets with unread data in their GT.M buffer. $ZKEY can be used any time a SOCKET device is current. Once an incoming socket (that is, "LISTENING") has been accepted either by being selected by WRITE /WAIT or by USE socdev:socket="listeningsocket", it is removed from $ZKEY.</p>
-<p>$ZKEY contains any one of the following values:</p>
-<pre class="programlisting">"LISTENING|&lt;listening_socket_handle&gt;|{&lt;portnumber&gt;|&lt;/path/to/LOCAL_socket&gt;}"</pre>
-<pre class="programlisting">"READ|&lt;socket_handle&gt;|&lt;address&gt;"</pre>
-<pre class="programlisting">"WRITE|&lt;socket_handle&gt;|&lt;address&gt;"</pre>
-<p>If $ZKEY contains one or more "READ|&lt;socket_handle&gt;|&lt;address&gt;" entries, it means there are ready to READ sockets that were selected by WRITE /WAIT or were partially read and there is data left in their buffer. Each entry is delimited by a ";".</p>
-<p>If $ZKEY contains one or more "LISTENING|&lt;listening_socket_handle&gt;|{&lt;portnumber|/path/to/LOCAL_socket&gt;}" entries, it means that there are pending connections and a USE s:socket=listening_socket_handle will accept a pending connection and remove the LISTENING|&lt;listening_socket_handle&gt; entry from $ZKEY.</p>
-<p>If $ZKEY contains one or more "WRITE|&lt;socket_handle&gt;|&lt;address&gt;" entries, it means
-that the prior WRITE /WAIT considered the non-blocking sockets writeable. This is likely to be the case most of the time. If $ZKEY contains one WRITE and one READ entry, it means that the non-blocking socket is both readable and writeable.</p>
-<p>$ZKEY is empty if no sockets have data in the buffer and there are no unaccepted incoming sockets from previous WRITE /WAITs.</p>
-<p>For Sequential File Device:</p>
-<p>$ZKEY contains the current position in the file based on the last READ. This is in bytes for STREAM and VARIABLE formats, and in a record,byte pair for FIXED format. For FIXED format, SEEKs and normal READs always produce a zero byte position; a non-zero byte position in $ZKEY for FIXED format operation indicates a partially read record, caused by a
-READ # or READ *. In FIXED mode, the information returned for $ZKEY is a function of record size, and, if a USE command changes record size by specifying the WIDTH deviceparameter while the file is open, $ZKEY offsets change accordingly; if record size changes, previously saved values of $ZKEY are likely inappropriate for use with SEEK. </p>
+<a name="zjob"></a>$ZJob<a class="indexterm" name="idm45819026061856"></a>
+</h2></div></div></div>
+<p>$ZJ[OB] holds the pid of the process created by the last JOB command performed by the current process.</p>
+<p>GT.M initializes $ZJOB to zero (0) at process startup. If the JOB command fails to spawn a new job, GT.M sets $ZJOB to zero (0). Note that because of the left to right evaluation order of M, using $ZJOB in the jobparameter string results in using the value created by the last, rather than the current JOB command, which is not likely to match common coding practice.</p>
+<p>GT.M does not permit the SET or NEW command to modify $ZJOB.</p>
 </div>
 <div class="navfooter">
 <hr>
@@ -57,9 +47,9 @@ READ # or READ *. In FIXED mode, the information returned for $ZKEY is a functio
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZJob </td>
+<td width="40%" align="left" valign="top">$ZIO </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZLevel</td>
+<td width="40%" align="right" valign="top"> $ZKey</td>
 </tr>
 </table>
 </div>

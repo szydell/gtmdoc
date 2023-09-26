@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZMALLoclim</title>
+<title>$ZLevel</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s41.html" title="$ZLevel">
-<link rel="next" href="ch08s43.html" title="$ZMAXTPTIme">
-<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
+<link rel="prev" href="ch08s41.html" title="$ZKey">
+<link rel="next" href="ch08s43.html" title="$ZMALLoclim">
+<link rel="copyright" href="ln-idm45819035664320.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZMALLoclim</th></tr>
+<tr><th colspan="3" align="center">$ZLevel</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s41.html">Prev</a> </td>
@@ -26,16 +26,34 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZMALLoclim</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZLevel</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zmalloclim"></a>$ZMALLoclim<a class="indexterm" name="idm46057738914192"></a>
+<a name="zlevel"></a>$ZLevel<a class="indexterm" name="idm45819025992464"></a>
 </h2></div></div></div>
-<p>$ZMALL[OCLIM] contains an integer value specifying a number of bytes of process memory, which, if exceeded, cause GT.M to issue a MALLOCCRIT error. When the value is zero (0), GT.M imposes no limit, although the OS still does. A positive value specifies a byte limit with a minimum of 2.5MB. A value of minus one (-1) provides a value of half the system imposed limit if any. </p>
-<p>When a request for additional memory exceeds the limit, GT.M does the expansion and then produces trappable MALLOCCRIT warning. By default, some later request for memory is likely to produce a fatal MEMORY error, unless subsequent to MALLOCCRIT, a limit has been reestablished by SET ZMALLOCLIM to the same or higher limit, but one not exceeding any system limit.</p>
-<p>Note that GT.M allocates memory from the OS in large blocks so the interaction of $ZMALLOCLIM with memory growth is not exact. MEMORY errors are fatal and terminate the process. In the case of a MEMORY error, GT.M makes an attempt to marshal available memory to enable as graceful a termination as possible. Note that independent of this mechanism, the OS may kill the process without recourse if it determines the greed of the process for memory jeopardizes the viability of the system. </p>
-<p>When the integer byte value specified in a SET $ZMALLOCLIN=intexpr or, at process startup, by the $gtm_malloc_limit environment variable specifies a positive value, GT.M uses the smaller of that value and any OS defined amount for the value of $ZMALLOCLIM. GT.M does not give errors or messages about its choice for $ZMALLOCLIM between a specified value and some other more appropriate value, so if the application needs to verify the result, it should examine the resulting ISV value. </p>
+<p>$ZL[EVEL] contains an integer value indicating the "level of nesting" caused by DO commands, XECUTE commands, and extrinsic functions in the M invocation stack.</p>
+<p>$ZLEVEL has an initial value of one (1) and increments by one with each DO, XECUTE or extrinsic function. Any QUIT that does not terminate a FOR loop decrements $ZLEVEL. ZGOTO may also reduce $ZLEVEL. In accordance with the M standard, a FOR command does not increase $ZLEVEL. M routines cannot modify $ZLEVEL with the SET or NEW commands.</p>
+<p>Use $ZLEVEL in debugging or in an error-handling mechanism to capture a level for later use in a ZGOTO argument.</p>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;zprint ^zleve
+zleve;
+ do B
+ write X,!
+ quit
+B
+ goto C
+ quit
+C
+ do D
+ quit
+D
+ set X=$ZLEVEL
+ quit
+GTM&gt;do ^zleve
+4
+GTM&gt;</pre>
+<p>This program, executed from Direct Mode, produces a value of 4 for $ZLEVEL. If you run this program from the shell, the value of $ZLEVEL is three (3). </p>
 </div>
 <div class="navfooter">
 <hr>
@@ -48,9 +66,9 @@
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZLevel </td>
+<td width="40%" align="left" valign="top">$ZKey </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZMAXTPTIme</td>
+<td width="40%" align="right" valign="top"> $ZMALLoclim</td>
 </tr>
 </table>
 </div>

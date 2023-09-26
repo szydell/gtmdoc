@@ -8,7 +8,7 @@
 <link rel="up" href="monitoring_gtm.html" title="Appendix B. Monitoring GT.M">
 <link rel="prev" href="monitoring_gtm.html" title="Appendix B. Monitoring GT.M">
 <link rel="next" href="apbs02.html" title="Managing core dumps">
-<link rel="copyright" href="ln-idm45367108088576.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45622523859200.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="GTM_Monitoring"></a>Monitoring GT.M Messages<a class="indexterm" name="idm45367097301920"></a>
+<a name="GTM_Monitoring"></a>Monitoring GT.M Messages<a class="indexterm" name="idm45622513128480"></a>
 </h2></div></div></div>
 <p>This section covers information on monitoring GT.M messages. There are several types of messages.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -115,7 +115,7 @@ Journal Pool</p></th>
 </tr>
 </tbody>
 </table></div>
-<a class="indexterm" name="idm45367097240544"></a><p>In addition to messages in the system log, and apart from database files and files created by application programs, GT.M creates several types of files: journal files, replication log files, gtmsecshr log files, inter-process communication socket files, files from recovery / rollback and output and error files from JOB'd processes. You should develop a review and retention policy. Journal files and files from recovery / rollback are likely to contain sensitive information that may require special handling to meet business or legal requirements. Monitor all of these files for growth in file numbers or size that is materially different than expectations set by the baseline. In particular, monitoring file sizes is computationally inexpensive and regular monitoring - once an hour, for example - is easily accomplished with the system crontab.</p>
+<a class="indexterm" name="idm45622513066992"></a><p>In addition to messages in the system log, and apart from database files and files created by application programs, GT.M creates several types of files: journal files, replication log files, gtmsecshr log files, inter-process communication socket files, files from recovery / rollback and output and error files from JOB'd processes. You should develop a review and retention policy. Journal files and files from recovery / rollback are likely to contain sensitive information that may require special handling to meet business or legal requirements. Monitor all of these files for growth in file numbers or size that is materially different than expectations set by the baseline. In particular, monitoring file sizes is computationally inexpensive and regular monitoring - once an hour, for example - is easily accomplished with the system crontab.</p>
 <p>While journal files automatically switch to new files when the limit is reached, log files can grow unchecked. You should periodically check the sizes of log files and switch them when they get large - or simply switch them on a regular schedule.</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">

@@ -8,7 +8,7 @@
 <link rel="up" href="mupipchap.html" title="Chapter 5. General Database Management">
 <link rel="prev" href="gdm.html" title="Commands and Qualifiers">
 <link rel="next" href="journaling.html" title="Chapter 6. GT.M Journaling">
-<link rel="copyright" href="ln-idm45367108088576.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45622523859200.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,7 +30,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="mupip_cmmd_summ"></a><span>MUPIP Command </span>Summary<a class="indexterm" name="idm45367104747632"></a>
+<a name="mupip_cmmd_summ"></a><span>MUPIP Command </span>Summary<a class="indexterm" name="idm45622520211536"></a>
 </h2></div></div></div>
 <div class="informaltable">
 <a name="tblmupcmdsumm"></a><table border="1">
@@ -169,7 +169,7 @@
 <tr>
 <td><p>DO[WNGRADE]</p></td>
 <td><p>file-name</p></td>
-<td><p>-V[ERSION]={V4|V5}</p></td>
+<td><p>-V[ERSION]=V5</p></td>
 <td><p>-V7.0-000</p></td>
 <td><p>Y</p></td>
 </tr>
@@ -384,6 +384,13 @@
 <tr>
 <td> </td>
 <td> </td>
+<td><p>-DMAXBLOCKSIZE=integer</p></td>
+<td><p>V7.1-002</p></td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
 <td><p>-FA[ST]</p></td>
 <td> </td>
 <td> </td>
@@ -400,6 +407,13 @@
 <td> </td>
 <td><p>-FU[LL]</p></td>
 <td> </td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td><p>-IMAXBLOCKSIZE=integer</p></td>
+<td><p>V7.1-002</p></td>
 <td> </td>
 </tr>
 <tr>
@@ -617,7 +631,14 @@
 <tr>
 <td> </td>
 <td> </td>
-<td><p>-FI[LL_FACTOR]=integer</p></td>
+<td><p>-FILL[_FACTOR]=integer</p></td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td><p>-FILE=file-name</p></td>
 <td> </td>
 <td> </td>
 </tr>
@@ -633,6 +654,13 @@
 <td> </td>
 <td><p>-K[EEP]={pct%|blocks}</p></td>
 <td><p>V6.3-009</p></td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td><p>-MIN[_LEVEL]=integer</p></td>
+<td><p>V7.1-002</p></td>
 <td> </td>
 </tr>
 <tr>
@@ -817,9 +845,16 @@
 <tr>
 <td> </td>
 <td> </td>
+<td><p>-DATA_[RESERVED_BYTES]=integer</p></td>
+<td><p>V7.1-002</p></td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
 <td><p>-[NO]DE[FER_TIME][=seconds]</p></td>
 <td> </td>
-<td><p>Y</p></td>
+<td><p></p></td>
 </tr>
 <tr>
 <td> </td>
@@ -876,6 +911,13 @@
 <td> </td>
 <td><p>-H[ARD_SPIN_COUNT]=integer</p></td>
 <td><p>V6.3-003</p></td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td><p>-INDEX_[RESERVED_BYTES]=integer</p></td>
+<td><p>V7.1-002</p></td>
 <td> </td>
 </tr>
 <tr>
@@ -974,7 +1016,7 @@
 <td> </td>
 <td><p>-RES[ERVED_BYTES]=integer</p></td>
 <td> </td>
-<td><p>Y</p></td>
+<td> </td>
 </tr>
 <tr>
 <td> </td>
@@ -1021,7 +1063,7 @@
 <tr>
 <td> </td>
 <td> </td>
-<td><p>-V[ERSION]={V4|V6}</p></td>
+<td><p>-V[ERSION]={V5|V6}</p></td>
 <td><p>-V7.0-000</p></td>
 <td> </td>
 </tr>
@@ -1531,6 +1573,13 @@
 <tr>
 <td> </td>
 <td> </td>
+<td><p>-[NO]RECVBUFFSIZE[=integer]</p></td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
 <td><p>-NORESYNC</p></td>
 <td><p>V5.5-000</p></td>
 <td> </td>
@@ -1554,6 +1603,13 @@
 <td> </td>
 <td><p>-RSYNC_STRM=strm_num</p></td>
 <td><p>V5.5-000</p></td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td><p>-[NO]SENDBUFFSIZE[=integer]</p></td>
+<td> </td>
 <td> </td>
 </tr>
 <tr>
@@ -2190,7 +2246,7 @@
 <tr>
 <td> </td>
 <td> </td>
-<td><p>-BUFFSIZE=Buffer_size</p></td>
+<td><p>-BUFFSIZE=integer</p></td>
 <td> </td>
 <td> </td>
 </tr>
@@ -2323,6 +2379,13 @@
 <tr>
 <td> </td>
 <td> </td>
+<td><p>-[NO]RECVBUFFSIZE[=integer]</p></td>
+<td><p>V7.1-002</p></td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
 <td><p>-RENEGOTIATE_INTERVAL=minutes</p></td>
 <td> </td>
 <td> </td>
@@ -2339,6 +2402,13 @@
 <td> </td>
 <td><p>-SECONDARY=secondary_instance_name</p></td>
 <td> </td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td><p>-[NO]SENDBUFFSIZE[=integer]</p></td>
+<td><p>V7.1-002</p></td>
 <td> </td>
 </tr>
 <tr>
@@ -2413,7 +2483,7 @@
 </tr>
 <tr>
 <td>
-<p>-VERSION={V4|V5}</p>
+<p>-VERSION={V5|V6}</p>
 </td>
 <td>
 <p>DOWNGRADE</p>

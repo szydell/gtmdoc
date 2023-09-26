@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZPOSition</title>
+<title>$ZPIN</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s47.html" title="$ZPIN">
-<link rel="next" href="ch08s49.html" title="$ZPOUT">
-<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
+<link rel="prev" href="ch08s47.html" title="$ZPATNumeric">
+<link rel="next" href="ch08s49.html" title="$ZPOSition">
+<link rel="copyright" href="ln-idm45819035664320.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZPOSition</th></tr>
+<tr><th colspan="3" align="center">$ZPIN</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s47.html">Prev</a> </td>
@@ -26,17 +26,13 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZPOSition</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZPIN</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zposition"></a>$ZPOSition<a class="indexterm" name="idm46057738782064"></a>
-</h2></div></div></div>
-<p>$ZPOS[ITION] contains a string value specifying the current entryref, where entryref is [label][+offset]^routine, and the offset is evaluated from the closest preceding label.</p>
-<p>GT.M does not permit the SET or NEW commands to modify $ZPOSITION.</p>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;WRITE !,$ZPOS,! ZPRINT @$ZPOS</pre>
-<p>This example displays the current location followed by the source code for that line.</p>
+<a name="zpin"></a>$ZPIN</h2></div></div></div>
+<p>When $PRINCIPAL has different input/output devices, the USE command recognizes intrinsic special variable $ZPIN to apply appropriate deviceparameters to the input side of $PRINCIPAL. A USE with $ZPIN sets $IO to $PRINCIPAL for READs and WRITEs from the input and output side of $PRINCIPAL. $ZSOCKET() also accepts $ZPIN as its first argument and, if the device is a split SOCKET device, supplies information on the input SOCKET device.  In any context other than USE or $ZSOCKET(), or if $PRINCIPAL is not a split device, $PRINCIPAL, $ZPIN and $ZPOUT are synonyms. In the case of a split $PRINCIPAL, $ZPIN returns the value of $PRINCIPAL followed by the string "&lt; /"  Any attempt to OPEN $ZPIN results in a DEVOPENFAIL error. </p>
+<p>For more information refer to <a class="xref" href="isvprinc.html" title="$Principal">&#8220;$Principal&#8221;</a>, <a class="xref" href="ch08s50.html" title="$ZPOUT">&#8220;$ZPOUT&#8221;</a>, and <a class="xref" href="ch07s46.html" title="$ZSOCKET()">&#8220;$ZSOCKET()&#8221;</a>.</p>
 </div>
 <div class="navfooter">
 <hr>
@@ -49,9 +45,9 @@
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZPIN </td>
+<td width="40%" align="left" valign="top">$ZPATNumeric </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZPOUT</td>
+<td width="40%" align="right" valign="top"> $ZPOSition</td>
 </tr>
 </table>
 </div>

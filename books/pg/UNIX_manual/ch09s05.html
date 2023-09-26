@@ -8,7 +8,7 @@
 <link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
 <link rel="prev" href="ch09s04.html" title="Using Sequential Files">
 <link rel="next" href="ch09s06.html" title="Using Null Devices">
-<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45819035664320.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="fifo_characterstics"></a>FIFO Characteristics<a class="indexterm" name="idm46057737977184"></a>
+<a name="fifo_characterstics"></a>FIFO Characteristics<a class="indexterm" name="idm45819025172192"></a>
 </h2></div></div></div>
 <p>FIFOs have most of the same characteristics as other sequential files, except that READs and WRITEs can occur in any order.</p>
 <p>The following characteristics of FIFO behavior may be helpful in using them effectively.</p>
@@ -297,7 +297,7 @@
 <p>The default access permissions on a FIFO are the same as the mask settings of the process that created the FIFO. Use the SYSTEM, GROUP, WORLD, and UIC deviceparameters to specify FIFO access permissions. File permissions have no affect on a process that already has the FIFO open. </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="considerations_in_implementing_fifo"></a>Considerations in Implementing FIFOs<a class="indexterm" name="idm46057737853120"></a>
+<a name="considerations_in_implementing_fifo"></a>Considerations in Implementing FIFOs<a class="indexterm" name="idm45819025008768"></a>
 </h3></div></div></div>
 <p>As you establish FIFOs for interprocess communication, consider whether, and how, the following issues will be addressed:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
@@ -314,7 +314,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gtm_recognition_of_fifo"></a>GT.M Recognition of FIFOs<a class="indexterm" name="idm46057737695136"></a>
+<a name="gtm_recognition_of_fifo"></a>GT.M Recognition of FIFOs<a class="indexterm" name="idm45819024919408"></a>
 </h3></div></div></div>
 <p>Like a sequential file, the path of a FIFO is specified as an argument expression to the OPEN, USE, and CLOSE commands. A device OPENed with a FIFO deviceparameter becomes a FIFO unless another device of that name is already OPEN. In that case, OPENing a device that has previously been OPENed by another process as a FIFO causes the process (the process here is the process trying to open the FIFO) to attach to the existing FIFO.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
@@ -327,7 +327,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="fifo_device_examples"></a>FIFO Device Examples<a class="indexterm" name="idm46057737786000"></a>
+<a name="fifo_device_examples"></a>FIFO Device Examples<a class="indexterm" name="idm45819024987632"></a>
 </h3></div></div></div>
 <p>The following two examples represent a master/slave arrangement where the slave waits in a read state on the FIFO until the master sends it some data that it then processes.</p>
 <p>Example:</p>

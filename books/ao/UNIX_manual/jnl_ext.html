@@ -8,7 +8,7 @@
 <link rel="up" href="journaling.html" title="Chapter 6. GT.M Journaling">
 <link rel="prev" href="mup_journal.html" title="JOURNAL">
 <link rel="next" href="ch07.html" title="Chapter 7. Database Replication">
-<link rel="copyright" href="ln-idm45367108088576.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45622523859200.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,7 +30,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="journal_extract"></a><span>Journal </span>Extract Formats<a class="indexterm" name="idm45367103468176"></a>
+<a name="journal_extract"></a><span>Journal </span>Extract Formats<a class="indexterm" name="idm45622519175840"></a>
 </h2></div></div></div>
 <p>Journal EXTRACT files always start with a label to identify the format of the file.  Simple and detail EXTRACT files have different labels, and the labels are specific to a GT.M release.
   </p>
@@ -319,7 +319,7 @@ ALIGN    time\tnum\chksum\pid\clntpid</pre>
  <p><code class="code">ondskbver</code></p>
 </td>
 <td>
- <p>On disk block version of this block at the time of writing the PBLK or AIMG record. 0 =&gt; V4, 1 =&gt; V5.</p>
+ <p>On disk block version of this block at the time of writing the PBLK or AIMG record.</p>
 </td>
 </tr>
 <tr>
@@ -343,7 +343,7 @@ ALIGN    time\tnum\chksum\pid\clntpid</pre>
  <p><code class="code">blks2upgrd</code></p>
 </td>
 <td>
- <p># of new V4 format bitmap blocks created if opcode=4,5; csd-&gt;blks_to_upgrd if opcode=6</p>
+ <p># of V6 format index blocks csd-&gt;blks_to_upgrd if opcode=6</p>
 </td>
 </tr>
 <tr>

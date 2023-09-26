@@ -8,7 +8,7 @@
 <link rel="up" href="index.html" title="GT.M Administration and Operations Guide">
 <link rel="prev" href="ch09s04.html" title="Database Structure">
 <link rel="next" href="operate_dse.html" title="Operating in DSE">
-<link rel="copyright" href="ln-idm45367108088576.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45622523859200.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,10 +30,22 @@
 <div class="chapter">
 <div class="titlepage"><div>
 <div><h2 class="title">
-<a name="chj_db_structure_editor"></a>Chapter 10. Database Structure Editor<a class="indexterm" name="idm45367100498560"></a>
+<a name="chj_db_structure_editor"></a>Chapter 10. Database Structure Editor<a class="indexterm" name="idm45622515984256"></a>
 </h2></div>
 <div><div class="revhistory"><table border="1" width="100%" summary="Revision history">
 <tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr>
+<tr>
+<td align="left">Revision V7.1-002</td>
+<td align="left">19 September 2023</td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#change_dse_cmmd" title="CHange">&#8220;CHange
+&#8221;</a>, Document new -DATA_RESERVED_BYTES and -INDEX_RESERVED_BYTES qualifiers to DSE CHANGE -FILEHEADER</p></li>
+<li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#change_qualifiers_file" title="CHANGE -FIleheader Qualifiers">&#8220;<span>CHANGE <span>-</span></span>FIleheader Qualifiers&#8221;</a>, fix typos</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch10s03.html" title="DSE Command Summary">&#8220;<span>DSE Command </span>Summary&#8221;</a>, add new -DATA_RESERVED_BYTES and -INDEX_RESERVED_BYTES qualifiers to the dse command table</p></li>
+<li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#dump_ex1" title="Examples for DUMP">&#8220;Examples<span> for DUMP</span> &#8221;</a>, Changed fileheader dump to reflect that Reserved Bytes is now reported as Data and Index Reserved Bytes</p></li>
+<li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#exam_maps" title="Examples">&#8220;Examples&#8221;</a>, Update examples</p></li>
+</ul></div></td>
+</tr>
 <tr>
 <td align="left">Revision V7.1-001</td>
 <td align="left">26 June 2023</td>
@@ -55,7 +67,7 @@
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#change_dse_cmmd" title="CHange">&#8220;CHange
 &#8221;</a>, correct  Zqgblmod_T[rans]=sequence-number</p></li>
-<li class="listitem"><p>In <a class="xref" href="dse_summary.html" title="DSE Command Summary">&#8220;<span>DSE Command </span>Summary&#8221;</a>, correct  Zqgblmod_T[rans]=sequence-number</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch10s03.html" title="DSE Command Summary">&#8220;<span>DSE Command </span>Summary&#8221;</a>, correct  Zqgblmod_T[rans]=sequence-number</p></li>
 <li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#find_cmmd_dse" title="Find">&#8220;Find
 &#8221;</a>, Add the -ST[ATS] qualifier to the table </p></li>
 <li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#find_qualifiers_dse" title="Qualifiers of FIND">&#8220;Qualifiers<span> of FIND</span>&#8221;</a>, In this section, Add a -Stats qualifier information.</p></li>
@@ -66,7 +78,7 @@
 <td align="left">12 February 2021</td>
 <td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#change_example_Dse" title="Examples for CHANGE">&#8220;Examples<span> for CHANGE</span>&#8221;</a>, fix dse command to update maximum record size, to pass just -record_max_size and not -reserved_bytes</p></li>
-<li class="listitem"><p>In <a class="xref" href="dse_summary.html" title="DSE Command Summary">&#8220;<span>DSE Command </span>Summary&#8221;</a>, correct the syntax of the -SIBLING qualifier</p></li>
+<li class="listitem"><p>In <a class="xref" href="ch10s03.html" title="DSE Command Summary">&#8220;<span>DSE Command </span>Summary&#8221;</a>, correct the syntax of the -SIBLING qualifier</p></li>
 <li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#find_qualifiers_dse" title="Qualifiers of FIND">&#8220;Qualifiers<span> of FIND</span>&#8221;</a>, correct the syntax for the -SIBLING qualifier</p></li>
 </ul></div></td>
 </tr>
@@ -78,7 +90,7 @@
 <tr>
 <td align="left">Revision V6.3-013</td>
 <td align="left">30 June 2020</td>
-<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="dse_summary.html" title="DSE Command Summary">&#8220;<span>DSE Command </span>Summary&#8221;</a>, fix typo: change HARD_SPIN_CPUNT to HARD_SPIN_COUNT and formatting cleanup.</p></li></ul></div></td>
+<td align="left"><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In <a class="xref" href="ch10s03.html" title="DSE Command Summary">&#8220;<span>DSE Command </span>Summary&#8221;</a>, fix typo: change HARD_SPIN_CPUNT to HARD_SPIN_COUNT and formatting cleanup.</p></li></ul></div></td>
 </tr>
 <tr>
 <td align="left">Revision V6.3-007</td>
@@ -109,7 +121,7 @@
 <li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#change_dse_cmmd" title="CHange">&#8220;CHange
 &#8221;</a>, added SLEEP_SPIN_COUNT and SPIN_SLEEP_MASK.</p></li>
 <li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#change_qualifiers_file" title="CHANGE -FIleheader Qualifiers">&#8220;<span>CHANGE <span>-</span></span>FIleheader Qualifiers&#8221;</a>, fix typo</p></li>
-<li class="listitem"><p>In <a class="xref" href="dse_summary.html" title="DSE Command Summary">&#8220;<span>DSE Command </span>Summary&#8221;</a>, added information about the -DUMP and -ALL qualifiers of ALL; add -ALL for DUMP. </p></li>
+<li class="listitem"><p>In <a class="xref" href="ch10s03.html" title="DSE Command Summary">&#8220;<span>DSE Command </span>Summary&#8221;</a>, added information about the -DUMP and -ALL qualifiers of ALL; add -ALL for DUMP. </p></li>
 <li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#dse_example_add2" title="Examples of ALL">&#8220;Examples<span> of ALL</span>&#8221;</a>, changed Examples of ADD to Examples of ALL and fix the WCINIT example to be ALL -WCINIT </p></li>
 <li class="listitem"><p>In <a class="xref" href="dse_cmmds_quals.html#dump_ex1" title="Examples for DUMP">&#8220;Examples<span> for DUMP</span> &#8221;</a>, update the DUMP -FILEHEADER output for V6.3-001</p></li>
 </ul></div></td>
@@ -214,7 +226,7 @@
 <dt><span class="sect2"><a href="dse_cmmds_quals.html#wcinit_dse_cmmd">Wcinit
 </a></span></dt>
 </dl></dd>
-<dt><span class="sect1"><a href="dse_summary.html"><span>DSE Command </span>Summary</a></span></dt>
+<dt><span class="sect1"><a href="ch10s03.html"><span>DSE Command </span>Summary</a></span></dt>
 </dl>
 </div>
 </div>

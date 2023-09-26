@@ -1,363 +1,40 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Triggers ISVs</title>
+<title>$ZYERror</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s66.html" title="$ZYERror">
-<link rel="next" href="ch09.html" title="Chapter 9. Input/Output Processing">
-<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
+<link rel="prev" href="ch08s66.html" title="$ZVersion">
+<link rel="next" href="ch08s68.html" title="Triggers ISVs">
+<link rel="copyright" href="ln-idm45819035664320.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">Triggers ISVs</th></tr>
+<tr><th colspan="3" align="center">$ZYERror</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s66.html">Prev</a> </td>
 <th width="60%" align="center">Chapter 8. <span>Intrinsic Special Variables</span>
 </th>
-<td width="20%" align="right"> <a accesskey="n" href="ch09.html">Next</a>
+<td width="20%" align="right"> <a accesskey="n" href="ch08s68.html">Next</a>
 </td>
 </tr>
 </table>
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">Triggers ISVs</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZYERror</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="trigger_isv_e"></a>Triggers ISVs</h2></div></div></div>
-<p>GT.M provides nine ISVs (Intrinsic Special Variables) to facilitate trigger operations. With the exception of $ZTWORMHOLE, all numeric trigger-related ISVs return zero (0) outside of a trigger context; non-numeric ISVs return the empty string.</p>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="trigiztd"></a>$ZTDAta</h3></div></div></div>
-<p>Within trigger context, $ZTDATA returns $DATA(@$REFERENCE)#2 for a SET or $DATA(@$REFERENCE) for a KILL, ZKILL or ZWITHDRAW prior to the explicit update. This provides a fast path alternative, avoiding the need for indirection in trigger code, to help trigger code determine the characteristics of the triggering node prior to the triggering update. For a SET, it shows whether the node did or did not hold data - whether a SET is modifying the contents of an existing node or creating data at a new node. For a KILL it shows whether the node had descendants and whether it had data.</p>
-</div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="ztdelim"></a>$ZTDElim</h3></div></div></div>
-<p>Within a SET trigger context, $ZTDE[LIM] returns the piece separator, as specified by -delim in the trigger definition. This allows triggers to extract updated pieces defined in $ZTUPDATE without having the piece separator hard coded into the routine. Outside of a SET trigger context, $ZTDELIM is null.  </p>
-</div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="ztlevel"></a>$ZTLevel</h3></div></div></div>
-<p>Within trigger context, $ZTLEVEL returns the current level of trigger nesting (invocation by a trigger of an additional trigger by an update in trigger context).</p>
-<p>$ZTLEVEL greater than one (&gt;1) indicates that there are nested triggers in progress. When a single update invokes multiple triggers solely because of multiple trigger matches of that initial (non-trigger) update, they are not nested (they are chained) and thus all have same $ZTLEVEL.</p>
-<p>Example:</p>
-<pre class="programlisting">+^Cycle(1) -commands=Set -xecute="Write ""$ZTLevel for ^Cycle(1) is: "",$ZTLevel Set ^Cycle(2)=1"
-+^Cycle(2) -commands=Set -xecute="Write ""$ZTLevel for ^Cycle(2) is: "",$ZTLevel Set ^Cycle(1)=1"</pre>
-<p>These trigger definitions show different values of $ZTLEVEL when two triggers are called recursively (and pathologically).</p>
-<pre class="programlisting">+^Acct("ID") -commands=set -xecute="set ^Acct(1)=$ztvalue+1"
-+^Acct(sub=:) -command=set -xecute="set ^X($ztvalue)=sub" </pre>
-<p>SET ^Acct("ID")=10 invokes both the above triggers in some order and $ZTLEVEL will have the same value in both because these triggers are chained rather than nested.</p>
-</div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="ztname"></a>$ZTNAME</h3></div></div></div>
-<p>Within a trigger context, $ZTNAME returns the trigger name. Outside a trigger context, $ZTNAME returns an empty string. </p>
-</div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="idm46057738483056"></a>$ZTOLdval</h3></div></div></div>
-<p>Within trigger context, $ZTOLDVAL returns the prior (old) value of the global node whose update caused the trigger invocation. This provides a fast path alternative to $GET(@$REFERENCE) at trigger entry (which avoids the heavyweight indirection ). If there are multiple triggers matching the same node (chained), $ZTOLDVAL returns the same result for each of them.</p>
-<p>Example:</p>
-<pre class="programlisting">+^Acct(1,"ID") -commands=Set -xecute="Write:$ZTOLdval ""The prior value of ^Acct(1,ID) was: "",$ZTOLdval" </pre>
-<p>This trigger gets invoked with a SET and displays the prior value (if it exists) of ^Acct(1,"ID").</p>
-<pre class="programlisting">GTM&gt;w ^Acct(1,"ID")       
-1975
-GTM&gt;s ^Acct(1,"ID")=2011
-The prior value of ^Acct(1,ID) was: 1975</pre>
-</div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="idm46057738451184"></a>$ZTRIggerop</h3></div></div></div>
-<p>Within trigger context, for SET (including MERGE and $INCREMENT() operations), $ZTRIGGEROP has the value "S". For KILL, $ZTRIGGEROP has the value "K" For ZKILL or ZWITHDRAW, $ZTRIGGEROP has the value "ZK".  </p>
-</div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="idm46057738450320"></a>$ZTSlate</h3></div></div></div>
-<p>$ZTSLATE allows you to specify a string that you want to make available in chained or nested triggers invoked for an outermost transaction (when a TSTART takes $TLEVEL from 0 to 1). You might use $ZTSLATE to accumulate transaction-related information, for example $ZTOLDVAL and $ZTVALUE,  available within trigger context for use in a subsequent trigger later in the same transaction. For example,  you can use $ZTSLATE to build up an application history or journal record to be written when a transaction is about to commit.</p>
-<p>You can SET $ZTSLATE only while a database trigger is active. GT.M clears $ZTSLATE for the outermost transaction or on a TRESTART. However, GT.M retains $ZTSLATE for all sub-transactions (where $TLEVEL&gt;1).</p>
-<p>Example:</p>
-<pre class="programlisting"> TSTART ()       ; Implicitly clears $ZTSLAT
- SET ^ACC(ACN1,BAL)=AMT          ; Trigger sets $ZTSLATE=ACN_"|"
- SET ^ACC(ACN2,BAL)=-AMT         ; Trigger sets $ZTSLATE=$ZTSLATE_ACN_"|"
- ZTRIGGER ^ACT("TRANS")          ; Trigger uses $ZTSLATE to update transaction log
- TCOMMIT</pre>
-</div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="idm46057738447728"></a>$ZTUPdate</h3></div></div></div>
-<p>Within trigger context, for SET commands where the GT.M trigger specifies a piece separator, $ZTUPDATE provides a comma separated list of piece numbers of pieces that differ between the current values of $ZTOLDVAL and $ZTVALUE. If the trigger specifies a piece separator, but does not specify any pieces of interest, $ZTUPDATE identifies all changed pieces.   $ZTUPDATE is 0 in all other cases (that is: for SET commands where the GT.M trigger does not specify a piece separator or for KILLs). Note that if an update matches more than one trigger, all matching triggers see the same $ZTOLDVAL at trigger entry but potentially different values of $ZTVALUE so $ZTUPDATE could change due to the actions of each matching trigger even though all matching triggers have identical -[z]delim and -piece specifications. </p>
-<p>Example:</p>
-<pre class="programlisting">+^trigvn -commands=Set -pieces=1;3:6 -delim="|" -xecute="Write !,$ZTUPDATE" </pre>
-<p>In the above trigger definition entry, $ZTUPDATE displays a comma separated list of the changed piece numbers if on of the pieces of interest: 1,3,4,5,or 6 are modified by the update.</p>
-<pre class="programlisting">GTM&gt;write ^trigvn
-Window|Table|Chair|Curtain|Cushion|Air Conditioner
-GTM&gt;set ^trigvn="Window|Dining Table|Chair|Vignette|Pillow|Air Conditioner"
-4,5 </pre>
-<p>Note that even though piece numbers 2,4 and 5 are changed, $ZTUPDATE displays only 4,5 because the trigger is not defined for updates for the second piece.</p>
-</div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="idm46057738444432"></a>$ZTVAlue</h3></div></div></div>
-<p>For SET, $ZTVALUE has the value assigned to the node by the explicit SET operation. Modifying $ZTVALUE within a trigger modifies the eventual value GT.M assigns to the node. Note that changing $ZTVALUE has a small performance impact because it causes an additional update operation on the node once all trigger code completes. If a node has multiple associated triggers each trigger receives the current value of $ZTVALUE, however, because the triggers run in arbitrary order, FIS strongly recommends no more than one trigger change any given element of application data, for example, a particular piece. For KILL and its variants, $ZTVALUE returns the empty string. While GT.M accepts updates to $ZTVALUE within the trigger code invoked for a KILL or any of its variants, it ultimately discards any such value. Outside trigger context, attempting to SET $ZTVALUE produces a SETINTRIGONLY error.</p>
-</div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="idm46057738442880"></a>$ZTWOrmhole</h3></div></div></div>
-<p>$ZTWORMHOLE allows you to specify a string up to 128KB of information you want to make available during trigger execution. You can use $ZTWORMHOLE to supply an application-context or process context to your trigger logic. Because GT.M makes $ZTWORMHOLE available throughout the duration of the process, you can access or update $ZTWORMHOLE both from inside and outside a trigger.</p>
-<p>$ZTWORMHOLE provides a mechanism to access information from a process/application context that is otherwise unavailable in trigger context. GT.M records any non-empty string value of $ZTWORMHOLE in the GT.M database journal file as part of any update that invokes at least one trigger which references $ZTWORMHOLE. GT.M also transmits any non-NULL $ZTWORMHOLE value in the replication stream, thus providing the same context to triggers invoked by MUPIP processes (either as part of the replicating instance update process or as part of MUPIP journal recovery/rollback). Therefore, whenever you use $ZTWORMHOLE in a trigger, you create something like a wormhole for process context that is otherwise NEWed in the run-time or non-existent in MUPIP.</p>
-<p>Note that if trigger code does not reference $ZTMORMHOLE, GT.M does not make it available to MUPIP (via the journal files or replication stream). Therefore, if a replicating secondary has different trigger code than the initiating primary (an unusual configuration) and the triggers on the replicating node require information from $ZTWORMHOLE, the triggers on the initiating node must reference $ZTWORMHOLE to ensure GT.M maintains the data it contains for use by the update process on the replicating node. While you can change $ZTWORMHOLE within trigger code, because of the arbitrary ordering of triggers on the same node, such an approach requires careful design and implementation. GTM allows $ZTWORMHOLE to be NEW'd. NEWing $ZTWORMHOLE is slightly different from NEWing other ISVs/variables in the sense that the former retains its original value whereas the latter does not. However, like other NEWs, GT.M restores $ZTWORMHOLE's value when the stack level pops.</p>
-<p>The following table summarizes the read/write permissions assigned to all trigger-related ISVs within trigger context and outside trigger context.</p>
-<p></p>
-<div class="informaltable">
-<a name="tbltrigperm"></a><table border="1">
-<colgroup>
-<col>
-<col>
-<col>
-</colgroup>
-<thead><tr>
-<th>
-                <p>Intrinsic Special Variable</p>
-              </th>
-<th>
-                <p>Within Trigger Context</p>
-              </th>
-<th>
-                <p>Notes</p>
-              </th>
-</tr></thead>
-<tbody>
-<tr>
-<td>
-                <p>$ETRAP</p>
-              </td>
-<td>
-                <p> Read / Write</p>
-              </td>
-<td>
-                <p>Set to gtm_trigger_etrap or the empty string when entering trigger context. <span>For more information on using the $ETRAP mechanism for handling errors during trigger execution, refer to <a class="xref" href="ch14s07.html#err_handling_trigger_execution" title="Error Handling during Trigger Execution">&#8220;Error Handling during Trigger Execution&#8221;</a>.</span></p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$REFERENCE</p>
-              </td>
-<td>
-                <p> Read only</p>
-              </td>
-<td>
-                <p>Restored at the completion of a trigger.</p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$TEST</p>
-              </td>
-<td>
-                <p> Read only</p>
-              </td>
-<td>
-                <p>Restored at the completion of a trigger.</p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$TLEVEL</p>
-              </td>
-<td>
-                <p> Read only</p>
-              </td>
-<td>
-                <p>Always &gt;=1 in trigger code; must be the same as the completion of processing a trigger as it was at the start.</p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$ZTNAME</p>
-              </td>
-<td>
-                <p> Read only</p>
-              </td>
-<td>
-                <p>Returns the trigger name.</p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$ZTDATA</p>
-              </td>
-<td>
-                <p> Read only</p>
-              </td>
-<td>
-                <p>Shows prior state.</p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$ZTLEVEL</p>
-              </td>
-<td>
-                <p> Read only</p>
-              </td>
-<td>
-                <p>Shows trigger nesting.</p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$ZTOLDVAL</p>
-              </td>
-<td>
-                <p> Read only</p>
-              </td>
-<td>
-                <p>Shows the pre-update value.</p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$ZTRAP</p>
-              </td>
-<td>
-                <p> Read only - ""</p>
-              </td>
-<td>
-                <p>Must use $ETRAP in trigger code. </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$ZTRIGGEROP</p>
-              </td>
-<td>
-                <p> Read only</p>
-              </td>
-<td>
-                <p>Shows the triggering command.</p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$ZTUPDATE</p>
-              </td>
-<td>
-                <p> Read only</p>
-              </td>
-<td>
-                <p>Lists modified pieces (if requested) for SET.</p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$ZTVALUE</p>
-              </td>
-<td>
-                <p> Read / Write</p>
-              </td>
-<td>
-                <p>Can change the eventual applied value for SET.</p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$ZTWORMHOLE</p>
-              </td>
-<td>
-                <p> Read / Write</p>
-              </td>
-<td>
-                <p>Holds application context because trigger code has no access to the local variable context.</p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>$ZTSLATE</p>
-              </td>
-<td>
-                <p>Read/ Write</p>
-              </td>
-<td>
-                <p>Holds outermost transaction context for chained or nested triggers.</p>
-              </td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<div class="titlepage"><div><div><h4 class="title">
-<a name="idm46057738413344"></a>Examples of Trigger ISVs</h4></div></div></div>&gt;<p>The following examples are derived from the FIS Profile application.</p>
-<p>Nodes in ^ACN(CID,50) have TYPE in piece 1, CLS in piece 2, FEEPLN in piece 15 and EMPLNO in piece 31. Indexes are ^XACN(CLS,ACN,CID), ^XREF("EMPLCTA",EMPLNO,ACN,TYPE,CID) and ^XREF("FEEPLN",FEEPLN,CID) and use ACN from the first piece of ^ACN(CLS,99). These indexes are maintained with four triggers: one invoked by a KILL or ZKill of an ^ACN(:,50) node and three invoked by SETs to different pieces of ^ACN(:,50) nodes. Note that ACN, CID, CLS and TYPE are required, whereas EMPLNO and FEEPLN can be null, which requires (in our convention) the use of $ZC(254) in indexes. The triggerfile definitions are:</p>
-<pre class="programlisting">+^ACN(cid=:,50) -zdelim="|" -pieces=2 -commands=SET -xecute="Do ^SclsACN50"  
-+^ACN(cid=:,50) -zdelim="|" -pieces=1,31 -commands=SET -xecute="Do ^SemplnoTypeACN50" +^ACN(cid=:,50) -zdelim="|" -pieces=15 -commands=SET -xecute="Do ^SfeeplnACN50" 
-+^ACN(cid=:,50) -commands=KILL,ZKill -xecute="Do ^KACN50" </pre>
-<p>The code in KACN50.m KILLs cross reference indexes when the application deletes any ^ACN(:,50).</p>
-<pre class="programlisting">KACN50 ; KILL of entire ^ACN(:,50) node, e.g., from account deletion
-  ; Capture information
-  Set cls=$Piece($ZTOLD,"|",2)                   ; CLS
-  Set emplno=$Piece($ZTOLD,"|",31)
-  Set:'$Length(emplno) emplno=$ZC(254)                ; EMPLNO
-  Set feepln=$Piece($ZTOLD,"|",15) 
-  Set:'$L(feepln) feepln=$ZC(254)                     ; FEEPLN
-  Set type=$Piece($ZTOLD,"|",1)                  ; TYPE
-  Set acn=$Piece(^ACN(cid,99),"|",1)             ; ACN
-  Kill ^XACN(cls,acn,cid)
-  Kill ^XREF("EMPLCTA",emplno,acn,type,cid)
-  Kill ^XREF("FEEPLN",feepln,cid)
-  Quit</pre>
-<p>The routine in SclsACN50.m creates cross references for a SET or a SET $PIECE() that modifies the second piece of ^ACN(:,50).</p>
-<pre class="programlisting">SClsACN50 ; Update to CLS in ^ACN(,50)
- ; Capture information 
-  Set oldcls=$Piece($ZTOLD,"|",2)                ; Old CLS 
-  Set cls=$Piece($ZTVAL,"|",2)                   ; New CLS 
-  Set acn=$Piece(^ACN(cid,99),"|",1)             ; ACN 
-  Set processMode=$Piece($ZTWORM,"|",1)          ; Process
-  If processMode&lt;2 Kill ^XACN(oldcls,acn,cid)
-  Set ^XACN(cls,acn,cid)="" 
-  Quit </pre>
-<p>Note that the example is written for clarity. Eliminating values that need not be assigned to temporary local variables produces: </p>
-<pre class="programlisting">SclsACN50
-  S acn=$P(^ACN(cid,99),"|",1)
-  I $P($ZTWORM,"|",1)&lt;2 K ^XACN($P($ZTOLD,"|",2),acn,cid)
-  S ^XACN($P($ZTVAL,"|",2),acn,cid)=""
-  Q</pre>
-<p>Indeed, this index can simply be included in the (one line) triggerfile specification itself:</p>
-<pre class="programlisting">+^ACN(cid=:,50) -zdelim="|" -pieces=2 -commands=SET -xecute="S oldcls=$P($ZTOLD,""|"",2),acn=$P(^ACN(cid,99),""|"",1) K:$P($ZTWO,""|"",1)&lt;2 ^XACN(oldcls,acn,cid) S ^XACN($P($ZTVAL,""|"",2),acn,cid)="""""</pre>
-<p>In the interest of readability most triggerfile definitions in this chapter  are written as complete routines.  The code in SemplnoTypeACN50.m handles changes to pieces 1 and 31 of ^ACN(:,50). Note that a SET to ^ACN(:,50) that modifies either or both pieces causes this trigger to execute just once, whereas two sequential SET $Piece() commands, to first modify one piece and then the other cause it to execute twice, at different times, once for each piece.</p>
-<pre class="programlisting">EmplnoTypeACN50 ; Update to EMPLNO and/or TYPE in ^ACN(,50)
- ; Capture information 
-  Set oldemplno=$Piece($ZTOLD,"|",31)
-  Set:'$Length(oldemplno) oldemplno=$ZC(254)
-  Set emplno=$Piece($ZTVAL,"|",31)
-  Set:'$L(emplno) emplno=$ZC(254)
-  Set oldtype=$Piece($ZTOLD,"|",1)
-  Set type=$Piece($ZTVAL,"|",1)
-  Set acn=$Piece(^ACN(cid,99),"|",1)
-  Set processMode=$Piece($ZTWORM,"|",1)
-  If processMode&lt;2 Do
-  . Kill ^XREF("EMPLNO",oldemplno,acn,oldtype,cid) 
-  . Set ^XREF("EMPLNO",emplno,acn,type,cid)=""
-  Quit</pre>
-<p>The code in SFeeplnACN50.m handles changes to piece 15.</p>
-<pre class="programlisting">SFeeplnACN50 ; Update to FEEPLN in ^ACN(,50)
-  ; Capture information     
-  Set oldfeepln=$Piece($ZTOLD,"|",15)
-  Set:'$Length(oldfeepln) oldfeepln=$ZC(254)    
-  Set feepln=$Piece($ZTVAL,"|",15)
-  Set:'$Length(feepln) feepln=$ZC(254)
-  Set processMode=$Piece($ZTWORM,"|",1)
-  If processMode&lt;2 Do 
-  . Kill ^XREF("FEEPLN",oldfeepln,cid) Set ^XREF("FEEPLN",feepln,cid)=""
-  Quit </pre>
-</div>
-</div>
+<a name="zyerror"></a>$ZYERror<a class="indexterm" name="idm45819025697808"></a>
+</h2></div></div></div>
+<p>$ZYER[ROR] is a read/write ISV that contains a string value pointing to an entryref. After GT.M encounters an error, if $ZYERROR is set a non-null value, GT.M invokes the routine at the entryref specified by $ZYERROR with an implicit DO. It is intended that the code invoked by $ZYERROR use the value of $ZSTATUS to select or construct a value to which it SETs $ZERROR. If $ZYERROR is not a valid entryref or if an error occurs while executing the entryref specified by $ZYERROR, GT.M SETs $ZERROR to the error status encountered. GT.M then returns control to the M code specified by $ETRAP/$ZTRAP or device EXCEPTION.</p>
+<p>$ZYERROR is implicitly NEWed on entry to the routine specified by $ZYERROR. However, if GT.M fails to compile, GT.M does not transfer control to the entryref specified by $ZYERROR.</p>
+<p>GT.M permits $ZYERROR to be modified by the SET and NEW commands.</p>
 </div>
 <div class="navfooter">
 <hr>
@@ -366,13 +43,13 @@ GTM&gt;set ^trigvn="Window|Dining Table|Chair|Vignette|Pillow|Air Conditioner"
 <td width="40%" align="left">
 <a accesskey="p" href="ch08s66.html">Prev</a> </td>
 <td width="20%" align="center"><a accesskey="u" href="ch08.html">Up</a></td>
-<td width="40%" align="right"> <a accesskey="n" href="ch09.html">Next</a>
+<td width="40%" align="right"> <a accesskey="n" href="ch08s68.html">Next</a>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZYERror </td>
+<td width="40%" align="left" valign="top">$ZVersion </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> Chapter 9. <span>Input/Output</span> Processing</td>
+<td width="40%" align="right" valign="top"> Triggers ISVs</td>
 </tr>
 </table>
 </div>

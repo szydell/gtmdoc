@@ -8,7 +8,7 @@
 <link rel="up" href="ch09.html" title="Chapter 9. GT.M Database Structure(GDS)">
 <link rel="prev" href="ch09.html" title="Chapter 9. GT.M Database Structure(GDS)">
 <link rel="next" href="ch09s02.html" title="Local Bitmaps">
-<link rel="copyright" href="ln-idm45367108088576.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45622523859200.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="DFO_GDS"></a>Database File Organization with GDS <a class="indexterm" name="idm45367100866240"></a> </h2></div></div></div>
+<a name="DFO_GDS"></a>Database File Organization with GDS <a class="indexterm" name="idm45622516307280"></a> </h2></div></div></div>
 <p>GT.M processes a GDS file using predominantly low-level system services. The GDS file consists of two parts: </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>The database file header </p></li>
@@ -46,7 +46,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="FHDE"></a>File Header Data Elements<a class="indexterm" name="idm45367100898864"></a> </h3></div></div></div>
+<a name="FHDE"></a>File Header Data Elements<a class="indexterm" name="idm45622516293824"></a> </h3></div></div></div>
 <p>All GT.M components, except GDE, (the run-time system, DSE, LKE, MUPIP) use the data elements of the file header for 
 accounting, control, and logging purposes.</p>
 <p>The current state of the file header always determines the characteristics of the database. The MUPIP CREATE command 
@@ -156,6 +156,14 @@ complete an update should spin before yielding the CPU when GT.M runs on SMP mac
 </tr>
 <tr>
 <td>
+       <p>Data Reserved Bytes </p>
+     </td>
+<td>
+       <p>Number of bytes reserved in data-level database blocks. </p>
+     </td>
+</tr>
+<tr>
+<td>
        <p>DB is auto-created  </p>
      </td>
 <td>
@@ -253,6 +261,14 @@ database (that is, not in use). MUPIP INTEG -NOONLINE (including -FAST) can rect
 <td>
        <p>The process identification number (PID) of the process in the write-critical section, or zero if no 
 process holds the critical section. </p>
+     </td>
+</tr>
+<tr>
+<td>
+       <p>Index Reserved Bytes </p>
+     </td>
+<td>
+       <p>Number of bytes reserved in index-level database blocks. </p>
      </td>
 </tr>
 <tr>
@@ -572,14 +588,6 @@ than zero. When DSE is the only process using a region, the reference count shou
        <p>Either On or OFF. [WAS ON] OFF means that replication is still working, but a problem with journaling 
 has caused GT.M to turn it off, so GT.M is still replicating, but will turn replication OFF if it ever has to turn to the 
 journal because the pool has lost data needed for replication. </p>
-     </td>
-</tr>
-<tr>
-<td>
-       <p>Reserved Bytes </p>
-     </td>
-<td>
-       <p>Number of bytes reserved in database blocks. </p>
      </td>
 </tr>
 <tr>

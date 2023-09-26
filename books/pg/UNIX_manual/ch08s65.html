@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZVersion</title>
+<title>$ZUT</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s64.html" title="$ZUT">
-<link rel="next" href="ch08s66.html" title="$ZYERror">
-<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
+<link rel="prev" href="ch08s64.html" title="$ZUSedstor">
+<link rel="next" href="ch08s66.html" title="$ZVersion">
+<link rel="copyright" href="ln-idm45819035664320.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZVersion</th></tr>
+<tr><th colspan="3" align="center">$ZUT</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s64.html">Prev</a> </td>
@@ -26,40 +26,12 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZVersion</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZUT</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zversion"></a>$ZVersion<a class="indexterm" name="idm46057738478160"></a>
-</h2></div></div></div>
-<p>$ZV[ERSION] contains a string value specifying the currently installed GT.M. $ZV[ERSION] is a space-delimited string with four pieces as follows:</p>
-<pre class="programlisting">&lt;product&gt; &lt;release&gt; &lt;OS&gt; &lt;architecture&gt; </pre>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>&lt;product&gt; is always "GT.M".</p></li>
-<li class="listitem">
-<p>&lt;release&gt; always begins with "V", and has the structure V&lt;DB_Format&gt;.&lt;major_release&gt;-&lt;minor_release&gt;[&lt;bug_fix_level&gt;] where:</p>
-<div class="itemizedlist"><ul class="itemizedlist" type="circle">
-<li class="listitem"><p>&lt;DB_Format&gt; identifies the block format of GT.M database files compatible with the release. For example, V4, V5, and V6. The &lt;DB_Format&gt; piece in $ZVERSION does not change even when a MUPIP UPRGRADE or MUPIP DOWNGRADE changes the DB Format element in the database fileheader. </p></li>
-<li class="listitem"><p>&lt;major_release&gt; identifies a release with major enhancements. </p></li>
-<li class="listitem"><p>&lt;minor_release&gt; identifies minor enhancements to a major release. The classification of major and minor enhancements is at the discretion of FIS. </p></li>
-<li class="listitem"><p>An optional &lt;bug_fix_level&gt; is an upper-case letter indicating bug fixes but no new enhancements. Note that GT.M is built monolithically and never patched. Even though a bug fix release has only bug fixes, it should be treated as a new GT.M release and installed in a separate directory. </p></li>
-</ul></div>
-</li>
-<li class="listitem"><p>&lt;OS&gt; is the host operating system name.</p></li>
-<li class="listitem"><p>&lt;architecture&gt; is the hardware architecture for which the release of GT.M is compiled. Note that GT.M retains it original names for continuity even if vendor branding changes, for example, "RS6000".</p></li>
-</ul></div>
-<p>M routines cannot modify $ZVERSION.</p>
-<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Warning">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
-<th align="left">Warning</th>
-</tr>
-<tr><td align="left" valign="top"><p>GT.M treats $ZVERSION as a literal at compile time. Therefore, always compile with the same version as that used at runtime.</p></td></tr>
-</table></div>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;w $zversion
-GT.M V6.0-003 Linux x86_64</pre>
-<p>This example displays the current version identifier for GT.M.</p>
+<a name="zut"></a>$ZUT</h2></div></div></div>
+<p>$ZUT (UNIX time or universal time) returns the number of microseconds since January 1, 1970 00:00:00 UTC, which provides a time stamp for directly comparing different timezones. $ZUT accuracy is subject to the precision of the system clock (use man gettimeofday from the UNIX shell for more information).</p>
 </div>
 <div class="navfooter">
 <hr>
@@ -72,9 +44,9 @@ GT.M V6.0-003 Linux x86_64</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZUT </td>
+<td width="40%" align="left" valign="top">$ZUSedstor </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZYERror</td>
+<td width="40%" align="right" valign="top"> $ZVersion</td>
 </tr>
 </table>
 </div>

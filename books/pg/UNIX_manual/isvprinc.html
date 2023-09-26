@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s08.html" title="$Key">
 <link rel="next" href="ch08s10.html" title="$Quit">
-<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45819035664320.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,18 +30,18 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="principal"></a>$Principal<a class="indexterm" name="idm46057739028736"></a>
+<a name="principal"></a>$Principal<a class="indexterm" name="idm45819026291200"></a>
 </h2></div></div></div>
 <p>$P[RINCIPAL] contains the <span>absolute path</span>name of the principal (initial $IO) device.  $PRINCIPAL is an MDC Type A enhancement to standard M.</p>
 <p>Input and output for a process may come from separate devices<span>, namely, the standard input and output</span>. However, the M I/O model allows only one device to be USEd (or active) at a time. <span>When an image starts, GT.M implicitly OPENs the standard input and standard output device(s) and assigns the device(s) to $PRINCIPAL.</span> For USE deviceparameters, it is the standard input that determines the device type.</p>
 <p>For an image invoked interactively, $PRINCIPAL is the user's terminal. For an image invoked from a terminal by means of a shell script, $PRINCIPAL is the shell script's standard input (usually the terminal) and standard output (also usually the terminal) for output, unless the shell redirects the input or output.</p>
-<p>GT.M provides a mechanism for the user to create a name for $PRINCIPAL <span> in the shell</span> before invoking GT.M. The <span>environment variable gtm_principal</span>, if defined becomes a synonym for the actual device and the value for $PRINCIPAL. $IO holds the same value as $PRINCIPAL. $ZIO in this case, holds the fully expanded name of the actual device. <span>See <a class="xref" href="ch08s38.html" title="$ZIO">&#8220;$ZIO&#8221;</a> for an example of its usage.</span></p>
+<p>GT.M provides a mechanism for the user to create a name for $PRINCIPAL <span> in the shell</span> before invoking GT.M. The <span>environment variable gtm_principal</span>, if defined becomes a synonym for the actual device and the value for $PRINCIPAL. $IO holds the same value as $PRINCIPAL. $ZIO in this case, holds the fully expanded name of the actual device. <span>See <a class="xref" href="ch08s39.html" title="$ZIO">&#8220;$ZIO&#8221;</a> for an example of its usage.</span></p>
 <p>GT.M ignores a CLOSE specifying the principal device. GT.M does not permit the SET command to modify $PRINCIPAL.</p>
 <p>GT.M fulfills READ to $PRINCIPAL when it is an empty socket device (that is, one with all sockets detached) with an empty string, and discards WRITE output to such a device. </p>
 <p>GT.M opens /dev/null as a placeholder for a socket which used to be associated with $PRINCIPAL via stdin when it is closed.</p>
 <p>GT.M creates a SOCKET device for $PRINCIPAL when standard input is a LOCAL domain socket and sets the default DELIMITER to "$C(10)" for sockets in the device. </p>
 <p>When $PRINCIPAL identifies a device that supports REWIND, the REWIND or INREWIND device parameters perform a REWIND of the input and OUTREWIND performs a REWIND of the output.</p>
-<p>When $PRINCIPAL has different input/output devices, the USE command recognizes intrinsic special variables $ZPIN or $ZPOUT and applies appropriate deviceparameters to the input or output side of $PRINCIPAL, respectively. A USE with $ZPIN or $ZPOUT sets $IO to $PRINCIPAL for READs and WRITEs from the input and output side of $PRINCIPAL. For more information refer to <a class="xref" href="ch08s47.html" title="$ZPIN">&#8220;$ZPIN&#8221;</a> or <a class="xref" href="ch08s49.html" title="$ZPOUT">&#8220;$ZPOUT&#8221;</a> .</p>
+<p>When $PRINCIPAL has different input/output devices, the USE command recognizes intrinsic special variables $ZPIN or $ZPOUT and applies appropriate deviceparameters to the input or output side of $PRINCIPAL, respectively. A USE with $ZPIN or $ZPOUT sets $IO to $PRINCIPAL for READs and WRITEs from the input and output side of $PRINCIPAL. For more information refer to <a class="xref" href="ch08s48.html" title="$ZPIN">&#8220;$ZPIN&#8221;</a> or <a class="xref" href="ch08s50.html" title="$ZPOUT">&#8220;$ZPOUT&#8221;</a> .</p>
 </div>
 <div class="navfooter">
 <hr>

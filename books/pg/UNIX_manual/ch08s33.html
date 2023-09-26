@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s32.html" title="$ZEOf">
 <link rel="next" href="ch08s34.html" title="$ZGbldir">
-<link rel="copyright" href="ln-idm46057743985696.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45819035664320.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,12 +30,12 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zerror"></a>$ZError<a class="indexterm" name="idm46057738964416"></a>
+<a name="zerror"></a>$ZError<a class="indexterm" name="idm45819026096576"></a>
 </h2></div></div></div>
-<p>$ZE[RROR] is supposed to hold the application-specific error-code corresponding to the GT.M error-code stored in $ECODE/$ZSTATUS<span> (see <a class="xref" href="ch08s02.html" title="$ECode">&#8220;$ECode&#8221;</a> and <a class="xref" href="ch08s56.html" title="$ZStatus">&#8220;$ZStatus&#8221;</a>)</span>. </p>
+<p>$ZE[RROR] is supposed to hold the application-specific error-code corresponding to the GT.M error-code stored in $ECODE/$ZSTATUS<span> (see <a class="xref" href="ch08s02.html" title="$ECode">&#8220;$ECode&#8221;</a> and <a class="xref" href="ch08s57.html" title="$ZStatus">&#8220;$ZStatus&#8221;</a>)</span>. </p>
 <p>$ZERROR contains a default value of "Unprocessed $ZERROR, see $ZSTATUS" at process startup. </p>
 <p>$ZERROR can be SET but not NEWed. </p>
-<p>The mapping of a GT.M error-code to the application-specific error-code is achieved as follows. Whenever GT.M encounters an error, $ECODE/$ZSTATUS gets set first. It then invokes the code that $ZYERROR points to if it is not null. It is intended that the code invoked by $ZYERROR use the value of $ZSTATUS to select or construct a value to which it SETs $ZERROR. If an error is encountered by the attempt to execute the code specified in $ZYERROR, GT.M sets $ZERROR to the error status encountered. If $ZYERROR is null, GT.M does not change the value of $ZERROR. In all cases, GT.M proceeds to return control to the code specified by $ETRAP/$ZTRAP or device EXCEPTION whichever is applicable. <span>For details, see <a class="xref" href="ch08s66.html" title="$ZYERror">&#8220;$ZYERror&#8221;</a>.</span></p>
+<p>The mapping of a GT.M error-code to the application-specific error-code is achieved as follows. Whenever GT.M encounters an error, $ECODE/$ZSTATUS gets set first. It then invokes the code that $ZYERROR points to if it is not null. It is intended that the code invoked by $ZYERROR use the value of $ZSTATUS to select or construct a value to which it SETs $ZERROR. If an error is encountered by the attempt to execute the code specified in $ZYERROR, GT.M sets $ZERROR to the error status encountered. If $ZYERROR is null, GT.M does not change the value of $ZERROR. In all cases, GT.M proceeds to return control to the code specified by $ETRAP/$ZTRAP or device EXCEPTION whichever is applicable. <span>For details, see <a class="xref" href="ch08s67.html" title="$ZYERror">&#8220;$ZYERror&#8221;</a>.</span></p>
 </div>
 <div class="navfooter">
 <hr>

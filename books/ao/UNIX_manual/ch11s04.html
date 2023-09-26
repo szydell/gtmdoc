@@ -8,7 +8,7 @@
 <link rel="up" href="ch11.html" title="Chapter 11. Maintaining Database Integrity">
 <link rel="prev" href="ch11s03.html" title="Repairing the Database with DSE">
 <link rel="next" href="ch12.html" title="Chapter 12. Database Encryption">
-<link rel="copyright" href="ln-idm45367108088576.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45622523859200.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="finding_and_fixing_db_errors"></a>Finding and Fixing Database Errors<a class="indexterm" name="idm45367098517968"></a>
+<a name="finding_and_fixing_db_errors"></a>Finding and Fixing Database Errors<a class="indexterm" name="idm45622514461344"></a>
 </h2></div></div></div>
 <p>The rest of this chapter is arranged loosely in the form of a decision tree. The
 material covers a wide range of scenarios and possible actions. </p>
@@ -559,7 +559,7 @@ online backups.</p></li>
 run-time system to generate further errors. An exception is
 auto-extend, which may not work properly if there are file size
 errors.</p></li>
-<li class="listitem"><p>Reference count errors and free block errors are informational
+<li class="listitem"><p>Reference count errors, free block errors, and block size exeeding user-specified limit errors are informational
 only.</p></li>
 </ul></div>
 </div>
@@ -608,182 +608,182 @@ only.</p></li>
 <tbody>
 <tr>
 <td>
+<p>B</p>
 <p>T</p>
 <p>B</p>
 <p>I</p>
 <p>I</p>
-<p>D</p>
 </td>
 <td>
+<p>BSIZTOOLARGE</p>
 <p>BUFFLUFAILED</p>
 <p>DBBADFREEBLKCTR</p>
 <p>DBBADKYNM</p>
 <p>DBBADNSUB</p>
-<p>DBBADPNTR</p>
 </td>
 <td>
+<p>ffff Block larger than specified maximum size.</p>
 <p>Error flushing buffers from rrrr for database file ffff.</p>
 <p>Free blocks counter in file header: nnnn appears incorrect, should be mmmm.</p>
 <p>Bad key name.</p>
 <p>Bad numeric subscript.</p>
-<p>Bad pointer value in directory.</p>
 </td>
 <td>
+<p>O6</p>
 <p>I7</p>
 <p>I3</p>
 <p>K1</p>
 <p>K1</p>
-<p>K4</p>
 </td>
 </tr>
 <tr>
 <td>
-<p>I</p>
 <p>D</p>
+<p>I</p>
 <p>D</p>
 <p>D</p>
 <p>D</p>
 </td>
 <td>
+<p>DBBADPNTR</p>
 <p>DBBDBALLOC</p>
 <p>DBBFSTAT</p>
 <p>DBBNPNTR</p>
 <p>DBBPLMGT2K</p>
-<p>DBBPLMLT512</p>
 </td>
 <td>
+<p>Bad pointer value in directory.</p>
 <p>Block doubly allocated.</p>
 <p>Block busy/free status unknown (local bitmap corrupted).</p>
 <p>Bit map block number as pointer.</p>
 <p>Blocks per local map is greater than 2K.</p>
-<p>Blocks per local map is less than 512.</p>
 </td>
 <td>
+<p>K4</p>
 <p>K3</p>
 <p>M1</p>
 <p>K4</p>
-<p>I3</p>
 <p>I3</p>
 </td>
 </tr>
 <tr>
 <td>
 <p>D</p>
+<p>D</p>
 <p>I</p>
 <p>I</p>
 <p>A</p>
-<p>T</p>
 </td>
 <td>
+<p>DBBPLMLT512</p>
 <p>DBBPLNOT512</p>
 <p>DBBSIZMN</p>
 <p>DBBSIZMX</p>
 <p>DBBSIZZRO</p>
-<p>DBBTUWRNG</p>
 </td>
 <td>
+<p>Blocks per local map is less than 512.</p>
 <p>Blocks per local map is not a multiple of 512.</p>
 <p>Block too small.</p>
 <p>Block larger than file block size.</p>
 <p>Block size equals zero.</p>
-<p>The blocks-to-upgrade file-header field is incorrect. Expected nnnn, found mmmm.</p>
 </td>
 <td>
 <p>I3</p>
+<p>I3</p>
 <p>O1</p>
 <p>O1</p>
 <p>I3</p>
-<p>H2</p>
 </td>
 </tr>
 <tr>
 <td>
+<p>T</p>
 <p>I</p>
 <p>I</p>
 <p>I</p>
 <p>A</p>
-<p>I</p>
 </td>
 <td>
+<p>DBBTUWRNG</p>
 <p>DBCMPBAD</p>
 <p>DBCMPNZRO</p>
 <p>DBCOMPTOOLRG</p>
 <p>DBCREINCOMP</p>
-<p>DBDATAMX</p>
 </td>
 <td>
+<p>The blocks-to-upgrade file-header field is incorrect. Expected nnnn, found mmmm.</p>
 <p>Compression count not maximal.</p>
 <p>First record of block has nonzero compression count.</p>
 <p>Record has too large compression count.</p>
 <p>Header indicates database file creation was interrupted before completion.</p>
-<p>Record too large.</p>
 </td>
 <td>
+<p>H2</p>
 <p>K6</p>
 <p>O1</p>
 <p>O2</p>
 <p>I3</p>
-<p>O2</p>
 </td>
 </tr>
 <tr>
 <td>
+<p>I</p>
 <p>T</p>
 <p>A</p>
 <p>D</p>
 <p>A</p>
-<p>I</p>
 </td>
 <td>
+<p>DBDATAMX</p>
 <p>DBFGTBC</p>
 <p>DBFLCORRP</p>
 <p>DBFSTBC</p>
 <p>DBFSTHEAD</p>
-<p>DBGTDBMAX</p>
 </td>
 <td>
+<p>Record too large.</p>
 <p>File size larger than block count would indicate.</p>
 <p>Header indicates database file is corrupt.</p>
 <p>File size smaller than block count would indicate.</p>
 <p>File smaller than database header.</p>
-<p>Key larger than database maximum.</p>
 </td>
 <td>
+<p>O2</p>
 <p>I4</p>
 <p>I8</p>
 <p>I4</p>
 <p>I3</p>
-<p>K7</p>
 </td>
 </tr>
 <tr>
 <td>
+<p>I</p>
 <p>A</p>
 <p>D</p>
 <p>A</p>
 <p>I</p>
-<p>I</p>
 </td>
 <td>
+<p>DBGTDBMAX</p>
 <p>DBHEADINV</p>
 <p>DBINCLVL</p>
 <p>DBINCRVER</p>
 <p>DBINVGBL</p>
-<p>DBKEYGTIND</p>
 </td>
 <td>
+<p>Key larger than database maximum.</p>
 <p>Header size not valid for database.</p>
 <p>Block at incorrect level.</p>
 <p>Incorrect version of GT.M database.</p>
 <p>Invalid mixing of global names.</p>
-<p>Key greater than index key.</p>
 </td>
 <td>
+<p>K7</p>
 <p>I3</p>
 <p>O1</p>
 <p>I2</p>
 <p>K3</p>
-<p>K2</p>
 </td>
 </tr>
 <tr>
@@ -792,58 +792,58 @@ only.</p></li>
 <p>I</p>
 <p>I</p>
 <p>I</p>
-<p>B</p>
+<p>I</p>
 </td>
 <td>
+<p>DBKEYGTIND</p>
 <p>DBKEYMN</p>
 <p>DBKEYMX</p>
 <p>DBKEYORD</p>
 <p>DBKGTALLW</p>
-<p>DBLOCMBINC</p>
 </td>
 <td>
+<p>Key greater than index key.</p>
 <p>Key too short.</p>
 <p>Key too long.</p>
 <p>Keys out of order.</p>
 <p>Key larger than maximum allowed length.</p>
-<p>Local bit map incorrect.</p>
 </td>
 <td>
+<p>K2</p>
 <p>K1</p>
 <p>K1</p>
 <p>K2</p>
 <p>K1</p>
-<p>M2</p>
 </td>
 </tr>
 <tr>
 <td>
+<p>B</p>
 <p>D</p>
 <p>I</p>
 <p>B</p>
 <p>I</p>
-<p>B</p>
 </td>
 <td>
+<p>DBLOCMBINC</p>
 <p>DBLRCINVSZ</p>
 <p>DBLTSIBL</p>
 <p>DBLVLINC</p>
 <p>DBMAXNRSUBS</p>
-<p>DBMBMINCFRE</p>
 </td>
 <td>
+<p>Local bit map incorrect.</p>
 <p>Last record of block has invalid size.</p>
 <p>Keys less than sibling's index key.</p>
 <p>Local bitmap block level incorrect.</p>
 <p>Maximum number of subscripts exceeded.</p>
-<p>Master bit map incorrectly asserts this local map has free space.</p>
 </td>
 <td>
+<p>M2</p>
 <p>K5</p>
 <p>K2</p>
 <p>M1</p>
 <p>K1</p>
-<p>M1</p>
 </td>
 </tr>
 <tr>
@@ -855,18 +855,18 @@ only.</p></li>
 <p>B</p>
 </td>
 <td>
+<p>DBMBMINCFRE</p>
 <p>DBMBPFLDIS</p>
 <p>DBMBPFLDLBM</p>
 <p>DBMBPFLINT</p>
 <p>DBMBPFRDLBM</p>
-<p>DBMBPFRINT</p>
 </td>
 <td>
+<p>Master bit map incorrectly asserts this local map has free space.</p>
 <p>Master bit map shows this map full, in disagreement with both disk and INTEG result.</p>
 <p>Master bit map shows this map full, agreeing with disk local map.</p>
 <p>Master bit map shows this map full, agreeing with MUPIP INTEG.</p>
 <p>Master bit map shows this map has space, agreeing with disk local map.</p>
-<p>Master bit map shows this map has space, agreeing with MUPIP INTEG.</p>
 </td>
 <td>
 <p>M1</p>
@@ -881,202 +881,202 @@ only.</p></li>
 <p>B</p>
 <p>B</p>
 <p>B</p>
-<p>T</p>
 <p>B</p>
+<p>T</p>
 </td>
 <td>
+<p>DBMBPFRINT</p>
 <p>DBMBPINCFL</p>
 <p>DBMBSIZMN</p>
 <p>DBMBSIZMX</p>
 <p>DBMBTNSIZMX</p>
-<p>DBMRKBUSY</p>
 </td>
 <td>
+<p>Master bit map shows this map has space, agreeing with MUPIP INTEG.</p>
 <p>Master bit map incorrectly marks this local map full.</p>
 <p>Map block too small.</p>
 <p>Map block too large.</p>
 <p>Map block transaction number too large.</p>
-<p>Block incorrectly marked busy.</p>
 </td>
 <td>
+<p>M1</p>
 <p>M1</p>
 <p>M2</p>
 <p>M2</p>
 <p>I6</p>
-<p>M1</p>
 </td>
 </tr>
 <tr>
 <td>
+<p>B</p>
 <p>D</p>
 <p>B</p>
 <p>A</p>
 <p>A</p>
-<p>A</p>
 </td>
 <td>
+<p>DBMRKBUSY</p>
 <p>DBMRKFREE</p>
 <p>DBNONUMSUBS</p>
 <p>DBNOREGION</p>
 <p>DBNOTGDS</p>
-<p>DBNOTMLTP</p>
 </td>
 <td>
+<p>Block incorrectly marked busy.</p>
 <p>Block incorrectly marked free.</p>
 <p>Key contains a numeric form of subscript in a global defined to collate all subscripts as strings.</p>
 <p>None of the database regions accessible.</p>
 <p>Unrecognized database file format.</p>
-<p>Block size not a multiple of 512 bytes.</p>
 </td>
 <td>
+<p>M1</p>
 <p>M1</p>
 <p>K1</p>
 <p>I6</p>
 <p>I3</p>
-<p>K1</p>
 </td>
 </tr>
 <tr>
 <td>
+<p>A</p>
 <p>I</p>
-<p>D</p>
 <p>D</p>
 <p>D</p>
 <p>D</p>
 </td>
 <td>
+<p>DBNOTMLTP</p>
 <p>DBNULCOL</p>
 <p>DBPTRMX</p>
 <p>DBPTRNOTPOS</p>
 <p>DBRBNLBMN</p>
-<p>DBRBNNEG</p>
 </td>
 <td>
+<p>Block size not a multiple of 512 bytes.</p>
 <p>NULL collation representation differs from the database file header setting.</p>
 <p>Block pointer larger than file maximum.</p>
 <p>Block pointer negative.</p>
 <p>Root block number is a local bit tmap number.</p>
-<p>Root block number negative.</p>
 </td>
 <td>
+<p>K1</p>
 <p>K1</p>
 <p>K4</p>
 <p>K4</p>
 <p>K4</p>
-<p>K4</p>
 </td>
 </tr>
 <tr>
 <td>
 <p>D</p>
-<p>T</p>
 <p>D</p>
+<p>T</p>
 <p>D</p>
 <p>D</p>
 </td>
 <td>
+<p>DBRBNNEG</p>
 <p>DBRBNTOOLRG</p>
 <p>DBRDONLY</p>
 <p>DBREADBM</p>
 <p>DBRLEVLTONE</p>
-<p>DBRLEVTOOHI</p>
 </td>
 <td>
+<p>Root block number negative.</p>
 <p>Root block number greater than last block number in file.</p>
 <p>Database file ffff read only.</p>
 <p>Read error on bit map.</p>
 <p>Root level less than one.</p>
-<p>Root level higher than maximum.</p>
 </td>
 <td>
+<p>K4</p>
 <p>K4</p>
 <p>I6</p>
 <p>H7</p>
 <p>O1</p>
-<p>O1</p>
 </td>
 </tr>
 <tr>
 <td>
-<p>I</p>
-<p>I</p>
-<p>S</p>
-<p>S</p>
 <p>D</p>
+<p>I</p>
+<p>I</p>
+<p>S</p>
+<p>S</p>
 </td>
 <td>
+<p>DBRLEVTOOHI</p>
 <p>DBRSIZMN</p>
 <p>DBRSIZMX</p>
 <p>DBSPANCHUNKORD</p>
 <p>DBSPANGLOINCMP</p>
-<p>DBSTARCMP</p>
 </td>
 <td>
+<p>Root level higher than maximum.</p>
 <p>Physical record too small.</p>
 <p>Physical record too large.</p>
 <p>Chunk of nnnn blocks is out of order.</p>
 <p>Spanning node is missing. Block no nnnn of spanning node is missing.</p>
-<p>Last record of block has nonzero compression count.</p>
 </td>
 <td>
+<p>O1</p>
 <p>O2</p>
 <p>O2</p>
 <p>O5</p>
 <p>O5</p>
-<p>K5</p>
 </td>
 </tr>
 <tr>
 <td>
+<p>D</p>
 <p>A</p>
 <p>A</p>
-<p>T</p>
 <p>T</p>
 <p>T</p>
 </td>
 <td>
+<p>DBSTARCMP</p>
 <p>DBSVBNMIN</p>
 <p>DBSZGT64K</p>
 <p>DBTNLTCTN</p>
 <p>DBTNNEQ</p>
-<p>DBTNRESET</p>
 </td>
 <td>
+<p>Last record of block has nonzero compression count.</p>
 <p>Start VBN smaller than possible.</p>
 <p>Block size is greater than 64K.</p>
 <p>Current tn and early tn are not equal.</p>
 <p>Cannot reset transaction number for this region.</p>
-<p>Transaction numbers greater than the current transaction were found.</p>
 </td>
 <td>
+<p>K5</p>
 <p>I3</p>
 <p>I4</p>
 <p>I6</p>
 <p>I4</p>
-<p>I6</p>
 </td>
 </tr>
 <tr>
 <td>
+<p>T</p>
 <p>A</p>
 <p>T</p>
 <p>A</p>
 <p>A</p>
-<p>A</p>
 </td>
 <td>
+<p>DBTNRESET</p>
 <p>DBTNTOOLG</p>
 <p>DBTTLBLK0</p>
 <p>DBUNDACCMT</p>
 <p>FREEZE</p>
-<p>MUSTANDALONE</p>
 </td>
 <td>
+<p>Transaction numbers greater than the current transaction were found.</p>
 <p>Total blocks equal zero.</p>
 <p>Block transaction number too large.</p>
 <p>Cannot determine access method; trying with BG.</p>
 <p>Database for region rrrr is already frozen, not INTEGing</p>
-<p>Could not get exclusive access to rrrr.</p>
 </td>
 <td>
 <p>I6</p>
@@ -1088,21 +1088,25 @@ only.</p></li>
 </tr>
 <tr>
 <td>
+<p>A</p>
 <p>B</p>
 <p>I</p>
 <p>A</p>
 </td>
 <td>
+<p>MUSTANDALONE</p>
 <p>NOGTCMDB</p>
 <p>NULSUBSC</p>
 <p>REGFILENOTFOUND</p>
 </td>
 <td>
+<p>Could not get exclusive access to rrrr.</p>
 <p>INTEG does not support operation on GT.CM database region.</p>
 <p>Null subscripts are not allowed for database file: rrrr.</p>
 <p>Database file ffff corresponding to region rrrr cannot be found.</p>
 </td>
 <td>
+<p>I6</p>
 <p>I5</p>
 <p>K1</p>
 <p>I6</p>
@@ -1566,7 +1570,7 @@ the data from the sequential file.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="sal_dam_spa"></a>O5&#8211;Salvage of a damaged spanning node<a class="indexterm" name="idm45367098275376"></a>
+<a name="sal_dam_spa"></a>O5&#8211;Salvage of a damaged spanning node<a class="indexterm" name="idm45622513881328"></a>
 </h3></div></div></div>
 <p>The following example shows how to salvage a damaged spanning node in ^mypoem. </p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
@@ -1688,6 +1692,19 @@ GTM&gt;w ^mypoem
 Half a league, half a league,Half a league onward,All in the valley of Death Rode the six hundred.  Forward, the Light Brigade!  Charge for the guns he said: Into the valley of Death Rode the six hundred.  Forward, the Light Brigade! Was there a man dismayed?  Not tho the soldiers knew Some one had blundered: Theirs not to make reply, Theirs not to reason why, Theirs but to do and die: Into the valley of Death Rode the six hundred.  Cannon to right of them, Cannon to left of them, Cannon in front of them Volleyed and thundered; Stormed at with shot and shell, Boldly they rode and well, Into the jaws of Death, Into the mouth of Hell Rode the six hundred.  Flashed all their sabres bare, Flashed as they turned in air Sabring the gunners there, Charging an army while All the world wondered: Plunged in the battery-smoke Right thro the line they broke; Cossack and Russian Reeled from the sabre-stroke Shattered and sundered.  Then they rode back, but not Not the six hundred.  Cannon to right of them, Cannon to left of them, Cannon behind them Volleyed and thundered; Stormed at with shot and shell, While horse and hero fell, They that had fought so well Came thro the jaws of Death, Back from the mouth of Hell, All that was left of them, Left of six hundred.  When can their glory fade?  O the wild charge they made!  All the world wondered.  Honour the charge they made!  Honour the Light Brigade, Noble six hundred!</pre>
 </li>
 </ol></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="o6_block_size_error"></a>O6&#8211;Block Size Errors</h3></div></div></div>
+<p>If INTEG is passed one of -IMAXBLOCKSIZE=n and/or -DMAXBLOCKSIZE=m, it will
+check index and/or data blocks, respectively, to verify that the data they contain does not
+exceed the specified size. Errors of this kind do not themselves indicate any database damage,
+although they can indicate that a newly-imposed reserved bytes value has not propagated to
+blocks that have not since been affected by new updates, or that a fill_factor passed to reorg
+was imposed successfully on blocks that existed when the reorg took place but not on newly
+created blocks. Errors of this kind therefore do not call for any recovery efforts, but may
+indicate the need for an additional reorg if the intent is to ensure that all blocks in the
+database meet a certain level of sparseness.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
@@ -1919,7 +1936,7 @@ extending</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="r2_structure_db_integ"></a>R2&#8211;Structural Database Integrity Errors<a class="indexterm" name="idm45367098005696"></a>
+<a name="r2_structure_db_integ"></a>R2&#8211;Structural Database Integrity Errors<a class="indexterm" name="idm45622513831776"></a>
 </h3></div></div></div>
 <p>These run-time errors indicate that the process detected an integrity error within the body of the database.</p>
 <p>Verify the error using the MUPIP command INTEG SUBSCRIPT=, specifying an
@@ -1937,7 +1954,7 @@ establishing the context of the last error.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Run-Time_Database_Restart_Code_Table"></a>Run-Time Database Restart Codes<a class="indexterm" name="idm45367098028496"></a>
+<a name="Run-Time_Database_Restart_Code_Table"></a>Run-Time Database Restart Codes<a class="indexterm" name="idm45622513861360"></a>
 </h3></div></div></div>
 <p>
 The following table lists the failure codes, whether or not they require a
