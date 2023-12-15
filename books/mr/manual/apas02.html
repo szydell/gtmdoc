@@ -8,7 +8,7 @@
 <link rel="up" href="quick_message_reference.html" title="Appendix A. Error Message Quick Reference">
 <link rel="prev" href="apas01.html" title="Standard Error Codes">
 <link rel="next" href="apb.html" title="Appendix B. Reference Implementation Error messages">
-<link rel="copyright" href="ln-idm46294892755360.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45072165103264.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="idm46294885572160"></a>ZMESSAGE Codes</h2></div></div></div>
+<a name="idm45072157908640"></a>ZMESSAGE Codes</h2></div></div></div>
 <p>The following table lists ZMESSAGE numbers of all messages documented in this manual.</p>
 <div class="informaltable"><table border="1">
 <colgroup>
@@ -1626,10 +1626,6 @@
 <td><p><a class="link" href="EVENTLOGERR.html" title="EVENTLOGERR ">EVENTLOGERR</a>, Error in event logging subsystem</p></td>
 </tr>
 <tr>
-<td><p>150378090</p></td>
-<td><p><a class="link" href="EXCEEDRCTLRNDWN.html" title="EXCEEDRCTLRNDWN ">EXCEEDRCTLRNDWN</a>, Maximum relinkctl rundown retries limit of nnnn exceeded</p></td>
-</tr>
-<tr>
 <td><p>150384402</p></td>
 <td><p><a class="link" href="EXCEEDSPREALLOC.html" title="EXCEEDSPREALLOC ">EXCEEDSPREALLOC</a>, Preallocated size ssss for M external call label LLLL exceeded by string of length SSSS</p></td>
 </tr>
@@ -2191,7 +2187,7 @@
 </tr>
 <tr>
 <td><p>150372986</p></td>
-<td><p><a class="link" href="GVSUBOFLOW.html" title="GVSUBOFLOW ">GVSUBOFLOW</a>, Maximum combined length of global subscripts exceeded</p></td>
+<td><p><a class="link" href="GVSUBOFLOW.html" title="GVSUBOFLOW ">GVSUBOFLOW</a>, The combined length of subscripts (xxxx) is greater than maximum allowed limit (yyyy) for region: zzzz</p></td>
 </tr>
 <tr>
 <td><p>150372994</p></td>
@@ -2759,7 +2755,7 @@
 </tr>
 <tr>
 <td><p>150378795</p></td>
-<td><p><a class="link" href="JNLPVTINFO.html" title="JNLPVTINFO ">JNLPVTINFO</a>, Pid aaaa  cycle mmmm fd_mismatch nnnn channel rrrr sync_io ssss  pini_addr xxxx qio_active yyyy old_channel zzzz</p></td>
+<td><p><a class="link" href="JNLPVTINFO.html" title="JNLPVTINFO ">JNLPVTINFO</a>, Pid aaaa cycle mmmm fd_mismatch nnnn channel rrrr sync_io ssss pini_addr xxxx qio_active yyyy</p></td>
 </tr>
 <tr>
 <td><p>150383011</p></td>
@@ -4846,6 +4842,10 @@
 <td><p><a class="link" href="RLBKSTRMSEQ.html" title="RLBKSTRMSEQ ">RLBKSTRMSEQ</a>, Stream journal seqno of the instance after rollback is Stream nnnn : Seqno dddd xxxx</p></td>
 </tr>
 <tr>
+<td><p>150379824</p></td>
+<td><p><a class="link" href="RLNKCTLOPENDEL.html" title="RLNKCTLOPENDEL ">RLNKCTLOPENDEL</a>, The relinkctl file rrrr for $ZROUTINES directory dddd has been deleted by another process, will try to reconnect. (retry = nnnn)</p></td>
+</tr>
+<tr>
 <td><p>150383594</p></td>
 <td><p><a class="link" href="RLNKCTLRNDWNFL.html" title="RLNKCTLRNDWNFL ">RLNKCTLRNDWNFL</a>, Relinkctl file for $ZROUTINES directory dddd failed to rundown as it is open by nnnn process(es)</p></td>
 </tr>
@@ -5174,6 +5174,10 @@
 <td><p><a class="link" href="SOCKETEXIST.html" title="SOCKETEXIST ">SOCKETEXIST</a>, Socket xxxx already exists</p></td>
 </tr>
 <tr>
+<td><p>150380602</p></td>
+<td><p><a class="link" href="SOCKHANGUP.html" title="SOCKHANGUP ">SOCKHANGUP</a>, Socket has disconnected</p></td>
+</tr>
+<tr>
 <td><p>150376386</p></td>
 <td><p><a class="link" href="SOCKINIT.html" title="SOCKINIT ">SOCKINIT</a>, Error initializing socket: (errno == aaaa) xxxx</p></td>
 </tr>
@@ -5212,6 +5216,10 @@
 <tr>
 <td><p>150376602</p></td>
 <td><p><a class="link" href="SOCKWRITE.html" title="SOCKWRITE ">SOCKWRITE</a>, Write to a socket failed</p></td>
+</tr>
+<tr>
+<td><p>150380856</p></td>
+<td><p><a class="link" href="SPCFCBUFDELAY.html" title="SPCFCBUFDELAY ">SPCFCBUFDELAY</a>, Request for block bbbb in database file dddd delayed by PID iiii</p></td>
 </tr>
 <tr>
 <td><p>150382874</p></td>
@@ -5487,7 +5495,7 @@
 </tr>
 <tr>
 <td><p>150383298</p></td>
-<td><p><a class="link" href="TLSRENEGOTIATE.html" title="TLSRENEGOTIATE ">TLSRENEGOTIATE</a>, Failed to renegotiate TLS/SSL connection</p></td>
+<td><p><a class="link" href="TLSRENEGOTIATE.html" title="TLSRENEGOTIATE ">TLSRENEGOTIATE</a>, Failed to XXXX TLS/SSL connection</p></td>
 </tr>
 <tr>
 <td><p>150376058</p></td>
@@ -5883,7 +5891,7 @@
 </tr>
 <tr>
 <td><p>150379746</p></td>
-<td><p><a class="link" href="WRITERSTUCK.html" title="WRITERSTUCK ">WRITERSTUCK</a>, Buffer flush stuck waiting for [xxxx] concurrent writers to finish writing to database file aaaa</p></td>
+<td><p><a class="link" href="WRITERSTUCK.html" title="WRITERSTUCK ">WRITERSTUCK</a>, Buffer flush stuck waiting for concurrent writer PID pppp (mmmm of xxxx) to finish writing to database file dddd</p></td>
 </tr>
 <tr>
 <td><p>150381946</p></td>

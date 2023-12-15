@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="SSV4NOALLOW.html" title="SSV4NOALLOW ">
 <link rel="next" href="STACKOFLOW.html" title="STACKOFLOW ">
-<link rel="copyright" href="ln-idm46294892755360.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45072165103264.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>STACKCRIT</strong></span>, Stack space critical</p>
 <p>Run Time Error: This indicates that the process has consumed almost all of the available stack space.</p>
 <p>Action: Look for infinite recursion. If you do not take immediate action to reduce your stack, GT.M is likely to produce a STACKOFLOW error, which terminates the process. Examine the stack with ZSHOW. Trim the stack using QUIT, ZGOTO, HALT or ZHALT. Note that if a single application call generates a stack frame larger than the stack space between the STACKCRIT and STACKOFLOW boundaries, the process puts a STACKCRIT message in the operator log, but processes the STACKOFLOW and terminates, so the application gets no chance to intervene and handle the error. Look into the gtm_mstack_crit_threshold and gtm_mstack_size environment variables.</p>
-<a class="indexterm" name="idm46294886824224"></a>
+<a class="indexterm" name="idm45072159146448"></a>
 </div>
 <div class="navfooter">
 <hr>

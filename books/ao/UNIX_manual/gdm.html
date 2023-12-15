@@ -8,7 +8,7 @@
 <link rel="up" href="mupipchap.html" title="Chapter 5. General Database Management">
 <link rel="prev" href="mup_intro.html" title="Introduction">
 <link rel="next" href="mup_summary.html" title="MUPIP Command Summary">
-<link rel="copyright" href="ln-idm45622523859200.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45430263190752.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -34,7 +34,7 @@
 <p>The MUPIP commands described in this section are used for common database operations and serves as the foundation for more advanced functionality like Journaling and Replication.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_back"></a>BACKUP<a class="indexterm" name="idm45622521333600"></a><a class="indexterm" name="idm45622521317952"></a>
+<a name="mup_back"></a>BACKUP<a class="indexterm" name="idm45430260646480"></a><a class="indexterm" name="idm45430260642832"></a>
 </h3></div></div></div>
 <p>Saves the contents of the database. It provides a consistent application snapshot across all database regions involved in the backup operation.</p>
 <p>The format of the MUPIP BACKUP command is:</p>
@@ -103,12 +103,12 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </td></tr>
 </table></div>
 <p></p>
-<p>Example:<a class="indexterm" name="idm45622521349648"></a></p>
+<p>Example:<a class="indexterm" name="idm45430260675904"></a></p>
 <pre class="programlisting">$ mupip backup "*" /gtm/bkup</pre>
 <p>This example creates ready-to-run database backup of all regions.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_bkupdbjnl"></a>-BKupdbjnl<a class="indexterm" name="idm45622521320320"></a>
+<a name="backup_bkupdbjnl"></a>-BKupdbjnl<a class="indexterm" name="idm45430260645328"></a>
 </h4></div></div></div>
 <p>A backup database shares the same journaling characteristics of the source database. However, with BKUPDBJNL you can disable or turns off journaling in the backup database. Use this qualifier if you intend to open your backup database at the same time in the same environment as the source database.</p>
 <p>The format of the BKUPDBJNL qualifier is:</p>
@@ -121,7 +121,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_bytestream"></a>-Bytestream<a class="indexterm" name="idm45622521302576"></a>
+<a name="backup_bytestream"></a>-Bytestream<a class="indexterm" name="idm45430260627904"></a>
 </h4></div></div></div>
 <p>Ttransfers MUPIP BACKUP output to a TCP connection, file (or a backup directory), or a pipe. If there are multiple .dat files, BYTESTREAM transfers output to a comma separated list of TCP connections, incremental backup files and/or directories, or pipes.  When used with -SINCE or -TRANSACTION, MUPIP BACKUP allow incremental backup, that is, include database blocks that have changed since a prior point specified by the -SINCE or -TRANSACTION.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
@@ -141,7 +141,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_database"></a>-Database<a class="indexterm" name="idm45622521292400"></a>
+<a name="backup_database"></a>-Database<a class="indexterm" name="idm45430260617728"></a>
 </h4></div></div></div>
 <p>Creates a disk-to-disk backup copy of the files of all selected regions. DATABASE backup copy is a ready-to-use a GT.M database unlike BYTESREAM backup which is required to be restored to a random access file.</p>
 <p>The format of the DATABASE qualifier is:</p>
@@ -154,7 +154,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_nettimeout"></a>-NETtimeout<a class="indexterm" name="idm45622521284144"></a>
+<a name="backup_nettimeout"></a>-NETtimeout<a class="indexterm" name="idm45430260609472"></a>
 </h4></div></div></div>
 <p>Specifies the timeout period when a bytestream BACKUP data is either sent over a TCP/IP connection or restored using the RESTORE command. The format of the NETTIMEOUT qualifier is:</p>
 <pre class="programlisting">NET[TIMEOUT]=seconds</pre>
@@ -165,10 +165,10 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_newjnlfiles"></a>-NEWJNLFILES<a class="indexterm" name="idm45622521427200"></a>
+<a name="mup_newjnlfiles"></a>-NEWJNLFILES<a class="indexterm" name="idm45430260630448"></a>
 </h4></div></div></div>
 <p>Determines the journaling charactertistics of the database files being backed-up. All the established journaling characteristics apply to new journal files. This qualifier is effective only for an ONLINE backup (the default), when the database has journaling enabled.</p>
-<p>The format of the NEWJNLFILES qualifier is:<a class="indexterm" name="idm45622521265776"></a><a class="indexterm" name="idm45622521265008"></a></p>
+<p>The format of the NEWJNLFILES qualifier is:<a class="indexterm" name="idm45430260591072"></a><a class="indexterm" name="idm45430260590304"></a></p>
 <pre class="programlisting">-[NO]NEWJNLFILES[=[NO]PREVLINK], [NO]S[YNC_IO]]</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
@@ -185,7 +185,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_online"></a>-Online<a class="indexterm" name="idm45622521295312"></a>
+<a name="backup_online"></a>-Online<a class="indexterm" name="idm45430260625408"></a>
 </h4></div></div></div>
 <p>Specifies that while a MUPIP BACKUP operation is active, other processes can update the database without affecting the result of the backup. The format of the ONLINE qualifier is:</p>
 <pre class="programlisting">-[NO]O[NLINE]</pre>
@@ -197,7 +197,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_record"></a>-Record<a class="indexterm" name="idm45622521259168"></a>
+<a name="backup_record"></a>-Record<a class="indexterm" name="idm45430260628848"></a>
 </h4></div></div></div>
 <p>Timestamps (in the form of a transaction number) a database file to mark a reference point for subsequent bytestream, database, or custom backup (SANS or disk mirror) protocols. Even though -DATABASE and -BYTESTREAM both mark their own relative timestamps, -RECORD provides an additional timestamp option.  In addition to storing the transaction number, -RECORD also stores a timestamp including the date and time of a successful backup operation in the database file.  MUPIP DUMPFHEAD displays this timestamp as "sgmnt_data.last_start_backup" using a format such as "Sun Aug 15 13:37:32 2021". DSE DUMP -FILEHEADER -ALL also displays this date and time as "Last Record Backup Start" using the same format.  These timestamps are displayed relative to the current timezone, and display as "Never" if the database file has never been successfully backed up with -RECORD.  MUPIP FREEZE also provides the -RECORD qualifier because a FREEZE may be used to set the database up for a SAN or disk-mirror based backup mechanism. </p>
 <p>The format of the RECORD qualifier is:</p>
@@ -209,7 +209,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_replace"></a>-REPLace<a class="indexterm" name="idm45622521253824"></a>
+<a name="backup_replace"></a>-REPLace<a class="indexterm" name="idm45430260579120"></a>
 </h4></div></div></div>
 <p>Overwrites the existing destination files.  </p>
 <p>The format of the REPLACE qualifier is:</p>
@@ -221,7 +221,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_replinstance"></a>-REPLInstance <a class="indexterm" name="idm45622521280624"></a>
+<a name="backup_replinstance"></a>-REPLInstance <a class="indexterm" name="idm45430260643856"></a>
 </h4></div></div></div>
 <p>Specifies the target location to place the backup of the replication instance file.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
@@ -236,7 +236,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_retry"></a>-RETry <a class="indexterm" name="idm45622521267696"></a>
+<a name="backup_retry"></a>-RETry <a class="indexterm" name="idm45430260605312"></a>
 </h4></div></div></div>
 <p>Makes the specified number of retry attempts to perform BACKUP if the backup fails. If -RETRY is not specified, MUPIP retries file copy operation once if the first attempt fails for a retriable reason. In case of an error, retry attempts are always based on cp or pax even when another copy mechanism is available. If -RETRY=0 is specified, there is no retry for any failure that BACKUP encounters.</p>
 <p>The format of the RETRY qualifier is:</p>
@@ -244,7 +244,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_showprogress"></a>-SHowprogress <a class="indexterm" name="idm45622521256736"></a>
+<a name="backup_showprogress"></a>-SHowprogress <a class="indexterm" name="idm45430260582032"></a>
 </h4></div></div></div>
 <p>When the backup copy mechanism supports monitoring, -SHOWPROGRESS periodically displays the transfer progress, estimated time left, speed, and the number of transaction applied to the database during backup. </p>
 <p>The format of the SHOWPROGRESS qualifier is:</p>
@@ -253,7 +253,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_since"></a>-Since<a class="indexterm" name="idm45622521322304"></a>
+<a name="backup_since"></a>-Since<a class="indexterm" name="idm45430260647312"></a>
 </h4></div></div></div>
 <p>Includes blocks changed since the last specified backup. The format of the SINCE qualifier is:</p>
 <pre class="programlisting">-SI[NCE]={DATABASE|BYTESTREAM|RECORD}</pre>
@@ -267,7 +267,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="backup_transaction"></a>-Transaction<a class="indexterm" name="idm45622521262832"></a>
+<a name="backup_transaction"></a>-Transaction<a class="indexterm" name="idm45430260588128"></a>
 </h4></div></div></div>
 <p>Specifies the transaction number of a starting transaction that causes BACKUP -BYTESTREAM to copy all blocks that have been changed by that transaction and all subsequent transactions. The format of the TRANSACTION qualifier is:</p>
 <pre class="programlisting">-T[RANSACTION]=transaction-number</pre>
@@ -287,7 +287,7 @@ Transactions up to 0x0000000000E92E04 are backed up.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_backup"></a>Examples<span> for MUPIP BACKUP</span><a class="indexterm" name="idm45622521247648"></a>
+<a name="examples_mup_backup"></a>Examples<span> for MUPIP BACKUP</span><a class="indexterm" name="idm45430260574704"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip backup -bytestream REPTILES,BIRDS bkup</pre>
@@ -347,7 +347,7 @@ BACKUP COMPLETED.</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_create"></a>CREATE<a class="indexterm" name="idm45622521465680"></a><a class="indexterm" name="idm45622521232160"></a>
+<a name="mup_create"></a>CREATE<a class="indexterm" name="idm45430260674752"></a><a class="indexterm" name="idm45430260692864"></a>
 </h3></div></div></div>
 <p>Creates and initializes database files using the information in a Global Directory file. If a file already exists for any segment, MUPIP CREATE takes no action for that segment.</p>
 <p>The format of the CREATE command is:</p>
@@ -356,7 +356,7 @@ BACKUP COMPLETED.</pre>
 <p>Note that a GT.M logical database (an M global variable namespace) can consist of an arbitrary number of database files. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="create_v6"></a>-V6<a class="indexterm" name="idm45622521206656"></a>
+<a name="create_v6"></a>-V6<a class="indexterm" name="idm45430260533680"></a>
 </h4></div></div></div>
 <p>Directs MUPIP to create a V6.3-014 compatible database file. This option is negatable to ensure that MUPIP CREATE always creates current version database files even when the environment variable gtm_db_create_ver is defined as V6. By default, MUPIP CREATE creates database files for the current version. The environment variable gtm_db_create_ver can override the default behavior.</p>
 <p>The format of the V6 qualifier is:</p>
@@ -365,7 +365,7 @@ BACKUP COMPLETED.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="create_region"></a>-Region<a class="indexterm" name="idm45622521254400"></a>
+<a name="create_region"></a>-Region<a class="indexterm" name="idm45430260585488"></a>
 </h4></div></div></div>
 <p>Specifies a single region for creation of a database file. By default, MUPIP CREATE creates database files for all regions in the current Global Directory that do not already have a database file. </p>
 <p>The format of the REGION qualifier is:</p>
@@ -380,7 +380,7 @@ BACKUP COMPLETED.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_create"></a>Examples<span> for MUPIP CREATE</span><a class="indexterm" name="idm45622521262272"></a>
+<a name="examples_mup_create"></a>Examples<span> for MUPIP CREATE</span><a class="indexterm" name="idm45430260726544"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip create -region=REPTILES</pre>
@@ -389,7 +389,7 @@ BACKUP COMPLETED.</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_downgrade"></a>DOWNGRADE<a class="indexterm" name="idm45622521261856"></a><a class="indexterm" name="idm45622521267312"></a>
+<a name="mup_downgrade"></a>DOWNGRADE<a class="indexterm" name="idm45430260587152"></a><a class="indexterm" name="idm45430260592416"></a>
 </h3></div></div></div>
 <p>The MUPIP DOWNGRADE command changes the file header format from V6 to V5 under appropriate conditions. The format of the MUPIP DOWNGRADE command is:</p>
 <pre class="programlisting">D[OWNGRADE] -V[ERSION]={V5|V63000A}} file-name</pre>
@@ -411,7 +411,7 @@ BACKUP COMPLETED.</pre>
 </table></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="down_ver"></a>-VERSION<span>={V5|V63000A}</span><a class="indexterm" name="idm45622521190384"></a>
+<a name="down_ver"></a>-VERSION<span>={V5|V63000A}</span><a class="indexterm" name="idm45430260515856"></a>
 </h4></div></div></div>
 <p>V5 specifies file header format. For more information on the downgrade criteria for your database, refer to the release notes document of your current GT.M version.</p>
 <p>V63000A:</p>
@@ -419,7 +419,7 @@ BACKUP COMPLETED.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_downgrade"></a>Examples<span> for MUPIP DOWNGRADE</span><a class="indexterm" name="idm45622521256480"></a>
+<a name="examples_mup_downgrade"></a>Examples<span> for MUPIP DOWNGRADE</span><a class="indexterm" name="idm45430260529328"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip downgrade mumps.dat -VERSION=V5</pre>
@@ -428,7 +428,7 @@ BACKUP COMPLETED.</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_dumpfhead"></a>DUMPFHEAD<a class="indexterm" name="idm45622521192656"></a><a class="indexterm" name="idm45622521367136"></a>
+<a name="mup_dumpfhead"></a>DUMPFHEAD<a class="indexterm" name="idm45430260518960"></a><a class="indexterm" name="idm45430260693440"></a>
 </h3></div></div></div>
 <p>The MUPIP DUMPFHEAD command displays information about one or more database files. The format of the MUPIP DUMPFHEAD command is:</p>
 <pre class="programlisting">DU[MPFHEAD]  {-FI[LE] file-name |-R[EGION] region-list} </pre>
@@ -441,7 +441,7 @@ BACKUP COMPLETED.</pre>
 </table></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_dumpfhead_file"></a>-FILE<span>=file</span><a class="indexterm" name="idm45622521184224"></a>
+<a name="mup_dumpfhead_file"></a>-FILE<span>=file</span><a class="indexterm" name="idm45430260510864"></a>
 </h4></div></div></div>
 <p>Specifies the name of the database file for the MUPIP DUMPFHEAD operation. -FILE does not require a Global Directory. The format of the FILE qualifier is:</p>
 <pre class="programlisting">-FI[LE] database-file-name</pre>
@@ -452,14 +452,14 @@ BACKUP COMPLETED.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_dumpfhead_flush"></a>-FLUSH<a class="indexterm" name="idm45622521191984"></a>
+<a name="mup_dumpfhead_flush"></a>-FLUSH<a class="indexterm" name="idm45430260586160"></a>
 </h4></div></div></div>
 <p>Flushes the database file header flush before displaying the database file header fields. While this qualifier ensures the information is recent, under most production circumstances the output is sufficiently accurate without -FLUSH. Use of -FLUSH makes the operation significanly more heavyweight. If the database file header flush fails, MUPIP DUMPFHEAD -FLUSH produces a BUFFLUFAILED warning, but still produces output. The format of the FLUSH qualifier is:</p>
 <pre class="programlisting">-FL[USH] </pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_dumpfhead_region"></a>-REGION<span>=region</span><a class="indexterm" name="idm45622521193488"></a>
+<a name="mup_dumpfhead_region"></a>-REGION<span>=region</span><a class="indexterm" name="idm45430260669856"></a>
 </h4></div></div></div>
 <p>Specifies that the DUMPFHEAD command identifies one or more regions rather than a database file. The format of the REGION qualifier is:</p>
 <pre class="programlisting">-R[EGION] region-list</pre>
@@ -471,7 +471,7 @@ BACKUP COMPLETED.</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_dumpfhead"></a>Examples<span> for MUPIP DUMPFHEAD</span><a class="indexterm" name="idm45622521529264"></a>
+<a name="examples_mup_dumpfhead"></a>Examples<span> for MUPIP DUMPFHEAD</span><a class="indexterm" name="idm45430260576496"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip dumpfhead -file mumps.dat</pre>
@@ -482,7 +482,7 @@ BACKUP COMPLETED.</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_endiancvt"></a>ENDIANCVT<a class="indexterm" name="idm45622521165152"></a><a class="indexterm" name="idm45622521202880"></a> <a class="indexterm" name="idm45622521203888"></a>
+<a name="mup_endiancvt"></a>ENDIANCVT<a class="indexterm" name="idm45430260491840"></a><a class="indexterm" name="idm45430260573776"></a> <a class="indexterm" name="idm45430260498768"></a>
 </h3></div></div></div>
 <p>Converts a database file from one endian format to the other (BIG to LITTLE or LITTLE to BIG). The format of the MUPIP ENDIANCVT command is:</p>
 <pre class="programlisting">ENDIANCVT [-OUTDB=&lt;outdb-file&gt;] -OV[ERRIDE] &lt;db-file&gt;</pre>
@@ -535,16 +535,16 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_exit"></a>EXIT<a class="indexterm" name="idm45622521152448"></a><a class="indexterm" name="idm45622521152976"></a>
+<a name="mup_exit"></a>EXIT<a class="indexterm" name="idm45430260479120"></a><a class="indexterm" name="idm45430260487264"></a>
 </h3></div></div></div>
 <p>Stops a MUPIP process and return control to the process from which MUPIP was invoked.</p>
 <p>The format of the MUPIP EXIT command is:</p>
 <pre class="programlisting">EXI[T]</pre>
 <p>The EXIT command does not accept any qualifiers.</p>
 </div>
-<a class="indexterm" name="idm45622521147744"></a><div class="sect2">
+<a class="indexterm" name="idm45430260502240"></a><div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_extend"></a>EXTEND<a class="indexterm" name="idm45622521168512"></a><a class="indexterm" name="idm45622521136736"></a>
+<a name="mup_extend"></a>EXTEND<a class="indexterm" name="idm45430260513296"></a><a class="indexterm" name="idm45430260464288"></a>
 </h3></div></div></div>
 <p>Increases the size of a database file. By default, GT.M automatically extends a database file when there is available space.</p>
 <p>The format of the MUPIP EXTEND command is:</p>
@@ -557,7 +557,7 @@ Proceed [yes/no] ?</pre>
 </ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="extend_blocks"></a>-Blocks<a class="indexterm" name="idm45622521132544"></a>
+<a name="extend_blocks"></a>-Blocks<a class="indexterm" name="idm45430260460240"></a>
 </h4></div></div></div>
 <p>Specifies the number of GDS database blocks by which MUPIP should extend the file. GDS files use additional blocks for bitmaps. MUPIP EXTEND adds the specified number of blocks plus the bitmap blocks required as overhead. <span>For more information about bitmaps, refer to <a class="xref" href="ch09.html" title="Chapter 9. GT.M Database Structure(GDS)">Chapter 9: &#8220;<i>GT.M Database Structure(GDS)</i>&#8221;</a>.</span></p>
 <p>The format of the BLOCK qualifier is:</p>
@@ -566,7 +566,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_extend"></a>Examples<span> for MUPIP EXTEND</span><a class="indexterm" name="idm45622521152320"></a>
+<a name="examples_mup_extend"></a>Examples<span> for MUPIP EXTEND</span><a class="indexterm" name="idm45430260518704"></a>
 </h4></div></div></div>
 <pre class="programlisting">$ mupip extend DEFAULT -blocks=400</pre>
 <p>This command adds 400 GDE database block to region DEFAULT.</p>
@@ -577,7 +577,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_extract"></a>EXTRACT<a class="indexterm" name="idm45622521185536"></a><a class="indexterm" name="idm45622521143248"></a>
+<a name="mup_extract"></a>EXTRACT<a class="indexterm" name="idm45430260466528"></a><a class="indexterm" name="idm45430260469344"></a>
 </h3></div></div></div>
 <p>Backups certain globals or to extract data from the database for use by another system. The MUPIP EXTRACT command copies globals from the current database to a sequential output file in one of three formats-GO, BINARY, or ZWR. The format of the MUPIP EXTRACT command is:</p>
 <pre class="programlisting">EXTR[ACT] 
@@ -604,10 +604,10 @@ Proceed [yes/no] ?</pre>
 <p>The following sections describe the qualifiers of MUPIP EXTRACT command.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="extract_format"></a>-FOrmat<a class="indexterm" name="idm45622521114320"></a><a class="indexterm" name="idm45622521106336"></a><a class="indexterm" name="idm45622521103312"></a><a class="indexterm" name="idm45622521101088"></a>
+<a name="extract_format"></a>-FOrmat<a class="indexterm" name="idm45430260442208"></a><a class="indexterm" name="idm45430260435344"></a><a class="indexterm" name="idm45430260432400"></a><a class="indexterm" name="idm45430260429536"></a>
 </h4></div></div></div>
 <p>Specifies the format of the output file. The format of the FORMAT qualifier is:</p>
-<a class="indexterm" name="idm45622521100208"></a><pre class="programlisting">-FO[RMAT]=format_code</pre>
+<a class="indexterm" name="idm45430260428656"></a><pre class="programlisting">-FO[RMAT]=format_code</pre>
 <p>The format code is any one of the following:</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -710,7 +710,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="extract_freeze"></a>-FReeze<a class="indexterm" name="idm45622521070064"></a>
+<a name="extract_freeze"></a>-FReeze<a class="indexterm" name="idm45430260398656"></a>
 </h4></div></div></div>
 <p>Prevents database updates to all database files from which the MUPIP EXTRACT command is copying records. FREEZE ensures that a MUPIP EXTRACT operation captures a "sharp" image of the globals, rather than one "blurred" by updates occurring while the copy is in progress.</p>
 <p>The format of the FREEZE qualifier is:</p>
@@ -719,7 +719,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="extract_label"></a>-LAbel<a class="indexterm" name="idm45622521112592"></a>
+<a name="extract_label"></a>-LAbel<a class="indexterm" name="idm45430260440064"></a>
 </h4></div></div></div>
 <p>Specifies the text string that becomes the first record in the output file. MUPIP EXTRACT -FORMAT=BINARY truncates the label text to 32 characters. The format of the LABEL qualifier is:</p>
 <pre class="programlisting">-LA[BEL]=text</pre>
@@ -730,7 +730,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="extract_log"></a>-LOg<a class="indexterm" name="idm45622521031744"></a>
+<a name="extract_log"></a>-LOg<a class="indexterm" name="idm45430260352800"></a>
 </h4></div></div></div>
 <p>Displays a message on stdout for each global extracted with the MUPIP EXTRACT command. The message displays the number of global nodes, the maximum subscript length and maximum data length for each global. The format of the LOG qualifier is:</p>
 <pre class="programlisting">-[NO]LO[G]</pre>
@@ -738,7 +738,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="extract_null_iv"></a>-Null_iv<a class="indexterm" name="idm45622521071488"></a>
+<a name="extract_null_iv"></a>-Null_iv<a class="indexterm" name="idm45430260420464"></a>
 </h4></div></div></div>
 <p>Creates an encrypted binary extract with null IVs from a database with non-null IVs, which can be restored to a version that does not support non-null IVs. The format of the -NULL_IV qualifier is:</p>
 <pre class="programlisting">-[NO]NULL_IV</pre>
@@ -751,7 +751,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="extract_region"></a>-Region<a class="indexterm" name="idm45622521158160"></a>
+<a name="extract_region"></a>-Region<a class="indexterm" name="idm45430260441728"></a>
 </h4></div></div></div>
 <p>Restricts MUPIP EXTRACT to a set of regions. The format of the REGION qualifier is:</p>
 <pre class="programlisting">-R[EGION]=region-list </pre>
@@ -759,7 +759,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="extract_select"></a>-Select<a class="indexterm" name="idm45622521033792"></a>
+<a name="extract_select"></a>-Select<a class="indexterm" name="idm45430260360176"></a>
 </h4></div></div></div>
 <p>Specifies globals for a MUPIP EXTRACT operation. The format of the SELECT qualifier is:</p>
 <pre class="programlisting">-S[ELECT]= global-specification</pre>
@@ -784,14 +784,14 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="extract_stdout"></a>-STdout<a class="indexterm" name="idm45622521092080"></a>
+<a name="extract_stdout"></a>-STdout<a class="indexterm" name="idm45430260418928"></a>
 </h4></div></div></div>
 <p>Redirects database extract to the standard output stream. The format of the STDOUT qualifier is:</p>
 <pre class="programlisting">-ST[DOUT]</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_extract"></a>Examples<span> for MUPIP EXTRACT</span><a class="indexterm" name="idm45622521071360"></a>
+<a name="examples_mup_extract"></a>Examples<span> for MUPIP EXTRACT</span><a class="indexterm" name="idm45430260417616"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip extract -format=go -freeze big.glo</pre>
@@ -815,8 +815,8 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_freeze"></a>FREEZE<a class="indexterm" name="idm45622521129264"></a>
-<a class="indexterm" name="idm45622521093968"></a>
+<a name="mup_freeze"></a>FREEZE<a class="indexterm" name="idm45430260453936"></a>
+<a class="indexterm" name="idm45430260387456"></a>
 </h3></div></div></div>
 <p>Temporarily suspends (freezes) updates to the database after ensuring a consistent state between memory and secondary storage, which, with -ACCESS_METHOD=BG, means after flushing global buffers. If you prefer a non-GT.M utility to perform a backup or reorganization, you might use this facility to provide standalone access to your GT.M database. You might use MUPIP FREEZE to suspend (and later resume) database updates for creating mirrored disk configuration or re-integrating a mirror.</p>
 <p>GT.M BACKUP, INTEG, and REORG operations may implicitly freeze and unfreeze database regions. However, for most operations, this freeze/unfreeze happens internally and is transparent to the application.</p>
@@ -845,7 +845,7 @@ Proceed [yes/no] ?</pre>
 -R[ECORD] - only valid with -ON</pre>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_freeze_off"></a>-OFf<a class="indexterm" name="idm45622521098288"></a>
+<a name="mup_freeze_off"></a>-OFf<a class="indexterm" name="idm45430260405408"></a>
 </h4></div></div></div>
 <p>Clears a freeze set by another process with the same userid.</p>
 <p>The format of the OFF qualifier is:</p>
@@ -858,7 +858,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_freeze_on"></a>-ON<a class="indexterm" name="idm45622521078720"></a>
+<a name="mup_freeze_on"></a>-ON<a class="indexterm" name="idm45430260406592"></a>
 </h4></div></div></div>
 <p>Specifies the start of a MUPIP FREEZE operation. The format of the ON qualifier is:</p>
 <pre class="programlisting">-ON</pre>
@@ -866,7 +866,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_freeze_autorelease"></a>-[NO]A[UTORELEASE<a class="indexterm" name="idm45622521035328"></a>
+<a name="mup_freeze_autorelease"></a>-[NO]A[UTORELEASE<a class="indexterm" name="idm45430260454416"></a>
 </h4></div></div></div>
 <p>Controls the behavior of a FREEZE specified with -ONLINE when GT.M must write to a database file. The format of the AUTORELEASE qualifier is:</p>
 <pre class="programlisting">-[NO]A[UTORELEASE]</pre>
@@ -892,7 +892,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_freeze_online"></a>-ONLine<a class="indexterm" name="idm45622521191280"></a>
+<a name="mup_freeze_online"></a>-ONLine<a class="indexterm" name="idm45430260459760"></a>
 </h4></div></div></div>
 <p>Controls the potential impact of a FREEZE on concurrently updating processes. The format of the ONLINE qualifier is:</p>
 <pre class="programlisting">-[NO]ONL[INE]</pre>
@@ -922,7 +922,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_freeze_override"></a>-OVerride<a class="indexterm" name="idm45622520989120"></a>
+<a name="mup_freeze_override"></a>-OVerride<a class="indexterm" name="idm45430260317552"></a>
 </h4></div></div></div>
 <p>Release a freeze set by a process with a different userid. GT.M provides OVERRIDE to allow error recovery in case a procedure with a freeze fails to release. The format of the OVERRIDE qualifier is:</p>
 <pre class="programlisting">-OV[ERRIDE]</pre>
@@ -933,7 +933,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_freeze_record"></a>-Record<a class="indexterm" name="idm45622520994656"></a>
+<a name="mup_freeze_record"></a>-Record<a class="indexterm" name="idm45430260322672"></a>
 </h4></div></div></div>
 <p>Specifies that a MUPIP FREEZE operation should record an event as a reference point. You might use MUPIP FREEZE to set up your database for a custom-backup mechanism (SAN or mirror-based).</p>
 <p>The format of the RECORD qualifier is:</p>
@@ -946,7 +946,7 @@ Proceed [yes/no] ?</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_freeze"></a>Examples<span> for MUPIP FREEZE</span><a class="indexterm" name="idm45622521079232"></a>
+<a name="examples_mup_freeze"></a>Examples<span> for MUPIP FREEZE</span><a class="indexterm" name="idm45430260407104"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip freeze -off DEFAULT</pre>
@@ -968,8 +968,8 @@ $ set -e</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_ftok"></a>FTOK<a class="indexterm" name="idm45622520991328"></a>
-<a class="indexterm" name="idm45622521138720"></a>
+<a name="mup_ftok"></a>FTOK<a class="indexterm" name="idm45430260319344"></a>
+<a class="indexterm" name="idm45430260370496"></a>
 </h3></div></div></div>
 <p>Produces the "public" (system generated) IPC Keys (essentially hash values) of a given file-list or the journal/receiver pool in a table form.</p>
 <p>The format of the MUPIP FTOK command is:</p>
@@ -980,37 +980,37 @@ $ set -e</pre>
 </ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="ftok_db"></a>-DB<a class="indexterm" name="idm45622520967120"></a>
+<a name="ftok_db"></a>-DB<a class="indexterm" name="idm45430260294736"></a>
 </h4></div></div></div>
 <p>Specifies that the file-name is a database file. By default, MUPIP FTOK uses -DB.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="ftok_id"></a>-ID<a class="indexterm" name="idm45622520992608"></a>
+<a name="ftok_id"></a>-ID<a class="indexterm" name="idm45430260486352"></a>
 </h4></div></div></div>
 <p>Specifies the signature use for the ftok; if unspecified, it defaults to the signature for a GT.M database file. if a file is not valid and accessible, FTOK reports -1 values. By default, the utility provides additional information about the file, including its file ID which provides the basis for the FTOK. </p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="ftok_header"></a>-[NO]HEADER<a class="indexterm" name="idm45622521154224"></a>
+<a name="ftok_header"></a>-[NO]HEADER<a class="indexterm" name="idm45430260399488"></a>
 </h4></div></div></div>
 <p>Displays or omits the header of the table. -ONLY output has no header, but by default other forms include a header that -NOHEADER suppresses.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="ftok_only"></a>-ONLY<a class="indexterm" name="idm45622520976192"></a>
+<a name="ftok_only"></a>-ONLY<a class="indexterm" name="idm45430260304256"></a>
 </h4></div></div></div>
 <p>Restricts the output to only the FTOK Key; if a file is not valid and accessible, FTOK reports -1 values. -ONLY does not report the table header even when -HEADER is specified. If the database file is unavailable, the utility defaults to the -ONLY behavior.  </p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="ftok_jnlpool"></a>-JNLPOOL<a class="indexterm" name="idm45622520986496"></a>
+<a name="ftok_jnlpool"></a>-JNLPOOL<a class="indexterm" name="idm45430260314384"></a>
 </h4></div></div></div>
 <p>Specifies that the reported key is for the Journal Pool of the instance created by the current Global Directory.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="ftok_recvpool"></a>-RECVPOOL<a class="indexterm" name="idm45622521043776"></a>
+<a name="ftok_recvpool"></a>-RECVPOOL<a class="indexterm" name="idm45430260320176"></a>
 </h4></div></div></div>
 <p>Specifies that the reported key is for the Receive Pool of the instance created by the current Global Directory.</p>
 </div>
@@ -1033,7 +1033,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_hash"></a>HASH<a class="indexterm" name="idm45622521124736"></a><a class="indexterm" name="idm45622520973360"></a>
+<a name="mup_hash"></a>HASH<a class="indexterm" name="idm45430260353824"></a><a class="indexterm" name="idm45430260310080"></a>
 </h3></div></div></div>
 <p>Uses a 128 bit hash based on the MurmurHash3 algorithm to provide provides the hash of source files from the command line. </p>
 <p>The format of the MUPIP HASH command is:</p>
@@ -1041,8 +1041,8 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_integ"></a>INTEG<a class="indexterm" name="idm45622520984704"></a>
-<a class="indexterm" name="idm45622520950512"></a><a class="indexterm" name="idm45622520950000"></a>
+<a name="mup_integ"></a>INTEG<a class="indexterm" name="idm45430260309568"></a>
+<a class="indexterm" name="idm45430260278784"></a><a class="indexterm" name="idm45430260278272"></a>
 </h3></div></div></div>
 <p>Performs an integrity check on a GT.M database file. You can perform structural integrity checks on one or more regions in the current Global Directory without bringing down (suspending database updates) your application. However, a MUPIP INTEG on a single file database requires standalone access but does not need a Global Directory. The order in which the MUPIP INTEG command selects database regions is a function of file system layout and may vary as files are moved or created. Execute a MUPIP INTEG operations one database file at a time to generate an report where the output always lists database files in a predictable sequence. For example, to compare output with a reference file, run INTEG on one file at a time.</p>
 <p>Always use MUPIP INTEG in the following conditions:</p>
@@ -1107,7 +1107,7 @@ $ mupip ftok -jnlpool
 <p>The following sections describe the qualifiers of the INTEG command.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_adjacency"></a>-ADjacency<a class="indexterm" name="idm45622520936800"></a>
+<a name="integ_adjacency"></a>-ADjacency<a class="indexterm" name="idm45430260264480"></a>
 </h4></div></div></div>
 <p>Specifies the logical adjacency of data blocks that MUPIP INTEG should assume while diagnosing the database. By default, MUPIP INTEG operates with -ADJACENCY=10 and reports the logical adjacency in the "Adjacent" column of the MUPIP INTEG report. </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -1119,7 +1119,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_block"></a>-BLock<a class="indexterm" name="idm45622520934368"></a>
+<a name="integ_block"></a>-BLock<a class="indexterm" name="idm45430260262176"></a>
 </h4></div></div></div>
 <p>Specifies the block for MUPIP INTEG command to start checking a sub-tree of the database. MUPIP INTEG -BLOCK cannot detect "incorrectly marked busy errors".</p>
 <p>The format of the BLOCK qualifier is:</p>
@@ -1131,7 +1131,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_brief"></a>-BRief<a class="indexterm" name="idm45622520927408"></a>
+<a name="integ_brief"></a>-BRief<a class="indexterm" name="idm45430260254656"></a>
 </h4></div></div></div>
 <p>Displays a single summary report by database file of the total number of directory, index and data blocks. The format of the BRIEF qualifier is:</p>
 <pre class="programlisting">-BR[IEF]</pre>
@@ -1142,14 +1142,14 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_dmaxblocksize"></a>-DMAXblocksize<a class="indexterm" name="idm45622520965712"></a>
+<a name="integ_dmaxblocksize"></a>-DMAXblocksize<a class="indexterm" name="idm45430260281344"></a>
 </h4></div></div></div>
 <p>Specifies the maximum actual size of a data-level block in the database; any data block which contains data in excess of this size causes integ to report the block number, its path, and an error. The format of the DMAXBLOCKSIZE qualifier is:</p>
 <pre class="programlisting">-DMAX[BLOCKSIZE][=integer]</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_fast"></a>-FAst<a class="indexterm" name="idm45622520937376"></a>
+<a name="integ_fast"></a>-FAst<a class="indexterm" name="idm45430260265184"></a>
 </h4></div></div></div>
 <p>Checks only index blocks. FAST does not check data blocks.</p>
 <p>The format of the FAST qualifier is:</p>
@@ -1164,7 +1164,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_file"></a>-FIle<a class="indexterm" name="idm45622520930320"></a>
+<a name="integ_file"></a>-FIle<a class="indexterm" name="idm45430260257568"></a>
 </h4></div></div></div>
 <p>Specifies the name of the database file for the MUPIP INTEG operation. FILE requires exclusive (stand-alone) access to a database file and does not require a Global Directory. The format of the FILE qualifier is:</p>
 <pre class="programlisting">-FI[LE]</pre>
@@ -1176,7 +1176,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_full"></a>-FUll<a class="indexterm" name="idm45622520933472"></a>
+<a name="integ_full"></a>-FUll<a class="indexterm" name="idm45430260290336"></a>
 </h4></div></div></div>
 <p>Displays an expanded report for a MUPIP INTEG operation. With -FULL specified, MUPIP INTEG displays the number of index and data blocks in the directory tree and in each global variable tree as well as the total number of directory, index and data blocks. The format of the FULL qualifier is:</p>
 <pre class="programlisting">-FU[LL]</pre>
@@ -1188,14 +1188,14 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_imaxblocksize"></a>-IMAXblocksize<a class="indexterm" name="idm45622520933856"></a>
+<a name="integ_imaxblocksize"></a>-IMAXblocksize<a class="indexterm" name="idm45430260261344"></a>
 </h4></div></div></div>
 <p>Specifies the maximum actual size of an index-level block in the database; any index block which contains data in excess of this size causes integ to report the block number, its path, and an error. The format of the IMAXBLOCKSIZE qualifier is:</p>
 <pre class="programlisting">-IMAX[BLOCKSIZE][=integer]</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_keyranges"></a>-Keyranges<a class="indexterm" name="idm45622520936128"></a>
+<a name="integ_keyranges"></a>-Keyranges<a class="indexterm" name="idm45430260263808"></a>
 </h4></div></div></div>
 <p>Specify whether the MUPIP INTEG report includes key ranges that identify the data suspected of problems it detects. The format of the KEYRANGES qualifier is:</p>
 <pre class="programlisting">-[NO]K[EYRANGES]</pre>
@@ -1203,7 +1203,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_map"></a>-MAP<a class="indexterm" name="idm45622520905328"></a>
+<a name="integ_map"></a>-MAP<a class="indexterm" name="idm45430260232576"></a>
 </h4></div></div></div>
 <p>Specifies the maximum number of "incorrectly marked busy errors" that MUPIP INTEG reports. The format of the MAP qualifier is:</p>
 <pre class="programlisting">-[NO]MAP[=max_imb_errors]</pre>
@@ -1230,7 +1230,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_maxkeysize"></a>-MAXkeysize<a class="indexterm" name="idm45622520931984"></a>
+<a name="integ_maxkeysize"></a>-MAXkeysize<a class="indexterm" name="idm45430260259232"></a>
 </h4></div></div></div>
 <p>Specifies the maximum number of "key size too large" errors that a MUPIP INTEG operation reports. The format of the MAXKEYSIZE qualifier is:</p>
 <pre class="programlisting">-[NO]MAX[KEYSIZE][=integer]</pre>
@@ -1243,7 +1243,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_online"></a>-Online<a class="indexterm" name="idm45622520898832"></a> <a class="indexterm" name="idm45622520883952"></a>
+<a name="integ_online"></a>-Online<a class="indexterm" name="idm45430260265472"></a> <a class="indexterm" name="idm45430260211200"></a>
 </h4></div></div></div>
 <p>Specifies that while a MUPIP INTEG operation is active, other processes can update the database without affecting the result of the backup. Allows checking database structural integrity to run concurrently with database updates. The format of the ONLINE qualifier is:</p>
 <pre class="programlisting">-[NO]O[NLINE]</pre>
@@ -1269,7 +1269,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_region"></a>-Region<a class="indexterm" name="idm45622520940000"></a>
+<a name="integ_region"></a>-Region<a class="indexterm" name="idm45430260243296"></a>
 </h4></div></div></div>
 <p>Specifies that the INTEG command identifies one or more regions rather than a database file. The format of the REGION qualifier is:</p>
 <pre class="programlisting">-R[EGION]=region-list</pre>
@@ -1283,7 +1283,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_subscript"></a>-Subscript<a class="indexterm" name="idm45622520867760"></a>
+<a name="integ_subscript"></a>-Subscript<a class="indexterm" name="idm45430260194800"></a>
 </h4></div></div></div>
 <p>Specifies a global or a range of keys to INTEG. The global key may be enclosed in quotation marks (" "). Identify a range by separating two subscripts with a colon (:). -SUBSCRIPT cannot detect incorrectly marked busy errors. The format of the SUBSCRIPT qualifier is:</p>
 <pre class="programlisting">-SU[BSCRIPT]=subscript</pre>
@@ -1292,7 +1292,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_stats"></a>-Stats<a class="indexterm" name="idm45622520873712"></a>
+<a name="integ_stats"></a>-Stats<a class="indexterm" name="idm45430260201584"></a>
 </h4></div></div></div>
 <p>Specifies INTEG to check any active statistics database associated with the region(s) specified for the command. The format of the STATS qualifier is:</p>
 <pre class="programlisting">-[NO]ST[ATS]</pre>
@@ -1301,7 +1301,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="tn_reset"></a>-TN_reset<a class="indexterm" name="idm45622520861808"></a>
+<a name="tn_reset"></a>-TN_reset<a class="indexterm" name="idm45430260187472"></a>
 </h4></div></div></div>
 <p>Resets block transaction numbers and backup event recorded transaction numbers to one (1), and the current transaction number to two (2) which makes the backup event recorded transaction numbers more meaningful and useful. It also issues an advisory message to perform a backup.</p>
 <p>The format of the TN_RESET qualifier is:</p>
@@ -1332,7 +1332,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="integ_transaction"></a>-TRansaction<a class="indexterm" name="idm45622520870384"></a>
+<a name="integ_transaction"></a>-TRansaction<a class="indexterm" name="idm45430260197840"></a>
 </h4></div></div></div>
 <p>Specifies the maximum number of block transaction- number-too-large errors that MUPIP INTEG reports. The format of the TRANSACTION qualifier is:</p>
 <pre class="programlisting">-[NO]TR[ANSACTION][=integer]</pre>
@@ -1345,7 +1345,7 @@ $ mupip ftok -jnlpool
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_integ"></a>Examples <span>for MUPIP INTEG</span><a class="indexterm" name="idm45622520865968"></a>
+<a name="examples_mup_integ"></a>Examples <span>for MUPIP INTEG</span><a class="indexterm" name="idm45430260285632"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip integ -block=4 mumps.dat</pre>
@@ -1427,8 +1427,8 @@ Level          Blocks         Records          % Used      Adjacent
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_intrpt"></a>INTRPT<a class="indexterm" name="idm45622521098032"></a>
-<a class="indexterm" name="idm45622520845520"></a><a class="indexterm" name="idm45622520845008"></a>
+<a name="mup_intrpt"></a>INTRPT<a class="indexterm" name="idm45430260364272"></a>
+<a class="indexterm" name="idm45430260172304"></a><a class="indexterm" name="idm45430260171792"></a>
 </h3></div></div></div>
 <p>Sends an interrupt signal to the specified process. The signal used is [POSIX] SIGUSR1. The format of the MUPIP INTRPT command is:</p>
 <pre class="programlisting">
@@ -1452,7 +1452,7 @@ INTRPT process-id</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_load"></a>LOAD<a class="indexterm" name="idm45622520862912"></a><a class="indexterm" name="idm45622520823088"></a><a class="indexterm" name="idm45622520822464"></a>
+<a name="mup_load"></a>LOAD<a class="indexterm" name="idm45430260200080"></a><a class="indexterm" name="idm45430260149136"></a><a class="indexterm" name="idm45430260148512"></a>
 </h3></div></div></div>
 <p>Puts the global variable names and their corresponding data values into a GT.M database from a sequential file.</p>
 <p>The format of the LOAD command is:</p>
@@ -1488,7 +1488,7 @@ INTRPT process-id</pre>
 <p>The following sections describe the optional qualifiers of the MUPIP LOAD command.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="load_format"></a>-FOrmat<a class="indexterm" name="idm45622520809392"></a>
+<a name="load_format"></a>-FOrmat<a class="indexterm" name="idm45430260287616"></a>
 </h4></div></div></div>
 <p>Specifies the format of the input file. If the format of the input file is not specified, MUPIP LOAD automatically detects file format (BINARY/ZWR/GO) based on the file header of the input file. If format is specified, it must match the actual format of the input file for LOAD to proceed.</p>
 <p>The format codes are:</p>
@@ -1507,7 +1507,7 @@ Z[WR] - ZWRITE format</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="load_begin"></a>-BEgin<a class="indexterm" name="idm45622521125040"></a>
+<a name="load_begin"></a>-BEgin<a class="indexterm" name="idm45430260183520"></a>
 </h4></div></div></div>
 <p>Specifies the record number of the input file with which LOAD should begin. Directing LOAD to begin at a point other than the beginning of a valid key causes an error. The format of the BEGIN qualifier is:</p>
 <pre class="programlisting">-BE[GIN]=integer</pre>
@@ -1526,7 +1526,7 @@ Z[WR] - ZWRITE format</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="load_end"></a>-End<a class="indexterm" name="idm45622520813488"></a>
+<a name="load_end"></a>-End<a class="indexterm" name="idm45430260139360"></a>
 </h4></div></div></div>
 <p>Specifies the record number of the input file at which LOAD should stop. -END=integer must be greater than the -BEGIN=integer for LOAD to operate. LOAD terminates after processing the record of the number specified by -END or reaching the end of the input file. The format of the END qualifier is:</p>
 <pre class="programlisting">-E[ND]=integer</pre>
@@ -1534,7 +1534,7 @@ Z[WR] - ZWRITE format</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="load_fillfactor"></a>-FIll_factor<a class="indexterm" name="idm45622520808432"></a>
+<a name="load_fillfactor"></a>-FIll_factor<a class="indexterm" name="idm45430260134848"></a>
 </h4></div></div></div>
 <p>Specifies the quantity of data stored in a database block. Subsequent run-time updates to the block fill the remaining available space reserved by the FILL_FACTOR. Blocks that avoid block splits operate more efficiently. The format of the FILL_FACTOR qualifier is:</p>
 <pre class="programlisting">-FI[LL_FACTOR]=integer</pre>
@@ -1553,7 +1553,7 @@ Z[WR] - ZWRITE format</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="load_onerror"></a>-Onerror<a class="indexterm" name="idm45622520875792"></a>
+<a name="load_onerror"></a>-Onerror<a class="indexterm" name="idm45430260203248"></a>
 </h4></div></div></div>
 <p>Determines the MUPIP LOAD behavior when it encounters an error. The format of the ONERROR qualifier is:</p>
 <pre class="programlisting">-[O]NERROR={STOP|PROCEED|INTERACTIVE}</pre>
@@ -1566,14 +1566,14 @@ Z[WR] - ZWRITE format</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="load_stdin"></a>-Stdin<a class="indexterm" name="idm45622520816128"></a>
-  <a class="indexterm" name="idm45622520780448"></a>  </h4></div></div></div>
+<a name="load_stdin"></a>-Stdin<a class="indexterm" name="idm45430260142000"></a>
+  <a class="indexterm" name="idm45430260106336"></a>  </h4></div></div></div>
 <p>Specifies that MUPIP LOAD takes input from standard input (stdin). The format of the STDIN qualifier is:</p>
 <pre class="programlisting">-S[TDIN]</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_load"></a>Examples <span>for MUPIP LOAD</span><a class="indexterm" name="idm45622520790048"></a>
+<a name="examples_mup_load"></a>Examples <span>for MUPIP LOAD</span><a class="indexterm" name="idm45430260129184"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip load ex_file.go</pre>
@@ -1602,7 +1602,7 @@ $mupip load -stdin &lt; big.glo</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_rctldump"></a>RCTLDUMP<a class="indexterm" name="idm45622520869296"></a>
+<a name="mup_rctldump"></a>RCTLDUMP<a class="indexterm" name="idm45430260281568"></a>
 </h3></div></div></div>
 <p>Reports information related to relinkctl files and their associated shared memory segments. The format of the MUPIP RCTLDUMP command is:</p>
 <pre class="programlisting">MUPIP RCTLDUMP [dir1]</pre>
@@ -1624,8 +1624,8 @@ Rtnobj shared memory # 1 : shmid: 11567113 shmlen: 0x100000 shmused: 0x200 shmfr
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_reorg"></a>REORG<a class="indexterm" name="idm45622520813856"></a>
-<a class="indexterm" name="idm45622520762768"></a><a class="indexterm" name="idm45622520762256"></a>
+<a name="mup_reorg"></a>REORG<a class="indexterm" name="idm45430260135104"></a>
+<a class="indexterm" name="idm45430260089088"></a><a class="indexterm" name="idm45430260088576"></a>
 </h3></div></div></div>
 <p>Improves database performance by defragmenting and reorganizing database files and attempts to reduce the size of the database file. MUPIP REORG runs concurrently with other database activity, including updates. Competing activity generally increases the time required to perform a REORG, as well as that of the competing operations.</p>
 <p>MUPIP REORG can also encrypt a database and/or change the encryption keys for database files "on the fly" while the database is in use. </p>
@@ -1703,7 +1703,7 @@ Total            4000           13904              NA          1307</pre>
 <p>The optional qualifiers for MUPIP REORG are:</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_downgrade"></a>-Downgrade<a class="indexterm" name="idm45622520747808"></a>
+<a name="reorg_downgrade"></a>-Downgrade<a class="indexterm" name="idm45430260074688"></a>
 </h4></div></div></div>
 <p>Downgrades blocks to a prior major version DB format. Use REORG -DOWNGRADE only when you have determined there is a clear reason to downgrade the DB format of a database to a prior format and there are no conditions that preclude that possibility. </p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note:">
@@ -1717,7 +1717,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_encrypt"></a>-Encrypt<a class="indexterm" name="idm45622520873168"></a>
+<a name="reorg_encrypt"></a>-Encrypt<a class="indexterm" name="idm45430260236160"></a>
 </h4></div></div></div>
 <p>Encrypts an unencrypted database or changes the encryption key of a database while the database continues to be used by applications. Whether or not the prior encryption uses non-zero initialization vectors (IVs), database blocks encrypted with the new key use non-zero IVs The format of the ENCRYPT qualifier is:</p>
 <pre class="programlisting">-ENCR[YPT]=&lt;key&gt;</pre>
@@ -1777,7 +1777,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_exclude"></a>-Exclude<a class="indexterm" name="idm45622520823904"></a>
+<a name="reorg_exclude"></a>-Exclude<a class="indexterm" name="idm45430260052576"></a>
 </h4></div></div></div>
 <p>Specifies that REORG not handle blocks that contain information about the globals in the associated list&#8211;this means they are neither reorganized nor swapped in the course of reorganizing other globals; -EXCLUDE can reduce the efficiency of REORG because it complicates and interferes with the block swapping actions that try to improve adjacency.</p>
 <p>The format of the EXCLUDE qualifier is:</p>
@@ -1804,14 +1804,14 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_file"></a>-FILE<a class="indexterm" name="idm45622520692592"></a> </h4></div></div></div>
+<a name="reorg_file"></a>-FILE<a class="indexterm" name="idm45430260021024"></a> </h4></div></div></div>
 <p>Specifies which database to upgrade. The format of the FILE qualifier is:</p>
 <pre class="programlisting">FILE=file-name</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The arguments for the FILE must be a fully qualified path to a database file.</p></li></ul></div>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_fill_factor"></a>-FILL_factor<a class="indexterm" name="idm45622520701792"></a> </h4></div></div></div>
+<a name="reorg_fill_factor"></a>-FILL_factor<a class="indexterm" name="idm45430260030480"></a> </h4></div></div></div>
 <p>Specifies how full you want each database block to be. This is a target number. Individual blocks may be more or less full than the fill factor. The format of the FILL_FACTOR qualifier is:</p>
 <pre class="programlisting">FILL[_FACTOR]=integer</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -1822,7 +1822,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_index_fill_factor"></a>-Index_fill_factor<a class="indexterm" name="idm45622520682448"></a>
+<a name="reorg_index_fill_factor"></a>-Index_fill_factor<a class="indexterm" name="idm45430260010304"></a>
 </h4></div></div></div>
 <p>Directs REORG to leave free space within index blocks for future updates. Arguments to this qualifier must be integers from 30 to 100 that represent the percentage of the index block that REORG can fill. REORG uses this number to decide whether to place more information in an index block, or create space by moving data to another block. The format of the INDEX_FILL_FACTOR qualifier is:</p>
 <pre class="programlisting">-I[NDEX_FILL_FACTOR]=integer</pre>
@@ -1830,7 +1830,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_min_level"></a>-Min_level<a class="indexterm" name="idm45622520700960"></a>
+<a name="reorg_min_level"></a>-Min_level<a class="indexterm" name="idm45430260041008"></a>
 </h4></div></div></div>
 <p>Directs REORG to only process blocks with a level greater than or equal to what is specified. -Min_level=1, for example, instructs REORG to only process index blocks. The format of the MIN_LEVEL qualifier is:</p>
 <pre class="programlisting">-M[IN_LEVEL]=integer</pre>
@@ -1838,7 +1838,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_keep"></a>-Keep<a class="indexterm" name="idm45622520678336"></a>
+<a name="reorg_keep"></a>-Keep<a class="indexterm" name="idm45430260038384"></a>
 </h4></div></div></div>
 <p>For a MUPIP REORG -TRUNCATE, -KEEP allows the user to specify, as a decimal integer number of blocks or a percentage from 0% to 99% of the starting total blocks, the total amount of space the truncate operation should leave (not truncate) in the database file at the completion of other REORG operations. The format of the KEEP qualifier is:</p>
 <pre class="programlisting">-KEEP={pct%|blocks}</pre>
@@ -1846,7 +1846,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_nocoalesce"></a>-NOCOalesce<a class="indexterm" name="idm45622520710240"></a>
+<a name="reorg_nocoalesce"></a>-NOCOalesce<a class="indexterm" name="idm45430260125024"></a>
 </h4></div></div></div>
 <p>-NOCOALESCE specifies to MUPIP REORG to skip actions that increase block density. The format of the NOCOALESCE qualifier is:</p>
 <pre class="programlisting">-NOCO[alesce]</pre>
@@ -1854,7 +1854,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_nosplit"></a>-NOSPlit<a class="indexterm" name="idm45622520715888"></a>
+<a name="reorg_nosplit"></a>-NOSPlit<a class="indexterm" name="idm45430260028368"></a>
 </h4></div></div></div>
 <p>-NOSPLIT specifies to MUPIP REORG to skip actions that decrease block density. The format of the NOSPLIT qualifier is:</p>
 <pre class="programlisting">-NOSP[lit]</pre>
@@ -1862,7 +1862,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_noswap"></a>-NOSWap<a class="indexterm" name="idm45622520673648"></a>
+<a name="reorg_noswap"></a>-NOSWap<a class="indexterm" name="idm45430260029808"></a>
 </h4></div></div></div>
 <p>-NOSWAP specifies to MUPIP REORG to skip actions that increase block adjacency. The format of the NOSWAP qualifier is:</p>
 <pre class="programlisting">-NOSW[ap]</pre>
@@ -1870,7 +1870,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_resume"></a>-Resume<a class="indexterm" name="idm45622520856704"></a>
+<a name="reorg_resume"></a>-Resume<a class="indexterm" name="idm45430260020640"></a>
 </h4></div></div></div>
 <p>For an interrupted REORG operation, -RESUME allows the user to resume the REORG operation from the point where the operation stopped. REORG stores the last key value in the database file header. The format of the RESUME qualifier is:</p>
 <pre class="programlisting">-R[ESUME]</pre>
@@ -1878,7 +1878,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_region"></a>-Region<a class="indexterm" name="idm45622520686784"></a>
+<a name="reorg_region"></a>-Region<a class="indexterm" name="idm45430260008768"></a>
 </h4></div></div></div>
 <p>Specifies that REORG operate in the regions in the associated list and restricts REORG to the globals in those regions that are mapped by the current global directory; it does not have the same interactions as -EXCLUDE and -SELECT, but it does not mitigate those interactions when combined with them.</p>
 <p>The format of the REGION qualifier is:</p>
@@ -1887,7 +1887,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_select"></a>-Select<a class="indexterm" name="idm45622520707568"></a>
+<a name="reorg_select"></a>-Select<a class="indexterm" name="idm45430259997808"></a>
 </h4></div></div></div>
 <p>Specifies that REORG reorganizes only the globals in the associated list; globals not on the list may be modified by block swaps with selected globals unless they are named with -EXCLUDE; -SELECT can be difficult to use efficiently because it tends to deoptimize unselected globals unless they are name in an -EXCLUDE list (which introduces inefficiency).</p>
 <p> The format of the SELECT qualifier is:</p>
@@ -1912,7 +1912,7 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_truncate"></a>-Truncate<a class="indexterm" name="idm45622520729072"></a>
+<a name="reorg_truncate"></a>-Truncate<a class="indexterm" name="idm45430260032752"></a>
 </h4></div></div></div>
 <p>Specifies that REORG, after it has rearranged some or all of a region's contents, should attempt to reduce the size of the database file and return free space to the file system. TRUNCATE only applies to BG databases. The format of the TRUNCATE qualifier is:</p>
 <pre class="programlisting">-T[RUNCATE][=percentage]</pre>
@@ -1934,13 +1934,13 @@ Total            4000           13904              NA          1307</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="reorg_upgrade"></a>-UPgrade<a class="indexterm" name="idm45622520683344"></a>
+<a name="reorg_upgrade"></a>-UPgrade<a class="indexterm" name="idm45430259984096"></a>
 </h4></div></div></div>
 <p>Upgrades blocks to current DB version format. A REORG with the -UPGRADE option cannot run concurrently on a file or region with any other REORG on the same file or region. Use REORG -UPGRADE when it is a part of a release notes procedure to upgrade the DB version format of a database or when you encounter a database integrity error that requires running REORG -UPGRADE. </p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_reorg"></a>Examples <span>for MUPIP REORG</span><a class="indexterm" name="idm45622520689424"></a>
+<a name="examples_mup_reorg"></a>Examples <span>for MUPIP REORG</span><a class="indexterm" name="idm45430260038016"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip reorg 
@@ -2035,7 +2035,7 @@ Database file /home/gtc_twinata/staff/nitin/tr11/mumps.dat now has encryption ma
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_restore"></a>RESTORE<a class="indexterm" name="idm45622520673136"></a><a class="indexterm" name="idm45622520670784"></a><a class="indexterm" name="idm45622520670160"></a>
+<a name="mup_restore"></a>RESTORE<a class="indexterm" name="idm45430260090880"></a><a class="indexterm" name="idm45430260133664"></a><a class="indexterm" name="idm45430260116864"></a>
 </h3></div></div></div>
 <p>Incrementally restores the output of the BACKUP -BYTESTREAM to a database file at the backup location. </p>
 <p>The format of the RESTORE command is:</p>
@@ -2055,8 +2055,8 @@ Database file /home/gtc_twinata/staff/nitin/tr11/mumps.dat now has encryption ma
 </ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_restore_extend"></a>-Extend<a class="indexterm" name="idm45622520810992"></a>
-<a class="indexterm" name="idm45622520777408"></a>
+<a name="mup_restore_extend"></a>-Extend<a class="indexterm" name="idm45430260184656"></a>
+<a class="indexterm" name="idm45430259983328"></a>
 </h4></div></div></div>
 <p>Specifies whether a MUPIP RESTORE operation should extend the database file automatically if it is smaller than the size required to load the data.</p>
 <p>The format of the EXTEND qualifier is:</p>
@@ -2066,7 +2066,7 @@ Database file /home/gtc_twinata/staff/nitin/tr11/mumps.dat now has encryption ma
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_restore"></a>Examples <span>for MUPIP RESTORE</span><a class="indexterm" name="idm45622520626448"></a>
+<a name="examples_mup_restore"></a>Examples <span>for MUPIP RESTORE</span><a class="indexterm" name="idm45430259954784"></a>
 </h4></div></div></div>
 <pre class="programlisting">$ mupip restore backup.dat $backup_dir/backup.bk1, $backup_dir/backup.bk2, $backup_dir/backup.bk3</pre>
 <p>This command restores backup.dat from incremental backups stored in directory specified by the environment variable backup_dir.</p>
@@ -2082,7 +2082,7 @@ Database file /home/gtc_twinata/staff/nitin/tr11/mumps.dat now has encryption ma
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_rundown"></a>RUNDOWN<a class="indexterm" name="idm45622520614864"></a><a class="indexterm" name="idm45622520653936"></a><a class="indexterm" name="idm45622520646320"></a>
+<a name="mup_rundown"></a>RUNDOWN<a class="indexterm" name="idm45430259942784"></a><a class="indexterm" name="idm45430259973792"></a><a class="indexterm" name="idm45430259979968"></a>
 </h3></div></div></div>
 <p>When database access has not been properly terminated, RUNDOWN properly closes currently inactive databases, removes abandoned GT.M database semaphores, and releases any IPC resources used. Under normal operations, the last process to close a database file performs the RUNDOWN actions, and a MUPIP RUNDOWN is not required. If a database file is already properly rundown, a MUPIP RUNDOWN has no effect. If in doubt, it is always to safe to perform a rundown. FIS recommends the following method to shutdown a GT.M application or the system:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -2108,20 +2108,20 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 <p>If the RUNDOWN command does not specify either -File or -Region, it checks all the IPC resources (shared memory) on the system and if they are associated with a GT.M database, attempts to rundown that file.  MUPIP RUNDOWN with no argument removes any statistics database file resources associated with actual database file resources it can remove.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_rundown_file"></a>-File<a class="indexterm" name="idm45622520595232"></a>
+<a name="mup_rundown_file"></a>-File<a class="indexterm" name="idm45430259923888"></a>
 </h4></div></div></div>
 <p>Specifies that the argument is a file-name for a single database file. The -FILE qualifier is incompatible with the REGION qualifier. If the rundown parameter consists of a list of files, the command only operates on the first item in the list.</p>
 <p>Incompatible with: -REGION</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_rundown_override"></a>-Override<a class="indexterm" name="idm45622520623872"></a>
+<a name="mup_rundown_override"></a>-Override<a class="indexterm" name="idm45430259951904"></a>
 </h4></div></div></div>
 <p>Overrides the protection that prevents MUPIP RUNDOWN from performing a rundown of a replication-enabled (with BEFORE_IMAGE) database or a non-replicated NOBEFORE-journaled database that was abnormally shutdown. The protection involves issuing the MUUSERLBK error for a previously crashed replication-enabled (with BEFORE IMAGE journaling) database and the MUUSERECOV error for a non-replicated or NOBEFORE-journaled database. Both these errors prevent complications related to data recovery from a journal file or a replication-enabled database.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_rundown_region"></a>-Region<a class="indexterm" name="idm45622520616528"></a>
+<a name="mup_rundown_region"></a>-Region<a class="indexterm" name="idm45430259944448"></a>
 </h4></div></div></div>
 <p>The region-list identifies the target of the RUNDOWN. region-list may specify more than one region of the current global directory in a list. Regions are case-insensitive, separated by a comma, and wildcards can be used to specify them. Any region-name may include the wildcard characters * and % (remember to escape them to protect them from inappropriate expansion by the shell). Any region name expansion occurs in M (ASCII) collation order.</p>
 <p>Use the wildcard "*" to rundown all inactive regions in a global directory. </p>
@@ -2130,7 +2130,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mup_rundown_relinkctl"></a>-Relinkctl<a class="indexterm" name="idm45622520621008"></a>
+<a name="mup_rundown_relinkctl"></a>-Relinkctl<a class="indexterm" name="idm45430259949376"></a>
 </h4></div></div></div>
 <p>Cleans up orphaned Relinkctl files. FIS strongly recommends avoiding actions that tend to make such cleanup necessary - for example, kill -9 of GT.M processes or ipcrm -m of active Relinkctl and/or Rtnobj shared memory segments. </p>
 <p>If the optional dir1 is not specified, MUPIP RUNDOWN -RELINKCTL examines the environment variable $gtmroutines, attempts to verify and correct their attach counts and runs down all its inactive auto-relink-enabled directories (those with with a *-suffix). Alternatively, one can specify a directory path for the parameter dir1 and MUPIP RUNDOWN -RELINKCTL treats it as an auto-relink-enabled directory and runs down the resources associated with this one directory. It prints a RLNKCTLRNDWNSUC message on a successful rundown and a RLNKCTLRNDWNFL message on a failure (usually because live processes are still accessing the Relinkctl file).</p>
@@ -2138,7 +2138,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_semaphere"></a>SEMAPHORE<a class="indexterm" name="idm45622520790464"></a><a class="indexterm" name="idm45622520663328"></a>
+<a name="mup_semaphere"></a>SEMAPHORE<a class="indexterm" name="idm45430259935136"></a><a class="indexterm" name="idm45430260053232"></a>
 </h3></div></div></div>
 <p>Reports the details of a space delimited list of semaphores IDs.</p>
 <p>The format of the MUPIP SEMAPHORE command is:</p>
@@ -2146,7 +2146,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_set"></a>SET<a class="indexterm" name="idm45622520790800"></a><a class="indexterm" name="idm45622520577392"></a><a class="indexterm" name="idm45622520576880"></a>
+<a name="mup_set"></a>SET<a class="indexterm" name="idm45430259952096"></a><a class="indexterm" name="idm45430259906176"></a><a class="indexterm" name="idm45430259905664"></a>
 </h3></div></div></div>
 <p>Use MUPIP SET for performance tuning and/or modifying certain database and journal file attributes.</p>
 <p>The format of the SET command is:</p>
@@ -2192,7 +2192,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_file"></a>-File<a class="indexterm" name="idm45622520573904"></a>
+<a name="set_file"></a>-File<a class="indexterm" name="idm45430259902688"></a>
 </h4></div></div></div>
 <p>Specifies that the argument is a file-name for a single database file. The format of the FILE qualifier is:</p>
 <pre class="programlisting">-F[ILE]</pre>
@@ -2200,7 +2200,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_jnlfile"></a>-Jnlfile<a class="indexterm" name="idm45622520655888"></a>
+<a name="set_jnlfile"></a>-Jnlfile<a class="indexterm" name="idm45430260130256"></a>
 </h4></div></div></div>
 <p>Specifies that the argument is a journal-file-name. The format of the JNLFILE qualifier is:</p>
 <pre class="programlisting">-JNLF[ILE] journal-file-name</pre>
@@ -2208,7 +2208,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_region"></a>-Region<a class="indexterm" name="idm45622520585664"></a>
+<a name="set_region"></a>-Region<a class="indexterm" name="idm45430260001392"></a>
 </h4></div></div></div>
 <p>Specifies that the argument is a region-list which identifies database file(s) mapped by the current Global Directory. The format of the REGION qualifier is:</p>
 <pre class="programlisting">-R[EGION] region-list</pre>
@@ -2217,7 +2217,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_replication"></a>-REPlication<a class="indexterm" name="idm45622520588880"></a>
+<a name="set_replication"></a>-REPlication<a class="indexterm" name="idm45430259917664"></a>
 </h4></div></div></div>
 <p>Specifies whether replication is on or off. The format of the REPLICATION qualifier is:</p>
 <pre class="programlisting">-REP[LICATION]={ON|OFF}</pre>
@@ -2226,21 +2226,21 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 <p>The following sections describe the action qualifiers of the MUPIP SET command exclusive of the details related to journaling and replication, which are described in <a class="xref" href="journaling.html" title="Chapter 6. GT.M Journaling">Chapter 6: &#8220;<i><span>GT.M </span>Journaling</i>&#8221;</a> and <a class="xref" href="ch07.html" title="Chapter 7. Database Replication">Chapter 7: &#8220;<i>Database Replication</i>&#8221;</a>. All of these qualifiers are incompatible with the -JNLFILE and -REPLICATION qualifiers.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_access_method"></a>-ACcess_method<a class="indexterm" name="idm45622520624240"></a> </h4></div></div></div>
+<a name="set_access_method"></a>-ACcess_method<a class="indexterm" name="idm45430259935424"></a> </h4></div></div></div>
 <p>Specifies the access method (GT.M buffering strategy) for storing and retrieving data from the database file. The format of the ACCESS_METHOD qualifier is:</p>
 <pre class="programlisting">-AC[CESS_METHOD]=code</pre>
 <p>For more information on specifying the ACCESS_METHOD, refer to <a class="xref" href="nameregseg.html#segment_quals" title="Segment Qualifiers">&#8220;Segment Qualifiers&#8221;</a>.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_asyncio"></a>-ASyncIO<a class="indexterm" name="idm45622520582624"></a> </h4></div></div></div>
+<a name="set_asyncio"></a>-ASyncIO<a class="indexterm" name="idm45430259906816"></a> </h4></div></div></div>
 <p>Specifies whether to use asynchronous I/O for an access method BG database, rather than using synchronous I/O through the file system cache. ASYNCIO is incompatible with the MM access method and an attempt to combine the two with MUPIP SET produces a ASYNCIONOMM error. The format of the ASYNCIO qualifier is:</p>
 <pre class="programlisting">-[NO]AS[YNCIO]</pre>
 <p>For more information on specifying ASYNCIO,refer to <a class="xref" href="nameregseg.html#segment_quals" title="Segment Qualifiers">&#8220;Segment Qualifiers&#8221;</a>.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_data_reserved_bytes"></a>-DATA_reserved_bytes<a class="indexterm" name="idm45622520569616"></a>
+<a name="set_data_reserved_bytes"></a>-DATA_reserved_bytes<a class="indexterm" name="idm45430259898704"></a>
 </h4></div></div></div>
 <p>Specifies the size for GT.M to reserve in data-level database blocks. DATA_RESERVED_BYTES can be used as a user-managed fill factor when it is appropriate to have a different level of sparseness for data and index blocks. The format of the DATA_RESERVED_BYTES qualifier is:</p>
 <pre class="programlisting">-DATA[_RESERVED_BYTES]=size</pre>
@@ -2248,13 +2248,13 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_defer_time"></a>-Defer_time<a class="indexterm" name="idm45622520612176"></a> </h4></div></div></div>
+<a name="set_defer_time"></a>-Defer_time<a class="indexterm" name="idm45430259914752"></a> </h4></div></div></div>
 <p>Specifies, in MM access mode, the multiplying factor applied to the flush time to produce a wait after an update before ensuring a journal buffer write to disk; the default is 1. A value of 2 produces a wait of double the flush time. -NODEFER_TIME or a value of -1 turns off timed journal writing, leaving the journal, under light update conditions, to potentially get as stale as the epoch time. Note that, in MM mode without the sync_io option set, absent a VIEW("JNLFLUSH") from the application, GT.M only fsyncs the journal at the epoch. The format of the DEFER_TIME qualifier is:</p>
 <pre class="programlisting">-[NO]D[efer_time][=seconds]</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_deferallocate"></a>-DEFER_Allocate<a class="indexterm" name="idm45622520564112"></a> </h4></div></div></div>
+<a name="set_deferallocate"></a>-DEFER_Allocate<a class="indexterm" name="idm45430259892448"></a> </h4></div></div></div>
 <p>With -DEFER_ALLOCATE, GT.M instructs the file system to create the database file as a sparse file. Before using -DEFER_ALLOCATE, ensure that your underlying file system supports sparse files. By default UNIX file systems, and GT.M, use sparse (or lazy) allocation, which defers actual allocation until blocks are first written. The format of the DEFER_ALLOCATE qualifier is: </p>
 <pre class="programlisting">-[NO]DEFER_Allocate</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -2266,28 +2266,28 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_epochtaper"></a>-Epochtaper<a class="indexterm" name="idm45622520557696"></a>
+<a name="set_epochtaper"></a>-Epochtaper<a class="indexterm" name="idm45430259874608"></a>
 </h4></div></div></div>
 <p>Tries to minimize epoch duration by reducing the number of buffers to flush by GT.M and the file system (via an fsync()) as the epoch (time-based or due to journal file auto-switch) approaches. Epoch tapering reduces the impact of I/O activity during an epoch event. Application that experience high load and/or need to reduce latency may benefit from epoch tapering. The format of the -EPOCHTAPER qualifier is:</p>
 <pre class="programlisting">-[NO]EPOCHTAPER</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_encryptable"></a>-ENCRYPTAble<a class="indexterm" name="idm45622520582112"></a>
+<a name="set_encryptable"></a>-ENCRYPTAble<a class="indexterm" name="idm45430259889728"></a>
 </h4></div></div></div>
 <p>Performs some basic encryption checks and marks the database as encryptable. Note that marking a database as encryptable does not encrypt the database.<span>For more information on encrypting a database, refer to <a class="xref" href="gdm.html#reorg_encrypt" title="-Encrypt">&#8220;-Encrypt&#8221;</a>.</span> The format of the ENCRYPTABLE qualifier is:</p>
 <pre class="programlisting">-[NO]ENCRYPTA[BLE]</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_encryptioncompelte"></a>-ENCRYPTIoncomplete<a class="indexterm" name="idm45622520534096"></a>
+<a name="set_encryptioncompelte"></a>-ENCRYPTIoncomplete<a class="indexterm" name="idm45430259862304"></a>
 </h4></div></div></div>
 <p>Checks whether a prior MUPIP REORG -ENCRYPT completed successfully and marks encryption as complete. <span>For usage scenarios of MUPIP SET -ENCRYPTIONCOMPLETE, refer to <a class="xref" href="gdm.html#reorg_encrypt" title="-Encrypt">&#8220;-Encrypt&#8221;</a>.</span> The format of the ENCRYPTIONCOMPLETE qualifier is:</p>
 <pre class="programlisting">-ENCRYPTI[ONCOMPELTE]</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_extension_count"></a>-EXtension_count<a class="indexterm" name="idm45622520548144"></a>
+<a name="set_extension_count"></a>-EXtension_count<a class="indexterm" name="idm45430259876272"></a>
 </h4></div></div></div>
 <p>Specifies the number of GDS blocks by which an existing database file extends. A file or region name is required. This qualifier requires standalone access. The format of the EXTENSION_COUNT qualifier is:</p>
 <pre class="programlisting">-EX[TENSION_COUNT]=integer </pre>
@@ -2295,14 +2295,14 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_flush_time"></a>-Flush_time<a class="indexterm" name="idm45622520530464"></a>
+<a name="set_flush_time"></a>-Flush_time<a class="indexterm" name="idm45430259858544"></a>
 </h4></div></div></div>
 <p>Specifies the amount of time between deferred writes of stale cache buffers. The default value is 1 second and the maximum value is 1 hour. -FLUSH_TIME requires standalone access. The format of the FLUSH_TIME qualifier is:</p>
 <pre class="programlisting">-F[LUSH_TIME]=[[[HOURS:]MINUTES:]SECONDS:]CENTISECONDS</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_fullblkwrt"></a>-FUllblkwrt<a class="indexterm" name="idm45622520556864"></a>
+<a name="set_fullblkwrt"></a>-FUllblkwrt<a class="indexterm" name="idm45430259944736"></a>
 </h4></div></div></div>
 <p>Determines whether GT.M writes only valid database blocks contents, or a full block including meaningless trailing content. Full block writes are more efficient with some secondary storage because they avoid read-before-write. The format of the FULLBLKWRT qualifier is:</p>
 <pre class="programlisting">-FU[LLBLKWRT]={0|1|2}</pre>
@@ -2315,7 +2315,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_global_buffers"></a>-Global_buffers<a class="indexterm" name="idm45622520543344"></a>
+<a name="set_global_buffers"></a>-Global_buffers<a class="indexterm" name="idm45430259871664"></a>
 </h4></div></div></div>
 <p>Specifies the number of cache buffers for a BG database. This qualifier requires standalone access.The format of the GLOBAL_BUFFERS qualifier is:</p>
 <pre class="programlisting">-G[LOBAL_BUFFERS]=integer</pre>
@@ -2326,7 +2326,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="hard_spin_count"></a>-Hard_spin_count<a class="indexterm" name="idm45622520527568"></a><a class="indexterm" name="idm45622520502496"></a>
+<a name="hard_spin_count"></a>-Hard_spin_count<a class="indexterm" name="idm45430259856272"></a><a class="indexterm" name="idm45430259830864"></a>
 </h4></div></div></div>
 <p>Specifies the maximum amount of time for processes to sleep while waiting to obtain critical sections for shared resources, principally those involving databases. The format of the -SPIN_SLEEP_MASK qualifier is:</p>
 <pre class="programlisting">-HARD_SPIN_COUNT=integer</pre>
@@ -2338,7 +2338,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_index_reserved_bytes"></a>-INDEX_reserved_bytes<a class="indexterm" name="idm45622520540336"></a>
+<a name="set_index_reserved_bytes"></a>-INDEX_reserved_bytes<a class="indexterm" name="idm45430259868416"></a>
 </h4></div></div></div>
 <p>Specifies the size for GT.M to reserve in index-level database blocks. INDEX_RESERVED_BYTES can be used as a user-managed fill factor when it is appropriate to have a different level of sparseness for data and index blocks. The format of the INDEX_RESERVED_BYTES qualifier is:</p>
 <pre class="programlisting">-INDEX[_RESERVED_BYTES]=size</pre>
@@ -2346,16 +2346,24 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="inst_freeze_on_error"></a>-INST_freeze_on_error<a class="indexterm" name="idm45622520570416"></a><a class="indexterm" name="idm45622520494208"></a>
+<a name="inst_freeze_on_error"></a>-INST_freeze_on_error<a class="indexterm" name="idm45430259859808"></a><a class="indexterm" name="idm45430259822608"></a>
 </h4></div></div></div>
-<p>Enables or disables custom errors in a region to automatically cause an Instance Freeze. This flag modifies the "Inst Freeze on Error" file header flag. The format of the INST_FREEZE_ON_ERROR qualifier is:</p>
+<p>Enables or disables custom errors in a region to automatically cause an Instance Freeze.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>GT.M creates a STATSDB region with INST_FREEZE_ON_ERROR disabled, preventing errors associated with such a region from causing an instance freeze even when INST_FREEZE_ON_ERROR for the base region is enabled.</p></td></tr>
+</table></div>
+<p> This flag modifies the "Inst Freeze on Error" file header flag. The format of the INST_FREEZE_ON_ERROR qualifier is:</p>
 <pre class="programlisting">-[NO]INST[_FREEZE_ON_ERROR]</pre>
 <p>For more information on creating a list of custom errors that automatically cause an Instance Freeze, refer to <a class="xref" href="ch07s02.html#inst_freeze" title="Instance Freeze">&#8220;Instance Freeze&#8221;</a>. </p>
 <p>For more information on promptly setting or clearing an Instance Freeze on an instance irrespective of whether any region is enabled for Instance, refer to the <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a> section of the Database Replication chapter.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_journal"></a>-Journal<a class="indexterm" name="idm45622520505392"></a>
+<a name="set_journal"></a>-Journal<a class="indexterm" name="idm45430259832512"></a>
 </h4></div></div></div>
 <p>Specifies whether the database allows journaling and, if it does, characteristics for the journal file.:</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
@@ -2366,7 +2374,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 <tr><td align="left" valign="top"><p>In regions that have journaling enabled and on, users can switch journal files without either requiring standalone access or freezing updates.</p></td></tr>
 </table></div>
 <p>The format of the JOURNAL qualifier is:</p>
-<pre class="programlisting">-[NO]J[OURNAL][=journal-option-list]<a class="indexterm" name="idm45622520485536"></a></pre>
+<pre class="programlisting">-[NO]J[OURNAL][=journal-option-list]<a class="indexterm" name="idm45430259812576"></a></pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>-NOJOURNAL specifies that the database does not allow journaling. And also it does not accept an argument assignment.</p></li>
 <li class="listitem"><p>-JOURNAL specifies journaling is allowed. It takes one or more arguments in a journal-option-list.</p></li>
@@ -2376,14 +2384,14 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_key_size"></a>-Key_size<a class="indexterm" name="idm45622520498784"></a> </h4></div></div></div>
+<a name="set_key_size"></a>-Key_size<a class="indexterm" name="idm45430259845600"></a> </h4></div></div></div>
 <p>Specifies the maximum key size in bytes for storing and retrieving data from the global database file. The maximum supported size is 1019 bytes. The format of the KEY_SIZE qualifier is:</p>
 <pre class="programlisting">-K[EY_SIZE=bytes</pre>
 <p>For more information on KEY_SIZE, refer to <a class="xref" href="nameregseg.html#region_qual" title="Region Qualifiers">&#8220;Region Qualifiers&#8221;</a>.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="lck_shares_db_crit"></a>-Lck_shares_db_crit<a class="indexterm" name="idm45622520531760"></a>
+<a name="lck_shares_db_crit"></a>-Lck_shares_db_crit<a class="indexterm" name="idm45430259842624"></a>
 </h4></div></div></div>
 <p>Specifies whether LOCK actions share the same resource and management as the database or use a separate resource and management. The format of the LCK_SHARES_DB_CRIT qualifier is:</p>
 <pre class="programlisting"> -[NO]LC[K_SHARES_DB_CRIT]</pre>
@@ -2392,7 +2400,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_lock_space"></a>-Lock_space<a class="indexterm" name="idm45622520488720"></a>
+<a name="set_lock_space"></a>-Lock_space<a class="indexterm" name="idm45430259816592"></a>
 </h4></div></div></div>
 <p>Specifies the number of pages allocated to the management of M locks associated with the database. The size of a page is always 512 bytes. The format of the LOCK_SPACE qualifier is:</p>
 <pre class="programlisting">-L[OCK]_SPACE=integer</pre>
@@ -2406,7 +2414,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="mutex_slots"></a>-Mutex_slots<a class="indexterm" name="idm45622520504656"></a>
+<a name="mutex_slots"></a>-Mutex_slots<a class="indexterm" name="idm45430259901280"></a>
 </h4></div></div></div>
 <p>Sets the size of a structure that GT.M uses to manage contention for the principal critical section for a database. Performance issues may occur when there are many processes contending for database access and if this structure cannot accommodate all waiting processes. Therefore, FIS recommends setting this value to a minimum of slightly more than the maximum number of concurrent processes you expect to access the database.</p>
 <p>The minimum value is 64 and the maximum value is 32768. The default value is 1024. The format of the MUTEX_SLOTS qualifier is:</p>
@@ -2414,7 +2422,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="null_subscripts"></a>-Null_subscripts<a class="indexterm" name="idm45622520489552"></a>
+<a name="null_subscripts"></a>-Null_subscripts<a class="indexterm" name="idm45430259833760"></a>
 </h4></div></div></div>
 <p>Controls whether GT.M accepts null subscripts in database keys.</p>
 <p>Usage:</p>
@@ -2427,7 +2435,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_problksplit"></a>-PROblksplit<a class="indexterm" name="idm45622520466512"></a>
+<a name="set_problksplit"></a>-PROblksplit<a class="indexterm" name="idm45430259793600"></a>
 </h4></div></div></div>
 <p>Specifies the approximate number of records a block in the region must exceed before GT.M considers a proactive block split. The format of the -PROBLKSPLIT qualifier is:</p>
 <pre class="programlisting">-PRO[BLKSPLIT]=integer</pre>
@@ -2442,7 +2450,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_qdbrundown"></a>-Qdbrundown<a class="indexterm" name="idm45622520548656"></a>
+<a name="set_qdbrundown"></a>-Qdbrundown<a class="indexterm" name="idm45430259871984"></a>
 </h4></div></div></div>
 <p>Shortens normal process shutdown when a large number of processes accessing a database file need to shutdown almost simultaneously, for example, in benchmarking scenarios or emergencies. The format of the QDBRUNDOWN qualifier is:</p>
 <pre class="programlisting">-[NO]Q[DBRUNDOWN]</pre>
@@ -2452,7 +2460,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_bypass_recov"></a>-PArtial_recov_bypass<a class="indexterm" name="idm45622520540720"></a>
+<a name="set_bypass_recov"></a>-PArtial_recov_bypass<a class="indexterm" name="idm45430259908288"></a>
 </h4></div></div></div>
 <p>Sets the CORRUPT_FILE flag in the database file header to FALSE. The CORRUPT_FILE flag indicates whether a region completed a successful recovery. The format of the PARTIAL_RECOV_BYPASS qualifier is:</p>
 <pre class="programlisting">-PA[RTIAL_RECOV_BYPASS]</pre>
@@ -2460,7 +2468,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_read_only"></a>-Read_only<a class="indexterm" name="idm45622520467344"></a>
+<a name="set_read_only"></a>-Read_only<a class="indexterm" name="idm45430259808560"></a>
 </h4></div></div></div>
 <p>Indicates whether GT.M should treat an MM access method segment as read only for all users, including root. This designation augments UNIX authorizations and prevents any state updates that normally might require an operational action for a database with no current accessing (attached) processes. Setting the -READ_ONLY attribute on a database file with BG access method or setting the access method to BG on a -READ_ONLY database produces an error. The GT.M help databases have -READ_ONLY set by default. The format of the READ_ONLY qualifier is:</p>
 <pre class="programlisting">-[NO]REA[D_ONLY]</pre>
@@ -2476,14 +2484,14 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_record_size"></a>-RECord_size<a class="indexterm" name="idm45622520482704"></a> </h4></div></div></div>
+<a name="set_record_size"></a>-RECord_size<a class="indexterm" name="idm45430259798800"></a> </h4></div></div></div>
 <p>Specifies the maximum record size in bytes for storing and retrieving data from the global database file. The maximum supported size is 1MiB bytes. The format of the RECORD_SIZE qualifier is:</p>
 <pre class="programlisting">-REC[ORD_SIZE=bytes</pre>
 <p>For more information on KEY_SIZE, refer to <a class="xref" href="nameregseg.html#region_qual" title="Region Qualifiers">&#8220;Region Qualifiers&#8221;</a>.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_reserved_bytes"></a>-REServed_bytes<a class="indexterm" name="idm45622520463984"></a>
+<a name="set_reserved_bytes"></a>-REServed_bytes<a class="indexterm" name="idm45430259805904"></a>
 </h4></div></div></div>
 <p>Specifies the size for GT.M to reserve in both data and index database blocks. RESERVED_BYTES is generally used as a user-managed fill factor. The format of the RESERVED_BYTES qualifier is:</p>
 <pre class="programlisting">-RES[ERVED_BYTES]=size</pre>
@@ -2491,7 +2499,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="sleep_spin_count"></a>-SLeep_spin_count<a class="indexterm" name="idm45622520472544"></a>
+<a name="sleep_spin_count"></a>-SLeep_spin_count<a class="indexterm" name="idm45430259780912"></a>
 </h4></div></div></div>
 <p>Specifies the number of times a process suspends its activity while waiting to obtain critical sections for shared resources, principally those involving databases. The format of the -SLEEP_SPIN_COUNT qualifier is:</p>
 <pre class="programlisting">-SLEEP_SPIN_COUNT=integer</pre>
@@ -2503,7 +2511,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="spin_sleep_mask"></a>-Spin_sleep_mask<a class="indexterm" name="idm45622520435392"></a><a class="indexterm" name="idm45622520450640"></a>
+<a name="spin_sleep_mask"></a>-Spin_sleep_mask<a class="indexterm" name="idm45430259762368"></a><a class="indexterm" name="idm45430259827280"></a>
 </h4></div></div></div>
 <p>Specifies the maximum amount of time for processes to sleep while waiting to obtain critical sections for shared resources, principally those involving databases. The format of the -SPIN_SLEEP_MASK qualifier is:</p>
 <pre class="programlisting">-SPIN_SLEEP_MASK=hex_mask</pre>
@@ -2515,7 +2523,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_stats"></a>-STATs<a class="indexterm" name="idm45622520425792"></a> </h4></div></div></div>
+<a name="set_stats"></a>-STATs<a class="indexterm" name="idm45430259752848"></a> </h4></div></div></div>
 <p>Specifies whether GT.M should permit statistics sharing for this region. This characteristic permits operational exclusion of statistics sharing for a region. The format of the STATS qualifier is:</p>
 <pre class="programlisting">-[NO]STAT[S]</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -2525,7 +2533,7 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_statsdb_allocation"></a>-StatsDB_allocation<a class="indexterm" name="idm45622520471712"></a> </h4></div></div></div>
+<a name="set_statsdb_allocation"></a>-StatsDB_allocation<a class="indexterm" name="idm45430259787472"></a> </h4></div></div></div>
 <p>Specifies the initial number of GDS blocks for the shadow stats regions when the database region is first created. This qualifier requires standalone access and a file or region name. The format of the STATSDB_ALLOCATION qualifier is:</p>
 <pre class="programlisting">-STATSD[B_ALLOCATION]=integer</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -2537,19 +2545,19 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_stdnullcoll"></a>-STDnullcoll<a class="indexterm" name="idm45622520417872"></a> </h4></div></div></div>
+<a name="set_stdnullcoll"></a>-STDnullcoll<a class="indexterm" name="idm45430259744928"></a> </h4></div></div></div>
 <p>Specifies whether GT.M uses standard MUMPS collation or GT.M collation for null-subscripted keys.  FIS strongly recommends that you use STDNULLCOLL and against using this non-standard null collation, which is the default for historical reasons. The format of the STDNULLCOLL qualifier is:</p>
 <pre class="programlisting">-[NO]STD[NULLCOLL]</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_trigger_flush"></a>-Trigger_flush<a class="indexterm" name="idm45622520430528"></a> </h4></div></div></div>
+<a name="set_trigger_flush"></a>-Trigger_flush<a class="indexterm" name="idm45430259800464"></a> </h4></div></div></div>
 <p>Specifies the decimal value, in buffers, for the threshold at which processes start flushing dirty buffers after each update. The format of the TRIGGER_FLUSH qualifier is:</p>
 <pre class="programlisting">-T[RIGGER_FLUSH]=integer</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_version"></a>-Version<a class="indexterm" name="idm45622520429456"></a>
+<a name="set_version"></a>-Version<a class="indexterm" name="idm45430259756928"></a>
 </h4></div></div></div>
 <p>Sets the block format version (Desired DB Format field in the file header) for all subsequent new blocks. The format of the VERSION qualifier is:</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note:">
@@ -2568,19 +2576,19 @@ RUNDOWN -FILE can be directed to a statistics database file and works even if th
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_wait_disk"></a>-WAit_disk<a class="indexterm" name="idm45622520421632"></a> </h4></div></div></div>
+<a name="set_wait_disk"></a>-WAit_disk<a class="indexterm" name="idm45430259742832"></a> </h4></div></div></div>
 <p>Specifies the seconds to wait for disk space before giving up on a database block write, where zero (0) means to give an error immediately without waiting. The format of the WAIT_DISK qualifier is:</p>
 <pre class="programlisting">-WA[IT_DISK]=seconds</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="set_writes_per_flush"></a>-WRites_per_flush<a class="indexterm" name="idm45622520463056"></a> </h4></div></div></div>
+<a name="set_writes_per_flush"></a>-WRites_per_flush<a class="indexterm" name="idm45430259826896"></a> </h4></div></div></div>
 <p>Specifies the decimal number of blocks to write in each flush. The default value is 7. The format of the WRITES_PER_FLUSH qualifier is:</p>
 <pre class="programlisting">-WR[ITES_PER_FLUSH]=integer</pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_set"></a>Examples <span>for MUPIP SET</span><a class="indexterm" name="idm45622520422336"></a>
+<a name="examples_mup_set"></a>Examples <span>for MUPIP SET</span><a class="indexterm" name="idm45430259790016"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip set -journal=on,nobefore -region "*"</pre>
@@ -2598,7 +2606,7 @@ Database file mumps.dat now has desired DB format V5</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_size"></a>SIZE<a class="indexterm" name="idm45622520591552"></a><a class="indexterm" name="idm45622520416912"></a><a class="indexterm" name="idm45622520416400"></a>
+<a name="mup_size"></a>SIZE<a class="indexterm" name="idm45430259919760"></a><a class="indexterm" name="idm45430259923120"></a><a class="indexterm" name="idm45430259922608"></a>
 </h3></div></div></div>
 <p>Estimates and reports the size of global variables using a format that is similar to the one that appears at the end of the MUPIP INTEG -FULL report. In comparison with MUPIP INTEG -FAST -FULL, MUPIP SIZE provides the option of choosing any one of the three estimation techniques to estimate the size of global variables in a database file. These techniques vary in measurement speed and estimate accuracy. The format of the MUPIP SIZE command is:</p>
 <pre class="programlisting">MUPIP SI[ZE] [-h[euristic]=estimation_technique] [-se[lect]=global-name-list] [-r[egion]=region-list] [-a[djacency]=integer] [-su[bscript]]=global-list</pre>
@@ -2681,8 +2689,8 @@ Database file mumps.dat now has desired DB format V5</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_stop"></a>STOP<a class="indexterm" name="idm45622520459616"></a>
-<a class="indexterm" name="idm45622520360928"></a><a class="indexterm" name="idm45622520360416"></a>
+<a name="mup_stop"></a>STOP<a class="indexterm" name="idm45430259843424"></a>
+<a class="indexterm" name="idm45430259688048"></a><a class="indexterm" name="idm45430259687536"></a>
 </h3></div></div></div>
 <p>Terminates a GT.M image. The image executes an orderly disengagement from all databases that are currently open by the process, and then exits. A MUPIP STOP performs a kill -15 and therefore may also be used to stop non-GT.M images.</p>
 <p>The format of the STOP command is:</p>
@@ -2705,7 +2713,7 @@ Database file mumps.dat now has desired DB format V5</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_trigger"></a>TRIGGER<a class="indexterm" name="idm45622520381168"></a><a class="indexterm" name="idm45622520248160"></a><a class="indexterm" name="idm45622520247536"></a>
+<a name="mup_trigger"></a>TRIGGER<a class="indexterm" name="idm45430259708304"></a><a class="indexterm" name="idm45430259575568"></a><a class="indexterm" name="idm45430259574944"></a>
 </h3></div></div></div>
 <p>Examines or loads trigger definitions. The format of the MUPIP TRIGGER command is:</p>
 <pre class="programlisting">TRIGGER {-TRIG[GERFILE]=&lt;trigger_definitions_file&gt; 
@@ -2715,7 +2723,7 @@ Database file mumps.dat now has desired DB format V5</pre>
 <li class="listitem"><p>Set the value of the environment variable <code class="code">gtmgbldir</code>: to specify the value of a current global directory.</p></li>
 <li class="listitem"><p>Ensure that the key size, record size, block size of your database is sufficient for storing all planned trigger definitions. You may have to set the key and record sizes larger than the database content would otherwise require.</p></li>
 </ol></div>
-<p>The qualifiers of the MUPIP TRIGGER command are as follows:<a class="indexterm" name="idm45622520430080"></a></p>
+<p>The qualifiers of the MUPIP TRIGGER command are as follows:<a class="indexterm" name="idm45430259757376"></a></p>
 <p><span class="emphasis"><em>TRIGgerfile=&lt;trigger_definitions_file&gt;</em></span> </p>
 <p>Loads a trigger definition file to the database. The format of the TRIGGERFILE qualifier is:</p>
 <pre class="programlisting">-TRIG[GERFILE]=&lt;trigger_definitions_file&gt; [-NOPR[OMPT]]</pre>
@@ -2741,7 +2749,7 @@ Database file mumps.dat now has desired DB format V5</pre>
 </tr>
 <tr><td align="left" valign="top">The trigger update summary reports count not only names and option changes as "modified" but also cases where a -COMMANDS list changed, even though those are functionally additions or deletions of separate trigger definitions.</td></tr>
 </table></div>
-<p><span class="emphasis"><em>SELECT=name-list<a class="indexterm" name="idm45622520397696"></a></em></span></p>
+<p><span class="emphasis"><em>SELECT=name-list<a class="indexterm" name="idm45430259760624"></a></em></span></p>
 <p>Provides a facility to examine the current trigger definition. SELECT produces a list of the current triggers for a comma-separate list of global variables or trigger names. The format of the SELECT qualifier is:</p>
 <pre class="programlisting">-SELE[CT][=name-list*][ &lt;select-output-file&gt;]</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -2768,7 +2776,7 @@ Database file mumps.dat now has desired DB format V5</pre>
 </tr>
 <tr><td align="left" valign="top"><p>MUPIP TRIGGER treats the deletion of a non-existent trigger as a success; if that is the only operation, or one of a set of successful operations, it returns success 0 to the shell. Also, MUPIP TRIGGER returns failure in case of trigger selection using trigger names where the number after the pound-sign (#) starts with a 0 (which is an impossible auto-generated trigger name).</p></td></tr>
 </table></div>
-<p><span class="emphasis"><em>UPGRADE<a class="indexterm" name="idm45622520405136"></a></em></span></p>
+<p><span class="emphasis"><em>UPGRADE<a class="indexterm" name="idm45430259732000"></a></em></span></p>
 <p>Upgrades older trigger definitions into current format. </p>
 <p>The format of the UPGRADE qualifier is:</p>
 <p>
@@ -2778,7 +2786,7 @@ Database file mumps.dat now has desired DB format V5</pre>
 If GT.M encounters an old trigger definition it produces a NEEDTRIGUPGRD message. To preserve the possibility of a straightforward downgrade to an earlier version, perform a select "*" action with MUPIP TRIGGER (or $ZTRIGGER() and save the result. Note that TRIGGER -UPGRADE assumes that the existing trigger definitions are properly defined; if the prior release has produced defective triggers delete them with a wild-card ("*"), and redefine the triggers in the new release. In the event of a downgrade, delete "*" all triggers before the downgrade and insert the saved version from before the upgrade. Attempting to perform a MUPIP TRIGGER -UPGRADE on a database without write authorization to the database produces a TRIGMODREGNOTRW error. The -UPGRADE qualifier is not compatible with any other MUPIP TRIGGER qualifier. Trigger upgrades from older versions may produce journal records based on the prior format that a MUPIP JOURNAL -RECOVER cannot process correctly, therefore, FIS recommends you do them with journaling off, and start with a backup and fresh journal files after the trigger upgrade.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_mup_trigger"></a>Examples <span>for MUPIP TRIGGER</span><a class="indexterm" name="idm45622520443760"></a>
+<a name="examples_mup_trigger"></a>Examples <span>for MUPIP TRIGGER</span><a class="indexterm" name="idm45430259559056"></a>
 </h4></div></div></div>
 <p>This section provides step-by-step instructions for creating, modifying, and deleting triggers. Triggers affect all processes updating a database unlike, for example, environment variables such as $gtmroutines which work on a per process basis. Therefore, FIS recommends that you should always have carefully planned procedures for changing triggers in your production environment.</p>
 <p><span class="bold"><strong>To create a new trigger for global node ^Acct("ID"): </strong></span></p>
@@ -2788,7 +2796,7 @@ If GT.M encounters an old trigger definition it produces a NEEDTRIGUPGRD message
 <pre class="programlisting">+^Acct("ID") -name=ValidateAccount -commands=S -xecute="Write ""Hello Earth!"""</pre>
 </li>
 <li class="listitem">
-<p>Execute a command like the following:<a class="indexterm" name="idm45622520192352"></a></p>
+<p>Execute a command like the following:<a class="indexterm" name="idm45430259519456"></a></p>
 <pre class="programlisting">$ mupip trigger -triggerfile=triggers.trg</pre>
 <p>This command adds a trigger for <code class="code">^Acct("ID")</code>. On successful trigger load, this command displays an output like the following:</p>
 <pre class="programlisting">File triggers.trg, Line 1: ^Acct trigger added with index 1
@@ -2809,7 +2817,7 @@ If GT.M encounters an old trigger definition it produces a NEEDTRIGUPGRD message
 </li>
 </ol></div>
 <p>
-<a class="indexterm" name="idm45622520241472"></a><span class="bold"><strong>To modify an existing trigger for global node ^Acct("ID"):</strong></span></p>
+<a class="indexterm" name="idm45430259568736"></a><span class="bold"><strong>To modify an existing trigger for global node ^Acct("ID"):</strong></span></p>
 <p>You cannot directly replace an existing trigger definition with a new one. With the exception of -NAME and -OPTIONS, to change an existing trigger, you have to delete the existing trigger definition and then add the modified trigger definition as a new trigger. Note that GT.M performs two different trigger comparisons to match trigger definitions depending on whether or not S[ET] is the trigger invocation command. If there is a S[ET], then the comparison is based on the global name and subscripts, PIECES, [Z]DELIM, and XECUTE. If there is no SET, GT.M compares only the global node with subscripts and the -XECUTE code value.</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -2845,7 +2853,7 @@ File trigger_mod.trg, Line 3: ^Acct trigger added with index 1
 <p>Congratulations! You have successfully modified the xecute string of ValidateAccount with the new one.</p>
 </li>
 </ol></div>
-<p><a class="indexterm" name="idm45622520199520"></a> <span class="bold"><strong>To delete an existing trigger for global node ^Acct("ID"):</strong></span></p>
+<p><a class="indexterm" name="idm45430259526224"></a> <span class="bold"><strong>To delete an existing trigger for global node ^Acct("ID"):</strong></span></p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
 <p>Begin by executing the following command:</p>
@@ -2903,8 +2911,8 @@ File trigger_mod.trg, Line 3: ^Acct trigger added with index 1
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="mup_gupgrade"></a>UPGRADE<a class="indexterm" name="idm45622520212416"></a>
-<a class="indexterm" name="idm45622520478976"></a><a class="indexterm" name="idm45622520236368"></a>
+<a name="mup_gupgrade"></a>UPGRADE<a class="indexterm" name="idm45430259539168"></a>
+<a class="indexterm" name="idm45430259522992"></a><a class="indexterm" name="idm45430259563488"></a>
 </h3></div></div></div>
 <p>Upgrades a number of V6 database characteristics to a transitional V7 database format (V7m). This is the first stage in upgrading a V6 database to the V7 format. This command must be run standalone and does not take a long time. The remainder of the upgrade is done by MUPIP REORG -UPGRADE which completes the remaining index block upgrades with standalone access.</p>
 <p>The format of the MUPIP UPGRADE command is:</p>
@@ -2919,7 +2927,7 @@ File trigger_mod.trg, Line 3: ^Acct trigger added with index 1
 </ul></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_of_mup_upgrade"></a>Example <span>for MUPIP UPGRADE</span><a class="indexterm" name="idm45622520187440"></a>
+<a name="examples_of_mup_upgrade"></a>Example <span>for MUPIP UPGRADE</span><a class="indexterm" name="idm45430259708784"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">$ mupip upgrade -file mumps.dat</pre>

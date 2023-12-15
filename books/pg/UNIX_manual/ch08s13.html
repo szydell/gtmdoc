@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s12.html" title="$STack">
 <link rel="next" href="ch08s14.html" title="$SYstem">
-<link rel="copyright" href="ln-idm45819035664320.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,9 +30,9 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="storage"></a>$Storage<a class="indexterm" name="idm45819026245424"></a>
+<a name="storage"></a>$Storage<a class="indexterm" name="idm45735649681984"></a>
 </h2></div></div></div>
-<p>$S[TORAGE] contains an integer value specifying the number of free bytes of address space remaining between the memory currently under management by the process and the theoretical maximum available to the process. </p>
+<p>$S[TORAGE] contains an integer value specifying difference between the current $ZREALSTOR as a subtrahend and, in order of precedence, $ZMALLOCLIM if it has a non-zero value, the process R_LIMIT if it is not unlimited, and otherwise the maximum of a 64-bit address space. </p>
 <p>GT.M uses memory for code (instructions) and data. If the amount of virtual memory available to the process exceeds 2,147,483,647 bytes, it is reported as 2,147,483,647 bytes. </p>
 <p>Instruction space starts out with the original  executable image. However, GT.M may expand instruction space by ZLINKing additional routines.</p>
 <p>Data space starts out with stack space that never expands, and pool space which may expand.  Operations such as opening a database or creating a local variable may cause an expansion in pool space. GT.M expands pool space in fairly large increments. Therefore, SETs of local variables may not affect $STORAGE at all or may cause an apparently disproportionate drop in its value.</p>

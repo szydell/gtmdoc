@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="REPLINSTFROZEN.html" title="REPLINSTFROZEN ">
 <link rel="next" href="REPLINSTNMLEN.html" title="REPLINSTNMLEN ">
-<link rel="copyright" href="ln-idm46294892755360.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45072165103264.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>REPLINSTMISMTCH</strong></span>, Process has replication instance file ffff (jnlpool  shmid = ssss) open but database dddd is bound to instance file gggg  (jnlpool shmid =tttt)</p>
 <p>Run Time Error: The process attempted an update on the replicated database dddd associated with the replication instance file ffff and journal pool shared memory id ssss; however, the process has already associated the database with a different replication instance file gggg or journal pool shmid tttt.</p>
 <p>Action: A replicated database can only accept updates by processes that have the same replication instance file (defined by the environment variable gtm_repl_instance or in the global directory) open for that database. Ensure the same replication instance file is used for all processes that update the same replicated database file. This error can also occur if the replication instance file was recreated (while processes were still accessing the replication instance). In this case, the name ffff and gggg would be the same but the corresponding journal pool shared memory ids would be different. To recover from this situation, shut down all processes accessing the instance from before and after the instance file recreate. Run an argumentless MUPIP RUNDOWN to clean up the older journal pool tttt and restart the instance.  The Source Server (which is the first process to start on a replicated instance) only binds replicated databases from its global directory to the journal  pool that it creates. No other replicated database file can be bound with this journal pool.</p>
-<a class="indexterm" name="idm46294887610224"></a>
+<a class="indexterm" name="idm45072159932640"></a>
 </div>
 <div class="navfooter">
 <hr>

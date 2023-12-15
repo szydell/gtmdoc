@@ -8,7 +8,7 @@
 <link rel="up" href="TLS_Configuration_File.html" title="Appendix G. Creating a $gtmcrypt_config file">
 <link rel="prev" href="apgs01.html" title="Why do we need a $gtmcrypt_config file?">
 <link rel="next" href="apgs03.html" title="Generating demo TLS certificates">
-<link rel="copyright" href="ln-idm45622523859200.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45430263190752.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -78,6 +78,14 @@
   [empty line]</pre>
 </dd>
 <dt><span class="term">
+<code class="filename"><span class="bold"><strong>plaintext-fallback</strong></span></code>
+</span></dt>
+<dd><p>The plaintext-fallback option sets a default action, which can be overridden by the MUPIP command line option -[no]plaintextfallback, to disallow or allow the servers to fallback to plaintext when they fail to negotiate a TLS connection</p></dd>
+<dt><span class="term">
+<code class="filename"><span class="bold"><strong>post-handshake-fallback</strong></span></code>
+</span></dt>
+<dd><p>The post-handshake-fallback option enables Receiver Servers configured with SSL_VERIFY_POST_HANDSHAKE to temporarily drop SSL_VERIFY_POST_HANDSHAKE when a TLS handshake (TLSHANDSHAKE) with the Source Server fails due to missing support for SSL_VERIFY_POST_HANDSHAKE. After the next successful connection, the Receiver Server restores SSL_VERIFY_POST_HANDSHAKE for subsequent connections. This allows misconfigured peers, including prior versions, to establish a connection while the Receiver Server periodically issues a warning message.</p></dd>
+<dt><span class="term">
 <code class="filename"><span class="bold"><strong>session-id-hex</strong></span></code>
 </span></dt>
 <dd><p>Takes a string value which is used to set the SSL session_id context for server sockets, which may be specified in the tlsid section of a config file or on WRITE /TLS("RENEGOTIATE",...). See the OpenSSL man page for SSL_set_session_id_context for usage details. The value should consist of hexadecimal digits representing the desired value. Application code can call the %UTF2HEX utility routine to translate a character string to the corresponding string of hexadecimal digits. If neither the command or the associated tlsid section in the configuration file specify a session-id-hex option when creating the socket, GT.M uses the current tlsid, translated into hexadecimal digits.</p></dd>
@@ -111,7 +119,7 @@
 <dt><span class="term">
 <code class="filename"><span class="bold"><strong>verify-mode</strong></span></code>
 </span></dt>
-<dd><p>The verify-mode option specifies how OpenSSL verifies certificates. If no verify-mode is specified, it defaults to SSL_VERIFY_PEER. See the man page for SSL_set_verify for details. SSL_VERIFY_PEER has two additional flags which modify verification only for the server role; when adding them to the option string, use the colon (:) delimiter.</p></dd>
+<dd><p>The verify-mode option specifies how OpenSSL verifies certificates. If no verify-mode is specified, it defaults to SSL_VERIFY_PEER:SSL_VERIFY_FAIL_IF_NO_PEER_CERT. See the man page for SSL_set_verify for details. SSL_VERIFY_PEER has additional flags which modify verification only for the server role; when adding them to the option string, use the colon (:) delimiter. Please refer to the OpenSSL documentation about SSL_set_verify. The verify-mode option must always include SSL_VERIFY_PEER. To disable all verification, use SSL_VERIFY_NONE.</p></dd>
 </dl></div>
 </div>
 <div class="navfooter">

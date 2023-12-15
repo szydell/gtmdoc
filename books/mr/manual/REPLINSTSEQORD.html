@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="REPLINSTSECUNDF.html" title="REPLINSTSECUNDF ">
 <link rel="next" href="REPLINSTSTNDALN.html" title="REPLINSTSTNDALN ">
-<link rel="copyright" href="ln-idm46294892755360.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45072165103264.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>REPLINSTSEQORD</strong></span>, REPLINSTSEQORD ssss has seqno xxxx which is less than last record seqno yyyy in replication instance file zzzz</p>
 <p>MUPIP Error: This error is issued in one of two scenarios. The instance file consists of a sequence of history records that should correspond to an increasing range of sequence numbers. They need to hence have their starting sequence number in increasing order. If an attempt is made to append a history record with a starting sequence number that is lesser than the last history record currently existing in the instance file, the source or receiver server issues this error. In this case ssss would be the string New history record. This error is also issued if at journal pool creation time, the source server notices that the instance file header has a value of the current seqno that is lesser than the starting seqno of the last history record in the instance file. In this case ssss would be the string Instance file header.</p>
 <p>Action: If this instance is not the root primary, this error can be handled by restoring both the database and the instance file from a previous backup (consistent backup of the instance file AND database files taken together at the same time) and restarting the instance. Subsequent to such a restore, all transactions since the last backup will be sent across from this instance's primary. Alternatively, this can be handled by shipping a copy of the database from any other instance (either the primary or any other secondary/tertiary), recreating the instance file and starting this instance as a secondary with the UPDATERESYNC qualifier. In either case, this procedure has to be repeated on all tertiary instances etc. that descend from this instance ensuring that for every primary-secondary instance pair, the secondary is not ahead of the primary in terms of journal seqno. If this instance is the root primary, restoring from a prior backup may not be viable as it may mean loss of transactions that occurred after the backup. The alternative way to handle this error is to recreate the instance file on the root primary, ship a copy of the database from the primary and recreate instance files on ALL secondaries (tertiaries etc.) and restart the secondaries with the UPDATERESYNC qualifier. In addition, report the entire incident to your GT.M support channel.</p>
-<a class="indexterm" name="idm46294887594976"></a>
+<a class="indexterm" name="idm45072159931840"></a>
 </div>
 <div class="navfooter">
 <hr>

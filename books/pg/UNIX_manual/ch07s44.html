@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s43.html" title="$ZPIece()">
 <link rel="next" href="ch07s45.html" title="$ZPrevious()">
-<link rel="copyright" href="ln-idm45819035664320.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -86,7 +86,7 @@
 <pre class="programlisting">gtmtypfldindx(&lt;structure-name&gt;.&lt;field-mnemonic&gt;)=&lt;n&gt;</pre>
 <p>where gtmtypes(&lt;structure-name&gt;,&lt;n&gt;,*) nodes contain the field characteristics</p>
 </li>
-<li class="listitem"><p>$VIEW("JNLPOOL") returns the replication instance for the current jnlpool. When multiple replication instances are in use, GT.M uses the current jnlpool to return values from a jnlpool related structure. The mnemonics GLF, GSL, JPC, NLREPL, and RIH require a jnlpool.</p></li>
+<li class="listitem"><p> When $ZGBLDIR is set to a global directory specifying a replication instance and replication has started, the Replication Journal Pool for that instance becomes the source of data reported by $ZPEEK(). If a global directory does not specify a Replication Instance, the gtm_repl_instance environment variable determines the Instance for its replicated regions. The mnemonics GLF, GSL, JPC, NLREPL, and RIH require a jnlpool. $VIEW("JNLPOOL") returns the Instance for the current Replication Jounal Pool.</p></li>
 </ul></div></td></tr>
 </table></div>
 </div>

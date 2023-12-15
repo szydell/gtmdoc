@@ -8,12 +8,13 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="WRITEERROR.html" title="WRITEERROR ">
 <link rel="next" href="WRITEWAITPID.html" title="WRITEWAITPID ">
-<link rel="copyright" href="ln-idm46294892755360.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45072165103264.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">WRITERSTUCK </th></tr>
+<tr><th colspan="3" align="center">WRITERSTUCK <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="WRITEERROR.html">Prev</a> </td>
@@ -25,15 +26,16 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">WRITERSTUCK </span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">WRITERSTUCK <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span></span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="WRITERSTUCK"></a>WRITERSTUCK </h2></div></div></div>
-<p><span class="bold"><strong>WRITERSTUCK</strong></span>,    Buffer flush stuck waiting for [xxxx] concurrent writers to finish writing to database file aaaa</p>
-<p>Run Time Error: This indicates that GT.M timed out after waiting nearly a minute for concurrent processes to complete flushing modified global buffers to the disk.</p>
+<a name="WRITERSTUCK"></a>WRITERSTUCK <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</h2></div></div></div>
+<p><span class="bold"><strong>WRITERSTUCK</strong></span>, Buffer flush stuck waiting for concurrent writer PID pppp (mmmm of xxxx) to finish writing to database file dddd</p>
+<p>Run Time Error: This indicates that GT.M timed out after waiting nearly a minute for process pppp to complete flushing modified global buffers to the disk in database file dddd. This message repeats for each mmmm of xxxx writers.</p>
 <p>Action: This is usually symptomatic of a stressed I/O subsystem, where disk writes take a long time. System Administration might be warranted to improve the performance.</p>
-<a class="indexterm" name="idm46294886194944"></a>
+<a class="indexterm" name="idm45072158669328"></a>
 </div>
 <div class="navfooter">
 <hr>

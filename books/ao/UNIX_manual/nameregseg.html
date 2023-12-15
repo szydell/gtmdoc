@@ -8,7 +8,7 @@
 <link rel="up" href="gdechap.html" title="Chapter 4. Global Directory Editor">
 <link rel="prev" href="gdecmds.html" title="Global Director Editor Commands">
 <link rel="next" href="gde_cmmd_summ.html" title="GDE Command Summary">
-<link rel="copyright" href="ln-idm45622523859200.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45430263190752.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -34,7 +34,7 @@
 <p> The <span>-</span>NAME, <span>-</span>REGION, and <span>-</span>SEGMENT qualifiers each have additional qualifiers used to further define or specify characteristics of a name, region, or segment. <span>The following sections describe these additional qualifiers.</span> </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="name_qualifiers"></a>Name Qualifiers<a class="indexterm" name="idm45622522289520"></a>
+<a name="name_qualifiers"></a>Name Qualifiers<a class="indexterm" name="idm45430261590352"></a>
 </h3></div></div></div>
 <p>The following <span>-</span>NAME qualifier can be used with the ADD or CHANGE commands.</p>
 <pre class="programlisting">-REGION=region-name</pre>
@@ -43,7 +43,7 @@ represented as uppercase by GDE.</p>
 <p>The minimum length is one alphabetic character. </p>
 <p>The maximum length is 31 alphanumeric characters.</p>
 <p>Example:</p>
-<a class="indexterm" name="idm45622522251584"></a><pre class="programlisting">GDE&gt; add -name a* -region=areg</pre>
+<a class="indexterm" name="idm45430261580608"></a><pre class="programlisting">GDE&gt; add -name a* -region=areg</pre>
 <p>This command creates the namespace a*, if it does not exist, and maps it to the region areg.</p>
 <p><span class="emphasis"><em>Summary</em></span></p>
 <div class="informaltable">
@@ -92,19 +92,19 @@ represented as uppercase by GDE.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="region_qual"></a>Region Qualifiers<a class="indexterm" name="idm45622522223632"></a>
+<a name="region_qual"></a>Region Qualifiers<a class="indexterm" name="idm45430261550928"></a>
 </h3></div></div></div>
 <p>The following <span>-</span>REGION qualifiers can be used with the ADD, CHANGE, or TEMPLATE commands. </p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>[NO]AU[TODB]<a class="indexterm" name="idm45622522361376"></a>
+<span>-</span>[NO]AU[TODB]<a class="indexterm" name="idm45430261615840"></a>
 </em></span>
 </p>
 <p>Specifies whether GT.M should implicitly create a database file for the region if none exists when a process attempts to access it. Because it carries lower operational risk and provides better operational control, the common practice is to create database files with MUPIP CREATE. However, AUTODB may simplify operations when you have scratch or temporary databases which are best deleted and recreated as a part of standard operation procedures. </p>
 <p>The default is NOAUTODB.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>C[OLLATION_DEFAULT]=number <a class="indexterm" name="idm45622522232544"></a>
+<span>-</span>C[OLLATION_DEFAULT]=number <a class="indexterm" name="idm45430261540448"></a>
 </em></span>
 </p>
 <p>Specifies the number of the collation sequence definition to be used
@@ -121,7 +121,7 @@ collation sequence.</p>
 <p>
 <span class="emphasis"><em>
 <span>-</span>D[YNAMIC_SEGMENT]=segment-name 
-<a class="indexterm" name="idm45622522327328"></a>
+<a class="indexterm" name="idm45430261555344"></a>
 </em></span>
 </p>
 <p>Specifies the name of the segment to which the region is mapped. Segment-names
@@ -130,18 +130,18 @@ are not case-sensitive, but are displayed as uppercase by GDE.</p>
 <p>The maximum length is 31 alphanumeric characters.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>[NO]EPOCHTAPER<a class="indexterm" name="idm45622522256240"></a>
-<a class="indexterm" name="idm45622522272592"></a></em></span></p>
+<span>-</span>[NO]EPOCHTAPER<a class="indexterm" name="idm45430261583408"></a>
+<a class="indexterm" name="idm45430261536208"></a></em></span></p>
 <p>Tries to minimize epoch duration by reducing the number of buffers to flush by GT.M and the file system (via an fsync()) as the epoch (time-based or due to a journal file auto-switch) approaches. By default, EPOCHTAPER is enabled. Epoch tapering reduces the impact of I/O activity during an epoch event. Application that experience high load and/or need to reduce latency may benefit from epoch tapering. </p>
 <p><span class="emphasis"><em>
--[NO]INST[_FREEZE_ON_ERROR]<a class="indexterm" name="idm45622522230336"></a>
+-[NO]INST[_FREEZE_ON_ERROR]<a class="indexterm" name="idm45430261563696"></a>
 </em></span></p>
 <p>Controls whether custom errors in a region should automatically cause an Instance Freeze. This qualifier modifies the value of "Inst Freeze on Error" file header element. </p>
 <p>For more information on setting up a list of custom errors that automatically invoke an Instance Freeze, refer to <a class="xref" href="ch07s02.html#inst_freeze" title="Instance Freeze">&#8220;Instance Freeze&#8221;</a>.</p>
 <p>For more information on setting or clearing an Instance Freeze on an instance irrespective of whether any region is enabled for Instance, refer to <a class="xref" href="replication.html#start_src_srvr" title="Starting the Source Server">&#8220;<span>Starting the </span> Source Server&#8221;</a>.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>[NO]J[OURNAL][=journal-option-list]  <a class="indexterm" name="idm45622522235280"></a>
+<span>-</span>[NO]J[OURNAL][=journal-option-list]  <a class="indexterm" name="idm45430261576832"></a>
 </em></span>
 </p>
 <p>This qualifier establishes characteristics for the journal file on newly created databases. </p>
@@ -159,35 +159,35 @@ will use journaling. The options available for <span>-</span>JOURNAL set up the 
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
 <li class="listitem" style="list-style-type: circle">
 <p>A[LLOCATION]=blocks</p>
-<a class="indexterm" name="idm45622522188576"></a>
+<a class="indexterm" name="idm45430261516384"></a>
 </li>
 <li class="listitem" style="list-style-type: circle">
 <p>AUTOSWITCHLIMIT=blocks</p>
-<a class="indexterm" name="idm45622522181456"></a>
+<a class="indexterm" name="idm45430261509264"></a>
 </li>
 <li class="listitem" style="list-style-type: circle"><p>[NO]BE[FORE_IMAGE]</p></li>
-<li class="listitem" style="list-style-type: circle"><p>BU[FFER_SIZE]=pages<a class="indexterm" name="idm45622522179808"></a></p></li>
-<li class="listitem" style="list-style-type: circle"><p>E[XTENSION]=blocks<a class="indexterm" name="idm45622522193856"></a></p></li>
+<li class="listitem" style="list-style-type: circle"><p>BU[FFER_SIZE]=pages<a class="indexterm" name="idm45430261507616"></a></p></li>
+<li class="listitem" style="list-style-type: circle"><p>E[XTENSION]=blocks<a class="indexterm" name="idm45430261521936"></a></p></li>
 <li class="listitem" style="list-style-type: circle">
 <p>F[ILE_NAME]=file-specification-name</p>
-<a class="indexterm" name="idm45622522184736"></a>
+<a class="indexterm" name="idm45430261512544"></a>
 </li>
 </ul></div>
 <p>The following section describes some <span>-</span>JOURNAL options.</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45622522201056"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45430261530000"></a>
 <span>-</span>AU[TOSWITCHLIMIT]=blocks</em></span></p>
 <p>Specifies the limit on the size of a journal file. When the journal file size reaches the limit, GT.M automatically switches to a new journal file with a back-pointer to the prior journal file.</p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45622522176000"></a>
-<span>-</span>[NO]BE[FORE_IMAGE]  <a class="indexterm" name="idm45622522265088"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45430261503808"></a>
+<span>-</span>[NO]BE[FORE_IMAGE]  <a class="indexterm" name="idm45430261500864"></a>
 </em></span>
 </p>
 <p>[NO]BEFORE_IMAGE controls whether the journal should include before-image records.</p>
 <p>The BEFORE_IMAGE option is required if you plan to consider "roll-back" (Backward) recovery of the associated database file or if you plan to use certain database replication options.<span> For a description of this type of recovery, refer to <a class="xref" href="journaling.html" title="Chapter 6. GT.M Journaling">Chapter 6: &#8220;<i><span>GT.M </span>Journaling</i>&#8221;</a>.</span> </p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>F[ILE_NAME]=<span>"file-name"</span> <a class="indexterm" name="idm45622522169888"></a>
+<span>-</span>F[ILE_NAME]=<span>"file-name"</span> <a class="indexterm" name="idm45430261565584"></a>
 </em></span>
 </p>
 <p>
@@ -206,7 +206,7 @@ MUPIP SET to explicitly turn it ON, and you must specify BEFORE/NOBEFORE at that
 <p>
 <span class="emphasis"><em>
 <span>-</span>K[EY_SIZE]=size in bytes 
-<a class="indexterm" name="idm45622522159360"></a>
+<a class="indexterm" name="idm45430261487392"></a>
 </em></span>
 </p>
 <p>Specifies the maximum size of keys, in bytes, which can be stored in the 
@@ -225,7 +225,7 @@ if the KEY_SIZE is inappropriate for the RECORD_SIZE.</p>
 </p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>[NO]L[OCK_CRIT]<a class="indexterm" name="idm45622522146528"></a>
+<span>-</span>[NO]L[OCK_CRIT]<a class="indexterm" name="idm45430261475056"></a>
 </em></span>
 </p>
 <p>
@@ -312,9 +312,9 @@ if the KEY_SIZE is inappropriate for the RECORD_SIZE.</p>
 </div>
 <p>
 </p>
-<a class="indexterm" name="idm45622522099584"></a><p>
+<a class="indexterm" name="idm45430261434864"></a><p>
 <span class="emphasis"><em>
-<span>-</span>[NO]N[ULL_SUBSCRIPTS]=[ALWAYS|NEVER|EXISTING]<a class="indexterm" name="idm45622522121312"></a>
+<span>-</span>[NO]N[ULL_SUBSCRIPTS]=[ALWAYS|NEVER|EXISTING]<a class="indexterm" name="idm45430261450192"></a>
 </em></span>
 </p>
 <p>Indicates whether GT.M allows null subscripts for global variables stored in the region (that is, whether GT.M permits references such as ^aaa("",1)).</p>
@@ -324,15 +324,15 @@ if the KEY_SIZE is inappropriate for the RECORD_SIZE.</p>
 <p>By default, regions have <span>-</span>NULL_SUBSCRIPTS=NEVER.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>[NO]Q[DBRUNDOWN]<a class="indexterm" name="idm45622522135904"></a>
-<a class="indexterm" name="idm45622522115120"></a></em></span></p>
+<span>-</span>[NO]Q[DBRUNDOWN]<a class="indexterm" name="idm45430261453968"></a>
+<a class="indexterm" name="idm45430261499568"></a></em></span></p>
 <p>Shortens normal process shutdown when a large number of processes accessing a database file need to shutdown almost simultaneously, for example, in benchmarking scenarios or emergencies. </p>
 <p>When a terminating GT.M process observes that a large number of processes are attached to a database file and QDBRUNDOWN is enabled, it bypasses checking whether it is the last process accessing the database. Such a check occurs in a critical section and bypassing it also bypasses the usual RUNDOWN actions which accelerates process shutdown removing a possible impediment to process startup. By default, QDBRUNDOWN is disabled.</p>
 <p>Note that with QDBRUNDOWN there is a possibility that the last process to exit might leave the database shared memory and IPC resources in need of cleanup. Except after the number of concurrent processes exceeds 32Ki, QDBRUNDOWN minimizes the prossibility of abandoned resources, but it cannot eliminate it. When using QDBRUNDOWN, use an explicit MUPIP RUNDOWN of the database file after the last process exits, to ensure the cleanup of database shared memory and IPC resources; not doing so risk database damage.</p>
 <p>When a database has QDBRUNDOWN enabled, if the number of attached processes ever exceeds 32Ki, GT.M stops tracking the number of attached processes, which means that it cannot recognize when the number reaches zero (0) and the shared resources can be released. The process that detects this event issues a NOMORESEMCNT in the system log. This means an orderly, safe shutdown requires a MUPIP JOURNAL -ROLLBACK -BACKWARD for replicated databases, a MUPIP JOURNAL -RECOVER -BACKWARD for unreplicated journaled databases and a MUPIP RUNDOWN for journal-free databases.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>R[ECORD_SIZE]=size in bytes <a class="indexterm" name="idm45622522110640"></a>
+<span>-</span>R[ECORD_SIZE]=size in bytes <a class="indexterm" name="idm45430261484192"></a>
 </em></span>
 </p>
 <p>Specifies the maximum size (in bytes) of a global variable node's value that can be stored in a region. </p>
@@ -342,7 +342,7 @@ if the KEY_SIZE is inappropriate for the RECORD_SIZE.</p>
 <p>By default, GDE uses a RECORD_SIZE of 256 bytes.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>[NO][STA[TS]<a class="indexterm" name="idm45622522114864"></a>
+<span>-</span>[NO][STA[TS]<a class="indexterm" name="idm45430261417024"></a>
 </em></span>
 </p>
 <p>Specifies whether GT.M should permit processes to share their database access statistics for other processes to monitor.  When on, this characteristic causes GT.M to create a small MM database for the associated region to hold the shared statistics. There may be operational or security reasons to prohibit sharing of statistics. For example, GT.M does not share statistics on database files that exist solely to support GT.M features. </p>
@@ -351,7 +351,7 @@ if the KEY_SIZE is inappropriate for the RECORD_SIZE.</p>
 <p>For more information, refer to VIEW "[NO]STATSHARE" and ^%YGBLSTAT in GT.M Programmer's Guide and gtm_statshare and gtm_statsdir in <a class="xref" href="ch03s02.html" title="Environment Variables">&#8220;Environment Variables&#8221;</a>. </p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>[NO]STD[NULLCOLL] <a class="indexterm" name="idm45622522114256"></a>
+<span>-</span>[NO]STD[NULLCOLL] <a class="indexterm" name="idm45430261423424"></a>
 </em></span>
 </p>
 <p>Determines whether GT.M null subscripts collate in conformance to the M standard.</p>
@@ -360,7 +360,7 @@ if the KEY_SIZE is inappropriate for the RECORD_SIZE.</p>
 <p>The following table summarizes GDE region qualifiers. It provides their abbreviations, defaults (as provided by FIS), and
 allowable minimum and maximum values.</p>
 <div class="informaltable">
-<a name="tblgdejnlopt"></a><a class="indexterm" name="idm45622522109392"></a><table border="1">
+<a name="tblgdejnlopt"></a><a class="indexterm" name="idm45430261473168"></a><table border="1">
 <colgroup>
 <col>
 <col>
@@ -551,13 +551,13 @@ allowable minimum and maximum values.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="segment_quals"></a>Segment Qualifiers<a class="indexterm" name="idm45622522130240"></a>
+<a name="segment_quals"></a>Segment Qualifiers<a class="indexterm" name="idm45430261464768"></a>
 </h3></div></div></div>
 <p>The following <span>-</span>SEGMENT qualifiers can be used with the ADD, CHANGE, or TEMPLATE commands.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>AC[CESS_METHOD]=code <a class="indexterm" name="idm45622522227456"></a>
-<a class="indexterm" name="idm45622522156848"></a>
+<span>-</span>AC[CESS_METHOD]=code <a class="indexterm" name="idm45430261548272"></a>
+<a class="indexterm" name="idm45430261530128"></a>
 </em></span>
 </p>
 <p>Specifies the access method or the GT.M buffering strategy for storing and retrieving data from the global database file. </p>
@@ -582,11 +582,11 @@ allowable minimum and maximum values.</p>
 <li class="listitem"><p>When GDE modifies the ACCESS_METHOD, it activates the appropriate set of TEMPLATEs and sets all unspecified qualifiers to the default values of the new ACCESS_METHOD.</p></li>
 </ul></div>
 <p>Example: </p>
-<a class="indexterm" name="idm45622522189616"></a><pre class="programlisting">GDE&gt; change -segment DEFAULT -access_method=MM </pre>
+<a class="indexterm" name="idm45430261410768"></a><pre class="programlisting">GDE&gt; change -segment DEFAULT -access_method=MM </pre>
 <p>This command sets MM as the access method or the GT.M buffering strategy for storing and retrieving database for segment DEFAULT.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>AL[LOCATION]=blocks<a class="indexterm" name="idm45622522079808"></a> 
+<span>-</span>AL[LOCATION]=blocks<a class="indexterm" name="idm45430261356672"></a> 
 </em></span> 
 </p>
 <p>Specifies the number of blocks GT.M allocates to a disk file when MUPIP creates the file. For GDS files, the number of bytes allocated is the size of the database file header plus the ALLOCATION size times the BLOCK_SIZE. </p>
@@ -599,7 +599,7 @@ allowable minimum and maximum values.</p>
 </ul></div>
 <p>
 <span class="emphasis"><em>
-<span>-</span>-[NO]AS[YNCIO] <a class="indexterm" name="idm45622522150912"></a>
+<span>-</span>-[NO]AS[YNCIO] <a class="indexterm" name="idm45430261396128"></a>
 </em></span>
 </p>
 <p>Determines whether an access method BG database file uses asynchronous I/O rather than using synchronous I/O through the file system cache.</p>
@@ -620,7 +620,7 @@ A large number of global buffers potentially implies a large number of dirty glo
 <p>By default GDE uses NOASYNCIO. On segments with an access method of MM, GT.M ignores this setting.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>BL[OCK_SIZE]=size <a class="indexterm" name="idm45622522092784"></a>
+<span>-</span>BL[OCK_SIZE]=size <a class="indexterm" name="idm45430261390672"></a>
 </em></span>
 </p>
 <p>Specifies the size, in bytes, of each database block in the file system. The BLOCK_SIZE
@@ -659,7 +659,7 @@ database block size must always be a multiple of 512.</p>
 <p>By default, GDE uses a BLOCK_SIZE of 4096 bytes.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>-[NO]DEFER_ALLOCATE <a class="indexterm" name="idm45622522087824"></a>
+<span>-</span>-[NO]DEFER_ALLOCATE <a class="indexterm" name="idm45430261563328"></a>
 </em></span>
 </p>
 <p>With -DEFER_ALLOCATE, GT.M instructs the file system to create the database file as a sparse file. Before using -DEFER_ALLOCATE, ensure that your underlying file system supports sparse files. By default UNIX file systems, and GT.M, use sparse (or lazy) allocation, which defers actual allocation until blocks are first written.</p>
@@ -670,12 +670,12 @@ database block size must always be a multiple of 512.</p>
 <li class="listitem"><p>The default is DEFER_ALLOCATE. </p></li>
 </ul></div>
 <p>
-   <span class="emphasis"><em><span>-</span>[NO]ENcryption </em></span><a class="indexterm" name="idm45622522074368"></a>
+   <span class="emphasis"><em><span>-</span>[NO]ENcryption </em></span><a class="indexterm" name="idm45430261384656"></a>
 </p>
 <p>Specifies whether or not the database file for a segment is flagged for encryption. Note that MUPIP CREATE acquires an encryption key for this file and puts a cryptographic hash of the key in the database file header. </p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>EX[TENSION_COUNT]=blocks <a class="indexterm" name="idm45622522003744"></a>
+<span>-</span>EX[TENSION_COUNT]=blocks <a class="indexterm" name="idm45430261339488"></a>
 </em></span>
 </p>
 <p>Specifies the number of extra GDS blocks of disk space by which the file
@@ -698,15 +698,15 @@ development and experimentation. Use larger extensions for
 larger actual applications. Because multiple file extensions adversely affect performance, set
 up extensions appropriate to the file allocation.</p>
 <p>
-   <span class="emphasis"><em><span>-</span>F[ILE_NAME]=<span>file-name</span> </em></span><a class="indexterm" name="idm45622521977696"></a>
+   <span class="emphasis"><em><span>-</span>F[ILE_NAME]=<span>file-name</span> </em></span><a class="indexterm" name="idm45430261306144"></a>
 </p>
 <p>Specifies the file for a segment. </p>
 <p>The maximum file name length is 255 characters. </p>
 <p>By default, GDE uses a file-name of mumps followed by the default extension, which is .dat. You can specify any filename and extension of your choice for a database file as long as it is valid on your operating system. </p>
-<a class="indexterm" name="idm45622521984784"></a><p>
+<a class="indexterm" name="idm45430261407936"></a><p>
 <span class="emphasis"><em>
--FU[LLBLKWRT]={0|1|2}<a class="indexterm" name="idm45622521974816"></a>
-<a class="indexterm" name="idm45622521967952"></a>
+-FU[LLBLKWRT]={0|1|2}<a class="indexterm" name="idm45430261303424"></a>
+<a class="indexterm" name="idm45430261296560"></a>
 </em></span>
 </p>
 <p>Determines whether GT.M writes only valid database blocks contents, or a full block including meaningless trailing content. Full block writes are more efficient with some secondary storage because they avoid read-before-write. </p>
@@ -724,10 +724,10 @@ up extensions appropriate to the file allocation.</p>
 </table></div>
 <p>
 <span class="emphasis"><em>
-<span>-</span>G[LOBAL_BUFFER_COUNT]=size  <a class="indexterm" name="idm45622521982288"></a>
+<span>-</span>G[LOBAL_BUFFER_COUNT]=size  <a class="indexterm" name="idm45430261311136"></a>
 </em></span>
 </p>
-<p>Specifies the number of global buffers for a file. Global buffers reside in shared memory and are part of the database caching mechanisms. Global buffers do not apply to MM databases.<a class="indexterm" name="idm45622521981232"></a></p>
+<p>Specifies the number of global buffers for a file. Global buffers reside in shared memory and are part of the database caching mechanisms. Global buffers do not apply to MM databases.<a class="indexterm" name="idm45430261309664"></a></p>
 <p>Choose the settings for this qualifier carefully. Small numbers of global buffers tend to throttle database performance. However, if your system has limited memory and the database file traffic is not heavy enough to hold the cache in RAM, increasing GLOBAL_BUFFER_COUNT may trigger  paging. </p>
 <p>If database global buffers are paged out, it will result in poor performance. Therefore, do not increase this factor to a large value without careful observation.</p>
 <p>The proper number of GLOBAL_BUFFERs depends on the application and the amount of primary memory available on the system. Most production databases exhibit a direct relationship between the number of GLOBAL_BUFFERs and performance. However, the relationship is not linear, but asymptotic, so that increases past some point have progressively less benefit. This point of diminishing returns
@@ -751,7 +751,7 @@ with each GDS file for the majority of caching. </p>
 </table></div>
 <p>
 <span class="emphasis"><em>
-<span>-</span>L[OCK_SPACE]=<span>integer</span><a class="indexterm" name="idm45622521957744"></a>
+<span>-</span>L[OCK_SPACE]=<span>integer</span><a class="indexterm" name="idm45430261287024"></a>
 </em></span>
 </p>
 <p>Specifies the number of pages of space to use for the lock database stored with this segment. The size of a page is always 512 bytes. </p>
@@ -769,11 +769,11 @@ with each GDS file for the majority of caching. </p>
 <p>Generally, you would limit LOCK_SPACE only when memory is scarce or you want to be made aware of unexpected levels of LOCK usage. For most other cases, there is no reason to limit the LOCK_SPACE. If you are introducing new code, FIS recommends using TSTART and TCOMMIT as a more efficient alternate for most LOCKs because it pushes the responsibility for Isolation onto GT.M, which internally manages them with optimistic algorithms.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>M[UTEX_SLOTS]=<span>integer</span><a class="indexterm" name="idm45622521955264"></a>
+<span>-</span>M[UTEX_SLOTS]=<span>integer</span><a class="indexterm" name="idm45430261276256"></a>
 </em></span></p>
 <p>Specifies the number of mutex slots for a database file. GT.M uses mutex slots to manage database contention. FIS recommends you configure the slots to cover the maximum number of processes you expect to concurrently access the database file, as an insufficient number of slots can lead to much steeper and more severe degradation of performance under heavy loads. The minimum is 1Ki and the maximum is 32Ki.  </p>
 <p>
-<span class="emphasis"><em><a class="indexterm" name="idm45622521963136"></a>
+<span class="emphasis"><em><a class="indexterm" name="idm45430261290512"></a>
 <span>-</span>R[ESERVED_BYTES]=size 
 </em></span>
 </p>
@@ -1008,12 +1008,12 @@ allowable minimum and maximum values.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gblname_qual"></a>Gblname Qualifiers<a class="indexterm" name="idm45622521919648"></a>
+<a name="gblname_qual"></a>Gblname Qualifiers<a class="indexterm" name="idm45430261280976"></a>
 </h3></div></div></div>
 <p>The following <span>-</span>GBLNAME qualifier can be used with the ADD, CHANGE, or TEMPLATE commands.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>C[OLLATION]=collation_number <a class="indexterm" name="idm45622521934048"></a>
+<span>-</span>C[OLLATION]=collation_number <a class="indexterm" name="idm45430261298560"></a>
 </em></span>
 </p>
 <p>Specifies the collation number for a global name; a value of 0 specifies standard M collation.  The first time that a GT.M processes accesses a global variable name in a database file, it determines the collation sequence as follows:</p>
@@ -1044,12 +1044,12 @@ allowable minimum and maximum values.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="instance_qual"></a>Instance Qualifier<a class="indexterm" name="idm45622521945168"></a>
+<a name="instance_qual"></a>Instance Qualifier<a class="indexterm" name="idm45430261196352"></a>
 </h3></div></div></div>
 <p>The following <span>-</span>INSTANCE qualifier is used with the CHANGE command.</p>
 <p>
 <span class="emphasis"><em>
-<span>-</span>F[ILE_NAME=[repl_inst_filename|""] <a class="indexterm" name="idm45622521943648"></a>
+<span>-</span>F[ILE_NAME=[repl_inst_filename|""] <a class="indexterm" name="idm45430261372768"></a>
 </em></span>
 </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
