@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZCLose</title>
+<title>$ZCOmpile</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s27.html" title="$ZCstatus">
-<link rel="next" href="ch08s29.html" title="$ZDAteform">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="prev" href="ch08s27.html" title="$ZCMdline">
+<link rel="next" href="ch08s29.html" title="$ZCstatus">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZCLose</th></tr>
+<tr><th colspan="3" align="center">$ZCOmpile</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s27.html">Prev</a> </td>
@@ -26,18 +26,29 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZCLose</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZCOmpile</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zclose"></a>$ZCLose</h2></div></div></div>
-<p>Provides termination status of the last PIPE CLOSE as follows:</p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>-99 when the check times out</p></li>
-<li class="listitem"><p>-98 for unanticipated problems with the check</p></li>
-<li class="listitem"><p>the negative of the signal value if a signal terminated the co-process. </p></li>
-</ul></div>
-<p>If positive, $ZCLOSE contains the exit status returned by the last co-process.</p>
+<a name="zcompile_unix"></a>$ZCOmpile<a class="indexterm" name="idm45283007245760"></a>
+</h2></div></div></div>
+<p>$ZCO[MPILE] contains a string value composed of one or more qualifiers that control the GT.M run-time compiler. ZCOMPILE, explicit ZLINKs and auto-ZLINKs use these qualifiers as defaults for any compilations they perform.</p>
+<p>$ZCOMPILE is a read-write ISV, that is, it can appear on the left side of the equal sign (=) in the argument to the SET command. A $ZCOMPILE value has the form of a list of M command qualifiers each separated by a space ( ).</p>
+<p>When the gtmcompile environment variable is defined, GT.M initializes $ZCOMPILE to the translation of $gtmcompile. Otherwise GT.M initializes $ZCOMPILE to null. Changes to the value of $ZCOMPILE during a GT.M invocation only last for the current invocation and do not change the value of the $gtmcompile environment variable.</p>
+<p>When $ZCOMPILE is null, GT.M uses the default M command qualifiers -IGNORE, -LABEL=LOWER, -NOLIST, and -OBJECT. <span>See <a class="xref" href="ch03.html" title="Chapter 3. Development Cycle">Chapter 3: &#8220;<i><span>Development</span> Cycle</i>&#8221;</a> for detailed descriptions of the M command qualifiers.</span></p>
+<p>Example:</p>
+<pre class="programlisting">$ export gtmcompile="-LIST -LENGTH=56 -SPACE=2"
+$ gtm
+GTM&gt;WRITE $ZCOMPILE
+-LIST -LENGTH=56 -SPACE=2
+GTM&gt;SET $ZCOMPILE="-LIST -NOIGNORE"
+GTM&gt;WRITE $ZCOMPILE
+-LIST -NOIGNORE
+GTM&gt;ZLINK "A.m"
+GTM&gt;HALT
+$ echo $gtmcompile
+-LIST -LENGTH=56 -SPACE=2</pre>
+<p>This example uses the environment variable gtmcompile to set up $ZCOMPILE. Then it modifies $ZCOMPILE with the SET command. The ZLINK argument specifies a file with a .m extension (type), which forces a compile. The compile produces a listing for routine A.m and does not produce an object module if A.m contains compilation errors. After GT.M terminates, the shell command echo $gtmcompile demonstrates that the SET command did not change the environment variable.</p>
 </div>
 <div class="navfooter">
 <hr>
@@ -50,9 +61,9 @@
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZCstatus </td>
+<td width="40%" align="left" valign="top">$ZCMdline </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZDAteform</td>
+<td width="40%" align="right" valign="top"> $ZCstatus</td>
 </tr>
 </table>
 </div>

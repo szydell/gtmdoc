@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s26.html" title="$ZAscii()">
 <link rel="next" href="ch07s28.html" title="$ZAUditlog">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zatransform"></a>$ZATRansform<a class="indexterm" name="idm45735650245168"></a>
+<a name="zatransform"></a>$ZATRansform<a class="indexterm" name="idm45283008096704"></a>
 </h2></div></div></div>
 <p>Returns the transformed representation of the first argument expr in a normalized form using the alternative transform specified by the second argument intexpr; the transformed representation can be used as an operand to the follows (]) or sorts-after (]]) operator such that, if both operands are in the normalized form, the result is independent of alternative collation. The format for the $ZATRANSFORM() function is:</p>
 <pre class="programlisting">$ZATRANSFORM(expr,intexpr[,{0|1|2|-2}][,{0|1}])</pre>
@@ -47,7 +47,7 @@
 </li>
 <li class="listitem"><p>The optional fourth argument specifes whether to use standard M collation of numbers before strings, the default or zero (0), or to sort all values as strings (1).</p></li>
 </ul></div>
-<p>Please see <a class="xref" href="ch07s31.html" title="$ZCOllate()">&#8220;$ZCOllate()&#8221;</a> for a similar alternative.</p>
+<p>Please see <a class="xref" href="ch07s31.html" title="$ZCOLlate()">&#8220;$ZCOLlate()&#8221;</a> for a similar alternative.</p>
 <p>
 The 2 and -2 work in M mode for the 'M' collation (collation 0), or any user defined collation which supplies the necessary plugin functionality. In UTF-8 mode, these argument values produce a ZATRANSCOL error. If the plugin for the specified collation does not support this "next character" functionality, the function produces a COLLATIONUNDEF error in response to an an attempt to invoke it. If an external collation library is used and encounters a gtm_ac_xutil failure, ZATRANSFORM produces an ERR_ZATRANSCOL. If an external collation library is used and does not supply a  gtm_ac_xutil function, ZATRANSFORM produces an ERR_COLLATIONUNDEF when operations -2 or 2 are specified. To use these operations with external collation libraries, the libraries must supply a function called 'gtm_ac_xutil'. <span>For more information on the following signature and characteristics of the gtm_ac_xutil function, refer to <a class="xref" href="ch12s02.html#transform_utility" title="Transform Utility Routine (gtm_ac_xutil)">&#8220;Transform Utility<span> Routine (gtm_ac_xutil)</span>&#8221;</a>.</span>
 </p>

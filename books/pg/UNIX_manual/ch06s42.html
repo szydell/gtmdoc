@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s41.html" title="ZRUPDATE">
 <link rel="next" href="ch06s43.html" title="ZSTep">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zshow_cmmd"></a>ZSHow<a class="indexterm" name="idm45735651369360"></a>
+<a name="zshow_cmmd"></a>ZSHow<a class="indexterm" name="idm45283026809152"></a>
 </h2></div></div></div>
 <p>The ZSHOW command displays information about the current GT.M environment.</p>
 <p>The format of the ZSHOW command is:</p>
@@ -48,7 +48,7 @@
 <p></p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zshow_info_codes"></a>ZSHOW Information Codes<a class="indexterm" name="idm45735651173472"></a>
+<a name="zshow_info_codes"></a>ZSHOW Information Codes<a class="indexterm" name="idm45283011219536"></a>
 </h3></div></div></div>
 <p>A ZSHOW argument is an expression containing a list of codes that select one or more types of information. The ZSHOW information codes are: </p>
 <div class="informaltable">
@@ -183,6 +183,9 @@ DTA : # of DaTA operations (TP and non-TP)
 DWT : # of Disk WriTes to the database file (TP and non-TP, committed and rolled-back). This does not include writes that are satisfied by buffered globals for databases that use the BG (Buffered Global) access method. GT.M always reports 0 for databases that use the MM (memory-mapped) access method as this has no real meaning in that mode.
 GET : # of GET operations (TP and non-TP)
 GLB : # of waits for bg access critical section
+IDXH: # of index block cache hits
+IDXM: # of index block cache misses  
+INC : # of $INCREMENT operations. The $INCREMENT function also increases the SET counter.
 JBB : # of Journal Buffer Bytes updated in shared memory
 JEX : # of Journal file EXtentions
 JFB : # of Journal File Bytes written to the journal file on disk. For performance reasons, GT.M always aligns the beginning of these writes to file system block size boundaries. JFB counts all bytes including those needed for alignment in order to reflect the actual IO load on the journal file. Since the bytes required to achieve alignment may have already been counted as part of the previous JFB, processes may write the same bytes more than once, causing the JFB counter to typically be higher than JBB.
@@ -246,6 +249,7 @@ GT.M maintains the counters of the mnemonics marked with a * on AIX. On Linux, G
 <p>If an operation is performed inside a TP transaction, and not committed as a consequence of a rollback, or an explicit or implicit restart, GT.M still counts it.</p>
 <p>KILL/GET/DATA/QUERY/ORDER/ZPREVIOUS operations on globals that never existed are not counted, while the same operations on globals that once existed but have since been killed are counted.</p>
 <p>Name-level ORDER/ZPREVIOUS operations (for example, $ORDER(^a) with no subscripts) increment the count for each transition into a region as they process the global directory map up to the point they find a global with data.</p>
+<p>Index block hit ratios for global buffers are IDXH/(IDXH+IDXM) but underrepresent total index block usage because of process-private caching.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
 <tr>
 <td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
@@ -271,7 +275,7 @@ GT.M maintains the counters of the mnemonics marked with a * on AIX. On Linux, G
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zshow"></a>Examples<span> of ZSHow</span><a class="indexterm" name="idm45735651072464"></a>
+<a name="examples_of_zshow"></a>Examples<span> of ZSHow</span><a class="indexterm" name="idm45283025917424"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;ZSHOW "db"</pre>
@@ -299,7 +303,8 @@ LAB1^RTN</pre>
 <pre class="programlisting">GLD:*,REG:*,SET:205,KIL:0,GET:1,DTA:0,ORD:0,ZPR:0,QRY:0,LKS:0,LKF:0,CTN:0,DRD:9,DWT:15,
 NTW:203,NTR:4,NBW:212,NBR:414,NR0:0,NR1:0,NR2:0,NR3:0,TTW:1,TTR:0,TRB:0,TBW:2,TBR:6,
 TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0,ZTR:0,DFL:0,DFS:0,JFL:0,JFS:0,JBB:0,JFB:0,JFW:0,JRL:0,JRP:0,
-JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,BTS:0
+JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,BTS:0,STG:0,KTG:0,ZTG:0,
+DEXA:0,GLB:0,JNL:0,MLK:0,PRC:0,TRX:0,ZAD:0,JOPA:0,AFRA:0,BREA:0,MLBA:0,TRGA:0,WRL:0,PRG:0,WFL:0,WHE:0,INC:0
 GLD:/home/gtmuser1/.fis-gtm/V5.4-002B_x86/g/mumps.gld,REG:DEFAULT,SET:205,KIL:0,GET:1,
 DTA:0,ORD:0,ZPR:0,QRY:0,LKS:0,LKF:0,CTN:411,DRD:9,DWT:15,NTW:2
 03,NTR:4,NBW:212,NBR:414,NR0:0,NR1:0,NR2:0,NR3:0,TTW:1,TTR:0,TRB:0,TBW:2,TBR:6,TR0:0,
@@ -307,7 +312,8 @@ TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0
 GLD:/tmp/tst/test.gld,REG:DEFAULT,SET:205,KIL:0,GET:1,DTA:0,ORD:0,ZPR:0,QRY:0,LKS:0,LKF:0,
 CTN:411,DRD:9,DWT:15,NTW:203,NTR:4,NBW:212,NBR:414,NR0:0,NR1:0,NR2:0,NR3:0,TTW:1,TTR:0,TRB:0,
 TBW:2,TBR:6,TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0,ZTR:0,DFL:0,DFS:0,JFL:0,JFS:0,JBB:0,JFB:0,JFW:0,
-JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,BTS:0
+JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,BTS:0,STG:0,
+KTG:0,ZTG:0,DEXA:0,GLB:0,JNL:0,MLK:0,PRC:0,TRX:0,ZAD:0,JOPA:0,AFRA:0,BREA:0,MLBA:0,TRGA:0,WRL:0,PRG:0,WFL:0,WHE:0,INC:0
 </pre>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;ZSHOW "G"</pre>
@@ -318,11 +324,15 @@ TBW:0,TBR:0,TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0
 GLD:/tmp/x1.gld,REG:REG1,SET:0,KIL:0,GET:0,DTA:0,ORD:0,ZPR:0,QRY:0,LKS:0,LKF:0,CTN:0,DRD:0,
 DWT:0,NTW:0,NTR:0,NBW:0,NBR:0,NR0:0,NR1:0,NR2:0,NR3:0,TTW:0,
 TTR:0,TRB:0,TBW:0,TBR:0,TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0,ZTR:0,DFL:0,DFS:0,JFL:0,JFS:0,JBB:0,
-JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,BTS:0
+JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,
+BTS:0,STG:0,KTG:0,ZTG:0,DEXA:0,GLB:0,JNL:0,MLK:0,PRC:0,TRX:0,ZAD:0,JOPA:0,AFRA:0,BREA:0,MLBA:0,TRGA:0,WRL:0,PRG:0,WFL:0,
+WHE:0,INC:0
 GLD:/tmp/x1.gld,REG:REG2,SET:0,KIL:0,GET:0,DTA:0,ORD:0,ZPR:0,QRY:0,LKS:0,LKF:0,CTN:0,DRD:0,
 DWT:0,NTW:0,NTR:0,NBW:0,NBR:0,NR0:0,NR1:0,NR2:0,NR3:0,TTW:0,
 TTR:0,TRB:0,TBW:0,TBR:0,TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0,ZTR:0,DFL:0,DFS:0,JFL:0,JFS:0,JBB:0,
-JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,BTS:0
+JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,
+BTS:0,STG:0,KTG:0,ZTG:0,DEXA:0,GLB:0,JNL:0,MLK:0,PRC:0,TRX:0,ZAD:0,JOPA:0,AFRA:0,BREA:0,MLBA:0,TRGA:0,WRL:0,PRG:0,WFL:0,
+WHE:0,INC:0
 </pre>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;ZSHOW "G":zgbl</pre>
@@ -330,15 +340,21 @@ JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQ
 <pre class="programlisting">zgbl("G",0)="GLD:*,REG:*,SET:0,KIL:0,GET:0,DTA:0,ORD:0,
 ZPR:0,QRY:0,LKS:0,LKF:0,CTN:0,DRD:0,DWT:0,NTW:0,NTR:0,NBW:0,NBR:0,NR0:0,NR1:0,NR2:0,NR3:0,TTW:0,
 TTR:0,TRB:0,TBW:0,TBR:0,TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0,ZTR:0,DFL:0,DFS:0,JFL:0,JFS:0,JBB:0,
-JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,BTS:0"
+JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,
+BTS:0,STG:0,KTG:0,ZTG:0,DEXA:0,GLB:0,JNL:0,MLK:0,PRC:0,TRX:0,ZAD:0,JOPA:0,AFRA:0,BREA:0,MLBA:0,TRGA:0,WRL:0,PRG:0,WFL:0,
+WHE:0,INC:0"
 zgbl("G",1)="GLD:/tmp/x1.gld,REG:REG1,SET:0,KIL:0,GET:0,DTA:0,ORD:0,ZPR:0,QRY:0,
 LKS:0,LKF:0,CTN:0,DRD:0,DWT:0,NTW:0,NTR:0,NBW:0,NBR:0,NR0:0,NR1:0,NR2:0,
 NR3:0,TTW:0,TTR:0,TRB:0,TBW:0,TBR:0,TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0,ZTR:0,DFL:0,DFS:0,JFL:0,
-JFS:0,JBB:0,JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,BTS:0"
+JFS:0,JBB:0,JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,
+WFR:0,BUS:0,BTS:0,STG:0,KTG:0,ZTG:0,DEXA:0,GLB:0,JNL:0,MLK:0,PRC:0,TRX:0,ZAD:0,JOPA:0,AFRA:0,BREA:0,MLBA:0,TRGA:0,WRL:0,
+PRG:0,WFL:0,WHE:0,INC:0"
 zgbl("G",2)="GLD:/tmp/x1.gld,REG:REG2,SET:0,KIL:0,GET:0,DTA:0,ORD:0,ZPR:0,QRY:0,LKS:0,
 LKF:0,CTN:0,DRD:0,DWT:0,NTW:0,NTR:0,NBW:0,NBR:0,NR0:0,NR1:0,NR2:0,
 NR3:0,TTW:0,TTR:0,TRB:0,TBW:0,TBR:0,TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0,ZTR:0,DFL:0,DFS:0,JFL:0,
-JFS:0,JBB:0,JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,BTS:0"
+JFS:0,JBB:0,JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,CAT:4,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,
+WFR:0,BUS:0,BTS:0,STG:0,KTG:0,ZTG:0,DEXA:0,GLB:0,JNL:0,MLK:0,PRC:0,TRX:0,ZAD:0,JOPA:0,AFRA:0,BREA:0,MLBA:0,TRGA:0,WRL:0,
+PRG:0,WFL:0,WHE:0,INC:0"
 </pre>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;LOCK ^FAIL:10
@@ -443,7 +459,7 @@ $ZYERROR=""</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zsh_destination_vars"></a>ZSHOW Destination Variables<a class="indexterm" name="idm45735651163120"></a>
+<a name="zsh_destination_vars"></a>ZSHOW Destination Variables<a class="indexterm" name="idm45283011406240"></a>
 </h3></div></div></div>
 <p>ZSHOW may specify an unsubscripted or subscripted global or local variable name (glvn) into which ZSHOW places its output. If the argument does not include a global or local variable name, ZSHOW directs its output to the current device. </p>
 <p>When ZSHOW directs its output to a variable, it adds two levels of descendants to that variable. The first level subscript contains a one-character string from the set of upper-case ZSHOW action codes, identifying the type of information. ZSHOW implicitly KILLs all descendants of the first level nodes. ZSHOW stores information elements at the second level using ascending integers, starting at 1. </p>
@@ -475,7 +491,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="use_of_zshow"></a>Use of ZSHOW<a class="indexterm" name="idm45735651103040"></a>
+<a name="use_of_zshow"></a>Use of ZSHOW<a class="indexterm" name="idm45283026918592"></a>
 </h3></div></div></div>
 <p>Use ZSHOW as</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">

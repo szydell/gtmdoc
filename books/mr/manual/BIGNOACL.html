@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="BFRQUALREQ.html" title="BFRQUALREQ ">
 <link rel="next" href="BINHDR.html" title="BINHDR ">
-<link rel="copyright" href="ln-idm45072165103264.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45268599753776.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>BIGNOACL</strong></span>,   Existing file found when BIGRECORD specified with UDF format but no GT.M ACE, perhaps lost during COPY</p>
 <p>Run Time Error: An existing file with an RMS record format of undefined (UDF) was opened by an OPEN command with a BIGRECORD parameter but no Access Control Entry containing information GT.M needs to access the file.  The ACE may have been lost when copying such a file with the OpenVMS DCL COPY command.</p>
 <p>Action: BIGRECORD format files should always be copied using the OpenVMS DCL BACKUP command which preserves the Access Control Entries on files. If the record format (VARIABLE or FIXED) and RECORDSIZE specified when creating the file are known, the ACE can be restored using the following OpenVMS DCL command: SET SECURITY &lt;filename.ext&gt; /ACL=(APPLICATION,SIZE=20,FLAGS=%X0A01,ACCESS=%X00F60001,DATA=%X424D5447,&lt;format&gt;,&lt;recordsize&gt;) Replacing "&lt;filename.ext&gt;" by the name of the file, "&lt;format&gt;" by "2" if the format is VARIABLE or "1" if FIXED, and "&lt;recordsize&gt;" by the RECORDSIZE originally specified.</p>
-<a class="indexterm" name="idm45072164312816"></a>
+<a class="indexterm" name="idm45268598955232"></a>
 </div>
 <div class="navfooter">
 <hr>

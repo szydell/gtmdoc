@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZCstatus</title>
+<title>$ZCMdline</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s26.html" title="$ZCOmpile">
-<link rel="next" href="ch08s28.html" title="$ZCLose">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="prev" href="ch08s26.html" title="$ZDAteform">
+<link rel="next" href="ch08s28.html" title="$ZCOmpile">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZCstatus</th></tr>
+<tr><th colspan="3" align="center">$ZCMdline</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s26.html">Prev</a> </td>
@@ -26,14 +26,41 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZCstatus</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZCMdline</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zcstatus"></a>$ZCstatus<a class="indexterm" name="idm45735649385504"></a>
+<a name="zcmdline"></a>$ZCMdline<a class="indexterm" name="idm45283007256432"></a>
 </h2></div></div></div>
-<p>$ZC[STATUS] holds the value of the status code for the last compilation performed by a ZCOMPILE, ZLINK or auto-ZLINK . One (1) indicates a clean compilation, a positive number greater than one is an error code you can turn into text with $ZMESSAGE(), and a negative number is a negated error code that indicates GT.M was not able to produce an object file. The error details appear in the compilation output, so $ZCSTATUS typically contains the code for ERRORSUMMARY. </p>
-<p>GT.M does not permit the SET command to modify $ZCSTATUS.</p>
+<p>$ZCM[DLINE] contains a string value specifying the "excess" portion of the command line that invoked the GT.M process. By "excess" is meant the portion of the command line <span>that is left after GT.M has done all of its command line processing.</span> For example, a command line mumps -direct extra1 extra2 causes GT.M to process the command line upto mumps -direct and place the "excess" of the command line, that is "extra1 extra2" in $ZCMDLINE. $ZCMDLINE gives the M routine access to the shell command line input.</p>
+<p>Note that the actual user input command line might have been transformed by the shell (for example, removing one level of quotes, filename, and wildcard substituion, and so on.), and it is this transformed command line that GT.M processes.</p>
+<p>Example:</p>
+<pre class="programlisting">$ cat &gt; test.m
+write " $ZCMDLINE=",$ZCMDLINE,!
+quit
+$ mumps -run test OTHER  information
+$ZCMDLINE=OTHER information
+$</pre>
+<p>This creates the program test.m, which writes the value of $ZCMDLINE. Note how the two spaces specified in OTHER information in the command line gets transformed to just one space in OTHER information in $ZCMDLINE due to the shell's pre-processing.</p>
+<p>Example:</p>
+<pre class="programlisting">$ cat foo.m
+foo     ; a routine to invoke an arbitrary entry with or without 
+ parameters
+   ;
+  set $etrap="" ; exit if the input isn't valid
+  if $length($zcmdline) do @$zcmdline quit
+  quit
+$ mumps -run foo 'BAR^FOOBAR("hello")'</pre>
+<p>In this example, GT.M processes the shell command line up to foo and puts the rest in $ZCMDLINE. This mechanism allows mumps -run 
+to invoke an arbitrary entryref with or without parameters. Note that this example encloses the command line argument with single quotes to prevent inappropriate expansion in Bourne-type shells. Always remember to use the escaping and quoting conventions of the shell and GT.M to prevent inappropriate expansion. </p>
+<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important: Important">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Important]" src="images/important.jpg"></td>
+<th align="left">Important</th>
+</tr>
+<tr><td align="left" valign="top"><p>Use the ^%XCMD utility to XECUTEs code from the shell command line and return any error status (truncated to a single byte on UNIX) that the code generates. <span>For more information, refer to <a class="xref" href="ch10s09.html#XCMD" title="%XCMD">&#8220;   
+      %XCMD&#8221;</a>. </span></p></td></tr>
+</table></div>
 </div>
 <div class="navfooter">
 <hr>
@@ -46,9 +73,9 @@
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZCOmpile </td>
+<td width="40%" align="left" valign="top">$ZDAteform </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZCLose</td>
+<td width="40%" align="right" valign="top"> $ZCOmpile</td>
 </tr>
 </table>
 </div>

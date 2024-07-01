@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZCOllate()</title>
+<title>$ZCOLlate()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s30.html" title="$ZCHar()">
 <link rel="next" href="ch07s32.html" title="$ZCOnvert()">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZCOllate()</th></tr>
+<tr><th colspan="3" align="center">$ZCOLlate()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s30.html">Prev</a> </td>
@@ -25,15 +25,15 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZCOllate()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZCOLlate()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zcollate"></a>$ZCOllate()<a class="indexterm" name="idm45735650180336"></a>
+<a name="zcollate"></a>$ZCOLlate()<a class="indexterm" name="idm45283008036176"></a>
 </h2></div></div></div>
 <p>Returns the transformed representation of the first argument glvn in a normalized form using the alternative transform specified by the second argument intexpr; the return can be used as an operand to the follows (]) or sorts-after (]]) operator such that, if both operands are in the normalized form, the result is independent of alternative collation. </p>
 <p>The format for the $ZCOLLATE() function is:</p>
-<pre class="programlisting">$ZCO[llate](glvn,intexpr[,{0|1}])</pre>
+<pre class="programlisting">$ZCOL[late](glvn,intexpr[,{0|1}])</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>The subscripted or unsubscripted global or local variable name specifies the key to transform.</p></li>
 <li class="listitem"><p>The integer expression specifies the ID of the alternative transform to use.</p></li>
@@ -43,7 +43,7 @@
 <p>Please see the section on $ZATRANSFORM() for a similar alternative.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zcollate"></a>Example of $ZCOllate()</h3></div></div></div>
+<a name="examples_of_zcollate"></a>Example of $ZCOLlate()</h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;write $zwrite($zcollate("A(""foo"")",0))
 "A"_$C(0,255)_"foo"_$C(0,0)

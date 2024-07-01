@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZCOmpile</title>
+<title>$ZDAteform</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s25.html" title="$ZCMdline">
-<link rel="next" href="ch08s27.html" title="$ZCstatus">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="prev" href="ch08s25.html" title="$ZCLose">
+<link rel="next" href="ch08s27.html" title="$ZCMdline">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZCOmpile</th></tr>
+<tr><th colspan="3" align="center">$ZDAteform</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s25.html">Prev</a> </td>
@@ -26,29 +26,22 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZCOmpile</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZDAteform</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zcompile_unix"></a>$ZCOmpile<a class="indexterm" name="idm45735649403744"></a>
+<a name="zdateform"></a>$ZDAteform<a class="indexterm" name="idm45283007264512"></a>
 </h2></div></div></div>
-<p>$ZCO[MPILE] contains a string value composed of one or more qualifiers that control the GT.M run-time compiler. ZCOMPILE, explicit ZLINKs and auto-ZLINKs use these qualifiers as defaults for any compilations they perform.</p>
-<p>$ZCOMPILE is a read-write ISV, that is, it can appear on the left side of the equal sign (=) in the argument to the SET command. A $ZCOMPILE value has the form of a list of M command qualifiers each separated by a space ( ).</p>
-<p>When the gtmcompile environment variable is defined, GT.M initializes $ZCOMPILE to the translation of $gtmcompile. Otherwise GT.M initializes $ZCOMPILE to null. Changes to the value of $ZCOMPILE during a GT.M invocation only last for the current invocation and do not change the value of the $gtmcompile environment variable.</p>
-<p>When $ZCOMPILE is null, GT.M uses the default M command qualifiers -IGNORE, -LABEL=LOWER, -NOLIST, and -OBJECT. <span>See <a class="xref" href="ch03.html" title="Chapter 3. Development Cycle">Chapter 3: &#8220;<i><span>Development</span> Cycle</i>&#8221;</a> for detailed descriptions of the M command qualifiers.</span></p>
+<p>$ZDA[TEFORM] contains an integer value, specifying the output year format of $ZDATE(). $ZDATEFORM can be modified using the SET command. GT.M initializes $ZDATEFORM to the translation of the <span>environment variable</span> gtm_zdate_form. If gtm_zdate_form is not defined, GT.M initializes $ZDATEFORM to zero (0). </p>
+<p>See <a class="xref" href="ch07s34.html" title="$ZDate()">&#8220;$ZDate()&#8221;</a> for the usage of $ZDATEFORM. $ZDATEFORM also defines the behavior of some date and time utility routines; refer "M utility Routines".</p>
 <p>Example:</p>
-<pre class="programlisting">$ export gtmcompile="-LIST -LENGTH=56 -SPACE=2"
-$ gtm
-GTM&gt;WRITE $ZCOMPILE
--LIST -LENGTH=56 -SPACE=2
-GTM&gt;SET $ZCOMPILE="-LIST -NOIGNORE"
-GTM&gt;WRITE $ZCOMPILE
--LIST -NOIGNORE
-GTM&gt;ZLINK "A.m"
-GTM&gt;HALT
-$ echo $gtmcompile
--LIST -LENGTH=56 -SPACE=2</pre>
-<p>This example uses the environment variable gtmcompile to set up $ZCOMPILE. Then it modifies $ZCOMPILE with the SET command. The ZLINK argument specifies a file with a .m extension (type), which forces a compile. The compile produces a listing for routine A.m and does not produce an object module if A.m contains compilation errors. After GT.M terminates, the shell command echo $gtmcompile demonstrates that the SET command did not change the environment variable.</p>
+<pre class="programlisting">GTM&gt;WRITE $ZDATEFROM
+0
+GTM&gt;WRITE $ZDATE($H)
+11/15/02
+GTM&gt;SET $ZDATEFORM=1
+GTM&gt;WRITE $ZDATE($H)
+11/15/2002</pre>
 </div>
 <div class="navfooter">
 <hr>
@@ -61,9 +54,9 @@ $ echo $gtmcompile
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZCMdline </td>
+<td width="40%" align="left" valign="top">$ZCLose </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZCstatus</td>
+<td width="40%" align="right" valign="top"> $ZCMdline</td>
 </tr>
 </table>
 </div>

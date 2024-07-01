@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s35.html" title="$ZExtract()">
 <link rel="next" href="ch07s37.html" title="$ZGetjpi()">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,20 +30,20 @@
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="zfind"></a>$ZFind()</h2></div></div></div>
-<a class="indexterm" name="idm45735650081744"></a><p>Returns an integer byte position that locates the occurrence of a byte sequence within a sequence of octets(8-bit bytes).</p>
+<a class="indexterm" name="idm45283007898000"></a><p>Returns an integer byte position that locates the occurrence of a byte sequence within a sequence of octets(8-bit bytes).</p>
 <p>The format of the $ZFIND function is:</p>
 <pre class="programlisting">$ZF[IND](expr1,expr2[,intexpr])</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>The first expression specifies the sequence of octets (8-bit bytes) in which $ZFIND() searches for the byte sequence.</p></li>
 <li class="listitem"><p>The second expression specifies the byte sequence for which $ZFIND() searches.</p></li>
 <li class="listitem"><p>The optional integer expression identifies the starting byte position for the $ZFIND() search. If this argument is missing, zero (0), or negative, $ZFIND() begins to search from the first position of the sequence of octets (8-bite bytes).</p></li>
-<li class="listitem"><p>If $ZFIND() locates the byte sequence, it returns the position after its last byte. If the end of the byte sequence coincides with the end of the the sequence of octets (expr1), it returns an integer equal to the byte length of the expr1 plus one ($L(expr1)+1).</p></li>
+<li class="listitem"><p>If $ZFIND() locates the byte sequence, it returns the position after its last byte. If the end of the byte sequence coincides with the end of the sequence of octets (expr1), it returns an integer equal to the byte length of the expr1 plus one ($L(expr1)+1).</p></li>
 <li class="listitem"><p>If $ZFIND() does not locate the byte sequence, it returns zero (0).</p></li>
 <li class="listitem"><p>$ZFIND() provides a tool to locate byte sequences. The ( [ ) operator and the two-argument $ZLENGTH() are other tools that provide related functionality.</p></li>
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zfind"></a>Examples<a class="indexterm" name="idm45735650015968"></a>
+<a name="examples_of_zfind"></a>Examples<a class="indexterm" name="idm45283007867104"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;write $zfind("<span class="symbol">&#20027;&#35201;&#38632;</span>",$zchar(187))

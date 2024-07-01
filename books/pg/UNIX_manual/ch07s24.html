@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s23.html" title="$TRanslate()">
 <link rel="next" href="ch07s25.html" title="$ZAHandle()">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="functions_view"></a>$View()<a class="indexterm" name="idm45735650432336"></a>
+<a name="functions_view"></a>$View()<a class="indexterm" name="idm45283008263424"></a>
 </h2></div></div></div>
 <p>Returns information about an environmental factor selected by the arguments. In GT.M, the first argument contains a keyword identifying the environmental factor and, where appropriate, subsequent arguments select among multiple possible occurrences of that factor.</p>
 <p>The format for the $VIEW() function is:</p>
@@ -40,7 +40,7 @@
 </ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="argument__keys_of_view"></a>Argument Keywords of $VIEW()<a class="indexterm" name="idm45735650422416"></a>
+<a name="argument__keys_of_view"></a>Argument Keywords of $VIEW()<a class="indexterm" name="idm45283008270016"></a>
 </h3></div></div></div>
 <p>$VIEW() provides a means to access GT.M environmental information. When GT.M permits modification of the factors accessible with $VIEW(), the VIEW command generally provides the means for effecting the change.</p>
 <div class="informaltable">
@@ -257,12 +257,17 @@
 <p>"JNLPOOL"</p>
 </td>
 <td>
-<p>none</p>
+<p>replication instance file</p>
 </td>
 <td>
 <p>
-Returns the replication instance file name for the current Journal Pool and an empty string when there is no Journal Pool. Note that the
-current Journal Pool may not be associated with the last global accessed by an extended reference.
+Returns the replication instance file name for the current Journal Pool and an empty string when there is no Journal Pool. Specifying a second expression
+for $VIEW("JNLPOOL") provides a means of iterating through active Journal Pools. If the second expression is an empty string, the function returns the 
+replication instance file name associated with the instance first attached by the process or. if the process has not previously engaged with any instance,
+the string "*". If the file name specified in the second expression does not match the replication instance file name for any of the active Journal Pools
+the function returns the string "*". Otherwise, the function returns the file name of the Journal Pool attached after the Journal Pool with the specified
+file name. Note the two argument form of $VIEW("JNLPOOL") does not change the current Replication Instance. Note also that the current Journal Pool may
+not be associated with the last global accessed by an extended reference.
 </p>
 </td>
 </tr>
@@ -443,7 +448,7 @@ current Journal Pool may not be associated with the last global accessed by an e
 <p>none</p>
 </td>
 <td>
-<p>Returns a string with three comma separated values: Number of bytes currently allocated as process working storage: GT.M manages this space as what is commonly called a heap, and uses the term stringpool to refer to it. The GT.M garbage collector reclaims unused space from the stringpool from time to time, and GT.M automatically expands the stringpool as needed by the application program; Number of bytes currently used by the process; Number of bytes reserved: The reserved space is used to reduce the active memory usage, for example, when a process uses a large amount of memory then subsequently uses a significantly reduced amount. </p>
+<p>Returns a string with two comma separated values: Number of bytes currently allocated as process working storage: GT.M manages this space as what is commonly called a heap, and uses the term stringpool to refer to it. The GT.M garbage collector reclaims unused space from the stringpool from time to time, and GT.M automatically expands the stringpool as needed by the application program; Number of bytes currently used by the process. </p>
 </td>
 </tr>
 <tr>
@@ -536,7 +541,7 @@ Integer value showing whether four digit year code is active for $ZDATE(); GT.M 
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_view_g"></a>Examples<span> of $VIEW()</span><a class="indexterm" name="idm45735650440016"></a>
+<a name="examples_of_view_g"></a>Examples<span> of $VIEW()</span><a class="indexterm" name="idm45283008119856"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;Set a=1,*b(1)=a
@@ -559,7 +564,9 @@ SET:203,KIL:12,GET:203,DTA:2,ORD:23,ZPR:21,QRY:0,LKS:0,LKF:0,CTN:44,DRD:103,DWT:
 NTW:24,NTR:55,NBW:27,NBR:138,NR0:0,NR1:0,NR2:0,NR3:0,TTW:17,TTR:5,TRB:0,TBW:32,
 TBR:80,TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0,ZTR:7,DFL:9,
 DFS:0,JFL:0,JFS:0,JBB:0,JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,
-CAT:35,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:13
+CAT:35,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:13,WFR:0,BUS:0,BTS:0,STG:0,
+KTG:0,ZTG:0,DEXA:0,GLB:0,JNL:0,MLK:0,PRC:0,TRX:0,ZAD:0,JOPA:0,AFRA:0,BREA:0,MLBA:0,
+TRGA:0,WRL:0,PRG:0,WFL:0,WHE:0,INC:0
 GTM&gt;</pre>
 <p>These are statistics associated with the DEFAULT region. Refer to <a class="xref" href="ch06s42.html#zshow_info_codes" title="ZSHOW Information Codes">&#8220;ZSHOW Information Codes&#8221;</a> for information on the parameters.</p>
 <p>Example:</p>

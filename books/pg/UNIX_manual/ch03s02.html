@@ -8,7 +8,7 @@
 <link rel="up" href="ch03.html" title="Chapter 3. Development Cycle">
 <link rel="prev" href="ch03s01.html" title="Overview of the Program Development Cycle">
 <link rel="next" href="ch03s03.html" title="Preparing the Database">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="def_env_var"></a>Defining Environment Variables<a class="indexterm" name="idm45735653542176"></a>
+<a name="def_env_var"></a>Defining Environment Variables<a class="indexterm" name="idm45283014618224"></a>
 </h2></div></div></div>
 <p>GT.M requires the definition of certain environment variables as part of setting up the environment. These environment variables are used for the following purposes:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
@@ -52,7 +52,7 @@ $ export env_variable</pre>
 <p>The following environment variables hold information that determines some details of GT.M run-time operation, over which the user has control.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gtm_dist"></a>gtm_dist<a class="indexterm" name="idm45735653580384"></a>
+<a name="gtm_dist"></a>gtm_dist<a class="indexterm" name="idm45283014558288"></a>
 </h3></div></div></div>
 <p>gtm_dist is used to establish the location of the installed GT.M program and support files.</p>
 <p>The syntax for gtm_dist is as follows:</p>
@@ -77,7 +77,7 @@ $ export PATH</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gtmgbldir"></a>gtmgbldir<a class="indexterm" name="idm45735653545392"></a>
+<a name="gtmgbldir"></a>gtmgbldir<a class="indexterm" name="idm45283014267424"></a>
 </h3></div></div></div>
 <p>gtmgbldir defines the path to a Global Directory. A Global Directory maps global variables to physical database files, and is required to locate M global variables. gtmgbldir provides the initial value for $ZGBLDIR, the intrinsic special variable that connects the GT.M run-time system to the Global Directory. It also connects the Global Directory to the utilities requiring one.</p>
 <p>If you maintain multiple global directories, define gtmgbldir to the Global Directory you currently want to use.</p>
@@ -90,7 +90,7 @@ $ export gtmgbldir</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gtm_principal"></a>gtm_principal<a class="indexterm" name="idm45735654240080"></a>
+<a name="gtm_principal"></a>gtm_principal<a class="indexterm" name="idm45283014295792"></a>
 </h3></div></div></div>
 <p>The gtm_principal environment variable specifies the value for $principal, which designates the absolute pathname of the principal $IO device. This is an MDC Type A enhancement to standard M.</p>
 <p>The following is an example of gtm_principal definition:</p>
@@ -100,7 +100,7 @@ $ export gtm_principal</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="gtmroutines"></a>gtmroutines<a class="indexterm" name="idm45735653550544"></a>
+<a name="gtmroutines"></a>gtmroutines<a class="indexterm" name="idm45283014354400"></a>
 </h3></div></div></div>
 <p>The gtmroutines environment variable specifies a search list of possible locations for M routines. This value is used to initialize $ZROUTINES, (the intrinsic special variable that enables GT.M to find the routine (program) you want to run). gtmroutines is required for ZLINKing. gtmroutines is particularly helpful in calling percent utilities and the Global Directory Editor (GDE), which are in gtm_dist.</p>
 <pre class="programlisting">$ gtmroutines="directories in search list"</pre>
@@ -113,7 +113,7 @@ $ export gtmroutines</pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Editor"></a>Editor<a class="indexterm" name="idm45735653549296"></a>
+<a name="Editor"></a>Editor<a class="indexterm" name="idm45283014043904"></a>
 </h3></div></div></div>
 <p>The EDITOR environment variable specifies the UNIX text editor used when editing a routine either from the shell or with ZEDIT. Since this is a standard part of establishing your UNIX environment, you will probably only need to define this when you want to use a different editor than the one defined in your shell startup file.</p>
 <p>Example:</p>

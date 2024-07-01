@@ -8,7 +8,7 @@
 <link rel="up" href="quick_message_reference.html" title="Appendix A. Error Message Quick Reference">
 <link rel="prev" href="apas01.html" title="Standard Error Codes">
 <link rel="next" href="apb.html" title="Appendix B. Reference Implementation Error messages">
-<link rel="copyright" href="ln-idm45072165103264.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45268599753776.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="idm45072157908640"></a>ZMESSAGE Codes</h2></div></div></div>
+<a name="idm45268592540768"></a>ZMESSAGE Codes</h2></div></div></div>
 <p>The following table lists ZMESSAGE numbers of all messages documented in this manual.</p>
 <div class="informaltable"><table border="1">
 <colgroup>
@@ -3307,11 +3307,11 @@
 </tr>
 <tr>
 <td><p>150384427</p></td>
-<td><p><a class="link" href="MLKHASHRESIZE.html" title="MLKHASHRESIZE ">MLKHASHRESIZE</a>, LOCK hash table increased in size from aaaa to bbbb and placed in shared memory (id = mmmm)</p></td>
+<td><p><a class="link" href="MLKHASHRESIZE.html" title="MLKHASHRESIZE ">MLKHASHRESIZE</a>, LOCK hash table for region rrrr (dddd) increased in size from aaaa to bbbb and placed in shared memory (id = mmmm)</p></td>
 </tr>
 <tr>
 <td><p>150384432</p></td>
-<td><p><a class="link" href="MLKHASHRESIZEFAIL.html" title="MLKHASHRESIZEFAIL ">MLKHASHRESIZEFAIL</a>, Failed to increase LOCK hash table size from aaaa to bbbb. Will retry with larger size.</p></td>
+<td><p><a class="link" href="MLKHASHRESIZEFAIL.html" title="MLKHASHRESIZEFAIL ">MLKHASHRESIZEFAIL</a>, Failed to increase LOCK hash table for region rrrr (dddd) size from aaaa to bbbb. Will retry with larger size.</p></td>
 </tr>
 <tr>
 <td><p>150384362</p></td>
@@ -3323,7 +3323,7 @@
 </tr>
 <tr>
 <td><p>150384555</p></td>
-<td><p><a class="link" href="MLKREHASH.html" title="MLKREHASH ">MLKREHASH</a>, LOCK hash table rebuilt for region rrrr (seed = ssss)</p></td>
+<td><p><a class="link" href="MLKREHASH.html" title="MLKREHASH ">MLKREHASH</a>, LOCK hash table rebuilt for region rrrr (dddd) (seed = ssss)</p></td>
 </tr>
 <tr>
 <td><p>150381320</p></td>
@@ -5546,8 +5546,8 @@
 <td><p><a class="link" href="TPNOSUPPORT.html" title="TPNOSUPPORT ">TPNOSUPPORT</a>, Operation cannot be performed while inside of a TP transaction</p></td>
 </tr>
 <tr>
-<td><p>150378867</p></td>
-<td><p><a class="link" href="TPNOTACID.html" title="TPNOTACID ">TPNOTACID</a>, tttt at xxxx in a final TP retry violates ACID properties of a TRANSACTION; indefinite RESTARTs may occur</p></td>
+<td><p>150378864</p></td>
+<td><p><a class="link" href="TPNOTACID.html" title="TPNOTACID ">TPNOTACID</a>, tttt at xxxx in a final TP retry violates ACID properties of a TRANSACTION and could exceed ssss milliseconds and rrrr RESTARTs have occurred</p></td>
 </tr>
 <tr>
 <td><p>150376082</p></td>

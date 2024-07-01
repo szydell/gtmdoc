@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="TRIGTCOMMIT.html" title="TRIGTCOMMIT ">
 <link rel="next" href="TRIGUPBADLABEL.html" title="TRIGUPBADLABEL ">
-<link rel="copyright" href="ln-idm45072165103264.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45268599753776.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>TRIGTLVLCHNG</strong></span>,  Detected a net transaction level ($TLEVEL) change during trigger tttt. Transaction level must be the same at exit as when the trigger started</p>
 <p>Trigger/Run Time Error: While the trigger logic can use balanced sub-transactions, it cannot cause a net change in $TLEVEL.</p>
 <p>Action: Review the transaction management (TSTART, TCOMMIT and TROLLBACK) within trigger logic to ensure that it commits or rolls back any transactions it starts and does not attempt to commit any transaction started prior to, or by, the trigger update. You can use TROLLBACK within trigger logic to block the current transaction, possibly to write error context information. Nonetheless if you use such a TROLLBACK, GT.M subsequently signals this error when you leave the trigger context in order to notify the process that the original triggering update has been discarded.</p>
-<a class="indexterm" name="idm45072158744576"></a><a class="indexterm" name="idm45072158743280"></a>
+<a class="indexterm" name="idm45268593391344"></a><a class="indexterm" name="idm45268593390384"></a>
 </div>
 <div class="navfooter">
 <hr>

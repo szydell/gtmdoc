@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZDAteform</title>
+<title>$ZCstatus</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
-<link rel="prev" href="ch08s28.html" title="$ZCLose">
+<link rel="prev" href="ch08s28.html" title="$ZCOmpile">
 <link rel="next" href="ch08s30.html" title="$ZDirectory">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZDAteform</th></tr>
+<tr><th colspan="3" align="center">$ZCstatus</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch08s28.html">Prev</a> </td>
@@ -26,22 +26,14 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZDAteform</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch08.html"><span>Intrinsic Special Variables</span></a></span> &gt; <span class="breadcrumb-node">$ZCstatus</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zdateform"></a>$ZDAteform<a class="indexterm" name="idm45735649449616"></a>
+<a name="zcstatus"></a>$ZCstatus<a class="indexterm" name="idm45283007257264"></a>
 </h2></div></div></div>
-<p>$ZDA[TEFORM] contains an integer value, specifying the output year format of $ZDATE(). $ZDATEFORM can be modified using the SET command. GT.M initializes $ZDATEFORM to the translation of the <span>environment variable</span> gtm_zdate_form. If gtm_zdate_form is not defined, GT.M initializes $ZDATEFORM to zero (0). </p>
-<p>See <a class="xref" href="ch07s34.html" title="$ZDate()">&#8220;$ZDate()&#8221;</a> for the usage of $ZDATEFORM. $ZDATEFORM also defines the behavior of some date and time utility routines; refer "M utility Routines".</p>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;WRITE $ZDATEFROM
-0
-GTM&gt;WRITE $ZDATE($H)
-11/15/02
-GTM&gt;SET $ZDATEFORM=1
-GTM&gt;WRITE $ZDATE($H)
-11/15/2002</pre>
+<p>$ZC[STATUS] holds the value of the status code for the last compilation performed by a ZCOMPILE, ZLINK or auto-ZLINK . One (1) indicates a clean compilation, a positive number greater than one is an error code you can turn into text with $ZMESSAGE(), and a negative number is a negated error code that indicates GT.M was not able to produce an object file. The error details appear in the compilation output, so $ZCSTATUS typically contains the code for ERRORSUMMARY. </p>
+<p>GT.M does not permit the SET command to modify $ZCSTATUS.</p>
 </div>
 <div class="navfooter">
 <hr>
@@ -54,7 +46,7 @@ GTM&gt;WRITE $ZDATE($H)
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZCLose </td>
+<td width="40%" align="left" valign="top">$ZCOmpile </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
 <td width="40%" align="right" valign="top"> $ZDirectory</td>
 </tr>

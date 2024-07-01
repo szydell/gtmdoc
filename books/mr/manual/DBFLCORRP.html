@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="DBFILOPERR.html" title="DBFILOPERR ">
 <link rel="next" href="DBFREEZEOFF.html" title="DBFREEZEOFF ">
-<link rel="copyright" href="ln-idm45072165103264.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45268599753776.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>DBFLCORRP</strong></span>,  xxxx Header indicates database file is corrupt</p>
 <p>Run Time/MUPIP Error: This indicates that a database operation tried to activate database file xxxx, which was previously marked as damaged.</p>
 <p>Action: If ROLLBACK (either -NOONLINE or -ONLINE) terminates abnormally (say because of a kill -9), it leaves the database in a potentially inconsistent state indicated by the FILE corrupt field in the database file header. When an ROLLBACK terminates leaving this field set, all other processes receive DBFLCORRP errors any time they attempt to interact with the database. The best way to clear DBFLCORRP is by running another ROLLBACK. MUPIP SET -FILE -PARTIAL_RECOV_BYPASS and DSE CHANGE -FILE -CORRUPT=FALSE -NOCRIT can also clear this condition but these commands do not ensure that the database has consistent state so you should always run MUPIP INTEG after executing these commands.</p>
-<a class="indexterm" name="idm45072163601248"></a><a class="indexterm" name="idm45072163600272"></a>
+<a class="indexterm" name="idm45268598246304"></a><a class="indexterm" name="idm45268598245328"></a>
 </div>
 <div class="navfooter">
 <hr>

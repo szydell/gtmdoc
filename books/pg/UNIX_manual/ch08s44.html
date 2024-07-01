@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s43.html" title="$ZMALLoclim">
 <link rel="next" href="ch08s45.html" title="$ZMOde">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,9 +30,9 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zmaxtptime"></a>$ZMAXTPTIme<a class="indexterm" name="idm45735649292464"></a>
+<a name="zmaxtptime"></a>$ZMAXTPTIme<a class="indexterm" name="idm45283007145520"></a>
 </h2></div></div></div>
-<p>$ZMAXTPTI[ME] contains an integer value indicating the time duration GT.M should wait for the completion of all activities fenced by the current transaction's outermost TSTART/TCOMMIT pair.</p>
+<p>$ZMAXTPTI[ME] contains a value between zero (0) and 60 in seconds with millisecond precision indicating the time duration GT.M should wait for the completion of all activities fenced by the current transaction's outermost TSTART/TCOMMIT pair. Values outside the accepted range leave the current value unchanged.</p>
 <p>$ZMAXTPTIME can be SET but cannot be NEWed.</p>
 <p>$ZMAXTPTIME takes its value from the environment variable gtm_zmaxtptime. If gtm_zmaxtptime is not defined, the initial value of $ZMAXTPTIME is zero (0) seconds which indicates "no timeout" (unlimited time). The value of $ZMAXTPTIME when a transaction's outermost TSTART operation executes determines the timeout setting for that transaction.</p>
 <p>When a $ZMAXTPTIME expires, GT.M executes the $ETRAP/$ZTRAP exception handler currently in effect.</p>

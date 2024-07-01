@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s54.html" title="$ZRELdate">
 <link rel="next" href="ch08s56.html" title="$ZSOurce">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,7 +30,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zroutines"></a>$ZROutines<a class="indexterm" name="idm45735649275472"></a>
+<a name="zroutines"></a>$ZROutines<a class="indexterm" name="idm45283007083424"></a>
 </h2></div></div></div>
 <p>$ZRO[UTINES] contains a string value specifying a directory or list of directories containing object files. Each object directory may also have an associated directory, or list of directories, containing the corresponding source files. These directory lists are used by certain GT.M functions, primarily auto-ZLINK, to locate object and source files. The order in which directories appear in a given list determines the order in which they are searched for the appropriate item.</p>
 <p>Searches that use $ZROUTINES treat files as either object or source files. GT.M treats files with an extension of .o as object files and files with an extension of .m as source files.</p>
@@ -44,14 +44,14 @@
 <p></p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="establishing_the_value_from_gtm_routine"></a>Establishing the Value from <span>$gtmroutines</span><a class="indexterm" name="idm45735649188608"></a>
+<a name="establishing_the_value_from_gtm_routine"></a>Establishing the Value from <span>$gtmroutines</span><a class="indexterm" name="idm45283007042224"></a>
 </h3></div></div></div>
 <p>When the environment variable gtmroutines is defined, GT.M initializes $ZROUTINES to the value of gtmroutines. Otherwise, GT.M initializes $ZROUTINES to ".". When $ZROUTINES is ".", GT.M attempts to locate all source and object files in the current working directory. $ZROUTINES="" is equivalent to $ZROUTINES=".".</p>
 <p>Commands or functions such as DO, GOTO, ZGOTO, ZBREAK, ZPRINT, and $TEXT may auto-ZLINK and thereby indirectly use $ZROUTINES. If their argument does not specify a directory, ZEDIT and explicit ZLINK use $ZROUTINES. ZPRINT and $TEXT use $ZROUTINES to locate a source file if GT.M cannot find the source file pointed to by the object file. <span>For more information on ZLINK and auto-ZLINK, see the <a class="xref" href="ch03.html" title="Chapter 3. Development Cycle">&#8220;<i><span>Development</span> Cycle</i>&#8221;</a> and <a class="xref" href="ch06.html" title="Chapter 6. Commands">&#8220;<i>Commands</i>&#8221;</a> chapters.</span></p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="setting_a_value"></a>Setting a Value for $ZROutines<a class="indexterm" name="idm45735649226976"></a>
+<a name="setting_a_value"></a>Setting a Value for $ZROutines<a class="indexterm" name="idm45283007041056"></a>
 </h3></div></div></div>
 <p>$ZRO[UTINES] is a read-write Intrinsic Special Variable, so M can also SET the value.</p>
 <p>By default, each directory entry in $ZROUTINES is assumed to contain both object and source files. However, each object directory may have an associated directory or list of directories to search for the corresponding source files. This is done by specifying the source directory list, in parentheses, following the object directory specification. </p>
@@ -62,7 +62,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zro_examples"></a>$ZROutines Examples<a class="indexterm" name="idm45735649223520"></a>
+<a name="zro_examples"></a>$ZROutines Examples<a class="indexterm" name="idm45283007075136"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;s $zroutines=".(../src) $gtm_dist"</pre>
@@ -96,7 +96,7 @@ $ echo $gtmroutines
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zroutines_search_types"></a>$ZROutines Search Types<a class="indexterm" name="idm45735649158496"></a>
+<a name="zroutines_search_types"></a>$ZROutines Search Types<a class="indexterm" name="idm45283007011440"></a>
 </h3></div></div></div>
 <p>GT.M uses $ZRO[UTINES] to perform three types of searches:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
@@ -246,7 +246,7 @@ SPECIFIED</p></div>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zroutine_search_examples"></a>$ZROutines Search Examples<a class="indexterm" name="idm45735649122160"></a>
+<a name="zroutine_search_examples"></a>$ZROutines Search Examples<a class="indexterm" name="idm45283006977952"></a>
 </h3></div></div></div>
 <p>This section describes a model for understanding $ZROUTINES operations and the illustrating examples, which may assist you if you wish to examine the topic closely.</p>
 <p>You may think of $ZROUTINES as supplying a two dimensional matrix of places to look for files. The matrix has one or more rows. The first row in the matrix contains places to look for object and the second and following rows contain places to look for source. Each column represents the set of places that contain information related to the object modules in the first row of the column.</p>
@@ -329,7 +329,7 @@ SPECIFIED</p></div>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="shared_lib_file_spec_in_zroutines"></a>Shared Library File Specification in $ZROUTINES<a class="indexterm" name="idm45735649140080"></a>
+<a name="shared_lib_file_spec_in_zroutines"></a>Shared Library File Specification in $ZROUTINES<a class="indexterm" name="idm45283006987648"></a>
 </h3></div></div></div>
 <p>The $ZROUTINES ISV allows individual UNIX shared library file names to be specified in the search path. During a search for auto-ZLINK, when a shared library is encountered, it is probed for a given routine and, if found, that routine is linked/loaded into the image. During an explicit ZLINK, all shared libraries in $ZROUTINES are ignored and are not searched for a given routine.</p>
 <p>$ZROUTINES syntax contains a file-specification indicating shared library file path. GT.M does not require any designated extension for the shared library component of $ZROUTINES. Any file specification that does not name a directory is treated as shared library. However, it is recommended that the extension commonly used on a given platform for shared library files be given to any GT.M shared libraries. <span>See <a class="xref" href="ch08s55.html#linking_shared_images" title="Linking GT.M Shared Images">&#8220;Link<span>ing GT.M</span> Shared Images&#8221;</a>. </span>A shared library component cannot specify source directories. GT.M reports an error at an attempt to associate any source directory with a shared library in $ZROUTINES.</p>
@@ -351,7 +351,7 @@ GTM&gt;W $TEXT(+0^foo);prints foo</pre>
 <p>Note that ZPRINT reports an error, as foo.m does not match the routine already linked into image. Also note that, to recompile and re-link the ZEDITed foo.m, its source directory needs to be attached to the object directory [./obj] in $ZROUTINES. The example assumes the shared library (libshare.so) has been built using shell commands. <span>For the procedure to build a shared library from a list of GT.M generated object (.o) files, see <a class="xref" href="ch08s55.html#linking_shared_images" title="Linking GT.M Shared Images">&#8220;Link<span>ing GT.M</span> Shared Images&#8221;</a>.</span></p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="linking_shared_images"></a>Link<span>ing GT.M</span> Shared Images<a class="indexterm" name="idm45735649063664"></a>
+<a name="linking_shared_images"></a>Link<span>ing GT.M</span> Shared Images<a class="indexterm" name="idm45283006917920"></a>
 </h4></div></div></div>
 <p>Following are the steps (UNIX system commands, and GT.M commands) that need to be taken to use GT.M shared image linking with $ZROUTINES.</p>
 <div class="sect4">
@@ -362,7 +362,7 @@ GTM&gt;W $TEXT(+0^foo);prints foo</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="create_shrd_lib_from_obj_files"></a>Create <span>a shared library from object (.o) files</span><a class="indexterm" name="idm45735649062992"></a>
+<a name="create_shrd_lib_from_obj_files"></a>Create <span>a shared library from object (.o) files</span><a class="indexterm" name="idm45283006917248"></a>
 </h5></div></div></div>
 <p>To create a shared library, use the following syntax:</p>
 <pre class="programlisting">ld -brtl -G -bexpfull -bnoentry -b64 -o libshr.so file1.o file2.o (on AIX)
@@ -393,7 +393,7 @@ ld -shared -o libshr.so file1.o file2.o (on Linux)
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="establish_zro_from_gtm_routines"></a>Establish $ZROUTINES<span> from gtmroutines</span><a class="indexterm" name="idm45735649154352"></a>
+<a name="establish_zro_from_gtm_routines"></a>Establish $ZROUTINES<span> from gtmroutines</span><a class="indexterm" name="idm45283006970896"></a>
 </h5></div></div></div>
 <p>When the environment variable gtmroutines is defined, GT.M initializes $ZROUTINES to the value of gtmroutines. The $ZROUTINES ISV can also be modified using SET command. </p>
 <p>Example:</p>

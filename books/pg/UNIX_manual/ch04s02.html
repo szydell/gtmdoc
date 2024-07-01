@@ -8,7 +8,7 @@
 <link rel="up" href="ch04.html" title="Chapter 4. Operating and Debugging in Direct Mode">
 <link rel="prev" href="ch04s01.html" title="Operating in Direct Mode">
 <link rel="next" href="ch04s03.html" title="Summary of GT.M Debugging Tools">
-<link rel="copyright" href="ln-idm45735654484560.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -148,7 +148,7 @@ name="Revere, Paul"</pre>
 <div class="titlepage"><div><div><h3 class="title">
 <a name="Correct_Errors"></a>Correcting Errors</h3></div></div></div>
 <p>Use the ZBREAK command to establish a temporary breakpoint and specify an action. ZBREAK sets or clears routine-transparent breakpoints during debugging. This command simplifies debugging by interrupting execution at a specific point to examine variables, execute commands, or to start using ZSTEP to execute the routine line by line.</p>
-<a class="indexterm" name="idm45735653147392"></a><p>GT.M suspends execution during execution when the entry reference specified by ZBREAK is encountered. If the ZBREAK does not specify an expression "action", the process uses the default, BREAK, and puts GT.M into Direct Mode. If the ZBREAK does specify an expression "action", the process XECUTEs the value of "action", and does not enter Direct Mode unless the action includes a BREAK. The action serves as a "trace-point". The trace-point is silent unless the action specifies terminal output.</p>
+<a class="indexterm" name="idm45283029251952"></a><p>GT.M suspends execution during execution when the entry reference specified by ZBREAK is encountered. If the ZBREAK does not specify an expression "action", the process uses the default, BREAK, and puts GT.M into Direct Mode. If the ZBREAK does specify an expression "action", the process XECUTEs the value of "action", and does not enter Direct Mode unless the action includes a BREAK. The action serves as a "trace-point". The trace-point is silent unless the action specifies terminal output.</p>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;ZBREAK name+3^dmex:"set bame=name"</pre>
 <p>This uses a ZBREAK with an action that SETs the variable bame equal to name.</p>
@@ -347,7 +347,9 @@ GLD:*,REG:*,SET:0,KIL:0,GET:0,DTA:0,ORD:0,ZPR:0,QRY:0,LKS:0,LKF:0,CTN:0,DRD:0
 DWT:0,NTW:0,NTR:0,NBW:0,NBR:0,NR0:0,NR1:0,NR2:0,NR3:0,TTW:0,TTR:0,TRB:0,TBW:0,
 TBR:0,TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0,ZTR:0,DFL:0,
 DFS:0,JFL:0,JFS:0,JBB:0,JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,
-CAT:0,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0
+CAT:0,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0,WFR:0,BUS:0,BTS:0,STG:0,
+KTG:0,ZTG:0,DEXA:0,GLB:0,JNL:0,MLK:0,PRC:0,TRX:0,ZAD:0,JOPA:0,AFRA:0,BREA:0,
+MLBA:0,TRGA:0,WRL:0,PRG:0,WFL:0,WHE:0,INC:0
 name+5^dmex    ($ZTRAP)
     (Direct mode)
 beg+1^dmex:51a6a6c4739b004094c4545246ce4d68
