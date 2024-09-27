@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="NCTCOLLDIFF.html" title="NCTCOLLDIFF ">
 <link rel="next" href="NEEDTRIGUPGRD.html" title="NEEDTRIGUPGRD ">
-<link rel="copyright" href="ln-idm45268599753776.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45987251743248.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>NCTCOLLSPGBL</strong></span>,  Database region rrrr contains portion of spanning global ^gggg and so cannot support non-zero numeric collation type</p>
 <p>Run Time Error: This indicates that region rrrr contains parts of a global gggg that spans multiple regions according to the current global directory but the directory tree in rrrr indicates gggg has a non-zero numeric collation type.</p>
 <p>Action: Spanning globals only support a value of zero for numeric collation (i.e. numbers collate as numbers, not as strings). Access region rrrr using a temporary global directory that maps all names (including gggg) to rrrr, extract the gggg global, KILL it, use $$set^%^GBLDEF to fix the numeric collation to 0, reload the global from the extract, switch back to the regular global directory. An alternative recovery action that does not require extract/load is to change the global directory so gggg is no longer a spanning global or has no mappings into any region that collates numbers using their string value.</p>
-<a class="indexterm" name="idm45268595383888"></a>
+<a class="indexterm" name="idm45987247360688"></a>
 </div>
 <div class="navfooter">
 <hr>

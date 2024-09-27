@@ -8,7 +8,7 @@
 <link rel="up" href="ch09.html" title="Chapter 9. Input/Output Processing">
 <link rel="prev" href="ch09s08.html" title="Using Socket Devices">
 <link rel="next" href="ch10.html" title="Chapter 10. Utility Routines">
-<link rel="copyright" href="ln-idm45283017488112.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="io_commands_9"></a>I/O Commands<a class="indexterm" name="idm45283005859744"></a>
+<a name="io_commands_9"></a>I/O Commands<a class="indexterm" name="idm45162258503888"></a>
 </h2></div></div></div>
 <p>This section describes the following GT.M I/O commands:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
@@ -42,7 +42,7 @@
 <p></p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="open_cmmd_9"></a>Open<a class="indexterm" name="idm45283005499952"></a>
+<a name="open_cmmd_9"></a>Open<a class="indexterm" name="idm45162258140448"></a>
 </h3></div></div></div>
 <p>The OPEN command establishes a connection from a GT.M process to a device.</p>
 <p>The format of the OPEN command is:</p>
@@ -71,7 +71,7 @@
 <p>If an I/O device uses a multi-byte character encoding, every READ and WRITE operation of that device checks for well-formed characters according to the specified character encoding with ICHSET or OCHSET. If the I/O commands encounter an illegal sequence of bytes, they always trigger a run-time error; a VIEW "NOBADCHAR" does not prevent such errors. Strings created by $ZCHAR() and other Z equivalent functions may contain illegal sequences. The only way to input or output such illegal sequences is to specify character set "M" with one of these deviceparameters. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="examples_of_open_9"></a>Examples of OPEN<a class="indexterm" name="idm45283005492640"></a>
+<a name="examples_of_open_9"></a>Examples of OPEN<a class="indexterm" name="idm45162258134224"></a>
 </h4></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">set sd="report.dat" open sd:newversion</pre>
@@ -82,7 +82,7 @@
 <a name="open_device_params"></a>OPEN Deviceparameters</h4></div></div></div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="append_9"></a>APPEND<a class="indexterm" name="idm45283005482704"></a>
+<a name="append_9"></a>APPEND<a class="indexterm" name="idm45162258123840"></a>
 </h5></div></div></div>
 <p>APPEND Applies to: SD</p>
 <p>Positions the file pointer at the end-of-file. This deviceparameter only affects the device on the first OPEN command or OPEN command if the file is CLOSEd NODESTROY. Re-OPENing an already OPEN device with this deviceparameter has no effect. By default, OPEN sets the file pointer to the beginning-of-file.</p>
@@ -101,7 +101,7 @@ use sd</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="attach_open"></a>ATTACH<a class="indexterm" name="idm45283005573664"></a>
+<a name="attach_open"></a>ATTACH<a class="indexterm" name="idm45162258313184"></a>
 </h5></div></div></div>
 <p>ATTACH=expr Applies to: SOC</p>
 <p>ATTACH assigns expr as the handle name to the newly created socket. When ATTACH is used and one of LISTEN or CONNECT is specified on the same OPEN, the value of expr becomes the identifier of the newly created socket. If neither LISTEN nor CONNECT is specified, ATTACH is ignored.</p>
@@ -142,7 +142,7 @@ use sd</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="connect_9"></a>CONNECT<a class="indexterm" name="idm45283005413808"></a>
+<a name="connect_9"></a>CONNECT<a class="indexterm" name="idm45162258055696"></a>
 </h5></div></div></div>
 <p>CONNECT=expr Applies to: SOC</p>
 <p>Creates a client connection with a server, which is located by the information provided by expr. A new socket is allocated for the client connection and is made the current socket for the device, if the operation is successful.</p>
@@ -167,7 +167,7 @@ use sd</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="delimiter_9"></a>DELIMITER<a class="indexterm" name="idm45283005415984"></a>
+<a name="delimiter_9"></a>DELIMITER<a class="indexterm" name="idm45162258050928"></a>
 </h5></div></div></div>
 <p>[NO]DELIMITER=expr Applies to: SOC</p>
 <p>DELIMITER establishes or replaces the list of delimiters used by the newly created socket. The default is NODELIMITER. The delimiter list on a preexisting device remains the same until it is explicitly replaced or deleted.</p>
@@ -189,7 +189,7 @@ use sd</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="exception_9"></a>EXCEPTION<a class="indexterm" name="idm45283005421600"></a>
+<a name="exception_9"></a>EXCEPTION<a class="indexterm" name="idm45162258063408"></a>
 </h5></div></div></div>
 <p>EXCEPTION=expr Applies to: All devices</p>
 <p>Defines an error handler for an I/O device. The expression must contain a fragment of GT.M code (for example, GOTO ERRFILE) that GT.M XECUTEs when GT.M detects an error, or an entryref to which GT.M transfers control, as appropriate for the current gtm_ztrap_form, setting except that there is never any implicit popping with EXCEPTION action.</p>
@@ -237,7 +237,7 @@ File &gt;</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="fflf_open"></a>FFLF<a class="indexterm" name="idm45283005412384"></a>
+<a name="fflf_open"></a>FFLF<a class="indexterm" name="idm45162258132592"></a>
 </h5></div></div></div>
 <p>[NO]FFLF Applies to: SD</p>
 <p>The [NO]FFLF deviceparameter controls whether WRITE # produces only a
@@ -270,7 +270,7 @@ It will write the sequence "&lt;FF&gt;Hello&lt;LF&gt;" to the file.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="fifo_9"></a>FIFO<a class="indexterm" name="idm45283005421152"></a>
+<a name="fifo_9"></a>FIFO<a class="indexterm" name="idm45162258048944"></a>
 </h5></div></div></div>
 <p>FIFO Applies to: FIFO</p>
 <p>Specifies that the device for the OPEN is a FIFO name. GT.M creates the FIFO if it does not already exist and if the process has adequate privileges. However, in the event that the process does not have adequate privileges, the process generates a run-time error. A process does not require any special privileges to OPEN an existing FIFO. The FIFO needs to be readable (or writeable) just like any other file.</p>
@@ -279,7 +279,7 @@ It will write the sequence "&lt;FF&gt;Hello&lt;LF&gt;" to the file.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="fixed_9"></a>FIXED<a class="indexterm" name="idm45283005406192"></a>
+<a name="fixed_9"></a>FIXED<a class="indexterm" name="idm45162258074128"></a>
 </h5></div></div></div>
 <p>[NO]FIXED Applies to: SD FIFO PIPE</p>
 <p>Selects a fixed-length record format for sequential disk files. FIXED does not specify the actual length of a record. Use RECORDSIZE to specify the record length.</p>
@@ -360,7 +360,7 @@ gtmcp ; Copy a binary file using GT.M
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="group_9_unix"></a>GROUP<a class="indexterm" name="idm45283005490800"></a>
+<a name="group_9_unix"></a>GROUP<a class="indexterm" name="idm45162258125072"></a>
 </h5></div></div></div>
 <p>GROUP=expr Applies to: SOC(LOCAL) SD FIFO</p>
 <p>Specifies access permission on a UNIX file for other users in the file owner's group. The expression is a character string evaluating to null or to any combination of the letters RWX, indicating respectively Read, Write, and eXecute access. When permission controlling deviceparameters (OWNER,GROUP,WORLD) appears on an OPEN of a new file, any user category (OWNER, SYSTEM, WORLD), that is not explicitly specified is given the default access permissions. When any one of these deviceparameters appears on an OPEN of an existing device, any user category that is not explicitly specified remains unchanged. </p>
@@ -424,7 +424,7 @@ decryption.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="io_error_9"></a>IOERROR<a class="indexterm" name="idm45283005383744"></a>
+<a name="io_error_9"></a>IOERROR<a class="indexterm" name="idm45162258024752"></a>
 </h5></div></div></div>
 <p>IOERROR=expr Applies to: SOC</p>
 <p>Enables exception handling in socket devices. expr specifies the I/O error trapping mode. A value equal to "TRAP" specifies that I/O errors on a device raise error conditions. A value equal to "NOTRAP", or when IOERROR is not specified, indicates that I/O error on a device does not raise error conditions.</p>
@@ -512,7 +512,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="zlisten"></a>LISTEN<a class="indexterm" name="idm45283005339152"></a>
+<a name="zlisten"></a>LISTEN<a class="indexterm" name="idm45162258027888"></a>
 </h5></div></div></div>
 <p>LISTEN=expr Applies to: SOC</p>
 <p>A new socket is allocated to listen for a connection. It is made the current socket for the device, if the operation is successful. Upon successful completion, $KEY is set to the format of "LISTENING|&lt;socket_handle&gt;|{&lt;portnumber&gt;|&lt;/path/to/LOCAL_socket&gt;}" otherwise, $KEY is assigned the empty string. </p>
@@ -546,7 +546,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="newversion_9_u"></a>NEWVERSION<a class="indexterm" name="idm45283005342768"></a>
+<a name="newversion_9_u"></a>NEWVERSION<a class="indexterm" name="idm45162257991536"></a>
 </h5></div></div></div>
 <p>NEWVERSION Applies to: SD FIFO SOC(LOCAL)</p>
 <p>The NEWVERSION deviceparameter assures that when an existing file is used, it is empty upon the OPEN.</p>
@@ -647,7 +647,7 @@ information.</td></tr>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="owner_u_9"></a>OWNER<a class="indexterm" name="idm45283005362480"></a>
+<a name="owner_u_9"></a>OWNER<a class="indexterm" name="idm45162257949904"></a>
 </h5></div></div></div>
 <p>OWNER=expr Applies to: SOC(LOCAL) SD FIFO</p>
 <p>Specifies access permission on a UNIX file for the owner of the file. The expression is a character string evaluating to null or to any combination of the letters RWX, indicating Read, Write, and eXecute access. When any one of these deviceparameters appears on an OPEN of a new file, any user category that is not explicitly specified is given the default mask. When any one of these deviceparameters (<span>OWNER, </span>GROUP, <span>,</span> WORLD) appears on an OPEN of an existing file, any user category that is not explicitly specified remains unchanged.</p>
@@ -738,7 +738,7 @@ OPEN a:(COMM="nohup cat":PARSE)::"PIPE" </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="read_only_9"></a>READONLY<a class="indexterm" name="idm45283005324528"></a>
+<a name="read_only_9"></a>READONLY<a class="indexterm" name="idm45162257969072"></a>
 </h5></div></div></div>
 <p>[NO]READONLY Applies to: SD FIFO PIPE </p>
 <p>OPENs a device for reading only (READONLY) or reading and writing (NOREADONLY).</p>
@@ -753,7 +753,7 @@ GTM&gt;</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="recordsize_9"></a>RECORDSIZE<a class="indexterm" name="idm45283005323056"></a>
+<a name="recordsize_9"></a>RECORDSIZE<a class="indexterm" name="idm45162257969888"></a>
 </h5></div></div></div>
 <p>RECORDSIZE=intexpr Applies to: SD <span>FIFO PIPE</span></p>
 <p>Overrides the default record size for a disk. </p>
@@ -769,11 +769,12 @@ record.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="rewind_9"></a>REWIND<a class="indexterm" name="idm45283005271200"></a>
+<a name="rewind_9"></a>REWIND<a class="indexterm" name="idm45162257915232"></a>
 </h5></div></div></div>
-<p>REWIND Applies to: SD </p>
+<p>REWIND Applies to: SD FIFO PIPE </p>
 <p>REWIND positions the file pointer of a sequential disk.</p>
 <p>When $PRINCIPAL identifies a device that supports REWIND, the REWIND or INREWIND device parameters perform a REWIND of the input and OUTREWIND performs a REWIND of the output.</p>
+<p>For FIFO or PIPE devices, REWIND only sets $X, $Y, and $ZEOF to zero.</p>
 <p>By default, OPEN does not REWIND.</p>
 <p>Example: </p>
 <pre class="programlisting">OPEN "test40.txt":(REWIND:RECORDSIZE=70:NOWRAP) </pre>
@@ -943,14 +944,14 @@ which is the size of the file. </p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="shell_9"></a>SHELL<a class="indexterm" name="idm45283005449040"></a>
+<a name="shell_9"></a>SHELL<a class="indexterm" name="idm45162257928096"></a>
 </h5></div></div></div>
 <p>SHELL Applies to: PIPE</p>
 <p>The SHELL deviceparameter specifies the shell for the new process. By default the newly created process uses the shell specified by the $SHELL environment variable, otherwise, if the environment variable SHELL is undefined the process uses /bin/sh.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="stderr_9"></a>STDERR<a class="indexterm" name="idm45283005359696"></a>
+<a name="stderr_9"></a>STDERR<a class="indexterm" name="idm45162257968944"></a>
 </h5></div></div></div>
 <p>STDERR Applies to: PIPE</p>
 <p>The STDERR deviceparameter specifies that the stderr output from the created process goes to a PIPE device with the name of the STDERR value. This PIPE device acts as a restricted device that can appear only as the argument to USE, READ and CLOSE commands. It is implicitly READONLY and an attempt to WRITE to it triggers an error. If it has not previously acted as the argument to an explicit CLOSE command, the CLOSE of the PIPE device implicitly closes the the STDERR device.</p>
@@ -958,7 +959,7 @@ which is the size of the file. </p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="stream_9"></a>STREAM<a class="indexterm" name="idm45283005297056"></a>
+<a name="stream_9"></a>STREAM<a class="indexterm" name="idm45162257988320"></a>
 </h5></div></div></div>
 <p>[NO]STREAM Applies to: SD FIFO PIPE</p>
 <p>STREAM and VARIABLE are semantically equivalent unless WRAP is disabled. As long as records do not exceed the WIDTH, they are also equivalent. </p>
@@ -1009,7 +1010,7 @@ quit </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="system_u_9"></a>SYSTEM<a class="indexterm" name="idm45283005320096"></a>
+<a name="system_u_9"></a>SYSTEM<a class="indexterm" name="idm45162257894816"></a>
 </h5></div></div></div>
 <p>SYSTEM=expr Applies to: SOC(LOCAL) SD FIFO</p>
 <p>This deviceparameter is a synonym for OWNER that is provided in the UNIX version of GT.M for compatibility with OpenVMS applications. </p>
@@ -1024,7 +1025,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="truncate_u"></a>TRUNCATE<a class="indexterm" name="idm45283005324752"></a>
+<a name="truncate_u"></a>TRUNCATE<a class="indexterm" name="idm45162258002560"></a>
 </h5></div></div></div>
 <p>[NO]TRUNCATE Applies to: SD</p>
 <p>Truncates the file destroying all data beyond the current file pointer. If APPEND is also specified, the file pointer will be positioned at the end of the file even if TRUNCATE is before APPEND in the list of device parameters.</p>
@@ -1032,7 +1033,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="uic"></a>UIC<a class="indexterm" name="idm45283005321616"></a>
+<a name="uic"></a>UIC<a class="indexterm" name="idm45162257979744"></a>
 </h5></div></div></div>
 <p>UIC=expr Applies to: SOC(LOCAL) SD FIFO</p>
 <p>Specifies the owner and group for the file. </p>
@@ -1040,7 +1041,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="variable_9"></a>VARIABLE<a class="indexterm" name="idm45283005256128"></a>
+<a name="variable_9"></a>VARIABLE<a class="indexterm" name="idm45162257917536"></a>
 </h5></div></div></div>
 <p>VARIABLE Applies to: SD <span>FIFO PIPE</span></p>
 <p>Specifies the VARIABLE record length format for sequential disk files.</p>
@@ -1049,7 +1050,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="world_9"></a>WORLD<a class="indexterm" name="idm45283005327824"></a>
+<a name="world_9"></a>WORLD<a class="indexterm" name="idm45162257972864"></a>
 </h5></div></div></div>
 <p>WORLD=expr Applies to: SOC(LOCAL) SD FIFO</p>
 <p>Specifies access permissions for users other than the owner who are not in the group specified for a file. This category of users is usually referred to as other in UNIX. The expression is a character string evaluating to null or to any combination of the letters RWX, indicating respectively Read, Write, and eXecute access. When any one of these deviceparameters appear on an OPEN of an existing file, any user category that is not explicitly specified remains unchanged. </p>
@@ -1061,7 +1062,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="wrap_9"></a>WRAP<a class="indexterm" name="idm45283005243760"></a>
+<a name="wrap_9"></a>WRAP<a class="indexterm" name="idm45162257946896"></a>
 </h5></div></div></div>
 <p>[NO]WRAP Applies to: TRM  SD <span>NULL FIFO PIPE</span> SOC</p>
 <p>Enables or disables automatic record termination. When the current record size ($X) reaches the maximum WIDTH and the device has WRAP enabled, GT.M starts a new record, as if the routine had issued a WRITE ! Command. When reading, WRAP only determines whether $X remains within the range of zero to WIDTH.</p>
@@ -1078,7 +1079,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="zbf_size"></a>ZBFSIZE<a class="indexterm" name="idm45283005227136"></a>
+<a name="zbf_size"></a>ZBFSIZE<a class="indexterm" name="idm45162257877424"></a>
 </h5></div></div></div>
 <p>ZBFSIZE Applies to: SOC</p>
 <p>Allocates a buffer used by GT.M when reading from a socket. The ZBFSIZE deviceparameter should be at least as big as the largest message expected.</p>
@@ -1086,7 +1087,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="zdelay"></a>ZDELAY<a class="indexterm" name="idm45283005276640"></a>
+<a name="zdelay"></a>ZDELAY<a class="indexterm" name="idm45162257923136"></a>
 </h5></div></div></div>
 <p>Z[NO]DELAY Applies to: SOC(TCP)</p>
 <p>Controls buffering of data packets by the system TCP stack using the TCP_NODELAY option to the setsockopt system call. This behavior is sometimes known as the Nagle algorithm. The default is ZDELAY. This delays sending additional packets until either an acknowledgment of previous packets is received or an interval passes. If several packets are sent from one end of a connection before the other end responds, setting ZNODELAY may be desirable though at the cost of additional packets being transmitted over the network. ZNODELAY must be fully spelled out.</p>
@@ -1097,14 +1098,14 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="zff"></a>ZFF<a class="indexterm" name="idm45283005270368"></a>
+<a name="zff"></a>ZFF<a class="indexterm" name="idm45162257934224"></a>
 </h5></div></div></div>
 <p>Z[NO]FF=expr Applied to: SOC</p>
 <p>expr specifies a string of characters, typically in $CHAR() format to send to socket device, whenever a routine issues a WRITE #. When no string is specified or when ZFF="", then no characters are sent. The default in GT.M is ZNOFF.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="zibfsize"></a>ZIBFSIZE<a class="indexterm" name="idm45283005274000"></a>
+<a name="zibfsize"></a>ZIBFSIZE<a class="indexterm" name="idm45162257881024"></a>
 </h5></div></div></div>
 <p>ZIBFSIZE  Applies to: SOC</p>
 <p>Sets the buffer size used by the network software (setsockopt SO_RCVBUF).</p>
@@ -1375,6 +1376,15 @@ GTM&gt; </pre>
 <td> </td>
 </tr>
 <tr>
+<td><p>INREWIND</p></td>
+<td> </td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr>
 <td>
 <p>IOERROR=expr</p>
 </td>
@@ -1443,6 +1453,15 @@ GTM&gt; </pre>
 <td><p></p></td>
 </tr>
 <tr>
+<td><p>OUTREWIND</p></td>
+<td> </td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
 <td>
 <p>OWNER=expr</p>
 </td>
@@ -1493,6 +1512,21 @@ GTM&gt; </pre>
 <p>X</p>
 </td>
 <td><p>X</p></td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td>
+<p>REWIND</p>
+  </td>
+<td> </td>
+<td>
+  <p>X</p>
+</td>
+<td><p>X</p></td>
+<td>
+  <p>X</p>
+</td>
 <td> </td>
 <td> </td>
 </tr>
@@ -1701,7 +1735,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="use_cmmd_9"></a>Use<a class="indexterm" name="idm45283005182208"></a>
+<a name="use_cmmd_9"></a>Use<a class="indexterm" name="idm45162257820128"></a>
 </h3></div></div></div>
 <p>The USE command selects the current device for READs (input) and WRITEs (output).</p>
 <p>The format of the USE command is:</p>
@@ -1723,7 +1757,7 @@ GTM&gt; </pre>
 <a name="use_device_params"></a>USE Deviceparameters</h4></div></div></div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="attach_use"></a>ATTACH<a class="indexterm" name="idm45283005172416"></a>
+<a name="attach_use"></a>ATTACH<a class="indexterm" name="idm45162257841888"></a>
 </h5></div></div></div>
 <p>ATTACH=expr Applies to: SOC</p>
 <p>expr specifies the handle for a socket in the socketpool. ATTACH looks up expr in the socketpool's collection of sockets and brings the one found to the current SOCKET device. If an ATTACH operation is successful, the attached socket becomes the current socket for the device.</p>
@@ -1739,7 +1773,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="canonical_use"></a>CANONICAL<a class="indexterm" name="idm45283005295632"></a>
+<a name="canonical_use"></a>CANONICAL<a class="indexterm" name="idm45162257820960"></a>
 </h5></div></div></div>
 <p>[NO]CANONICAL  Applies to: TRM</p>
 <p>Enables or disables canonical input as controlled by the ICANON terminal attribute. See the documentation on your platform for details, but in general this would be erase and kill edit functions, and lines delimited by NL (usually &lt;LF&gt;), EOF (usually ^D), and EOL (usually not defined).</p>
@@ -1747,10 +1781,10 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="cenable"></a>CENABLE<a class="indexterm" name="idm45283005196384"></a>
+<a name="cenable"></a>CENABLE<a class="indexterm" name="idm45162257870752"></a>
 </h5></div></div></div>
 <p>[NO]CENABLE Applies to: TRM</p>
-<a class="indexterm" name="idm45283005203024"></a><p>Enables or disables the ability to force GT.M into Direct Mode by entering &lt;CTRL-C&gt; at $PRINCIPAL.</p>
+<a class="indexterm" name="idm45162257686256"></a><p>Enables or disables the ability to force GT.M into Direct Mode by entering &lt;CTRL-C&gt; at $PRINCIPAL.</p>
 <p>If CENABLE is set, &lt;CTRL-C&gt; interrupts process execution. <span>For more information on interrupt handling, refer to <a class="xref" href="ch05s07.html#interrupt_handling" title="Interrupt Handling">&#8220;Interrupt Handling&#8221;</a>.</span></p>
 <p>By default, CENABLE is set. If CTRAP contains $C(3), CENABLE is disabled. </p>
 <p>Example: </p>
@@ -1758,7 +1792,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="clearscreen_use"></a>CLEARSCREEN<a class="indexterm" name="idm45283005194000"></a>
+<a name="clearscreen_use"></a>CLEARSCREEN<a class="indexterm" name="idm45162258190512"></a>
 </h5></div></div></div>
 <p>CLEARSCREEN Applies to: TRM</p>
 <p>Clears the terminal screen from the present cursor position to the bottom of the screen. The CLEARSCREEN deviceparameter does not change the cursor position or the $X and $Y variables.</p>
@@ -1768,7 +1802,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="connect_use"></a>CONNECT<a class="indexterm" name="idm45283005184400"></a>
+<a name="connect_use"></a>CONNECT<a class="indexterm" name="idm45162258257168"></a>
 </h5></div></div></div>
 <p>CONNECT=expr Applies to: SOC</p>
 <p>Enables a client connection with a server, which is located by the information provided by expr. A new socket is allocated for the client connection and is made the current socket for the device, if the operation is successful.</p>
@@ -1787,7 +1821,7 @@ GTM&gt; </pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="covert_use"></a>CONVERT<a class="indexterm" name="idm45283005304160"></a>
+<a name="covert_use"></a>CONVERT<a class="indexterm" name="idm45162257832640"></a>
 </h5></div></div></div>
 <p>[NO]CONVERT Applies to: TRM</p>
 <p>Enables or disables GT.M from converting lowercase input to uppercase during READs.</p>
@@ -1799,7 +1833,7 @@ READ X</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="ctrap_use"></a>CTRAP<a class="indexterm" name="idm45283005174432"></a>
+<a name="ctrap_use"></a>CTRAP<a class="indexterm" name="idm45162257821376"></a>
 </h5></div></div></div>
 <p>CTRAP=$CHAR(intexpr[,...]) Applies to: TRM</p>
 <p>Establishes a trap facility for &lt;CTRL&gt; characters for the current device. The expression is a comma seperated list of ASCII characters where 0&lt;=intexpr&lt;=31. Other than &lt;CTRL_C&gt;, GT.M recognizes &lt;CTRL&gt; characters only when reading them from $IO. The behavior for &lt;CTRL-C&gt; is different in the sense that the OS recognizes it as an out-of-band interrupt including when it occurs on $PRINCIPAL when $IO'=$PRINCIPAL and delivers it immediately; When the device receives a &lt;CTRL-n&gt;, GT.M interrupts process execution.</p>
@@ -1818,7 +1852,7 @@ READ X</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="delimiter_use"></a>DELIMITER<a class="indexterm" name="idm45283005215824"></a>
+<a name="delimiter_use"></a>DELIMITER<a class="indexterm" name="idm45162257828576"></a>
 </h5></div></div></div>
 <p>[NO]DELIMITER Applies to: SOC</p>
 <p>DELIMITER establishes or replaces the list of delimiters used by the current socket. The default is NODELIMITER. </p>
@@ -1839,7 +1873,7 @@ READ X</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="detach_use"></a>DETACH<a class="indexterm" name="idm45283005040528"></a>
+<a name="detach_use"></a>DETACH<a class="indexterm" name="idm45162257853536"></a>
 </h5></div></div></div>
 <p>DETACH=expr Applies to: SOC</p>
 <p>Removes the socket identified by expr from the current socket device, without affecting any existing connection of that socket. The removed socket is placed in the socketpool (which has the reserved name "YGTMSOCKETSPOOL") and may be attached to another socket device. If the socket being removed is the current socket, then GT.M does the following:</p>
@@ -1910,14 +1944,14 @@ YGTMSOCKETPOOL OPEN SOCKET TOTAL=0 CURRENT=-1</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="downscroll_use"></a>DOWNSCROLL<a class="indexterm" name="idm45283005046288"></a>
+<a name="downscroll_use"></a>DOWNSCROLL<a class="indexterm" name="idm45162257660544"></a>
 </h5></div></div></div>
 <p>DOWNSCROLL Applies to: TRM</p>
 <p>If $Y=0, DOWNSCROLL does nothing. Otherwise, DOWNSCROLL moves the cursor up one line on the terminal screen and decrements $Y by one. DOWNSCROLL does not change the column position or $X. Some terminal hardware may not support DOWNSCROLL.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="echo_use"></a>ECHO<a class="indexterm" name="idm45283005226880"></a>
+<a name="echo_use"></a>ECHO<a class="indexterm" name="idm45162257684800"></a>
 </h5></div></div></div>
 <p>[NO]ECHO Applies to: TRM</p>
 <p>Enables or disables the echo of terminal input. If you disable ECHO, the EDITING functions will be disabled and any input is not available for later recall. </p>
@@ -1928,7 +1962,7 @@ YGTMSOCKETPOOL OPEN SOCKET TOTAL=0 CURRENT=-1</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="editing_uni"></a>EDITING<a class="indexterm" name="idm45283005188864"></a>
+<a name="editing_uni"></a>EDITING<a class="indexterm" name="idm45162257841648"></a>
 </h5></div></div></div>
 <p>[NO]EDITING    Applies to: TRM </p>
 <p>Enables the EDITING mode for the $PRINCIPAL device. If you enable EDITING, GT.M allows the use of the left and right cursor movement keys and certain &lt;CTRL&gt; characters within the current input line. You can recall the last input line using the up or down arrow key. The editing functions are the same as during direct mode command input as described in the "Line Editing" section of the "Operating &amp; Debugging in Direct Mode" chapter except that backspace is not treated the same as the erase character from terminfo which is usually delete (ASCII 127). NOECHO disables EDITING mode. </p>
@@ -1955,14 +1989,14 @@ YGTMSOCKETPOOL OPEN SOCKET TOTAL=0 CURRENT=-1</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="eraseline_use"></a>ERASELINE<a class="indexterm" name="idm45283005220080"></a>
+<a name="eraseline_use"></a>ERASELINE<a class="indexterm" name="idm45162257670816"></a>
 </h5></div></div></div>
 <p>ERASELINE Applies to: TRM</p>
 <p>Clears the current line from the physical cursor position to the end of the line. ERASELINE does not affect the physical cursor position, or $X and $Y.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="escape_use"></a>ESCAPE<a class="indexterm" name="idm45283005038352"></a>
+<a name="escape_use"></a>ESCAPE<a class="indexterm" name="idm45162257829872"></a>
 </h5></div></div></div>
 <p>[NO]ESCAPE Applies to: TRM</p>
 <p>Enables or disables GT.M processing of escape sequences. </p>
@@ -1976,7 +2010,7 @@ YGTMSOCKETPOOL OPEN SOCKET TOTAL=0 CURRENT=-1</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="exception_use"></a>EXCEPTION<a class="indexterm" name="idm45283005021120"></a>
+<a name="exception_use"></a>EXCEPTION<a class="indexterm" name="idm45162257859360"></a>
 </h5></div></div></div>
 <p>EXCEPTION=expr Applies to: All devices</p>
 <p>Defines an error handler for an I/O device. The expression must contain a fragment of GT.M code (for example, GOTO ERRFILE) that GT.M XECUTEs when the driver for the device detects an error, or an entryref to which GT.M transfers control, as appropriate for the current gtm_ztrap_form.</p>
@@ -1984,7 +2018,7 @@ YGTMSOCKETPOOL OPEN SOCKET TOTAL=0 CURRENT=-1</pre>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="fflf_use"></a>FFLF<a class="indexterm" name="idm45283005045536"></a>
+<a name="fflf_use"></a>FFLF<a class="indexterm" name="idm45162257632304"></a>
 </h5></div></div></div>
 <p>[NO]FFLF Applies to: SD</p>
 <p>The [NO]FFLF deviceparameter controls whether WRITE # produces only a
@@ -2000,7 +2034,7 @@ control behavior by specifying the FFLF deviceparameter.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="filter_use"></a>FILTER<a class="indexterm" name="idm45283004983088"></a>
+<a name="filter_use"></a>FILTER<a class="indexterm" name="idm45162257608960"></a>
 </h5></div></div></div>
 <p>[NO]FILTER[=expr] Applies to: TRM SOC NULL</p>
 <p>Specifies character filtering for specified cursor movement sequences. Filtering requires character by character examination of all output and reduces I/O performance.</p>
@@ -2026,7 +2060,7 @@ control behavior by specifying the FFLF deviceparameter.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="hostsync"></a>HOSTSYNC<a class="indexterm" name="idm45283005219264"></a>
+<a name="hostsync"></a>HOSTSYNC<a class="indexterm" name="idm45162257665328"></a>
 </h5></div></div></div>
 <p>[NO]HOSTSYNC  Applies to: TRM</p>
 <p>Enables or disables the use of XON/XOFF by the host to throttle input and prevent impending buffer overruns for a terminal. This deviceparameter provides a control mechanism for the host over asynchronous communication lines to help prevent data loss when hardware is slow and/or processing load is high.</p>
@@ -2034,7 +2068,7 @@ control behavior by specifying the FFLF deviceparameter.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="hupenable"></a>HUPENABLE<a class="indexterm" name="idm45283004979968"></a>
+<a name="hupenable"></a>HUPENABLE<a class="indexterm" name="idm45162257619600"></a>
 </h5></div></div></div>
 <p>[NO]HUPENABLE  Applies to: TRM and SOC</p>
 <p>Enables or disables the recognition by the process of the loss ("hang up") of the PRINCIPAL device terminal. When enabled the process receives a SOCKHANGUP or TERMHANGUP error if the O/S signals that the device assigned to the process as the PRINCIPAL device has disconnected. In addition, a SOCKHANGUP or TERMHANGUP error implicitly sets the device to NOHUPENABLE so if a process anticipates multiple disconnects/hangups, it should explicitly issue a USE $PRINCIPAL:HUPENABLE. If GT.M is configured to ignore such a signal, a process may subsequently receive an IOEOF or a SOCKWRITE/TERMWRITE error from an attempt to respectively READ from, or WRITE to the missing device. GT.M terminates a process that ignores more than one of these messages and, if the process is not in Direct Mode, sends a NOPRINCIO message to the operator log. </p>
@@ -2052,8 +2086,8 @@ control behavior by specifying the FFLF deviceparameter.</p>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
 <a name="inrewind_use"></a>INREWIND</h5></div></div></div>
-<p>Applies to: SD</p>
-<p>Performs a REWIND on input when $PRINCIPAL identifies a device that supports REWIND. Use this deviceparameter with $PRINCIPAL when redirected from a file. <span>For more information, refer to <a class="xref" href="ch09s09.html#seek_use" title="SEEK=strexpr">&#8220;SEEK=strexpr&#8221;</a>.</span> </p>
+<p>Applies to: SD FIFO PIPE</p>
+<p>Performs a REWIND on input when $PRINCIPAL identifies a device that supports REWIND. Use this deviceparameter with $PRINCIPAL when redirected from a file. <span>For more information, refer to <a class="xref" href="ch09s09.html#rewind_use" title="REWIND">&#8220;REWIND&#8221;</a>.</span> </p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
@@ -2063,7 +2097,7 @@ control behavior by specifying the FFLF deviceparameter.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="insert_use"></a>INSERT<a class="indexterm" name="idm45283004992384"></a>
+<a name="insert_use"></a>INSERT<a class="indexterm" name="idm45162257616688"></a>
 </h5></div></div></div>
 <p>[NO]INSERT Applies to: TRM</p>
 <p>Enables or disables insert mode for the $PRINCIPAL device. If INSERT mode is enabled, GT.M inserts input characters at the logical position in the input stream designated by the virtual cursor as defined by $X and $Y, for example in the middle of the line/record. If INSERT mode is disabled, input characters overwrite the existing characters in the input stream at the logical position designated by the virtual cursor. You can toggle the insert mode within a direct mode line or if EDITING is enabled for a single READ argument's input using the terminal's INSERT key. The INSERT mode is reset to the default or what was last specified with USE at the beginning of each direct mode line or READ argument. </p>
@@ -2096,7 +2130,7 @@ control behavior by specifying the FFLF deviceparameter.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="length_use"></a>LENGTH<a class="indexterm" name="idm45283004943376"></a>
+<a name="length_use"></a>LENGTH<a class="indexterm" name="idm45162257566880"></a>
 </h5></div></div></div>
 <p>[Z]LENGTH=intexpr Applies to: TRM SOC SD<span> FIFO PIPE</span> NULL</p>
 <p>Sets the virtual page length for an I/O device to the integer expression. You can specify the virtual page length up to 1,048,576. The page length controls the point at which the device driver automatically resets $Y to 0. </p>
@@ -2108,7 +2142,7 @@ control behavior by specifying the FFLF deviceparameter.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="zlisten_use_9"></a>LISTEN<a class="indexterm" name="idm45283004961376"></a>
+<a name="zlisten_use_9"></a>LISTEN<a class="indexterm" name="idm45162257583840"></a>
 </h5></div></div></div>
 <p>LISTEN=expr  Applies to: SOC</p>
 <p>A new socket is allocated to listen for a connection. It is made the current socket for the device, if the operation is successful. </p>
@@ -2165,7 +2199,7 @@ information.</td></tr>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
 <a name="outrewind_use"></a>OUTREWIND</h5></div></div></div>
-<p>Applies to: SD</p>
+<p>Applies to: SD FIFO PIPE</p>
 <p>Performs a REWIND on output when $PRINCIPAL identifies a device that supports REWIND. Use this deviceparameter with $PRINCIPAL when redirected to a file. <span>For more information, refer to <a class="xref" href="ch09s09.html#rewind_use" title="REWIND">&#8220;REWIND&#8221;</a>.</span> </p>
 </div>
 <div class="sect4">
@@ -2176,7 +2210,7 @@ information.</td></tr>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="pasthru_use"></a>PASTHRU<a class="indexterm" name="idm45283004920592"></a>
+<a name="pasthru_use"></a>PASTHRU<a class="indexterm" name="idm45162257545664"></a>
 </h5></div></div></div>
 <p>[NO]PASTHRU Applies to: TRM</p>
 <p>Enables or disables interpretation of the ERASE character for a terminal. PASTHRU shifts management of handling and response to ERASE characters in the input stream from GT.M to the application code.</p>
@@ -2187,7 +2221,7 @@ information.</td></tr>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="readsync_use"></a>READSYNC<a class="indexterm" name="idm45283004922448"></a>
+<a name="readsync_use"></a>READSYNC<a class="indexterm" name="idm45162257547104"></a>
 </h5></div></div></div>
 <p>[NO]READSYNC Applies to: TRM</p>
 <p>Enables or disables automatic output of &lt;XON&gt; before a READ and &lt;XOFF&gt; after a READ. </p>
@@ -2195,10 +2229,11 @@ information.</td></tr>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="rewind_use"></a>REWIND<a class="indexterm" name="idm45283004937552"></a>
+<a name="rewind_use"></a>REWIND<a class="indexterm" name="idm45162257585600"></a>
 </h5></div></div></div>
-<p>REWIND Applies to: SD</p>
+<p>REWIND Applies to: SD FIFO PIPE</p>
 <p>REWIND places the file pointer to the beginning of the file. </p>
+<p>For FIFO and PIPE devices, REWIND only sets $X, $Y, and $ZEOF to zero.</p>
 <p>By default, USE does not REWIND.</p>
 <p>REWIND on redirected output for $PRINCIPAL is the same as OUTREWIND.</p>
 </div>
@@ -2217,7 +2252,7 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="socket_use"></a>SOCKET<a class="indexterm" name="idm45283004990416"></a>
+<a name="socket_use"></a>SOCKET<a class="indexterm" name="idm45162257603184"></a>
 </h5></div></div></div>
 <p>SOCKET=expr Applies to: SOC</p>
 <p>Makes the socket specified by the handle named in expr the current socket for the Socket device . If the named socket is a listening socket, it checks for an incoming connection request and if one is available, it accepts the request and creates a new connected socket in which case $KEY provides information on the new socket Specifying a socket handle not contained in the Socket device generates an error.</p>
@@ -2232,7 +2267,7 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="terminator_use"></a>TERMINATOR<a class="indexterm" name="idm45283004917872"></a>
+<a name="terminator_use"></a>TERMINATOR<a class="indexterm" name="idm45162257565952"></a>
 </h5></div></div></div>
 <p>[NO]TERMINATOR[=expr] Applies to: TRM</p>
 <p>Specifies which of the 256 ASCII characters terminate a READ. For example, TERMINATOR=$C(0) makes &lt;NUL&gt; the terminator. </p>
@@ -2249,7 +2284,7 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="truncate_use_9"></a>TRUNCATE<a class="indexterm" name="idm45283004916576"></a>
+<a name="truncate_use_9"></a>TRUNCATE<a class="indexterm" name="idm45162257584800"></a>
 </h5></div></div></div>
 <p>[NO]TRUNCATE Applies to: SD</p>
 <p>Enables or disables overwriting of existing data in sequential files. Because the position of each record depends on the prior record, a WRITE destroys the ability to reliably position to subsequent records in a file. Therefore, by default (NOTRUNCATE), GT.M permits WRITEs only when the file pointer is positioned at the end-of-file. When a device has TRUNCATE enabled, a WRITE issued when the file pointer is not at end-of-file truncates the file by destroying all data from the file pointer to the end-of-file.</p>
@@ -2258,7 +2293,7 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="ttsync_use_9"></a>TTSYNC<a class="indexterm" name="idm45283004923168"></a>
+<a name="ttsync_use_9"></a>TTSYNC<a class="indexterm" name="idm45162257577440"></a>
 </h5></div></div></div>
 <p>[NO]TTSYNC Applies to: TRM</p>
 <p>Enables or disables recognition of XON/XOFF for terminal output. </p>
@@ -2273,7 +2308,7 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="typehead"></a>TYPEAHEAD<a class="indexterm" name="idm45283004907840"></a>
+<a name="typehead"></a>TYPEAHEAD<a class="indexterm" name="idm45162257533504"></a>
 </h5></div></div></div>
 <p>[NO]TYPEAHEAD  Applies to: TRM</p>
 <p>Enables or disables type-ahead buffering for a terminal. When TYPEAHEAD is disabled, any pending input which has not yet been read will be discarded before input is read for each READ argument. When TYPEAHEAD is enabled, any input not read by one READ argument will remain available for the next READ argument or command. </p>
@@ -2282,14 +2317,14 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="upscroll"></a>UPSCROLL<a class="indexterm" name="idm45283004916320"></a>
+<a name="upscroll"></a>UPSCROLL<a class="indexterm" name="idm45162257541104"></a>
 </h5></div></div></div>
 <p>UPSCROLL  Applies to: TRM</p>
 <p>Moves the cursor down one line on the terminal screen. If $Y=LENGTH-1, UPSCROLL sets $Y=0. Otherwise UPSCROLL increments $Y by one. If the cursor is physically at the bottom of the page, the screen scrolls up one line. UPSCROLL does not change the column position or $X.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="width_use_9"></a>WIDTH<a class="indexterm" name="idm45283004895632"></a>
+<a name="width_use_9"></a>WIDTH<a class="indexterm" name="idm45162257513104"></a>
 </h5></div></div></div>
 <p>[Z]WIDTH=intexpr Applies to: TRM SOC NULL SD FIFO PIPE</p>
 <p>Sets the device's logical record size and enables WRAP. The default WIDTH for SD, FIFO, and PIPE is taken from the RECORDSIZE. </p>
@@ -2303,7 +2338,7 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="wrap_use_9"></a>WRAP<a class="indexterm" name="idm45283004922736"></a>
+<a name="wrap_use_9"></a>WRAP<a class="indexterm" name="idm45162257512688"></a>
 </h5></div></div></div>
 <p>[NO]WRAP  Applies to: TRM SOC NULL SD <span>FIFO PIPE</span></p>
 <p>Enables or disables automatic record termination. When the current record size ($X) reaches the maximum WIDTH and the device has WRAP enabled, GT.M starts a new record, as if the routine had issued a WRITE ! command.  When reading, WRAP only determines whether $X remains within the range of zero to WIDTH.</p>
@@ -2315,7 +2350,7 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="x_use_9"></a>X<a class="indexterm" name="idm45283004908784"></a>
+<a name="x_use_9"></a>X<a class="indexterm" name="idm45162257504160"></a>
 </h5></div></div></div>
 <p>X=intexpr  Applies to: TRM</p>
 <p>$X positions the cursor to a vertical column on the terminal. If NOWRAP is enabled or intexpr&lt;WIDTH, GT.M sets $X=intexpr. If WRAP is enabled and intexpr&gt;WIDTH, GT.M sets $X=intexpr#WIDTH, where # is the GT.M modulo operator. The resulting $X determines the actual physical position. </p>
@@ -2343,7 +2378,7 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="y_use_9"></a>Y<a class="indexterm" name="idm45283004840400"></a>
+<a name="y_use_9"></a>Y<a class="indexterm" name="idm45162257464432"></a>
 </h5></div></div></div>
 <p>Y=intexpr  Applies to: TRM </p>
 <p>Positions the cursor to a horizontal row on the terminal.</p>
@@ -2372,7 +2407,7 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="zbfsize_use_9"></a>ZBFSIZE<a class="indexterm" name="idm45283004884048"></a>
+<a name="zbfsize_use_9"></a>ZBFSIZE<a class="indexterm" name="idm45162257429168"></a>
 </h5></div></div></div>
 <p>ZBFSIZE  Applies to: SOC</p>
 <p>Allocates a buffer used by GT.M when reading from a socket. The ZBFSIZE deviceparameter should be at least as big as the largest message expected.</p>
@@ -2380,14 +2415,14 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="zdelay_use_9"></a>ZDELAY<a class="indexterm" name="idm45283004800464"></a>
+<a name="zdelay_use_9"></a>ZDELAY<a class="indexterm" name="idm45162257438224"></a>
 </h5></div></div></div>
 <p>Z[NO]DELAY  Applies to: SOC</p>
 <p>Controls buffering of data packets by the system TCP stack using the TCP_NODELAY option to the SETSOCKOPT system call. This behavior is sometimes known as the Nagle algorithm. The default is ZDELAY. This delays sending additional packets until either an acknowledgement of previous packets is received or an interval passes. If several packets are sent from one end of a connection before the other end responds, setting ZNODELAY may be desirable though at the cost of additional packets being transmitted over the network. ZNODELAY must be fully spelled out.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="zff_use_9"></a>ZFF<a class="indexterm" name="idm45283004838784"></a>
+<a name="zff_use_9"></a>ZFF<a class="indexterm" name="idm45162257514224"></a>
 </h5></div></div></div>
 <p>Z[NO]FF=expr  Applies to: SOC</p>
 <p>expr specifies a string of characters, typically in $CHAR() format to send to socket device, whenever a routine issues a WRITE #. When no string is specified or when ZFF="", then no characters are sent. The default in GT.M is ZNOFF.</p>
@@ -2397,7 +2432,7 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="zibfsize_use_9"></a>ZIBFSIZE<a class="indexterm" name="idm45283004870304"></a>
+<a name="zibfsize_use_9"></a>ZIBFSIZE<a class="indexterm" name="idm45162257416688"></a>
 </h5></div></div></div>
 <p>ZIBFSIZE  Applies to: SOC</p>
 <p>Sets the buffer size used by the network software (setsockopt SO_RCVBUF).</p>
@@ -2798,8 +2833,8 @@ character set must follow at least one prior READ since the device was created.<
                 </td>
 <td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td><p>X</p></td>
+<td><p>X</p></td>
 <td> </td>
 <td>
                 </td>
@@ -2893,8 +2928,8 @@ character set must follow at least one prior READ since the device was created.<
                 </td>
 <td> </td>
 <td><p>X</p></td>
-<td> </td>
-<td> </td>
+<td><p>X</p></td>
+<td><p>X</p></td>
 <td> </td>
 <td>
                 </td>
@@ -2932,8 +2967,8 @@ character set must follow at least one prior READ since the device was created.<
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
-<td> </td>
+<td><p>X</p></td>
+<td><p>X</p></td>
 <td> </td>
 <td> </td>
 </tr>
@@ -3146,7 +3181,7 @@ character set must follow at least one prior READ since the device was created.<
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="read_cmmd_9"></a>READ<a class="indexterm" name="idm45283004833616"></a>
+<a name="read_cmmd_9"></a>READ<a class="indexterm" name="idm45162257469792"></a>
 </h3></div></div></div>
 <p>The READ command transfers input from the current device to a global or local variable specified as a READ argument. For convenience, READ also accepts arguments that perform limited output to the current device.</p>
 <p>The format of the READ command is:</p>
@@ -3167,7 +3202,7 @@ character set must follow at least one prior READ since the device was created.<
 <p>In UTF-8 mode, the READ command uses the character set value specified on the device OPEN as the character encoding of the input device. If character set "M" or "UTF-8" is specified, the data is read with no transformation. If character set is "UTF-16", "UTF-16LE", or "UTF-16BE", the data is read with the specified encoding and transformed to UTF-8. If the READ command encounters an illegal character or a character outside the selected representation, it produces a run-time error. The READ command recognizes all <span class="trademark">Unicode</span>(R) line terminators for non-FIXED devices. See "Line Terminators" section for more details. In M mode, characters and bytes have a one-to-one relationship and therefore READ can be used to read bit-streams of non-character data. </p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="read_cmmd_star"></a>READ * Command<a class="indexterm" name="idm45283004926960"></a>
+<a name="read_cmmd_star"></a>READ * Command<a class="indexterm" name="idm45162257423792"></a>
 </h4></div></div></div>
 <p>The READ * command reads one character from the current device and returns the decimal ASCII representation of that character into the variable specified for the READ * command. READ * appears most frequently in communication protocols, or in interactive programs where single character answers are appropriate.</p>
 <p>In UTF-8 mode, the READ * command accepts one <span class="trademark">Unicode</span>(R) character input and puts the numeric code-point value for that character into the variable. The READ * command reads one to four bytes, depending on the encoding and returns the numeric code-point value of the character. If ICHSET specifies "UTF-16", "UTF-16LE" or "UTF-16BE", the READ * command reads a byte pair or two byte pairs (if it is a surrogate pair) and returns the numeric code-point value. If ICHSET is M, the READ * command reads a single byte and returns the numeric byte value just like in M mode. </p>
@@ -3189,7 +3224,7 @@ GTM&gt;Write $char(x)
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="read_x_maxlen_cmmd"></a>READ X#maxlen Command<a class="indexterm" name="idm45283004904992"></a>
+<a name="read_x_maxlen_cmmd"></a>READ X#maxlen Command<a class="indexterm" name="idm45162257534928"></a>
 </h4></div></div></div>
 <p>The READ X#maxlen command limits the maximum size of the input to a maximum of "maxlen" characters, where maxlen is an integer expression.</p>
 <p>If a READ follows a READ X#maxlen command, the READ returns the remainder of the current record. </p>
@@ -3200,7 +3235,7 @@ GTM&gt;Write $char(x)
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="write_cmmd_9"></a>Write<a class="indexterm" name="idm45283005192608"></a>
+<a name="write_cmmd_9"></a>Write<a class="indexterm" name="idm45162257439696"></a>
 </h3></div></div></div>
 <p>The WRITE command transfers a character stream specified by its arguments to the current device.</p>
 <p>The format of the WRITE command is:</p>
@@ -3243,7 +3278,7 @@ GTM&gt;Write $char(x)
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="close_cmmd_9"></a>Close<a class="indexterm" name="idm45283004908944"></a>
+<a name="close_cmmd_9"></a>Close<a class="indexterm" name="idm45162257493088"></a>
 </h3></div></div></div>
 <p>The CLOSE command breaks the connection between a process and a device.</p>
 <p>The format of the CLOSE command is:</p>
@@ -3269,7 +3304,7 @@ GTM&gt;Write $char(x)
 <a name="close_device_params_9"></a>CLOSE Deviceparameters</h4></div></div></div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="delete_close"></a>DELETE<a class="indexterm" name="idm45283004626768"></a>
+<a name="delete_close"></a>DELETE<a class="indexterm" name="idm45162257246752"></a>
 </h5></div></div></div>
 <p>DELETE  Applies to:  SD FIFO SOC(LOCAL)</p>
 <p>Instructs GT.M to delete  the disk file after GT.M closes it. </p>
@@ -3289,7 +3324,7 @@ rather than the entire socket device.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="exception_close"></a>EXCEPTION<a class="indexterm" name="idm45283004617328"></a>
+<a name="exception_close"></a>EXCEPTION<a class="indexterm" name="idm45162257238544"></a>
 </h5></div></div></div>
 <p>EXCEPTION=expr  Applies to: All devices</p>
 <p>Defines an error handler for an I/O device. The expression must contain a fragment of GT.M code (for example, GOTO ERRFILE) that GT.M XECUTEs when the driver for the device detects an error, or an entryref to which GT.M transfers control, as appropriate for the current gtm_ztrap_form.</p>
@@ -3298,7 +3333,7 @@ rather than the entire socket device.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="group_close"></a>GROUP<a class="indexterm" name="idm45283004875888"></a>
+<a name="group_close"></a>GROUP<a class="indexterm" name="idm45162257508352"></a>
 </h5></div></div></div>
 <p>GROUP=expr  Applies to: SOC(LOCAL), SD<span>, FIFO</span></p>
 <p>Specifies access permission on a UNIX file for other users in the file owner's group. The expression is a character string evaluating to null or to any combination of the letters RWX, indicating respectively Read, Write, and eXecute access. When any one of these deviceparameters (OWNER, GROUP, WORLD) appear on a CLOSE of an existing file, any user category, that is not explicitly specified remains unchanged.</p>
@@ -3307,7 +3342,7 @@ rather than the entire socket device.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="owner_close"></a>OWNER<a class="indexterm" name="idm45283004613072"></a>
+<a name="owner_close"></a>OWNER<a class="indexterm" name="idm45162257241376"></a>
 </h5></div></div></div>
 <p>OWNER=expr   Applies to: SOC(LOCAL) SD <span>FIFO</span></p>
 <p>Specifies access permission on a UNIX file for the owner of the file. The expression is a character string evaluating to null or to any combination of the letters RWX, indicating respectively Read, Write, and eXecute access. When any one of these deviceparameters appear on a CLOSE of an existing file, any user category (GROUP, SYSTEM, WORLD), that is not explicitly specified remains unchanged.</p>
@@ -3316,7 +3351,7 @@ rather than the entire socket device.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="rename_close"></a>RENAME<a class="indexterm" name="idm45283004808192"></a>
+<a name="rename_close"></a>RENAME<a class="indexterm" name="idm45162257229584"></a>
 </h5></div></div></div>
 <p>RENAME=expr   Applies to: SD</p>
 <p>Changes the file name to the name contained in the argument string. CLOSE ignores RENAME when it specifies the same file as that of the CLOSE file-specification. When the files are different, the original file specified by the CLOSE no longer exists. RENAME gives an error if the specified file exists, while REPLACE does not. When the expression omits part of the pathname, GT.M constructs the full pathname by applying the defaults discussed in the section on device specifications.</p>
@@ -3324,7 +3359,7 @@ rather than the entire socket device.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="replace_close"></a>REPLACE<a class="indexterm" name="idm45283004628736"></a>
+<a name="replace_close"></a>REPLACE<a class="indexterm" name="idm45162257248720"></a>
 </h5></div></div></div>
 <p>REPLACE=expr   Applies to: SD</p>
 <p>Changes the file name to the name contained in the argument string. REPLACE overwrites any existing file, while RENAME does not. CLOSE ignores REPLACE when it specifies the same file as that of the CLOSE file-specification. When the files are different, the original file specified by the CLOSE no longer exists. When the expression omits part of the pathname, GT.M constructs the full pathname by applying the defaults discussed in the section on device specifications.</p>
@@ -3332,7 +3367,7 @@ rather than the entire socket device.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="socket_close"></a>SOCKET<a class="indexterm" name="idm45283004594384"></a>
+<a name="socket_close"></a>SOCKET<a class="indexterm" name="idm45162257215024"></a>
 </h5></div></div></div>
 <p>SOCKET=expr   Applies to: SOC</p>
 <p>The socket specified in expr is closed. Specifying a socket that has not been previously OPENed generates an error. If no SOCKET deviceparameter is specified on a CLOSE for a socket device, the socket device and all sockets associated with it are closed.</p>
@@ -3340,7 +3375,7 @@ rather than the entire socket device.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="system_close_unix"></a>SYSTEM<a class="indexterm" name="idm45283004614192"></a>
+<a name="system_close_unix"></a>SYSTEM<a class="indexterm" name="idm45162257235632"></a>
 </h5></div></div></div>
 <p>SYSTEM=expr   Applies to: SOC(LOCAL) SD FIFO</p>
 <p>This deviceparameter is a synonym for OWNER that is maintained in UNIX for compatibility with VMS applications.</p>
@@ -3354,7 +3389,7 @@ rather than the entire socket device.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="uic_unix_close"></a>UIC<a class="indexterm" name="idm45283004628000"></a>
+<a name="uic_unix_close"></a>UIC<a class="indexterm" name="idm45162257251728"></a>
 </h5></div></div></div>
 <p>UIC=exprgroup number    Applies to: SOC(LOCAL) SD FIFO</p>
 <p>Specifies the group that has access to the file. The format of the string is "g,i" where g is a decimal number representing the group portion of the UIC and i is a decimal number representing the individual portion. </p>
@@ -3362,7 +3397,7 @@ rather than the entire socket device.</p>
 </div>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="world_close"></a>WORLD<a class="indexterm" name="idm45283004627472"></a>
+<a name="world_close"></a>WORLD<a class="indexterm" name="idm45162257204480"></a>
 </h5></div></div></div>
 <p>WORLD=expr    Applies to: SOC(LOCAL) SD <span>FIFO</span></p>
 <p>Specifies access permissions for users not in the owner's group on a UNIX file. The expression is a character string evaluating to null or to any combination of the letters RWX, indicating respectively Read, Write, and eXecute access. When any one of these deviceparameters (OWNER, GROUP, WORLD) appears on a CLOSE of a new file, any user category that is not explicitly specified is given the default character string. When any one of these deviceparameters (OWNER, GROUP, WORLD) appears on a CLOSE of an existing file, any user category , that is not explicitly specified remains unchanged.</p>
@@ -3527,7 +3562,7 @@ rather than the entire socket device.</p>
 <td>
                   <p>X</p>
                 </td>
-<td> </td>
+<td><p>X</p></td>
 <td> </td>
 </tr>
 <tr>

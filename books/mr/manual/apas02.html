@@ -8,7 +8,7 @@
 <link rel="up" href="quick_message_reference.html" title="Appendix A. Error Message Quick Reference">
 <link rel="prev" href="apas01.html" title="Standard Error Codes">
 <link rel="next" href="apb.html" title="Appendix B. Reference Implementation Error messages">
-<link rel="copyright" href="ln-idm45268599753776.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45987251743248.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="idm45268592540768"></a>ZMESSAGE Codes</h2></div></div></div>
+<a name="idm45987244504880"></a>ZMESSAGE Codes</h2></div></div></div>
 <p>The following table lists ZMESSAGE numbers of all messages documented in this manual.</p>
 <div class="informaltable"><table border="1">
 <colgroup>
@@ -975,11 +975,11 @@
 </tr>
 <tr>
 <td><p>150384267</p></td>
-<td><p><a class="link" href="DBFREEZEOFF.html" title="DBFREEZEOFF ">DBFREEZEOFF</a>, Region rrrr is UNFROZEN ([NO]OVERRIDE [NO]AUTOREL)</p></td>
+<td><p><a class="link" href="DBFREEZEOFF.html" title="DBFREEZEOFF ">DBFREEZEOFF</a>, Region rrrr (dddd) is UNFROZEN ([NO]OVERRIDE [NO]AUTOREL)</p></td>
 </tr>
 <tr>
 <td><p>150384259</p></td>
-<td><p><a class="link" href="DBFREEZEON.html" title="DBFREEZEON ">DBFREEZEON</a>, Region rrrr is FROZEN ([NO]OVERRIDE [NO]ONLINE [NO]AUTOREL)</p></td>
+<td><p><a class="link" href="DBFREEZEON.html" title="DBFREEZEON ">DBFREEZEON</a>, Region rrrr (dddd) is FROZEN ([NO]OVERRIDE [NO]ONLINE [NO]AUTOREL)</p></td>
 </tr>
 <tr>
 <td><p>150380474</p></td>
@@ -1330,14 +1330,6 @@
 <td><p><a class="link" href="DBUPGRDREQ.html" title="DBUPGRDREQ ">DBUPGRDREQ</a>, Database file DDDD is not fully upgraded (format FFFF) and cannot be used by this version of GT.M. Please upgrade the database.</p></td>
 </tr>
 <tr>
-<td><p>150377624</p></td>
-<td><p><a class="link" href="DBVERPERFWARN1.html" title="DBVERPERFWARN1 ">DBVERPERFWARN1</a>, Performance warning: Database aaaa is running in compatibility mode which degrades performance. Run MUPIP REORG UPGRADE for best overall performance.</p></td>
-</tr>
-<tr>
-<td><p>150378560</p></td>
-<td><p><a class="link" href="DBVERPERFWARN2.html" title="DBVERPERFWARN2 ">DBVERPERFWARN2</a>, Peformance warning: Database aaaa is not fully upgraded. Run MUPIP REORG UPGRADE for best overall performance.</p></td>
-</tr>
-<tr>
 <td><p>150380547</p></td>
 <td><p><a class="link" href="DBWCVERIFYEND.html" title="DBWCVERIFYEND ">DBWCVERIFYEND</a>, Database file xxxx, write cache verification finished by pid pppp [aaaa] at transaction number yyyy</p></td>
 </tr>
@@ -1556,6 +1548,10 @@
 <tr>
 <td><p>150379696</p></td>
 <td><p><a class="link" href="ECLOSTMID.html" title="ECLOSTMID ">ECLOSTMID</a>, $ECODE overflow, the first and last ecodes are retained, but some intervening ecodes have been lost</p></td>
+</tr>
+<tr>
+<td><p>150380624</p></td>
+<td><p><a class="link" href="ENCODING.html" title="ENCODING ">ENCODING</a>, M or W-1252 code designation for character set encoding, might return unexpected results when ""UTF-8""=$ZCHSET</p></td>
 </tr>
 <tr>
 <td><p>150383858</p></td>
@@ -4630,6 +4626,10 @@
 <td><p><a class="link" href="REPLINSTREAD.html" title="REPLINSTREAD ">REPLINSTREAD</a>, Error reading xxxx bytes at offset yyyy from replication instance file ffff</p></td>
 </tr>
 <tr>
+<td><p>150380610</p></td>
+<td><p><a class="link" href="REPLINSTRECR.html" title="REPLINSTRECR ">REPLINSTRECR</a>, Error recreating replication instance file ffff</p></td>
+</tr>
+<tr>
 <td><p>150380922</p></td>
 <td><p><a class="link" href="REPLINSTSECLEN.html" title="REPLINSTSECLEN ">REPLINSTSECLEN</a>, REPLINSTSECLEN Secondary replication instance name xxxx should be 1 to 15 characters long</p></td>
 </tr>
@@ -4984,6 +4984,10 @@
 <tr>
 <td><p>150379443</p></td>
 <td><p><a class="link" href="SEMREMOVED.html" title="SEMREMOVED ">SEMREMOVED</a>, Semaphore id xxxx removed from the system</p></td>
+</tr>
+<tr>
+<td><p>418816074</p></td>
+<td><p><a class="link" href="SEMUNDOOVERFLOW.html" title="SEMUNDOOVERFLOW ">SEMUNDOOVERFLOW</a>, The operating system per-process SEM_UNDO table is full and region rrrr cannot be opened</p></td>
 </tr>
 <tr>
 <td><p>150378690</p></td>
