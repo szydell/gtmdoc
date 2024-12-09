@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZPARSE()</title>
+<title>$ZMessage()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s41.html" title="$ZMessage()">
-<link rel="next" href="ch07s43.html" title="$ZPIece()">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="prev" href="ch07s41.html" title="$ZLength()">
+<link rel="next" href="ch07s43.html" title="$ZPARSE()">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZPARSE()</th></tr>
+<tr><th colspan="3" align="center">$ZMessage()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s41.html">Prev</a> </td>
@@ -25,71 +25,27 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZPARSE()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZMessage()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zparse"></a>$ZPARSE()<a class="indexterm" name="idm45162260484368"></a>
+<a name="zmessage_g"></a>$ZMessage()<a class="indexterm" name="idm45565262479296"></a>
 </h2></div></div></div>
-<p>Expands a file name to a full <span>pathname</span> and then returns the full <span>pathname</span> or one of its fields <span>(directory, name, or extension)</span>. </p>
-<p>The format for the $ZPARSE function is:</p>
-<pre class="programlisting">$ZPARSE(expr1[,expr2[,expr3[,expr4[,expr5]]]])</pre>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The first expression specifies the file name; if the file name is not valid, $ZPARSE() returns a null string; if the file name contains a wildcard (* and/or ?), $ZPARSE() returns a file name containing the wildcard(s).</p></li>
-<li class="listitem"><p>The optional second expression specifies the field of the <span>pathname</span> that $ZPARSE() returns; if this argument is missing or null, $ZPARSE() returns a full <span>pathname</span> constructed using default values in place of any fields missing for <span> directory, file and extension</span>.</p></li>
-<li class="listitem"><p>The optional third and fourth expressions specify default values to use during file name expansion for missing fields <span>(directory, name, or extension)</span>, if any, in the original file name. For any field missing in the original file name specified in expr1, $ZPARSE() will attempt to substitute the corresponding field from expr3; if that field is not present in expr3, $ZPARSE() will attempt to use the corresponding field from expr4.</p></li>
-<li class="listitem"><p>If the file <span>extension</span> is missing from all three of expr1, expr3, and expr4, $ZPARSE() will return a null string for the corresponding field. If the file  or directory is missing from all three of expr1, expr3, and expr4, $ZPARSE() will substitute the information from your current <span>working</span> directory.</p></li>
-<li class="listitem"><p>The optional fifth expression specifies the mode or type of parse that $ZPARSE() performs.</p></li>
-</ul></div>
-<p>$ZPARSE() provides a tool for verifying that a <span>file name</span> is syntactically correct, for examining specific fields of a <span>file name</span>, and for filling in missing pieces in a partial specification based on a hierarchy of defaults. For information about determining whether a file exists, see <a class="xref" href="ch07s49.html" title="$ZSEARCH()">&#8220;$ZSEARCH()&#8221;</a>.</p>
-<p>$ZPARSE() arguments, after the first, are optional. If you use no other arguments, a single argument is sufficient. However, if you use selected arguments $ZPARSE() requires that null strings ("") be filled in for the unspecified arguments.</p>
-<p>The acceptable keywords for the second argument are:</p>
-<p>"DIRECTORY":  Directory name</p>
-<p>"NAME":       File name (excluding file extension)</p>
-<p>"TYPE":       File type extension</p>
-<p>The keywords may be entered in either upper or lower case. Variables that evaluate to these strings and indirection are acceptable for argument two. When the keywords themselves appear as string literals, they must be enclosed in quotation marks (" ").</p>
-<p>The following guidelines must be followed in constructing arguments one, three and four:</p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>Directory specifications must end in a slash; anything after the final slash in the directory specification is assumed to be part of the name specification.</p></li>
-<li class="listitem"><p>A file name with an extension must include at least one character to the left of the period (.). Thus, "/user/.login" refers to the file named ".login", while "/usr/taxes.c" refers to a file named "taxes" with the extension "c". If a file name includes more than one period, the extension includes all letters to the right of the rightmost period.</p></li>
-</ul></div>
-<p>The keywords for the fifth argument $ZPARSE() are:</p>
-<p>NULL (""):        Returns a full file-specification or device</p>
-<p>"SYNTAX_ONLY":    Disables checking for the existence of the directory or device.</p>
+<p>Returns a message string associated with a specified status code .</p>
+<p>The format for the $ZMESSAGE function is:</p>
+<pre class="programlisting">$ZM[ESSAGE](intexpr)</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The integer expression specifies the status code for which $ZMESSAGE() returns error message text .</p></li></ul></div>
+<p>$ZMESSAGE() provides a tool for examining the message and/or mnemonic associated with a particular message code as reported in $ZSTATUS.</p>
+<p>The $ZSTATUS Intrinsic Special Variable holds the message code and the message of the last non-Direct Mode GT.M error. For more information on $ZSTATUS, refer "Intrinsic Special Variables".</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zparse"></a>Examples<span> of $ZPARSE()</span><a class="indexterm" name="idm45162260440896"></a>
+<a name="examples_of_zmessage_g"></a>Examples<span> of $ZMESSAGE()</span><a class="indexterm" name="idm45565262349008"></a>
 </h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;write $zparse("test","","/usr/work/","dust.lis")
-/usr/work/test.lis
+<pre class="programlisting">GTM&gt;write $zmessage(150373210)
+%GTM-E-DIVZERO, Attempt to divide by zero
 GTM&gt;</pre>
-<p>This uses $ZPARSE() to demonstrate defaulting using the third and fourth arguments. The result gets the  directory field from  the third expression, <span>the name from the first expression, and the type from the fourth expression</span>.</p>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;r!,"file :",f w ?20,$zparse(f,"directory")
-file: test.list /usr/work/
-GTM&gt;</pre>
-<p>This uses $ZPARSE() to display the directory for the file name entered as input at the prompt file: , in this case, the current working directory.</p>
-<p>Example:</p>
-<pre class="programlisting">$ cd /usr/work/me
-$ $gtm
-GTM&gt;write $zparse("test","","x.list","y.c")/usr/work/me/test.lis
-GTM&gt;write $zparse("test","","/usr/work/","/dev/y.c")/usr/work/test.c
-GTM&gt;write $zparse("test","","/usr/work","/dev/y.c")/usr/test.c
-GTM&gt;</pre>
-<p>This example illustratest the use of the third and fourth arguments to $ZPARSE(). In the first statement, the first argument has no directory or extension field, so $ZPARSE() substitutes the extension field from the third argument. Since neither the third nor fourth argument specifies a directory, and because the fourth argument does not contain any fields that are not present in the third argument, the fourth argument is not used.</p>
-<p>In the second statement, the first argument to $ZPARSE() is again missing both the directory and extension. In this instance, $ZPARSE() uses the directory specified in the third argument and, becuase neither the first nor third argument specifies a file extension, $ZPARSE() uses the file extension from the fourth argument.</p>
-<p>In the third statement, because "/usr/work" does not end with a backward slash (/), $ZPARSE() interprets the substring "work" as a file name. Then, $ZPARSE() substitutes "/usr/" for the directory missing in the first argument and substitutes ".c" from the fourth argument for the extension missing from both the first and third arguments.</p>
-<p>Example:</p>
-<pre class="programlisting">$ cd /usr/work/me
-$ /usr/lib/fis-gtm/V5.4-002B_x86/gtm
-GTM&gt;For i="DIRECTORY","NAME","TYPE","" Write $ZPARSE("test.m",i),!
-/usr/work/me/
-test
-.m
-/usr/work/me/test.m
-GTM&gt;</pre>
-<p>This example illustrates the output produced for each of the possible values for the second argument.</p>
+<p>This uses $ZMESSAGE() to display the message string corresponding to code 150373210. </p>
 </div>
 </div>
 <div class="navfooter">
@@ -103,9 +59,9 @@ GTM&gt;</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZMessage() </td>
+<td width="40%" align="left" valign="top">$ZLength() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZPIece()</td>
+<td width="40%" align="right" valign="top"> $ZPARSE()</td>
 </tr>
 </table>
 </div>

@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$REverse()</title>
+<title>$REPLACE()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s18.html" title="$Random()">
-<link rel="next" href="ch07s20.html" title="$Select()">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="next" href="ch07s20.html" title="$REverse()">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$REverse()</th></tr>
+<tr><th colspan="3" align="center">$REPLACE()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s18.html">Prev</a> </td>
@@ -25,25 +25,30 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$REverse()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$REPLACE()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="reverse"></a>$REverse()<a class="indexterm" name="idm45162261010064"></a>
+<a name="replace"></a>$REPLACE()<a class="indexterm" name="idm45565262880736"></a>
 </h2></div></div></div>
-<p>Returns a string with the characters in the reverse order from that of its argument.</p>
-<p>The format for the $REVERSE function is:</p>
-<pre class="programlisting">$RE[VERSE](expr)</pre>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The expr in the syntax is the string to be reversed.</p></li></ul></div>
+<p>Returns a string that results from replacing or dropping a substring in the first of its arguments as specified by the patterns of its other arguments.</p>
+<p>The format for the $REPLACE function is:</p>
+<pre class="programlisting">$REPLACE(expr1[,expr2[,expr3]])</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>The first expression specifies the string on which $REPLACE() operates. If the other arguments are omitted, $REPLACE() returns this expression.</p></li>
+<li class="listitem"><p>The optional second expression specifies the substring for $REPLACE() to replace. If this argument is omitted, $REPLACE() returns the first expression without modification.</p></li>
+<li class="listitem"><p>The optional third expression specifies the replacement for the second expression. If this argument is empty or omitted, $ZREPLACE() drops all occurrences of the substring in the second expression.</p></li>
+</ul></div>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>For a process started in UTF-8 mode, the algorithm of $REPLACE() treats the string arguments as UTF-8 encoded. With VIEW "BADCHAR" enabled, $REPLACE() produces a run-time error when it encounters a malformed character.</p></li></ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_reverse"></a>Examples<span> of $REVERSE()</span><a class="indexterm" name="idm45162261001456"></a>
+<a name="examples_of_replace"></a>Examples<span> of $REPLACE()</span><a class="indexterm" name="idm45565262892096"></a>
 </h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;write $reverse(123)
-321
-GTM&gt;write $reverse("AbCDe")
-"eDCbA"</pre>
+<pre class="programlisting">GTM&gt;write $replace("alphabet","abe","ABE")
+alphABEt
+GTM&gt;</pre>
+<p>$REPLACE() searches for the second expression "abe" in the first expression "alphabet". Since "abe" exists in the first expression, it replaces the occurrence with the third expression "ABE".</p>
 </div>
 </div>
 <div class="navfooter">
@@ -59,7 +64,7 @@ GTM&gt;write $reverse("AbCDe")
 <tr>
 <td width="40%" align="left" valign="top">$Random() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $Select()</td>
+<td width="40%" align="right" valign="top"> $REverse()</td>
 </tr>
 </table>
 </div>

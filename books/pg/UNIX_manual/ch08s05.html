@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s04.html" title="$ETrap">
 <link rel="next" href="ch08s06.html" title="$IO">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,13 +30,13 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="horolog"></a>$Horolog<a class="indexterm" name="idm45162260239280"></a>
+<a name="horolog"></a>$Horolog<a class="indexterm" name="idm45565261873744"></a>
 </h2></div></div></div>
 <p>$H[OROLOG] contains a string value specifying the number of days since "31 December, 1840," and the number of seconds since midnight of date in the time zone of the process, separated by a comma (,). At midnight, the piece of the string following the comma resets to zero (0), and the piece preceding the comma increments by one (1). GT.M does not permit the SET command to modify $HOROLOG. A process takes the system time from the system clock, but can adjust the time zone by appropriately setting the TZ environment variable before invoking GT.M. $HOROLOG accuracy is subject to the precision of the system clock (use man gettimeofday from the UNIX shell for more information). </p>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;Write $HOROLOG</pre>
 <p>Produces the result 58883,55555 at 3:25:55 pm on 20 March, 2002.</p>
-<p>For further information on formatting $HOROLOG for external use, refer to <a class="xref" href="ch07s34.html" title="$ZDate()">&#8220;$ZDate()&#8221;</a>.</p>
+<p>For further information on formatting $HOROLOG for external use, refer to <a class="xref" href="ch07s35.html" title="$ZDate()">&#8220;$ZDate()&#8221;</a>.</p>
 </div>
 <div class="navfooter">
 <hr>

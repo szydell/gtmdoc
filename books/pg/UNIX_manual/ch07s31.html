@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZCOLlate()</title>
+<title>$ZCHar()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s30.html" title="$ZCHar()">
-<link rel="next" href="ch07s32.html" title="$ZCOnvert()">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="prev" href="ch07s30.html" title="$ZBIT Functions">
+<link rel="next" href="ch07s32.html" title="$ZCOLlate()">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZCOLlate()</th></tr>
+<tr><th colspan="3" align="center">$ZCHar()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s30.html">Prev</a> </td>
@@ -25,32 +25,37 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZCOLlate()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZCHar()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zcollate"></a>$ZCOLlate()<a class="indexterm" name="idm45162260644352"></a>
+<a name="zchar"></a>$ZCHar()<a class="indexterm" name="idm45565262781824"></a>
 </h2></div></div></div>
-<p>Returns the transformed representation of the first argument glvn in a normalized form using the alternative transform specified by the second argument intexpr; the return can be used as an operand to the follows (]) or sorts-after (]]) operator such that, if both operands are in the normalized form, the result is independent of alternative collation. </p>
-<p>The format for the $ZCOLLATE() function is:</p>
-<pre class="programlisting">$ZCOL[late](glvn,intexpr[,{0|1}])</pre>
+<p>Returns a string composed of bytes represented by the integer octet values specified in its argument(s).</p>
+<p>The format for the $ZCHAR() function is:</p>
+<pre class="programlisting">$ZCH[AR](intexpr[,...])</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The subscripted or unsubscripted global or local variable name specifies the key to transform.</p></li>
-<li class="listitem"><p>The integer expression specifies the ID of the alternative transform to use.</p></li>
-<li class="listitem"><p>The optional third argument specifies whether the transform is to normalized form, by default or if zero (0), or, if one (1), the reverse transform from the normalized to the native form.</p></li>
+<li class="listitem"><p>The integer expression(s) specify the numeric byte value of the byte(s) $ZCHAR() returns.</p></li>
+<li class="listitem">
+<p>GT.M limits the number of arguments to a maximum of 254. $ZCHAR() provides a means of producing byte sequences. In the UTF-8 mode, $ZCHAR() returns a malformed characters for numeric byte values 128 to 255. In the M mode, $ZCHAR() can create valid UTF-8 characters that includes bytes in the range 128-255. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>The output of $ZCHAR() for values of integer expression(s) from 0 through 127 does not vary with choice of the character encoding scheme. This is because 7-bit ASCII is a proper subset of UTF-8 character encoding scheme. The representation of characters returned by $ZCHAR() for values 128 through 255 differ for each character encoding scheme.</p></td></tr>
+</table></div>
+</li>
+<li class="listitem"><p>When used with $ZASCII(), $ZCHAR() can also perform arithmetic operations on the byte values of the bytes associated with a sequence of octets (8-bit bytes).</p></li>
 </ul></div>
-<p>Note that because the forward transform is to the GDS global storage format, the reverse transform always shows a global form. This is not material when the result is used for most comparisons, but for some uses the applcation might need to remove the leading up-arrow (^).</p>
-<p>Please see the section on $ZATRANSFORM() for a similar alternative.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zcollate"></a>Example of $ZCOLlate()</h3></div></div></div>
+<a name="idm45565262582848"></a>Example of $ZCHAR()</h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;write $zwrite($zcollate("A(""foo"")",0))
-"A"_$C(0,255)_"foo"_$C(0,0)
-GTM&gt;write $zcollate($zcollate("A(""foo"")",0),0,1)
-^A("foo")
+<pre class="programlisting">GTM&gt;write $zchar(228,184,187,7)
+<span class="symbol">&#20027;</span>
 GTM&gt;</pre>
-<p>The first WRITE in this example shows the readable form or the value produced by the $ZCOLLATE() revealing the details of how GT.M internally represents this key using default (M) collation. The second WRITE shows how the combination of the transform and reverse transform restores the value to the original representation.</p>
+<p>This example WRITEs the byte sequence represented by <span class="symbol">&#20027;</span> and signals the terminal bell.</p>
 </div>
 </div>
 <div class="navfooter">
@@ -64,9 +69,9 @@ GTM&gt;</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZCHar() </td>
+<td width="40%" align="left" valign="top">$ZBIT Functions </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZCOnvert()</td>
+<td width="40%" align="right" valign="top"> $ZCOLlate()</td>
 </tr>
 </table>
 </div>

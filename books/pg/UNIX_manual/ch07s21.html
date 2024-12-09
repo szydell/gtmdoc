@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$STack()</title>
+<title>$Select()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s20.html" title="$Select()">
-<link rel="next" href="ch07s22.html" title="$Text()">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="prev" href="ch07s20.html" title="$REverse()">
+<link rel="next" href="ch07s22.html" title="$STack()">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$STack()</th></tr>
+<tr><th colspan="3" align="center">$Select()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s20.html">Prev</a> </td>
@@ -25,136 +25,42 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$STack()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$Select()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="stack"></a>$STack()<a class="indexterm" name="idm45162260985840"></a>
+<a name="select"></a>$Select()<a class="indexterm" name="idm45565262855568"></a>
 </h2></div></div></div>
-<p>Returns strings describing aspects of the execution environment.</p>
-<p>The format for the $STACK function is:</p>
-<pre class="programlisting">$ST[ACK](intexpr[,expr])</pre>
+<p>Returns a value associated with the first true truth-valued expression in a list of paired expression arguments.</p>
+<p>The format for the $SELECT function is:</p>
+<pre class="programlisting">$S[ELECT](tvexpr:expr[,...])</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The intexpr identifies the M virtual machine stack level (as described by the standard), on which the function is to provide information.</p></li>
-<li class="listitem">
-<p>The optional second argument is evaluated as a keyword that specifies a type of information to be returned as follows: </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="circle">
-<li class="listitem"><p>"MCODE" the line of code that was executed.</p></li>
-<li class="listitem">
-<p>"PLACE" the address of the above line of code or the symbol at ("@") to indicate code executed from a string value.</p>
-<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>For run-time errors, GT.M does not provide a "PLACE" within a line (unlike it does for compilation errors), but it reports a label, offset, and routine.</p></td></tr>
-</table></div>
-</li>
-<li class="listitem"><p>"ECODE" either an empty string, or the error code(s) that was added at this execution level.</p></li>
+<li class="listitem"><p>$SELECT() evaluates expressions from left to right.</p></li>
+<li class="listitem"><p>If a truth-valued expression is TRUE (1), $SELECT() returns the corresponding expression after the colon (:) delimiter.</p></li>
+<li class="listitem"><p>Once $SELECT() finds a TRUE, the function does not process any remaining arguments.</p></li>
+<li class="listitem"><p>If $SELECT() finds no TRUE truth-value in its list of arguments, the function generates a run-time error.</p></li>
+<li class="listitem"><p>$SELECT() does not have any effect on $TEST. </p></li>
 </ul></div>
-</li>
-<li class="listitem"><p>When $STACK has only one argument, values corresponding to available stack levels specify a return value that indicates how the level was created, as follows:</p></li>
-<li class="listitem"><p>If intexpr is zero (0), the function returns information on how GT.M was invoked.</p></li>
-<li class="listitem"><p>If intexpr is minus one (-1), the function returns the highest level for which $STACK can return information. Note that, if $ECODE="", $STACK(-1) returns the same value as the $STACK ISV.</p></li>
-<li class="listitem"><p>If intexpr is greater than zero (0) and less than or equal to $STACK(-1), indicates how this level of process stack was created ("DO", "TRIGGER" - for a stack level invoked by a trigger, "XECUTE", or "$$" - for an extrinsic function).</p></li>
-<li class="listitem"><p>$STACK(lvl) reports "ZINTR" for a stack level invoked by MUPIP INTRPT.</p></li>
-<li class="listitem"><p>If intexpr is greater than $STACK (-1), the function returns an empty string.</p></li>
-<li class="listitem"><p>During error handling, $STACK() return a snapshot of the state of the stack at the time of error. Even if subsequent actions add stack levels, $STACK() continues to report the same snapshot for the levels as of the time of the error. $STACK() reports the latest stack information only after the code clears $ECODE. </p></li>
-<li class="listitem"><p>$STACK() assists in debugging programs. </p></li>
-</ul></div>
-<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>$STACK() returns similar information to ZSHOW "S" when ""=$ECODE, but when $ECODE contains error information, $STACK() returns information as of the time of a prior error, generally the first entry in $ECODE. For $STACK() to return current information, be sure that error handing code does a SET $ECODE="" before restoring the normal flow of control.</p></td></tr>
-</table></div>
+<p>$SELECT() is one of a limited set of functions that permit an indefinite number of arguments. $SELECT() provides a means of selecting from a list of alternatives.</p>
+<p>Generally, the last $SELECT() argument has numeric literal one (1) for a truth-value to prevent run-time errors, and to provide a "default" value.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_stack"></a>Examples<span> of $STACK()</span><a class="indexterm" name="idm45162261019392"></a>
+<a name="examples_of_select"></a>Examples<span> of $SELECT()</span><a class="indexterm" name="idm45565262856208"></a>
 </h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">/usr/lib/fis-gtm/V5.4-002B_x86/gtm -run ^dstackex
-dstackex;
-  zprint ^dstackex
-  write !,$STACK
-  xecute "WRITE !,$STACK"
-  do Label
-  write !,$$ELabel
-  write !,$STACK
-  quit
- 
-Label
-  write !,$STACK
-  do DLabel
-  quit
- 
-ELabel()
-  quit $STACK
- 
-DLabel
-  write !,$STACK
-  quit
-0
-1
-1
-2
-1
-</pre>
-<p>Example for error processing:</p>
-<pre class="programlisting">GTM&gt;zprint ^debugerr
-debugerr;
- set dsm1=$stack(-1)
- write !,"$stack(-1):",dsm1
- for l=dsm1:-1:0 do
- . write !,l
- . for i="ecode","place","mcode" write ?5,i,?15,$stack(l,i),!
+<pre class="programlisting">GTM&gt;for i=3:-1:0 write !,$select(i=1:"here",i=2:"come",i=3:"Watson")
+Watson
+come
+here
+%GTM-E-SELECTFALSE, No argument to $SELECT was true
 GTM&gt;</pre>
-<p>The above example can be used to display a trace of the code path that led to an error.</p>
+<p>This loop uses $SELECT() to WRITE a series of strings. Because there is no true argument on the fourth iteration, when i=0, $SELECT() produces an error.</p>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;zprint ^dstacktst
-dstacktst(x)       ; check $stack() returns with and without clearing $ecode
- set $etrap="do ^debugerr"
-label
- if x&gt;0 set $ecode=",U1," ; if condition
- else  set $ecode=",U2," ;  else condition
- quit
-GTM&gt;do ^dstacktst(0)
-$stack(-1):2
-2    ecode
-     place     debugerr+3^debugerr
-     mcode      for l=dsm1:-1:0 do
-1    ecode     ,U2,
-     place     label+2^dstacktst
-     mcode      else  set $ecode=",U2," ;  else condition
-0    ecode
-     place     +1^GTM$DMOD
-     mcode
-%GTM-E-SETECODE, Non-empty value assigned to $ECODE (user-defined error trap)
-GTM&gt;do ^dstacktst(1)
-$stack(-1):1
-1    ecode     ,U2,
-     place     label+2^dstacktst
-     mcode      else  set $ecode=",U2," ;  else condition
-0    ecode
-     place     +1^GTM$DMOD
-     mcode
-%GTM-E-SETECODE, Non-empty value assigned to $ECODE (user-defined error trap)
-GTM&gt;set $ecode=""
-GTM&gt;do ^dstacktst(1)
-$stack(-1):2
-2    ecode
-     place     debugerr+3^debugerr
-     mcode      for l=dsm1:-1:0 do
-1    ecode     ,U1,
-     place     label+1^dstacktst
-     mcode      if x&gt;0 set $ecode=",U1," ; if condition
-0    ecode
-     place     +1^GTM$DMOD
-     mcode
-%GTM-E-SETECODE, Non-empty value assigned to $ECODE (user-defined error trap)
-GTM&gt;</pre>
-<p>This example shows how SETing $ECODE=.. makes $STACK() reports current information. Notice how ^do dstacktst(0) and ^dostacktst(1) without clearing $ECODE in between displays information frozen at the time of the first error (else condition).</p>
+<pre class="programlisting">set name=$select(sex="M":"Mr. ",sex="F":"Ms. ",1:"")_name</pre>
+<p>This example uses $SELECT() to add a prefix to the name based on a sex code held in the variable sex. Notice that the default handles the case of a missing or incorrect code.</p>
+<p>Example:</p>
+<pre class="programlisting">if $select(x=+x:x,x="":0,"JANAPRJULOCT"[x:1,1:0) do THING</pre>
+<p>This uses $SELECT() to perform complex logic as the truth-valued expression argument to an IF command.</p>
 </div>
 </div>
 <div class="navfooter">
@@ -168,9 +74,9 @@ GTM&gt;</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$Select() </td>
+<td width="40%" align="left" valign="top">$REverse() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $Text()</td>
+<td width="40%" align="right" valign="top"> $STack()</td>
 </tr>
 </table>
 </div>

@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZAUditlog</title>
+<title>$ZATRansform</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s27.html" title="$ZATRansform">
-<link rel="next" href="ch07s29.html" title="$ZBIT Functions">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="prev" href="ch07s27.html" title="$ZAscii()">
+<link rel="next" href="ch07s29.html" title="$ZAUditlog">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZAUditlog</th></tr>
+<tr><th colspan="3" align="center">$ZATRansform</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s27.html">Prev</a> </td>
@@ -25,151 +25,41 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZAUditlog</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZATRansform</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zauditlog"></a>$ZAUditlog<a class="indexterm" name="idm45162260939056"></a>
+<a name="zatransform"></a>$ZATRansform<a class="indexterm" name="idm45565262615488"></a>
 </h2></div></div></div>
-<p>Sends its argument to an audit logger/listener process. This function requires setting the AZA_ENABLE audit logging facility in the $gtm_dist/restrict.txt file. <span>For information on setting up the AZA_ENABLE audit logging facility, refer to "Configuring the Restriction Facility" section in the <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</span>The format for the $ZAUDITLOG() function is:</p>
-<pre class="programlisting">ZAUDITLOG(expr)</pre>
+<p>Returns the transformed representation of the first argument expr in a normalized form using the alternative transform specified by the second argument intexpr; the transformed representation can be used as an operand to the follows (]) or sorts-after (]]) operator such that, if both operands are in the normalized form, the result is independent of alternative collation. The format for the $ZATRANSFORM() function is:</p>
+<pre class="programlisting">$ZATRANSFORM(expr,intexpr[,{0|1|2|-2}][,{0|1}])</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>expr specifies the string to send for audit logging</p></li>
-<li class="listitem"><p>A return of TRUE (1) indicates successful logging, FALSE (0) indicates logging is not enabled; a trappable RESTRICTEDOP error indicates logging is enabled but not working.</p></li>
-<li class="listitem"><p>$ZAUDITLOG() identifies its message with src=4, and like other GT.M logging facilities, records the location of GT.M distribution, uid, euid, pid, tty, and the command / argument(s). </p></li>
+<li class="listitem"><p>The expression specifies the string to transform.</p></li>
+<li class="listitem"><p>The intexpr specifies the ID of the alternative transform to use.</p></li>
 <li class="listitem">
-<p>If LGDE is specified as an option for the AZA_ENABLE facility, GDE logs all commands. GT.M ignores this option if specified with other A*_ENABLE audit logging facilities. When it fails to log a command, GDE issues a GDELOGFAIL error. The following table characterizes $ZAUDITLOG() and GDE audit logging behavior:</p>
-<p>
-</p>
-<div class="informaltable"><table border="1">
-<colgroup>
-<col>
-<col>
-<col>
-<col>
-<col>
-</colgroup>
-<thead>
-<tr><th colspan="5"><p>$ZAUDITLOG() / GDE logging Characteristics</p></th></tr>
-<tr>
-<th>
-<p>AZA_ENABLE</p>
-</th>
-<th>
-<p>LGDE</p>
-</th>
-<th>
-<p>Logging success</p>
-</th>
-<th>
-<p>GDE audit logging</p>
-</th>
-<th>
-<p>$ZAUDITLOG() result</p>
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<p>Yes</p>
-</td>
-<td>
-<p>Yes</p>
-</td>
-<td>
-<p>Yes</p>
-</td>
-<td>
-<p>Yes</p>
-</td>
-<td>
-<p>1</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>Yes</p>
-</td>
-<td>
-<p>No</p>
-</td>
-<td>
-<p>Yes</p>
-</td>
-<td>
-<p>No</p>
-</td>
-<td>
-<p>1</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>Yes</p>
-</td>
-<td>
-<p>Yes</p>
-</td>
-<td>
-<p>No</p>
-</td>
-<td>
-<p>GDELOGFAIL error</p>
-</td>
-<td>
-<p>RESTRICTEDOP error</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>Yes</p>
-</td>
-<td>
-<p>No</p>
-</td>
-<td>
-<p>No</p>
-</td>
-<td>
-<p>No</p>
-</td>
-<td>
-<p>RESTRICTEDOP error</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>No</p>
-</td>
-<td>
-<p>N/A</p>
-</td>
-<td>
-<p>N/A</p>
-</td>
-<td>
-<p>No</p>
-</td>
-<td>
-<p>0</p>
-</td>
-</tr>
-</tbody>
-</table></div>
-<p>
-  </p>
-</li>
+<p>The optional third argument specifies:</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem"><p>zero (0): the transform is to normalized form</p></li>
+<li class="listitem"><p>one (1): the reverse transform from the normalized to the native form</p></li>
+<li class="listitem"><p>two (2): the character which collates immediately after the first character of the first argument, or the empty string if no character does.</p></li>
+<li class="listitem"><p>minus two (-2): character which collates immediately before the first character of the first argument, or the empty string if no character does.</p></li>
 </ul></div>
+</li>
+<li class="listitem"><p>The optional fourth argument specifes whether to use standard M collation of numbers before strings, the default or zero (0), or to sort all values as strings (1).</p></li>
+</ul></div>
+<p>Please see <a class="xref" href="ch07s32.html" title="$ZCOLlate()">&#8220;$ZCOLlate()&#8221;</a> for a similar alternative.</p>
+<p>
+The 2 and -2 work in M mode for the 'M' collation (collation 0), or any user defined collation which supplies the necessary plugin functionality. In UTF-8 mode, these argument values produce a ZATRANSCOL error. If the plugin for the specified collation does not support this "next character" functionality, the function produces a COLLATIONUNDEF error in response to an an attempt to invoke it. If an external collation library is used and encounters a gtm_ac_xutil failure, ZATRANSFORM produces an ERR_ZATRANSCOL. If an external collation library is used and does not supply a  gtm_ac_xutil function, ZATRANSFORM produces an ERR_COLLATIONUNDEF when operations -2 or 2 are specified. To use these operations with external collation libraries, the libraries must supply a function called 'gtm_ac_xutil'. <span>For more information on the following signature and characteristics of the gtm_ac_xutil function, refer to <a class="xref" href="ch12s02.html#transform_utility" title="Transform Utility Routine (gtm_ac_xutil)">&#8220;Transform Utility<span> Routine (gtm_ac_xutil)</span>&#8221;</a>.</span>
+</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zauditlog"></a>Examples<span> of $ZAUDitlog()</span>
+<a name="examples_of_zatransform"></a>Examples<span> of $ZATRANSFORM()</span>
 </h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;write $zauditlog("Name Change for "_ip)
-1
+<pre class="programlisting">GTM&gt;write $zatransform("John Smythe",1)]$zatransform("Jane Smith",2)
+0
 GTM&gt;</pre>
-<p>This example uses $ZAUDITLOG() to log a literal label concatenated with a variable (identifier). The return indicates the logging was successful.</p>
+<p>This example uses $ZATRANSFORM() and two (here unspecified) collation definitions to compare the ordering of two (literal) expressions as GT.M would collate them if there was a way to collate them together. The result indicates that the first would collate before the second.</p>
 </div>
 </div>
 <div class="navfooter">
@@ -183,9 +73,9 @@ GTM&gt;</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZATRansform </td>
+<td width="40%" align="left" valign="top">$ZAscii() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZBIT Functions</td>
+<td width="40%" align="right" valign="top"> $ZAUditlog</td>
 </tr>
 </table>
 </div>

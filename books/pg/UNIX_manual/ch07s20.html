@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$Select()</title>
+<title>$REverse()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s19.html" title="$REverse()">
-<link rel="next" href="ch07s21.html" title="$STack()">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="prev" href="ch07s19.html" title="$REPLACE()">
+<link rel="next" href="ch07s21.html" title="$Select()">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$Select()</th></tr>
+<tr><th colspan="3" align="center">$REverse()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s19.html">Prev</a> </td>
@@ -25,42 +25,25 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$Select()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$REverse()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="select"></a>$Select()<a class="indexterm" name="idm45162260995760"></a>
+<a name="reverse"></a>$REverse()<a class="indexterm" name="idm45565262863120"></a>
 </h2></div></div></div>
-<p>Returns a value associated with the first true truth-valued expression in a list of paired expression arguments.</p>
-<p>The format for the $SELECT function is:</p>
-<pre class="programlisting">$S[ELECT](tvexpr:expr[,...])</pre>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>$SELECT() evaluates expressions from left to right.</p></li>
-<li class="listitem"><p>If a truth-valued expression is TRUE (1), $SELECT() returns the corresponding expression after the colon (:) delimiter.</p></li>
-<li class="listitem"><p>Once $SELECT() finds a TRUE, the function does not process any remaining arguments.</p></li>
-<li class="listitem"><p>If $SELECT() finds no TRUE truth-value in its list of arguments, the function generates a run-time error.</p></li>
-<li class="listitem"><p>$SELECT() does not have any effect on $TEST. </p></li>
-</ul></div>
-<p>$SELECT() is one of a limited set of functions that permit an indefinite number of arguments. $SELECT() provides a means of selecting from a list of alternatives.</p>
-<p>Generally, the last $SELECT() argument has numeric literal one (1) for a truth-value to prevent run-time errors, and to provide a "default" value.</p>
+<p>Returns a string with the characters in the reverse order from that of its argument.</p>
+<p>The format for the $REVERSE function is:</p>
+<pre class="programlisting">$RE[VERSE](expr)</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The expr in the syntax is the string to be reversed.</p></li></ul></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_select"></a>Examples<span> of $SELECT()</span><a class="indexterm" name="idm45162260979552"></a>
+<a name="examples_of_reverse"></a>Examples<span> of $REVERSE()</span><a class="indexterm" name="idm45565262894992"></a>
 </h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;for i=3:-1:0 write !,$select(i=1:"here",i=2:"come",i=3:"Watson")
-Watson
-come
-here
-%GTM-E-SELECTFALSE, No argument to $SELECT was true
-GTM&gt;</pre>
-<p>This loop uses $SELECT() to WRITE a series of strings. Because there is no true argument on the fourth iteration, when i=0, $SELECT() produces an error.</p>
-<p>Example:</p>
-<pre class="programlisting">set name=$select(sex="M":"Mr. ",sex="F":"Ms. ",1:"")_name</pre>
-<p>This example uses $SELECT() to add a prefix to the name based on a sex code held in the variable sex. Notice that the default handles the case of a missing or incorrect code.</p>
-<p>Example:</p>
-<pre class="programlisting">if $select(x=+x:x,x="":0,"JANAPRJULOCT"[x:1,1:0) do THING</pre>
-<p>This uses $SELECT() to perform complex logic as the truth-valued expression argument to an IF command.</p>
+<pre class="programlisting">GTM&gt;write $reverse(123)
+321
+GTM&gt;write $reverse("AbCDe")
+"eDCbA"</pre>
 </div>
 </div>
 <div class="navfooter">
@@ -74,9 +57,9 @@ GTM&gt;</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$REverse() </td>
+<td width="40%" align="left" valign="top">$REPLACE() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $STack()</td>
+<td width="40%" align="right" valign="top"> $Select()</td>
 </tr>
 </table>
 </div>

@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZAscii()</title>
+<title>$ZAHandle()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s25.html" title="$ZAHandle()">
-<link rel="next" href="ch07s27.html" title="$ZATRansform">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="prev" href="ch07s25.html" title="$View()">
+<link rel="next" href="ch07s27.html" title="$ZAscii()">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZAscii()</th></tr>
+<tr><th colspan="3" align="center">$ZAHandle()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s25.html">Prev</a> </td>
@@ -25,36 +25,65 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZAscii()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZAHandle()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zascii"></a>$ZAscii()<a class="indexterm" name="idm45162260992992"></a>
-</h2></div></div></div>
-<p>Returns the numeric byte value (0 through 255) of a given sequence of octets (8-bit bytes).</p>
-<p>The format for the $ASCII function is:</p>
-<pre class="programlisting">$ZA[SCII](expr[,intexpr])</pre>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The expression is the sequence of octets (8-bit bytes) from which $ZASCII() extracts the byte it decodes.</p></li>
-<li class="listitem"><p>The optional integer expression contains the position within the expression of the byte that $ZASCII() decodes. If this argument is missing, $ZASCII() returns a result based on the first byte position. $ZASCII() starts numbering byte positions at one (1), (the first byte of a string is at position one (1)).</p></li>
-<li class="listitem"><p>If the explicit or implicit position is before the beginning or after the end of the expression, $ZASCII() returns a value of negative one (-1).</p></li>
-<li class="listitem"><p>$ZASCII() provides a means of examining bytes in a byte sequence. When used with $ZCHAR(), $ZASCII() also provides a means to perform arithmetic operations on the byte values associated with a sequence of octets (8-bit bytes).</p></li>
-</ul></div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="idm45162260958224"></a>Examples<span> of $ZASCII()</span>
-</h3></div></div></div>
+<a name="zahandle"></a>$ZAHandle()</h2></div></div></div>
+<p>$ZAHANDLE() returns a unique identifier (handle) for the array associated with a name or an alias container; for an subscripted lvn, it returns an empty string. To facilitate debugging, the handle is a printable string representation of a hexadecimal number. The only meaningful operation on the value returned by a call to $ZAHANDLE() is to compare it for equality with the value returned by another call. Changing nodes within the array doesn't change its handle. $ZAHANDLE() returns different results for copies of an array.</p>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;for i=0:1:4 write !,$zascii("<span class="symbol">&#20027;</span>",i)
- 
--1
-228
-184
-187
--1
+<pre class="programlisting">GTM&gt;set A=1,*B(1)=A
+GTM&gt;write "$zahandle(A)=""",$zahandle(A),""" $zahandle(B(1))=""",$zahandle(B(1)),""""
+$zahandle(A)="17B8810" $zahandle(B(1))="17B8810"
+GTM&gt;set A("Subscript")="Value" ; Change array - but $ZAHandle() doesn't change
+GTM&gt;write "$zahandle(A)=""",$zahandle(A),""" $zahandle(B(1))=""",$zahandle(B(1)),""""
+$zahandle(A)="17B8810" $zahandle(B(1))="17B8810"
+GTM&gt;merge D=A ; A copy of the data has a different $zahandle()
+GTM&gt;Write "$ZAHandle(A)=""",$ZAHandle(A),""" $ZAHandle(D)=""",$ZAHandle(D),""""      
+$zahandle(A)="17B8810" $zahandle(D)="17B8C10"
 GTM&gt;</pre>
-<p>This UTF-8 mode example displays the result of $ZASCII() specifying a byte position before, first, second and third positions, and after the sequence of octets (8-bit bytes) represented by <span class="symbol">&#20027;</span>. In the above example, 228, 184, and 187 represents the numeric byte value of the three-byte in the sequence of octets (8-bit bytes) represented by <span class="symbol">&#20027;</span>.</p>
-</div>
+<p>Since GT.M does not provide a way for a function to return an array or alias variable as its result, the uniqueness of $ZAHandle() can be exploited to effect this capability, by placing the result in a local variable with an agreed prefix (e.g., "%") and its $ZAHANDLE() as a suffix.  The handle can be returned as the value.</p>
+<pre class="programlisting">$ /usr/lib/fis-gtm/V5.4-002B_x86/gtm -run retval
+retval        ; Return an array / object from a function
+    ;;Data for the object array
+    ;;Albert Einstein,14-March-1879
+    ;;Arthur Eddington,28-December-1882
+    ;;
+    zprint    ; Print this program
+    new tmp1,tmp2,tmp3
+    for i=3:1 set tmp1=$text(+i),tmp2=$piece(tmp1,";;",2) quit:'$length(tmp2)  do  
+    .set tmp3="%"_$$NewPerson($piece(tmp2,",",1),$piece(tmp2,",",2))
+    .set @("*Relativists("_(i-2)_")="_tmp3)
+    .kill @("*"_tmp3)
+    kill tmp1,tmp2,tmp3
+    write "------------",!
+    write "Array of objects of relativists:",!
+    zwrite
+    quit
+    ;    
+NewPerson(name,birthdate)    ; Create new person object
+    new lname,fname,dob,tmp1,tmp2 ; New variables used by this function
+    set lname=$Piece(name," ",2),fname=$Piece(name," ",1)
+    set dob=$$FUNC^%DATE(birthdate)
+    set tmp1("fname")=fname,tmp1("lname")=lname,tmp1("dob")=dob
+    set tmp2=$ZAHandle(tmp1)
+    set @("*%"_tmp2_"=tmp1")
+    quit tmp2
+------------
+Array of objects of relativists:
+$ZWRTAC=""
+*Relativists(1)=$ZWRTAC1
+$ZWRTAC1("dob")=13952
+$ZWRTAC1("fname")="Albert"
+$ZWRTAC1("lname")="Einstein"
+*Relativists(2)=$ZWRTAC2
+$ZWRTAC2("dob")=15337
+$ZWRTAC2("fname")="Arthur"
+$ZWRTAC2("lname")="Eddington"
+i=5
+$ZWRTAC=""
+$
+</pre>
 </div>
 <div class="navfooter">
 <hr>
@@ -67,9 +96,9 @@ GTM&gt;</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZAHandle() </td>
+<td width="40%" align="left" valign="top">$View() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZATRansform</td>
+<td width="40%" align="right" valign="top"> $ZAscii()</td>
 </tr>
 </table>
 </div>

@@ -8,12 +8,13 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="REPLINSTDBSTRM.html" title="REPLINSTDBSTRM ">
 <link rel="next" href="REPLINSTFREEZECOMMENT.html" title="REPLINSTFREEZECOMMENT ">
-<link rel="copyright" href="ln-idm45987251743248.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46145190558096.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">REPLINSTFMT </th></tr>
+<tr><th colspan="3" align="center">REPLINSTFMT <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="REPLINSTDBSTRM.html">Prev</a> </td>
@@ -25,16 +26,17 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">REPLINSTFMT </span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">REPLINSTFMT <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span></span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="REPLINSTFMT"></a>REPLINSTFMT </h2></div></div></div>
-<p><span class="bold"><strong>REPLINSTFMT</strong></span>,  Format error encountered while reading replication instance file xxxx. Expected yyyy. Found zzzz.</p>
+<a name="REPLINSTFMT"></a>REPLINSTFMT <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</h2></div></div></div>
+<p><span class="bold"><strong>REPLINSTFMT</strong></span>, Format error encountered while reading replication instance file xxxx. Expected yyyy. Found zzzz.</p>
 <p>Run Time/MUPIP Error: This error is issued by GT.M or MUPIP whenever it tries to open the replication instance file and finds that it was created with a format that the current version of GT.M cannot interpret. GT.M also produces this error when it encounters:</p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><p>an instance file created on a different endian system or</p></li>
-<li class="listitem"><p>an instance file created by a 32-bit (or 64-bit) version of GT.M that is different from the current 64-bit (or 32-bit) version of GT.M.</p></li>
+<li class="listitem"><p>Shutting down a replication server using a different GT.M version, indicating that the instance is not shutdown.</p></li>
 </ol></div>
 <p>Action: Recreate the instance file using the mupip replic -instance_create command with the current version of GT.M.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note">
@@ -49,7 +51,7 @@
 <p>If a MUPIP SET -JOUNAL=ON command produces this message for the region in the operator log, it may indicate that one or more of the current generation journal files are damaged/missing and new journal files were created with no back pointers to the previous journal files. FIS recommends taking a database backup at the earliest convenience because a MUPIP RECOVER/ROLLBACK will not be able to go back past xxxx. If this message is for a specified region(s), consider switching the journal files for all regions (with REGION "*") that the process has opened (all journaled/replicated regions in the instance if replication is in use) to ensure that the RECOVER/ROLLBACK for other regions remains unaffected.</p>
 <p>No action is required if the MUPIP BACKUP -NEWJNLFILES=NOPREVLINK issues the error. </p>
 <p></p>
-<a class="indexterm" name="idm45987246546064"></a><a class="indexterm" name="idm45987246545296"></a>
+<a class="indexterm" name="idm46145185357696"></a><a class="indexterm" name="idm46145185345296"></a>
 </div>
 <div class="navfooter">
 <hr>

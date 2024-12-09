@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZSUBstr()</title>
+<title>$ZSEARCH()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s50.html" title="$ZSIGPROC()">
-<link rel="next" href="ch07s52.html" title="$ZTRanslate()">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="prev" href="ch07s50.html" title="$ZQGBLMOD()">
+<link rel="next" href="ch07s52.html" title="$ZSIGPROC()">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZSUBstr()</th></tr>
+<tr><th colspan="3" align="center">$ZSEARCH()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s50.html">Prev</a> </td>
@@ -25,53 +25,42 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZSUBstr()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZSEARCH()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zsubstr"></a>$ZSUBstr()<a class="indexterm" name="idm45162260481008"></a>
+<a name="zsearch"></a>$ZSEARCH()<a class="indexterm" name="idm45565262075024"></a>
 </h2></div></div></div>
-<p>Returns a properly encoded string from a sequence of bytes.</p>
-<pre class="programlisting">$ZSUB[STR] (expr ,intexpr1 [,intexpr2])</pre>
+<p>The $ZSEARCH function attempts to locate a file matching the specified file name. If the file exists, it returns the file name; if the file does not exist, it returns the null string.</p>
+<p>The format for the $ZSEARCH function is:</p>
+<pre class="programlisting">$ZSEARCH(expr[,intexpr])</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The first expression is an expression of the byte string from which $ZSUBSTR() derives the character sequence.</p></li>
-<li class="listitem"><p>The second expression is the starting byte position (counting from 1 for the first position) in the first expression from where $ZSUBSTR() begins to derive the character sequence.</p></li>
-<li class="listitem"><p>The optional third expression specifies the number of bytes from the starting byte position specified by the second expression that contribute to the result. If the third expression is not specified, the $ZSUBSTR() function returns the sequence of characters starting from the byte position specified by the second expression up to the end of the byte string.</p></li>
-<li class="listitem"><p>The $ZSUBSTR() function never returns a string with illegal or invalid characters. With VIEW "NOBADCHAR", the $ZSUBSTR() function ignores all byte sequences within the specified range that do not correspond to valid UTF-8 code-points. With VIEW "BADCHAR", the $ZSUBSTR() function triggers a run-time error if the specified byte sequence contains a code-point value that is not in the character set.</p></li>
-<li class="listitem"><p>The $ZSUBSTR() is similar to the $ZEXTRACT() byte equivalent function but differs from that function in restricting its result to conform to the valid characters in the current encoding.</p></li>
+<li class="listitem"><p>The expression contains a <span>file name</span>, with or without  wildcards, for which $ZSEARCH() attempts to locate a matching file. Repeating $ZSEARCH with the same filename uses the same context and return a sequence of matching files when they exist; when the sequence is exhausted, $ZSEARCH() returns an empty string (""). Any change to the file name starts a new context.</p></li>
+<li class="listitem"><p>$ZSEARCH() uses the process current working directory, if the expression does not specify a directory.</p></li>
+<li class="listitem"><p>The optional integer expression specifies a "stream" number from 0 to 255 for each search; streams provide a means of having up to 256 $ZSEARCH() contexts simultaneously in progress. </p></li>
+<li class="listitem"><p>If a $ZSEARCH() stream has never been used or if the expression differs from the argument to the last $ZSEARCH() of the stream, the function resets the context and returns the first <span>pathname</span> matching the expression; otherwise, it returns the next matching file in collating sequence; if the last prior <span>pathname</span> returned for the same expression and same stream was the last one matching the argument, $ZSEARCH() returns a null string.</p></li>
 </ul></div>
+<p>$ZSEARCH() provides a tool for verifying that a file exists. <span>For information to help determine the validity of a file name, see <a class="xref" href="ch07s43.html" title="$ZPARSE()">&#8220;$ZPARSE()&#8221;</a>.</span></p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>You can call the POSIX stat() function to access metadata. The optional GT.M POSIX plug-in packages the stat() function for easy access from M application code. </p></td></tr>
+</table></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="idm45162260190624"></a>Examples<span> of $ZSUBSTR()</span>
+<a name="examples_of_zsearch"></a>Examples<span> of $ZSEARCH()</span><a class="indexterm" name="idm45565262170560"></a>
 </h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;write $ZCHSET
-M
-GTM&gt;set char1="a" ; one byte character
-GTM&gt;set char2="<span class="symbol">c</span>"; two-byte character
-GTM&gt;set char3="<span class="symbol">&#26032;</span>"; three-byte character
-GTM&gt;set y=char1_char2_char3
-GTM&gt;write $zsubstr(y,1,3)=$zsubstr(y,1,5)
-0</pre>
-<p>With character set M specified, the expression $ZSUBSTR(y,1,3)=$ZSUBSTR(y,1,5) evaluates to 0 or "false" because the expression $ZSUBSTR(y,1,5) returns more characters than $ZSUBSTR(y,1,3).</p>
+<pre class="programlisting">GTM&gt;write $zsearch("data.dat")
+/usr/staff/ccc/data.dat
+GTM&gt;</pre>
+<p>This uses $ZSEARCH() to display the full <span>file path name of "data.dat"</span> in the process current default directory.</p>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;write $zchset
-UTF-8
-GTM&gt;set char1="a" ; one byte character
-GTM&gt;set char2="<span class="symbol">c</span>"; two-byte character
-GTM&gt;set char3="<span class="symbol">&#26032;</span>"; three-byte character
-GTM&gt;set y=char1_char2_char3
-GTM&gt;write $zsubstr(y,1,3)=$zsubstr(y,1,5)
-1</pre>
-<p>For a process started in UTF-8 mode, the expression $ZSUBSTR(y,1,3)=$ZSUBSTR(y,1,5) evaluates to 1 or "true" because the expression $ZSUBSTR(y,1,5) returns a string made up of char1 and char2 excluding the three-byte char3 because it was not completely included in the specified byte-length.</p>
-<p>In many ways, the $ZSUBSTR() function is similar to the $ZEXTRACT() function. For example, $ZSUBSTR(expr,intexpr1) is equivalent to $ZEXTRACT(expr,intexpr1,$L(expr)). Note that this means when using the M character set, $ZSUBSTR() behaves identically to $EXTRACT() and $ZEXTRACT(). The differences are as follows:</p>
-<div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
-<li class="listitem" style="list-style-type: circle"><p>$ZSUBSTR() cannot appear on the left of the equal sign in the SET command where as $ZEXTRACT() can.</p></li>
-<li class="listitem" style="list-style-type: circle"><p>In both the modes, the third expression of $ZSUBSTR() is a byte, rather than character, position within the first expression.</p></li>
-<li class="listitem" style="list-style-type: circle"><p>$EXTRACT() operates on characters, irrespective of byte length.</p></li>
-<li class="listitem" style="list-style-type: circle"><p>$ZEXTRACT() operates on bytes, irrespective of multi-byte character boundaries.</p></li>
-<li class="listitem" style="list-style-type: circle"><p>$ZSUBSTR() is the only way to extract as valid UTF-8 encoded characters from a byte string containing mixed UTF-8 and non UTF-8 data. It operates on <span class="trademark">Unicode</span>(R) characters so that its result does not exceed the given byte length.</p></li>
-</ul></div>
+<pre class="programlisting">GTM&gt;set x=$zsearch("*.c")
+GTM&gt;for  set x=$zsearch("*.m") quit:x=""  write !,$zparse(x,"NAME")</pre>
+<p>This FOR loop uses $ZSEARCH() and $ZPARSE() to display M source file names in the process current <span>working</span> directory. To ensure that the search starts at the beginning, the example resets the context by first searching with a different argument.</p>
 </div>
 </div>
 <div class="navfooter">
@@ -85,9 +74,9 @@ GTM&gt;write $zsubstr(y,1,3)=$zsubstr(y,1,5)
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZSIGPROC() </td>
+<td width="40%" align="left" valign="top">$ZQGBLMOD() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZTRanslate()</td>
+<td width="40%" align="right" valign="top"> $ZSIGPROC()</td>
 </tr>
 </table>
 </div>

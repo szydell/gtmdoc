@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZTRanslate()</title>
+<title>$ZSIGPROC()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s51.html" title="$ZSUBstr()">
-<link rel="next" href="ch07s53.html" title="$ZTRIgger()">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="prev" href="ch07s51.html" title="$ZSEARCH()">
+<link rel="next" href="ch07s53.html" title="$ZSUBstr()">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZTRanslate()</th></tr>
+<tr><th colspan="3" align="center">$ZSIGPROC()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s51.html">Prev</a> </td>
@@ -25,39 +25,69 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZTRanslate()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZSIGPROC()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="ztranslate"></a>$ZTRanslate()<a class="indexterm" name="idm45162260348240"></a>
-</h2></div></div></div>
-<p>Returns a byte sequence that results from replacing or dropping bytes in the first of its arguments as specified by the patterns of its other arguments.</p>
-<p>The format for the $ZTRANSLATE() function is:</p>
-<pre class="programlisting">$ZTR[ANSLATE](expr1[,expr2[,expr3]])</pre>
+<a name="zsigproc"></a>$ZSIGPROC()</h2></div></div></div>
+<p>Sends a signal to a process. The format for the $ZSIGPROC function is:</p>
+<pre class="programlisting">$ZSIGPROC(expr1,expr2)</pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The first expression specifies the sequence of octets on which $ZTRANSLATE() operates. If the other arguments are omitted, $ZTRANSLATE() returns this expression.</p></li>
-<li class="listitem"><p>The optional second expression specifies the byte for $TRANSLATE() to replace. If a byte occurs more than once in the second expression, the first occurrence controls the translation, and $ZTRANSLATE() ignores subsequent occurrences. If this argument is omitted, $ZTRANSLATE() returns the first expression without modification.</p></li>
-<li class="listitem"><p>The optional third expression specifies the replacement bytes for the positionally corresponding bytes in the second expression. If this argument is omitted or shorter than the second expression, $ZTRANSLATE() drops all occurrences of the bytes in the second expression that have no replacement in the corresponding position of the third expression.</p></li>
-<li class="listitem"><p>$ZTRANSLATE() provides a tool for tasks such as encryption.</p></li>
+<li class="listitem"><p>The first expression is the pid of the process to which the signal is to be sent. </p></li>
+<li class="listitem"><p>The second expression is the system signal number. Because a signal number of a signal name can be different for various platforms, FIS recommends using signal names to maintain code portability across different platforms. For example, the signal number for SIGUSR1 is 10 on Linux, 30 on AIX, and 16 for some other platforms. Use the $&amp;gtmposix.signalval(signame,.sigval) function available in the gtmposix plugin to determine the signal number of a signal name. </p></li>
+<li class="listitem"><p>If the second expression is 0, $ZSIGPROC() checks the validity of the pid specified in the first expression. </p></li>
+<li class="listitem">
+<p>There are four possible return values from $ZSIGPROC():</p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th><p>Return codes/POSIX Error Definitions</p></th>
+<th><p>Description</p></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p>0</p></td>
+<td><p>The specified signal number was successfully sent to the specified pid. Any return value other than 0 indicates an error. </p></td>
+</tr>
+<tr>
+<td><p>EPERM</p></td>
+<td><p>The process has insufficient permissions to send the signal to the specified pid.</p></td>
+</tr>
+<tr>
+<td><p>ESRCH</p></td>
+<td><p>The specified pid does not exist.</p></td>
+</tr>
+<tr>
+<td><p>EINVAL</p></td>
+<td><p>Invalid expression(s).</p></td>
+</tr>
+</tbody>
+</table></div>
+</li>
 </ul></div>
-<p>The $ZTRANSLATE() algorithm can be understood as follows:</p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>$ZTRANSLATE() evaluates each byte in the first expression, comparing it byte by byte to the second expression looking for a match. If there is no match in the second expression, the resulting expression contains the byte without modification.</p></li>
-<li class="listitem"><p>When it locates a byte match, $ZTRANSLATE() uses the position of the match in the second expression to identify the appropriate replacement for the original expression. If the second expression has more bytes than the third expression, $ZTRANSLATE() replaces the original byte with a null, thereby deleting it from the result. By extension of this principle, if the third expression is missing, $ZTRANSLATE() deletes all bytes from the first expression that occur in the second expression.</p></li>
-</ul></div>
+<div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution: Caution">
+<tr>
+<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Caution]" src="images/caution.jpg"></td>
+<th align="left">Caution</th>
+</tr>
+<tr><td align="left" valign="top"><p>Although $ZSIGPROC() may work today as a way to invoke the asynchronous interrupt mechanism of GT.M processes to XECUTE $ZINTERRUPT because the underlying mechanism uses the POSIX USR1 signal, FIS reserves the right to change the underlying mechanism to suit its convenience and sending a POSIX USR1 may cease to work as a way to invoke the asynchronous interrupt mechanism. Use MUPIP INTRPT as the supported and stable API to invoke the asynchronous interrupt mechanism.</p></td></tr>
+</table></div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="idm45162260217856"></a>Examples<span> of $ZTRANSLATE()</span>
+<a name="examples_of_zsigproc"></a>Examples<span> of $ZSIGPROC()</span>
 </h3></div></div></div>
 <p>Example:</p>
-<pre class="programlisting">GTM&gt;set hiraganaA=$char(12354) ; $zchar(227,129,130) 
-GTM&gt;set temp1=$zchar(130)
-GTM&gt;set temp2=$zchar(140)
-GTM&gt;set tr=$ztranslate(hiraganaA,temp1,temp2)
-GTM&gt;w $ascii(tr)
-12364 
+<pre class="programlisting">GTM&gt;job ^Somejob
+GTM&gt;set ret=$&amp;gtmposix.signalval("SIGUSR1",.sigusr1) zwrite 
+ret=0
+sigusr1=10
+GTM&gt;write $zsigproc($zjob,sigusr1)
+0
 GTM&gt;</pre>
-<p>In the above example, $ZTRANSLATE() replaces byte $ZCHAR(130) in first expression and matching the first (and only) byte in the second expression with byte $ZCHAR(140) - the corresponding byte in the third expression. </p>
+<p>This example sends the SIGUSR1 signal to the pid specified by $zjob. </p>
 </div>
 </div>
 <div class="navfooter">
@@ -71,9 +101,9 @@ GTM&gt;</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZSUBstr() </td>
+<td width="40%" align="left" valign="top">$ZSEARCH() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZTRIgger()</td>
+<td width="40%" align="right" valign="top"> $ZSUBstr()</td>
 </tr>
 </table>
 </div>

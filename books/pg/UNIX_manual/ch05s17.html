@@ -8,7 +8,7 @@
 <link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
 <link rel="prev" href="ch05s16.html" title="Extrinsic Special Variables">
 <link rel="next" href="ch06.html" title="Chapter 6. Commands">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,12 +30,12 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="Transctn_Processing"></a>Transaction Processing<a class="indexterm" name="idm45162274288352"></a>
+<a name="Transctn_Processing"></a>Transaction Processing<a class="indexterm" name="idm45565265088320"></a>
 </h2></div></div></div>
 <p>Transaction Processing (TP) provides a way for M programs to organize database updates into logical groups that occur as a single event (i.e., either all the database updates in a transaction occur, or none of them occur). With a properly constructed transaction, no other actor or process behaves as if it observed any intermediate state. Transaction processing has been designed to improve throughput and minimize the possibility and impact of "live lock" conditions. </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="TP_Defnts"></a>TP Definitions<a class="indexterm" name="idm45162275203056"></a>
+<a name="TP_Defnts"></a>TP Definitions<a class="indexterm" name="idm45565265074816"></a>
 </h3></div></div></div>
 <p>In M, a transaction is a sequence of commands that begins with a TSTART command, ends with a TCOMMIT command, and is not within the scope of another transaction. Applications can nest TSTART/TCOMMIT commands to create sub-transactions, but sub-transactions only commit at the outer-most TCOMMIT. $TLEVEL greater than 1 indicates sub-transaction nesting.</p>
 <p>A successful transaction ends with a COMMIT that is triggered by the TCOMMIT command at the end of the transaction. A COMMIT causes all the database updates performed within the transaction to become available to other processes.</p>
@@ -44,7 +44,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="TP_Characteristics"></a>Key Considerations - Writing TP Code<a class="indexterm" name="idm45162275792944"></a>
+<a name="TP_Characteristics"></a>Key Considerations - Writing TP Code<a class="indexterm" name="idm45565265076960"></a>
 </h3></div></div></div>
 <p>Some key considerations for writing application code between TSTART and TCOMMIT are as follows: </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -99,7 +99,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="TP_Performance"></a>TP Performance<a class="indexterm" name="idm45162277150064"></a>
+<a name="TP_Performance"></a>TP Performance<a class="indexterm" name="idm45565265151920"></a>
 </h3></div></div></div>
 <p>To achieve the best GT.M performance, transactions should:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="opencircle">
@@ -152,7 +152,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="TP_Example"></a>TP Example<a class="indexterm" name="idm45162263433920"></a>
+<a name="TP_Example"></a>TP Example<a class="indexterm" name="idm45565265154864"></a>
 </h3></div></div></div>
 <p>Here is a transaction processing example that lets you exercise the concept. If you use this example, be mindful that the functions "holdit" and "trestart" are included as tools to allow you access to information within a transaction which would normally be hidden from users. These types of functions would not normally appear in production code. Comments have been inserted into the code to explain the function of various segments.</p>
 <pre class="programlisting">trans

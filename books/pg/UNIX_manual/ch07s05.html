@@ -8,7 +8,7 @@
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
 <link rel="prev" href="ch07s04.html" title="$Extract()">
 <link rel="next" href="ch07s06.html" title="$FNumber()">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="find"></a>$Find()<a class="indexterm" name="idm45162261285440"></a>
+<a name="find"></a>$Find()<a class="indexterm" name="idm45565263106336"></a>
 </h2></div></div></div>
 <p>Returns an integer character position that locates the occurrence of a substring within a string.</p>
 <p>The format for the $FIND function is:</p>
@@ -41,12 +41,12 @@
 <li class="listitem"><p>If $FIND() locates the substring, it returns the position after the last character of the substring. If the end of the substring coincides with the end of the string (expr1), it returns an integer equal to the length of the string plus one ($L(expr1)+1).</p></li>
 <li class="listitem"><p>If $FIND() does not locate the substring, it returns zero (0).</p></li>
 <li class="listitem"><p>For a process started in UTF-8 mode, $FIND() interprets the string arguments as UTF-8 encoded. With VIEW "BADCHAR" enabled, $FIND() produces a run-time error when it encounters a malformed  character, but it does not process the characters that fall after the span specified by the arguments.</p></li>
-<li class="listitem"><p>$ZFIND() is the Z equivalent function $FIND(). Irrespective of the settings of VIEW "BADCHAR" and $ZCHSET, $ZFIND() interprets argument as a sequence of bytes (rather than a sequence of characters) and can perform byte-oriented $FIND() operations.<span>For more information, refer to <a class="xref" href="ch07s36.html" title="$ZFind()">&#8220;$ZFind()&#8221;</a>.</span></p></li>
+<li class="listitem"><p>$ZFIND() is the Z equivalent function $FIND(). Irrespective of the settings of VIEW "BADCHAR" and $ZCHSET, $ZFIND() interprets argument as a sequence of bytes (rather than a sequence of characters) and can perform byte-oriented $FIND() operations.<span>For more information, refer to <a class="xref" href="ch07s37.html" title="$ZFind()">&#8220;$ZFind()&#8221;</a>.</span></p></li>
 </ul></div>
 <p>$FIND() provides a tool to locate substrings. The ([) operator and the two-argument $LENGTH() are other tools that provide related functionality.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_find"></a>Examples<span> of $FIND()</span><a class="indexterm" name="idm45162261233184"></a>
+<a name="examples_of_find"></a>Examples<span> of $FIND()</span><a class="indexterm" name="idm45565263103552"></a>
 </h3></div></div></div>
 <p>Example:</p>
 <pre class="programlisting">GTM&gt;write $find("HIFI","I")

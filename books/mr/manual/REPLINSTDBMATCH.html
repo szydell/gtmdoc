@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="REPLINSTCREATE.html" title="REPLINSTCREATE ">
 <link rel="next" href="REPLINSTDBSTRM.html" title="REPLINSTDBSTRM ">
-<link rel="copyright" href="ln-idm45987251743248.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm46145190558096.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>REPLINSTDBMATCH</strong></span>,    Replication instance file xxxx has seqno xxxx while database has a different seqno yyyy</p>
 <p>MUPIP Error: This error is issued by the first source server that is started on a replication instance or a mupip journal -rollback command if the journal sequence numbers stored in the instance file does not match that stored in the database file header. This is possible if the database was recreated or refreshed from a backup on another instance without correspondingly recreating the instance file.</p>
 <p>Action: If this instance is not the root primary, this error can be handled by restoring both the database and the instance file from a previous backup (consistent backup of the instance file AND database files taken together at the same time) and restarting the instance. Subsequent to such a restore, all transactions since the last backup will be sent across from this instance's primary. Alternatively, this can be handled by shipping a copy of the database from any other instance (either the primary or any other secondary/tertiary), recreating the instance file and starting this instance as a secondary with the -updateresync qualifier. In either case, this procedure has to be repeated on all tertiary instances etc. that descend from this instance ensuring that for every primary-secondary instance pair, the secondary is not ahead of the primary in terms of journal sequence number. If this instance is the root primary, restoring from a prior backup may not be viable as it may mean loss of transactions that occurred after the backup. The alternative way to handle this error is to recreate the instance file on the root primary, ship a copy of the database from the primary and recreate instance files on ALL secondaries (tertiaries etc.) and restart the secondaries with the -updateresync qualifier. In addition, report the entire incident context to your GT.M support channel.</p>
-<a class="indexterm" name="idm45987246661952"></a>
+<a class="indexterm" name="idm46145185388208"></a>
 </div>
 <div class="navfooter">
 <hr>

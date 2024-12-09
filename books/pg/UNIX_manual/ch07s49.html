@@ -1,19 +1,19 @@
 <html>
 <HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>$ZSEARCH()</title>
+<title>$ZSYSLOG()</title>
 <link rel="stylesheet" href="gtm.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="GT.M Programmer's Guide">
 <link rel="up" href="ch07.html" title="Chapter 7. Functions">
-<link rel="prev" href="ch07s48.html" title="$ZQGBLMOD()">
-<link rel="next" href="ch07s50.html" title="$ZSIGPROC()">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="prev" href="ch07s48.html" title="$ZSOCKET()">
+<link rel="next" href="ch07s50.html" title="$ZQGBLMOD()">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">$ZSEARCH()</th></tr>
+<tr><th colspan="3" align="center">$ZSYSLOG()</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ch07s48.html">Prev</a> </td>
@@ -25,43 +25,13 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZSEARCH()</span>
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZSYSLOG()</span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zsearch"></a>$ZSEARCH()<a class="indexterm" name="idm45162260369024"></a>
-</h2></div></div></div>
-<p>The $ZSEARCH function attempts to locate a file matching the specified file name. If the file exists, it returns the file name; if the file does not exist, it returns the null string.</p>
-<p>The format for the $ZSEARCH function is:</p>
-<pre class="programlisting">$ZSEARCH(expr[,intexpr])</pre>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The expression contains a <span>file name</span>, with or without  wildcards, for which $ZSEARCH() attempts to locate a matching file. Repeating $ZSEARCH with the same filename uses the same context and return a sequence of matching files when they exist; when the sequence is exhausted, $ZSEARCH() returns an empty string (""). Any change to the file name starts a new context.</p></li>
-<li class="listitem"><p>$ZSEARCH() uses the process current working directory, if the expression does not specify a directory.</p></li>
-<li class="listitem"><p>The optional integer expression specifies a "stream" number from 0 to 255 for each search; streams provide a means of having up to 256 $ZSEARCH() contexts simultaneously in progress. </p></li>
-<li class="listitem"><p>If a $ZSEARCH() stream has never been used or if the expression differs from the argument to the last $ZSEARCH() of the stream, the function resets the context and returns the first <span>pathname</span> matching the expression; otherwise, it returns the next matching file in collating sequence; if the last prior <span>pathname</span> returned for the same expression and same stream was the last one matching the argument, $ZSEARCH() returns a null string.</p></li>
-</ul></div>
-<p>$ZSEARCH() provides a tool for verifying that a file exists. <span>For information to help determine the validity of a file name, see <a class="xref" href="ch07s42.html" title="$ZPARSE()">&#8220;$ZPARSE()&#8221;</a>.</span></p>
-<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="12pt"><img alt="[Note]" src="images/note.jpg"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>You can call the POSIX stat() function to access metadata. The optional GT.M POSIX plug-in packages the stat() function for easy access from M application code. </p></td></tr>
-</table></div>
-<div class="sect2">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="examples_of_zsearch"></a>Examples<span> of $ZSEARCH()</span><a class="indexterm" name="idm45162260366352"></a>
-</h3></div></div></div>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;write $zsearch("data.dat")
-/usr/staff/ccc/data.dat
-GTM&gt;</pre>
-<p>This uses $ZSEARCH() to display the full <span>file path name of "data.dat"</span> in the process current default directory.</p>
-<p>Example:</p>
-<pre class="programlisting">GTM&gt;set x=$zsearch("*.c")
-GTM&gt;for  set x=$zsearch("*.m") quit:x=""  write !,$zparse(x,"NAME")</pre>
-<p>This FOR loop uses $ZSEARCH() and $ZPARSE() to display M source file names in the process current <span>working</span> directory. To ensure that the search starts at the beginning, the example resets the context by first searching with a different argument.</p>
-</div>
+<a name="zsyslog"></a>$ZSYSLOG()</h2></div></div></div>
+<p>Sends its string parameter to the system log and always returns TRUE (1). The text appears in the syslog with the same format as any other GT.M syslog message (that is, in the user.info log with GTM-MUMPS[pid]" or "GTM-MUPIP[pid]" prefix along with instance information where appropriate). The format of the $ZSYSLOG function is:</p>
+<pre class="programlisting">$ZSYSLOG(expr)</pre>
 </div>
 <div class="navfooter">
 <hr>
@@ -74,9 +44,9 @@ GTM&gt;for  set x=$zsearch("*.m") quit:x=""  write !,$zparse(x,"NAME")</pre>
 </td>
 </tr>
 <tr>
-<td width="40%" align="left" valign="top">$ZQGBLMOD() </td>
+<td width="40%" align="left" valign="top">$ZSOCKET() </td>
 <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-<td width="40%" align="right" valign="top"> $ZSIGPROC()</td>
+<td width="40%" align="right" valign="top"> $ZQGBLMOD()</td>
 </tr>
 </table>
 </div>

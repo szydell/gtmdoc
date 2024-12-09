@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s11.html" title="Kill">
 <link rel="next" href="ch06s13.html" title="Using Locks within Transactions">
-<link rel="copyright" href="ln-idm45162270349072.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,7 +30,7 @@
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="Lock_Cmmd"></a>Lock</h2></div></div></div>
-<a class="indexterm" name="idm45162273747040"></a><p>The LOCK command reserves and releases resource names, and provides a semaphore capability for GT.M processes. This capability can be used for interprocess synchronization and signaling.</p>
+<a class="indexterm" name="idm45565264474288"></a><p>The LOCK command reserves and releases resource names, and provides a semaphore capability for GT.M processes. This capability can be used for interprocess synchronization and signaling.</p>
 <p>Assigning a LOCK does not specify any explicit control over variables and does not directly effect either read or write access to global (or local) data. However, an application that adheres to clearly defined conventions of LOCKing before any access can indirectly achieve such an effect.</p>
 <p>FIS recommends implementing database Consistency using transaction processing rather than LOCKs. If you wish to avoid GT.M's use of optimistic concurrency for TP, place the LOCK just before the original TSTART and release it after the final TCOMMIT.</p>
 <p>The format of the LOCK command is:</p>
