@@ -180,7 +180,7 @@ an application with an LMS configuration.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="repl_recovr"></a>Recovery</h4></div></div></div>
-<p>When an instance goes down, its recovery consists of (at least) two steps: recovery of the instance itself: hardware, OS, file systems, and so on - say t<sub>sys</sub>; t<sub>sys</sub> is almost completely<sup>[<a name="idm46503682035904" href="ch07s02.html#ftn.idm46503682035904" class="footnote">2</a>]</sup> independent of the type of GT.M journaling.</p>
+<p>When an instance goes down, its recovery consists of (at least) two steps: recovery of the instance itself: hardware, OS, file systems, and so on - say t<sub>sys</sub>; t<sub>sys</sub> is almost completely<sup>[<a name="idm46503682035904" href="#ftn.idm46503682035904" class="footnote">2</a>]</sup> independent of the type of GT.M journaling.</p>
 <p>For database recovery:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>With BEFORE_IMAGE journaling, the time is simply that is needed to execute a mupip journal  recover  backward "*" command or, when using replication, mupip journal  recover -rollback. This uses before image records in the journal files to roll the database files back to their last epochs, and then forward to the most current updates. If this takes t<sub>bck</sub>, the total recovery time is t<sub>sys</sub>+t<sub>bck</sub>.</p></li>
@@ -210,7 +210,7 @@ an application with an LMS configuration.</p>
 <tr>
 <td><p>Cost</p></td>
 <td>
-<p>The cost of using an LMS configuration is at least one extra instance plus network bandwidth for replication. There are trade-offs: with two instances, it may be appropriate to use less expensive servers and storage without materially compromising enterprise application availability. In fact, since GT.M allows replication to as many as sixteen instances, it is not unreasonable to use commodity hardware<sup>[<a name="idm46503681983216" href="ch07s02.html#ftn.idm46503681983216" class="footnote">a</a>]</sup> and still save total cost.</p> </td>
+<p>The cost of using an LMS configuration is at least one extra instance plus network bandwidth for replication. There are trade-offs: with two instances, it may be appropriate to use less expensive servers and storage without materially compromising enterprise application availability. In fact, since GT.M allows replication to as many as sixteen instances, it is not unreasonable to use commodity hardware<sup>[<a name="idm46503681983216" href="#ftn.idm46503681983216" class="footnote">a</a>]</sup> and still save total cost.</p> </td>
 </tr>
 <tr>
 <td><p>Storage</p></td>
@@ -221,18 +221,18 @@ an application with an LMS configuration.</p>
 <td>
 <p>IO bandwidth requirements of nobefore journaling are less than those of before image journaling, because GT.M does not write before image journal records or flush the database.</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>With before image journaling, the first time a database block is updated after an epoch, GT.M writes a before image journal record. This means that immediately after an epoch, given a steady rate of updates, there is an increase in before image records (because every update changes at least one database block and generates at least one before image journal record). As the epoch proceeds, the frequency of writing before image records falls back to the steady level<sup>[<a name="idm46503681955200" href="ch07s02.html#ftn.idm46503681955200" class="footnote">b</a>]</sup> - until the next epoch. Before image journal records are larger than journal records that describe updates.</p></li>
-<li class="listitem"><p>At epochs, both before image journaling and nobefore journaling flush journal blocks and perform an fsync() on journal files<sup>[<a name="idm46503682046016" href="ch07s02.html#ftn.idm46503682046016" class="footnote">c</a>]</sup>. When using before image journaling, GT.M ensures all dirty database blocks have been written and does an fsync()<sup>[<a name="idm46503681941936" href="ch07s02.html#ftn.idm46503681941936" class="footnote">d</a>]</sup>, but nobefore journaling does not take these steps.</p></li>
+<li class="listitem"><p>With before image journaling, the first time a database block is updated after an epoch, GT.M writes a before image journal record. This means that immediately after an epoch, given a steady rate of updates, there is an increase in before image records (because every update changes at least one database block and generates at least one before image journal record). As the epoch proceeds, the frequency of writing before image records falls back to the steady level<sup>[<a name="idm46503681955200" href="#ftn.idm46503681955200" class="footnote">b</a>]</sup> - until the next epoch. Before image journal records are larger than journal records that describe updates.</p></li>
+<li class="listitem"><p>At epochs, both before image journaling and nobefore journaling flush journal blocks and perform an fsync() on journal files<sup>[<a name="idm46503682046016" href="#ftn.idm46503682046016" class="footnote">c</a>]</sup>. When using before image journaling, GT.M ensures all dirty database blocks have been written and does an fsync()<sup>[<a name="idm46503681941936" href="#ftn.idm46503681941936" class="footnote">d</a>]</sup>, but nobefore journaling does not take these steps.</p></li>
 </ul></div>
 <p>Because IO subsystems are often sized to accommodate peak IO rates, choosing NOBEFORE_IMAGE journaling may allow more economical hardware without compromising application throughput or responsiveness.</p>
 </td>
 </tr>
 </tbody>
 <tbody class="footnotes"><tr><td colspan="2">
-<div class="footnote"><p><sup>[<a name="ftn.idm46503681983216" href="ch07s02.html#idm46503681983216" class="para">a</a>] </sup>GT.M absolutely requires the underlying computer system to perform correctly at all times. So, the use of error correcting RAM, and mirrored disks is advised for production instances. But, it may well be cost effective to use servers without redundant power supplies or hot-swappable components, to use RAID rather than SAN for storage, and so on.</p></div>
-<div class="footnote"><p><sup>[<a name="ftn.idm46503681955200" href="ch07s02.html#idm46503681955200" class="para">b</a>] </sup>How much the steady level is lower depends on the application and workload. </p></div>
-<div class="footnote"><p><sup>[<a name="ftn.idm46503682046016" href="ch07s02.html#idm46503682046016" class="para">c</a>] </sup>Even flushing as many as 20,000 journal buffers, which is more than most applications use, is only 10MB of data. Furthermore, when GT.M's SYNC_IO journal flag is specified, the fsync() operation requires no physical IO.</p></div>
-<div class="footnote"><p><sup>[<a name="ftn.idm46503681941936" href="ch07s02.html#idm46503681941936" class="para">d</a>] </sup>The volume of dirty database blocks to be flushed can be large. For example, 80% of 40,000 4KB database blocks being dirty would require 128MB of data to be written and flushed.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idm46503681983216" href="#idm46503681983216" class="para">a</a>] </sup>GT.M absolutely requires the underlying computer system to perform correctly at all times. So, the use of error correcting RAM, and mirrored disks is advised for production instances. But, it may well be cost effective to use servers without redundant power supplies or hot-swappable components, to use RAID rather than SAN for storage, and so on.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idm46503681955200" href="#idm46503681955200" class="para">b</a>] </sup>How much the steady level is lower depends on the application and workload. </p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idm46503682046016" href="#idm46503682046016" class="para">c</a>] </sup>Even flushing as many as 20,000 journal buffers, which is more than most applications use, is only 10MB of data. Furthermore, when GT.M's SYNC_IO journal flag is specified, the fsync() operation requires no physical IO.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idm46503681941936" href="#idm46503681941936" class="para">d</a>] </sup>The volume of dirty database blocks to be flushed can be large. For example, 80% of 40,000 4KB database blocks being dirty would require 128MB of data to be written and flushed.</p></div>
 </td></tr></tbody>
 </table></div>
 </div>
@@ -276,7 +276,7 @@ related database damage to occur on both originating and replicating instances. 
 </div>
 <div class="footnotes">
 <br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a name="ftn.idm46503682035904" href="ch07s02.html#idm46503682035904" class="para">2</a>] </sup>The reason for the "almost completely" qualification is that the time to recover some older file systems can depend on the amount of space used.</p></div>
+<div class="footnote"><p><sup>[<a name="ftn.idm46503682035904" href="#idm46503682035904" class="para">2</a>] </sup>The reason for the "almost completely" qualification is that the time to recover some older file systems can depend on the amount of space used.</p></div>
 </div>
 </div>
 <div class="navfooter">
