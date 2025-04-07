@@ -8,7 +8,7 @@
 <link rel="up" href="ch13.html" title="Chapter 13. Error Processing">
 <link rel="prev" href="ch13s04.html" title="Processing Run-time Errors">
 <link rel="next" href="ch13s06.html" title="Error Actions">
-<link rel="copyright" href="ln-idm45565267019712.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45582637830384.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="prgrm_handling_of_error"></a>Program Handling of Errors<a class="indexterm" name="idm45565256852464"></a>
+<a name="prgrm_handling_of_error"></a>Program Handling of Errors<a class="indexterm" name="idm45582627775520"></a>
 </h2></div></div></div>
 <p>GT.M provides the error handling facilities described in the M standard. In addition, GT.M provides a number of extensions for error handling. Both are discussed in the following sections. The following table summarizes some of the tools, which are then described in more detail within the context of various techniques and examples. </p>
 <div class="informaltable">
@@ -210,7 +210,7 @@
 <p></p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="ecode_ch14"></a>$ECODE<a class="indexterm" name="idm45565256782496"></a>
+<a name="ecode_ch14"></a>$ECODE<a class="indexterm" name="idm45582627616304"></a>
 </h3></div></div></div>
 <p>The value of $ECODE is a string that may reflect multiple error conditions. As long as no error has occured, the value of $ECODE is equal to the empty string. </p>
 <p>$ECODE contains a list of errors codes for "active" errors - the error conditions which are not yet resolved. If there are no active errors, $ECODE contains the empty string. The value of $ECODE can be SET. </p>
@@ -252,7 +252,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zstatus_content"></a>$ZSTATUS Content<a class="indexterm" name="idm45565256771360"></a>
+<a name="zstatus_content"></a>$ZSTATUS Content<a class="indexterm" name="idm45582627604752"></a>
 </h3></div></div></div>
 <p>$ZSTATUS contains a string value specifying the error condition code and location of the last exception condition that occurred during routine execution.</p>
 <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Note">
@@ -265,7 +265,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="zerror_and_zyerror"></a>$ZERROR and $ZYERROR<a class="indexterm" name="idm45565256785120"></a>
+<a name="zerror_and_zyerror"></a>$ZERROR and $ZYERROR<a class="indexterm" name="idm45582627608720"></a>
 </h3></div></div></div>
 <p>After an error occurs, if $ZYERROR is set to a valid entryref that exists in the current environment, GT.M invokes the routine at that entryref with an implicit DO before returning control to M code specified by a device EXCEPTION, $ETRAP or $ZTRAP. It is intended that the code invoked by $ZYERROR use the value of $ZSTATUS to select or construct a value to which it SETs $ZERROR.</p>
 <p>If $ZYERROR is empty, $ZYERROR="unprocessed $ZERROR, see $ZSTATUS".</p>
@@ -273,7 +273,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="etrap_behavior"></a>$ETRAP Behavior<a class="indexterm" name="idm45565256729584"></a>
+<a name="etrap_behavior"></a>$ETRAP Behavior<a class="indexterm" name="idm45582627561472"></a>
 </h3></div></div></div>
 <p>If, at the time of any error, the value of $ETRAP is non-empty, GT.M proceeds as if the next instruction to be excuted were the first one on "the next line" and the code on that next line would be the same as the text in the value of $ETRAP. Furthermore, GT.M behaves as if the line following "the next line" looks like:</p>
 <pre class="programlisting">QUIT:$QUIT "" QUIT</pre>
@@ -281,7 +281,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="nesting_etrap_and_using_estack"></a>Nesting $ETRAP and using $ESTACK<a class="indexterm" name="idm45565256759136"></a>
+<a name="nesting_etrap_and_using_estack"></a>Nesting $ETRAP and using $ESTACK<a class="indexterm" name="idm45582627596160"></a>
 </h3></div></div></div>
 <p>When you need to set up a stratified scheme where one level of subroutines use one error trap setting and another more nested subroutine uses a different one; the more nested subroutine must NEW $ETRAP. When $ETRAP is NEWed, its old value is saved and copied to the current value. A subsequent SET $ETRAP=&lt;new-value&gt; then establishes the error trapping code for the current execution level.</p>
 <p>The QUIT command that reverts to the calling routine causes the NEWed values to be unstacked, including the one for $ETRAP.</p>
@@ -297,7 +297,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="ztrap_behavior"></a><span>$ZTRAP </span>Behavior<a class="indexterm" name="idm45565256781120"></a>
+<a name="ztrap_behavior"></a><span>$ZTRAP </span>Behavior<a class="indexterm" name="idm45582627597344"></a>
 </h3></div></div></div>
 <p>If, at the time of any error, the value of $ZTRAP is non-empty, GT.M uses the $ZTRAP contents to direct execution of the next action.<span>Refer to the $ZTRAP section in <a class="xref" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">Chapter 8: &#8220;<i><span>Intrinsic Special Variables</span></i>&#8221;</a>.</span> </p>
 <p>By default, execution proceeds as if the next instruction to be executed were the first one on "the next line", and the code on that next line would be the same as the text in the value of $ZTRAP. Unless $ZTRAP or any code it invokes issues a GOTO or ZGOTO, after GT.M has executed the code in $ZTRAP, GT.M attempts to execute the line with the error again. When a value is assigned to $ZTRAP, the new value replaces the previous value. If the value of $ETRAP is a non-empty one, $ETRAP is implicitly NEWed, and the value of $ETRAP becomes equal to the empty string; this ensures that at most one of $ETRAP and $ZTRAP is not the empty string. If the <span>environment variable</span> gtm_ztrap_new evaluates to Boolean TRUE (case insensitive string "TRUE", or case insensitive string "YES", or a non-zero number), $ZTRAP is NEWed when $ZTRAP is SET; otherwise $ZTRAP is not stacked when it is SET.</p>
@@ -371,7 +371,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="diff_btw_etrap_and_ztrap"></a><span>Differences between </span>$ETRAP and $ZTRAP<a class="indexterm" name="idm45565256767296"></a>
+<a name="diff_btw_etrap_and_ztrap"></a><span>Differences between </span>$ETRAP and $ZTRAP<a class="indexterm" name="idm45582627649296"></a>
 </h3></div></div></div>
 <p>The activation of $ETRAP and $ZTRAP are the same, however there are a number of differences in their subsequent behavior.</p>
 <p>For subsequent errors the then current $ZTRAP is invoked, while with $ETRAP, behavior is controlled by the state of $ECODE. This means that when using $ZTRAP, it is important to change $ZTRAP, possibly to the empty string, at the beginning of the action in order to protect against recursion caused by any errors in $ZTRAP itself or in the code it invokes.</p>
@@ -380,7 +380,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="ztrap_idnt_with_etrap"></a>$ZTRAP <span>Interaction </span>With $ETRAP<a class="indexterm" name="idm45565256823440"></a>
+<a name="ztrap_idnt_with_etrap"></a>$ZTRAP <span>Interaction </span>With $ETRAP<a class="indexterm" name="idm45582627674064"></a>
 </h3></div></div></div>
 <p>It is important to be aware of which of the trap mechanisms is in place to avoid unintended interactions, and aware of which conditions may cause a switch-over from one mode of error handling to the other.</p>
 <p>When a SET command assigns a value to either $ZTRAP or $ETRAP, GT.M examines the value of the other error handling variable. If the other value is non-empty, GT.M executes an implicit NEW command that saves the current value of that variable, and then assigns that variable to the empty string, then makes the requested assignment effective. </p>
@@ -400,7 +400,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="choosing_etrap_and_ztrap"></a><span>Choosing </span>$ETRAP or $ZTRAP<a class="indexterm" name="idm45565256691472"></a>
+<a name="choosing_etrap_and_ztrap"></a><span>Choosing </span>$ETRAP or $ZTRAP<a class="indexterm" name="idm45582627529264"></a>
 </h3></div></div></div>
 <p>Making a choice between the two mechanisms for error handling is mostly a matter of compatibility. If compatibility with existing GT.M code is important, and that code happens to use $ZTRAP, then $ZTRAP is the best effort choice. If compatibility with code written in MUMPS dialects from other vendors is important, then $ETRAP or a non-default form of $ZTRAP probably is the better choice.</p>
 <p>When no pre-existing code exists that favors one mechanism, the features of the mechanisms themselves should be examined. </p>
@@ -415,7 +415,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </table></div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="example1_return_cntrl"></a>Example 1: Returning control to a specific execution level<a class="indexterm" name="idm45565256685280"></a>
+<a name="example1_return_cntrl"></a>Example 1: Returning control to a specific execution level<a class="indexterm" name="idm45582627558032"></a>
 </h4></div></div></div>
 <p>The following example returns control to the execution level "level" and then to an error processing routine "proc^prog".</p>
 <p>With $ZTRAP: Set $ZTRAP="ZGOTO "_level_":proc^prog"</p>
@@ -425,7 +425,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="example2_ignoring"></a>Example 2: Ignoring an Error<a class="indexterm" name="idm45565256680032"></a>
+<a name="example2_ignoring"></a>Example 2: Ignoring an Error<a class="indexterm" name="idm45582627524624"></a>
 </h4></div></div></div>
 <p>With $ZTRAP: Set $ZTRAP="Quit"</p>
 <p>With $ETRAP: Set $ETRAP="Set $ECODE="""" Quit"</p>
@@ -433,7 +433,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="nested_err_hndl"></a>Example 3: Nested Error Handlers<a class="indexterm" name="idm45565256729136"></a>
+<a name="nested_err_hndl"></a>Example 3: Nested Error Handlers<a class="indexterm" name="idm45582627513392"></a>
 </h4></div></div></div>
 <p>With $ZTRAP: New $ZTRAP Set $ZTRAP=...</p>
 <p>With $ETRAP: New $ETRAP Set $ETRAP=...</p>
@@ -447,7 +447,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="example4_access_to_cause_of_error"></a>Example 4: Access to "cause of error"<a class="indexterm" name="idm45565256684800"></a>
+<a name="example4_access_to_cause_of_error"></a>Example 4: Access to "cause of error"<a class="indexterm" name="idm45582627563664"></a>
 </h4></div></div></div>
 <p>With $ZTRAP: If $ZSTATUS[...</p>
 <p>With $ETRAP: If $ECODE[...</p>
@@ -462,7 +462,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="err_proc_caution"></a>Error Processing Cautions<a class="indexterm" name="idm45565256769520"></a>
+<a name="err_proc_caution"></a>Error Processing Cautions<a class="indexterm" name="idm45582627633520"></a>
 </h3></div></div></div>
 <p>$ETRAP and $ZTRAP offer many features for catching, recognizing, and recovering from errors. Code within an error processing subroutines may cause its own errors and these need to be processed without causing an infinite loop (where an error is caught, which, while being processed causes another error, which is caught, and so on).</p>
 <p>During the debugging phase, such loops are typically the result of typographical errors in code. Once these typographical errors are corrected, the risk remains that an error trapping subroutine was designed specifically to deal with an expected condition; such as the loss of a network connection. This then creates an unexpected error of its own, such as:</p>
@@ -481,7 +481,7 @@ SET $PIECE($ECODE,",",$LENGTH($ECODE,",")+1)="An..," ;append        </pre>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="input_output_errors"></a><span>Input/Output </span>Errors<a class="indexterm" name="idm45565256708096"></a>
+<a name="input_output_errors"></a><span>Input/Output </span>Errors<a class="indexterm" name="idm45582627518912"></a>
 </h3></div></div></div>
 <p>When GT.M encounters an error in the operation of an I/O device, GT.M executes the EXCEPTION deviceparameter for the OPEN/USE/CLOSE commands. An EXCEPTION deviceparameter specifies an action to take when an error occurs in the operation of an I/O device. The form of the EXCEPTION action is subject to the gtm_ztrap_form setting described for $ZTRAP, except that there is never any implicit popping with EXCEPTION actions. If a device has no current EXCEPTION, GT.M uses $ETRAP or $ZTRAP to handle an error from that device. </p>
 <p>GT.M provides the option to:</p>
