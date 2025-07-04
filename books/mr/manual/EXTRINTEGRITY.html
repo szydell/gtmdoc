@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="EXTRFMT.html" title="EXTRFMT ">
 <link rel="next" href="EXTRIOERR.html" title="EXTRIOERR ">
-<link rel="copyright" href="ln-idm45439962814000.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45776651566944.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>EXTRINTEGRITY</strong></span>, Database ffff potentially contains spanning nodes or data encrypted with two different keys</p>
 <p>MUPIP Error: MUPIP EXTRACT cannot run because the database file ffff might contain spanning nodes or be partially encrypted with a particular key. Proceeding on a live database in such situation could result in data corruption.</p>
 <p>Action: If you encounter this error while running MUPIP EXTRACT with -FORMAT="BINARY", re-run the command with the -FREEZE qualifier. MUPIP EXTRACT requires -FREEZE to acquire stand-alone access to produce a consistent copy of the data. However, not using -FREEZE when you request a MUPIP EXTRACT  may produce a loadable, if inconsistent output. If you encountered this error while running MUPIP EXTRACT with ZWR or GO format, it is likely that your database is encrypted with more than one key; with BINARY output it may be multiple keys or spanning node data. If the issue is a key change, run MUPIP REORG -ENCRYPT to complete the encryption of the database. As a final resort, you may use an -OVERRIDE qualifier to proceed on a live database that either contains spanning nodes or is undergoing (re)encryption. Although EXTRACT -OVERRIDE may produce text for analysis, the result is not suitable as input for MUPIP LOAD and FIS highly discourages using -OVERRIDE.</p>
-<a class="indexterm" name="idm45439960625200"></a>
+<a class="indexterm" name="idm45776649368336"></a>
 </div>
 <div class="navfooter">
 <hr>

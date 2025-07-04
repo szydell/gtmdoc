@@ -8,7 +8,7 @@
 <link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
 <link rel="prev" href="ch05s02.html" title="M Names">
 <link rel="next" href="ch05s04.html" title="Literals">
-<link rel="copyright" href="ln-idm45582637830384.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45327936835808.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,12 +30,12 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="Variables"></a>Variables<a class="indexterm" name="idm45582637129968"></a>
+<a name="Variables"></a>Variables<a class="indexterm" name="idm45327935396432"></a>
 </h2></div></div></div>
 <p>M does not require predefinition of variable type or size. M variables are either local or global. Any variable may be unsubscripted or subscripted.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Arrays_and_Subscripts"></a>Arrays and Subscripts<a class="indexterm" name="idm45582636265712"></a>
+<a name="Arrays_and_Subscripts"></a>Arrays and Subscripts<a class="indexterm" name="idm45327935280176"></a>
 </h3></div></div></div>
 <p>In M, subscripted variables identify elements in sparse arrays. Sparse arrays comprise existing subscripts and data nodes -; no space is reserved for potential data nodes. These arrays generally serve logical, rather than mathematical, purposes.</p>
 <p>M array subscripts are expressions, and are not restricted to numeric values.</p>
@@ -50,14 +50,14 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="M_Collation_Seq"></a>M Collation Sequences<a class="indexterm" name="idm45582636469904"></a>
+<a name="M_Collation_Seq"></a>M Collation Sequences<a class="indexterm" name="idm45327935421344"></a>
 </h3></div></div></div>
 <p>M collates all canonic numeric subscripts ahead of all string subscripts, including strings such as those with leading zeros that represent non-canonic numbers. Numeric subscripts collate from negative to positive in value order. String subscripts collate in ASCII sequence. In addition, GT.M allows the empty string subscript in most contexts, (the null, or empty, string collates ahead of all canonic numeric subscripts).</p>
 <p>GT.M allows definition of alternative collation sequences. For complete information on enabling this functionality, <span>See <a class="xref" href="ch12.html" title="Chapter 12. Internationalization">Chapter 12: &#8220;<i>Internationalization</i>&#8221;</a></span>.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Local_Variables"></a>Local Variables<a class="indexterm" name="idm45582636344288"></a>
+<a name="Local_Variables"></a>Local Variables<a class="indexterm" name="idm45327935584608"></a>
 </h3></div></div></div>
 <p>A local variable in M refers to a variable used solely within the scope of a single process. Local variable names have no leading delimiter.</p>
 <p>M makes a local variable available and subject to modification by all routines executed within a process from the time that variable is first SET until it is KILLed, or until the process stops executing M. However, M "protects" a local variable after that variable appears as an argument to a NEW command, or after it appears as an element in a formallist used in parameter passing. When M protects a local variable, it saves a copy of the variable's value and makes that variable undefined. M restores the variable to its saved value during execution of the QUIT that terminates the process stack level associated with the "protecting" NEW or formallist. For more information on NEW and QUIT, <span>see <a class="xref" href="ch06.html" title="Chapter 6. Commands">Chapter 6: &#8220;<i>Commands</i>&#8221;</a></span>.</p>
@@ -73,14 +73,14 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Global_Var_Resource_Name_Env"></a><span>Global Variables</span> and Resource Name Env<span>ironments</span><a class="indexterm" name="idm45582636277952"></a>
+<a name="Global_Var_Resource_Name_Env"></a><span>Global Variables</span> and Resource Name Env<span>ironments</span><a class="indexterm" name="idm45327935402800"></a>
 </h3></div></div></div>
 <p>M recognizes an optional environment specification in global names or in the LOCK resource names (nrefs), which have analogous syntax. Global variable names have a leading caret symbol (^) as a delimiter.</p>
 <p>M makes a global variable available, and subject to modification by all routines executed within all processes in an environment, from the time that variable is first SET until it is KILLed.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Naked_Ref"></a>Naked References<a class="indexterm" name="idm45582636411664"></a>
+<a name="Naked_Ref"></a>Naked References<a class="indexterm" name="idm45327935412336"></a>
 </h3></div></div></div>
 <p>M accepts an abbreviation of the global name under some circumstances. When the leading caret symbol (^) immediately precedes the left parenthesis delimiting subscripts, the global variable reference is called a naked reference. M evaluates a naked reference by prefixing the last used global variable name, except for its last subscript, to the list of subscripts specified by the naked reference. The prefixed portion is known as the naked indicator. An attempt to use a naked reference when the prior global reference does not exist, or did not contain a subscript, generates an error.</p>
 <p>Because M has only one process-wide naked indicator which it maintains as a side affect of every evaluation of a global variable, using the naked reference requires an understanding of M execution sequence. M execution generally proceeds from left to right within a line, subject to commands that change the flow of control. However, M evaluates the portion of a SET command argument to the right side of the equal sign before the left side. Also, M does not evaluate any further $SELECT() arguments within the function after it encounters a true selection argument.</p>
@@ -88,7 +88,7 @@
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Global_Var_Name_Environments"></a>Global Variable Name Environments<a class="indexterm" name="idm45582636286848"></a>
+<a name="Global_Var_Name_Environments"></a>Global Variable Name Environments<a class="indexterm" name="idm45327935269216"></a>
 </h3></div></div></div>
 <p>M recognizes an optional environment specification in global names. The environment specification designates one of some set of alternative database files.</p>
 <p>The syntax for global variable names that include an environment specification is:</p>
@@ -145,14 +145,14 @@ THIS IS ^A IN DATABASE WHITE</pre>
 <p>For more information on Global Directories, refer to the "Global Directory Editor" chapter of the <a class="ulink" href="../../ao/UNIX_manual/index.html" target="_top">GT.M Administration and Operations Guide</a>.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="Optnl_GT.M_Envr_Transltn_Facility"></a>Optional GT.M Environment Translation Facility<a class="indexterm" name="idm45582636201072"></a>
+<a name="Optnl_GT.M_Envr_Transltn_Facility"></a>Optional GT.M Environment Translation Facility<a class="indexterm" name="idm45327935203984"></a>
 </h4></div></div></div>
 <p>For users who wish to dynamically (at run-time) determine a global directory from non-global directory information (typically UCI and VOL) in the environment specification, GT.M provides an interface to add an appropriate translation.</p>
 <p>Using this facility impacts the performance of every global access that uses environment specification. Make sure you use it only when static determination of the global directory is not feasible. When used, make every effort to keep the translation routines very efficient.</p>
 <p>The use of this facility is enabled by the definition of the <span>environment variable gtm_env_translate</span>, which contains the path of a <span>shared library</span> with the following entry point:</p>
 <div class="sect4">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="gtm_env_xlate"></a>gtm_env_xlate<a class="indexterm" name="idm45582636189312"></a>
+<a name="gtm_env_xlate"></a>gtm_env_xlate<a class="indexterm" name="idm45327935192688"></a>
 </h5></div></div></div>
 <p>If the shared object is not accessible or the entry point is not accessible, GT.M reports an error.</p>
 <p>The gtm_env_xlate() routine has the following C prototype:</p>

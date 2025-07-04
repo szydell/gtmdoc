@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="Chapter 8. Intrinsic Special Variables">
 <link rel="prev" href="ch08s61.html" title="$ZTExit">
 <link rel="next" href="ch08s63.html" title="$ZTrap">
-<link rel="copyright" href="ln-idm45582637830384.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45327936835808.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -34,8 +34,8 @@
 <p>$ZTIMEOUT controls a single process wide timer. The format of the $ZTIMEOUT ISV is:</p>
 <pre class="programlisting">$ZTIMeout=([timeout][:labelref]) </pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>The optional timeout in seconds specifies with microsecond accuracy how long from the current time the timer interrupts the process. If the specified timeout is negative, GT.M cancels the timer. If the timeout is zero, GT.M treats it as it would a DO of the vector. </p></li>
-<li class="listitem"><p>The optional labelref specifies a code vector defining a fragment of M code to which GT.M transfers control as if with a DO when the timeout expires. If the timeout is missing, the assignment must start with a colon and only changes the vector, and in this case, if the timeout is the empty string, GT.M removes any current vector.</p></li>
+<li class="listitem"><p>The optional timeout in seconds specifies with microsecond resolution how long from the current time the timer interrupts the process. If the specified timeout is negative, GT.M cancels the timer. If the timeout is zero, GT.M treats it as it would an XECUTE of the vector. </p></li>
+<li class="listitem"><p>The optional labelref specifies a code vector defining a fragment of M code to which GT.M transfers control as if with an XECUTE when the timeout expires. If the timeout is missing, the assignment must start with a colon and only changes the vector, and in this case, if the timeout is the empty string, GT.M removes any current vector.</p></li>
 </ul></div>
 <p>Note that GT.M only recognizes interrupts such as from $ZTIMEOUT at points where it can properly resume operation, such as the beginning of a line, when waiting on a command with a timeout, or when starting a FOR iteration. GT.M defers recognition of a $ZTIMEOUT arriving while executing a TP transaction until after a TROLLBACK or the "master" TCOMMIT. When a timeout occurs, if the last assignment specified no vector, GT.M uses the current $ETRAP or $ZTRAP. When a $ZTIMEOUT expires, it invokes one of three possible vectors:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">

@@ -8,7 +8,7 @@
 <link rel="up" href="quick_message_reference.html" title="Appendix A. Error Message Quick Reference">
 <link rel="prev" href="apas01.html" title="Standard Error Codes">
 <link rel="next" href="apb.html" title="Appendix B. Reference Implementation Error messages">
-<link rel="copyright" href="ln-idm45439962814000.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45776651566944.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="idm45439955568560"></a>ZMESSAGE Codes</h2></div></div></div>
+<a name="idm45776644303264"></a>ZMESSAGE Codes</h2></div></div></div>
 <p>The following table lists ZMESSAGE numbers of all messages documented in this manual.</p>
 <div class="informaltable"><table border="1">
 <colgroup>
@@ -2723,7 +2723,7 @@
 </tr>
 <tr>
 <td><p>150383896</p></td>
-<td><p><a class="link" href="JNLNOTALLOWED.html" title="JNLNOTALLOWED ">JNLNOTALLOWED</a>, Did not enable journaling on xxxx region yyyy</p></td>
+<td><p><a class="link" href="JNLNOTALLOWED.html" title="JNLNOTALLOWED ">JNLNOTALLOWED</a>, Did not enable journaling on xxxx region rrrr (dddd)</p></td>
 </tr>
 <tr>
 <td><p>150376650</p></td>
@@ -3675,7 +3675,7 @@
 </tr>
 <tr>
 <td><p>150380746</p></td>
-<td><p><a class="link" href="MUUPGRDNRDY.html" title="MUUPGRDNRDY ">MUUPGRDNRDY</a>, Database xxx has not been certified as being ready to upgrade to yyy format</p></td>
+<td><p><a class="link" href="MUUPGRDNRDY.html" title="MUUPGRDNRDY ">MUUPGRDNRDY</a>, Database dddd has not been completely upgraded to ffff format - still bbbb database blocks to upgrade</p></td>
 </tr>
 <tr>
 <td><p>150382250</p></td>
@@ -4731,11 +4731,11 @@
 </tr>
 <tr>
 <td><p>150380970</p></td>
-<td><p><a class="link" href="REPLREQROLLBACK.html" title="REPLREQROLLBACK ">REPLREQROLLBACK</a>, Replication instance file xxxx indicates abnormal shutdown. Run MUPIP JOURNAL ROLLBACK first.</p></td>
+<td><p><a class="link" href="REPLREQROLLBACK.html" title="REPLREQROLLBACK ">REPLREQROLLBACK</a>, Replication instance file xxxx indicates abnormal shutdown or an incomplete ROLLBACK. Run MUPIP JOURNAL -ROLLBACKLLBACK</p></td>
 </tr>
 <tr>
 <td><p>150379426</p></td>
-<td><p><a class="link" href="REPLREQRUNDOWN.html" title="REPLREQRUNDOWN ">REPLREQRUNDOWN</a>, Error accessing replication instance xxxx. Must be rundown on cluster node yyyy.</p></td>
+<td><p><a class="link" href="REPLREQRUNDOWN.html" title="REPLREQRUNDOWN ">REPLREQRUNDOWN</a>, Error accessing replication instance RRRR. Run MUPIP RUNDOWN -REGION "*" on node NNNN.</p></td>
 </tr>
 <tr>
 <td><p>150383696</p></td>
@@ -4775,19 +4775,19 @@
 </tr>
 <tr>
 <td><p>150379986</p></td>
-<td><p><a class="link" href="REQRECOV.html" title="REQRECOV ">REQRECOV</a>, Error accessing database dddd. Must be recovered on cluster node ccccc.</p></td>
+<td><p><a class="link" href="REQRECOV.html" title="REQRECOV ">REQRECOV</a>, Error accessing database DDDD. Run MUPIP JOURNAL -RECOVER on node NNNN.</p></td>
 </tr>
 <tr>
 <td><p>150383578</p></td>
-<td><p><a class="link" href="REQRLNKCTLRNDWN.html" title="REQRLNKCTLRNDWN ">REQRLNKCTLRNDWN</a>, Error accessing relinkctl file rrrr for $ZROUTINES directory dddd. Must be rundown</p></td>
+<td><p><a class="link" href="REQRLNKCTLRNDWN.html" title="REQRLNKCTLRNDWN ">REQRLNKCTLRNDWN</a>, Error accessing relinkctl file rrrr for $ZROUTINES directory dddd. Run MUPIP RUNDOWN -RELINKCTL</p></td>
 </tr>
 <tr>
 <td><p>150380978</p></td>
-<td><p><a class="link" href="REQROLLBACK.html" title="REQROLLBACK ">REQROLLBACK</a>, Error accessing database dddd. Run MUPIP JOURNAL -ROLLBACK -NOONLINE on cluster node cccc.</p></td>
+<td><p><a class="link" href="REQROLLBACK.html" title="REQROLLBACK ">REQROLLBACK</a>, Error accessing database DDDD. Run MUPIP JOURNAL -ROLLBACK -NOONLINE on node NNNN.</p></td>
 </tr>
 <tr>
 <td><p>150374954</p></td>
-<td><p><a class="link" href="REQRUNDOWN.html" title="REQRUNDOWN ">REQRUNDOWN</a>, Error accessing database dddd. Must be rundown on cluster node ccccc.</p></td>
+<td><p><a class="link" href="REQRUNDOWN.html" title="REQRUNDOWN ">REQRUNDOWN</a>, Error accessing database DDDD. Run MUPIP RUNDOWN on node NNNN.</p></td>
 </tr>
 <tr>
 <td><p>150380499</p></td>

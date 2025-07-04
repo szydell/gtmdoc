@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="PRIMARYISROOT.html" title="PRIMARYISROOT ">
 <link rel="next" href="PROCTERM.html" title="PROCTERM ">
-<link rel="copyright" href="ln-idm45439962814000.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45776651566944.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>PRIMARYNOTROOT</strong></span>,    Attempted operation not valid on non-root primary instance xxxx</p>
 <p>MUPIP Error: If a replication instance is not a root primary (the journal pool already exists and was created by a source server command that specified propagateprimary), issuing a source server command with the start or deactivate qualifiers that has the rootprimary qualifier explicitly specified (or implicitly assumed) on this instance will cause this error to be issued. This error can also be issued by the receiver server or mupip rollback if the instance that the source server is running on is not a root primary and it connects to a receiver server or a mupip journal -rollback -fetchresync running on an instance that was formerly a root primary and has not yet had a mupip replic -source -losttncomplete command run either explicitly or implicitly on it.</p>
 <p>Action: Use propagateprimary qualifier instead of rootprimary in the source server command. If this error is issued by the receiver server or fetchresync rollback, the secondary instance has to be brought up as the secondary of a root primary since it was a root primary immediately before this. The rule is that any instance that was previously a root primary should be brought up as a secondary of the new root primary. This will create a lost transaction file that needs to be applied on the new root primary. Once that is done, a mupip replic -source -losttncomplete command should be run either explicitly or implicitly on this instance before trying to bring this up as a secondary of a propagating primary.</p>
-<a class="indexterm" name="idm45439957857360"></a>
+<a class="indexterm" name="idm45776646597904"></a>
 </div>
 <div class="navfooter">
 <hr>

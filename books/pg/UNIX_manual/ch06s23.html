@@ -8,7 +8,7 @@
 <link rel="up" href="ch06.html" title="Chapter 6. Commands">
 <link rel="prev" href="ch06s22.html" title="TROllback">
 <link rel="next" href="ch06s24.html" title="Use">
-<link rel="copyright" href="ln-idm45582637830384.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45327936835808.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="tstart"></a>TStart<a class="indexterm" name="idm45582635114080"></a>
+<a name="tstart"></a>TStart<a class="indexterm" name="idm45327934047216"></a>
 </h2></div></div></div>
 <p>The TSTART command marks the beginning of a transaction or sub-transaction and increments $TLEVEL. When TSTART marks the beginning of a transaction ($TLEVEL=1), its arguments determine whether the transaction may RESTART and whether serializability is enforced. If a transaction may RESTART, the TSTART arguments determine which local variables are restored during a RESTART. Serializability is enforced by LOCK commands or, if the SERIAL keyword is specified, by GT.M.</p>
 <p>The format of the TSTART command is:</p>
@@ -53,13 +53,13 @@
 <p>The following keywords may appear in a TSTART argument:</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="serial_cmmd"></a>S[ERIAL]<a class="indexterm" name="idm45582635085552"></a>
+<a name="serial_cmmd"></a>S[ERIAL]<a class="indexterm" name="idm45327934086032"></a>
 </h3></div></div></div>
 <p>The SERIAL keyword indicates that GT.M must ensure the serializability of the transaction. Note that GT.M always serializes transactions regardless of the SERIAL keyword. On a nested TSTART, this portion of the argument is irrelevant.</p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="transactionid"></a>T[RANSACTIONID]=expr<a class="indexterm" name="idm45582635058560"></a>
+<a name="transactionid"></a>T[RANSACTIONID]=expr<a class="indexterm" name="idm45327934231104"></a>
 </h3></div></div></div>
 <p>The TRANSACTIONID keyword declares an arbitrary transaction identification.</p>
 <p>If TRANSACTIONID="BATCH" or "BA" at transaction completion, the process immediately continues execution. When a process issues a [final] TCOMMIT for a transaction and journaling is active, by default the process waits until the entire transaction is written to the journal file(s) before executing the next command. This ensures that every transaction is durable before the process moves on to the next step. Transactions flagged as "BATCH" have lower latency and higher throughput, but a lower guarantee of durability. Normally this flag is used when operational procedures (such as a backup) or application code (such as a checkpoint algorithm) provides an acceptable alternative means of ensuring durability.</p>

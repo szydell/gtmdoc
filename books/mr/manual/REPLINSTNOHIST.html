@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="REPLINSTNMUNDEF.html" title="REPLINSTNMUNDEF ">
 <link rel="next" href="REPLINSTNOSHM.html" title="REPLINSTNOSHM ">
-<link rel="copyright" href="ln-idm45439962814000.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45776651566944.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>REPLINSTNOHIST</strong></span>, REPLINSTNOHIST  History record for xxxx not found in replication instance file yyyy</p>
 <p>MUPIP Error: The source server or receiver server issue this message as an error while mupip rollback issues this message as a warning when they scan the replication instance file looking for a history record corresponding to a journal sequence number that is lesser than the earliest sequence number or greater than the latest sequence number stored in the instance file. This means that the replication instance files on the primary and secondary have differing level of history detail (possible if the instance file was later recreated in one instance) and that it is no longer possible to determine the sync point (resync seqno) between the two instances.</p>
 <p>Action: If mupip rollback issues this error, it truncates the replication instance file history. This means that if this instance is a secondary, it should be brought up with the -updateresync qualifier. If the source or receiver server issue this error, this error needs to be handled by ensuring the primary and secondary databases are in sync (by shipping a copy of the database from the primary to the secondary if not already done), recreating the instance file on the secondary (if not already done) and start the receiver server on the secondary with the -updateresync qualifier.</p>
-<a class="indexterm" name="idm45439957584032"></a>
+<a class="indexterm" name="idm45776646324736"></a>
 </div>
 <div class="navfooter">
 <hr>

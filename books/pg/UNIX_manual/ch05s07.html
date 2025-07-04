@@ -8,7 +8,7 @@
 <link rel="up" href="ch05.html" title="Chapter 5. General Language Features of M">
 <link rel="prev" href="ch05s06.html" title="Operators">
 <link rel="next" href="ch05s08.html" title="M Locks">
-<link rel="copyright" href="ln-idm45582637830384.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45327936835808.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -30,30 +30,30 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="Gen_M_Cmmds"></a>Commands<a class="indexterm" name="idm45582636224752"></a>
+<a name="Gen_M_Cmmds"></a>Commands<a class="indexterm" name="idm45327935227680"></a>
 </h2></div></div></div>
 <p>M commands may be abbreviated to a defined prefix. Most commands have arguments. However, some commands have either optional arguments or no arguments. When a command has no argument and is followed by more commands on the same line, at least two spaces (&lt;SP&gt;) must follow the command without arguments. Commands that accept arguments generally accept multiple arguments on the same command. M treats multiple arguments the same as multiple occurrences of the same command, each with its own argument.</p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Postconditionals"></a>Postconditionals<a class="indexterm" name="idm45582636148064"></a>
+<a name="Postconditionals"></a>Postconditionals<a class="indexterm" name="idm45327935102960"></a>
 </h3></div></div></div>
 <p>M provides postconditionals as a tool for placing a condition on the execution of a single command and, in some cases, a single command argument. A postconditional consists of a colon (:) delimiter followed by a truth-valued expression. When the expression evaluates to true, M executes the command occurrence. When the expression evaluates to false, M does not execute the command occurrence.</p>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="Command_Postconditionals"></a>Command Postconditionals<a class="indexterm" name="idm45582636095456"></a>
+<a name="Command_Postconditionals"></a>Command Postconditionals<a class="indexterm" name="idm45327935097232"></a>
 </h4></div></div></div>
 <p>Command postconditionals appear immediately following a command and apply to all arguments for the command when it has multiple arguments. All commands except commands that themselves have a conditional aspect accept a command postconditional. Among the M standard commands, ELSE, FOR, and IF do not accept command postconditionals. All the GT.M command extensions accept command postconditionals. When a postconditional evaluates to a literal FALSE (0), GT.M discards the command and its arguments at compile time, which means it does not perform any validity checking on the arguments.</p>
 </div>
 <div class="sect3">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="Argument_Postconditionals"></a>Argument Postconditionals<a class="indexterm" name="idm45582636302256"></a>
+<a name="Argument_Postconditionals"></a>Argument Postconditionals<a class="indexterm" name="idm45327935202672"></a>
 </h4></div></div></div>
 <p>Commands that affect the flow of control may accept postconditionals on individual command arguments. Because multiple arguments act as multiple commands, this is a straight-forward application of the same principal as command postconditional. The only M standard commands that accept argument postconditionals are DO, GOTO, and XECUTE. The GT.M command extensions that accept argument postconditionals are BREAK, ZGOTO, and ZSYSTEM.</p>
 </div>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="Timeout"></a>Timeouts<a class="indexterm" name="idm45582636114352"></a>
+<a name="Timeout"></a>Timeouts<a class="indexterm" name="idm45327935134496"></a>
 </h3></div></div></div>
 <p>M provides timeouts as a tool to retain program control over commands of indefinite duration. A timeout consists of a colon (:) delimiter on an argument, followed by a numeric expression specifying the number of seconds to millisecond (three decimal place) precision for M to attempt to execute the command. When the timeout is zero (0), M makes a single attempt to complete the command.</p>
 <p><span>GT.M caps the maximum timeout to 2,147,483.647 seconds (about 24.8 days), and converts values greater than the maximum timeout to that cap. </span> When a command has a timeout, M maintains the $TEST intrinsic special variable as the command completes. If the command completes successfully, M sets $TEST to TRUE (1). If the command times out before successful completion, M sets $TEST to FALSE (0). When a command argument does not specify a timeout, M does not maintain $TEST.</p>

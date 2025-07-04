@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="Chapter 1. Error Messages">
 <link rel="prev" href="BKUPRUNNING.html" title="BKUPRUNNING ">
 <link rel="next" href="BKUPTMPFILWRITE.html" title="BKUPTMPFILWRITE ">
-<link rel="copyright" href="ln-idm45439962814000.html" title="Legal Notice">
+<link rel="copyright" href="ln-idm45776651566944.html" title="Legal Notice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>BKUPTMPFILOPEN</strong></span>,  Open of backup temporary file aaaa failed</p>
 <p>Run Time Error: When an online backup is in progress, a GT.M process doing updates to the database is saving away the pre-update images of the blocks it updates in a special backup area used to make sure the backups are consistent. Periodically, these blocks need to be flushed out to a temporary file and are flushed by the process needing the space to put its own changed blocks. This means every running process needs to have R/W access to the temporary file created by the backup. If the process cannot open the temporary file, this error is written to the operator log, the backup is flagged as having encountered an error and the process proceeds. So this error is only backup related. It is NOT an error in the process itself which proceeds as if backup were not running.</p>
 <p>Action: Determine cause of why process could not open temporary file, fix, and restart backup.</p>
-<a class="indexterm" name="idm45439961982000"></a>
+<a class="indexterm" name="idm45776650724336"></a>
 </div>
 <div class="navfooter">
 <hr>
