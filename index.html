@@ -1,11 +1,276 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-<HEAD>
-	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-	<TITLE>GT.M Documentation</TITLE>
-	<meta http-equiv="refresh" content="0; url=https://fis-gtm.sourceforge.io/">
-</HEAD>
-<BODY LANG="en-US" DIR="LTR">
-<P>Please visit the new Documentation site <a href="https://fis-gtm.sourceforge.io">here</a></P>
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GT.M Documentation</title>
+  <meta name="author" content="FIS GT.M Team">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #222;
+      background: #f5f6f8;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    header {
+      border-bottom: 3px solid #005a9c;
+      padding-bottom: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 1.9rem;
+      color: #005a9c;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    section {
+      background: #fff;
+      border: 1px solid #dde1e7;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    section > h2, section > h3 {
+      background: #005a9c;
+      color: #fff;
+      padding: 0.55rem 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .entry {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0.45rem 1rem;
+      border-top: 1px solid #eef0f3;
+    }
+
+    .entry:first-of-type { border-top: none; }
+
+    .entry-title {
+      color: #222;
+      flex: 1;
+    }
+
+    .entry-title a {
+      color: #005a9c;
+      text-decoration: none;
+    }
+
+    .entry-title a:hover { text-decoration: underline; }
+
+    .badges {
+      display: flex;
+      gap: 0.35rem;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.1rem 0.55rem;
+      border-radius: 3px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-html {
+      background: #e8f0fb;
+      color: #1a5fa8;
+      border: 1px solid #b3cef0;
+    }
+
+    .badge-pdf {
+      background: #fdecea;
+      color: #b71c1c;
+      border: 1px solid #f5b7b1;
+    }
+
+    .badge-html:hover { background: #cfe0f7; }
+    .badge-pdf:hover  { background: #fbd7d4; }
+
+    details { border-top: 1px solid #eef0f3; }
+    details:first-of-type { border-top: none; }
+
+    details > summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: #333;
+      list-style: none;
+      user-select: none;
+    }
+
+    details > summary::-webkit-details-marker { display: none; }
+
+    details > summary::after {
+      content: "\25B8";
+      font-size: 0.8rem;
+      color: #888;
+      transition: transform 0.15s;
+    }
+
+    details[open] > summary::after { transform: rotate(90deg); }
+
+    details > summary:hover { background: #f5f6f8; }
+
+    details .entry { border-top: 1px solid #eef0f3; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>GT.M Documentation</h1>
+  </header>
+
+  <!-- Manuals -->
+  <section>
+    <h2>Manuals</h2>
+    <div class="entry">
+      <span class="entry-title">Administration and Operations Guide</span>
+      <span class="badges">
+        <a class="badge badge-html" href="manuals/ao/index.html">HTML</a>
+        <a class="badge badge-pdf"  href="manuals/ao/ao_screen.pdf">PDF</a>
+      </span>
+    </div>
+    <div class="entry">
+      <span class="entry-title">Programmers Guide</span>
+      <span class="badges">
+        <a class="badge badge-html" href="manuals/pg/index.html">HTML</a>
+        <a class="badge badge-pdf"  href="manuals/pg/pg_screen.pdf">PDF</a>
+      </span>
+    </div>
+    <div class="entry">
+      <span class="entry-title">Messages and Recovery Procedures</span>
+      <span class="badges">
+        <a class="badge badge-html" href="manuals/mr/index.html">HTML</a>
+        <a class="badge badge-pdf"  href="manuals/mr/mr_screen.pdf">PDF</a>
+      </span>
+    </div>
+  </section>
+
+  <!-- Release Notes -->
+  <section>
+    <h3>GT.M Release Notes</h3>
+
+    <details open>
+      <summary>V7.1 Versions</summary>
+      <div class="entry"><span class="entry-title">V7.1-011 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-011_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-011_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.1-010 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-010_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-010_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.1-009 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-009_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-009_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.1-008 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-008_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-008_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.1-007 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-007_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-007_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.1-006 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-006_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-006_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.1-005 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-005_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-005_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.1-004 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-004_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-004_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.1-003 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-003_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-003_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.1-002 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-002_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-002_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.1-001 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-001_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-001_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.1-000 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.1-000_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.1-000_Release_Notes_screen.pdf">PDF</a></span></div>
+    </details>
+
+    <details>
+      <summary>V7.0 Versions</summary>
+      <div class="entry"><span class="entry-title">V7.0-005 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.0-005_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.0-005_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.0-004 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.0-004_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.0-004_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.0-003 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.0-003_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.0-003_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.0-002 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.0-002_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.0-002_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.0-001 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.0-001_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.0-001_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V7.0-000 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V7.0-000_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V7.0-000_Release_Notes_screen.pdf">PDF</a></span></div>
+    </details>
+
+    <details>
+      <summary>V6.3 Versions</summary>
+      <div class="entry"><span class="entry-title">V6.3-014 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-014_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-014_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-013 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-013_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-013_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-012 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-012_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-012_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-011 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-011_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-011_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-010 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-010_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-010_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-009 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-009_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-009_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-008 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-008_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-008_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-007 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-007_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-007_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-006 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-006_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-006_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-005 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-005_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-005_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-004 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-004_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-004_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-003 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-003_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-003_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-002 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-002_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-002_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-001 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-001_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-001_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.3-000 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.3-000_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.3-000_Release_Notes_screen.pdf">PDF</a></span></div>
+    </details>
+
+    <details>
+      <summary>V6.2 Versions</summary>
+      <div class="entry"><span class="entry-title">V6.2-002 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.2-002_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.2-002_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.2-001 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.2-001_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.2-001_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.2-000 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.2-000_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.2-000_Release_Notes_screen.pdf">PDF</a></span></div>
+    </details>
+
+    <details>
+      <summary>V6.1 Versions</summary>
+      <div class="entry"><span class="entry-title">V6.1-000 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.1-000_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.1-000_Release_Notes_screen.pdf">PDF</a></span></div>
+    </details>
+
+    <details>
+      <summary>V6.0 Versions</summary>
+      <div class="entry"><span class="entry-title">V6.0-003 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.0-003_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.0-003_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.0-002 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.0-002_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.0-002_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.0-001 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.0-001_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.0-001_Release_Notes_screen.pdf">PDF</a></span></div>
+      <div class="entry"><span class="entry-title">V6.0-000 Release Notes</span><span class="badges"><a class="badge badge-html" href="releasenotes/GTM_V6.0-000_Release_Notes.html">HTML</a><a class="badge badge-pdf" href="releasenotes/GTM_V6.0-000_Release_Notes_screen.pdf">PDF</a></span></div>
+    </details>
+
+  </section>
+
+  <!-- Technical Bulletins -->
+  <section>
+    <h3>Technical Bulletins</h3>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Alias_Variables.html">Alias Variables</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Database_Encryption.html">Database Encryption</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Database_Endian_Conversion.html">Database Endian Conversion</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Database_Migration.html">Database Migration - V4 to V5</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_on_z_OS.html">GT.M on the z/OS Platform</a></span></div>
+    <div class="entry">
+      <span class="entry-title">GTMJI - GT.M Java Interface Plug-in</span>
+      <span class="badges">
+        <a class="badge badge-html" href="bulletins/GTMJI_Technical_Bulletin.html">HTML</a>
+        <a class="badge badge-pdf"  href="bulletins/GTMJI_Technical_Bulletin_screen.pdf">PDF</a>
+      </span>
+    </div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Long_Names.html">Long Names</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_M_Read_Editing_for_Unix.html">M Read Editing</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Migrating_Off_Alpha_AXP_OpenVMS.html">Migrating from Alpha/AXP OpenVMS</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Multi_Site_Replication.html">Multi-Site Replication</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Null_Subscripts.html">Null Subscripts</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/PIPE_IO_Technical_bulletin.html">PIPE Devices</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/081023-2dS9I10-002703gtmsecshr.pdf">Security Advisory - releases through V5.3-002</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Security_Philosophy.html">Security Philosophy and Implementation</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Supplementary_Instance.html">Supplementary Instance Replication</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Triggers.html">Triggers</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Unicode_Support.html">Unicode (ISO/IEC-10646) for internationalization</a></span></div>
+    <div class="entry"><span class="entry-title"><a href="bulletins/GTM_Update_Helper_Processes.html">Update Helper Processes</a></span></div>
+  </section>
+
+</div>
+</body>
+</html>

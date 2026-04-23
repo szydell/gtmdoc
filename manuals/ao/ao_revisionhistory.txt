@@ -1,0 +1,692 @@
+==== AO V7.1-011 ====
+In GT.M Journaling -> Journal Extract Formats : Add offset field to EPOCH; update example
+In General Database Management -> SET : add missing entries in the format description
+In Global Directory Editor -> Segment Qualifiers : Remove obsolete text from -FULLBLKWRT
+In General Database Management -> -FUllblkwrt : Remove obsolete text
+In General Database Management -> -Global_buffers : tweak the working on the adjustment of trigger_flush
+In General Database Management -> -Trigger_flush : Revise MIN and MAX
+
+==== AO V7.1-010 ====
+In General Database Management -> -RETry : add restriction
+In General Database Management -> -Global_buffers : Adjust wording on relation to flush_trigger
+In General Database Management -> -Trigger_flush : Adjust wording on relation to -global_buffers
+In Database Structure Editor -> SPawn : Removed redundant information
+
+==== AO V7.1-009 ====
+In Basic Operations -> Environment Variables : add new gtm_dynamic_varnames; revise gtm_zmaxtptime description
+In General Database Management -> -FILE file : Fix usage in title
+In General Database Management -> -REGION region : Fix usage in title
+In General Database Management -> MUPIP Command Summary : Introduce MUPIP JOURNAL [-ROLLBACK [-FORWARD] [-JNLDIR]]]
+In GT.M Journaling -> Journal Control Qualifiers : Introduce MUPIP JOURNAL [-ROLLBACK [-FORWARD [-JNLDIR]]]
+In GT.M Journaling -> JOURNAL : Introduce MUPIP JOURNAL [-ROLLBACK [-FORWARD] [-JNLDIR]]]
+In Maintaining Database Integrity -> M2-Bitmap Header Problems : Bring bit map header value current
+
+==== AO V7.1-008 ====
+In Basic Operations -> Environment Variables : add gtm_nozenable environment variable
+In General Database Management -> -Global_buffers : Add interaction with trigger_flush_limit
+In General Database Management -> -Trigger_flush : add relationship to -GLOBAL_BUFFERS
+In Introduction -> Why do we need a $gtmcrypt_config file? : Updated for plugins section and explain key search order
+
+==== AO V7.1-007 ====
+In Database Replication -> Creating the Replication Instance FileCreate instance : Correct maximum length for an instance name
+In Database Structure Editor -> Examples for EVALUATE : dse eval without -d/-h takes ties for a comprehensive result
+In Introduction -> Why do we need a $gtmcrypt_config file? : gtmcrypt_config version 2
+
+==== AO V7.1-006 ====
+In Basic Operations -> Environment Variables : correct gtm_zmaxtptime invalid values
+In Global Directory Editor -> Global Directory Abbreviations : Add AUTODELETE
+In Global Directory Editor -> Examining the Default Global Directory : Add "Auto Del" column
+In Global Directory Editor -> SHow : Add AUTODELETE
+In Global Directory Editor -> Region Qualifiers : Add AUTODELETE
+
+==== AO V7.1-005 ====
+In Basic Operations -> Environment Variables : clarify VIEW "NOSTATSHARE" as without region-list
+In General Database Management -> -STATS : -STATS require it to be specified in full
+
+==== AO V7.1-004 ====
+In Basic Operations -> Environment Variables : Add gtm_tpnotacidtries; update gtm_tpnotacidtime and gtm_zmaxtptime
+In Global Directory Editor -> -Segment : add $ to the environment variable name
+In Global Directory Editor -> Identifying the Current Global Directory : Remove extraneous example.
+In General Database Management -> CREATE : Fix minimum acceptable chars for CREATE
+In General Database Management -> FREEZE : fix minimum acceptable chars for FREEZE
+In General Database Management -> INTEG : fix minimum acceptable chars for INTEG
+In General Database Management -> RESTORE : fix minimum acceptable chars for RESTORE
+In General Database Management -> SET : fix minimum acceptable form of SET
+In General Database Management -> MUPIP Command Summary : add summary table entry for mupip semaphore
+In General Database Management -> -Mutex_slots : specify that MUTEX_SLOTS works only on AIX
+In GT.M Journaling -> Journal Files : add caution about the impact of journal off
+In GT.M Journaling -> SET -JOURNAL Options : provide a defensible value for journal file extension
+In Database Replication -> Setting up an A->P replication configuration with empty databases : clarify the instuctions
+In Database Replication -> Instance Bound Global Directories : Describe use of second argument for JNLPOOL
+In Database Replication -> Starting the Start Source Server : journal extract delimiter is backslash
+In Database Structure Editor -> Qualifiers of CACHE : fixed a typo
+In Maintaining Database Integrity -> I4-File Size Errors : correct the formula for calculating TOTAL_BLKS
+
+==== AO V7.1-003 ====
+In General Database Management -> -INST_freeze_on_error : GT.M creates StatsDB regions with INST_FREEZE_ON_ERROR disabled
+In Database Replication -> Instance Freeze : Note StatDB non-participation in Instance Freeze
+In Database Replication -> Starting the Start Source Server : Clarify renegotiation for inter-version replication
+In Database Replication -> Starting the Receiver Server : document {SEND|RECV}BUFFSIZE qualifiers for receiver
+In Introduction -> OpenSSL Options : Default includes SSL_VERIFY_FAIL_IF_NO_PEER_CERT\nand additional configuration options
+
+==== AO V7.1-002 ====
+In Global Directory Editor -> Segment Qualifiers : document that both index and data reserved_bytes are controlled by the GDE -RESERVED_BYTES qualifier
+In General Database Management -> -DMAXblocksize : revise DMAXBLOCKSIZE description
+In General Database Management -> -IMAXblocksize : Revise IMAXBLOCKSIZE description
+In General Database Management -> -Online : Remove V4 reference
+In General Database Management -> DOWNGRADE : Remove reference to V4
+In General Database Management -> EXTENDMUPIPEXTEND : specify maximum blocks for V6 and V7
+In General Database Management -> FTOK : Add missing details
+In General Database Management -> INTEG : document new -IMAXBLOCKSIZE and -DMAXBLOCKSIZE INTEG qualifiers
+In General Database Management -> REORG : document -MIN_LEVEL qualifier
+In General Database Management -> SET : Added the new -INDEX_RESERVED_BYTES and -DATA_RESERVE_BYTES qualifiers
+In General Database Management -> MUPIP Command Summary : document -[NO]{SEND|RECV}BUFFSIZE, -MIN_LEVEL, -{I|D}MAXBLOCKSIZE, and -{INDEX|DATA}_RESERVED_BYTES qualifiers
+In General Database Management -> -DATA_reserved_bytes : document default data reserved bytes value
+In General Database Management -> -INDEX_reserved_bytes : document index reserved bytes default
+In General Database Management -> -PROblksplit : enhance description
+In General Database Management -> -REServed_bytes : document default reserved bytes value
+In General Database Management -> -Version : adjust format
+In General Database Management -> -SLeep_spin_countSleep_spin_count qualifier with MUPIP SET : correct typo
+In General Database Management -> -Spin_sleep_mask : Fix typo
+In GT.M Journaling -> SET Object Identifying Qualifiers : specify that a process may keep a prior generation journal file open for up to 60 seconds after an explicit journal file switch.
+In GT.M Journaling -> Journal Extract Formats : remove V4 references
+In GT.M Journaling -> -ROLLBACK [{-ON[LINE]|-NOO[NLINE]}] : update for ORLBKROLLED message
+In Database Replication -> Starting the Start Source Server : document the new -[NO]{SEND|RECV}BUFFSIZE qualifier to specify TCP buffer sizing
+In GT.M Database Structure(GDS) -> File Header Data Elements : document separation of reserved_bytes into data_reserved_bytes and index_reserved_bytes in the fileheader
+In GT.M Database Structure(GDS) -> Local Bitmaps : revise version in example
+In GT.M Database Structure(GDS) -> String Subscripts : Update example
+In Database Structure Editor -> CHange : Document new -DATA_RESERVED_BYTES and -INDEX_RESERVED_BYTES qualifiers to DSE CHANGE -FILEHEADER
+In Database Structure Editor -> CHANGE -FIleheader Qualifiers : fix typos
+In Database Structure Editor -> DSE Command Summary : add new -DATA_RESERVED_BYTES and -INDEX_RESERVED_BYTES qualifiers to the dse command table
+In Database Structure Editor -> Examples for DUMP : Changed fileheader dump to reflect that Reserved Bytes is now reported as Data and Index Reserved Bytes
+In Database Structure Editor -> Examples for MAPS : Update examples
+In Maintaining Database Integrity -> MUPIP INTEG Error Classification Table : document BSIZTOOLARGE informational integ message
+In Maintaining Database Integrity -> Finding and Fixing Database Errors : document -IMAXBLOCKSIZE and -DMAXBLOCKSIZE INTEG qualifiers
+In Maintaining Database Integrity -> O6-Block Size Errors : Document block-size informational message as a result of -IMAXBLOCKSIZE and -DMAXBLOCKSIZE
+In Introduction -> Database Upgrade Matrix : replace V4 info
+
+==== AO V7.1-001 ====
+In General Database Management -> -Truncate : TRUNCATE applies only to BG databases
+In General Database Management -> -UPgrade : add restriction on other concurrent REORGs
+In General Database Management -> -PROblksplit : specify that the default is 0 and other changes
+In Database Replication -> Starting the Start Source Server : add information about the importance of the size of the Receiver Pool
+In Database Replication -> Stopping the Receiver Server and/or the Update Process : fixed a typo in the title
+In Database Structure Editor -> Operating in DSEOperations : corrected information about DSE Inquiry commands
+
+==== AO V7.1-000 ====
+In Basic Operations -> Configuring the Restriction facility : syntax fix: ZROUTINES instead of $ZROUTINE
+In Basic Operations -> Environment Variables : document new supported value for the gtm_boolean environment variable and the new behavior it enables: EXTENDED_BOOLEAN
+In Global Directory Editor -> Segment Qualifiers : fix default block size to 4096.
+In General Database Management -> -V6 : add information about -NOV6
+In General Database Management -> DOWNGRADE : DOWNGRADE command limitation
+In General Database Management -> DUMPFHEAD : update abbreviation
+In General Database Management -> UPGRADE : MUPIP UPGRADE starts the upgrade of a DB to V7m
+In General Database Management -> RCTLDUMP : F135385 - added the "superseded" counter(the times an object has been replaced)
+In General Database Management -> SIZE : corrected syntax of MUPIP SIZE -SELECT.
+In General Database Management -> STOP : MUPIP STOP three times within a minute shuts down GT.M process
+In General Database Management -> MUPIP Command Summary : DOWNGRADE options are no longer supported. REORG -UPGRADE requires standalone access
+In General Database Management -> -Downgrade : Note limitation onV7->V6
+In General Database Management -> -UPgrade : REORG -UPGRADE requires standalone access
+In General Database Management -> -StatsDB_allocation : Clarify statsdb_allocation behavior
+In General Database Management -> -Version : Note V6->V7 limitation
+In GT.M Journaling -> SET -JOURNAL Options : Document the adjustment of an in range journal buffer size
+In GT.M Database Structure(GDS) -> File Header Data Elements : "Certified for Upgrade to" states the block version
+In Database Structure Editor -> CHANGE -FIleheader Qualifiers : FULL_UPGRADED indicates the DB is at or below supported current version
+In Introduction -> Usage : Default is --devicedetail.
+
+==== AO V7.0-005 ====
+In Basic Operations -> Logging : add gde, lke and dse logging information; add information about Makefile
+In Basic Operations -> Audit Logging facility : AM_ENABLE allows MUPIP prompt; add AD_ENABLE, AL_ENABLE, and AZA_ENABLE
+In Basic Operations -> Configuring the Restriction facility : ZLINK, $ZROUTINES, ZRUPDATE, and A{D|L|M|PD|ZA}_ENABLE entries
+In Basic Operations -> Configuring huge pages for GT.M x86[-64] on Linux : Removed references to libhugetlbfs and added environment variable gtm_hugetlb_shm
+In Basic Operations -> Environment Variables : add gtm_hugetlb_shm; correct - gtm_mstack_crit_threshold
+In Database Replication -> Introduction : add minor note about bandwidth consideration
+
+==== AO V7.0-004 ====
+In Basic Operations -> Audit Logging facility : add information about AM_ENABLE
+In Basic Operations -> Configuring the Restriction facility : Add LKE and LKECLEAR
+In Basic Operations -> Environment Variables : gtm_db_create_ver affects MUPIP CREATE
+In General Database Management -> -RETry : specify that -RETRY=count is the number of retry attempts.
+In General Database Management -> -Region : autodb
+In General Database Management -> -V6 : MUPIP CREATE -V6 and the env var
+In General Database Management -> CREATE : add MUPIP CREATE -V6; Note about AutoDBs
+In General Database Management -> -Truncate : Update TRUNCATE notes for standalone
+In Introduction -> OpenSSL Options : remove dh params
+In Introduction -> Why do we need a $gtmcrypt_config file? : Eliminate dh512 and dh1024
+In Introduction -> Creating and signing demo leaf-level certificates : no dh params
+
+==== AO V7.0-003 ====
+In Basic Operations -> Using huge pages : LD_PRELOAD and where libhugtlbfs is now maintained
+In General Database Management -> -Region : specify that INTEG processes regions based on the order specified in the region-list
+In General Database Management -> -REGION region : specify that DUMPFHEAD selects regions based on the order specified in the region-list.
+In Database Replication -> Starting the Start Source Server : remove information about compiling zlib. Warn about TLSv1.3 and renegotiation vs key update
+In Introduction -> Tested Reference Implementations : Drop RHEL 6 and update other distros
+
+==== AO V7.0-002 ====
+In Basic Operations -> Environment Variables : add gtm_malloc_limit ; gtm_autorelink_ctlmax - Add routine shared object integrity-check
+In General Database Management -> BACKUP : correct the syntax of -NOONLINE; specified that MUPIP BACKUP selects regions based on the user-specified order
+In General Database Management -> -PROblksplit : add new section
+In GT.M Journaling -> JOURNAL : removed a reference to working with journal files on tape
+In Database Replication -> Starting the Start Source Server : correct formatting
+In Database Structure Editor -> Examples for DUMP : updated the -fileheader output
+In Introduction -> Special note - GNU Privacy Guard and Agents : Advise kill and restart of any existing GPG agent processes so that updates are recognized.
+In Introduction -> Using the reference implementation's custom pinentry program : Correct typo. Should be GPG 2.2.4 not GPG 2.2.24
+
+==== AO V7.0-001 ====
+In Installing GT.M -> Before you begin : Installation no longer prompts for ICU version
+In Installing GT.M -> gtminstall script GT.M installing with gtminstall : gtminstall does not accept ICU version
+In Installing GT.M -> Installation Procedure : Installation does not prompt for ICU version; tar on AIX should be run as root
+In Basic Operations -> Configuring the Restriction facility : add ZSTEP to the ZBREAK restriction.
+In Basic Operations -> Environment Variables : fix a minor typo and update the entry for gtm_non_blocked_write_retries
+In Global Directory Editor -> Region Qualifiers : add a table for equivalent settings for [NO]L[OCK_CRIT] in other utilities
+In General Database Management -> -Record : added a note of the added timestamping functionality of -RECORD.
+In General Database Management -> -RETry : add new section
+In General Database Management -> -Lck_shares_db_crit : add reference to the -[NO]L[OCK_CRIT] section.
+In General Database Management -> BACKUP : add -RETRY and -SHOWPROGRESS
+In General Database Management -> -FLUSH : add clarifications
+In General Database Management -> SET : added -STATSD[B_ALLOCATION] qualifier; corrected ordering of LCK_SHARES_DB_CRIT
+In General Database Management -> MUPIP Command Summary : The -STATSD[B_ALLOCATION] qualifier expects to get an integer.
+In General Database Management -> -StatsDB_allocation : change the minimum statsdb_allocation value to 128.
+In GT.M Journaling -> Journal Action Qualifiers : add that file can be a fifo
+In GT.M Journaling -> Journal Files : GTM-9443 MUPIP SET waits with the removal of a temporary journal file.
+In GT.M Journaling -> Introduction : time of creation -> time of rename
+In Database Replication -> Starting the Start Source Server : improve the description of -RENEGOTIATE_INTERVAL.
+In Database Replication -> Starting the Receiver Server : Connection restarts with -updateresync
+In Database Replication -> Starting the Update Process : Starting replication with no helper processes
+In Database Structure Editor -> CHange : correct Zqgblmod_T[rans]=sequence-number
+In Database Structure Editor -> DSE Command Summary : correct Zqgblmod_T[rans]=sequence-number
+In Database Structure Editor -> Find : Add the -ST[ATS] qualifier to the table
+In Database Structure Editor -> Qualifiers of FIND : In this section, Add a -Stats qualifier information.
+In Introduction -> Device IO : Add reference to the Programmer's Guide for data in motion
+
+==== AO V7.0-000 ====
+In Basic Operations -> Environment Variables : If gtm_tprestart_log_delta is defined and gtm_tprestart_log_first is not defined, GT.M initializes gtm_tprestart_log_first to 0
+In Global Directory Editor -> Region Qualifiers : correct default for LOCK_CRIT
+In Global Directory Editor -> Segment Qualifiers : Update maximum value of Reserved Bytes
+In General Database Management -> MUPIP Command Summary : removed -DBG as it is for internal FIS use.
+In General Database Management -> -REServed_bytes : Update maximum Reserved Bytes
+In Database Replication -> Reporting the Current Backlog of Journal RecordsSource backlog : add information about the acknowledgement sequence number and examples
+In Database Replication -> Shutting down theShutdown Source Server : add information about -ZEROBACKLOG and -TIMEOUT.
+In GT.M Database Structure(GDS) -> File Header Data Elements : Update Maximum TN and Maximum TN Warn
+In Database Structure Editor -> Examples for CHANGE : fix dse command to update maximum record size, to pass just -record_max_size and not -reserved_bytes
+In Database Structure Editor -> DSE Command Summary : correct the syntax of the -SIBLING qualifier
+In Database Structure Editor -> Qualifiers of FIND : correct the syntax for the -SIBLING qualifier
+
+==== AO V6.3-014 ====
+In Basic Operations -> Environment Variables : added gtm_coredump_filter, revised gtm_baktmpdir, gtm_snaptmpdir, remove references to the deprecated gtm_log, and specify that gtm_statshare is applied only after a db file is opened.
+In General Database Management -> FTOK : add new qualifiers and functionality.
+In General Database Management -> SEMAPHORE : add SEMAPHORE command
+In Database Replication -> Creating the Replication Instance FileCreate instance : add reference to gtm_repl_instname and gtm_repl_instance.
+In Database Replication -> Switchover possibilities in an A->B replication configuration : fixed default wait period to 30 seconds
+In Database Replication -> Shutting down theShutdown Source Server : added the default and max value of -timeout and information about the internal max wait time.
+In Database Replication -> Starting the Start Source Server : add -CONNECTPARAMS information and adjust the maximum -BUFFSIZE
+In Database Structure Editor -> Qualifiers of SHIFT : remove spurious qualifier
+In Introduction -> Why do we need a $gtmcrypt_config file? : tlsids must begin with a letter.
+
+==== AO V6.3-013 ====
+In Basic Operations -> Environment Variables : add more information about $gtm_tmp
+In Global Directory Editor -> Global Directory Abbreviations : correct typo: [HO] to [NO]
+In General Database Management -> BACKUP : Indicate that "-B" is not sufficient to indicate a "-BYTESTREAM" backup. It must be at least "-BY".
+In General Database Management -> -[NO]A[UTORELEASE : specify that GT.M does not honor MUPIP SET commands even when -AUTORELEASE is set.
+In General Database Management -> Operations - Standalone and Concurrent Access : remove a redundant and add a reference to the MUPIP Command Summary table.
+In General Database Management -> SET : Remove a bullet point about standalone access.
+In General Database Management -> MUPIP Command Summary : add a new Standalone Access column; correct note about EXTRACT; change -B[YTESTREAM] to -BY[TESTREAM]; change STD[NULLSUBS] to STD[NULLCOLL]; remove SPIN[_SLEEP_LIMIT]
+In GT.M Journaling -> Journal Time Qualifiers : change "ending time" to "ending inclusive time"
+In GT.M Journaling -> Journal Extract Formats : Pull the version specific simple extract header. Add examples of both simple and detail extracts. Add a description of the detail format with the record offsets and lengths.
+In GT.M Journaling -> SET -JOURNAL Options : Maximum journal buffer size
+In Database Replication -> Setting up an A->B->C replication configuration with empty databases : Minor formatting adjustment
+In Database Replication -> Setting up an A->B replication configuration with empty databases : Minor formatting adjustment
+In Database Replication -> Setting up an A->P replication configuration with empty databases : formatting adjustment of the note.
+In Database Replication -> Starting the Start Source Server : Adjust replication -buffsize maximum
+In GT.M Database Structure(GDS) -> File Header Data Elements : update default and maximum journal buffer size
+In Database Structure Editor -> DSE Command Summary : fix typo: change HARD_SPIN_CPUNT to HARD_SPIN_COUNT and formatting cleanup.
+
+==== AO V6.3-012 ====
+In About GT.M -> GT.M Utility Programs : Fixed GDE entry and added links to GDE and MUPIP chapters
+In Basic Operations -> Configuring the Restriction facility : correct alphabetical order; add LIBRARY and LOGDENIALS.
+In Basic Operations -> Environment Variables : deprecate gtm_fullblockwrites
+In Global Directory Editor -> Examining the Default Global Directory : add FBWR
+In Global Directory Editor -> SHow : add FBWR
+In Global Directory Editor -> GDE Command Qualifier Summary : add -FULLBLKWRT
+In Global Directory Editor -> Segment Qualifiers : add -FULLBLKWRT qualifier.
+In General Database Management -> RESTORE : added an example and made content improvements.
+In General Database Management -> SET : add -FULLBLKWRT
+In General Database Management -> SIZE : correct and expand the subscript documentation.
+In General Database Management -> MUPIP Command Summary : add -FULLBLKWRT
+
+==== AO V6.3-011 ====
+In Basic Operations -> Environment Variables : add description of gtm_nofflf and gtm_hupenable
+In Basic Operations -> M mode and UTF-8 mode : add information in ICU version configuration used by gtmprofile
+In Global Directory Editor -> Instance Qualifier : add a link
+In Global Directory Editor -> Segment Qualifiers : reflect higher extension_count
+In General Database Management -> SIZE : enhance the 2 sigma explanation
+In Database Replication -> Instance Bound Global Directories : simplify the content to encourage the use of replication and instance bound global directories.
+In Database Replication -> Introduction : content improvement
+
+==== AO V6.3-010 ====
+In Installing GT.M -> gtminstall script GT.M installing with gtminstall : add the filename option.
+In Basic Operations -> Logging : Added additional documentation to the Direct Mode Auditing (or APD) feature. Specifically, more information on how to compile and run the logger programs is added.
+In Basic Operations -> Environment Variables : correct the definition of gtm_retention; add gtm_max_indrcache_count which got removed in revision V6.3-009 due to a documentation error.
+In Global Directory Editor -> GDE Command Summary : add SHOW -COMMAND to table
+In General Database Management -> REORG : add -DOWNGRADE and -UPGRADE.
+In General Database Management -> SIZE : mupip size -subscript changes
+In General Database Management -> MUPIP Command Summary : add qualifiers for REORG; add -CORRUPTDB
+In GT.M Journaling -> Journal Control Qualifiers : add the CORRUPTDB qualifier.
+In M Lock Utility (LKE) -> Clear : remove non-existent -CRIT qualifier from LKE CLEAR
+In Maintaining Database Integrity -> MUPIP INTEG Error Classification Table : add more explanation
+In Maintaining Database Integrity -> Run-Time Database Restart Codes : fix section title
+In Maintaining Database Integrity -> C1-Possible Cache Control Problems : add a link to section R3
+In Maintaining Database Integrity -> Can Be Deferred : update MUPIP INTEG error messages table and give it its own section
+In Maintaining Database Integrity -> Finding and Fixing Database Errors : separate mupip integ error table and restart code table into a separate sections
+In Maintaining Database Integrity -> H1-Process Hangs : improve the instructions
+In Maintaining Database Integrity -> H3-Database Access Problems : modify some instructions
+In Maintaining Database Integrity -> H7-Disk Hardware Problems : remove inappropriate text
+In Maintaining Database Integrity -> I1-MUPIP INTEG Errors : put table in a separate section
+In Maintaining Database Integrity -> I3-File Header Errors : add mupip dumpfhead as a reporter of freecnt
+In Maintaining Database Integrity -> I5-More Database Access Problems : remove inappropriate text
+In Maintaining Database Integrity -> K5-Star Key Problems : more accurate wording
+In Maintaining Database Integrity -> I6-Transient Errors : add discussion of the role of startup procedures.
+In Maintaining Database Integrity -> I7-Database Rundown Problem : modify the description to reflect the use of appropriate startup.
+In Maintaining Database Integrity -> K3-Block Doubly Allocated : improve wording
+In Maintaining Database Integrity -> M1-Bitmap Errors : enhance wording of MAP -MASTER
+In Maintaining Database Integrity -> O3-Data Block Errors : additional recommendations
+In Maintaining Database Integrity -> O4-Salvage of Data Blocks with Lost Indices : adjust wording
+In Maintaining Database Integrity -> P1-Process Damage : enhance wording
+In Maintaining Database Integrity -> R2-Structural Database Integrity Errors : additions and adjustments
+In Maintaining Database Integrity -> Repairing the Database with DSE : additional instructions
+
+==== AO V6.3-009 ====
+In Basic Operations -> Environment Variables : add gtm_linktmpdir
+In General Database Management -> REORG : Add -keep, -nocoalesce, -nosplit, -noswap
+In General Database Management -> MUPIP Command Summary : add entries for -GVPATFILE and -STOPRECEIVERFILTER.
+In General Database Management -> -Read_only : add a note on using -NOREAD_ONLY.
+In GT.M Journaling -> Journal Selection Qualifiers : add new GVPATFILE qualifier.
+In Database Replication -> Replication Architecture : add more information about the purpose of a passive Source Server and general content improvements.
+In Database Replication -> Freezing an Freeze Instance : add new section.
+In Database Replication -> Replication Instance File : add a reference to autorollback
+In Database Replication -> Starting the Start Source Server : specify the default value for -connectparams; content improvements; organize qualifiers by relevance.
+In Database Replication -> Stopping theStop Receiver Filter : add new section.
+In Database Replication -> Stopping theStop Source Filter : add -instsecondary qualifier to specify the Source Server target for stopping the Source filter.
+In Database Replication -> Starting the Receiver Server : organize qualifiers by relevance.
+
+==== AO V6.3-008 ====
+In Basic Operations -> Environment Variables : add gtm_max_indrcache_count and gtm_max_indrcache_memory.
+In Basic Operations -> M mode and UTF-8 mode : remove references to the Compiling ICU on GT.M Supported Platforms appendix.
+In General Database Management -> SET : add information about the -[NO]ENCYRPTABLE and -ENCRYPTIONCOMPLETE qualifiers
+In Database Replication -> Checking Server Health : source -checkhealth does not accept -helpers option
+In Database Replication -> Checking Server Receiver Health : receiver -checkhealth supports -helpers option
+In Database Replication -> Download Replication Examples : remove redundant material.
+In Database Replication -> Starting the Start Source Server : specify that MUPIP ignores the -BUFFSIZE qualifier when the Journal Pool is already set up.
+In Database Replication -> TLS/SSL Replication : remove redundant material.
+In Database Replication -> Setting up a secured TLS replication connection : remove redundant material.
+In GT.M Database Structure(GDS) -> GDS Records : Update breakdown of the record header fields.
+In GT.M Database Structure(GDS) -> GDS Blocks : Update breakdown of field within the block header.
+
+==== AO V6.3-007 ====
+In Basic Operations -> Logging : Downlodable dm_audit_listener.zip
+In Basic Operations -> Audit Logging facility : add new section
+In Basic Operations -> Configuring the Restriction facility : add Audit Principal Device section
+In Basic Operations -> Environment Variables : improve the description of gtm_passwd and gtm_obfusaction_key.
+In Global Directory Editor -> Region Qualifiers : make a correction
+In Global Directory Editor -> Segment Qualifiers : correct max GLOBAL_BUFFER_COUNT; general fixes for the segment qualifiers summary table
+In General Database Management -> BACKUP : Add caution regarding NOPREVLINK option of -NEWJNLFILE qualifier
+In General Database Management -> SET : add -trigger_flush and writes_per_flush
+In General Database Management -> MUPIP Command Summary : add [NO] for LOSTTRANS and BROKENTRANS qualifiers
+In General Database Management -> -Encrypt : add a note about the FIS recommendation for rotating the encryption key of your database.
+In General Database Management -> -Global_buffers : The max global buffers is 2,097,151
+In GT.M Journaling -> Backup Journal Files : Add caution on using NOPREVLINK
+In GT.M Journaling -> Journal Control Qualifiers : add NO for BROKENTRANS and LOSTTRANS
+In GT.M Journaling -> JOURNAL : add NO for LOSTTRANS and BROKENTRANS
+In GT.M Journaling -> Journal Sequence NumberSEQNO Qualifiers : add links to the relevant sections.
+In GT.M Journaling -> -RECover : add statement on specifying non-overlapping file names
+In GT.M Journaling -> SET -JOURNAL Options : add information about JNLSPACELOW and made general improvements
+In Database Replication -> Replicating Instance Starts from Backup of Originating Instance (A->B and A->P ) : Use PREVLINK when taking a backup to be used exclusively for replication.
+In Database Replication -> Rolling Back a Replicated Database Rollback Database : correct the description of -FETCHRESYNC.
+In Database Replication -> Starting the Receiver Server : improve the description of -AUTOROLLBACK.
+In GT.M Database Structure(GDS) -> File Header Data Elements : Add a missing word to the Maximum Record Size description
+In Database Structure Editor -> Examples for DUMP : update DSE dump -fileheader output for V6.3-007
+In Introduction -> Encrypted Database Creation : remove redundant information. Add a summary for encrypting the database.
+In Introduction -> Key Ring on Disk : rewrite the section with corrections and improvements.
+In Introduction -> Master Key Configuration File and Encryption Keys : remove redundant information
+In Introduction -> Changing the Encryption Keys : remove redundant information and add a link to REORG -ENCRYPT.
+In Introduction -> Packaging : remove the reference to BLOWFISH algorithm.
+In Introduction -> Installation : remove the reference to libgtmcrypt_openssl_BLOWFISHCFB.so
+In Introduction -> Keys in the Process Address Space / Environment : add a point about the importance of password management procedure and a note on using the GT.M restriction facility.
+In Introduction -> Long Lived Keys : wording revision on key changes to better reflect the reality
+In Introduction -> Using the reference implementation's custom pinentry program : add an introduction paragraph, corrections, and a reference to the manpages of gpg and gpg-agent.
+
+==== AO V6.3-006 ====
+In Installing GT.M -> Before you begin : change "perform Unicode-related operations" to "perform UTF-8 mode operations".
+In Basic Operations -> Compiling ICU : UTF-8 mode tweaks
+In Basic Operations -> Configuring and operating GT.M with Unicode support (optional) : UTF-8 mode tweaks
+In Basic Operations -> Environment Variables : UTF-8 mode tweaks.
+In Installing GT.M -> gtminstall script GT.M installing with gtminstall : UTF-8 tweaks
+In Installing GT.M -> Installation Procedure : UTF-8 tweaks
+In Basic Operations -> Starting GT.M : UTF-8 mode tweaks
+In Global Directory Editor -> Region Qualifiers : add more information about epoch tapering and -NOSTATS.
+In Global Directory Editor -> Segment Qualifiers : content improvements and corrections for ASYNCIO and DEFER_ALLOCATE.
+In General Database Management -> -NETtimeout : add RESTORE as a compatible MUPIP command.
+In General Database Management -> -FOrmat : improve the description of the GO format.
+In General Database Management -> FREEZE : tweaks for clarity
+In General Database Management -> -[NO]A[UTORELEASE : fix typo
+In General Database Management -> -ONLine : correct typos
+In General Database Management -> RESTORE : change file-list to bytestrm-bkup-list, add -NETTIMEOUT syntax and reference, and improve the description.
+In General Database Management -> SET : remove -REPLICATION from the destination list,-STANDALONENOT and -PARTIAL_RECOV_BYPASS, and minor changes to the definition of MUPIP SET.
+In General Database Management -> -ACcess_method : fix a typo.
+In General Database Management -> -DEFER_Allocate : improve the description of DEFER_ALLOCATE.
+In General Database Management -> -Epochtaper : add more information about epoch tapering.
+In General Database Management -> -REPlication : remove -FILE and -REGION from the list of incompatible qualifiers.
+In General Database Management -> -STATS : specify that a process disables itself from maintaining shared statistics when it fails to open a statsdb.
+In GT.M Journaling -> Backward Recovery : remove an incorrect reference to -AFTER.
+In GT.M Journaling -> Broken Transaction File : content improvements.
+In GT.M Journaling -> Epoch : add new section.
+In GT.M Journaling -> Examples for MUPIP SET : remove the NOPREVJNLFILE example as it is not supported as a JOURNAL option.
+In GT.M Journaling -> SET Object Identifying Qualifiers : UTF-8 tweaks
+In GT.M Journaling -> Journal Time Qualifiers : add more clarity to the description of the -AFTER qualifier.
+In GT.M Journaling -> Lost Transaction File : content improvements
+In GT.M Journaling -> -RECover : add a note stating that -RECOVER on replicated databases initiates database recovery but turns replication OFF.
+In GT.M Journaling -> SET -JOURNAL Options : remove the PREVJNLFILE option and UTF-8 tweaks.
+In Database Replication -> Displaying/Changing the attributes of Replication Instance File and Journal PoolEdit instance : add information about the -cleanslot qualifier.
+In Database Replication -> Introduction : correct the alignment of bc_repl.svg.
+In Database Replication -> Setting up a secured TLS replication connection : make corrections and add clarification about openssl.conf
+In M Lock Utility (LKE) -> SHow : add information about -NOCRIT and make information about the LOCKSPACEINFO up to date.
+In M Lock Utility (LKE) -> Clear : made formatting adjustments and corrected the syntax of the CLEAR command.
+In M Lock Utility (LKE) -> CLNup : add new section.
+In GT.M Database Structure(GDS) -> String Subscripts : UTF-8 tweaks
+In Maintaining Database Integrity -> P1-Process Damage : add clarification.
+
+==== AO V6.3-005 ====
+In Basic Operations -> Environment Variables : Correct gtm_mstack_size default from 270 to 272 and add gtm_mstack_cirt.
+In Basic Operations -> ZSYSTEM and PIPE OPEN command restriction facility : add new section for the ZSYSTEM and PIPE OPEN command restriction facility
+In Global Directory Editor -> Change : correct the syntax of CHANGE -INSTANCE -FILE_NAME.
+In General Database Management -> -Database : remove reference to magnetic tape
+In General Database Management -> BACKUP : change "breaking a disk mirror" to "disk mirroring".
+In General Database Management -> EXTRACT : remove reference to magnetic tape, add -NULL_IV, and corrections for -SELECT.
+In Introduction -> Why do we need a $gtmcrypt_config file? : Disable SSLv3
+In Database Replication -> Download Replication Examples : adjust formatting to fix a PDF rendering issue
+In Database Replication -> Instance Bound Global Directories : fix a typo.
+In M Lock Utility (LKE) -> SHow : specify that SHOW recognizes the full keyword for -CRITICAL.
+In M Lock Utility (LKE) -> Exercise 2: Rectifying a deadlock situation : made formatting adjustments for the caution note.
+In Maintaining Database Integrity -> R2-Structural Database Integrity Errors : revise wording for H
+In Introduction -> Plugin Architecture & Interface : fix a typo (change "provided compiled" to "provided")
+
+==== AO V6.3-004 ====
+In Basic Operations -> Environment Variables : add the description of the gtm_mstack_size
+In Installing GT.M -> gtminstall script GT.M installing with gtminstall : general improvements with emphasis on the use of the verbose option.
+In Global Directory Editor -> Region Qualifiers : Add to stats qualifier description
+In General Database Management -> Examples for MUPIP REORG : add a simple REORG -ENCRYPT example to encrypt an unencrypted database.
+In General Database Management -> -Null_iv : correct qualifier format and add missing information.
+In General Database Management -> -Select : change prefix to suffix; add clarity about using suffixes; remove the point about supporting parenthetical list such as (a,B,C).
+In General Database Management -> CREATE : Max # of blocks is 992Mi
+In General Database Management -> MUPIP Command Summary : remove the entry for -updhelper
+In General Database Management -> -Encrypt : made minor refinements and add the requirement of an an encryption setup for -ENCRYPTABLE.
+In General Database Management -> -Read_only : note about semaphores
+In General Database Management -> -STATS : Expand information on STATS
+In General Database Management -> -STDnullcoll : change STATs to STDnullcoll and remove the duplicate STDnullcoll section
+In GT.M Journaling -> Journal Sequence NumberSEQNO Qualifiers : add information about the -seqno qualifer of journal -extract.
+In Database Replication -> Rollback data from crashed (idle) regions : add procedure to rollback data from crashed (idle) regions
+In Database Replication -> Starting the Start Source Server : specify that the Source Server directs errors to the log file, add fixes for the filter example
+In Maintaining Database Integrity -> Download salvage.m : add section on downloading salvage.m
+In Introduction -> Special note - GNU Privacy Guard and Agents : GPG agent bug affecting 2.1.15 through 2.2.23
+In Introduction -> Using the reference implementation's custom pinentry program : GPG agent bug affecting 2.1.15 through 2.2.23
+In Introduction -> Recommendations : add recommendation for using restrictions to limit what facilities are available to GT.M applications
+In Introduction -> Philosophy : add safety checks for system()
+
+==== AO V6.3-003 ====
+In Basic Operations -> Configuring the Restriction facility : update TRIGGER_MOD; add HALT and ZHALT
+In Global Directory Editor -> Add : fix section ordering
+In Global Directory Editor -> Change : add CHANGE -INSTANCE -FILENAME
+In Global Directory Editor -> GDE Command Summary : add entry for the CHANGE and SHOW -INSTANCE qualifier; properly order ALL and GBLNAME
+In Global Directory Editor -> Delete : fix ordering of the format of the DELETE command
+In Global Directory Editor -> Rename : fix the ordering of the format of the RENAME command
+In Global Directory Editor -> SHow : add the -INSTANCE qualifier and improve the documentation of SHOW -COMMAND
+In Global Directory Editor -> Verify : fix the ordering of the format of the VERIFY command
+In Global Directory Editor -> Instance Qualifier : add new section
+In Global Directory Editor -> Segment Qualifiers : correct the description of -extension_count and specify 262144 as the maximum LOCK_SPACE; remove redundant and misplaced Encryption text.
+In General Database Management -> -Hard_spin_count : improve the description.
+In General Database Management -> BACKUP : change -COMPREHENSIVE to -DATABASE
+In General Database Management -> FREEZE : add information about DBFREEZEON and DBFREEZEOFF messages that MUPIP FREEZE sends to the system log.
+In General Database Management -> Operations - Standalone and Concurrent Access : remove redundant entry for MUPIP BACKUP
+In General Database Management -> SET : add entries for -Null_subscripts, -Stdnullcoll, and -Read_only qualifiers.
+In General Database Management -> MUPIP Command Summary : add a new GT.M Version column - maintainable since GT.M V5.4-002.
+In General Database Management -> -Lock_space : specify 262144 as the maximum LOCK_SPACE.
+In General Database Management -> -Read_only : add conflict handling explanation
+In General Database Management -> -Spin_sleep_mask : add new section.
+In GT.M Journaling -> -ROLLBACK [{-ON[LINE]|-NOO[NLINE]}] : remove obsolete caution
+In Database Replication -> Comparison other than Recovery : correct incomplete statement
+In Database Replication -> Download Replication Examples : changing script title to env and spell change
+In Database Replication -> Instance Bound Global Directories : add new section
+In Database Replication -> Replication Instance File : instance reconnect on the basis of most recent shared journal seq number
+In Database Replication -> Recovery : corrections and improvements
+In Database Replication -> Starting the Start Source Server : correct the quoting of the -filter qualifier and remove -replicate
+In Database Replication -> Introduction : add information about using extended global references or SET $ZGBLDIR to update another source instance.
+In Database Replication -> Creating a new Replication Instance File : Updated GTM version
+In Database Structure Editor -> CHange : mark abbreviations
+In Introduction -> Building Encryption Libraries : AIX pre-reqs
+
+==== AO V6.3-002 ====
+In Basic Operations -> Configuring the Restriction facility : add information about the Restriction facility
+In Basic Operations -> Environment Variables : Update gtm_tpnotacidtime for WRITE /* and millisecond precision and add gtm_nontprestart_log_delta, gtm_nontprestart_log_first, and gtm_repl_instname.
+In Installing GT.M -> gtminstall script GT.M installing with gtminstall : add systemd/addRemoveIPC-no description and remove passive voice from the opening paragraph.
+In Installing GT.M -> Installation Procedure : add format for newer versions of ICU and update the script output for V6.3-002
+In Global Directory Editor -> GDE Overview : add statement on the return code
+In Global Directory Editor -> SHow : clarify that SHOW -COMMAND does not display the current template settings.
+In Global Directory Editor -> Region Qualifiers : change -JOURNAL qualifier example to match the new default value for BUFFER_SIZE.
+In General Database Management -> SET : correct abbreviations for -SLEEP_SPIN_COUNT and -SPIN_SLEEP_LIMIT.
+In GT.M Journaling -> SET -JOURNAL Options : change default BUFFER_SIZE value to 2312; improve some wording
+In GT.M Journaling -> -SHow=show-option-list : adjust sample MUPIP JOURNAL -SHOW output to match current format
+In Database Replication -> Instance Freeze : add that MUPIP REPLICATE -SOURCE -JNLPOOL -SHOW displays the load status of the custom errors file.
+In Database Structure Editor -> CHange : fix typo in hard spin count
+In Database Structure Editor -> CHANGE -FIleheader Qualifiers : add STDNULLCOLL, clarify the radixes of qualifiers with values, and remove duplicate entry for -TIMERS_PENDING
+In Introduction -> Building Encryption Libraries : eliminate old platforms and reduce instruction bloat for linuxen
+In Introduction -> IBM AIX 7.1 (pSeries) : libgcrypt is an AIX requirement
+In Introduction -> Overview : add information about the gtmpcat_for_{release} kit.
+In Introduction -> Usage : add callin, cmdscript, gtmdeftypes, ppi, and regiondetail options.
+
+==== AO V6.3-001 ====
+In About GT.M -> Hardware/Operating System Environment : remove references to OpenVMS
+In About GT.M -> Security : removed the reference to OpenVMS
+In Basic Operations -> GT.M Environment Setup : gtm_dbkeys to gtmcrypt_config
+In Installing GT.M -> Before you begin : removed the reference to HP-UX, Solaris and Tru64
+In Basic Operations -> Configuring and operating GT.M with Unicode support (optional) : added an ICU compatibility table to reflect GT.M's ability to use the default ICU on Linux, AIX 7 and AIX 6. Also, explained when to use gtm_icu_version.
+In Basic Operations -> Environment Variables : added updates for V6.3-001 and corrected the alphabetical ordering. Add to the note on gtm_procstuckexec; added gtm_zstep, gtm_statsdir, gtm_statsshare,gtm_aio_nr_events
+In Basic Operations -> M mode and UTF-8 mode : remove the reference to Solaris and HP-UX
+In Installing GT.M -> Instructions : improved the instructions for compiling the reference implementation plugin and removed parts about creating symlinks.
+In Installing GT.M -> Compiling the Reference Implementation Plugin : improved the instructions for compiling the reference implementation plugin and removed parts about creating symlinks.
+In Global Directory Editor -> Global Directory Abbreviations : added AIO, AutoDB, Dall, Epoch Taper, LOCK Crit, and Stats abbreviations.
+In Global Directory Editor -> Examining the Default Global Directory : added updates for V6.3-001.
+In Global Directory Editor -> SHow : updated output for V6.3-001.
+In Global Directory Editor -> GDE Command Qualifier Summary : updated the table for V6.3-001.
+In Global Directory Editor -> Region Qualifiers : added a note about a condition when the number of attached processes exceed 32Ki on a QDBRUNDOWN enabled database; tweaked wording; alphabetize lists; added AUTODB, LOCK_CRIT, and STATS
+In Global Directory Editor -> Segment Qualifiers : removed references to HP-UX and Solaris and various corrections and improvements; use delimiter before qualifiers; add -recover -forward for MM ; updated the summary table for V6.3-001 added ASYNCIO
+In General Database Management -> -REPLInstance : admonished that the source server needs to be started at least once before taking a backup of the replication instance file.
+In General Database Management -> Examples for MUPIP INTEG : added the explanation of % Used
+In General Database Management -> Examples for MUPIP REORG : added an example for MUPIP REORG.
+In General Database Management -> -FOrmat : added changes for -null_iv qualifier.
+In General Database Management -> -Null_iv : tweaked wording
+In General Database Management -> -Stats : added STATS qualifier
+In General Database Management -> -FOrmat : added enhancements related to MUPIP LOAD -FORMAT.
+In General Database Management -> -Onerror : corrected the default and qualifier item description
+In General Database Management -> -Stdin : added an Index entry
+In General Database Management -> BACKUP : removed d-DBG from MUPIP BACKUP qualifier list as it is for FIS internal use.
+In General Database Management -> DOWNGRADE : added information about the V63000A option and a note about performing MUPIP INTEG -ONLINE prior to downgrading a database file.
+In General Database Management -> DUMPFHEAD : added information about the MUPIP DUMPFHEAD command
+In General Database Management -> FREEZE : added information about the [NO]ONLINE and [NO]AUTORELEASE qualifiers.
+In General Database Management -> Operations - Standalone and Concurrent Access : added a note about MUUSERLBK and MUUSERECOV errors.
+In General Database Management -> REORG : -REGION= is a syntax error.
+In General Database Management -> RUNDOWN : added references to statistics database files
+In General Database Management -> SET : added the SPIN_SLEEP_LIMIT,SLEEP_SPIN_COUNT, ASYNCIO, LCK_SHARES_DB_CRIT, and STATS qualifiers.
+In General Database Management -> SIZE : added explanation for the 2 Sigma column of the report
+In General Database Management -> TRIGGER : added caution about relying on journaling of trigger -upgrade.
+In General Database Management -> MUPIP Command Summary : added FREEZE, DOWNGRADE, DUMPFHEAD commands and MUPIP INTEG and SET qualifiers for V6.3-001
+In General Database Management -> -Encrypt : added information about the -ENCRYPT qualifier; Added a note that reorg -encrypt does not support changing of encryption algorithms.
+In General Database Management -> -DEFER_Allocate : removed references to HP-UX and Solaris.
+In General Database Management -> -Epochtaper : replaced "QDBRUNDOWN" with "-EPOCHTAPER"
+In General Database Management -> -Qdbrundown : added a note about the condition when the number of attached processes exceeds 32Ki.
+In GT.M Journaling -> Journal Action Qualifiers : added information about the new PARALLEL qualifier.
+In GT.M Journaling -> Journal Control Qualifiers : added for the -CHECKTN and FENCE qualifiers; clarified FENCES
+In GT.M Journaling -> JOURNAL : made adjustments to the qualifier compatibility matrix for MUPIP JOURNAL. Expanded the qualifier entries to their full keywords.
+In GT.M Journaling -> -PARA[LLEL][=n]Parallel : fixed typo; removed text associated with older versions and with other options
+In GT.M Journaling -> Journal Sequence NumberSEQNO Qualifiers : used caps for non example keywords
+In GT.M Journaling -> Journal Time Qualifiers : added changes for BEFORE and SINCE
+In GT.M Journaling -> -[NO]Verify : added improvements and revised recommendations.
+In GT.M Journaling -> Journal Extract Formats : removed HP-UX and OpenVMS
+In GT.M Journaling -> -ROLLBACK [{-ON[LINE]|-NOO[NLINE]}] : specified that -ONLINE is not supported for -ROLLBACK -FORWARD and made content improvements; reordered for better flow and removed some passive voice
+In GT.M Journaling -> SET -JOURNAL Options : used delimiters for qualifiers
+In Database Replication -> A and P require rollback : used capitals for keywords
+In Introduction -> Why do we need a $gtmcrypt_config file? : fixed a minor typo
+In Database Replication -> Creating the Replication Instance FileCreate instance : added the description of the -noqdbrundown qualifier.
+In Database Replication -> Displaying/Changing the attributes of Replication Instance File and Journal PoolEdit instance : added the description of the -noqdbrundown qualifier.
+In Database Replication -> Changing the global directory in an A->B replication configuration : added a new procedures for changing global directory settings in an A->B replication configuration; minor tweak to wording
+In Database Replication -> Helper Processes : specified that Helper Processes increase replication throughput, decrease backlog, and improve manageability.
+In Database Replication -> Instance Freeze : removed the reference to the Instance Freeze as field test grade implementation. The Instance Freeze facility became production grade in V6.0-001.
+In Database Replication -> Procedures : rewrote most sections and added downloadable replication example scripts.
+In Database Replication -> Switchover possibilities in a B<-A->P->Q replication configuration : updated for V6.3-000A
+In Database Replication -> Replication Instance File : used caps for keywords
+In Database Replication -> Recovery : used capitals for keywords and leading delimiters for qualifiers
+In Database Replication -> Replicating Instance Starts from Backup of Originating Instance (A->B and A->P ) : followed convention of capitalizing key words when they are outside of examples
+In Database Replication -> Limitations - SI Replication : removed reference to OpenVMS
+In Database Replication -> Shutting down theShutdown Source Server : added the description of the -zerobacklog qualifier.
+In Database Replication -> Examples : used capitals for keywords outside of examples
+In Database Replication -> Starting the Start Source Server : removed references to Solaris, HP-UX, and OpenVMS; specified that pool limit is 4GiB - 8; specified that GT.M supports the use of IBM provided zlib library for AIX.
+In Database Replication -> Stopping the Receiver Server and/or the Update Process : added information about the -shutdown qualifier; alphabetized the qualifiers after -shutdown.
+In Database Replication -> Introduction : language cleanup - intermediate save
+In Database Replication -> Setting up a secured TLS replication connection : Changed Helen and Phil to Alice and Bob.
+In Database Replication -> Creating a new Replication Instance File : changed 4.5-000 to 5.4-000
+In Database Replication -> Setting up a new replicating instance of an originating instance (A->B, P->Q, or A->P) : changed on -> one\n
+In GT.M Database Structure(GDS) -> File Header Data Elements : removed references to OpenVMS and added the descriptions of WIP queue cache blocks, DB is auto-created, DB shares gvstats. LOCK crit sharing, AsyncIO
+In Database Structure Editor -> Qualifiers of CACHE : added the missing command
+In Database Structure Editor -> ALL : added information about the -DUMP and -ALL qualifiers.
+In Database Structure Editor -> CHange : added SLEEP_SPIN_COUNT and SPIN_SLEEP_MASK.
+In Database Structure Editor -> CHANGE -FIleheader Qualifiers : fix typo
+In Database Structure Editor -> DSE Command Summary : added information about the -DUMP and -ALL qualifiers of ALL; add -ALL for DUMP.
+In Database Structure Editor -> Examples of ALL : changed Examples of ADD to Examples of ALL and fix the WCINIT example to be ALL -WCINIT
+In Database Structure Editor -> Examples for DUMP : update the DUMP -FILEHEADER output for V6.3-001
+In Maintaining Database Integrity -> H7-Disk Hardware Problems : replaced OpenVMS with OS.
+In Introduction -> Key Ring on Disk : gtm_dbkeys to gtmcrypt_config
+In Introduction -> Master Key Configuration File and Encryption Keys : gtm_dbkeys to gtmcrypt_config
+In Introduction -> Plugin Architecture & Interface : specified that reference implementation is not shipped in binary form
+In Introduction -> GT.CM : specified that replication can be encrypted
+In Introduction -> Tested Reference Implementations : specified that the reference impl is source only; remove Solaris and HP-UX. Changed the supported versions table to drop 12.04 and SLES. Also added newer Linux versions that we test with and cleanup up the blowfish discussion
+In Introduction -> Using the Reference Implementation with Older Releases : corrected typos and tweaked wording
+In Introduction -> Packaging : specified that reference implementation is not shipped in binary form
+In Introduction -> Warning : specified that the reference implementation is source only.
+In Introduction -> Overview : gtm_dbkeys to gtmcrypt_config
+In Introduction -> Overview : specified that the reference impl is source only.
+In Introduction -> FIPS Mode : fixed a typo and added a link to http://www.openssl.org/docs/fips; remove HP-UX and Solaris
+In Introduction -> Installation : specified that the reference implementation is source only.
+In Introduction -> Special note - GNU Privacy Guard and Agents : Updated for changes in the FIS recommendations for how GT.M works with a GPG agent.
+In Introduction -> Using the reference implementation's custom pinentry program : use-standard-socket doc add-on
+In Introduction -> Monitoring GT.M Messages : improved the note on gtm_procstuckexec
+In Introduction -> GT.CM Client : added clarity to the GT.CM client requirements
+In Introduction -> Recommendations : removed references to Solaris.
+In Introduction -> gtmsecshr Exception : removed references to Solaris and HP-UX.
+In Introduction -> Managing core dumps : removed references to HP-UX and Solaris.
+In Introduction -> Overview : removed references to HP-UX and Solaris.
+
+==== AO V6.2-002 ====
+In Installing GT.M -> Instructions : added instructions for reviewing and editing the Makefile.
+In Basic Operations -> Environment Variables : added the description of gtm_autorelink_ctlmax.
+In General Database Management -> SET : added the [NO]EPOCHTAPER and -[NO]DEFER_ALLOCATE qualifiers.
+In General Database Management -> INTEG : added a recommendation against running ONLINE INTEG as the same time as MUPIP REORG.
+In General Database Management -> RUNDOWN : and , specified that a successful rundown turns off any MUPIP FREEZE.
+In Database Replication -> Procedures : Added examples and improved the instructions in .
+In Database Structure Editor -> CHange : added the [NO]EPOCHTAPER qualifier and removed the deprecated SPIN_SLEEP_TIME qualifier.
+In Database Structure Editor -> ALL : added the DUMP qualifier.
+In Database Structure Editor -> CRitical : added the ALL qualifer.
+
+==== AO V6.2-001 ====
+In Installing GT.M -> Installation Procedure : improved the description of the use of /temporary/directory.
+In Installing GT.M -> gtminstall script GT.M installing with gtminstall : specified that gtminstall expects icu-config to be available to install UTF-8 mode support.
+In Basic Operations -> Starting GT.M : added the step for setting the LC_CTYPE environment variables to the examples for starting GT.M with UTF-8 support.
+In Basic Operations -> Configuring huge pages for GT.M x86[-64] on Linux : Improved the description of .
+In Basic Operations -> Environment Variables : corrected the description of gtm_tpnotacidtime and added the descriptions of gtm_boolean, gtm_autorelink_shm, and gtm_autorelink_keeptrn.
+In Basic Operations -> gtmprofile : Updated for V6.2-001 enhancements.
+In General Database Management -> LOAD : added the new ONERROR qualifier and information about automatically detecting file format (BINARY/ZWR/GO).
+In General Database Management -> EXTRACT : added the REGION qualifier.
+In General Database Management -> SIZE : and , added information about adjacency reporting.
+In General Database Management -> TRIGGER : In In , added information about return status, LGTRIG journal records, and specified that MUPIP TRIGGER -SELECT works even if a multi-line XECUTE string does not terminate with a newline character.
+In General Database Management -> TRIGGER : added trigger expression source line limit, the UPGRADE qualifier, and a note about how MUPIP TRIGGER operates within a TP transaction.
+In General Database Management -> Introduction : specified that GT.M processes performing read operations can access databases on a filesystem mounted read-only.
+In General Database Management -> RCTLDUMP : Added the new command.
+In General Database Management -> -Relinkctl : Added the new qualifier for MUPIP RUNDOWN.
+In GT.M Journaling -> Journal Extract Formats : added information about the LGTRIG field.
+In Database Replication -> Starting the Start Source Server : added the NOJNLFILEONLY qualifier.
+In Database Structure Editor -> Dump : added the recommendation of using the ZWR format with UTF-8 mode.
+
+==== AO V6.1-000/1 ====
+In Database Replication -> Procedures : corrected the downloadable scripts example (msr_proc2.tar.gz) for setting up an A->P replication configuration.
+In Installing GT.M -> Compiling the Reference Implementation Plugin : Added a new section called .
+
+==== AO V6.1-000 ====
+In Basic Operations -> Environment Variables : improved the descriptions of gtm_tpnotacidtime and gtm_zquit_anyway and added the descriptions of gtmcrypt_config, gtmtls_passwd_<tlslabel>, and gtmcrypt_FIPS.
+In Global Directory Editor -> Global Directory : explained the concepts of mapping different subscripts of the same global to different regions.
+In Global Directory Editor -> Global Director Editor Commands : added example of globals spanning regions, the description of the new -GBLNAME, -COLLATION, MUTEX_LOCK qualifiers.
+In General Database Management -> Introduction : added a note recommending against runing any GT.M component as root.
+In Database Replication -> Starting the Start Source Server : added the description of -TLSID, -[NO]PLAINTEXTFALLBACK, and -RENEGOTIATE_INTERVAL qualifiers.
+In Database Replication -> Starting the Receiver Server : added the descriptions of -TLSID, -START, and -LOG qualifiers..
+In Database Replication -> Procedures : added a new topic called . This topic includes a downloadable example that creates two databases and sets up TLS replication between them.
+In Database Replication -> TLS/SSL Replication : Added a new section called .
+
+==== AO V6.0-003/1 ====
+In Introduction -> Packaging GT.M Applications : Added a new appendix called .
+In General Database Management -> REORG : added a caution note on running successive REORGs.
+In Basic Operations -> Environment Variables : improved the description of the gtm_nocenable environment variable.
+In GT.M Database Structure(GDS) -> File Header Data Elements : updated the descriptions for V6.0-003.
+In Basic Operations -> Environment Variables : improved the description of gtm_nocenable.
+In Database Replication -> Starting the Start Source Server : added information about the use of the gtm_ipv4_only environment variable.
+In General Database Management -> REORG : added a caution note about running successive reorgs.
+
+==== AO V6.0-003 ====
+In Basic Operations -> gtm : added the -help and -? command line options for the gtm script and the descriptions of gtm_ipv4_only and gtm_etrap environment variables.
+In Database Replication -> Procedures : added downloadable script examples for A->B and A->P replication scenarios, information about the ACTIVE_REQUESTED mode, PASSIVE_REQUESTED mode, and IPv6 support.
+In Basic Operations -> gtm : added the -help and -? command line options.
+In Basic Operations -> Environment Variables : added the description of gtm_ipv4_only and gtm_etrap.
+In Global Directory Editor -> Region Qualifiers : corrected the syntax of [NO]STDNULLCOLL and -COLLATION_DEFAULT .
+In Global Directory Editor -> Segment Qualifiers : added a paragraph about what happens when database file with automatic extension disabled (EXTENSION_COUNT=0) starts to get full.
+In General Database Management -> SET : added the -Mutex_slots qualifier.
+In General Database Management -> RUNDOWN : added the -Override qualifier.
+In Database Replication -> Procedures : added downloadable script examples for A->B and A->P replication scenarios.
+In Database Replication -> Activating aActivate Passive Source Server : added information about the ACTIVE_REQUESTED mode.
+In Database Replication -> Deactivating anDeactive Active Source Server : added information about the PASSIVE_REQUESTED mode.
+In Database Replication -> Starting the Start Source Server : added information about the IPv6 support.
+In GT.M Database Structure(GDS) -> GDS Blocks : corrected the description of block header fields.
+
+==== AO V6.0-001/2 ====
+In Introduction -> GTMPCAT - GT.M Process/Core Analysis Tool : added information about the cmdfile option.
+In General Database Management -> BACKUP : added notes for "Before starting a MUPIP BACKUP".
+
+==== AO V6.0-001/1 ====
+In GT.M Journaling -> SET Object Identifying Qualifiers : added the descriptions of -repl_state={on|off} and -dbfilename=filename qualifiers of -jnlfile.
+In GT.M Journaling -> SET Object Identifying Qualifiers : added information about the -repl_state and -dbfilename qualifiers.
+
+==== AO V6.0-001 ====
+In Introduction -> GTMPCAT - GT.M Process/Core Analysis Tool : Added . gtmpcat is a diagnostic tool for FIS to provide GT.M support.
+In Basic Operations -> Configuring huge pages for GT.M x86[-64] on Linux : Added the section.
+In Basic Operations -> Environment Variables : added the description of gtm_side_effects, gtm_extract_nocol, and gtm_crypt_plugin environment variables.
+In Global Directory Editor -> Segment Qualifiers : and under the -ALLOCATION section, specified that GT.M always reserves 32 global buffers for BG access method out of the requested allocation.
+In General Database Management -> BACKUP : added information about the BKUPRUNNING message and added information on the handling of KILLs in Progress and Abandoned Kills during a backup.
+In General Database Management -> EXTRACT : added the description of -STDOUT.
+In General Database Management -> -MAP : In MUPIP INTEG, specified the threshold limit of incorrectly marked busy errors in and added information on clearing KILLs in Progress and Adandoned Kills.
+In GT.M Journaling -> -EXtract[=<file-name>|-stdout] : added information about the gtm_extract_nocol environment variable.
+In Database Replication -> Instance Freeze : added a note about the behavior when a process configured for instance freeze encounters an error with journaling.
+In Database Replication -> Procedures : added the following topics:
+In Database Replication -> Displaying/Changing the attributes of Replication Instance File and Journal PoolEdit instance : corrected the description of the -offset and -size qualifiers of -EDITINSTANCE.
+In Database Structure Editor -> CHange : added the description of -ABANDONED_KILLS, -STRM_NUM, -STRM_REG_SEQNO, and -KILL_IN_PROG.
+In Introduction -> Tested Reference Implementations : Updated , , and for V6.0-001.
+
+==== AO V6.0-000/1 ====
+In Basic Operations -> Environment Variables : added the description of the environment variables gtm_tprestart_log_delta, gtm_tprestart_log_first, gtm_tpnotacidtime, and gtm_zmaxtptime.
+In General Database Management -> -PArtial_recov_bypass : In MUPIP SET, added the description of .
+In General Database Management -> TRIGGER : Updated for V6.0-000.
+In GT.M Journaling -> SET -JOURNAL Options : Updated and the journaling limits for V6.0-000.
+In Database Replication -> Commands and QualifiersReplication : added the description of the -log_interval qualifier.
+In Database Replication -> Starting the Receiver Server : added the description of the -initialize qualifier and updated the description of -updateresync for V6.0-000.
+In M Lock Utility (LKE) -> SHow : added updated for V6.0-000.
+In Database Structure Editor -> CHange : added the description of -QBDRUNDOWN and updated the description of -CORRUPT_FILE qualifier for V6.0-000.
+
+==== AO V6.0-000 ====
+In Global Directory Editor -> Region Qualifiers : added the description of -[NO]INST[_FREEZE_ON_ERROR].
+In General Database Management -> -INST_freeze_on_error : In MUPIP SET, added the description of .
+In Database Replication -> Starting the Start Source Server : added the description of the -freeze qualifier.
+In Database Replication -> Instance Freeze : Added a new section called .
