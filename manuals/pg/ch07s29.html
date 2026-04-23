@@ -1,0 +1,193 @@
+<html>
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>$ZAUditlog</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GT.M Programmer's Guide">
+<link rel="up" href="ch07.html" title="Chapter 7. Functions">
+<link rel="prev" href="ch07s28.html" title="$ZATRansform">
+<link rel="next" href="ch07s30.html" title="$ZBIT Functions">
+<link rel="copyright" href="ln-id4.html" title="Legal Notice">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">$ZAUditlog</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch07s28.html">Prev</a> </td>
+<th width="60%" align="center">Chapter 7. Functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch07s30.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">GT.M Programmer's Guide</a></span> &gt; <span class="breadcrumb-link"><a href="ch07.html">Functions</a></span> &gt; <span class="breadcrumb-node">$ZAUditlog</span>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="zauditlog"></a>$ZAUditlog<a class="indexterm" name="id10576"></a>
+</h2></div></div></div>
+<p>Sends its argument to an audit logger/listener process. This function requires setting the AZA_ENABLE audit logging facility in the $gtm_dist/restrict.txt file. <span>For information on setting up the AZA_ENABLE audit logging facility, refer to "Configuring the Restriction Facility" section in the GT.M Administration and Operations Guide.</span>The format for the $ZAUDITLOG() function is:</p>
+<pre class="programlisting">ZAUDITLOG(expr)</pre>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>expr specifies the string to send for audit logging</p></li>
+<li class="listitem"><p>A return of TRUE (1) indicates successful logging, FALSE (0) indicates logging is not enabled; a trappable RESTRICTEDOP error indicates logging is enabled but not working.</p></li>
+<li class="listitem"><p>$ZAUDITLOG() identifies its message with src=4, and like other GT.M logging facilities, records the location of GT.M distribution, uid, euid, pid, tty, and the command / argument(s). </p></li>
+<li class="listitem">
+<p>If LGDE is specified as an option for the AZA_ENABLE facility, GDE logs all commands. GT.M ignores this option if specified with other A*_ENABLE audit logging facilities. When it fails to log a command, GDE issues a GDELOGFAIL error. The following table characterizes $ZAUDITLOG() and GDE audit logging behavior:</p>
+<p>
+</p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr><th colspan="5"><p>$ZAUDITLOG() / GDE logging Characteristics</p></th></tr>
+<tr>
+<th>
+<p>AZA_ENABLE</p>
+</th>
+<th>
+<p>LGDE</p>
+</th>
+<th>
+<p>Logging success</p>
+</th>
+<th>
+<p>GDE audit logging</p>
+</th>
+<th>
+<p>$ZAUDITLOG() result</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>1</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>No</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>No</p>
+</td>
+<td>
+<p>1</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>No</p>
+</td>
+<td>
+<p>GDELOGFAIL error</p>
+</td>
+<td>
+<p>RESTRICTEDOP error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>No</p>
+</td>
+<td>
+<p>No</p>
+</td>
+<td>
+<p>No</p>
+</td>
+<td>
+<p>RESTRICTEDOP error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>No</p>
+</td>
+<td>
+<p>N/A</p>
+</td>
+<td>
+<p>N/A</p>
+</td>
+<td>
+<p>No</p>
+</td>
+<td>
+<p>0</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>
+  </p>
+</li>
+</ul></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="examples_of_zauditlog"></a>Examples<span> of $ZAUDitlog()</span>
+</h3></div></div></div>
+<p>Example:</p>
+<pre class="programlisting">GTM&gt;write $zauditlog("Name Change for "_ip)
+1
+GTM&gt;</pre>
+<p>This example uses $ZAUDITLOG() to log a literal label concatenated with a variable (identifier). The return indicates the logging was successful.</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch07s28.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch07s30.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">$ZATRansform </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> $ZBIT Functions</td>
+</tr>
+</table>
+</div>
+</body>
+</html>
