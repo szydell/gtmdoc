@@ -1,17 +1,9 @@
 # gtmdoc
-	
+
 Track changes in the gt.m documentation
-	
- 
-	
+
 Visit the site with documents mirror at https://mumps.pl
-	
- 
-	
- 
-	
-* [Adminstration Guide PDF](https://github.com/szydell/gtmdoc/blob/master/books/ao/UNIX_manual/ao_UNIX_screen.pdf) Revision V7.1-009 22 September 2025
-	
-* [Programmers Guide PDF](https://github.com/szydell/gtmdoc/blob/master/books/pg/UNIX_manual/pg_UNIX_screen.pdf) Revision V7.1-008 23 June 2025
-	
-* [Messages and recovery procedures manual PDF](https://github.com/szydell/gtmdoc/blob/master/books/mr/manual/mr_screen.pdf) Revision V7.1-009 22 September 2025
+
+* [Administration and Operations Guide PDF](https://github.com/szydell/gtmdoc/blob/master/manuals/ao/ao_screen.pdf) Revision V7.1-011 April 09, 2026
+* [Programmer's Guide PDF](https://github.com/szydell/gtmdoc/blob/master/manuals/pg/pg_screen.pdf) Revision V7.1-011 April 09, 2026
+* [Messages and Recovery Procedures Manual PDF](https://github.com/szydell/gtmdoc/blob/master/manuals/mr/mr_screen.pdf) Revision V7.1-011 9 April 2026
