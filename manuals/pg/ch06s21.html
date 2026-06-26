@@ -29,18 +29,21 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="trestart"></a>TREstart<a class="indexterm" name="id6894"></a>
+<a name="trestart"></a>TREstart<a class="indexterm" name="id6890"></a>
 </h2></div></div></div>
 <p>The TRESTART command attempts to RESTART the current transaction. A RESTART transfers control back to the initial TSTART and restores much of the process state to what it was when that TSTART was originally executed. A TRESTART issued when no transaction is in progress ($TLEVEL=0) or when the transaction does not have RESTART enabled produces an error.</p>
 <p>A TRESTART command causes the TP transaction to RESTART in the same way that GT.M uses to implicitly restart the transaction in case of resource conflicts. All restarts increment the internal transaction retry count to a maximum of three (3), at which point, GT.M performs the entire TP transaction within a critical section on all databases referenced in the transaction. </p>
 <p>GT.M issues a TRESTMAX runtime error when application code attempts a TRESTART more than once during a transaction while $TRESTART=4 (note: in order to be wholesome, TRESTART usage in application code should always be conditional). In the final retry, GT.M holds the critical section lock on all databases involved in the transaction. Since a TRESTART cancels all the work done in the current transaction and transfers control back to the TSTART, limiting the number of times this can be done in the final retry limits the time a process can (by virtue of holding a critical section lock on the databases) prevent other processes from updating the database.</p>
 <p>GT.M limits TP restarts in the final retry due to non-availability of M-locks in a similar fashion. GT.M allows a maximum of 16 such restarts after which it issues a TPLOCKRESTMAX runtime error.</p>
 <p>The format for the TRESTART command is:</p>
-<pre class="programlisting">TRE[START][:tvexpr]</pre>
+<pre class="programlisting">TRE[START][:tvexpr] [XPEL=label] </pre>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>The optional truth-valued expression immediately following the command is a command postconditional that controls whether or not GT.M executes the command.</p></li>
+<li class="listitem"><p>
+          TRESTART recognizes an option argument, XPEL=label, specifying GT.M perform a RESTART of the entire transaction, a ROLLBACK leaving $TLEVEL=0, a DO using the LABELREF as the DO argument, and, when the DO completes, reinitiate the transaction starting with the original (outer-most) TSTART as if for the first time with $TRESTART=0. Attempting to activate this feature on a transaction that is not restartable produces a TRESTNOT error. Attempting to use XPEL while in a trigger produces a TRIGNOXPEL error. GT.M evaluates a literal XPEL value at compile time to ensure its validity. If DO of the specified code fails, the failure invokes the current error handing logic. A transfer of control by a (non-FOR terminating) QUIT, including an implicit QUIT due to error handling, or a ZGOTO that abandons the stack level associated with the TSTART within which the XPEL originated terminates the XPEL (and the already rolled back transaction). This feature includes the read-only $ZINXPEL ISV which provides an integer counter analogous to $TRESTART. A non-zero $ZINXPEL in combination with a zero (0) $TLEVEL indicates operation within the scope of the XPEL DO. Attempting a TSTART within the scope of XPEL logic produces a XPELNOTP error.
+            </p></li>
 <li class="listitem">
-<p>Because TRESTART has no argument, at least two (2) spaces must follow the command to separate it from the next command on the line.</p>
+<p>When TRESTART has no argument, at least two (2) spaces must follow the command to separate it from the next command on the line.</p>
 <p>TRESTARTs (and implicit RESTARTs) do not restore any device states; they do restore the following to the state they had when GT.M executed the initial TSTART:</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem"><p>$TEST</p></li>

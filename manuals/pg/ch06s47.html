@@ -29,7 +29,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="ztstart_cmmd"></a>ZTStart<a class="indexterm" name="id8768"></a>
+<a name="ztstart_cmmd"></a>ZTStart<a class="indexterm" name="id8766"></a>
 </h2></div></div></div>
 <p>The ZTSTART command marks the beginning of a logical transaction within a GT.M program. ZTSTART and ZTCOMMIT "fence" transactions (that is, mark the beginning and end). Fenced transactions prevent the MUPIP JOURNAL facility from recovering incomplete transactions. All ZTSTARTs must be matched with ZTCOMMITs before the journal processing facility recognizes the transaction as complete. FIS strongly recommends the use of the M transaction processing commands such as TSTART and TCOMMIT rather than ZTSTART and ZTCOMMIT. FIS no longer tests the deprecated ZTSTART / ZTCOMMIT functionally.</p>
 <p>The format of the ZTSTART command is:</p>
