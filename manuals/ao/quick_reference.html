@@ -1,0 +1,453 @@
+<html><title>Utilities Command Reference</title>
+<link rel="stylesheet" href="gtm.css" type="text/css">
+<HEAD><META HTTP-EQUIV="Pragma" CONTENT="no-cache"><META HTTP-EQUIV="Expires" CONTENT="-1"><script language="Javascript">
+function frameload(result){
+var optlabel=['gde','gde syntax','gde add','gde change','gde delete','gde exit','gde locks','gde log','gde quit','gde setgd','gde setgd -file=<global_dir_file_name>','gde setgd -quit','gde show','gde template','gde verify','gde add -name','gde change -name','gde delete -name','gde add -region=<region_name>','gde change -region=<region_name>','gde delete -region=<region_name>','gde template -region=<region_name>','gde add -region=<region_name> -collation_sequence=0_to_255','gde change -region=<region_name> -collation_sequence=0_to_255','gde template -region=<region_name> -collation_sequence=0_to_255','gde add -region=<region_name> -dynamic_segment=<segment_name>','gde change -region=<region_name> -dynamic_segment=<segment_name>','gde template -region=<region_name> -dynamic_segment=<segment_name>','gde add -region=<region_name> -key_size=3_to_1019','gde change -region=<region_name> -key_size=3_to_1019','gde template -region=<region_name> -key_size=3_to_1019','gde add -region=<region_name> -record_size=7_to_1048576','gde change -region=<region_name> -record_size=7_to_1048576','gde template -region=<region_name> -record_size=7_to_1048576','gde add -region=<region_name> -[no]n[ull_subscript]=[always|never|existing]','gde change -region=<region_name> -[no]n[ull_subscript]=[always|never|existing]','gde template -region=<region_name> -[no]n[ull_subscript]=[always|never|existing]','gde add -region=<region_name> -[no]stdnullcoll','gde change -region=<region_name> -[no]stdnullcoll','gde template -region=<region_name> -[no]stdnullcoll','gde add -region=<region_name> -[no]inst[_freeze_on_error]','gde change -region=<region_name> -[no]inst[_freeze_on_error]','gde template -region=<region_name> -[no]inst[_freeze_on_error]','gde add -region=<region_name> -[no]q[dbrundown]','gde change -region=<region_name> -[no]q[dbrundown]','gde template -region=<region_name> -[no]q[dbrundown]','gde add -region=<region_name> -[no]j[ournal][=journal-option-list]','gde change -region=<region_name> -[no]j[ournal][=journal-option-list]','gde template -region=<region_name> -[no]j[ournal][=journal-option-list]','gde add -segment <segment_name> -file=<file_name>','gde change -segment <segment_name> -file=<file_name>','gde delete -segment <segment_name>','gde template -segment <segment_name> -file=<file_name>','gde add -segment <segment_name> -access_method=BG|MM','gde change -segment <segment_name> -access_method=BG|MM','gde template -segment <segment_name> -access_method=BG|MM','gde add -segment <segment_name> -allocation=10_to_1040187392','gde change -segment <segment_name> -allocation=10_to_1040187392','gde template -segment <segment_name> -allocation=10_to_1040187392','gde add -segment <segment_name> -block_size=512_to_65024','gde change -segment <segment_name> -block_size=512_to_65024','gde template -segment <segment_name> -block_size=512_to_65024','gde add -segment <segment_name> -[no]encryption','gde change -segment <segment_name> -[no]encryption','gde template -segment <segment_name> -[no]encryption','gde add -segment <segment_name> -extention_count=0_to_65535','gde change -segment <segment_name> -extention_count=0_to_65535','gde template -segment <segment_name> -extention_count=0_to_65535','gde add -segment <segment_name> -global_buffer_count=64_to_2147483647','gde change -segment <segment_name> -global_buffer_count=64_to_2147483647','gde template -segment <segment_name> -global_buffer_count=64_to_2147483647','gde add -segment <segment_name> -lock_space=10_to_65536','gde change -segment <segment_name> -lock_space=10_to_65536','gde template -segment <segment_name> -lock_space=10_to_65536','gde add -segment <segment_name> -reserved_bytes=0_to_block_size-block_header-record_size','gde change -segment <segment_name> -reserved_bytes=0_to_block_size-block_header-record_size','gde template -segment <segment_name> -reserved_bytes=0_to_block_size-block_header-record_size','gde summary','lke','lke syntax','lke clear','lke clear -all','lke clear -lock','lke clear -[no]crit','lke clear -[no]exact','lke clear -[no]interactive','lke clear -output="file-name"','lke clear -pid=<process_id>','lke clear -region=<region-name>','lke show','lke show -all','lke show -lock','lke show -[no]crit','lke show -output="file-name"','lke show -pid=<process_id>','lke show -region=<region-name>','lke show -wait','lke exit','lke spawn','lke summary','mupip','mupip syntax','mupip backup','mupip backup -bkupdbjnl=disable|off','mupip backup -bytestream','mupip backup -comprehensive','mupip backup -database','mupip backup -increment','mupip backup -nettimeout','mupip backup -[no]newjnlfiles[=[no]prevlink],[no]s[ync_io]]','mupip backup -online','mupip backup -replinstance=<target_location>','mupip backup -since=[database|bytestream|record]','mupip backup -replace','mupip backup -transaction=<hexa_transaction_number>','mupip backup examples','mupip create -region=<region_name>','mupip endiancvt -outdb=<outdb-file> -override <db-file>','mupip rctldump [dir1]','mupip endiancvt examples','mupip exit','mupip extend -blocks=<data-blocks-to-add> <region-name>','mupip extract','mupip extract -format=binary|go|zwr','mupip extract -freeze','mupip extract -label=<text>','mupip extract -[no]log','mupip extract -select=<global-specification>','mupip extract examples','mupip freeze','mupip freeze -off','mupip freeze -on','mupip freeze -override','mupip freeze -record','mupip ftok','mupip ftok -jnlpool','mupip ftok -recvpool','mupip ftok -db','mupip integ','mupip integ -adjacency=<integer>','mupip integ -block=<block_number>','mupip integ -brief','mupip integ -fast','mupip integ -file','mupip integ -full','mupip integ -[no]keyranges','mupip integ -[no]map=<integer>','mupip integ -[no]maxkeysize=<integer>','mupip integ -online','mupip integ -region','mupip integ -subscript=<subscript>','mupip integ -tnreset','mupip integ -[no]transaction=<integer>','mupip integ examples','mupip intrpt <process-id>','mupip load','mupip load -format=go|binary|zwr','mupip load -begin=<integer>','mupip load -end=<integer>','mupip load -fillfactor=<integer>','mupip load -stdin','mupip load -onerror','mupip load examples','mupip reorg','mupip reorg -exclude=<global-name-list>','mupip reorg -fill_factor<integer>','mupip reorg -index_fill_factor<integer>','mupip reorg -resume','mupip reorg -region','mupip reorg -select=<global-name-list>','mupip reorg -truncate[=<percentage>]','mupip reorg examples','mupip restore','mupip restore -[no]extend','mupip restore examples','mupip rundown','mupip rundown -region','mupip rundown -file','mupip rundown -override','mupip rundown -relinkctl','mupip set','mupip trigger -triggerfile -[no]prompt','mupip trigger -select][=name-list*][<select-output-file>]','mupip trigger -upgrade','mupip set -access_method=bg|mm','mupip set -partial_recov_bypass','mupip set -region','mupip set -file','mupip set -extension_count=<integer>','mupip set -flush_time=[[[hours:]minutes:]seconds:]centiseconds','mupip set -global_buffers=64_to_2147483647','mupip set -lock_space=10_to_65536','mupip set -inst_freeze_on_error','mupip set -[no]journal=<journal-option-list>','mupip set -[no]qdbrundown','mupip set -reserved_bytes=0_to_block_size-block_header-record_size','mupip set -version=V4|V6','mupip downgrade -version=V4|V5','mupip journal <Action_Qualifiers>','mupip journal -extract=<file_name>|stdout','mupip journal -recover','mupip journal -rollback -[no]online','mupip journal -show=<all,active_processes,broken_transactions,header,processes,statistics>','mupip journal -[no]verify','mupip journal -[no]verify <Direction_Qualifiers>','mupip journal <Action_Qualifiers> <Direction_Qualifiers>','mupip journal -extract=<file_name>|stdout <Direction_Qualifiers>','mupip journal -extract=<file_name>|stdout [-detail] <Direction_Qualifiers>','mupip journal -recover <Direction_Qualifiers>','mupip journal -rollback -[no]online <Direction_Qualifiers>','mupip journal -show=<all,active_processes,broken_transactions,header,processes,statistics> <Direction_Qualifiers>','mupip journal -[no]verify -after=<day-mon-yyyy hh:mm:ss>','mupip journal -[no]verify -before=<day-mon-yyyy hh:mm:ss>','mupip journal <Action_Qualifiers> <Direction_Qualifiers> [Time_Qualifiers]','mupip journal -extract=<file_name>|stdout [-detail] <Direction_Qualifiers> -after=<day-mon-yyyy hh:mm:ss>','mupip journal -extract=<file_name>|stdout [-detail] <Direction_Qualifiers> -before=<day-mon-yyyy hh:mm:ss>','mupip journal -recover -forward -after=<day-mon-yyyy hh:mm:ss>','mupip journal -recover <Direction_Qualifiers> -before=<day-mon-yyyy hh:mm:ss>','mupip journal -rollback -[no]online <Direction_Qualifiers>','mupip journal -rollback -[no]online -forward -after=<day-mon-yyyy hh:mm:ss>','mupip journal -show=<all,active_processes,broken_transactions,header,processes,statistics,[no]verify> <Direction_Qualifiers>','mupip journal -rollback -[no]online <Direction_Qualifiers> <Journal_Sequence_Number>','mupip journal -rollback -[no]online <Direction_Qualifiers> -fetchresync=<port_no> -losttrans=<extract_file> <file_list>','mupip journal -rollback -[no]online <Direction_Qualifiers> -resync=<journal_sequence_number>','mupip journal -rollback -[no]online <Direction_Qualifiers> <Journal_Sequence_Number>','mupip journal -rollback -[no]online <Direction_Qualifiers> <Journal_Control>','mupip journal -extract=<file_name>|stdout [-detail] -brokentrans=<extract_file>','mupip journal -rollback -[no]online <Direction_Qualifiers> -brokentrans=<extract_file>','mupip journal -recover <Direction_Qualifiers> -brokentrans=<extract_file>','mupip journal -recover <Direction_Qualifiers> -losttrans=<extract_file>','mupip journal -recover -forward -[no]chain','mupip journal -recover -forward -[no]checktn','mupip journal -[no]error_limit=<integer>','mupip journal -recover -fences=none|always|process','mupip journal -extract=<file_name>|stdout -full','mupip journal -[no]error_limit=<integer> -[no]interactive','mupip journal -recover -forward -redirect=<old-file-name=new-file-name>','mupip journal -verbose','mupip set -replication=on|off|was_on','mupip replicate -instance_create','mupip replicate -instance_create -name=<instance_name>','mupip replicate -instance_create -name=<instance_name> -noreplace','mupip replicate -instance_create -name=<instance_name> -noreplace -supplementary','mupip replicate -editinstance <instance_file> -show -detail','mupip replicate -editinstance <instance_file>','mupip replicate -editinstance <instance_file> -change -offset=<hexa> -size=<hexa> -value=<hexa> -name=<new_name>','mupip replicate -editinstance <instance_file> -change -offset=<hexa> -size=<hexa> -value=<hexa> -name=<new_name>','mupip replicate -source -jnlpool -show -detail','mupip replicate -source -showbacklog','mupip replicate -source -start -secondary=<hostname:port>','mupip replicate -source -start -passive','mupip replicate -source -start -buffsize=<Journal Pool size in bytes>','mupip replicate -source -start -filter=<filter command>','mupip replicate -source -start -freeze=on|off -[no]comment=&quot;"<string>"&quot;','mupip replicate -source -start -connectparams=<hard tries>,<hard tries period>,<soft tries period>, <alert time>, <heartbeat period>,<max heartbeat wait>','mupip replicate -source -start -instsecondary=<replicating instance name>','mupip replicate -source -start -log=<log file name> -log_interval=<integer>','mupip replicate -source -start -rootprimary','mupip replicate -source -start -propagateprimary','mupip replicate -source -start -tlsid ','mupip replicate -source -start -tlsid -renegotiate_interval','mupip replicate -source -start -tlsid -renegotiate_interval -plaintextfallback','mupip replicate -source -start -tlsid -renegotiate_interval -noplaintextfallback','mupip replicate -source -start -updok','mupip replicate -source -start -updnotok','mupip replicate -source -start -cmplvl=<compression level>','mupip replicate -source -shutdown -timeout=<seconds>','mupip replicate -source -activate -secondary=<hostname:port> -instsecondary=<instance_name>','mupip replicate -source -activate -secondary=<hostname:port> -connectparams=<hard tries>,<hard tries period>,<soft tries period>,<alert time>,<heartbeat period>,<max heartbeat wait>','mupip replicate -source -activate -secondary=<hostname:port> -instsecondary=<instance_name> -rootprimary','mupip replicate -source -activate -secondary=<hostname:port> -instsecondary=<instance_name> -propagateprimary','mupip replicate -source -deactivate -instsecondary=<instance_name>','mupip replicate -source -deactivate -propagateprimary','mupip replicate -source -stopsourcefilter','mupip replicate -source -checkhealth','mupip replicate -source -losttncomplete','mupip replicate -source -needrestart','mupip replicate -source -checkhealth -instsecondary=<instance_instance> -helpers','mupip replicate -source -start -changelog -log=<log file name>','mupip replicate -source -activate -changelog -log=<log file name>','mupip replicate -source -changelog -log=<log file name> -log_interval=<integer> -instsecondary=<instance_name>','mupip replicate -source -statslog=ON|OFF -log_interval=<integer>','mupip replicate -source -shutdown -instsecondary=<instance_name> -timeout=<seconds>','mupip replicate -receiver -start -listenport=<port number> -log=<log file name> -log_interval=&quot;[integer1],[integer2]&quot;','mupip replicate -receiver -start -listenport=<port number> -log=<log file name> -log_interval=&quot;[integer1],[integer2]&quot;','mupip replicate -receiver -start -listenport=<port number> -log=<log file name> -autorollback=verbose','mupip replicate -receiver -start -listenport=<port number> -log=<log file name> -buffsize=<Receive Pool size in bytes>','mupip replicate -receiver -start -listenport=<port number> -log=<log file name> -filter=<filter command>','mupip replicate -receiver -start -listenport=<port number> -log=<log file name> -noresync','mupip replicate -receiver -start -listenport=<port number> -log=<log file name> -stopsourcefilter','mupip replicate -receiver -start -listenport=<port number> -log=<log file name> -updateresync=<srcinstfile> -resume=<strm_num>','mupip replicate -receiver -start -listenport=<port number> -log=<log file name> -updateresync=<srcinstfile> -reuse=<instname>','mupip replicate -receiver -start -listenport=<port number> -log=<log file name> -updateresync=<srcinstfile> -initialize','mupip replicate -receiver -start -listenport=<port number> -log=<log file name> -cmplvl=n','mupip replicate -receiver -start -tlsid ','mupip replicate -receiver -start -tlsid -renegotiate_interval','mupip replicate -receiver -start -tlsid -renegotiate_interval -plaintextfallback','mupip replicate -receiver -start -tlsid -renegotiate_interval -noplaintextfallback','mupip replicate -receiver -start -updateonly -helpers=m,n','mupip replicate -receiver -shutdown -updateonly -timeout=<timeout in seconds>','mupip replicate -receiver -shutdown -helpers -timeout=<timeout in seconds>','mupip replicate -receiver -checkhealth','mupip replicate -receiver -changelog -log=<log file name>','mupip replicate -receiver -changelog -log=<log file name> -log_interval=&quot;integer1,integer2&quot;','mupip replicate -receiver -statslog=ON|OFF','mupip replicate -receiver -statslog=ON|OFF -log_interval=&quot;integer1,integer2&quot;','mupip replicate -receiver -showbacklog','dse','dse syntax','dse add','dse add -block=block -offset=<offset> -key=<key> -pointer=<pointer>','dse add -block=block -RECORD=record -key=<key> -pointer=<pointer>','dse add -block=block -RECORD=record -star -pointer=<pointer>','dse add -block=block -RECORD=record -key=<key> -data=<string>','dse all -buffer_flush','dse all -critinit','dse all -[no]freeze','dse all -override','dse all -reference','dse all -release','dse all -renew','dse all -seize','dse all -wcinit','dse buffer_flush','dse change -block=<block_num>','dse change -block=<block_num> -bsiz=<block-size','dse change -block=<block_num> -level=level','dse change -block=<block_num> -tn=transaction-number','dse change -block=<block_num> -offset=offset','dse change -block=<block_num> -record=record-number','dse change -block=<block_num> -cmpc=compression-count','dse change -block=<block_num> -rsiz=record-size','dse change -fileheader','dse change -fileheader -avg_blks_read=<average-blocks-read>','dse change -fileheader -b_bytestream=<transaction-number>','dse change -fileheader -b_comprehensive=<transaction-number>','dse change -fileheader -b_database=<transaction-number>','dse change -fileheader -b_incremental=<transaction-number>','dse change -fileheader -b_record=<transaction-number>','dse change -fileheader -blk_size=<block-size>','dse change -fileheader -blocks_free=<free-blocks>','dse change -fileheader -current_tn=<transaction-number>','dse change -fileheader -commitwait_spin_count=<boolean>','dse change -fileheader -declocation=<value>','dse change -fileheader -def_collation=<value>','dse change -fileheader -encryption_hash','dse change -fileheader -flush_time=<delta-time>','dse change -fileheader -freeze=<value>','dse change -fileheader -fully_upgraded=<boolean>','dse change -fileheader -gvstatsreset','dse change -fileheader -hard_spin_cpunt=mutex-hard-spin-sount>','dse change -fileheader -hexlocation=<value>','dse change -fileheader -interrupted_recov=<boolean>','dse change -fileheader -jnl_yield_limit=<journal-yeild-limit>','dse change -fileheader -key_max_size=<key-max-size>','dse change -fileheader -machine_nam=<value>','dse change -fileheader -null_subscripts=<value>','dse change -fileheader -nocrit','dse change -fileheader -override','dse change -fileheader -qdbrundown','dse change -fileheader -rc_srv_count','dse change -fileheader -re_read_trigger=<read-trigger>','dse change -fileheader -record_max_size=<record-max-size>','dse change -fileheader -reference_count=<reference-count>','dse change -fileheader -reg_seqno=<sequence-number>','dse change -fileheader -reserved_bytes=<reserved-bytes>','dse change -fileheader -sleep_spin_count=<mutex-sleep-spin-count>','dse change -fileheader -spin_sleep_time=<mutex-sleep-time>','dse change -fileheader -timers_pending=<integer>','dse change -fileheader -total_blks=<total-blocks>','dse change -fileheader -trigger_flush=<trigger-flush>','dse change -fileheader -upd_reserved_area=<reserved-area>','dse change -fileheader -upd_writer_trigger_factor=<trigger-factor>','dse change -fileheader -writes_per_flush=<writes-per-flush>','dse change -fileheader -wait_disk=<wait-disk>','dse change -fileheader -zqgblmod_seqno=<sequence-number>','dse change -fileheader -zqgblmod_trans=<sequence-number>','dse cache -recover -all','dse cache -verify -all','dse close','dse critical -init -reset','dse critical -owner','dse critical -release','dse critical -remove','dse critical -sieze','dse dump -all','dse dump -block=<block_num>','dse dump -count=<count>','dse dump -fileheader','dse dump -glo','dse dump -gvstats','dse dump -[no]crit','dse dump -[no]header','dse dump -offset=offset','dse dump -record=<record_number>','dse dump -updproc','dse dump -zwr','dse evaluate -decimal -number=<hexa>','dse evaluate -hexadecimal -number=<deci>','dse exit','dse find -exhaustive -siblings','dse find -block -freeblock -hint','dse find -[no]crit -key=<key>','dse find -block -siblings','dse find -region=<region_name>','dse integrit -block=<block_num>','dse integrit -block=<block_num> -[no]crit','dse maps -block=<block_num> -busy','dse maps -block=<block_num> -free','dse maps -block=<block_num> -master','dse maps -restore_all','dse open -file=<output_file_name>','dse overwrite -data=<string> -offset=<offset>','dse page','dse range -from=<block_num> -to=<block_num>','dse range -lower=<key> -upper=<key> -from=<block_num> -to=<block_num>','dse range -lower=<key> -upper=<key> -index -star','dse range -lost -lower=<key> -upper=<key> -star','dse range -[no]crit','dse range -[no]busy','dse remove -block=<block_num> -count=<count>','dse remove -block=<block_num> -version=<version_num>','dse remove -block=<block_num> -record=<record_num>','dse remove -block=<block_num> -offset=<offset> -count=<count>','dse restore -block=<block_num> -version=<version-number>','dse restore -block=<block_num> -from=<block_num>','dse restore -block=<block_num> -from=<block_num> -region=<region_name>','dse save -block=<block_num> -comment=<string>','dse save -block=<block_num> -comment=<string> -list','dse save -block=<block_num> -comment=<string> -[no]crit','dse shift -backward=bytes_to_shift -offset=<offset>','dse shift -forward=bytes_to_shift -offset=<offset>','dse spawn <shell-command>','dse wcinit',''];
+ var optval=['gde_overview.html','gdecmds.html','gdecmds.html#gde_add','gdecmds.html#gde_change','gdecmds.html#gde_delete','gdecmds.html#gde_exit','gdecmds.html#gde_locks','gdecmds.html#gde_log','gdecmds.html#gde_quit','gdecmds.html#setgd','gdecmds.html#setgd','gdecmds.html#setgd','gdecmds.html#gde_show','gdecmds.html#gde_template','gdecmds.html#gde_verify','nameregseg.html#name_qualifiers','nameregseg.html#name_qualifiers','nameregseg.html#name_qualifiers','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','nameregseg.html#region_quals','jnl_set.html#set_jnl_options','jnl_set.html#set_jnl_options','jnl_set.html#set_jnl_options','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','nameregseg.html#segment_quals','gde_cmmd_summ.html','introduction.html#invoke_exit_LKE','lke_comm_quals.html','lke_comm_quals.html#lke_clear','lke_comm_quals.html#lke_clear','lke_comm_quals.html#lke_clear','lke_comm_quals.html#lke_clear','lke_comm_quals.html#lke_clear','lke_comm_quals.html#lke_clear','lke_comm_quals.html#lke_clear','lke_comm_quals.html#lke_clear','lke_comm_quals.html#lke_clear','lke_comm_quals.html#LKE_Show','lke_comm_quals.html#LKE_Show','lke_comm_quals.html#LKE_Show','lke_comm_quals.html#LKE_Show','lke_comm_quals.html#LKE_Show','lke_comm_quals.html#LKE_Show','lke_comm_quals.html#LKE_Show','lke_comm_quals.html#LKE_Show','lke_comm_quals.html#LKE_Exit','lke_comm_quals.html#LKE_SPAWN','lke_command_summ.html','mup_intro.html#mup_invoke','mup_intro.html#mupip_main','gdm.html#mup_back','gdm.html#backup_bkupdbjnl','gdm.html#backup_bytestream','gdm.html#backup_comprehensive','gdm.html#backup_database','gdm.html#backup_increment','gdm.html#backup_nettimeout','gdm.html#mup_newjnlfiles','gdm.html#backup_online','gdm.html#backup_replinstance','gdm.html#backup_since','gdm.html#backup_replace','gdm.html#backup_transaction','gdm.html#examples_mup_backup','gdm.html#mup_create','gdm.html#mup_endiancvt','gdm.html#mup_rctldump','gdm.html#examples_mup_endiancvt','gdm.html#mup_exit','gdm.html#mup_extend','gdm.html#mup_extract','gdm.html#extract_format','gdm.html#extract_freeze','gdm.html#extract_label','gdm.html#extract_log','gdm.html#extract_select','gdm.html#examples_mup_extract','gdm.html#mup_freeze','gdm.html#mup_freeze_off','gdm.html#mup_freeze_on','gdm.html#mup_freeze_override','gdm.html#mup_freeze_record','gdm.html#mup_ftok','gdm.html#ftok_jnlpool','gdm.html#ftok_recvpool','gdm.html#ftok_db','gdm.html#mup_integ','gdm.html#integ_adjacency','gdm.html#integ_block','gdm.html#integ_brief','gdm.html#integ_fast','gdm.html#integ_file','gdm.html#integ_full','gdm.html#integ_keyranges','gdm.html#integ_brief','gdm.html#integ_maxkeysize','gdm.html#integ_online','gdm.html#integ_region','gdm.html#integ_subscript','gdm.html#integ_tnreset','gdm.html#integ_transaction','gdm.html#examples_mup_integ','gdm.html#mup_intrpt','gdm.html#mup_load','gdm.html#load_format','gdm.html#load_begin','gdm.html#load_end','gdm.html#load_fillfactor','gdm.html#load_stdin','gdm.html#load_stdin','gdm.html#examples_mup_load','gdm.html#mup_reorg','gdm.html#reorg_exclude','gdm.html#reorg_fill_factor','gdm.html#reorg_index_fill_factor','gdm.html#reorg_resume','gdm.html#reorg_region','gdm.html#reorg_select','gdm.html#reorg_truncate','gdm.html#examples_mup_reorg','gdm.html#mup_restore','gdm.html#mup_restore_extend','gdm.html#examples_mup_restore','gdm.html#mup_rundown','gdm.html#mup_rundown_region','gdm.html#mup_rundown_file','gdm.html#mup_rundown_file','gdm.html#mup_rundown_file','gdm.html#mup_set','gdm.html#mup_trigger','gdm.html#mup_trigger','gdm.html#mup_trigger','gdm.html#set_access_method','gdm.html#set_bypass_recov','gdm.html#set_region','gdm.html#set_file','gdm.html#set_extension_count','gdm.html#set_flush_time','gdm.html#set_global_buffers','gdm.html#set_lock_space','gdm.html#inst_freeze_on_error','gdm.html#set_journal','gdm.html#set_qdbrundown','gdm.html#set_reserved_bytes','gdm.html#set_version','gdm.html#mup_downgrade','mup_journal.html#jnl_action','mup_journal.html#jnl_extractstd','mup_journal.html#recover','mup_journal.html#rollback','mup_journal.html#show','mup_journal.html#jnl_verify','mup_journal.html#jnl_verify','mup_journal.html#jnl_direction','mup_journal.html#jnl_direction','mup_journal.html#jnl_direction','mup_journal.html#jnl_direction','mup_journal.html#jnl_direction','mup_journal.html#jnl_direction','mup_journal.html#jnl_time','mup_journal.html#jnl_time','mup_journal.html#jnl_time','mup_journal.html#jnl_time','mup_journal.html#jnl_time','mup_journal.html#jnl_time','mup_journal.html#jnl_time','mup_journal.html#jnl_time','mup_journal.html#jnl_time','mup_journal.html#jnl_time','mup_journal.html#jnl_sequence','replication.html#rollback_db_after_sys_fail','mup_journal.html#jnl_sequence','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','mup_journal.html#jnl_ctrl_quals','replication.html#trng_repl_on_off','replication.html#create_repl_inst','replication.html#create_repl_inst','replication.html#create_repl_inst','replication.html#create_repl_inst','replication.html#disp_change_repl','replication.html#disp_change_repl','replication.html#disp_change_repl','replication.html#disp_change_repl','replication.html#disp_change_repl','replication.html#rprt_current_backlog','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#start_src_srvr','replication.html#sour_srvr_shutdown','replication.html#activate_passive_src_srvr','replication.html#activate_passive_src_srvr','replication.html#activate_passive_src_srvr','replication.html#activate_passive_src_srvr','replication.html#deavtivate_act_src_srvr','replication.html#deavtivate_act_src_srvr','replication.html#stop_src_filtr','replication.html#chck_srvr_hlth','replication.html#process_lost','replication.html#process_lost','replication.html#chck_srvr_hlth','replication.html#chng_log_file','replication.html#chng_log_file','replication.html#chng_log_file','replication.html#stp_src_srv','replication.html#stp_src_srv','replication.html#strt_rcvr_srvr','replication.html#strt_rcvr_srvr','replication.html#strt_rcvr_srvr','replication.html#strt_rcvr_srvr','replication.html#strt_rcvr_srvr','replication.html#strt_rcvr_srvr','replication.html#strt_rcvr_srvr','replication.html#strt_rcvr_srvr','replication.html#strt_rcvr_srvr','replication.html#strt_rcvr_srvr','replication.html#strt_rcvr_srvr','replication.html#start_rcvr_srvr','replication.html#start_rcvr_srvr','replication.html#start_rcvr_srvr','replication.html#start_rcvr_srvr','replication.html#strt_upd_proc','replication.html#stop_upd_proc','replication.html#stop_upd_proc','replication.html#chk_srvr_hlth','replication.html#chng_log','replication.html#chng_log','replication.html#enable_disable_login','replication.html#enable_disable_login','replication.html#rep_curr_backlog','operate_dse.html','dse_cmmds_quals.html','dse_cmmds_quals.html#add_dse','dse_cmmds_quals.html#add_dse','dse_cmmds_quals.html#add_dse','dse_cmmds_quals.html#add_dse','dse_cmmds_quals.html#add_dse','dse_cmmds_quals.html#all_dse_cmmd','dse_cmmds_quals.html#all_dse_cmmd','dse_cmmds_quals.html#all_dse_cmmd','dse_cmmds_quals.html#all_dse_cmmd','dse_cmmds_quals.html#all_dse_cmmd','dse_cmmds_quals.html#all_dse_cmmd','dse_cmmds_quals.html#all_dse_cmmd','dse_cmmds_quals.html#all_dse_cmmd','dse_cmmds_quals.html#all_dse_cmmd','dse_cmmds_quals.html#buffer_flush_cmmd_dse','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#change_dse_cmmd','dse_cmmds_quals.html#dse_cache','dse_cmmds_quals.html#dse_cache','dse_cmmds_quals.html#close_dse_cmmd','dse_cmmds_quals.html#critical_dse_cmmd','dse_cmmds_quals.html#critical_dse_cmmd','dse_cmmds_quals.html#critical_dse_cmmd','dse_cmmds_quals.html#critical_dse_cmmd','dse_cmmds_quals.html#critical_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#dump_dse_cmmd','dse_cmmds_quals.html#evaluate_dse_cmmd','dse_cmmds_quals.html#evaluate_dse_cmmd','dse_cmmds_quals.html#exit_dse_cmmd','dse_cmmds_quals.html#find_cmmd_dse','dse_cmmds_quals.html#find_cmmd_dse','dse_cmmds_quals.html#find_cmmd_dse','dse_cmmds_quals.html#find_cmmd_dse','dse_cmmds_quals.html#find_cmmd_dse','dse_cmmds_quals.html#integrit_dse_cmmd','dse_cmmds_quals.html#integrit_dse_cmmd','dse_cmmds_quals.html#maps_dse_cmmd','dse_cmmds_quals.html#maps_dse_cmmd','dse_cmmds_quals.html#maps_dse_cmmd','dse_cmmds_quals.html#maps_dse_cmmd','dse_cmmds_quals.html#open_cmmd_dse','dse_cmmds_quals.html#overwrite_dse_cmmd','dse_cmmds_quals.html#page_cmmd_dse','dse_cmmds_quals.html#range_dse_cmmd','dse_cmmds_quals.html#range_dse_cmmd','dse_cmmds_quals.html#range_dse_cmmd','dse_cmmds_quals.html#range_dse_cmmd','dse_cmmds_quals.html#range_dse_cmmd','dse_cmmds_quals.html#range_dse_cmmd','dse_cmmds_quals.html#remove_dse_cmmd','dse_cmmds_quals.html#remove_dse_cmmd','dse_cmmds_quals.html#remove_dse_cmmd','dse_cmmds_quals.html#remove_dse_cmmd','dse_cmmds_quals.html#restore_dse_cmmd','dse_cmmds_quals.html#restore_dse_cmmd','dse_cmmds_quals.html#restore_dse_cmmd','dse_cmmds_quals.html#save_dse_cmmd','dse_cmmds_quals.html#save_dse_cmmd','dse_cmmds_quals.html#save_dse_cmmd','dse_cmmds_quals.html#shift','dse_cmmds_quals.html#shift','dse_cmmds_quals.html#dse_spawn','dse_cmmds_quals.html#wcinit_dse_cmmd',''];
+var val=optlabel.indexOf(result);
+if (optval[val]==undefined||optval[val]=='') return false;
+javascript:top.frames['body'].frames['bottom'].location=optval[val];return true;
+}</script><style>body{background-image:url('images/bannerimage.gif');background-repeat:no-repeat;}</style></head>
+<body><form><h1>&nbsp;</h1><p align="right">Type gde, mupip, lke, or dse</p>
+ <table><tr><td><input type="text" name="gtmcommand" list="gtmcommandss" onchange="javascript:frameload(this.value);" size=100% maxlength=300 onsubmit=top.frames['body'].frames['bottom'].location=gtmcommand.value></td><td><input type="button" value="Go" onclick="javascript:frameload(gtmcommand.value);"></td></tr></table>
+ <datalist id="gtmcommandss">
+ <label>
+<select name="gtmcommands"><optgroup id="optg">
+<option>gde</option>
+<option>gde syntax</option>
+<option>gde add</option>
+<option>gde change</option>
+<option>gde delete</option>
+<option>gde exit</option>
+<option>gde locks</option>
+<option>gde log</option>
+<option>gde quit</option>
+<option>gde setgd</option>
+<option>gde setgd -file=&lt;global_dir_file_name&gt;</option>
+<option>gde setgd -quit</option>
+<option>gde show</option>
+<option>gde template</option>
+<option>gde verify</option>
+<option>gde add -name</option>
+<option>gde change -name</option>
+<option>gde delete -name</option>
+<option>gde add -region=&lt;region_name&gt;</option>
+<option>gde change -region=&lt;region_name&gt;</option>
+<option>gde delete -region=&lt;region_name&gt;</option>
+<option>gde template -region=&lt;region_name&gt;</option>
+<option>gde add -region=&lt;region_name&gt; -collation_sequence=0_to_255</option>
+<option>gde change -region=&lt;region_name&gt; -collation_sequence=0_to_255</option>
+<option>gde template -region=&lt;region_name&gt; -collation_sequence=0_to_255</option>
+<option>gde add -region=&lt;region_name&gt; -dynamic_segment=&lt;segment_name&gt;</option>
+<option>gde change -region=&lt;region_name&gt; -dynamic_segment=&lt;segment_name&gt;</option>
+<option>gde template -region=&lt;region_name&gt; -dynamic_segment=&lt;segment_name&gt;</option>
+<option>gde add -region=&lt;region_name&gt; -key_size=3_to_1019</option>
+<option>gde change -region=&lt;region_name&gt; -key_size=3_to_1019</option>
+<option>gde template -region=&lt;region_name&gt; -key_size=3_to_1019</option>
+<option>gde add -region=&lt;region_name&gt; -record_size=7_to_1048576</option>
+<option>gde change -region=&lt;region_name&gt; -record_size=7_to_1048576</option>
+<option>gde template -region=&lt;region_name&gt; -record_size=7_to_1048576</option>
+<option>gde add -region=&lt;region_name&gt; -[no]n[ull_subscript]=[always|never|existing]</option>
+<option>gde change -region=&lt;region_name&gt; -[no]n[ull_subscript]=[always|never|existing]</option>
+<option>gde template -region=&lt;region_name&gt; -[no]n[ull_subscript]=[always|never|existing]</option>
+<option>gde add -region=&lt;region_name&gt; -[no]stdnullcoll</option>
+<option>gde change -region=&lt;region_name&gt; -[no]stdnullcoll</option>
+<option>gde template -region=&lt;region_name&gt; -[no]stdnullcoll</option>
+<option>gde add -region=&lt;region_name&gt; -[no]inst[_freeze_on_error]</option>
+<option>gde change -region=&lt;region_name&gt; -[no]inst[_freeze_on_error]</option>
+<option>gde template -region=&lt;region_name&gt; -[no]inst[_freeze_on_error]</option>
+<option>gde add -region=&lt;region_name&gt; -[no]q[dbrundown]</option>
+<option>gde change -region=&lt;region_name&gt; -[no]q[dbrundown]</option>
+<option>gde template -region=&lt;region_name&gt; -[no]q[dbrundown]</option>
+<option>gde add -region=&lt;region_name&gt; -[no]j[ournal][=journal-option-list]</option>
+<option>gde change -region=&lt;region_name&gt; -[no]j[ournal][=journal-option-list]</option>
+<option>gde template -region=&lt;region_name&gt; -[no]j[ournal][=journal-option-list]</option>
+<option>gde add -segment &lt;segment_name&gt; -file=&lt;file_name&gt;</option>
+<option>gde change -segment &lt;segment_name&gt; -file=&lt;file_name&gt;</option>
+<option>gde delete -segment &lt;segment_name&gt;</option>
+<option>gde template -segment &lt;segment_name&gt; -file=&lt;file_name&gt;</option>
+<option>gde add -segment &lt;segment_name&gt; -access_method=BG|MM</option>
+<option>gde change -segment &lt;segment_name&gt; -access_method=BG|MM</option>
+<option>gde template -segment &lt;segment_name&gt; -access_method=BG|MM</option>
+<option>gde add -segment &lt;segment_name&gt; -allocation=10_to_1040187392</option>
+<option>gde change -segment &lt;segment_name&gt; -allocation=10_to_1040187392</option>
+<option>gde template -segment &lt;segment_name&gt; -allocation=10_to_1040187392</option>
+<option>gde add -segment &lt;segment_name&gt; -block_size=512_to_65024</option>
+<option>gde change -segment &lt;segment_name&gt; -block_size=512_to_65024</option>
+<option>gde template -segment &lt;segment_name&gt; -block_size=512_to_65024</option>
+<option>gde add -segment &lt;segment_name&gt; -[no]encryption</option>
+<option>gde change -segment &lt;segment_name&gt; -[no]encryption</option>
+<option>gde template -segment &lt;segment_name&gt; -[no]encryption</option>
+<option>gde add -segment &lt;segment_name&gt; -extention_count=0_to_65535</option>
+<option>gde change -segment &lt;segment_name&gt; -extention_count=0_to_65535</option>
+<option>gde template -segment &lt;segment_name&gt; -extention_count=0_to_65535</option>
+<option>gde add -segment &lt;segment_name&gt; -global_buffer_count=64_to_2147483647</option>
+<option>gde change -segment &lt;segment_name&gt; -global_buffer_count=64_to_2147483647</option>
+<option>gde template -segment &lt;segment_name&gt; -global_buffer_count=64_to_2147483647</option>
+<option>gde add -segment &lt;segment_name&gt; -lock_space=10_to_65536</option>
+<option>gde change -segment &lt;segment_name&gt; -lock_space=10_to_65536</option>
+<option>gde template -segment &lt;segment_name&gt; -lock_space=10_to_65536</option>
+<option>gde add -segment &lt;segment_name&gt; -reserved_bytes=0_to_block_size-block_header-record_size</option>
+<option>gde change -segment &lt;segment_name&gt; -reserved_bytes=0_to_block_size-block_header-record_size</option>
+<option>gde template -segment &lt;segment_name&gt; -reserved_bytes=0_to_block_size-block_header-record_size</option>
+<option>gde summary</option>
+<option>lke</option>
+<option>lke syntax</option>
+<option>lke clear</option>
+<option>lke clear -all</option>
+<option>lke clear -lock</option>
+<option>lke clear -[no]crit</option>
+<option>lke clear -[no]exact</option>
+<option>lke clear -[no]interactive</option>
+<option>lke clear -output="file-name"</option>
+<option>lke clear -pid=&lt;process_id&gt;</option>
+<option>lke clear -region=&lt;region-name&gt;</option>
+<option>lke show</option>
+<option>lke show -all</option>
+<option>lke show -lock</option>
+<option>lke show -[no]crit</option>
+<option>lke show -output="file-name"</option>
+<option>lke show -pid=&lt;process_id&gt;</option>
+<option>lke show -region=&lt;region-name&gt;</option>
+<option>lke show -wait</option>
+<option>lke exit</option>
+<option>lke spawn</option>
+<option>lke summary</option>
+<option>mupip</option>
+<option>mupip syntax</option>
+<option>mupip backup</option>
+<option>mupip backup -bkupdbjnl=disable|off</option>
+<option>mupip backup -bytestream</option>
+<option>mupip backup -comprehensive</option>
+<option>mupip backup -database</option>
+<option>mupip backup -increment</option>
+<option>mupip backup -nettimeout</option>
+<option>mupip backup -[no]newjnlfiles[=[no]prevlink],[no]s[ync_io]]</option>
+<option>mupip backup -online</option>
+<option>mupip backup -replinstance=&lt;target_location&gt;</option>
+<option>mupip backup -since=[database|bytestream|record]</option>
+<option>mupip backup -replace</option>
+<option>mupip backup -transaction=&lt;hexa_transaction_number&gt;</option>
+<option>mupip backup examples</option>
+<option>mupip create -region=&lt;region_name&gt;</option>
+<option>mupip endiancvt -outdb=&lt;outdb-file&gt; -override &lt;db-file&gt;</option>
+<option>mupip rctldump [dir1]</option>
+<option>mupip endiancvt examples</option>
+<option>mupip exit</option>
+<option>mupip extend -blocks=&lt;data-blocks-to-add&gt; &lt;region-name&gt;</option>
+<option>mupip extract</option>
+<option>mupip extract -format=binary|go|zwr</option>
+<option>mupip extract -freeze</option>
+<option>mupip extract -label=&lt;text&gt;</option>
+<option>mupip extract -[no]log</option>
+<option>mupip extract -select=&lt;global-specification&gt;</option>
+<option>mupip extract examples</option>
+<option>mupip freeze</option>
+<option>mupip freeze -off</option>
+<option>mupip freeze -on</option>
+<option>mupip freeze -override</option>
+<option>mupip freeze -record</option>
+<option>mupip ftok</option>
+<option>mupip ftok -jnlpool</option>
+<option>mupip ftok -recvpool</option>
+<option>mupip ftok -db</option>
+<option>mupip integ</option>
+<option>mupip integ -adjacency=&lt;integer&gt;</option>
+<option>mupip integ -block=&lt;block_number&gt;</option>
+<option>mupip integ -brief</option>
+<option>mupip integ -fast</option>
+<option>mupip integ -file</option>
+<option>mupip integ -full</option>
+<option>mupip integ -[no]keyranges</option>
+<option>mupip integ -[no]map=&lt;integer&gt;</option>
+<option>mupip integ -[no]maxkeysize=&lt;integer&gt;</option>
+<option>mupip integ -online</option>
+<option>mupip integ -region</option>
+<option>mupip integ -subscript=&lt;subscript&gt;</option>
+<option>mupip integ -tnreset</option>
+<option>mupip integ -[no]transaction=&lt;integer&gt;</option>
+<option>mupip integ examples</option>
+<option>mupip intrpt &lt;process-id&gt;</option>
+<option>mupip load</option>
+<option>mupip load -format=go|binary|zwr</option>
+<option>mupip load -begin=&lt;integer&gt;</option>
+<option>mupip load -end=&lt;integer&gt;</option>
+<option>mupip load -fillfactor=&lt;integer&gt;</option>
+<option>mupip load -stdin</option>
+<option>mupip load -onerror</option>
+<option>mupip load examples</option>
+<option>mupip reorg</option>
+<option>mupip reorg -exclude=&lt;global-name-list&gt;</option>
+<option>mupip reorg -fill_factor&lt;integer&gt;</option>
+<option>mupip reorg -index_fill_factor&lt;integer&gt;</option>
+<option>mupip reorg -resume</option>
+<option>mupip reorg -region</option>
+<option>mupip reorg -select=&lt;global-name-list&gt;</option>
+<option>mupip reorg -truncate[=&lt;percentage&gt;]</option>
+<option>mupip reorg examples</option>
+<option>mupip restore</option>
+<option>mupip restore -[no]extend</option>
+<option>mupip restore examples</option>
+<option>mupip rundown</option>
+<option>mupip rundown -region</option>
+<option>mupip rundown -file</option>
+<option>mupip rundown -override</option>
+<option>mupip rundown -relinkctl</option>
+<option>mupip set</option>
+<option>mupip trigger -triggerfile -[no]prompt</option>
+<option>mupip trigger -select][=name-list*][&lt;select-output-file&gt;]</option>
+<option>mupip trigger -upgrade</option>
+<option>mupip set -access_method=bg|mm</option>
+<option>mupip set -partial_recov_bypass</option>
+<option>mupip set -region</option>
+<option>mupip set -file</option>
+<option>mupip set -extension_count=&lt;integer&gt;</option>
+<option>mupip set -flush_time=[[[hours:]minutes:]seconds:]centiseconds</option>
+<option>mupip set -global_buffers=64_to_2147483647</option>
+<option>mupip set -lock_space=10_to_65536</option>
+<option>mupip set -inst_freeze_on_error</option>
+<option>mupip set -[no]journal=&lt;journal-option-list&gt;</option>
+<option>mupip set -[no]qdbrundown</option>
+<option>mupip set -reserved_bytes=0_to_block_size-block_header-record_size</option>
+<option>mupip set -version=V4|V6</option>
+<option>mupip downgrade -version=V4|V5</option>
+<option>mupip journal &lt;Action_Qualifiers&gt;</option>
+<option>mupip journal -extract=&lt;file_name&gt;|stdout</option>
+<option>mupip journal -recover</option>
+<option>mupip journal -rollback -[no]online</option>
+<option>mupip journal -show=&lt;all,active_processes,broken_transactions,header,processes,statistics&gt;</option>
+<option>mupip journal -[no]verify</option>
+<option>mupip journal -[no]verify &lt;Direction_Qualifiers&gt;</option>
+<option>mupip journal &lt;Action_Qualifiers&gt; &lt;Direction_Qualifiers&gt;</option>
+<option>mupip journal -extract=&lt;file_name&gt;|stdout &lt;Direction_Qualifiers&gt;</option>
+<option>mupip journal -extract=&lt;file_name&gt;|stdout [-detail] &lt;Direction_Qualifiers&gt;</option>
+<option>mupip journal -recover &lt;Direction_Qualifiers&gt;</option>
+<option>mupip journal -rollback -[no]online &lt;Direction_Qualifiers&gt;</option>
+<option>mupip journal -show=&lt;all,active_processes,broken_transactions,header,processes,statistics&gt; &lt;Direction_Qualifiers&gt;</option>
+<option>mupip journal -[no]verify -after=&lt;day-mon-yyyy hh:mm:ss&gt;</option>
+<option>mupip journal -[no]verify -before=&lt;day-mon-yyyy hh:mm:ss&gt;</option>
+<option>mupip journal &lt;Action_Qualifiers&gt; &lt;Direction_Qualifiers&gt; [Time_Qualifiers]</option>
+<option>mupip journal -extract=&lt;file_name&gt;|stdout [-detail] &lt;Direction_Qualifiers&gt; -after=&lt;day-mon-yyyy hh:mm:ss&gt;</option>
+<option>mupip journal -extract=&lt;file_name&gt;|stdout [-detail] &lt;Direction_Qualifiers&gt; -before=&lt;day-mon-yyyy hh:mm:ss&gt;</option>
+<option>mupip journal -recover -forward -after=&lt;day-mon-yyyy hh:mm:ss&gt;</option>
+<option>mupip journal -recover &lt;Direction_Qualifiers&gt; -before=&lt;day-mon-yyyy hh:mm:ss&gt;</option>
+<option>mupip journal -rollback -[no]online &lt;Direction_Qualifiers&gt;</option>
+<option>mupip journal -rollback -[no]online -forward -after=&lt;day-mon-yyyy hh:mm:ss&gt;</option>
+<option>mupip journal -show=&lt;all,active_processes,broken_transactions,header,processes,statistics,[no]verify&gt; &lt;Direction_Qualifiers&gt;</option>
+<option>mupip journal -rollback -[no]online &lt;Direction_Qualifiers&gt; &lt;Journal_Sequence_Number&gt;</option>
+<option>mupip journal -rollback -[no]online &lt;Direction_Qualifiers&gt; -fetchresync=&lt;port_no&gt; -losttrans=&lt;extract_file&gt; &lt;file_list&gt;</option>
+<option>mupip journal -rollback -[no]online &lt;Direction_Qualifiers&gt; -resync=&lt;journal_sequence_number&gt;</option>
+<option>mupip journal -rollback -[no]online &lt;Direction_Qualifiers&gt; &lt;Journal_Sequence_Number&gt;</option>
+<option>mupip journal -rollback -[no]online &lt;Direction_Qualifiers&gt; &lt;Journal_Control&gt;</option>
+<option>mupip journal -extract=&lt;file_name&gt;|stdout [-detail] -brokentrans=&lt;extract_file&gt;</option>
+<option>mupip journal -rollback -[no]online &lt;Direction_Qualifiers&gt; -brokentrans=&lt;extract_file&gt;</option>
+<option>mupip journal -recover &lt;Direction_Qualifiers&gt; -brokentrans=&lt;extract_file&gt;</option>
+<option>mupip journal -recover &lt;Direction_Qualifiers&gt; -losttrans=&lt;extract_file&gt;</option>
+<option>mupip journal -recover -forward -[no]chain</option>
+<option>mupip journal -recover -forward -[no]checktn</option>
+<option>mupip journal -[no]error_limit=&lt;integer&gt;</option>
+<option>mupip journal -recover -fences=none|always|process</option>
+<option>mupip journal -extract=&lt;file_name&gt;|stdout -full</option>
+<option>mupip journal -[no]error_limit=&lt;integer&gt; -[no]interactive</option>
+<option>mupip journal -recover -forward -redirect=&lt;old-file-name=new-file-name&gt;</option>
+<option>mupip journal -verbose</option>
+<option>mupip set -replication=on|off|was_on</option>
+<option>mupip replicate -instance_create</option>
+<option>mupip replicate -instance_create -name=&lt;instance_name&gt;</option>
+<option>mupip replicate -instance_create -name=&lt;instance_name&gt; -noreplace</option>
+<option>mupip replicate -instance_create -name=&lt;instance_name&gt; -noreplace -supplementary</option>
+<option>mupip replicate -editinstance &lt;instance_file&gt; -show -detail</option>
+<option>mupip replicate -editinstance &lt;instance_file&gt;</option>
+<option>mupip replicate -editinstance &lt;instance_file&gt; -change -offset=&lt;hexa&gt; -size=&lt;hexa&gt; -value=&lt;hexa&gt; -name=&lt;new_name&gt;</option>
+<option>mupip replicate -editinstance &lt;instance_file&gt; -change -offset=&lt;hexa&gt; -size=&lt;hexa&gt; -value=&lt;hexa&gt; -name=&lt;new_name&gt;</option>
+<option>mupip replicate -source -jnlpool -show -detail</option>
+<option>mupip replicate -source -showbacklog</option>
+<option>mupip replicate -source -start -secondary=&lt;hostname:port&gt;</option>
+<option>mupip replicate -source -start -passive</option>
+<option>mupip replicate -source -start -buffsize=&lt;Journal Pool size in bytes&gt;</option>
+<option>mupip replicate -source -start -filter=&lt;filter command&gt;</option>
+<option>mupip replicate -source -start -freeze=on|off -[no]comment=&quot;"&lt;string&gt;"&quot;</option>
+<option>mupip replicate -source -start -connectparams=&lt;hard tries&gt;,&lt;hard tries period&gt;,&lt;soft tries period&gt;, &lt;alert time&gt;, &lt;heartbeat period&gt;,&lt;max heartbeat wait&gt;</option>
+<option>mupip replicate -source -start -instsecondary=&lt;replicating instance name&gt;</option>
+<option>mupip replicate -source -start -log=&lt;log file name&gt; -log_interval=&lt;integer&gt;</option>
+<option>mupip replicate -source -start -rootprimary</option>
+<option>mupip replicate -source -start -propagateprimary</option>
+<option>mupip replicate -source -start -tlsid </option>
+<option>mupip replicate -source -start -tlsid -renegotiate_interval</option>
+<option>mupip replicate -source -start -tlsid -renegotiate_interval -plaintextfallback</option>
+<option>mupip replicate -source -start -tlsid -renegotiate_interval -noplaintextfallback</option>
+<option>mupip replicate -source -start -updok</option>
+<option>mupip replicate -source -start -updnotok</option>
+<option>mupip replicate -source -start -cmplvl=&lt;compression level&gt;</option>
+<option>mupip replicate -source -shutdown -timeout=&lt;seconds&gt;</option>
+<option>mupip replicate -source -activate -secondary=&lt;hostname:port&gt; -instsecondary=&lt;instance_name&gt;</option>
+<option>mupip replicate -source -activate -secondary=&lt;hostname:port&gt; -connectparams=&lt;hard tries&gt;,&lt;hard tries period&gt;,&lt;soft tries period&gt;,&lt;alert time&gt;,&lt;heartbeat period&gt;,&lt;max heartbeat wait&gt;</option>
+<option>mupip replicate -source -activate -secondary=&lt;hostname:port&gt; -instsecondary=&lt;instance_name&gt; -rootprimary</option>
+<option>mupip replicate -source -activate -secondary=&lt;hostname:port&gt; -instsecondary=&lt;instance_name&gt; -propagateprimary</option>
+<option>mupip replicate -source -deactivate -instsecondary=&lt;instance_name&gt;</option>
+<option>mupip replicate -source -deactivate -propagateprimary</option>
+<option>mupip replicate -source -stopsourcefilter</option>
+<option>mupip replicate -source -checkhealth</option>
+<option>mupip replicate -source -losttncomplete</option>
+<option>mupip replicate -source -needrestart</option>
+<option>mupip replicate -source -checkhealth -instsecondary=&lt;instance_instance&gt; -helpers</option>
+<option>mupip replicate -source -start -changelog -log=&lt;log file name&gt;</option>
+<option>mupip replicate -source -activate -changelog -log=&lt;log file name&gt;</option>
+<option>mupip replicate -source -changelog -log=&lt;log file name&gt; -log_interval=&lt;integer&gt; -instsecondary=&lt;instance_name&gt;</option>
+<option>mupip replicate -source -statslog=ON|OFF -log_interval=&lt;integer&gt;</option>
+<option>mupip replicate -source -shutdown -instsecondary=&lt;instance_name&gt; -timeout=&lt;seconds&gt;</option>
+<option>mupip replicate -receiver -start -listenport=&lt;port number&gt; -log=&lt;log file name&gt; -log_interval=&quot;[integer1],[integer2]&quot;</option>
+<option>mupip replicate -receiver -start -listenport=&lt;port number&gt; -log=&lt;log file name&gt; -log_interval=&quot;[integer1],[integer2]&quot;</option>
+<option>mupip replicate -receiver -start -listenport=&lt;port number&gt; -log=&lt;log file name&gt; -autorollback=verbose</option>
+<option>mupip replicate -receiver -start -listenport=&lt;port number&gt; -log=&lt;log file name&gt; -buffsize=&lt;Receive Pool size in bytes&gt;</option>
+<option>mupip replicate -receiver -start -listenport=&lt;port number&gt; -log=&lt;log file name&gt; -filter=&lt;filter command&gt;</option>
+<option>mupip replicate -receiver -start -listenport=&lt;port number&gt; -log=&lt;log file name&gt; -noresync</option>
+<option>mupip replicate -receiver -start -listenport=&lt;port number&gt; -log=&lt;log file name&gt; -stopsourcefilter</option>
+<option>mupip replicate -receiver -start -listenport=&lt;port number&gt; -log=&lt;log file name&gt; -updateresync=&lt;srcinstfile&gt; -resume=&lt;strm_num&gt;</option>
+<option>mupip replicate -receiver -start -listenport=&lt;port number&gt; -log=&lt;log file name&gt; -updateresync=&lt;srcinstfile&gt; -reuse=&lt;instname&gt;</option>
+<option>mupip replicate -receiver -start -listenport=&lt;port number&gt; -log=&lt;log file name&gt; -updateresync=&lt;srcinstfile&gt; -initialize</option>
+<option>mupip replicate -receiver -start -listenport=&lt;port number&gt; -log=&lt;log file name&gt; -cmplvl=n</option>
+<option>mupip replicate -receiver -start -tlsid </option>
+<option>mupip replicate -receiver -start -tlsid -renegotiate_interval</option>
+<option>mupip replicate -receiver -start -tlsid -renegotiate_interval -plaintextfallback</option>
+<option>mupip replicate -receiver -start -tlsid -renegotiate_interval -noplaintextfallback</option>
+<option>mupip replicate -receiver -start -updateonly -helpers=m,n</option>
+<option>mupip replicate -receiver -shutdown -updateonly -timeout=&lt;timeout in seconds&gt;</option>
+<option>mupip replicate -receiver -shutdown -helpers -timeout=&lt;timeout in seconds&gt;</option>
+<option>mupip replicate -receiver -checkhealth</option>
+<option>mupip replicate -receiver -changelog -log=&lt;log file name&gt;</option>
+<option>mupip replicate -receiver -changelog -log=&lt;log file name&gt; -log_interval=&quot;integer1,integer2&quot;</option>
+<option>mupip replicate -receiver -statslog=ON|OFF</option>
+<option>mupip replicate -receiver -statslog=ON|OFF -log_interval=&quot;integer1,integer2&quot;</option>
+<option>mupip replicate -receiver -showbacklog</option>
+<option>dse</option>
+<option>dse syntax</option>
+<option>dse add</option>
+<option>dse add -block=block -offset=&lt;offset&gt; -key=&lt;key&gt; -pointer=&lt;pointer&gt;</option>
+<option>dse add -block=block -RECORD=record -key=&lt;key&gt; -pointer=&lt;pointer&gt;</option>
+<option>dse add -block=block -RECORD=record -star -pointer=&lt;pointer&gt;</option>
+<option>dse add -block=block -RECORD=record -key=&lt;key&gt; -data=&lt;string&gt;</option>
+<option>dse all -buffer_flush</option>
+<option>dse all -critinit</option>
+<option>dse all -[no]freeze</option>
+<option>dse all -override</option>
+<option>dse all -reference</option>
+<option>dse all -release</option>
+<option>dse all -renew</option>
+<option>dse all -seize</option>
+<option>dse all -wcinit</option>
+<option>dse buffer_flush</option>
+<option>dse change -block=&lt;block_num&gt;</option>
+<option>dse change -block=&lt;block_num&gt; -bsiz=&lt;block-size</option>
+<option>dse change -block=&lt;block_num&gt; -level=level</option>
+<option>dse change -block=&lt;block_num&gt; -tn=transaction-number</option>
+<option>dse change -block=&lt;block_num&gt; -offset=offset</option>
+<option>dse change -block=&lt;block_num&gt; -record=record-number</option>
+<option>dse change -block=&lt;block_num&gt; -cmpc=compression-count</option>
+<option>dse change -block=&lt;block_num&gt; -rsiz=record-size</option>
+<option>dse change -fileheader</option>
+<option>dse change -fileheader -avg_blks_read=&lt;average-blocks-read&gt;</option>
+<option>dse change -fileheader -b_bytestream=&lt;transaction-number&gt;</option>
+<option>dse change -fileheader -b_comprehensive=&lt;transaction-number&gt;</option>
+<option>dse change -fileheader -b_database=&lt;transaction-number&gt;</option>
+<option>dse change -fileheader -b_incremental=&lt;transaction-number&gt;</option>
+<option>dse change -fileheader -b_record=&lt;transaction-number&gt;</option>
+<option>dse change -fileheader -blk_size=&lt;block-size&gt;</option>
+<option>dse change -fileheader -blocks_free=&lt;free-blocks&gt;</option>
+<option>dse change -fileheader -current_tn=&lt;transaction-number&gt;</option>
+<option>dse change -fileheader -commitwait_spin_count=&lt;boolean&gt;</option>
+<option>dse change -fileheader -declocation=&lt;value&gt;</option>
+<option>dse change -fileheader -def_collation=&lt;value&gt;</option>
+<option>dse change -fileheader -encryption_hash</option>
+<option>dse change -fileheader -flush_time=&lt;delta-time&gt;</option>
+<option>dse change -fileheader -freeze=&lt;value&gt;</option>
+<option>dse change -fileheader -fully_upgraded=&lt;boolean&gt;</option>
+<option>dse change -fileheader -gvstatsreset</option>
+<option>dse change -fileheader -hard_spin_cpunt=mutex-hard-spin-sount&gt;</option>
+<option>dse change -fileheader -hexlocation=&lt;value&gt;</option>
+<option>dse change -fileheader -interrupted_recov=&lt;boolean&gt;</option>
+<option>dse change -fileheader -jnl_yield_limit=&lt;journal-yeild-limit&gt;</option>
+<option>dse change -fileheader -key_max_size=&lt;key-max-size&gt;</option>
+<option>dse change -fileheader -machine_nam=&lt;value&gt;</option>
+<option>dse change -fileheader -null_subscripts=&lt;value&gt;</option>
+<option>dse change -fileheader -nocrit</option>
+<option>dse change -fileheader -override</option>
+<option>dse change -fileheader -qdbrundown</option>
+<option>dse change -fileheader -rc_srv_count</option>
+<option>dse change -fileheader -re_read_trigger=&lt;read-trigger&gt;</option>
+<option>dse change -fileheader -record_max_size=&lt;record-max-size&gt;</option>
+<option>dse change -fileheader -reference_count=&lt;reference-count&gt;</option>
+<option>dse change -fileheader -reg_seqno=&lt;sequence-number&gt;</option>
+<option>dse change -fileheader -reserved_bytes=&lt;reserved-bytes&gt;</option>
+<option>dse change -fileheader -sleep_spin_count=&lt;mutex-sleep-spin-count&gt;</option>
+<option>dse change -fileheader -spin_sleep_time=&lt;mutex-sleep-time&gt;</option>
+<option>dse change -fileheader -timers_pending=&lt;integer&gt;</option>
+<option>dse change -fileheader -total_blks=&lt;total-blocks&gt;</option>
+<option>dse change -fileheader -trigger_flush=&lt;trigger-flush&gt;</option>
+<option>dse change -fileheader -upd_reserved_area=&lt;reserved-area&gt;</option>
+<option>dse change -fileheader -upd_writer_trigger_factor=&lt;trigger-factor&gt;</option>
+<option>dse change -fileheader -writes_per_flush=&lt;writes-per-flush&gt;</option>
+<option>dse change -fileheader -wait_disk=&lt;wait-disk&gt;</option>
+<option>dse change -fileheader -zqgblmod_seqno=&lt;sequence-number&gt;</option>
+<option>dse change -fileheader -zqgblmod_trans=&lt;sequence-number&gt;</option>
+<option>dse cache -recover -all</option>
+<option>dse cache -verify -all</option>
+<option>dse close</option>
+<option>dse critical -init -reset</option>
+<option>dse critical -owner</option>
+<option>dse critical -release</option>
+<option>dse critical -remove</option>
+<option>dse critical -sieze</option>
+<option>dse dump -all</option>
+<option>dse dump -block=&lt;block_num&gt;</option>
+<option>dse dump -count=&lt;count&gt;</option>
+<option>dse dump -fileheader</option>
+<option>dse dump -glo</option>
+<option>dse dump -gvstats</option>
+<option>dse dump -[no]crit</option>
+<option>dse dump -[no]header</option>
+<option>dse dump -offset=offset</option>
+<option>dse dump -record=&lt;record_number&gt;</option>
+<option>dse dump -updproc</option>
+<option>dse dump -zwr</option>
+<option>dse evaluate -decimal -number=&lt;hexa&gt;</option>
+<option>dse evaluate -hexadecimal -number=&lt;deci&gt;</option>
+<option>dse exit</option>
+<option>dse find -exhaustive -siblings</option>
+<option>dse find -block -freeblock -hint</option>
+<option>dse find -[no]crit -key=&lt;key&gt;</option>
+<option>dse find -block -siblings</option>
+<option>dse find -region=&lt;region_name&gt;</option>
+<option>dse integrit -block=&lt;block_num&gt;</option>
+<option>dse integrit -block=&lt;block_num&gt; -[no]crit</option>
+<option>dse maps -block=&lt;block_num&gt; -busy</option>
+<option>dse maps -block=&lt;block_num&gt; -free</option>
+<option>dse maps -block=&lt;block_num&gt; -master</option>
+<option>dse maps -restore_all</option>
+<option>dse open -file=&lt;output_file_name&gt;</option>
+<option>dse overwrite -data=&lt;string&gt; -offset=&lt;offset&gt;</option>
+<option>dse page</option>
+<option>dse range -from=&lt;block_num&gt; -to=&lt;block_num&gt;</option>
+<option>dse range -lower=&lt;key&gt; -upper=&lt;key&gt; -from=&lt;block_num&gt; -to=&lt;block_num&gt;</option>
+<option>dse range -lower=&lt;key&gt; -upper=&lt;key&gt; -index -star</option>
+<option>dse range -lost -lower=&lt;key&gt; -upper=&lt;key&gt; -star</option>
+<option>dse range -[no]crit</option>
+<option>dse range -[no]busy</option>
+<option>dse remove -block=&lt;block_num&gt; -count=&lt;count&gt;</option>
+<option>dse remove -block=&lt;block_num&gt; -version=&lt;version_num&gt;</option>
+<option>dse remove -block=&lt;block_num&gt; -record=&lt;record_num&gt;</option>
+<option>dse remove -block=&lt;block_num&gt; -offset=&lt;offset&gt; -count=&lt;count&gt;</option>
+<option>dse restore -block=&lt;block_num&gt; -version=&lt;version-number&gt;</option>
+<option>dse restore -block=&lt;block_num&gt; -from=&lt;block_num&gt;</option>
+<option>dse restore -block=&lt;block_num&gt; -from=&lt;block_num&gt; -region=&lt;region_name&gt;</option>
+<option>dse save -block=&lt;block_num&gt; -comment=&lt;string&gt;</option>
+<option>dse save -block=&lt;block_num&gt; -comment=&lt;string&gt; -list</option>
+<option>dse save -block=&lt;block_num&gt; -comment=&lt;string&gt; -[no]crit</option>
+<option>dse shift -backward=bytes_to_shift -offset=&lt;offset&gt;</option>
+<option>dse shift -forward=bytes_to_shift -offset=&lt;offset&gt;</option>
+<option>dse spawn &lt;shell-command&gt;</option>
+<option>dse wcinit</option>
+</optgroup>  </select>
+ </datalist>
+</body>
+</html>

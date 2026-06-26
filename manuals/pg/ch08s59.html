@@ -30,7 +30,7 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="zstrpllim"></a>$ZSTRPllim<a class="indexterm" name="id13613"></a>
+<a name="zstrpllim"></a>$ZSTRPllim<a class="indexterm" name="id13615"></a>
 </h2></div></div></div>
 <p>$ZSTRP[LLIM] provides a way for a process to limit its process private memory used for local variable and scratch storage. When the value is 0 or negative, the default, there is no limit. A positive value specifies a byte limit. When a request for additional memory exceeds the limit, GT.M does the expansion and then produces an STPCRIT error. By default, a later request for memory produces an STPOFLOW, unless subsequent to STPCRIT , $ZSTRPLLIM has been set to the same or higher limit. Note that GT.M allocates memory in large blocks so the interaction of $ZSTRPLLIM with memory growth is not exact. When the gtm_string_pool_limit environment variable specifies a positive value, GT.M uses it for the initial value of $ZSTRPLLIM. </p>
 </div>
