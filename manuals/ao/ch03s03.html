@@ -39,8 +39,8 @@
 <p>$gtm_chset determines the mode in which a process operates. If it has a value of M, GT.M treats all 256 combinations of the 8 bits in a byte as a character, which is suitable for many single-language applications.</p>
 <p>If $gtm_chset has a value of UTF-8, GT.M (at process startup) interprets strings as being encoded in UTF-8. In this mode, all functionality related to <span class="trademark">Unicode</span>® support becomes available and standard string-oriented operations operate with UTF-8 encoding. In this mode, GT.M detects character boundaries (since the size of a character is variable length), calculates glyph display width, and performs string conversion between UTF-8 and UTF-16.</p>
 <p><a class="indexterm" name="id2733"></a><a class="indexterm" name="id2735"></a>If you install GT.M with Unicode support, all GT.M components related to M mode reside in your GT.M distribution directory and Unicode support related components reside in the utf8 subdirectory of your GT.M distribution. For processes in UTF-8 mode, in addition to gtm_chset, ensure that $gtm_dist points to the utf8 subdirectory, that $gtmroutines includes the utf8 subdirectory (or the libgtmutil.so therein) rather than its parent directory.</p>
-<p>In addition to $gtm_chset, GT.M V5.3-004 and up use $gtm_icu_version to choose an ICU library library version other than the default. For ICU libraries built with <code class="code">symbol renaming enabled</code>, $gtm_icu_version becomes a required setting.</p>
-<p><code class="code">$gtm_icu_version</code> specifies the ICU version that GT.M should use for UTF-8 operations. It is in the form of <code class="code">MajorVersion.MinorVersion</code> where MajorVersion and MinorVersion specify the desired Major verion and Minor version of ICU. For example, 3.6 refers to ICU version 3.6. If $gtm_icu_version is defined, GT.M works regardless of whether or not symbols are renamed in ICU. If $gtm_icu_version is not defined or does not evaluate to an installed ICU version, GT.M look for non-renamed symbols in the default ICU version. Note that display widths for a few characters are different starting in ICU 4.0. </p>
+<p>In addition to $gtm_chset, GT.M releases V5.3-004 through V7.1-011 may use $gtm_icu_version to choose an ICU library other than the default.  For ICU libraries built with <code class="code">symbol renaming enabled</code>, $gtm_icu_version becomes a required setting for these releases.  For later GT.M releases, $gtm_icu_version is no longer required, but may still be used to select a particular ICU library, and does not have to be removed from existing configurations.</p>
+<p>As mentioned, <code class="code">$gtm_icu_version</code> specifies the ICU version that GT.M should use for UTF-8 operations. It is in the form of <code class="code">MajorVersion.MinorVersion</code> where MajorVersion and MinorVersion specify the desired Major verion and Minor version of ICU. For example, 3.6 refers to ICU version 3.6. If $gtm_icu_version is defined, GT.M works regardless of whether or not symbols are renamed in ICU. If $gtm_icu_version is not defined or does not evaluate to an installed ICU version, GT.M releases through V7.1-011 look for non-renamed symbols in the default ICU version while later GT.M releases automatically detect and use symbol renaming in the default ICU. Note that display widths for a few characters are different starting in ICU 4.0. </p>
 <p>GT.M versions V5.2-000 to V5.3-003 required ICU 3.6 libraries. These versions did not use $gtm_icu_version. The following table lists GT.M versions and their compatibility with the operating system provided ICU libraries.</p>
 <div class="informaltable"><table border="1" width="75%">
 <colgroup>
@@ -76,15 +76,20 @@
 <td><p>N</p></td>
 </tr>
 <tr>
-<td rowspan="2" valign="middle"><p>Linux (RHEL 6+, SLES 11+, Ubuntu 12.04+)</p></td>
+<td rowspan="3" valign="middle"><p>Linux (RHEL 6+, SLES 11+, Ubuntu 12.04+)</p></td>
 <td><p>GT.M V5.3-004 to GT.M V5.4-001</p></td>
 <td><p>GT.M can use the Linux distribution provided ICU libraries from ICU 3.6 until ICU 4.2. These libraries are compiled with symbol renaming. </p></td>
 <td><p>Y</p></td>
 </tr>
 <tr>
-<td><p>GT.M V5.4-002 and up</p></td>
+<td><p>GT.M V5.4-002 through GT.M V7.1-011</p></td>
 <td><p>GT.M can use the Linux distribution provided ICU libraries. These libraries are compiled with symbol renaming. </p></td>
 <td><p>Y</p></td>
+</tr>
+<tr>
+<td><p>GT.M after V7.1-011</p></td>
+<td><p>GT.M can use the Linux distribution provided ICU libraries. These libraries are compiled with symbol renaming. </p></td>
+<td><p>N</p></td>
 </tr>
 </tbody>
 </table></div>

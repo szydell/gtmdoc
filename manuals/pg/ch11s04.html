@@ -31,12 +31,16 @@
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="external_routines_using_external_calls"></a><span>Using </span>External Calls<a class="indexterm" name="id23600"></a>
+<a name="external_routines_using_external_calls"></a><span>Using </span>External Calls<a class="indexterm" name="id23598"></a>
 </h2></div></div></div>
 <p>The functions in programs increment and decrement are now available to GT.M through the shareable library libcrement.sl or libcrement.so, or though the DLL as libcrement.dll, depending on the specific platform. The suffix .sl is used throughout the following examples to represent .sl, .so, or .dll. Be sure to use the appropriate suffix for your platform.</p>
 <p>GT.M uses an "external call table" to map the typeless data of M into the typed data of C, and vice versa. The external call table has a first line containing the pathname of the shareable library file followed by one or more specification lines in the following format:</p>
-<pre class="programlisting">entryref: return-value routine-name (parameter, parameter, ... ) [: SIGSAFE]      </pre>
+<pre class="programlisting">entryref: return-value routine-name (parameter, parameter, ... ) [: [ACIDTP] [SIGSAFE] [TERMIO] ]</pre>
+<p>The optional, case-insensitive keyword ACIDTP, when specified in the parameter list, serves as an explicit user-declared assurance that the external call does not interact with any external actor and completes within a consistently short duration. With ACIDTP, GT.M bypasses the TPNOTACID checks that normally apply to external calls. ACIDTP can improve performance in low-contention environments. If the application consistently shows high transaction restarts (TR*) or transaction conflicts (TC*) in GVSTATS, first address the underlying causes of contention before enabling ACIDTP. Always compare system behavior with and without ACIDTP under realistic contention scenarios before adopting ACIDTP in production.</p>
 <p>The optional case-insensitive keyword SIGSAFE following the parameter list specifies the external call does not create its own signal handlers; this allows GT.M to avoid burdensome signal handler coordination for the external call. By default, GT.M saves and restores signal setups for external calls.</p>
+<p>The optional case-insensitive keyword TERMIO following the parameter list specifies the external call may read from a terminal device so GT.M should
+reset the terminal attributes whenever control is given to the routine.  Care is still needed to avoid issues due to GT.M using the read() system service if the
+    external routine uses other services such as the fgets() family.</p>
 <p><code class="code"> entryref</code> is an M entryref, return-value is gtm_long_t, gtm_status_t, or void, and parameters are in the format: </p>
 <pre class="programlisting">direction:type [num]</pre>
 <p>where [num] indicates a pre-allocation value explained later in this chapter.</p>
@@ -459,12 +463,14 @@ void gtm_cancel_timer(gtm_tid_t tid);</pre>
 <li class="listitem"><p>Use of exit system call in external functions is strongly discouraged. Since GT.M uses exit handlers to properly shutdown runtime environment and any active resources, the system call _exit should never be used in external functions.</p></li>
 <li class="listitem"><p>GT.M uses timer signals so often that the likelihood of a system call being interrupted is high. So, all system calls in the external program can return EINTR if interrupted by a signal.</p></li>
 <li class="listitem"><p>Handler functions invoked with start_timer must not invoke services that are identified by the Operating System documentation as unsafe for signal handlers (or not identified as safe) - consult the system documentation or man pages for this information. Such services cause non-deterministic failures when they are interrupted by a function that then attempts to call them, wrongly assuming they are reentrant.</p></li>
+<li class="listitem"><p>GT.M performs device input using the read() system service. UNIX documentation recommends against mixing this type of input with buffered input services in
+the fgets() family and ignoring this recommendation is likely to cause loss of input that is difficult to diagnose and understand.</p></li>
 </ol></div>
 <p></p>
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="examples_fo_using_ext_calls"></a>Examples<span> of Using External Calls</span><a class="indexterm" name="id23973"></a>
+<a name="examples_fo_using_ext_calls"></a>Examples<span> of Using External Calls</span><a class="indexterm" name="id23975"></a>
 </h3></div></div></div>
 <pre class="programlisting">foo: void bar (I:gtm_float_t*, O:gtm_float_t*)</pre>
 <p>There is one external call table for each package. The environment variable "GTMXC" must name the external call table file for the default package. External call table files for packages other than the default must be identified by environment variables of the form "GTMXC_name".</p>
