@@ -34,7 +34,7 @@
 <p><span class="bold"><strong>HTEXPFAIL</strong></span>,    Hash table expansion failed for lack of memory</p>
 <p>Run Time/MUPIP Error: The hash table, an internally expanding data structure maintained by GT.M, has exceeded its maximum capacity. In GT.M, each unique local variable name uses up some hash table space. In MUPIP, it is backward recovery (or rollback) that might encounter this error. Here each TP transaction that is encountered in the backward processing phase of recovery uses up some hash table space. In either case, it is more likely that a process will run out of virtual memory much before it reaches the maximum hashtable capacity.</p>
 <p>Action: Increase process memory quotas to increase available process virtual memory. Reduce the number of unique local variable names referenced by the GT.M process. For MUPIP backward recovery/rollback, reduce the number of TP transactions encountered in the backward processing phase by using a later timestamp in the SINCE_TIME qualifier or higher RESYNC_SEQNO for rollback.</p>
-<a class="indexterm" name="id5665"></a><a class="indexterm" name="id5668"></a>
+<a class="indexterm" name="id5658"></a><a class="indexterm" name="id5661"></a>
 </div>
 <div class="navfooter">
 <hr>

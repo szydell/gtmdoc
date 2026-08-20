@@ -33,7 +33,7 @@
 <p><span class="bold"><strong>DBFLCORRP</strong></span>,  xxxx Header indicates database file is corrupt</p>
 <p>Run Time/MUPIP Error: This indicates that a database operation tried to activate database file xxxx, which was previously marked as damaged.</p>
 <p>Action: If ROLLBACK (either -NOONLINE or -ONLINE) terminates abnormally (say because of a kill -9), it leaves the database in a potentially inconsistent state indicated by the FILE corrupt field in the database file header. When an ROLLBACK terminates leaving this field set, all other processes receive DBFLCORRP errors any time they attempt to interact with the database. The best way to clear DBFLCORRP is by running another ROLLBACK. MUPIP SET -FILE -PARTIAL_RECOV_BYPASS and DSE CHANGE -FILE -CORRUPT=FALSE -NOCRIT can also clear this condition but these commands do not ensure that the database has consistent state so you should always run MUPIP INTEG after executing these commands.</p>
-<a class="indexterm" name="id2572"></a><a class="indexterm" name="id2575"></a>
+<a class="indexterm" name="id2568"></a><a class="indexterm" name="id2571"></a>
 </div>
 <div class="navfooter">
 <hr>

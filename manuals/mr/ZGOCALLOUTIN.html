@@ -13,7 +13,8 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">ZGOCALLOUTIN </th></tr>
+<tr><th colspan="3" align="center">ZGOCALLOUTIN <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="ZGBLDIRACC.html">Prev</a> </td>
@@ -25,15 +26,16 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">ZGOCALLOUTIN </span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">ZGOCALLOUTIN <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span></span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="ZGOCALLOUTIN"></a>ZGOCALLOUTIN </h2></div></div></div>
-<p><span class="bold"><strong>ZGOCALLOUTIN</strong></span>,  ZGOTO level 0 with entry ref not valid when using call-ins</p>
-<p>Call in/Run Time Error: Code invoked by a call-in contained a ZGOTO 0:entryref. The purpose of a ZGOTO 0:entryref is to "refresh" the GT.M routine context, but that action would invalidate the interface with the calling (in) code.</p>
-<p>Action: Refactor the code invoked by the call-in to avoid or appropriately conditionalize the ZGOTO 0:entryref.</p>
-<a class="indexterm" name="id16001"></a><a class="indexterm" name="id16004"></a>
+<a name="ZGOCALLOUTIN"></a>ZGOCALLOUTIN <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
+</h2></div></div></div>
+<p><span class="bold"><strong>ZGOCALLOUTIN</strong></span>, ZGOTO XXXXX:entryref not valid when using call-ins</p>
+<p>Call in/Run Time Error: Code invoked by a call-in contained a ZGOTO [0|1]:entryref. The purpose of a ZGOTO 0:entryref is to "refresh" the GT.M routine context, but that action would invalidate the interface with the calling (in) code. A ZGOTO 1:entryref indicates a $ZLEVEL lower than the minimum available to user code in a call-in context, which is 2.</p>
+<p>Action: Refactor the code invoked by the call-in to avoid or appropriately conditionalize the ZGOTO [0|1]:entryref.</p>
+<a class="indexterm" name="id16000"></a><a class="indexterm" name="id16003"></a>
 </div>
 <div class="navfooter">
 <hr>

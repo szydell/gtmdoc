@@ -13,8 +13,7 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
-<tr><th colspan="3" align="center">TPTIMEOUT <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
-</th></tr>
+<tr><th colspan="3" align="center">TPTIMEOUT </th></tr>
 <tr>
 <td width="20%" align="left">
 <a accesskey="p" href="TPSTACKOFLOW.html">Prev</a> </td>
@@ -26,16 +25,15 @@
 <hr>
 </div>
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">TPTIMEOUT <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span></span>
+<span class="breadcrumb-link"><a href="titlepage.html">GT.M Message and Recovery Procedures Manual</a></span> &gt; <span class="breadcrumb-link"><a href="ch01.html">Error Messages</a></span> &gt; <span class="breadcrumb-node">TPTIMEOUT </span>
 </div>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="TPTIMEOUT"></a>TPTIMEOUT <span class="inlinemediaobject"><img src="images/revised.png" alt="Revised"></span>
-</h2></div></div></div>
+<a name="TPTIMEOUT"></a>TPTIMEOUT </h2></div></div></div>
 <p><span class="bold"><strong>TPTIMEOUT</strong></span>, Transaction timeout after rrrr restart(s) and gggg grace period(s) [from zzzz dddd]</p>
 <p>Run Time Error: This message indicates that the transaction did not complete within $ZMAXTPTIME. rrrr is the number of restarts, if any. GT.M divides the time from the initial (outermost) TSTART to the $ZMAXTPTIME limit into five (gggg) equal grace-period intervals, each ending in a SIGALRM checkpoint, so that a single suppressed SIGALRM costs only one interval rather than terminating the transaction prematurely or letting it hang. The timeout occurs when the cumulative time reaches $ZMAXTPTIME. An external call that manipulates GT.M's SIGALRM handler can suppress one or more of these signals and cause a premature TPTIMEOUT, so review external calls and external interactions carefully to avoid premature TPTIMEOUT. During external calls, GT.M sends a warning to the syslog as each grace period expires, and after all five expire it delivers an error to both the syslog and the process. The error reports $ZPOSITION zzzz and $ZDIRECTORY dddd where GT.M detected the expiration. Timeouts prevent runaway processes, damage from software bugs, and transactions so large as to be hostile to other users.</p>
 <p>Action: Review the message(s) for any information about the cause of the transaction timeout, and/or research what the process was doing at the time of the warning or error. If the transaction uses custom programs, routines, or functions, they may need to be debugged.</p>
-<a class="indexterm" name="id14573"></a>
+<a class="indexterm" name="id14575"></a>
 </div>
 <div class="navfooter">
 <hr>
